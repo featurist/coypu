@@ -93,6 +93,15 @@ namespace Coypu.DriverImplementationTests
 			AssertElementNotFound(() => Driver.FindButton("firstHiddenInputId"));
 		}
 
+		[Test]
+		public void When_clicking_It_should_click_the_underlying_node()
+		{
+			var node = Driver.FindButton("clickMeTest");
+			Assert.That(Driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me"));
+			node.Click();
+			Assert.That(Driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me - clicked"));
+		}
+
 		private void AssertElementNotFound(Func<Node> find)
 		{
 			var thrown = false;

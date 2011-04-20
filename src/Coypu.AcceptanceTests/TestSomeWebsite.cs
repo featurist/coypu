@@ -19,6 +19,8 @@ namespace Coypu.AcceptanceTests
 				var session = new Session(robustDriver);
 
 				session.Visit("http://www.google.com");
+
+				//TODO: Try some tricky stuff
 			}
 		}
 	}

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Coypu.UnitTests
 {
 	[TestFixture]
-	public class When_interacting_with_the_browser_session
+	public class When_interacting_with_the_browser
 	{
 		[Test]
 		public void Visit_should_pass_message_to_the_driver()

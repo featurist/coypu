@@ -17,7 +17,7 @@ namespace Coypu.Drivers
 
 		private Node BuildNode(IWebElement element)
 		{
-			return new Node(null)
+			return new Node(this)
 			       	{
 			       		UnderlyingNode = element,
 			       		Text = element.Text,
@@ -44,7 +44,7 @@ namespace Coypu.Drivers
 
 		public void Click(Node node)
 		{
-			throw new NotImplementedException();
+			SeleniumElement(node).Click();
 		}
 
 		public void Visit(string url)
@@ -52,6 +52,10 @@ namespace Coypu.Drivers
 			selenium.Navigate().GoToUrl(url);
 		}
 
+		private IWebElement SeleniumElement(Node node)
+		{
+			return ((IWebElement) node.UnderlyingNode);
+		}
 
 		private bool IsInputButton(IWebElement e)
 		{

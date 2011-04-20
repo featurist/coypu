@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="When_interacting_with_the_browser_session.cs" />
+    <Compile Include="When_interacting_with_the_browser.cs" />
     <Compile Include="SpyRobustWrapper.cs" />
     <Compile Include="When_messages_are_passed_through_the_robust_driver.cs" />
     <Compile Include="FakeDriver.cs" />
