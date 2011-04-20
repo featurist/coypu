@@ -1,6 +1,8 @@
-﻿namespace Coypu
+﻿using System;
+
+namespace Coypu
 {
-	public interface Driver
+	public interface Driver : IDisposable
 	{
 		Node FindButton(string locator);
 		Node FindLink(string locator);
