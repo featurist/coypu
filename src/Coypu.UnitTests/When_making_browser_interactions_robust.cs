@@ -10,8 +10,8 @@ namespace Coypu.UnitTests
 		[Test]
 		public void When_a_Function_throws_a_recurring_exception_It_should_retry_at_regular_intervals()
 		{
-			var timeout = TimeSpan.FromMilliseconds(50);
-			var interval = TimeSpan.FromMilliseconds(10);
+			var timeout = TimeSpan.FromMilliseconds(100);
+			var interval = TimeSpan.FromMilliseconds(20);
 			var robustness = new WaitAndRetryRobustWrapper(timeout, interval);
 
 			var tries = 0;
@@ -139,7 +139,7 @@ namespace Coypu.UnitTests
 		[Test]
 		public void When_an_Action_throws_an_exception_first_time_It_should_retry()
 		{
-			var robustness = new WaitAndRetryRobustWrapper(TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(5));
+			var robustness = new WaitAndRetryRobustWrapper(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(5));
 			var tries = 0;
 			Action action = () =>
 			                	{
