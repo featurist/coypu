@@ -10,6 +10,7 @@ namespace Coypu.UnitTests.TestDoubles
 		private readonly IList<string> visits = new List<string>();
 		private readonly IList<string> findButtonRequests = new List<string>();
 		private readonly IList<string> findLinkRequests = new List<string>();
+		private bool disposed;
 
 		public IEnumerable<Node> ClickedNodes
 		{
@@ -61,6 +62,16 @@ namespace Coypu.UnitTests.TestDoubles
 		public void StubLink(string locator, Node node)
 		{
 			links[locator] = node;
+		}
+
+		public void Dispose()
+		{
+			disposed = true;
+		}
+
+		public bool Disposed()
+		{
+			return disposed;
 		}
 	}
 }

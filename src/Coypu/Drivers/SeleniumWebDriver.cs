@@ -2,17 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers
 {
-	public class SeleniumWebDriver : Driver, IDisposable
+	public class SeleniumWebDriver : Driver
 	{
-		private readonly FirefoxDriver selenium;
+		private readonly RemoteWebDriver selenium;
 
-		public SeleniumWebDriver()
+		public SeleniumWebDriver(Browser browser)
 		{
-			selenium = new FirefoxDriver();
+			selenium = NewRemoteWebDriver(browser);
+		}
+
+		private RemoteWebDriver NewRemoteWebDriver(Browser browser)
+		{
+			switch (browser)
+			{
+			
+				case (Browser.Firefox):
+					return new FirefoxDriver();
+				case (Browser.InternetExplorer):
+					return new InternetExplorerDriver();
+				case (Browser.Chrome):
+					return new ChromeDriver();
+				default:
+					throw new BrowserNotSupportedException(browser,this);
+			}
 		}
 
 		private Node BuildNode(IWebElement element)
@@ -76,6 +95,14 @@ namespace Coypu.Drivers
 		public void Dispose()
 		{
 			selenium.Dispose();
+		}
+	}
+
+	internal class BrowserNotSupportedException : Exception
+	{
+		public BrowserNotSupportedException(Browser browser, Driver driver) 
+			: base(string.Format("{0} is not supported by {1}", browser, driver.GetType().Name))
+		{
 		}
 	}
 }
