@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using Coypu.API;
+﻿using System;
+using System.Linq;
+using Coypu.UnitTests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.UnitTests
@@ -7,54 +8,73 @@ namespace Coypu.UnitTests
 	[TestFixture]
 	public class When_interacting_with_the_browser
 	{
+		private FakeDriver driver;
+		private SpyRobustWrapper spyRobustWrapper;
+		private Session session;
+
+		[SetUp]
+		public void SetUp()
+		{
+			driver = new FakeDriver();
+			spyRobustWrapper = new SpyRobustWrapper();
+			session = new Session(driver, spyRobustWrapper);
+		}
+
+		[Test]
+		public void Click_should_make_robust_call_to_underlying_driver()
+		{
+			var node = new Node();
+			session.Click(node);
+
+			Assert.That(driver.ClickedNodes, Is.Empty);
+
+			spyRobustWrapper.DeferredActions.Single()();
+
+			Assert.That(driver.ClickedNodes, Has.Member(node));
+		}
+
+		[Test]
+		public void FindButton_should_make_robust_call_to_underlying_driver()
+		{
+			var node = new Node();
+			driver.StubButton("Find button robustly", node);
+			session.FindButton("Find button robustly");
+
+			var found = ((Func<Node>) spyRobustWrapper.DeferredFunctions.Single())();
+			Assert.That(found, Is.SameAs(node));
+		}
+
 		[Test]
 		public void Visit_should_pass_message_to_the_driver()
 		{
-			var driver = new FakeDriver();
-			new Session(driver).Visit("http://visit.me");
+			new Session(driver, null).Visit("http://visit.me");
 
 			Assert.That(driver.Visits.Single(), Is.EqualTo("http://visit.me"));
 		}
 
 		[Test]
-		public void Click_button_should_find_by_text_and_click()
+		public void Click_button_should_robustly_find_by_text_and_click()
 		{
-			var driver = new FakeDriver();
-			var node = new Node(driver);
-			driver.StubButton("Some button text", node);
-
-			var session = new Session(driver);
-
-			session.ClickButton("Some button text");
-
-			Assert.That(driver.ClickedNodes, Has.Member(node));
-		}
-
-		[Test]
-		public void Click_button_should_find_button_by_locator_and_click()
-		{
-			var driver = new FakeDriver();
-			var node = new Node(driver);
+			var node = new Node();
 			driver.StubButton("Some button locator", node);
-
-			var session = new Session(driver);
 
 			session.ClickButton("Some button locator");
 
+			Assert.That(driver.ClickedNodes, Has.No.Member(node));
+			spyRobustWrapper.DeferredActions.Single()();
 			Assert.That(driver.ClickedNodes, Has.Member(node));
 		}
 
 		[Test]
-		public void Click_link_should_find_link_by_locator_and_click()
+		public void Click_link_should_robustly_find_link_by_locator_and_click()
 		{
-			var driver = new FakeDriver();
-			var node = new Node(driver);
-			driver.StubLink("Some button locator", node);
+			var node = new Node();
+			driver.StubLink("Some link locator", node);
 
-			var session = new Session(driver);
+			session.ClickLink("Some link locator");
 
-			session.ClickLink("Some button locator");
-
+			Assert.That(driver.ClickedNodes, Has.No.Member(node));
+			spyRobustWrapper.DeferredActions.Single()();
 			Assert.That(driver.ClickedNodes, Has.Member(node));
 		}
 	}

@@ -87,10 +87,9 @@
   <ItemGroup>
     <Compile Include="Driver.cs" />
     <Compile Include="Node.cs" />
-    <Compile Include="Drivers\RobustDriver.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />
     <Compile Include="Drivers\SeleniumWebDriver.cs" />
-    <Compile Include="API\Session.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robustness\WaitAndRetryRobustWrapper.cs" />
   </ItemGroup>

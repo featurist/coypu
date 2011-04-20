@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Coypu.UnitTests
+namespace Coypu.UnitTests.TestDoubles
 {
 	public class FakeDriver : Driver
 	{
@@ -8,10 +8,22 @@ namespace Coypu.UnitTests
 		private readonly IList<Node> clickedNodes = new List<Node>();
 		private readonly Dictionary<string, Node> links = new Dictionary<string, Node>();
 		private readonly IList<string> visits = new List<string>();
+		private readonly IList<string> findButtonRequests = new List<string>();
+		private readonly IList<string> findLinkRequests = new List<string>();
 
 		public IEnumerable<Node> ClickedNodes
 		{
 			get { return clickedNodes; }
+		}
+
+		public IList<string> FindButtonRequests
+		{
+			get { return findButtonRequests; }
+		}
+
+		public IList<string> FindLinkRequests
+		{
+			get { return findLinkRequests; }
 		}
 
 		public IEnumerable<string> Visits
@@ -21,11 +33,13 @@ namespace Coypu.UnitTests
 
 		public Node FindButton(string locator)
 		{
+			findButtonRequests.Add(locator);
 			return buttons[locator];
 		}
 
 		public Node FindLink(string locator)
 		{
+			findLinkRequests.Add(locator);
 			return links[locator];
 		}
 

@@ -17,7 +17,7 @@ namespace Coypu.Drivers
 
 		private Node BuildNode(IWebElement element)
 		{
-			return new Node(this)
+			return new Node
 			       	{
 			       		UnderlyingNode = element,
 			       		Text = element.Text,

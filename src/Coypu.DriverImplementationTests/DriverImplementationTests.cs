@@ -18,6 +18,8 @@ namespace Coypu.DriverImplementationTests
 		private const string INTERACTION_TESTS_PAGE = @"..\..\html\InteractionTestsPage.htm";
 		protected abstract Driver Driver { get; }
 
+		// NEXT: Find link by text
+
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_text()
 		{
@@ -98,7 +100,7 @@ namespace Coypu.DriverImplementationTests
 		{
 			var node = Driver.FindButton("clickMeTest");
 			Assert.That(Driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me"));
-			node.Click();
+			Driver.Click(node);
 			Assert.That(Driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me - clicked"));
 		}
 
