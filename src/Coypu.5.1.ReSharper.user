@@ -1,0 +1,230 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:API/f:Session.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Driver.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:RobustDriver.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:RobustWrapper.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:WaitAndRetryRobustWrapper.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:SpyRobustWrapper.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_interacting_with_the_browser_session.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_making_browser_interactions_robust.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_messages_are_passed_through_the_robust_driver.cs" caret="0" fromTop="0" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/f:RealDriverImplementationTestSuite.cs" caret="0" fromTop="0" />
+      <File id="6E5D29AC-14C4-4BBE-826D-F8EEA1B40900/f:BloomTests.cs" caret="0" fromTop="0" />
+      <File id="6E5D29AC-14C4-4BBE-826D-F8EEA1B40900/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/d:Drivers/f:SeleniumDriverTests.cs" caret="0" fromTop="0" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:API/f:Session.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Driver.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:RobustDriver.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:RobustWrapper.cs" caret="0" fromTop="0" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:WaitAndRetryRobustWrapper.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:SpyRobustWrapper.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_interacting_with_the_browser_session.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_making_browser_interactions_robust.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_messages_are_passed_through_the_robust_driver.cs" caret="0" fromTop="0" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/d:Drivers/f:SeleniumDriverTests.cs" caret="0" fromTop="0" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/f:RealDriverImplementationTestSuite.cs" caret="0" fromTop="0" />
+      <File id="6E5D29AC-14C4-4BBE-826D-F8EEA1B40900/f:BloomTests.cs" caret="0" fromTop="0" />
+      <File id="6E5D29AC-14C4-4BBE-826D-F8EEA1B40900/d:Properties/f:AssemblyInfo.cs" caret="0" fromTop="0" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="public" priority="9" />
+      <Item value="void" priority="4" />
+      <Item value="var" priority="10" />
+      <Item value="node" priority="5" />
+      <Item value="n" priority="0" />
+      <Item value="new" priority="20" />
+      <Item value="Nappybara" priority="0" />
+      <Item value="string" priority="3" />
+      <Item value="Node`0" priority="5" />
+      <Item value="buttons" priority="2" />
+      <Item value="someButtonText" priority="2" />
+      <Item value="if" priority="3" />
+      <Item value="KeyNotFoundException`0" priority="0" />
+      <Item value="return" priority="6" />
+      <Item value="null" priority="0" />
+      <Item value="using" priority="2" />
+      <Item value="NUnit.Framework" priority="0" />
+      <Item value="Assert`0" priority="1" />
+      <Item value="Clicks" priority="0" />
+      <Item value="Has`0" priority="0" />
+      <Item value="char" priority="0" />
+      <Item value="ClickedNodes" priority="0" />
+      <Item value="List`0" priority="0" />
+      <Item value="TestFixture" priority="1" />
+      <Item value="Test" priority="0" />
+      <Item value="Driver`0" priority="0" />
+      <Item value="RobustDriver`0" priority="2" />
+      <Item value="FakeDriver`0" priority="0" />
+      <Item value="Node" priority="0" />
+      <Item value="Robustness`0" priority="0" />
+      <Item value="API.UnitTests" priority="0" />
+      <Item value="ThreadStaticAttribute`0" priority="2" />
+      <Item value="delegate" priority="0" />
+      <Item value="Delegate`0" priority="1" />
+      <Item value="int" priority="0" />
+      <Item value="Action`0" priority="0" />
+      <Item value="List&lt;Action&gt;" priority="0" />
+      <Item value="throw" priority="0" />
+      <Item value="interval" priority="0" />
+      <Item value="TimeSpan`0" priority="2" />
+      <Item value="driver" priority="4" />
+      <Item value="link" priority="0" />
+      <Item value="links" priority="0" />
+      <Item value="locator" priority="2" />
+      <Item value="class" priority="0" />
+      <Item value="Driver" priority="1" />
+      <Item value="SeleniumWebDriverDriver`0" priority="1" />
+      <Item value="FirefoxDriver`0" priority="0" />
+      <Item value="selenium" priority="2" />
+      <Item value="elements" priority="1" />
+      <Item value="object" priority="0" />
+      <Item value="T`0" priority="0" />
+      <Item value="element" priority="1" />
+      <Item value="Id" priority="0" />
+      <Item value="byte" priority="0" />
+      <Item value="IWebElement" priority="0" />
+      <Item value="IWebElement`0" priority="1" />
+      <Item value="webElements" priority="1" />
+      <Item value="array" priority="0" />
+      <Item value="AsQueryable`0" priority="0" />
+      <Item value="e" priority="0" />
+      <Item value="found" priority="0" />
+      <Item value="By`0" priority="0" />
+      <Item value="TearDown" priority="0" />
+      <Item value="abstract" priority="0" />
+      <Item value="IDisposable`0" priority="0" />
+      <Item value="TestFixtureTearDown" priority="0" />
+      <Item value="Is`0" priority="0" />
+      <Item value="httpVisitMe" priority="0" />
+      <Item value="ContextBoundObject`0" priority="0" />
+      <Item value="Robustness" priority="0" />
+      <Item value="RobustWrapper`0" priority="0" />
+      <Item value="WaitAndRetryRobustWrapper`0" priority="0" />
+      <Item value="Session`0" priority="0" />
+      <Item value="Drivers" priority="0" />
+      <Item value="SeleniumWebDriver`0" priority="0" />
+      <Item value="Contains`1" priority="0" />
+      <Item value="session" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.Dictionary`2">
+      <Item value="Add`0" priority="0" />
+      <Item value="ContainsKey`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@NUnit.Framework.Assert">
+      <Item value="That`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@NUnit.Framework.Has">
+      <Item value="Member`0" priority="0" />
+      <Item value="No" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.API.RobustDriver">
+      <Item value="Click`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.API.UnitTests.FakeDriver">
+      <Item value="ClickedNodes" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:NUnit.Framework.Constraints.ConstraintExpression">
+      <Item value="Member`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.IList`1">
+      <Item value="Add`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.API.Driver">
+      <Item value="FindButton`0" priority="0" />
+      <Item value="Click`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.TimeSpan">
+      <Item value="Add`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.TimeSpan">
+      <Item value="FromMilliseconds`0" priority="0" />
+      <Item value="FromSeconds`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.Firefox.FirefoxDriver">
+      <Item value="Navigate`0" priority="0" />
+      <Item value="FindElementsByXPath`0" priority="0" />
+      <Item value="FindElementsById`0" priority="0" />
+      <Item value="Dispose`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.INavigation">
+      <Item value="GoToUrl`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Format`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.Node">
+      <Item value="Id" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.IWebElement">
+      <Item value="GetAttribute`0" priority="0" />
+      <Item value="Text" priority="0" />
+      <Item value="TagName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.ObjectModel.ReadOnlyCollection`1">
+      <Item value="Count" priority="1" />
+      <Item value="CopyTo`0" priority="1" />
+      <Item value="FirstOrDefault`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Linq.IQueryable`1">
+      <Item value="Where`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.IEnumerable`1">
+      <Item value="FirstOrDefault`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@OpenQA.Selenium.By">
+      <Item value="XPath`0" priority="0" />
+      <Item value="Name`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.UnitTests.FakeDriver">
+      <Item value="Visit`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@NUnit.Framework.Is">
+      <Item value="EqualTo`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.Driver">
+      <Item value="Visit`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.By">
+      <Item value="FindElement`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.API.Session">
+      <Item value="Visit`0" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
