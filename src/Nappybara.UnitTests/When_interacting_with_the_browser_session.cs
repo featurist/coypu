@@ -1,55 +1,61 @@
-﻿using Nappybara.API;
+﻿using System.Linq;
+using Nappybara.API;
 using NUnit.Framework;
 
 namespace Nappybara.UnitTests
 {
-    [TestFixture]
-    public class When_interacting_with_the_browser_session
-    {
-        [Test]
-        public void Click_button_should_find_by_text_and_click()
-        {
-            var driver = new FakeDriver();
-            var node = new Node(driver);
-            driver.StubButton("Some button text", node);
+	[TestFixture]
+	public class When_interacting_with_the_browser_session
+	{
+		[Test]
+		public void Visit_should_pass_message_to_the_driver()
+		{
+			var driver = new FakeDriver();
+			new Session(driver).Visit("http://visit.me");
 
-            var session = new Session(driver);
+			Assert.That(driver.Visits.Single(), Is.EqualTo("http://visit.me"));
+		}
 
-            session.ClickButton("Some button text");
+		[Test]
+		public void Click_button_should_find_by_text_and_click()
+		{
+			var driver = new FakeDriver();
+			var node = new Node(driver);
+			driver.StubButton("Some button text", node);
 
-            Assert.That(driver.ClickedNodes, Has.Member(node));
-        }
-    }
+			var session = new Session(driver);
 
-    [TestFixture]
-    public class QueryTests
-    {
-        [Test]
-        public void Click_button_should_find_button_by_locator_and_click()
-        {
-            var driver = new FakeDriver();
-            var node = new Node(driver);
-            driver.StubButton("Some button locator", node);
+			session.ClickButton("Some button text");
 
-            var session = new Session(driver);
+			Assert.That(driver.ClickedNodes, Has.Member(node));
+		}
 
-            session.ClickButton("Some button locator");
+		[Test]
+		public void Click_button_should_find_button_by_locator_and_click()
+		{
+			var driver = new FakeDriver();
+			var node = new Node(driver);
+			driver.StubButton("Some button locator", node);
 
-            Assert.That(driver.ClickedNodes, Has.Member(node));
-        }
+			var session = new Session(driver);
 
-        [Test]
-        public void Click_link_should_find_link_by_locator_and_click()
-        {
-            var driver = new FakeDriver();
-            var node = new Node(driver);
-            driver.StubLink("Some button locator", node);
+			session.ClickButton("Some button locator");
 
-            var session = new Session(driver);
+			Assert.That(driver.ClickedNodes, Has.Member(node));
+		}
 
-            session.ClickLink("Some button locator");
+		[Test]
+		public void Click_link_should_find_link_by_locator_and_click()
+		{
+			var driver = new FakeDriver();
+			var node = new Node(driver);
+			driver.StubLink("Some button locator", node);
 
-            Assert.That(driver.ClickedNodes, Has.Member(node));
-        }
-    }
+			var session = new Session(driver);
+
+			session.ClickLink("Some button locator");
+
+			Assert.That(driver.ClickedNodes, Has.Member(node));
+		}
+	}
 }

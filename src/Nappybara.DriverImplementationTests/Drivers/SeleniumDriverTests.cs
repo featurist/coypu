@@ -1,21 +1,22 @@
-﻿using Nappybara.Drivers;
+﻿using System;
+using Nappybara.Drivers;
 using NUnit.Framework;
 
 namespace Nappybara.DriverImplementationTests.Drivers
 {
-    [TestFixture]
-    public class SeleniumDriverTests : RealDriverImplementationTestSuite
-    {
-        private SeleniumWebDriver driver;
+	[TestFixture]
+	public class SeleniumDriverTests : RealDriverImplementationTestSuite, IDisposable
+	{
+		private SeleniumWebDriver driver;
 
-        public override void DisposeBrowser()
-        {
-            driver.Dispose();
-        }
+		protected override Driver Driver
+		{
+			get { return driver ?? (driver = new SeleniumWebDriver()); }
+		}
 
-        protected override Driver Driver
-        {
-            get { return driver ?? (driver = new SeleniumWebDriver()); }
-        }
-    }
+		public override void Dispose()
+		{
+			driver.Dispose();
+		}
+	}
 }
