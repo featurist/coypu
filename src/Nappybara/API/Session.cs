@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Nappybara.API
+﻿namespace Nappybara.API
 {
     public class Session
     {
@@ -13,12 +11,12 @@ namespace Nappybara.API
 
         public void ClickButton(string locator)
         {
-        	driver.FindButton(locator).Click();
+            driver.FindButton(locator).Click();
         }
 
-    	public void ClickLink(string locator)
-    	{
-    		driver.FindLink(locator).Click();
-    	}
+        public void ClickLink(string locator)
+        {
+            driver.FindLink(locator).Click();
+        }
     }
 }

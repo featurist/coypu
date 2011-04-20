@@ -8,49 +8,43 @@
   </SettingsComponent>
   <RecentFiles>
     <RecentFiles>
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:DeferedRobustness.cs" caret="178" fromTop="7" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Robustness.cs" caret="128" fromTop="7" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="3326" fromTop="6" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:WaitAndRetryRobustness.cs" caret="834" fromTop="7" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="8" fromTop="0" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Session.cs" caret="409" fromTop="5" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="971" fromTop="5" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="735" fromTop="4" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Driver.cs" caret="116" fromTop="4" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustDriverTests.cs" caret="457" fromTop="3" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:RobustDriver.cs" caret="551" fromTop="10" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:RobustWrapper.cs" caret="86" fromTop="4" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_making_browser_interactions_robust.cs" caret="0" fromTop="0" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_interacting_with_the_browser_session.cs" caret="1529" fromTop="32" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:DeferedRobustWrapper.cs" caret="831" fromTop="27" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="963" fromTop="5" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:RobustDriver.cs" caret="882" fromTop="3" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:WaitAndRetryRobustWrapper.cs" caret="1477" fromTop="21" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="1469" fromTop="55" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="370" fromTop="16" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/d:Drivers/f:SeleniumDriverTests.cs" caret="100" fromTop="3" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_messages_are_passed_through_the_robust_driver.cs" caret="2012" fromTop="25" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/f:RealDriverImplementationTestSuite.cs" caret="895" fromTop="25" />
     </RecentFiles>
     <RecentEdits>
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="158" fromTop="8" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="158" fromTop="1" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="158" fromTop="0" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="994" fromTop="3" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="4423" fromTop="5" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="1889" fromTop="4" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustnessTests.cs" caret="3326" fromTop="4" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="65" fromTop="4" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="216" fromTop="15" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="871" fromTop="11" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="506" fromTop="6" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="506" fromTop="10" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="562" fromTop="0" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="918" fromTop="14" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="366" fromTop="9" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="1034" fromTop="7" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="570" fromTop="7" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="1262" fromTop="11" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:ActionTests.cs" caret="1129" fromTop="11" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Session.cs" caret="388" fromTop="10" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Session.cs" caret="277" fromTop="4" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Driver.cs" caret="121" fromTop="3" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="791" fromTop="13" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustDriverTests.cs" caret="851" fromTop="4" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustDriverTests.cs" caret="1611" fromTop="17" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustDriverTests.cs" caret="1095" fromTop="9" />
-      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:RobustDriverTests.cs" caret="1385" fromTop="1" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:RobustDriver.cs" caret="686" fromTop="11" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:RobustDriver.cs" caret="829" fromTop="14" />
-      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:RobustDriver.cs" caret="369" fromTop="7" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="555" fromTop="16" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:FakeDriver.cs" caret="963" fromTop="5" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:RobustDriver.cs" caret="377" fromTop="15" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:RobustDriver.cs" caret="882" fromTop="3" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:WaitAndRetryRobustWrapper.cs" caret="313" fromTop="13" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Robustness/f:WaitAndRetryRobustWrapper.cs" caret="1443" fromTop="21" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="1358" fromTop="12" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="78" fromTop="1" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="275" fromTop="6" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="445" fromTop="16" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="171" fromTop="7" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="218" fromTop="8" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/f:Node.cs" caret="315" fromTop="16" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="733" fromTop="7" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="372" fromTop="5" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="1102" fromTop="16" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="1031" fromTop="8" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="980" fromTop="15" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="181" fromTop="4" />
+      <File id="0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C/d:Drivers/f:SeleniumWebDriver.cs" caret="1448" fromTop="52" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/f:RealDriverImplementationTestSuite.cs" caret="1204" fromTop="33" />
+      <File id="72FF4797-CAB8-40B9-97B3-DD962D4C0D17/d:Drivers/f:SeleniumDriverTests.cs" caret="100" fromTop="3" />
+      <File id="3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2/f:When_messages_are_passed_through_the_robust_driver.cs" caret="2012" fromTop="57" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
@@ -66,22 +60,22 @@
   </UnitTestRunnerNUnit>
   <CompletionStatisticsManager>
     <ItemStatistics item="Default">
-      <Item value="public" priority="5" />
+      <Item value="public" priority="7" />
       <Item value="void" priority="2" />
-      <Item value="var" priority="8" />
-      <Item value="node" priority="3" />
+      <Item value="var" priority="10" />
+      <Item value="node" priority="5" />
       <Item value="n" priority="0" />
-      <Item value="new" priority="10" />
+      <Item value="new" priority="15" />
       <Item value="Nappybara" priority="0" />
-      <Item value="string" priority="2" />
-      <Item value="Node`0" priority="4" />
+      <Item value="string" priority="3" />
+      <Item value="Node`0" priority="5" />
       <Item value="buttons" priority="2" />
       <Item value="someButtonText" priority="2" />
-      <Item value="if" priority="1" />
+      <Item value="if" priority="3" />
       <Item value="KeyNotFoundException`0" priority="0" />
-      <Item value="return" priority="3" />
+      <Item value="return" priority="6" />
       <Item value="null" priority="0" />
-      <Item value="using" priority="0" />
+      <Item value="using" priority="1" />
       <Item value="NUnit.Framework" priority="0" />
       <Item value="Assert`0" priority="0" />
       <Item value="Clicks" priority="0" />
@@ -89,15 +83,15 @@
       <Item value="char" priority="0" />
       <Item value="ClickedNodes" priority="0" />
       <Item value="List`0" priority="0" />
-      <Item value="TestFixture" priority="0" />
+      <Item value="TestFixture" priority="1" />
       <Item value="Test" priority="0" />
       <Item value="Driver`0" priority="0" />
-      <Item value="RobustDriver`0" priority="0" />
+      <Item value="RobustDriver`0" priority="1" />
       <Item value="FakeDriver`0" priority="0" />
       <Item value="Node" priority="0" />
       <Item value="Robustness`0" priority="0" />
       <Item value="API.UnitTests" priority="0" />
-      <Item value="ThreadStaticAttribute`0" priority="1" />
+      <Item value="ThreadStaticAttribute`0" priority="2" />
       <Item value="delegate" priority="0" />
       <Item value="Delegate`0" priority="1" />
       <Item value="int" priority="0" />
@@ -109,7 +103,30 @@
       <Item value="driver" priority="1" />
       <Item value="link" priority="0" />
       <Item value="links" priority="0" />
-      <Item value="locator" priority="0" />
+      <Item value="locator" priority="2" />
+      <Item value="class" priority="0" />
+      <Item value="Driver" priority="1" />
+      <Item value="SeleniumWebDriverDriver`0" priority="1" />
+      <Item value="FirefoxDriver`0" priority="0" />
+      <Item value="selenium" priority="2" />
+      <Item value="elements" priority="1" />
+      <Item value="object" priority="0" />
+      <Item value="T`0" priority="0" />
+      <Item value="element" priority="1" />
+      <Item value="Id" priority="0" />
+      <Item value="byte" priority="0" />
+      <Item value="IWebElement" priority="0" />
+      <Item value="IWebElement`0" priority="1" />
+      <Item value="webElements" priority="1" />
+      <Item value="array" priority="0" />
+      <Item value="AsQueryable`0" priority="0" />
+      <Item value="e" priority="0" />
+      <Item value="found" priority="0" />
+      <Item value="By`0" priority="0" />
+      <Item value="TearDown" priority="0" />
+      <Item value="abstract" priority="0" />
+      <Item value="IDisposable`0" priority="0" />
+      <Item value="TestFixtureTearDown" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.Dictionary`2">
       <Item value="Add`0" priority="0" />
@@ -143,6 +160,40 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.TimeSpan">
       <Item value="FromMilliseconds`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.Firefox.FirefoxDriver">
+      <Item value="Navigate`0" priority="0" />
+      <Item value="FindElementsByXPath`0" priority="0" />
+      <Item value="FindElementsById`0" priority="0" />
+      <Item value="Dispose`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.INavigation">
+      <Item value="GoToUrl`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Format`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Nappybara.Node">
+      <Item value="Id" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:OpenQA.Selenium.IWebElement">
+      <Item value="GetAttribute`0" priority="0" />
+      <Item value="Text" priority="0" />
+      <Item value="TagName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.ObjectModel.ReadOnlyCollection`1">
+      <Item value="Count" priority="1" />
+      <Item value="CopyTo`0" priority="1" />
+      <Item value="FirstOrDefault`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Linq.IQueryable`1">
+      <Item value="Where`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.IEnumerable`1">
+      <Item value="FirstOrDefault`1" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@OpenQA.Selenium.By">
+      <Item value="XPath`0" priority="0" />
     </ItemStatistics>
   </CompletionStatisticsManager>
 </Configuration>

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nappybara.API", "Nappybara.API\Nappybara.API.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nappybara", "Nappybara\Nappybara.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nappybara.API.UnitTests", "Nappybara.API.UnitTests\Nappybara.API.UnitTests.csproj", "{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nappybara.UnitTests", "Nappybara.UnitTests\Nappybara.UnitTests.csproj", "{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nappybara.DriverImplementationTests", "Nappybara.DriverImplementationTests\Nappybara.DriverImplementationTests.csproj", "{72FF4797-CAB8-40B9-97B3-DD962D4C0D17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72FF4797-CAB8-40B9-97B3-DD962D4C0D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72FF4797-CAB8-40B9-97B3-DD962D4C0D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72FF4797-CAB8-40B9-97B3-DD962D4C0D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72FF4797-CAB8-40B9-97B3-DD962D4C0D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
