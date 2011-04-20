@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RealDriverImplementationTestSuite.cs" />
+    <Compile Include="DriverImplementationTests.cs" />
     <Compile Include="Drivers\SeleniumDriverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

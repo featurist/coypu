@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Coypu.DriverImplementationTests.Drivers
 {
 	[TestFixture]
-	public class SeleniumDriverTests : RealDriverImplementationTestSuite, IDisposable
+	public class SeleniumDriverTests : DriverImplementationTests, IDisposable
 	{
 		private SeleniumWebDriver driver;
 

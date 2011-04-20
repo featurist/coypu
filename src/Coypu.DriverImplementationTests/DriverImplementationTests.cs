@@ -1,9 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace Coypu.DriverImplementationTests
 {
-	public abstract class RealDriverImplementationTestSuite
+	public abstract class DriverImplementationTests
 	{
 		[SetUp]
 		public void SetUp()
@@ -55,8 +56,56 @@ namespace Coypu.DriverImplementationTests
 		[Test]
 		public void FindButton_should_find_a_particular_input_button_by_its_name()
 		{
-			Assert.That(Driver.FindButton("secondInputButtonName").Value, Is.EqualTo("I am the second input button"));
+			Assert.That(Driver.FindButton("secondInputButtonId").Value, Is.EqualTo("I am the second input button"));
 			Assert.That(Driver.FindButton("thirdInputButtonName").Value, Is.EqualTo("I am the third input button"));
+		}
+
+		[Test]
+		public void FindButton_should_find_a_particular_submit_button_by_its_value()
+		{
+			Assert.That(Driver.FindButton("I am the first submit button").Id, Is.EqualTo("firstSubmitButtonId"));
+			Assert.That(Driver.FindButton("I am the second submit button").Id, Is.EqualTo("secondSubmitButtonId"));
+		}
+
+		[Test]
+		public void FindButton_should_find_a_particular_submit_button_by_its_id()
+		{
+			Assert.That(Driver.FindButton("firstSubmitButtonId").Value, Is.EqualTo("I am the first submit button"));
+			Assert.That(Driver.FindButton("thirdSubmitButtonId").Value, Is.EqualTo("I am the third submit button"));
+		}
+
+		[Test]
+		public void FindButton_should_find_a_particular_submit_button_by_its_name()
+		{
+			Assert.That(Driver.FindButton("secondSubmitButtonId").Value, Is.EqualTo("I am the second submit button"));
+			Assert.That(Driver.FindButton("thirdSubmitButtonName").Value, Is.EqualTo("I am the third submit button"));
+		}
+
+		[Test]
+		public void FindButton_should_not_find_text_inputs()
+		{
+			AssertElementNotFound(() => Driver.FindButton("firstTextInputId"));
+		}
+
+		[Test]
+		public void FindButton_should_not_find_hidden_inputs()
+		{
+			AssertElementNotFound(() => Driver.FindButton("firstHiddenInputId"));
+		}
+
+		private void AssertElementNotFound(Func<Node> find)
+		{
+			var thrown = false;
+			try
+			{
+				find();
+			}
+			catch (Exception)
+			{
+				thrown = true;
+			}
+			if (!thrown)
+				Assert.Fail("Expected an element not found exception of some kind");
 		}
 	}
 }

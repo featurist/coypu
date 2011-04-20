@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -27,12 +28,11 @@ namespace Coypu.Drivers
 
 		public Node FindButton(string locator)
 		{
-			var buttonTagNames = new[] {"button","input"};
 			var found =
-				selenium.FindElements(By.XPath(string.Format("//button[text() = '{0}']", locator))).FirstOrDefault() ??
-				selenium.FindElements(By.XPath(string.Format("//input[@type = 'button' and @value = '{0}']", locator))).FirstOrDefault() ??
-				selenium.FindElements(By.Id(locator)).FirstOrDefault(e => buttonTagNames.Contains(e.TagName)) ??
-				selenium.FindElements(By.Name(locator)).FirstOrDefault(e => buttonTagNames.Contains(e.TagName));
+				find(By.TagName(string.Format("button"))).FirstOrDefault(e => e.Text == locator) ??
+				find(By.CssSelector(string.Format("input[type=button],input[type=submit]"))).FirstOrDefault(e => e.Value == locator) ??
+				find(By.Id(locator)).FirstOrDefault(IsInputButton) ??
+				find(By.Name(locator)).FirstOrDefault(IsInputButton);
 
 			return BuildNode(found);
 		}
@@ -50,6 +50,23 @@ namespace Coypu.Drivers
 		public void Visit(string url)
 		{
 			selenium.Navigate().GoToUrl(url);
+		}
+
+
+		private bool IsInputButton(IWebElement e)
+		{
+			return e.TagName == "button" ||
+			       (e.TagName == "input" && (HasAttr(e, "type", "button") || HasAttr(e, "type", "submit")));
+		}
+
+		private bool HasAttr(IWebElement e, string attributeName, string value)
+		{
+			return e.GetAttribute(attributeName) == value;
+		}
+
+		private IEnumerable<IWebElement> find(By by)
+		{
+			return selenium.FindElements(by);
 		}
 
 		public void Dispose()
