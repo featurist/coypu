@@ -18,4 +18,4 @@ gem/pkg/*
 gem/dotnet/Cuke4NukeLog.txt*
 *.gem
 TestResult.xml
-.idea
+.idea*.swp
