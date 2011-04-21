@@ -1,4 +1,5 @@
-﻿using Coypu.Robustness;
+﻿using System;
+using Coypu.Robustness;
 
 namespace Coypu
 {
@@ -28,14 +29,19 @@ namespace Coypu
 			driver.Visit(url);
 		}
 
-		public void FindButton(string locator)
-		{
-			robustWrapper.Robustly(() => driver.FindButton(locator));
-		}
-
 		public void Click(Node node)
 		{
 			robustWrapper.Robustly(() => driver.Click(node));
+		}
+
+		public Node FindButton(string locator)
+		{
+			return robustWrapper.Robustly(() => driver.FindButton(locator));
+		}
+
+		public Node FindLink(string locator)
+		{
+			return robustWrapper.Robustly(() => driver.FindLink(locator));
 		}
 	}
 }

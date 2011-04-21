@@ -8,6 +8,8 @@ namespace Coypu.UnitTests.TestDoubles
 	{
 		public IList<Action> DeferredActions = new List<Action>();
 		public IList<object> DeferredFunctions = new List<object>();
+		
+		private readonly IDictionary<Type,object> stubbedResults = new Dictionary<Type, object>();
 
 		public TimeSpan Timeout
 		{
@@ -27,7 +29,12 @@ namespace Coypu.UnitTests.TestDoubles
 		public TResult Robustly<TResult>(Func<TResult> function)
 		{
 			DeferredFunctions.Add(function);
-			return default(TResult);
+			return (TResult) stubbedResults[typeof(TResult)];
+		}
+
+		public void AlwaysReturn(object result)
+		{
+			stubbedResults.Add(result.GetType(),result);
 		}
 	}
 }

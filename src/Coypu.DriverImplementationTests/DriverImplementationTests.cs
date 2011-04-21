@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using Coypu.Drivers;
 using NUnit.Framework;
 
 namespace Coypu.DriverImplementationTests
@@ -29,8 +29,6 @@ namespace Coypu.DriverImplementationTests
 		protected abstract Driver GetDriver();
 
 		private const string INTERACTION_TESTS_PAGE = @"..\..\html\InteractionTestsPage.htm";
-
-		// NEXT: Find link by text
 
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_text()
@@ -98,13 +96,26 @@ namespace Coypu.DriverImplementationTests
 		[Test]
 		public void FindButton_should_not_find_text_inputs()
 		{
-			AssertElementNotFound(() => driver.FindButton("firstTextInputId"));
+			Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstTextInputId"));
 		}
 
 		[Test]
 		public void FindButton_should_not_find_hidden_inputs()
 		{
-			AssertElementNotFound(() => driver.FindButton("firstHiddenInputId"));
+			Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstHiddenInputId"));
+		}
+
+		[Test]
+		public void FindLink_should_find_link_by_text()
+		{
+			Assert.That(driver.FindLink("I am the first link").Id == "firstLinkId");
+			Assert.That(driver.FindLink("I am the second link").Id == "secondLinkId");
+		}
+
+		[Test]
+		public void FindLink_should_find_only_find_links()
+		{
+			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am not a link"));
 		}
 
 		[Test]
@@ -116,19 +127,5 @@ namespace Coypu.DriverImplementationTests
 			Assert.That(driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me - clicked"));
 		}
 
-		private void AssertElementNotFound(Func<Node> find)
-		{
-			var thrown = false;
-			try
-			{
-				find();
-			}
-			catch (Exception)
-			{
-				thrown = true;
-			}
-			if (!thrown)
-				Assert.Fail("Expected an element not found exception of some kind");
-		}
 	}
 }

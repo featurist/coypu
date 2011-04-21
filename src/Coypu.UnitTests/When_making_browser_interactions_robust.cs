@@ -28,7 +28,7 @@ namespace Coypu.UnitTests
 			{
 			}
 
-			Assert.That(tries, Is.GreaterThan(1));
+			Assert.That(tries, Is.GreaterThan(10));
 		}
 
 		[Test]
@@ -36,11 +36,9 @@ namespace Coypu.UnitTests
 			When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(123);
-			var interval = TimeSpan.FromMilliseconds(2);
 			var robustness = new WaitAndRetryRobustWrapper(expectedTimeout);
 
 			Func<object> function = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
-			const int allowMillisecondsForFuncToReturn = 2;
 
 			var startTime = DateTime.Now;
 			try
@@ -55,9 +53,8 @@ namespace Coypu.UnitTests
 			var endTime = DateTime.Now;
 
 			var actualDuration = (endTime - startTime);
-			var endOfTimeoutWindow = interval.Add(TimeSpan.FromMilliseconds(allowMillisecondsForFuncToReturn));
 			Assert.That(actualDuration, Is.InRange(expectedTimeout,
-			                                       expectedTimeout.Add(endOfTimeoutWindow)));
+			                                       expectedTimeout.Add(TimeSpan.FromMilliseconds(10))));
 		}
 
 		[Test]

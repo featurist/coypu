@@ -9,13 +9,13 @@ namespace Coypu.DriverImplementationTests.Drivers
 		protected override Driver GetDriver() { return new SeleniumWebDriver(Browser.Firefox); }
 	}
 
-	[TestFixture, Ignore("Need to host on a website to get round security issues I think")]
+	[TestFixture]
 	public class InternetExplorerSeleniumWebDriverTests : DriverImplementationTests
 	{
 		protected override Driver GetDriver() { return new SeleniumWebDriver(Browser.InternetExplorer); }
 	}
 
-	[TestFixture,Ignore("Need to ensure chrome installed")]
+	[TestFixture]
 	public class ChromeSeleniumWebDriverTests : DriverImplementationTests
 	{
 		protected override Driver GetDriver() { return new SeleniumWebDriver(Browser.Chrome); }
