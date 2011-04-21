@@ -85,9 +85,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Browser.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Drivers\Browser.cs" />
+    <Compile Include="Drivers\BrowserNotSupportedException.cs" />
+    <Compile Include="Drivers\DriverNotSupportedException.cs" />
     <Compile Include="Drivers\MissingHtmlException.cs" />
+    <Compile Include="Drivers\WebDriver.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />
     <Compile Include="Drivers\SeleniumWebDriver.cs" />

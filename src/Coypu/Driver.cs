@@ -6,6 +6,7 @@ namespace Coypu
 	{
 		Node FindButton(string locator);
 		Node FindLink(string locator);
+		Node FindTextField(string locator);
 		void Click(Node node);
 		void Visit(string url);
 	}

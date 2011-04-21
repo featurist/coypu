@@ -5,13 +5,6 @@ namespace Coypu.Robustness
 {
 	public class WaitAndRetryRobustWrapper : RobustWrapper
 	{
-		public WaitAndRetryRobustWrapper(TimeSpan timeout)
-		{
-			Timeout = timeout;
-		}
-
-		public TimeSpan Timeout { get; private set; }
-
 		public void Robustly(Action action)
 		{
 			Robustly<object>(() =>
@@ -23,7 +16,7 @@ namespace Coypu.Robustness
 
 		public TResult Robustly<TResult>(Func<TResult> function)
 		{
-			var interval = (int) Math.Round(Timeout.TotalMilliseconds / 10);
+			var interval = (int)Math.Round(Configuration.Timeout.TotalMilliseconds / 10);
 			var startTime = DateTime.Now;
 			while (true)
 			{
@@ -33,7 +26,7 @@ namespace Coypu.Robustness
 				}
 				catch (Exception)
 				{
-					if (DateTime.Now - startTime >= Timeout)
+					if (DateTime.Now - startTime >= Configuration.Timeout)
 					{
 						throw;
 					}

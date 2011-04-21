@@ -4,12 +4,14 @@ namespace Coypu.UnitTests.TestDoubles
 {
 	public class FakeDriver : Driver
 	{
-		private readonly Dictionary<string, Node> buttons = new Dictionary<string, Node>();
 		private readonly IList<Node> clickedNodes = new List<Node>();
+		private readonly Dictionary<string, Node> buttons = new Dictionary<string, Node>();
 		private readonly Dictionary<string, Node> links = new Dictionary<string, Node>();
+		private readonly Dictionary<string, Node> textFields = new Dictionary<string, Node>();
 		private readonly IList<string> visits = new List<string>();
 		private readonly IList<string> findButtonRequests = new List<string>();
 		private readonly IList<string> findLinkRequests = new List<string>();
+		private readonly IList<string> findTextFieldRequests = new List<string>();
 		private bool disposed;
 
 		public IEnumerable<Node> ClickedNodes
@@ -44,6 +46,12 @@ namespace Coypu.UnitTests.TestDoubles
 			return links[locator];
 		}
 
+		public Node FindTextField(string locator)
+		{
+			findTextFieldRequests.Add(locator);
+			return textFields[locator];
+		}
+
 		public void Click(Node node)
 		{
 			clickedNodes.Add(node);
@@ -62,6 +70,11 @@ namespace Coypu.UnitTests.TestDoubles
 		public void StubLink(string locator, Node node)
 		{
 			links[locator] = node;
+		}
+
+		public void StubTextField(string locator, Node node)
+		{
+			textFields[locator] = node;
 		}
 
 		public void Dispose()

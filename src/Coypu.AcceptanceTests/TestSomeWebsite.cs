@@ -1,32 +1,44 @@
 ﻿using System;
 using Coypu.Drivers;
-using Coypu.Robustness;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
 {
 	[TestFixture]
-	
-
 	public class TestSomeWebsite
 	{
+		[SetUp]
+		public void SetUp()
+		{
+			Configuration.Timeout = TimeSpan.FromSeconds(10);
+			Configuration.Browser = Drivers.Browser.Firefox;
+			Configuration.WebDriver = typeof(SeleniumWebDriver);
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			Browser.EndSession();
+		}
+
 		[Test]
 		public void TrySomeStuff()
 		{
-			using (var seleniumWebDriver = new SeleniumWebDriver(Browser.Firefox))
+			using (var session = Browser.Session)
 			{
-				var waitAndRetryRobustWrapper = new WaitAndRetryRobustWrapper(TimeSpan.FromSeconds(10));
-				var session = new Session(seleniumWebDriver, waitAndRetryRobustWrapper);
-
 				session.Visit("http://www.google.com");
 
 				session.ClickButton("I'm Feeling Lucky");
 				session.ClickLink("2000");
 				session.ClickLink("Next »");
 				session.ClickLink("Home");
-
-				//TODO: Try some tricky stuff
 			}
+
+			Configuration.Browser = Drivers.Browser.Chrome;
+
+			Browser.Session.Visit("http://www.bing.com");
+
+			//TODO: Try some tricky stuff
 		}
 	}
 }
