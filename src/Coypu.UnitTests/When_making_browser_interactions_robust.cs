@@ -28,14 +28,14 @@ namespace Coypu.UnitTests
 			{
 			}
 
-			Assert.That(tries, Is.GreaterThan(10));
+			Assert.That(tries, Is.GreaterThan(5));
 		}
 
 		[Test]
 		public void
 			When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
 		{
-			var expectedTimeout = TimeSpan.FromMilliseconds(123);
+			var expectedTimeout = TimeSpan.FromMilliseconds(200);
 			var robustness = new WaitAndRetryRobustWrapper(expectedTimeout);
 
 			Func<object> function = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
@@ -53,8 +53,8 @@ namespace Coypu.UnitTests
 			var endTime = DateTime.Now;
 
 			var actualDuration = (endTime - startTime);
-			Assert.That(actualDuration, Is.InRange(expectedTimeout,
-			                                       expectedTimeout.Add(TimeSpan.FromMilliseconds(10))));
+			var discrepancy = TimeSpan.FromMilliseconds(50);
+			Assert.That(actualDuration, Is.InRange(expectedTimeout, expectedTimeout + discrepancy));
 		}
 
 		[Test]
@@ -82,7 +82,7 @@ namespace Coypu.UnitTests
         public void
             When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
         {
-            var timeout = TimeSpan.FromMilliseconds(1000);
+            var timeout = TimeSpan.FromMilliseconds(200);
             var robustness = new WaitAndRetryRobustWrapper(timeout);
             Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
