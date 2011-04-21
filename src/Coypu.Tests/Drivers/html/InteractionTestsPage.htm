@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend>Buttons</legend>
+      <button id="firstButtonId" name="firstButtonName">I am the first button</button>
+      <button id="secondButtonId" name="secondButtonName"> I am the second button</button>
+      <button id="thirdButtonId" name="thirdButtonName">
+        I am the third button</button>
+      
+      <input type="text" id="firstTextInputId" name="firstTextInputName" value="I am the first text input" />
+      <input type="hidden" id="firstHiddenInputId" name="firstHiddenInputName" value="I am the first hidden input" />
+      
+      <input type="button" id="firstInputButtonId" name="firstInputButtonName" value="I am the first input button" />
+      <input type="button" id="secondInputButtonId" name="secondInputButtonName" value="I am the second input button" />
+      <input type="button" id="thirdInputButtonId" name="thirdInputButtonName" value="I am the third input button" />
+      
+      <input type="submit" id="firstSubmitButtonId" name="firstSubmitButtonName" value="I am the first submit button" />
+      <input type="submit" id="secondSubmitButtonId" name="secondSubmitButtonName" value="I am the second submit button" />
+      <input type="submit" id="thirdSubmitButtonId" name="thirdSubmitButtonName" value="I am the third submit button" />
+      
+      <button id="clickMeTest" onclick="this.innerHTML += ' - clicked'; return false;">Click me</button>
+    </fieldset>
+    <fieldset>
+      <legend>Text fields</legend>
+      <label for="forLabeledTextFieldId">I am the text field linked by for</label>
+      <input type="text" id="forLabeledTextFieldId" name="forLabeledTextFieldName" value="text field one val" />
+      <label>
+        I am the text field in a label container
+        <input type="text" id="containerLabeledTextFieldId" name="containerLabeledTextFieldName" value="text field two val" />
+      </label>
+    </fieldset>
+  </form>
+  <section>
+    <h1>Links</h1>
+    <a href="#link1href" id="firstLinkId">I am the first link</a>
+    <a href="#link2href" id="secondLinkId">
+      I am the second link</a>
+    <span id="linkPretender">I am not a link</span>
+  </section>
+  
+</body>
+</html>

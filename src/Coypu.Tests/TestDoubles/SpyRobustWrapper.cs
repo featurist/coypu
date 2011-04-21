@@ -11,15 +11,6 @@ namespace Coypu.UnitTests.TestDoubles
 		
 		private readonly IDictionary<Type,object> stubbedResults = new Dictionary<Type, object>();
 
-		public TimeSpan Timeout
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public TimeSpan Interval
-		{
-			get { throw new NotImplementedException(); }
-		}
 
 		public void Robustly(Action action)
 		{

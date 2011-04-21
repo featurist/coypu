@@ -3,15 +3,27 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-	public class Session
+	public class Session : IDisposable
 	{
 		private readonly Driver driver;
 		private readonly RobustWrapper robustWrapper;
+		public bool WasDisposed { get; private set; }
+
+		public Driver Driver
+		{
+			get { return driver; }
+		}
 
 		public Session(Driver driver, RobustWrapper robustWrapper)
 		{
-			this.driver = driver;
 			this.robustWrapper = robustWrapper;
+			this.driver = driver;
+		}
+
+		public void Dispose()
+		{
+			driver.Dispose();
+			WasDisposed = true;
 		}
 
 		public void ClickButton(string locator)
@@ -42,6 +54,11 @@ namespace Coypu
 		public Node FindLink(string locator)
 		{
 			return robustWrapper.Robustly(() => driver.FindLink(locator));
+		}
+
+		public Node FindTextField(string locator)
+		{
+			return robustWrapper.Robustly(() => driver.FindTextField(locator));
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using Coypu.Drivers;
 using NUnit.Framework;
 
-namespace Coypu.DriverImplementationTests
+namespace Coypu.Tests.Drivers
 {
 	public abstract class DriverImplementationTests
 	{
@@ -28,7 +28,7 @@ namespace Coypu.DriverImplementationTests
 
 		protected abstract Driver GetDriver();
 
-		private const string INTERACTION_TESTS_PAGE = @"..\..\html\InteractionTestsPage.htm";
+		private const string INTERACTION_TESTS_PAGE = @"..\..\Drivers\html\InteractionTestsPage.htm";
 
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_text()
@@ -125,6 +125,30 @@ namespace Coypu.DriverImplementationTests
 			Assert.That(driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me"));
 			driver.Click(node);
 			Assert.That(driver.FindButton("clickMeTest").Text, Is.EqualTo("Click me - clicked"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_text_field_by_label_text_by_for_attribute()
+		{
+			Assert.That(driver.FindTextField("I am the text field linked by for").Id, Is.EqualTo("forLabeledTextFieldId"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_text_field_by_container_label()
+		{
+			Assert.That(driver.FindTextField("I am the text field in a label container").Id, Is.EqualTo("containerLabeledTextFieldId"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_text_field_by_id()
+		{
+			Assert.That(driver.FindTextField("containerLabeledTextFieldId").Value, Is.EqualTo("text field two val"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_text_field_by_name()
+		{
+			Assert.That(driver.FindTextField("containerLabeledTextFieldName").Value, Is.EqualTo("text field two val"));
 		}
 
 	}

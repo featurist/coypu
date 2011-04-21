@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace Coypu.UnitTests.When_interacting_with_the_browser
+namespace Coypu.Tests.Session.When_interacting_with_the_browser
 {
-	[TestFixture]
+	//[TestFixture]
 	public class When_completing_forms : APITests
 	{
 	}

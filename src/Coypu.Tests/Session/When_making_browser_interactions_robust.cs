@@ -2,7 +2,7 @@
 using Coypu.Robustness;
 using NUnit.Framework;
 
-namespace Coypu.UnitTests
+namespace Coypu.Tests.Session
 {
 	[TestFixture]
 	public class When_making_browser_interactions_robust
@@ -11,7 +11,8 @@ namespace Coypu.UnitTests
 		public void When_a_Function_throws_a_recurring_exception_It_should_retry_at_regular_intervals()
 		{
 			var timeout = TimeSpan.FromMilliseconds(100);
-			var robustness = new WaitAndRetryRobustWrapper(timeout);
+			Configuration.Timeout = timeout;
+			var robustness = new WaitAndRetryRobustWrapper();
 
 			var tries = 0;
 			Func<object> function = () =>
@@ -36,7 +37,8 @@ namespace Coypu.UnitTests
 			When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(200);
-			var robustness = new WaitAndRetryRobustWrapper(expectedTimeout);
+			Configuration.Timeout = expectedTimeout;
+			var robustness = new WaitAndRetryRobustWrapper();
 
 			Func<object> function = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
@@ -60,7 +62,8 @@ namespace Coypu.UnitTests
 		[Test]
 		public void When_a_Function_throws_an_exception_first_time_It_should_retry()
 		{
-			var robustness = new WaitAndRetryRobustWrapper(TimeSpan.FromMilliseconds(10));
+			Configuration.Timeout = TimeSpan.FromMilliseconds(10);
+			var robustness = new WaitAndRetryRobustWrapper();
 			var tries = 0;
 			var expectedReturnValue = new object();
 			Func<object> function = () =>
@@ -83,7 +86,8 @@ namespace Coypu.UnitTests
             When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
         {
             var timeout = TimeSpan.FromMilliseconds(200);
-            var robustness = new WaitAndRetryRobustWrapper(timeout);
+        	Configuration.Timeout = timeout;
+            var robustness = new WaitAndRetryRobustWrapper();
             Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
             var startTime = DateTime.Now;
@@ -106,7 +110,8 @@ namespace Coypu.UnitTests
 	    [Test]
 		public void When_an_Action_throws_an_exception_first_time_It_should_retry()
 		{
-			var robustness = new WaitAndRetryRobustWrapper(TimeSpan.FromMilliseconds(100));
+	    	Configuration.Timeout = TimeSpan.FromMilliseconds(100);
+	    	var robustness = new WaitAndRetryRobustWrapper();
 			var tries = 0;
 			Action action = () =>
 			                	{
