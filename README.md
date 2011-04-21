@@ -1,8 +1,8 @@
 Coypu
 =====
 
-### What?
-Coypu is designed for those special cases when you're forced to use .NET and can't make us of Cucumber/Capybara. Basically, it's like Capybara for .NET.
+### Why?
+Coypu is designed for those special cases when you're forced to use .NET and can't make use of Cucumber/Capybara.
 
 ### Coypu is
 * A robust wrapper for browser automation tools (e.g. Selenium WebDriver) to ease automating js/ajax-heavy websites from .Net and SpecFlow/Cuke4Nuke
