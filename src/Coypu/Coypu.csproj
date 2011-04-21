@@ -93,6 +93,8 @@
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />
     <Compile Include="Drivers\DriverNotSupportedException.cs" />
     <Compile Include="Drivers\MissingHtmlException.cs" />
+    <Compile Include="Drivers\SeleniumExtensions.cs" />
+    <Compile Include="Drivers\SeleniumNode.cs" />
     <Compile Include="Drivers\WebDriver.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />

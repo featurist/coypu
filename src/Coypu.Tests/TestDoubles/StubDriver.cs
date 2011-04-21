@@ -1,4 +1,4 @@
-﻿namespace Coypu.UnitTests.TestDoubles
+﻿namespace Coypu.Tests.TestDoubles
 {
 	public class StubDriver : Driver
 	{
@@ -26,6 +26,10 @@
 		}
 
 		public void Visit(string url)
+		{
+		}
+
+		public void Set(Node node, string value)
 		{
 		}
 	}

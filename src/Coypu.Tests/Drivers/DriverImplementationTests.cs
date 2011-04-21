@@ -106,6 +106,12 @@ namespace Coypu.Tests.Drivers
 		}
 
 		[Test]
+		public void FindButton_should_not_find_invisible_inputs()
+		{
+			Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstInvisibleInputId"));
+		}
+
+		[Test]
 		public void FindLink_should_find_link_by_text()
 		{
 			Assert.That(driver.FindLink("I am the first link").Id == "firstLinkId");
@@ -116,6 +122,13 @@ namespace Coypu.Tests.Drivers
 		public void FindLink_should_find_only_find_links()
 		{
 			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am not a link"));
+		}
+
+		[Test]
+		public void FindLink_should_find_only_find_visible_links()
+		{
+			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
+			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
 		}
 
 		[Test]
@@ -149,6 +162,18 @@ namespace Coypu.Tests.Drivers
 		public void FindTextField_should_find_text_field_by_name()
 		{
 			Assert.That(driver.FindTextField("containerLabeledTextFieldName").Value, Is.EqualTo("text field two val"));
+		}
+
+		[Test]
+		public void Set_should_set_value_of_text_field()
+		{
+			var textField = driver.FindTextField("containerLabeledTextFieldName");
+			driver.Set(textField,"New value");
+
+			Assert.That(textField.Value, Is.EqualTo("New value"));
+
+			var findAgain = driver.FindTextField("containerLabeledTextFieldName");
+			Assert.That(findAgain.Value, Is.EqualTo("New value"));
 		}
 
 	}

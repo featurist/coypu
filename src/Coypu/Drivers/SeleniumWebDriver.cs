@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -28,40 +28,54 @@ namespace Coypu.Drivers
 				case (Browser.Chrome):
 					return new ChromeDriver();
 				default:
-					throw new BrowserNotSupportedException(Configuration.Browser,this);
+					throw new BrowserNotSupportedException(Configuration.Browser, this);
 			}
 		}
 
 		private Node BuildNode(IWebElement element)
 		{
-			return new Node
-			       	{
-			       		UnderlyingNode = element,
-			       		Text = element.Text,
-			       		Id = element.GetAttribute("id"),
-			       		Value = element.GetAttribute("value"),
-			       	};
+			return new SeleniumNode(element);
 		}
 
 		public Node FindButton(string locator)
 		{
-			var found =
-				find(By.TagName(string.Format("button"))).FirstOrDefault(e => e.Text == locator) ??
-				find(By.CssSelector(string.Format("input[type=button],input[type=submit]"))).FirstOrDefault(e => e.Value == locator) ??
-				find(By.Id(locator)).FirstOrDefault(IsInputButton) ??
-				find(By.Name(locator)).FirstOrDefault(IsInputButton);
+			return FindNode(() => FindButtonByText(locator) ??
+		                          FindInputButtonByValue(locator) ??
+		                          find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
+		                          find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton));
+		}
 
-			if (found == null)
-				throw new MissingHtmlException("Could not find button: " + locator);
+		private IWebElement FindInputButtonByValue(string locator)
+		{
+			var inputButtonsCss = string.Format("input[type=button],input[type=submit]");
 
-			return BuildNode(found);
+			return find(By.CssSelector(inputButtonsCss)).FirstVisibleOrDefault(e => e.Value == locator);
+		}
+
+		private IWebElement FindButtonByText(string locator)
+		{
+			return find(By.TagName(string.Format("button"))).FirstVisibleOrDefault(e => e.Text == locator);
 		}
 
 		public Node FindLink(string locator)
 		{
+			return FindNode(() => selenium.FindElement(By.LinkText(locator)));
+		}
+
+		private Node FindNode(Func<IWebElement> findNode)
+		{
+			
 			try
 			{
-				return BuildNode(selenium.FindElementByLinkText(locator));
+				var webElement = findNode();
+				try
+				{
+					return BuildNode(webElement);
+				}
+				catch (NullReferenceException nre)
+				{
+					throw new MissingHtmlException(nre.Message, nre);
+				}
 			}
 			catch (NoSuchElementException e)
 			{
@@ -80,30 +94,30 @@ namespace Coypu.Drivers
 			else
 			{
 				textField = FindTextFieldById(locator) ??
-							FindTextFieldByName(locator); 
+				            FindTextFieldByName(locator);
 			}
 			return BuildNode(textField);
 		}
 
 		private IWebElement FindLabelByText(string locator)
 		{
-			return selenium.FindElements(By.TagName("label")).FirstOrDefault(e => e.Text == locator);
+			return selenium.FindElements(By.TagName("label")).FirstVisibleOrDefault(e => e.Text == locator);
 		}
 
 		private IWebElement FindTextInputFromLabel(IWebElement label)
 		{
 			return FindTextFieldById(label.GetAttribute("for")) ??
-			       label.FindElements(By.TagName("input")).FirstOrDefault(IsTextField);
+			       label.FindElements(By.TagName("input")).FirstVisibleOrDefault(IsTextField);
 		}
 
 		private IWebElement FindTextFieldById(string id)
 		{
-			return selenium.FindElementsById(id).FirstOrDefault(IsTextField);
+			return selenium.FindElementsById(id).FirstVisibleOrDefault(IsTextField);
 		}
 
 		private IWebElement FindTextFieldByName(string name)
 		{
-			return selenium.FindElementsByName(name).FirstOrDefault(IsTextField);
+			return selenium.FindElementsByName(name).FirstVisibleOrDefault(IsTextField);
 		}
 
 		public void Click(Node node)
@@ -116,6 +130,14 @@ namespace Coypu.Drivers
 			selenium.Navigate().GoToUrl(url);
 		}
 
+		public void Set(Node node, string value)
+		{
+			var seleniumElement = SeleniumElement(node);
+			seleniumElement.Clear();
+			seleniumElement.SendKeys(value);
+			node.Update();
+		}
+
 		private IWebElement SeleniumElement(Node node)
 		{
 			return ((IWebElement) node.UnderlyingNode);
@@ -124,7 +146,7 @@ namespace Coypu.Drivers
 		private bool IsInputButton(IWebElement e)
 		{
 			return e.TagName == "button" ||
-				   (e.TagName == "input" && (HasAttr(e, "type", "button") || HasAttr(e, "type", "submit")));
+			       (e.TagName == "input" && (HasAttr(e, "type", "button") || HasAttr(e, "type", "submit")));
 		}
 
 		private bool IsTextField(IWebElement e)
@@ -145,6 +167,7 @@ namespace Coypu.Drivers
 		public void Dispose()
 		{
 			selenium.Close();
+			selenium.Dispose();
 		}
 	}
 }

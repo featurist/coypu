@@ -9,7 +9,7 @@ namespace Coypu.Tests.Session.When_interacting_with_the_browser
 		[Test]
 		public void Click_should_make_robust_call_to_underlying_driver()
 		{
-			var node = new Node();
+			var node = new TestNode();
 			Session.Click(node);
 
 			Assert.That(Driver.ClickedNodes, Is.Empty);
@@ -22,7 +22,7 @@ namespace Coypu.Tests.Session.When_interacting_with_the_browser
 		[Test]
 		public void Click_button_should_robustly_find_by_text_and_click()
 		{
-			var node = new Node();
+			var node = new TestNode();
 			Driver.StubButton("Some button locator", node);
 
 			Session.ClickButton("Some button locator");
@@ -35,7 +35,7 @@ namespace Coypu.Tests.Session.When_interacting_with_the_browser
 		[Test]
 		public void Click_link_should_robustly_find_link_by_locator_and_click()
 		{
-			var node = new Node();
+			var node = new TestNode();
 			Driver.StubLink("Some link locator", node);
 
 			Session.ClickLink("Some link locator");

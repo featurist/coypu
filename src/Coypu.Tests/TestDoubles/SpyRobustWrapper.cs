@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Coypu.Robustness;
 
-namespace Coypu.UnitTests.TestDoubles
+namespace Coypu.Tests.TestDoubles
 {
 	public class SpyRobustWrapper : RobustWrapper
 	{
