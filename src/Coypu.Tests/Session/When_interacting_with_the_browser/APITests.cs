@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Tests.TestDoubles;
 using Coypu.UnitTests.TestDoubles;
 using NUnit.Framework;
 
@@ -21,8 +22,8 @@ namespace Coypu.Tests.Session.When_interacting_with_the_browser
 
 		protected void Should_find_robustly(Func<string, Node> subject, Action<string, Node> stub)
 		{
-			var expectedImmediateResult = new Node();
-			var expectedDeferredResult = new Node();
+			var expectedImmediateResult = new TestNode();
+			var expectedDeferredResult = new TestNode();
 
 			SpyRobustWrapper.AlwaysReturn(expectedImmediateResult);
 			stub("Find me", expectedDeferredResult);

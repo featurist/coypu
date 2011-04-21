@@ -26,17 +26,13 @@ namespace Coypu.AcceptanceTests
 		{
 			using (var session = Browser.Session)
 			{
-				session.Visit("http://www.google.com");
+				session.Visit("http://www.twitter.com");
 
-				session.ClickButton("I'm Feeling Lucky");
-				session.ClickLink("2000");
-				session.ClickLink("Next »");
-				session.ClickLink("Home");
+				session.FillIn("session[username_or_email]","coypu");
+				session.FillIn("session[password]","nappybara");
+				session.ClickButton("Sign in");
 			}
 
-			Configuration.Browser = Drivers.Browser.Chrome;
-
-			Browser.Session.Visit("http://www.bing.com");
 
 			//TODO: Try some tricky stuff
 		}

@@ -25,6 +25,8 @@
       <input type="submit" id="thirdSubmitButtonId" name="thirdSubmitButtonName" value="I am the third submit button" />
       
       <button id="clickMeTest" onclick="this.innerHTML += ' - clicked'; return false;">Click me</button>
+      
+      <button id="firstInvisibleInputId" style="visibility:hidden">I am an invisible button</button>
     </fieldset>
     <fieldset>
       <legend>Text fields</legend>
@@ -42,6 +44,8 @@
     <a href="#link2href" id="secondLinkId">
       I am the second link</a>
     <span id="linkPretender">I am not a link</span>
+    <a style="display:none" href="#invisible">I am an invisible link by visibility</a>
+    <a style="visibility:hidden" href="#invisible">I am an invisible link by display</a>
   </section>
   
 </body>

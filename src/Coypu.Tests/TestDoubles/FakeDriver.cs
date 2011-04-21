@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace Coypu.UnitTests.TestDoubles
 {
@@ -12,6 +14,7 @@ namespace Coypu.UnitTests.TestDoubles
 		private readonly IList<string> findButtonRequests = new List<string>();
 		private readonly IList<string> findLinkRequests = new List<string>();
 		private readonly IList<string> findTextFieldRequests = new List<string>();
+		private readonly IDictionary<Node, string> filledInFields = new Dictionary<Node, string>();
 		private bool disposed;
 
 		public IEnumerable<Node> ClickedNodes
@@ -29,10 +32,16 @@ namespace Coypu.UnitTests.TestDoubles
 			get { return findLinkRequests; }
 		}
 
+		public IDictionary<Node,string> FilledInFields
+		{
+			get { return filledInFields; }
+		}
+
 		public IEnumerable<string> Visits
 		{
 			get { return visits; }
 		}
+
 
 		public Node FindButton(string locator)
 		{
@@ -85,6 +94,11 @@ namespace Coypu.UnitTests.TestDoubles
 		public bool Disposed()
 		{
 			return disposed;
+		}
+
+		public void Set(Node node, string value)
+		{
+			filledInFields.Add(node,value);
 		}
 	}
 }

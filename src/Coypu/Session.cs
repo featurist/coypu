@@ -60,5 +60,11 @@ namespace Coypu
 		{
 			return robustWrapper.Robustly(() => driver.FindTextField(locator));
 		}
+
+		public void FillIn(string locator, string with)
+		{
+			robustWrapper.Robustly(() => driver.Set(driver.FindTextField(locator),with));
+
+		}
 	}
 }
