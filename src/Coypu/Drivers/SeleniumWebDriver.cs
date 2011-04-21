@@ -53,12 +53,22 @@ namespace Coypu.Drivers
 				find(By.Id(locator)).FirstOrDefault(IsInputButton) ??
 				find(By.Name(locator)).FirstOrDefault(IsInputButton);
 
+			if (found == null)
+				throw new MissingHtmlException("Could not find button: " + locator);
+
 			return BuildNode(found);
 		}
 
 		public Node FindLink(string locator)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return BuildNode(selenium.FindElementByLinkText(locator));
+			}
+			catch (NoSuchElementException e)
+			{
+				throw new MissingHtmlException(e.Message, e);
+			}
 		}
 
 		public void Click(Node node)

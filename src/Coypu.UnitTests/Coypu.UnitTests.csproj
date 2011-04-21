@@ -49,7 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="When_interacting_with_the_browser.cs" />
+    <Compile Include="When_interacting_with_the_browser\APITests.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_visiting.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_completing_forms.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_clicking.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding.cs" />
     <Compile Include="TestDoubles\SpyRobustWrapper.cs" />
     <Compile Include="TestDoubles\FakeDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
