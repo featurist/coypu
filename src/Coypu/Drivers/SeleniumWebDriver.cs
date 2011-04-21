@@ -104,6 +104,7 @@ namespace Coypu.Drivers
 
 		public void Dispose()
 		{
+			selenium.Close();
 			selenium.Dispose();
 		}
 	}
