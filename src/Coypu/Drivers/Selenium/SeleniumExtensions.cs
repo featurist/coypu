@@ -19,7 +19,7 @@ namespace Coypu.Drivers.Selenium
 
 		public static IWebElement FirstVisibleOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
 		{
-			return elements.Where(IsVisible).FirstOrDefault(predicate);
+			return elements.Where(predicate).FirstOrDefault(IsVisible);
 		}
 	}
 }

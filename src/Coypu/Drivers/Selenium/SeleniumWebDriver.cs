@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -46,35 +47,37 @@ namespace Coypu.Drivers.Selenium
 
 		public Node FindButton(string locator)
 		{
-			return FindNode(() => FindButtonByText(locator) ??
-		                          FindInputButtonByValue(locator) ??
-		                          find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
-		                          find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton),
-								  "find button: " + locator);
+			try
+			{
+				return BuildNode(FindButtonByText(locator) ??
+                                 FindInputButtonByValue(locator) ??
+                                 Find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
+                                 Find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton),
+								 "find button: " + locator);
+			}
+			catch (NoSuchElementException e)
+			{
+				throw new MissingHtmlException(e.Message, e);
+			}
 		}
 
 		private IWebElement FindInputButtonByValue(string locator)
 		{
 			var inputButtonsCss = string.Format("input[type=button],input[type=submit]");
 
-			return find(By.CssSelector(inputButtonsCss)).FirstVisibleOrDefault(e => e.Value == locator);
+			return Find(By.CssSelector(inputButtonsCss)).FirstVisibleOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindButtonByText(string locator)
 		{
-			return find(By.TagName(string.Format("button"))).FirstVisibleOrDefault(e => e.Text == locator);
+			return Find(By.TagName(string.Format("button"))).FirstVisibleOrDefault(e => e.Text == locator);
 		}
 
 		public Node FindLink(string locator)
 		{
-			return FindNode(() => selenium.FindElement(By.LinkText(locator)), "finding link: " + locator);
-		}
-
-		private Node FindNode(Func<IWebElement> findNode, string description)
-		{
 			try
 			{
-				return BuildNode(findNode(), description);
+				return BuildNode(selenium.FindElement(By.LinkText(locator)), "find link: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -92,7 +95,8 @@ namespace Coypu.Drivers.Selenium
 			}
 			else
 			{
-				textField = FindTextFieldById(locator) ??
+				textField = FindTextFieldByPlaceholder(locator) ??
+							FindTextFieldById(locator) ??
 				            FindTextFieldByName(locator);
 			}
 			return BuildNode(textField, "find text field: " + locator);
@@ -106,7 +110,14 @@ namespace Coypu.Drivers.Selenium
 		private IWebElement FindTextInputFromLabel(IWebElement label)
 		{
 			return FindTextFieldById(label.GetAttribute("for")) ??
-			       label.FindElements(By.TagName("input")).FirstVisibleOrDefault(IsTextField);
+			       label.FindElements(By.XPath("*")).FirstVisibleOrDefault(IsTextField);
+		}
+
+		private IWebElement FindTextFieldByPlaceholder(string placeholder)
+		{
+			return selenium.FindElements(By.XPath("//input[@placeholder]"))
+					.Where(IsTextField)
+					.FirstVisibleOrDefault(e => e.GetAttribute("placeholder") == placeholder);
 		}
 
 		private IWebElement FindTextFieldById(string id)
@@ -158,7 +169,7 @@ namespace Coypu.Drivers.Selenium
 			return e.GetAttribute(attributeName) == value;
 		}
 
-		private IEnumerable<IWebElement> find(By by)
+		private IEnumerable<IWebElement> Find(By by)
 		{
 			return selenium.FindElements(by);
 		}
