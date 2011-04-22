@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Coypu.Drivers
+namespace Coypu.Drivers.Selenium
 {
 	public class SeleniumNode : Node
 	{

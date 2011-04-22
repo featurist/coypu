@@ -6,7 +6,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 
-namespace Coypu.Drivers
+namespace Coypu.Drivers.Selenium
 {
 	public class SeleniumWebDriver : Driver
 	{
@@ -32,9 +32,16 @@ namespace Coypu.Drivers
 			}
 		}
 
-		private Node BuildNode(IWebElement element)
+		private Node BuildNode(IWebElement element, string description)
 		{
-			return new SeleniumNode(element);
+			try
+			{
+				return new SeleniumNode(element);
+			}
+			catch (NullReferenceException)
+			{
+				throw new MissingHtmlException("Failed to " + description);
+			}
 		}
 
 		public Node FindButton(string locator)
@@ -42,7 +49,8 @@ namespace Coypu.Drivers
 			return FindNode(() => FindButtonByText(locator) ??
 		                          FindInputButtonByValue(locator) ??
 		                          find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
-		                          find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton));
+		                          find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton),
+								  "find button: " + locator);
 		}
 
 		private IWebElement FindInputButtonByValue(string locator)
@@ -59,23 +67,14 @@ namespace Coypu.Drivers
 
 		public Node FindLink(string locator)
 		{
-			return FindNode(() => selenium.FindElement(By.LinkText(locator)));
+			return FindNode(() => selenium.FindElement(By.LinkText(locator)), "finding link: " + locator);
 		}
 
-		private Node FindNode(Func<IWebElement> findNode)
+		private Node FindNode(Func<IWebElement> findNode, string description)
 		{
-			
 			try
 			{
-				var webElement = findNode();
-				try
-				{
-					return BuildNode(webElement);
-				}
-				catch (NullReferenceException nre)
-				{
-					throw new MissingHtmlException(nre.Message, nre);
-				}
+				return BuildNode(findNode(), description);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -96,7 +95,7 @@ namespace Coypu.Drivers
 				textField = FindTextFieldById(locator) ??
 				            FindTextFieldByName(locator);
 			}
-			return BuildNode(textField);
+			return BuildNode(textField, "find text field: " + locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
@@ -151,7 +150,7 @@ namespace Coypu.Drivers
 
 		private bool IsTextField(IWebElement e)
 		{
-			return e.TagName == "input" && (HasAttr(e, "type", "text"));
+			return e.TagName == "input" && (HasAttr(e, "type", "text") || HasAttr(e, "type", "password"));
 		}
 
 		private bool HasAttr(IWebElement e, string attributeName, string value)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Coypu.Drivers;
+using Coypu.Drivers.Selenium;
 using Coypu.Robustness;
 
 namespace Coypu

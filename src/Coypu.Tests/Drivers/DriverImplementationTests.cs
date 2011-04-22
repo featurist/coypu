@@ -165,10 +165,34 @@ namespace Coypu.Tests.Drivers
 		}
 
 		[Test]
+		public void FindTextField_should_find_password_field_by_label_text_by_for_attribute()
+		{
+			Assert.That(driver.FindTextField("I am the password field linked by for").Id, Is.EqualTo("forLabeledPasswordFieldId"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_password_field_by_container_label()
+		{
+			Assert.That(driver.FindTextField("I am the password field in a label container").Id, Is.EqualTo("containerLabeledPasswordFieldId"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_password_field_by_id()
+		{
+			Assert.That(driver.FindTextField("containerLabeledPasswordFieldId").Value, Is.EqualTo("password field two val"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_password_field_by_name()
+		{
+			Assert.That(driver.FindTextField("containerLabeledPasswordFieldName").Value, Is.EqualTo("password field two val"));
+		}
+
+		[Test]
 		public void Set_should_set_value_of_text_field()
 		{
 			var textField = driver.FindTextField("containerLabeledTextFieldName");
-			driver.Set(textField,"New value");
+			driver.Set(textField, "New value");
 
 			Assert.That(textField.Value, Is.EqualTo("New value"));
 
