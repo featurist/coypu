@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using System.Collections.Generic;
 
-namespace Coypu.UnitTests.TestDoubles
+namespace Coypu.Tests.TestDoubles
 {
 	public class FakeDriver : Driver
 	{
@@ -16,7 +14,6 @@ namespace Coypu.UnitTests.TestDoubles
 		private readonly IList<string> findTextFieldRequests = new List<string>();
 		private readonly IDictionary<Node, string> filledInFields = new Dictionary<Node, string>();
 		private bool disposed;
-		private object native;
 
 		public IEnumerable<Node> ClickedNodes
 		{

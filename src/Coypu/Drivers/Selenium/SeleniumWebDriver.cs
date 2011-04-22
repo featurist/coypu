@@ -146,9 +146,25 @@ namespace Coypu.Drivers.Selenium
 		public void Set(Node node, string value)
 		{
 			var seleniumElement = SeleniumElement(node);
-			seleniumElement.Clear();
-			seleniumElement.SendKeys(value);
+			
+			if (!SetSelectedOption(seleniumElement, value))
+			{
+				seleniumElement.Clear();
+				seleniumElement.SendKeys(value);
+			}
 			node.Update();
+		}
+
+		private bool SetSelectedOption(IWebElement seleniumElement, string value)
+		{
+			var optionToSelect = seleniumElement.FindElements(By.TagName("option"))
+				.FirstOrDefault(e => e.Text == value || e.Value == value);
+			if (optionToSelect != null)
+			{
+				optionToSelect.Select();
+				return true;
+			}
+			return false;
 		}
 
 		public object Native

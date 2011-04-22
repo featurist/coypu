@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Linq;
+using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -20,6 +21,16 @@ namespace Coypu.Drivers.Selenium
 			Id = SeleniumElement.GetAttribute("id");
 			Value = SeleniumElement.GetAttribute("value");
 			Name = SeleniumElement.GetAttribute("name");
+			SetSelectedOptionForSelectElements();
+		}
+
+		private void SetSelectedOptionForSelectElements()
+		{
+			var selectedOption = SeleniumElement.FindElements(By.TagName("option"))
+												.Where(e => e.Selected)
+												.FirstOrDefault();
+			if (selectedOption != null)
+				SelectedOption = selectedOption.Text;
 		}
 	}
 }

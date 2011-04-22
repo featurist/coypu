@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Coypu.Tests.TestDoubles;
-using Coypu.UnitTests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.Session.When_interacting_with_the_browser
