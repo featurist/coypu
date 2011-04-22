@@ -25,7 +25,7 @@ namespace Coypu.Tests.Session.When_interacting_with_the_browser
 			var expectedImmediateResult = new TestNode();
 			var expectedDeferredResult = new TestNode();
 
-			SpyRobustWrapper.AlwaysReturn(expectedImmediateResult);
+			SpyRobustWrapper.AlwaysReturn(typeof(Node), expectedImmediateResult);
 			stub("Find me", expectedDeferredResult);
 
 			var actualImmediateResult = subject("Find me");
