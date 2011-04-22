@@ -23,9 +23,9 @@ namespace Coypu.Tests.TestDoubles
 			return (TResult) stubbedResults[typeof(TResult)];
 		}
 
-		public void AlwaysReturn(object result)
+		public void AlwaysReturn(Type type, object result)
 		{
-			stubbedResults.Add(result.GetType(),result);
+			stubbedResults.Add(type,result);
 		}
 	}
 }
