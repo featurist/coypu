@@ -6,6 +6,21 @@
 </head>
 <body>
   <form>
+    <!--section>
+      <h1>JS links / buttons</h1>
+      
+      <h2>These should be ignored as genuine ones exist later in the doc</h2>
+      <div>I am the first button</div>
+      <span>I am the first text input</span>
+      <ul>
+        <li>I am the first link</li>
+      </ul>
+      
+      <h2>These are unique so should be found</h2>
+      <div id="ImAButtonReally">I am a js button</div>
+      <span id="ImALinkReally">I am a js link</span>
+      
+    </section-->
     <fieldset>
       <legend>Buttons</legend>
       <button id="firstButtonId" name="firstButtonName">I am the first button</button>
@@ -43,6 +58,7 @@
         I am the password field in a label container
         <input type="password" id="containerLabeledPasswordFieldId" name="containerLabeledPasswordFieldName" value="password field two val" />
       </label>
+      <input id="textFieldWithPlaceholder" placeholder="I am the text field with a placeholder" type="text" />
     </fieldset>
   </form>
   <section>
@@ -50,10 +66,8 @@
     <a href="#link1href" id="firstLinkId">I am the first link</a>
     <a href="#link2href" id="secondLinkId">
       I am the second link</a>
-    <span id="linkPretender">I am not a link</span>
     <a style="display:none" href="#invisible">I am an invisible link by visibility</a>
     <a style="visibility:hidden" href="#invisible">I am an invisible link by display</a>
   </section>
-  
 </body>
 </html>

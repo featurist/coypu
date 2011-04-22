@@ -4,6 +4,11 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.Drivers
 {
+	/* Next: 
+	 * <textarea>, 
+	 * css buttons(???)
+	 */
+
 	public abstract class DriverImplementationTests
 	{
 		private Driver driver;
@@ -119,17 +124,12 @@ namespace Coypu.Tests.Drivers
 		}
 
 		[Test]
-		public void FindLink_should_find_only_find_links()
-		{
-			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am not a link"));
-		}
-
-		[Test]
 		public void FindLink_should_find_only_find_visible_links()
 		{
 			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
 			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
 		}
+
 
 		[Test]
 		public void When_clicking_It_should_click_the_underlying_node()
@@ -186,6 +186,12 @@ namespace Coypu.Tests.Drivers
 		public void FindTextField_should_find_password_field_by_name()
 		{
 			Assert.That(driver.FindTextField("containerLabeledPasswordFieldName").Value, Is.EqualTo("password field two val"));
+		}
+
+		[Test]
+		public void FindTextField_should_find_text_field_by_placeholder()
+		{
+			Assert.That(driver.FindTextField("I am the text field with a placeholder").Id, Is.EqualTo("textFieldWithPlaceholder"));
 		}
 
 		[Test]
