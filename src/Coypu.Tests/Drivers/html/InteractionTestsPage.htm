@@ -10,10 +10,10 @@
       <h1>JS links / buttons</h1>
       
       <h2>These should be ignored as genuine ones exist later in the doc</h2>
-      <div>I am the first button</div>
-      <span>I am the first text input</span>
+      <div>first button</div>
+      <span>first text input</span>
       <ul>
-        <li>I am the first link</li>
+        <li>first link</li>
       </ul>
       
       <h2>These are unique so should be found</h2>
@@ -23,49 +23,93 @@
     </section-->
     <fieldset>
       <legend>Buttons</legend>
-      <button id="firstButtonId" name="firstButtonName">I am the first button</button>
-      <button id="secondButtonId" name="secondButtonName"> I am the second button</button>
+      <button id="firstButtonId" name="firstButtonName">first button</button>
+      <button id="secondButtonId" name="secondButtonName"> second button</button>
       <button id="thirdButtonId" name="thirdButtonName">
-        I am the third button</button>
+        third button</button>
       
-      <input type="text" id="firstTextInputId" name="firstTextInputName" value="I am the first text input" />
-      <input type="hidden" id="firstHiddenInputId" name="firstHiddenInputName" value="I am the first hidden input" />
+      <input type="text" id="firstTextInputId" name="firstTextInputName" value="first text input" />
+      <input type="hidden" id="firstHiddenInputId" name="firstHiddenInputName" value="first hidden input" />
       
-      <input type="button" id="firstInputButtonId" name="firstInputButtonName" value="I am the first input button" />
-      <input type="button" id="secondInputButtonId" name="secondInputButtonName" value="I am the second input button" />
-      <input type="button" id="thirdInputButtonId" name="thirdInputButtonName" value="I am the third input button" />
+      <input type="button" id="firstInputButtonId" name="firstInputButtonName" value="first input button" />
+      <input type="button" id="secondInputButtonId" name="secondInputButtonName" value="second input button" />
+      <input type="button" id="thirdInputButtonId" name="thirdInputButtonName" value="third input button" />
       
-      <input type="submit" id="firstSubmitButtonId" name="firstSubmitButtonName" value="I am the first submit button" />
-      <input type="submit" id="secondSubmitButtonId" name="secondSubmitButtonName" value="I am the second submit button" />
-      <input type="submit" id="thirdSubmitButtonId" name="thirdSubmitButtonName" value="I am the third submit button" />
+      <input type="submit" id="firstSubmitButtonId" name="firstSubmitButtonName" value="first submit button" />
+      <input type="submit" id="secondSubmitButtonId" name="secondSubmitButtonName" value="second submit button" />
+      <input type="submit" id="thirdSubmitButtonId" name="thirdSubmitButtonName" value="third submit button" />
       
       <button id="clickMeTest" onclick="this.innerHTML += ' - clicked'; return false;">Click me</button>
       
       <button id="firstInvisibleInputId" style="visibility:hidden">I am an invisible button</button>
     </fieldset>
     <fieldset>
-      <legend>Text fields</legend>
-      <label for="forLabeledTextFieldId">I am the text field linked by for</label>
-      <input type="text" id="forLabeledTextFieldId" name="forLabeledTextFieldName" value="text field one val" />
+      <legend>Fields</legend>
+      
+      <label for="forLabeledTextInputFieldId">text input field linked by for</label>
+      <input type="text" id="forLabeledTextInputFieldId" name="forLabeledTextInputFieldName" value="text input field one val" />
+      
+      <label for="forLabeledPasswordFieldId">password field linked by for</label>
+      <input type="password" id="forLabeledPasswordFieldId" name="forLabeledPasswordFieldName" value="password field one val" />
+            
+      <label for="forLabeledCheckboxFieldId">checkbox field linked by for</label>
+      <input type="checkbox" id="forLabeledCheckboxFieldId" name="forLabeledCheckboxFieldName" value="checkbox field one val" />
+      
+      <label for="forLabeledRadioFieldId">radio field linked by for</label>
+      <input type="radio" id="forLabeledRadioFieldId" name="forLabeledRadioFieldName" value="radio field one val" />
+      
+      <label for="forLabeledSelectFieldId">select field linked by for</label>
+      <select id="forLabeledSelectFieldId" name="forLabeledSelectFieldName">
+        <option value="value1">one</option>
+        <option value="value2">two</option>
+      </select>
+      
+      <label for="forLabeledTextareaFieldId">textarea field linked by for</label>
+      <textarea cols="30" rows="5" id="forLabeledTextareaFieldId" name="forLabeledTextareaFieldName">textarea val one</textarea>
+      
       <label>
-        I am the text field in a label container
-        <input type="text" id="containerLabeledTextFieldId" name="containerLabeledTextFieldName" value="text field two val" />
+        text input field in a label container
+        <input type="text" id="containerLabeledTextInputFieldId" name="containerLabeledTextInputFieldName" value="text input field two val" />
       </label>
       
-      <label for="forLabeledPasswordFieldId">I am the password field linked by for</label>
-      <input type="password" id="forLabeledPasswordFieldId" name="forLabeledPasswordFieldName" value="password field one val" />
       <label>
-        I am the password field in a label container
+        password field in a label container
         <input type="password" id="containerLabeledPasswordFieldId" name="containerLabeledPasswordFieldName" value="password field two val" />
       </label>
-      <input id="textFieldWithPlaceholder" placeholder="I am the text field with a placeholder" type="text" />
+      
+      <label>
+        radio field in a label container
+        <input type="radio" id="containerLabeledRadioFieldId" name="containerLabeledRadioFieldName" value="radio field two val" />
+      </label>
+      
+      <label>
+        checkbox field in a label container
+        <input type="checkbox" id="containerLabeledCheckboxFieldId" name="containerLabeledCheckboxFieldName" value="checkbox field two val" />
+      </label>
+      
+      <label for="containerLabeledTextareaFieldId">
+        textarea field in a label container
+        <textarea cols="30" rows="5" id="containerLabeledTextareaFieldId" name="containerLabeledTextareaFieldName">textarea field two val</textarea>
+      </label>
+      
+      <label for="containerLabeledSelectFieldId">
+        select field in a label container
+        <select id="containerLabeledSelectFieldId" name="containerLabeledSelectFieldName">
+          <option value="value1">one</option>
+          <option value="value2">two</option>
+        </select>
+      </label>
+      
+      <input id="textInputFieldWithPlaceholder" placeholder="text input field with a placeholder" type="text" />
+      <input id="textareaFieldWithPlaceholder" placeholder="textarea field with a placeholder" type="text" />
+      
     </fieldset>
   </form>
   <section>
     <h1>Links</h1>
-    <a href="#link1href" id="firstLinkId">I am the first link</a>
+    <a href="#link1href" id="firstLinkId">first link</a>
     <a href="#link2href" id="secondLinkId">
-      I am the second link</a>
+      second link</a>
     <a style="display:none" href="#invisible">I am an invisible link by visibility</a>
     <a style="visibility:hidden" href="#invisible">I am an invisible link by display</a>
   </section>

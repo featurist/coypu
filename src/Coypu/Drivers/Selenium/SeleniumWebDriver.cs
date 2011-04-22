@@ -85,49 +85,52 @@ namespace Coypu.Drivers.Selenium
 			}
 		}
 
-		public Node FindTextField(string locator)
+		public Node FindField(string locator)
 		{
-			IWebElement textField;
+			IWebElement field;
 			var label = FindLabelByText(locator);
 			if (label != null)
 			{
-				textField = FindTextInputFromLabel(label);
+				field = FindFieldFromLabel(label);
 			}
 			else
 			{
-				textField = FindTextFieldByPlaceholder(locator) ??
-							FindTextFieldById(locator) ??
-				            FindTextFieldByName(locator);
+				field = FindFieldByPlaceholder(locator) ??
+						FindFieldById(locator) ??
+			            FindFieldByName(locator);
 			}
-			return BuildNode(textField, "find text field: " + locator);
+			return BuildNode(field, "find text field: " + locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
 		{
-			return selenium.FindElements(By.TagName("label")).FirstVisibleOrDefault(e => e.Text == locator);
+			var labels = selenium.FindElements(By.TagName("label"));
+
+			return labels.FirstVisibleOrDefault(e => e.Text == locator) ??
+				   labels.FirstVisibleOrDefault(e => e.Text.StartsWith(locator));
 		}
 
-		private IWebElement FindTextInputFromLabel(IWebElement label)
+		private IWebElement FindFieldFromLabel(IWebElement label)
 		{
-			return FindTextFieldById(label.GetAttribute("for")) ??
-			       label.FindElements(By.XPath("*")).FirstVisibleOrDefault(IsTextField);
+			return FindFieldById(label.GetAttribute("for")) ??
+			       label.FindElements(By.XPath("*")).FirstVisibleOrDefault(IsField);
 		}
 
-		private IWebElement FindTextFieldByPlaceholder(string placeholder)
+		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
 			return selenium.FindElements(By.XPath("//input[@placeholder]"))
-					.Where(IsTextField)
+					.Where(IsField)
 					.FirstVisibleOrDefault(e => e.GetAttribute("placeholder") == placeholder);
 		}
 
-		private IWebElement FindTextFieldById(string id)
+		private IWebElement FindFieldById(string id)
 		{
-			return selenium.FindElementsById(id).FirstVisibleOrDefault(IsTextField);
+			return selenium.FindElementsById(id).FirstVisibleOrDefault(IsField);
 		}
 
-		private IWebElement FindTextFieldByName(string name)
+		private IWebElement FindFieldByName(string name)
 		{
-			return selenium.FindElementsByName(name).FirstVisibleOrDefault(IsTextField);
+			return selenium.FindElementsByName(name).FirstVisibleOrDefault(IsField);
 		}
 
 		public void Click(Node node)
@@ -148,9 +151,14 @@ namespace Coypu.Drivers.Selenium
 			node.Update();
 		}
 
+		public object Native
+		{
+			get { return selenium; }
+		}
+
 		private IWebElement SeleniumElement(Node node)
 		{
-			return ((IWebElement) node.UnderlyingNode);
+			return ((IWebElement) node.Native);
 		}
 
 		private bool IsInputButton(IWebElement e)
@@ -159,9 +167,18 @@ namespace Coypu.Drivers.Selenium
 			       (e.TagName == "input" && (HasAttr(e, "type", "button") || HasAttr(e, "type", "submit")));
 		}
 
-		private bool IsTextField(IWebElement e)
+		private bool IsField(IWebElement e)
 		{
-			return e.TagName == "input" && (HasAttr(e, "type", "text") || HasAttr(e, "type", "password"));
+			return IsInputField(e) || e.TagName == "select" || e.TagName == "textarea";
+		}
+
+		private bool IsInputField(IWebElement e)
+		{
+			return e.TagName == "input" && 
+			       (HasAttr(e, "type", "text") || 
+			        HasAttr(e, "type", "password") ||
+			        HasAttr(e, "type", "radio") ||
+			        HasAttr(e, "type", "checkbox"));
 		}
 
 		private bool HasAttr(IWebElement e, string attributeName, string value)

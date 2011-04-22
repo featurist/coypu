@@ -6,11 +6,11 @@ namespace Coypu.Drivers.Selenium
 	{
 		private IWebElement SeleniumElement
 		{
-			get { return (IWebElement) UnderlyingNode; }
+			get { return (IWebElement) Native; }
 		}
 		public SeleniumNode(IWebElement seleniumElement)
 		{
-			UnderlyingNode = seleniumElement;
+			Native = seleniumElement;
 			Update();
 		}
 
@@ -19,6 +19,7 @@ namespace Coypu.Drivers.Selenium
 			Text = SeleniumElement.Text;
 			Id = SeleniumElement.GetAttribute("id");
 			Value = SeleniumElement.GetAttribute("value");
+			Name = SeleniumElement.GetAttribute("name");
 		}
 	}
 }

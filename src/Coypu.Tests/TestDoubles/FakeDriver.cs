@@ -16,6 +16,7 @@ namespace Coypu.UnitTests.TestDoubles
 		private readonly IList<string> findTextFieldRequests = new List<string>();
 		private readonly IDictionary<Node, string> filledInFields = new Dictionary<Node, string>();
 		private bool disposed;
+		private object native;
 
 		public IEnumerable<Node> ClickedNodes
 		{
@@ -55,7 +56,7 @@ namespace Coypu.UnitTests.TestDoubles
 			return links[locator];
 		}
 
-		public Node FindTextField(string locator)
+		public Node FindField(string locator)
 		{
 			findTextFieldRequests.Add(locator);
 			return textFields[locator];
@@ -99,6 +100,11 @@ namespace Coypu.UnitTests.TestDoubles
 		public void Set(Node node, string value)
 		{
 			filledInFields.Add(node,value);
+		}
+
+		public object Native
+		{
+			get { return "Native driver on fake driver"; }
 		}
 	}
 }

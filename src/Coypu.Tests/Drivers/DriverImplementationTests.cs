@@ -4,11 +4,6 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.Drivers
 {
-	/* Next: 
-	 * <textarea>, 
-	 * css buttons(???)
-	 */
-
 	public abstract class DriverImplementationTests
 	{
 		private Driver driver;
@@ -38,64 +33,64 @@ namespace Coypu.Tests.Drivers
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_text()
 		{
-			Assert.That(driver.FindButton("I am the first button").Id, Is.EqualTo("firstButtonId"));
-			Assert.That(driver.FindButton("I am the second button").Id, Is.EqualTo("secondButtonId"));
+			Assert.That(driver.FindButton("first button").Id, Is.EqualTo("firstButtonId"));
+			Assert.That(driver.FindButton("second button").Id, Is.EqualTo("secondButtonId"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_id()
 		{
-			Assert.That(driver.FindButton("firstButtonId").Text, Is.EqualTo("I am the first button"));
-			Assert.That(driver.FindButton("thirdButtonId").Text, Is.EqualTo("I am the third button"));
+			Assert.That(driver.FindButton("firstButtonId").Text, Is.EqualTo("first button"));
+			Assert.That(driver.FindButton("thirdButtonId").Text, Is.EqualTo("third button"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_name()
 		{
-			Assert.That(driver.FindButton("secondButtonName").Text, Is.EqualTo("I am the second button"));
-			Assert.That(driver.FindButton("thirdButtonName").Text, Is.EqualTo("I am the third button"));
+			Assert.That(driver.FindButton("secondButtonName").Text, Is.EqualTo("second button"));
+			Assert.That(driver.FindButton("thirdButtonName").Text, Is.EqualTo("third button"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_input_button_by_its_value()
 		{
-			Assert.That(driver.FindButton("I am the first input button").Id, Is.EqualTo("firstInputButtonId"));
-			Assert.That(driver.FindButton("I am the second input button").Id, Is.EqualTo("secondInputButtonId"));
+			Assert.That(driver.FindButton("first input button").Id, Is.EqualTo("firstInputButtonId"));
+			Assert.That(driver.FindButton("second input button").Id, Is.EqualTo("secondInputButtonId"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_input_button_by_its_id()
 		{
-			Assert.That(driver.FindButton("firstInputButtonId").Value, Is.EqualTo("I am the first input button"));
-			Assert.That(driver.FindButton("thirdInputButtonId").Value, Is.EqualTo("I am the third input button"));
+			Assert.That(driver.FindButton("firstInputButtonId").Value, Is.EqualTo("first input button"));
+			Assert.That(driver.FindButton("thirdInputButtonId").Value, Is.EqualTo("third input button"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_input_button_by_its_name()
 		{
-			Assert.That(driver.FindButton("secondInputButtonId").Value, Is.EqualTo("I am the second input button"));
-			Assert.That(driver.FindButton("thirdInputButtonName").Value, Is.EqualTo("I am the third input button"));
+			Assert.That(driver.FindButton("secondInputButtonId").Value, Is.EqualTo("second input button"));
+			Assert.That(driver.FindButton("thirdInputButtonName").Value, Is.EqualTo("third input button"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_submit_button_by_its_value()
 		{
-			Assert.That(driver.FindButton("I am the first submit button").Id, Is.EqualTo("firstSubmitButtonId"));
-			Assert.That(driver.FindButton("I am the second submit button").Id, Is.EqualTo("secondSubmitButtonId"));
+			Assert.That(driver.FindButton("first submit button").Id, Is.EqualTo("firstSubmitButtonId"));
+			Assert.That(driver.FindButton("second submit button").Id, Is.EqualTo("secondSubmitButtonId"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_submit_button_by_its_id()
 		{
-			Assert.That(driver.FindButton("firstSubmitButtonId").Value, Is.EqualTo("I am the first submit button"));
-			Assert.That(driver.FindButton("thirdSubmitButtonId").Value, Is.EqualTo("I am the third submit button"));
+			Assert.That(driver.FindButton("firstSubmitButtonId").Value, Is.EqualTo("first submit button"));
+			Assert.That(driver.FindButton("thirdSubmitButtonId").Value, Is.EqualTo("third submit button"));
 		}
 
 		[Test]
 		public void FindButton_should_find_a_particular_submit_button_by_its_name()
 		{
-			Assert.That(driver.FindButton("secondSubmitButtonId").Value, Is.EqualTo("I am the second submit button"));
-			Assert.That(driver.FindButton("thirdSubmitButtonName").Value, Is.EqualTo("I am the third submit button"));
+			Assert.That(driver.FindButton("secondSubmitButtonId").Value, Is.EqualTo("second submit button"));
+			Assert.That(driver.FindButton("thirdSubmitButtonName").Value, Is.EqualTo("third submit button"));
 		}
 
 		[Test]
@@ -119,8 +114,8 @@ namespace Coypu.Tests.Drivers
 		[Test]
 		public void FindLink_should_find_link_by_text()
 		{
-			Assert.That(driver.FindLink("I am the first link").Id == "firstLinkId");
-			Assert.That(driver.FindLink("I am the second link").Id == "secondLinkId");
+			Assert.That(driver.FindLink("first link").Id == "firstLinkId");
+			Assert.That(driver.FindLink("second link").Id == "secondLinkId");
 		}
 
 		[Test]
@@ -141,69 +136,78 @@ namespace Coypu.Tests.Drivers
 		}
 
 		[Test]
-		public void FindTextField_should_find_text_field_by_label_text_by_for_attribute()
+		public void FindField_should_find_field_by_label_text_by_for_attribute()
 		{
-			Assert.That(driver.FindTextField("I am the text field linked by for").Id, Is.EqualTo("forLabeledTextFieldId"));
+			Assert.That(driver.FindField("text input field linked by for").Id, Is.EqualTo("forLabeledTextInputFieldId"));
+			Assert.That(driver.FindField("password field linked by for").Id, Is.EqualTo("forLabeledPasswordFieldId"));
+			Assert.That(driver.FindField("select field linked by for").Id, Is.EqualTo("forLabeledSelectFieldId"));
+			Assert.That(driver.FindField("checkbox field linked by for").Id, Is.EqualTo("forLabeledCheckboxFieldId"));
+			Assert.That(driver.FindField("radio field linked by for").Id, Is.EqualTo("forLabeledRadioFieldId"));
+			Assert.That(driver.FindField("textarea field linked by for").Id, Is.EqualTo("forLabeledTextareaFieldId"));
 		}
 
 		[Test]
-		public void FindTextField_should_find_text_field_by_container_label()
+		public void FindField_should_find_field_by_container_label()
 		{
-			Assert.That(driver.FindTextField("I am the text field in a label container").Id, Is.EqualTo("containerLabeledTextFieldId"));
+			Assert.That(driver.FindField("text input field in a label container").Id, Is.EqualTo("containerLabeledTextInputFieldId"));
+			Assert.That(driver.FindField("password field in a label container").Id, Is.EqualTo("containerLabeledPasswordFieldId"));
+			Assert.That(driver.FindField("checkbox field in a label container").Id, Is.EqualTo("containerLabeledCheckboxFieldId"));
+			Assert.That(driver.FindField("radio field in a label container").Id, Is.EqualTo("containerLabeledRadioFieldId"));
+			Assert.That(driver.FindField("select field in a label container").Id, Is.EqualTo("containerLabeledSelectFieldId"));
+			Assert.That(driver.FindField("textarea field in a label container").Id, Is.EqualTo("containerLabeledTextareaFieldId"));
 		}
 
 		[Test]
-		public void FindTextField_should_find_text_field_by_id()
+		public void FindField_should_find_text_field_by_placeholder()
 		{
-			Assert.That(driver.FindTextField("containerLabeledTextFieldId").Value, Is.EqualTo("text field two val"));
+			Assert.That(driver.FindField("text input field with a placeholder").Id, Is.EqualTo("textInputFieldWithPlaceholder"));
+			Assert.That(driver.FindField("textarea field with a placeholder").Id, Is.EqualTo("textareaFieldWithPlaceholder"));
 		}
 
 		[Test]
-		public void FindTextField_should_find_text_field_by_name()
+		public void FindField_should_find_field_by_id()
 		{
-			Assert.That(driver.FindTextField("containerLabeledTextFieldName").Value, Is.EqualTo("text field two val"));
+			Assert.That(driver.FindField("containerLabeledTextInputFieldId").Value, Is.EqualTo("text input field two val"));
+			Assert.That(driver.FindField("containerLabeledTextareaFieldId").Value, Is.EqualTo("textarea field two val"));
+			Assert.That(driver.FindField("containerLabeledSelectFieldId").Name, Is.EqualTo("containerLabeledSelectFieldName"));
+			Assert.That(driver.FindField("containerLabeledCheckboxFieldId").Value, Is.EqualTo("checkbox field two val"));
+			Assert.That(driver.FindField("containerLabeledRadioFieldId").Value, Is.EqualTo("radio field two val"));
+			Assert.That(driver.FindField("containerLabeledPasswordFieldId").Name, Is.EqualTo("containerLabeledPasswordFieldName"));
 		}
 
 		[Test]
-		public void FindTextField_should_find_password_field_by_label_text_by_for_attribute()
+		public void FindField_should_find_field_by_name()
 		{
-			Assert.That(driver.FindTextField("I am the password field linked by for").Id, Is.EqualTo("forLabeledPasswordFieldId"));
+			Assert.That(driver.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("text input field two val"));
+			Assert.That(driver.FindField("containerLabeledTextareaFieldName").Value, Is.EqualTo("textarea field two val"));
+			Assert.That(driver.FindField("containerLabeledSelectFieldName").Id, Is.EqualTo("containerLabeledSelectFieldId"));
+			Assert.That(driver.FindField("containerLabeledCheckboxFieldName").Value, Is.EqualTo("checkbox field two val"));
+			Assert.That(driver.FindField("containerLabeledRadioFieldName").Value, Is.EqualTo("radio field two val"));
+			Assert.That(driver.FindField("containerLabeledPasswordFieldName").Id, Is.EqualTo("containerLabeledPasswordFieldId"));
 		}
 
 		[Test]
-		public void FindTextField_should_find_password_field_by_container_label()
+		public void Set_should_set_value_of_text_input_field()
 		{
-			Assert.That(driver.FindTextField("I am the password field in a label container").Id, Is.EqualTo("containerLabeledPasswordFieldId"));
+			var textField = driver.FindField("containerLabeledTextInputFieldName");
+			driver.Set(textField, "New text input value");
+
+			Assert.That(textField.Value, Is.EqualTo("New text input value"));
+
+			var findAgain = driver.FindField("containerLabeledTextInputFieldName");
+			Assert.That(findAgain.Value, Is.EqualTo("New text input value"));
 		}
 
 		[Test]
-		public void FindTextField_should_find_password_field_by_id()
+		public void Set_should_set_value_of_textarea_field()
 		{
-			Assert.That(driver.FindTextField("containerLabeledPasswordFieldId").Value, Is.EqualTo("password field two val"));
-		}
+			var textField = driver.FindField("containerLabeledTextareaFieldName");
+			driver.Set(textField, "New textarea value");
 
-		[Test]
-		public void FindTextField_should_find_password_field_by_name()
-		{
-			Assert.That(driver.FindTextField("containerLabeledPasswordFieldName").Value, Is.EqualTo("password field two val"));
-		}
+			Assert.That(textField.Value, Is.EqualTo("New textarea value"));
 
-		[Test]
-		public void FindTextField_should_find_text_field_by_placeholder()
-		{
-			Assert.That(driver.FindTextField("I am the text field with a placeholder").Id, Is.EqualTo("textFieldWithPlaceholder"));
-		}
-
-		[Test]
-		public void Set_should_set_value_of_text_field()
-		{
-			var textField = driver.FindTextField("containerLabeledTextFieldName");
-			driver.Set(textField, "New value");
-
-			Assert.That(textField.Value, Is.EqualTo("New value"));
-
-			var findAgain = driver.FindTextField("containerLabeledTextFieldName");
-			Assert.That(findAgain.Value, Is.EqualTo("New value"));
+			var findAgain = driver.FindField("containerLabeledTextareaFieldName");
+			Assert.That(findAgain.Value, Is.EqualTo("New textarea value"));
 		}
 
 	}

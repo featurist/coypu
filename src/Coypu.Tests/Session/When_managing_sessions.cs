@@ -62,5 +62,17 @@ namespace Coypu.Tests.Session
 			Configuration.WebDriver = typeof(StubDriver);
 			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof(StubDriver)));
 		}
+
+		[Test]
+		public void Session_exposes_native_driver_if_you_really_need_it()
+		{
+			Configuration.WebDriver = typeof(FakeDriver);
+			Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on fake driver"));
+
+			Browser.EndSession();
+
+			Configuration.WebDriver = typeof(StubDriver);
+			Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on stub driver"));
+		}
 	}
 }

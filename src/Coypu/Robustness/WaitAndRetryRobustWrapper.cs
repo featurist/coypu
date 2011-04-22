@@ -16,7 +16,7 @@ namespace Coypu.Robustness
 
 		public TResult Robustly<TResult>(Func<TResult> function)
 		{
-			var interval = (int)Math.Round(Configuration.Timeout.TotalMilliseconds / 10);
+			var interval = Configuration.RetryInterval;
 			var startTime = DateTime.Now;
 			while (true)
 			{
@@ -26,13 +26,18 @@ namespace Coypu.Robustness
 				}
 				catch (Exception)
 				{
-					if (DateTime.Now - startTime >= Configuration.Timeout)
+					if (TimeoutExceeded(startTime))
 					{
 						throw;
 					}
 					Thread.Sleep(interval);
 				}
 			}
+		}
+
+		private bool TimeoutExceeded(DateTime startTime)
+		{
+			return DateTime.Now - startTime >= Configuration.Timeout;
 		}
 	}
 }

@@ -14,6 +14,11 @@ namespace Coypu
 			get { return driver; }
 		}
 
+		public object Native
+		{
+			get { return driver.Native; }
+		}
+
 		public Session(Driver driver, RobustWrapper robustWrapper)
 		{
 			this.robustWrapper = robustWrapper;
@@ -59,12 +64,12 @@ namespace Coypu
 
 		public Node FindTextField(string locator)
 		{
-			return robustWrapper.Robustly(() => driver.FindTextField(locator));
+			return robustWrapper.Robustly(() => driver.FindField(locator));
 		}
 
 		public void FillIn(string locator, string with)
 		{
-			robustWrapper.Robustly(() => driver.Set(driver.FindTextField(locator),with));
+			robustWrapper.Robustly(() => driver.Set(driver.FindField(locator),with));
 		}
 	}
 }
