@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 
-namespace Coypu.Drivers
+namespace Coypu.Drivers.Selenium
 {
 	public static class SeleniumExtensions
 	{

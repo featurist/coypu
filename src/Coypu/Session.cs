@@ -22,6 +22,7 @@ namespace Coypu
 
 		public void Dispose()
 		{
+			if (WasDisposed) return;
 			driver.Dispose();
 			WasDisposed = true;
 		}
@@ -64,7 +65,6 @@ namespace Coypu
 		public void FillIn(string locator, string with)
 		{
 			robustWrapper.Robustly(() => driver.Set(driver.FindTextField(locator),with));
-
 		}
 	}
 }

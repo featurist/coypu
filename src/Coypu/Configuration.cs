@@ -1,5 +1,6 @@
 ﻿using System;
 using Coypu.Drivers;
+using Coypu.Drivers.Selenium;
 
 namespace Coypu
 {

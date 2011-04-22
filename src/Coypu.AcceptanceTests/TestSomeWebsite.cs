@@ -1,5 +1,6 @@
 ﻿using System;
 using Coypu.Drivers;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -10,7 +11,7 @@ namespace Coypu.AcceptanceTests
 		[SetUp]
 		public void SetUp()
 		{
-			Configuration.Timeout = TimeSpan.FromSeconds(10);
+			Configuration.Timeout = TimeSpan.FromSeconds(5);
 			Configuration.Browser = Drivers.Browser.Firefox;
 			Configuration.WebDriver = typeof(SeleniumWebDriver);
 		}
@@ -28,11 +29,10 @@ namespace Coypu.AcceptanceTests
 			{
 				session.Visit("http://www.twitter.com");
 
-				session.FillIn("session[username_or_email]","coypu");
+				session.FillIn("session[username_or_email]","coyputester");
 				session.FillIn("session[password]","nappybara");
 				session.ClickButton("Sign in");
 			}
-
 
 			//TODO: Try some tricky stuff
 		}
