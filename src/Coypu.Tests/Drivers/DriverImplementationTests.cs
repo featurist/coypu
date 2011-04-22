@@ -210,5 +210,34 @@ namespace Coypu.Tests.Drivers
 			Assert.That(findAgain.Value, Is.EqualTo("New textarea value"));
 		}
 
+		[Test]
+		public void Set_should_select_option_by_text_or_value()
+		{
+			var textField = driver.FindField("containerLabeledSelectFieldId");
+			Assert.That(textField.Value, Is.EqualTo("select2value1"));
+
+			driver.Set(textField, "select two option two");
+
+			var findAgain = driver.FindField("containerLabeledSelectFieldId");
+			Assert.That(findAgain.Value, Is.EqualTo("select2value2"));
+
+			driver.Set(textField, "select2value1");
+
+			var andAgain = driver.FindField("containerLabeledSelectFieldId");
+			Assert.That(andAgain.Value, Is.EqualTo("select2value1"));
+		}
+
+		[Test]
+		public void Selected_is_text_of_selected_option()
+		{
+			var textField = driver.FindField("containerLabeledSelectFieldId");
+			Assert.That(textField.SelectedOption, Is.EqualTo("select two option one"));
+
+			driver.Set(textField, "select2value2");
+
+			textField = driver.FindField("containerLabeledSelectFieldId");
+			Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
+		}
+
 	}
 }

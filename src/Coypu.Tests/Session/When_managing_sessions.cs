@@ -1,5 +1,4 @@
 ﻿using Coypu.Tests.TestDoubles;
-using Coypu.UnitTests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.Session
