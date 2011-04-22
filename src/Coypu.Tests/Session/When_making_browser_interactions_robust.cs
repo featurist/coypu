@@ -8,35 +8,10 @@ namespace Coypu.Tests.Session
 	public class When_making_browser_interactions_robust
 	{
 		[Test]
-		public void When_a_Function_throws_a_recurring_exception_It_should_retry_at_regular_intervals()
-		{
-			var timeout = TimeSpan.FromMilliseconds(100);
-			Configuration.Timeout = timeout;
-			var robustness = new WaitAndRetryRobustWrapper();
-
-			var tries = 0;
-			Func<object> function = () =>
-			                        	{
-			                        		tries++;
-			                        		throw new ExplicitlyThrownTestException("Fails every time");
-			                        	};
-
-			try
-			{
-				robustness.Robustly(function);
-			}
-			catch (ExplicitlyThrownTestException)
-			{
-			}
-
-			Assert.That(tries, Is.GreaterThan(5));
-		}
-
-		[Test]
-		public void
-			When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
+		public void When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(200);
+			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 			Configuration.Timeout = expectedTimeout;
 			var robustness = new WaitAndRetryRobustWrapper();
 
@@ -62,7 +37,8 @@ namespace Coypu.Tests.Session
 		[Test]
 		public void When_a_Function_throws_an_exception_first_time_It_should_retry()
 		{
-			Configuration.Timeout = TimeSpan.FromMilliseconds(10);
+			Configuration.Timeout = TimeSpan.FromMilliseconds(100);
+			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 			var robustness = new WaitAndRetryRobustWrapper();
 			var tries = 0;
 			var expectedReturnValue = new object();
@@ -82,11 +58,11 @@ namespace Coypu.Tests.Session
 		}
 
         [Test]
-        public void
-            When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
+        public void When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
         {
             var timeout = TimeSpan.FromMilliseconds(200);
         	Configuration.Timeout = timeout;
+			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
             var robustness = new WaitAndRetryRobustWrapper();
             Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 

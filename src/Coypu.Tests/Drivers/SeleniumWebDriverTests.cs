@@ -1,5 +1,4 @@
-﻿using Coypu.Drivers;
-using Coypu.Drivers.Selenium;
+﻿using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
 namespace Coypu.Tests.Drivers

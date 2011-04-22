@@ -16,7 +16,7 @@
 			return null;
 		}
 
-		public Node FindTextField(string locator)
+		public Node FindField(string locator)
 		{
 			return null;
 		}
@@ -31,6 +31,11 @@
 
 		public void Set(Node node, string value)
 		{
+		}
+
+		public object Native
+		{
+			get { return "Native driver on stub driver"; }
 		}
 	}
 }
