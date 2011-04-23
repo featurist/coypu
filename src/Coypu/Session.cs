@@ -62,14 +62,49 @@ namespace Coypu
 			return robustWrapper.Robustly(() => driver.FindLink(locator));
 		}
 
-		public Node FindTextField(string locator)
+		public Node FindField(string locator)
 		{
 			return robustWrapper.Robustly(() => driver.FindField(locator));
 		}
 
-		public void FillIn(string locator, string with)
+		public FillInWith FillIn(string locator)
 		{
-			robustWrapper.Robustly(() => driver.Set(driver.FindField(locator),with));
+			return new FillInWith(value => robustWrapper.Robustly(() => driver.Set(driver.FindField(locator), value)));
+		}
+
+		public SelectFrom Select(string option)
+		{
+			return new SelectFrom(locator => robustWrapper.Robustly(() => driver.Select(driver.FindField(locator), option)));
+		}
+	}
+
+	public class FillInWith
+	{
+		private readonly Action<string> action;
+
+		public FillInWith(Action<string> action)
+		{
+			this.action = action;
+		}
+
+		public void With(string value)
+		{
+			action(value);
+		}
+	}
+
+	public class SelectFrom
+	{
+		private readonly Action<string> action;
+
+		public SelectFrom(Action<string> action)
+		{
+			this.action = action;
+		}
+
+		public void From(string locator)
+		{
+			action(locator);
 		}
 	}
 }

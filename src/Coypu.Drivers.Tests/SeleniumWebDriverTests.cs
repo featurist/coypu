@@ -1,14 +1,14 @@
 ﻿using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
-namespace Coypu.Tests.Drivers
+namespace Coypu.Drivers.Tests
 {
 	[TestFixture]
 	public class FirefoxSeleniumWebDriverTests : DriverImplementationTests
 	{
 		protected override Driver GetDriver()
 		{
-			Configuration.Browser = Coypu.Drivers.Browser.Firefox;
+			Configuration.Browser = Browser.Firefox;
 			return new SeleniumWebDriver();
 		}
 	}
@@ -18,7 +18,7 @@ namespace Coypu.Tests.Drivers
 	{
 		protected override Driver GetDriver()
 		{
-			Configuration.Browser = Coypu.Drivers.Browser.InternetExplorer;
+			Configuration.Browser = Browser.InternetExplorer;
 			return new SeleniumWebDriver();
 		}
 	}
@@ -28,7 +28,7 @@ namespace Coypu.Tests.Drivers
 	{
 		protected override Driver GetDriver()
 		{
-			Configuration.Browser = Coypu.Drivers.Browser.Chrome;
+			Configuration.Browser = Browser.Chrome;
 			return new SeleniumWebDriver();
 		}
 	}

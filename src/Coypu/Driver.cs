@@ -10,6 +10,7 @@ namespace Coypu
 		void Click(Node node);
 		void Visit(string url);
 		void Set(Node node, string value);
+		void Select(Node node, string option);
 		object Native { get; }
 	}
 }

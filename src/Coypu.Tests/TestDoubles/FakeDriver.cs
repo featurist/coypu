@@ -12,7 +12,8 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IList<string> findButtonRequests = new List<string>();
 		private readonly IList<string> findLinkRequests = new List<string>();
 		private readonly IList<string> findTextFieldRequests = new List<string>();
-		private readonly IDictionary<Node, string> filledInFields = new Dictionary<Node, string>();
+		private readonly IDictionary<Node, string> setFields = new Dictionary<Node, string>();
+		private readonly IDictionary<Node, string> selectedOptions = new Dictionary<Node, string>();
 		private bool disposed;
 
 		public IEnumerable<Node> ClickedNodes
@@ -30,9 +31,14 @@ namespace Coypu.Tests.TestDoubles
 			get { return findLinkRequests; }
 		}
 
-		public IDictionary<Node,string> FilledInFields
+		public IDictionary<Node, string> SetFields
 		{
-			get { return filledInFields; }
+			get { return setFields; }
+		}
+
+		public IDictionary<Node,string> SelectedOptions
+		{
+			get { return selectedOptions; }
 		}
 
 		public IEnumerable<string> Visits
@@ -79,7 +85,7 @@ namespace Coypu.Tests.TestDoubles
 			links[locator] = node;
 		}
 
-		public void StubTextField(string locator, Node node)
+		public void StubField(string locator, Node node)
 		{
 			textFields[locator] = node;
 		}
@@ -96,7 +102,12 @@ namespace Coypu.Tests.TestDoubles
 
 		public void Set(Node node, string value)
 		{
-			filledInFields.Add(node,value);
+			setFields.Add(node, value);
+		}
+
+		public void Select(Node node, string option)
+		{
+			selectedOptions.Add(node, option);
 		}
 
 		public object Native
