@@ -1,15 +1,15 @@
 ﻿using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
-namespace Coypu.Tests.Session
+namespace Coypu.Tests
 {
 	[TestFixture]
-	public class When_managing_sessions
+	public class When_starting_and_ending_sessions
 	{
 		[SetUp]
 		public void SetUp()
 		{
-			Configuration.WebDriver = typeof(FakeDriver);
+			Configuration.WebDriver = typeof (FakeDriver);
 		}
 
 		[TearDown]
@@ -21,18 +21,18 @@ namespace Coypu.Tests.Session
 		[Test]
 		public void A_session_is_always_available()
 		{
-			Assert.That(Browser.Session, Is.TypeOf(typeof (Coypu.Session)));
+			Assert.That(Browser.Session, Is.TypeOf(typeof (Session)));
 
 			Browser.EndSession();
 
-			Assert.That(Browser.Session, Is.TypeOf(typeof (Coypu.Session)));
+			Assert.That(Browser.Session, Is.TypeOf(typeof (Session)));
 		}
 
 		[Test]
 		public void After_end_a_new_session_is_available()
 		{
 			var firstSession = Browser.Session;
-			Assert.That(firstSession, Is.TypeOf(typeof (Coypu.Session)));
+			Assert.That(firstSession, Is.TypeOf(typeof (Session)));
 
 			Browser.EndSession();
 
@@ -42,7 +42,7 @@ namespace Coypu.Tests.Session
 		[Test]
 		public void After_disposing_the_session_a_new_session_is_available()
 		{
-			Coypu.Session firstSession;
+			Session firstSession;
 			using (var session = Browser.Session)
 			{
 				firstSession = session;
@@ -53,25 +53,26 @@ namespace Coypu.Tests.Session
 		[Test]
 		public void A_session_gets_its_driver_from_config()
 		{
-			Configuration.WebDriver = typeof(FakeDriver);
-			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof(FakeDriver)));
+			Configuration.WebDriver = typeof (FakeDriver);
+			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof (FakeDriver)));
 
 			Browser.EndSession();
 
-			Configuration.WebDriver = typeof(StubDriver);
-			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof(StubDriver)));
+			Configuration.WebDriver = typeof (StubDriver);
+			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof (StubDriver)));
 		}
 
 		[Test]
 		public void Session_exposes_native_driver_if_you_really_need_it()
 		{
-			Configuration.WebDriver = typeof(FakeDriver);
+			Configuration.WebDriver = typeof (FakeDriver);
 			Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on fake driver"));
 
 			Browser.EndSession();
 
-			Configuration.WebDriver = typeof(StubDriver);
+			Configuration.WebDriver = typeof (StubDriver);
 			Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on stub driver"));
 		}
+
 	}
 }

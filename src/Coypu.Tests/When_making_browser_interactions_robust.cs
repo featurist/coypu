@@ -2,7 +2,7 @@
 using Coypu.Robustness;
 using NUnit.Framework;
 
-namespace Coypu.Tests.Session
+namespace Coypu.Tests
 {
 	[TestFixture]
 	public class When_making_browser_interactions_robust

@@ -33,6 +33,10 @@
 		{
 		}
 
+		public void Select(Node node, string option)
+		{
+		}
+
 		public object Native
 		{
 			get { return "Native driver on stub driver"; }

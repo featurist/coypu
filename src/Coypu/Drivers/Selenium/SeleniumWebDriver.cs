@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -33,16 +32,12 @@ namespace Coypu.Drivers.Selenium
 			}
 		}
 
-		private Node BuildNode(IWebElement element, string description)
+		private Node BuildNode(IWebElement element, string failureMessage)
 		{
-			try
-			{
-				return new SeleniumNode(element);
-			}
-			catch (NullReferenceException)
-			{
-				throw new MissingHtmlException("Failed to " + description);
-			}
+			if (element == null)
+				throw new MissingHtmlException(failureMessage);
+
+			return new SeleniumNode(element);
 		}
 
 		public Node FindButton(string locator)
@@ -50,10 +45,10 @@ namespace Coypu.Drivers.Selenium
 			try
 			{
 				return BuildNode(FindButtonByText(locator) ??
-                                 FindInputButtonByValue(locator) ??
-                                 Find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
-                                 Find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton),
-								 "find button: " + locator);
+				                 FindInputButtonByValue(locator) ??
+				                 Find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
+				                 Find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton),
+				                 "No such button: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -77,7 +72,7 @@ namespace Coypu.Drivers.Selenium
 		{
 			try
 			{
-				return BuildNode(selenium.FindElement(By.LinkText(locator)), "find link: " + locator);
+				return BuildNode(selenium.FindElement(By.LinkText(locator)), "No such link: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -96,18 +91,18 @@ namespace Coypu.Drivers.Selenium
 			else
 			{
 				field = FindFieldByPlaceholder(locator) ??
-						FindFieldById(locator) ??
-			            FindFieldByName(locator);
+				        FindFieldById(locator) ??
+				        FindFieldByName(locator);
 			}
-			return BuildNode(field, "find text field: " + locator);
+			return BuildNode(field, "No such field: " + locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
 		{
 			var labels = selenium.FindElements(By.TagName("label"));
 
-			return labels.FirstVisibleOrDefault(e => e.Text == locator) ??
-				   labels.FirstVisibleOrDefault(e => e.Text.StartsWith(locator));
+			return labels.FirstOrDefault(e => e.Text == locator) ??
+			       labels.FirstOrDefault(e => e.Text.StartsWith(locator));
 		}
 
 		private IWebElement FindFieldFromLabel(IWebElement label)
@@ -119,8 +114,8 @@ namespace Coypu.Drivers.Selenium
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
 			return selenium.FindElements(By.XPath("//input[@placeholder]"))
-					.Where(IsField)
-					.FirstVisibleOrDefault(e => e.GetAttribute("placeholder") == placeholder);
+				.Where(IsField)
+				.FirstVisibleOrDefault(e => e.GetAttribute("placeholder") == placeholder);
 		}
 
 		private IWebElement FindFieldById(string id)
@@ -146,25 +141,27 @@ namespace Coypu.Drivers.Selenium
 		public void Set(Node node, string value)
 		{
 			var seleniumElement = SeleniumElement(node);
-			
-			if (!SetSelectedOption(seleniumElement, value))
-			{
-				seleniumElement.Clear();
-				seleniumElement.SendKeys(value);
-			}
-			node.Update();
+
+			seleniumElement.Clear();
+			seleniumElement.SendKeys(value);
 		}
 
-		private bool SetSelectedOption(IWebElement seleniumElement, string value)
+		public void Select(Node node, string option)
+		{
+			SetSelectedOption(SeleniumElement(node), option);
+		}
+
+		private void SetSelectedOption(IWebElement seleniumElement, string option)
 		{
 			var optionToSelect = seleniumElement.FindElements(By.TagName("option"))
-				.FirstOrDefault(e => e.Text == value || e.Value == value);
-			if (optionToSelect != null)
+				.FirstOrDefault(e => e.Text == option || e.Value == option);
+
+			if (optionToSelect == null)
 			{
-				optionToSelect.Select();
-				return true;
+				throw new MissingHtmlException("No such option: " + option);
 			}
-			return false;
+
+			optionToSelect.Select();
 		}
 
 		public object Native
@@ -190,8 +187,8 @@ namespace Coypu.Drivers.Selenium
 
 		private bool IsInputField(IWebElement e)
 		{
-			return e.TagName == "input" && 
-			       (HasAttr(e, "type", "text") || 
+			return e.TagName == "input" &&
+			       (HasAttr(e, "type", "text") ||
 			        HasAttr(e, "type", "password") ||
 			        HasAttr(e, "type", "radio") ||
 			        HasAttr(e, "type", "checkbox"));

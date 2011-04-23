@@ -1,13 +1,13 @@
 ﻿using System.IO;
-using Coypu.Drivers;
 using NUnit.Framework;
 
-namespace Coypu.Tests.Drivers
+namespace Coypu.Drivers.Tests
 {
 	public abstract class DriverImplementationTests
 	{
+		private const string INTERACTION_TESTS_PAGE = @"..\..\html\InteractionTestsPage.htm";
 		private Driver driver;
-		
+
 		[TestFixtureSetUp]
 		public void FixtureSetUp()
 		{
@@ -27,8 +27,6 @@ namespace Coypu.Tests.Drivers
 		}
 
 		protected abstract Driver GetDriver();
-
-		private const string INTERACTION_TESTS_PAGE = @"..\..\Drivers\html\InteractionTestsPage.htm";
 
 		[Test]
 		public void FindButton_should_find_a_particular_button_by_its_text()
@@ -216,12 +214,12 @@ namespace Coypu.Tests.Drivers
 			var textField = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(textField.Value, Is.EqualTo("select2value1"));
 
-			driver.Set(textField, "select two option two");
+			driver.Select(textField, "select two option two");
 
 			var findAgain = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(findAgain.Value, Is.EqualTo("select2value2"));
 
-			driver.Set(textField, "select2value1");
+			driver.Select(textField, "select2value1");
 
 			var andAgain = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(andAgain.Value, Is.EqualTo("select2value1"));

@@ -2,13 +2,11 @@
 {
 	public abstract class Node
 	{
-		public string Id { get; protected set; }
-		public string Text { get; protected set; }
-		public string Value { get; protected set; }
-		public string Name { get; protected set; }
-		public string SelectedOption { get; protected set; }
+		public abstract string Id { get; }
+		public abstract string Text { get; }
+		public abstract string Value { get; }
+		public abstract string Name { get; }
+		public abstract string SelectedOption { get; }
 		public object Native { get; protected set; }
-
-		public abstract void Update();
 	}
 }

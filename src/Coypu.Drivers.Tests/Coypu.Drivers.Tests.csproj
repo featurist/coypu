@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}</ProjectGuid>
+    <ProjectGuid>{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Coypu.AcceptanceTests</RootNamespace>
-    <AssemblyName>Coypu.AcceptanceTests</AssemblyName>
+    <RootNamespace>Coypu.Drivers.Tests</RootNamespace>
+    <AssemblyName>Coypu.Drivers.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,14 +47,14 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\WebDriver.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TrickyAjaxFormFilling.cs" />
+    <Compile Include="DriverImplementationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeleniumWebDriverTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="html\InteractionTestsPage.htm" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu\Coypu.csproj">

@@ -9,28 +9,41 @@ namespace Coypu.Drivers.Selenium
 		{
 			get { return (IWebElement) Native; }
 		}
+
 		public SeleniumNode(IWebElement seleniumElement)
 		{
 			Native = seleniumElement;
-			Update();
 		}
 
-		public override void Update()
+		public override string Id
 		{
-			Text = SeleniumElement.Text;
-			Id = SeleniumElement.GetAttribute("id");
-			Value = SeleniumElement.GetAttribute("value");
-			Name = SeleniumElement.GetAttribute("name");
-			SetSelectedOptionForSelectElements();
+			get { return SeleniumElement.GetAttribute("id"); }
 		}
 
-		private void SetSelectedOptionForSelectElements()
+		public override string Text
 		{
-			var selectedOption = SeleniumElement.FindElements(By.TagName("option"))
-												.Where(e => e.Selected)
-												.FirstOrDefault();
-			if (selectedOption != null)
-				SelectedOption = selectedOption.Text;
+			get { return SeleniumElement.Text; }
+		}
+
+		public override string Value
+		{
+			get { return SeleniumElement.GetAttribute("value"); }
+		}
+
+		public override string Name
+		{
+			get { return SeleniumElement.GetAttribute("name"); }
+		}
+
+		public override string SelectedOption
+		{
+			get
+			{
+				return SeleniumElement.FindElements(By.TagName("option"))
+					.Where(e => e.Selected)
+					.Select(e => e.Text)
+					.FirstOrDefault();
+			}
 		}
 	}
 }
