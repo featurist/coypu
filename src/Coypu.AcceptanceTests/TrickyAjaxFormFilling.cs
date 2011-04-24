@@ -25,9 +25,7 @@ namespace Coypu.AcceptanceTests
 			var session = Browser.Session;
 			session.Visit("http://www.autotrader.co.uk/used-cars");
 
-			session.FillIn("postcode").With("N1 1AA\t");
-
-			session.Click(session.FindField("make"));
+			session.FillIn("postcode").With("N1 1AA");
 
 			session.Select("citroen").From("make");
 			session.Select("c4_grand_picasso").From("model");
@@ -50,7 +48,7 @@ namespace Coypu.AcceptanceTests
 			var session = Browser.Session;
 			session.Visit("used-cars");
 
-			session.FillIn("Postcode").With("N1 1AA\t");
+			session.FillIn("Postcode").With("N1 1AA");
 
 			session.Select("CITROEN").From("Make");
 			session.Select("C4 GRAND PICASSO").From("Model");

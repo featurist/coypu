@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -46,8 +47,8 @@ namespace Coypu.Drivers.Selenium
 			{
 				return BuildNode(FindButtonByText(locator) ??
 				                 FindInputButtonByValue(locator) ??
-				                 Find(By.Id(locator)).FirstVisibleOrDefault(IsInputButton) ??
-				                 Find(By.Name(locator)).FirstVisibleOrDefault(IsInputButton),
+				                 Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
+				                 Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
 				                 "No such button: " + locator);
 			}
 			catch (NoSuchElementException e)
@@ -60,12 +61,12 @@ namespace Coypu.Drivers.Selenium
 		{
 			var inputButtonsCss = string.Format("input[type=button],input[type=submit]");
 
-			return Find(By.CssSelector(inputButtonsCss)).FirstVisibleOrDefault(e => e.Value == locator);
+			return Find(By.CssSelector(inputButtonsCss)).FirstDisplayedOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindButtonByText(string locator)
 		{
-			return Find(By.TagName(string.Format("button"))).FirstVisibleOrDefault(e => e.Text == locator);
+			return Find(By.TagName(string.Format("button"))).FirstDisplayedOrDefault(e => e.Text == locator);
 		}
 
 		public Node FindLink(string locator)
@@ -108,24 +109,24 @@ namespace Coypu.Drivers.Selenium
 		private IWebElement FindFieldFromLabel(IWebElement label)
 		{
 			return FindFieldById(label.GetAttribute("for")) ??
-			       label.FindElements(By.XPath("*")).FirstVisibleOrDefault(IsField);
+			       label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
 			return selenium.FindElements(By.XPath("//input[@placeholder]"))
 				.Where(IsField)
-				.FirstVisibleOrDefault(e => e.GetAttribute("placeholder") == placeholder);
+				.FirstDisplayedOrDefault(e => e.GetAttribute("placeholder") == placeholder);
 		}
 
 		private IWebElement FindFieldById(string id)
 		{
-			return selenium.FindElementsById(id).FirstVisibleOrDefault(IsField);
+			return selenium.FindElementsById(id).FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldByName(string name)
 		{
-			return selenium.FindElementsByName(name).FirstVisibleOrDefault(IsField);
+			return selenium.FindElementsByName(name).FirstDisplayedOrDefault(IsField);
 		}
 
 		public void Click(Node node)
@@ -148,19 +149,15 @@ namespace Coypu.Drivers.Selenium
 
 		public void Select(Node node, string option)
 		{
-			SetSelectedOption(SeleniumElement(node), option);
-		}
-
-		private void SetSelectedOption(IWebElement seleniumElement, string option)
-		{
-			var optionToSelect = seleniumElement.FindElements(By.TagName("option"))
-				.FirstOrDefault(e => e.Text == option || e.Value == option);
-
+			var select = SeleniumElement(node);
+			var optionToSelect = select.FindElements(By.TagName("option"))
+									   .FirstOrDefault(e => e.Text == option || e.Value == option);
 			if (optionToSelect == null)
 			{
 				throw new MissingHtmlException("No such option: " + option);
 			}
-
+			//TODO: These 2 are not happening synchronously
+			select.Click();
 			optionToSelect.Select();
 		}
 
@@ -174,10 +171,15 @@ namespace Coypu.Drivers.Selenium
 			return ((IWebElement) node.Native);
 		}
 
+		private bool IsButton(IWebElement e)
+		{
+			return e.TagName == "button" || IsInputButton(e);
+		}
+
 		private bool IsInputButton(IWebElement e)
 		{
-			return e.TagName == "button" ||
-			       (e.TagName == "input" && (HasAttr(e, "type", "button") || HasAttr(e, "type", "submit")));
+			var inputButtonTypes = new []{"button","submit","image"};
+			return e.TagName == "input" && inputButtonTypes.Contains(e.GetAttribute("type"));
 		}
 
 		private bool IsField(IWebElement e)

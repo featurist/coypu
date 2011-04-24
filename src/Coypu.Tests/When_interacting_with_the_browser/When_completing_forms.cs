@@ -43,7 +43,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
 			Session.Select("some option to select").From("Some select field locator");
 
-			Assert.That(Driver.SetFields, Has.No.Member(node));
+			Assert.That(Driver.SelectedOptions, Has.No.Member(node));
 
 			SpyRobustWrapper.DeferredActions.Single()();
 

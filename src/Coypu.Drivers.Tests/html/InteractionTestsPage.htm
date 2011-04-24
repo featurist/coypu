@@ -39,6 +39,9 @@
       <input type="submit" id="secondSubmitButtonId" name="secondSubmitButtonName" value="second submit button" />
       <input type="submit" id="thirdSubmitButtonId" name="thirdSubmitButtonName" value="third submit button" />
       
+      <input type="image" src="img.jpg" id="firstImageButtonId" name="firstImageButtonName" value="first image button" />
+      <input type="image" src="img2.jpg" id="secondImageButtonId" name="secondImageButtonName" value="second image button" />
+      
       <button id="clickMeTest" onclick="this.innerHTML += ' - clicked'; return false;">Click me</button>
       
       <button id="firstInvisibleInputId" style="visibility:hidden">I am an invisible button</button>
@@ -102,7 +105,14 @@
       
       <input id="textInputFieldWithPlaceholder" placeholder="text input field with a placeholder" type="text" />
       <input id="textareaFieldWithPlaceholder" placeholder="textarea field with a placeholder" type="text" />
-      
+
+      <input id="focusOnSetValue" onfocus="this.name = 'newNameSetOnFocus';" name="originalName">
+
+      <select id="focusOnSelectOption" onfocus="this.name = 'newNameSetOnFocus';" name="originalName">
+        <option>default</option>
+        <option>select me to test focussing</option>
+      </select>
+        
     </fieldset>
   </form>
   <section>
