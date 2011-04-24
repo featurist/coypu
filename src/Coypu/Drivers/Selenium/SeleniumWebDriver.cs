@@ -156,8 +156,6 @@ namespace Coypu.Drivers.Selenium
 			{
 				throw new MissingHtmlException("No such option: " + option);
 			}
-			//TODO: These 2 are not happening synchronously
-			select.Click();
 			optionToSelect.Select();
 		}
 
