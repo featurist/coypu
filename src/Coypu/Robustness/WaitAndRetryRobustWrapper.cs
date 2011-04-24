@@ -24,8 +24,9 @@ namespace Coypu.Robustness
 				{
 					return function();
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					if (TimeoutExceeded(startTime))
 					{
 						throw;

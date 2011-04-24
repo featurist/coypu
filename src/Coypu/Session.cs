@@ -69,42 +69,12 @@ namespace Coypu
 
 		public FillInWith FillIn(string locator)
 		{
-			return new FillInWith(value => robustWrapper.Robustly(() => driver.Set(driver.FindField(locator), value)));
+			return new FillInWith(locator, driver, robustWrapper);
 		}
 
 		public SelectFrom Select(string option)
 		{
-			return new SelectFrom(locator => robustWrapper.Robustly(() => driver.Select(driver.FindField(locator), option)));
-		}
-	}
-
-	public class FillInWith
-	{
-		private readonly Action<string> action;
-
-		public FillInWith(Action<string> action)
-		{
-			this.action = action;
-		}
-
-		public void With(string value)
-		{
-			action(value);
-		}
-	}
-
-	public class SelectFrom
-	{
-		private readonly Action<string> action;
-
-		public SelectFrom(Action<string> action)
-		{
-			this.action = action;
-		}
-
-		public void From(string locator)
-		{
-			action(locator);
+			return new SelectFrom(option,driver,robustWrapper);
 		}
 	}
 }

@@ -92,6 +92,14 @@ namespace Coypu.Drivers.Tests
 		}
 
 		[Test]
+		public void FindButton_should_find_image_buttons()
+		{
+			Assert.That(driver.FindButton("firstImageButtonId").Value, Is.EqualTo("first image button"));
+			Assert.That(driver.FindButton("secondImageButtonId").Value, Is.EqualTo("second image button"));
+			
+		}
+
+		[Test]
 		public void FindButton_should_not_find_text_inputs()
 		{
 			Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstTextInputId"));
@@ -119,8 +127,8 @@ namespace Coypu.Drivers.Tests
 		[Test]
 		public void FindLink_should_find_only_find_visible_links()
 		{
-			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
 			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
+			Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
 		}
 
 
@@ -231,11 +239,34 @@ namespace Coypu.Drivers.Tests
 			var textField = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(textField.SelectedOption, Is.EqualTo("select two option one"));
 
-			driver.Set(textField, "select2value2");
+			driver.Select(textField, "select2value2");
 
 			textField = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
 		}
 
+		// Selenium WebDriver wasn't doing this -- bad when other fields have blur handlers.
+		// Had to explicitly click the select first to get Selenium to pass this test
+		[Test]
+		public void Selecting_an_option_should_focus_the_select()
+		{
+			var select = driver.FindField("focusOnSelectOption");
+
+			Assert.That(select.Name, Is.EqualTo("originalName"));
+			driver.Select(select, "select me to test focussing");
+
+			Assert.That(driver.FindField("focusOnSelectOption"), Is.EqualTo("newNameSetOnFocus"));
+		}
+
+		[Test]
+		public void Setting_text_should_focus_the_input()
+		{
+			var input = driver.FindField("focusOnSetValue");
+
+			Assert.That(input.Name, Is.EqualTo("originalName"));
+			driver.Set(input, "Entering this should focus");
+
+			Assert.That(driver.FindField("focusOnSetValue"), Is.EqualTo("newNameSetOnFocus"));
+		}
 	}
 }

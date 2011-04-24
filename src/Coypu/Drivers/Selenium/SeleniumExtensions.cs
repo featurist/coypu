@@ -7,19 +7,20 @@ namespace Coypu.Drivers.Selenium
 {
 	public static class SeleniumExtensions
 	{
-		public static bool IsVisible(this IWebElement webElement)
+		public static bool Displayed(this IWebElement webElement)
 		{
 			var renderedElement = webElement as IRenderedWebElement;
 			return renderedElement != null && renderedElement.Displayed;
 		}
-		public static IWebElement FirstVisibleOrDefault(this IEnumerable<IWebElement> elements)
+
+		public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements)
 		{
-			return elements.FirstOrDefault(IsVisible);
+			return elements.FirstOrDefault(Displayed);
 		}
 
-		public static IWebElement FirstVisibleOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
+		public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
 		{
-			return elements.Where(predicate).FirstOrDefault(IsVisible);
+			return elements.Where(predicate).FirstOrDefault(Displayed);
 		}
 	}
 }
