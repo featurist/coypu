@@ -167,7 +167,7 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasContent(string text)
 		{
-			throw new NotImplementedException();
+			return PageText().Contains(text);
 		}
 
 		public bool HasCss(string cssSelector)
@@ -178,6 +178,11 @@ namespace Coypu.Drivers.Selenium
 		public bool HasXPath(string xpath)
 		{
 			throw new NotImplementedException();
+		}
+
+		private string PageText()
+		{
+			return selenium.FindElement(By.CssSelector("html body")).Text;
 		}
 
 		private IWebElement SeleniumElement(Node node)
