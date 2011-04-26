@@ -119,7 +119,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 					};
 
 			Assert.That(waitAndRetryRobustWrapper.WaitFor(throwsFirstTimeThenReturnOppositeResult, expectedResult), Is.EqualTo(oppositeResult));
-			Assert.That(tries, Is.InRange(4,26));
+			Assert.That(tries, Is.InRange(4,27));
 		}
 	}
 }
