@@ -58,5 +58,15 @@ namespace Coypu.Tests.TestDoubles
 		{
 			return false;
 		}
+
+		public Node FindCss(string cssSelector)
+		{
+			return null;
+		}
+
+		public Node FindXPath(string xpath)
+		{
+			return null;
+		}
 	}
 }

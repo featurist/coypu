@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -85,12 +84,12 @@ namespace Coypu.Drivers.Selenium
 
 		public Node FindField(string locator)
 		{
-            var field = (FindFieldById(locator) ??
-                         FindFieldByName(locator)) ?? 
-                         FindFieldByPlaceholder(locator) ??
-                         FindFieldFromLabel(FindLabelByText(locator));
+			var field = (FindFieldById(locator) ??
+			             FindFieldByName(locator)) ??
+			            FindFieldByPlaceholder(locator) ??
+			            FindFieldFromLabel(FindLabelByText(locator));
 
-		    return BuildNode(field, "No such field: " + locator);
+			return BuildNode(field, "No such field: " + locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
@@ -146,7 +145,7 @@ namespace Coypu.Drivers.Selenium
 		{
 			var select = SeleniumElement(node);
 			var optionToSelect = select.FindElements(By.TagName("option"))
-									   .FirstOrDefault(e => e.Text == option || e.Value == option);
+				.FirstOrDefault(e => e.Text == option || e.Value == option);
 			if (optionToSelect == null)
 			{
 				throw new MissingHtmlException("No such option: " + option);
@@ -166,10 +165,21 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasCss(string cssSelector)
 		{
-			throw new NotImplementedException();
+			return selenium.FindElements(By.CssSelector(cssSelector)).Any();
 		}
 
 		public bool HasXPath(string xpath)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Node FindCss(string cssSelector)
+		{
+			return BuildNode(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
+			                 "Failed to find: " + cssSelector);
+		}
+
+		public Node FindXPath(string xpath)
 		{
 			throw new NotImplementedException();
 		}
@@ -201,7 +211,7 @@ namespace Coypu.Drivers.Selenium
 
 		private bool IsInputButton(IWebElement e)
 		{
-			var inputButtonTypes = new []{"button","submit","image"};
+			var inputButtonTypes = new[] {"button", "submit", "image"};
 			return e.TagName == "input" && inputButtonTypes.Contains(e.GetAttribute("type"));
 		}
 
