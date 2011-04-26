@@ -302,5 +302,43 @@ namespace Coypu.Drivers.Tests
 		{
 			Assert.That(driver.HasContent(unexpectedText), Is.False, "Expected not to find text:\r\n" + unexpectedText);
 		}
+
+		// FindCss / FindXPath are impractical to test thoroughly without mocking out the driver in question.
+		// Probably more value in just throwing some examples at it to get some evidence of correct usage.
+		[Test]
+		public void FindCss_finds_present_css_examples()
+		{
+			var shouldFind = "#inspectingContent p.css-test span";
+			Assert.That(driver.FindCss(shouldFind).Text, Is.EqualTo("This"));
+
+			shouldFind = "ul#cssTest li:nth-child(3)";
+			Assert.That(driver.FindCss(shouldFind).Text, Is.EqualTo("Me! Pick me!"));
+		}
+
+		[Test]
+		public void HasCss_finds_present_css_examples()
+		{
+			var shouldFind = "#inspectingContent p.css-test span";
+			Assert.That(driver.HasCss(shouldFind), "Expected to find something at: " + shouldFind);
+
+			shouldFind = "ul#cssTest li:nth-child(3)";
+			Assert.That(driver.HasCss(shouldFind), "Expected to find something at: " + shouldFind);
+		}
+
+		[Test]
+		public void FindCss_does_not_find_missing_css_examples()
+		{
+			const string shouldNotFind = "#inspectingContent p.css-missing-test";
+			Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
+		}
+
+		[Test]
+		public void HasCss_does_not_find_missing_css_examples()
+		{
+			const string shouldNotFind = "#inspectingContent p.css-missing-test";
+			Assert.That(driver.HasCss(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
+		}
+
+		//Next findxpath
 	}
 }

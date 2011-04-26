@@ -15,5 +15,7 @@ namespace Coypu
 		bool HasContent(string text);
 		bool HasCss(string cssSelector);
 		bool HasXPath(string xpath);
+		Node FindCss(string cssSelector);
+		Node FindXPath(string xpath);
 	}
 }

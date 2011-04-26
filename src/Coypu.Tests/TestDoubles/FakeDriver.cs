@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -161,6 +162,16 @@ namespace Coypu.Tests.TestDoubles
 		{
 			hasXPathQueries.Add(xpath);
 			return stubbedHasXPathResults[xpath];
+		}
+
+		public Node FindCss(string cssSelector)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Node FindXPath(string xpath)
+		{
+			throw new NotImplementedException();
 		}
 
 		public void StubHasXPath(string xpath, bool result)
