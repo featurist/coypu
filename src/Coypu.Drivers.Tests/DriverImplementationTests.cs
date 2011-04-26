@@ -244,5 +244,63 @@ namespace Coypu.Drivers.Tests
 			textField = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
 		}
+
+		[Test]
+		public void HasContent_finds_text_of_an_element()
+		{
+			AssertHasContent("Some text in a span");
+		}
+
+		[Test]
+		public void HasContent_doesnt_find_missing_text()
+		{
+			AssertHasNoContent("Some missing text");
+		}
+
+		[Test]
+		public void HasContent_finds_text_with_parts_marked_up_variously()
+		{
+			AssertHasContent("Some text with parts marked up variously");
+		}
+
+		[Test]
+		public void HasContent_finds_text_in_a_table_row()
+		{
+			AssertHasContent("Some text in a table row");
+		}
+
+		[Test]
+		public void HasContent_finds_text_in_a_list()
+		{
+			AssertHasContent("Some text in a list");
+		}
+
+		[Test]
+		public void HasContent_finds_text_split_over_multiple_lines_in_source()
+		{
+			AssertHasContent("Some text split over multiple lines in source");
+		}
+
+		[Test]
+		public void HasContent_finds_text_displayed_over_multiple_lines_in_source()
+		{
+			AssertHasContent("Some text displayed over\r\nmultiple lines");
+		}
+
+		[Test]
+		public void HasContent_does_not_find_single_line_text_displayed_over_multiple_lines_in_source()
+		{
+			AssertHasNoContent("Some text displayed over multiple lines");
+		}
+
+		private void AssertHasContent(string expectedText)
+		{
+			Assert.That(driver.HasContent(expectedText), "Expected to find text:\r\n" + expectedText);
+		}
+
+		private void AssertHasNoContent(string unexpectedText)
+		{
+			Assert.That(driver.HasContent(unexpectedText), Is.False, "Expected not to find text:\r\n" + unexpectedText);
+		}
 	}
 }
