@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
@@ -162,6 +163,21 @@ namespace Coypu.Drivers.Selenium
 		public object Native
 		{
 			get { return selenium; }
+		}
+
+		public bool HasContent(string text)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool HasCss(string cssSelector)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool HasXPath(string xpath)
+		{
+			throw new NotImplementedException();
 		}
 
 		private IWebElement SeleniumElement(Node node)

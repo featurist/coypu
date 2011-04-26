@@ -7,77 +7,77 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 	[TestFixture]
 	public class When_completing_forms
 	{
-		protected FakeDriver Driver;
-		protected SpyRobustWrapper SpyRobustWrapper;
-		protected Session Session;
+		private FakeDriver driver;
+		private SpyRobustWrapper spyRobustWrapper;
+		private Session session;
 
 		[SetUp]
 		public void SetUp()
 		{
-			Driver = new FakeDriver();
-			SpyRobustWrapper = new SpyRobustWrapper();
-			Session = new Session(Driver, SpyRobustWrapper);
+			driver = new FakeDriver();
+			spyRobustWrapper = new SpyRobustWrapper();
+			session = new Session(driver, spyRobustWrapper);
 		}
 
 		[Test]
 		public void When_filling_in_a_text_field_It_should_find_field_and_set_value_robustly()
 		{
 			var node = new StubNode();
-			Driver.StubField("Some field locator", node);
+			driver.StubField("Some field locator", node);
 
-			Session.FillIn("Some field locator").With("some value for the field");
+			session.FillIn("Some field locator").With("some value for the field");
 
-			Assert.That(Driver.SetFields, Has.No.Member(node));
+			Assert.That(driver.SetFields, Has.No.Member(node));
 
-			SpyRobustWrapper.DeferredActions.Single()();
+			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(Driver.SetFields.Keys, Has.Member(node));
-			Assert.That(Driver.SetFields[node], Is.EqualTo("some value for the field"));
+			Assert.That(driver.SetFields.Keys, Has.Member(node));
+			Assert.That(driver.SetFields[node], Is.EqualTo("some value for the field"));
 		}
 
 		[Test]
 		public void When_filling_in_a_text_field_It_should_click_to_ensure_focus()
 		{
 			var node = new StubNode();
-			Driver.StubField("Some field locator", node);
+			driver.StubField("Some field locator", node);
 
-			Session.FillIn("Some field locator").With("some value for the field");
+			session.FillIn("Some field locator").With("some value for the field");
 
-			Assert.That(Driver.ClickedNodes,Is.Empty);
-			SpyRobustWrapper.DeferredActions.Single()();
+			Assert.That(driver.ClickedNodes,Is.Empty);
+			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(Driver.ClickedNodes, Has.Member(node));
+			Assert.That(driver.ClickedNodes, Has.Member(node));
 		}
 
 		[Test]
 		public void When_selecting_an_option_It_should_find_field_and_select_option_robustly()
 		{
 			var node = new StubNode();
-			Driver.StubField("Some select field locator", node);
+			driver.StubField("Some select field locator", node);
 
-			Session.Select("some option to select").From("Some select field locator");
+			session.Select("some option to select").From("Some select field locator");
 
-			Assert.That(Driver.SelectedOptions, Has.No.Member(node));
+			Assert.That(driver.SelectedOptions, Has.No.Member(node));
 
-			SpyRobustWrapper.DeferredActions.Single()();
+			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(Driver.SelectedOptions.Keys, Has.Member(node));
-			Assert.That(Driver.SelectedOptions[node], Is.EqualTo("some option to select"));
+			Assert.That(driver.SelectedOptions.Keys, Has.Member(node));
+			Assert.That(driver.SelectedOptions[node], Is.EqualTo("some option to select"));
 		}
 
 		[Test]
 		public void When_selecting_an_option_It_should_click_to_ensure_focus()
 		{
 			var node = new StubNode();
-			Driver.StubField("Some select field locator", node);
+			driver.StubField("Some select field locator", node);
 
-			Session.Select("some option to select").From("Some select field locator");
+			session.Select("some option to select").From("Some select field locator");
 
-			Assert.That(Driver.ClickedNodes, Has.No.Member(node));
+			Assert.That(driver.ClickedNodes, Has.No.Member(node));
 
-			SpyRobustWrapper.DeferredActions.Single()();
+			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(Driver.ClickedNodes, Has.Member(node));
+			Assert.That(driver.ClickedNodes, Has.Member(node));
 		}
 	}
 }

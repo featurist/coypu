@@ -2,10 +2,10 @@
 using Coypu.Robustness;
 using NUnit.Framework;
 
-namespace Coypu.Tests
+namespace Coypu.Tests.When_making_browser_interactions_robust
 {
 	[TestFixture]
-	public class When_making_browser_interactions_robust
+	public class When_wrapping_any_function_or_action
 	{
 		[Test]
 		public void When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
@@ -100,12 +100,6 @@ namespace Coypu.Tests
 
 			Assert.That(tries, Is.EqualTo(2));
 		}
-	}
 
-	public class ExplicitlyThrownTestException : Exception
-	{
-		public ExplicitlyThrownTestException(string message) : base(message)
-		{
-		}
 	}
 }

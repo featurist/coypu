@@ -244,29 +244,5 @@ namespace Coypu.Drivers.Tests
 			textField = driver.FindField("containerLabeledSelectFieldId");
 			Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
 		}
-
-		// Selenium WebDriver wasn't doing this -- bad when other fields have blur handlers.
-		// Had to explicitly click the select first to get Selenium to pass this test
-		[Test]
-		public void Selecting_an_option_should_focus_the_select()
-		{
-			var select = driver.FindField("focusOnSelectOption");
-
-			Assert.That(select.Name, Is.EqualTo("originalName"));
-			driver.Select(select, "select me to test focussing");
-
-			Assert.That(driver.FindField("focusOnSelectOption"), Is.EqualTo("newNameSetOnFocus"));
-		}
-
-		[Test]
-		public void Setting_text_should_focus_the_input()
-		{
-			var input = driver.FindField("focusOnSetValue");
-
-			Assert.That(input.Name, Is.EqualTo("originalName"));
-			driver.Set(input, "Entering this should focus");
-
-			Assert.That(driver.FindField("focusOnSetValue"), Is.EqualTo("newNameSetOnFocus"));
-		}
 	}
 }
