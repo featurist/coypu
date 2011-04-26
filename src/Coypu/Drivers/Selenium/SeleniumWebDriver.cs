@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -182,7 +183,17 @@ namespace Coypu.Drivers.Selenium
 
 		private string PageText()
 		{
-			return selenium.FindElement(By.CssSelector("html body")).Text;
+			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;
+
+			if (selenium is ChromeDriver) // Which adds extra whitespace around CRLF
+				pageText = StripWhitespaceAroundCRLFs(pageText);
+
+			return pageText;
+		}
+
+		private string StripWhitespaceAroundCRLFs(string pageText)
+		{
+			return Regex.Replace(pageText, @"\s*\r\n\s*", "\r\n");
 		}
 
 		private IWebElement SeleniumElement(Node node)
