@@ -40,9 +40,8 @@ namespace Coypu.Robustness
 					}
 					return result;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
-					Console.WriteLine(e.Message);
 					if (TimeoutExceeded(startTime))
 					{
 						throw;

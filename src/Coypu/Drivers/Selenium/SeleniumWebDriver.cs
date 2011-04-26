@@ -85,19 +85,12 @@ namespace Coypu.Drivers.Selenium
 
 		public Node FindField(string locator)
 		{
-			IWebElement field;
-			var label = FindLabelByText(locator);
-			if (label != null)
-			{
-				field = FindFieldFromLabel(label);
-			}
-			else
-			{
-				field = FindFieldByPlaceholder(locator) ??
-				        FindFieldById(locator) ??
-				        FindFieldByName(locator);
-			}
-			return BuildNode(field, "No such field: " + locator);
+            var field = (FindFieldById(locator) ??
+                         FindFieldByName(locator)) ?? 
+                         FindFieldByPlaceholder(locator) ??
+                         FindFieldFromLabel(FindLabelByText(locator));
+
+		    return BuildNode(field, "No such field: " + locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)

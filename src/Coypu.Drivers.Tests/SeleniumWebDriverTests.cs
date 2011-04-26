@@ -23,7 +23,7 @@ namespace Coypu.Drivers.Tests
 		}
 	}
 
-	[TestFixture]
+    [TestFixture]
 	public class ChromeSeleniumWebDriverTests : DriverImplementationTests
 	{
 		protected override Driver GetDriver()

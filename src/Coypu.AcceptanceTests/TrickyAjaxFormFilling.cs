@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
 {
-	[TestFixture]
+	[TestFixture,Explicit]
 	public class TrickyAjaxFormFilling
 	{
 		[SetUp]
