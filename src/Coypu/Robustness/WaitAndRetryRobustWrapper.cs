@@ -16,13 +16,29 @@ namespace Coypu.Robustness
 
 		public TResult Robustly<TResult>(Func<TResult> function)
 		{
+			return Robustly(function, null);
+		}
+
+		public bool WaitFor(Func<bool> query, bool toBecome)
+		{
+			return Robustly(query, toBecome);
+		}
+
+		public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)
+		{
 			var interval = Configuration.RetryInterval;
 			var startTime = DateTime.Now;
 			while (true)
 			{
 				try
 				{
-					return function();
+					var result = function();
+					if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, startTime))
+					{
+						WaitForInterval(interval);
+						continue;
+					}
+					return result;
 				}
 				catch (Exception e)
 				{
@@ -31,9 +47,19 @@ namespace Coypu.Robustness
 					{
 						throw;
 					}
-					Thread.Sleep(interval);
+					WaitForInterval(interval);
 				}
 			}
+		}
+
+		private void WaitForInterval(TimeSpan interval)
+		{
+			Thread.Sleep(interval);
+		}
+
+		private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, DateTime startTime)
+		{
+			return expectedResult != null && !result.Equals(expectedResult) && !TimeoutExceeded(startTime);
 		}
 
 		private bool TimeoutExceeded(DateTime startTime)

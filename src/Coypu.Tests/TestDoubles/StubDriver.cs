@@ -1,4 +1,6 @@
-﻿namespace Coypu.Tests.TestDoubles
+﻿using System;
+
+namespace Coypu.Tests.TestDoubles
 {
 	public class StubDriver : Driver
 	{
@@ -40,6 +42,21 @@
 		public object Native
 		{
 			get { return "Native driver on stub driver"; }
+		}
+
+		public bool HasContent(string text)
+		{
+			return false;
+		}
+
+		public bool HasCss(string cssSelector)
+		{
+			return false;
+		}
+
+		public bool HasXPath(string xpath)
+		{
+			return false;
 		}
 	}
 }

@@ -12,5 +12,8 @@ namespace Coypu
 		void Set(Node node, string value);
 		void Select(Node node, string option);
 		object Native { get; }
+		bool HasContent(string text);
+		bool HasCss(string cssSelector);
+		bool HasXPath(string xpath);
 	}
 }

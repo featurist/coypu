@@ -8,8 +8,10 @@ namespace Coypu.Tests.TestDoubles
 	{
 		public IList<Action> DeferredActions = new List<Action>();
 		public IList<object> DeferredFunctions = new List<object>();
+		public IList<Func<bool>> DeferredWaitForQueries = new List<Func<bool>>();
 		
 		private readonly IDictionary<Type,object> stubbedResults = new Dictionary<Type, object>();
+		private readonly IDictionary<bool, bool> stubbedWaitForResult = new Dictionary<bool, bool>();
 
 
 		public void Robustly(Action action)
@@ -23,9 +25,20 @@ namespace Coypu.Tests.TestDoubles
 			return (TResult) stubbedResults[typeof(TResult)];
 		}
 
-		public void AlwaysReturn(Type type, object result)
+		public bool WaitFor(Func<bool> query, bool toBecome)
+		{
+			DeferredWaitForQueries.Add(query);
+			return stubbedWaitForResult[toBecome];
+		}
+
+		public void AlwaysReturnFromRobustly(Type type, object result)
 		{
 			stubbedResults.Add(type,result);
+		}
+
+		public void AlwaysReturnFromWaitFor(bool expected, bool result)
+		{
+			stubbedWaitForResult[expected] = result;
 		}
 	}
 }

@@ -76,5 +76,35 @@ namespace Coypu
 		{
 			return new SelectFrom(option,driver,robustWrapper);
 		}
+
+		public bool HasContent(string cssSelector)
+		{
+			return robustWrapper.WaitFor(() => driver.HasContent(cssSelector), true);
+		}
+
+		public bool HasNoContent(string cssSelector)
+		{
+			return robustWrapper.WaitFor(() => driver.HasContent(cssSelector), false);
+		}
+
+		public bool HasCss(string cssSelector)
+		{
+			return robustWrapper.WaitFor(() => driver.HasCss(cssSelector), true);
+		}
+
+		public bool HasNoCss(string cssSelector)
+		{
+			return robustWrapper.WaitFor(() => driver.HasCss(cssSelector), false);
+		}
+
+		public bool HasXPath(string xpath)
+		{
+			return robustWrapper.WaitFor(() => driver.HasXPath(xpath), true);
+		}
+
+		public bool HasNoXPath(string xpath)
+		{
+			return robustWrapper.WaitFor(() => driver.HasXPath(xpath), false);
+		}
 	}
 }

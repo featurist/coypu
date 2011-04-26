@@ -7,24 +7,22 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 	[TestFixture]
 	public class When_visiting
 	{
-		protected FakeDriver Driver;
-		protected SpyRobustWrapper SpyRobustWrapper;
-		protected Session Session;
-
-		[Test]
-		public void Visit_should_pass_message_to_the_driver()
-		{
-			Session.Visit("http://visit.me");
-
-			Assert.That(Driver.Visits.Single(), Is.EqualTo("http://visit.me"));
-		}
+		private FakeDriver driver;
+		private Session session;
 
 		[SetUp]
 		public void SetUp()
 		{
-			Driver = new FakeDriver();
-			SpyRobustWrapper = new SpyRobustWrapper();
-			Session = new Session(Driver, SpyRobustWrapper);
+			driver = new FakeDriver();
+			session = new Session(driver, null);
+		}
+
+		[Test]
+		public void Visit_should_pass_message_to_the_driver()
+		{
+			session.Visit("http://visit.me");
+
+			Assert.That(driver.Visits.Single(), Is.EqualTo("http://visit.me"));
 		}
 	}
 }
