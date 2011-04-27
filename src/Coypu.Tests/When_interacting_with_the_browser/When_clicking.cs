@@ -11,6 +11,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		private SpyRobustWrapper spyRobustWrapper;
 		private Session session;
 
+		[SetUp]
+		public void SetUp()
+		{
+			driver = new FakeDriver();
+			spyRobustWrapper = new SpyRobustWrapper();
+			session = new Session(driver, spyRobustWrapper);
+		}
+
 		[Test]
 		public void Click_should_make_robust_call_to_underlying_driver()
 		{
@@ -48,14 +56,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			Assert.That(driver.ClickedNodes, Has.No.Member(node));
 			spyRobustWrapper.DeferredActions.Single()();
 			Assert.That(driver.ClickedNodes, Has.Member(node));
-		}
-
-		[SetUp]
-		public void SetUp()
-		{
-			driver = new FakeDriver();
-			spyRobustWrapper = new SpyRobustWrapper();
-			session = new Session(driver, spyRobustWrapper);
 		}
 	}
 }

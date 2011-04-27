@@ -38,15 +38,29 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			Should_find_robustly(session.FindField, driver.StubField);
 		}
 
+		[Test]
+		public void FindCss_should_make_robust_call_to_underlying_driver()
+		{
+			Should_find_robustly(session.FindCss, driver.StubCss);
+		}
+
+		[Test]
+		public void FindXPath_should_make_robust_call_to_underlying_driver()
+		{
+			Should_find_robustly(session.FindXPath, driver.StubXPath);
+		}
+
 		protected void Should_find_robustly(Func<string, Node> subject, Action<string, Node> stub)
 		{
+			var locator = "Find me " + DateTime.Now.Ticks;
+
 			var expectedImmediateResult = new StubNode();
 			var expectedDeferredResult = new StubNode();
 
 			spyRobustWrapper.AlwaysReturnFromRobustly(typeof(Node), expectedImmediateResult);
-			stub("Find me", expectedDeferredResult);
+			stub(locator, expectedDeferredResult);
 
-			var actualImmediateResult = subject("Find me");
+			var actualImmediateResult = subject(locator);
 			Assert.That(actualImmediateResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
 			Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
