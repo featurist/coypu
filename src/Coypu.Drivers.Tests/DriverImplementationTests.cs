@@ -192,7 +192,14 @@ namespace Coypu.Drivers.Tests
 			Assert.That(driver.FindField("containerLabeledPasswordFieldName").Id, Is.EqualTo("containerLabeledPasswordFieldId"));
 		}
 
-		[Test]
+        [Test]
+        public void FindField_should_find_radio_button_by_value()
+        {
+            Assert.That(driver.FindField("radio field one val").Name, Is.EqualTo("forLabeledRadioFieldName"));
+            Assert.That(driver.FindField("radio field two val").Name, Is.EqualTo("containerLabeledRadioFieldName"));
+        }
+
+	    [Test]
 		public void Set_should_set_value_of_text_input_field()
 		{
 			var textField = driver.FindField("containerLabeledTextInputFieldName");
@@ -291,6 +298,30 @@ namespace Coypu.Drivers.Tests
 
             var findAgain = driver.FindField("uncheckedBox");
             Assert.That(findAgain.Selected, Is.False);
+        }
+
+        [Test]
+        public void Choose_should_choose_radio_button_from_list()
+        {
+            var radioButton1 = driver.FindField("chooseRadio1");
+            Assert.That(radioButton1.Selected, Is.False);
+
+            // Choose 1
+            driver.Choose(radioButton1);
+
+            var radioButton2 = driver.FindField("chooseRadio2");
+            Assert.That(radioButton2.Selected, Is.False);
+
+            // Choose 2
+            driver.Choose(radioButton2);
+
+            // New choice is now selected
+            radioButton2 = driver.FindField("chooseRadio2");
+            Assert.That(radioButton2.Selected, Is.True);
+
+            // Originally selected is no longer selected
+            radioButton1 = driver.FindField("chooseRadio1");
+            Assert.That(radioButton1.Selected, Is.False);
         }
 
 		[Test]

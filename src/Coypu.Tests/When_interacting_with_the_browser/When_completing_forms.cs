@@ -109,5 +109,20 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.UncheckedNodes, Has.Member(node));
         }
+
+        [Test]
+        public void When_choosing_a_radio_button_It_should_find_field_and_choose_robustly()
+        {
+            var node = new StubNode();
+            driver.StubField("Some radio locator", node);
+
+            session.Choose("Some radio locator");
+
+            Assert.That(driver.ChosenNodes, Has.No.Member(node));
+
+            spyRobustWrapper.DeferredActions.Single()();
+
+            Assert.That(driver.ChosenNodes, Has.Member(node));
+        }
 	}
 }

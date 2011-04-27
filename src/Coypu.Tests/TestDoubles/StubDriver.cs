@@ -90,5 +90,10 @@ namespace Coypu.Tests.TestDoubles
 	    {
 	        
 	    }
+
+	    public void Choose(Node field)
+	    {
+	        
+	    }
 	}
 }

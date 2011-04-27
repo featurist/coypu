@@ -22,5 +22,6 @@ namespace Coypu
 		IEnumerable<Node> FindAllXPath(string xpath);
 	    void Check(Node field);
 	    void Uncheck(Node field);
+	    void Choose(Node field);
 	}
 }
