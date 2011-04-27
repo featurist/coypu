@@ -91,13 +91,19 @@ namespace Coypu.Drivers.Selenium
 		{
 			var field = (FindFieldById(locator) ??
 			             FindFieldByName(locator)) ??
-			            FindFieldByPlaceholder(locator) ??
-			            FindFieldFromLabel(FindLabelByText(locator));
+			             FindFieldByPlaceholder(locator) ??
+                         FindFieldFromLabel(locator) ??
+                         FindRadioButtonFromValue(locator);
 
 			return BuildNode(field, "No such field: " + locator);
 		}
 
-		private IWebElement FindLabelByText(string locator)
+	    private IWebElement FindRadioButtonFromValue(string locator)
+	    {
+	        return selenium.FindElements(By.XPath("//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
+	    }
+
+	    private IWebElement FindLabelByText(string locator)
 		{
 			var labels = selenium.FindElements(By.TagName("label"));
 
@@ -105,8 +111,12 @@ namespace Coypu.Drivers.Selenium
 			       labels.FirstOrDefault(e => e.Text.StartsWith(locator));
 		}
 
-		private IWebElement FindFieldFromLabel(IWebElement label)
+        private IWebElement FindFieldFromLabel(string locator)
 		{
+		    var label = FindLabelByText(locator);
+            if (label == null)
+                return null;
+
 			return FindFieldById(label.GetAttribute("for")) ??
 			       label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
 		}
@@ -217,6 +227,11 @@ namespace Coypu.Drivers.Selenium
 
             if (seleniumElement.Selected)
                 seleniumElement.Toggle();
+	    }
+
+	    public void Choose(Node field)
+	    {
+	        SeleniumElement(field).Select();
 	    }
 
 	    private string PageText()

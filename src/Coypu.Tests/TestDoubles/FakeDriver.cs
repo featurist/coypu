@@ -8,6 +8,7 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IList<Node> clickedNodes = new List<Node>();
 	    private readonly IList<Node> checkedNodes = new List<Node>();
 	    private readonly IList<Node> uncheckedNodes = new List<Node>();
+	    private readonly IList<Node> chosenNodes = new List<Node>();
 	    private readonly IList<string> hasContentQueries = new List<string>();
 	    private readonly IList<string> hasCssQueries = new List<string>();
 	    private readonly IList<string> hasXPathQueries = new List<string>();
@@ -45,6 +46,11 @@ namespace Coypu.Tests.TestDoubles
         public IEnumerable<Node> CheckedNodes
         {
             get { return checkedNodes; }
+        }
+
+        public IEnumerable<Node> ChosenNodes
+        {
+            get { return chosenNodes; }
         }
 
         public IEnumerable<Node> UncheckedNodes
@@ -221,6 +227,11 @@ namespace Coypu.Tests.TestDoubles
 	    public void Uncheck(Node field)
 	    {
             uncheckedNodes.Add(field);
+	    }
+
+	    public void Choose(Node field)
+	    {
+	        chosenNodes.Add(field);
 	    }
 	}
 }
