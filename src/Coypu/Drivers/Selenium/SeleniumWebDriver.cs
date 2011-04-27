@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -39,6 +38,11 @@ namespace Coypu.Drivers.Selenium
 			if (element == null)
 				throw new MissingHtmlException(failureMessage);
 
+			return BuildNode(element);
+		}
+
+		private SeleniumNode BuildNode(IWebElement element)
+		{
 			return new SeleniumNode(element);
 		}
 
@@ -165,12 +169,12 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasCss(string cssSelector)
 		{
-			return selenium.FindElements(By.CssSelector(cssSelector)).Any();
+			return selenium.FindElements(By.CssSelector(cssSelector)).AnyDisplayed();
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			throw new NotImplementedException();
+			return selenium.FindElements(By.XPath(xpath)).AnyDisplayed();
 		}
 
 		public Node FindCss(string cssSelector)
@@ -181,17 +185,24 @@ namespace Coypu.Drivers.Selenium
 
 		public Node FindXPath(string xpath)
 		{
-			throw new NotImplementedException();
+			return BuildNode(selenium.FindElements(By.XPath(xpath)).FirstDisplayedOrDefault(),
+				"Failed to find xpath: " + xpath);
 		}
 
 		public IEnumerable<Node> FindAllCss(string cssSelector)
 		{
-			throw new NotImplementedException();
+			return selenium.FindElements(By.CssSelector(cssSelector))
+						   .Where(e => e.Displayed())
+						   .Select(e => BuildNode(e))
+						   .Cast<Node>();
 		}
 
 		public IEnumerable<Node> FindAllXPath(string xpath)
 		{
-			throw new NotImplementedException();
+			return selenium.FindElements(By.XPath(xpath))
+						   .Where(e => e.Displayed())
+						   .Select(e => BuildNode(e))
+						   .Cast<Node>();
 		}
 
 		private string PageText()
