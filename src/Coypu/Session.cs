@@ -106,5 +106,15 @@ namespace Coypu
 		{
 			return robustWrapper.WaitFor(() => driver.HasXPath(xpath), false);
 		}
+
+		public Node FindCss(string cssSelector)
+		{
+			return robustWrapper.Robustly(() => driver.FindCss(cssSelector));
+		}
+
+		public Node FindXPath(string xpath)
+		{
+			return robustWrapper.Robustly(() => driver.FindXPath(xpath));
+		}
 	}
 }

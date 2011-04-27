@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -20,159 +21,93 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void HasContent_should_return_result_from_wrapper()
+		public void HasContent_should_wait_for_robustly_Positive_example()
 		{
-			const string textToFind = "#some css.selector";
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, true);
-			Assert.That(session.HasContent(textToFind), Is.True);
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, false);
-			Assert.That(session.HasContent(textToFind), Is.False);
+			Should_wait_for_robustly(true, true, session.HasContent, driver.StubHasContent);
 		}
 
 		[Test]
-		public void HasContent_should_wait_for_robustly()
+		public void HasContent_should_wait_for_robustly_Negative_example()
 		{
-			const string textToFind = "#some css.selector";
-			driver.StubHasContent(textToFind, true);
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, true);
-
-			session.HasContent(textToFind);
-
-			Assert.That(driver.HasContentQueries, Is.Empty);
-			spyRobustWrapper.DeferredWaitForQueries.Single()();
-			Assert.That(driver.HasContentQueries.Single(), Is.EqualTo(textToFind));
+			Should_wait_for_robustly(true, false, session.HasContent, driver.StubHasContent);
 		}
 
 		[Test]
-		public void HasNoContent_should_return_result_from_wrapper()
+		public void HasNoContent_should_wait_for_robustly_Positive_example()
 		{
-			const string textToFind = "#some css.selector";
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, true);
-			Assert.That(session.HasNoContent(textToFind), Is.True);
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, false);
-			Assert.That(session.HasNoContent(textToFind), Is.False);
+			Should_wait_for_robustly(false, true, session.HasNoContent, driver.StubHasContent);
 		}
 
 		[Test]
-		public void HasNoContent_should_wait_for_robustly()
+		public void HasNoContent_should_wait_for_robustly_Negative_example()
 		{
-			const string textToFind = "#some css.selector";
-			driver.StubHasContent(textToFind, false);
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, false);
-
-			session.HasNoContent(textToFind);
-
-			Assert.That(driver.HasContentQueries, Is.Empty);
-			spyRobustWrapper.DeferredWaitForQueries.Single()();
-			Assert.That(driver.HasContentQueries.Single(), Is.EqualTo(textToFind));
+			Should_wait_for_robustly(false, false, session.HasNoContent, driver.StubHasContent);
 		}
 
 		[Test]
-		public void HasCss_should_return_result_from_wrapper()
+		public void HasCss_should_wait_for_robustly_Positive_example()
 		{
-			const string cssSelector = "#some css.selector";
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, true);
-			Assert.That(session.HasCss(cssSelector), Is.True);
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, false);
-			Assert.That(session.HasCss(cssSelector), Is.False);
+			Should_wait_for_robustly(true, true, session.HasCss, driver.StubHasCss);
 		}
 
 		[Test]
-		public void HasCss_should_wait_for_robustly()
+		public void HasCss_should_wait_for_robustly_Negative_example()
 		{
-			const string cssSelector = "#some css.selector";
-			driver.StubHasCss(cssSelector, true);
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, true);
-
-			session.HasCss(cssSelector);
-
-			Assert.That(driver.HasCssQueries, Is.Empty);
-			spyRobustWrapper.DeferredWaitForQueries.Single()();
-			Assert.That(driver.HasCssQueries.Single(), Is.EqualTo(cssSelector));
+			Should_wait_for_robustly(true, false, session.HasCss, driver.StubHasCss);
 		}
 
 		[Test]
-		public void HasNoCss_should_return_result_from_wrapper()
+		public void HasNoCss_should_wait_for_robustly_Positive_example()
 		{
-			const string cssSelector = "#some css.selector";
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, true);
-			Assert.That(session.HasNoCss(cssSelector), Is.True);
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, false);
-			Assert.That(session.HasNoCss(cssSelector), Is.False);
+			Should_wait_for_robustly(false, true, session.HasNoCss, driver.StubHasCss);
 		}
 
 		[Test]
-		public void HasNoCss_should_wait_for_robustly()
+		public void HasNoCss_should_wait_for_robustly_Negative_example()
 		{
-			const string cssSelector = "#some css.selector";
-			driver.StubHasCss(cssSelector, false);
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, false);
-
-			session.HasNoCss(cssSelector);
-
-			Assert.That(driver.HasCssQueries, Is.Empty);
-			spyRobustWrapper.DeferredWaitForQueries.Single()();
-			Assert.That(driver.HasCssQueries.Single(), Is.EqualTo(cssSelector));
+			Should_wait_for_robustly(false, false, session.HasNoCss, driver.StubHasCss);
 		}
 
 		[Test]
-		public void HasXPath_should_return_result_from_wrapper()
+		public void HasXPath_should_wait_for_robustly_Positive_example()
 		{
-			const string xpath = "//some/xpath[@selector]";
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, true);
-			Assert.That(session.HasXPath(xpath), Is.True);
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, false);
-			Assert.That(session.HasXPath(xpath), Is.False);
+			Should_wait_for_robustly(true, true, session.HasXPath, driver.StubHasXPath);
 		}
 
 		[Test]
-		public void HasXPath_should_wait_for_robustly()
+		public void HasXPath_should_wait_for_robustly_Negative_example()
 		{
-			const string xpath = "//some/xpath[@selector]";
-			driver.StubHasXPath(xpath, true);
-			spyRobustWrapper.AlwaysReturnFromWaitFor(true, true);
-
-			session.HasXPath(xpath);
-
-			Assert.That(driver.HasXPathQueries, Is.Empty);
-			spyRobustWrapper.DeferredWaitForQueries.Single()();
-			Assert.That(driver.HasXPathQueries.Single(), Is.EqualTo(xpath));
+			Should_wait_for_robustly(true, false, session.HasXPath, driver.StubHasXPath);
 		}
 
 		[Test]
-		public void HasNoXPath_should_return_result_from_wrapper()
+		public void HasNoXPath_should_wait_for_robustly_Positive_example()
 		{
-			const string xpath = "//some/xpath[@selector]";
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, true);
-			Assert.That(session.HasNoXPath(xpath), Is.True);
-
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, false);
-			Assert.That(session.HasNoXPath(xpath), Is.False);
+			Should_wait_for_robustly(false, true, session.HasNoXPath, driver.StubHasXPath);
 		}
 
 		[Test]
-		public void HasNoXPath_should_wait_for_robustly()
+		public void HasNoXPath_should_wait_for_robustly_Negative_example()
 		{
-			const string xpath = "//some/xpath[@selector]";
-			driver.StubHasXPath(xpath, false);
-			spyRobustWrapper.AlwaysReturnFromWaitFor(false, false);
+			Should_wait_for_robustly(false, false, session.HasNoXPath, driver.StubHasXPath);
+		}
 
-			session.HasNoXPath(xpath);
+		protected void Should_wait_for_robustly(bool expecting, bool stubResult, Func<string, bool> subject, Action<string, bool> stub)
+		{
+			var locator = "Find me " + DateTime.Now.Ticks;
 
-			Assert.That(driver.HasXPathQueries, Is.Empty);
-			spyRobustWrapper.DeferredWaitForQueries.Single()();
-			Assert.That(driver.HasXPathQueries.Single(), Is.EqualTo(xpath));
+			var expectedImmediateResult = !stubResult;
+			var expectedDeferredResult = stubResult;
+
+			spyRobustWrapper.AlwaysReturnFromWaitFor(expecting, expectedImmediateResult);
+			stub(locator, expectedDeferredResult);
+
+			var actualImmediateResult = subject(locator);
+			Assert.That(actualImmediateResult, Is.Not.EqualTo(expectedDeferredResult), "Result was not found robustly");
+			Assert.That(actualImmediateResult, Is.EqualTo(expectedImmediateResult));
+
+			var actualDeferredResult = spyRobustWrapper.DeferredWaitForQueries.Single()();
+			Assert.That(actualDeferredResult, Is.EqualTo(expectedDeferredResult));
 		}
 	}
 }

@@ -1,41 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Coypu.Tests.TestDoubles
 {
 	public class FakeDriver : Driver
 	{
 		private readonly IList<Node> clickedNodes = new List<Node>();
-		private readonly Dictionary<string, Node> buttons = new Dictionary<string, Node>();
-		private readonly Dictionary<string, Node> links = new Dictionary<string, Node>();
-		private readonly Dictionary<string, Node> textFields = new Dictionary<string, Node>();
 		private readonly IList<string> hasContentQueries = new List<string>();
 		private readonly IList<string> hasCssQueries = new List<string>();
 		private readonly IList<string> hasXPathQueries = new List<string>();
 		private readonly IList<string> visits = new List<string>();
-		private readonly IList<string> findButtonRequests = new List<string>();
-		private readonly IList<string> findLinkRequests = new List<string>();
-		private readonly IList<string> findTextFieldRequests = new List<string>();
 		private readonly IDictionary<Node, string> setFields = new Dictionary<Node, string>();
 		private readonly IDictionary<Node, string> selectedOptions = new Dictionary<Node, string>();
+		private readonly Dictionary<string, Node> stubbedButtons = new Dictionary<string, Node>();
+		private readonly Dictionary<string, Node> stubbedLinks = new Dictionary<string, Node>();
+		private readonly Dictionary<string, Node> stubbedTextFields = new Dictionary<string, Node>();
+		private readonly Dictionary<string, Node> stubbedCssResults = new Dictionary<string, Node>();
+		private readonly Dictionary<string, Node> stubbedXPathResults = new Dictionary<string, Node>();
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
+
 		private bool disposed;
 
 		public IEnumerable<Node> ClickedNodes
 		{
 			get { return clickedNodes; }
-		}
-
-		public IList<string> FindButtonRequests
-		{
-			get { return findButtonRequests; }
-		}
-
-		public IList<string> FindLinkRequests
-		{
-			get { return findLinkRequests; }
 		}
 
 		public IDictionary<Node, string> SetFields
@@ -70,20 +59,17 @@ namespace Coypu.Tests.TestDoubles
         
 		public Node FindButton(string locator)
 		{
-			findButtonRequests.Add(locator);
-			return buttons[locator];
+			return stubbedButtons[locator];
 		}
 
 		public Node FindLink(string locator)
 		{
-			findLinkRequests.Add(locator);
-			return links[locator];
+			return stubbedLinks[locator];
 		}
 
 		public Node FindField(string locator)
 		{
-			findTextFieldRequests.Add(locator);
-			return textFields[locator];
+			return stubbedTextFields[locator];
 		}
 
 		public void Click(Node node)
@@ -98,17 +84,44 @@ namespace Coypu.Tests.TestDoubles
 
 		public void StubButton(string locator, Node node)
 		{
-			buttons[locator] = node;
+			stubbedButtons[locator] = node;
 		}
 
 		public void StubLink(string locator, Node node)
 		{
-			links[locator] = node;
+			stubbedLinks[locator] = node;
 		}
 
 		public void StubField(string locator, Node node)
 		{
-			textFields[locator] = node;
+			stubbedTextFields[locator] = node;
+		}
+
+		public void StubHasContent(string text, bool result)
+		{
+			stubbedHasContentResults.Add(text, result);
+		}
+
+
+		public void StubHasCss(string cssSelector, bool result)
+		{
+			stubbedHasCssResults.Add(cssSelector, result);
+		}
+
+
+		public void StubHasXPath(string xpath, bool result)
+		{
+			stubbedHasXPathResults.Add(xpath, result);
+		}
+
+		public void StubCss(string cssSelector, Node result)
+		{
+			stubbedCssResults.Add(cssSelector, result);
+		}
+
+		public void StubXPath(string cssSelector, Node result)
+		{
+			stubbedXPathResults.Add(cssSelector, result);
 		}
 
 		public void Dispose()
@@ -142,41 +155,28 @@ namespace Coypu.Tests.TestDoubles
 			return stubbedHasContentResults[text];
 		}
 
-		public void StubHasContent(string text, bool result)
-		{
-			stubbedHasContentResults.Add(text, result);
-		}
 
 		public bool HasCss(string cssSelector)
 		{
-			hasCssQueries.Add(cssSelector);
+			//hasCssQueries.Add(cssSelector);
 			return stubbedHasCssResults[cssSelector];
-		}
-
-		public void StubHasCss(string cssSelector, bool result)
-		{
-			stubbedHasCssResults.Add(cssSelector, result);
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			hasXPathQueries.Add(xpath);
+			//hasXPathQueries.Add(xpath);
 			return stubbedHasXPathResults[xpath];
 		}
 
 		public Node FindCss(string cssSelector)
 		{
-			throw new NotImplementedException();
+			return stubbedCssResults[cssSelector];
 		}
 
 		public Node FindXPath(string xpath)
 		{
-			throw new NotImplementedException();
+			return stubbedXPathResults[xpath];
 		}
 
-		public void StubHasXPath(string xpath, bool result)
-		{
-			stubbedHasXPathResults.Add(xpath, result);
-		}
 	}
 }
