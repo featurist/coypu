@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -45,5 +46,10 @@ namespace Coypu.Drivers.Selenium
 					.FirstOrDefault();
 			}
 		}
+
+	    public override bool Selected
+	    {
+            get { return SeleniumElement.Selected; }
+	    }
 	}
 }

@@ -13,12 +13,14 @@ namespace Coypu
 		void Set(Node node, string value);
 		void Select(Node node, string option);
 		object Native { get; }
-		bool HasContent(string text);
+	    bool HasContent(string text);
 		bool HasCss(string cssSelector);
 		bool HasXPath(string xpath);
 		Node FindCss(string cssSelector);
 		Node FindXPath(string xpath);
 		IEnumerable<Node> FindAllCss(string cssSelector);
 		IEnumerable<Node> FindAllXPath(string xpath);
+	    void Check(Node field);
+	    void Uncheck(Node field);
 	}
 }

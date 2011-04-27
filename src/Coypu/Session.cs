@@ -127,5 +127,15 @@ namespace Coypu
 		{
 			return robustWrapper.Robustly(() => driver.FindAllXPath(xpath));
 		}
+
+	    public void Check(string someCheckboxLocator)
+	    {
+	        robustWrapper.Robustly(() => driver.Check(driver.FindField(someCheckboxLocator)));
+	    }
+
+	    public void Uncheck(string someCheckboxLocator)
+	    {
+            robustWrapper.Robustly(() => driver.Uncheck(driver.FindField(someCheckboxLocator)));
+	    }
 	}
 }
