@@ -79,5 +79,35 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
 			Assert.That(driver.ClickedNodes, Has.Member(node));
 		}
+
+        [Test]
+        public void When_checking_a_checkbox_It_should_find_field_and_check_robustly()
+        {
+            var node = new StubNode();
+            driver.StubField("Some checkbox locator", node);
+
+            session.Check("Some checkbox locator");
+
+            Assert.That(driver.CheckedNodes, Has.No.Member(node));
+
+            spyRobustWrapper.DeferredActions.Single()();
+
+            Assert.That(driver.CheckedNodes, Has.Member(node));
+        }
+
+        [Test]
+        public void When_unchecking_a_checkbox_It_should_find_field_and_uncheck_robustly()
+        {
+            var node = new StubNode();
+            driver.StubField("Some checkbox locator", node);
+
+            session.Uncheck("Some checkbox locator");
+
+            Assert.That(driver.UncheckedNodes, Has.No.Member(node));
+
+            spyRobustWrapper.DeferredActions.Single()();
+
+            Assert.That(driver.UncheckedNodes, Has.Member(node));
+        }
 	}
 }

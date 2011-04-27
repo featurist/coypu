@@ -245,11 +245,53 @@ namespace Coypu.Drivers.Tests
 			Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
 		}
 
-		[Test]
-		public void HasContent_finds_text_of_an_element()
+        [Test]
+		public void Check_should_check_an_unchecked_checkbox()
 		{
-			AssertHasContent("Some text in a span");
+            var checkbox = driver.FindField("uncheckedBox");
+            Assert.That(checkbox.Selected, Is.False);
+
+            driver.Check(checkbox);
+
+            var findAgain = driver.FindField("uncheckedBox");
+            Assert.That(findAgain.Selected, Is.True);
 		}
+
+	    [Test]
+	    public void Check_should_leave_a_checked_checkbox_checked()
+	    {
+            var checkbox = driver.FindField("checkedBox");
+            Assert.That(checkbox.Selected, Is.True);
+
+	        driver.Check(checkbox);
+
+            var findAgain = driver.FindField("checkedBox");
+	        Assert.That(findAgain.Selected, Is.True);
+	    }
+
+	    [Test]
+        public void Uncheck_should_uncheck_a_checked_checkbox()
+		{
+            var checkbox = driver.FindField("checkedBox");
+            Assert.That(checkbox.Selected, Is.True);
+
+            driver.Uncheck(checkbox);
+
+            var findAgain = driver.FindField("checkedBox");
+            Assert.That(findAgain.Selected, Is.False);
+		}
+
+	    [Test]
+        public void Uncheck_should_leave_an_unchecked_checkbox_unchecked()
+        {
+            var checkbox = driver.FindField("uncheckedBox");
+            Assert.That(checkbox.Selected, Is.False);
+
+            driver.Uncheck(checkbox);
+
+            var findAgain = driver.FindField("uncheckedBox");
+            Assert.That(findAgain.Selected, Is.False);
+        }
 
 		[Test]
 		public void HasContent_doesnt_find_missing_text()

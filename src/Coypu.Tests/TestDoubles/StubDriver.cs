@@ -80,5 +80,15 @@ namespace Coypu.Tests.TestDoubles
 		{
 			return Enumerable.Empty<Node>();
 		}
+
+	    public void Check(Node field)
+	    {
+	        
+	    }
+
+	    public void Uncheck(Node field)
+	    {
+	        
+	    }
 	}
 }

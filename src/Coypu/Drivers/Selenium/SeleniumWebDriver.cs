@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -205,7 +206,20 @@ namespace Coypu.Drivers.Selenium
 						   .Cast<Node>();
 		}
 
-		private string PageText()
+	    public void Check(Node field)
+	    {
+	        SeleniumElement(field).Select();
+	    }
+
+	    public void Uncheck(Node field)
+	    {
+	        var seleniumElement = SeleniumElement(field);
+
+            if (seleniumElement.Selected)
+                seleniumElement.Toggle();
+	    }
+
+	    private string PageText()
 		{
 			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;
 
