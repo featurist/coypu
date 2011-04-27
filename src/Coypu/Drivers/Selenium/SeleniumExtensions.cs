@@ -18,6 +18,11 @@ namespace Coypu.Drivers.Selenium
 			return elements.FirstOrDefault(Displayed);
 		}
 
+		public static bool AnyDisplayed(this IEnumerable<IWebElement> elements)
+		{
+			return elements.Any(Displayed);
+		}
+
 		public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
 		{
 			return elements.Where(predicate).FirstOrDefault(Displayed);

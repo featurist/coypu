@@ -303,10 +303,10 @@ namespace Coypu.Drivers.Tests
 			Assert.That(driver.HasContent(unexpectedText), Is.False, "Expected not to find text:\r\n" + unexpectedText);
 		}
 
-		// FindCss / FindXPath are impractical to test thoroughly without mocking out the driver in question.
-		// Probably more value in just throwing some examples at it to get some evidence of correct usage.
+		// FindCss / FindXPath are probably impractical to test thoroughly without mocking out the driver in question.
+		// Think there's more value in just throwing some examples at it to get some evidence of correct usage.
 		[Test]
-		public void FindCss_finds_present_css_examples()
+		public void FindCss_finds_present_examples()
 		{
 			var shouldFind = "#inspectingContent p.css-test span";
 			Assert.That(driver.FindCss(shouldFind).Text, Is.EqualTo("This"));
@@ -316,7 +316,7 @@ namespace Coypu.Drivers.Tests
 		}
 
 		[Test]
-		public void HasCss_finds_present_css_examples()
+		public void HasCss_finds_present_examples()
 		{
 			var shouldFind = "#inspectingContent p.css-test span";
 			Assert.That(driver.HasCss(shouldFind), "Expected to find something at: " + shouldFind);
@@ -326,19 +326,80 @@ namespace Coypu.Drivers.Tests
 		}
 
 		[Test]
-		public void FindCss_does_not_find_missing_css_examples()
+		public void FindCss_does_not_find_missing_examples()
 		{
 			const string shouldNotFind = "#inspectingContent p.css-missing-test";
 			Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
 		}
 
 		[Test]
-		public void HasCss_does_not_find_missing_css_examples()
+		public void HasCss_does_not_find_missing_examples()
 		{
 			const string shouldNotFind = "#inspectingContent p.css-missing-test";
 			Assert.That(driver.HasCss(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
 		}
 
-		//Next findxpath
+		[Test]
+		public void FindCss_only_finds_visible_elements()
+		{
+			const string shouldNotFind = "#inspectingContent p.css-test img.invisible";
+			Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
+		}
+
+		[Test]
+		public void HasCss_only_finds_visible_elements()
+		{
+			const string shouldNotFind = "#inspectingContent p.css-test img.invisible";
+			Assert.That(driver.HasCss(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
+		}
+
+		[Test]
+		public void FindXPath_finds_present_examples()
+		{
+			var shouldFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/span";
+			Assert.That(driver.FindXPath(shouldFind).Text, Is.EqualTo("This"));
+
+			shouldFind = "//ul[@id='cssTest']/li[3]";
+			Assert.That(driver.FindXPath(shouldFind).Text, Is.EqualTo("Me! Pick me!"));
+		}
+
+		[Test]
+		public void HasXPath_finds_present_examples()
+		{
+			var shouldFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/span";
+			Assert.That(driver.HasXPath(shouldFind), "Expected to find something at: " + shouldFind);
+
+			shouldFind = "//ul[@id='cssTest']/li[3]";
+			Assert.That(driver.HasXPath(shouldFind), "Expected to find something at: " + shouldFind);
+		}
+
+		[Test]
+		public void FindXPath_does_not_find_missing_examples()
+		{
+			const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";
+			Assert.Throws<MissingHtmlException>(() => driver.FindXPath(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
+		}
+
+		[Test]
+		public void HasXPath_does_not_find_missing_examples()
+		{
+			const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";
+			Assert.That(driver.HasXPath(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
+		}
+
+		[Test]
+		public void FindXPath_only_finds_visible_elements()
+		{
+			const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/img";
+			Assert.Throws<MissingHtmlException>(() => driver.FindXPath(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
+		}
+
+		[Test]
+		public void HasXPath_only_finds_visible_elements()
+		{
+			const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/img";
+			Assert.That(driver.HasXPath(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
+		}
+
 	}
 }
