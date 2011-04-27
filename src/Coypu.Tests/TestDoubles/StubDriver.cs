@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -67,6 +69,16 @@ namespace Coypu.Tests.TestDoubles
 		public Node FindXPath(string xpath)
 		{
 			return null;
+		}
+
+		public IEnumerable<Node> FindAllCss(string cssSelector)
+		{
+			return Enumerable.Empty<Node>();
+		}
+
+		public IEnumerable<Node> FindAllXPath(string xpath)
+		{
+			return Enumerable.Empty<Node>();
 		}
 	}
 }

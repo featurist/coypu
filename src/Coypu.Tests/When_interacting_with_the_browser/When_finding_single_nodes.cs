@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_finding
+	public class When_finding_single_nodes
 	{
 		private FakeDriver driver;
 		private SpyRobustWrapper spyRobustWrapper;

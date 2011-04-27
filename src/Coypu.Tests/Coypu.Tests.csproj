@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestDoubles\StubDriver.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_all_matching_nodes.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_the_page.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_querying_for_an_expected_result.cs" />
     <Compile Include="ExplicitlyThrownTestException.cs" />
@@ -57,7 +58,7 @@
     <Compile Include="When_interacting_with_the_browser\When_visiting.cs" />
     <Compile Include="When_interacting_with_the_browser\When_completing_forms.cs" />
     <Compile Include="When_interacting_with_the_browser\When_clicking.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_single_nodes.cs" />
     <Compile Include="TestDoubles\SpyRobustWrapper.cs" />
     <Compile Include="TestDoubles\FakeDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -184,6 +184,16 @@ namespace Coypu.Drivers.Selenium
 			throw new NotImplementedException();
 		}
 
+		public IEnumerable<Node> FindAllCss(string cssSelector)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<Node> FindAllXPath(string xpath)
+		{
+			throw new NotImplementedException();
+		}
+
 		private string PageText()
 		{
 			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;

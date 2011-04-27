@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Coypu
 {
@@ -17,5 +18,7 @@ namespace Coypu
 		bool HasXPath(string xpath);
 		Node FindCss(string cssSelector);
 		Node FindXPath(string xpath);
+		IEnumerable<Node> FindAllCss(string cssSelector);
+		IEnumerable<Node> FindAllXPath(string xpath);
 	}
 }
