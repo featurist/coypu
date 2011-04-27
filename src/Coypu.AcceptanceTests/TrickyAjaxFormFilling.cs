@@ -81,6 +81,7 @@ namespace Coypu.AcceptanceTests
 			session.ClickLink("find some interesting people");
 			session.ClickLink("Technology");
 			session.ClickLink("dickc");
+
 		}
 	}
 }

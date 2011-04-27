@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Coypu.Robustness;
 
 namespace Coypu
@@ -115,6 +116,16 @@ namespace Coypu
 		public Node FindXPath(string xpath)
 		{
 			return robustWrapper.Robustly(() => driver.FindXPath(xpath));
+		}
+
+		public IEnumerable<Node> FindAllCss(string cssSelector)
+		{
+			return robustWrapper.Robustly(() => driver.FindAllCss(cssSelector));
+		}
+
+		public IEnumerable<Node> FindAllXPath(string xpath)
+		{
+			return robustWrapper.Robustly(() => driver.FindAllXPath(xpath));
 		}
 	}
 }

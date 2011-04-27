@@ -16,6 +16,8 @@ namespace Coypu.Tests.TestDoubles
 		private readonly Dictionary<string, Node> stubbedTextFields = new Dictionary<string, Node>();
 		private readonly Dictionary<string, Node> stubbedCssResults = new Dictionary<string, Node>();
 		private readonly Dictionary<string, Node> stubbedXPathResults = new Dictionary<string, Node>();
+		private readonly IDictionary<string, IEnumerable<Node>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Node>>();
+		private readonly IDictionary<string, IEnumerable<Node>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Node>>();
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
@@ -32,7 +34,7 @@ namespace Coypu.Tests.TestDoubles
 			get { return setFields; }
 		}
 
-		public IDictionary<Node,string> SelectedOptions
+		public IDictionary<Node, string> SelectedOptions
 		{
 			get { return selectedOptions; }
 		}
@@ -56,7 +58,7 @@ namespace Coypu.Tests.TestDoubles
 		{
 			get { return hasXPathQueries; }
 		}
-        
+
 		public Node FindButton(string locator)
 		{
 			return stubbedButtons[locator];
@@ -124,6 +126,16 @@ namespace Coypu.Tests.TestDoubles
 			stubbedXPathResults.Add(cssSelector, result);
 		}
 
+		public void StubAllCss(string cssSelector, IEnumerable<Node> result)
+		{
+			stubbedAllCssResults.Add(cssSelector, result);
+		}
+
+		public void StubAllXPath(string xpath, IEnumerable<Node> result)
+		{
+			stubbedAllXPathResults.Add(xpath, result);
+		}
+
 		public void Dispose()
 		{
 			disposed = true;
@@ -178,5 +190,14 @@ namespace Coypu.Tests.TestDoubles
 			return stubbedXPathResults[xpath];
 		}
 
+		public IEnumerable<Node> FindAllCss(string cssSelector)
+		{
+			return stubbedAllCssResults[cssSelector];
+		}
+
+		public IEnumerable<Node> FindAllXPath(string xpath)
+		{
+			return stubbedAllXPathResults[xpath];
+		}
 	}
 }
