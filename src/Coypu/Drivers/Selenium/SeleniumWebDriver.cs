@@ -209,13 +209,20 @@ namespace Coypu.Drivers.Selenium
 		{
 			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;
 
-			if (selenium is ChromeDriver) // Which adds extra whitespace around CRLF
-				pageText = StripWhitespaceAroundCRLFs(pageText);
+            pageText = NormalizeCRLFBetweenBrowserImplementations(pageText);
 
 			return pageText;
 		}
 
-		private string StripWhitespaceAroundCRLFs(string pageText)
+	    private string NormalizeCRLFBetweenBrowserImplementations(string text)
+	    {
+            if (selenium is ChromeDriver) // Which adds extra whitespace around CRLF
+                text = StripWhitespaceAroundCRLFs(text);
+
+	        return Regex.Replace(text, "(\r\n)+", "\r\n");
+	    }
+
+	    private string StripWhitespaceAroundCRLFs(string pageText)
 		{
 			return Regex.Replace(pageText, @"\s*\r\n\s*", "\r\n");
 		}

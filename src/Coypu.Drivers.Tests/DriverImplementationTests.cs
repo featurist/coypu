@@ -284,7 +284,8 @@ namespace Coypu.Drivers.Tests
 		[Test]
 		public void HasContent_finds_text_displayed_over_multiple_lines_in_source()
 		{
-			AssertHasContent("Some text displayed over\r\nmultiple lines");
+		    AssertHasContent("Some text displayed over\r\nmultiple lines");
+		    AssertHasContent("Some text displayed over\r\ntwo paragraphs");
 		}
 
 		[Test]
