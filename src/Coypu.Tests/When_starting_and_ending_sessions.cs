@@ -9,7 +9,7 @@ namespace Coypu.Tests
 		[SetUp]
 		public void SetUp()
 		{
-			Configuration.RegisterDriver = () => new FakeDriver();
+			Configuration.RegisterDriver = typeof(FakeDriver);
 		}
 
 		[TearDown]
@@ -53,24 +53,24 @@ namespace Coypu.Tests
 		[Test]
 		public void A_session_gets_its_driver_from_config()
 		{
-			Configuration.RegisterDriver = () => new FakeDriver();
+			Configuration.RegisterDriver = typeof(FakeDriver);
 			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof (FakeDriver)));
 
 			Browser.EndSession();
 
-			Configuration.RegisterDriver = () => new StubDriver();
+			Configuration.RegisterDriver = typeof (StubDriver);
 			Assert.That(Browser.Session.Driver, Is.TypeOf(typeof (StubDriver)));
 		}
 
 		[Test]
 		public void Session_exposes_native_driver_if_you_really_need_it()
 		{
-			Configuration.RegisterDriver = () => new FakeDriver();
+			Configuration.RegisterDriver = typeof (FakeDriver);
 			Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on fake driver"));
 
 			Browser.EndSession();
 
-			Configuration.RegisterDriver = () => new StubDriver();
+			Configuration.RegisterDriver = typeof (StubDriver);
 			Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on stub driver"));
 		}
 
