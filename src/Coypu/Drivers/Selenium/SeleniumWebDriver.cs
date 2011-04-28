@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -218,20 +217,23 @@ namespace Coypu.Drivers.Selenium
 
 	    public void Check(Node field)
 	    {
-	        SeleniumElement(field).Select();
+	    	var seleniumElement = SeleniumElement(field);
+
+	    	if (!seleniumElement.Selected)
+				seleniumElement.Click();
 	    }
 
-	    public void Uncheck(Node field)
+		public void Uncheck(Node field)
 	    {
 	        var seleniumElement = SeleniumElement(field);
 
             if (seleniumElement.Selected)
-                seleniumElement.Toggle();
+                seleniumElement.Click();
 	    }
 
 	    public void Choose(Node field)
 	    {
-	        SeleniumElement(field).Select();
+	        SeleniumElement(field).Click();
 	    }
 
 	    private string PageText()

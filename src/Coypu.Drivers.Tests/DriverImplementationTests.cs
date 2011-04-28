@@ -300,6 +300,29 @@ namespace Coypu.Drivers.Tests
             Assert.That(findAgain.Selected, Is.False);
         }
 
+
+		[Test]
+		public void Check_should_fire_onclick_event()
+		{
+			var checkbox = driver.FindField("uncheckedBox");
+			Assert.That(checkbox.Value, Is.EqualTo("unchecked"));
+
+			driver.Check(checkbox);
+
+			Assert.That(driver.FindField("uncheckedBox").Value, Is.EqualTo("unchecked - clicked"));
+		}
+
+		[Test]
+		public void Uncheck_should_fire_onclick_event()
+		{
+			var checkbox = driver.FindField("checkedBox");
+			Assert.That(checkbox.Value, Is.EqualTo("checked"));
+
+			driver.Uncheck(checkbox);
+
+			Assert.That(driver.FindField("checkedBox").Value, Is.EqualTo("checked - clicked"));
+		}
+
         [Test]
         public void Choose_should_choose_radio_button_from_list()
         {
@@ -323,6 +346,17 @@ namespace Coypu.Drivers.Tests
             radioButton1 = driver.FindField("chooseRadio1");
             Assert.That(radioButton1.Selected, Is.False);
         }
+
+		[Test]
+		public void Choose_should_fire_onclick_event()
+		{
+			var radio = driver.FindField("chooseRadio2");
+			Assert.That(radio.Value, Is.EqualTo("Radio buttons - 2nd value"));
+
+			driver.Choose(radio);
+
+			Assert.That(driver.FindField("chooseRadio2").Value, Is.EqualTo("Radio buttons - 2nd value - clicked"));
+		}
 
 		[Test]
 		public void HasContent_doesnt_find_missing_text()
