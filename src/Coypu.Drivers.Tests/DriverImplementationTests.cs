@@ -241,6 +241,17 @@ namespace Coypu.Drivers.Tests
 		}
 
 		[Test]
+		public void Set_should_fire_change_event_when_selecting_an_option()
+		{
+			var textField = driver.FindField("containerLabeledSelectFieldId");
+			Assert.That(textField.Name, Is.EqualTo("containerLabeledSelectFieldName"));
+
+			driver.Select(textField, "select two option two");
+
+			Assert.That(driver.FindField("containerLabeledSelectFieldId").Name, Is.EqualTo("containerLabeledSelectFieldName - changed"));
+		}
+
+		[Test]
 		public void Selected_is_text_of_selected_option()
 		{
 			var textField = driver.FindField("containerLabeledSelectFieldId");
