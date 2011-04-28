@@ -1,4 +1,5 @@
-﻿using Coypu.Robustness;
+﻿using System;
+using Coypu.Robustness;
 
 namespace Coypu
 {
@@ -24,8 +25,7 @@ namespace Coypu
 
 		private static Driver NewWebDriver()
 		{
-			return Configuration.RegisterDriver();
-
+			return (Driver) Activator.CreateInstance(Configuration.RegisterDriver);
 		}
 
 		public static void EndSession()

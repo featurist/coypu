@@ -10,7 +10,7 @@ namespace Coypu.AcceptanceTests
 		public void SetUp()
 		{
 			Configuration.Browser = Drivers.Browser.Firefox;
-			Configuration.RegisterDriver = () => new SeleniumWebDriver();
+			Configuration.RegisterDriver = typeof (SeleniumWebDriver);
 		}
 
 		[TearDown]
