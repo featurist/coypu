@@ -25,6 +25,7 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 	    private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
+		private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
 
 	    private bool disposed;
 
@@ -130,106 +131,116 @@ namespace Coypu.Tests.TestDoubles
 		}
 
 
-	    public void StubHasXPath(string xpath, bool result)
+		public void StubHasXPath(string xpath, bool result)
 		{
 			stubbedHasXPathResults.Add(xpath, result);
 		}
 
-	    public void StubCss(string cssSelector, Node result)
+		public void StubDialog(string text, bool result)
+		{
+			stubbedHasDialogResults.Add(text, result);
+		}
+
+		public void StubCss(string cssSelector, Node result)
 		{
 			stubbedCssResults.Add(cssSelector, result);
 		}
 
-	    public void StubXPath(string cssSelector, Node result)
+		public void StubXPath(string cssSelector, Node result)
 		{
 			stubbedXPathResults.Add(cssSelector, result);
 		}
 
-	    public void StubAllCss(string cssSelector, IEnumerable<Node> result)
+		public void StubAllCss(string cssSelector, IEnumerable<Node> result)
 		{
 			stubbedAllCssResults.Add(cssSelector, result);
 		}
 
-	    public void StubAllXPath(string xpath, IEnumerable<Node> result)
+		public void StubAllXPath(string xpath, IEnumerable<Node> result)
 		{
 			stubbedAllXPathResults.Add(xpath, result);
 		}
 
-	    public void Dispose()
+		public void Dispose()
 		{
 			disposed = true;
 		}
 
-	    public bool Disposed()
+		public bool Disposed()
 		{
 			return disposed;
 		}
 
-	    public void Set(Node node, string value)
+		public void Set(Node node, string value)
 		{
 			setFields.Add(node, value);
 		}
 
-	    public void Select(Node node, string option)
+		public void Select(Node node, string option)
 		{
 			selectedOptions.Add(node, option);
 		}
 
-	    public object Native
+		public object Native
 		{
 			get { return "Native driver on fake driver"; }
 		}
 
-	    public bool HasContent(string text)
+		public bool HasContent(string text)
 		{
 			hasContentQueries.Add(text);
 			return stubbedHasContentResults[text];
 		}
 
 
-	    public bool HasCss(string cssSelector)
+		public bool HasCss(string cssSelector)
 		{
 			//hasCssQueries.Add(cssSelector);
 			return stubbedHasCssResults[cssSelector];
 		}
 
-	    public bool HasXPath(string xpath)
+		public bool HasXPath(string xpath)
 		{
 			//hasXPathQueries.Add(xpath);
 			return stubbedHasXPathResults[xpath];
 		}
 
-	    public Node FindCss(string cssSelector)
+		public bool HasDialog(string withText)
+		{
+			return stubbedHasDialogResults[withText];
+		}
+
+		public Node FindCss(string cssSelector)
 		{
 			return stubbedCssResults[cssSelector];
 		}
 
-	    public Node FindXPath(string xpath)
+		public Node FindXPath(string xpath)
 		{
 			return stubbedXPathResults[xpath];
 		}
 
-	    public IEnumerable<Node> FindAllCss(string cssSelector)
+		public IEnumerable<Node> FindAllCss(string cssSelector)
 		{
 			return stubbedAllCssResults[cssSelector];
 		}
 
-	    public IEnumerable<Node> FindAllXPath(string xpath)
+		public IEnumerable<Node> FindAllXPath(string xpath)
 		{
 			return stubbedAllXPathResults[xpath];
 		}
 
-	    public void Check(Node field)
+		public void Check(Node field)
 	    {
 	        checkedNodes.Add(field);
 	    }
 
-	    public void Uncheck(Node field)
+		public void Uncheck(Node field)
 	    {
             uncheckedNodes.Add(field);
 	    }
 
-	    public void Choose(Node field)
+		public void Choose(Node field)
 	    {
 	        chosenNodes.Add(field);
 	    }

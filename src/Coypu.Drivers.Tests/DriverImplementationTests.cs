@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -11,6 +12,12 @@ namespace Coypu.Drivers.Tests
 		[TestFixtureSetUp]
 		public void FixtureSetUp()
 		{
+			driver = GetDriver();
+		}
+
+		public void NewSession()
+		{
+			driver.Dispose();
 			driver = GetDriver();
 		}
 
@@ -520,5 +527,24 @@ namespace Coypu.Drivers.Tests
 			Assert.That(driver.HasXPath(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
 		}
 
+		[Test]
+		public void HasDialog_finds_exact_text_in_alert()
+		{
+			driver.Click(driver.FindLink("Trigger an alert"));
+			Assert.That(driver.HasDialog("You have triggered an alert and this is the text."));
+			Assert.That(driver.HasDialog("You have triggered AN alert and this is the text."), Is.False);
+			NewSession();
+		}
+
+		[Test]
+		public void HasDialog_finds_exact_text_in_confirm()
+		{
+			driver.Click(driver.FindLink("Trigger a confirm"));
+			Assert.That(driver.HasDialog("You have triggered a confirm and this is the text."));
+			Assert.That(driver.HasDialog("You have triggered a different confirm and this is the different text."), Is.False);
+			NewSession();
+		}
+
+		
 	}
 }

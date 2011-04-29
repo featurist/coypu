@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -185,6 +186,13 @@ namespace Coypu.Drivers.Selenium
 		public bool HasXPath(string xpath)
 		{
 			return selenium.FindElements(By.XPath(xpath)).AnyDisplayed();
+		}
+
+		public bool HasDialog(string withText)
+		{
+			return selenium.SwitchTo() != null &&
+			       selenium.SwitchTo().Alert() != null &&
+			       selenium.SwitchTo().Alert().Text == withText;
 		}
 
 		public Node FindCss(string cssSelector)

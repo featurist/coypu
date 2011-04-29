@@ -16,12 +16,13 @@ namespace Coypu
 	    bool HasContent(string text);
 		bool HasCss(string cssSelector);
 		bool HasXPath(string xpath);
+		bool HasDialog(string withText);
 		Node FindCss(string cssSelector);
 		Node FindXPath(string xpath);
 		IEnumerable<Node> FindAllCss(string cssSelector);
 		IEnumerable<Node> FindAllXPath(string xpath);
-	    void Check(Node field);
-	    void Uncheck(Node field);
-	    void Choose(Node field);
+		void Check(Node field);
+		void Uncheck(Node field);
+		void Choose(Node field);
 	}
 }
