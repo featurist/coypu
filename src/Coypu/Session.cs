@@ -142,5 +142,15 @@ namespace Coypu
 	    {
             robustWrapper.Robustly(() => driver.Choose(driver.FindField(locator)));
 	    }
+
+		public bool HasDialog(string withText)
+		{
+			return robustWrapper.WaitFor(() => driver.HasDialog(withText),true);
+		}
+
+		public bool HasNoDialog(string withText)
+		{
+			return robustWrapper.WaitFor(() => driver.HasDialog(withText), false);
+		}
 	}
 }

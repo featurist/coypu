@@ -61,6 +61,11 @@ namespace Coypu.Tests.TestDoubles
 			return false;
 		}
 
+		public bool HasDialog(string withText)
+		{
+			return false;
+		}
+
 		public Node FindCss(string cssSelector)
 		{
 			return null;
