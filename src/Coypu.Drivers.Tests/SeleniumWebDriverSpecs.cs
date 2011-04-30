@@ -1,10 +1,8 @@
-﻿//using Coypu.Drivers.Selenium;
-//using NUnit.Framework;
-//
-//namespace Coypu.Drivers.Tests
-//{
-//	[TestFixture]
-//	public class FirefoxSeleniumWebDriverTests : DriverImplementationTests
+﻿using Coypu.Drivers.Selenium;
+
+namespace Coypu.Drivers.Tests
+{
+//	public class FirefoxSeleniumWebDriverSpecs : driver_implementation_specs
 //	{
 //		protected override Driver GetDriver()
 //		{
@@ -13,8 +11,7 @@
 //		}
 //	}
 //
-//	[TestFixture]
-//	public class InternetExplorerSeleniumWebDriverTests : DriverImplementationTests
+//	public class InternetExplorerSeleniumWebDriverSpecs : driver_implementation_specs
 //	{
 //		protected override Driver GetDriver()
 //		{
@@ -23,8 +20,7 @@
 //		}
 //	}
 //
-//    [TestFixture]
-//	public class ChromeSeleniumWebDriverTests : DriverImplementationTests
+//	public class ChromeSeleniumWebDriverSpecs : driver_implementation_specs
 //	{
 //		protected override Driver GetDriver()
 //		{
@@ -32,4 +28,4 @@
 //			return new SeleniumWebDriver();
 //		}
 //	}
-//}
+}
