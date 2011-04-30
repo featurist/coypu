@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Coypu.Drivers.Selenium;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -477,6 +477,41 @@ namespace Coypu.Drivers.Tests
 		{
 			const string shouldNotFind = "#inspectingContent p.css-test img.invisible";
 			Assert.That(driver.HasCss(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
+		}
+
+
+		[Test]
+		public void FindAllCss_returns_empty_if_no_matches()
+		{
+			const string shouldNotFind = "#inspectingContent p.css-missing-test";
+			Assert.That(driver.FindAllCss(shouldNotFind), Is.Empty);
+		}
+
+		[Test]
+		public void FindCss_returns_all_matches_by_css()
+		{
+			const string shouldNotFind = "#inspectingContent ul#cssTest li";
+			var all = driver.FindAllCss(shouldNotFind);
+			Assert.That(all.Count(), Is.EqualTo(3));
+			Assert.That(all.ElementAt(1).Text, Is.EqualTo("two"));
+			Assert.That(all.ElementAt(2).Text, Is.EqualTo("Me! Pick me!"));
+		}
+
+		[Test]
+		public void FindXPath_returns_empty_if_no_matches()
+		{
+			const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";
+			Assert.That(driver.FindAllXPath(shouldNotFind), Is.Empty);
+		}
+
+		[Test]
+		public void FindXPath_returns_all_matches_by_xpath()
+		{
+			const string shouldNotFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
+			var all = driver.FindAllXPath(shouldNotFind);
+			Assert.That(all.Count(), Is.EqualTo(3));
+			Assert.That(all.ElementAt(1).Text, Is.EqualTo("two"));
+			Assert.That(all.ElementAt(2).Text, Is.EqualTo("Me! Pick me!"));
 		}
 
 		[Test]

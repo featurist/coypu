@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void FindCss_should_make_robust_call_to_underlying_driver()
+		public void FindAllCss_should_make_robust_call_to_underlying_driver()
 		{
 			Should_find_robustly(session.FindAllCss, driver.StubAllCss);
 		}
