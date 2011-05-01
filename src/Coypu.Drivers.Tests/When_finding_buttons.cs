@@ -7,7 +7,7 @@ namespace Coypu.Drivers.Tests
 {
 	public class When_finding_buttons : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
 		{
 			return () =>
 			   {

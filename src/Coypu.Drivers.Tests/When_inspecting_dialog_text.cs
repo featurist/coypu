@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 {
 	internal class When_inspecting_dialog_text : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
 		{
 			return () =>
 			{
