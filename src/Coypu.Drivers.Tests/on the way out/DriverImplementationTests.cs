@@ -237,20 +237,20 @@
 //			var radioButton1 = driver.FindField("chooseRadio1");
 //			radioButton1.Selected.should_be_false();
 //
-			// Choose 1
+			//Choose 1
 //			driver.Choose(radioButton1);
 //
 //			var radioButton2 = driver.FindField("chooseRadio2");
 //			radioButton2.Selected.should_be_false();
 //
-			// Choose 2
+			//Choose 2
 //			driver.Choose(radioButton2);
 //
-			// New choice is now selected
+			//New choice is now selected
 //			radioButton2 = driver.FindField("chooseRadio2");
 //			radioButton2.Selected.should_be_true();
 //
-			// Originally selected is no longer selected
+			//Originally selected is no longer selected
 //			radioButton1 = driver.FindField("chooseRadio1");
 //			radioButton1.Selected.should_be_false();
 //		}
