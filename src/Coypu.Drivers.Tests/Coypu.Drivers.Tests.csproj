@@ -61,11 +61,8 @@
     <Compile Include="When_finding_an_element_by_css.cs" />
     <Compile Include="When_finding_an_element_by_xpath.cs" />
     <Compile Include="When_finding_buttons.cs" />
-    <Compile Include="on the way out\SeleniumWebDriverSpecs.cs" />
     <Compile Include="Test_each_driver_and_browser_combination.cs" />
-    <Compile Include="on the way out\DriverImplementationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="on the way out\SeleniumWebDriverTests.cs" />
     <Compile Include="When_clicking.cs" />
     <Compile Include="When_finding_fields.cs" />
     <Compile Include="When_finding_links.cs" />

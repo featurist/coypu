@@ -21,7 +21,7 @@ namespace Coypu.Drivers.Tests
 		{
 			LoadSpecsFor(driverType, Browser.Firefox);
 			LoadSpecsFor(driverType, Browser.Chrome);
-			//LoadSpecsFor(driverType, Browser.InternetExplorer);
+			LoadSpecsFor(driverType, Browser.InternetExplorer);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser)
@@ -36,7 +36,7 @@ namespace Coypu.Drivers.Tests
 		private void LoadSpecs(Type driverSpecsType)
 		{
 			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')] 
-				= ((DriverSpecs)Activator.CreateInstance(driverSpecsType)).Specs(GetDriver, it);
+				= ((DriverSpecs)Activator.CreateInstance(driverSpecsType)).Specs(GetDriver, describe, it);
 		}
 
 		private Driver GetDriver()

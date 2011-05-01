@@ -6,19 +6,38 @@ namespace Coypu.Drivers.Tests
 {
 	internal class When_finding_fields : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
 		{
 			return () =>
 			{
-				it["should find field by label text by for attribute"] = () =>
+				describe["when finding by for attribute"] = () =>
 				{
-					driver().FindField("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
-					driver().FindField("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
-					driver().FindField("select field linked by for").Id.should_be("forLabeledSelectFieldId");
-					driver().FindField("checkbox field linked by for").Id.should_be("forLabeledCheckboxFieldId");
-					driver().FindField("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
-					driver().FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
+					it["should find text input"] = () =>
+				    {
+					   driver().FindField("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
+				    };
+					it["should find password field"] = () =>
+					{
+						driver().FindField("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
+					};
+					it["should find select field"] = () =>
+					{
+						driver().FindField("select field linked by for").Id.should_be("forLabeledSelectFieldId");
+					};
+					it["should find checkbox"] = () =>
+					{
+						driver().FindField("checkbox field linked by for").Id.should_be("forLabeledCheckboxFieldId");
+					};
+					it["should find radio button"] = () =>
+					{
+						driver().FindField("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
+					};
+					it["should find textarea"] = () =>
+					{
+						driver().FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
+					};
 				};
+
 				it["should find field by container label"] = () =>
 				{
 					driver().FindField("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");
