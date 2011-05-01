@@ -1,4 +1,5 @@
 ﻿using System;
+using NSpec;
 using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
@@ -7,7 +8,20 @@ namespace Coypu.Drivers.Tests
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister it)
 		{
-			return () => { };
+			return () =>
+			{
+				it["should set text of selected option"] = () =>
+				{
+					var textField = driver().FindField("containerLabeledSelectFieldId");
+					textField.SelectedOption.should_be("select two option one");
+
+					driver().Select(textField, "select2value2");
+
+					textField = driver().FindField("containerLabeledSelectFieldId");
+					textField.SelectedOption.should_be("select two option two");
+				};
+
+			};
 		}
 	}
 }

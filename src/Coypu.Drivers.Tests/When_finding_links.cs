@@ -11,16 +11,16 @@ namespace Coypu.Drivers.Tests
 		{
 			return () =>
 			{
-				it["should_find_link_by_text"] = () =>
+				it["should find link by text"] = () =>
 				{
 					driver().FindLink("first link").Id.should_be("firstLinkId");
 					driver().FindLink("second link").Id.should_be("secondLinkId");
 				};
 
 				it["should not find display:none"] = () =>
-             	{
-             		Assert.Throws<MissingHtmlException>(() => driver().FindLink("I am an invisible link by display"));
-             	};
+				 {
+					 Assert.Throws<MissingHtmlException>(() => driver().FindLink("I am an invisible link by display"));
+				 };
 
 				it["should not find visibility:hidden links"] =	() =>
 				{

@@ -43,13 +43,13 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			var tries = 0;
 			var expectedReturnValue = new object();
 			Func<object> function = () =>
-			                        	{
-			                        		tries++;
-			                        		if (tries == 1)
-			                        			throw new Exception("Fails first time");
+										{
+											tries++;
+											if (tries == 1)
+												throw new Exception("Fails first time");
 
-			                        		return expectedReturnValue;
-			                        	};
+											return expectedReturnValue;
+										};
 
 			var actualReturnValue = robustness.Robustly(function);
 
@@ -57,44 +57,44 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			Assert.That(actualReturnValue, Is.SameAs(expectedReturnValue));
 		}
 
-        [Test]
-        public void When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
-        {
-            var timeout = TimeSpan.FromMilliseconds(200);
-        	Configuration.Timeout = timeout;
+		[Test]
+		public void When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
+		{
+			var timeout = TimeSpan.FromMilliseconds(200);
+			Configuration.Timeout = timeout;
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
-            var robustness = new WaitAndRetryRobustWrapper();
-            Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
+			var robustness = new WaitAndRetryRobustWrapper();
+			Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
-            var startTime = DateTime.Now;
-            try
-            {
-                robustness.Robustly(action);
-                Assert.Fail("Expected 'Fails every time' exception");
-            }
-            catch (ExplicitlyThrownTestException e)
-            {
-                Assert.That(e.Message, Is.EqualTo("Fails every time"));
-            }
-            var endTime = DateTime.Now;
+			var startTime = DateTime.Now;
+			try
+			{
+				robustness.Robustly(action);
+				Assert.Fail("Expected 'Fails every time' exception");
+			}
+			catch (ExplicitlyThrownTestException e)
+			{
+				Assert.That(e.Message, Is.EqualTo("Fails every time"));
+			}
+			var endTime = DateTime.Now;
 
-            var actualDuration = (endTime - startTime);
-            var discrepancy = TimeSpan.FromMilliseconds(50);
-            Assert.That(actualDuration, Is.LessThan(timeout + discrepancy));
-        }
+			var actualDuration = (endTime - startTime);
+			var discrepancy = TimeSpan.FromMilliseconds(50);
+			Assert.That(actualDuration, Is.LessThan(timeout + discrepancy));
+		}
 
-	    [Test]
+		[Test]
 		public void When_an_Action_throws_an_exception_first_time_It_should_retry()
 		{
-	    	Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-	    	var robustness = new WaitAndRetryRobustWrapper();
+			Configuration.Timeout = TimeSpan.FromMilliseconds(100);
+			var robustness = new WaitAndRetryRobustWrapper();
 			var tries = 0;
 			Action action = () =>
-			                	{
-			                		tries++;
-			                		if (tries == 1)
-			                			throw new ExplicitlyThrownTestException("Fails first time");
-			                	};
+								{
+									tries++;
+									if (tries == 1)
+										throw new ExplicitlyThrownTestException("Fails first time");
+								};
 
 			robustness.Robustly(action);
 

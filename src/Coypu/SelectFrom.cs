@@ -20,7 +20,7 @@ namespace Coypu
 			robustWrapper.Robustly(
 				() => {
 						driver.Click(driver.FindField(locator));
-				      	driver.Select(driver.FindField(locator), option);
+						  driver.Select(driver.FindField(locator), option);
 				});
 		}
 	}

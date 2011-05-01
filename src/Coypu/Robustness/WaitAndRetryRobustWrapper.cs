@@ -8,10 +8,10 @@ namespace Coypu.Robustness
 		public void Robustly(Action action)
 		{
 			Robustly<object>(() =>
-			         	{
-			         		action();
-			         		return null;
-			         	});
+						 {
+							 action();
+							 return null;
+						 });
 		}
 
 		public TResult Robustly<TResult>(Func<TResult> function)

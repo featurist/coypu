@@ -10,7 +10,7 @@ namespace Coypu.Drivers.Tests
 		{
 			return () =>
 			{
-				it["should_find_field_by_label_text_by_for_attribute"] = () =>
+				it["should find field by label text by for attribute"] = () =>
 				{
 					driver().FindField("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
 					driver().FindField("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
@@ -19,7 +19,7 @@ namespace Coypu.Drivers.Tests
 					driver().FindField("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
 					driver().FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
 				};
-				it["should_find_field_by_container_label"] = () =>
+				it["should find field by container label"] = () =>
 				{
 					driver().FindField("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");
 					driver().FindField("password field in a label container").Id.should_be("containerLabeledPasswordFieldId");
@@ -29,12 +29,12 @@ namespace Coypu.Drivers.Tests
 					driver().FindField("textarea field in a label container").Id.should_be("containerLabeledTextareaFieldId");
 
 				};
-				it["should_find_text_field_by_placeholder"] = () =>
+				it["should find text field by placeholder"] = () =>
 				{
 					driver().FindField("text input field with a placeholder").Id.should_be("textInputFieldWithPlaceholder");
 					driver().FindField("textarea field with a placeholder").Id.should_be("textareaFieldWithPlaceholder");
 				};
-				it["should_find_field_by_id"] = () =>
+				it["should find field by id"] = () =>
 				{
 					driver().FindField("containerLabeledTextInputFieldId").Value.should_be("text input field two val");
 					driver().FindField("containerLabeledTextareaFieldId").Value.should_be("textarea field two val");
@@ -43,7 +43,7 @@ namespace Coypu.Drivers.Tests
 					driver().FindField("containerLabeledRadioFieldId").Value.should_be("radio field two val");
 					driver().FindField("containerLabeledPasswordFieldId").Name.should_be("containerLabeledPasswordFieldName");
 				};
-				it["should_find_field_by_name"] = () =>
+				it["should find field by name"] = () =>
 				{
 					driver().FindField("containerLabeledTextInputFieldName").Value.should_be("text input field two val");
 					driver().FindField("containerLabeledTextareaFieldName").Value.should_be("textarea field two val");
@@ -52,7 +52,7 @@ namespace Coypu.Drivers.Tests
 					driver().FindField("containerLabeledRadioFieldName").Value.should_be("radio field two val");
 					driver().FindField("containerLabeledPasswordFieldName").Id.should_be("containerLabeledPasswordFieldId");
 				};
-				it["should_find_radio_button_by_value"] = () =>
+				it["should find radio button by value"] = () =>
 				{
 					driver().FindField("radio field one val").Name.should_be("forLabeledRadioFieldName");
 					driver().FindField("radio field two val").Name.should_be("containerLabeledRadioFieldName");
