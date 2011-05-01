@@ -10,12 +10,12 @@ namespace Coypu.Drivers.Tests
 		public Action Specs(Func<Driver> driver, ActionRegister it)
 		{
 			return () =>
-	       	{
-	       		it["should find a particular button by its text"] = () =>
-            	{
-            		driver().FindButton("first button").Id.should_be("firstButtonId");
-            		driver().FindButton("second button").Id.should_be("secondButtonId");
-            	};
+			   {
+				   it["should find a particular button by its text"] = () =>
+				{
+					driver().FindButton("first button").Id.should_be("firstButtonId");
+					driver().FindButton("second button").Id.should_be("secondButtonId");
+				};
 
 				it["should find a particular button by its id"] = () =>
 				{

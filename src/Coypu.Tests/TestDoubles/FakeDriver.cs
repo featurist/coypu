@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Coypu.Tests.TestDoubles
 {
 	public class FakeDriver : Driver
 	{
 		private readonly IList<Node> clickedNodes = new List<Node>();
-	    private readonly IList<Node> checkedNodes = new List<Node>();
-	    private readonly IList<Node> uncheckedNodes = new List<Node>();
-	    private readonly IList<Node> chosenNodes = new List<Node>();
-	    private readonly IList<string> hasContentQueries = new List<string>();
-	    private readonly IList<string> hasCssQueries = new List<string>();
-	    private readonly IList<string> hasXPathQueries = new List<string>();
-	    private readonly IList<string> visits = new List<string>();
-	    private readonly IDictionary<Node, string> setFields = new Dictionary<Node, string>();
-	    private readonly IDictionary<Node, string> selectedOptions = new Dictionary<Node, string>();
+		private readonly IList<Node> checkedNodes = new List<Node>();
+		private readonly IList<Node> uncheckedNodes = new List<Node>();
+		private readonly IList<Node> chosenNodes = new List<Node>();
+		private readonly IList<string> hasContentQueries = new List<string>();
+		private readonly IList<string> hasCssQueries = new List<string>();
+		private readonly IList<string> hasXPathQueries = new List<string>();
+		private readonly IList<string> visits = new List<string>();
+		private readonly IDictionary<Node, string> setFields = new Dictionary<Node, string>();
+		private readonly IDictionary<Node, string> selectedOptions = new Dictionary<Node, string>();
 		private readonly Dictionary<string, Node> stubbedButtons = new Dictionary<string, Node>();
 		private readonly Dictionary<string, Node> stubbedLinks = new Dictionary<string, Node>();
 		private readonly Dictionary<string, Node> stubbedTextFields = new Dictionary<string, Node>();
@@ -24,108 +23,106 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IDictionary<string, IEnumerable<Node>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Node>>();
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
-	    private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
+		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
 
-	    private bool disposed;
-
-	    public IEnumerable<Node> ClickedNodes
+		public IEnumerable<Node> ClickedNodes
 		{
 			get { return clickedNodes; }
 		}
 
-	    public IDictionary<Node, string> SetFields
+		public IDictionary<Node, string> SetFields
 		{
 			get { return setFields; }
 		}
 
-	    public IDictionary<Node, string> SelectedOptions
+		public IDictionary<Node, string> SelectedOptions
 		{
 			get { return selectedOptions; }
 		}
 
-        public IEnumerable<Node> CheckedNodes
-        {
-            get { return checkedNodes; }
-        }
+		public IEnumerable<Node> CheckedNodes
+		{
+			get { return checkedNodes; }
+		}
 
-        public IEnumerable<Node> ChosenNodes
-        {
-            get { return chosenNodes; }
-        }
+		public IEnumerable<Node> ChosenNodes
+		{
+			get { return chosenNodes; }
+		}
 
-        public IEnumerable<Node> UncheckedNodes
-        {
-            get { return uncheckedNodes; }
-        }
+		public IEnumerable<Node> UncheckedNodes
+		{
+			get { return uncheckedNodes; }
+		}
 
-	    public IEnumerable<string> Visits
+		public IEnumerable<string> Visits
 		{
 			get { return visits; }
 		}
 
-	    public IEnumerable<string> HasContentQueries
+		public IEnumerable<string> HasContentQueries
 		{
 			get { return hasContentQueries; }
 		}
 
-	    public IEnumerable<string> HasCssQueries
+		public IEnumerable<string> HasCssQueries
 		{
 			get { return hasCssQueries; }
 		}
 
-	    public IEnumerable<string> HasXPathQueries
+		public IEnumerable<string> HasXPathQueries
 		{
 			get { return hasXPathQueries; }
 		}
 
-	    public Node FindButton(string locator)
+		public Node FindButton(string locator)
 		{
 			return stubbedButtons[locator];
 		}
 
-	    public Node FindLink(string locator)
+		public Node FindLink(string locator)
 		{
 			return stubbedLinks[locator];
 		}
 
-	    public Node FindField(string locator)
+		public Node FindField(string locator)
 		{
 			return stubbedTextFields[locator];
 		}
 
-	    public void Click(Node node)
+		public void Click(Node node)
 		{
 			clickedNodes.Add(node);
 		}
 
-	    public void Visit(string url)
+		public void Visit(string url)
 		{
 			visits.Add(url);
 		}
 
-	    public void StubButton(string locator, Node node)
+		public void StubButton(string locator, Node node)
 		{
 			stubbedButtons[locator] = node;
 		}
 
-	    public void StubLink(string locator, Node node)
+		public void StubLink(string locator, Node node)
 		{
 			stubbedLinks[locator] = node;
 		}
 
-	    public void StubField(string locator, Node node)
+		public void StubField(string locator, Node node)
 		{
 			stubbedTextFields[locator] = node;
 		}
 
-	    public void StubHasContent(string text, bool result)
+		public void StubHasContent(string text, bool result)
 		{
 			stubbedHasContentResults.Add(text, result);
 		}
 
 
-	    public void StubHasCss(string cssSelector, bool result)
+		public void StubHasCss(string cssSelector, bool result)
 		{
 			stubbedHasCssResults.Add(cssSelector, result);
 		}
@@ -163,13 +160,10 @@ namespace Coypu.Tests.TestDoubles
 
 		public void Dispose()
 		{
-			disposed = true;
+			Disposed = true;
 		}
 
-		public bool Disposed()
-		{
-			return disposed;
-		}
+		public bool Disposed { get; private set; }
 
 		public void Set(Node node, string value)
 		{
@@ -231,18 +225,18 @@ namespace Coypu.Tests.TestDoubles
 		}
 
 		public void Check(Node field)
-	    {
-	        checkedNodes.Add(field);
-	    }
+		{
+			checkedNodes.Add(field);
+		}
 
 		public void Uncheck(Node field)
-	    {
-            uncheckedNodes.Add(field);
-	    }
+		{
+			uncheckedNodes.Add(field);
+		}
 
 		public void Choose(Node field)
-	    {
-	        chosenNodes.Add(field);
-	    }
+		{
+			chosenNodes.Add(field);
+		}
 	}
 }

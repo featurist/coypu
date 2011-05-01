@@ -13,7 +13,7 @@ namespace Coypu
 		void Set(Node node, string value);
 		void Select(Node node, string option);
 		object Native { get; }
-	    bool HasContent(string text);
+		bool HasContent(string text);
 		bool HasCss(string cssSelector);
 		bool HasXPath(string xpath);
 		bool HasDialog(string withText);
@@ -24,5 +24,6 @@ namespace Coypu
 		void Check(Node field);
 		void Uncheck(Node field);
 		void Choose(Node field);
+		bool Disposed { get; }
 	}
 }

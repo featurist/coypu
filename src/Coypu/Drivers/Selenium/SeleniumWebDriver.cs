@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -12,6 +11,7 @@ namespace Coypu.Drivers.Selenium
 {
 	public class SeleniumWebDriver : Driver
 	{
+		public bool Disposed { get; private set; }
 		private readonly RemoteWebDriver selenium;
 
 		public SeleniumWebDriver()
@@ -52,10 +52,10 @@ namespace Coypu.Drivers.Selenium
 			try
 			{
 				return BuildNode(FindButtonByText(locator) ??
-				                 FindInputButtonByValue(locator) ??
-				                 Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
-				                 Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
-				                 "No such button: " + locator);
+								 FindInputButtonByValue(locator) ??
+								 Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
+								 Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
+								 "No such button: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -90,35 +90,35 @@ namespace Coypu.Drivers.Selenium
 		public Node FindField(string locator)
 		{
 			var field = (FindFieldById(locator) ??
-			             FindFieldByName(locator)) ??
-			             FindFieldByPlaceholder(locator) ??
-                         FindFieldFromLabel(locator) ??
-                         FindRadioButtonFromValue(locator);
+						 FindFieldByName(locator)) ??
+						 FindFieldByPlaceholder(locator) ??
+						 FindFieldFromLabel(locator) ??
+						 FindRadioButtonFromValue(locator);
 
 			return BuildNode(field, "No such field: " + locator);
 		}
 
-	    private IWebElement FindRadioButtonFromValue(string locator)
-	    {
-	        return selenium.FindElements(By.XPath("//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
-	    }
+		private IWebElement FindRadioButtonFromValue(string locator)
+		{
+			return selenium.FindElements(By.XPath("//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
+		}
 
-	    private IWebElement FindLabelByText(string locator)
+		private IWebElement FindLabelByText(string locator)
 		{
 			var labels = selenium.FindElements(By.TagName("label"));
 
 			return labels.FirstOrDefault(e => e.Text == locator) ??
-			       labels.FirstOrDefault(e => e.Text.StartsWith(locator));
+				   labels.FirstOrDefault(e => e.Text.StartsWith(locator));
 		}
 
-        private IWebElement FindFieldFromLabel(string locator)
+		private IWebElement FindFieldFromLabel(string locator)
 		{
-		    var label = FindLabelByText(locator);
-            if (label == null)
-                return null;
+			var label = FindLabelByText(locator);
+			if (label == null)
+				return null;
 
 			return FindFieldById(label.GetAttribute("for")) ??
-			       label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
+				   label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
@@ -191,14 +191,14 @@ namespace Coypu.Drivers.Selenium
 		public bool HasDialog(string withText)
 		{
 			return selenium.SwitchTo() != null &&
-			       selenium.SwitchTo().Alert() != null &&
-			       selenium.SwitchTo().Alert().Text == withText;
+				   selenium.SwitchTo().Alert() != null &&
+				   selenium.SwitchTo().Alert().Text == withText;
 		}
 
 		public Node FindCss(string cssSelector)
 		{
 			return BuildNode(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
-			                 "Failed to find: " + cssSelector);
+							 "Failed to find: " + cssSelector);
 		}
 
 		public Node FindXPath(string xpath)
@@ -223,45 +223,45 @@ namespace Coypu.Drivers.Selenium
 						   .Cast<Node>();
 		}
 
-	    public void Check(Node field)
-	    {
-	    	var seleniumElement = SeleniumElement(field);
+		public void Check(Node field)
+		{
+			var seleniumElement = SeleniumElement(field);
 
-	    	if (!seleniumElement.Selected)
+			if (!seleniumElement.Selected)
 				seleniumElement.Click();
-	    }
+		}
 
 		public void Uncheck(Node field)
-	    {
-	        var seleniumElement = SeleniumElement(field);
+		{
+			var seleniumElement = SeleniumElement(field);
 
-            if (seleniumElement.Selected)
-                seleniumElement.Click();
-	    }
+			if (seleniumElement.Selected)
+				seleniumElement.Click();
+		}
 
-	    public void Choose(Node field)
-	    {
-	        SeleniumElement(field).Click();
-	    }
+		public void Choose(Node field)
+		{
+			SeleniumElement(field).Click();
+		}
 
-	    private string PageText()
+		private string PageText()
 		{
 			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;
 
-            pageText = NormalizeCRLFBetweenBrowserImplementations(pageText);
+			pageText = NormalizeCRLFBetweenBrowserImplementations(pageText);
 
 			return pageText;
 		}
 
-	    private string NormalizeCRLFBetweenBrowserImplementations(string text)
-	    {
-            if (selenium is ChromeDriver) // Which adds extra whitespace around CRLF
-                text = StripWhitespaceAroundCRLFs(text);
+		private string NormalizeCRLFBetweenBrowserImplementations(string text)
+		{
+			if (selenium is ChromeDriver) // Which adds extra whitespace around CRLF
+				text = StripWhitespaceAroundCRLFs(text);
 
-	        return Regex.Replace(text, "(\r\n)+", "\r\n");
-	    }
+			return Regex.Replace(text, "(\r\n)+", "\r\n");
+		}
 
-	    private string StripWhitespaceAroundCRLFs(string pageText)
+		private string StripWhitespaceAroundCRLFs(string pageText)
 		{
 			return Regex.Replace(pageText, @"\s*\r\n\s*", "\r\n");
 		}
@@ -290,10 +290,10 @@ namespace Coypu.Drivers.Selenium
 		private bool IsInputField(IWebElement e)
 		{
 			return e.TagName == "input" &&
-			       (HasAttr(e, "type", "text") ||
-			        HasAttr(e, "type", "password") ||
-			        HasAttr(e, "type", "radio") ||
-			        HasAttr(e, "type", "checkbox"));
+				   (HasAttr(e, "type", "text") ||
+					HasAttr(e, "type", "password") ||
+					HasAttr(e, "type", "radio") ||
+					HasAttr(e, "type", "checkbox"));
 		}
 
 		private bool HasAttr(IWebElement e, string attributeName, string value)
@@ -310,6 +310,7 @@ namespace Coypu.Drivers.Selenium
 		{
 			selenium.Close();
 			selenium.Dispose();
+			Disposed = true;
 		}
 	}
 }

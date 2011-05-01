@@ -47,9 +47,9 @@ namespace Coypu.Drivers.Selenium
 			}
 		}
 
-	    public override bool Selected
-	    {
-            get { return SeleniumElement.Selected; }
-	    }
+		public override bool Selected
+		{
+			get { return SeleniumElement.Selected; }
+		}
 	}
 }

@@ -128,20 +128,20 @@ namespace Coypu
 			return robustWrapper.Robustly(() => driver.FindAllXPath(xpath));
 		}
 
-	    public void Check(string locator)
-	    {
-	        robustWrapper.Robustly(() => driver.Check(driver.FindField(locator)));
-	    }
+		public void Check(string locator)
+		{
+			robustWrapper.Robustly(() => driver.Check(driver.FindField(locator)));
+		}
 
-	    public void Uncheck(string locator)
-	    {
-            robustWrapper.Robustly(() => driver.Uncheck(driver.FindField(locator)));
-	    }
+		public void Uncheck(string locator)
+		{
+			robustWrapper.Robustly(() => driver.Uncheck(driver.FindField(locator)));
+		}
 
-	    public void Choose(string locator)
-	    {
-            robustWrapper.Robustly(() => driver.Choose(driver.FindField(locator)));
-	    }
+		public void Choose(string locator)
+		{
+			robustWrapper.Robustly(() => driver.Choose(driver.FindField(locator)));
+		}
 
 		public bool HasDialog(string withText)
 		{

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using NSpec;
 using NSpec.Domain;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -7,7 +10,23 @@ namespace Coypu.Drivers.Tests
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister it)
 		{
-			return () => { };
+			return () =>
+			{
+				it["should return empty if no matches"] = () => 
+				{
+					const string shouldNotFind = "#inspectingContent p.css-missing-test";
+					Assert.That(driver().FindAllCss(shouldNotFind), Is.Empty);
+				};
+
+				it["should return all matches by css"] = () =>
+				{
+					const string shouldNotFind = "#inspectingContent ul#cssTest li";
+					var all = driver().FindAllCss(shouldNotFind);
+					all.Count().should_be(3);
+					all.ElementAt(1).Text.should_be("two");
+					all.ElementAt(2).Text.should_be("Me! Pick me!");
+				};
+			};
 		}
 	}
 }

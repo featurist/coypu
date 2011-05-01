@@ -86,19 +86,24 @@ namespace Coypu.Tests.TestDoubles
 			return Enumerable.Empty<Node>();
 		}
 
-	    public void Check(Node field)
-	    {
-	        
-	    }
+		public void Check(Node field)
+		{
+			
+		}
 
-	    public void Uncheck(Node field)
-	    {
-	        
-	    }
+		public void Uncheck(Node field)
+		{
+			
+		}
 
-	    public void Choose(Node field)
-	    {
-	        
-	    }
+		public void Choose(Node field)
+		{
+			
+		}
+
+		public bool Disposed
+		{
+			get { return false; }
+		}
 	}
 }

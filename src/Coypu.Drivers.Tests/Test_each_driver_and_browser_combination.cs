@@ -46,7 +46,6 @@ namespace Coypu.Drivers.Tests
 
 		private void LoadTestHTML(Type driverType, Browser browser)
 		{
-			Console.WriteLine("LoadTestHTML");
 			EnsureDriver(driverType, browser);
 			driver.Visit(GetTestHTMLPathLocation());
 		}
@@ -63,12 +62,14 @@ namespace Coypu.Drivers.Tests
 
 		private void EnsureDriver(Type driverType, Browser browser)
 		{
-			if (driver != null && driverType == driver.GetType() && Configuration.Browser == browser)
-				return;
+			if (driver != null && !driver.Disposed)
+			{
+				if (driverType == driver.GetType() && Configuration.Browser == browser)
+					return;
 
-			if (driver != null)
-				driver.Dispose();
-
+				driver.Dispose();  
+			} 
+			
 			Configuration.Browser = browser;
 			driver = (Driver)Activator.CreateInstance(driverType);
 		}
