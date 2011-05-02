@@ -1,11 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
 	public class SeleniumElement : Element
 	{
-		private IWebElement NativeElement
+		private IWebElement NativeSeleniumElement
 		{
 			get { return (IWebElement) Native; }
 		}
@@ -17,29 +18,29 @@ namespace Coypu.Drivers.Selenium
 
 		public override string Id
 		{
-			get { return NativeElement.GetAttribute("id"); }
+			get { return NativeSeleniumElement.GetAttribute("id"); }
 		}
 
 		public override string Text
 		{
-			get { return NativeElement.Text; }
+			get { return NativeSeleniumElement.Text; }
 		}
 
 		public override string Value
 		{
-			get { return NativeElement.GetAttribute("value"); }
+			get { return NativeSeleniumElement.GetAttribute("value"); }
 		}
 
 		public override string Name
 		{
-			get { return NativeElement.GetAttribute("name"); }
+			get { return NativeSeleniumElement.GetAttribute("name"); }
 		}
 
 		public override string SelectedOption
 		{
 			get
 			{
-				return NativeElement.FindElements(By.TagName("option"))
+				return NativeSeleniumElement.FindElements(By.TagName("option"))
 					.Where(e => e.Selected)
 					.Select(e => e.Text)
 					.FirstOrDefault();
@@ -48,7 +49,12 @@ namespace Coypu.Drivers.Selenium
 
 		public override bool Selected
 		{
-			get { return NativeElement.Selected; }
+			get { return NativeSeleniumElement.Selected; }
+		}
+
+		public override string this[string attributeName]
+		{
+			get { return NativeSeleniumElement.GetAttribute(attributeName); }
 		}
 	}
 }

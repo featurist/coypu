@@ -32,10 +32,5 @@ namespace Coypu
 		{
 			session.Dispose();
 		}
-
-		public static void ClickButton(string locator)
-		{
-			session.ClickButton(locator);
-		}
 	}
 }

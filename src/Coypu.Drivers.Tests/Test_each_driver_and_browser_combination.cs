@@ -11,21 +11,21 @@ namespace Coypu.Drivers.Tests
 	{
 		private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
 		Driver driver;
-		private readonly Type specsToRun = typeof(When_interacting_with_dialogs); // Change this to run one suite only
 
 		public void when_testing_each_driver()
 		{
-			LoadSpecsFor(typeof(SeleniumWebDriver));
+			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs)); // All
+			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_inspecting_dialog_text)); // Individual
 		}
 
-		private void LoadSpecsForEachBrowser(Type driverType)
+		private void LoadSpecsForEachBrowser(Type driverType, Type specsToRun)
 		{
-			LoadSpecsFor(driverType, Browser.Firefox);
-			//LoadSpecsFor(driverType, Browser.Chrome);
-			//LoadSpecsFor(driverType, Browser.InternetExplorer);
+			LoadSpecsFor(driverType, Browser.Firefox, specsToRun);
+			//LoadSpecsFor(driverType, Browser.Chrome, specsToRun);
+			//LoadSpecsFor(driverType, Browser.InternetExplorer, specsToRun);
 		}
 
-		private void LoadDriverSpecs(Type driverType, Browser browser)
+		private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
 		{
 			before = () => LoadTestHTML(driverType, browser);
 
@@ -51,14 +51,14 @@ namespace Coypu.Drivers.Tests
 			driver.Visit(GetTestHTMLPathLocation());
 		}
 
-		private void LoadSpecsFor(Type driverType)
+		private void LoadSpecsFor(Type driverType, Type specsToRun)
 		{
-			context["and the driver is " + driverType.Name] = () => LoadSpecsForEachBrowser(driverType);
+			context["and the driver is " + driverType.Name] = () => LoadSpecsForEachBrowser(driverType,specsToRun);
 		}
 
-		private void LoadSpecsFor(Type driverType, Browser browser)
+		private void LoadSpecsFor(Type driverType, Browser browser, Type specsToRun)
 		{
-			context["and the browser is " + browser] = () => LoadDriverSpecs(driverType, browser);
+			context["and the browser is " + browser] = () => LoadDriverSpecs(driverType, browser, specsToRun);
 		}
 
 		private void EnsureDriver(Type driverType, Browser browser)

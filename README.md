@@ -5,6 +5,7 @@
 # Coypu is not
 * A port of Capybara to .Net
 * A headless browser
+* An acceptance testing framework
 
 It is targetted at people doing browser automation in .Net with Selenium WebDriver (or other drivers) to help make your tests readable, robust and fast to write.
 
@@ -68,9 +69,19 @@ or so:
 	{
 		...		
 	}
+
+
+## Disclaimer
+
+Coypu is still *very* new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
+
+If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
+
+	var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) Browser.Session.Native);
 	
+But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
 	
-#### Visiting
+#### Navigating
 	
 	Browser.Session.Visit("http://www.autotrader.co.uk/used-cars") // TODO: Configure the host globally then Visit("/used-cars")
 
