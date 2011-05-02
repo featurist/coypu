@@ -21,8 +21,8 @@ Coypu drivers must implement the Coypu.Driver interface and read the Configurati
 
 Choose your driver/browser combination like so:
 
-`Configuration.RegisterDriver = typeof (SeleniumWebDriver);
-Configuration.Browser = Drivers.Browser.Firefox;`
+	Configuration.RegisterDriver = typeof (SeleniumWebDriver);
+	Configuration.Browser = Drivers.Browser.Firefox;`
 
 ##### Timeout
 
@@ -34,8 +34,8 @@ All methods use this wait and retry strategy EXCEPT: Visit, FindAllCss and FindA
 
 Setup timeout/retry like so:
 
-`Configuration.Timeout = TimeSpan.FromSeconds(5);
-Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);`
+	Configuration.Timeout = TimeSpan.FromSeconds(5);
+	Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);
 
 #### Visible elements
 
