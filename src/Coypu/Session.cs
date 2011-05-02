@@ -120,12 +120,12 @@ namespace Coypu
 
 		public IEnumerable<Node> FindAllCss(string cssSelector)
 		{
-			return robustWrapper.Robustly(() => driver.FindAllCss(cssSelector));
+			return driver.FindAllCss(cssSelector);
 		}
 
 		public IEnumerable<Node> FindAllXPath(string xpath)
 		{
-			return robustWrapper.Robustly(() => driver.FindAllXPath(xpath));
+			return driver.FindAllXPath(xpath);
 		}
 
 		public void Check(string locator)
