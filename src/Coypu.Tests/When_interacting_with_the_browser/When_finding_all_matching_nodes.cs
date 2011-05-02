@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -22,13 +21,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void FindAllCss_should_make_robust_call_to_underlying_driver()
+		public void FindAllCss_should_make_direct_call_to_underlying_driver()
 		{
 			Should_find_robustly(session.FindAllCss, driver.StubAllCss);
 		}
 
 		[Test]
-		public void FindAllXPath_should_make_robust_call_to_underlying_driver()
+		public void FindAllXPath_should_make_direct_call_to_underlying_driver()
 		{
 			Should_find_robustly(session.FindAllXPath, driver.StubAllXPath);
 		}
@@ -38,17 +37,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			var locator = "Find me " + DateTime.Now.Ticks;
 
 			var expectedImmediateResult = new[] {new StubNode()};
-			var expectedDeferredResult = new[] { new StubNode() };
 
-			spyRobustWrapper.AlwaysReturnFromRobustly(typeof(IEnumerable<Node>), expectedImmediateResult);
-			stub(locator, expectedDeferredResult);
+			stub(locator, expectedImmediateResult);
 
 			var actualImmediateResult = subject(locator);
-			Assert.That(actualImmediateResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
 			Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
-			var actualDeferredResult = ((Func<IEnumerable<Node>>) spyRobustWrapper.DeferredFunctions.Single())();
-			Assert.That(actualDeferredResult, Is.SameAs(expectedDeferredResult));
+			Assert.That(spyRobustWrapper.DeferredFunctions, Is.Empty);
 		}
 	}
 }

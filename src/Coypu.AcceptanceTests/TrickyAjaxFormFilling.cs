@@ -1,4 +1,5 @@
-﻿using Coypu.Drivers.Selenium;
+﻿using System;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -9,8 +10,10 @@ namespace Coypu.AcceptanceTests
 		[SetUp]
 		public void SetUp()
 		{
-			Configuration.Browser = Drivers.Browser.Firefox;
 			Configuration.RegisterDriver = typeof (SeleniumWebDriver);
+			Configuration.Browser = Drivers.Browser.Firefox;
+			Configuration.Timeout = TimeSpan.FromSeconds(5);
+			Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);
 		}
 
 		[TearDown]
@@ -38,8 +41,6 @@ namespace Coypu.AcceptanceTests
 			session.FillIn("Add keyword:").With("vtr");
 
 			session.ClickButton("search-used-vehicles");
-
-			session.ClickLink("Compare car");
 		}
 
 		[Test]

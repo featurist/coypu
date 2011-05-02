@@ -11,7 +11,7 @@ namespace Coypu.Drivers.Tests
 	{
 		private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
 		Driver driver;
-		private readonly Type specsToRun = typeof(DriverSpecs); // Change this to run one suite only
+		private readonly Type specsToRun = typeof(When_interacting_with_dialogs); // Change this to run one suite only
 
 		public void when_testing_each_driver()
 		{
