@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -164,6 +165,15 @@ namespace Coypu.Tests.TestDoubles
 		}
 
 		public bool Disposed { get; private set; }
+		public void AcceptModalDialog()
+		{
+			ModalDialogsAccepted++;
+		}
+
+		public void CancelModalDialog()
+		{
+			ModalDialogsCancelled++;
+		}
 
 		public void Set(Node node, string value)
 		{
@@ -180,22 +190,22 @@ namespace Coypu.Tests.TestDoubles
 			get { return "Native driver on fake driver"; }
 		}
 
+		public int ModalDialogsAccepted { get; private set; }
+		public int ModalDialogsCancelled { get; private set; }
+
 		public bool HasContent(string text)
 		{
 			hasContentQueries.Add(text);
 			return stubbedHasContentResults[text];
 		}
 
-
 		public bool HasCss(string cssSelector)
 		{
-			//hasCssQueries.Add(cssSelector);
 			return stubbedHasCssResults[cssSelector];
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			//hasXPathQueries.Add(xpath);
 			return stubbedHasXPathResults[xpath];
 		}
 

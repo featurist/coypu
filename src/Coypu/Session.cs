@@ -152,5 +152,15 @@ namespace Coypu
 		{
 			return robustWrapper.WaitFor(() => driver.HasDialog(withText), false);
 		}
+
+		public void AcceptModalDialog()
+		{
+			robustWrapper.Robustly(() => driver.AcceptModalDialog());
+		}
+
+		public void CancelModalDialog()
+		{
+			robustWrapper.Robustly(() => driver.CancelModalDialog());
+		}
 	}
 }

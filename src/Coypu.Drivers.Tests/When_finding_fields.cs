@@ -37,7 +37,6 @@ namespace Coypu.Drivers.Tests
 						driver().FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
 					};
 				};
-
 				it["should find field by container label"] = () =>
 				{
 					driver().FindField("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");

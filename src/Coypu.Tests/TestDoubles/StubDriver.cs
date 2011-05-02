@@ -105,5 +105,15 @@ namespace Coypu.Tests.TestDoubles
 		{
 			get { return false; }
 		}
+
+		public void AcceptModalDialog()
+		{
+			
+		}
+
+		public void CancelModalDialog()
+		{
+			
+		}
 	}
 }

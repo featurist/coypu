@@ -25,5 +25,7 @@ namespace Coypu
 		void Uncheck(Node field);
 		void Choose(Node field);
 		bool Disposed { get; }
+		void AcceptModalDialog();
+		void CancelModalDialog();
 	}
 }

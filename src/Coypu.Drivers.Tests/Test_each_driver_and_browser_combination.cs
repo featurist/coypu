@@ -11,6 +11,7 @@ namespace Coypu.Drivers.Tests
 	{
 		private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
 		Driver driver;
+		private readonly Type specsToRun = typeof(DriverSpecs); // Change this to run one suite only
 
 		public void when_testing_each_driver()
 		{
@@ -20,8 +21,8 @@ namespace Coypu.Drivers.Tests
 		private void LoadSpecsForEachBrowser(Type driverType)
 		{
 			LoadSpecsFor(driverType, Browser.Firefox);
-			LoadSpecsFor(driverType, Browser.Chrome);
-			LoadSpecsFor(driverType, Browser.InternetExplorer);
+			//LoadSpecsFor(driverType, Browser.Chrome);
+			//LoadSpecsFor(driverType, Browser.InternetExplorer);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser)
@@ -29,7 +30,7 @@ namespace Coypu.Drivers.Tests
 			before = () => LoadTestHTML(driverType, browser);
 
 			Assembly.GetExecutingAssembly().GetTypes()
-					.Where(t => t.IsClass && typeof (DriverSpecs).IsAssignableFrom(t))
+					.Where(t => t.IsClass && specsToRun.IsAssignableFrom(t))
 					.Do(LoadSpecs);
 		}
 

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_inspecting_dialog_text.cs" />
     <Compile Include="DriverSpecs.cs" />
     <Compile Include="When_checking.cs" />
     <Compile Include="When_choosing.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="When_finding_links.cs" />
     <Compile Include="When_inspecting_content.cs" />
     <Compile Include="When_inspecting_css.cs" />
-    <Compile Include="When_inspecting_dialog_text.cs" />
+    <Compile Include="When_interacting_with_dialogs.cs" />
     <Compile Include="When_inspecting_xpath.cs" />
     <Compile Include="When_selecting_options.cs" />
     <Compile Include="When_setting_fields.cs" />

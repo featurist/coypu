@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -91,8 +92,8 @@ namespace Coypu.Drivers.Selenium
 		{
 			var field = (FindFieldById(locator) ??
 						 FindFieldByName(locator)) ??
-						 FindFieldByPlaceholder(locator) ??
 						 FindFieldFromLabel(locator) ??
+						 FindFieldByPlaceholder(locator) ??
 						 FindRadioButtonFromValue(locator);
 
 			return BuildNode(field, "No such field: " + locator);
@@ -105,27 +106,34 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindLabelByText(string locator)
 		{
-			var labels = selenium.FindElements(By.TagName("label"));
-
-			return labels.FirstOrDefault(e => e.Text == locator) ??
-				   labels.FirstOrDefault(e => e.Text.StartsWith(locator));
+			return
+				selenium.FindElements(By.XPath(string.Format("//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
+				selenium.FindElements(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
 		}
 
 		private IWebElement FindFieldFromLabel(string locator)
 		{
+			var start = DateTime.Now;
+			
 			var label = FindLabelByText(locator);
 			if (label == null)
 				return null;
 
-			return FindFieldById(label.GetAttribute("for")) ??
-				   label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
+			try
+			{
+				return FindFieldById(label.GetAttribute("for")) ??
+				       label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
+			}
+			finally
+			{
+				Console.WriteLine("find field from label: " + (DateTime.Now - start));
+			}
 		}
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
-			return selenium.FindElements(By.XPath("//input[@placeholder]"))
-				.Where(IsField)
-				.FirstDisplayedOrDefault(e => e.GetAttribute("placeholder") == placeholder);
+			return selenium.FindElements(By.XPath(string.Format("//input[@placeholder = \"{0}\"]", placeholder)))
+						   .FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldById(string id)
@@ -193,6 +201,16 @@ namespace Coypu.Drivers.Selenium
 			return selenium.SwitchTo() != null &&
 				   selenium.SwitchTo().Alert() != null &&
 				   selenium.SwitchTo().Alert().Text == withText;
+		}
+
+		public void AcceptModalDialog()
+		{
+			selenium.SwitchTo().Alert().Accept();
+		}
+
+		public void CancelModalDialog()
+		{
+			selenium.SwitchTo().Alert().Dismiss();
 		}
 
 		public Node FindCss(string cssSelector)
