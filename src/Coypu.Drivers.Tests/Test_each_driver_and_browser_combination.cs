@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Watin;
 using NSpec;
 
 namespace Coypu.Drivers.Tests
@@ -14,7 +16,8 @@ namespace Coypu.Drivers.Tests
 
 		public void when_testing_each_driver()
 		{
-			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs)); // All
+			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs)); // All
+			 LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs)); // All
 
 			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_interacting_with_dialogs)); // Individual
 		}
@@ -25,7 +28,7 @@ namespace Coypu.Drivers.Tests
 
 			// Unstable:
 			// LoadSpecsFor(driverType, Browser.Chrome, specsToRun);
-			// LoadSpecsFor(driverType, Browser.InternetExplorer, specsToRun);
+			//LoadSpecsFor(driverType, Browser.InternetExplorer, specsToRun);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)

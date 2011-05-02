@@ -13,11 +13,10 @@ namespace Coypu.Drivers.Selenium
 	public class SeleniumWebDriver : Driver
 	{
 		public bool Disposed { get; private set; }
-		private readonly RemoteWebDriver selenium;
-
-		public SeleniumWebDriver()
+		private RemoteWebDriver seleniumInstance;
+		private RemoteWebDriver Selenium
 		{
-			selenium = NewRemoteWebDriver();
+			get { return seleniumInstance ?? (seleniumInstance = NewRemoteWebDriver()); }
 		}
 
 		private RemoteWebDriver NewRemoteWebDriver()
@@ -80,7 +79,7 @@ namespace Coypu.Drivers.Selenium
 		{
 			try
 			{
-				return BuildElement(selenium.FindElement(By.LinkText(locator)), "No such link: " + locator);
+				return BuildElement(Selenium.FindElement(By.LinkText(locator)), "No such link: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -101,14 +100,14 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindRadioButtonFromValue(string locator)
 		{
-			return selenium.FindElements(By.XPath("//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
+			return Selenium.FindElements(By.XPath("//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
 		{
 			return
-				selenium.FindElements(By.XPath(string.Format("//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
-				selenium.FindElements(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
+				Selenium.FindElements(By.XPath(string.Format("//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
+				Selenium.FindElements(By.XPath(string.Format("//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
 		}
 
 		private IWebElement FindFieldFromLabel(string locator)
@@ -123,18 +122,18 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
-			return selenium.FindElements(By.XPath(string.Format("//input[@placeholder = \"{0}\"]", placeholder)))
+			return Selenium.FindElements(By.XPath(string.Format("//input[@placeholder = \"{0}\"]", placeholder)))
 						   .FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldById(string id)
 		{
-			return selenium.FindElementsById(id).FirstDisplayedOrDefault(IsField);
+			return Selenium.FindElementsById(id).FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldByName(string name)
 		{
-			return selenium.FindElementsByName(name).FirstDisplayedOrDefault(IsField);
+			return Selenium.FindElementsByName(name).FirstDisplayedOrDefault(IsField);
 		}
 
 		public void Click(Element element)
@@ -144,7 +143,7 @@ namespace Coypu.Drivers.Selenium
 
 		public void Visit(string url)
 		{
-			selenium.Navigate().GoToUrl(url);
+			Selenium.Navigate().GoToUrl(url);
 		}
 
 		public void Set(Element element, string value)
@@ -158,8 +157,10 @@ namespace Coypu.Drivers.Selenium
 		public void Select(Element element, string option)
 		{
 			var select = SeleniumElement(element);
-			var optionToSelect = select.FindElements(By.TagName("option"))
-				.FirstOrDefault(e => e.Text == option || e.Value == option);
+			var optionToSelect = 
+				select.FindElements(By.TagName("option"))
+					  .FirstOrDefault(e => e.Text == option || e.Value == option);
+
 			if (optionToSelect == null)
 			{
 				throw new MissingHtmlException("No such option: " + option);
@@ -169,7 +170,7 @@ namespace Coypu.Drivers.Selenium
 
 		public object Native
 		{
-			get { return selenium; }
+			get { return Selenium; }
 		}
 
 		public bool HasContent(string text)
@@ -179,48 +180,48 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasCss(string cssSelector)
 		{
-			return selenium.FindElements(By.CssSelector(cssSelector)).AnyDisplayed();
+			return Selenium.FindElements(By.CssSelector(cssSelector)).AnyDisplayed();
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			return selenium.FindElements(By.XPath(xpath)).AnyDisplayed();
+			return Selenium.FindElements(By.XPath(xpath)).AnyDisplayed();
 		}
 
 		public bool HasDialog(string withText)
 		{
-			return selenium.SwitchTo() != null &&
-				   selenium.SwitchTo().Alert() != null &&
-				   selenium.SwitchTo().Alert().Text == withText;
+			return Selenium.SwitchTo() != null &&
+				   Selenium.SwitchTo().Alert() != null &&
+				   Selenium.SwitchTo().Alert().Text == withText;
 		}
 
 		public void AcceptModalDialog()
 		{
 			throw new NotImplementedException("Not working properly, needs more investigation");
-			selenium.SwitchTo().Alert().Accept();
+			Selenium.SwitchTo().Alert().Accept();
 		}
 
 		public void CancelModalDialog()
 		{
 			throw new NotImplementedException("Not working properly, needs more investigation");
-			selenium.SwitchTo().Alert().Dismiss();
+			Selenium.SwitchTo().Alert().Dismiss();
 		}
 
 		public Element FindCss(string cssSelector)
 		{
-			return BuildElement(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
+			return BuildElement(Selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
 							 "Failed to find: " + cssSelector);
 		}
 
 		public Element FindXPath(string xpath)
 		{
-			return BuildElement(selenium.FindElements(By.XPath(xpath)).FirstDisplayedOrDefault(),
+			return BuildElement(Selenium.FindElements(By.XPath(xpath)).FirstDisplayedOrDefault(),
 				"Failed to find xpath: " + xpath);
 		}
 
 		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
-			return selenium.FindElements(By.CssSelector(cssSelector))
+			return Selenium.FindElements(By.CssSelector(cssSelector))
 						   .Where(e => e.Displayed())
 						   .Select(e => BuildElement(e))
 						   .Cast<Element>();
@@ -228,7 +229,7 @@ namespace Coypu.Drivers.Selenium
 
 		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
-			return selenium.FindElements(By.XPath(xpath))
+			return Selenium.FindElements(By.XPath(xpath))
 						   .Where(e => e.Displayed())
 						   .Select(e => BuildElement(e))
 						   .Cast<Element>();
@@ -257,7 +258,7 @@ namespace Coypu.Drivers.Selenium
 
 		private string PageText()
 		{
-			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;
+			var pageText = Selenium.FindElement(By.CssSelector("html body")).Text;
 
 			pageText = NormalizeCRLFBetweenBrowserImplementations(pageText);
 
@@ -266,7 +267,7 @@ namespace Coypu.Drivers.Selenium
 
 		private string NormalizeCRLFBetweenBrowserImplementations(string text)
 		{
-			if (selenium is ChromeDriver) // Which adds extra whitespace around CRLF
+			if (Selenium is ChromeDriver) // Which adds extra whitespace around CRLF
 				text = StripWhitespaceAroundCRLFs(text);
 
 			return Regex.Replace(text, "(\r\n)+", "\r\n");
@@ -314,13 +315,13 @@ namespace Coypu.Drivers.Selenium
 
 		private IEnumerable<IWebElement> Find(By by)
 		{
-			return selenium.FindElements(by);
+			return Selenium.FindElements(by);
 		}
 
 		public void Dispose()
 		{
-			selenium.Close();
-			selenium.Dispose();
+			Selenium.Close();
+			Selenium.Dispose();
 			Disposed = true;
 		}
 	}

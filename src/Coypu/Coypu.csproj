@@ -120,9 +120,9 @@
     <Compile Include="Driver.cs" />
     <Compile Include="Drivers\Browser.cs" />
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />
-    <Compile Include="Drivers\WatiNDriver\WatiNElement.cs" />
-    <Compile Include="Drivers\WatiNDriver\WatiNExtensions.cs" />
-    <Compile Include="Drivers\WatiNDriver\WatiNDriver.cs" />
+    <Compile Include="Drivers\Watin\WatiNElement.cs" />
+    <Compile Include="Drivers\Watin\WatiNExtensions.cs" />
+    <Compile Include="Drivers\Watin\WatiNDriver.cs" />
     <Compile Include="Drivers\DriverNotSupportedException.cs" />
     <Compile Include="Drivers\MissingHtmlException.cs" />
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />

@@ -17,6 +17,6 @@ end
 
 desc 'testdrivers'
 nunit :testdrivers => :compile do |nunit|
-  nunit.command = 'lib\nspec\NSpecRunner.exe'
+  nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
   nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\#{BUILD_CONFIGURATION.downcase}\\Coypu.Drivers.Tests.dll"]
 end
