@@ -22,107 +22,107 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		[Test]
 		public void When_filling_in_a_text_field_It_should_find_field_and_set_value_robustly()
 		{
-			var node = new StubNode();
-			driver.StubField("Some field locator", node);
+			var element = new StubElement();
+			driver.StubField("Some field locator", element);
 
 			session.FillIn("Some field locator").With("some value for the field");
 
-			Assert.That(driver.SetFields, Has.No.Member(node));
+			Assert.That(driver.SetFields, Has.No.Member(element));
 
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.SetFields.Keys, Has.Member(node));
-			Assert.That(driver.SetFields[node], Is.EqualTo("some value for the field"));
+			Assert.That(driver.SetFields.Keys, Has.Member(element));
+			Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
 		}
 
 		[Test]
 		public void When_filling_in_a_text_field_It_should_click_to_ensure_focus()
 		{
-			var node = new StubNode();
-			driver.StubField("Some field locator", node);
+			var element = new StubElement();
+			driver.StubField("Some field locator", element);
 
 			session.FillIn("Some field locator").With("some value for the field");
 
-			Assert.That(driver.ClickedNodes,Is.Empty);
+			Assert.That(driver.ClickedElements,Is.Empty);
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.ClickedNodes, Has.Member(node));
+			Assert.That(driver.ClickedElements, Has.Member(element));
 		}
 
 		[Test]
 		public void When_selecting_an_option_It_should_find_field_and_select_option_robustly()
 		{
-			var node = new StubNode();
-			driver.StubField("Some select field locator", node);
+			var element = new StubElement();
+			driver.StubField("Some select field locator", element);
 
 			session.Select("some option to select").From("Some select field locator");
 
-			Assert.That(driver.SelectedOptions, Has.No.Member(node));
+			Assert.That(driver.SelectedOptions, Has.No.Member(element));
 
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.SelectedOptions.Keys, Has.Member(node));
-			Assert.That(driver.SelectedOptions[node], Is.EqualTo("some option to select"));
+			Assert.That(driver.SelectedOptions.Keys, Has.Member(element));
+			Assert.That(driver.SelectedOptions[element], Is.EqualTo("some option to select"));
 		}
 
 		[Test]
 		public void When_selecting_an_option_It_should_click_to_ensure_focus()
 		{
-			var node = new StubNode();
-			driver.StubField("Some select field locator", node);
+			var element = new StubElement();
+			driver.StubField("Some select field locator", element);
 
 			session.Select("some option to select").From("Some select field locator");
 
-			Assert.That(driver.ClickedNodes, Has.No.Member(node));
+			Assert.That(driver.ClickedElements, Has.No.Member(element));
 
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.ClickedNodes, Has.Member(node));
+			Assert.That(driver.ClickedElements, Has.Member(element));
 		}
 
 		[Test]
 		public void When_checking_a_checkbox_It_should_find_field_and_check_robustly()
 		{
-			var node = new StubNode();
-			driver.StubField("Some checkbox locator", node);
+			var element = new StubElement();
+			driver.StubField("Some checkbox locator", element);
 
 			session.Check("Some checkbox locator");
 
-			Assert.That(driver.CheckedNodes, Has.No.Member(node));
+			Assert.That(driver.CheckedElements, Has.No.Member(element));
 
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.CheckedNodes, Has.Member(node));
+			Assert.That(driver.CheckedElements, Has.Member(element));
 		}
 
 		[Test]
 		public void When_unchecking_a_checkbox_It_should_find_field_and_uncheck_robustly()
 		{
-			var node = new StubNode();
-			driver.StubField("Some checkbox locator", node);
+			var element = new StubElement();
+			driver.StubField("Some checkbox locator", element);
 
 			session.Uncheck("Some checkbox locator");
 
-			Assert.That(driver.UncheckedNodes, Has.No.Member(node));
+			Assert.That(driver.UncheckedElements, Has.No.Member(element));
 
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.UncheckedNodes, Has.Member(node));
+			Assert.That(driver.UncheckedElements, Has.Member(element));
 		}
 
 		[Test]
 		public void When_choosing_a_radio_button_It_should_find_field_and_choose_robustly()
 		{
-			var node = new StubNode();
-			driver.StubField("Some radio locator", node);
+			var element = new StubElement();
+			driver.StubField("Some radio locator", element);
 
 			session.Choose("Some radio locator");
 
-			Assert.That(driver.ChosenNodes, Has.No.Member(node));
+			Assert.That(driver.ChosenElements, Has.No.Member(element));
 
 			spyRobustWrapper.DeferredActions.Single()();
 
-			Assert.That(driver.ChosenNodes, Has.Member(node));
+			Assert.That(driver.ChosenElements, Has.Member(element));
 		}
 	}
 }

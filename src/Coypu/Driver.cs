@@ -5,25 +5,25 @@ namespace Coypu
 {
 	public interface Driver : IDisposable
 	{
-		Node FindButton(string locator);
-		Node FindLink(string locator);
-		Node FindField(string locator);
-		void Click(Node node);
+		Element FindButton(string locator);
+		Element FindLink(string locator);
+		Element FindField(string locator);
+		void Click(Element element);
 		void Visit(string url);
-		void Set(Node node, string value);
-		void Select(Node node, string option);
+		void Set(Element element, string value);
+		void Select(Element element, string option);
 		object Native { get; }
 		bool HasContent(string text);
 		bool HasCss(string cssSelector);
 		bool HasXPath(string xpath);
 		bool HasDialog(string withText);
-		Node FindCss(string cssSelector);
-		Node FindXPath(string xpath);
-		IEnumerable<Node> FindAllCss(string cssSelector);
-		IEnumerable<Node> FindAllXPath(string xpath);
-		void Check(Node field);
-		void Uncheck(Node field);
-		void Choose(Node field);
+		Element FindCss(string cssSelector);
+		Element FindXPath(string xpath);
+		IEnumerable<Element> FindAllCss(string cssSelector);
+		IEnumerable<Element> FindAllXPath(string xpath);
+		void Check(Element field);
+		void Uncheck(Element field);
+		void Choose(Element field);
 		bool Disposed { get; }
 		void AcceptModalDialog();
 		void CancelModalDialog();

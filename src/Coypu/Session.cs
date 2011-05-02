@@ -48,22 +48,22 @@ namespace Coypu
 			driver.Visit(url);
 		}
 
-		public void Click(Node node)
+		public void Click(Element element)
 		{
-			robustWrapper.Robustly(() => driver.Click(node));
+			robustWrapper.Robustly(() => driver.Click(element));
 		}
 
-		public Node FindButton(string locator)
+		public Element FindButton(string locator)
 		{
 			return robustWrapper.Robustly(() => driver.FindButton(locator));
 		}
 
-		public Node FindLink(string locator)
+		public Element FindLink(string locator)
 		{
 			return robustWrapper.Robustly(() => driver.FindLink(locator));
 		}
 
-		public Node FindField(string locator)
+		public Element FindField(string locator)
 		{
 			return robustWrapper.Robustly(() => driver.FindField(locator));
 		}
@@ -108,22 +108,22 @@ namespace Coypu
 			return robustWrapper.WaitFor(() => driver.HasXPath(xpath), false);
 		}
 
-		public Node FindCss(string cssSelector)
+		public Element FindCss(string cssSelector)
 		{
 			return robustWrapper.Robustly(() => driver.FindCss(cssSelector));
 		}
 
-		public Node FindXPath(string xpath)
+		public Element FindXPath(string xpath)
 		{
 			return robustWrapper.Robustly(() => driver.FindXPath(xpath));
 		}
 
-		public IEnumerable<Node> FindAllCss(string cssSelector)
+		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
 			return driver.FindAllCss(cssSelector);
 		}
 
-		public IEnumerable<Node> FindAllXPath(string xpath)
+		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
 			return driver.FindAllXPath(xpath);
 		}

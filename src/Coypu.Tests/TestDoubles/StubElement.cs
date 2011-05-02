@@ -1,6 +1,6 @@
 ﻿namespace Coypu.Tests.TestDoubles
 {
-	public class StubNode : Node
+	public class StubElement : Element
 	{
 		public override string Id
 		{

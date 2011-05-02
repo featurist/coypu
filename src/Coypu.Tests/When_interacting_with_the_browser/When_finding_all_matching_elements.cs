@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_finding_all_matching_nodes
+	public class When_finding_all_matching_elements
 	{
 		private FakeDriver driver;
 		private SpyRobustWrapper spyRobustWrapper;
@@ -32,11 +32,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			Should_find_robustly(session.FindAllXPath, driver.StubAllXPath);
 		}
 
-		protected void Should_find_robustly(Func<string, IEnumerable<Node>> subject, Action<string, IEnumerable<Node>> stub)
+		protected void Should_find_robustly(Func<string, IEnumerable<Element>> subject, Action<string, IEnumerable<Element>> stub)
 		{
 			var locator = "Find me " + DateTime.Now.Ticks;
 
-			var expectedImmediateResult = new[] {new StubNode()};
+			var expectedImmediateResult = new[] {new StubElement()};
 
 			stub(locator, expectedImmediateResult);
 

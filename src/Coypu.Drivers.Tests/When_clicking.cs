@@ -9,15 +9,15 @@ namespace Coypu.Drivers.Tests
 		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
 		{
 			return () =>
-			   {
-				   it["should click the underlying node"] = () =>
-				 {
-					 var node = driver().FindButton("clickMeTest");
-					 driver().FindButton("clickMeTest").Text.should_be("Click me");
-					driver().Click(node);
+			{
+				it["should click the underlying element"] = () =>
+				{
+					var element = driver().FindButton("clickMeTest");
+					driver().FindButton("clickMeTest").Text.should_be("Click me");
+					driver().Click(element);
 					driver().FindButton("clickMeTest").Text.should_be("Click me - clicked");
-				 };
-			   };
+				};
+			};
 		}
 	}
 }

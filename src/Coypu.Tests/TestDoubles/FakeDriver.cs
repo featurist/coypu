@@ -5,56 +5,56 @@ namespace Coypu.Tests.TestDoubles
 {
 	public class FakeDriver : Driver
 	{
-		private readonly IList<Node> clickedNodes = new List<Node>();
-		private readonly IList<Node> checkedNodes = new List<Node>();
-		private readonly IList<Node> uncheckedNodes = new List<Node>();
-		private readonly IList<Node> chosenNodes = new List<Node>();
+		private readonly IList<Element> clickedElements = new List<Element>();
+		private readonly IList<Element> checkedElements = new List<Element>();
+		private readonly IList<Element> uncheckedElements = new List<Element>();
+		private readonly IList<Element> chosenElements = new List<Element>();
 		private readonly IList<string> hasContentQueries = new List<string>();
 		private readonly IList<string> hasCssQueries = new List<string>();
 		private readonly IList<string> hasXPathQueries = new List<string>();
 		private readonly IList<string> visits = new List<string>();
-		private readonly IDictionary<Node, string> setFields = new Dictionary<Node, string>();
-		private readonly IDictionary<Node, string> selectedOptions = new Dictionary<Node, string>();
-		private readonly Dictionary<string, Node> stubbedButtons = new Dictionary<string, Node>();
-		private readonly Dictionary<string, Node> stubbedLinks = new Dictionary<string, Node>();
-		private readonly Dictionary<string, Node> stubbedTextFields = new Dictionary<string, Node>();
-		private readonly Dictionary<string, Node> stubbedCssResults = new Dictionary<string, Node>();
-		private readonly Dictionary<string, Node> stubbedXPathResults = new Dictionary<string, Node>();
-		private readonly IDictionary<string, IEnumerable<Node>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Node>>();
-		private readonly IDictionary<string, IEnumerable<Node>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Node>>();
+		private readonly IDictionary<Element, string> setFields = new Dictionary<Element, string>();
+		private readonly IDictionary<Element, string> selectedOptions = new Dictionary<Element, string>();
+		private readonly Dictionary<string, Element> stubbedButtons = new Dictionary<string, Element>();
+		private readonly Dictionary<string, Element> stubbedLinks = new Dictionary<string, Element>();
+		private readonly Dictionary<string, Element> stubbedTextFields = new Dictionary<string, Element>();
+		private readonly Dictionary<string, Element> stubbedCssResults = new Dictionary<string, Element>();
+		private readonly Dictionary<string, Element> stubbedXPathResults = new Dictionary<string, Element>();
+		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Element>>();
+		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Element>>();
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
 
-		public IEnumerable<Node> ClickedNodes
+		public IEnumerable<Element> ClickedElements
 		{
-			get { return clickedNodes; }
+			get { return clickedElements; }
 		}
 
-		public IDictionary<Node, string> SetFields
+		public IDictionary<Element, string> SetFields
 		{
 			get { return setFields; }
 		}
 
-		public IDictionary<Node, string> SelectedOptions
+		public IDictionary<Element, string> SelectedOptions
 		{
 			get { return selectedOptions; }
 		}
 
-		public IEnumerable<Node> CheckedNodes
+		public IEnumerable<Element> CheckedElements
 		{
-			get { return checkedNodes; }
+			get { return checkedElements; }
 		}
 
-		public IEnumerable<Node> ChosenNodes
+		public IEnumerable<Element> ChosenElements
 		{
-			get { return chosenNodes; }
+			get { return chosenElements; }
 		}
 
-		public IEnumerable<Node> UncheckedNodes
+		public IEnumerable<Element> UncheckedElements
 		{
-			get { return uncheckedNodes; }
+			get { return uncheckedElements; }
 		}
 
 		public IEnumerable<string> Visits
@@ -77,24 +77,24 @@ namespace Coypu.Tests.TestDoubles
 			get { return hasXPathQueries; }
 		}
 
-		public Node FindButton(string locator)
+		public Element FindButton(string locator)
 		{
 			return stubbedButtons[locator];
 		}
 
-		public Node FindLink(string locator)
+		public Element FindLink(string locator)
 		{
 			return stubbedLinks[locator];
 		}
 
-		public Node FindField(string locator)
+		public Element FindField(string locator)
 		{
 			return stubbedTextFields[locator];
 		}
 
-		public void Click(Node node)
+		public void Click(Element element)
 		{
-			clickedNodes.Add(node);
+			clickedElements.Add(element);
 		}
 
 		public void Visit(string url)
@@ -102,19 +102,19 @@ namespace Coypu.Tests.TestDoubles
 			visits.Add(url);
 		}
 
-		public void StubButton(string locator, Node node)
+		public void StubButton(string locator, Element element)
 		{
-			stubbedButtons[locator] = node;
+			stubbedButtons[locator] = element;
 		}
 
-		public void StubLink(string locator, Node node)
+		public void StubLink(string locator, Element element)
 		{
-			stubbedLinks[locator] = node;
+			stubbedLinks[locator] = element;
 		}
 
-		public void StubField(string locator, Node node)
+		public void StubField(string locator, Element element)
 		{
-			stubbedTextFields[locator] = node;
+			stubbedTextFields[locator] = element;
 		}
 
 		public void StubHasContent(string text, bool result)
@@ -139,22 +139,22 @@ namespace Coypu.Tests.TestDoubles
 			stubbedHasDialogResults.Add(text, result);
 		}
 
-		public void StubCss(string cssSelector, Node result)
+		public void StubCss(string cssSelector, Element result)
 		{
 			stubbedCssResults.Add(cssSelector, result);
 		}
 
-		public void StubXPath(string cssSelector, Node result)
+		public void StubXPath(string cssSelector, Element result)
 		{
 			stubbedXPathResults.Add(cssSelector, result);
 		}
 
-		public void StubAllCss(string cssSelector, IEnumerable<Node> result)
+		public void StubAllCss(string cssSelector, IEnumerable<Element> result)
 		{
 			stubbedAllCssResults.Add(cssSelector, result);
 		}
 
-		public void StubAllXPath(string xpath, IEnumerable<Node> result)
+		public void StubAllXPath(string xpath, IEnumerable<Element> result)
 		{
 			stubbedAllXPathResults.Add(xpath, result);
 		}
@@ -175,14 +175,14 @@ namespace Coypu.Tests.TestDoubles
 			ModalDialogsCancelled++;
 		}
 
-		public void Set(Node node, string value)
+		public void Set(Element element, string value)
 		{
-			setFields.Add(node, value);
+			setFields.Add(element, value);
 		}
 
-		public void Select(Node node, string option)
+		public void Select(Element element, string option)
 		{
-			selectedOptions.Add(node, option);
+			selectedOptions.Add(element, option);
 		}
 
 		public object Native
@@ -214,39 +214,39 @@ namespace Coypu.Tests.TestDoubles
 			return stubbedHasDialogResults[withText];
 		}
 
-		public Node FindCss(string cssSelector)
+		public Element FindCss(string cssSelector)
 		{
 			return stubbedCssResults[cssSelector];
 		}
 
-		public Node FindXPath(string xpath)
+		public Element FindXPath(string xpath)
 		{
 			return stubbedXPathResults[xpath];
 		}
 
-		public IEnumerable<Node> FindAllCss(string cssSelector)
+		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
 			return stubbedAllCssResults[cssSelector];
 		}
 
-		public IEnumerable<Node> FindAllXPath(string xpath)
+		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
 			return stubbedAllXPathResults[xpath];
 		}
 
-		public void Check(Node field)
+		public void Check(Element field)
 		{
-			checkedNodes.Add(field);
+			checkedElements.Add(field);
 		}
 
-		public void Uncheck(Node field)
+		public void Uncheck(Element field)
 		{
-			uncheckedNodes.Add(field);
+			uncheckedElements.Add(field);
 		}
 
-		public void Choose(Node field)
+		public void Choose(Element field)
 		{
-			chosenNodes.Add(field);
+			chosenElements.Add(field);
 		}
 	}
 }

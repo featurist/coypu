@@ -1,46 +1,45 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-	public class SeleniumNode : Node
+	public class SeleniumElement : Element
 	{
-		private IWebElement SeleniumElement
+		private IWebElement NativeElement
 		{
 			get { return (IWebElement) Native; }
 		}
 
-		public SeleniumNode(IWebElement seleniumElement)
+		public SeleniumElement(IWebElement seleniumElement)
 		{
 			Native = seleniumElement;
 		}
 
 		public override string Id
 		{
-			get { return SeleniumElement.GetAttribute("id"); }
+			get { return NativeElement.GetAttribute("id"); }
 		}
 
 		public override string Text
 		{
-			get { return SeleniumElement.Text; }
+			get { return NativeElement.Text; }
 		}
 
 		public override string Value
 		{
-			get { return SeleniumElement.GetAttribute("value"); }
+			get { return NativeElement.GetAttribute("value"); }
 		}
 
 		public override string Name
 		{
-			get { return SeleniumElement.GetAttribute("name"); }
+			get { return NativeElement.GetAttribute("name"); }
 		}
 
 		public override string SelectedOption
 		{
 			get
 			{
-				return SeleniumElement.FindElements(By.TagName("option"))
+				return NativeElement.FindElements(By.TagName("option"))
 					.Where(e => e.Selected)
 					.Select(e => e.Text)
 					.FirstOrDefault();
@@ -49,7 +48,7 @@ namespace Coypu.Drivers.Selenium
 
 		public override bool Selected
 		{
-			get { return SeleniumElement.Selected; }
+			get { return NativeElement.Selected; }
 		}
 	}
 }
