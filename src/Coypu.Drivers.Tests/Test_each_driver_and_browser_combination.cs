@@ -16,19 +16,9 @@ namespace Coypu.Drivers.Tests
 
 		public void when_testing_each_driver()
 		{
-			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs)); // All
-			 LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs)); // All
-
-			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_interacting_with_dialogs)); // Individual
-		}
-
-		private void LoadSpecsForEachBrowser(Type driverType, Type specsToRun)
-		{
-			LoadSpecsFor(driverType, Browser.Firefox, specsToRun);
-
-			// Unstable:
-			// LoadSpecsFor(driverType, Browser.Chrome, specsToRun);
-			//LoadSpecsFor(driverType, Browser.InternetExplorer, specsToRun);
+			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Firefox);
+			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+			LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
@@ -57,9 +47,9 @@ namespace Coypu.Drivers.Tests
 			driver.Visit(GetTestHTMLPathLocation());
 		}
 
-		private void LoadSpecsFor(Type driverType, Type specsToRun)
+		private void LoadSpecsFor(Type driverType, Type specsToRun, Browser browser)
 		{
-			context["and the driver is " + driverType.Name] = () => LoadSpecsForEachBrowser(driverType,specsToRun);
+			context["and the driver is " + driverType.Name] = () => LoadSpecsFor(driverType, browser, specsToRun);
 		}
 
 		private void LoadSpecsFor(Type driverType, Browser browser, Type specsToRun)

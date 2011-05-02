@@ -53,3 +53,6 @@ Build succeeded.
     0 Error(s)
 
 Time Elapsed 00:00:01.05
+(in c:/dev/github/Coypu)
+F, [2011-05-03T00:29:32.454111 #4672] FATAL -- : NUnit Failed. See Build Log For Detail
+Terminate batch job (Y/N)? 
