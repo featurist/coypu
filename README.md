@@ -8,11 +8,11 @@
 
 It is targetted at people doing browser automation in .Net with Selenium WebDriver (or other drivers) to help make your tests readable, robust and fast to write.
 
-### Using Coypu
+## Using Coypu
 
-#### Configuration
+### Configuration
 
-##### Driver
+#### Driver
 
 Coypu drivers must implement the Coypu.Driver interface and read the Configuration.Browser setting to test the correct browser. So far Coypu.Drivers.Selenium.SeleniumWebDriver is the only driver.
 
@@ -21,7 +21,7 @@ Choose your driver/browser combination like so:
 	Configuration.RegisterDriver = typeof (SeleniumWebDriver);
 	Configuration.Browser = Drivers.Browser.Firefox;`
 
-##### Timeout
+#### Timeout
 
 Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It doesn't try to monitor XmlHttpRequests or hook into any ready events, just catches exceptions -- mainly the Coypu.Drivers.MissingHtmlException that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
 
@@ -34,7 +34,7 @@ Setup timeout/retry like so:
 	Configuration.Timeout = TimeSpan.FromSeconds(5);
 	Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);
 
-#### Visible elements
+### Visible elements
 
 Coypu drivers filter out any elements that are not visible on the page -- this includes hidden inputs. 
 
@@ -42,38 +42,38 @@ Non-visible elements can get in the way of finding the elements that we are real
 
 What we are really trying to do here is interact with the browser in the way that a human would. Once we start hacking around with elements not accessible to the user then we invalidate our tests in any case.
 
-#### DSL
+### DSL
 
 Here are some examples to get you started using Coypu
 
-##### Visiting
+#### Visiting
 
 TODO
 
-##### Completing forms
+#### Completing forms
 
 TODO
 
-##### Clicking
+#### Clicking
 
 TODO
 
-##### Finding single nodes
+#### Finding single nodes
 
 TODO
 
-##### Finding all matching nodes
+#### Finding all matching nodes
 
 TODO
 
-##### Inspecting nodes
+#### Inspecting nodes
 
 TODO
 
-##### Inspecting page content
+#### Inspecting page content
 
 TODO
 
-##### Dialogs
+#### Dialogs
 
 TODO
