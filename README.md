@@ -14,7 +14,7 @@ It is targetted at people doing browser automation in .Net with Selenium WebDriv
 
 #### Driver
 
-Coypu drivers must implement the Coypu.Driver interface and read the Configuration.Browser setting to test the correct browser. So far Coypu.Drivers.Selenium.SeleniumWebDriver is the only driver.
+Coypu drivers must implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to test the correct browser. So far `Coypu.Drivers.Selenium.SeleniumWebDriver` is the only driver.
 
 Choose your driver/browser combination like so:
 
@@ -23,11 +23,11 @@ Choose your driver/browser combination like so:
 
 #### Timeout
 
-Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It doesn't try to monitor XmlHttpRequests or hook into any ready events, just catches exceptions -- mainly the Coypu.Drivers.MissingHtmlException that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
+Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It doesn't try to monitor XmlHttpRequests or hook into any ready events, just catches exceptions -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
 
-This is a rather blunt approach but the only truly robust method of using Selenium WebDriver that I have found. It also frees the driver from any concerns except for interacting with the browser in its current state.
+This is a rather blunt approach but the only truly robust method of using Selenium WebDriver that we have found. It also frees the driver from any concerns except for interacting with the browser in its current state.
 
-All methods use this wait and retry strategy EXCEPT: Visit, FindAllCss and FindAllXPath which call the driver once immediately. In the case of the FindAll methods this gives you a snapshot of the current state. TODO: add a WaitForAtLeast(n) wrapper for FindAll methods.
+All methods use this wait and retry strategy EXCEPT: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately. In the case of the FindAll methods this gives you a snapshot of the current state. TODO: add a WaitForAtLeast(n) wrapper for FindAll methods.
 
 Setup timeout/retry like so:
 
