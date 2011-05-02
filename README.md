@@ -46,9 +46,9 @@ What we are really trying to do here is interact with the browser in the way tha
 
 Here are some examples to get you started using Coypu
 
-#### Visiting
-
 	using Coypu;
+	
+#### Visiting
 	
 	Browser.Session.Visit("http://www.autotrader.co.uk/used-cars") // TODO: Configure the host globally then Visit("/used-cars")
 
