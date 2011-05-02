@@ -48,15 +48,40 @@ Here are some examples to get you started using Coypu
 
 #### Visiting
 
-TODO
+	using Coypu;
+	
+	Browser.Session.Visit("http://www.autotrader.co.uk/used-cars") // TODO: Configure the host globally then Visit("/used-cars")
 
 #### Completing forms
 
-TODO
+Form fields are found by label text, partial label text, id, name, placeholder or radio button value
+
+	var browser = Browser.Session;
+	
+	// Drop downs
+	browser.Select("toyota").From("make");
+	
+	// Text inputs
+	browser.FillIn("keywords").With("hybrid");
+	
+	// Radio button lists
+	browser.Choose("Trade");
+	browser.Choose("Private");
+	
+	// Checkboxes
+	browser.Check("Additional ads")
+	browser.Uncheck("Additional ads")	
 
 #### Clicking
 
-TODO
+Buttons are found by value/text, id or name
+
+	browser.ClickButton("Search");
+	browser.ClickButton("search-used-vehicles");
+	
+Links are found by the text of the link
+
+	browser.ClickButton("Reset search");
 
 #### Finding single nodes
 
