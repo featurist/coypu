@@ -1,35 +1,43 @@
-﻿using System;
+﻿using System.Linq;
+using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_inspecting_with_modal_dialogs : When_inspecting
+	public class When_interacting_with_modal_dialogs
 	{
-		[Test]
-		public void HasDialog_should_wait_for_robustly_Positive_example()
+		private FakeDriver driver;
+		private SpyRobustWrapper spyRobustWrapper;
+		private Session session;
+
+		[SetUp]
+		public void SetUp()
 		{
-			Should_wait_for_robustly(true, true, Session.HasDialog, Driver.StubDialog);
+			driver = new FakeDriver();
+			spyRobustWrapper = new SpyRobustWrapper();
+			session = new Session(driver, spyRobustWrapper);
 		}
 
 		[Test]
-		public void HasDialog_should_wait_for_robustly_Negative_example()
+		public void AcceptDialog_should_make_robust_call_to_underlying_driver()
 		{
-			Should_wait_for_robustly(true, false, Session.HasDialog, Driver.StubDialog);
+			session.AcceptModalDialog();
+
+			Assert.That(driver.ModalDialogsAccepted, Is.EqualTo(0));
+			spyRobustWrapper.DeferredActions.Single()();
+			Assert.That(driver.ModalDialogsAccepted, Is.EqualTo(1));
 		}
 
 		[Test]
-		public void HasNoDialog_should_wait_for_robustly_Positive_example()
+		public void CancelDialog_should_make_robust_call_to_underlying_driver()
 		{
-			Should_wait_for_robustly(false, true, Session.HasNoDialog, Driver.StubDialog);
+			session.CancelModalDialog();
+
+			Assert.That(driver.ModalDialogsCancelled, Is.EqualTo(0));
+			spyRobustWrapper.DeferredActions.Single()();
+			Assert.That(driver.ModalDialogsCancelled, Is.EqualTo(1));
 		}
 
-		[Test]
-		public void HasNoDialog_should_wait_for_robustly_Negative_example()
-		{
-			Should_wait_for_robustly(false, false, Session.HasNoDialog, Driver.StubDialog);
-		}
-
-		// Next : Accept + Cancel
 	}
 }
