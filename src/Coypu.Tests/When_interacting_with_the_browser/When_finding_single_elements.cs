@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_finding_single_nodes
+	public class When_finding_single_elements
 	{
 		private FakeDriver driver;
 		private SpyRobustWrapper spyRobustWrapper;
@@ -50,21 +50,21 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			Should_find_robustly(session.FindXPath, driver.StubXPath);
 		}
 
-		protected void Should_find_robustly(Func<string, Node> subject, Action<string, Node> stub)
+		protected void Should_find_robustly(Func<string, Element> subject, Action<string, Element> stub)
 		{
 			var locator = "Find me " + DateTime.Now.Ticks;
 
-			var expectedImmediateResult = new StubNode();
-			var expectedDeferredResult = new StubNode();
+			var expectedImmediateResult = new StubElement();
+			var expectedDeferredResult = new StubElement();
 
-			spyRobustWrapper.AlwaysReturnFromRobustly(typeof(Node), expectedImmediateResult);
+			spyRobustWrapper.AlwaysReturnFromRobustly(typeof(Element), expectedImmediateResult);
 			stub(locator, expectedDeferredResult);
 
 			var actualImmediateResult = subject(locator);
 			Assert.That(actualImmediateResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
 			Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
-			var actualDeferredResult = ((Func<Node>) spyRobustWrapper.DeferredFunctions.Single())();
+			var actualDeferredResult = ((Func<Element>) spyRobustWrapper.DeferredFunctions.Single())();
 			Assert.That(actualDeferredResult, Is.SameAs(expectedDeferredResult));
 		}
 	}

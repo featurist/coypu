@@ -1,6 +1,6 @@
 ﻿namespace Coypu
 {
-	public abstract class Node
+	public abstract class Element
 	{
 		public abstract string Id { get; }
 		public abstract string Text { get; }

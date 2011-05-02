@@ -111,11 +111,11 @@
     <Compile Include="Drivers\DriverNotSupportedException.cs" />
     <Compile Include="Drivers\MissingHtmlException.cs" />
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumNode.cs" />
+    <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
     <Compile Include="Drivers\Selenium\SeleniumWebDriver.cs" />
     <Compile Include="Drivers\WebDriver.cs" />
     <Compile Include="FillInWith.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="Element.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />
     <Compile Include="SelectFrom.cs" />
     <Compile Include="Session.cs" />

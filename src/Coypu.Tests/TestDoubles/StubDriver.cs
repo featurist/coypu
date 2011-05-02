@@ -10,22 +10,22 @@ namespace Coypu.Tests.TestDoubles
 		{
 		}
 
-		public Node FindButton(string locator)
+		public Element FindButton(string locator)
 		{
 			return null;
 		}
 
-		public Node FindLink(string locator)
+		public Element FindLink(string locator)
 		{
 			return null;
 		}
 
-		public Node FindField(string locator)
+		public Element FindField(string locator)
 		{
 			return null;
 		}
 
-		public void Click(Node node)
+		public void Click(Element element)
 		{
 		}
 
@@ -33,11 +33,11 @@ namespace Coypu.Tests.TestDoubles
 		{
 		}
 
-		public void Set(Node node, string value)
+		public void Set(Element element, string value)
 		{
 		}
 
-		public void Select(Node node, string option)
+		public void Select(Element element, string option)
 		{
 		}
 
@@ -66,37 +66,37 @@ namespace Coypu.Tests.TestDoubles
 			return false;
 		}
 
-		public Node FindCss(string cssSelector)
+		public Element FindCss(string cssSelector)
 		{
 			return null;
 		}
 
-		public Node FindXPath(string xpath)
+		public Element FindXPath(string xpath)
 		{
 			return null;
 		}
 
-		public IEnumerable<Node> FindAllCss(string cssSelector)
+		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
-			return Enumerable.Empty<Node>();
+			return Enumerable.Empty<Element>();
 		}
 
-		public IEnumerable<Node> FindAllXPath(string xpath)
+		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
-			return Enumerable.Empty<Node>();
+			return Enumerable.Empty<Element>();
 		}
 
-		public void Check(Node field)
-		{
-			
-		}
-
-		public void Uncheck(Node field)
+		public void Check(Element field)
 		{
 			
 		}
 
-		public void Choose(Node field)
+		public void Uncheck(Element field)
+		{
+			
+		}
+
+		public void Choose(Element field)
 		{
 			
 		}

@@ -34,24 +34,24 @@ namespace Coypu.Drivers.Selenium
 			}
 		}
 
-		private Node BuildNode(IWebElement element, string failureMessage)
+		private Element BuildElement(IWebElement element, string failureMessage)
 		{
 			if (element == null)
 				throw new MissingHtmlException(failureMessage);
 
-			return BuildNode(element);
+			return BuildElement(element);
 		}
 
-		private SeleniumNode BuildNode(IWebElement element)
+		private SeleniumElement BuildElement(IWebElement element)
 		{
-			return new SeleniumNode(element);
+			return new SeleniumElement(element);
 		}
 
-		public Node FindButton(string locator)
+		public Element FindButton(string locator)
 		{
 			try
 			{
-				return BuildNode(FindButtonByText(locator) ??
+				return BuildElement(FindButtonByText(locator) ??
 								 FindInputButtonByValue(locator) ??
 								 Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
 								 Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
@@ -75,11 +75,11 @@ namespace Coypu.Drivers.Selenium
 			return Find(By.TagName(string.Format("button"))).FirstDisplayedOrDefault(e => e.Text == locator);
 		}
 
-		public Node FindLink(string locator)
+		public Element FindLink(string locator)
 		{
 			try
 			{
-				return BuildNode(selenium.FindElement(By.LinkText(locator)), "No such link: " + locator);
+				return BuildElement(selenium.FindElement(By.LinkText(locator)), "No such link: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -87,7 +87,7 @@ namespace Coypu.Drivers.Selenium
 			}
 		}
 
-		public Node FindField(string locator)
+		public Element FindField(string locator)
 		{
 			var field = (FindFieldById(locator) ??
 						 FindFieldByName(locator)) ??
@@ -95,7 +95,7 @@ namespace Coypu.Drivers.Selenium
 						 FindFieldByPlaceholder(locator) ??
 						 FindRadioButtonFromValue(locator);
 
-			return BuildNode(field, "No such field: " + locator);
+			return BuildElement(field, "No such field: " + locator);
 		}
 
 		private IWebElement FindRadioButtonFromValue(string locator)
@@ -136,9 +136,9 @@ namespace Coypu.Drivers.Selenium
 			return selenium.FindElementsByName(name).FirstDisplayedOrDefault(IsField);
 		}
 
-		public void Click(Node node)
+		public void Click(Element element)
 		{
-			SeleniumElement(node).Click();
+			SeleniumElement(element).Click();
 		}
 
 		public void Visit(string url)
@@ -146,17 +146,17 @@ namespace Coypu.Drivers.Selenium
 			selenium.Navigate().GoToUrl(url);
 		}
 
-		public void Set(Node node, string value)
+		public void Set(Element element, string value)
 		{
-			var seleniumElement = SeleniumElement(node);
+			var seleniumElement = SeleniumElement(element);
 
 			seleniumElement.Clear();
 			seleniumElement.SendKeys(value);
 		}
 
-		public void Select(Node node, string option)
+		public void Select(Element element, string option)
 		{
-			var select = SeleniumElement(node);
+			var select = SeleniumElement(element);
 			var optionToSelect = select.FindElements(By.TagName("option"))
 				.FirstOrDefault(e => e.Text == option || e.Value == option);
 			if (optionToSelect == null)
@@ -203,35 +203,35 @@ namespace Coypu.Drivers.Selenium
 			selenium.SwitchTo().Alert().Dismiss();
 		}
 
-		public Node FindCss(string cssSelector)
+		public Element FindCss(string cssSelector)
 		{
-			return BuildNode(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
+			return BuildElement(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
 							 "Failed to find: " + cssSelector);
 		}
 
-		public Node FindXPath(string xpath)
+		public Element FindXPath(string xpath)
 		{
-			return BuildNode(selenium.FindElements(By.XPath(xpath)).FirstDisplayedOrDefault(),
+			return BuildElement(selenium.FindElements(By.XPath(xpath)).FirstDisplayedOrDefault(),
 				"Failed to find xpath: " + xpath);
 		}
 
-		public IEnumerable<Node> FindAllCss(string cssSelector)
+		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
 			return selenium.FindElements(By.CssSelector(cssSelector))
 						   .Where(e => e.Displayed())
-						   .Select(e => BuildNode(e))
-						   .Cast<Node>();
+						   .Select(e => BuildElement(e))
+						   .Cast<Element>();
 		}
 
-		public IEnumerable<Node> FindAllXPath(string xpath)
+		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
 			return selenium.FindElements(By.XPath(xpath))
 						   .Where(e => e.Displayed())
-						   .Select(e => BuildNode(e))
-						   .Cast<Node>();
+						   .Select(e => BuildElement(e))
+						   .Cast<Element>();
 		}
 
-		public void Check(Node field)
+		public void Check(Element field)
 		{
 			var seleniumElement = SeleniumElement(field);
 
@@ -239,7 +239,7 @@ namespace Coypu.Drivers.Selenium
 				seleniumElement.Click();
 		}
 
-		public void Uncheck(Node field)
+		public void Uncheck(Element field)
 		{
 			var seleniumElement = SeleniumElement(field);
 
@@ -247,7 +247,7 @@ namespace Coypu.Drivers.Selenium
 				seleniumElement.Click();
 		}
 
-		public void Choose(Node field)
+		public void Choose(Element field)
 		{
 			SeleniumElement(field).Click();
 		}
@@ -274,9 +274,9 @@ namespace Coypu.Drivers.Selenium
 			return Regex.Replace(pageText, @"\s*\r\n\s*", "\r\n");
 		}
 
-		private IWebElement SeleniumElement(Node node)
+		private IWebElement SeleniumElement(Element element)
 		{
-			return ((IWebElement) node.Native);
+			return ((IWebElement) element.Native);
 		}
 
 		private bool IsButton(IWebElement e)
