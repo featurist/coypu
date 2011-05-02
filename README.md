@@ -15,12 +15,16 @@ It is targetted at people doing browser automation in .Net with Selenium WebDriv
 
 #### Driver
 
-Coypu drivers must implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to test the correct browser. So far `Coypu.Drivers.Selenium.SeleniumWebDriver` is the only driver.
+Coypu drivers must implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to test the correct browser.
+
+`Coypu.Drivers.Selenium.SeleniumWebDriver` with Firefox is the only stable driver/browser combination that passes all the driver tests in Selenium so far.
 
 Choose your driver/browser combination like so:
 
 	Configuration.RegisterDriver = typeof (SeleniumWebDriver);
 	Configuration.Browser = Drivers.Browser.Firefox;`
+
+These settings are the default configuration.
 
 #### Timeout
 
@@ -32,8 +36,10 @@ All methods use this wait and retry strategy EXCEPT: `Visit()`, `FindAllCss()` a
 
 Setup timeout/retry like so:
 
-	Configuration.Timeout = TimeSpan.FromSeconds(5);
-	Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);
+	Configuration.Timeout = TimeSpan.FromSeconds(10);
+	Configuration.RetryInterval = TimeSpan.FromSeconds(0.1);
+	
+These settings are the default configuration.
 
 ### Visible elements
 
