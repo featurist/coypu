@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_accessing_attributes.cs" />
     <Compile Include="When_inspecting_dialog_text.cs" />
     <Compile Include="DriverSpecs.cs" />
     <Compile Include="When_checking.cs" />

@@ -1,4 +1,6 @@
-﻿namespace Coypu.Tests.TestDoubles
+﻿using System;
+
+namespace Coypu.Tests.TestDoubles
 {
 	public class StubElement : Element
 	{
@@ -30,6 +32,11 @@
 		public override bool Selected
 		{
 			get { return false; }
+		}
+
+		public override string this[string attributeName]
+		{
+			get { return string.Empty; }
 		}
 	}
 }

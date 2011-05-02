@@ -9,5 +9,6 @@
 		public abstract string SelectedOption { get; }
 		public abstract bool Selected { get;}
 		public object Native { get; protected set; }
+		public abstract string this[string attributeName] { get; }
 	}
 }
