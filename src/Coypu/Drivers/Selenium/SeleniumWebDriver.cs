@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -113,21 +112,12 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindFieldFromLabel(string locator)
 		{
-			var start = DateTime.Now;
-			
 			var label = FindLabelByText(locator);
 			if (label == null)
 				return null;
 
-			try
-			{
-				return FindFieldById(label.GetAttribute("for")) ??
+			return FindFieldById(label.GetAttribute("for")) ??
 				       label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
-			}
-			finally
-			{
-				Console.WriteLine("find field from label: " + (DateTime.Now - start));
-			}
 		}
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
