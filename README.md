@@ -1,10 +1,8 @@
-Coypu is
-========
+## Coypu is
 * A robust wrapper for browser automation tools (e.g. Selenium WebDriver) to ease automating js/ajax-heavy websites from .Net
 * A more intuitive DSL for interacting with the browser, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
 
-Coypu is not
-============
+## Coypu is not
 * A port of Capybara to .Net
 * A headless browser
 
