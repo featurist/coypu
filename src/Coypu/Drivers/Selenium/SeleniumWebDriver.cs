@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -195,11 +196,13 @@ namespace Coypu.Drivers.Selenium
 
 		public void AcceptModalDialog()
 		{
+			throw new NotImplementedException("Not working properly, needs more investigation");
 			selenium.SwitchTo().Alert().Accept();
 		}
 
 		public void CancelModalDialog()
 		{
+			throw new NotImplementedException("Not working properly, needs more investigation");
 			selenium.SwitchTo().Alert().Dismiss();
 		}
 

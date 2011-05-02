@@ -15,14 +15,17 @@ namespace Coypu.Drivers.Tests
 		public void when_testing_each_driver()
 		{
 			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs)); // All
-			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_inspecting_dialog_text)); // Individual
+
+			// LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_interacting_with_dialogs)); // Individual
 		}
 
 		private void LoadSpecsForEachBrowser(Type driverType, Type specsToRun)
 		{
 			LoadSpecsFor(driverType, Browser.Firefox, specsToRun);
-			//LoadSpecsFor(driverType, Browser.Chrome, specsToRun);
-			//LoadSpecsFor(driverType, Browser.InternetExplorer, specsToRun);
+
+			// Unstable:
+			// LoadSpecsFor(driverType, Browser.Chrome, specsToRun);
+			// LoadSpecsFor(driverType, Browser.InternetExplorer, specsToRun);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
