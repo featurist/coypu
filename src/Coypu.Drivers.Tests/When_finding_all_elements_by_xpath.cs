@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Drivers.Watin;
 using NSpec;
 using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
+	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_finding_all_elements_by_xpath : DriverSpecs
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)

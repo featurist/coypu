@@ -8,10 +8,15 @@ namespace Coypu.Drivers.Watin
 {
 	public class WatiNDriver : Driver
 	{
+		public bool Disposed { get; private set; }
 		private WatiN.Core.Browser watinInstance;
+
 		private WatiN.Core.Browser Watin 
 		{ 
-			get { return watinInstance ?? (watinInstance = NewDriver()); }
+			get 
+			{ 
+				return watinInstance ?? (watinInstance = NewDriver());
+			}
 		}
 
 		private WatiN.Core.Browser NewDriver()
@@ -47,7 +52,7 @@ namespace Coypu.Drivers.Watin
 
 		public Element FindLink(string locator)
 		{
-			var link = Watin.Links.Filter(l => l.Text == locator).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault();
+			var link = Watin.Links.Filter(l => l.Text.Trim() == locator.Trim()).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault();
 
 			return BuildElement(link, "Failed to find link with text: " + locator);
 		}
@@ -124,7 +129,7 @@ namespace Coypu.Drivers.Watin
 
 		public object Native
 		{
-			get { throw new NotImplementedException(); }
+			get { return Watin; }
 		}
 
 		public bool HasContent(string text)
@@ -132,44 +137,9 @@ namespace Coypu.Drivers.Watin
 			return Watin.ContainsText(text);
 		}
 
-		public bool HasCss(string cssSelector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool HasXPath(string xpath)
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool HasDialog(string withText)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Element FindCss(string cssSelector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Element FindXPath(string xpath)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IEnumerable<Element> FindAllCss(string cssSelector)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IEnumerable<Element> FindAllXPath(string xpath)
-		{
-			throw new NotImplementedException();
-		}
-
 		public void Check(Element field)
 		{
-			((CheckBox) field.Native).Checked = true;
+			((CheckBox)field.Native).Checked = true;
 		}
 
 		public void Uncheck(Element field)
@@ -179,19 +149,52 @@ namespace Coypu.Drivers.Watin
 
 		public void Choose(Element field)
 		{
-			((RadioButton) field.Native).Checked = true;
+			((RadioButton)field.Native).Checked = true;
 		}
 
-		public bool Disposed { get; private set; }
+		public bool HasDialog(string withText)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
 
 		public void AcceptModalDialog()
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
 		}
 
 		public void CancelModalDialog()
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
+
+		public bool HasCss(string cssSelector)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
+
+		public bool HasXPath(string xpath)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
+
+		public Element FindCss(string cssSelector)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
+
+		public Element FindXPath(string xpath)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
+
+		public IEnumerable<Element> FindAllCss(string cssSelector)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+		}
+
+		public IEnumerable<Element> FindAllXPath(string xpath)
+		{
+			throw new NotImplementedException("Not yet implemented in WatiNDriver");
 		}
 
 		public void Dispose()
