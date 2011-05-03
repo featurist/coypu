@@ -40,6 +40,10 @@ namespace Coypu.Robustness
 					}
 					return result;
 				}
+                catch (NotImplementedException)
+                {
+                    throw;
+                }
 				catch (Exception)
 				{
 					if (TimeoutExceeded(startTime))
