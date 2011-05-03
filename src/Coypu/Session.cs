@@ -80,32 +80,32 @@ namespace Coypu
 
 		public bool HasContent(string cssSelector)
 		{
-			return robustWrapper.WaitFor(() => driver.HasContent(cssSelector), true);
+			return robustWrapper.Query(() => driver.HasContent(cssSelector), true);
 		}
 
 		public bool HasNoContent(string cssSelector)
 		{
-			return robustWrapper.WaitFor(() => driver.HasContent(cssSelector), false);
+			return robustWrapper.Query(() => driver.HasContent(cssSelector), false);
 		}
 
 		public bool HasCss(string cssSelector)
 		{
-			return robustWrapper.WaitFor(() => driver.HasCss(cssSelector), true);
+			return robustWrapper.Query(() => driver.HasCss(cssSelector), true);
 		}
 
 		public bool HasNoCss(string cssSelector)
 		{
-			return robustWrapper.WaitFor(() => driver.HasCss(cssSelector), false);
+			return robustWrapper.Query(() => driver.HasCss(cssSelector), false);
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			return robustWrapper.WaitFor(() => driver.HasXPath(xpath), true);
+			return robustWrapper.Query(() => driver.HasXPath(xpath), true);
 		}
 
 		public bool HasNoXPath(string xpath)
 		{
-			return robustWrapper.WaitFor(() => driver.HasXPath(xpath), false);
+			return robustWrapper.Query(() => driver.HasXPath(xpath), false);
 		}
 
 		public Element FindCss(string cssSelector)
@@ -145,12 +145,12 @@ namespace Coypu
 
 		public bool HasDialog(string withText)
 		{
-			return robustWrapper.WaitFor(() => driver.HasDialog(withText),true);
+			return robustWrapper.Query(() => driver.HasDialog(withText),true);
 		}
 
 		public bool HasNoDialog(string withText)
 		{
-			return robustWrapper.WaitFor(() => driver.HasDialog(withText), false);
+			return robustWrapper.Query(() => driver.HasDialog(withText), false);
 		}
 
 		public void AcceptModalDialog()

@@ -33,7 +33,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			Assert.That(actualImmediateResult, Is.Not.EqualTo(expectedDeferredResult), "Result was not found robustly");
 			Assert.That(actualImmediateResult, Is.EqualTo(expectedImmediateResult));
 
-			var actualDeferredResult = SpyRobustWrapper.DeferredWaitForQueries.Single()();
+			var actualDeferredResult = SpyRobustWrapper.DeferredQueries.Cast<Func<bool>>().Single()();
 			Assert.That(actualDeferredResult, Is.EqualTo(expectedDeferredResult));
 		}
 	}

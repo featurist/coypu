@@ -19,9 +19,9 @@ namespace Coypu.Robustness
 			return Robustly(function, null);
 		}
 
-		public bool WaitFor(Func<bool> query, bool toBecome)
+		public T Query<T>(Func<T> query, T expecting)
 		{
-			return Robustly(query, toBecome);
+			return Robustly(query, expecting);
 		}
 
 		public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)
