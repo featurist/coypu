@@ -20,39 +20,31 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		[Test]
 		public void When_the_expected_result_is_found_It_should_return_the_expected_result_immediately()
 		{
-			When_the_expected_result_is_found_It_should_return_the_expected_result_immediately(true);
-			When_the_expected_result_is_found_It_should_return_the_expected_result_immediately(false);
-		}
+			var expectedResult = new object();
+			Func<object> returnsTrueImmediately = () => expectedResult;
 
-		private void When_the_expected_result_is_found_It_should_return_the_expected_result_immediately(bool expectedResult)
-		{
-			Func<bool> returnsTrueImmediately = () => expectedResult;
-
-			var actualResult = waitAndRetryRobustWrapper.WaitFor(returnsTrueImmediately, expectedResult);
+			var actualResult = waitAndRetryRobustWrapper.Query(returnsTrueImmediately, expectedResult);
 
 			Assert.That(actualResult, Is.EqualTo(expectedResult));
 		}
 
 		[Test]
-		public void When_the_expected_result_is_never_found_It_should_return_the_opposite_result_after_timeout()
-		{
-			When_the_expected_result_is_never_found_It_should_return_the_opposite_result_after_timeout(true);
-			When_the_expected_result_is_never_found_It_should_return_the_opposite_result_after_timeout(false);
-		}
-
-		private void When_the_expected_result_is_never_found_It_should_return_the_opposite_result_after_timeout(bool expectedResult)
+		public void When_the_expected_result_is_never_found_It_should_return_the_actual_result_after_timeout()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(200);
 			Configuration.Timeout = expectedTimeout;
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 
-			Func<bool> returnsOppositeImmediately = () => !expectedResult;
+			var expectedResult = new object();
+			var unexpectedResult = new object();
+
+			Func<object> returnsUnexpectedResult = () => unexpectedResult;
 
 			var startTime = DateTime.Now;
-			var actualResult = waitAndRetryRobustWrapper.WaitFor(returnsOppositeImmediately, expectedResult);
+			var actualResult = waitAndRetryRobustWrapper.Query(returnsUnexpectedResult, expectedResult);
 			var endTime = DateTime.Now;
 
-			Assert.That(actualResult, Is.EqualTo(!expectedResult));
+			Assert.That(actualResult, Is.EqualTo(unexpectedResult));
 
 			var actualDuration = (endTime - startTime);
 			var discrepancy = TimeSpan.FromMilliseconds(50);
@@ -64,20 +56,15 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		{
 			Func<bool> alwaysThrows = () => { throw new ExplicitlyThrownTestException("This query always errors"); };
 
-			Assert.Throws<ExplicitlyThrownTestException>(() => waitAndRetryRobustWrapper.WaitFor(alwaysThrows, true));
+			Assert.Throws<ExplicitlyThrownTestException>(() => waitAndRetryRobustWrapper.Query(alwaysThrows, true));
 		}
 
 		[Test]
 		public void When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_expected_result_immediately()
 		{
-			When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_expected_result_immediately(true);
-			When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_expected_result_immediately(false);
-		}
-
-		private void When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_expected_result_immediately(bool expectedResult)
-		{
 			var tries = 0;
-			Func<bool> throwsFirstTimeThenReturnsExpectedResult =
+			var expectedResult = new object();
+			Func<object> throwsFirstTimeThenReturnsExpectedResult =
 				() =>
 					{
 						tries++;
@@ -88,26 +75,21 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 						return expectedResult;
 					};
 
-			Assert.That(waitAndRetryRobustWrapper.WaitFor(throwsFirstTimeThenReturnsExpectedResult, expectedResult), Is.EqualTo(expectedResult));
+			Assert.That(waitAndRetryRobustWrapper.Query(throwsFirstTimeThenReturnsExpectedResult, expectedResult), Is.EqualTo(expectedResult));
 			Assert.That(tries, Is.EqualTo(3));
 		}
 
 		[Test]
-		public void When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_opposite_result_after_timeout()
-		{
-			When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_opposite_result_after_timeout(true);
-			When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_opposite_result_after_timeout(false);
-		}
-
-		private void When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_opposite_result_after_timeout(bool expectedResult)
+		public void When_exceptions_are_thrown_It_should_retry_And_when_unexpected_result_found_subsequently_It_should_return_unexpected_result_after_timeout()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(250);
 			Configuration.Timeout = expectedTimeout;
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 
-			var oppositeResult = !expectedResult;
+			var expectedResult = new object();
+			var unexpectedResult = new object();
 			var tries = 0;
-			Func<bool> throwsFirstTimeThenReturnOppositeResult =
+			Func<object> throwsFirstTimeThenReturnOppositeResult =
 				() =>
 					{
 						tries++;
@@ -115,10 +97,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 						{
 							throw new ExplicitlyThrownTestException("This query always errors");
 						}
-						return oppositeResult;
+						return unexpectedResult;
 					};
 
-			Assert.That(waitAndRetryRobustWrapper.WaitFor(throwsFirstTimeThenReturnOppositeResult, expectedResult), Is.EqualTo(oppositeResult));
+			Assert.That(waitAndRetryRobustWrapper.Query(throwsFirstTimeThenReturnOppositeResult, expectedResult), Is.EqualTo(unexpectedResult));
 			Assert.That(tries, Is.InRange(4,27));
 		}
 	}
