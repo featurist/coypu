@@ -1,16 +1,18 @@
 ﻿using System;
+using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Watin;
 using NSpec;
 using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
+	[NotSupportedBy(typeof(WatiNDriver), typeof(SeleniumWebDriver))]
 	internal class When_interacting_with_dialogs : DriverSpecs
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
 		{
 			return () =>
 		       {
-		       	return; // Flakey right now
 				it["should accept alerts"] = () => 
 				{
 					DisposeOnError(driver(), () =>

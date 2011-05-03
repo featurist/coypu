@@ -1,10 +1,12 @@
 ﻿using System;
+using Coypu.Drivers.Watin;
 using NSpec;
 using NSpec.Domain;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
+	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_finding_an_element_by_css : DriverSpecs
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)

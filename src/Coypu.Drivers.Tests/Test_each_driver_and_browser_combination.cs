@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Watin;
 using NSpec;
@@ -18,6 +17,7 @@ namespace Coypu.Drivers.Tests
 		{
 			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Firefox);
 			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+			
 			LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 		}
 
@@ -26,8 +26,15 @@ namespace Coypu.Drivers.Tests
 			before = () => LoadTestHTML(driverType, browser);
 
 			Assembly.GetExecutingAssembly().GetTypes()
-					.Where(t => t.IsClass && specsToRun.IsAssignableFrom(t))
+					.Where(t => t.IsClass && specsToRun.IsAssignableFrom(t) && IsSupported(t))
 					.Do(LoadSpecs);
+
+			it["cleans up"] = () => { if (!driver.Disposed) driver.Dispose();};
+		}
+
+		private bool IsSupported(Type t)
+		{
+			return !t.GetCustomAttributes(typeof(NotSupportedByAttribute),true).Any();
 		}
 
 		private void LoadSpecs(Type driverSpecsType)

@@ -1,9 +1,11 @@
 ﻿using System;
+using Coypu.Drivers.Watin;
 using NSpec.Domain;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
+	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_inspecting_xpath : DriverSpecs
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
