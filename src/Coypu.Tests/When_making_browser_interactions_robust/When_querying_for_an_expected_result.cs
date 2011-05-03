@@ -90,7 +90,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
                     throw new NotImplementedException("This query always errors");
                 };
 
-            Assert.Throws<NotImplementedException>(() => waitAndRetryRobustWrapper.WaitFor(throwsNotImplemented, true));
+            Assert.Throws<NotImplementedException>(() => waitAndRetryRobustWrapper.Query(throwsNotImplemented, true));
             Assert.That(tries, Is.EqualTo(1));
         }
 
