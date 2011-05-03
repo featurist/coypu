@@ -79,6 +79,21 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			Assert.That(tries, Is.EqualTo(3));
 		}
 
+        [Test]
+        public void When_a_not_implemented_exception_is_thrown_It_should_not_retry()
+        {
+            var tries = 0;
+            Func<bool> throwsNotImplemented =
+                () =>
+                {
+                    tries++;
+                    throw new NotImplementedException("This query always errors");
+                };
+
+            Assert.Throws<NotImplementedException>(() => waitAndRetryRobustWrapper.WaitFor(throwsNotImplemented, true));
+            Assert.That(tries, Is.EqualTo(1));
+        }
+
 		[Test]
 		public void When_exceptions_are_thrown_It_should_retry_And_when_unexpected_result_found_subsequently_It_should_return_unexpected_result_after_timeout()
 		{

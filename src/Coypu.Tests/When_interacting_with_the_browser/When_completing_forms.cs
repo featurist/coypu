@@ -66,21 +66,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_selecting_an_option_It_should_click_to_ensure_focus()
-		{
-			var element = new StubElement();
-			driver.StubField("Some select field locator", element);
-
-			session.Select("some option to select").From("Some select field locator");
-
-			Assert.That(driver.ClickedElements, Has.No.Member(element));
-
-			spyRobustWrapper.DeferredActions.Single()();
-
-			Assert.That(driver.ClickedElements, Has.Member(element));
-		}
-
-		[Test]
 		public void When_checking_a_checkbox_It_should_find_field_and_check_robustly()
 		{
 			var element = new StubElement();

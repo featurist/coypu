@@ -17,11 +17,7 @@ namespace Coypu
 
 		public void From(string locator)
 		{
-			robustWrapper.Robustly(
-				() => {
-						driver.Click(driver.FindField(locator));
-						  driver.Select(driver.FindField(locator), option);
-				});
+			robustWrapper.Robustly(() => driver.Select(driver.FindField(locator), option));
 		}
 	}
 }

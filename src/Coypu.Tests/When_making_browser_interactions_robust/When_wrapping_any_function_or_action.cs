@@ -57,6 +57,23 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			Assert.That(actualReturnValue, Is.SameAs(expectedReturnValue));
 		}
 
+        [Test]
+        public void When_a_Function_throws_a_not_implemented_exception_It_should_not_retry()
+        {
+            Configuration.Timeout = TimeSpan.FromMilliseconds(100);
+            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            var robustness = new WaitAndRetryRobustWrapper();
+            var tries = 0;
+            Func<object> function = () =>
+            {
+                tries++;
+                throw new NotImplementedException("Fails first time");
+            };
+
+            Assert.Throws<NotImplementedException>(() => robustness.Robustly(function));
+            Assert.That(tries, Is.EqualTo(1));
+        }
+
 		[Test]
 		public void When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
 		{
@@ -100,6 +117,22 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
 			Assert.That(tries, Is.EqualTo(2));
 		}
+
+        [Test]
+        public void When_an_Action_throws_a_not_implemented_exception_It_should_retry()
+        {
+            Configuration.Timeout = TimeSpan.FromMilliseconds(100);
+            var robustness = new WaitAndRetryRobustWrapper();
+            var tries = 0;
+            Action action = () =>
+            {
+                tries++;
+                throw new NotImplementedException("Fails first time");
+            };
+
+            Assert.Throws<NotImplementedException>(() => robustness.Robustly(action));
+            Assert.That(tries, Is.EqualTo(1));
+        }
 
 	}
 }

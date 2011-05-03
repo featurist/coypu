@@ -7,8 +7,6 @@ namespace Coypu.Robustness
 		void Robustly(Action action);
 		TResult Robustly<TResult>(Func<TResult> function);
 		T Query<T>(Func<T> query, T expecting);
-
-		// TODO: something like this..
-		// void TryUntil(Action tryAction, Func<bool> until);
+	    void TryUntil(Action tryThis, Func<bool> until);
 	}
 }
