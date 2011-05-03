@@ -162,5 +162,19 @@ namespace Coypu
 		{
 			robustWrapper.Robustly(() => driver.CancelModalDialog());
 		}
+
+	    public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
+	    {
+	        var defaultTimeout = Configuration.Timeout;
+	        Configuration.Timeout = individualTimeout;
+	        try
+	        {
+	            action();
+	        }
+	        finally
+	        {
+                Configuration.Timeout = defaultTimeout;    
+	        }
+	    }
 	}
 }
