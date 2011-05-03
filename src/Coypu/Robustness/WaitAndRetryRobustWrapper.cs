@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Coypu.Drivers;
 
 namespace Coypu.Robustness
 {
@@ -40,6 +41,10 @@ namespace Coypu.Robustness
 					}
 					return result;
 				}
+                catch (NotImplementedException)
+                {
+                    throw;
+                }
 				catch (Exception)
 				{
 					if (TimeoutExceeded(startTime))
@@ -65,5 +70,17 @@ namespace Coypu.Robustness
 		{
 			return DateTime.Now - startTime >= Configuration.Timeout;
 		}
+
+	    public void TryUntil(Action tryThis, Func<bool> until)
+	    {
+	        var outcome = Robustly(() =>
+	                                    {
+	                                        tryThis();
+	                                        return until();
+	                                    }
+	                                , true);
+            if (!outcome)
+                throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
+	    }
 	}
 }

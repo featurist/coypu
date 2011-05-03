@@ -31,7 +31,11 @@ namespace Coypu.Tests.TestDoubles
 			return (T) stubbedWaitForResult[expecting];
 		}
 
-		public void AlwaysReturnFromRobustly(Type type, object result)
+	    public void TryUntil(Action tryThis, Func<bool> until)
+	    {
+	    }
+
+	    public void AlwaysReturnFromRobustly(Type type, object result)
 		{
 			stubbedResults.Add(type,result);
 		}
