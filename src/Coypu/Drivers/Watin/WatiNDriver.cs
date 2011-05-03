@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Watin
 			switch (Configuration.Browser)
 			{
 				case (Browser.InternetExplorer):
-					return new IE(true);
+					return new IE();
 //				case (Browser.Firefox):
 //					return new FireFox();
 				default:
@@ -199,7 +199,8 @@ namespace Coypu.Drivers.Watin
 
 		public void Dispose()
 		{
-			Watin.Dispose();
+            Watin.Close();
+            Watin.Dispose();
 			Disposed = true;
 		}
 	}
