@@ -38,7 +38,7 @@ namespace Coypu.Drivers.Tests
 								driver().HasDialog("You have triggered a confirm and this is the text.").should_be_false();
 							});
 						};
-						it["should return false"] = () =>
+						it["should return true"] = () =>
 						{
 							DisposeOnError(driver(), () => 
 							{
