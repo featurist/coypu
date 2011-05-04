@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -70,10 +69,10 @@ namespace Coypu.Drivers.Selenium
 			try
 			{
 				return BuildElement(FindButtonByText(locator) ??
-								 FindInputButtonByValue(locator) ??
-								 Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
-								 Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
-								 "No such button: " + locator);
+								    FindInputButtonByValue(locator) ??
+								    Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
+								    Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
+									  "No such button: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -97,7 +96,7 @@ namespace Coypu.Drivers.Selenium
 		{
 			try
 			{
-				return BuildElement(selenium.FindElement(By.LinkText(locator)), "No such link: " + locator);
+				return BuildElement(Find(By.LinkText(locator)).FirstDisplayedOrDefault(), "No such link: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -199,12 +198,12 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasCss(string cssSelector)
 		{
-			return selenium.FindElements(By.CssSelector(cssSelector)).AnyDisplayed();
+			return Find(By.CssSelector(cssSelector)).AnyDisplayed();
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			return selenium.FindElements(By.XPath(xpath)).AnyDisplayed();
+			return Find(By.XPath(xpath)).AnyDisplayed();
 		}
 
 		public bool HasDialog(string withText)
@@ -233,24 +232,24 @@ namespace Coypu.Drivers.Selenium
 
 		public Element FindXPath(string xpath)
 		{
-			return BuildElement(selenium.FindElements(By.XPath(xpath)).FirstDisplayedOrDefault(),
+			return BuildElement(Find(By.XPath(xpath)).FirstDisplayedOrDefault(),
 				"Failed to find xpath: " + xpath);
 		}
 
 		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
-			return selenium.FindElements(By.CssSelector(cssSelector))
-						   .Where(e => e.Displayed())
-						   .Select(e => BuildElement(e))
-						   .Cast<Element>();
+			return Find(By.CssSelector(cssSelector))
+					   .Where(e => e.Displayed())
+					   .Select(e => BuildElement(e))
+					   .Cast<Element>();
 		}
 
 		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
-			return selenium.FindElements(By.XPath(xpath))
-						   .Where(e => e.Displayed())
-						   .Select(e => BuildElement(e))
-						   .Cast<Element>();
+			return Find(By.XPath(xpath))
+					   .Where(e => e.Displayed())
+					   .Select(e => BuildElement(e))
+					   .Cast<Element>();
 		}
 
 		public void Check(Element field)
@@ -333,7 +332,7 @@ namespace Coypu.Drivers.Selenium
 
 		private IEnumerable<IWebElement> Find(By by)
 		{
-			return selenium.FindElements(by);
+			return scope.FindElements(by);
 		}
 
 		public void Dispose()
