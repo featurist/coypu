@@ -15,10 +15,9 @@ namespace Coypu.Drivers.Tests
 
 		public void when_testing_each_driver()
 		{
-			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Firefox);
-			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
-			
-			LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_finding_fields), Browser.Firefox);
+			//LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+			//LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
@@ -39,8 +38,8 @@ namespace Coypu.Drivers.Tests
 
 		private void LoadSpecs(Type driverSpecsType)
 		{
-			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')] 
-				= ((DriverSpecs)Activator.CreateInstance(driverSpecsType)).Specs(GetDriver, describe, it);
+			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')]
+				= ((DriverSpecs)Activator.CreateInstance(driverSpecsType)).Specs(GetDriver, describe, it, a => before = a);
 		}
 
 		private Driver GetDriver()

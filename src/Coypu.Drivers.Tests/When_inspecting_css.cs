@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
 	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_inspecting_css : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
 		{
 			return () =>
 			{

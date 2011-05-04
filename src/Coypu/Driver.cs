@@ -27,5 +27,6 @@ namespace Coypu
 		bool Disposed { get; }
 		void AcceptModalDialog();
 		void CancelModalDialog();
+		void SetScope(Element findScope);
 	}
 }

@@ -175,6 +175,11 @@ namespace Coypu.Tests.TestDoubles
 			ModalDialogsCancelled++;
 		}
 
+		public void SetScope(Element findScope)
+		{
+			throw new NotImplementedException();
+		}
+
 		public void Set(Element element, string value)
 		{
 			setFields.Add(element, value);

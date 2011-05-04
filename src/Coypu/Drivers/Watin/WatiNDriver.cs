@@ -9,6 +9,7 @@ namespace Coypu.Drivers.Watin
 	public class WatiNDriver : Driver
 	{
 		public bool Disposed { get; private set; }
+
 		private WatiN.Core.Browser watinInstance;
 
 		private WatiN.Core.Browser Watin 
@@ -30,6 +31,11 @@ namespace Coypu.Drivers.Watin
 				default:
 					throw new BrowserNotSupportedException(Configuration.Browser, this);
 			}
+		}
+
+		public void SetScope(Element findScope)
+		{
+			throw new NotImplementedException();
 		}
 
 		public Element FindButton(string locator)

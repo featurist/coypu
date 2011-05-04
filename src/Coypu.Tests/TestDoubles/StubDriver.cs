@@ -115,5 +115,10 @@ namespace Coypu.Tests.TestDoubles
 		{
 			
 		}
+
+		public void SetScope(Element findScope)
+		{
+			
+		}
 	}
 }
