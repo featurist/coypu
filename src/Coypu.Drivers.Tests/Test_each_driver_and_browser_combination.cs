@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Tests
 
 		public void when_testing_each_driver()
 		{
-			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_finding_fields), Browser.Firefox);
+			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_finding_buttons), Browser.Firefox);
 			//LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 			//LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 		}
