@@ -15,14 +15,18 @@ namespace Coypu.Drivers.Tests
 
 		public void when_testing_each_driver()
 		{
-			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_finding_buttons), Browser.Firefox);
+			LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Firefox);
 			//LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 			//LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
 		}
 
 		private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
 		{
-			before = () => LoadTestHTML(driverType, browser);
+			before = () =>
+			         {
+			         	LoadTestHTML(driverType, browser);
+			         	driver.ClearScope();
+			         };
 
 			Assembly.GetExecutingAssembly().GetTypes()
 					.Where(t => t.IsClass && specsToRun.IsAssignableFrom(t) && IsSupported(t))

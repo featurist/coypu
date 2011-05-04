@@ -38,6 +38,11 @@ namespace Coypu.Drivers.Watin
 			throw new NotImplementedException();
 		}
 
+		public void ClearScope()
+		{
+			throw new NotImplementedException();
+		}
+
 		public Element FindButton(string locator)
 		{
 			var button = Watin.Buttons.Filter(b => b.Text == locator).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault() ??

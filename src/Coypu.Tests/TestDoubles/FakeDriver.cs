@@ -180,6 +180,11 @@ namespace Coypu.Tests.TestDoubles
 			throw new NotImplementedException();
 		}
 
+		public void ClearScope()
+		{
+			throw new NotImplementedException();
+		}
+
 		public void Set(Element element, string value)
 		{
 			setFields.Add(element, value);
