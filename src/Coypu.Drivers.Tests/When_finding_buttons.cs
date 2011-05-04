@@ -85,7 +85,6 @@ namespace Coypu.Drivers.Tests
 				{
 					Assert.Throws<MissingHtmlException>(() => driver().FindButton("firstInvisibleInputId"));
 				};
-
 			};
 		}
 	}

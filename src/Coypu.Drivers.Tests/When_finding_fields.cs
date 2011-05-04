@@ -1,6 +1,7 @@
 ﻿using System;
 using NSpec;
 using NSpec.Domain;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -10,100 +11,100 @@ namespace Coypu.Drivers.Tests
 		{
 			return () =>
 			{
-				describe["when finding by for attribute"] = () =>
-				{
-					it["should find text input"] = () =>
-				    {
-					   driver().FindField("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
-				    };
-					it["should find password field"] = () =>
-					{
-						driver().FindField("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
-					};
-					it["should find select field"] = () =>
-					{
-						driver().FindField("select field linked by for").Id.should_be("forLabeledSelectFieldId");
-					};
-					it["should find checkbox"] = () =>
-					{
-						driver().FindField("checkbox field linked by for").Id.should_be("forLabeledCheckboxFieldId");
-					};
-					it["should find radio button"] = () =>
-					{
-						driver().FindField("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
-					};
-					it["should find textarea"] = () =>
-					{
-						driver().FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
-					};
-				};
-				it["should find field by container label"] = () =>
-				{
-					driver().FindField("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");
-					driver().FindField("password field in a label container").Id.should_be("containerLabeledPasswordFieldId");
-					driver().FindField("checkbox field in a label container").Id.should_be("containerLabeledCheckboxFieldId");
-					driver().FindField("radio field in a label container").Id.should_be("containerLabeledRadioFieldId");
-					driver().FindField("select field in a label container").Id.should_be("containerLabeledSelectFieldId");
-					driver().FindField("textarea field in a label container").Id.should_be("containerLabeledTextareaFieldId");
-
-				};
-				it["should find text field by placeholder"] = () =>
-				{
-					driver().FindField("text input field with a placeholder").Id.should_be("textInputFieldWithPlaceholder");
-					driver().FindField("textarea field with a placeholder").Id.should_be("textareaFieldWithPlaceholder");
-				};
-				it["should find field by id"] = () =>
-				{
-					driver().FindField("containerLabeledTextInputFieldId").Value.should_be("text input field two val");
-					driver().FindField("containerLabeledTextareaFieldId").Value.should_be("textarea field two val");
-					driver().FindField("containerLabeledSelectFieldId").Name.should_be("containerLabeledSelectFieldName");
-					driver().FindField("containerLabeledCheckboxFieldId").Value.should_be("checkbox field two val");
-					driver().FindField("containerLabeledRadioFieldId").Value.should_be("radio field two val");
-					driver().FindField("containerLabeledPasswordFieldId").Name.should_be("containerLabeledPasswordFieldName");
-				};
-				it["should find field by name"] = () =>
-				{
-					driver().FindField("containerLabeledTextInputFieldName").Value.should_be("text input field two val");
-					driver().FindField("containerLabeledTextareaFieldName").Value.should_be("textarea field two val");
-					driver().FindField("containerLabeledSelectFieldName").Id.should_be("containerLabeledSelectFieldId");
-					driver().FindField("containerLabeledCheckboxFieldName").Value.should_be("checkbox field two val");
-					driver().FindField("containerLabeledRadioFieldName").Value.should_be("radio field two val");
-					driver().FindField("containerLabeledPasswordFieldName").Id.should_be("containerLabeledPasswordFieldId");
-				};
-				it["should find radio button by value"] = () =>
-				{
-					driver().FindField("radio field one val").Name.should_be("forLabeledRadioFieldName");
-					driver().FindField("radio field two val").Name.should_be("containerLabeledRadioFieldName");
-				};
-				
+//				describe["when finding by for attribute"] = () =>
+//				{
+//					it["should find text input"] = () =>
+//				    {
+//					   driver().FindField("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
+//				    };
+//					it["should find password field"] = () =>
+//					{
+//						driver().FindField("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
+//					};
+//					it["should find select field"] = () =>
+//					{
+//						driver().FindField("select field linked by for").Id.should_be("forLabeledSelectFieldId");
+//					};
+//					it["should find checkbox"] = () =>
+//					{
+//						driver().FindField("checkbox field linked by for").Id.should_be("forLabeledCheckboxFieldId");
+//					};
+//					it["should find radio button"] = () =>
+//					{
+//						driver().FindField("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
+//					};
+//					it["should find textarea"] = () =>
+//					{
+//						driver().FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
+//					};
+//				};
+//				it["should find field by container label"] = () =>
+//				{
+//					driver().FindField("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");
+//					driver().FindField("password field in a label container").Id.should_be("containerLabeledPasswordFieldId");
+//					driver().FindField("checkbox field in a label container").Id.should_be("containerLabeledCheckboxFieldId");
+//					driver().FindField("radio field in a label container").Id.should_be("containerLabeledRadioFieldId");
+//					driver().FindField("select field in a label container").Id.should_be("containerLabeledSelectFieldId");
+//					driver().FindField("textarea field in a label container").Id.should_be("containerLabeledTextareaFieldId");
+//
+//				};
+//				it["should find text field by placeholder"] = () =>
+//				{
+//					driver().FindField("text input field with a placeholder").Id.should_be("textInputFieldWithPlaceholder");
+//					driver().FindField("textarea field with a placeholder").Id.should_be("textareaFieldWithPlaceholder");
+//				};
+//				it["should find field by id"] = () =>
+//				{
+//					driver().FindField("containerLabeledTextInputFieldId").Value.should_be("text input field two val");
+//					driver().FindField("containerLabeledTextareaFieldId").Value.should_be("textarea field two val");
+//					driver().FindField("containerLabeledSelectFieldId").Name.should_be("containerLabeledSelectFieldName");
+//					driver().FindField("containerLabeledCheckboxFieldId").Value.should_be("checkbox field two val");
+//					driver().FindField("containerLabeledRadioFieldId").Value.should_be("radio field two val");
+//					driver().FindField("containerLabeledPasswordFieldId").Name.should_be("containerLabeledPasswordFieldName");
+//				};
+//				it["should find field by name"] = () =>
+//				{
+//					driver().FindField("containerLabeledTextInputFieldName").Value.should_be("text input field two val");
+//					driver().FindField("containerLabeledTextareaFieldName").Value.should_be("textarea field two val");
+//					driver().FindField("containerLabeledSelectFieldName").Id.should_be("containerLabeledSelectFieldId");
+//					driver().FindField("containerLabeledCheckboxFieldName").Value.should_be("checkbox field two val");
+//					driver().FindField("containerLabeledRadioFieldName").Value.should_be("radio field two val");
+//					driver().FindField("containerLabeledPasswordFieldName").Id.should_be("containerLabeledPasswordFieldId");
+//				};
+//				it["should find radio button by value"] = () =>
+//				{
+//					driver().FindField("radio field one val").Name.should_be("forLabeledRadioFieldName");
+//					driver().FindField("radio field two val").Name.should_be("containerLabeledRadioFieldName");
+//				};
+//				
 				describe["within scope1"] = () =>
                 {
                 	setBefore(() => driver().SetScope(driver().FindCss("#scope1")));
 
-					it["should find text input"] = () =>
+					it["should find text input by for"] = () =>
 					{
 						driver().FindField("scoped text input field linked by for").Id.should_be("scope1TextInputFieldId");
 					};
-					it["should find password field"] = () =>
+					it["should find text input in container label"] = () =>
 					{
-						driver().FindField("scoped password field linked by for").Id.should_be("scope1PasswordFieldId");
+						driver().FindField("scoped text input field in a label container").Id.should_be("scope1ContainerLabeledTextInputFieldId");
 					};
-					it["should find select field"] = () =>
+                	it["should find text input by placeholder"] = () =>
 					{
-						driver().FindField("scoped select field linked by for").Id.should_be("scope1SelectFieldId");
+						driver().FindField("scoped text input field with a placeholder").Id.should_be("scope1TextInputFieldWithPlaceholder");
 					};
-					it["should find checkbox"] = () =>
+                	it["should find text input by name"] = () =>
 					{
-						driver().FindField("scoped checkbox field linked by for").Id.should_be("scope1CheckboxFieldId");
+						driver().FindField("containerLabeledTextInputFieldName").Id.should_be("scope1ContainerLabeledTextInputFieldId");
 					};
-					it["should find radio button"] = () =>
+                	it["should find radio button by value"] = () =>
 					{
-						driver().FindField("scoped radio field linked by for").Id.should_be("scope1RadioFieldId");
+						driver().FindField("scoped radio field one val").Id.should_be("scope1RadioFieldId");
 					};
-					it["should find textarea"] = () =>
-					{
-						driver().FindField("scoped textarea field linked by for").Id.should_be("scope1TextareaFieldId");
-					};
+                	it["should find not find text input by id outside scope"] = () =>
+                    {
+                    	Assert.Throws<MissingHtmlException>(() => driver().FindField("containerLabeledTextInputFieldId"));
+                    };
                 };
 				describe["within scope2"] = () =>
 				{
@@ -113,26 +114,27 @@ namespace Coypu.Drivers.Tests
 					{
 						driver().FindField("scoped text input field linked by for").Id.should_be("scope2TextInputFieldId");
 					};
-					it["should find password field"] = () =>
+					it["should find text input in container label"] = () =>
 					{
-						driver().FindField("scoped password field linked by for").Id.should_be("scope2PasswordFieldId");
+						driver().FindField("scoped text input field in a label container").Id.should_be("scope2ContainerLabeledTextInputFieldId");
 					};
-					it["should find select field"] = () =>
+					it["should find text input by placeholder"] = () =>
 					{
-						driver().FindField("scoped select field linked by for").Id.should_be("scope2SelectFieldId");
+						driver().FindField("scoped text input field with a placeholder").Id.should_be("scope2TextInputFieldWithPlaceholder");
 					};
-					it["should find checkbox"] = () =>
+					it["should find text input by name"] = () =>
 					{
-						driver().FindField("scoped checkbox field linked by for").Id.should_be("scope2CheckboxFieldId");
+						driver().FindField("containerLabeledTextInputFieldName").Id.should_be("scope2ContainerLabeledTextInputFieldId");
 					};
-					it["should find radio button"] = () =>
+					it["should find radio button by value"] = () =>
 					{
-						driver().FindField("scoped radio field linked by for").Id.should_be("scope2RadioFieldId");
+						driver().FindField("scoped radio field one val").Id.should_be("scope2RadioFieldId");
 					};
-					it["should find textarea"] = () =>
+					it["should find not find text input by id outside scope"] = () =>
 					{
-						driver().FindField("scoped textarea field linked by for").Id.should_be("scope2TextareaFieldId");
+						Assert.Throws<MissingHtmlException>(() => driver().FindField("containerLabeledTextInputFieldId"));
 					};
+					
 				};
 			};
 		}

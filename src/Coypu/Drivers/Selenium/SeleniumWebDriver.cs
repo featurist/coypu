@@ -118,7 +118,7 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindRadioButtonFromValue(string locator)
 		{
-			return selenium.FindElements(By.XPath(".//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
+			return scope.FindElements(By.XPath(".//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
@@ -146,7 +146,7 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
-			return selenium.FindElements(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)))
+			return scope.FindElements(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)))
 						   .FirstDisplayedOrDefault(IsField);
 		}
 
