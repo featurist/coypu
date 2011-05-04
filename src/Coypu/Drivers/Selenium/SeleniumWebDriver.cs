@@ -16,8 +16,9 @@ namespace Coypu.Drivers.Selenium
 
 		private RemoteWebDriver selenium;
 		private Func<Element> findScope;
+	    private bool findingScope;
 
-		public SeleniumWebDriver()
+	    public SeleniumWebDriver()
 		{
 			selenium = NewRemoteWebDriver();
 		}
@@ -49,7 +50,25 @@ namespace Coypu.Drivers.Selenium
 
         private ISearchContext Scope
 	    {
-            get { return findScope == null ? selenium : (ISearchContext) findScope().Native; }
+            get
+            {
+                return findScope == null || findingScope 
+                       ? selenium 
+                       : FindScope();
+            }
+	    }
+
+	    private ISearchContext FindScope()
+	    {
+	        findingScope = true;
+	        try
+	        {
+	            return (ISearchContext) findScope().Native;
+	        }
+	        finally
+	        {
+	            findingScope = false;
+	        }
 	    }
 
 	    public void ClearScope()
@@ -232,7 +251,7 @@ namespace Coypu.Drivers.Selenium
 
 		public Element FindCss(string cssSelector)
 		{
-			return BuildElement(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
+			return BuildElement(Find(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
 							 "No element found by css: " + cssSelector);
 		}
 
