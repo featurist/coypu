@@ -26,8 +26,9 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
+	    private Func<Element> findScope;
 
-		public IEnumerable<Element> ClickedElements
+	    public IEnumerable<Element> ClickedElements
 		{
 			get { return clickedElements; }
 		}
@@ -175,15 +176,20 @@ namespace Coypu.Tests.TestDoubles
 			ModalDialogsCancelled++;
 		}
 
-		public void SetScope(Element findScope)
+        public void SetScope(Func<Element> find)
 		{
-			throw new NotImplementedException();
+		    findScope = find;
 		}
 
-		public void ClearScope()
-		{
-			throw new NotImplementedException();
-		}
+	    public Element Scope
+	    {
+            get { return findScope == null ? null : findScope();}
+	    }
+
+	    public void ClearScope()
+	    {
+	        findScope = null;
+	    }
 
 		public void Set(Element element, string value)
 		{

@@ -6,7 +6,7 @@ using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
-	[NotSupportedBy(typeof(WatiNDriver), typeof(SeleniumWebDriver))]
+	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_interacting_with_dialogs : DriverSpecs
 	{
 		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)

@@ -28,19 +28,22 @@ namespace Coypu.AcceptanceTests
 			var session = Browser.Session;
 			session.Visit("http://www.autotrader.co.uk/used-cars");
 
-			session.FillIn("postcode").With("N1 1AA");
+            session.Within(() => session.FindCss("form.searchForm"), () =>
+            {
+                session.FillIn("postcode").With("N1 1AA");
 
-			session.Select("citroen").From("make");
-			session.Select("c4_grand_picasso").From("model");
+                session.Select("citroen").From("make");
+                session.Select("c4_grand_picasso").From("model");
 
-			session.Select("National").From("radius");
-			session.Select("diesel").From("fuel-type");
-			session.Select("up_to_7_years_old").From("maximum-age");
-			session.Select("up_to_60000_miles").From("maximum-mileage");
+                session.Select("National").From("radius");
+                session.Select("diesel").From("fuel-type");
+                session.Select("up_to_7_years_old").From("maximum-age");
+                session.Select("up_to_60000_miles").From("maximum-mileage");
 
-			session.FillIn("Add keyword:").With("vtr");
+                session.FillIn("Add keyword:").With("vtr");
 
-			session.ClickButton("search-used-vehicles");
+                session.ClickButton("search-used-vehicles");
+            });
 		}
 
 		[Test]

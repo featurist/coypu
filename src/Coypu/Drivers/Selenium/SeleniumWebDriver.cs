@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -14,11 +15,11 @@ namespace Coypu.Drivers.Selenium
 		public bool Disposed { get; private set; }
 
 		private RemoteWebDriver selenium;
-		private ISearchContext scope;
+		private Func<Element> findScope;
 
 		public SeleniumWebDriver()
 		{
-			scope = selenium = NewRemoteWebDriver();
+			selenium = NewRemoteWebDriver();
 		}
 
 		private RemoteWebDriver NewRemoteWebDriver()
@@ -41,14 +42,19 @@ namespace Coypu.Drivers.Selenium
 			get { return selenium; }
 		}
 
-		public void SetScope(Element newScope)
+		public void SetScope(Func<Element> find)
 		{
-			scope = (IWebElement) newScope.Native;
+			findScope = find;
 		}
 
-		public void ClearScope()
+        private ISearchContext Scope
+	    {
+            get { return findScope == null ? selenium : (ISearchContext) findScope().Native; }
+	    }
+
+	    public void ClearScope()
 		{
-			scope = selenium;
+			findScope = null;
 		}
 
 		private Element BuildElement(IWebElement element, string failureMessage)
@@ -117,14 +123,14 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindRadioButtonFromValue(string locator)
 		{
-			return scope.FindElements(By.XPath(".//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
+			return Scope.FindElements(By.XPath(".//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
 		{
 			return
-				scope.FindElements(By.XPath(string.Format(".//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
-				scope.FindElements(By.XPath(string.Format(".//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
+				Scope.FindElements(By.XPath(string.Format(".//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
+				Scope.FindElements(By.XPath(string.Format(".//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
 		}
 
 		private IWebElement FindFieldFromLabel(string locator)
@@ -145,18 +151,18 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
-			return scope.FindElements(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)))
+			return Scope.FindElements(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)))
 						   .FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldById(string id)
 		{
-			return scope.FindElements(By.Id(id)).FirstDisplayedOrDefault(IsField);
+			return Scope.FindElements(By.Id(id)).FirstDisplayedOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldByName(string name)
 		{
-			return scope.FindElements(By.Name(name)).FirstDisplayedOrDefault(IsField);
+			return Scope.FindElements(By.Name(name)).FirstDisplayedOrDefault(IsField);
 		}
 
 		public void Click(Element element)
@@ -227,13 +233,13 @@ namespace Coypu.Drivers.Selenium
 		public Element FindCss(string cssSelector)
 		{
 			return BuildElement(selenium.FindElements(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
-							 "Failed to find: " + cssSelector);
+							 "No element found by css: " + cssSelector);
 		}
 
 		public Element FindXPath(string xpath)
 		{
 			return BuildElement(Find(By.XPath(xpath)).FirstDisplayedOrDefault(),
-				"Failed to find xpath: " + xpath);
+                             "No element found by xpath: " + xpath);
 		}
 
 		public IEnumerable<Element> FindAllCss(string cssSelector)
@@ -332,7 +338,7 @@ namespace Coypu.Drivers.Selenium
 
 		private IEnumerable<IWebElement> Find(By by)
 		{
-			return scope.FindElements(by);
+			return Scope.FindElements(by);
 		}
 
 		public void Dispose()

@@ -176,5 +176,18 @@ namespace Coypu
                 Configuration.Timeout = defaultTimeout;    
 	        }
 	    }
+
+	    public void Within(Func<Element> findScope, Action doThis)
+	    {
+	        try
+	        {
+                driver.SetScope(findScope);
+	            doThis();
+	        }
+	        finally
+	        {
+                driver.ClearScope();    
+	        }
+	    }
 	}
 }
