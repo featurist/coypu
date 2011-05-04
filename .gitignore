@@ -20,3 +20,4 @@ gem/dotnet/Cuke4NukeLog.txt*
 TestResult.xml
 .idea
 *.swp
+Coypu*.zip
