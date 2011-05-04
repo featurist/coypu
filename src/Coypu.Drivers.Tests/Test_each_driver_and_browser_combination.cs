@@ -29,15 +29,15 @@ namespace Coypu.Drivers.Tests
 			         };
 
 			Assembly.GetExecutingAssembly().GetTypes()
-					.Where(t => t.IsClass && specsToRun.IsAssignableFrom(t) && IsSupported(t))
+                    .Where(t => t.IsClass && specsToRun.IsAssignableFrom(t) && IsSupported(t, driverType))
 					.Do(LoadSpecs);
 
 			it["cleans up"] = () => { if (!driver.Disposed) driver.Dispose();};
 		}
 
-		private bool IsSupported(Type t)
+		private bool IsSupported(Type t, Type driverType)
 		{
-			return !t.GetCustomAttributes(typeof(NotSupportedByAttribute),true).Any();
+            return !t.GetCustomAttributes(typeof(NotSupportedByAttribute), true).Cast<NotSupportedByAttribute>().Any(a => a.Types.Contains(driverType));
 		}
 
 		private void LoadSpecs(Type driverSpecsType)

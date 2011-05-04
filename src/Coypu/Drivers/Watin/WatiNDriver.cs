@@ -8,11 +8,11 @@ namespace Coypu.Drivers.Watin
 {
 	public class WatiNDriver : Driver
 	{
-		public bool Disposed { get; private set; }
+	    public bool Disposed { get; private set; }
 
-		private WatiN.Core.Browser watinInstance;
+	    private WatiN.Core.Browser watinInstance;
 
-		private WatiN.Core.Browser Watin 
+	    private WatiN.Core.Browser Watin 
 		{ 
 			get 
 			{ 
@@ -20,7 +20,7 @@ namespace Coypu.Drivers.Watin
 			}
 		}
 
-		private WatiN.Core.Browser NewDriver()
+	    private WatiN.Core.Browser NewDriver()
 		{
 			switch (Configuration.Browser)
 			{
@@ -33,17 +33,17 @@ namespace Coypu.Drivers.Watin
 			}
 		}
 
-		public void SetScope(Element findScope)
+	    public void SetScope(Func<Element> find)
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    public void ClearScope()
 		{
 			throw new NotImplementedException();
 		}
 
-		public void ClearScope()
-		{
-			throw new NotImplementedException();
-		}
-
-		public Element FindButton(string locator)
+	    public Element FindButton(string locator)
 		{
 			var button = Watin.Buttons.Filter(b => b.Text == locator).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault() ??
 						 Watin.Buttons.Filter(b => b.Id == locator).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault();
@@ -52,7 +52,7 @@ namespace Coypu.Drivers.Watin
 			return BuildElement(button, "Failed to find button with text, id or name: " + locator);
 		}
 
-		public Element BuildElement(WatiN.Core.Element element, string description)
+	    public Element BuildElement(WatiN.Core.Element element, string description)
 		{
 			if (element == null)
 			{
@@ -61,14 +61,14 @@ namespace Coypu.Drivers.Watin
 			return new WatiNElement(element);
 		}
 
-		public Element FindLink(string locator)
+	    public Element FindLink(string locator)
 		{
 			var link = Watin.Links.Filter(l => l.Text.Trim() == locator.Trim()).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault();
 
 			return BuildElement(link, "Failed to find link with text: " + locator);
 		}
 
-		public Element FindField(string locator)
+	    public Element FindField(string locator)
 		{
 			var allFields = FindAllFields();
 			var field = FindFieldByLabel(locator, allFields) ??
@@ -80,12 +80,12 @@ namespace Coypu.Drivers.Watin
 			return BuildElement(field, "Failed to find field with label, id, name or placeholder: " + locator);
 		}
 
-		private WatiN.Core.Element GetRadioButtonWithValue(string value)
+	    private WatiN.Core.Element GetRadioButtonWithValue(string value)
 		{
 			return Watin.RadioButtons.Cast<WatiN.Core.Element>().FirstDisplayedOrDefault(r => r.GetAttributeValue("value") == value);
 		}
 
-		private IEnumerable<WatiN.Core.Element> FindAllFields()
+	    private IEnumerable<WatiN.Core.Element> FindAllFields()
 		{
 			var textFields = Watin.TextFields.Cast<WatiN.Core.Element>();
 			var selects = Watin.SelectLists.Cast<WatiN.Core.Element>();
@@ -95,7 +95,7 @@ namespace Coypu.Drivers.Watin
 			return textFields.Concat(selects.Concat(checkboxes.Concat(radioButtons)));
 		}
 
-		private WatiN.Core.Element FindFieldByLabel(string locator, IEnumerable<WatiN.Core.Element> allFields)
+	    private WatiN.Core.Element FindFieldByLabel(string locator, IEnumerable<WatiN.Core.Element> allFields)
 		{
 			var label = Watin.Labels.Filter(l => l.Text == locator).First();
 			if (label != null)
@@ -106,27 +106,27 @@ namespace Coypu.Drivers.Watin
 			return null;
 		}
 
-		public void Click(Element element)
+	    public void Click(Element element)
 		{
 			WatiNElement(element).Click();
 		}
 
-		private WatiN.Core.Element WatiNElement(Element element)
+	    private WatiN.Core.Element WatiNElement(Element element)
 		{
 			return ((WatiN.Core.Element) element.Native);
 		}
 
-		public void Visit(string url)
+	    public void Visit(string url)
 		{
 			Watin.GoTo(url);
 		}
 
-		public void Set(Element element, string value)
+	    public void Set(Element element, string value)
 		{
 			((TextField) element.Native).Value = value;
 		}
 
-		public void Select(Element element, string option)
+	    public void Select(Element element, string option)
 		{
 			try
 			{
@@ -138,47 +138,47 @@ namespace Coypu.Drivers.Watin
 			}
 		}
 
-		public object Native
+	    public object Native
 		{
 			get { return Watin; }
 		}
 
-		public bool HasContent(string text)
+	    public bool HasContent(string text)
 		{
 			return Watin.ContainsText(text);
 		}
 
-		public void Check(Element field)
+	    public void Check(Element field)
 		{
 			((CheckBox)field.Native).Checked = true;
 		}
 
-		public void Uncheck(Element field)
+	    public void Uncheck(Element field)
 		{
 			((CheckBox)field.Native).Checked = false;
 		}
 
-		public void Choose(Element field)
+	    public void Choose(Element field)
 		{
 			((RadioButton)field.Native).Checked = true;
 		}
 
-		public bool HasDialog(string withText)
+	    public bool HasDialog(string withText)
 		{
 			throw new NotImplementedException("Not yet implemented in WatiNDriver");
 		}
 
-		public void AcceptModalDialog()
+	    public void AcceptModalDialog()
 		{
 			throw new NotImplementedException("Not yet implemented in WatiNDriver");
 		}
 
-		public void CancelModalDialog()
+	    public void CancelModalDialog()
 		{
 			throw new NotImplementedException("Not yet implemented in WatiNDriver");
 		}
 
-		public bool HasCss(string cssSelector)
+	    public bool HasCss(string cssSelector)
 		{
 			throw new NotImplementedException("Not yet implemented in WatiNDriver");
 		}

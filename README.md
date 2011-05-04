@@ -1,5 +1,5 @@
 # Coypu is
-* A robust wrapper for browser automation tools (e.g. Selenium WebDriver) to ease automating js/ajax-heavy websites from .Net
+* A robust wrapper for .Net browser automation tools such as Selenium WebDriver and WatiN to ease automating js/ajax-heavy websites
 * A more intuitive DSL for interacting with the browser, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
 
 # Coypu is not
@@ -17,7 +17,7 @@ It is targetted at people doing browser automation in .Net with Selenium WebDriv
 
 Coypu drivers must implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to test the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` with Firefox is the only stable driver/browser combination that passes all the driver tests in Selenium so far.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` with Firefox is the only stable driver/browser combination that passes all the driver tests so far.
 
 Choose your driver/browser combination like so:
 
@@ -172,3 +172,25 @@ Interact with the current dialog like so (*Not working reliably yet*):
 
 	browser.AcceptDialog();
 	browser.CancelDialog();
+	
+#### Scope
+
+When you want perform operations only within a particular part of the page define a scope by using Within:
+
+	browser.Within(() => browser.FindCss("form.searchForm"), () =>
+	{
+		session.FillIn("postcode").With("N1 1AA");
+
+		session.Select("citroen").From("make");
+		session.Select("c4_grand_picasso").From("model");
+
+		session.FillIn("Add keyword:").With("vtr");
+
+		session.ClickButton("search-used-vehicles");
+	}
+	
+The first parameter is a `Func<Element>` which allows you to find a `Coypu.Element` in any way you see fit. 
+
+The actual finding of this element is deferred by the driver until each and every time it tries to find any element inside the Within block.
+
+If you are used to the Capybara implementation of within the there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.

@@ -116,12 +116,12 @@ namespace Coypu.Tests.TestDoubles
 			
 		}
 
-		public void SetScope(Element findScope)
+		public void SetScope(Func<Element> findScope)
 		{
 			
 		}
 
-		public void ClearScope()
+	    public void ClearScope()
 		{
 			
 		}

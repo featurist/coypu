@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="NotSupportedByAttribute.cs" />
     <Compile Include="When_accessing_attributes.cs" />
+    <Compile Include="When_finding_buttons_within_scope.cs" />
+    <Compile Include="When_finding_fields_within_scope.cs" />
     <Compile Include="When_inspecting_dialog_text.cs" />
     <Compile Include="DriverSpecs.cs" />
     <Compile Include="When_checking.cs" />
