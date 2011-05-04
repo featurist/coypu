@@ -118,8 +118,13 @@ Buttons are found by value/text, id or name
 	
 Links are found by the text of the link
 
-	browser.ClickButton("Reset search");
+	browser.ClickLink("Reset search");
 
+Any other element you want to click can be passed directly to `Session.Click`:
+
+	var h1 = browser.FindCss("h1")
+	browser.Click(h1);
+	
 #### Finding single elements
 
 Find methods return the first matching `Coypu.Element`. The locator arguments are case sensitive.
