@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
 	internal class When_inspecting_dialog_text : DriverSpecs
 	{
 		[NotSupportedBy(typeof(WatiNDriver))]
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
 		{
 			return () =>
 			{

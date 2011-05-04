@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 {
 	internal class When_finding_fields : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
 		{
 			return () =>
 			{
@@ -74,6 +74,65 @@ namespace Coypu.Drivers.Tests
 				{
 					driver().FindField("radio field one val").Name.should_be("forLabeledRadioFieldName");
 					driver().FindField("radio field two val").Name.should_be("containerLabeledRadioFieldName");
+				};
+				
+				describe["within scope1"] = () =>
+                {
+                	setBefore(() => driver().SetScope(driver().FindCss("#scope1")));
+
+					it["should find text input"] = () =>
+					{
+						driver().FindField("scoped text input field linked by for").Id.should_be("scope1TextInputFieldId");
+					};
+					it["should find password field"] = () =>
+					{
+						driver().FindField("scoped password field linked by for").Id.should_be("scope1PasswordFieldId");
+					};
+					it["should find select field"] = () =>
+					{
+						driver().FindField("scoped select field linked by for").Id.should_be("scope1SelectFieldId");
+					};
+					it["should find checkbox"] = () =>
+					{
+						driver().FindField("scoped checkbox field linked by for").Id.should_be("scope1CheckboxFieldId");
+					};
+					it["should find radio button"] = () =>
+					{
+						driver().FindField("scoped radio field linked by for").Id.should_be("scope1RadioFieldId");
+					};
+					it["should find textarea"] = () =>
+					{
+						driver().FindField("scoped textarea field linked by for").Id.should_be("scope1TextareaFieldId");
+					};
+                };
+				describe["within scope2"] = () =>
+				{
+					setBefore(() => driver().SetScope(driver().FindCss("#scope2")));
+
+					it["should find text input"] = () =>
+					{
+						driver().FindField("scoped text input field linked by for").Id.should_be("scope2TextInputFieldId");
+					};
+					it["should find password field"] = () =>
+					{
+						driver().FindField("scoped password field linked by for").Id.should_be("scope2PasswordFieldId");
+					};
+					it["should find select field"] = () =>
+					{
+						driver().FindField("scoped select field linked by for").Id.should_be("scope2SelectFieldId");
+					};
+					it["should find checkbox"] = () =>
+					{
+						driver().FindField("scoped checkbox field linked by for").Id.should_be("scope2CheckboxFieldId");
+					};
+					it["should find radio button"] = () =>
+					{
+						driver().FindField("scoped radio field linked by for").Id.should_be("scope2RadioFieldId");
+					};
+					it["should find textarea"] = () =>
+					{
+						driver().FindField("scoped textarea field linked by for").Id.should_be("scope2TextareaFieldId");
+					};
 				};
 			};
 		}

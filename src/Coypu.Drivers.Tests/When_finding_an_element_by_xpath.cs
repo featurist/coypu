@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
 	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_finding_an_element_by_xpath : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
 		{
 			return () =>
 			{

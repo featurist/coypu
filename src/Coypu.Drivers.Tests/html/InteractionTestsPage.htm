@@ -6,7 +6,7 @@
 </head>
 <body>
   <form>
-	<!--section>
+	<!--section> TODO:
 	  <h1>JS links / buttons</h1>
 	  
 	  <h2>These should be ignored as genuine ones exist later in the doc</h2>
@@ -197,5 +197,58 @@
   <form id="attributeTestForm" method="post" action="http://somesite.com/action.htm" target="_parent">
 	<input type="submit" value="Attributes" />
   </form>
+
+ 
+  <div id="scope1">
+	<fieldset>
+		<legend>Scope 1</legend>
+		<label for="scope1TextInputFieldId">scoped text input field linked by for</label>
+		<input type="text" id="scope1TextInputFieldId" name="scopedTextInputFieldName" value="scoped text input field one val" />
+		  
+		<label for="scope1PasswordFieldId">scoped password field linked by for</label>
+		<input type="password" id="scope1PasswordFieldId" name="scopedPasswordFieldName" value="scoped password field one val" />
+				
+		<label for="scope1CheckboxFieldId">scoped checkbox field linked by for</label>
+		<input type="checkbox" id="scope1CheckboxFieldId" name="scopedCheckboxFieldName" value="scoped checkbox field one val" />
+		  
+		<label for="scope1RadioFieldId">scoped radio field linked by for</label>
+		<input type="radio" id="scope1RadioFieldId" name="scopedRadioFieldName" value="scoped radio field one val" />
+		  
+		<label for="scope1SelectFieldId">scoped select field linked by for</label>
+		<select id="scope1SelectFieldId" name="scopedSelectFieldName">
+			<option value="value1">one</option>
+			<option value="value2">two</option>
+		</select>
+		  
+		<label for="scope1TextareaFieldId">scoped textarea field linked by for</label>
+		<textarea cols="30" rows="5" id="scope1TextareaFieldId" name="scopedTextareaFieldName">scope1 textarea val one</textarea>	
+	</fieldset>		
+  </div>
+  
+  <div id="scope2">
+	<fieldset>
+		<legend>Scope 2</legend>
+		<label for="scope2TextInputFieldId">scoped text input field linked by for</label>
+		<input type="text" id="scope2TextInputFieldId" name="scopedTextInputFieldName" value="scoped text input field one val" />
+		  
+		<label for="scope2PasswordFieldId">scoped password field linked by for</label>
+		<input type="password" id="scope2PasswordFieldId" name="scopedPasswordFieldName" value="scoped password field one val" />
+				
+		<label for="scope2CheckboxFieldId">scoped checkbox field linked by for</label>
+		<input type="checkbox" id="scope2CheckboxFieldId" name="scopedCheckboxFieldName" value="scoped checkbox field one val" />
+		  
+		<label for="scope2RadioFieldId">scoped radio field linked by for</label>
+		<input type="radio" id="scope2RadioFieldId" name="scopedRadioFieldName" value="scoped radio field one val" />
+		  
+		<label for="scope2SelectFieldId">scoped select field linked by for</label>
+		<select id="scope2SelectFieldId" name="scopedSelectFieldName">
+			<option value="value1">one</option>
+			<option value="value2">two</option>
+		</select>
+		  
+		<label for="scope2TextareaFieldId">scoped textarea field linked by for</label>
+		<textarea cols="30" rows="5" id="scope2TextareaFieldId" name="scopedTextareaFieldName">scope2 textarea val one</textarea>	
+	</fieldset>		
+  </div>
 </body>
 </html>

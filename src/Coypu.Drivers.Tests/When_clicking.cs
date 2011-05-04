@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 {
 	public class When_clicking : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it)
+		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
 		{
 			return () =>
 			{
