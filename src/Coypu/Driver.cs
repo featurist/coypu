@@ -28,5 +28,6 @@ namespace Coypu
 		void AcceptModalDialog();
 		void CancelModalDialog();
 		void SetScope(Element findScope);
+		void ClearScope();
 	}
 }

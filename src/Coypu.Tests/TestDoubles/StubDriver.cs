@@ -120,5 +120,10 @@ namespace Coypu.Tests.TestDoubles
 		{
 			
 		}
+
+		public void ClearScope()
+		{
+			
+		}
 	}
 }
