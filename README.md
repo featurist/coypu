@@ -193,4 +193,4 @@ The first parameter is a `Func<Element>` which allows you to find a `Coypu.Eleme
 
 The actual finding of this element is deferred by the driver until each and every time it tries to find any element inside the Within block.
 
-If you are used to the Capybara implementation of within the there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
+If you are used to the Capybara implementation of within then there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
