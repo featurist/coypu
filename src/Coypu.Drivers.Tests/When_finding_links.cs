@@ -1,30 +1,29 @@
 ﻿using System;
 using NSpec;
-using NSpec.Domain;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
 	public class When_finding_links : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
+		internal override Action Specs()
 		{
 			return () =>
 			{
 				it["should find link by text"] = () =>
 				{
-					driver().FindLink("first link").Id.should_be("firstLinkId");
-					driver().FindLink("second link").Id.should_be("secondLinkId");
+					driver.FindLink("first link").Id.should_be("firstLinkId");
+					driver.FindLink("second link").Id.should_be("secondLinkId");
 				};
 
 				it["should not find display:none"] = () =>
 				 {
-					 Assert.Throws<MissingHtmlException>(() => driver().FindLink("I am an invisible link by display"));
+					 Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
 				 };
 
 				it["should not find visibility:hidden links"] =	() =>
 				{
-					Assert.Throws<MissingHtmlException>(() => driver().FindLink("I am an invisible link by visibility"));
+					Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
 				};
 			};
 		}
