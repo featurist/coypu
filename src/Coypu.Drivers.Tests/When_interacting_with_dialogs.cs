@@ -2,25 +2,24 @@
 using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Watin;
 using NSpec;
-using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
 	[NotSupportedBy(typeof(WatiNDriver))]
 	internal class When_interacting_with_dialogs : DriverSpecs
 	{
-		public Action Specs(Func<Driver> driver, ActionRegister describe, ActionRegister it, Action<Action> setBefore)
+		internal override Action Specs()
 		{
 			return () =>
 		       {
 				it["should accept alerts"] = () => 
 				{
-					DisposeOnError(driver(), () =>
+					DisposeOnError(driver, () =>
 					{
-						driver().Click(driver().FindLink("Trigger an alert"));
-						driver().HasDialog("You have triggered an alert and this is the text.").should_be_true();
-						driver().AcceptModalDialog();
-						driver().HasDialog("You have triggered an alert and this is the text.").should_be_false();
+						driver.Click(driver.FindLink("Trigger an alert"));
+						driver.HasDialog("You have triggered an alert and this is the text.").should_be_true();
+						driver.AcceptModalDialog();
+						driver.HasDialog("You have triggered an alert and this is the text.").should_be_false();
 					});
 				};
 
@@ -30,21 +29,21 @@ namespace Coypu.Drivers.Tests
 					{
 						it["should clear dialog"] = () =>
 						{
-							DisposeOnError(driver(), () => 
+							DisposeOnError(driver, () => 
 							{
-								driver().Click(driver().FindLink("Trigger a confirm"));
-								driver().HasDialog("You have triggered a confirm and this is the text.").should_be_true();
-								driver().AcceptModalDialog();
-								driver().HasDialog("You have triggered a confirm and this is the text.").should_be_false();
+								driver.Click(driver.FindLink("Trigger a confirm"));
+								driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
+								driver.AcceptModalDialog();
+								driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
 							});
 						};
 						it["should return true"] = () =>
 						{
-							DisposeOnError(driver(), () => 
+							DisposeOnError(driver, () => 
 							{
-								driver().Click(driver().FindLink("Trigger a confirm"));
-								driver().AcceptModalDialog();
-								driver().FindLink("Trigger a confirm - accepted").should_not_be_null();
+								driver.Click(driver.FindLink("Trigger a confirm"));
+								driver.AcceptModalDialog();
+								driver.FindLink("Trigger a confirm - accepted").should_not_be_null();
 							});
 						};
 					};
@@ -52,21 +51,21 @@ namespace Coypu.Drivers.Tests
 					{
 						it["should clear dialog"] = () =>
 						{
-							DisposeOnError(driver(), () =>
+							DisposeOnError(driver, () =>
 							{
-								driver().Click(driver().FindLink("Trigger a confirm"));
-								driver().HasDialog("You have triggered a confirm and this is the text.").should_be_true();
-								driver().CancelModalDialog();
-								driver().HasDialog("You have triggered a confirm and this is the text.").should_be_false();
+								driver.Click(driver.FindLink("Trigger a confirm"));
+								driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
+								driver.CancelModalDialog();
+								driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
 							});
 						};
 						it["should return false"] = () =>
 						{
-							DisposeOnError(driver(), () =>
+							DisposeOnError(driver, () =>
 							{
-								driver().Click(driver().FindLink("Trigger a confirm"));
-								driver().CancelModalDialog();
-								driver().FindLink("Trigger a confirm - cancelled").should_not_be_null();
+								driver.Click(driver.FindLink("Trigger a confirm"));
+								driver.CancelModalDialog();
+								driver.FindLink("Trigger a confirm - cancelled").should_not_be_null();
 							});
 						};
 					};

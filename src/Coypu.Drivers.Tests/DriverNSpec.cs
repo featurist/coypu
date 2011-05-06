@@ -2,16 +2,19 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Watin;
 using NSpec;
+using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
-	public class Test_each_driver_and_browser_combination : nspec
+	public class DriverNSpec : nspec
 	{
 		private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
-		Driver driver;
+
+		public Driver Driver { get; private set; }
 
 		public void when_testing_each_driver()
 		{
@@ -25,14 +28,14 @@ namespace Coypu.Drivers.Tests
 			before = () =>
 			         {
 			         	LoadTestHTML(driverType, browser);
-			         	driver.ClearScope();
+			         	Driver.ClearScope();
 			         };
 
 			Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(t => t.IsClass && specsToRun.IsAssignableFrom(t) && IsSupported(t, driverType))
+                    .Where(t => t.IsClass && t != typeof(DriverSpecs) && specsToRun.IsAssignableFrom(t) && IsSupported(t, driverType))
 					.Do(LoadSpecs);
 
-			it["cleans up"] = () => { if (!driver.Disposed) driver.Dispose();};
+			it["cleans up"] = () => { if (!Driver.Disposed) Driver.Dispose();};
 		}
 
 		private bool IsSupported(Type t, Type driverType)
@@ -42,19 +45,16 @@ namespace Coypu.Drivers.Tests
 
 		private void LoadSpecs(Type driverSpecsType)
 		{
-			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')]
-				= ((DriverSpecs)Activator.CreateInstance(driverSpecsType)).Specs(GetDriver, describe, it, a => before = a);
-		}
+			var specs = ((DriverSpecs)Activator.CreateInstance(driverSpecsType));
+			specs.DriverNSpec = this;
 
-		private Driver GetDriver()
-		{
-			return driver;
+			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')] = specs.Specs();
 		}
 
 		private void LoadTestHTML(Type driverType, Browser browser)
 		{
 			EnsureDriver(driverType, browser);
-			driver.Visit(GetTestHTMLPathLocation());
+			Driver.Visit(GetTestHTMLPathLocation());
 		}
 
 		private void LoadSpecsFor(Type driverType, Type specsToRun, Browser browser)
@@ -69,16 +69,16 @@ namespace Coypu.Drivers.Tests
 
 		private void EnsureDriver(Type driverType, Browser browser)
 		{
-			if (driver != null && !driver.Disposed)
+			if (Driver != null && !Driver.Disposed)
 			{
-				if (driverType == driver.GetType() && Configuration.Browser == browser)
+				if (driverType == Driver.GetType() && Configuration.Browser == browser)
 					return;
 
-				driver.Dispose();  
+				Driver.Dispose();  
 			} 
 			
 			Configuration.Browser = browser;
-			driver = (Driver)Activator.CreateInstance(driverType);
+			Driver = (Driver)Activator.CreateInstance(driverType);
 		}
 
 		private string GetTestHTMLPathLocation()
@@ -86,6 +86,26 @@ namespace Coypu.Drivers.Tests
 			var assemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
 			var projRoot = Path.Combine(assemblyDirectory,@"..\..\");
 			return new FileInfo(Path.Combine(projRoot,INTERACTION_TESTS_PAGE)).FullName;
+		}
+
+		public ActionRegister NSpecDescribe
+		{
+			get { return describe; }
+		}
+
+		public ActionRegister NSpecIt
+		{
+			get { return it; }
+		}
+
+		public Action NSpecBefore
+		{
+			set { before = value; }
+		}
+
+		public Action NSpecAfter
+		{
+			set { before = value; }
 		}
 	}
 }
