@@ -1,4 +1,5 @@
 ﻿using System;
+using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Watin;
 using NSpec;
 
@@ -6,7 +7,8 @@ namespace Coypu.Drivers.Tests
 {
 	internal class When_inspecting_dialog_text : DriverSpecs
 	{
-		[NotSupportedBy(typeof(WatiNDriver))]
+		//[NotSupportedBy(typeof(WatiNDriver))] // with FF 3
+		[NotSupportedBy(typeof(WatiNDriver), typeof(SeleniumWebDriver))] // with FF 4
 		internal override Action Specs()
 		{
 			return () =>

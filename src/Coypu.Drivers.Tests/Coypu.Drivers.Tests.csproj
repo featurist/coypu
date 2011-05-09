@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_inspecting_content_within_scope.cs" />
     <Compile Include="NotSupportedByAttribute.cs" />
     <Compile Include="When_accessing_attributes.cs" />
     <Compile Include="When_finding_buttons_within_scope.cs" />
