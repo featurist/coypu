@@ -41,10 +41,7 @@ namespace Coypu.Robustness
 					}
 					return result;
 				}
-                catch (NotImplementedException)
-                {
-                    throw;
-                }
+                catch (NotImplementedException) { throw; }
 				catch (Exception)
 				{
 					if (TimeoutExceeded(startTime))
@@ -71,12 +68,23 @@ namespace Coypu.Robustness
 			return DateTime.Now - startTime >= Configuration.Timeout;
 		}
 
-	    public void TryUntil(Action tryThis, Func<bool> until)
+		public void TryUntil(Action tryThis, Func<bool> until, TimeSpan untilTimeout)
 	    {
 	        var outcome = Robustly(() =>
 	                                    {
 	                                        tryThis();
-	                                        return until();
+	                                    	bool result;
+	                                    	var outerTimeout = Configuration.Timeout;
+	                                    	try
+	                                    	{
+	                                    		Configuration.Timeout = untilTimeout;
+	                                    		result = until();
+	                                    	}
+	                                    	finally
+	                                    	{
+												Configuration.Timeout = outerTimeout;
+	                                    	}
+	                                    	return result;
 	                                    }
 	                                , true);
             if (!outcome)

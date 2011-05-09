@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Coypu.Drivers;
 using Coypu.Robustness;
 using NUnit.Framework;
@@ -26,7 +27,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Action toTry = () => tries++;
             Func<bool> until = () => true;
 
-            waitAndRetryRobustWrapper.TryUntil(toTry, until);
+			waitAndRetryRobustWrapper.TryUntil(toTry, until, Configuration.Timeout);
 
             Assert.That(tries, Is.EqualTo(1));
         }
@@ -39,7 +40,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Action toTry = () => tries++;
             Func<bool> until = () => tries >= 3;
 
-            waitAndRetryRobustWrapper.TryUntil(toTry, until);
+			waitAndRetryRobustWrapper.TryUntil(toTry, until, Configuration.Timeout);
 
             Assert.That(tries, Is.EqualTo(3));
         }
@@ -52,10 +53,27 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Action toTry = () => tries++;
             Func<bool> until = () => false;
 
-            Assert.Throws<MissingHtmlException>(() => waitAndRetryRobustWrapper.TryUntil(toTry, until));
+			Assert.Throws<MissingHtmlException>(() => waitAndRetryRobustWrapper.TryUntil(toTry, until, Configuration.Timeout));
 
             Assert.That(tries, Is.GreaterThan(5));
         }
+
+		[Test]
+		public void It_should_apply_seperate_timeouts_to_until()
+		{
+			var tries = 0;
+
+			Action toTry = () => tries++;
+			Func<bool> until = () =>
+			                   {
+			                   	Thread.Sleep(Configuration.Timeout);
+			                   	throw new MissingHtmlException("Timeout finding until result");
+			                   };
+
+			Assert.Throws<MissingHtmlException>(() => waitAndRetryRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(10)));
+
+			Assert.That(tries, Is.InRange(5,12));
+		}
 
 	}
 }
