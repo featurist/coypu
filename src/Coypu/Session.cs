@@ -189,5 +189,15 @@ namespace Coypu
                 driver.ClearScope();    
 	        }
 	    }
+
+		public void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+		{
+			robustWrapper.TryUntil(() => ClickButton(locator), until, waitBetweenRetries);
+		}
+
+		public void ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+		{
+			robustWrapper.TryUntil(() => ClickLink(locator), until, waitBetweenRetries);
+		}
 	}
 }
