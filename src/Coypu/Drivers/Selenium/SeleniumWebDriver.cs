@@ -218,7 +218,20 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasContent(string text)
 		{
-			return PageText().Contains(text);
+			return GetContent().Contains(text);
+		}
+
+		private string GetContent()
+		{
+			return findScope != null
+					? GetText(".") 
+					: GetText("/html/body");
+		}
+
+		private string GetText(string xpath)
+		{
+			var pageText = Scope.FindElement(By.XPath(xpath)).Text;
+			return NormalizeCRLFBetweenBrowserImplementations(pageText);
 		}
 
 		public bool HasCss(string cssSelector)
@@ -296,15 +309,6 @@ namespace Coypu.Drivers.Selenium
 		public void Choose(Element field)
 		{
 			SeleniumElement(field).Click();
-		}
-
-		private string PageText()
-		{
-			var pageText = selenium.FindElement(By.CssSelector("html body")).Text;
-
-			pageText = NormalizeCRLFBetweenBrowserImplementations(pageText);
-
-			return pageText;
 		}
 
 		private string NormalizeCRLFBetweenBrowserImplementations(string text)
