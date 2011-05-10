@@ -12,6 +12,9 @@ namespace Coypu.Drivers.Selenium
 {
 	public class SeleniumWebDriver : Driver
 	{
+		private static readonly string [] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file" };
+		private static readonly string[] InputButtonTypes = new[] { "button", "submit", "image" };
+
 		public bool Disposed { get; private set; }
 
 		private RemoteWebDriver selenium;
@@ -336,8 +339,7 @@ namespace Coypu.Drivers.Selenium
 
 		private bool IsInputButton(IWebElement e)
 		{
-			var inputButtonTypes = new[] {"button", "submit", "image"};
-			return e.TagName == "input" && inputButtonTypes.Contains(e.GetAttribute("type"));
+			return e.TagName == "input" && InputButtonTypes.Contains(e.GetAttribute("type"));
 		}
 
 		private bool IsField(IWebElement e)
@@ -347,16 +349,7 @@ namespace Coypu.Drivers.Selenium
 
 		private bool IsInputField(IWebElement e)
 		{
-			return e.TagName == "input" &&
-				   (HasAttr(e, "type", "text") ||
-					HasAttr(e, "type", "password") ||
-					HasAttr(e, "type", "radio") ||
-					HasAttr(e, "type", "checkbox"));
-		}
-
-		private bool HasAttr(IWebElement e, string attributeName, string value)
-		{
-			return e.GetAttribute(attributeName) == value;
+			return e.TagName == "input" && FieldInputTypes.Contains(e.GetAttribute("type"));
 		}
 
 		private IEnumerable<IWebElement> Find(By by)
