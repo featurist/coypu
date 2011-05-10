@@ -9,7 +9,7 @@ using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
-	public class DriverNSpec : nspec
+	public class DriverSpecRunner : nspec
 	{
 		private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
 
@@ -45,9 +45,9 @@ namespace Coypu.Drivers.Tests
 		private void LoadSpecs(Type driverSpecsType)
 		{
 			var specs = ((DriverSpecs)Activator.CreateInstance(driverSpecsType));
-			specs.DriverNSpec = this;
+			specs.DriverSpecRunner = this;
 
-			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')] = specs.Specs();
+			describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')] = specs.Specs;
 		}
 
 		private void LoadTestHTML(Type driverType, Browser browser)

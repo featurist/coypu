@@ -69,6 +69,9 @@
   	  
 	    <label for="forLabeledTextareaFieldId">textarea field linked by for</label>
 	    <textarea cols="30" rows="5" id="forLabeledTextareaFieldId" name="forLabeledTextareaFieldName">textarea val one</textarea>
+	    
+	    <label for="forLabeledFileFieldId">file field linked by for</label>
+	    <input type="file" id="forLabeledFileFieldId" name="forLabeledFileFieldName" />
   	  
 	    <label>
 		    text input field in a label container
@@ -102,6 +105,11 @@
 		      <option value="select2value2">select two option two</option>
 		    </select>
 	    </label>
+	    
+	    <label for="containerLabeledFileFieldId">
+	      file field in a label container
+	      <input type="file" id="containerLabeledFileFieldId" name="containerLabeledFileFieldName" />
+	    </label>
   	  
 	    <input id="textInputFieldWithPlaceholder" placeholder="text input field with a placeholder" type="text" />
 	    <input id="textareaFieldWithPlaceholder" placeholder="textarea field with a placeholder" type="text" />
@@ -119,6 +127,7 @@
 	    <input type="radio" name="chooseRadio" id="chooseRadio1" value="Radio buttons - 1st value" />
 	    <input type="radio" name="chooseRadio" id="chooseRadio2" value="Radio buttons - 2nd value" onclick="this.value += ' - clicked';" />
 	    <input type="radio" name="chooseRadio" id="chooseRadio3" value="Radio buttons - 3rd value" />
+	    
   		
 	  </fieldset>
   </form>
