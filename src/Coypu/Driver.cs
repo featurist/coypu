@@ -29,5 +29,6 @@ namespace Coypu
 		void CancelModalDialog();
 		void SetScope(Func<Element> find);
 		void ClearScope();
+	    string ExecuteScript(string javascript);
 	}
 }

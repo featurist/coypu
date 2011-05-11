@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestDoubles\StubDriver.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_executing_script.cs" />
     <Compile Include="When_interacting_with_the_browser\When_clicking_any_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_clicking_links.cs" />
     <Compile Include="When_interacting_with_the_browser\When_scoping_interactions.cs" />

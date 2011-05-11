@@ -22,6 +22,7 @@ namespace Coypu.Tests.TestDoubles
 		private readonly Dictionary<string, Element> stubbedXPathResults = new Dictionary<string, Element>();
 		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Element>>();
 		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Element>>();
+        private readonly IDictionary<string, string> stubbedExecuteScriptResults = new Dictionary<string, string>();
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
@@ -191,7 +192,12 @@ namespace Coypu.Tests.TestDoubles
 	        findScope = null;
 	    }
 
-		public void Set(Element element, string value)
+	    public string ExecuteScript(string javascript)
+	    {
+	        return stubbedExecuteScriptResults[javascript];
+	    }
+
+	    public void Set(Element element, string value)
 		{
 			setFields.Add(element, value);
 		}
@@ -264,5 +270,10 @@ namespace Coypu.Tests.TestDoubles
 		{
 			chosenElements.Add(field);
 		}
+
+	    public void StubExecuteScript(string script, string scriptReturnValue)
+	    {
+	        stubbedExecuteScriptResults.Add(script, scriptReturnValue);
+	    }
 	}
 }

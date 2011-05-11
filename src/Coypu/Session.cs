@@ -199,5 +199,10 @@ namespace Coypu
 		{
 			robustWrapper.TryUntil(() => ClickLink(locator), until, waitBetweenRetries);
 		}
+
+	    public string ExecuteScript(string javascript)
+	    {
+	        return driver.ExecuteScript(javascript);
+	    }
 	}
 }
