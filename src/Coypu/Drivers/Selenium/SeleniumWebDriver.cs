@@ -81,7 +81,8 @@ namespace Coypu.Drivers.Selenium
 
 	    public string ExecuteScript(string javascript)
 	    {
-	        throw new NotSupportedException();
+	        var result = selenium.ExecuteScript(javascript);
+            return result == null ? null : result.ToString();
 	    }
 
 	    private Element BuildElement(IWebElement element, string failureMessage)
