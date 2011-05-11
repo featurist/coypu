@@ -80,17 +80,17 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
         [Test]
-        public void When_a_not_implemented_exception_is_thrown_It_should_not_retry()
+        public void When_a_not_supported_exception_is_thrown_It_should_not_retry()
         {
             var tries = 0;
-            Func<bool> throwsNotImplemented =
+            Func<bool> throwsNotSupported =
                 () =>
                 {
                     tries++;
-                    throw new NotImplementedException("This query always errors");
+                    throw new NotSupportedException("This query always errors");
                 };
 
-            Assert.Throws<NotImplementedException>(() => waitAndRetryRobustWrapper.Query(throwsNotImplemented, true));
+            Assert.Throws<NotSupportedException>(() => waitAndRetryRobustWrapper.Query(throwsNotSupported, true));
             Assert.That(tries, Is.EqualTo(1));
         }
 

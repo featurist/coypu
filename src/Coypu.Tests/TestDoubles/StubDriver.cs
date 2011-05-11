@@ -125,5 +125,10 @@ namespace Coypu.Tests.TestDoubles
 		{
 			
 		}
+
+	    public string ExecuteScript(string javascript)
+	    {
+	        return null;
+	    }
 	}
 }

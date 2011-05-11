@@ -79,7 +79,12 @@ namespace Coypu.Drivers.Selenium
 			findScope = null;
 		}
 
-		private Element BuildElement(IWebElement element, string failureMessage)
+	    public string ExecuteScript(string javascript)
+	    {
+	        throw new NotSupportedException();
+	    }
+
+	    private Element BuildElement(IWebElement element, string failureMessage)
 		{
 			if (element == null)
 				throw new MissingHtmlException(failureMessage);

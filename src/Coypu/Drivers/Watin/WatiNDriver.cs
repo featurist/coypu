@@ -35,13 +35,18 @@ namespace Coypu.Drivers.Watin
 
 	    public void SetScope(Func<Element> find)
 	    {
-	        throw new NotImplementedException();
+	        throw new NotSupportedException();
 	    }
 
 	    public void ClearScope()
 		{
-			throw new NotImplementedException();
+			throw new NotSupportedException();
 		}
+
+	    public string ExecuteScript(string javascript)
+	    {
+	        throw new NotSupportedException();
+	    }
 
 	    public Element FindButton(string locator)
 		{
@@ -165,47 +170,47 @@ namespace Coypu.Drivers.Watin
 
 	    public bool HasDialog(string withText)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 	    public void AcceptModalDialog()
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 	    public void CancelModalDialog()
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 	    public bool HasCss(string cssSelector)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 		public Element FindCss(string cssSelector)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 		public Element FindXPath(string xpath)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
-			throw new NotImplementedException("Not yet implemented in WatiNDriver");
+			throw new NotSupportedException("Not yet implemented in WatiNDriver");
 		}
 
 		public void Dispose()
