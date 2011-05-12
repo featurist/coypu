@@ -9,14 +9,14 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 	[TestFixture]
     public class When_trying_an_action_until_a_given_state_is_reached
 	{
-        private WaitAndRetryRobustWrapper waitAndRetryRobustWrapper;
+        private RetryUntilTimeoutRobustWrapper retryUntilTimeoutRobustWrapper;
 
         [SetUp]
         public void SetUp()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(200);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
-            waitAndRetryRobustWrapper = new WaitAndRetryRobustWrapper();
+            retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Action toTry = () => tries++;
             Func<bool> until = () => true;
 
-			waitAndRetryRobustWrapper.TryUntil(toTry, until, Configuration.Timeout);
+			retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, Configuration.Timeout);
 
             Assert.That(tries, Is.EqualTo(1));
         }
@@ -40,7 +40,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Action toTry = () => tries++;
             Func<bool> until = () => tries >= 3;
 
-			waitAndRetryRobustWrapper.TryUntil(toTry, until, Configuration.Timeout);
+			retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, Configuration.Timeout);
 
             Assert.That(tries, Is.EqualTo(3));
         }
@@ -53,7 +53,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Action toTry = () => tries++;
             Func<bool> until = () => false;
 
-			Assert.Throws<MissingHtmlException>(() => waitAndRetryRobustWrapper.TryUntil(toTry, until, Configuration.Timeout));
+			Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, Configuration.Timeout));
 
             Assert.That(tries, Is.GreaterThan(5));
         }
@@ -70,7 +70,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			                   	throw new MissingHtmlException("Timeout finding until result");
 			                   };
 
-			Assert.Throws<MissingHtmlException>(() => waitAndRetryRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(10)));
+			Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(10)));
 
 			Assert.That(tries, Is.InRange(5,12));
 		}

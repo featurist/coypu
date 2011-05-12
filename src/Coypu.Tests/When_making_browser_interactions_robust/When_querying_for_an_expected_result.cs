@@ -7,14 +7,14 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 	[TestFixture]
 	public class When_querying_for_an_expected_result
 	{
-		private WaitAndRetryRobustWrapper waitAndRetryRobustWrapper;
+		private RetryUntilTimeoutRobustWrapper retryUntilTimeoutRobustWrapper;
 
 		[SetUp]
 		public void SetUp()
 		{
 			Configuration.Timeout = TimeSpan.FromMilliseconds(200);
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
-			waitAndRetryRobustWrapper = new WaitAndRetryRobustWrapper();
+			retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
 		}
 
 		[Test]
@@ -23,7 +23,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			var expectedResult = new object();
 			Func<object> returnsTrueImmediately = () => expectedResult;
 
-			var actualResult = waitAndRetryRobustWrapper.Query(returnsTrueImmediately, expectedResult);
+			var actualResult = retryUntilTimeoutRobustWrapper.Query(returnsTrueImmediately, expectedResult);
 
 			Assert.That(actualResult, Is.EqualTo(expectedResult));
 		}
@@ -41,7 +41,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			Func<object> returnsUnexpectedResult = () => unexpectedResult;
 
 			var startTime = DateTime.Now;
-			var actualResult = waitAndRetryRobustWrapper.Query(returnsUnexpectedResult, expectedResult);
+			var actualResult = retryUntilTimeoutRobustWrapper.Query(returnsUnexpectedResult, expectedResult);
 			var endTime = DateTime.Now;
 
 			Assert.That(actualResult, Is.EqualTo(unexpectedResult));
@@ -56,7 +56,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		{
 			Func<bool> alwaysThrows = () => { throw new ExplicitlyThrownTestException("This query always errors"); };
 
-			Assert.Throws<ExplicitlyThrownTestException>(() => waitAndRetryRobustWrapper.Query(alwaysThrows, true));
+			Assert.Throws<ExplicitlyThrownTestException>(() => retryUntilTimeoutRobustWrapper.Query(alwaysThrows, true));
 		}
 
 		[Test]
@@ -75,7 +75,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 						return expectedResult;
 					};
 
-			Assert.That(waitAndRetryRobustWrapper.Query(throwsFirstTimeThenReturnsExpectedResult, expectedResult), Is.EqualTo(expectedResult));
+			Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsFirstTimeThenReturnsExpectedResult, expectedResult), Is.EqualTo(expectedResult));
 			Assert.That(tries, Is.EqualTo(3));
 		}
 
@@ -90,7 +90,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
                     throw new NotSupportedException("This query always errors");
                 };
 
-            Assert.Throws<NotSupportedException>(() => waitAndRetryRobustWrapper.Query(throwsNotSupported, true));
+            Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Query(throwsNotSupported, true));
             Assert.That(tries, Is.EqualTo(1));
         }
 
@@ -115,7 +115,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 						return unexpectedResult;
 					};
 
-			Assert.That(waitAndRetryRobustWrapper.Query(throwsFirstTimeThenReturnOppositeResult, expectedResult), Is.EqualTo(unexpectedResult));
+			Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsFirstTimeThenReturnOppositeResult, expectedResult), Is.EqualTo(unexpectedResult));
 			Assert.That(tries, Is.InRange(4,27));
 		}
 	}

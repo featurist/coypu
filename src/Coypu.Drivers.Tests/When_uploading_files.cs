@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using System.IO;
+using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
@@ -8,11 +9,23 @@ namespace Coypu.Drivers.Tests
 		{
 			it["should set the path to be uploaded"] = () =>
 			{
-				var textField = driver.FindField("forLabeledFileFieldId");
-				driver.Set(textField, @"c:\some\local.file");
+				const string someLocalFile = @"local.file";
+				try
+				{
+					var directoryInfo = new DirectoryInfo(".");
+					var fullPath = Path.Combine(directoryInfo.FullName,someLocalFile);
+					using (File.Create(fullPath)) { }
 
-				var findAgain = driver.FindField("forLabeledFileFieldId");
-				findAgain.Value.should_be(@"c:\some\local.file");
+					var textField = driver.FindField("forLabeledFileFieldId");
+					driver.Set(textField, fullPath);
+
+					var findAgain = driver.FindField("forLabeledFileFieldId");
+					findAgain.Value.should_be(fullPath);
+				}
+				finally
+				{
+					File.Delete(someLocalFile);
+				}
 			};
 		}
 	}

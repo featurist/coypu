@@ -4,7 +4,7 @@ using Coypu.Drivers;
 
 namespace Coypu.Robustness
 {
-	public class WaitAndRetryRobustWrapper : RobustWrapper
+	public class RetryUntilTimeoutRobustWrapper : RobustWrapper
 	{
 		public void Robustly(Action action)
 		{
