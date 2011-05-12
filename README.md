@@ -99,7 +99,7 @@ But if you need to do this, please consider forking Coypu, adding what you need 
 	
 #### Navigating
 	
-	Browser.Session.Visit("http://www.autotrader.co.uk/used-cars") // TODO: Configure the host globally then Visit("/used-cars")
+	Browser.Session.Visit("/used-cars")
 
 #### Completing forms
 
