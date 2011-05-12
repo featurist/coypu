@@ -43,9 +43,16 @@ namespace Coypu
 			robustWrapper.Robustly(() => driver.Click(driver.FindLink(locator)));
 		}
 
-		public void Visit(string url)
+		public void Visit(string virtualPath)
 		{
-			driver.Visit(url);
+			virtualPath = virtualPath.TrimStart('/');
+			var scheme = Configuration.SSL ? "https" : "http";
+
+			var fullyQualifiedUrl = Configuration.Port == 80
+				? string.Format("{0}://{1}/{2}", scheme, Configuration.AppHost, virtualPath)
+				: string.Format("{0}://{1}:{2}/{3}", scheme, Configuration.AppHost, Configuration.Port, virtualPath);
+
+			driver.Visit(fullyQualifiedUrl);
 		}
 
 		public void Click(Element element)
@@ -75,7 +82,7 @@ namespace Coypu
 
 		public SelectFrom Select(string option)
 		{
-			return new SelectFrom(option,driver,robustWrapper);
+			return new SelectFrom(option, driver, robustWrapper);
 		}
 
 		public bool HasContent(string cssSelector)
@@ -145,7 +152,7 @@ namespace Coypu
 
 		public bool HasDialog(string withText)
 		{
-			return robustWrapper.Query(() => driver.HasDialog(withText),true);
+			return robustWrapper.Query(() => driver.HasDialog(withText), true);
 		}
 
 		public bool HasNoDialog(string withText)
@@ -163,32 +170,32 @@ namespace Coypu
 			robustWrapper.Robustly(() => driver.CancelModalDialog());
 		}
 
-	    public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
-	    {
-	        var defaultTimeout = Configuration.Timeout;
-	        Configuration.Timeout = individualTimeout;
-	        try
-	        {
-	            action();
-	        }
-	        finally
-	        {
-                Configuration.Timeout = defaultTimeout;    
-	        }
-	    }
+		public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
+		{
+			var defaultTimeout = Configuration.Timeout;
+			Configuration.Timeout = individualTimeout;
+			try
+			{
+				action();
+			}
+			finally
+			{
+				Configuration.Timeout = defaultTimeout;
+			}
+		}
 
-	    public void Within(Func<Element> findScope, Action doThis)
-	    {
-	        try
-	        {
-                driver.SetScope(findScope);
-	            doThis();
-	        }
-	        finally
-	        {
-                driver.ClearScope();    
-	        }
-	    }
+		public void Within(Func<Element> findScope, Action doThis)
+		{
+			try
+			{
+				driver.SetScope(findScope);
+				doThis();
+			}
+			finally
+			{
+				driver.ClearScope();
+			}
+		}
 
 		public void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
 		{
@@ -200,9 +207,9 @@ namespace Coypu
 			robustWrapper.TryUntil(() => ClickLink(locator), until, waitBetweenRetries);
 		}
 
-	    public string ExecuteScript(string javascript)
-	    {
-	        return driver.ExecuteScript(javascript);
-	    }
+		public string ExecuteScript(string javascript)
+		{
+			return driver.ExecuteScript(javascript);
+		}
 	}
 }

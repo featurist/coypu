@@ -25,8 +25,9 @@ namespace Coypu.AcceptanceTests
 		[Test]
 		public void AutotraderCurrentAPI()
 		{
+			Configuration.AppHost = "www.autotrader.co.uk";
 			var session = Browser.Session;
-			session.Visit("http://www.autotrader.co.uk/used-cars");
+			session.Visit("/used-cars");
 
             session.Within(() => session.FindCss("form.searchForm"), () =>
             {
@@ -52,10 +53,10 @@ namespace Coypu.AcceptanceTests
 			// Would like this to worked with this script, written entirely by eye -- no firebug.
 			// Mostly possible I think, by falling back to looser matches if the exact match does not exist.
 
-			// Configuration.AppHost = "http://www.autotrader.co.uk";
+			Configuration.AppHost = "www.autotrader.co.uk";
 
 			var session = Browser.Session;
-			session.Visit("used-cars"); // Add AppHost setting
+			session.Visit("/used-cars");
 
 			session.FillIn("Postcode").With("N1 1AA"); // Match label text before ':'
 
@@ -76,7 +77,8 @@ namespace Coypu.AcceptanceTests
 		public void NewTwitter()
 		{
 			var session = Browser.Session;
-			session.Visit("http://www.twitter.com");
+			Configuration.AppHost = "www.twitter.com";
+			session.Visit("/");
 
 			session.FillIn("session[username_or_email]").With("coyputester");
 			session.FillIn("session[password]").With("nappybara");

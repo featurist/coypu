@@ -13,7 +13,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			var expectedTimeout = TimeSpan.FromMilliseconds(200);
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 			Configuration.Timeout = expectedTimeout;
-			var robustness = new WaitAndRetryRobustWrapper();
+			var robustness = new RetryUntilTimeoutRobustWrapper();
 
 			Func<object> function = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
@@ -39,7 +39,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		{
 			Configuration.Timeout = TimeSpan.FromMilliseconds(100);
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
-			var robustness = new WaitAndRetryRobustWrapper();
+			var robustness = new RetryUntilTimeoutRobustWrapper();
 			var tries = 0;
 			var expectedReturnValue = new object();
 			Func<object> function = () =>
@@ -62,7 +62,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
-            var robustness = new WaitAndRetryRobustWrapper();
+            var robustness = new RetryUntilTimeoutRobustWrapper();
             var tries = 0;
             Func<object> function = () =>
             {
@@ -80,7 +80,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 			var timeout = TimeSpan.FromMilliseconds(200);
 			Configuration.Timeout = timeout;
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
-			var robustness = new WaitAndRetryRobustWrapper();
+			var robustness = new RetryUntilTimeoutRobustWrapper();
 			Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
 			var startTime = DateTime.Now;
@@ -104,7 +104,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		public void When_an_Action_throws_an_exception_first_time_It_should_retry()
 		{
 			Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-			var robustness = new WaitAndRetryRobustWrapper();
+			var robustness = new RetryUntilTimeoutRobustWrapper();
 			var tries = 0;
 			Action action = () =>
 								{
@@ -122,7 +122,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void When_an_Action_throws_a_not_supported_exception_It_should_retry()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-            var robustness = new WaitAndRetryRobustWrapper();
+            var robustness = new RetryUntilTimeoutRobustWrapper();
             var tries = 0;
             Action action = () =>
             {
