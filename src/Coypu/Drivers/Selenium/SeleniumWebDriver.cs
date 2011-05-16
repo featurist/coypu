@@ -382,7 +382,9 @@ namespace Coypu.Drivers.Selenium
 			{
 				selenium.SwitchTo().Alert().Accept();
 			}
+            catch(WebDriverException){}
 			catch (InvalidOperationException) {}
+
 		}
 	}
 }
