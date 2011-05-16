@@ -13,6 +13,16 @@ It is targetted at people doing browser automation in .Net with Selenium WebDriv
 
 ### Configuration
 
+#### Website under test
+
+Configure the website you are testing as follows
+
+	Configuration.AppHost = "autotrader.co.uk";
+	Configuration.Port = "5555";
+	Configuration.SSL = true|false;
+	
+If you don't specify any of these, Coypu will default to http, localhost and port 80.
+
 #### Driver
 
 Coypu drivers must implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to test the correct browser.
@@ -89,7 +99,7 @@ But if you need to do this, please consider forking Coypu, adding what you need 
 	
 #### Navigating
 	
-	Browser.Session.Visit("http://www.autotrader.co.uk/used-cars") // TODO: Configure the host globally then Visit("/used-cars")
+	Browser.Session.Visit("/used-cars")
 
 #### Completing forms
 
@@ -100,6 +110,9 @@ Form fields are found by label text, partial label text, id, name, placeholder o
 	
 	// Text inputs
 	browser.FillIn("keywords").With("hybrid");
+	
+	// File inputs
+	browser.FillIn("Avatar").With(@"c:\users\adiel\photos\avatar.jpg");
 	
 	// Radio button lists
 	browser.Choose("Trade");
@@ -143,6 +156,16 @@ FindAll methods return all matching elements
 		...
 	}
 
+#### Executing javascript in the browser
+
+You can execute javascript like so:
+
+	browser.ExecuteScript("document.getElementById('SomeContainer').innerHTML = '<h2>Hello</h2>';");
+	
+Anything is returned from the javascript will be returned from `browser.ExecuteScript`
+
+	var innerHtml = browser.ExecuteScript("return document.getElementById('SomeContainer').innerHTML;");
+	
 #### Querying
 
 Look for text anywhere in the page:
@@ -199,3 +222,5 @@ The first parameter is a `Func<Element>` which allows you to find a `Coypu.Eleme
 The actual finding of this element is deferred by the driver until each and every time it tries to find any element inside the Within block.
 
 If you are used to the Capybara implementation of within then there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
+
+NOTE: Nested scopes are not currently supported - the inner scope will simply replace the outer scope at the moment.
