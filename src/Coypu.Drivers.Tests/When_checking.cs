@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should check an unchecked checkbox"] = () =>
+			it["checks an unchecked checkbox"] = () =>
 			{
 				var checkbox = driver.FindField("uncheckedBox");
 				checkbox.Selected.should_be_false();
@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Tests
 				findAgain.Selected.should_be_true();
 			};
 
-			it["should leave a checked checkbox checked"] = () =>
+			it["leaves a checked checkbox checked"] = () =>
 			{
 				var checkbox = driver.FindField("checkedBox");
 				checkbox.Selected.should_be_true();
@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Tests
 				findAgain.Selected.should_be_true();
 			};
 
-			it["should uncheck a checked checkbox"] = () =>
+			it["unchecks a checked checkbox"] = () =>
 			{
 				var checkbox = driver.FindField("checkedBox");
 				checkbox.Selected.should_be_true();
@@ -39,7 +39,7 @@ namespace Coypu.Drivers.Tests
 				findAgain.Selected.should_be_false();
 			};
 
-			it["should leave an unchecked checkbox unchecked"] = () =>
+			it["leaves an unchecked checkbox unchecked"] = () =>
 			{
 				var checkbox = driver.FindField("uncheckedBox");
 				checkbox.Selected.should_be_false();
@@ -50,7 +50,7 @@ namespace Coypu.Drivers.Tests
 				findAgain.Selected.should_be_false();
 			};
 
-			it["should fire onclick event"] = () =>
+			it["fires onclick event"] = () =>
 			{
 				var checkbox = driver.FindField("uncheckedBox");
 				checkbox.Value.should_be("unchecked");
@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Tests
 				driver.FindField("uncheckedBox").Value.should_be("unchecked - clicked");
 			};
 
-			it["should fire onclick event"] = () =>
+			it["fires onclick event"] = () =>
 			{
 				var checkbox = driver.FindField("checkedBox");
 				checkbox.Value.should_be("checked");

@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should click the underlying element"] = () =>
+			it["clicks the underlying element"] = () =>
 			{
 				var element = driver.FindButton("clickMeTest");
 				driver.FindButton("clickMeTest").Text.should_be("Click me");

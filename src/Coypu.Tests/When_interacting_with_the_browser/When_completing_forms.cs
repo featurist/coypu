@@ -20,7 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_filling_in_a_text_field_It_should_find_field_and_set_value_robustly()
+		public void When_filling_in_a_text_field_It_finds_field_and_sets_value_robustly()
 		{
 			var element = new StubElement();
 			driver.StubField("Some field locator", element);
@@ -36,7 +36,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_filling_in_a_text_field_It_should_click_to_ensure_focus()
+		public void When_filling_in_a_text_field_It_clicks_to_ensure_focus()
 		{
 			var element = new StubElement();
 			driver.StubField("Some field locator", element);
@@ -50,7 +50,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_selecting_an_option_It_should_find_field_and_select_option_robustly()
+		public void When_selecting_an_option_It_finds_field_and_selects_option_robustly()
 		{
 			var element = new StubElement();
 			driver.StubField("Some select field locator", element);
@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_checking_a_checkbox_It_should_find_field_and_check_robustly()
+		public void When_checking_a_checkbox_It_find_fields_and_checks_robustly()
 		{
 			var element = new StubElement();
 			driver.StubField("Some checkbox locator", element);
@@ -81,7 +81,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_unchecking_a_checkbox_It_should_find_field_and_uncheck_robustly()
+		public void When_unchecking_a_checkbox_It_finds_field_and_unchecks_robustly()
 		{
 			var element = new StubElement();
 			driver.StubField("Some checkbox locator", element);
@@ -96,7 +96,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void When_choosing_a_radio_button_It_should_find_field_and_choose_robustly()
+		public void When_choosing_a_radio_button_It_finds_field_and_chooses_robustly()
 		{
 			var element = new StubElement();
 			driver.StubField("Some radio locator", element);

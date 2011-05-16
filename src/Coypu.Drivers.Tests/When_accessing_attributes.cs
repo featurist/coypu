@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should expose element attributes"] = () => 
+			it["exposes element attributes"] = () => 
 			{
 				var formWithAttributesToTest = driver.FindCss("#attributeTestForm");
 				formWithAttributesToTest["id"].should_be("attributeTestForm");

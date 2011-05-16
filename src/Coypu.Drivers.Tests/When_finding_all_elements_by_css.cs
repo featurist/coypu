@@ -10,13 +10,13 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should return empty if no matches"] = () => 
+			it["returns empty if no matches"] = () => 
 			{
 				const string shouldNotFind = "#inspectingContent p.css-missing-test";
 				Assert.That(driver.FindAllCss(shouldNotFind), Is.Empty);
 			};
 
-			it["should return all matches by css"] = () =>
+			it["returns all matches by css"] = () =>
 			{
 				const string shouldNotFind = "#inspectingContent ul#cssTest li";
 				var all = driver.FindAllCss(shouldNotFind);

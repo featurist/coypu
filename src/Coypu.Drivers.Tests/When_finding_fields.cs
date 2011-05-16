@@ -8,72 +8,72 @@ namespace Coypu.Drivers.Tests
         {
             describe["finding by for attribute"] = () =>
             {
-                it["should find text input"] = () =>
+                it["finds text input"] = () =>
                 {
                     driver.FindField("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
                 };
-                it["should find password field"] = () =>
+                it["finds password field"] = () =>
                 {
                     driver.FindField("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
                 };
-                it["should find select field"] = () =>
+                it["finds select field"] = () =>
                 {
                     driver.FindField("select field linked by for").Id.should_be("forLabeledSelectFieldId");
                 };
-                it["should find checkbox"] = () =>
+                it["finds checkbox"] = () =>
                 {
                     driver.FindField("checkbox field linked by for").Id.should_be("forLabeledCheckboxFieldId");
                 };
-                it["should find radio button"] = () =>
+                it["finds radio button"] = () =>
                 {
                     driver.FindField("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
                 };
-				it["should find textarea"] = () =>
+				it["finds textarea"] = () =>
 				{
 					driver.FindField("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
 				};
-				it["should find file input"] = () =>
+				it["finds file input"] = () =>
 				{
 					driver.FindField("file field linked by for").Id.should_be("forLabeledFileFieldId");
 				};
             };
 			describe["finding by container label"] = () =>
 			{
-				it["should find text input"] = () =>
+				it["finds text input"] = () =>
 				{
 					driver.FindField("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");
 				};
-				it["should find password"] = () =>
+				it["finds password"] = () =>
 				{
 					driver.FindField("password field in a label container").Id.should_be("containerLabeledPasswordFieldId");
 				};
-				it["should find checkbox"] = () =>
+				it["finds checkbox"] = () =>
 				{
 					driver.FindField("checkbox field in a label container").Id.should_be("containerLabeledCheckboxFieldId");
 				};
-				it["should find radio"] = () =>
+				it["finds radio"] = () =>
 				{
 					driver.FindField("radio field in a label container").Id.should_be("containerLabeledRadioFieldId");
 				};
-				it["should find select"] = () =>
+				it["finds select"] = () =>
 				{
 					driver.FindField("select field in a label container").Id.should_be("containerLabeledSelectFieldId");
 				};
-				it["should find textarea"] = () =>
+				it["finds textarea"] = () =>
 				{
 					driver.FindField("textarea field in a label container").Id.should_be("containerLabeledTextareaFieldId");
 				};
-				it["should find file field"] = () =>
+				it["finds file field"] = () =>
 				{
 					driver.FindField("file field in a label container").Id.should_be("containerLabeledFileFieldId");
 				};
 			};
-            it["should find text field by placeholder"] = () =>
+            it["finds text field by placeholder"] = () =>
             {
                 driver.FindField("text input field with a placeholder").Id.should_be("textInputFieldWithPlaceholder");
                 driver.FindField("textarea field with a placeholder").Id.should_be("textareaFieldWithPlaceholder");
             };
-            it["should find field by id"] = () =>
+            it["finds field by id"] = () =>
             {
                 driver.FindField("containerLabeledTextInputFieldId").Value.should_be("text input field two val");
                 driver.FindField("containerLabeledTextareaFieldId").Value.should_be("textarea field two val");
@@ -83,7 +83,7 @@ namespace Coypu.Drivers.Tests
                 driver.FindField("containerLabeledPasswordFieldId").Name.should_be("containerLabeledPasswordFieldName");
                 driver.FindField("containerLabeledFileFieldId").Name.should_be("containerLabeledFileFieldName");
             };
-            it["should find field by name"] = () =>
+            it["finds field by name"] = () =>
             {
                 driver.FindField("containerLabeledTextInputFieldName").Value.should_be("text input field two val");
                 driver.FindField("containerLabeledTextareaFieldName").Value.should_be("textarea field two val");
@@ -93,7 +93,7 @@ namespace Coypu.Drivers.Tests
                 driver.FindField("containerLabeledPasswordFieldName").Id.should_be("containerLabeledPasswordFieldId");
                 driver.FindField("containerLabeledFileFieldName").Id.should_be("containerLabeledFileFieldId");
             };
-            it["should find radio button by value"] = () =>
+            it["finds radio button by value"] = () =>
             {
                 driver.FindField("radio field one val").Name.should_be("forLabeledRadioFieldName");
                 driver.FindField("radio field two val").Name.should_be("containerLabeledRadioFieldName");

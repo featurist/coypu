@@ -17,7 +17,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
         [Test]
-        public void It_should_set_the_scope_before_executing_action()
+        public void It_sets_the_scope_before_executing_action()
         {
             var expectedScope = new StubElement();
             Element actualScope = null;
@@ -30,7 +30,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void It_should_clear_the_scope_after_executing_action()
+        public void It_clears_the_scope_after_executing_action()
         {
             var expectedScope = new StubElement();
             session.Within(() => expectedScope, () => {});
@@ -39,7 +39,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void It_should_clear_the_scope_after_exception_in_action()
+        public void It_clears_the_scope_after_exception_in_action()
         {
             var expectedScope = new StubElement();
 

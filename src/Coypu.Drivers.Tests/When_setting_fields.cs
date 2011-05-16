@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should set value of text input field"] = () =>
+			it["sets value of text input field"] = () =>
 			{
 				var textField = driver.FindField("containerLabeledTextInputFieldName");
 				driver.Set(textField, "New text input value");
@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Tests
 				findAgain.Value.should_be("New text input value");
 			};
 
-			it["should set value of textarea field"] = () =>
+			it["sets value of textarea field"] = () =>
 			{
 				var textField = driver.FindField("containerLabeledTextareaFieldName");
 				driver.Set(textField, "New textarea value");
@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Tests
 				findAgain.Value.should_be("New textarea value");
 			};
 
-			it["should select option by text or value"] = () =>
+			it["selects option by text or value"] = () =>
 			{
 				var textField = driver.FindField("containerLabeledSelectFieldId");
 				textField.Value.should_be("select2value1");
@@ -44,7 +44,7 @@ namespace Coypu.Drivers.Tests
 				andAgain.Value.should_be("select2value1");
 			};
 						   
-			it["should fire change event when selecting an option"] = () =>
+			it["fires change event when selecting an option"] = () =>
 			{
 				var textField = driver.FindField("containerLabeledSelectFieldId");
 				textField.Name.should_be("containerLabeledSelectFieldName");

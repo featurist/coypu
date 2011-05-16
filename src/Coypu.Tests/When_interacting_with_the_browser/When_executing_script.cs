@@ -18,7 +18,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void Visit_should_pass_message_directly_to_the_driver_returning_response_immediately()
+        public void Visit_passes_message_directly_to_the_driver_returning_response_immediately()
         {
             const string script = "document.getElementById('asdf').click();";
             const string expectedReturnValue = "script return value";

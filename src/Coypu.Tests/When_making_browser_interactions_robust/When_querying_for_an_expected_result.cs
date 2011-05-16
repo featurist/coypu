@@ -18,7 +18,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
 		[Test]
-		public void When_the_expected_result_is_found_It_should_return_the_expected_result_immediately()
+		public void When_the_expected_result_is_found_It_returns_the_expected_result_immediately()
 		{
 			var expectedResult = new object();
 			Func<object> returnsTrueImmediately = () => expectedResult;
@@ -29,7 +29,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
 		[Test]
-		public void When_the_expected_result_is_never_found_It_should_return_the_actual_result_after_timeout()
+		public void When_the_expected_result_is_never_found_It_returns_the_actual_result_after_timeout()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(200);
 			Configuration.Timeout = expectedTimeout;
@@ -52,7 +52,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
 		[Test]
-		public void When_exceptions_are_always_thrown_It_should_rethrow_after_timeout()
+		public void When_exceptions_are_always_thrown_It_rethrows_after_timeout()
 		{
 			Func<bool> alwaysThrows = () => { throw new ExplicitlyThrownTestException("This query always errors"); };
 
@@ -60,7 +60,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
 		[Test]
-		public void When_exceptions_are_thrown_It_should_retry_And_when_expected_result_found_subsequently_It_should_return_expected_result_immediately()
+		public void When_exceptions_are_thrown_It_retries_And_when_expected_result_found_subsequently_It_returns_expected_result_immediately()
 		{
 			var tries = 0;
 			var expectedResult = new object();
@@ -80,7 +80,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
         [Test]
-        public void When_a_not_supported_exception_is_thrown_It_should_not_retry()
+        public void When_a_not_supported_exception_is_thrown_It_does_not_retry()
         {
             var tries = 0;
             Func<bool> throwsNotSupported =
@@ -95,7 +95,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
 		[Test]
-		public void When_exceptions_are_thrown_It_should_retry_And_when_unexpected_result_found_subsequently_It_should_return_unexpected_result_after_timeout()
+		public void When_exceptions_are_thrown_It_retries_And_when_unexpected_result_found_subsequently_It_return_unexpected_result_after_timeout()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(250);
 			Configuration.Timeout = expectedTimeout;

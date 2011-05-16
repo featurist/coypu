@@ -14,27 +14,27 @@ namespace Coypu.Drivers.Tests
             {
                 before = () => driver.SetScope(() => driver.FindCss("#scope1"));
 
-                it["should find text input by for"] = () =>
+                it["finds text input by for"] = () =>
                 {
                     driver.FindField("scoped text input field linked by for").Id.should_be("scope1TextInputFieldId");
                 };
-                it["should find text input in container label"] = () =>
+                it["finds text input in container label"] = () =>
                 {
                     driver.FindField("scoped text input field in a label container").Id.should_be("scope1ContainerLabeledTextInputFieldId");
                 };
-                it["should find text input by placeholder"] = () =>
+                it["finds text input by placeholder"] = () =>
                 {
                     driver.FindField("scoped text input field with a placeholder").Id.should_be("scope1TextInputFieldWithPlaceholder");
                 };
-                it["should find text input by name"] = () =>
+                it["finds text input by name"] = () =>
                 {
                     driver.FindField("containerLabeledTextInputFieldName").Id.should_be("scope1ContainerLabeledTextInputFieldId");
                 };
-                it["should find radio button by value"] = () =>
+                it["finds radio button by value"] = () =>
                 {
                     driver.FindField("scoped radio field one val").Id.should_be("scope1RadioFieldId");
                 };
-                it["should find not find text input by id outside scope"] = () =>
+                it["finds not find text input by id outside scope"] = () =>
                 {
                     Assert.Throws<MissingHtmlException>(() => driver.FindField("containerLabeledTextInputFieldId"));
                 };
@@ -43,27 +43,27 @@ namespace Coypu.Drivers.Tests
             {
                 before = () => driver.SetScope(() => driver.FindCss("#scope2"));
 
-                it["should find text input"] = () =>
+                it["finds text input"] = () =>
                 {
                     driver.FindField("scoped text input field linked by for").Id.should_be("scope2TextInputFieldId");
                 };
-                it["should find text input in container label"] = () =>
+                it["finds text input in container label"] = () =>
                 {
                     driver.FindField("scoped text input field in a label container").Id.should_be("scope2ContainerLabeledTextInputFieldId");
                 };
-                it["should find text input by placeholder"] = () =>
+                it["finds text input by placeholder"] = () =>
                 {
                     driver.FindField("scoped text input field with a placeholder").Id.should_be("scope2TextInputFieldWithPlaceholder");
                 };
-                it["should find text input by name"] = () =>
+                it["finds text input by name"] = () =>
                 {
                     driver.FindField("containerLabeledTextInputFieldName").Id.should_be("scope2ContainerLabeledTextInputFieldId");
                 };
-                it["should find radio button by value"] = () =>
+                it["finds radio button by value"] = () =>
                 {
                     driver.FindField("scoped radio field one val").Id.should_be("scope2RadioFieldId");
                 };
-                it["should find not find text input by id outside scope"] = () =>
+                it["finds not find text input by id outside scope"] = () =>
                 {
                     Assert.Throws<MissingHtmlException>(() => driver.FindField("containerLabeledTextInputFieldId"));
                 };

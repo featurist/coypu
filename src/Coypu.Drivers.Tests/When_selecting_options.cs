@@ -7,7 +7,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should set text of selected option"] = () =>
+			it["sets text of selected option"] = () =>
 			{
 				var textField = driver.FindField("containerLabeledSelectFieldId");
 				textField.SelectedOption.should_be("select two option one");

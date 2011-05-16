@@ -8,7 +8,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 	public class When_wrapping_any_function_or_action
 	{
 		[Test]
-		public void When_a_Function_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
+		public void When_a_Function_throws_a_recurring_exception_It_retries_until_the_timeout_is_reached_then_rethrow()
 		{
 			var expectedTimeout = TimeSpan.FromMilliseconds(200);
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
@@ -35,7 +35,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
 		[Test]
-		public void When_a_Function_throws_an_exception_first_time_It_should_retry()
+		public void When_a_Function_throws_an_exception_first_time_It_retries()
 		{
 			Configuration.Timeout = TimeSpan.FromMilliseconds(100);
 			Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
@@ -58,7 +58,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
         [Test]
-        public void When_a_Function_throws_a_not_supported_exception_It_should_not_retry()
+        public void When_a_Function_throws_a_not_supported_exception_It_does_not_retry()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
@@ -75,7 +75,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
 		[Test]
-		public void When_an_Action_throws_a_recurring_exception_It_should_retry_until_the_timeout_is_reached_then_rethrow()
+		public void When_an_Action_throws_a_recurring_exception_It_retries_until_the_timeout_is_reached_then_rethrows()
 		{
 			var timeout = TimeSpan.FromMilliseconds(200);
 			Configuration.Timeout = timeout;
@@ -101,7 +101,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
 		[Test]
-		public void When_an_Action_throws_an_exception_first_time_It_should_retry()
+		public void When_an_Action_throws_an_exception_first_time_It_retries()
 		{
 			Configuration.Timeout = TimeSpan.FromMilliseconds(100);
 			var robustness = new RetryUntilTimeoutRobustWrapper();
@@ -119,7 +119,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 		}
 
         [Test]
-        public void When_an_Action_throws_a_not_supported_exception_It_should_retry()
+        public void When_an_Action_throws_a_not_supported_exception_It_retries()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             var robustness = new RetryUntilTimeoutRobustWrapper();
