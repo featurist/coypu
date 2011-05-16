@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		private Session session;
 
 		[Test]
-		public void It_should_pass_message_directly_to_the_driver()
+		public void It_passes_message_directly_to_the_driver()
 		{
 			session.Visit("http://visit.me");
 
@@ -34,7 +34,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_form_url_from_host_port_and_virtual_path()
+		public void It_forms_url_from_host_port_and_virtual_path()
 		{
 			Configuration.AppHost = "im.theho.st";
 			Configuration.Port = 81;
@@ -45,7 +45,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_default_to_localhost()
+		public void It_defaults_to_localhost()
 		{
 			Configuration.Port = 81;
 
@@ -55,7 +55,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_default_to_port_80()
+		public void It_defaults_to_port_80()
 		{
 			Configuration.AppHost = "im.theho.st";
 
@@ -65,7 +65,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_handle_trailing_slashes_in_host()
+		public void It_handles_trailing_slashes_in_host()
 		{
 			Configuration.AppHost = "im.theho.st/";
 
@@ -75,7 +75,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_handle_missing_leading_slashes_in_virtual_path()
+		public void It_handles_missing_leading_slashes_in_virtual_path()
 		{
 			Configuration.AppHost = "im.theho.st";
 
@@ -85,7 +85,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_handle_trailing_and_missing_leading_slashes_with_a_port()
+		public void It_handles_trailing_and_missing_leading_slashes_with_a_port()
 		{
 			Configuration.AppHost = "im.theho.st/";
 			Configuration.Port = 123;
@@ -96,7 +96,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_support_SSL()
+		public void It_supports_SSL()
 		{
 			Configuration.AppHost = "im.theho.st";
 			Configuration.SSL = true;
@@ -106,7 +106,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			Assert.That(driver.Visits.Single(), Is.EqualTo("https://im.theho.st/visit/me"));
 		}
 		[Test]
-		public void It_should_support_SSL_with_ports()
+		public void It_supports_SSL_with_ports()
 		{
 			Configuration.AppHost = "im.theho.st";
 			Configuration.Port = 321;

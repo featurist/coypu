@@ -11,11 +11,11 @@ namespace Coypu.Drivers.Tests
             {
           	    before = () => driver.SetScope(() => driver.FindCss("#scope1"));
 
-				it["should find content within scope"] = () =>
+				it["finds content within scope"] = () =>
 				{
 					driver.HasContent("Scope 1").should_be_true();
 				};
-				it["should not find content outside scope"] = () =>
+				it["does not find content outside scope"] = () =>
 				{
 					driver.HasContent("Scope 2").should_be_false();
 				};
@@ -24,11 +24,11 @@ namespace Coypu.Drivers.Tests
 			{
 				before = () => driver.SetScope(() => driver.FindCss("#scope2"));
 
-				it["should find content within scope"] = () =>
+				it["finds content within scope"] = () =>
 				{
 					driver.HasContent("Scope 2").should_be_true();
 				};
-				it["should not find content outside scope"] = () =>
+				it["does not find content outside scope"] = () =>
 				{
 					driver.HasContent("Scope 1").should_be_false();
 				};

@@ -11,7 +11,7 @@ namespace Coypu.Drivers.Tests
 		[NotSupportedBy(typeof(WatiNDriver), typeof(SeleniumWebDriver))] // with FF 4
 		internal override void Specs()
 		{
-			it["should find exact text in alert"] = () => 
+			it["finds exact text in alert"] = () => 
 			{
 				using (driver)
 				{
@@ -21,7 +21,7 @@ namespace Coypu.Drivers.Tests
 				}
 			};
 
-			it["should find exact text in confirm"] = () =>
+			it["finds exact text in confirm"] = () =>
 			{
 				using (driver)
 				{

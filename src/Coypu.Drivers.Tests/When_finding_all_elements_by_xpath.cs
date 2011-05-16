@@ -9,13 +9,13 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should return empty if no matches"] = () =>
+			it["returns empty if no matches"] = () =>
 			{
 				const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";
 				driver.FindAllXPath(shouldNotFind).should_be_empty();
 			};
 
-			it["should return all matches by xpath"] = () =>
+			it["returns all matches by xpath"] = () =>
 			{
 				const string shouldNotFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
 				var all = driver.FindAllXPath(shouldNotFind);

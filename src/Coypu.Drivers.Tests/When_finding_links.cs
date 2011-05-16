@@ -8,18 +8,18 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should find link by text"] = () =>
+			it["finds link by text"] = () =>
 			{
 				driver.FindLink("first link").Id.should_be("firstLinkId");
 				driver.FindLink("second link").Id.should_be("secondLinkId");
 			};
 
-			it["should not find display:none"] = () =>
+			it["does not find display:none"] = () =>
 			 {
 				 Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
 			 };
 
-			it["should not find visibility:hidden links"] =	() =>
+			it["does not find visibility:hidden links"] =	() =>
 			{
 				Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
 			};

@@ -21,7 +21,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_robustly_find_by_text_and_click()
+		public void It_robustly_finds_by_text_and_clicks()
 		{
 			var linkToBeClicked = StubLinkToBeClicked();
 
@@ -40,7 +40,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		[TestCase(true, 1)]
 		[TestCase(false, 1)]
 		[TestCase(false, 321)]
-		public void It_should_try_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
+		public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
 		{
 			var waitBetweenRetries = TimeSpan.FromSeconds(untilTimeoutSecs);
 			var linkToBeClicked = StubLinkToBeClicked();

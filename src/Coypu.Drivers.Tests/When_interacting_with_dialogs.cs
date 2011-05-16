@@ -11,7 +11,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
         {
-			it["should accept alerts"] = () => 
+			it["accepts alerts"] = () => 
 			{
 				DisposeOnError(() =>
 				{
@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Tests
 			{
 				describe["when accepting"] = () =>
 				{
-					it["should clear dialog"] = () =>
+					it["clears dialog"] = () =>
 					{
 						DisposeOnError(() => 
 						{
@@ -36,7 +36,7 @@ namespace Coypu.Drivers.Tests
 							driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
 						});
 					};
-					it["should return true"] = () =>
+					it["returns true"] = () =>
 					{
 						DisposeOnError(() => 
 						{
@@ -48,7 +48,7 @@ namespace Coypu.Drivers.Tests
 				};
 				describe["when cancelling"] = () =>
 				{
-					it["should clear dialog"] = () =>
+					it["clears dialog"] = () =>
 					{
 						DisposeOnError(() =>
 						{
@@ -58,7 +58,7 @@ namespace Coypu.Drivers.Tests
 							driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
 						});
 					};
-					it["should return false"] = () =>
+					it["returns false"] = () =>
 					{
 						DisposeOnError(() =>
 						{

@@ -20,7 +20,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         [Test]
-        public void When_state_exists_it_should_return_immediately()
+        public void When_state_exists_It_returns_immediately()
         {
             var tries = 0;
 
@@ -33,7 +33,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         [Test]
-        public void When_state_exists_after_three_tries_it_should_try_three_times()
+        public void When_state_exists_after_three_tries_It_tries_three_times()
         {
             var tries = 0;
 
@@ -46,7 +46,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         [Test]
-        public void When_state_never_exists_it_should_fail_after_timeout()
+        public void When_state_never_exists_It_fails_after_timeout()
         {
             var tries = 0;
 
@@ -59,7 +59,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
 		[Test]
-		public void It_should_apply_seperate_timeouts_to_until()
+		public void It_applies_seperate_timeouts_to_until()
 		{
 			var tries = 0;
 

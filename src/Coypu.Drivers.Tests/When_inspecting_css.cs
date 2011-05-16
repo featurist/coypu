@@ -8,13 +8,13 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should not find missing examples"] = () => 
+			it["does not find missing examples"] = () => 
 			{
 				const string shouldNotFind = "#inspectingContent p.css-missing-test";
 				Assert.That(driver.HasCss(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);
 			};
 
-			it["should find present examples"] = () => 
+			it["finds present examples"] = () => 
 			{
 				var shouldFind = "#inspectingContent p.css-test span";
 				Assert.That(driver.HasCss(shouldFind), "Expected to find something at: " + shouldFind);
@@ -23,7 +23,7 @@ namespace Coypu.Drivers.Tests
 				Assert.That(driver.HasCss(shouldFind), "Expected to find something at: " + shouldFind);
 			};
 
-			it["should only finds visible elements"] = () =>
+			it["only finds visible elements"] = () =>
 			{
 				const string shouldNotFind = "#inspectingContent p.css-test img.invisible";
 				Assert.That(driver.HasCss(shouldNotFind), Is.False, "Expected not to find something at: " + shouldNotFind);

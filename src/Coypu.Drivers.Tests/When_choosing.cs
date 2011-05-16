@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should choose radio button from list"] = () =>
+			it["chooses radio button from list"] = () =>
 			{
 				var radioButton1 = driver.FindField("chooseRadio1");
 				radioButton1.Selected.should_be_false();
@@ -29,7 +29,7 @@ namespace Coypu.Drivers.Tests
 				radioButton1.Selected.should_be_false();
 			};
 
-			it["should fire onclick event"] = () =>
+			it["fires onclick event"] = () =>
 			{
 				var radio = driver.FindField("chooseRadio2");
 				radio.Value.should_be("Radio buttons - 2nd value");

@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should find present examples"] = () =>
+			it["finds present examples"] = () =>
 			{
 				var shouldFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/span";
 				driver.FindXPath(shouldFind).Text.should_be("This");
@@ -18,13 +18,13 @@ namespace Coypu.Drivers.Tests
 				driver.FindXPath(shouldFind).Text.should_be("Me! Pick me!");
 			};
 
-			it["should not find missing examples"] = () =>
+			it["does not find missing examples"] = () =>
 			{
 				const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";
 				Assert.Throws<MissingHtmlException>(() => driver.FindXPath(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
 			};
 
-			it["should only finds visible elements"] = () =>
+			it["only finds visible elements"] = () =>
 			{
 				const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/img";
 				Assert.Throws<MissingHtmlException>(() => driver.FindXPath(shouldNotFind), "Expected not to find something at: " + shouldNotFind);

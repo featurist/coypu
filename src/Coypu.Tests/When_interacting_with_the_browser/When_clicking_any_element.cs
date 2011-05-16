@@ -20,7 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 		}
 
 		[Test]
-		public void It_should_make_robust_call_to_underlying_driver()
+		public void It_makes_robust_call_to_underlying_driver()
 		{
 			var element = new StubElement();
 			session.Click(element);

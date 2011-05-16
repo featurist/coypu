@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-            it["should run the script in the browser"] = () =>
+            it["runs the script in the browser"] = () =>
             {
                 driver.FindButton("firstButtonId").Text.should_be("first button");
 
@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Tests
                 driver.FindButton("firstButtonId").Text.should_be("script executed");
             };
 
-            it["should return the result"] = () =>
+            it["returns the result"] = () =>
             {
                 driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;").should_be("first button");
             };

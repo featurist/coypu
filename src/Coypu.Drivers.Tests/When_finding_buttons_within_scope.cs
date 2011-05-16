@@ -13,15 +13,15 @@ namespace Coypu.Drivers.Tests
             {
                 before = () => driver.SetScope(() => driver.FindCss("#scope1"));
 
-                it["should find button by name"] = () =>
+                it["finds button by name"] = () =>
                 {
                     driver.FindButton("scopedButtonName").Id.should_be("scope1ButtonId");
                 };
-                it["should find input button by value"] = () =>
+                it["finds input button by value"] = () =>
                 {
                     driver.FindButton("scoped input button").Id.should_be("scope1InputButtonId");
                 };
-                it["should find button by text"] = () =>
+                it["finds button by text"] = () =>
                 {
                     driver.FindButton("scoped button").Id.should_be("scope1ButtonId");
                 };
@@ -30,15 +30,15 @@ namespace Coypu.Drivers.Tests
             {
                 before = () => driver.SetScope(() => driver.FindCss("#scope2"));
 
-                it["should find button by name"] = () =>
+                it["finds button by name"] = () =>
                 {
                     driver.FindButton("scopedButtonName").Id.should_be("scope2ButtonId");
                 };
-                it["should find input button by value"] = () =>
+                it["finds input button by value"] = () =>
                 {
                     driver.FindButton("scoped input button").Id.should_be("scope2InputButtonId");
                 };
-                it["should find button by text"] = () =>
+                it["finds button by text"] = () =>
                 {
                     driver.FindButton("scoped button").Id.should_be("scope2ButtonId");
                 };

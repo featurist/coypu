@@ -7,7 +7,7 @@ namespace Coypu.Drivers.Tests
 	{
 		internal override void Specs()
 		{
-			it["should set the path to be uploaded"] = () =>
+			it["sets the path to be uploaded"] = () =>
 			{
 				const string someLocalFile = @"local.file";
 				try
