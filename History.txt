@@ -1,0 +1,18 @@
+# Version 0.1.2
+
+Release date: 2011-05-12
+
+### Added
+
+* Configure the AppHost, Port and SSL globally
+* Simple ExecuteScript in SeleniumWebDriver
+* Set file upload paths with FillIn.With
+* Scoping of HasContent
+* ClickLink and ClickButton now have TryUntil overloads
+
+### Changed
+
+* Visit now takes a virtual path
+* Renamed WaitAndRetryRobustWrapper to RetryUntilTimeoutRobustWrapper 
+
+
