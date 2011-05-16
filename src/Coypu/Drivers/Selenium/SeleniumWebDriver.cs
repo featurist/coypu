@@ -368,10 +368,21 @@ namespace Coypu.Drivers.Selenium
 			if (selenium == null) 
 				return;
 
+			AcceptAnyAlert();
+
 			selenium.Close();
 			selenium.Dispose();
 			selenium = null;
 			Disposed = true;
+		}
+
+		private void AcceptAnyAlert()
+		{
+			try
+			{
+				selenium.SwitchTo().Alert().Accept();
+			}
+			catch (InvalidOperationException) {}
 		}
 	}
 }
