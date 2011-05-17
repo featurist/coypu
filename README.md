@@ -234,24 +234,17 @@ NOTE: Nested scopes are not currently supported - the inner scope will simply re
 
 So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 
 
-If the driver reports it had found and clicked your element successfully but nothing happens then it may simply be that your app isn't wiring up events at the right time etc. But if you have exhausted this angle then you could try:
+If the driver reports it had found and clicked your element successfully but nothing happens then it may simply be that your app isn't wiring up events at the right time. But if you have exhausted this angle and cannot fix the problem in the site itself, then you could try a couple of things:
 
-1. Tell Coypu to wait a short time between first finding the link/button and clicking it:
-
-For an individual click:	
-	
-	// browser.ClickButton(string locator, TimeSpan waitBeforeClick)
-	browser.ClickButton("Search",Timespan.FromMiliseconds(0.2));
-
-For every link and button:
-
-	Configuration.WaitBeforeClick = Timespan.FromMiliseconds(0.2);
-		
-WARNING: Setting this in global config means adding 0.2s to *every* click in your tests, so this should really be a last resort.
-
-2. Tell Coypu to keep clicking at regular intervals until you see the result you expect:
+1. Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
 	// browser.ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
 	browser.ClickButton("Search", () => browser.FindCss("#SearchResults"), TimeSpan.Seconds(2));
 
-This is equally unpleasant as option 1 as you are coupling the click to the expected result rather than verifying what you expect in a seperate step, but again, as a last resort we have found this useful.
+This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a seperate step, but as a last resort we have found this useful.
+
+2. Tell Coypu to wait a short time between first finding links/buttons and clicking them:
+
+	Configuration.WaitBeforeClick = Timespan.FromMiliseconds(0.2);
+		
+WARNING: Setting this in global config means adding time to *every* click in your tests, so again this should be used as a last resort and kept as low as possible.
