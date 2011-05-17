@@ -18,25 +18,27 @@ namespace Coypu
 			Driver = typeof(SeleniumWebDriver);
 		}
 
-		public static TimeSpan RetryInterval { get; set; }
-		public static TimeSpan Timeout { get; set; }
-		public static Drivers.Browser Browser { get; set; }
-		public static Type Driver { get; set; }
-		
-		private static string appHost;
-		public static string AppHost
+	    public static TimeSpan RetryInterval { get; set; }
+	    public static TimeSpan Timeout { get; set; }
+	    public static Drivers.Browser Browser { get; set; }
+	    public static Type Driver { get; set; }
+	    public static TimeSpan WaitBeforeClick { get; set; }
+
+	    private static string appHost;
+	    public static string AppHost
 		{
 			get { return appHost == default(string) ? DEFAULT_APP_HOST : appHost;}
 			set { appHost = value == null ? null : value.TrimEnd('/'); }
 		}
 
-		private static int port;
-		public static int Port
+	    private static int port;
+
+	    public static int Port
 		{
 			get { return port == default(int) ? DEFAULT_PORT : port;}
 			set { port = value; }
 		}
 
-		public static bool SSL { get; set; }
+	    public static bool SSL { get; set; }
 	}
 }

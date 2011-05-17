@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -27,7 +28,13 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
+	    private readonly IDictionary<long, string> timings = new Dictionary<long, string>();
 	    private Func<Element> findScope;
+
+	    public IDictionary<long, string> Timings
+	    {
+            get { return timings; }
+	    }
 
 	    public IEnumerable<Element> ClickedElements
 		{
@@ -81,11 +88,13 @@ namespace Coypu.Tests.TestDoubles
 
 		public Element FindButton(string locator)
 		{
-			return stubbedButtons[locator];
+		    LogTiming(locator);
+		    return stubbedButtons[locator];
 		}
 
-		public Element FindLink(string locator)
+	    public Element FindLink(string locator)
 		{
+            LogTiming(locator);
 			return stubbedLinks[locator];
 		}
 
@@ -96,6 +105,7 @@ namespace Coypu.Tests.TestDoubles
 
 		public void Click(Element element)
 		{
+            LogTiming(element.Id);
 			clickedElements.Add(element);
 		}
 
@@ -275,5 +285,17 @@ namespace Coypu.Tests.TestDoubles
 	    {
 	        stubbedExecuteScriptResults.Add(script, scriptReturnValue);
 	    }
+
+        private void LogTiming(params string[] args)
+        {
+            var method = new StackTrace().GetFrame(1).GetMethod();
+            while (timings.ContainsKey(DateTime.Now.Ticks)){} 
+            timings.Add(DateTime.Now.Ticks, FormatTimingDetails(method.Name, args));
+        }
+
+        private string FormatTimingDetails(string method, params string[] args)
+        {
+            return string.Format("{0}({1})", method, string.Join(" ; ", args));
+        }
 	}
 }
