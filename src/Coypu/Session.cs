@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Coypu.Robustness;
 
 namespace Coypu
@@ -35,12 +36,26 @@ namespace Coypu
 
 		public void ClickButton(string locator)
 		{
-			robustWrapper.Robustly(() => driver.Click(driver.FindButton(locator)));
+            robustWrapper.Robustly(
+                () =>
+                {
+                    var findLink = driver.FindButton(locator);
+                    Thread.Sleep(Configuration.WaitBeforeClick);
+                    driver.Click(findLink);
+                }
+            );
 		}
 
 		public void ClickLink(string locator)
 		{
-			robustWrapper.Robustly(() => driver.Click(driver.FindLink(locator)));
+			robustWrapper.Robustly(
+                () =>
+                {
+                    var findLink = driver.FindLink(locator);
+                    Thread.Sleep(Configuration.WaitBeforeClick);
+                    driver.Click(findLink);
+                }
+		    );
 		}
 
 		public void Visit(string virtualPath)

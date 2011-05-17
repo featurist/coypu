@@ -1,42 +1,52 @@
-﻿using System;
-
-namespace Coypu.Tests.TestDoubles
+﻿namespace Coypu.Tests.TestDoubles
 {
 	public class StubElement : Element
 	{
-		public override string Id
-		{
-			get { return null; }
-		}
+	    private string id;
+	    private string text;
+	    private string value;
+	    private string name;
+	    private string selectedOption;
+	    private bool selected;
 
-		public override string Text
-		{
-			get { return null; }
-		}
+        public void SetId(string id)
+        {
+            this.id = id;
+        }
 
-		public override string Value
-		{
-			get { return null; }
-		}
+	    public override string Id
+	    {
+	        get { return id; }
+	    }
 
-		public override string Name
-		{
-			get { return null; }
-		}
+	    public override string Text
+	    {
+	        get { return text; }
+	    }
 
-		public override string SelectedOption
-		{
-			get { return null; }
-		}
+	    public override string Value
+	    {
+	        get { return value; }
+	    }
 
-		public override bool Selected
-		{
-			get { return false; }
-		}
+	    public override string Name
+	    {
+	        get { return name; }
+	    }
 
-		public override string this[string attributeName]
-		{
-			get { return string.Empty; }
-		}
+	    public override string SelectedOption
+	    {
+	        get { return selectedOption; }
+	    }
+
+	    public override bool Selected
+	    {
+	        get { return selected; }
+	    }
+
+	    public override string this[string attributeName]
+	    {
+            get { return string.Empty; }
+	    }
 	}
 }
