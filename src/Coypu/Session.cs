@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using Coypu.Robustness;
 
 namespace Coypu
@@ -9,6 +8,8 @@ namespace Coypu
 	{
 		private readonly Driver driver;
 		private readonly RobustWrapper robustWrapper;
+		private readonly Clicker clicker;
+		private readonly UrlBuilder urlBuilder;
 		public bool WasDisposed { get; private set; }
 
 		public Driver Driver
@@ -25,55 +26,32 @@ namespace Coypu
 		{
 			this.robustWrapper = robustWrapper;
 			this.driver = driver;
+			clicker = new Clicker(driver);
+			urlBuilder = new UrlBuilder();
 		}
 
 		public void Dispose()
 		{
-			if (WasDisposed) return;
+			if (WasDisposed) 
+				return;
+
 			driver.Dispose();
 			WasDisposed = true;
 		}
 
 		public void ClickButton(string locator)
 		{
-            robustWrapper.Robustly(
-                () =>
-                {
-                    var findLink = driver.FindButton(locator);
-                    Thread.Sleep(Configuration.WaitBeforeClick);
-                    driver.Click(findLink);
-                }
-            );
+            robustWrapper.Robustly(() => clicker.FindAndClickButton(locator));
 		}
 
 		public void ClickLink(string locator)
 		{
-			robustWrapper.Robustly(
-                () =>
-                {
-                    var findLink = driver.FindLink(locator);
-                    Thread.Sleep(Configuration.WaitBeforeClick);
-                    driver.Click(findLink);
-                }
-		    );
+			robustWrapper.Robustly(() => clicker.FindAndClickLink(locator));
 		}
 
 		public void Visit(string virtualPath)
 		{
-			driver.Visit(GetFullyQualifiedUrl(virtualPath));
-		}
-
-		private string GetFullyQualifiedUrl(string virtualPath)
-		{
-			if (Uri.IsWellFormedUriString(virtualPath, UriKind.Absolute))
-				return virtualPath;
-
-			virtualPath = virtualPath.TrimStart('/');
-			var scheme = Configuration.SSL ? "https" : "http";
-
-			return Configuration.Port == 80
-                	? string.Format("{0}://{1}/{2}", scheme, Configuration.AppHost, virtualPath)
-                	: string.Format("{0}://{1}:{2}/{3}", scheme, Configuration.AppHost, Configuration.Port, virtualPath);
+			driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath));
 		}
 
 		public void Click(Element element)
