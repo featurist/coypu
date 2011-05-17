@@ -5,24 +5,14 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_visiting
+	public class When_visiting : BrowserInteractionTests
 	{
-		private FakeDriver driver;
-		private Session session;
-
 		[Test]
 		public void It_passes_message_directly_to_the_driver()
 		{
 			session.Visit("http://visit.me");
 
 			Assert.That(driver.Visits.SingleOrDefault(), Is.Not.Null);
-		}
-
-		[SetUp]
-		public void SetUp()
-		{
-			driver = new FakeDriver();
-			session = new Session(driver, null);
 		}
 
 		[TearDown]
@@ -115,6 +105,20 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 			session.Visit("/visit/me");
 
 			Assert.That(driver.Visits.Single(), Is.EqualTo("https://im.theho.st:321/visit/me"));
+		}
+
+		[Test]
+		public void It_ignores_host_etc_when_supplied_a_fully_qualified_url()
+		{
+			Configuration.AppHost = "im.theho.st";
+			Configuration.Port = 321;
+			Configuration.SSL = true;
+
+			session.Visit("http://www.someother.site/over.here");
+			Assert.That(driver.Visits.Last(), Is.EqualTo("http://www.someother.site/over.here"));
+
+			session.Visit("file:///C:/local/file.here");
+			Assert.That(driver.Visits.Last(), Is.EqualTo("file:///C:/local/file.here"));
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace Coypu.AcceptanceTests
 		[SetUp]
 		public void SetUp()
 		{
-			Configuration.RegisterDriver = typeof (SeleniumWebDriver);
+			Configuration.Driver = typeof (SeleniumWebDriver);
 			Configuration.Browser = Drivers.Browser.Firefox;
 			Configuration.Timeout = TimeSpan.FromSeconds(5);
 			Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);

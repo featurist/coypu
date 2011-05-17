@@ -4,18 +4,8 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_scoping_interactions
+	public class When_scoping_interactions : BrowserInteractionTests
 	{
-		private FakeDriver driver;
-		private Session session;
-
-		[SetUp]
-		public void SetUp()
-		{
-			driver = new FakeDriver();
-			session = new Session(driver, null);
-		}
-
         [Test]
         public void It_sets_the_scope_before_executing_action()
         {
