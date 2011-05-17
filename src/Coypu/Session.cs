@@ -45,14 +45,20 @@ namespace Coypu
 
 		public void Visit(string virtualPath)
 		{
+			driver.Visit(GetFullyQualifiedUrl(virtualPath));
+		}
+
+		private string GetFullyQualifiedUrl(string virtualPath)
+		{
+			if (Uri.IsWellFormedUriString(virtualPath, UriKind.Absolute))
+				return virtualPath;
+
 			virtualPath = virtualPath.TrimStart('/');
 			var scheme = Configuration.SSL ? "https" : "http";
 
-			var fullyQualifiedUrl = Configuration.Port == 80
-				? string.Format("{0}://{1}/{2}", scheme, Configuration.AppHost, virtualPath)
-				: string.Format("{0}://{1}:{2}/{3}", scheme, Configuration.AppHost, Configuration.Port, virtualPath);
-
-			driver.Visit(fullyQualifiedUrl);
+			return Configuration.Port == 80
+                	? string.Format("{0}://{1}/{2}", scheme, Configuration.AppHost, virtualPath)
+                	: string.Format("{0}://{1}:{2}/{3}", scheme, Configuration.AppHost, Configuration.Port, virtualPath);
 		}
 
 		public void Click(Element element)

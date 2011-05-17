@@ -25,7 +25,7 @@ namespace Coypu
 
 		private static Driver NewWebDriver()
 		{
-			return (Driver) Activator.CreateInstance(Configuration.RegisterDriver);
+			return (Driver) Activator.CreateInstance(Configuration.Driver);
 		}
 
 		public static void EndSession()

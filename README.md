@@ -100,6 +100,11 @@ But if you need to do this, please consider forking Coypu, adding what you need 
 #### Navigating
 	
 	Browser.Session.Visit("/used-cars")
+	
+If you need to step away and visit a site outside of the `Configuration.AppHost` then you can use a fully qualified Uri:
+
+	Browser.Session.Visit("https://gmail.com")
+	Browser.Session.Visit("file:///C:/users/adiel/localstuff.htm")
 
 #### Completing forms
 
@@ -224,3 +229,13 @@ The actual finding of this element is deferred by the driver until each and ever
 If you are used to the Capybara implementation of within then there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
 
 NOTE: Nested scopes are not currently supported - the inner scope will simply replace the outer scope at the moment.
+
+## More tricks/tips
+
+So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 
+
+If the driver reports it had found and clicked your element successfully but nothing happens then it may simply be that your app is buggy and doesn't wire up events at the right time etc. But if you have exhausted...
+
+1. Expect a particular result after clicking and try again
+2.  
+

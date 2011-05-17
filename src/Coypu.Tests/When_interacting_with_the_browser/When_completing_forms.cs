@@ -5,20 +5,8 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_completing_forms
+	public class When_completing_forms : BrowserInteractionTests 
 	{
-		private FakeDriver driver;
-		private SpyRobustWrapper spyRobustWrapper;
-		private Session session;
-
-		[SetUp]
-		public void SetUp()
-		{
-			driver = new FakeDriver();
-			spyRobustWrapper = new SpyRobustWrapper();
-			session = new Session(driver, spyRobustWrapper);
-		}
-
 		[Test]
 		public void When_filling_in_a_text_field_It_finds_field_and_sets_value_robustly()
 		{

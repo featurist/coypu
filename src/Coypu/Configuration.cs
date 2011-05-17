@@ -15,13 +15,13 @@ namespace Coypu
 			Timeout = TimeSpan.FromSeconds(DEFAULT_TIMEOUT_SECONDS);
 			RetryInterval = TimeSpan.FromSeconds(DEFAULT_INTERVAL_SECONDS);
 			Browser = Drivers.Browser.Firefox;
-			RegisterDriver = typeof(SeleniumWebDriver);
+			Driver = typeof(SeleniumWebDriver);
 		}
 
 		public static TimeSpan RetryInterval { get; set; }
 		public static TimeSpan Timeout { get; set; }
 		public static Drivers.Browser Browser { get; set; }
-		public static Type RegisterDriver { get; set; }
+		public static Type Driver { get; set; }
 		
 		private static string appHost;
 		public static string AppHost

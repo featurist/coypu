@@ -6,20 +6,8 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
 	[TestFixture]
-	public class When_finding_all_matching_elements
+	public class When_finding_all_matching_elements : BrowserInteractionTests
 	{
-		private FakeDriver driver;
-		private SpyRobustWrapper spyRobustWrapper;
-		private Session session;
-
-		[SetUp]
-		public void SetUp()
-		{
-			driver = new FakeDriver();
-			spyRobustWrapper = new SpyRobustWrapper();
-			session = new Session(driver, spyRobustWrapper);
-		}
-
 		[Test]
 		public void FindAllCss_should_make_direct_call_to_underlying_driver()
 		{
