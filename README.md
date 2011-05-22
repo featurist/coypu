@@ -201,7 +201,7 @@ Check for the presence of a modal dialog with expected text:
 	
 Waits are as for the other Has/HasNo methods.
 
-Interact with the current dialog like so (*Not working reliably yet*):
+Interact with the current dialog like so:
 
 	browser.AcceptDialog();
 	browser.CancelDialog();
@@ -238,7 +238,6 @@ If the driver reports it had found and clicked your element successfully but not
 
 1. Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
-	// browser.ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
 	browser.ClickButton("Search", () => browser.FindCss("#SearchResults"), TimeSpan.Seconds(2));
 
 This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a seperate step, but as a last resort we have found this useful.
