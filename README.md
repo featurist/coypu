@@ -238,7 +238,10 @@ If the driver reports it had found and clicked your element successfully but not
 
 1. Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
-	browser.ClickButton("Search", () => browser.FindCss("#SearchResults"), TimeSpan.Seconds(2));
+	var until = () => browser.FindCss("#SearchResults");
+	var waitBetweenRetries = TimeSpan.Seconds(2);
+
+	browser.ClickButton("Search", until, waitBetweenRetries);
 
 This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a seperate step, but as a last resort we have found this useful.
 
