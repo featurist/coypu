@@ -236,7 +236,7 @@ So, you are using Coypu but sometimes links or buttons still don't seem to be cl
 
 If the driver reports it had found and clicked your element successfully but nothing happens then it may simply be that your app isn't wiring up events at the right time. But if you have exhausted this angle and cannot fix the problem in the site itself, then you could try a couple of things:
 
-1. Tell Coypu to keep clicking at regular intervals until you see the result you expect:
+1) Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
 	var until = () => browser.FindCss("#SearchResults");
 	var waitBetweenRetries = TimeSpan.Seconds(2);
@@ -245,7 +245,7 @@ If the driver reports it had found and clicked your element successfully but not
 
 This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a seperate step, but as a last resort we have found this useful.
 
-2. Tell Coypu to wait a short time between first finding links/buttons and clicking them:
+2) Tell Coypu to wait a short time between first finding links/buttons and clicking them:
 
 	Configuration.WaitBeforeClick = Timespan.FromMiliseconds(0.2);
 		
