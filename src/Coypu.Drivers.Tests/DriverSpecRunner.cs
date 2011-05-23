@@ -92,6 +92,11 @@ namespace Coypu.Drivers.Tests
 			get { return describe; }
 		}
 
+		public ActionRegister NSpecContext
+		{
+			get { return context; }
+		}
+
 		public ActionRegister NSpecIt
 		{
 			get { return it; }

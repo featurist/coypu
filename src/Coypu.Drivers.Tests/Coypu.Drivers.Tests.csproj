@@ -65,33 +65,91 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="When_executing_script.cs" />
-    <Compile Include="When_uploading_files.cs" />
-    <Compile Include="When_inspecting_content_within_scope.cs" />
-    <Compile Include="NotSupportedByAttribute.cs" />
-    <Compile Include="When_accessing_attributes.cs" />
-    <Compile Include="When_finding_buttons_within_scope.cs" />
-    <Compile Include="When_finding_fields_within_scope.cs" />
-    <Compile Include="When_inspecting_dialog_text.cs" />
-    <Compile Include="DriverSpecs.cs" />
-    <Compile Include="When_checking.cs" />
-    <Compile Include="When_choosing.cs" />
-    <Compile Include="When_finding_all_elements_by_css.cs" />
-    <Compile Include="When_finding_all_elements_by_xpath.cs" />
-    <Compile Include="When_finding_an_element_by_css.cs" />
-    <Compile Include="When_finding_an_element_by_xpath.cs" />
-    <Compile Include="When_finding_buttons.cs" />
-    <Compile Include="DriverSpecRunner.cs" />
+    <Compile Include="DriverSpecRunner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DriverSpecs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NotSupportedByAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="When_clicking.cs" />
-    <Compile Include="When_finding_fields.cs" />
-    <Compile Include="When_finding_links.cs" />
-    <Compile Include="When_inspecting_content.cs" />
-    <Compile Include="When_inspecting_css.cs" />
-    <Compile Include="When_interacting_with_dialogs.cs" />
-    <Compile Include="When_inspecting_xpath.cs" />
-    <Compile Include="When_selecting_options.cs" />
-    <Compile Include="When_setting_fields.cs" />
+    <Compile Include="When_accessing_attributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_checking.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_choosing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_clicking.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_executing_script.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_all_elements_by_css.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_all_elements_by_xpath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_an_element_by_css.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_an_element_by_xpath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_buttons.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_buttons_within_scope.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_fields.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_fieldsets.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_fields_within_scope.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_links.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_finding_sections.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_inspecting_content.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_inspecting_content_within_scope.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_inspecting_css.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_inspecting_dialog_text.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_inspecting_xpath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_interacting_with_dialogs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_selecting_options.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_setting_fields.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="When_uploading_files.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="html\InteractionTestsPage.htm" />

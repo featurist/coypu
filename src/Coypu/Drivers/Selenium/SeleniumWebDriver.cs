@@ -87,12 +87,34 @@ namespace Coypu.Drivers.Selenium
 
 		public Element FindFieldset(string locator)
 		{
-			throw new NotImplementedException();
+			var fieldset = Find(By.XPath(string.Format(".//fieldset[legend[text() = \"{0}\"]]", locator))).FirstOrDefault() ??
+						   Find(By.Id(locator)).FirstOrDefault(e => e.TagName == "fieldset");
+
+			return BuildElement(fieldset, "Failed to find fieldset: " + locator);
 		}
 
 		public Element FindSection(string locator)
 		{
-			throw new NotImplementedException();
+			var section =
+				Find(By.Id(locator)).FirstDisplayedOrDefault(IsSection) ??
+				FindSectionByHeaderText(locator, "h1") ??
+				FindSectionByHeaderText(locator, "h2") ??
+				FindSectionByHeaderText(locator, "h3") ??
+				FindSectionByHeaderText(locator, "h4") ??
+				FindSectionByHeaderText(locator, "h5") ??
+				FindSectionByHeaderText(locator, "h6");
+
+			return BuildElement(section, "Failed to find section: " + locator);
+		}
+
+		private IWebElement FindSectionByHeaderText(string locator, string tagName)
+		{
+			return Find(By.XPath(string.Format(".//{0}[text() = \"{1}\"]/..", tagName, locator))).FirstOrDefault(e => IsSection(e));
+		}
+
+		private bool IsSection(IWebElement e)
+		{
+			return e.TagName == "section" || e.TagName == "div";
 		}
 
 		private Element BuildElement(IWebElement element, string failureMessage)
@@ -114,8 +136,8 @@ namespace Coypu.Drivers.Selenium
 			{
 				return BuildElement(FindButtonByText(locator) ??
 								    FindInputButtonByValue(locator) ??
-								    Find(By.Id(locator)).FirstDisplayedOrDefault(IsButton) ??
-								    Find(By.Name(locator)).FirstDisplayedOrDefault(IsButton),
+								    Find(By.Id(locator)).FirstOrDefault(IsButton) ??
+								    Find(By.Name(locator)).FirstOrDefault(IsButton),
 									  "No such button: " + locator);
 			}
 			catch (NoSuchElementException e)
@@ -128,19 +150,19 @@ namespace Coypu.Drivers.Selenium
 		{
 			var inputButtonsCss = string.Format("input[type=button],input[type=submit]");
 
-			return Find(By.CssSelector(inputButtonsCss)).FirstDisplayedOrDefault(e => e.Value == locator);
+			return Find(By.CssSelector(inputButtonsCss)).FirstOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindButtonByText(string locator)
 		{
-			return Find(By.TagName(string.Format("button"))).FirstDisplayedOrDefault(e => e.Text == locator);
+			return Find(By.TagName(string.Format("button"))).FirstOrDefault(e => e.Text == locator);
 		}
 
 		public Element FindLink(string locator)
 		{
 			try
 			{
-				return BuildElement(Find(By.LinkText(locator)).FirstDisplayedOrDefault(), "No such link: " + locator);
+				return BuildElement(Find(By.LinkText(locator)).FirstOrDefault(), "No such link: " + locator);
 			}
 			catch (NoSuchElementException e)
 			{
@@ -161,14 +183,14 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindRadioButtonFromValue(string locator)
 		{
-			return Scope.FindElements(By.XPath(".//input[@type = 'radio']")).FirstDisplayedOrDefault(e => e.Value == locator);
+			return Find(By.XPath(".//input[@type = 'radio']")).FirstOrDefault(e => e.Value == locator);
 		}
 
 		private IWebElement FindLabelByText(string locator)
 		{
 			return
-				Scope.FindElements(By.XPath(string.Format(".//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
-				Scope.FindElements(By.XPath(string.Format(".//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
+				Find(By.XPath(string.Format(".//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
+				Find(By.XPath(string.Format(".//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
 		}
 
 		private IWebElement FindFieldFromLabel(string locator)
@@ -189,18 +211,18 @@ namespace Coypu.Drivers.Selenium
 
 		private IWebElement FindFieldByPlaceholder(string placeholder)
 		{
-			return Scope.FindElements(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)))
-						   .FirstDisplayedOrDefault(IsField);
+			return Find(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)))
+						.FirstOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldById(string id)
 		{
-			return Scope.FindElements(By.Id(id)).FirstDisplayedOrDefault(IsField);
+			return Find(By.Id(id)).FirstOrDefault(IsField);
 		}
 
 		private IWebElement FindFieldByName(string name)
 		{
-			return Scope.FindElements(By.Name(name)).FirstDisplayedOrDefault(IsField);
+			return Find(By.Name(name)).FirstOrDefault(IsField);
 		}
 
 		public void Click(Element element)
@@ -255,12 +277,12 @@ namespace Coypu.Drivers.Selenium
 
 		public bool HasCss(string cssSelector)
 		{
-			return Find(By.CssSelector(cssSelector)).AnyDisplayed();
+			return Find(By.CssSelector(cssSelector)).Any();
 		}
 
 		public bool HasXPath(string xpath)
 		{
-			return Find(By.XPath(xpath)).AnyDisplayed();
+			return Find(By.XPath(xpath)).Any();
 		}
 
 		public bool HasDialog(string withText)
@@ -283,20 +305,19 @@ namespace Coypu.Drivers.Selenium
 
 		public Element FindCss(string cssSelector)
 		{
-			return BuildElement(Find(By.CssSelector(cssSelector)).FirstDisplayedOrDefault(),
+			return BuildElement(Find(By.CssSelector(cssSelector)).FirstOrDefault(),
 							 "No element found by css: " + cssSelector);
 		}
 
 		public Element FindXPath(string xpath)
 		{
-			return BuildElement(Find(By.XPath(xpath)).FirstDisplayedOrDefault(),
+			return BuildElement(Find(By.XPath(xpath)).FirstOrDefault(),
                              "No element found by xpath: " + xpath);
 		}
 
 		public IEnumerable<Element> FindAllCss(string cssSelector)
 		{
 			return Find(By.CssSelector(cssSelector))
-					   .Where(e => e.Displayed())
 					   .Select(e => BuildElement(e))
 					   .Cast<Element>();
 		}
@@ -304,7 +325,6 @@ namespace Coypu.Drivers.Selenium
 		public IEnumerable<Element> FindAllXPath(string xpath)
 		{
 			return Find(By.XPath(xpath))
-					   .Where(e => e.Displayed())
 					   .Select(e => BuildElement(e))
 					   .Cast<Element>();
 		}
@@ -370,7 +390,7 @@ namespace Coypu.Drivers.Selenium
 
 		private IEnumerable<IWebElement> Find(By by)
 		{
-			return Scope.FindElements(by);
+			return Scope.FindElements(by).Where(e => e.Displayed());
 		}
 
 		public void Dispose()
