@@ -85,7 +85,17 @@ namespace Coypu.Drivers.Selenium
             return result == null ? null : result.ToString();
 	    }
 
-	    private Element BuildElement(IWebElement element, string failureMessage)
+		public Element FindFieldset(string locator)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Element FindSection(string locator)
+		{
+			throw new NotImplementedException();
+		}
+
+		private Element BuildElement(IWebElement element, string failureMessage)
 		{
 			if (element == null)
 				throw new MissingHtmlException(failureMessage);

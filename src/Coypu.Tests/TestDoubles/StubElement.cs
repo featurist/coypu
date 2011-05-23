@@ -3,15 +3,10 @@
 	public class StubElement : Element
 	{
 	    private string id;
-	    private string text;
-	    private string value;
-	    private string name;
-	    private string selectedOption;
-	    private bool selected;
 
-        public void SetId(string id)
+        public void SetId(string newId)
         {
-            this.id = id;
+			id = newId;
         }
 
 	    public override string Id
@@ -21,27 +16,27 @@
 
 	    public override string Text
 	    {
-	        get { return text; }
+	        get { return string.Empty; }
 	    }
 
 	    public override string Value
 	    {
-	        get { return value; }
+	        get { return string.Empty; }
 	    }
 
 	    public override string Name
 	    {
-	        get { return name; }
+	        get { return string.Empty; }
 	    }
 
 	    public override string SelectedOption
 	    {
-	        get { return selectedOption; }
+			get { return string.Empty; }
 	    }
 
 	    public override bool Selected
 	    {
-	        get { return selected; }
+	        get { return false; }
 	    }
 
 	    public override string this[string attributeName]

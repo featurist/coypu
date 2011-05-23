@@ -196,6 +196,16 @@ namespace Coypu
 			}
 		}
 
+		public void WithinFieldset(string locator, Action action)
+		{
+			Within(() => driver.FindFieldset(locator),action);
+		}
+		
+		public void WithinSection(string locator, Action action)
+		{
+			Within(() => driver.FindSection(locator),action);
+		}
+
 		public void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
 		{
 			robustWrapper.TryUntil(() => ClickButton(locator), until, waitBetweenRetries);

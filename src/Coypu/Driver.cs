@@ -30,5 +30,7 @@ namespace Coypu
 		void SetScope(Func<Element> find);
 		void ClearScope();
 	    string ExecuteScript(string javascript);
+		Element FindFieldset(string locator);
+		Element FindSection(string locator);
 	}
 }
