@@ -1,6 +1,7 @@
 ﻿using System;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {
@@ -16,6 +17,8 @@ namespace Coypu.AcceptanceTests
 			Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);
 		}
 
+        public Session browser { get { return Browser.Session; } }
+
 		[TearDown]
 		public void TearDown()
 		{
@@ -26,24 +29,23 @@ namespace Coypu.AcceptanceTests
 		public void AutotraderCurrentAPI()
 		{
 			Configuration.AppHost = "www.autotrader.co.uk";
-			var session = Browser.Session;
-			session.Visit("/used-cars");
+			browser.Visit("/used-cars");
 
-            session.Within(() => session.FindCss("form.searchForm"), () =>
+            browser.Within(() => browser.FindCss("form.searchForm"), () =>
             {
-                session.FillIn("postcode").With("N1 1AA");
+                browser.FillIn("postcode").With("N1 1AA");
 
-                session.Select("citroen").From("make");
-                session.Select("c4_grand_picasso").From("model");
+                browser.Select("citroen").From("make");
+                browser.Select("c4_grand_picasso").From("model");
 
-                session.Select("National").From("radius");
-                session.Select("diesel").From("fuel-type");
-                session.Select("up_to_7_years_old").From("maximum-age");
-                session.Select("up_to_60000_miles").From("maximum-mileage");
+                browser.Select("National").From("radius");
+                browser.Select("diesel").From("fuel-type");
+                browser.Select("up_to_7_years_old").From("maximum-age");
+                browser.Select("up_to_60000_miles").From("maximum-mileage");
 
-                session.FillIn("Add keyword:").With("vtr");
+                browser.FillIn("Add keyword:").With("vtr");
 
-                session.ClickButton("search-used-vehicles");
+                browser.ClickButton("search-used-vehicles");
             });
 		}
 
@@ -55,39 +57,54 @@ namespace Coypu.AcceptanceTests
 
 			Configuration.AppHost = "www.autotrader.co.uk";
 
-			var session = Browser.Session;
-			session.Visit("/used-cars");
+			browser.Visit("/used-cars");
 
-			session.FillIn("Postcode").With("N1 1AA"); // Match label text before ':'
+			browser.FillIn("Postcode").With("N1 1AA"); // Match label text before ':'
 
-			session.Select("CITROEN").From("Make"); // If no exact match, match value starts with; ignore case on id/name;
-			session.Select("C4 GRAND PICASSO").From("Model"); // If no exact Match, match value starts with; ignore case on id/name;
+			browser.Select("CITROEN").From("Make"); // If no exact match, match value starts with; ignore case on id/name;
+			browser.Select("C4 GRAND PICASSO").From("Model"); // If no exact Match, match value starts with; ignore case on id/name;
 
-			session.Select("National").From("Distance"); // Find labels with display:none / ignore case on id/name;
-			session.Select("Diesel").From("Fuel type"); // ignore case AND try match with '-' or '_' replaced with whitespace on id/name;
-			session.Select("Up to 7 years old").From("Age"); // ignore case on id/name;
-			session.Select("Up to 60,000 miles").From("Mileage"); //ignore case on id/name;
+			browser.Select("National").From("Distance"); // Find labels with display:none / ignore case on id/name;
+			browser.Select("Diesel").From("Fuel type"); // ignore case AND try match with '-' or '_' replaced with whitespace on id/name;
+			browser.Select("Up to 7 years old").From("Age"); // ignore case on id/name;
+			browser.Select("Up to 60,000 miles").From("Mileage"); //ignore case on id/name;
 
-			session.FillIn("Add keyword").With("VTI"); // Match label text before ':'
+			browser.FillIn("Add keyword").With("VTI"); // Match label text before ':'
 
-			session.ClickButton("Search"); // // If no exact match, match name starts with (this may be too loose to be helpful)
+			browser.ClickButton("Search"); // // If no exact match, match name starts with (this may be too loose to be helpful)
 		}
 
 		[Test]
 		public void NewTwitter()
 		{
-			var session = Browser.Session;
 			Configuration.AppHost = "www.twitter.com";
-			session.Visit("/");
+			browser.Visit("/");
 
-			session.FillIn("session[username_or_email]").With("coyputester");
-			session.FillIn("session[password]").With("nappybara");
+			browser.FillIn("session[username_or_email]").With("coyputester");
+			browser.FillIn("session[password]").With("nappybara");
 
-			session.ClickButton("Sign in");
-			session.ClickLink("find some interesting people");
-			session.ClickLink("Technology");
-			session.ClickLink("dickc");
-
+			browser.ClickButton("Sign in");
+			browser.ClickLink("find some interesting people");
+			browser.ClickLink("Technology");
+			browser.ClickLink("dickc");
 		}
+
+        [Test]
+        public void CarBuzz()
+        {
+            Configuration.AppHost = "carbuzz.heroku.com";
+
+            browser.Visit("/car_search");
+            browser.WithinSection("Make",
+                                  () =>
+                                      {
+                                          browser.Check("Audi");
+                                          browser.Check("Ford");
+                                          browser.Check("Maserati");
+                                      });
+            browser.WithinSection("Seats", () => browser.ClickButton("4"));
+
+            Assert.That(browser.HasContent("11 car reviews found"));
+        }
 	}
 }
