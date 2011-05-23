@@ -9,6 +9,7 @@ namespace Coypu.Drivers.Tests
 
 		protected Driver driver { get { return DriverSpecRunner.Driver; } }
 		protected ActionRegister describe { get { return DriverSpecRunner.NSpecDescribe; } }
+		protected ActionRegister context { get { return DriverSpecRunner.NSpecContext; } }
 		protected ActionRegister it { get { return DriverSpecRunner.NSpecIt; } }
 		protected Action before { set { DriverSpecRunner.NSpecBefore = value; } }
 		protected Action after { set { DriverSpecRunner.NSpecAfter = value; } }

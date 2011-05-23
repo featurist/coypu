@@ -22,6 +22,10 @@ namespace Coypu.Drivers.Selenium
 		{
 			return elements.Any(Displayed);
 		}
+		public static bool AnyDisplayed(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
+		{
+			return elements.Where(predicate).Any(Displayed);
+		}
 
 		public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
 		{
