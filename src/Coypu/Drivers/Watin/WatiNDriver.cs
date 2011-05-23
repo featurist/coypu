@@ -48,7 +48,17 @@ namespace Coypu.Drivers.Watin
 	        throw new NotSupportedException();
 	    }
 
-	    public Element FindButton(string locator)
+		public Element FindFieldset(string locator)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Element FindSection(string locator)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Element FindButton(string locator)
 		{
 			var button = Watin.Buttons.Filter(b => b.Text == locator).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault() ??
 						 Watin.Buttons.Filter(b => b.Id == locator).Cast<WatiN.Core.Element>().FirstDisplayedOrDefault();

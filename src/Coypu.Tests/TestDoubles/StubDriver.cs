@@ -130,5 +130,15 @@ namespace Coypu.Tests.TestDoubles
 	    {
 	        return null;
 	    }
+
+		public Element FindFieldset(string locator)
+		{
+			return null;
+		}
+
+		public Element FindSection(string locator)
+		{
+			return null;
+		}
 	}
 }

@@ -24,6 +24,8 @@ namespace Coypu.Tests.TestDoubles
 		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Element>>();
 		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Element>>();
         private readonly IDictionary<string, string> stubbedExecuteScriptResults = new Dictionary<string, string>();
+		private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
+		private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
 		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
 		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
@@ -207,7 +209,17 @@ namespace Coypu.Tests.TestDoubles
 	        return stubbedExecuteScriptResults[javascript];
 	    }
 
-	    public void Set(Element element, string value)
+		public Element FindFieldset(string locator)
+		{
+			return stubbedFieldsets[locator];
+		}
+		
+		public Element FindSection(string locator)
+		{
+			return stubbedSections[locator];
+		}
+
+		public void Set(Element element, string value)
 		{
 			setFields.Add(element, value);
 		}
@@ -286,14 +298,24 @@ namespace Coypu.Tests.TestDoubles
 	        stubbedExecuteScriptResults.Add(script, scriptReturnValue);
 	    }
 
-        private void LogTiming(params string[] args)
+		public void StubFieldset(string locator, StubElement fieldset)
+		{
+			stubbedFieldsets.Add(locator, fieldset);
+		}
+		
+		public void StubSection(string locator, StubElement fieldset)
+		{
+			stubbedSections.Add(locator, fieldset);
+		}
+
+		private void LogTiming(params string[] args)
         {
             var method = new StackTrace().GetFrame(1).GetMethod();
             while (timings.ContainsKey(DateTime.Now.Ticks)){} 
             timings.Add(DateTime.Now.Ticks, FormatTimingDetails(method.Name, args));
         }
 
-        private string FormatTimingDetails(string method, params string[] args)
+		private string FormatTimingDetails(string method, params string[] args)
         {
             return string.Format("{0}({1})", method, string.Join(" ; ", args));
         }
