@@ -1,17 +1,14 @@
-﻿using System;
-using Coypu.Drivers.Watin;
-using NSpec;
+﻿using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
-    [NotSupportedBy(typeof(WatiNDriver))]
     public class When_finding_buttons_within_scope : DriverSpecs
     {
         internal override void Specs()
         {
             describe["within scope1"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindCss("#scope1"));
+                before = () => driver.SetScope(() => driver.FindId("scope1"));
 
                 it["finds button by name"] = () =>
                 {
@@ -28,7 +25,7 @@ namespace Coypu.Drivers.Tests
             };
             describe["within scope2"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindCss("#scope2"));
+                before = () => driver.SetScope(() => driver.FindId("scope2"));
 
                 it["finds button by name"] = () =>
                 {

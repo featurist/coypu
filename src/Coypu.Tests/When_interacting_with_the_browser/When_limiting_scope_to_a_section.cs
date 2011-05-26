@@ -3,16 +3,16 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-	[TestFixture]
-	public class When_limiting_scope_to_a_section : BrowserInteractionTests
-	{
+    [TestFixture]
+    public class When_limiting_scope_to_a_section : BrowserInteractionTests
+    {
         [Test]
         public void It_sets_the_scope_before_executing_action()
         {
-        	const string locator = "Section locator";
+            const string locator = "Section locator";
 
-        	var section = new StubElement();
-        	driver.StubSection(locator, section);
+            var section = new StubElement();
+            driver.StubSection(locator, section);
 
             Element actualScope = null;
             session.WithinSection(locator, () =>
@@ -26,10 +26,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_clears_the_scope_after_executing_action()
         {
-			const string locator = "Section locator";
+            const string locator = "Section locator";
 
             var section = new StubElement();
-        	driver.StubSection(locator, section);
+            driver.StubSection(locator, section);
 
             session.WithinSection(locator, () => {});
 
@@ -39,10 +39,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_clears_the_scope_after_exception_in_action()
         {
-			const string locator = "Section locator";
+            const string locator = "Section locator";
 
-			var section = new StubElement();
-			driver.StubSection(locator, section);
+            var section = new StubElement();
+            driver.StubSection(locator, section);
 
             Assert.Throws<ExplicitlyThrownTestException>(
                 () => session.WithinSection(
@@ -51,5 +51,5 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.Scope, Is.Null);
         }
-	}
+    }
 }

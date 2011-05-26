@@ -4,141 +4,146 @@ using System.Linq;
 
 namespace Coypu.Tests.TestDoubles
 {
-	public class StubDriver : Driver
-	{
-		public void Dispose()
-		{
-		}
+    public class StubDriver : Driver
+    {
+        public void Dispose()
+        {
+        }
 
-		public Element FindButton(string locator)
-		{
-			return null;
-		}
+        public Element FindButton(string locator)
+        {
+            return null;
+        }
 
-		public Element FindLink(string locator)
-		{
-			return null;
-		}
+        public Element FindLink(string locator)
+        {
+            return null;
+        }
 
-		public Element FindField(string locator)
-		{
-			return null;
-		}
+        public Element FindField(string locator)
+        {
+            return null;
+        }
 
-		public void Click(Element element)
-		{
-		}
+        public void Click(Element element)
+        {
+        }
 
-		public void Visit(string url)
-		{
-		}
+        public void Visit(string url)
+        {
+        }
 
-		public void Set(Element element, string value)
-		{
-		}
+        public void Set(Element element, string value)
+        {
+        }
 
-		public void Select(Element element, string option)
-		{
-		}
+        public void Select(Element element, string option)
+        {
+        }
 
-		public object Native
-		{
-			get { return "Native driver on stub driver"; }
-		}
+        public object Native
+        {
+            get { return "Native driver on stub driver"; }
+        }
 
-		public bool HasContent(string text)
-		{
-			return false;
-		}
+        public bool HasContent(string text)
+        {
+            return false;
+        }
 
-		public bool HasCss(string cssSelector)
-		{
-			return false;
-		}
+        public bool HasCss(string cssSelector)
+        {
+            return false;
+        }
 
-		public bool HasXPath(string xpath)
-		{
-			return false;
-		}
+        public bool HasXPath(string xpath)
+        {
+            return false;
+        }
 
-		public bool HasDialog(string withText)
-		{
-			return false;
-		}
+        public bool HasDialog(string withText)
+        {
+            return false;
+        }
 
-		public Element FindCss(string cssSelector)
-		{
-			return null;
-		}
+        public Element FindCss(string cssSelector)
+        {
+            return null;
+        }
 
-		public Element FindXPath(string xpath)
-		{
-			return null;
-		}
+        public Element FindXPath(string xpath)
+        {
+            return null;
+        }
 
-		public IEnumerable<Element> FindAllCss(string cssSelector)
-		{
-			return Enumerable.Empty<Element>();
-		}
+        public IEnumerable<Element> FindAllCss(string cssSelector)
+        {
+            return Enumerable.Empty<Element>();
+        }
 
-		public IEnumerable<Element> FindAllXPath(string xpath)
-		{
-			return Enumerable.Empty<Element>();
-		}
+        public IEnumerable<Element> FindAllXPath(string xpath)
+        {
+            return Enumerable.Empty<Element>();
+        }
 
-		public void Check(Element field)
-		{
-			
-		}
+        public void Check(Element field)
+        {
+            
+        }
 
-		public void Uncheck(Element field)
-		{
-			
-		}
+        public void Uncheck(Element field)
+        {
+            
+        }
 
-		public void Choose(Element field)
-		{
-			
-		}
+        public void Choose(Element field)
+        {
+            
+        }
 
-		public bool Disposed
-		{
-			get { return false; }
-		}
+        public bool Disposed
+        {
+            get { return false; }
+        }
 
-		public void AcceptModalDialog()
-		{
-			
-		}
+        public void AcceptModalDialog()
+        {
+            
+        }
 
-		public void CancelModalDialog()
-		{
-			
-		}
+        public void CancelModalDialog()
+        {
+            
+        }
 
-		public void SetScope(Func<Element> findScope)
-		{
-			
-		}
+        public void SetScope(Func<Element> findScope)
+        {
+            
+        }
 
-	    public void ClearScope()
-		{
-			
-		}
+        public void ClearScope()
+        {
+            
+        }
 
-	    public string ExecuteScript(string javascript)
-	    {
-	        return null;
-	    }
+        public string ExecuteScript(string javascript)
+        {
+            return null;
+        }
 
-		public Element FindFieldset(string locator)
-		{
-			return null;
-		}
+        public Element FindFieldset(string locator)
+        {
+            return null;
+        }
 
-		public Element FindSection(string locator)
-		{
-			return null;
-		}
-	}
+        public Element FindSection(string locator)
+        {
+            return null;
+        }
+
+        public Element FindId(string id)
+        {
+            return null;
+        }
+    }
 }

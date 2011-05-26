@@ -1,15 +1,16 @@
-﻿using Coypu.Drivers.Watin;
+﻿using System.Threading;
+using Coypu.Drivers.Watin;
 using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
-    [NotSupportedBy(typeof(WatiNDriver))]
-	internal class When_executing_script : DriverSpecs
-	{
-		internal override void Specs()
-		{
+    internal class When_executing_script : DriverSpecs
+    {
+        internal override void Specs()
+        {
             it["runs the script in the browser"] = () =>
             {
+                Thread.Sleep(5000);
                 driver.FindButton("firstButtonId").Text.should_be("first button");
 
                 driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';");
@@ -21,6 +22,6 @@ namespace Coypu.Drivers.Tests
             {
                 driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;").should_be("first button");
             };
-		}
-	}
+        }
+    }
 }

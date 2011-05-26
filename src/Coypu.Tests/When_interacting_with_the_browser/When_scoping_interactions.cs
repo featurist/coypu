@@ -3,9 +3,9 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-	[TestFixture]
-	public class When_scoping_interactions : BrowserInteractionTests
-	{
+    [TestFixture]
+    public class When_scoping_interactions : BrowserInteractionTests
+    {
         [Test]
         public void It_sets_the_scope_before_executing_action()
         {
@@ -40,5 +40,5 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.Scope, Is.Null);
         }
-	}
+    }
 }
