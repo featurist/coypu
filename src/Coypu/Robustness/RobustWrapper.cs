@@ -2,11 +2,11 @@
 
 namespace Coypu.Robustness
 {
-	public interface RobustWrapper
-	{
-		void Robustly(Action action);
-		TResult Robustly<TResult>(Func<TResult> function);
-		T Query<T>(Func<T> query, T expecting);
-	    void TryUntil(Action tryThis, Func<bool> until, TimeSpan untilTimeout);
-	}
+    public interface RobustWrapper
+    {
+        void Robustly(Action action);
+        TResult Robustly<TResult>(Func<TResult> function);
+        T Query<T>(Func<T> query, T expecting);
+        void TryUntil(Action tryThis, Func<bool> until, TimeSpan untilTimeout);
+    }
 }

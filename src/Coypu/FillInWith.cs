@@ -2,28 +2,28 @@
 
 namespace Coypu
 {
-	public class FillInWith
-	{
-		private readonly string locator;
-		private readonly Driver driver;
-		private readonly RobustWrapper robustWrapper;
+    public class FillInWith
+    {
+        private readonly string locator;
+        private readonly Driver driver;
+        private readonly RobustWrapper robustWrapper;
 
-		public FillInWith(string locator, Driver driver, RobustWrapper robustWrapper)
-		{
-			this.locator = locator;
-			this.driver = driver;
-			this.robustWrapper = robustWrapper;
-		}
+        public FillInWith(string locator, Driver driver, RobustWrapper robustWrapper)
+        {
+            this.locator = locator;
+            this.driver = driver;
+            this.robustWrapper = robustWrapper;
+        }
 
-		public void With(string value)
-		{
-			robustWrapper.Robustly(
-				() =>
-					{
-						driver.Click(driver.FindField(locator));
-						driver.Set(driver.FindField(locator), value);
-					});
+        public void With(string value)
+        {
+            robustWrapper.Robustly(
+                () =>
+                    {
+                        driver.Click(driver.FindField(locator));
+                        driver.Set(driver.FindField(locator), value);
+                    });
 
-		}
-	}
+        }
+    }
 }

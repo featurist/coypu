@@ -108,6 +108,7 @@
     <Compile Include="When_finding_buttons_within_scope.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="When_finding_sections_as_divs.cs" />
     <Compile Include="When_finding_fields.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -53,8 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TrickyAjaxFormFilling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrickyAjaxFormFilling.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu\Coypu.csproj">

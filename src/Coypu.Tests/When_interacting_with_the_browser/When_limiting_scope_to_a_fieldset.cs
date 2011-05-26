@@ -3,16 +3,16 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-	[TestFixture]
-	public class When_limiting_scope_to_a_fieldset : BrowserInteractionTests
-	{
+    [TestFixture]
+    public class When_limiting_scope_to_a_fieldset : BrowserInteractionTests
+    {
         [Test]
         public void It_sets_the_scope_before_executing_action()
         {
-        	const string locator = "Fieldset locator";
+            const string locator = "Fieldset locator";
 
-        	var fieldset = new StubElement();
-        	driver.StubFieldset(locator, fieldset);
+            var fieldset = new StubElement();
+            driver.StubFieldset(locator, fieldset);
 
             Element actualScope = null;
             session.WithinFieldset(locator, () =>
@@ -26,10 +26,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_clears_the_scope_after_executing_action()
         {
-			const string locator = "Fieldset locator";
+            const string locator = "Fieldset locator";
 
             var fieldset = new StubElement();
-        	driver.StubFieldset(locator, fieldset);
+            driver.StubFieldset(locator, fieldset);
 
             session.WithinFieldset(locator, () => {});
 
@@ -39,10 +39,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_clears_the_scope_after_exception_in_action()
         {
-			const string locator = "Fieldset locator";
+            const string locator = "Fieldset locator";
 
-			var fieldset = new StubElement();
-			driver.StubFieldset(locator, fieldset);
+            var fieldset = new StubElement();
+            driver.StubFieldset(locator, fieldset);
 
             Assert.Throws<ExplicitlyThrownTestException>(
                 () => session.WithinFieldset(
@@ -51,5 +51,5 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.Scope, Is.Null);
         }
-	}
+    }
 }

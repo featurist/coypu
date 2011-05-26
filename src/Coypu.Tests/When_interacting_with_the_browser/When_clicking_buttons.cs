@@ -5,45 +5,45 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-	[TestFixture]
-	public class When_clicking_buttons : BrowserInteractionTests
-	{
-		[Test]
-		public void It_robustly_finds_by_text_and_clicks()
-		{
-			var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
+    [TestFixture]
+    public class When_clicking_buttons : BrowserInteractionTests
+    {
+        [Test]
+        public void It_robustly_finds_by_text_and_clicks()
+        {
+            var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
 
-			session.ClickButton("Some button locator");
+            session.ClickButton("Some button locator");
 
-			AssertNotClickedYet(buttonToBeClicked);
-			ExecuteDeferedRobustAction();
-			AssertClicked(buttonToBeClicked);
-		}
+            AssertNotClickedYet(buttonToBeClicked);
+            ExecuteDeferedRobustAction();
+            AssertClicked(buttonToBeClicked);
+        }
 
-		private void AssertClicked(StubElement buttonToBeClicked)
-		{
-			Assert.That(driver.ClickedElements, Has.Member(buttonToBeClicked));
-		}
+        private void AssertClicked(StubElement buttonToBeClicked)
+        {
+            Assert.That(driver.ClickedElements, Has.Member(buttonToBeClicked));
+        }
 
-		[TestCase(true, 1)]
-		[TestCase(false, 1)]
-		[TestCase(false, 321)]
-		public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
-		{
-			var waitBetweenRetries = TimeSpan.FromSeconds(untilTimeoutSecs);
-			var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
+        [TestCase(true, 1)]
+        [TestCase(false, 1)]
+        [TestCase(false, 321)]
+        public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
+        {
+            var waitBetweenRetries = TimeSpan.FromSeconds(untilTimeoutSecs);
+            var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
 
-			session.ClickButton("Some button locator", () => stubUntil, waitBetweenRetries);
+            session.ClickButton("Some button locator", () => stubUntil, waitBetweenRetries);
 
-			var tryUntilArgs = GetTryUntilArgs();
+            var tryUntilArgs = GetTryUntilArgs();
 
-			AssertNotClickedYet(buttonToBeClicked);
-			ExecuteDeferedRobustAction();
-			AssertClicked(buttonToBeClicked);
+            AssertNotClickedYet(buttonToBeClicked);
+            ExecuteDeferedRobustAction();
+            AssertClicked(buttonToBeClicked);
 
-			Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
-			Assert.That(tryUntilArgs.UntilTimeout, Is.EqualTo(waitBetweenRetries));
-		}
+            Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
+            Assert.That(tryUntilArgs.UntilTimeout, Is.EqualTo(waitBetweenRetries));
+        }
 
         [Test]
         public void It_waits_between_find_and_click_as_configured()
@@ -78,34 +78,34 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             return TimeSpan.FromTicks(clickTiming) - TimeSpan.FromTicks(findTiming);
         }
 
-		private void AssertNotClickedYet(StubElement buttonToBeClicked)
-		{
-			Assert.That(driver.ClickedElements, Has.No.Member(buttonToBeClicked));
-		}
+        private void AssertNotClickedYet(StubElement buttonToBeClicked)
+        {
+            Assert.That(driver.ClickedElements, Has.No.Member(buttonToBeClicked));
+        }
 
-		private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
-		{
-			var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
-			tryUntilArgs.TryThis();
-			return tryUntilArgs;
-		}
+        private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
+        {
+            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
+            tryUntilArgs.TryThis();
+            return tryUntilArgs;
+        }
 
-		private void ExecuteDeferedRobustAction()
-		{
-			spyRobustWrapper.DeferredActions.Single()();
-		}
+        private void ExecuteDeferedRobustAction()
+        {
+            spyRobustWrapper.DeferredActions.Single()();
+        }
 
         private void ExecuteLastDeferedRobustAction()
         {
             spyRobustWrapper.DeferredActions.Last()();
         }
 
-		private StubElement StubButtonToBeClicked(string locator)
-		{
-			var buttonToBeClicked = new StubElement();
+        private StubElement StubButtonToBeClicked(string locator)
+        {
+            var buttonToBeClicked = new StubElement();
             buttonToBeClicked.SetId(Guid.NewGuid().ToString());
-			driver.StubButton(locator, buttonToBeClicked);
-			return buttonToBeClicked;
-		}
-	}
+            driver.StubButton(locator, buttonToBeClicked);
+            return buttonToBeClicked;
+        }
+    }
 }

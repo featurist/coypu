@@ -1,8 +1,8 @@
 ﻿namespace Coypu.Drivers
 {
-	public enum WebDriver
-	{
-		Selenium,
-		WatiN
-	}
+    public enum WebDriver
+    {
+        Selenium,
+        WatiN
+    }
 }

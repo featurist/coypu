@@ -1,7 +1,6 @@
 ﻿using System;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
-using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {

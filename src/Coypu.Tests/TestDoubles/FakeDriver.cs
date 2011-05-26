@@ -4,320 +4,325 @@ using System.Diagnostics;
 
 namespace Coypu.Tests.TestDoubles
 {
-	public class FakeDriver : Driver
-	{
-		private readonly IList<Element> clickedElements = new List<Element>();
-		private readonly IList<Element> checkedElements = new List<Element>();
-		private readonly IList<Element> uncheckedElements = new List<Element>();
-		private readonly IList<Element> chosenElements = new List<Element>();
-		private readonly IList<string> hasContentQueries = new List<string>();
-		private readonly IList<string> hasCssQueries = new List<string>();
-		private readonly IList<string> hasXPathQueries = new List<string>();
-		private readonly IList<string> visits = new List<string>();
-		private readonly IDictionary<Element, string> setFields = new Dictionary<Element, string>();
-		private readonly IDictionary<Element, string> selectedOptions = new Dictionary<Element, string>();
-		private readonly Dictionary<string, Element> stubbedButtons = new Dictionary<string, Element>();
-		private readonly Dictionary<string, Element> stubbedLinks = new Dictionary<string, Element>();
-		private readonly Dictionary<string, Element> stubbedTextFields = new Dictionary<string, Element>();
-		private readonly Dictionary<string, Element> stubbedCssResults = new Dictionary<string, Element>();
-		private readonly Dictionary<string, Element> stubbedXPathResults = new Dictionary<string, Element>();
-		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Element>>();
-		private readonly IDictionary<string, IEnumerable<Element>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Element>>();
+    public class FakeDriver : Driver
+    {
+        private readonly IList<Element> clickedElements = new List<Element>();
+        private readonly IList<Element> checkedElements = new List<Element>();
+        private readonly IList<Element> uncheckedElements = new List<Element>();
+        private readonly IList<Element> chosenElements = new List<Element>();
+        private readonly IList<string> hasContentQueries = new List<string>();
+        private readonly IList<string> hasCssQueries = new List<string>();
+        private readonly IList<string> hasXPathQueries = new List<string>();
+        private readonly IList<string> visits = new List<string>();
+        private readonly IDictionary<Element, string> setFields = new Dictionary<Element, string>();
+        private readonly IDictionary<Element, string> selectedOptions = new Dictionary<Element, string>();
+        private readonly Dictionary<string, Element> stubbedButtons = new Dictionary<string, Element>();
+        private readonly Dictionary<string, Element> stubbedLinks = new Dictionary<string, Element>();
+        private readonly Dictionary<string, Element> stubbedTextFields = new Dictionary<string, Element>();
+        private readonly Dictionary<string, Element> stubbedCssResults = new Dictionary<string, Element>();
+        private readonly Dictionary<string, Element> stubbedXPathResults = new Dictionary<string, Element>();
+        private readonly IDictionary<string, IEnumerable<Element>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Element>>();
+        private readonly IDictionary<string, IEnumerable<Element>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Element>>();
         private readonly IDictionary<string, string> stubbedExecuteScriptResults = new Dictionary<string, string>();
-		private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
-		private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
-		private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
-		private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
-		private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
-		private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
-	    private readonly IDictionary<long, string> timings = new Dictionary<long, string>();
-	    private Func<Element> findScope;
+        private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
+        private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
+        private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
+        private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
+        private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
+        private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
+        private readonly IDictionary<long, string> timings = new Dictionary<long, string>();
+        private Func<Element> findScope;
 
-	    public IDictionary<long, string> Timings
-	    {
+        public IDictionary<long, string> Timings
+        {
             get { return timings; }
-	    }
+        }
 
-	    public IEnumerable<Element> ClickedElements
-		{
-			get { return clickedElements; }
-		}
+        public IEnumerable<Element> ClickedElements
+        {
+            get { return clickedElements; }
+        }
 
-		public IDictionary<Element, string> SetFields
-		{
-			get { return setFields; }
-		}
+        public IDictionary<Element, string> SetFields
+        {
+            get { return setFields; }
+        }
 
-		public IDictionary<Element, string> SelectedOptions
-		{
-			get { return selectedOptions; }
-		}
+        public IDictionary<Element, string> SelectedOptions
+        {
+            get { return selectedOptions; }
+        }
 
-		public IEnumerable<Element> CheckedElements
-		{
-			get { return checkedElements; }
-		}
+        public IEnumerable<Element> CheckedElements
+        {
+            get { return checkedElements; }
+        }
 
-		public IEnumerable<Element> ChosenElements
-		{
-			get { return chosenElements; }
-		}
+        public IEnumerable<Element> ChosenElements
+        {
+            get { return chosenElements; }
+        }
 
-		public IEnumerable<Element> UncheckedElements
-		{
-			get { return uncheckedElements; }
-		}
+        public IEnumerable<Element> UncheckedElements
+        {
+            get { return uncheckedElements; }
+        }
 
-		public IEnumerable<string> Visits
-		{
-			get { return visits; }
-		}
+        public IEnumerable<string> Visits
+        {
+            get { return visits; }
+        }
 
-		public IEnumerable<string> HasContentQueries
-		{
-			get { return hasContentQueries; }
-		}
+        public IEnumerable<string> HasContentQueries
+        {
+            get { return hasContentQueries; }
+        }
 
-		public IEnumerable<string> HasCssQueries
-		{
-			get { return hasCssQueries; }
-		}
+        public IEnumerable<string> HasCssQueries
+        {
+            get { return hasCssQueries; }
+        }
 
-		public IEnumerable<string> HasXPathQueries
-		{
-			get { return hasXPathQueries; }
-		}
+        public IEnumerable<string> HasXPathQueries
+        {
+            get { return hasXPathQueries; }
+        }
 
-		public Element FindButton(string locator)
-		{
-		    LogTiming(locator);
-		    return stubbedButtons[locator];
-		}
-
-	    public Element FindLink(string locator)
-		{
+        public Element FindButton(string locator)
+        {
             LogTiming(locator);
-			return stubbedLinks[locator];
-		}
+            return stubbedButtons[locator];
+        }
 
-		public Element FindField(string locator)
-		{
-			return stubbedTextFields[locator];
-		}
+        public Element FindLink(string locator)
+        {
+            LogTiming(locator);
+            return stubbedLinks[locator];
+        }
 
-		public void Click(Element element)
-		{
+        public Element FindField(string locator)
+        {
+            return stubbedTextFields[locator];
+        }
+
+        public void Click(Element element)
+        {
             LogTiming(element.Id);
-			clickedElements.Add(element);
-		}
+            clickedElements.Add(element);
+        }
 
-		public void Visit(string url)
-		{
-			visits.Add(url);
-		}
+        public void Visit(string url)
+        {
+            visits.Add(url);
+        }
 
-		public void StubButton(string locator, Element element)
-		{
-			stubbedButtons[locator] = element;
-		}
+        public void StubButton(string locator, Element element)
+        {
+            stubbedButtons[locator] = element;
+        }
 
-		public void StubLink(string locator, Element element)
-		{
-			stubbedLinks[locator] = element;
-		}
+        public void StubLink(string locator, Element element)
+        {
+            stubbedLinks[locator] = element;
+        }
 
-		public void StubField(string locator, Element element)
-		{
-			stubbedTextFields[locator] = element;
-		}
+        public void StubField(string locator, Element element)
+        {
+            stubbedTextFields[locator] = element;
+        }
 
-		public void StubHasContent(string text, bool result)
-		{
-			stubbedHasContentResults.Add(text, result);
-		}
-
-
-		public void StubHasCss(string cssSelector, bool result)
-		{
-			stubbedHasCssResults.Add(cssSelector, result);
-		}
+        public void StubHasContent(string text, bool result)
+        {
+            stubbedHasContentResults.Add(text, result);
+        }
 
 
-		public void StubHasXPath(string xpath, bool result)
-		{
-			stubbedHasXPathResults.Add(xpath, result);
-		}
+        public void StubHasCss(string cssSelector, bool result)
+        {
+            stubbedHasCssResults.Add(cssSelector, result);
+        }
 
-		public void StubDialog(string text, bool result)
-		{
-			stubbedHasDialogResults.Add(text, result);
-		}
 
-		public void StubCss(string cssSelector, Element result)
-		{
-			stubbedCssResults.Add(cssSelector, result);
-		}
+        public void StubHasXPath(string xpath, bool result)
+        {
+            stubbedHasXPathResults.Add(xpath, result);
+        }
 
-		public void StubXPath(string cssSelector, Element result)
-		{
-			stubbedXPathResults.Add(cssSelector, result);
-		}
+        public void StubDialog(string text, bool result)
+        {
+            stubbedHasDialogResults.Add(text, result);
+        }
 
-		public void StubAllCss(string cssSelector, IEnumerable<Element> result)
-		{
-			stubbedAllCssResults.Add(cssSelector, result);
-		}
+        public void StubCss(string cssSelector, Element result)
+        {
+            stubbedCssResults.Add(cssSelector, result);
+        }
 
-		public void StubAllXPath(string xpath, IEnumerable<Element> result)
-		{
-			stubbedAllXPathResults.Add(xpath, result);
-		}
+        public void StubXPath(string cssSelector, Element result)
+        {
+            stubbedXPathResults.Add(cssSelector, result);
+        }
 
-		public void Dispose()
-		{
-			Disposed = true;
-		}
+        public void StubAllCss(string cssSelector, IEnumerable<Element> result)
+        {
+            stubbedAllCssResults.Add(cssSelector, result);
+        }
 
-		public bool Disposed { get; private set; }
-		public void AcceptModalDialog()
-		{
-			ModalDialogsAccepted++;
-		}
+        public void StubAllXPath(string xpath, IEnumerable<Element> result)
+        {
+            stubbedAllXPathResults.Add(xpath, result);
+        }
 
-		public void CancelModalDialog()
-		{
-			ModalDialogsCancelled++;
-		}
+        public void Dispose()
+        {
+            Disposed = true;
+        }
+
+        public bool Disposed { get; private set; }
+        public void AcceptModalDialog()
+        {
+            ModalDialogsAccepted++;
+        }
+
+        public void CancelModalDialog()
+        {
+            ModalDialogsCancelled++;
+        }
 
         public void SetScope(Func<Element> find)
-		{
-		    findScope = find;
-		}
+        {
+            findScope = find;
+        }
 
-	    public Element Scope
-	    {
+        public Element Scope
+        {
             get { return findScope == null ? null : findScope();}
-	    }
+        }
 
-	    public void ClearScope()
-	    {
-	        findScope = null;
-	    }
+        public void ClearScope()
+        {
+            findScope = null;
+        }
 
-	    public string ExecuteScript(string javascript)
-	    {
-	        return stubbedExecuteScriptResults[javascript];
-	    }
+        public string ExecuteScript(string javascript)
+        {
+            return stubbedExecuteScriptResults[javascript];
+        }
 
-		public Element FindFieldset(string locator)
-		{
-			return stubbedFieldsets[locator];
-		}
-		
-		public Element FindSection(string locator)
-		{
-			return stubbedSections[locator];
-		}
+        public Element FindFieldset(string locator)
+        {
+            return stubbedFieldsets[locator];
+        }
+        
+        public Element FindSection(string locator)
+        {
+            return stubbedSections[locator];
+        }
 
-		public void Set(Element element, string value)
-		{
-			setFields.Add(element, value);
-		}
+        public Element FindId(string id)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Select(Element element, string option)
-		{
-			selectedOptions.Add(element, option);
-		}
+        public void Set(Element element, string value)
+        {
+            setFields.Add(element, value);
+        }
 
-		public object Native
-		{
-			get { return "Native driver on fake driver"; }
-		}
+        public void Select(Element element, string option)
+        {
+            selectedOptions.Add(element, option);
+        }
 
-		public int ModalDialogsAccepted { get; private set; }
-		public int ModalDialogsCancelled { get; private set; }
+        public object Native
+        {
+            get { return "Native driver on fake driver"; }
+        }
 
-		public bool HasContent(string text)
-		{
-			hasContentQueries.Add(text);
-			return stubbedHasContentResults[text];
-		}
+        public int ModalDialogsAccepted { get; private set; }
+        public int ModalDialogsCancelled { get; private set; }
 
-		public bool HasCss(string cssSelector)
-		{
-			return stubbedHasCssResults[cssSelector];
-		}
+        public bool HasContent(string text)
+        {
+            hasContentQueries.Add(text);
+            return stubbedHasContentResults[text];
+        }
 
-		public bool HasXPath(string xpath)
-		{
-			return stubbedHasXPathResults[xpath];
-		}
+        public bool HasCss(string cssSelector)
+        {
+            return stubbedHasCssResults[cssSelector];
+        }
 
-		public bool HasDialog(string withText)
-		{
-			return stubbedHasDialogResults[withText];
-		}
+        public bool HasXPath(string xpath)
+        {
+            return stubbedHasXPathResults[xpath];
+        }
 
-		public Element FindCss(string cssSelector)
-		{
-			return stubbedCssResults[cssSelector];
-		}
+        public bool HasDialog(string withText)
+        {
+            return stubbedHasDialogResults[withText];
+        }
 
-		public Element FindXPath(string xpath)
-		{
-			return stubbedXPathResults[xpath];
-		}
+        public Element FindCss(string cssSelector)
+        {
+            return stubbedCssResults[cssSelector];
+        }
 
-		public IEnumerable<Element> FindAllCss(string cssSelector)
-		{
-			return stubbedAllCssResults[cssSelector];
-		}
+        public Element FindXPath(string xpath)
+        {
+            return stubbedXPathResults[xpath];
+        }
 
-		public IEnumerable<Element> FindAllXPath(string xpath)
-		{
-			return stubbedAllXPathResults[xpath];
-		}
+        public IEnumerable<Element> FindAllCss(string cssSelector)
+        {
+            return stubbedAllCssResults[cssSelector];
+        }
 
-		public void Check(Element field)
-		{
-			checkedElements.Add(field);
-		}
+        public IEnumerable<Element> FindAllXPath(string xpath)
+        {
+            return stubbedAllXPathResults[xpath];
+        }
 
-		public void Uncheck(Element field)
-		{
-			uncheckedElements.Add(field);
-		}
+        public void Check(Element field)
+        {
+            checkedElements.Add(field);
+        }
 
-		public void Choose(Element field)
-		{
-			chosenElements.Add(field);
-		}
+        public void Uncheck(Element field)
+        {
+            uncheckedElements.Add(field);
+        }
 
-	    public void StubExecuteScript(string script, string scriptReturnValue)
-	    {
-	        stubbedExecuteScriptResults.Add(script, scriptReturnValue);
-	    }
+        public void Choose(Element field)
+        {
+            chosenElements.Add(field);
+        }
 
-		public void StubFieldset(string locator, StubElement fieldset)
-		{
-			stubbedFieldsets.Add(locator, fieldset);
-		}
-		
-		public void StubSection(string locator, StubElement fieldset)
-		{
-			stubbedSections.Add(locator, fieldset);
-		}
+        public void StubExecuteScript(string script, string scriptReturnValue)
+        {
+            stubbedExecuteScriptResults.Add(script, scriptReturnValue);
+        }
 
-		private void LogTiming(params string[] args)
+        public void StubFieldset(string locator, StubElement fieldset)
+        {
+            stubbedFieldsets.Add(locator, fieldset);
+        }
+        
+        public void StubSection(string locator, StubElement fieldset)
+        {
+            stubbedSections.Add(locator, fieldset);
+        }
+
+        private void LogTiming(params string[] args)
         {
             var method = new StackTrace().GetFrame(1).GetMethod();
             while (timings.ContainsKey(DateTime.Now.Ticks)){} 
             timings.Add(DateTime.Now.Ticks, FormatTimingDetails(method.Name, args));
         }
 
-		private string FormatTimingDetails(string method, params string[] args)
+        private string FormatTimingDetails(string method, params string[] args)
         {
             return string.Format("{0}({1})", method, string.Join(" ; ", args));
         }
-	}
+    }
 }

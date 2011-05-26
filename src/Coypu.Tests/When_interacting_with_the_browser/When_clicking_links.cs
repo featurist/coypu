@@ -5,35 +5,35 @@ using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-	[TestFixture]
-	public class When_clicking_links : BrowserInteractionTests
-	{
+    [TestFixture]
+    public class When_clicking_links : BrowserInteractionTests
+    {
         [TearDown]
         public void TearDown()
         {
             Configuration.WaitBeforeClick = TimeSpan.Zero;
         }
 
-		[Test]
-		public void It_robustly_finds_by_text_and_clicks()
-		{
-			var linkToBeClicked = StubLinkToBeClicked("Some link locator");
+        [Test]
+        public void It_robustly_finds_by_text_and_clicks()
+        {
+            var linkToBeClicked = StubLinkToBeClicked("Some link locator");
 
-			session.ClickLink("Some link locator");
+            session.ClickLink("Some link locator");
 
-			AssertNotClickedYet(linkToBeClicked);
-			ExecuteDeferedRobustAction();
-			AssertClicked(linkToBeClicked);
-		}
+            AssertNotClickedYet(linkToBeClicked);
+            ExecuteDeferedRobustAction();
+            AssertClicked(linkToBeClicked);
+        }
 
-		private void AssertClicked(StubElement linkToBeClicked)
-		{
-			Assert.That(driver.ClickedElements, Has.Member(linkToBeClicked));
-		}
+        private void AssertClicked(StubElement linkToBeClicked)
+        {
+            Assert.That(driver.ClickedElements, Has.Member(linkToBeClicked));
+        }
 
-		[TestCase(true, 1)]
-		[TestCase(false, 1)]
-		[TestCase(false, 321)]
+        [TestCase(true, 1)]
+        [TestCase(false, 1)]
+        [TestCase(false, 321)]
         public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
         {
             var waitBetweenRetries = TimeSpan.FromSeconds(untilTimeoutSecs);
@@ -67,51 +67,51 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(waitBeforeClickActual, Is.InRange(expectedWaitBeforeClick - waitBeforeClickControl, expectedWaitBeforeClick + waitBeforeClickControl));
         }
 
-	    private TimeSpan RecordWaitBeforeClickLinkTiming(string locator, Element stubLinkToBeClicked)
-	    {
+        private TimeSpan RecordWaitBeforeClickLinkTiming(string locator, Element stubLinkToBeClicked)
+        {
             session.ClickLink(locator);
             ExecuteLastDeferedRobustAction();
 
-	        var times = driver.Timings.Keys;
+            var times = driver.Timings.Keys;
 
             var findTiming = times.ElementAt(times.Count - 2);
             var clickTiming = times.ElementAt(times.Count - 1);
 
             // Verity timings
-	        Assert.That(driver.Timings[findTiming], Is.StringContaining(locator));
+            Assert.That(driver.Timings[findTiming], Is.StringContaining(locator));
             Assert.That(driver.Timings[clickTiming], Is.StringContaining(stubLinkToBeClicked.Id));
             
-	        return TimeSpan.FromTicks(clickTiming) - TimeSpan.FromTicks(findTiming);
-	    }
+            return TimeSpan.FromTicks(clickTiming) - TimeSpan.FromTicks(findTiming);
+        }
 
-	    private void AssertNotClickedYet(StubElement linkToBeClicked)
-		{
-			Assert.That(driver.ClickedElements, Has.No.Member(linkToBeClicked));
-		}
+        private void AssertNotClickedYet(StubElement linkToBeClicked)
+        {
+            Assert.That(driver.ClickedElements, Has.No.Member(linkToBeClicked));
+        }
 
-		private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
-		{
-			var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
-			tryUntilArgs.TryThis();
-			return tryUntilArgs;
-		}
+        private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
+        {
+            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
+            tryUntilArgs.TryThis();
+            return tryUntilArgs;
+        }
 
-		private void ExecuteDeferedRobustAction()
-		{
-			spyRobustWrapper.DeferredActions.Single()();
-		}
+        private void ExecuteDeferedRobustAction()
+        {
+            spyRobustWrapper.DeferredActions.Single()();
+        }
 
         private void ExecuteLastDeferedRobustAction()
         {
             spyRobustWrapper.DeferredActions.Last()();
         }
 
-		private StubElement StubLinkToBeClicked(string someLinkLocator)
-		{
-		    var linkToBeClicked = new StubElement();
-		    linkToBeClicked.SetId(Guid.NewGuid().ToString());
-			driver.StubLink(someLinkLocator, linkToBeClicked);
-			return linkToBeClicked;
-		}
-	}
+        private StubElement StubLinkToBeClicked(string someLinkLocator)
+        {
+            var linkToBeClicked = new StubElement();
+            linkToBeClicked.SetId(Guid.NewGuid().ToString());
+            driver.StubLink(someLinkLocator, linkToBeClicked);
+            return linkToBeClicked;
+        }
+    }
 }
