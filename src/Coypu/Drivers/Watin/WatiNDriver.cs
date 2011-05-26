@@ -31,8 +31,6 @@ namespace Coypu.Drivers.Watin
             {
                 case (Browser.InternetExplorer):
                     return new IE();
-//                case (Browser.Firefox):
-//                    return new FireFox();
                 default:
                     throw new BrowserNotSupportedException(Configuration.Browser, this);
             }

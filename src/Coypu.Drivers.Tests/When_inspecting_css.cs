@@ -3,7 +3,6 @@ using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
-    [NotSupportedBy(typeof(WatiNDriver))]
     internal class When_inspecting_css : DriverSpecs
     {
         internal override void Specs()

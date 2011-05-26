@@ -4,7 +4,6 @@ using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
-    [NotSupportedBy(typeof(WatiNDriver))]
     internal class When_finding_all_elements_by_xpath : DriverSpecs
     {
         internal override void Specs()
