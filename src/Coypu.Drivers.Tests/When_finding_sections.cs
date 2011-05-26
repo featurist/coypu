@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
-    [NotSupportedBy(typeof(WatiNDriver))]
     internal class When_finding_sections : DriverSpecs
     {
         internal override void Specs()
