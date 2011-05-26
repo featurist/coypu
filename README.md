@@ -1,13 +1,14 @@
-# Coypu is
-* A robust wrapper for .Net browser automation tools such as Selenium WebDriver and WatiN to ease automating js/ajax-heavy websites
-* A more intuitive DSL for interacting with the browser, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
+# Coypu
 
-# Coypu is not
+Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with FireBug then Coypu might help.
+
+## Coypu is
+* A robust wrapper for browser automation tools on .Net, such as Selenium WebDriver that eases automating ajax-heavy websites
+* A more intuitive DSL for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
+
+## Coypu is not
 * A port of Capybara to .Net
-* A headless browser
 * An acceptance testing framework
-
-It is targeted at people doing browser automation in .Net with Selenium WebDriver (or other drivers) to help make your tests readable, robust and fast to write.
 
 ## Using Coypu
 
@@ -168,7 +169,7 @@ FindAll methods return all matching elements:
 		...
 	}
 	
-### Scope
+#### Scope
 
 When you want perform operations only within a particular part of the page define a scope by using Within:
 
@@ -307,3 +308,15 @@ This is far from ideal as you are coupling the click to the expected result rath
 	Configuration.WaitBeforeClick = Timespan.FromMiliseconds(0.2);
 		
 WARNING: Setting this in global config means adding time to *every* click in your tests, so again this should be used as a last resort and kept as low as possible.
+
+## License
+
+(The MIT License)
+
+Copyright &copy; ITV plc 2011
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
