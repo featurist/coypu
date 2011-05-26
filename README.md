@@ -7,7 +7,7 @@
 * A headless browser
 * An acceptance testing framework
 
-It is targetted at people doing browser automation in .Net with Selenium WebDriver (or other drivers) to help make your tests readable, robust and fast to write.
+It is targeted at people doing browser automation in .Net with Selenium WebDriver (or other drivers) to help make your tests readable, robust and fast to write.
 
 ## Using Coypu
 
@@ -25,24 +25,30 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 #### Driver
 
-Coypu drivers must implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to test the correct browser.
+Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` with Firefox is the only stable driver/browser combination that passes all the driver tests so far.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` with Firefox is the only stable driver/browser combination that passes all the driver tests so far. 
+
+Selenium with IE mostly works, and Chrome is a way behind due to the Selenium IE + Chrome drivers themselves. However a new release of Selenium WebDriver is imminent (as of May 2012) which is purported to fix a lot of these problems.
+
+The Coypu WatiN driver is further behind and needs more features implemented before it is a viable alternative to Selenium, except for in exceptional cases where the Selenium driver IE isn't working for you perhaps.
+
+A goal for the future would be a driver for a headless browser such as zombie.js - http://zombie.labnotes.org/
 
 Choose your driver/browser combination like so:
 
-	Configuration.RegisterDriver = typeof (SeleniumWebDriver);
-	Configuration.Browser = Drivers.Browser.Firefox;`
-
+	Configuration.Driver = typeof (SeleniumWebDriver);
+	Configuration.Browser = Drivers.Browser.Firefox;
+ 
 These settings are the default configuration.
 
 #### Timeout
 
 Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It doesn't try to monitor XmlHttpRequests or hook into any ready events, just catches exceptions -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
 
-This is a rather blunt approach but the only truly robust method of using Selenium WebDriver that we have found.
+This is a rather blunt approach but the only truly robust method of using Selenium WebDriver against heavily asynchronous websites that we have found.
 
-All methods use this wait and retry strategy EXCEPT: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately.
+All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately.
 
 Setup timeout/retry like so:
 
@@ -58,6 +64,16 @@ Coypu drivers filter out any elements that are not visible on the page -- this i
 Non-visible elements can get in the way of finding the elements that we are really looking for and cause often errors when trying to interact with them. 
 
 What we are really trying to do here is interact with the browser in the way that a human would. It's probably best to avoid hacking around with elements not accessible to the user where possible to avoid invalidating our tests in any case.
+
+### Disclaimer
+
+Coypu is still *very* new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
+
+If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
+
+	var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) Browser.Session.Native);
+	
+But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
 
 ### DSL
 
@@ -77,7 +93,7 @@ If you need to close the browser and start a new session next time `Browser.Sess
 
 or just dispose the current session like so:
 
-	Browser.Session.Dispose();
+	browser.Dispose();
 
 or so:
 
@@ -85,26 +101,15 @@ or so:
 	{
 		...		
 	}
-
-
-## Disclaimer
-
-Coypu is still *very* new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
-
-If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
-
-	var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) Browser.Session.Native);
-	
-But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
 	
 #### Navigating
 	
-	Browser.Session.Visit("/used-cars")
+	browser.Visit("/used-cars")
 	
 If you need to step away and visit a site outside of the `Configuration.AppHost` then you can use a fully qualified Uri:
 
-	Browser.Session.Visit("https://gmail.com")
-	Browser.Session.Visit("file:///C:/users/adiel/localstuff.htm")
+	browser.Visit("https://gmail.com")
+	browser.Visit("file:///C:/users/adiel/localstuff.htm")
 
 #### Completing forms
 
@@ -153,13 +158,89 @@ Find methods return the first matching `Coypu.Element`. The locator arguments ar
 	var element = browser.FindCss("table#menu");
 	var element = browser.FindXPath("Username");
 
-FindAll methods return all matching elements
+#### Finding multiple elements	
+	
+FindAll methods return all matching elements:
 
 	foreach(var link in browser.FindAllCss("a")) 
 	{
 		var attributeValue = a["href"];
 		...
 	}
+	
+### Scope
+
+When you want perform operations only within a particular part of the page define a scope by using Within:
+
+	browser.Within(() => browser.FindCss("form.searchForm"), () =>
+	{
+		browser.FillIn("postcode").With("N1 1AA");
+
+		browser.Select("citroen").From("make");
+		browser.Select("c4_grand_picasso").From("model");
+
+		browser.FillIn("Add keyword:").With("vtr");
+
+		browser.ClickButton("Search");
+	}
+	
+The first parameter is a `Func<Element>` which allows you to find a `Coypu.Element` in any way you see fit. 
+
+The actual finding of this element is deferred by the driver until each and every time it tries to find any element inside the Within block.
+
+If you are used to the Capybara implementation of within then there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
+
+NOTE: Nested scopes are not currently supported - the inner scope will simply replace the outer scope at the moment.
+
+#### Fieldsets / Sections
+
+To find this:
+
+	<fieldset>	
+		<legend>Advanced search</legend>
+		...
+	</fieldset>
+
+use this:	
+	
+	var element = browser.FindFieldset("Advanced search");
+	
+To find this:
+
+	<div>	
+		<h2>Search results</h2>
+		...
+	</div>
+
+or this:
+
+	<section>
+		<h3>Search results</h3>
+		...
+	</section>
+
+use this:
+	
+	var element = browser.FindSection("Search results");
+
+**These work particularly well when used as scopes:**
+
+	browser.WithinFieldset("Advanced search"), () =>
+	{
+		browser.FillIn("First name").With("Philip");
+		browser.FillIn("Middle initial").With("J");
+		browser.FillIn("Last name").With("Fry");
+
+		browser.Click("Find");
+	}
+
+or:	
+	
+	browser.WithinSection("Search results"), () =>
+	{
+		Assert.That(browser.HasContent("1 friend found"));
+		Assert.That(browser.HasContent("Philip J Fry"));
+	}	
 
 #### Executing javascript in the browser
 
@@ -206,30 +287,6 @@ Interact with the current dialog like so:
 	browser.AcceptDialog();
 	browser.CancelDialog();
 	
-#### Scope
-
-When you want perform operations only within a particular part of the page define a scope by using Within:
-
-	browser.Within(() => browser.FindCss("form.searchForm"), () =>
-	{
-		session.FillIn("postcode").With("N1 1AA");
-
-		session.Select("citroen").From("make");
-		session.Select("c4_grand_picasso").From("model");
-
-		session.FillIn("Add keyword:").With("vtr");
-
-		session.ClickButton("search-used-vehicles");
-	}
-	
-The first parameter is a `Func<Element>` which allows you to find a `Coypu.Element` in any way you see fit. 
-
-The actual finding of this element is deferred by the driver until each and every time it tries to find any element inside the Within block.
-
-If you are used to the Capybara implementation of within then there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
-
-NOTE: Nested scopes are not currently supported - the inner scope will simply replace the outer scope at the moment.
-
 ## More tricks/tips
 
 So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 
@@ -243,7 +300,7 @@ If the driver reports it had found and clicked your element successfully but not
 
 	browser.ClickButton("Search", until, waitBetweenRetries);
 
-This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a seperate step, but as a last resort we have found this useful.
+This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a separate step, but as a last resort we have found this useful.
 
 #### Tell Coypu to wait a short time between first finding links/buttons and clicking them:
 
