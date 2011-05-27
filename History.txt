@@ -1,3 +1,21 @@
+# Version 0.1.3
+
+Release date: 2011-05-27
+
+2011-05-27
+
+### Added
+* WithinFieldset and WithinSection
+* Configurable wait between find & click
+* Much more support for WatiN driver (see driver_test_results.txt)
+* MIT Licence 
+* Nuget
+
+### Changed
+* Section headers may contain other markup, e.g. links 
+* Reuse scope within individual driver methods
+* Close any alerts on disposing SeleniumWebDriver 
+
 # Version 0.1.2
 
 Release date: 2011-05-12
