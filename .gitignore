@@ -2,6 +2,7 @@ obj
 bin
 deploy
 deploy/*
+temp/
 _ReSharper.*
 *.ReSharper.user
 *.csproj.user
@@ -21,3 +22,4 @@ TestResult.xml
 .idea
 *.swp
 Coypu*.zip
+Coypu*.nupkg
