@@ -114,7 +114,15 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindSectionByHeaderText(string locator, string tagName)
         {
-            return Find(By.XPath(string.Format(".//{0}[text() = \"{1}\"]/..", tagName, locator))).FirstOrDefault(e => IsSection(e));
+            var matchingTitles = Find(By.TagName(tagName)).Where(e => e.Text == locator);
+            var parentsOfMatchingTitles = matchingTitles.Select(e => Parent(e));
+
+            return parentsOfMatchingTitles.FirstOrDefault(IsSection);
+        }
+
+        private IWebElement Parent(IWebElement element)
+        {
+            return element.FindElement(By.XPath(".."));
         }
 
         private bool IsSection(IWebElement e)
@@ -160,7 +168,9 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindButtonByText(string locator)
         {
-            return Find(By.TagName(string.Format("button"))).FirstOrDefault(e => e.Text == locator);
+            return
+                Find(By.TagName("button")).FirstOrDefault(e => e.Text == locator) ??
+                Find(By.ClassName("button")).FirstOrDefault(e => e.Text == locator);
         }
 
         public Element FindLink(string locator)
@@ -177,11 +187,11 @@ namespace Coypu.Drivers.Selenium
 
         public Element FindField(string locator)
         {
-            var field = (FindFieldById(locator) ??
-                         FindFieldByName(locator)) ??
-                         FindFieldFromLabel(locator) ??
+            var field = (FindFieldFromLabel(locator) ??
                          FindFieldByPlaceholder(locator) ??
-                         FindRadioButtonFromValue(locator);
+                         FindRadioButtonFromValue(locator) ??
+                         FindFieldById(locator) ??
+                         FindFieldByName(locator));
 
             return BuildElement(field, "No such field: " + locator);
         }
@@ -418,7 +428,8 @@ namespace Coypu.Drivers.Selenium
                 selenium.SwitchTo().Alert().Accept();
             }
             catch(WebDriverException){}
-            catch (InvalidOperationException) {}
+            catch(KeyNotFoundException){} // Chrome
+            catch(InvalidOperationException) {}
 
         }
     }
