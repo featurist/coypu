@@ -20,7 +20,7 @@ namespace Coypu.Drivers.Tests
                     driver.Set(textField, fullPath);
 
                     var findAgain = driver.FindField("forLabeledFileFieldId");
-                    findAgain.Value.should_end_with("\\" + fullPath);
+                    findAgain.Value.should_end_with("\\" + someLocalFile);
                 }
                 finally
                 {
