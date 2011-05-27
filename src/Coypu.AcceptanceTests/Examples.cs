@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Linq;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {
 	[TestFixture,Explicit]
-	public class TrickyAjaxFormFilling
+	public class Examples
 	{
 		[SetUp]
 		public void SetUp()
 		{
 			Configuration.Driver = typeof (SeleniumWebDriver);
-			Configuration.Browser = Drivers.Browser.Firefox;
+			Configuration.Browser = Drivers.Browser.Chrome;
 			Configuration.Timeout = TimeSpan.FromSeconds(5);
 			Configuration.RetryInterval = TimeSpan.FromSeconds(0.5);
 		}
@@ -79,13 +82,25 @@ namespace Coypu.AcceptanceTests
 			Configuration.AppHost = "www.twitter.com";
 			browser.Visit("/");
 
-			browser.FillIn("session[username_or_email]").With("coyputester");
-			browser.FillIn("session[password]").With("nappybara");
-
+			browser.FillIn("session[username_or_email]").With("coyputester2");
+			browser.FillIn("session[password]").With("Nappybara");
 			browser.ClickButton("Sign in");
-			browser.ClickLink("find some interesting people");
-			browser.ClickLink("Technology");
-			browser.ClickLink("dickc");
+
+			browser.FillIn("find users by name").With("gojko");
+            browser.ClickButton("Search");
+
+			browser.ClickLink("gojkoadzic");
+            browser.ClickLink("@gojkoadzic view full profile →");
+
+		    browser.Click(browser.FindCss(".url a"));
+
+		    var nativeWebDriver = ((RemoteWebDriver) browser.Native);
+            nativeWebDriver.SwitchTo().Window(nativeWebDriver.GetWindowHandles().Last());
+
+		    browser.WithinSection("Designing good Cucumber feature files",
+                () => Assert.That(browser.HasContent("Alister Scott")));
+
+            
 		}
 
         [Test]
