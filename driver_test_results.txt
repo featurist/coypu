@@ -1,0 +1,696 @@
+DriverSpecRunner
+  when testing each driver
+    and the driver is SeleniumWebDriver
+      and the browser is Firefox
+        cleans up
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath
+        when finding an element by css
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by section by id
+            finds section by id
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples
+          only finds visible elements
+        when inspecting dialog text
+          finds exact text in alert
+          finds exact text in confirm
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples
+        when interacting with dialogs
+          accepts alerts - FAILED - Unexpected error. Unable to dismiss alert. Is an alert present?
+          confirms
+            when accepting
+              clears dialog - FAILED - Unexpected error. Unable to dismiss alert. Is an alert present?
+              returns true - FAILED - Unexpected error. Unable to dismiss alert. Is an alert present?
+            when cancelling
+              clears dialog - FAILED - Unexpected error. Unable to dismiss alert. Is an alert present?
+              returns false - FAILED - Unexpected error. Unable to dismiss alert. Is an alert present?
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded
+    and the driver is SeleniumWebDriver
+      and the browser is InternetExplorer
+        cleans up
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css - FAILED - Expected: 3, But was: 0
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath - FAILED - Expected: 3, But was: 0
+        when finding an element by css
+          finds present examples - FAILED - No element found by css: #inspectingContent p.css-test span
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples - FAILED - No element found by xpath: //*[@id = 'inspectingContent']//p[@class='css-test']/span
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text - FAILED - Failed to find section: Section One h1
+            finds by h2 text - FAILED - Failed to find section: Section One h2
+            finds by h3 text - FAILED - Failed to find section: Section One h3
+            finds by h6 text - FAILED - Failed to find section: Section One h6
+            finds by section by id - FAILED - Failed to find section: sectionOne
+            finds section by id - FAILED - Failed to find section: sectionOne
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row - FAILED - Expected: True, But was: False
+          finds text in a list - FAILED - Expected: True, But was: False
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples - FAILED - Expected to find something at: #inspectingContent p.css-test span, Expected: True, But was: False
+          only finds visible elements
+        when inspecting dialog text
+          finds exact text in alert
+          finds exact text in confirm
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples - FAILED - Expected to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/span, Expected: True, But was: False
+        when interacting with dialogs
+          accepts alerts - FAILED - No alert is active (27)
+          confirms
+            when accepting
+              clears dialog - FAILED - No alert is active (27)
+              returns true
+            when cancelling
+              clears dialog - FAILED - No alert is active (27)
+              returns false
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded
+    and the driver is SeleniumWebDriver
+      and the browser is Chrome
+        cleans up
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath
+        when finding an element by css
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea - FAILED - Expected: "textarea field two val", But was: null
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+          finding by name
+            finds text input
+            finds textarea - FAILED - Expected: "textarea field two val", But was: null
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by section by id
+            finds section by id
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples
+          only finds visible elements
+        when inspecting dialog text
+          finds exact text in alert - FAILED - Object reference not set to an instance of an object.
+          finds exact text in confirm - FAILED - Object reference not set to an instance of an object.
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples
+        when interacting with dialogs
+          accepts alerts - FAILED - Object reference not set to an instance of an object.
+          confirms
+            when accepting
+              clears dialog - FAILED - Object reference not set to an instance of an object.
+              returns true - FAILED - No such link: Trigger a confirm - accepted
+            when cancelling
+              clears dialog - FAILED - Object reference not set to an instance of an object.
+              returns false - FAILED - No such link: Trigger a confirm - cancelled
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field - FAILED - Expected string length 20 but was 24. Strings differ at index 0., Expected: "New text input value", But was: "text input field two val", -----------^
+          sets value of textarea field - FAILED - Expected: "New textarea value", But was: null
+          selects option by text or value - FAILED - Expected: "select2value1", But was: null
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded - FAILED - Expected: String ending with "\local.file", But was: null
+    and the driver is WatiNDriver
+      and the browser is InternetExplorer
+        cleans up
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches - FAILED - Not yet implemented in WatiNDriver
+          returns all matches by css - FAILED - Not yet implemented in WatiNDriver
+        when finding all elements by xpath
+          returns empty if no matches - FAILED - Not yet implemented in WatiNDriver
+          returns all matches by xpath - FAILED - Not yet implemented in WatiNDriver
+        when finding an element by css
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+          does not find missing examples - FAILED - Expected not to find something at: #inspectingContent p.css-missing-test, Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
+          only finds visible elements - FAILED - Expected not to find something at: #inspectingContent p.css-test img.invisible, Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
+        when finding an element by xpath
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+          does not find missing examples - FAILED - Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-missing-test'], Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
+          only finds visible elements - FAILED - Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/img, Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons - FAILED - Failed to find button with text, id or name: firstImageButtonId
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs - FAILED - Expected: <Coypu.Drivers.MissingHtmlException>, But was: null
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select - FAILED - Failed to find field with label, id, name or placeholder: select field in a label container
+            finds textarea - FAILED - Failed to find field with label, id, name or placeholder: textarea field in a label container
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none - FAILED - Expected: <Coypu.Drivers.MissingHtmlException>, But was: null
+          does not find visibility:hidden links
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text - FAILED - Failed to find section: Section One h1
+            finds by h2 text - FAILED - Failed to find section: Section One h2
+            finds by h3 text - FAILED - Failed to find section: Section One h3
+            finds by h6 text - FAILED - Failed to find section: Section One h6
+            finds by section by id - FAILED - Failed to find section: Section One h1
+            finds section by id - FAILED - Failed to find section: Section One h1
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row - FAILED - Expected: True, But was: False
+          finds text in a list - FAILED - Expected: True, But was: False
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples - FAILED - Not yet implemented in WatiNDriver
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+          only finds visible elements - FAILED - Not yet implemented in WatiNDriver
+        when inspecting xpath
+          does not find missing examples - FAILED - Not yet implemented in WatiNDriver
+          only finds visible elements - FAILED - Not yet implemented in WatiNDriver
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded
+
+525 Examples, 64 Failed, 0 Pending
