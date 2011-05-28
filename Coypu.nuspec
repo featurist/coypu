@@ -6,10 +6,14 @@
     <authors>AdrianLongley, AndrewVos</authors>
     <owners>AdrianLongley, AndrewVos</owners>
     <projectUrl>https://github.com/ITV/Coypu</projectUrl>
-	<licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
+    <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Intuitive, robust browser automation for .Net</description>
     <tags></tags>
+    <dependencies>
+      <dependency id="SeleniumDotNet" version="[2.0.3]" />
+      <dependency id="WatiN" version="[2.1.0]" />
+    </dependencies>
   </metadata>
     <files>
       <file src="temp\net35\*.*" target="lib\net35" />
