@@ -88,4 +88,6 @@ def bump_version
   File.open('Coypu.nuspec', 'w') do |file|
     file.puts nuspec
   end
+  sh "git add Coypu.nuspec"
+  sh "git commit -m 'bump version'"
 end
