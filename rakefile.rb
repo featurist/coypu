@@ -84,7 +84,6 @@ def bump_version
   puts "Bumped #{version_string} to #{new_version}"
   new_version_xml = "<version>#{new_version}</version>"
   nuspec.gsub!(version_regex, new_version_xml)
-  puts nuspec
   File.open('Coypu.nuspec', 'w') do |file|
     file.puts nuspec
   end
