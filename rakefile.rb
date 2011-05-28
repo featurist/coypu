@@ -28,10 +28,10 @@ end
 desc 'package'
 task :package do
   FileUtils.rm_rf('temp')
-  FileUtils.mkdir_p('temp')
   [:net35, :net40].each do |version|
     Rake::Task["compile_#{version}"].invoke
-    FileUtils.mv('src/Coypu/bin/Release', "temp/#{version}")
+    FileUtils.mkdir_p("temp/#{version}")
+    FileUtils.cp('src/Coypu/bin/Release/Coypu.dll', "temp/#{version}")
   end
   sh 'nuget Pack Coypu.nuspec'
 end
