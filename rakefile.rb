@@ -1,4 +1,5 @@
 require 'albacore'
+require 'ostruct'
 
 BUILD_CONFIGURATION = ENV['BUILD_CONFIGURATION'] || 'Release'
 
@@ -41,4 +42,50 @@ task :publish => :package do
   package_file = Dir.glob('Coypu*.nupkg').first
   sh "nuget Push #{package_file}"
   FileUtils.rm(package_file)
+end
+
+namespace :version do
+  namespace :bump do
+    desc "bump major version"
+    task :major do
+      bump_version do |version|
+        version.major = version.major + 1
+        version.minor = 0
+	version.patch = 0
+      end
+    end
+    desc "bump minor version"
+    task :minor do
+      bump_version do |version|
+        version.minor = version.minor + 1
+        version.patch = 0
+      end
+    end
+    desc "bump patch version"
+    task :patch do
+      bump_version do |version|
+        version.patch = version.patch + 1
+      end
+    end
+  end
+end
+
+def bump_version
+  version_regex = /<version>(\d+\.\d+\.\d+)<\/version>/
+  nuspec = File.read("Coypu.nuspec")
+  version_string = nuspec.match(version_regex).captures.first
+  version_parts = version_string.split('.')
+  version = OpenStruct.new
+  version.major = version_parts[0].to_i
+  version.minor = version_parts[1].to_i
+  version.patch = version_parts[2].to_i
+  yield version
+  new_version = "#{version.major}.#{version.minor}.#{version.patch}"
+  puts "Bumped #{version_string} to #{new_version}"
+  new_version_xml = "<version>#{new_version}</version>"
+  nuspec.gsub!(version_regex, new_version_xml)
+  puts nuspec
+  File.open('Coypu.nuspec', 'w') do |file|
+    file.puts nuspec
+  end
 end
