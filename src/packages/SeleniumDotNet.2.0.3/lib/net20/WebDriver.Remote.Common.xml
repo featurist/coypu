@@ -1,0 +1,880 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebDriver.Remote.Common</name>
+    </assembly>
+    <members>
+        <member name="T:OpenQA.Selenium.Remote.Command">
+            <summary>
+            Provides a way to send commands to the remote server
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Command.#ctor(OpenQA.Selenium.Remote.DriverCommand,System.String)">
+            <summary>
+            Initializes a new instance of the Command class using a command name and a JSON-encoded string for the parameters.
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="jsonParameters">Parameters for the command as a JSON-encoded string.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Command.#ctor(OpenQA.Selenium.Remote.SessionId,OpenQA.Selenium.Remote.DriverCommand,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the Command class for a Session
+            </summary>
+            <param name="sessionId">Session ID the driver is using</param>
+            <param name="name">Name of the command</param>
+            <param name="parameters">Parameters for that command</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Command.ToString">
+            <summary>
+            Returns a string of the Command object
+            </summary>
+            <returns>A string representation of the Command Object</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Command.ConvertParametersFromJson(System.String)">
+            <summary>
+            Gets the command parameters as a <see cref="T:System.Collections.Generic.Dictionary`2"/>, with a string key, and an object value.
+            </summary>
+            <param name="value">The JSON-encoded string representing the command parameters.</param>
+            <returns>A <see cref="T:System.Collections.Generic.Dictionary`2"/> with a string keys, and an object value. </returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Command.SessionId">
+            <summary>
+            Gets the SessionID of the command
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Command.Name">
+            <summary>
+            Gets the command name
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Command.Parameters">
+            <summary>
+            Gets the parameters of the command
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Command.ParametersAsJsonString">
+            <summary>
+            Gets the parameters of the command as a JSON-encoded string.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.CommandInfo">
+            <summary>
+            Provides the execution information for a <see cref="T:OpenQA.Selenium.Remote.DriverCommand"/>.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CommandInfo.PostCommand">
+            <summary>
+            POST verb for the command info
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CommandInfo.GetCommand">
+            <summary>
+            GET verb for the command info
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.CommandInfo.DeleteCommand">
+            <summary>
+            DELETE verb for the command info
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CommandInfo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the CommandInfo class
+            </summary>
+            <param name="method">Method of the Command</param>
+            <param name="resourcePath">Relative URL path to the resource used to execute the command</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CommandInfo.CreateWebRequest(System.Uri,OpenQA.Selenium.Remote.Command)">
+            <summary>
+            Creates a webrequest for your command
+            </summary>
+            <param name="baseUri">Uri that will have the command run against</param>
+            <param name="commandToExecute">Command to execute</param>
+            <returns>A web request of what has been run</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.CommandInfo.ResourcePath">
+            <summary>
+            Gets the URL representing the path to the resource.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.CommandInfo.Method">
+            <summary>
+            Gets the HTTP method associated with the command.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.CommandInfoRepository">
+            <summary>
+            Holds the information about all commands specified by the JSON wire protocol.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CommandInfoRepository.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:OpenQA.Selenium.Remote.CommandInfoRepository"/> class from being created.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CommandInfoRepository.GetCommandInfo(OpenQA.Selenium.Remote.DriverCommand)">
+            <summary>
+            Gets the <see cref="T:OpenQA.Selenium.Remote.CommandInfo"/> for a <see cref="T:OpenQA.Selenium.Remote.DriverCommand"/>.
+            </summary>
+            <param name="commandName">The <see cref="T:OpenQA.Selenium.Remote.DriverCommand"/> for which to get the information.</param>
+            <returns>The <see cref="T:OpenQA.Selenium.Remote.CommandInfo"/> for the specified command.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.CommandInfoRepository.Instance">
+            <summary>
+            Gets the singleton instance of the <see cref="T:OpenQA.Selenium.Remote.CommandInfoRepository"/>.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.DesiredCapabilities">
+            <summary>
+            Class to Create the capabilities of the browser you require for <see cref="T:OpenQA.Selenium.IWebDriver"/>. 
+            If you wish to use default values use the static methods
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.#ctor(System.String,System.String,OpenQA.Selenium.Platform)">
+            <summary>
+            Initializes a new instance of the DesiredCapabilities class
+            </summary>
+            <param name="browser">Name of the browser e.g. firefox, internet explorer, safari</param>
+            <param name="version">Version of the browser</param>
+            <param name="platform">The platform it works on</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.#ctor">
+            <summary>
+            Initializes a new instance of the DesiredCapabilities class
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the DesiredCapabilities class
+            </summary>
+            <param name="rawMap">Dictionary of items for the remotedriver</param>
+            <example>
+            <code>
+            DesiredCapabilities capabilities = new DesiredCapabilities(new Dictionary<![CDATA[<string,object>]]>(){["browserName","firefox"],["version",string.Empty],["javaScript",true]});
+            </code>
+            </example>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.Firefox">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New instance of DesiredCapabilites for use with Firefox</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.InternetExplorer">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New instance of DesiredCapabilities for use with Internet Explorer</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.HtmlUnit">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New instance of DesiredCapabilities for use with HTMLUnit</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.HtmlUnitWithJavaScript">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New instance of DesiredCapabilities for use with HTMLUnit with JS</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.IPhone">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New instance of DesiredCapabilities for use with IPhone</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.Chrome">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New istance of DesiredCapabilities for use with Chrome</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.Android">
+            <summary>
+            Method to return a new DesiredCapabilities using defaults
+            </summary>
+            <returns>New istance of DesiredCapabilities for use with Android</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.HasCapability(System.String)">
+            <summary>
+            Gets a value indicating whether the browser has a given capability.
+            </summary>
+            <param name="capability">The capability ot get.</param>
+            <returns>Returns <see langword="true"/> if the browser has the capability; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.GetCapability(System.String)">
+            <summary>
+            Gets a capability of the browser.
+            </summary>
+            <param name="capability">The capability to get.</param>
+            <returns>An object associated with the capability, or <see langword="null"/>
+            if the capability is not set on the browser.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.GetHashCode">
+            <summary>
+            Return HashCode for the DesiredCapabilties that has been created
+            </summary>
+            <returns>Integer of HashCode generated</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.ToString">
+            <summary>
+            Return a string of capabilies being used
+            </summary>
+            <returns>String of capabilites being used</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.DesiredCapabilities.Equals(System.Object)">
+            <summary>
+            Compare two DesiredCapabilities and will return either true or false
+            </summary>
+            <param name="obj">DesiredCapabities you wish to compare</param>
+            <returns>true if they are the same or false if they are not</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.BrowserName">
+            <summary>
+            Gets the browser name 
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.Platform">
+            <summary>
+            Gets or sets the platform
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.Version">
+            <summary>
+            Gets the browser version
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.DesiredCapabilities.IsJavaScriptEnabled">
+            <summary>
+            Gets or sets a value indicating whether the browser is javascript enabled
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.DriverCommand">
+            <summary>
+            Values describing the list of commands understood by a remote server using the JSON wire protocol.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.DefineDriverMapping">
+            <summary>
+            Represents the Define Driver Mapping command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.NewSession">
+            <summary>
+            Represents a New Session command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetSessionCapabilities">
+            <summary>
+            Represents the Get Session Capabilities command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.Close">
+            <summary>
+            Represents a Browser close command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.Quit">
+            <summary>
+            Represents a browser quit command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.Get">
+            <summary>
+            Represents a GET command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GoBack">
+            <summary>
+            Represents a Browser going back command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GoForward">
+            <summary>
+            Represents a Browser going forward command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.Refresh">
+            <summary>
+            Represents a Browser refreshing command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.AddCookie">
+            <summary>
+            Represents adding a cookie command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetAllCookies">
+            <summary>
+            Represents getting all cookies command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.DeleteCookie">
+            <summary>
+            Represents deleting a cookie command
+            </summary>        
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.DeleteAllCookies">
+            <summary>
+            Represents Deleting all cookies command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.FindElement">
+            <summary>
+            Represents findelement command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.FindElements">
+            <summary>
+            Represents findelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.FindChildElement">
+            <summary>
+            Represents findchildelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.FindChildElements">
+            <summary>
+            Represents findchildelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.DescribeElement">
+            <summary>
+            Describes an element
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ClearElement">
+            <summary>
+            Represents clearelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ClickElement">
+            <summary>
+            Represents clickelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.HoverOverElement">
+            <summary>
+            Represents hoverelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SendKeysToElement">
+            <summary>
+            Represents SendKeysToElements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SubmitElement">
+            <summary>
+            Represents SubmitElement command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ToggleElement">
+            <summary>
+            Represents TogleElements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetCurrentWindowHandle">
+            <summary>
+            Represents findchildelements command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetWindowHandles">
+            <summary>
+            Represents GetWindowHandles command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SwitchToWindow">
+            <summary>
+            Represents SwitchToWindow command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SwitchToFrame">
+            <summary>
+            Represents SwitchToFrame command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetActiveElement">
+            <summary>
+            Represents GetActiveElement command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetCurrentUrl">
+            <summary>
+            Represents GetCurrentUrl command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetPageSource">
+            <summary>
+            Represents GetPageSource command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetTitle">
+            <summary>
+            Represents GetTitle command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ExecuteScript">
+            <summary>
+            Represents ExecuteScript command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ExecuteAsyncScript">
+            <summary>
+            Represents ExecuteAsyncScript command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetSpeed">
+            <summary>
+            Represents GetSpeed command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SetSpeed">
+            <summary>
+            Represents SetSpeed command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SetBrowserVisible">
+            <summary>
+            Represents SetBrowserVisible command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.IsBrowserVisible">
+            <summary>
+            Represents IsBrowserVisible command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementText">
+            <summary>
+            Represents GetElementText command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementValue">
+            <summary>
+            Represents GetElementValue command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementTagName">
+            <summary>
+            Represents GetElementTagName command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SetElementSelected">
+            <summary>
+            Represents SetElementSelected command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.DragElement">
+            <summary>
+            Represents DragElement command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.IsElementSelected">
+            <summary>
+            Represents IsElementSelected command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.IsElementEnabled">
+            <summary>
+            Represents IsElementEnabled command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.IsElementDisplayed">
+            <summary>
+            Represents IsElementDisplayed command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementLocation">
+            <summary>
+            Represents GetElementLocation command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementLocationOnceScrolledIntoView">
+            <summary>
+            Represents GetElementLocationOnceScrolledIntoView command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementSize">
+            <summary>
+            Represents GetElementSize command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementAttribute">
+            <summary>
+            Represents GetElementAttribute command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetElementValueOfCssProperty">
+            <summary>
+            Represents GetElementValueOfCssProperty command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ElementEquals">
+            <summary>
+            Represents ElementEquals command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.Screenshot">
+            <summary>
+            Represents Screenshot command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.DismissAlert">
+            <summary>
+            Represents the DismissAlert command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.AcceptAlert">
+            <summary>
+            Represents the AcceptAlert command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.GetAlertText">
+            <summary>
+            Represents the GetAlertText command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SetAlertValue">
+            <summary>
+            Represents the SetAlertValue command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.ImplicitlyWait">
+            <summary>
+            Represents the ImplicitlyWait command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SetAsyncScriptTimeout">
+            <summary>
+            Represents the SetAsyncScriptTimeout command
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.MouseClick">
+            <summary>
+            Represents the MouseClick command.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.MouseDoubleClick">
+            <summary>
+            Represents the MouseDoubleClick command.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.MouseDown">
+            <summary>
+            Represents the MouseDown command.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.MouseUp">
+            <summary>
+            Represents the MouseUp command.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.MouseMoveTo">
+            <summary>
+            Represents the MouseMoveTo command.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SendModifierKeyToActiveElement">
+            <summary>
+            Represents the SendModifierKeyToActiveElement command.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Remote.DriverCommand.SendKeysToSession">
+            <summary>
+            Represents the SendKeysToSession command.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.ErrorResponse">
+            <summary>
+            Provides a way to store errors from a repsonse
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.ErrorResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Remote.ErrorResponse"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.ErrorResponse.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Remote.ErrorResponse"/> class using the specified values.
+            </summary>
+            <param name="responseValue">A <see cref="T:System.Collections.Generic.Dictionary`2"/> containing names and values of
+            the properties of this <see cref="T:OpenQA.Selenium.Remote.ErrorResponse"/>.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.ErrorResponse.Message">
+            <summary>
+            Gets or sets the message from the reponse
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.ErrorResponse.ClassName">
+            <summary>
+            Gets or sets the class name that threw the error
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.ErrorResponse.Screenshot">
+            <summary>
+            Gets or sets the screenshot of the error
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.ErrorResponse.StackTrace">
+            <summary>
+            Gets or sets the stack trace of the error
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.ICommandExecutor">
+            <summary>
+            Provides a way to send commands to the remote server
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.ICommandExecutor.Execute(OpenQA.Selenium.Remote.Command)">
+            <summary>
+            Executes a command
+            </summary>
+            <param name="commandToExecute">The command you wish to execute</param>
+            <returns>A response from the browser</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.Response">
+            <summary>
+            Handles reponses from the browser
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Response.#ctor">
+            <summary>
+            Initializes a new instance of the Response class
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Response.#ctor(OpenQA.Selenium.Remote.SessionId)">
+            <summary>
+            Initializes a new instance of the Response class
+            </summary>
+            <param name="sessionId">Session ID in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Response.FromJson(System.String)">
+            <summary>
+            Returns a new <see cref="T:OpenQA.Selenium.Remote.Response"/> from a JSON-encoded string.
+            </summary>
+            <param name="value">The JSON string to deserialize into a <see cref="T:OpenQA.Selenium.Remote.Response"/>.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Remote.Response"/> object described by the JSON string.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Response.ToJson">
+            <summary>
+            Returns this object as a JSON-encoded string.
+            </summary>
+            <returns>A JSON-encoded string representing this <see cref="T:OpenQA.Selenium.Remote.Response"/> object.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.Response.ToString">
+            <summary>
+            Returns the object as a string.
+            </summary>
+            <returns>A string with the Session ID, status value, and the value from JSON.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Response.Value">
+            <summary>
+            Gets or sets the value from JSON.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Response.SessionId">
+            <summary>
+            Gets or sets the session ID.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.Response.Status">
+            <summary>
+            Gets or sets the status value of the response.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.SessionId">
+            <summary>
+            Provides a mechanism for maintaining a session for a test
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.SessionId.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the SessionId class
+            </summary>
+            <param name="opaqueKey">Key for the session in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.SessionId.ToString">
+            <summary>
+            Get the value of the key
+            </summary>
+            <returns>The key in use</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.SessionId.GetHashCode">
+            <summary>
+            Get the hashcode of the key
+            </summary>
+            <returns>The hashcode of the key</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.SessionId.Equals(System.Object)">
+            <summary>
+            Compares two Sessions
+            </summary>
+            <param name="obj">Session to compare</param>
+            <returns>True if they are equal or False if they are not</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.StackTraceElement">
+            <summary>
+            Gives properties to get a stack trace
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.StackTraceElement.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Remote.StackTraceElement"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.StackTraceElement.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Remote.StackTraceElement"/> class using the given property values.
+            </summary>
+            <param name="elementAttributes">A <see cref="T:System.Collections.Generic.Dictionary`2"/> containing the names and values for the properties of this <see cref="T:OpenQA.Selenium.Remote.StackTraceElement"/>.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.StackTraceElement.ToString">
+            <summary>
+            Gets a string representation of the object.
+            </summary>
+            <returns>A string representation of the object.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.StackTraceElement.FileName">
+            <summary>
+            Gets or sets the value of the filename in the stack
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.StackTraceElement.ClassName">
+            <summary>
+            Gets or sets the value of the Class name in the stack trace
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.StackTraceElement.LineNumber">
+            <summary>
+            Gets or sets the line number
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Remote.StackTraceElement.MethodName">
+            <summary>
+            Gets or sets the Method name in the stack trace
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.CharArrayJsonConverter">
+            <summary>
+            Provides a way to convert a Char arry to JSON
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CharArrayJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Checks if the object can be converted
+            </summary>
+            <param name="objectType">Type of the object to see if can be converted</param>
+            <returns>True if can be converted else false</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CharArrayJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the Object to JSON
+            </summary>
+            <param name="writer">A JSON Writer object</param>
+            <param name="value">Object to be converted</param>
+            <param name="serializer">JSON Serializer object instance</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CharArrayJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Method not implemented
+            </summary>
+            <param name="reader">JSON Reader instance</param>
+            <param name="objectType">Object type being read</param>
+            <param name="existingValue">Existing Value to be read</param>
+            <param name="serializer">JSON Serializer instance</param>
+            <returns>Object from JSON</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.CookieJsonConverter">
+            <summary>
+            Provides a way to convert Cookies to JSON and back
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CookieJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Checks if the object can be converted
+            </summary>
+            <param name="objectType">Type of the object</param>
+            <returns>A value indicating if it can be converted</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CookieJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Get the platform from the JSON reader
+            </summary>
+            <param name="reader">JSON Reader instance</param>
+            <param name="objectType">Object type being read</param>
+            <param name="existingValue">The exisiting value of the object</param>
+            <param name="serializer">JSON Serializer instance</param>
+            <returns>Platform from JSON reader</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.CookieJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Created a cookie from the JSON string
+            </summary>
+            <param name="writer">The JSON writer with a string</param>
+            <param name="value">Value of the string</param>
+            <param name="serializer">JSON serializer instance</param>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.PlatformJsonConverter">
+            <summary>
+            Provides a mechanism to get the platform from JSON and write the platform 
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.PlatformJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Checks if the type can be converted
+            </summary>
+            <param name="objectType">Object type to be converted</param>
+            <returns>A value indicating if it can be converted</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.PlatformJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Get the platform from the JSON reader
+            </summary>
+            <param name="reader">JSON Reader instance</param>
+            <param name="objectType">Object type being read</param>
+            <param name="existingValue">The exisiting value of the object</param>
+            <param name="serializer">JSON Serializer instance</param>
+            <returns>Platform from JSON reader</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.PlatformJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the platform to JSON
+            </summary>
+            <param name="writer">JSON Writer instance</param>
+            <param name="value">the platform</param>
+            <param name="serializer">JSON Serializer Instance</param>
+        </member>
+        <member name="T:OpenQA.Selenium.Remote.ResponseValueJsonConverter">
+            <summary>
+            Converts the response to JSON
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.ResponseValueJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Checks if the object can be converted
+            </summary>
+            <param name="objectType">The object to be converted</param>
+            <returns>True if it can be converted or false if can't be</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.ResponseValueJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Pricess the reader to return an object from JSON
+            </summary>
+            <param name="reader">A JSON reader</param>
+            <param name="objectType">Type of the object</param>
+            <param name="existingValue">The existing value of the object</param>
+            <param name="serializer">JSON Serializer</param>
+            <returns>Object created from JSON</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Remote.ResponseValueJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes objects to JSON. Currently not implemented
+            </summary>
+            <param name="writer">JSON Writer Object</param>
+            <param name="value">Value to be written</param>
+            <param name="serializer">JSON Serializer </param>
+        </member>
+    </members>
+</doc>

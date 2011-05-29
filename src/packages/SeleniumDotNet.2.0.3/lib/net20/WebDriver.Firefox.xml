@@ -1,0 +1,650 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebDriver.Firefox</name>
+    </assembly>
+    <members>
+        <member name="T:OpenQA.Selenium.Firefox.FirefoxBinary">
+            <summary>
+            Represents the binary associated with Firefox.
+            </summary>
+            <remarks>The <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> class is responsible for instantiating the
+            Firefox process, and the operating system environment in which it runs.</remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> class located at a specific file location.
+            </summary>
+            <param name="pathToFirefoxBinary">Full path and file name to the Firefox executable.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.StartProfile(OpenQA.Selenium.Firefox.FirefoxProfile,System.String[])">
+            <summary>
+            Starts Firefox using the specified profile and command-line arguments.
+            </summary>
+            <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> to use with this instance of Firefox.</param>
+            <param name="commandLineArguments">The command-line arguments to use in starting Firefox.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.SetEnvironmentProperty(System.String,System.String)">
+            <summary>
+            Sets a variable to be used in the Firefox execution environment.
+            </summary>
+            <param name="propertyName">The name of the environment variable to set.</param>
+            <param name="value">The value of the environment variable to set.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.CreateProfile(System.String)">
+            <summary>
+            Creates a named profile for Firefox.
+            </summary>
+            <param name="profileName">The name of the profile to create.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.WaitForProcessExit">
+            <summary>
+            Waits for the process to complete execution.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.Clean(OpenQA.Selenium.Firefox.FirefoxProfile)">
+            <summary>
+            Intializes the binary with the specified profile.
+            </summary>
+            <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> to use to initialize the binary.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.Quit">
+            <summary>
+            Stops the execution of this <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/>, terminating the process if necessary.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.ToString">
+            <summary>
+            Returns a <see cref="T:System.String">String</see> that represents the current <see cref="T:System.Object">Object</see>.
+            </summary>
+            <returns>A <see cref="T:System.String">String</see> that represents the current <see cref="T:System.Object">Object</see>.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxBinary.StartFirefoxProcess(System.Diagnostics.Process)">
+            <summary>
+            Starts the Firefox process.
+            </summary>
+            <param name="builder">A <see cref="T:System.Diagnostics.Process"/> object used to start Firefox.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxBinary.TimeoutInMilliseconds">
+            <summary>
+            Gets or sets the timeout (in milliseconds) to wait for command execution.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxBinary.ConsoleOutput">
+            <summary>
+            Gets all console output of the binary.
+            </summary>
+            <remarks>Output retrieval is non-destructive and non-blocking.</remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxBinary.BinaryExecutable">
+            <summary>
+            Gets the <see cref="T:OpenQA.Selenium.Firefox.Internal.Executable"/> associated with this <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/>.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxBinary.IsOnLinux">
+            <summary>
+            Gets a value indicating whether the current operating system is Linux.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxBinary.ExtraEnvironmentVariables">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.Dictionary`2"/> containing string key-value pairs
+            representing any operating system environment variables beyond the defaults.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.FirefoxDriver">
+            <summary>
+            Provides a way to access Firefox to run tests.
+            </summary>
+            <remarks>
+            When the FirefoxDriver object has been instantiated the browser will load. The test can then navigate to the URL under test and 
+            start your test.
+            <para>
+            In the case of the FirefoxDriver, you can specify a named profile to be used, or you can let the
+            driver create a temporary, anonymous profile. A custom extension allowing the driver to communicate
+            to the browser will be installed into the profile.
+            </para>
+            </remarks>
+            <example>
+            <code>
+            [TestFixture]
+            public class Testing
+            {
+                private IWebDriver driver;
+                <para></para>
+                [SetUp]
+                public void SetUp()
+                {
+                    driver = new FirefoxDriver();
+                }
+                <para></para>
+                [Test]
+                public void TestGoogle()
+                {
+                    driver.Navigate().GoToUrl("http://www.google.co.uk");
+                    /*
+                    *   Rest of the test
+                    */
+                }
+                <para></para>
+                [TearDown]
+                public void TearDown()
+                {
+                    driver.Quit();
+                } 
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:OpenQA.Selenium.Firefox.FirefoxDriver.DefaultPort">
+            <summary>
+            The default port on which to communicate with the Firefox extension.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Firefox.FirefoxDriver.DefaultEnableNativeEvents">
+            <summary>
+            Indicates whether native events is enabled by default for this platform.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Firefox.FirefoxDriver.AcceptUntrustedCertificates">
+            <summary>
+            Indicates whether the driver will accept untrusted SSL certificates.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(OpenQA.Selenium.Firefox.FirefoxProfile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver"/> class for a given profile.
+            </summary>
+            <param name="profile">A <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> object representing the profile settings
+            to be used in starting Firefox.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.#ctor(OpenQA.Selenium.Firefox.FirefoxBinary,OpenQA.Selenium.Firefox.FirefoxProfile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver"/> class for a given profile and binary environment.
+            </summary>
+            <param name="binary">A <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> object representing the operating system 
+            environmental settings used when running Firefox.</param>
+            <param name="profile">A <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> object representing the profile settings
+            to be used in starting Firefox.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.GetScreenshot">
+            <summary>
+            Gets a <see cref="T:OpenQA.Selenium.Screenshot"/> object representing the image of the page on the screen.
+            </summary>
+            <returns>A <see cref="T:OpenQA.Selenium.Screenshot"/> object containing the image.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.ConnectTo(OpenQA.Selenium.Firefox.FirefoxBinary,OpenQA.Selenium.Firefox.FirefoxProfile,System.String)">
+            <summary>
+            Connects the <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver"/> to a running instance of the WebDriver Firefox extension.
+            </summary>
+            <param name="binary">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> to use to connect to the extension.</param>
+            <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> to use to connect to the extension.</param>
+            <param name="host">The host name of the computer running the Firefox browser extension (usually "localhost").</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Firefox.Internal.ExtensionConnection"/> to the currently running Firefox extension.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.StartClient">
+            <summary>
+            Starts the command executor, enabling communication with the browser.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.StopClient">
+            <summary>
+            Stops the command executor, ending further communication with the browser.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.PrepareEnvironment">
+            <summary>
+            In derived classes, the <see cref="M:OpenQA.Selenium.Firefox.FirefoxDriver.PrepareEnvironment"/> method prepares the environment for test execution.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxDriver.CreateElement(System.String)">
+            <summary>
+            Creates a <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement"/> with the specified ID.
+            </summary>
+            <param name="elementId">The ID of this element.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement"/> with the specified ID. For the FirefoxDriver this will be a <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/>.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxDriver.Binary">
+            <summary>
+            Gets the FirefoxBinary and its details for subclasses
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxDriver.Profile">
+            <summary>
+            Gets the FirefoxProfile that is currently in use by subclasses
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.FirefoxProfile">
+            <summary>
+            Provides the ability to edit the preferences associated with a Firefox profile.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> class using a specific profile directory.
+            </summary>
+            <param name="profileDirectory">The directory containing the profile.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> class using a 
+            specific profile directory.
+            </summary>
+            <param name="profileDirectory">The directory containing the profile.</param>
+            <param name="profileIsNamed">A value indicating whether the profile is a named profile.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.AddExtension(System.Boolean)">
+            <summary>
+            Adds the WebDriver Firefox extension to this profile.
+            </summary>
+            <param name="forceAddition"><see langword="true"/> to force the extension to be installed to the
+            profile, even if the extension is already installed; otherwise, <see langword="false"/></param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.AddExtension(System.String)">
+            <summary>
+            Adds a Firefox Extension to this profile
+            </summary>
+            <param name="extensionToInstall">The path to the new extension</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.SetPreference(System.String,System.String)">
+            <summary>
+            Sets a preference in the profile.
+            </summary>
+            <param name="name">The name of the preference to add.</param>
+            <param name="value">A <see cref="T:System.String"/> value to add to the profile.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.SetPreference(System.String,System.Int32)">
+            <summary>
+            Sets a preference in the profile.
+            </summary>
+            <param name="name">The name of the preference to add.</param>
+            <param name="value">A <see cref="T:System.Int32"/> value to add to the profile.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.SetPreference(System.String,System.Boolean)">
+            <summary>
+            Sets a preference in the profile.
+            </summary>
+            <param name="name">The name of the preference to add.</param>
+            <param name="value">A <see cref="T:System.Boolean"/> value to add to the profile.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.UpdateUserPreferences">
+            <summary>
+            Writes the user preferences to the profile.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.DeleteExtensionsCache">
+            <summary>
+            Deletes the cache of extensions for this profile, if the cache exists.
+            </summary>
+            <remarks>If the extensions cache does not exist for this profile, the
+            <see cref="M:OpenQA.Selenium.Firefox.FirefoxProfile.DeleteExtensionsCache"/> method performs no operations, but 
+            succeeds.</remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.Clean">
+            <summary>
+            Cleans this Firefox profile.
+            </summary>
+            <remarks>If this profile is a named profile that existed prior to
+            launching Firefox, the <see cref="M:OpenQA.Selenium.Firefox.FirefoxProfile.Clean"/> method removes the WebDriver
+            Firefox extension. If the profile is an anonymous profile, the profile
+            is deleted.</remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.WriteNewPreferences(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Writes the specified preferences to the user preferences file.
+            </summary>
+            <param name="preferences">A <see cref="T:System.Collections.Generic.Dictionary`2"/> containing key-value pairs
+            representing the preferences to write.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfile.ReadExistingPreferences">
+            <summary>
+            Reads the existing preferences from the profile.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.Dictionary`2"/>containing key-value pairs representing the preferences.</returns>
+            <remarks>Assumes that we only really care about the preferences, not the comments</remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfile.Port">
+            <summary>
+            Gets or sets the port on which the profile connects to the WebDriver extension.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfile.ProfileDirectory">
+            <summary>
+            Gets the directory containing the profile.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfile.EnableNativeEvents">
+            <summary>
+            Gets or sets a value indicating whether native events are enabled.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfile.AlwaysLoadNoFocusLibrary">
+            <summary>
+            Gets or sets a value indicating whether to always load the library for allowing Firefox 
+            to execute commands without its window having focus.
+            </summary>
+            <remarks>The <see cref="P:OpenQA.Selenium.Firefox.FirefoxProfile.AlwaysLoadNoFocusLibrary"/> property is only used on Linux.</remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfile.AcceptUntrustedCertificates">
+            <summary>
+            Gets or sets a value indicating whether Firefox should accept untrusted certificates.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfile.IsRunning">
+            <summary>
+            Gets a value indicating whether Firefox is currently running with this profile loaded.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.FirefoxProfileManager">
+            <summary>
+            Allows the user to enumerate and access existing named Firefox profiles.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfileManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfileManager"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxProfileManager.GetProfile(System.String)">
+            <summary>
+            Gets a <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> with a given name.
+            </summary>
+            <param name="profileName">The name of the profile to get.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> with a given name.
+            Returns <see langword="null"/> if no profile with the given name exists.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.FirefoxProfileManager.ExistingProfiles">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/> containing <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile">FirefoxProfiles</see>
+            representing the existing named profiles for Firefox.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.FirefoxWebElement">
+            <summary>
+            Allows the user to control elements on a page in Firefox.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxWebElement.#ctor(OpenQA.Selenium.Firefox.FirefoxDriver,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/> class.
+            </summary>
+            <param name="parentDriver">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxDriver"/> instance hosting this element.</param>
+            <param name="id">The ID assigned to the element.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxWebElement.Equals(System.Object)">
+            <summary>
+            Determines whether two <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/> instances are equal.
+            </summary>
+            <param name="obj">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/> to compare with the current <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/>.</param>
+            <returns><see langword="true"/> if the specified <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/> is equal to the 
+            current <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/>; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.FirefoxWebElement.GetHashCode">
+            <summary>
+            Serves as a hash function for a <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/>.
+            </summary>
+            <returns>A hash code for the current <see cref="T:OpenQA.Selenium.Firefox.FirefoxWebElement"/>.</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.IExtensionConnection">
+            <summary>
+            Defines the interface by which a driver connects to the WebDriver extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.IExtensionConnection.Start">
+            <summary>
+            Starts the connection to the extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.IExtensionConnection.Quit">
+            <summary>
+            Closes the connection to the extension.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Preferences">
+            <summary>
+            Represents the preferences used by a profile in Firefox.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Preferences.SetPreference(System.String,System.String)">
+            <summary>
+            Sets a preference.
+            </summary>
+            <param name="key">The name of the preference to set.</param>
+            <param name="value">A <see cref="T:System.String"/> value give the preference.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Preferences.SetPreference(System.String,System.Int32)">
+            <summary>
+            Sets a preference.
+            </summary>
+            <param name="key">The name of the preference to set.</param>
+            <param name="value">A <see cref="T:System.Int32"/> value give the preference.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Preferences.SetPreference(System.String,System.Boolean)">
+            <summary>
+            Sets a preference.
+            </summary>
+            <param name="key">The name of the preference to set.</param>
+            <param name="value">A <see cref="T:System.Boolean"/> value give the preference.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Preferences.AppendPreferencesTo(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Appends this set of preferences to the specified set of preferences.
+            </summary>
+            <param name="preferencesToAdd">A dictionary containing the preferences to which to
+            append these values.</param>
+            <remarks>If the preference already exists in <paramref name="preferencesToAdd"/>, 
+            the value will be updated.</remarks>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.Executable">
+            <summary>
+            Represents the executable file for Firefox.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.Executable.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.Internal.Executable"/> class.
+            </summary>
+            <param name="userSpecifiedBinaryPath">The path and file name to the Firefox executable.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.Executable.SetLibraryPath(System.Diagnostics.Process)">
+            <summary>
+            Sets the library path for the Firefox executable environment.
+            </summary>
+            <param name="builder">The <see cref="T:System.Diagnostics.Process"/> used to execute the binary.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.Executable.LocateFirefoxBinaryFromPlatform">
+            <summary>
+            Locates the Firefox binary by platform.
+            </summary>
+            <returns>The full path to the binary.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.Executable.GetEnvironmentVariable(System.String,System.String)">
+            <summary>
+            Retrieves an environment variable
+            </summary>
+            <param name="name">Name of the variable.</param>
+            <param name="defaultValue">Default value of the variable.</param>
+            <returns>The value of the variable. If no variable with that name is set, returns the default.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.Executable.GetLibraryPathPropertyName">
+            <summary>
+            Retrieves the platform specific environment property name which contains the library path.
+            </summary>
+            <returns>The platform specific environment property name which contains the library path.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.Executable.FindBinary(System.String[])">
+            <summary>
+            Walk a PATH to locate binaries with a specified name. Binaries will be searched for in the
+            order they are provided.
+            </summary>
+            <param name="binaryNames">The binary names to search for.</param>
+            <returns>The first binary found matching that name.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.Internal.Executable.ExecutablePath">
+            <summary>
+            Gets the full path to the executable.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.ExtensionConnection">
+            <summary>
+            Represents the connection to the WebDriver Firefox extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ExtensionConnection.#ctor(OpenQA.Selenium.Firefox.Internal.ILock,OpenQA.Selenium.Firefox.FirefoxBinary,OpenQA.Selenium.Firefox.FirefoxProfile,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.Internal.ExtensionConnection"/> class.
+            </summary>
+            <param name="lockObject">An <see cref="T:OpenQA.Selenium.Firefox.Internal.ILock"/> object used to lock the mutex port before connection.</param>
+            <param name="binary">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> on which to make the connection.</param>
+            <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> creating the connection.</param>
+            <param name="host">The name of the host on which to connect to the Firefox extension (usually "localhost").</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ExtensionConnection.Start">
+            <summary>
+            Starts the connection to the extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ExtensionConnection.Quit">
+            <summary>
+            Closes the connection to the extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ExtensionConnection.Execute(OpenQA.Selenium.Remote.Command)">
+            <summary>
+            Executes a command
+            </summary>
+            <param name="commandToExecute">The command you wish to execute</param>
+            <returns>A response from the browser</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.ExtensionConnectionFactory">
+            <summary>
+            Creates connections to a running instance of the WebDriver Firefox extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ExtensionConnectionFactory.ConnectTo(OpenQA.Selenium.Firefox.FirefoxBinary,OpenQA.Selenium.Firefox.FirefoxProfile,System.String)">
+            <summary>
+            Connect to an instance of the WebDriver Firefox extension.
+            </summary>
+            <param name="binary">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxBinary"/> in which the extension is hosted.</param>
+            <param name="profile">The <see cref="T:OpenQA.Selenium.Firefox.FirefoxProfile"/> in which the extension is installed.</param>
+            <param name="host">The host name of the computer running the extension (usually "localhost").</param>
+            <returns>An <see cref="T:OpenQA.Selenium.Firefox.Internal.ExtensionConnection"/> connected to the WebDriver Firefox extension.</returns>
+            <exception cref="T:OpenQA.Selenium.WebDriverException">If there are any problems connecting to the extension.</exception>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.ILock">
+            <summary>
+            Defines the interface through which the mutex port for establishing communication 
+            with the WebDriver extension can be locked.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ILock.LockObject(System.Int64)">
+            <summary>
+            Locks the mutex port.
+            </summary>
+            <param name="timeoutInMilliseconds">The amount of time (in milliseconds) to wait for 
+            the mutex port to become available.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.ILock.UnlockObject">
+            <summary>
+            Unlocks the mutex port.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.IniFileReader">
+            <summary>
+            Parses and reads an INI file.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.IniFileReader.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.Internal.IniFileReader"/> class.
+            </summary>
+            <param name="fileName">The full path to the .INI file to be read.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.IniFileReader.GetValue(System.String,System.String)">
+            <summary>
+            Gets a value from the .INI file.
+            </summary>
+            <param name="sectionName">The section in which to find the key-value pair.</param>
+            <param name="valueName">The key of the key-value pair.</param>
+            <returns>The value associated with the given section and key.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Firefox.Internal.IniFileReader.SectionNames">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/> containing the names of the sections in the .INI file.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.NativeMethods">
+            <summary>
+            Provides access to platform-specific operations.
+            </summary>
+            <remarks>TODO (JimEvans): Need to handle non-Windows platforms for socket inheritance.</remarks>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.NativeMethods.HandleInformation">
+            <summary>
+            Values for flags for setting information about a native operating system handle.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Firefox.Internal.NativeMethods.HandleInformation.None">
+            <summary>
+            No flags are to be set for the handle.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Firefox.Internal.NativeMethods.HandleInformation.Inherit">
+            <summary>
+            If this flag is set, a child process created with the bInheritHandles 
+            parameter of CreateProcess set to TRUE will inherit the object handle.
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Firefox.Internal.NativeMethods.HandleInformation.ProtectFromClose">
+            <summary>
+            If this flag is set, calling the CloseHandle function will not close the 
+            object handle.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Firefox.Internal.SocketLock">
+            <summary>
+            Provides a mutex-like lock on a socket.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.SocketLock.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Firefox.Internal.SocketLock"/> class.
+            </summary>
+            <param name="lockPort">Port to use to acquire the lock.</param>
+            <remarks>The <see cref="T:OpenQA.Selenium.Firefox.Internal.SocketLock"/> class will attempt to acquire the
+            specified port number, and wait for it to become free.</remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.SocketLock.LockObject(System.Int64)">
+            <summary>
+            Locks the mutex port.
+            </summary>
+            <param name="timeoutInMilliseconds">The amount of time (in milliseconds) to wait for 
+            the mutex port to become available.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.SocketLock.UnlockObject">
+            <summary>
+            Unlocks the mutex port.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Firefox.Internal.SocketLock.Dispose">
+            <summary>
+            Releases all resources associated with this <see cref="T:OpenQA.Selenium.Firefox.Internal.SocketLock"/>
+            </summary>
+        </member>
+    </members>
+</doc>

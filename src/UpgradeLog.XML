@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Coypu">
+</Property><Property Name="Solution File" Value="C:\dev\github\Coypu\src\Coypu.sln">
+</Property><Property Name="Date" Value="29 May 2011">
+</Property><Property Name="Time" Value="09:29">
+</Property></Properties><Event ErrorLevel="0" Project="Coypu" Source="Coypu\Coypu.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Coypu" Source="Coypu\Coypu.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Coypu.AcceptanceTests" Source="Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Coypu.AcceptanceTests" Source="Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Coypu.Tests" Source="Coypu.Tests\Coypu.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Coypu.Tests" Source="Coypu.Tests\Coypu.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Coypu.Drivers.Tests" Source="Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Coypu.Drivers.Tests" Source="Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Coypu.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Coypu.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Coypu" Source="Coypu\Coypu.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Coypu.AcceptanceTests" Source="Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Coypu.Tests" Source="Coypu.Tests\Coypu.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Coypu.Drivers.Tests" Source="Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

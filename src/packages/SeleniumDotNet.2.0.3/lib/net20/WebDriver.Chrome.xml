@@ -1,0 +1,415 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebDriver.Chrome</name>
+    </assembly>
+    <members>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeBinary">
+            <summary>
+            Provides a mechanism to find the Chrome Binary
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.#ctor(OpenQA.Selenium.Chrome.ChromeProfile,OpenQA.Selenium.Chrome.ChromeExtension)">
+            <summary>
+            Initializes a new instance of the ChromeBinary class using the given <see cref="T:OpenQA.Selenium.Chrome.ChromeProfile"/> and <see cref="T:OpenQA.Selenium.Chrome.ChromeExtension"/>.
+            </summary>
+            <param name="profile">The Chrome profile to use.</param>
+            <param name="extension">The extension to launch Chrome with.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.#ctor(OpenQA.Selenium.Chrome.ChromeProfile,OpenQA.Selenium.Chrome.ChromeExtension,System.Int32)">
+            <summary>
+            Initializes a new instance of the ChromeBinary class using the given <see cref="T:OpenQA.Selenium.Chrome.ChromeProfile"/>, <see cref="T:OpenQA.Selenium.Chrome.ChromeExtension"/> and port value.
+            </summary>
+            <param name="profile">The Chrome profile to use.</param>
+            <param name="extension">The extension to launch Chrome with.</param>
+            <param name="port">The port on which to listen for commands.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.IncrementStartWaitInterval(System.Int32)">
+            <summary>
+            Increases the wait time used for starting the Chrome process.
+            </summary>
+            <param name="diff">Interval by which to increase the wait time.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.AddCustomArguments(System.String)">
+            <summary>
+            Adds custom arguments to the command line.
+            </summary>
+            <param name="customArguments">The arguments to add.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.Start">
+            <summary>
+             Starts the Chrome process for WebDriver. Assumes the passed directories exist.
+            </summary>
+            <exception cref="T:OpenQA.Selenium.WebDriverException">When it can't launch will throw an error</exception>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.Kill">
+            <summary>
+            Kills off the Browser Instance
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeBinary.GetChromeFile">
+            <summary>
+            Locates the Chrome executable on the current platform. First looks in the webdriver.chrome.bin property, then searches
+            through the default expected locations.
+            </summary>
+            <returns>chrome.exe path</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeBinary.Port">
+            <summary>
+            Gets the port number on which the <see cref="T:OpenQA.Selenium.Chrome.ChromeExtension"/> should listen for commands.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeCommandExecutor">
+            <summary>
+            Provides a mechanism to execute commands on the browser
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.#ctor(OpenQA.Selenium.Chrome.ChromeBinary)">
+            <summary>
+            Initializes a new instance of the ChromeCommandExecutor class
+            </summary>
+            <param name="binary">The <see cref="T:OpenQA.Selenium.Chrome.ChromeBinary"/> in which the commands are executed.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.Start">
+            <summary>
+            Starts the connection to the browser extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.Stop">
+            <summary>
+            Closes the connection to the extension.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.Execute(OpenQA.Selenium.Remote.Command)">
+            <summary>
+            Executes the Command in the browser
+            </summary>
+            <param name="commandToExecute">Command to execute</param>
+            <returns>The response from the Browser</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.Dispose">
+            <summary>
+            Releases all resources associated with this <see cref="T:OpenQA.Selenium.Chrome.ChromeCommandExecutor"/>.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources associated with this <see cref="T:OpenQA.Selenium.Chrome.ChromeCommandExecutor"/>.
+            </summary>
+            <param name="disposing"><see langword="true"/> to release only managed resources;
+            <see langword="false"/> to release managed and unmanaged resources.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.StartListening">
+            <summary>
+            Starts listening for the Chrome Server
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.StopListening">
+            <summary>
+            Stops listening to the Chrome Server
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeCommandExecutor.HasClient">
+            <summary>
+            Gets a value indicating whether it has the client
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ChromeExtensionPacketType.Unknown">
+            <summary>
+            Represents the Unknown packet type
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ChromeExtensionPacketType.Get">
+            <summary>
+            Represents the Get packet type
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ChromeExtensionPacketType.Post">
+            <summary>
+            Represents the Post packet type
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ExtensionRequestPacket">
+            <summary>
+            Provides a mechanism to handle requests from the Chrome Extension
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ExtensionRequestPacket.#ctor(System.Net.HttpListenerContext)">
+            <summary>
+            Initializes a new instance of the ExtensionRequestPacket class
+            </summary>
+            <param name="currentContext">Current HTTP Context in use</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ExtensionRequestPacket.ID">
+            <summary>
+            Gets the Unique packet ID
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ExtensionRequestPacket.PacketType">
+            <summary>
+            Gets the Packet Type
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ExtensionRequestPacket.Context">
+            <summary>
+            Gets the Context
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeCommandExecutor.ExtensionRequestPacket.Content">
+            <summary>
+            Gets the Content 
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeDriver">
+            <summary>
+            Provides a mechanism to write tests against Chrome
+            </summary>
+            <example>
+            <code>
+            [TestFixture]
+            public class Testing
+            {
+                private IWebDriver driver;
+                <para></para>
+                [SetUp]
+                public void SetUp()
+                {
+                    driver = new ChromeDriver();
+                }
+                <para></para>
+                [Test]
+                public void TestGoogle()
+                {
+                    driver.Navigate().GoToUrl("http://www.google.co.uk");
+                    /*
+                    *   Rest of the test
+                    */
+                }
+                <para></para>
+                [TearDown]
+                public void TearDown()
+                {
+                    driver.Quit();
+                } 
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:OpenQA.Selenium.Chrome.ChromeDriver.AcceptUntrustedCertificates">
+            <summary>
+            Accept untrusted SSL Certificates
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.#ctor">
+            <summary>
+            Initializes a new instance of the ChromeDriver class with the required extension loaded, and has it connect to a new ChromeCommandExecutor on its port
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.#ctor(OpenQA.Selenium.Chrome.ChromeBinary)">
+            <summary>
+            Initializes a new instance of the ChromeDriver class with the required Chrome Binary
+            </summary>
+            <param name="chromeBinary">A <see cref="T:OpenQA.Selenium.Chrome.ChromeBinary"/> object to launch.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.#ctor(OpenQA.Selenium.Chrome.ChromeProfile,OpenQA.Selenium.Chrome.ChromeExtension)">
+            <summary>
+            Initializes a new instance of the ChromeDriver class using the specified profile and extension.
+            </summary>
+            <param name="profile">The profile to use.</param>
+            <param name="extension">The extension to use.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.GetScreenshot">
+            <summary>
+            Gets a <see cref="T:OpenQA.Selenium.Screenshot"/> object representing the image of the page on the screen.
+            </summary>
+            <returns>A <see cref="T:OpenQA.Selenium.Screenshot"/> object containing the image.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.StartClient">
+            <summary>
+            By default will try to load Chrome from system property
+            webdriver.chrome.bin and the extension from
+            webdriver.chrome.extensiondir.  If the former fails, will try to guess the
+            path to Chrome.  If the latter fails, will try to unzip from the JAR we 
+            hope we're in.  If these fail, throws exceptions.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.StopClient">
+            <summary>
+            Kills the started Chrome process and ChromeCommandExecutor if they exist
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.Execute(OpenQA.Selenium.Remote.DriverCommand,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Executes a command with this driver .
+            </summary>
+            <param name="driverCommandToExecute">A <see cref="T:OpenQA.Selenium.Remote.DriverCommand"/> value representing the command to execute.</param>
+            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> containing the names and values of the parameters of the command.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Remote.Response"/> containing information about the success or failure of the command and any data returned by the command.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeDriver.CreateElement(System.String)">
+            <summary>
+            Creates a <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement"/> with the specified ID.
+            </summary>
+            <param name="elementId">The ID of this element.</param>
+            <returns>A <see cref="T:OpenQA.Selenium.Remote.RemoteWebElement"/> with the specified ID. For the ChromeDriver this will be a <see cref="T:OpenQA.Selenium.Chrome.ChromeWebElement"/>.</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeExtension">
+            <summary>
+            Provides a mechanism to Add the WebDriver Extension
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeExtension.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ChromeExtension class. Assumes that the directory exists and has the required
+            </summary>
+            <param name="directory">The directory to use as the Chrome extension.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeExtension.#ctor">
+            <summary>
+            Initializes a new instance of the ChromeExtension class. Assumes that the directory exists and has the required
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeExtension.FindChromeExtensionDir">
+            <summary>
+            Searches for the Chrome extension directory to use. Will first check the
+            directory specified by the {@code webdriver.chrome.extensiondir} system
+            property, and then will check the current classpath for  {@code chrome-extension.zip}.
+            </summary>
+            <returns>The Chrome extension directory.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeExtension.CheckExtensionForManifest(System.String)">
+            <summary>
+            Verifies that the given {@code directory} is a valid Chrome extension
+            directory. Will check if the directory has the required
+            {@code manifest.json} file.
+            </summary>
+            <param name="directory">The directory to check.</param>
+            <returns>The verified directory.</returns>
+            <exception cref="T:System.IO.IOException">If the directory is not valid.</exception>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeExtension.ExtensionDirectory">
+            <summary>
+            Gets the Extension Directory
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeProfile">
+            <summary>
+            Manages the extension used by the <see cref="T:OpenQA.Selenium.Chrome.ChromeDriver"/>.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeProfile.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ChromeProfile class using the given directory. Assumes that the directory
+            exists and has the required files.
+            </summary>
+            <param name="directory">The directory to use.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeProfile.#ctor">
+            <summary>
+            Initializes a new instance of the ChromeProfile class using the given directory. Assumes that the directory
+            exists and has the required files.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeProfile.DefaultProfile">
+            <summary>
+            Gets an instance of the defualt profile to be used by WebDriver
+            </summary>
+            <remarks>
+            Using the default profile if it currently has windows open will fail, as the extension 
+            will not be installed.
+            TODO: This should really create a new profile identical to the default profile.
+            </remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeProfile.ProfileDirectory">
+            <summary>
+            Gets the value of the Profile Directory
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeProfile.DeleteProfileOnExit">
+            <summary>
+            Gets or sets a value indicating whether to delete this profile when exiting the browser.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeProfile.UntrustedCertificatesCommandLineArgument">
+            <summary>
+            Gets a value of the UntrustedCertificatesFlag that is used when starting the browser
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Chrome.ChromeProfile.AcceptUntrustedCertificates">
+            <summary>
+            Gets or sets a value indicating whether to accept untrusted certificates or not
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.ChromeWebElement">
+            <summary>
+            Provides a mechanism to get elements off the page for test
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeWebElement.#ctor(OpenQA.Selenium.Chrome.ChromeDriver,System.String)">
+            <summary>
+            Initializes a new instance of the ChromeWebElement class
+            </summary>
+            <param name="parent">Driver in use</param>
+            <param name="elementId">Id of the element</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeWebElement.DragAndDropBy(System.Int32,System.Int32)">
+            <summary>
+            Drag and drop by delta of pixels horizontally and vertically. Not Supported in Chrome Yet
+            </summary>
+            <param name="moveRightBy">Move right by x pixels</param>
+            <param name="moveDownBy">Move down by x pixels</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeWebElement.DragAndDropOn(OpenQA.Selenium.IRenderedWebElement)">
+            <summary>
+            Drag and Drop onto another element. Not Supported in Chrome yet
+            </summary>
+            <param name="element">Element to be dropped on</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeWebElement.GetHashCode">
+            <summary>
+            Returns the HashCode of the Element
+            </summary>
+            <returns>Hashcode of the element</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.ChromeWebElement.Equals(System.Object)">
+            <summary>
+            Compares current element against another
+            </summary>
+            <param name="obj">element to compare against</param>
+            <returns>A value indicating whether they are the same</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Chrome.FatalChromeException">
+            <summary>
+            Creates a new Chrome Exception
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.FatalChromeException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Chrome.FatalChromeException"/> class
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.FatalChromeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Chrome.FatalChromeException"/> class
+            </summary>
+            <param name="message">Message of the error</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.FatalChromeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Chrome.FatalChromeException"/> class
+            </summary>
+            <param name="message">Message of the error</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null"/> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Chrome.FatalChromeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Chrome.FatalChromeException"/> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized 
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual 
+            information about the source or destination.</param>
+        </member>
+    </members>
+</doc>

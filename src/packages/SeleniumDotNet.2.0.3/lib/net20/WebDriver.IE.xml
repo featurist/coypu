@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebDriver.IE</name>
+    </assembly>
+    <members>
+        <member name="T:OpenQA.Selenium.IE.InternetExplorerDriver">
+            <summary>
+            Provides a way to access Internet Explorer to run your tests by creating a InternetExplorerDriver instance
+            </summary>
+            <remarks>
+            When the WebDriver object has been instantiated the browser will load. The test can then navigate to the URL under test and 
+            start your test.
+            </remarks>
+            <example>
+            <code>
+            [TestFixture]
+            public class Testing
+            {
+                private IWebDriver driver;
+                <para></para>
+                [SetUp]
+                public void SetUp()
+                {
+                    driver = new InternetExplorerDriver();
+                }
+                <para></para>
+                [Test]
+                public void TestGoogle()
+                {
+                    driver.Navigate().GoToUrl("http://www.google.co.uk");
+                    /*
+                    *   Rest of the test
+                    */
+                }
+                <para></para>
+                [TearDown]
+                public void TearDown()
+                {
+                    driver.Quit();
+                    driver.Dispose();
+                } 
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.#ctor">
+            <summary>
+            Initializes a new instance of the InternetExplorerDriver class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the InternetExplorerDriver class for the specified port.
+            </summary>
+            <param name="port">The port to use to communicate with the IE server.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.GetScreenshot">
+            <summary>
+            Gets a <see cref="T:OpenQA.Selenium.Screenshot"/> object representing the image of the page on the screen.
+            </summary>
+            <returns>A <see cref="T:OpenQA.Selenium.Screenshot"/> object containing the image.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.StartClient">
+            <summary>
+            Starts the command executor, enabling communication with the browser.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriver.StopClient">
+            <summary>
+            Stops the command executor, ending further communication with the browser.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.IE.InternetExplorerDriverServer">
+            <summary>
+            Provides a wrapper for the native-code Internet Explorer driver library.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriverServer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.IE.InternetExplorerDriverServer"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriverServer.Start(System.Int32)">
+            <summary>
+            Starts the server, communicating on the specified port, if it is not already running
+            </summary>
+            <param name="port">The port on which the server should listen for requests.</param>
+            <returns>The port on which the server is actually listening for requests.</returns>
+            <remarks>If the server has already been started, there is no need to start it
+            again. We can leverage the already-running server, and the port it is listening
+            on.</remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriverServer.Dispose">
+            <summary>
+            Releases all resources used by this InternetExplorerDriverServer.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerDriverServer.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by this InternetExplorerDriverServer.
+            </summary>
+            <param name="disposing"><see langword="true"/> to dispose of managed and unmanaged resources;
+            <see langword="false"/> to only dispose of unmanaged resources.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.IE.InternetExplorerDriverServer.LibraryIsLoaded">
+            <summary>
+            Gets a value indicating whether the unmanaged native code library has been loaded.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.IE.InternetExplorerDriverServer.IsRunning">
+            <summary>
+            Gets a value indicating whether the Internet Explorer driver server is running.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.IE.InternetExplorerWebElement">
+            <summary>
+            InternetExplorerWebElement allows you to have access to specific items that are found on the page.
+            </summary>
+            <seealso cref="T:OpenQA.Selenium.IRenderedWebElement"/>
+            <seealso cref="T:OpenQA.Selenium.ILocatable"/>
+            <example>
+            <code>
+            [Test]
+            public void TestGoogle()
+            {
+                driver = new InternetExplorerDriver();
+                InternetExplorerWebElement elem = driver.FindElement(By.Name("q"));
+                elem.SendKeys("Cheese please!");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.InternetExplorerWebElement.#ctor(OpenQA.Selenium.IE.InternetExplorerDriver,System.String)">
+            <summary>
+            Initializes a new instance of the InternetExplorerWebElement class.
+            </summary>
+            <param name="parent">Driver in use.</param>
+            <param name="id">ID of the element.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.IE.NativeLibrary">
+            <summary>
+            Utility class to wrap an unmanaged DLL and be responsible for freeing it.
+            </summary>
+            <remarks>
+            This is a managed wrapper over the native LoadLibrary, GetProcAddress, 
+            and FreeLibrary calls.
+            </remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.NativeLibrary.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.IE.NativeLibrary"/> class.
+            </summary>
+            <param name="fileName">full path name of dll to load</param>
+            <exception cref="T:System.IO.FileNotFoundException">
+            If fileName can't be found
+            </exception>
+            <remarks>
+            This constructor loads a DLL and makes this class responible for 
+            freeing it. Throws exceptions on failure. Most common failure would be 
+            file-not-found, or that the file is not a loadable image.
+            </remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.NativeLibrary.GetUnmanagedFunction(System.String,System.Type)">
+            <summary>
+            Dynamically lookup a function in the dll via kernel32!GetProcAddress.
+            </summary>
+            <param name="functionName">The name of the function in the export table.</param>
+            <param name="delegateType">The Type of the delegate to be returned.</param>
+            <returns>A delegate to the unmanaged function. Returns 
+            <see langword="null"/> if the function is not found.
+            </returns>
+            <remarks>
+            GetProcAddress results are valid as long as the dll is not yet 
+            unloaded. This is very very dangerous to use since you need to 
+            ensure that the dll is not unloaded until after you're done with any 
+            objects implemented by the dll. For example, if you get a delegate 
+            that then gets an IUnknown implemented by this dll, you can not 
+            dispose this library until that IUnknown is collected. Else, you may 
+            free the library and then the CLR may call release on that IUnknown 
+            and it will crash.
+            </remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.NativeLibrary.Dispose">
+            <summary>
+            Call FreeLibrary on the unmanaged dll. All function pointers handed 
+            out from this class become invalid after this.
+            </summary>
+            <remarks>
+            This is very dangerous because it suddenly invalidate everything
+            retrieved from this dll. This includes any functions handed out via 
+            GetProcAddress, and potentially any objects returned from those 
+            functions (which may have an implemention in the dll).
+            </remarks>
+        </member>
+        <member name="T:OpenQA.Selenium.IE.NativeLibrarySafeHandle">
+            <summary>
+            Represents a wrapper class for the handle to a native library.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.NativeLibrarySafeHandle.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.IE.NativeLibrarySafeHandle"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.IE.NativeLibrarySafeHandle.ReleaseHandle">
+            <summary>
+            Releases the native library handle.
+            </summary>
+            <returns><see langword="true"/> if the library was released, otherwise <see langword="false"/>.</returns>
+            <remarks>The handle is released by calling the FreeLibrary API.</remarks>
+        </member>
+        <member name="T:OpenQA.Selenium.IE.NativeMethods">
+            <summary>
+            Provides entry points into needed unmanaged APIs.
+            </summary>
+        </member>
+    </members>
+</doc>

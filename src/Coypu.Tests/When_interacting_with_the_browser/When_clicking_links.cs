@@ -51,20 +51,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(tryUntilArgs.UntilTimeout, Is.EqualTo(waitBetweenRetries));
         }
 
-        [Test]
-        public void It_waits_between_find_and_click_as_configured()
+        [TestCase(200)]
+        [TestCase(300)]
+        public void It_waits_between_find_and_click_as_configured(int waitMs)
         {
-            var expectedWaitBeforeClick = TimeSpan.FromMilliseconds(200);
+            const int tolleranceMS = 10;
 
             var stubLinkToBeClicked = StubLinkToBeClicked("Some link locator");
 
-            Configuration.WaitBeforeClick = TimeSpan.FromSeconds(0);
-            var waitBeforeClickControl = RecordWaitBeforeClickLinkTiming("Some link locator", stubLinkToBeClicked);
-
-            Configuration.WaitBeforeClick = expectedWaitBeforeClick;
+            Configuration.WaitBeforeClick = TimeSpan.FromMilliseconds(waitMs);
             var waitBeforeClickActual = RecordWaitBeforeClickLinkTiming("Some link locator", stubLinkToBeClicked);
 
-            Assert.That(waitBeforeClickActual, Is.InRange(expectedWaitBeforeClick - waitBeforeClickControl, expectedWaitBeforeClick + waitBeforeClickControl));
+            Assert.That(waitBeforeClickActual, Is.InRange(TimeSpan.FromMilliseconds(waitMs - tolleranceMS), TimeSpan.FromMilliseconds(waitMs + tolleranceMS)));
         }
 
         private TimeSpan RecordWaitBeforeClickLinkTiming(string locator, Element stubLinkToBeClicked)
