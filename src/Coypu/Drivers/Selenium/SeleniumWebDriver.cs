@@ -115,8 +115,8 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindSectionByHeaderText(string locator, string tagName, ISearchContext scope)
         {
-            var matchingTitles = Find(By.TagName(tagName), scope).Where(e => e.Text == locator);
-            var parentsOfMatchingTitles = matchingTitles.Select(e => Parent(e));
+            var headers = Find(By.XPath(string.Format(".//{0}",tagName)), scope).Where(e => e.Text == locator);
+            var parentsOfMatchingTitles = headers.Select(e => Parent(e));
 
             return parentsOfMatchingTitles.FirstOrDefault(IsSection);
         }
@@ -190,11 +190,11 @@ namespace Coypu.Drivers.Selenium
         public Element FindField(string locator)
         {
             var scope = Scope;
-            var field = (FindFieldFromLabel(locator, scope) ??
-                         FindFieldByPlaceholder(locator, scope) ??
-                         FindRadioButtonFromValue(locator, scope) ??
+            var field = (FindFieldByName(locator, scope) ??
                          FindFieldById(locator, scope) ??
-                         FindFieldByName(locator, scope));
+                         FindFieldFromLabel(locator, scope) ??
+                         FindFieldByPlaceholder(locator, scope) ??
+                         FindRadioButtonFromValue(locator, scope));
 
             return BuildElement(field, "No such field: " + locator);
         }
@@ -229,8 +229,7 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindFieldByPlaceholder(string placeholder, ISearchContext scope)
         {
-            return Find(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)), scope)
-                        .FirstOrDefault(IsField);
+            return Find(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)), scope).FirstOrDefault(IsField);
         }
 
         private IWebElement FindFieldById(string id, ISearchContext scope)
@@ -269,9 +268,8 @@ namespace Coypu.Drivers.Selenium
                       .FirstOrDefault(e => e.Text == option || e.Value == option);
 
             if (optionToSelect == null)
-            {
                 throw new MissingHtmlException("No such option: " + option);
-            }
+
             optionToSelect.Select();
         }
 
