@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -23,44 +25,44 @@ namespace Coypu.AcceptanceTests
 			browser.Dispose();
 		}
 
-        // Raw selenium should fail on select option with 'Element is no longer attached to the DOM'
+
 	    [Test]
 	    public void FindingStuff_CarBuzz()
 	    {
-//            Configuration.AppHost = "carbuzz.heroku.com";
-//
-//            browser.Visit("/car_search");
-//            browser.WithinSection("Make",
-//                                  () =>
-//                                      {
-//                                          browser.Check("Audi");
-//                                          browser.Check("Ford");
-//                                          browser.Check("Maserati");
-//                                      });
-//            
-//            Assert.That(browser.HasContent("30 car reviews found"));
-//
-//            browser.WithinSection("Seats", () => browser.ClickButton("4"));
-//
-//            Assert.That(browser.HasContent("8 car reviews found"));
+            browser.Navigate().GoToUrl("http://carbuzz.heroku.com/car_search");
+
+	        var start = DateTime.Now;
+
+            browser.FindElementByName("make_17").Click();
+            browser.FindElementByName("make_14").Click();
+            browser.FindElementByName("make_11").Click();
+
+            browser.FindElementByXPath("//ul[@class='seats']/li/button[@value='4']").Click();
+
+	        browser.FindElementByXPath("//ul[@class='features']/li/button[@value='Fun to Drive']").Click();
+            browser.FindElementByXPath("//ul[@class='features']/li/button[@value='Cabriolet']").Click();
+
+	        Console.WriteLine(DateTime.Now - start);
+
+            Assert.That(browser.PageSource.Contains(" 8 car reviews found"));
 	    }
 
 	    [Test]
 		public void Retries_AutotraderCurrentAPI()
-		{
+        {
             browser.Navigate().GoToUrl("http://www.autotrader.co.uk/used-cars");
 
-            browser.FindElementByName("postcode").SendKeys("N1 1AA");
+	        browser.FindElementByName("postcode").SendKeys("N1 1AA");
 
-		    browser.FindElementByName("make").FindElements(By.TagName("option")).First(e => e.Value == "citroen").Select();
-		    browser.FindElementByName("model").FindElements(By.TagName("option")).First(e => e.Value == "c4_grand_picasso").Select();
-		    browser.FindElementByName("radius").FindElements(By.TagName("option")).First(e => e.Text == "National").Select();
-		    browser.FindElementByName("fuel-type").FindElements(By.TagName("option")).First(e => e.Value == "diesel").Select();
-		    browser.FindElementByName("maximum-age").FindElements(By.TagName("option")).First(e => e.Value == "up_to_7_years_old").Select();
-		    browser.FindElementByName("maximum-mileage").FindElements(By.TagName("option")).First(e => e.Value == "up_to_60000_miles").Select();
+	        browser.FindElementByName("make").FindElements(By.TagName("option")).First(e => e.Value == "citroen").Select();
+	        browser.FindElementByName("model").FindElements(By.TagName("option")).First(e => e.Value == "c4_grand_picasso").Select();
+            browser.FindElementByName("radius").FindElements(By.TagName("option")).First(e => e.Text == "National").Select();
+            browser.FindElementByName("fuel-type").FindElements(By.TagName("option")).First(e => e.Value == "diesel").Select();
+            browser.FindElementByName("maximum-age").FindElements(By.TagName("option")).First(e => e.Value == "up_to_7_years_old").Select();
+            browser.FindElementByName("maximum-mileage").FindElements(By.TagName("option")).First(e => e.Value == "up_to_60000_miles").Select();
 
-            browser.FindElementByName("keywords").SendKeys("vtr");
-		}
+	        browser.FindElementByName("keywords").SendKeys("vtr");
+        }
 
 	    [Test]
 		public void Visibility_NewTwitter()

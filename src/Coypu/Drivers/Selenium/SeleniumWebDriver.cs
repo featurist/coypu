@@ -20,6 +20,7 @@ namespace Coypu.Drivers.Selenium
         private RemoteWebDriver selenium;
         private Func<Element> findScope;
         private bool findingScope;
+        private ISearchContext cachedScope;
 
         public SeleniumWebDriver()
         {
@@ -55,8 +56,8 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return findScope == null || findingScope 
-                       ? selenium 
+                return findScope == null || findingScope
+                       ? selenium
                        : FindScope();
             }
         }
@@ -66,7 +67,9 @@ namespace Coypu.Drivers.Selenium
             findingScope = true;
             try
             {
-                return (ISearchContext) findScope().Native;
+                return cachedScope == null
+                    ? (cachedScope = FindFreshScope()) 
+                    : (cachedScope = CheckForStaleElement());
             }
             finally
             {
@@ -74,8 +77,28 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
+        private ISearchContext FindFreshScope()
+        {
+            return (ISearchContext) findScope().Native;
+        }
+
+        private ISearchContext CheckForStaleElement()
+        {
+            try
+            {
+                cachedScope.FindElement(By.XPath("."));
+                return cachedScope;
+            }
+            catch (StaleElementReferenceException)
+            {
+                Console.WriteLine("Stale Element: " + cachedScope);
+                return FindFreshScope();
+            }
+        }
+
         public void ClearScope()
         {
+            cachedScope = null;
             findScope = null;
         }
 
@@ -96,14 +119,8 @@ namespace Coypu.Drivers.Selenium
         public Element FindSection(string locator)
         {
             var scope = Scope;
-            var section =
-                Find(By.Id(locator), scope).FirstDisplayedOrDefault(IsSection) ??
-                FindSectionByHeaderText(locator, "h1", scope) ??
-                FindSectionByHeaderText(locator, "h2", scope) ??
-                FindSectionByHeaderText(locator, "h3", scope) ??
-                FindSectionByHeaderText(locator, "h4", scope) ??
-                FindSectionByHeaderText(locator, "h5", scope) ??
-                FindSectionByHeaderText(locator, "h6", scope);
+            var section = FindSectionByHeaderText(locator, scope) ??
+                          Find(By.Id(locator), scope).FirstDisplayedOrDefault(IsSection);
 
             return BuildElement(section, "Failed to find section: " + locator);
         }
@@ -113,17 +130,19 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(Find(By.Id(id)).FirstDisplayedOrDefault(), "Failed to find id: " + id);
         }
 
-        private IWebElement FindSectionByHeaderText(string locator, string tagName, ISearchContext scope)
+        private IWebElement FindSectionByHeaderText(string locator, ISearchContext scope)
         {
-            var headers = Find(By.XPath(string.Format(".//{0}",tagName)), scope).Where(e => e.Text == locator);
-            var parentsOfMatchingTitles = headers.Select(e => Parent(e));
-
-            return parentsOfMatchingTitles.FirstOrDefault(IsSection);
+            return FindSectionByHeaderText(locator, scope, "section").FirstOrDefault() ??
+                   FindSectionByHeaderText(locator, scope, "div").FirstOrDefault();
         }
 
-        private IWebElement Parent(IWebElement element)
+        private IEnumerable<IWebElement> FindSectionByHeaderText(string locator, ISearchContext scope, string sectionTag)
         {
-            return element.FindElement(By.XPath(".."));
+            string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
+            var matchAnyHeaderWithText = string.Join(string.Format(" = \"{0}\" or ", locator), headerTags) +
+                                         string.Format(" = \"{0}\"", locator);
+
+            return Find(By.XPath(string.Format(".//{0}[{1}]", sectionTag, matchAnyHeaderWithText)), scope);
         }
 
         private bool IsSection(IWebElement e)
@@ -150,9 +169,7 @@ namespace Coypu.Drivers.Selenium
             {
                 var scope = Scope;
                 return BuildElement(FindButtonByText(locator, scope) ??
-                                    FindInputButtonByValue(locator, scope) ??
-                                    Find(By.Id(locator), scope).FirstOrDefault(IsButton) ??
-                                    Find(By.Name(locator), scope).FirstOrDefault(IsButton),
+                                    FindButtonByIdNameOrValue(locator, scope),
                                       "No such button: " + locator);
             }
             catch (NoSuchElementException e)
@@ -161,18 +178,22 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        private IWebElement FindInputButtonByValue(string locator, ISearchContext scope)
+        private IWebElement FindButtonByIdNameOrValue(string locator, ISearchContext scope)
         {
-            var inputButtonsCss = string.Format("input[type=button],input[type=submit]");
-
-            return Find(By.CssSelector(inputButtonsCss), scope).FirstOrDefault(e => e.Value == locator);
+            var xpathToFind = string.Format(".//*[@id = \"{0}\" or @name = \"{0}\" or @value = \"{0}\"]", locator);
+            return Find(By.XPath(xpathToFind), scope).FirstOrDefault(IsButton);
         }
 
         private IWebElement FindButtonByText(string locator, ISearchContext scope)
         {
             return
-                Find(By.TagName("button"), scope).FirstOrDefault(e => e.Text == locator) ??
-                Find(By.ClassName("button"), scope).FirstOrDefault(e => e.Text == locator);
+                Find(By.TagName("button"), scope).FirstOrDefault(e => TextMatches(e, locator)) ??
+                Find(By.ClassName("button"), scope).FirstOrDefault(e => TextMatches(e, locator));
+        }
+
+        private bool TextMatches(IWebElement e, string locator)
+        {
+            return e.Text.Trim() == locator.Trim();
         }
 
         public Element FindLink(string locator)
@@ -190,9 +211,8 @@ namespace Coypu.Drivers.Selenium
         public Element FindField(string locator)
         {
             var scope = Scope;
-            var field = (FindFieldByName(locator, scope) ??
-                         FindFieldById(locator, scope) ??
-                         FindFieldFromLabel(locator, scope) ??
+            var field = (FindFieldByIdOrName(locator, scope) ?? 
+                         FindFieldFromLabel(locator, scope) ?? 
                          FindFieldByPlaceholder(locator, scope) ??
                          FindRadioButtonFromValue(locator, scope));
 
@@ -232,15 +252,17 @@ namespace Coypu.Drivers.Selenium
             return Find(By.XPath(string.Format(".//input[@placeholder = \"{0}\"]", placeholder)), scope).FirstOrDefault(IsField);
         }
 
+        private IWebElement FindFieldByIdOrName(string locator, ISearchContext scope)
+        {
+            var xpathToFind = string.Format(".//*[@id = \"{0}\" or @name = \"{0}\"]", locator);
+            return Find(By.XPath(xpathToFind), scope).FirstOrDefault(IsField);
+        }
+
         private IWebElement FindFieldById(string id, ISearchContext scope)
         {
             return Find(By.Id(id), scope).FirstOrDefault(IsField);
         }
 
-        private IWebElement FindFieldByName(string name, ISearchContext scope)
-        {
-            return Find(By.Name(name), scope).FirstOrDefault(IsField);
-        }
 
         public void Click(Element element)
         {

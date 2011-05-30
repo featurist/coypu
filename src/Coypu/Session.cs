@@ -79,6 +79,11 @@ namespace Coypu
             return new FillInWith(locator, driver, robustWrapper);
         }
 
+        public FillInWith FillIn(Element element)
+        {
+            return new FillInWith(element, driver, robustWrapper);
+        }
+
         public SelectFrom Select(string option)
         {
             return new SelectFrom(option, driver, robustWrapper);

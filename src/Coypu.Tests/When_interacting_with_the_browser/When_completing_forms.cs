@@ -24,7 +24,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void When_filling_in_a_text_field_It_clicks_to_ensure_focus()
+        public void When_filling_in_a_field_It_clicks_to_ensure_focus()
         {
             var element = new StubElement();
             driver.StubField("Some field locator", element);
@@ -35,6 +35,21 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper.DeferredActions.Single()();
 
             Assert.That(driver.ClickedElements, Has.Member(element));
+        }
+
+        [Test]
+        public void When_filling_in_an_field_already_found_It_sets_value_robustly()
+        {
+            var element = new StubElement();
+
+            session.FillIn(element).With("some value for the field");
+
+            Assert.That(driver.SetFields, Has.No.Member(element));
+
+            spyRobustWrapper.DeferredActions.Single()();
+
+            Assert.That(driver.SetFields.Keys, Has.Member(element));
+            Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
         }
 
         [Test]
