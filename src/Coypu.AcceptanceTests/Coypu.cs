@@ -26,7 +26,8 @@ namespace Coypu.AcceptanceTests
 	        Configuration.AppHost = "carbuzz.heroku.com";
 
 	        browser.Visit("/car_search");
-	        browser.WithinSection("Make",
+
+            browser.WithinSection("Make",
 	                              () =>
 	                              {
 	                                  browser.Check("Audi");
@@ -34,21 +35,28 @@ namespace Coypu.AcceptanceTests
 	                                  browser.Check("Maserati");
 	                              });
             
-	        Assert.That(browser.HasContent("30 car reviews found"));
+	        Assert.That(browser.HasContent(" 30 car reviews found"));
 
 	        browser.WithinSection("Seats", () => browser.ClickButton("4"));
 
-	        Assert.That(browser.HasContent("8 car reviews found"));
+            browser.WithinSection("Features",
+                () =>
+                {
+                    browser.ClickButton("Hybrid Engine");
+                    browser.ClickButton("Off-Road Capability");
+                });
+
+            Assert.That(browser.HasContent(" 8 car reviews found"));
 	    }
 
 	    [Test]
 		public void Retries_AutotraderCurrentAPI()
 		{
-            browser.Visit("http://www.autotrader.co.uk/used-cars");
+	        browser.Visit("http://www.autotrader.co.uk/used-cars");
 
-            browser.FillIn("postcode").With("N1 1AA");
+	        browser.FillIn("postcode").With("N1 1AA");
 
-            browser.Select("citroen").From("make");
+	        browser.Select("citroen").From("make");
             browser.Select("c4_grand_picasso").From("model");
 
             browser.Select("National").From("radius");

@@ -36,20 +36,18 @@ namespace Coypu.Robustness
                     var result = function();
                     if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, startTime))
                     {
-                        //Console.WriteLine("Expected result not found");
                         WaitForInterval(interval);
                         continue;
                     }
                     return result;
                 }
                 catch (NotSupportedException) { throw; }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     if (TimeoutExceeded(startTime))
                     {
                         throw;
                     }
-                    //Console.WriteLine(ex.Message);
                     WaitForInterval(interval);
                 }
             }

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Coypu.Drivers.Watin;
 using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -11,7 +11,7 @@ namespace Coypu.Drivers.Tests
             it["returns empty if no matches"] = () =>
             {
                 const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";
-                driver.FindAllXPath(shouldNotFind).should_be_empty();
+                Assert.That(driver.FindAllXPath(shouldNotFind), Is.Empty);
             };
 
             it["returns all matches by xpath"] = () =>
