@@ -13,7 +13,7 @@ namespace Coypu
         void Set(Element element, string value);
         void Select(Element element, string option);
         object Native { get; }
-        bool HasContent(string text);
+        bool HasContent(string pattern);
         bool HasCss(string cssSelector);
         bool HasXPath(string xpath);
         bool HasDialog(string withText);

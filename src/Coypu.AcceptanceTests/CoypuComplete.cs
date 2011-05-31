@@ -3,9 +3,15 @@
 namespace Coypu.AcceptanceTests
 {
     [TestFixture, Explicit]
-    public class Coypu
+    public class CoypuComplete
     {
-        
+
+        [TearDown]
+        public void TearDown()
+        {
+            Browser.EndSession();
+        }
+
         [Test]
         public void Retries_Autotrader()
         {
@@ -26,37 +32,17 @@ namespace Coypu.AcceptanceTests
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
         [Test]
         public void Visibility_NewTwitterLogin()
         {
             var browser = Browser.Session;
             browser.Visit("http://www.twitter.com");
 
+            browser.FillIn("session[username_or_email]").With("coyputester2");
+            browser.FillIn("session[password]").With("Nappybara");
+
+            browser.ClickButton("Sign in");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         [Test]
@@ -64,6 +50,20 @@ namespace Coypu.AcceptanceTests
         {
             var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
+
+            browser.WithinSection("Make",
+                                  () =>
+                                  {
+                                      browser.Check("Audi");
+                                      browser.Check("BMW");
+                                      browser.Check("Mercedes");
+                                  });
+
+            Assert.That(browser.HasContent(@"\b5 car reviews found"));
+
+            browser.WithinSection("Seats", () => browser.ClickButton("4"));
+
+            Assert.That(browser.HasContent(@"\b2 car reviews found"));
 
         }
     }

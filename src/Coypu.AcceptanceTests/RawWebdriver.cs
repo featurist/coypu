@@ -1,55 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {
 	[TestFixture,Explicit]
 	public class RawWebDriver
 	{
-	    private RemoteWebDriver browser;
-
-	    [SetUp]
-		public void SetUp()
-		{
-            browser = new FirefoxDriver();
-		}
-        
-		[TearDown]
-		public void TearDown()
-		{
-			browser.Dispose();
-		}
-
-
 	    [Test]
-	    public void FindingStuff_CarBuzz()
-	    {
-            browser.Navigate().GoToUrl("http://carbuzz.heroku.com/car_search");
-
-	        var start = DateTime.Now;
-
-            browser.FindElementByName("make_17").Click();
-            browser.FindElementByName("make_14").Click();
-            browser.FindElementByName("make_11").Click();
-
-            browser.FindElementByXPath("//ul[@class='seats']/li/button[@value='4']").Click();
-
-	        browser.FindElementByXPath("//ul[@class='features']/li/button[@value='Fun to Drive']").Click();
-            browser.FindElementByXPath("//ul[@class='features']/li/button[@value='Cabriolet']").Click();
-
-	        Console.WriteLine(DateTime.Now - start);
-
-            Assert.That(browser.PageSource.Contains(" 8 car reviews found"));
-	    }
-
-	    [Test]
-		public void Retries_AutotraderCurrentAPI()
+		public void Retries_Autotrader()
         {
+            var browser = new FirefoxDriver();
             browser.Navigate().GoToUrl("http://www.autotrader.co.uk/used-cars");
 
 	        browser.FindElementByName("postcode").SendKeys("N1 1AA");
@@ -64,13 +26,52 @@ namespace Coypu.AcceptanceTests
 	        browser.FindElementByName("keywords").SendKeys("vtr");
         }
 
+
+
+
+
+
+
+
+
+
 	    [Test]
 		public void Visibility_NewTwitter()
 		{
+            var browser = new FirefoxDriver();
             browser.Navigate().GoToUrl("http://www.twitter.com");
 
             browser.FindElementByName("session[username_or_email]").SendKeys("theuser");
-            browser.FindElementByName("session[password]").SendKeys("thepassword");
+            browser.FindElementByName("session[password]").SendKeys("thepass");
+            
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+	    [Test]
+	    public void FindingStuff_CarBuzz()
+        {
+            var browser = new FirefoxDriver();
+	        browser.Navigate().GoToUrl("http://carbuzz.heroku.com/car_search");
+
+	        browser.FindElementByName("make_17").Click();
+	        browser.FindElementByName("make_14").Click();
+	        browser.FindElementByName("make_11").Click();
+
+	        Assert.That(browser.PageSource.Contains(" 5 car reviews found"));
+
+	        browser.FindElementByXPath("//ul[@class='seats']/li/button[@value='4']").Click();
+
+	        Assert.That(browser.PageSource.Contains(" 1 car reviews found"));
+	    }
 	}
 }

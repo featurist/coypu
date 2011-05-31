@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="html\InteractionTestsPage.htm" />
+    <Content Include="results\driver_test_results.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu\Coypu.csproj">

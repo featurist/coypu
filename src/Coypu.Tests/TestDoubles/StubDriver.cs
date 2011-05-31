@@ -46,7 +46,7 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on stub driver"; }
         }
 
-        public bool HasContent(string text)
+        public bool HasContent(string pattern)
         {
             return false;
         }

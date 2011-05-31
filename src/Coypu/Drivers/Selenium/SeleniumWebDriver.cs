@@ -295,9 +295,10 @@ namespace Coypu.Drivers.Selenium
             optionToSelect.Select();
         }
 
-        public bool HasContent(string text)
+        public bool HasContent(string pattern)
         {
-            return GetContent().Contains(text);
+            return Regex.IsMatch(GetContent(), pattern);
+            //return GetContent().Contains(text);
         }
 
         private string GetContent()

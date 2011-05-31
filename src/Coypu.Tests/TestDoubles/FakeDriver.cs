@@ -242,10 +242,10 @@ namespace Coypu.Tests.TestDoubles
         public int ModalDialogsAccepted { get; private set; }
         public int ModalDialogsCancelled { get; private set; }
 
-        public bool HasContent(string text)
+        public bool HasContent(string pattern)
         {
-            hasContentQueries.Add(text);
-            return stubbedHasContentResults[text];
+            hasContentQueries.Add(pattern);
+            return stubbedHasContentResults[pattern];
         }
 
         public bool HasCss(string cssSelector)
