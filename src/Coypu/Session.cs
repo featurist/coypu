@@ -89,14 +89,14 @@ namespace Coypu
             return new SelectFrom(option, driver, robustWrapper);
         }
 
-        public bool HasContent(string cssSelector)
+        public bool HasContent(string pattern)
         {
-            return robustWrapper.Query(() => driver.HasContent(cssSelector), true);
+            return robustWrapper.Query(() => driver.HasContent(pattern), true);
         }
 
-        public bool HasNoContent(string cssSelector)
+        public bool HasNoContent(string pattern)
         {
-            return robustWrapper.Query(() => driver.HasContent(cssSelector), false);
+            return robustWrapper.Query(() => driver.HasContent(pattern), false);
         }
 
         public bool HasCss(string cssSelector)

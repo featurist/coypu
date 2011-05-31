@@ -41,6 +41,11 @@ namespace Coypu.Drivers.Tests
             {
                 driver.HasContent("Some text displayed over multiple lines").should_be_false();
             };
+
+            it["finds text by regex"] = () =>
+            {
+                driver.HasContent(@"\bSome (text)? with [Pp]arts marked \w* variously").should_be_true();
+            };
         }
     }
 }
