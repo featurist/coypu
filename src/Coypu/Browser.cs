@@ -30,7 +30,12 @@ namespace Coypu
 
         public static void EndSession()
         {
-            session.Dispose();
+            if (SessionIsActive) session.Dispose();
+        }
+        
+        public static bool SessionIsActive
+        {
+            get {return session != null;}
         }
     }
 }
