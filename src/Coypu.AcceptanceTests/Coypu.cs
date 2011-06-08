@@ -64,7 +64,6 @@ namespace Coypu.AcceptanceTests
         {
             var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
-
         }
     }
 }

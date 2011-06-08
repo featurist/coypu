@@ -30,7 +30,7 @@ namespace Coypu
 
         public static void EndSession()
         {
-            session.Dispose();
+            if (session != null) session.Dispose();
         }
     }
 }

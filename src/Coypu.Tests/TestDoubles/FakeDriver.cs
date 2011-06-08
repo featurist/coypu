@@ -26,6 +26,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<string, string> stubbedExecuteScriptResults = new Dictionary<string, string>();
         private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
         private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
+        private readonly IDictionary<string, Element> stubbedIFrames = new Dictionary<string, Element>();
         private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
         private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
         private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
@@ -224,6 +225,11 @@ namespace Coypu.Tests.TestDoubles
             throw new NotImplementedException();
         }
 
+        public Element FindIFrame(string locator)
+        {
+            return stubbedIFrames[locator];
+        }
+
         public void Set(Element element, string value)
         {
             setFields.Add(element, value);
@@ -323,6 +329,11 @@ namespace Coypu.Tests.TestDoubles
         private string FormatTimingDetails(string method, params string[] args)
         {
             return string.Format("{0}({1})", method, string.Join(" ; ", args));
+        }
+
+        public void StubIFrame(string locator, StubElement iframe)
+        {
+            stubbedIFrames.Add(locator, iframe);
         }
     }
 }

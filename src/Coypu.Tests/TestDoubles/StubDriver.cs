@@ -145,5 +145,10 @@ namespace Coypu.Tests.TestDoubles
         {
             return null;
         }
+
+        public Element FindIFrame(string locator)
+        {
+            return null;
+        }
     }
 }

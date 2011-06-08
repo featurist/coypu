@@ -79,7 +79,14 @@ namespace Coypu.Drivers.Selenium
 
         private ISearchContext FindFreshScope()
         {
-            return (ISearchContext) findScope().Native;
+            var findFreshScope = (IWebElement)findScope().Native;
+            if (findFreshScope.TagName == "iframe")
+            {
+                selenium.SwitchTo().Frame(findFreshScope);
+                return selenium;
+            }
+
+            return findFreshScope;
         }
 
         private ISearchContext CheckForStaleElement()
@@ -128,6 +135,30 @@ namespace Coypu.Drivers.Selenium
         public Element FindId(string id)
         {
             return BuildElement(Find(By.Id(id)).FirstDisplayedOrDefault(), "Failed to find id: " + id);
+        }
+
+        public Element FindIFrame(string locator)
+        {
+            var frame = Find(By.TagName("iframe"))
+                .FirstOrDefault(e => FindFrameByHeaderText(e, locator));
+
+            return BuildElement(frame, "Failed to find frame: " + locator);
+            
+        }
+
+
+        private bool FindFrameByHeaderText(IWebElement e, string locator)
+        {
+            try
+            {
+                var frame = selenium.SwitchTo().Frame(e);
+                return frame.FindElements(By.XPath(string.Format(".//h1[text() = \"{0}\"]", locator))).Any();
+            }
+            finally
+            {
+                selenium.SwitchTo().DefaultContent();    
+            }
+            
         }
 
         private IWebElement FindSectionByHeaderText(string locator, ISearchContext scope)
