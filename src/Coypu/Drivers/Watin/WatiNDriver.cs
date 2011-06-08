@@ -104,6 +104,22 @@ namespace Coypu.Drivers.Watin
             return BuildElement(element, "Failed to find id: " + id);
         }
 
+        public Element FindIFrame(string locator)
+        {
+            var frame = Filter(Watin.Frames, f => HasElement(f, "h1", locator)).FirstOrDefault() ??
+                        Filter(Watin.Frames,Find.ById(locator)).FirstOrDefault() ??
+                        Filter(Watin.Frames,Find.ByName(locator)).FirstOrDefault();
+
+            return BuildElement(frame, "Failed to find frame: " + locator);
+        }
+
+        private bool HasElement(IElementContainer elementContainer, string tagName, string text)
+        {
+            return elementContainer.ElementsWithTag(new List<ElementTag> { new ElementTag(tagName) })
+                    .Filter(Find.ByText(text))
+                    .Any();
+        }
+
         public Element FindButton(string locator)
         {
             var button = FindFirst(Watin.Buttons, e => TextMatches(e,locator) ||

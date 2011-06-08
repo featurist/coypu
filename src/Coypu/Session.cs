@@ -203,12 +203,12 @@ namespace Coypu
 
         public void WithinFieldset(string locator, Action action)
         {
-            Within(() => driver.FindFieldset(locator),action);
+            Within(() => driver.FindFieldset(locator), action);
         }
         
         public void WithinSection(string locator, Action action)
         {
-            Within(() => driver.FindSection(locator),action);
+            Within(() => driver.FindSection(locator), action);
         }
 
         public void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
@@ -224,6 +224,11 @@ namespace Coypu
         public string ExecuteScript(string javascript)
         {
             return driver.ExecuteScript(javascript);
+        }
+
+        public void WithinIFrame(string locator, Action action)
+        {
+            Within(() => driver.FindIFrame(locator), action);
         }
     }
 }

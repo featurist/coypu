@@ -33,5 +33,6 @@ namespace Coypu
         Element FindFieldset(string locator);
         Element FindSection(string locator);
         Element FindId(string id);
+        Element FindIFrame(string locator);
     }
 }

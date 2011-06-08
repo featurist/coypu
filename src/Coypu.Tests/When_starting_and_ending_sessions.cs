@@ -33,12 +33,19 @@ namespace Coypu.Tests
         public void After_end_a_new_session_is_available()
         {
             var firstSession = Browser.Session;
-            Assert.That(firstSession, Is.TypeOf(typeof (Session)));
+            Assert.That(firstSession, Is.TypeOf(typeof(Session)));
 
             Browser.EndSession();
 
             Assert.That(Browser.Session, Is.Not.SameAs(firstSession));
         }
+
+        [Test]
+        public void End_ignores_a_null_session()
+        {
+            Browser.EndSession();
+        }
+
 
         [Test]
         public void After_disposing_the_session_a_new_session_is_available()
