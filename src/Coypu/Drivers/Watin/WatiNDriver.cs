@@ -261,11 +261,18 @@ namespace Coypu.Drivers.Watin
             get { return Watin; }
         }
 
-        public bool HasContent(string pattern)
+        public bool HasContent(string text)
         {
             return Scope != null
-                ? Regex.IsMatch(Scope.Text,pattern) 
-                : Watin.ContainsText(new Regex(pattern));
+                ? Scope.Text.Contains(text) 
+                : Watin.ContainsText(text);
+        }
+        
+        public bool HasContentMatch(Regex pattern)
+        {
+            return Scope != null
+                ? pattern.IsMatch(Scope.Text) 
+                : Watin.ContainsText(pattern);
         }
 
         public void Check(Element field)

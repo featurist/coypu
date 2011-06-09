@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -11,6 +12,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<Element> uncheckedElements = new List<Element>();
         private readonly IList<Element> chosenElements = new List<Element>();
         private readonly IList<string> hasContentQueries = new List<string>();
+        private readonly IList<Regex> hasContentMatchQueries = new List<Regex>();
         private readonly IList<string> hasCssQueries = new List<string>();
         private readonly IList<string> hasXPathQueries = new List<string>();
         private readonly IList<string> visits = new List<string>();
@@ -27,6 +29,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
         private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
         private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
+        private readonly IDictionary<Regex, bool> stubbedHasContentMatchResults = new Dictionary<Regex, bool>();
         private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
         private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
         private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
@@ -72,10 +75,15 @@ namespace Coypu.Tests.TestDoubles
         {
             get { return visits; }
         }
-
+        
         public IEnumerable<string> HasContentQueries
         {
             get { return hasContentQueries; }
+        }
+        
+        public IEnumerable<Regex> HasContentMatchQueries
+        {
+            get { return hasContentMatchQueries; }
         }
 
         public IEnumerable<string> HasCssQueries
@@ -135,7 +143,11 @@ namespace Coypu.Tests.TestDoubles
         {
             stubbedHasContentResults.Add(text, result);
         }
-
+        
+        public void StubHasContentMatch(Regex pattern, bool result)
+        {
+            stubbedHasContentMatchResults.Add(pattern, result);
+        }
 
         public void StubHasCss(string cssSelector, bool result)
         {
@@ -242,10 +254,16 @@ namespace Coypu.Tests.TestDoubles
         public int ModalDialogsAccepted { get; private set; }
         public int ModalDialogsCancelled { get; private set; }
 
-        public bool HasContent(string pattern)
+        public bool HasContent(string text)
         {
-            hasContentQueries.Add(pattern);
-            return stubbedHasContentResults[pattern];
+            hasContentQueries.Add(text);
+            return stubbedHasContentResults[text];
+        }
+        
+        public bool HasContentMatch(Regex pattern)
+        {
+            hasContentMatchQueries.Add(pattern);
+            return stubbedHasContentMatchResults[pattern];
         }
 
         public bool HasCss(string cssSelector)

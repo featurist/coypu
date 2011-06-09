@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
@@ -8,8 +9,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     {
         protected void Should_wait_for_robustly(bool expecting, bool stubResult, Func<string, bool> subject, Action<string, bool> stub)
         {
-            var locator = "Find me " + DateTime.Now.Ticks;
-
+          Should_wait_for_robustly<string>(expecting,  stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
+        }
+        
+        protected void Should_wait_for_robustly<T>(bool expecting, bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
+        {
             var expectedImmediateResult = !stubResult;
             var expectedDeferredResult = stubResult;
 
