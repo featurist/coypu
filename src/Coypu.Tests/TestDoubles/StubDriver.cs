@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -46,7 +47,12 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on stub driver"; }
         }
 
-        public bool HasContent(string pattern)
+        public bool HasContent(string text)
+        {
+            return false;
+        }
+        
+        public bool HasContentMatch(Regex pattern)
         {
             return false;
         }

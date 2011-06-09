@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Coypu
 {
@@ -13,7 +14,8 @@ namespace Coypu
         void Set(Element element, string value);
         void Select(Element element, string option);
         object Native { get; }
-        bool HasContent(string pattern);
+        bool HasContent(string text);
+        bool HasContentMatch(Regex pattern);
         bool HasCss(string cssSelector);
         bool HasXPath(string xpath);
         bool HasDialog(string withText);

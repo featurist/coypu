@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Coypu.Robustness;
+using System.Text.RegularExpressions;
 
 namespace Coypu
 {
@@ -89,14 +90,24 @@ namespace Coypu
             return new SelectFrom(option, driver, robustWrapper);
         }
 
-        public bool HasContent(string pattern)
+        public bool HasContent(string text)
         {
-            return robustWrapper.Query(() => driver.HasContent(pattern), true);
+            return robustWrapper.Query(() => driver.HasContent(text), true);
+        }
+        
+        public bool HasContentMatch(Regex pattern)
+        {
+            return robustWrapper.Query(() => driver.HasContentMatch(pattern), true);
         }
 
-        public bool HasNoContent(string pattern)
+        public bool HasNoContent(string text)
         {
-            return robustWrapper.Query(() => driver.HasContent(pattern), false);
+            return robustWrapper.Query(() => driver.HasContent(text), false);
+        }
+
+        public bool HasNoContentMatch(Regex pattern)
+        {
+            return robustWrapper.Query(() => driver.HasContentMatch(pattern), false);
         }
 
         public bool HasCss(string cssSelector)
