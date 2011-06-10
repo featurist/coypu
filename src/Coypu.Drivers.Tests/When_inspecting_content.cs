@@ -1,4 +1,5 @@
 ﻿using NSpec;
+using System.Text.RegularExpressions;
 
 namespace Coypu.Drivers.Tests
 {
@@ -44,7 +45,7 @@ namespace Coypu.Drivers.Tests
 
             it["finds text by regex"] = () =>
             {
-                driver.HasContent(@"\bSome (text)? with [Pp]arts marked \w* variously").should_be_true();
+                driver.HasContentMatch(new Regex(@"\bSome (text)? with [Pp]arts marked \w* variously")).should_be_true();
             };
         }
     }

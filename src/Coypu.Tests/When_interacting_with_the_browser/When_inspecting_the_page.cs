@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
@@ -16,6 +17,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Should_wait_for_robustly(true, false, session.HasContent, driver.StubHasContent);
         }
+        
+        [Test]
+        public void HasContentMatch_should_wait_for_robustly_Positive_example()
+        {
+            Should_wait_for_robustly(true, true, session.HasContentMatch, driver.StubHasContentMatch, new Regex("some r[eE]gex^"));
+        }
+
+        [Test]
+        public void HasContentMatch_should_wait_for_robustly_Negative_example()
+        {
+            Should_wait_for_robustly(true, false, session.HasContentMatch, driver.StubHasContentMatch, new Regex("some r[eE]gex^"));
+        }
 
         [Test]
         public void HasNoContent_should_wait_for_robustly_Positive_example()
@@ -27,6 +40,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void HasNoContent_should_wait_for_robustly_Negative_example()
         {
             Should_wait_for_robustly(false, false, session.HasNoContent, driver.StubHasContent);
+        }
+        
+        [Test]
+        public void HasNoContentMatch_should_wait_for_robustly_Positive_example()
+        {
+            Should_wait_for_robustly(false, true, session.HasNoContentMatch, driver.StubHasContentMatch, new Regex("some r[eE]gex^"));
+        }
+
+        [Test]
+        public void HasNoContentMatch_should_wait_for_robustly_Negative_example()
+        {
+            Should_wait_for_robustly(false, false, session.HasNoContentMatch, driver.StubHasContentMatch, new Regex("some r[eE]gex^"));
         }
 
         [Test]
