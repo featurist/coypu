@@ -140,19 +140,21 @@ namespace Coypu.Drivers.Selenium
         public Element FindIFrame(string locator)
         {
             var frame = Find(By.TagName("iframe"))
-                .FirstOrDefault(e => FindFrameByHeaderText(e, locator));
+                .FirstOrDefault(e => FindFrameByContents(e, locator));
 
             return BuildElement(frame, "Failed to find frame: " + locator);
             
         }
 
 
-        private bool FindFrameByHeaderText(IWebElement e, string locator)
+        private bool FindFrameByContents(IWebElement e, string locator)
         {
             try
             {
                 var frame = selenium.SwitchTo().Frame(e);
-                return frame.FindElements(By.XPath(string.Format(".//h1[text() = \"{0}\"]", locator))).Any();
+                return 
+                    frame.Title == locator ||
+                    frame.FindElements(By.XPath(string.Format(".//h1[text() = \"{0}\"]", locator))).Any();
             }
             finally
             {
