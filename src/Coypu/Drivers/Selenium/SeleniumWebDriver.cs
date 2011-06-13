@@ -146,7 +146,6 @@ namespace Coypu.Drivers.Selenium
             
         }
 
-
         private bool FindFrameByContents(IWebElement e, string locator)
         {
             try
@@ -160,22 +159,22 @@ namespace Coypu.Drivers.Selenium
             {
                 selenium.SwitchTo().DefaultContent();    
             }
-            
         }
 
         private IWebElement FindSectionByHeaderText(string locator, ISearchContext scope)
         {
-            return FindSectionByHeaderText(locator, scope, "section").FirstOrDefault() ??
-                   FindSectionByHeaderText(locator, scope, "div").FirstOrDefault();
+            return FindSectionByHeaderText(locator, scope, "section") ??
+                   FindSectionByHeaderText(locator, scope, "div");
         }
 
-        private IEnumerable<IWebElement> FindSectionByHeaderText(string locator, ISearchContext scope, string sectionTag)
+        private IWebElement FindSectionByHeaderText(string locator, ISearchContext scope, string sectionTag)
         {
             string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
-            var matchAnyHeaderWithText = string.Join(string.Format(" = \"{0}\" or ", locator), headerTags) +
-                                         string.Format(" = \"{0}\"", locator);
+            var headersXPath = string.Join(string.Format(" or ", locator), headerTags);
+            var headersCss = string.Join(string.Format(",", locator), headerTags);
 
-            return Find(By.XPath(string.Format(".//{0}[{1}]", sectionTag, matchAnyHeaderWithText)), scope);
+            var withAHeader = Find(By.XPath(string.Format(".//{0}[{1}]", sectionTag, headersXPath)), scope);
+            return withAHeader.FirstDisplayedOrDefault(e => e.FindElements(By.CssSelector(headersCss)).Any(h => TextMatches(h,locator)));
         }
 
         private bool IsSection(IWebElement e)
@@ -202,7 +201,8 @@ namespace Coypu.Drivers.Selenium
             {
                 var scope = Scope;
                 return BuildElement(FindButtonByText(locator, scope) ??
-                                    FindButtonByIdNameOrValue(locator, scope),
+                                    FindButtonByIdNameOrValue(locator, scope) ??
+                                    FindByPartialId(locator, scope).FirstOrDefault(IsButton),
                                       "No such button: " + locator);
             }
             catch (NoSuchElementException e)
@@ -244,10 +244,11 @@ namespace Coypu.Drivers.Selenium
         public Element FindField(string locator)
         {
             var scope = Scope;
-            var field = (FindFieldByIdOrName(locator, scope) ?? 
-                         FindFieldFromLabel(locator, scope) ?? 
-                         FindFieldByPlaceholder(locator, scope) ??
-                         FindRadioButtonFromValue(locator, scope));
+            var field = FindFieldByIdOrName(locator, scope) ?? 
+                        FindFieldFromLabel(locator, scope) ?? 
+                        FindFieldByPlaceholder(locator, scope) ??
+                        FindRadioButtonFromValue(locator, scope) ??
+                        FindByPartialId(locator,scope).FirstOrDefault(IsField);
 
             return BuildElement(field, "No such field: " + locator);
         }
@@ -472,6 +473,12 @@ namespace Coypu.Drivers.Selenium
         private IEnumerable<IWebElement> Find(By by, ISearchContext scope)
         {
             return scope.FindElements(by).Where(IsDisplayed);
+        }
+        
+        private IEnumerable<IWebElement> FindByPartialId(string id, ISearchContext scope)
+        {
+            var xpath = string.Format(".//*[substring(@id, string-length(@id) - {0} + 1, string-length(@id)) = '{1}']", id.Length, id);
+            return Find(By.XPath(xpath), scope);
         }
 
         private bool IsDisplayed(IWebElement e)
