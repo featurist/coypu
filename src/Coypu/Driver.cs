@@ -36,5 +36,6 @@ namespace Coypu
         Element FindSection(string locator);
         Element FindId(string id);
         Element FindIFrame(string locator);
+        void Hover(Element element);
     }
 }

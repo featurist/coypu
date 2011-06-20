@@ -106,11 +106,16 @@ namespace Coypu.Drivers.Watin
 
         public Element FindIFrame(string locator)
         {
-            var frame = Filter(Watin.Frames, f => HasElement(f, "h1", locator)).FirstOrDefault() ??
-                        Filter(Watin.Frames,Find.ById(locator)).FirstOrDefault() ??
-                        Filter(Watin.Frames,Find.ByName(locator)).FirstOrDefault();
+            var frame = Filter(Watin.Frames, f => HasElement(f, "h1", locator) ||
+                                                  f.Title == locator ||
+                                                  f.Id == locator).FirstOrDefault();
 
             return BuildElement(frame, "Failed to find frame: " + locator);
+        }
+
+        public void Hover(Element element)
+        {
+            (WatiNElement(element)).MouseEnter();
         }
 
         private bool HasElement(IElementContainer elementContainer, string tagName, string text)

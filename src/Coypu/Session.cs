@@ -241,5 +241,16 @@ namespace Coypu
         {
             Within(() => driver.FindIFrame(locator), action);
         }
+
+        public void Click(Func<Element> findElement)
+        {
+            robustWrapper.Robustly(() => driver.Click(findElement()));
+        }
+
+        public void Hover(Func<Element> findElement)
+        {
+            robustWrapper.Robustly(() => driver.Hover(findElement()));
+            
+        }
     }
 }
