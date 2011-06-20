@@ -2,6 +2,10 @@
 
 Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with FireBug then Coypu might help.
 
+Coypu is on Nuget:
+
+PM> Install-Package Coypu
+
 ## Coypu is
 * A robust wrapper for browser automation tools on .Net, such as Selenium WebDriver that eases automating ajax-heavy websites
 * A more intuitive DSL for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
