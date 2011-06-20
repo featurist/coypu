@@ -32,7 +32,15 @@ task :package do
   [:net35, :net40].each do |version|
     Rake::Task["compile_#{version}"].invoke
     FileUtils.mkdir_p("temp/#{version}")
-    FileUtils.cp('src/Coypu/bin/Release/Coypu.dll', "temp/#{version}")
+	
+	exclude_files = [
+					'src/Coypu/bin/Release/Microsoft.mshtml.dll',
+					'src/Coypu/bin/Release/WatiN.Core.dll',
+					'src/Coypu/bin/Release/WatiN.Core.xml',
+					'src/Coypu/bin/Release/Coypu.pdb',
+					]
+	include_files = Dir.glob('src/Coypu/bin/Release/*').reject{|f| exclude_files.include?(f)}
+	include_files.each {|f| FileUtils.cp(f, "temp/#{version}")}
   end
   sh 'nuget Pack Coypu.nuspec'
 end
