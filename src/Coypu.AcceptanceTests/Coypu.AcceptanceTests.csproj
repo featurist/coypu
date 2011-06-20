@@ -55,7 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Webdriver\WebDriver.Common.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Firefox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="WebDriver.Firefox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Webdriver\WebDriver.Firefox.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver.Remote, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Webdriver\WebDriver.Remote.dll</HintPath>

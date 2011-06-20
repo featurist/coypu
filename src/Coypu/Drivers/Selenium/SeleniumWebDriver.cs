@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
@@ -34,9 +36,13 @@ namespace Coypu.Drivers.Selenium
                 case (Browser.Firefox):
                     return new FirefoxDriver();
                 case (Browser.InternetExplorer):
-                    return new InternetExplorerDriver();
+                    {
+                        DesiredCapabilities ieCapabilities = DesiredCapabilities.InternetExplorer();
+                        ieCapabilities.SetCapability("ignoreProtectedModeSettings", true);
+                        return new InternetExplorerDriver(ieCapabilities);
+                    }
                 case (Browser.Chrome):
-                    return new ChromeDriver();
+                        return new ChromeDriver();
                 default:
                     throw new BrowserNotSupportedException(Configuration.Browser, this);
             }
@@ -147,8 +153,10 @@ namespace Coypu.Drivers.Selenium
 
         public void Hover(Element element)
         {
-            var sequenceBuilder = new OpenQA.Selenium.Interactions.DefaultActionSequenceBuilder(selenium);
-            sequenceBuilder.MoveToElement((IWebElement) element.Native);
+            var sequenceBuilder = new DefaultActionSequenceBuilder(selenium);
+            var actionSequenceBuilder = sequenceBuilder.MoveToElement((IWebElement) element.Native);
+            var action = actionSequenceBuilder.Build();
+            action.Perform();
         }
 
         private bool FindFrameByContents(IWebElement e, string locator)

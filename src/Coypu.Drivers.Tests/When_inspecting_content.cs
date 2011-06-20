@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Tests
 
             it["finds text in a list"] = () =>
             {
-                driver.HasContent("Some text in a list").should_be_true();
+                driver.HasContent("Some\r\ntext\r\nin\r\na\r\nlist").should_be_true();
             };
 
             it["finds text split over multiple lines in source"] = () =>
