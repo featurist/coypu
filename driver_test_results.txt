@@ -1,75 +1,78 @@
-Microsoft (R) Build Engine Version 3.5.30729.4926
-[Microsoft .NET Framework, Version 2.0.50727.4959]
+Microsoft (R) Build Engine Version 3.5.30729.5420
+[Microsoft .NET Framework, Version 2.0.50727.5444]
 Copyright (C) Microsoft Corporation 2007. All rights reserved.
 
-Build started 20/06/2011 09:27:43.
-Project "C:\dev\current\github\Coypu\src\Coypu.sln" on node 0 (default targets).
-  Building solution configuration "Release|Any CPU".
-Project "C:\dev\current\github\Coypu\src\Coypu.sln" (1) is building "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (2) on node 0 (default targets).
+Build started 20/06/2011 15:07:57.
+Project "D:\P\Coypu\src\Coypu.sln" on node 0 (default targets).
+  Building solution configuration "Debug|Any CPU".
+Project "D:\P\Coypu\src\Coypu.sln" (1) is building "D:\P\Coypu\src\Coypu\Coypu.csproj" (2) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
 CoreCompile:
 Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
-  Coypu -> C:\dev\current\github\Coypu\src\Coypu\bin\Release\Coypu.dll
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (default targets).
-Project "C:\dev\current\github\Coypu\src\Coypu.sln" (1) is building "C:\dev\current\github\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) on node 0 (default targets).
+  Coypu -> D:\P\Coypu\src\Coypu\bin\Debug\Coypu.dll
+Done Building Project "D:\P\Coypu\src\Coypu\Coypu.csproj" (default targets).
+Project "D:\P\Coypu\src\Coypu.sln" (1) is building "D:\P\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
-Project "C:\dev\current\github\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (2:2) on node 0 (GetTargetPath target(s)).
+Project "D:\P\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "D:\P\Coypu\src\Coypu\Coypu.csproj" (2:2) on node 0 (GetTargetPath target(s)).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (GetTargetPath target(s)).
-Project "C:\dev\current\github\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (2:3) on node 0 (GetNativeManifest target(s)).
+Done Building Project "D:\P\Coypu\src\Coypu\Coypu.csproj" (GetTargetPath target(s)).
+Project "D:\P\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "D:\P\Coypu\src\Coypu\Coypu.csproj" (2:3) on node 0 (GetNativeManifest target(s)).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (GetNativeManifest target(s)).
+Done Building Project "D:\P\Coypu\src\Coypu\Coypu.csproj" (GetNativeManifest target(s)).
 CoreCompile:
 Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
-Project "C:\dev\current\github\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (2:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
+Project "D:\P\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "D:\P\Coypu\src\Coypu\Coypu.csproj" (2:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu\Coypu.csproj" (GetCopyToOutputDirectoryItems target(s)).
+Done Building Project "D:\P\Coypu\src\Coypu\Coypu.csproj" (GetCopyToOutputDirectoryItems target(s)).
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
-  Coypu.AcceptanceTests -> C:\dev\current\github\Coypu\src\Coypu.AcceptanceTests\bin\Release\Coypu.AcceptanceTests.dll
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (default targets).
-Project "C:\dev\current\github\Coypu\src\Coypu.sln" (1) is building "C:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (4) on node 0 (default targets).
+  Coypu.AcceptanceTests -> D:\P\Coypu\src\Coypu.AcceptanceTests\bin\Debug\Coypu.AcceptanceTests.dll
+Done Building Project "D:\P\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (default targets).
+Project "D:\P\Coypu\src\Coypu.sln" (1) is building "D:\P\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (4) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 _CopyAppConfigFile:
 Skipping target "_CopyAppConfigFile" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
-  Copying file from "obj\Release\Coypu.Drivers.Tests.dll" to "bin\Release\Coypu.Drivers.Tests.dll".
-  Coypu.Drivers.Tests -> C:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\bin\Release\Coypu.Drivers.Tests.dll
-  Copying file from "obj\Release\Coypu.Drivers.Tests.pdb" to "bin\Release\Coypu.Drivers.Tests.pdb".
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (default targets).
-Project "C:\dev\current\github\Coypu\src\Coypu.sln" (1) is building "C:\dev\current\github\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (5) on node 0 (default targets).
+  Copying file from "obj\Debug\Coypu.Drivers.Tests.dll" to "bin\Debug\Coypu.Drivers.Tests.dll".
+  Coypu.Drivers.Tests -> D:\P\Coypu\src\Coypu.Drivers.Tests\bin\Debug\Coypu.Drivers.Tests.dll
+  Copying file from "obj\Debug\Coypu.Drivers.Tests.pdb" to "bin\Debug\Coypu.Drivers.Tests.pdb".
+Done Building Project "D:\P\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (default targets).
+Project "D:\P\Coypu\src\Coypu.sln" (1) is building "D:\P\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (5) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
-C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
 CoreCompile:
 Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
-  Coypu.Tests -> C:\dev\current\github\Coypu\src\Coypu.Tests\bin\Release\Coypu.Tests.dll
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default targets).
-Done Building Project "C:\dev\current\github\Coypu\src\Coypu.sln" (default targets).
+  Coypu.Tests -> D:\P\Coypu\src\Coypu.Tests\bin\Debug\Coypu.Tests.dll
+Done Building Project "D:\P\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default targets).
+Done Building Project "D:\P\Coypu\src\Coypu.sln" (default targets).
 
 Build succeeded.
-
-"C:\dev\current\github\Coypu\src\Coypu.sln" (default target) (1) ->
-"C:\dev\current\github\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default target) (5) ->
-(ResolveAssemblyReferences target) -> 
-  C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
-
-    1 Warning(s)
+    0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.80
+Time Elapsed 00:00:00.59
+Started ChromeDriver
+port=57143
 
 DriverSpecRunner
   when testing each driver
@@ -77,7 +80,7 @@ DriverSpecRunner
       and the browser is Firefox
         cleans up
         when hovering
-          mouses over the underlying element - FAILED - Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
+          mouses over the underlying element
         when using iframes as scope
           elements withing iframes are not found in outer scope
             does not find something in an iframe
@@ -126,6 +129,7 @@ DriverSpecRunner
           finds a particular button by its name
           finds a particular input button by its value
           finds a particular input button by its id
+          finds a particular input button by id ends with
           finds a particular input button by its name
           finds a particular submit button by its value
           finds a particular submit button by its id
@@ -178,6 +182,7 @@ DriverSpecRunner
             finds radio
             finds password
             finds file
+            finds by id ends with
           finding by name
             finds text input
             finds textarea
@@ -255,185 +260,7 @@ DriverSpecRunner
       and the browser is InternetExplorer
         cleans up
         when hovering
-          mouses over the underlying element - FAILED - Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
-        when using iframes as scope
-          elements withing iframes are not found in outer scope
-            does not find something in an iframe
-          within iframe one
-            finds the element in the current scope
-          within iframe two
-            finds the element in the current scope
-        when finding iframes
-          finds by header text
-          finds by id
-          finds by title
-        when accessing attributes
-          exposes element attributes
-        when checking
-          checks an unchecked checkbox
-          leaves a checked checkbox checked
-          unchecks a checked checkbox
-          leaves an unchecked checkbox unchecked
-          fires onclick event
-          fires onclick event
-        when choosing
-          chooses radio button from list
-          fires onclick event
-        when clicking
-          clicks the underlying element
-        when executing script
-          runs the script in the browser
-          returns the result
-        when finding all elements by css
-          returns empty if no matches
-          returns all matches by css - FAILED - Expected: 3, But was: 0
-        when finding all elements by xpath
-          returns empty if no matches
-          returns all matches by xpath - FAILED - Expected: 3, But was: 0
-        when finding an element by css
-          finds present examples - FAILED - No element found by css: #inspectingContent p.css-test span
-          does not find missing examples
-          only finds visible elements
-        when finding an element by xpath
-          finds present examples - FAILED - No element found by xpath: //*[@id = 'inspectingContent']//p[@class='css-test']/span
-          does not find missing examples
-          only finds visible elements
-        when finding buttons
-          finds a particular button by its text
-          finds a particular button by its id
-          finds a particular button by its name
-          finds a particular input button by its value
-          finds a particular input button by its id
-          finds a particular input button by its name
-          finds a particular submit button by its value
-          finds a particular submit button by its id
-          finds a particular submit button by its name
-          finds image buttons
-          does not find text inputs
-          does not find hidden inputs
-          does not find invisible inputs
-        when finding buttons within scope
-          within scope1
-            finds button by name
-            finds input button by value
-            finds button by text
-          within scope2
-            finds button by name
-            finds input button by value
-            finds button by text
-        when finding sections as divs
-          finds by div by id
-          finding sections by header text
-            finds by h1 text
-            finds by h2 text
-            finds by h3 text
-            finds by h6 text
-            finds by h2 text within child link
-        when finding fields
-          finds text field by placeholder
-          finds radio button by value
-          finding by for attribute
-            finds text input
-            finds password field
-            finds select field
-            finds checkbox
-            finds radio button
-            finds textarea
-            finds file input
-          finding by container label
-            finds text input
-            finds password
-            finds checkbox
-            finds radio
-            finds select
-            finds textarea
-            finds file field
-          finding by id
-            finds field
-            finds textarea
-            finds select
-            finds checkbox
-            finds radio
-            finds password
-            finds file
-          finding by name
-            finds text input
-            finds textarea
-            finds select
-            finds checkbox
-            finds radio button
-            finds password input
-            finds file input
-        when finding fieldsets
-          finds by legend text
-          finds by id
-          finds only fieldsets
-        when finding fields within scope
-          within scope1
-            finds text input by for
-            finds text input in container label
-            finds text input by placeholder
-            finds text input by name
-            finds radio button by value
-            finds not find text input by id outside scope
-          within scope2
-            finds text input
-            finds text input in container label
-            finds text input by placeholder
-            finds text input by name
-            finds radio button by value
-            finds not find text input by id outside scope
-        when finding links
-          finds link by text
-          does not find display:none
-          does not find visibility:hidden links
-        when finding sections
-          only finds div and section
-          finding sections by header text
-            finds by h1 text - FAILED - Failed to find section: Section One h1
-            finds by h2 text - FAILED - Failed to find section: Section One h2
-            finds by h3 text - FAILED - Failed to find section: Section One h3
-            finds by h6 text - FAILED - Failed to find section: Section One h6
-            finds by section by id - FAILED - Failed to find section: sectionOne
-            finds section by id - FAILED - Failed to find section: sectionOne
-        when inspecting content
-          does not find missing text
-          finds text with parts marked up variously
-          finds text in a table row - FAILED - Expected: True, But was: False
-          finds text in a list - FAILED - Expected: True, But was: False
-          finds text split over multiple lines in source
-          finds text displayed over multiple lines in source
-          does not find single line text displayed over multiple lines in source
-          finds text by regex
-        when inspecting content within scope
-          scope 1
-            finds content within scope
-            does not find content outside scope
-          scope 2
-            finds content within scope
-            does not find content outside scope
-        when inspecting css
-          does not find missing examples
-          finds present examples - FAILED - Expected to find something at: #inspectingContent p.css-test span, Expected: True, But was: False
-          only finds visible elements
-        when inspecting xpath
-          does not find missing examples
-          only finds visible elements
-          finds present examples - FAILED - Expected to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/span, Expected: True, But was: False
-        when selecting options
-          sets text of selected option
-        when setting fields
-          sets value of text input field
-          sets value of textarea field
-          selects option by text or value
-          fires change event when selecting an option
-        when uploading files
-          sets the path to be uploaded
-    and the driver is SeleniumWebDriver
-      and the browser is Chrome
-        cleans up
-        when hovering
-          mouses over the underlying element - FAILED - Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
+          mouses over the underlying element
         when using iframes as scope
           elements withing iframes are not found in outer scope
             does not find something in an iframe
@@ -482,6 +309,7 @@ DriverSpecRunner
           finds a particular button by its name
           finds a particular input button by its value
           finds a particular input button by its id
+          finds a particular input button by id ends with
           finds a particular input button by its name
           finds a particular submit button by its value
           finds a particular submit button by its id
@@ -528,15 +356,16 @@ DriverSpecRunner
             finds file field
           finding by id
             finds field
-            finds textarea - FAILED - Expected: "textarea field two val", But was: null
+            finds textarea
             finds select
             finds checkbox
             finds radio
             finds password
             finds file
+            finds by id ends with
           finding by name
             finds text input
-            finds textarea - FAILED - Expected: "textarea field two val", But was: null
+            finds textarea
             finds select
             finds checkbox
             finds radio button
@@ -601,12 +430,192 @@ DriverSpecRunner
         when selecting options
           sets text of selected option
         when setting fields
-          sets value of text input field - FAILED - Expected string length 20 but was 24. Strings differ at index 0., Expected: "New text input value", But was: "text input field two val", -----------^
-          sets value of textarea field - FAILED - Expected: "New textarea value", But was: null
-          selects option by text or value - FAILED - Expected: "select2value1", But was: null
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
           fires change event when selecting an option
         when uploading files
-          sets the path to be uploaded - FAILED - Expected: String ending with "\local.file", But was: null
+          sets the path to be uploaded
+    and the driver is SeleniumWebDriver
+      and the browser is Chrome
+        cleans up
+        when hovering
+          mouses over the underlying element
+        when using iframes as scope
+          elements withing iframes are not found in outer scope
+            does not find something in an iframe
+          within iframe one
+            finds the element in the current scope
+          within iframe two
+            finds the element in the current scope
+        when finding iframes
+          finds by header text
+          finds by id
+          finds by title
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath
+        when finding an element by css
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by id ends with
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id - FAILED - 
+          finding sections by header text
+            finds by h1 text - FAILED - 
+            finds by h2 text - FAILED - 
+            finds by h3 text - FAILED - 
+            finds by h6 text - FAILED - 
+            finds by h2 text within child link - FAILED - 
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+            finds by id ends with
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+        when finding sections
+          only finds div and section - FAILED - Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.InvalidOperationException>
+          finding sections by header text
+            finds by h1 text - FAILED - 
+            finds by h2 text - FAILED - 
+            finds by h3 text - FAILED - 
+            finds by h6 text - FAILED - 
+            finds by section by id - FAILED - 
+            finds section by id - FAILED - 
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+          finds text by regex
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples
+          only finds visible elements
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded - FAILED - Expected: String ending with "\local.file", But was: <string.Empty>
     and the driver is WatiNDriver
       and the browser is InternetExplorer
         cleans up
@@ -657,9 +666,10 @@ DriverSpecRunner
         when finding buttons
           finds a particular button by its text
           finds a particular button by its id
-          finds a particular button by its name
+          finds a particular button by its name - FAILED - Expected string length 13 but was 14. Strings differ at index 0., Expected: "second button", But was: " second button", -----------^
           finds a particular input button by its value
           finds a particular input button by its id
+          finds a particular input button by id ends with - FAILED - Failed to find button with text, id or name: rdInputButtonId
           finds a particular input button by its name
           finds a particular submit button by its value
           finds a particular submit button by its id
@@ -712,6 +722,7 @@ DriverSpecRunner
             finds radio
             finds password
             finds file
+            finds by id ends with - FAILED - Failed to find field with label, id, name or placeholder: tainerLabeledFileFieldId
           finding by name
             finds text input
             finds textarea
@@ -746,21 +757,21 @@ DriverSpecRunner
         when finding sections
           only finds div and section
           finding sections by header text
-            finds by h1 text - FAILED - Failed to find section: Section One h1
-            finds by h2 text - FAILED - Failed to find section: Section One h2
-            finds by h3 text - FAILED - Failed to find section: Section One h3
-            finds by h6 text - FAILED - Failed to find section: Section One h6
-            finds by section by id - FAILED - Failed to find section: Section One h1
-            finds section by id - FAILED - Failed to find section: Section One h1
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by section by id - FAILED - Unable to cast COM object of type 'System.__ComObject' to interface type 'mshtml.DispHTMLBaseElement'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{3050F518-98B5-11CF-BB82-00AA00BDCE0B}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+            finds section by id - FAILED - Unable to cast COM object of type 'System.__ComObject' to interface type 'mshtml.DispHTMLBaseElement'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{3050F518-98B5-11CF-BB82-00AA00BDCE0B}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
         when inspecting content
           does not find missing text
           finds text with parts marked up variously
           finds text in a table row - FAILED - Expected: True, But was: False
-          finds text in a list - FAILED - Expected: True, But was: False
+          finds text in a list
           finds text split over multiple lines in source
-          finds text displayed over multiple lines in source
+          finds text displayed over multiple lines in source - FAILED - Expected: True, But was: False
           does not find single line text displayed over multiple lines in source
-          finds text by regex
+          finds text by regex - FAILED - Expected: True, But was: False
         when inspecting content within scope
           scope 1
             finds content within scope
@@ -788,305 +799,421 @@ DriverSpecRunner
 
 **** FAILURES ****
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Firefox. when hovering. mouses over the underlying element.
-Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
-   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 14
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections as divs. finding sections by header text. finds by h1 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when hovering. mouses over the underlying element.
-Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
-   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 14
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections_as_divs.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections_as_divs.cs:line 13
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding all elements by css. returns all matches by css.
-Expected: 3, But was: 0
-   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 22
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections as divs. finding sections by header text. finds by h2 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns all matches by xpath.
-Expected: 3, But was: 0
-   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 21
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections_as_divs.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections_as_divs.cs:line 18
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding an element by css. finds present examples.
-No element found by css: #inspectingContent p.css-test span
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 388
-   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 14
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections as divs. finding sections by header text. finds by h3 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding an element by xpath. finds present examples.
-No element found by xpath: //*[@id = 'inspectingContent']//p[@class='css-test']/span
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 394
-   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 14
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections_as_divs.<Specs>b__3() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections_as_divs.cs:line 23
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h1 text.
-Failed to find section: Section One h1
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 128
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 15
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections as divs. finding sections by header text. finds by h6 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h2 text.
-Failed to find section: Section One h2
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 128
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 20
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections_as_divs.<Specs>b__4() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections_as_divs.cs:line 28
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h3 text.
-Failed to find section: Section One h3
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 128
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__3() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 25
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections as divs. finding sections by header text. finds by h2 text within child link.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h6 text.
-Failed to find section: Section One h6
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 128
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__4() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 30
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections_as_divs.<Specs>b__5() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections_as_divs.cs:line 34
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by section by id.
-Failed to find section: sectionOne
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 128
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__5() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 35
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections as divs. finds by div by id.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds section by id.
-Failed to find section: sectionOne
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.BuildElement(IWebElement element, String failureMessage) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 193
-   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 128
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__6() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 41
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections_as_divs.<Specs>b__6() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections_as_divs.cs:line 41
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when inspecting content. finds text in a table row.
-Expected: True, But was: False
-   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 22
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. finding sections by header text. finds by h1 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when inspecting content. finds text in a list.
-Expected: True, But was: False
-   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__3() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 27
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 15
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when inspecting css. finds present examples.
-Expected to find something at: #inspectingContent p.css-test span, Expected: True, But was: False
-   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 19
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. finding sections by header text. finds by h2 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when inspecting xpath. finds present examples.
-Expected to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/span, Expected: True, But was: False
-   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 26
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 20
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when hovering. mouses over the underlying element.
-Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
-   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 14
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. finding sections by header text. finds by h3 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding fields. finding by id. finds textarea.
-Expected: "textarea field two val", But was: null
-   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__13() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 84
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__3() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 25
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding fields. finding by name. finds textarea.
-Expected: "textarea field two val", But was: null
-   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__1b() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 115
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. finding sections by header text. finds by h6 text.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when setting fields. sets value of text input field.
-Expected string length 20 but was 24. Strings differ at index 0., Expected: "New text input value", But was: "text input field two val", -----------^
-   at Coypu.Drivers.Tests.When_setting_fields.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_setting_fields.cs:line 14
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__4() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 30
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when setting fields. sets value of textarea field.
-Expected: "New textarea value", But was: null
-   at Coypu.Drivers.Tests.When_setting_fields.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_setting_fields.cs:line 25
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. finding sections by header text. finds by section by id.
 
-DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when setting fields. selects option by text or value.
-Expected: "select2value1", But was: null
-   at Coypu.Drivers.Tests.When_setting_fields.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_setting_fields.cs:line 34
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__5() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 35
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. finding sections by header text. finds section by id.
+
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(String mechanism, String value)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElementsByCssSelector(String cssSelector)
+   at OpenQA.Selenium.By.<>c__DisplayClass1e.<CssSelector>b__1d(ISearchContext context)
+   at OpenQA.Selenium.By.FindElements(ISearchContext context)
+   at OpenQA.Selenium.Remote.RemoteWebElement.FindElements(By by)
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.<>c__DisplayClass7.<FindSectionByHeaderText>b__5(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(IWebElement e) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Selenium.SeleniumExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Func`2 predicate) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumExtensions.cs:line 32
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope, String sectionTag) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 190
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSectionByHeaderText(String locator, ISearchContext scope) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 179
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(String locator) in d:\P\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 135
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__6() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 41
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when finding sections. only finds div and section.
+Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.InvalidOperationException>
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__7() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 50
 
 DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when uploading files. sets the path to be uploaded.
-Expected: String ending with "\local.file", But was: null
-   at Coypu.Drivers.Tests.When_uploading_files.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_uploading_files.cs:line 23
+Expected: String ending with "\local.file", But was: <string.Empty>
+   at Coypu.Drivers.Tests.When_uploading_files.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_uploading_files.cs:line 23
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when hovering. mouses over the underlying element.
 Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
-   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 14
+   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 14
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. within iframe one. finds the element in the current scope.
 Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
    at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
    at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
    at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
-   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__5() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 22
-   at Coypu.Drivers.Watin.WatiNDriver.SetScope(Func`1 find) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 41
-   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__4() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 22
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 109
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__5() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 22
+   at Coypu.Drivers.Watin.WatiNDriver.SetScope(Func`1 find) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 41
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__4() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 22
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. within iframe two. finds the element in the current scope.
 Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
    at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
    at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
    at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
-   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__9() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 34
-   at Coypu.Drivers.Watin.WatiNDriver.SetScope(Func`1 find) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 41
-   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__8() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 34
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 109
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__9() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 34
+   at Coypu.Drivers.Watin.WatiNDriver.SetScope(Func`1 find) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 41
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__8() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 34
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by header text.
 Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
    at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
    at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
    at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
-   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 11
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 109
+   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 11
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by id.
 Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
    at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
    at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
    at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
-   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
-   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 17
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 109
+   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 17
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by title.
 Failed to find frame: iframe one title
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
-   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 23
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 113
+   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 23
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by css. returns empty if no matches.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.FindAllCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 351
-   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 15
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllCss(String cssSelector) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 351
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 15
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by css. returns all matches by css.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.FindAllCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 351
-   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 21
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllCss(String cssSelector) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 351
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 21
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns empty if no matches.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 356
-   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 14
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(String xpath) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 356
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 14
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns all matches by xpath.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 356
-   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 20
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(String xpath) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 356
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 20
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. finds present examples.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.FindCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 341
-   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 14
+   at Coypu.Drivers.Watin.WatiNDriver.FindCss(String cssSelector) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 341
+   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 14
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. does not find missing examples.
 Expected not to find something at: #inspectingContent p.css-missing-test, Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
-   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 23
+   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 23
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. only finds visible elements.
 Expected not to find something at: #inspectingContent p.css-test img.invisible, Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
-   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__3() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 29
+   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__3() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 29
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. finds present examples.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.FindXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 346
-   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 14
+   at Coypu.Drivers.Watin.WatiNDriver.FindXPath(String xpath) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 346
+   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 14
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. does not find missing examples.
 Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-missing-test'], Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
-   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 23
+   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 23
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. only finds visible elements.
 Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/img, Expected: <Coypu.Drivers.MissingHtmlException>, But was: <System.NotSupportedException>
-   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__3() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 29
+   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__3() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 29
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular button by its name.
+Expected string length 13 but was 14. Strings differ at index 0., Expected: "second button", But was: " second button", -----------^
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 25
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular input button by id ends with.
+Failed to find button with text, id or name: rdInputButtonId
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__5() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 43
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds image buttons.
 Failed to find button with text, id or name: firstImageButtonId
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 137
-   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__9() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 67
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__a() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 72
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. does not find invisible inputs.
 Expected: <Coypu.Drivers.MissingHtmlException>, But was: null
-   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__e() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 83
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__f() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 88
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds select.
 Failed to find field with label, id, name or placeholder: select field in a label container
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 189
-   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__d() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 60
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
+   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 196
+   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__d() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 60
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds textarea.
 Failed to find field with label, id, name or placeholder: textarea field in a label container
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 189
-   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__e() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 64
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
+   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 196
+   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__e() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 64
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds by id ends with.
+Failed to find field with label, id, name or placeholder: tainerLabeledFileFieldId
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
+   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 196
+   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__19() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 109
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding links. does not find display:none.
 Expected: <Coypu.Drivers.MissingHtmlException>, But was: null
-   at Coypu.Drivers.Tests.When_finding_links.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_links.cs:line 19
-
-DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h1 text.
-Failed to find section: Section One h1
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 85
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 15
-
-DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h2 text.
-Failed to find section: Section One h2
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 85
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 20
-
-DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h3 text.
-Failed to find section: Section One h3
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 85
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__3() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 25
-
-DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h6 text.
-Failed to find section: Section One h6
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 85
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__4() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 30
+   at Coypu.Drivers.Tests.When_finding_links.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_links.cs:line 19
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by section by id.
-Failed to find section: Section One h1
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 85
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__5() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 35
+Unable to cast COM object of type 'System.__ComObject' to interface type 'mshtml.DispHTMLBaseElement'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{3050F518-98B5-11CF-BB82-00AA00BDCE0B}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at WatiN.Core.Native.InternetExplorer.IEElement.get_AsDispHTMLBaseElement()
+   at WatiN.Core.Native.InternetExplorer.IEElement.Equals(Object obj)
+   at WatiN.Core.Element.Equals(Element element)
+   at WatiN.Core.Element.Equals(Object obj)
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__5() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 35
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds section by id.
-Failed to find section: Section One h1
-   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 174
-   at Coypu.Drivers.Watin.WatiNDriver.FindSection(String locator) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 85
-   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__6() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 41
+Unable to cast COM object of type 'System.__ComObject' to interface type 'mshtml.DispHTMLBaseElement'. This operation failed because the QueryInterface call on the COM component for the interface with IID '{3050F518-98B5-11CF-BB82-00AA00BDCE0B}' failed due to the following error: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE)).
+   at WatiN.Core.Native.InternetExplorer.IEElement.get_AsDispHTMLBaseElement()
+   at WatiN.Core.Native.InternetExplorer.IEElement.Equals(Object obj)
+   at WatiN.Core.Element.Equals(Element element)
+   at WatiN.Core.Element.Equals(Object obj)
+   at Coypu.Drivers.Tests.When_finding_sections.<Specs>b__6() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_finding_sections.cs:line 41
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text in a table row.
 Expected: True, But was: False
-   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 22
+   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 22
 
-DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text in a list.
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text displayed over multiple lines in source.
 Expected: True, But was: False
-   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__3() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 27
+   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__5() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 37
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text by regex.
+Expected: True, But was: False
+   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__7() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 48
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. does not find missing examples.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
-   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 13
+   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
+   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 13
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. finds present examples.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
-   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 19
+   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
+   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 19
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. only finds visible elements.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
-   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 28
+   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
+   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 28
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. does not find missing examples.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
-   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__0() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 14
+   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
+   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__0() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 14
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. only finds visible elements.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
-   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__1() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 20
+   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
+   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__1() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 20
 
 DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. finds present examples.
 Not yet implemented in WatiNDriver
-   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in c:\dev\current\github\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
-   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__2() in c:\dev\current\github\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 26
+   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in d:\P\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
+   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__2() in d:\P\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 26
 
-536 Examples, 58 Failed, 0 Pending
-(in C:/dev/current/github/Coypu)
+544 Examples, 49 Failed, 0 Pending
+(in D:/P/Coypu)
