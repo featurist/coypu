@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -184,10 +183,20 @@ namespace Coypu.Drivers.Selenium
         {
             string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
             var headersXPath = string.Join(" or ", headerTags);
-            var headersCss = string.Join(",", headerTags);
-
             var withAHeader = Find(By.XPath(string.Format(".//{0}[{1}]", sectionTag, headersXPath)), scope);
-            return withAHeader.FirstDisplayedOrDefault(e => e.FindElements(By.CssSelector(headersCss)).Any(h => TextMatches(h,locator)));
+            
+            var childHeaderSelector = GetChildHeaderSelector(headerTags);
+            return withAHeader.FirstDisplayedOrDefault(e => e.FindElements(childHeaderSelector).Any(h => TextMatches(h,locator)));
+        }
+
+        private By GetChildHeaderSelector(string[] headerTags)
+        {
+            if (selenium is ChromeDriver)
+            {
+                var namePredicate = string.Join(" or ", headerTags.Select(t => string.Format("name() = '{0}'", t)).ToArray());
+                return By.XPath(string.Format("./*[{0}]", namePredicate));
+            }
+            return By.CssSelector(string.Join(",", headerTags));
         }
 
         private bool IsSection(IWebElement e)
@@ -257,8 +266,8 @@ namespace Coypu.Drivers.Selenium
         public Element FindField(string locator)
         {
             var scope = Scope;
-            var field = FindFieldByIdOrName(locator, scope) ?? 
-                        FindFieldFromLabel(locator, scope) ?? 
+            var field = FindFieldFromLabel(locator, scope) ?? 
+                        FindFieldByIdOrName(locator, scope) ?? 
                         FindFieldByPlaceholder(locator, scope) ??
                         FindRadioButtonFromValue(locator, scope) ??
                         FindByPartialId(locator,scope).FirstOrDefault(IsField);
@@ -268,7 +277,7 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindRadioButtonFromValue(string locator, ISearchContext scope)
         {
-            return Find(By.XPath(".//input[@type = 'radio']"),scope).FirstOrDefault(e => e.Value == locator);
+            return Find(By.XPath(".//input[@type = 'radio']"),scope).FirstOrDefault(e => e.GetAttribute("value") == locator);
         }
 
         private IWebElement FindFieldFromLabel(string locator, ISearchContext scope)
@@ -334,7 +343,7 @@ namespace Coypu.Drivers.Selenium
             var select = SeleniumElement(element);
             var optionToSelect = 
                 select.FindElements(By.TagName("option"))
-                      .FirstOrDefault(e => e.Text == option || e.Value == option);
+                      .FirstOrDefault(e => e.Text == option || e.GetAttribute("value") == option);
 
             if (optionToSelect == null)
                 throw new MissingHtmlException("No such option: " + option);

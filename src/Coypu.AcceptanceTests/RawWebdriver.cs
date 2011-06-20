@@ -16,12 +16,12 @@ namespace Coypu.AcceptanceTests
 
 	        browser.FindElementByName("postcode").SendKeys("N1 1AA");
 
-	        browser.FindElementByName("make").FindElements(By.TagName("option")).First(e => e.Value == "citroen").Select();
-	        browser.FindElementByName("model").FindElements(By.TagName("option")).First(e => e.Value == "c4_grand_picasso").Select();
+	        browser.FindElementByName("make").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "citroen").Select();
+            browser.FindElementByName("model").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "c4_grand_picasso").Select();
             browser.FindElementByName("radius").FindElements(By.TagName("option")).First(e => e.Text == "National").Select();
-            browser.FindElementByName("fuel-type").FindElements(By.TagName("option")).First(e => e.Value == "diesel").Select();
-            browser.FindElementByName("maximum-age").FindElements(By.TagName("option")).First(e => e.Value == "up_to_7_years_old").Select();
-            browser.FindElementByName("maximum-mileage").FindElements(By.TagName("option")).First(e => e.Value == "up_to_60000_miles").Select();
+            browser.FindElementByName("fuel-type").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "diesel").Select();
+            browser.FindElementByName("maximum-age").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "up_to_7_years_old").Select();
+            browser.FindElementByName("maximum-mileage").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "up_to_60000_miles").Select();
 
 	        browser.FindElementByName("keywords").SendKeys("vtr");
         }
