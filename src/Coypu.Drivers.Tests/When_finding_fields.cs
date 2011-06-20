@@ -103,6 +103,11 @@ namespace Coypu.Drivers.Tests
                 {
                     driver.FindField("containerLabeledFileFieldId").Name.should_be("containerLabeledFileFieldName");
                 };
+                
+                it["finds by id ends with"] = () =>
+                {
+                    driver.FindField("tainerLabeledFileFieldId").Name.should_be("containerLabeledFileFieldName");
+                };
             };
             describe["finding by name"] = () =>
             {
