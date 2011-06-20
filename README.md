@@ -32,11 +32,13 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` with Firefox is the only stable driver/browser combination that passes all the driver tests so far. 
+`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0 RC2 and supports Firefox, IE and Chrome as the browser.
 
-Selenium with IE mostly works, and Chrome is a way behind due to the Selenium IE + Chrome drivers themselves. However a new release of Selenium WebDriver is imminent (as of May 2012) which is purported to fix a lot of these problems.
+NOTE: To use WebDriver's Chrome driver you will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu 0.2.0 download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
 
-The Coypu WatiN driver is further behind and needs more features implemented before it is a viable alternative to Selenium, except for in exceptional cases where the Selenium driver IE isn't working for you perhaps.
+The Coypu WatiN driver is further behind. The basics are working, but it needs more features implemented before it is a viable alternative to Selenium, except for in specific cases where the Selenium IE driver isn't working for you. 
+
+Check the driver_test_results.txt file for the latest report on driver/browser support.
 
 A goal for the future would be a driver for a headless browser such as zombie.js - http://zombie.labnotes.org/
 
@@ -72,7 +74,7 @@ What we are really trying to do here is interact with the browser in the way tha
 
 ### Disclaimer
 
-Coypu is still *very* new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
+Coypu is still rather new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
 
 If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
@@ -137,21 +139,38 @@ Form fields are found by label text, partial label text, id, name, placeholder o
 	browser.Check("Additional ads")
 	browser.Uncheck("Additional ads")	
 
+To help with asp.net testing, if there is no matching element based on the rules above then an element that ends with the locator will be matched.
+
+	browser.Check("radioTrade"); // matches id="_00123_some_aspnet_webforms_crap_radioTrade";
+	
 #### Clicking
 
-Buttons are found by value/text, id or name
+Buttons are found by value/text, id or name. 
 
 	browser.ClickButton("Search");
 	browser.ClickButton("search-used-vehicles");
+	
+To help with asp.net testing, if none of these match an id that ends with the locator will be matched.
+	
+	browser.ClickButton("btnSearch"); // matches id="_00123_some_aspnet_webforms_crap_btnSearch";
 	
 Links are found by the text of the link
 
 	browser.ClickLink("Reset search");
 
-Any other element you want to click can be passed directly to `Session.Click`:
+Click any other element by passing a function that tells Coypu how to find it:
+	
+	browser.Click(() => browser.FindCss("span#i-should-be-a-link"));
 
-	var h1 = browser.FindCss("h1")
-	browser.Click(h1);
+The above is the recommended, robust way to click, as Coypu can retry the find and click together if there is an exception after the element is found as the driver goes to click it.
+	
+Alternatively you can pass an element you have already found directly to `Click()`:
+
+	var allToClick = browser.FindAllCss("span.clickable")
+	foreach(var element in allToClick)
+	{
+		browser.Click(element);
+	}
 	
 #### Finding single elements
 
@@ -172,6 +191,12 @@ FindAll methods return all matching elements:
 		var attributeValue = a["href"];
 		...
 	}
+
+#### Hover
+
+Hover over an element by passing a function that tells Coypu how to find it:
+
+	browser.Hover(() => browser.FindCss("span#hoverOnMe"));
 	
 #### Scope
 
@@ -247,6 +272,15 @@ or:
 		Assert.That(browser.HasContent("Philip J Fry"));
 	}	
 
+#### Scoping within iframes
+
+To restrict the scope to an iframe, locate the iframe by its id, title or the text of an h1 element within the frame:
+
+	browser.WithinIFrame("@coypu_news on Twitter"), () =>
+	{
+		Assert.That(browser.HasContent("Coypu 0.2.0 released"));
+	}	
+	
 #### Executing javascript in the browser
 
 You can execute javascript like so:
@@ -262,6 +296,7 @@ Anything is returned from the javascript will be returned from `browser.ExecuteS
 Look for text anywhere in the page:
 
 	bool hasContent = browser.HasContent("In France, the coypu is known as a ragondin");
+	bool hasContent = browser.HasContentMatch("In [Ss]pain, the coypu is known as a (\w*)");
 	
 Check for the presence of an element:
 

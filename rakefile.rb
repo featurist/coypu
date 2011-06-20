@@ -37,11 +37,13 @@ task :package do
 					'src/Coypu/bin/Release/Microsoft.mshtml.dll',
 					'src/Coypu/bin/Release/WatiN.Core.dll',
 					'src/Coypu/bin/Release/WatiN.Core.xml',
+					'src/Coypu/bin/Release/chromedriver.exe',
 					'src/Coypu/bin/Release/Coypu.pdb',
 					]
 	include_files = Dir.glob('src/Coypu/bin/Release/*').reject{|f| exclude_files.include?(f)}
 	include_files.each {|f| FileUtils.cp(f, "temp/#{version}")}
   end
+  package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}
   sh 'nuget Pack Coypu.nuspec'
 end
 
