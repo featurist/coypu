@@ -8,6 +8,7 @@ namespace Coypu.Tests.TestDoubles
     public class FakeDriver : Driver
     {
         private readonly IList<Element> clickedElements = new List<Element>();
+        private readonly IList<Element> hoveredElements = new List<Element>();
         private readonly IList<Element> checkedElements = new List<Element>();
         private readonly IList<Element> uncheckedElements = new List<Element>();
         private readonly IList<Element> chosenElements = new List<Element>();
@@ -45,6 +46,11 @@ namespace Coypu.Tests.TestDoubles
         public IEnumerable<Element> ClickedElements
         {
             get { return clickedElements; }
+        }
+
+        public IEnumerable<Element> HoveredElements
+        {
+            get { return hoveredElements; }
         }
 
         public IDictionary<Element, string> SetFields
@@ -111,6 +117,7 @@ namespace Coypu.Tests.TestDoubles
 
         public Element FindField(string locator)
         {
+            LogTiming(locator);
             return stubbedTextFields[locator];
         }
 
@@ -118,6 +125,11 @@ namespace Coypu.Tests.TestDoubles
         {
             LogTiming(element.Id);
             clickedElements.Add(element);
+        }
+
+        public void Hover(Element element)
+        {
+            hoveredElements.Add(element);
         }
 
         public void Visit(string url)
@@ -279,21 +291,25 @@ namespace Coypu.Tests.TestDoubles
 
         public bool HasXPath(string xpath)
         {
+            LogTiming(xpath);
             return stubbedHasXPathResults[xpath];
         }
 
         public bool HasDialog(string withText)
         {
+            LogTiming(withText);
             return stubbedHasDialogResults[withText];
         }
 
         public Element FindCss(string cssSelector)
         {
+            LogTiming(cssSelector);
             return stubbedCssResults[cssSelector];
         }
 
         public Element FindXPath(string xpath)
         {
+            LogTiming(xpath);
             return stubbedXPathResults[xpath];
         }
 

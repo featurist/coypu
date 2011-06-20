@@ -156,5 +156,9 @@ namespace Coypu.Tests.TestDoubles
         {
             return null;
         }
+
+        public void Hover(Element element)
+        {   
+        }
     }
 }

@@ -139,13 +139,17 @@ namespace Coypu.Drivers.Selenium
 
         public Element FindIFrame(string locator)
         {
-            var frame = Find(By.TagName("iframe"))
-                .FirstOrDefault(e => FindFrameByContents(e, locator));
-
+            var frame = Find(By.TagName("iframe")).FirstOrDefault(e => e.GetAttribute("id") == locator ||
+                                                                       e.GetAttribute("title") == locator ||
+                                                                       FindFrameByContents(e, locator));
             return BuildElement(frame, "Failed to find frame: " + locator);
-            
         }
 
+        public void Hover(Element element)
+        {
+            var sequenceBuilder = new OpenQA.Selenium.Interactions.DefaultActionSequenceBuilder(selenium);
+            sequenceBuilder.MoveToElement((IWebElement) element.Native);
+        }
 
         private bool FindFrameByContents(IWebElement e, string locator)
         {
