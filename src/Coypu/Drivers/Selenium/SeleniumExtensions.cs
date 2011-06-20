@@ -9,8 +9,7 @@ namespace Coypu.Drivers.Selenium
     {
         public static bool IsDisplayed(this IWebElement webElement)
         {
-            var renderedElement = webElement as IRenderedWebElement;
-            return renderedElement != null && renderedElement.Displayed;
+            return webElement.Displayed;
         }
 
         public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements)

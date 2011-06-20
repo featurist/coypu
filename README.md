@@ -32,11 +32,11 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0 RC2 and supports Firefox, IE and Chrome as the browser.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0 RC2 and supports Firefox (fastest), IE (slowest) and Chrome as the browser.
 
 NOTE: To use WebDriver's Chrome driver you will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu 0.2.0 download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
 
-The Coypu WatiN driver is further behind. The basics are working, but it needs more features implemented before it is a viable alternative to Selenium, except for in specific cases where the Selenium IE driver isn't working for you. 
+The Coypu WatiN-IE driver is further behind (though it is faster than WebDriver-IE) and could use some more features implementing. 
 
 Check the driver_test_results.txt file for the latest report on driver/browser support.
 
