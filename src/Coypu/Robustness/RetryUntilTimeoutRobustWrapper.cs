@@ -68,7 +68,7 @@ namespace Coypu.Robustness
             return DateTime.Now - startTime >= Configuration.Timeout;
         }
 
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan untilTimeout)
+        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)
         {
             var outcome = Robustly(() =>
                                         {
@@ -77,7 +77,7 @@ namespace Coypu.Robustness
                                             var outerTimeout = Configuration.Timeout;
                                             try
                                             {
-                                                Configuration.Timeout = untilTimeout;
+                                                Configuration.Timeout = retryAfter;
                                                 result = until();
                                             }
                                             finally
