@@ -1,5 +1,4 @@
-﻿using Coypu.Drivers.Watin;
-using NSpec;
+﻿using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests

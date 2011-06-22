@@ -32,7 +32,7 @@ namespace Coypu.Drivers.Watin
                 case (Browser.InternetExplorer):
                     return new IE();
                 default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, this);
+                    throw new BrowserNotSupportedException(Configuration.Browser, this.GetType());
             }
         }
 
