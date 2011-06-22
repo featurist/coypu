@@ -14,6 +14,10 @@ PM> Install-Package Coypu
 * A port of Capybara to .Net
 * An acceptance testing framework
 
+## Demo
+
+Check out a [demo of Coypu](http://skillsmatter.com/podcast/open-source-dot-net/london-dot-net-user-group-may) from a talk given at Skills Matter in May 2011.
+
 ## Using Coypu
 
 ### Configuration
