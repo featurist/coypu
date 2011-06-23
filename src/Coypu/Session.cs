@@ -23,6 +23,11 @@ namespace Coypu
             get { return driver.Native; }
         }
 
+        public RobustWrapper RobustWrapper
+        {
+            get { return robustWrapper; }
+        }
+
         public Session(Driver driver, RobustWrapper robustWrapper)
         {
             this.robustWrapper = robustWrapper;
