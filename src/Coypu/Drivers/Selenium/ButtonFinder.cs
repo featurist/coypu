@@ -6,10 +6,10 @@ namespace Coypu.Drivers.Selenium
 {
     public class ButtonFinder
     {
-        private readonly SeleniumElementFinder elementFinder;
+        private readonly ElementFinder elementFinder;
         private readonly TextMatcher textMatcher;
 
-        public ButtonFinder(SeleniumElementFinder elementFinder, TextMatcher textMatcher)
+        public ButtonFinder(ElementFinder elementFinder, TextMatcher textMatcher)
         {
             this.elementFinder = elementFinder;
             this.textMatcher = textMatcher;
@@ -42,7 +42,7 @@ namespace Coypu.Drivers.Selenium
 
         private bool IsInputButton(IWebElement e)
         {
-            return e.TagName == "input" && SeleniumFieldFinder.InputButtonTypes.Contains(e.GetAttribute("type"));
+            return e.TagName == "input" && FieldFinder.InputButtonTypes.Contains(e.GetAttribute("type"));
         }
     }
 }

@@ -4,13 +4,13 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SeleniumFieldFinder
+    public class FieldFinder
     {
         private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file" };
         public static readonly string[] InputButtonTypes = new[] { "button", "submit", "image" };
-        private readonly SeleniumElementFinder elementFinder;
+        private readonly ElementFinder elementFinder;
 
-        public SeleniumFieldFinder(SeleniumElementFinder elementFinder)
+        public FieldFinder(ElementFinder elementFinder)
         {
             this.elementFinder = elementFinder;
         }

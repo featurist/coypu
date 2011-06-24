@@ -4,14 +4,14 @@ using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SeleniumScoping
+    public class Scoping
     {
         private readonly RemoteWebDriver selenium;
         private Func<Element> findScope;
         private bool findingScope;
         private ISearchContext cachedScope;
 
-        public SeleniumScoping(RemoteWebDriver selenium)
+        public Scoping(RemoteWebDriver selenium)
         {
             this.selenium = selenium;
         }
