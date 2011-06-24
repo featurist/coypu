@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
@@ -14,24 +13,30 @@ namespace Coypu.Drivers.Selenium
         public bool Disposed { get; private set; }
 
         private RemoteWebDriver selenium;
-        private readonly SeleniumScoping scoping;
-        private readonly SeleniumElementFinder elementFinder;
-        private readonly SeleniumFieldFinder fieldFinder;
+        private readonly Scoping scoping;
+        private readonly ElementFinder elementFinder;
+        private readonly FieldFinder fieldFinder;
         private readonly IFrameFinder iframeFinder;
         private readonly ButtonFinder buttonFinder;
         private readonly SectionFinder sectionFinder;
         private readonly TextMatcher textMatcher;
+        private readonly Dialogs dialogs;
+        private readonly MouseControl mouseControl;
+        private readonly OptionSelector optionSelector;
 
         public SeleniumWebDriver()
         {
-            selenium = new SeleniumDriverFactory().NewRemoteWebDriver();
-            scoping = new SeleniumScoping(selenium);
-            elementFinder = new SeleniumElementFinder(scoping);
-            fieldFinder = new SeleniumFieldFinder(elementFinder);
+            selenium = new DriverFactory().NewRemoteWebDriver();
+            scoping = new Scoping(selenium);
+            elementFinder = new ElementFinder(scoping);
+            fieldFinder = new FieldFinder(elementFinder);
             iframeFinder = new IFrameFinder(selenium, elementFinder);
             textMatcher = new TextMatcher();
             buttonFinder = new ButtonFinder(elementFinder, textMatcher);
             sectionFinder = new SectionFinder(selenium, elementFinder,textMatcher);
+            dialogs = new Dialogs(selenium);
+            mouseControl = new MouseControl(selenium);
+            optionSelector = new OptionSelector();
         }
 
         public object Native
@@ -171,9 +176,7 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasDialog(string withText)
         {
-            return selenium.SwitchTo() != null &&
-                   selenium.SwitchTo().Alert() != null &&
-                   selenium.SwitchTo().Alert().Text == withText;
+            return dialogs.HasDialog(withText);
         }
 
         public void Visit(string url) 
@@ -188,10 +191,7 @@ namespace Coypu.Drivers.Selenium
 
         public void Hover(Element element)
         {
-            var sequenceBuilder = new DefaultActionSequenceBuilder(selenium);
-            var actionSequenceBuilder = sequenceBuilder.MoveToElement((IWebElement) element.Native);
-            var action = actionSequenceBuilder.Build();
-            action.Perform();
+            mouseControl.Hover2(element);
         }
 
         public void Set(Element element, string value) 
@@ -204,25 +204,17 @@ namespace Coypu.Drivers.Selenium
 
         public void Select(Element element, string option)
         {
-            var select = SeleniumElement(element);
-            var optionToSelect =
-                select.FindElements(By.TagName("option"))
-                    .FirstOrDefault(e => e.Text == option || e.GetAttribute("value") == option);
-
-            if (optionToSelect == null)
-                throw new MissingHtmlException("No such option: " + option);
-
-            optionToSelect.Select();
+            optionSelector.Select(element, option);
         }
 
         public void AcceptModalDialog()
         {
-            selenium.SwitchTo().Alert().Accept();
+            dialogs.AcceptModalDialog();
         }
 
         public void CancelModalDialog()
         {
-            selenium.SwitchTo().Alert().Dismiss();
+            dialogs.CancelModalDialog();
         }
 
         public void Check(Element field)

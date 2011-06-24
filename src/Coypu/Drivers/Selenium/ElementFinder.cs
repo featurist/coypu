@@ -5,11 +5,11 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SeleniumElementFinder
+    public class ElementFinder
     {
-        private readonly SeleniumScoping scoping;
+        private readonly Scoping scoping;
 
-        public SeleniumElementFinder(SeleniumScoping scoping)
+        public ElementFinder(Scoping scoping)
         {
             this.scoping = scoping;
         }

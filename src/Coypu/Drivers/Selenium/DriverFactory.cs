@@ -5,7 +5,7 @@ using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SeleniumDriverFactory
+    public class DriverFactory
     {
         public RemoteWebDriver NewRemoteWebDriver()
         {

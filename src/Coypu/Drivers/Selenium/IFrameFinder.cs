@@ -7,9 +7,9 @@ namespace Coypu.Drivers.Selenium
     public class IFrameFinder
     {
         private readonly IWebDriver selenium;
-        private readonly SeleniumElementFinder elementFinder;
+        private readonly ElementFinder elementFinder;
 
-        public IFrameFinder(IWebDriver selenium, SeleniumElementFinder elementFinder)
+        public IFrameFinder(IWebDriver selenium, ElementFinder elementFinder)
         {
             this.selenium = selenium;
             this.elementFinder = elementFinder;

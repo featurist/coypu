@@ -9,10 +9,10 @@ namespace Coypu.Drivers.Selenium
     public class SectionFinder
     {
         private readonly RemoteWebDriver selenium;
-        private readonly SeleniumElementFinder elementFinder;
+        private readonly ElementFinder elementFinder;
         private readonly TextMatcher textMatcher;
 
-        public SectionFinder(RemoteWebDriver selenium, SeleniumElementFinder elementFinder, TextMatcher textMatcher)
+        public SectionFinder(RemoteWebDriver selenium, ElementFinder elementFinder, TextMatcher textMatcher)
         {
             this.selenium = selenium;
             this.elementFinder = elementFinder;
