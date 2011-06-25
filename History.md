@@ -1,3 +1,10 @@
+# Version 0.2.1
+
+Release date: 2011-06-25
+
+### Added
+Expose the RobustWrapper on Session exposing Robustly(), Query() and TryUntil() directly to help with custom waits & retries
+
 # Version 0.2.0
 
 Release date: 2011-06-20
