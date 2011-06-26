@@ -259,31 +259,31 @@ use this:
 
 **These work particularly well when used as scopes:**
 
-	browser.WithinFieldset("Advanced search"), () =>
+	browser.WithinFieldset("Advanced search", () =>
 	{
 		browser.FillIn("First name").With("Philip");
 		browser.FillIn("Middle initial").With("J");
 		browser.FillIn("Last name").With("Fry");
 
 		browser.Click("Find");
-	}
+	});
 
 or:	
 	
-	browser.WithinSection("Search results"), () =>
+	browser.WithinSection("Search results", () =>
 	{
 		Assert.That(browser.HasContent("1 friend found"));
 		Assert.That(browser.HasContent("Philip J Fry"));
-	}	
+	});	
 
 #### Scoping within iframes
 
 To restrict the scope to an iframe, locate the iframe by its id, title or the text of an h1 element within the frame:
 
-	browser.WithinIFrame("@coypu_news on Twitter"), () =>
+	browser.WithinIFrame("@coypu_news on Twitter", () =>
 	{
 		Assert.That(browser.HasContent("Coypu 0.2.0 released"));
-	}	
+	});	
 	
 #### Executing javascript in the browser
 
