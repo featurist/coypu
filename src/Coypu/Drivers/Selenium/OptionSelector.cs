@@ -14,7 +14,7 @@ namespace Coypu.Drivers.Selenium
             if (optionToSelect == null)
                 throw new MissingHtmlException("No such option: " + option);
 
-            optionToSelect.Select();
+            optionToSelect.Click();
         }
     }
 }
