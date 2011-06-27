@@ -12,7 +12,7 @@ namespace Coypu.Tests.TestDoubles
         public IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
         
         private readonly IDictionary<Type,object> stubbedResults = new Dictionary<Type, object>();
-        private readonly IDictionary<object, object> stubbedWaitForResult = new Dictionary<object, object>();
+        private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
 
         public void Robustly(Action action)
         {
@@ -22,13 +22,13 @@ namespace Coypu.Tests.TestDoubles
         public TResult Robustly<TResult>(Func<TResult> function)
         {
             DeferredFunctions.Add(function);
-            return stubbedResults.ContainsKey(typeof(TResult)) ? (TResult) stubbedResults[typeof(TResult)] : default(TResult);
+            return (TResult)stubbedResults[typeof(TResult)];
         }
 
         public T Query<T>(Func<T> query, T expecting)
         {
             DeferredQueries.Add(query);
-            return stubbedWaitForResult.ContainsKey(expecting) ? (T) stubbedWaitForResult[expecting] : default(T);
+            return (T)stubbedQueryResult[expecting];
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
@@ -41,9 +41,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedResults.Add(type,result);
         }
 
-        public void AlwaysReturnFromWaitFor(bool expected, bool result)
+        public void AlwaysReturnFromQuery<T>(T expected, T result)
         {
-            stubbedWaitForResult[expected] = result;
+            stubbedQueryResult[expected] = result;
         }
 
         public class TryUntilArgs

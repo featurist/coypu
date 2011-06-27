@@ -1,6 +1,4 @@
 ﻿using System;
-using Coypu.Robustness;
-using Coypu.Tests.TestDoubles;
 using Coypu.Tests.When_interacting_with_the_browser;
 using NUnit.Framework;
 
@@ -24,7 +22,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void RobustFunction_is_exposed_on_the_session()
         {
-            session.Robustly(() => "The expected result");
+            spyRobustWrapper.AlwaysReturnFromRobustly(typeof(string), "immediate result");
+
+            Func<string> function = () => "The expected result";
+            
+            var immediateResult = session.Robustly(function);
+            Assert.That(immediateResult, Is.EqualTo("immediate result"));
 
             var actualResult = ((Func<string>)spyRobustWrapper.DeferredFunctions[0])();
 
@@ -50,6 +53,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void Query_is_exposed_on_the_session()
         {
+            spyRobustWrapper.AlwaysReturnFromQuery("expected query result", "expected query result");
             Func<string> query = () => "query result";
 
             session.Query(query, "expected query result");
