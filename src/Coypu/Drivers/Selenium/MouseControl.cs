@@ -12,9 +12,9 @@ namespace Coypu.Drivers.Selenium
             this.selenium = selenium;
         }
 
-        public void Hover2(Element element)
+        public void Hover(Element element)
         {
-            var sequenceBuilder = new DefaultActionSequenceBuilder(selenium);
+            var sequenceBuilder = new Actions(selenium);
             var actionSequenceBuilder = sequenceBuilder.MoveToElement((IWebElement) element.Native);
             var action = actionSequenceBuilder.Build();
             action.Perform();
