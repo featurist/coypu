@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Coypu.Drivers;
 using Coypu.Robustness;
 using System.Text.RegularExpressions;
 
@@ -271,6 +272,19 @@ namespace Coypu
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
             robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
+        }
+
+        public bool Has(Func<Element> findElement)
+        {
+            try
+            {
+                findElement();
+                return true;
+            }
+            catch (MissingHtmlException)
+            {
+                return false;
+            }
         }
     }
 }
