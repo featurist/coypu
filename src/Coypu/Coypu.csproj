@@ -158,6 +158,8 @@
     <Compile Include="FillInWith.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />
+    <Compile Include="Robustness\ThreadSleepWaiter.cs" />
+    <Compile Include="Robustness\Waiter.cs" />
     <Compile Include="SelectFrom.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

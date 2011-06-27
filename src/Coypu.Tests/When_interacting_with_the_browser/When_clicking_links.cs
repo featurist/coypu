@@ -21,7 +21,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             session.ClickLink("Some link locator");
 
-            AssertNotClickedYet(linkToBeClicked);
+            AssertButtonNotClickedYet(linkToBeClicked);
             ExecuteDeferedRobustAction();
             AssertClicked(linkToBeClicked);
         }
@@ -34,57 +34,56 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [TestCase(true, 1)]
         [TestCase(false, 1)]
         [TestCase(false, 321)]
-        public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
+        public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int waitBeforeRetrySecs)
         {
-            var waitBetweenRetries = TimeSpan.FromSeconds(untilTimeoutSecs);
+            var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
             var linkToBeClicked = StubLinkToBeClicked("Some link locator");
 
             session.ClickLink("Some link locator", () => stubUntil, waitBetweenRetries);
 
             var tryUntilArgs = GetTryUntilArgs();
 
-            AssertNotClickedYet(linkToBeClicked);
+            AssertButtonNotClickedYet(linkToBeClicked);
             ExecuteDeferedRobustAction();
             AssertClicked(linkToBeClicked);
 
             Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.UntilTimeout, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
         }
 
         [TestCase(200)]
         [TestCase(300)]
         public void It_waits_between_find_and_click_as_configured(int waitMs)
         {
-            const int tolleranceMS = 10;
-
             var stubLinkToBeClicked = StubLinkToBeClicked("Some link locator");
+            var expectedWait = TimeSpan.FromMilliseconds(waitMs);
+            Configuration.WaitBeforeClick = expectedWait;
 
-            Configuration.WaitBeforeClick = TimeSpan.FromMilliseconds(waitMs);
-            var waitBeforeClickActual = RecordWaitBeforeClickLinkTiming("Some link locator", stubLinkToBeClicked);
+            var waiterCalled = false;
+            mockSleepWaiter.DoOnWait(milliseconds =>
+                                    {
+                                        Assert.That(milliseconds, Is.EqualTo(expectedWait));
 
-            Assert.That(waitBeforeClickActual, Is.InRange(TimeSpan.FromMilliseconds(waitMs - tolleranceMS), TimeSpan.FromMilliseconds(waitMs + tolleranceMS)));
-        }
+                                        AssertButtonFound();
+                                        AssertButtonNotClickedYet(stubLinkToBeClicked);
 
-        private TimeSpan RecordWaitBeforeClickLinkTiming(string locator, Element stubLinkToBeClicked)
-        {
-            session.ClickLink(locator);
+                                        waiterCalled = true;
+                                    });
+            session.ClickLink("Some link locator");
             ExecuteLastDeferedRobustAction();
 
-            var times = driver.Timings.Keys;
-
-            var findTiming = times.ElementAt(times.Count - 2);
-            var clickTiming = times.ElementAt(times.Count - 1);
-
-            // Verity timings
-            Assert.That(driver.Timings[findTiming], Is.StringContaining(locator));
-            Assert.That(driver.Timings[clickTiming], Is.StringContaining(stubLinkToBeClicked.Id));
-            
-            return TimeSpan.FromTicks(clickTiming) - TimeSpan.FromTicks(findTiming);
+            Assert.That(waiterCalled, "The waiter was not called");
+            AssertClicked(stubLinkToBeClicked);
         }
 
-        private void AssertNotClickedYet(StubElement linkToBeClicked)
+        private void AssertButtonFound()
         {
-            Assert.That(driver.ClickedElements, Has.No.Member(linkToBeClicked));
+            Assert.That(driver.FindLinkRequests.Contains("Some link locator"), "Wait called before find");
+        }
+
+        private void AssertButtonNotClickedYet(StubElement linkToBeClicked)
+        {
+            Assert.That(driver.ClickedElements, Has.No.Member(linkToBeClicked), "Expected link not to have been clicked yet, but it has been");
         }
 
         private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()

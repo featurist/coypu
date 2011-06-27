@@ -39,7 +39,7 @@ namespace Coypu.Drivers.Selenium
 
             var childHeaderSelector = GetChildHeaderSelector(headerTags);
             return
-                withAHeader.FirstDisplayedOrDefault(e => Enumerable.Any<IWebElement>(e.FindElements(childHeaderSelector), h => textMatcher.TextMatches(h, locator)));
+                withAHeader.FirstDisplayedOrDefault(e => e.FindElements(childHeaderSelector).Any(h => textMatcher.TextMatches(h, locator)));
         }
 
         private By GetChildHeaderSelector(string[] headerTags) 

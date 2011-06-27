@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.TestDoubles
@@ -35,13 +34,9 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
         private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
         private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
-        private readonly IDictionary<long, string> timings = new Dictionary<long, string>();
+        private readonly IList<string> findButtonRequests = new List<string>();
+        private readonly IList<string> findLinkRequests = new List<string>();
         private Func<Element> findScope;
-
-        public IDictionary<long, string> Timings
-        {
-            get { return timings; }
-        }
 
         public IEnumerable<Element> ClickedElements
         {
@@ -82,12 +77,12 @@ namespace Coypu.Tests.TestDoubles
         {
             get { return visits; }
         }
-        
+
         public IEnumerable<string> HasContentQueries
         {
             get { return hasContentQueries; }
         }
-        
+
         public IEnumerable<Regex> HasContentMatchQueries
         {
             get { return hasContentMatchQueries; }
@@ -103,27 +98,35 @@ namespace Coypu.Tests.TestDoubles
             get { return hasXPathQueries; }
         }
 
+        public IEnumerable<string> FindButtonRequests
+        {
+            get { return findButtonRequests; }
+        }
+
+        public IEnumerable<string> FindLinkRequests
+        {
+            get { return findLinkRequests; }
+        }
+
         public Element FindButton(string locator)
         {
-            LogTiming(locator);
+            findButtonRequests.Add(locator);
             return stubbedButtons[locator];
         }
 
         public Element FindLink(string locator)
         {
-            LogTiming(locator);
+            findLinkRequests.Add(locator);
             return stubbedLinks[locator];
         }
 
         public Element FindField(string locator)
         {
-            LogTiming(locator);
             return stubbedTextFields[locator];
         }
 
         public void Click(Element element)
         {
-            LogTiming(element.Id);
             clickedElements.Add(element);
         }
 
@@ -156,7 +159,7 @@ namespace Coypu.Tests.TestDoubles
         {
             stubbedHasContentResults.Add(text, result);
         }
-        
+
         public void StubHasContentMatch(Regex pattern, bool result)
         {
             stubbedHasContentMatchResults.Add(pattern, result);
@@ -204,6 +207,7 @@ namespace Coypu.Tests.TestDoubles
         }
 
         public bool Disposed { get; private set; }
+
         public void AcceptModalDialog()
         {
             ModalDialogsAccepted++;
@@ -238,7 +242,7 @@ namespace Coypu.Tests.TestDoubles
         {
             return stubbedFieldsets[locator];
         }
-        
+
         public Element FindSection(string locator)
         {
             return stubbedSections[locator];
@@ -270,6 +274,7 @@ namespace Coypu.Tests.TestDoubles
         }
 
         public int ModalDialogsAccepted { get; private set; }
+
         public int ModalDialogsCancelled { get; private set; }
 
         public bool HasContent(string text)
@@ -291,25 +296,21 @@ namespace Coypu.Tests.TestDoubles
 
         public bool HasXPath(string xpath)
         {
-            LogTiming(xpath);
             return stubbedHasXPathResults[xpath];
         }
 
         public bool HasDialog(string withText)
         {
-            LogTiming(withText);
             return stubbedHasDialogResults[withText];
         }
 
         public Element FindCss(string cssSelector)
         {
-            LogTiming(cssSelector);
             return stubbedCssResults[cssSelector];
         }
 
         public Element FindXPath(string xpath)
         {
-            LogTiming(xpath);
             return stubbedXPathResults[xpath];
         }
 
@@ -351,18 +352,6 @@ namespace Coypu.Tests.TestDoubles
         public void StubSection(string locator, StubElement fieldset)
         {
             stubbedSections.Add(locator, fieldset);
-        }
-
-        private void LogTiming(params string[] args)
-        {
-            var method = new StackTrace().GetFrame(1).GetMethod();
-            while (timings.ContainsKey(DateTime.Now.Ticks)){} 
-            timings.Add(DateTime.Now.Ticks, FormatTimingDetails(method.Name, args));
-        }
-
-        private string FormatTimingDetails(string method, params string[] args)
-        {
-            return string.Format("{0}({1})", method, string.Join(" ; ", args));
         }
 
         public void StubIFrame(string locator, StubElement iframe)

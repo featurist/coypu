@@ -1,14 +1,17 @@
-﻿using NUnit.Framework;
+﻿using System.Text.RegularExpressions;
+using NUnit.Framework;
 
-namespace Coypu.AcceptanceTests
-{
+namespace Coypu.AcceptanceTests {
     [TestFixture, Explicit]
-    public class Coypu
-    {
-        
+    public class CoypuComplete {
+
+        [TearDown]
+        public void TearDown() {
+            Browser.EndSession();
+        }
+
         [Test]
-        public void Retries_Autotrader()
-        {
+        public void Retries_Autotrader() {
             var browser = Browser.Session;
             browser.Visit("http://www.autotrader.co.uk/used-cars");
 
@@ -26,44 +29,36 @@ namespace Coypu.AcceptanceTests
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
         [Test]
-        public void Visibility_NewTwitterLogin()
-        {
+        public void Visibility_NewTwitterLogin() {
             var browser = Browser.Session;
             browser.Visit("http://www.twitter.com");
 
+            browser.FillIn("session[username_or_email]").With("coyputester2");
+            browser.FillIn("session[password]").With("Nappybara");
+
+            browser.ClickButton("Sign in");
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        [Test]
-        public void FindingStuff_CarBuzz()
-        {
+        [Test, Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
+        public void FindingStuff_CarBuzz() {
             var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
+
+            browser.Click(() => browser.Driver.FindSection("Make"));
+            
+            browser.Check("Audi");
+            browser.Check("BMW");
+            browser.Check("Mercedes");
+
+            Assert.That(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
+
+            browser.Click(() => browser.Driver.FindSection("Seats"));
+            browser.ClickButton("4");
+
+            Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));
+
         }
     }
 }

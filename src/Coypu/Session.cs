@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Coypu
 {
-    public class Session : IDisposable
+    public class Session : IDisposable, RobustWrapper
     {
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
@@ -23,16 +23,11 @@ namespace Coypu
             get { return driver.Native; }
         }
 
-        public RobustWrapper RobustWrapper
-        {
-            get { return robustWrapper; }
-        }
-
-        public Session(Driver driver, RobustWrapper robustWrapper)
+        public Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter)
         {
             this.robustWrapper = robustWrapper;
             this.driver = driver;
-            clicker = new Clicker(driver);
+            clicker = new Clicker(driver, waiter);
             urlBuilder = new UrlBuilder();
         }
 
@@ -47,7 +42,7 @@ namespace Coypu
 
         public void ClickButton(string locator)
         {
-            robustWrapper.Robustly(() => clicker.FindAndClickButton(locator));
+            Robustly(() => clicker.FindAndClickButton(locator));
         }
 
         public void ClickLink(string locator)
@@ -256,6 +251,26 @@ namespace Coypu
         {
             robustWrapper.Robustly(() => driver.Hover(findElement()));
             
+        }
+
+        public void Robustly(Action action)
+        {
+            robustWrapper.Robustly(action);
+        }
+
+        public TResult Robustly<TResult>(Func<TResult> function)
+        {
+            return robustWrapper.Robustly(function);
+        }
+
+        public T Query<T>(Func<T> query, T expecting)
+        {
+            return robustWrapper.Query(query, expecting);
+        }
+
+        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+        {
+            robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
         }
     }
 }
