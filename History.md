@@ -1,3 +1,12 @@
+# Version 0.2.2
+
+Release date: 2011-06-27
+
+### Added
+Rounded out the session API with FindSection, FindFieldset and FindId and make the Session.Driver internal. 
+Has(Func<Element>) and HasNot(Func<Element>) for custom queries.
+Robustly, Query & TryUntil are now callable directly on session.
+
 # Version 0.2.1
 
 Release date: 2011-06-25
