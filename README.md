@@ -40,7 +40,15 @@ Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration
 
 `Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0 RC2 and supports Firefox (fastest), IE (slowest) and Chrome as the browser.
 
-NOTE: To use WebDriver's Chrome driver you will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu 0.2.0 download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
+##### Firefox
+
+Version 5 not supported yet - will be in the next release of WebDriver.
+
+##### Internet Explorer
+Only IE9 supports CSS & XPath and certain HTML features.
+
+##### Chrome
+Chrome driver you will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu 0.2.0 download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
 
 The Coypu WatiN-IE driver is further behind (though it is faster than WebDriver-IE) and could use some more features implementing. 
 

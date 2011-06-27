@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Tests
                     driver.FindSection("Div Section One h6").Id.should_be("divSectionOne");
                     driver.FindSection("Div Section Two h6").Id.should_be("divSectionTwo");
                 };
-
+                
                 it["finds by h2 text within child link"] = () =>
                 {
                     driver.FindSection("Div Section One h2 with link").Id.should_be("divSectionOneWithLink");

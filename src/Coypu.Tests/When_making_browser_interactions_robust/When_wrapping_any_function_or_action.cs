@@ -30,8 +30,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var endTime = DateTime.Now;
 
             var actualDuration = (endTime - startTime);
-            var discrepancy = TimeSpan.FromMilliseconds(50);
-            Assert.That(actualDuration, Is.InRange(expectedTimeout, expectedTimeout + discrepancy));
+            var tollerance = TimeSpan.FromMilliseconds(50);
+            Assert.That(actualDuration, Is.InRange(expectedTimeout, expectedTimeout + tollerance));
         }
 
         [Test]
@@ -96,8 +96,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var endTime = DateTime.Now;
 
             var actualDuration = (endTime - startTime);
-            var discrepancy = TimeSpan.FromMilliseconds(50);
-            Assert.That(actualDuration, Is.LessThan(timeout + discrepancy));
+            var tollerance = TimeSpan.FromMilliseconds(50);
+            Assert.That(actualDuration, Is.LessThan(timeout + tollerance));
         }
 
         [Test]

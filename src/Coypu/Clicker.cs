@@ -1,27 +1,30 @@
 ﻿using System.Threading;
+using Coypu.Robustness;
 
 namespace Coypu
 {
     public class Clicker
     {
         private readonly Driver driver;
+        private readonly Waiter waiter;
 
-        public Clicker(Driver driver)
+        public Clicker(Driver driver, Waiter waiter)
         {
             this.driver = driver;
+            this.waiter = waiter;
         }
 
         public void FindAndClickButton(string locator)
         {
             var findLink = driver.FindButton(locator);
-            Thread.Sleep(Configuration.WaitBeforeClick);
+            waiter.Wait(Configuration.WaitBeforeClick);
             driver.Click(findLink);
         }
 
         public void FindAndClickLink(string locator)
         {
             var findLink = driver.FindLink(locator);
-            Thread.Sleep(Configuration.WaitBeforeClick);
+            waiter.Wait(Configuration.WaitBeforeClick);
             driver.Click(findLink);
         }
     }

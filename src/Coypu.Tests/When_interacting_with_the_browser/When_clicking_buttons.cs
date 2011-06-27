@@ -15,7 +15,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             session.ClickButton("Some button locator");
 
-            AssertNotClickedYet(buttonToBeClicked);
+            AssertButtonNotClickedYet(buttonToBeClicked);
             ExecuteDeferedRobustAction();
             AssertClicked(buttonToBeClicked);
         }
@@ -28,57 +28,54 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [TestCase(true, 1)]
         [TestCase(false, 1)]
         [TestCase(false, 321)]
-        public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int untilTimeoutSecs)
+        public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int waitBeforeRetrySecs)
         {
-            var waitBetweenRetries = TimeSpan.FromSeconds(untilTimeoutSecs);
+            var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
 
             session.ClickButton("Some button locator", () => stubUntil, waitBetweenRetries);
 
             var tryUntilArgs = GetTryUntilArgs();
 
-            AssertNotClickedYet(buttonToBeClicked);
+            AssertButtonNotClickedYet(buttonToBeClicked);
             ExecuteDeferedRobustAction();
             AssertClicked(buttonToBeClicked);
 
             Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.UntilTimeout, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
         }
 
-        [Test]
-        public void It_waits_between_find_and_click_as_configured()
+        [TestCase(200)]
+        [TestCase(300)]
+        public void It_waits_between_find_and_click_as_configured(int waitMs)
         {
-            var expectedWaitBeforeClick = TimeSpan.FromMilliseconds(200);
+            var stubButtonToBeClicked = StubButtonToBeClicked("Some button locator");
+            var expectedWait = TimeSpan.FromMilliseconds(waitMs);
+            Configuration.WaitBeforeClick = expectedWait;
 
-            var stubLinkToBeClicked = StubButtonToBeClicked("Some button locator");
+            var waiterCalled = false;
+            mockSleepWaiter.DoOnWait(milliseconds =>
+            {
+                Assert.That(milliseconds, Is.EqualTo(expectedWait));
 
-            Configuration.WaitBeforeClick = TimeSpan.FromSeconds(0);
-            var waitBeforeClickControl = RecordWaitBeforeClickButtonTiming("Some button locator", stubLinkToBeClicked);
+                AssertButtonFound();
+                AssertButtonNotClickedYet(stubButtonToBeClicked);
 
-            Configuration.WaitBeforeClick = expectedWaitBeforeClick;
-            var waitBeforeClickActual = RecordWaitBeforeClickButtonTiming("Some button locator", stubLinkToBeClicked);
-
-            Assert.That(waitBeforeClickActual, Is.InRange(expectedWaitBeforeClick - waitBeforeClickControl, expectedWaitBeforeClick + waitBeforeClickControl));
-        }
-
-        private TimeSpan RecordWaitBeforeClickButtonTiming(string locator, Element stubLinkToBeClicked)
-        {
-            session.ClickButton(locator);
+                waiterCalled = true;
+            });
+            session.ClickButton("Some button locator");
             ExecuteLastDeferedRobustAction();
 
-            var times = driver.Timings.Keys;
-
-            var findTiming = times.ElementAt(times.Count - 2);
-            var clickTiming = times.ElementAt(times.Count - 1);
-
-            // Verity timings
-            Assert.That(driver.Timings[findTiming], Is.StringContaining(locator));
-            Assert.That(driver.Timings[clickTiming], Is.StringContaining(stubLinkToBeClicked.Id));
-
-            return TimeSpan.FromTicks(clickTiming) - TimeSpan.FromTicks(findTiming);
+            Assert.That(waiterCalled, "The waiter was not called");
+            AssertClicked(stubButtonToBeClicked);
         }
 
-        private void AssertNotClickedYet(StubElement buttonToBeClicked)
+        private void AssertButtonFound()
+        {
+            Assert.That(driver.FindButtonRequests.Contains("Some button locator"), "Wait called before find");
+        }
+
+        private void AssertButtonNotClickedYet(StubElement buttonToBeClicked)
         {
             Assert.That(driver.ClickedElements, Has.No.Member(buttonToBeClicked));
         }

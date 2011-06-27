@@ -22,18 +22,18 @@ namespace Coypu.Tests.TestDoubles
         public TResult Robustly<TResult>(Func<TResult> function)
         {
             DeferredFunctions.Add(function);
-            return (TResult) stubbedResults[typeof(TResult)];
+            return stubbedResults.ContainsKey(typeof(TResult)) ? (TResult) stubbedResults[typeof(TResult)] : default(TResult);
         }
 
         public T Query<T>(Func<T> query, T expecting)
         {
             DeferredQueries.Add(query);
-            return (T) stubbedWaitForResult[expecting];
+            return stubbedWaitForResult.ContainsKey(expecting) ? (T) stubbedWaitForResult[expecting] : default(T);
         }
 
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan untilTimeout)
+        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
-            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, untilTimeout));
+            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
         }
 
         public void AlwaysReturnFromRobustly(Type type, object result)
@@ -50,11 +50,11 @@ namespace Coypu.Tests.TestDoubles
         {
             public Action TryThis { get; private set; }
             public Func<bool> Until { get; private set; }
-            public TimeSpan UntilTimeout { get; private set; }
+            public TimeSpan WaitBeforeRetry { get; private set; }
 
-            public TryUntilArgs(Action tryThis, Func<bool> until, TimeSpan untilTimeout)
+            public TryUntilArgs(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
             {
-                UntilTimeout = untilTimeout;
+                WaitBeforeRetry = waitBeforeRetry;
                 TryThis = tryThis;
                 Until = until;
             }
