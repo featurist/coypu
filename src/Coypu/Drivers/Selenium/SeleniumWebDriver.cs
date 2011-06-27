@@ -191,7 +191,7 @@ namespace Coypu.Drivers.Selenium
 
         public void Hover(Element element)
         {
-            mouseControl.Hover2(element);
+            mouseControl.Hover(element);
         }
 
         public void Set(Element element, string value) 
