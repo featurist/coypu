@@ -14,7 +14,7 @@ namespace Coypu
         private readonly UrlBuilder urlBuilder;
         public bool WasDisposed { get; private set; }
 
-        public Driver Driver
+        internal Driver Driver
         {
             get { return driver; }
         }
@@ -48,7 +48,7 @@ namespace Coypu
 
         public void ClickLink(string locator)
         {
-            robustWrapper.Robustly(() => clicker.FindAndClickLink(locator));
+            Robustly(() => clicker.FindAndClickLink(locator));
         }
 
         public void Visit(string virtualPath)
@@ -58,22 +58,22 @@ namespace Coypu
 
         public void Click(Element element)
         {
-            robustWrapper.Robustly(() => driver.Click(element));
+            Robustly(() => driver.Click(element));
         }
 
         public Element FindButton(string locator)
         {
-            return robustWrapper.Robustly(() => driver.FindButton(locator));
+            return Robustly(() => driver.FindButton(locator));
         }
 
         public Element FindLink(string locator)
         {
-            return robustWrapper.Robustly(() => driver.FindLink(locator));
+            return Robustly(() => driver.FindLink(locator));
         }
 
         public Element FindField(string locator)
         {
-            return robustWrapper.Robustly(() => driver.FindField(locator));
+            return Robustly(() => driver.FindField(locator));
         }
 
         public FillInWith FillIn(string locator)
@@ -93,57 +93,72 @@ namespace Coypu
 
         public bool HasContent(string text)
         {
-            return robustWrapper.Query(() => driver.HasContent(text), true);
+            return Query(() => driver.HasContent(text), true);
         }
         
         public bool HasContentMatch(Regex pattern)
         {
-            return robustWrapper.Query(() => driver.HasContentMatch(pattern), true);
+            return Query(() => driver.HasContentMatch(pattern), true);
         }
 
         public bool HasNoContent(string text)
         {
-            return robustWrapper.Query(() => driver.HasContent(text), false);
+            return Query(() => driver.HasContent(text), false);
         }
 
         public bool HasNoContentMatch(Regex pattern)
         {
-            return robustWrapper.Query(() => driver.HasContentMatch(pattern), false);
+            return Query(() => driver.HasContentMatch(pattern), false);
         }
 
         public bool HasCss(string cssSelector)
         {
-            return robustWrapper.Query(() => driver.HasCss(cssSelector), true);
+            return Query(() => driver.HasCss(cssSelector), true);
         }
 
         public bool HasNoCss(string cssSelector)
         {
-            return robustWrapper.Query(() => driver.HasCss(cssSelector), false);
+            return Query(() => driver.HasCss(cssSelector), false);
         }
 
         public bool HasXPath(string xpath)
         {
-            return robustWrapper.Query(() => driver.HasXPath(xpath), true);
+            return Query(() => driver.HasXPath(xpath), true);
         }
 
         public bool HasNoXPath(string xpath)
         {
-            return robustWrapper.Query(() => driver.HasXPath(xpath), false);
+            return Query(() => driver.HasXPath(xpath), false);
         }
 
         public Element FindCss(string cssSelector)
         {
-            return robustWrapper.Robustly(() => driver.FindCss(cssSelector));
+            return Robustly(() => driver.FindCss(cssSelector));
         }
 
         public Element FindXPath(string xpath)
         {
-            return robustWrapper.Robustly(() => driver.FindXPath(xpath));
+            return Robustly(() => driver.FindXPath(xpath));
         }
 
         public IEnumerable<Element> FindAllCss(string cssSelector)
         {
             return driver.FindAllCss(cssSelector);
+        }
+
+        public Element FindSection(string locator)
+        {
+            return Robustly(() => driver.FindSection(locator));
+        }
+
+        public Element FindFieldset(string locator)
+        {
+            return Robustly(() => driver.FindFieldset(locator));
+        }
+
+        public Element FindId(string id)
+        {
+            return Robustly(() => driver.FindId(id));
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath)
@@ -153,17 +168,17 @@ namespace Coypu
 
         public void Check(string locator)
         {
-            robustWrapper.Robustly(() => driver.Check(driver.FindField(locator)));
+            Robustly(() => driver.Check(driver.FindField(locator)));
         }
 
         public void Uncheck(string locator)
         {
-            robustWrapper.Robustly(() => driver.Uncheck(driver.FindField(locator)));
+            Robustly(() => driver.Uncheck(driver.FindField(locator)));
         }
 
         public void Choose(string locator)
         {
-            robustWrapper.Robustly(() => driver.Choose(driver.FindField(locator)));
+            Robustly(() => driver.Choose(driver.FindField(locator)));
         }
 
         public bool HasDialog(string withText)
@@ -178,12 +193,12 @@ namespace Coypu
 
         public void AcceptModalDialog()
         {
-            robustWrapper.Robustly(() => driver.AcceptModalDialog());
+            Robustly(() => driver.AcceptModalDialog());
         }
 
         public void CancelModalDialog()
         {
-            robustWrapper.Robustly(() => driver.CancelModalDialog());
+            Robustly(() => driver.CancelModalDialog());
         }
 
         public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
@@ -217,7 +232,7 @@ namespace Coypu
         {
             Within(() => driver.FindFieldset(locator), action);
         }
-        
+
         public void WithinSection(string locator, Action action)
         {
             Within(() => driver.FindSection(locator), action);
@@ -225,12 +240,12 @@ namespace Coypu
 
         public void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
         {
-            robustWrapper.TryUntil(() => ClickButton(locator), until, waitBetweenRetries);
+            TryUntil(() => ClickButton(locator), until, waitBetweenRetries);
         }
 
         public void ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
         {
-            robustWrapper.TryUntil(() => ClickLink(locator), until, waitBetweenRetries);
+            TryUntil(() => ClickLink(locator), until, waitBetweenRetries);
         }
 
         public string ExecuteScript(string javascript)
@@ -245,13 +260,47 @@ namespace Coypu
 
         public void Click(Func<Element> findElement)
         {
-            robustWrapper.Robustly(() => driver.Click(findElement()));
+            Robustly(() => driver.Click(findElement()));
         }
 
         public void Hover(Func<Element> findElement)
         {
-            robustWrapper.Robustly(() => driver.Hover(findElement()));
+            Robustly(() => driver.Hover(findElement()));
             
+        }
+
+        public bool Has(Func<Element> findElement) 
+        {
+            return Query(BuildZeroTimeoutHasHtmlQuery(findElement), true);
+        }
+
+        public bool HasNo(Func<Element> findElement)
+        {
+            return Query(BuildZeroTimeoutHasHtmlQuery(findElement), false);
+        }
+
+        private static Func<bool> BuildZeroTimeoutHasHtmlQuery(Func<Element> findElement)
+        {
+            Func<bool> query =
+                () =>
+                    {
+                        var outerTimeout = Configuration.Timeout;
+                        Configuration.Timeout = TimeSpan.Zero;
+                        try
+                        {
+                            findElement();
+                            return true;
+                        }
+                        catch (MissingHtmlException)
+                        {
+                            return false;
+                        }
+                        finally
+                        {
+                            Configuration.Timeout = outerTimeout;
+                        }
+                    };
+            return query;
         }
 
         public void Robustly(Action action)
@@ -272,19 +321,6 @@ namespace Coypu
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
             robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
-        }
-
-        public bool Has(Func<Element> findElement)
-        {
-            try
-            {
-                findElement();
-                return true;
-            }
-            catch (MissingHtmlException)
-            {
-                return false;
-            }
         }
     }
 }

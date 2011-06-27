@@ -29,6 +29,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
         private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
         private readonly IDictionary<string, Element> stubbedIFrames = new Dictionary<string, Element>();
+        private readonly IDictionary<string, Element> stubbedIDs = new Dictionary<string, Element>();
         private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
         private readonly IDictionary<Regex, bool> stubbedHasContentMatchResults = new Dictionary<Regex, bool>();
         private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
@@ -250,7 +251,7 @@ namespace Coypu.Tests.TestDoubles
 
         public Element FindId(string id)
         {
-            throw new NotImplementedException();
+            return stubbedIDs[id];
         }
 
         public Element FindIFrame(string locator)
@@ -344,19 +345,24 @@ namespace Coypu.Tests.TestDoubles
             stubbedExecuteScriptResults.Add(script, scriptReturnValue);
         }
 
-        public void StubFieldset(string locator, StubElement fieldset)
+        public void StubFieldset(string locator, Element fieldset)
         {
             stubbedFieldsets.Add(locator, fieldset);
         }
         
-        public void StubSection(string locator, StubElement fieldset)
+        public void StubSection(string locator, Element fieldset)
         {
             stubbedSections.Add(locator, fieldset);
         }
 
-        public void StubIFrame(string locator, StubElement iframe)
+        public void StubIFrame(string locator, Element iframe)
         {
             stubbedIFrames.Add(locator, iframe);
+        }
+
+        public void StubId(string id, Element element)
+        {
+            stubbedIDs.Add(id, element);
         }
     }
 }

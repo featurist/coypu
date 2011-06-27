@@ -46,7 +46,6 @@ namespace Coypu.Tests
             Browser.EndSession();
         }
 
-
         [Test]
         public void After_disposing_the_session_a_new_session_is_available()
         {

@@ -47,7 +47,10 @@ namespace Coypu.AcceptanceTests {
             var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
-            browser.Click(() => browser.Driver.FindSection("Make"));
+            Console.WriteLine(browser.Has(() => browser.FindSection("Make")));
+            Console.WriteLine(browser.HasNo(() => browser.FindSection("Bake")));
+
+            browser.Click(() => browser.FindSection("Make"));
             
             browser.Check("Audi");
             browser.Check("BMW");
@@ -55,7 +58,7 @@ namespace Coypu.AcceptanceTests {
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
 
-            browser.Click(() => browser.Driver.FindSection("Seats"));
+            browser.Click(() => browser.FindSection("Seats"));
             browser.ClickButton("4");
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));

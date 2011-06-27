@@ -33,7 +33,25 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void FindXPath_should_make_robust_call_to_underlying_driver()
+        public void FindId_should_make_robust_call_to_underlying_driver() 
+        {
+            Should_find_robustly(session.FindId, driver.StubId);
+        }
+
+        [Test]
+        public void FindSection_should_make_robust_call_to_underlying_driver() 
+        {
+            Should_find_robustly(session.FindSection, driver.StubSection);
+        }
+
+        [Test]
+        public void FindFieldset_should_make_robust_call_to_underlying_driver() 
+        {
+            Should_find_robustly(session.FindFieldset, driver.StubFieldset);
+        }
+
+        [Test]
+        public void FindXPath_should_make_robust_call_to_underlying_driver() 
         {
             Should_find_robustly(session.FindXPath, driver.StubXPath);
         }
