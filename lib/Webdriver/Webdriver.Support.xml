@@ -1,0 +1,1115 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Webdriver.Support</name>
+    </assembly>
+    <members>
+        <member name="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver">
+            <summary>
+            A wrapper around an arbitrary WebDriver instance which supports registering for 
+            events, e.g. for logging purposes.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.#ctor(OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the EventFiringWebDriver class.
+            </summary>
+            <param name="parentDriver">The driver to register events for.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Close">
+            <summary>
+            Close the current window, quitting the browser if it is the last window currently open.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Quit">
+            <summary>
+            Quits this driver, closing every associated window.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Manage">
+            <summary>
+            Instructs the driver to change its settings.
+            </summary>
+            <returns>An <see cref="T:OpenQA.Selenium.IOptions"/> object allowing the user to change
+            the settings of the driver.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigate">
+            <summary>
+            Instructs the driver to navigate the browser to another location.
+            </summary>
+            <returns>An <see cref="T:OpenQA.Selenium.INavigation"/> object allowing the user to access 
+            the browser's history and to navigate to a given URL.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.SwitchTo">
+            <summary>
+            Instructs the driver to send future commands to a different frame or window.
+            </summary>
+            <returns>An <see cref="T:OpenQA.Selenium.ITargetLocator"/> object which can be used to select
+            a frame or window.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.FindElement(OpenQA.Selenium.By)">
+            <summary>
+            Find the first <see cref="T:OpenQA.Selenium.IWebElement"/> using the given method. 
+            </summary>
+            <param name="by">The locating mechanism to use.</param>
+            <returns>The first matching <see cref="T:OpenQA.Selenium.IWebElement"/> on the current context.</returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException">If no element matches the criteria.</exception>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.FindElements(OpenQA.Selenium.By)">
+            <summary>
+            Find all <see cref="T:OpenQA.Selenium.IWebElement">IWebElements</see> within the current context 
+            using the given mechanism.
+            </summary>
+            <param name="by">The locating mechanism to use.</param>
+            <returns>A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/> of all <see cref="T:OpenQA.Selenium.IWebElement">WebElements</see>
+            matching the current criteria, or an empty list if nothing matches.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Dispose">
+            <summary>
+            Frees all managed and unmanaged resources used by this instance.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExecuteScript(System.String,System.Object[])">
+            <summary>
+            Executes JavaScript in the context of the currently selected frame or window.
+            </summary>
+            <param name="script">The JavaScript code to execute.</param>
+            <param name="args">The arguments to the script.</param>
+            <returns>The value returned by the script.</returns>
+            <remarks>
+            <para>
+            The <see cref="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExecuteScript(System.String,System.Object[])"/>method executes JavaScript in the context of 
+            the currently selected frame or window. This means that "document" will refer 
+            to the current document. If the script has a return value, then the following 
+            steps will be taken:
+            </para>
+            <para>
+            <list type="bullet">
+            <item><description>For an HTML element, this method returns a <see cref="T:OpenQA.Selenium.IWebElement"/></description></item>
+            <item><description>For a number, a <see cref="T:System.Int64"/> is returned</description></item>
+            <item><description>For a boolean, a <see cref="T:System.Boolean"/> is returned</description></item>
+            <item><description>For all other cases a <see cref="T:System.String"/> is returned.</description></item>
+            <item><description>For an array,we check the first element, and attempt to return a 
+            <see cref="T:System.Collections.Generic.List`1"/> of that type, following the rules above. Nested lists are not
+            supported.</description></item>
+            <item><description>If the value is null or there is no return value,
+            <see langword="null"/> is returned.</description></item>
+            </list>
+            </para>
+            <para>
+            Arguments must be a number (which will be converted to a <see cref="T:System.Int64"/>),
+            a <see cref="T:System.Boolean"/>, a <see cref="T:System.String"/> or a <see cref="T:OpenQA.Selenium.IWebElement"/>.
+            An exception will be thrown if the arguments do not meet these criteria. 
+            The arguments will be made available to the JavaScript via the "arguments" magic 
+            variable, as if the function were called via "Function.apply" 
+            </para>
+            </remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExecuteAsyncScript(System.String,System.Object[])">
+            <summary>
+            Executes JavaScript asynchronously in the context of the currently selected frame or window.
+            </summary>
+            <param name="script">The JavaScript code to execute.</param>
+            <param name="args">The arguments to the script.</param>
+            <returns>The value returned by the script.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.GetScreenshot">
+            <summary>
+            Gets a <see cref="T:OpenQA.Selenium.Screenshot"/> object representing the image of the page on the screen.
+            </summary>
+            <returns>A <see cref="T:OpenQA.Selenium.Screenshot"/> object containing the image.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Dispose(System.Boolean)">
+            <summary>
+            Frees all managed and, optionally, unmanaged resources used by this instance.
+            </summary>
+            <param name="disposing"><see langword="true"/> to dispose of only managed resources;
+            <see langword="false"/> to dispose of managed and unmanaged resources.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnNavigating(OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigating"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnNavigated(OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnNavigatingBack(OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatingBack"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnNavigatedBack(OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatedBack"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnNavigatingForward(OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatingForward"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnNavigatedForward(OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatedForward"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnElementClicking(OpenQA.Selenium.Support.Events.WebElementEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementClicking"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebElementEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnElementClicked(OpenQA.Selenium.Support.Events.WebElementEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementClicked"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebElementEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnElementValueChanging(OpenQA.Selenium.Support.Events.WebElementEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementValueChanging"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebElementEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnElementValueChanged(OpenQA.Selenium.Support.Events.WebElementEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementValueChanged"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebElementEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnFindingElement(OpenQA.Selenium.Support.Events.FindElementEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.FindingElement"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.FindElementEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnFindElementCompleted(OpenQA.Selenium.Support.Events.FindElementEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.FindElementCompleted"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.FindElementEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnScriptExecuting(OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ScriptExecuting"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnScriptExecuted(OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ScriptExecuted"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.OnException(OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs)">
+            <summary>
+            Raises the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExceptionThrown"/> event.
+            </summary>
+            <param name="e">A <see cref="T:OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigating">
+            <summary>
+            Fires before the driver begins navigation.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated">
+            <summary>
+            Fires after the driver completes navigation
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatingBack">
+            <summary>
+            Fires before the driver begins navigation back one entry in the browser history list.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatedBack">
+            <summary>
+            Fires after the driver completes navigation back one entry in the browser history list.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatingForward">
+            <summary>
+            Fires before the driver begins navigation forward one entry in the browser history list.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.NavigatedForward">
+            <summary>
+            Fires after the driver completes navigation forward one entry in the browser history list.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementClicking">
+            <summary>
+            Fires before the driver clicks on an element.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementClicked">
+            <summary>
+            Fires after the driver has clicked on an element.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementValueChanging">
+            <summary>
+            Fires before the driver changes the value of an element via Clear(), SendKeys() or Toggle().
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ElementValueChanged">
+            <summary>
+            Fires after the driver has changed the value of an element via Clear(), SendKeys() or Toggle().
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.FindingElement">
+            <summary>
+            Fires before the driver starts to find an element.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.FindElementCompleted">
+            <summary>
+            Fires after the driver completes finding an element.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ScriptExecuting">
+            <summary>
+            Fires before a script is executed.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ScriptExecuted">
+            <summary>
+            Fires after a script is executed.
+            </summary>
+        </member>
+        <member name="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExceptionThrown">
+            <summary>
+            Fires when an exception is thrown.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.WrappedDriver">
+            <summary>
+            Gets the <see cref="T:OpenQA.Selenium.IWebDriver"/> wrapped by this EventsFiringWebDriver instance.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Url">
+            <summary>
+            Gets or sets the URL the browser is currently displaying.
+            </summary>
+            <remarks>
+            Setting the <see cref="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Url"/> property will load a new web page in the current browser window. 
+            This is done using an HTTP GET operation, and the method will block until the 
+            load is complete. This will follow redirects issued either by the server or 
+            as a meta-redirect from within the returned HTML. Should a meta-redirect "rest"
+            for any duration of time, it is best to wait until this timeout is over, since 
+            should the underlying page change while your test is executing the results of 
+            future calls against this interface will be against the freshly loaded page. 
+            </remarks>
+            <seealso cref="M:OpenQA.Selenium.INavigation.GoToUrl(System.String)"/>
+            <seealso cref="M:OpenQA.Selenium.INavigation.GoToUrl(System.Uri)"/>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Title">
+            <summary>
+            Gets the title of the current browser window.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.PageSource">
+            <summary>
+            Gets the source of the page last loaded by the browser.
+            </summary>
+            <remarks>
+            If the page has been modified after loading (for example, by JavaScript) 
+            there is no guarentee that the returned text is that of the modified page. 
+            Please consult the documentation of the particular driver being used to 
+            determine whether the returned text reflects the current state of the page 
+            or the text last sent by the web server. The page source returned is a 
+            representation of the underlying DOM: do not expect it to be formatted 
+            or escaped in the same way as the response sent from the web server. 
+            </remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.CurrentWindowHandle">
+            <summary>
+            Gets the current window handle, which is an opaque handle to this 
+            window that uniquely identifies it within this driver instance.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.WindowHandles">
+            <summary>
+            Gets the window handles of open browser windows.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation">
+            <summary>
+            Provides a mechanism for Navigating with the driver.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation.#ctor(OpenQA.Selenium.Support.Events.EventFiringWebDriver)">
+            <summary>
+            Initializes a new instance of the EventFiringNavigation class
+            </summary>
+            <param name="driver">Driver in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation.Back">
+            <summary>
+            Move the browser back
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation.Forward">
+            <summary>
+            Move the browser forward
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation.GoToUrl(System.String)">
+            <summary>
+            Navigate to a url for your test
+            </summary>
+            <param name="url">String of where you want the browser to go to</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation.GoToUrl(System.Uri)">
+            <summary>
+            Navigate to a url for your test
+            </summary>
+            <param name="url">Uri object of where you want the browser to go to</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringNavigation.Refresh">
+            <summary>
+            Refresh the browser
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringOptions">
+            <summary>
+            Provides a mechanism for setting options needed for the driver during the test.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringOptions.#ctor(OpenQA.Selenium.Support.Events.EventFiringWebDriver)">
+            <summary>
+            Initializes a new instance of the EventFiringOptions class
+            </summary>
+            <param name="driver">Instance of the driver currently in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringOptions.Timeouts">
+            <summary>
+            Provides access to the timeouts defined for this driver.
+            </summary>
+            <returns>An object implementing the <see cref="T:OpenQA.Selenium.ITimeouts"/> interface.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringOptions.Cookies">
+            <summary>
+            Gets an object allowing the user to manipulate cookies on the page.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator">
+            <summary>
+            Provides a mechanism for finding elements on the page with locators.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.#ctor(OpenQA.Selenium.Support.Events.EventFiringWebDriver)">
+            <summary>
+            Initializes a new instance of the EventFiringTargetLocator class
+            </summary>
+            <param name="driver">The driver that is currently in use</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.Frame(System.Int32)">
+            <summary>
+            Move to a different frame using its index
+            </summary>
+            <param name="frameIndex">The index of the </param>
+            <returns>A WebDriver instance that is currently in use</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.Frame(System.String)">
+            <summary>
+            Move to different frame using its name
+            </summary>
+            <param name="frameName">name of the frame</param>
+            <returns>A WebDriver instance that is currently in use</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.Frame(OpenQA.Selenium.IWebElement)">
+            <summary>
+            Move to a frame element.
+            </summary>
+            <param name="frameElement">a previously found FRAME or IFRAME element.</param>
+            <returns>A WebDriver instance that is currently in use.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.Window(System.String)">
+            <summary>
+            Change to the Window by passing in the name
+            </summary>
+            <param name="windowName">name of the window that you wish to move to</param>
+            <returns>A WebDriver instance that is currently in use</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.DefaultContent">
+            <summary>
+            Change the active frame to the default 
+            </summary>
+            <returns>Element of the default</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.ActiveElement">
+            <summary>
+            Finds the active element on the page and returns it
+            </summary>
+            <returns>Element that is active</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTargetLocator.Alert">
+            <summary>
+            Switches to the currently active modal dialog for this particular driver instance.
+            </summary>
+            <returns>A handle to the dialog.</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTimeouts">
+            <summary>
+            Defines the interface through which the user can define timeouts.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTimeouts.#ctor(OpenQA.Selenium.IOptions)">
+            <summary>
+            Initializes a new instance of the EventFiringTimeouts class
+            </summary>
+            <param name="options">The <see cref="T:OpenQA.Selenium.IOptions"/> object to wrap.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTimeouts.ImplicitlyWait(System.TimeSpan)">
+            <summary>
+            Specifies the amount of time the driver should wait when searching for an
+            element if it is not immediately present.
+            </summary>
+            <param name="timeToWait">A <see cref="T:System.TimeSpan"/> structure defining the amount of time to wait.</param>
+            <returns>A self reference</returns>
+            <remarks>
+            When searching for a single element, the driver should poll the page
+            until the element has been found, or this timeout expires before throwing
+            a <see cref="T:OpenQA.Selenium.NoSuchElementException"/>. When searching for multiple elements,
+            the driver should poll the page until at least one element has been found
+            or this timeout has expired.
+            <para>
+            Increasing the implicit wait timeout should be used judiciously as it
+            will have an adverse effect on test run time, especially when used with
+            slower location strategies like XPath.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringTimeouts.SetScriptTimeout(System.TimeSpan)">
+            <summary>
+            Specifies the amount of time the driver should wait when executing JavaScript asynchronously.
+            </summary>
+            <param name="timeToWait">A <see cref="T:System.TimeSpan"/> structure defining the amount of time to wait.</param>
+            <returns>A self reference</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement">
+            <summary>
+            EventFiringWebElement allows you to have access to specific items that are found on the page
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.#ctor(OpenQA.Selenium.Support.Events.EventFiringWebDriver,OpenQA.Selenium.IWebElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement"/> class.
+            </summary>
+            <param name="driver">The <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver"/> instance hosting this element.</param>
+            <param name="element">The <see cref="T:OpenQA.Selenium.IWebElement"/> to wrap for event firing.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Clear">
+            <summary>
+            Method to clear the text out of an Input element
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.SendKeys(System.String)">
+            <summary>
+            Method for sending native key strokes to the browser
+            </summary>
+            <param name="text">String containing what you would like to type onto the screen</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Submit">
+            <summary>
+            If this current element is a form, or an element within a form, then this will be submitted to the remote server. 
+            If this causes the current page to change, then this method will block until the new page is loaded.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Click">
+            <summary>
+            Click this element. If this causes a new page to load, this method will block until the page has loaded. At this point, you should discard all references to this element and any further operations performed on this element 
+            will have undefined behaviour unless you know that the element and the page will still be present. If this element is not clickable, then this operation is a no-op since it's pretty common for someone to accidentally miss 
+            the target when clicking in Real Life
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Select">
+            <summary>
+            Select or unselect element. This operation only applies to input elements such as checkboxes, options in a select and radio buttons.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.GetAttribute(System.String)">
+            <summary>
+            If this current element is a form, or an element within a form, then this will be submitted to the remote server. If this causes the current page to change, then this method will block until the new page is loaded.
+            </summary>
+            <param name="attributeName">Attribute you wish to get details of</param>
+            <returns>The attribute's current value or null if the value is not set.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Toggle">
+            <summary>
+            If the element is a checkbox this will toggle the elements state from selected to not selected, or from not selected to selected
+            </summary>
+            <returns>Whether the toggled element is selected (true) or not (false) after this toggle is complete</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.GetCssValue(System.String)">
+            <summary>
+            Method to return the value of a CSS Property
+            </summary>
+            <param name="propertyName">CSS property key</param>
+            <returns>string value of the CSS property</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.FindElement(OpenQA.Selenium.By)">
+            <summary>
+            Finds the first element in the page that matches the <see cref="T:OpenQA.Selenium.By"/> object
+            </summary>
+            <param name="by">By mechanism to find the element</param>
+            <returns>IWebElement object so that you can interction that object</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.FindElements(OpenQA.Selenium.By)">
+            <summary>
+            Finds the elements on the page by using the <see cref="T:OpenQA.Selenium.By"/> object and returns a ReadOnlyCollection of the Elements on the page
+            </summary>
+            <param name="by">By mechanism to find the element</param>
+            <returns>ReadOnlyCollection of IWebElement</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.WrappedElement">
+            <summary>
+            Gets the underlying wrapped <see cref="T:OpenQA.Selenium.IWebElement"/>.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.TagName">
+            <summary>
+            Gets the DOM Tag of element
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Text">
+            <summary>
+            Gets the text from the element
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Enabled">
+            <summary>
+            Gets a value indicating whether an element is currently enabled
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Selected">
+            <summary>
+            Gets a value indicating whether this element is selected or not. This operation only applies to input elements such as checkboxes, options in a select and radio buttons.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Location">
+            <summary>
+            Gets the Location of an element and returns a Point object
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Size">
+            <summary>
+            Gets the <see cref="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Size"/> of the element on the page
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.Displayed">
+            <summary>
+            Gets a value indicating whether the element is currently being displayed
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.EventFiringWebDriver.EventFiringWebElement.ParentDriver">
+            <summary>
+            Gets the underlying EventFiringWebDriver for this element.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.FindElementEventArgs">
+            <summary>
+            Provides data for events related to finding elements.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.FindElementEventArgs.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.FindElementEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used in finding elements.</param>
+            <param name="method">The <see cref="T:OpenQA.Selenium.By"/> object containing the method used to find elements</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.FindElementEventArgs.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.IWebElement,OpenQA.Selenium.By)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.FindElementEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used in finding elements.</param>
+            <param name="element">The parent element used as the context for the search.</param>
+            <param name="method">The <see cref="T:OpenQA.Selenium.By"/> object containing the method used to find elements.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.FindElementEventArgs.Driver">
+            <summary>
+            Gets the WebDriver instance used in finding elements.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.FindElementEventArgs.Element">
+            <summary>
+            Gets the parent element used as the context for the search.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.FindElementEventArgs.FindMethod">
+            <summary>
+            Gets the <see cref="T:OpenQA.Selenium.By"/> object containing the method used to find elements.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs">
+            <summary>
+            Provides data for events relating to exception handling.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs.#ctor(OpenQA.Selenium.IWebDriver,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance throwing the exception.</param>
+            <param name="thrownException">The exception thrown by the driver.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs.ThrownException">
+            <summary>
+            Gets the exception thrown by the driver.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebDriverExceptionEventArgs.Driver">
+            <summary>
+            Gets the WebDriver instance .
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs">
+            <summary>
+            Provides data for events relating to navigation.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs.#ctor(OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used in navigation.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs.#ctor(OpenQA.Selenium.IWebDriver,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used in navigation.</param>
+            <param name="url">The URL navigated to by the driver.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs.Url">
+            <summary>
+            Gets the URL navigated to by the driver.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebDriverNavigationEventArgs.Driver">
+            <summary>
+            Gets the WebDriver instance used in navigation.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs">
+            <summary>
+            Provides data for events relating to executing JavaScript.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs.#ctor(OpenQA.Selenium.IWebDriver,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used to execute the script.</param>
+            <param name="script">The script executed by the driver.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs.Driver">
+            <summary>
+            Gets the WebDriver instance used to execute the script.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebDriverScriptEventArgs.Script">
+            <summary>
+            Gets the script executed by the driver.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.Events.WebElementEventArgs">
+            <summary>
+            Provides data for events relating to elements.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.Events.WebElementEventArgs.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.IWebElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.Events.WebElementEventArgs"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used for the action.</param>
+            <param name="element">The element used for the action.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebElementEventArgs.Driver">
+            <summary>
+            Gets the WebDriver instance used for the action.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.Events.WebElementEventArgs.Element">
+            <summary>
+            Gets the element used for the action.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.ByFactory">
+            <summary>
+            Provides instances of the <see cref="T:OpenQA.Selenium.By"/> object to the attributes.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.ByFactory.From(OpenQA.Selenium.Support.PageObjects.FindsByAttribute)">
+            <summary>
+            Gets an instance of the <see cref="T:OpenQA.Selenium.By"/> class based on the specified attribute.
+            </summary>
+            <param name="attribute">The <see cref="T:OpenQA.Selenium.Support.PageObjects.FindsByAttribute"/> describing how to find the element.</param>
+            <returns>An instance of the <see cref="T:OpenQA.Selenium.By"/> class.</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.CacheLookupAttribute">
+            <summary>
+            Marks the element so that lookups to the browser page are cached. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.FindsByAttribute">
+            <summary>
+            Marks the program element with methods by which to find a corresponding element on the page. This 
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.PageObjects.FindsByAttribute.How">
+            <summary>
+            Gets or sets the method used to look up the element
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.PageObjects.FindsByAttribute.Using">
+            <summary>
+            Gets or sets the value to lookup by (i.e. for How.Name, the actual name to look up)
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.PageObjects.FindsByAttribute.Bys">
+            <summary>
+            Gets the list of <see cref="T:OpenQA.Selenium.By"/> object from which to find.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.How">
+            <summary>
+            Provides the lookup methods for the FindsBy attribute (for using in PageObjects)
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.Id">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.Id(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.Name">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.Name(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.TagName">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.TagName(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.ClassName">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.ClassName(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.CssSelector">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.CssSelector(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.LinkText">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.LinkText(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.PartialLinkText">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.PartialLinkText(System.String)"/>
+            </summary>
+        </member>
+        <member name="F:OpenQA.Selenium.Support.PageObjects.How.XPath">
+            <summary>
+            Finds by <see cref="M:OpenQA.Selenium.By.XPath(System.String)"/>
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.PageFactory">
+            <summary>
+            Provides the ability to produce Page Objects modeling a page. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.PageFactory.#ctor">
+            <summary>
+            Prevents a default instance of the PageFactory class from being created.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.PageFactory.InitElements(OpenQA.Selenium.ISearchContext,System.Object)">
+            <summary>
+            Initializes the elements in the Page Object.
+            </summary>
+            <param name="driver">The driver used to find elements on the page.</param>
+            <param name="page">The Page Object to be populated with elements.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.PageFactory.ProxiedWebElementInterceptor">
+            <summary>
+            Provides an interceptor to assist in creating the Page Object. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.PageFactory.ProxiedWebElementInterceptor.#ctor(OpenQA.Selenium.ISearchContext,System.Collections.Generic.IEnumerable{OpenQA.Selenium.By},System.Boolean)">
+            <summary>
+            Initializes a new instance of the ProxiedWebElementInterceptor class.
+            </summary>
+            <param name="searchContext">The driver used to search for element.</param>
+            <param name="bys">The list of methods by which to search for the elements.</param>
+            <param name="cache"><see langword="true"/> to cache the lookup to the element; otherwise, <see langword="false"/>.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.PageFactory.ProxiedWebElementInterceptor.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            Intercepts calls to methods on the class.
+            </summary>
+            <param name="invocation">An IInvocation object describing the actual implementation.</param>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.PageObjects.PageFactory.ProxiedWebElementInterceptor.WrappedElement">
+            <summary>
+            Gets the element wrapped by this ProxiedWebElementInterceptor.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.PageObjects.WebElementProxyComparer">
+            <summary>
+            Provides comparison of proxied web elements.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.WebElementProxyComparer.Equals(System.Object)">
+            <summary>
+            Gets a value indicating whether two elements are equal.
+            </summary>
+            <param name="obj">An object representing a second element.</param>
+            <returns><see langword="true"/> if the objects are equal; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.PageObjects.WebElementProxyComparer.GetHashCode">
+            <summary>
+            Gets a unique hash code for this object.
+            </summary>
+            <returns>A unique hash code for this object.</returns>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.UI.IClock">
+            <summary>
+            An interface describing time handling functions for timeouts.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.IClock.LaterBy(System.TimeSpan)">
+            <summary>
+            Gets the <see cref="T:System.DateTime"/> at a specified offset in the future.
+            </summary>
+            <param name="delay">The offset to use.</param>
+            <returns>The <see cref="T:System.DateTime"/> at the specified offset in the future.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.IClock.IsNowBefore(System.DateTime)">
+            <summary>
+            Gets a value indicating whether the current date and time is before the specified date and time.
+            </summary>
+            <param name="otherDateTime">The date and time values to compare the current date and time values to.</param>
+            <returns><see langword="true"/> if the current date and time is before the specified date and time; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.UI.IClock.Now">
+            <summary>
+            Gets the current date and time values.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.UI.IWait`1">
+            <summary>
+            Interface describing a class designed to wait for a condition.
+            </summary>
+            <typeparam name="TSource">The type of object used to detect the condition.</typeparam>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.IWait`1.Until``1(System.Func{`0,``0})">
+            <summary>
+            Waits until a condition is true or times out.
+            </summary>
+            <typeparam name="TResult">The type of result to expect from the condition.</typeparam>
+            <param name="condition">A delegate taking a TSource as its parameter, and returning a TResult.</param>
+            <returns>If TResult is a boolean, the method returns <see langword="true"/> when the condition is true, and <see langword="false"/> otherwise.
+            If TResult is an object, the method returns the object when the condition evaluates to a value other than <see langword="null"/>.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when TResult is not boolean or an object type.</exception>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.UI.SelectElement">
+            <summary>
+            Provides a convenience method for manipulating selections of options in an HTML select element.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.#ctor(OpenQA.Selenium.IWebElement)">
+            <summary>
+            Initializes a new instance of the SelectElement class.
+            </summary>
+            <param name="element">The element to be wrapped</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.SelectByText(System.String)">
+            <summary>
+            Select the option by the text displayed.
+            </summary>
+            <param name="text">The text of the option to be selected.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.SelectByValue(System.String)">
+            <summary>
+            Select an option by the value.
+            </summary>
+            <param name="value">The value of the option to be selected.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.SelectByIndex(System.Int32)">
+            <summary>
+            Select the option by the index.
+            </summary>
+            <param name="index">The index of the option to be selected.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.DeselectByText(System.String)">
+            <summary>
+            Deselect the option by the text displayed.
+            </summary>
+            <param name="text">The text of the option to be deselected.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.DeselectByValue(System.String)">
+            <summary>
+            Deselect the option by the value.
+            </summary>
+            <param name="value">The value of the option to deselect.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.DeselectByIndex(System.Int32)">
+            <summary>
+            Deselect the option by the index.
+            </summary>
+            <param name="index">The index of the option to deselect.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SelectElement.DeselectAll">
+            <summary>
+            Clear all selected entries. This is only valid when the SELECT supports multiple selections.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.UI.SelectElement.IsMultiple">
+            <summary>
+            Gets a value indicating whether the parent element supports multiple selections.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.UI.SelectElement.Options">
+            <summary>
+            Gets the list of options for the select element.
+            </summary>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.UI.SelectElement.SelectedOption">
+            <summary>
+            Gets the selected item within the select element. Returns <see langword="null"/> if no option is selected.
+            </summary>
+            <remarks>If more than one item is selected this will return the first item.</remarks>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.UI.SelectElement.AllSelectedOptions">
+            <summary>
+            Gets all of the selected options within the select element.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.UI.SystemClock">
+            <summary>
+            Uses the system clock to calculate time for timeouts.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SystemClock.LaterBy(System.TimeSpan)">
+            <summary>
+            Calculates the date and time values after a specific delay.
+            </summary>
+            <param name="delay">The delay after to calculate.</param>
+            <returns>The future date and time values.</returns>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.SystemClock.IsNowBefore(System.DateTime)">
+            <summary>
+            Gets a value indicating whether the current date and time is before the specified date and time.
+            </summary>
+            <param name="otherDateTime">The date and time values to compare the current date and time values to.</param>
+            <returns><see langword="true"/> if the current date and time is before the specified date and time; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="P:OpenQA.Selenium.Support.UI.SystemClock.Now">
+            <summary>
+            Gets the current date and time values.
+            </summary>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.UI.UnexpectedTagNameException">
+            <summary>
+            The exception thrown when using the Select class on a tag that 
+            does not support the HTML select element's selection semantics.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.UnexpectedTagNameException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.UnexpectedTagNameException"/> class with
+            the expected tag name and the actual tag name.
+            </summary>
+            <param name="expected">The tag name that was expected.</param>
+            <param name="actual">The actual tag name of the element.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.UnexpectedTagNameException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.UnexpectedTagNameException"/> class.
+            </summary>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.UnexpectedTagNameException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.UnexpectedTagNameException"/> class with 
+            a specified error message.
+            </summary>
+            <param name="message">The message of the exception</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.UnexpectedTagNameException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.UnexpectedTagNameException"/> class with
+            a specified error message and a reference to the inner exception that is the
+            cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception,
+            or <see langword="null"/> if no inner exception is specified.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.UnexpectedTagNameException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.UnexpectedTagNameException"/> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized 
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual 
+            information about the source or destination.</param>
+        </member>
+        <member name="T:OpenQA.Selenium.Support.UI.WebDriverWait">
+            <summary>
+            Provides the ability to wait for an arbitrary condition during test execution.
+            </summary>
+            <example>
+            IWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
+            IWebElement element = wait.until(driver => driver.FindElement(By.Name("q")));
+            </example>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.WebDriverWait.#ctor(OpenQA.Selenium.IWebDriver,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.WebDriverWait"/> class.
+            </summary>
+            <param name="driver">The WebDriver instance used to wait.</param>
+            <param name="timeout">The timeout value indicating how long to wait for the condition.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.WebDriverWait.#ctor(OpenQA.Selenium.Support.UI.IClock,OpenQA.Selenium.IWebDriver,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OpenQA.Selenium.Support.UI.WebDriverWait"/> class.
+            </summary>
+            <param name="clock">An object implementing the <see cref="T:OpenQA.Selenium.Support.UI.IClock"/> interface used to determine when time has passed.</param>
+            <param name="driver">The WebDriver instance used to wait.</param>
+            <param name="timeout">The timeout value indicating how long to wait for the condition.</param>
+            <param name="sleepInterval">A <see cref="T:System.TimeSpan"/> value indiciating how often to check for the condition to be true.</param>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.WebDriverWait.Until``1(System.Func{OpenQA.Selenium.IWebDriver,``0})">
+            <summary>
+            Waits until a condition is true or times out.
+            </summary>
+            <typeparam name="TResult">The type of result to expect from the condition.</typeparam>
+            <param name="condition">A delegate taking an <see cref="T:OpenQA.Selenium.IWebDriver"/> as its parameter, and returning a TResult.</param>
+            <returns>If TResult is a boolean, the method returns <see langword="true"/> when the condition is true, and <see langword="false"/> otherwise.
+            If TResult is an object, the method returns the object when the condition evaluates to a value other than <see langword="null"/>.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when TResult is not boolean or an object type.</exception>
+        </member>
+        <member name="M:OpenQA.Selenium.Support.UI.WebDriverWait.ThrowTimeoutException(System.String,System.Exception)">
+            <summary>
+            Throws a <see cref="T:System.TimeoutException"/> with the given message.
+            </summary>
+            <param name="message">The message of the exception.</param>
+            <param name="lastException">The last exception thrown by the condition.</param>
+        </member>
+    </members>
+</doc>

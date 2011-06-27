@@ -1,3 +1,10 @@
+# Version 0.2.3
+
+Release date: 2011-06-27
+
+### Changed
+Upgrade of Selenium WebDriver to 2.0rc3
+
 # Version 0.2.2
 
 Release date: 2011-06-27

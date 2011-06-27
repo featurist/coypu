@@ -38,11 +38,11 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0 RC2 and supports Firefox (fastest), IE (slowest) and Chrome as the browser.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0rc3 and supports Firefox (fastest), IE (slowest) and Chrome as the browser.
 
 ##### Firefox
 
-Version 5 not supported yet - will be in the next release of WebDriver.
+Versions up to and including Firefox 5 are now supported.
 
 ##### Internet Explorer
 Only IE9 supports CSS & XPath and certain HTML features.
