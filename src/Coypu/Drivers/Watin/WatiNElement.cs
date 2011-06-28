@@ -2,9 +2,9 @@
 
 namespace Coypu.Drivers.Watin
 {
-    public class WatiNElement : Element
+    internal class WatiNElement : Element
     {
-        public WatiNElement(object watinElement)
+        internal WatiNElement(object watinElement)
         {
             Native = watinElement;
         }

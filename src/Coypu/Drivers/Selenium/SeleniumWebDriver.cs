@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Selenium
         private readonly MouseControl mouseControl;
         private readonly OptionSelector optionSelector;
 
-        public SeleniumWebDriver()
+        internal SeleniumWebDriver()
         {
             selenium = new DriverFactory().NewRemoteWebDriver();
             scoping = new Scoping(selenium);

@@ -1,14 +1,13 @@
-﻿using System.Threading;
-using Coypu.Robustness;
+﻿using Coypu.Robustness;
 
 namespace Coypu
 {
-    public class Clicker
+    internal class Clicker
     {
         private readonly Driver driver;
         private readonly Waiter waiter;
 
-        public Clicker(Driver driver, Waiter waiter)
+        internal Clicker(Driver driver, Waiter waiter)
         {
             this.driver = driver;
             this.waiter = waiter;

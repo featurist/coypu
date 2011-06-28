@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SeleniumElement : Element
+    internal class SeleniumElement : Element
     {
         private IWebElement NativeSeleniumElement
         {

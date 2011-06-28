@@ -2,9 +2,9 @@
 
 namespace Coypu
 {
-    public class UrlBuilder
+    internal class UrlBuilder
     {
-        public string GetFullyQualifiedUrl(string virtualPath)
+        internal string GetFullyQualifiedUrl(string virtualPath)
         {
             if (Uri.IsWellFormedUriString(virtualPath, UriKind.Absolute))
                 return virtualPath;

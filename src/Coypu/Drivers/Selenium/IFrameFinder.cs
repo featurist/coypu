@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class IFrameFinder
+    internal class IFrameFinder
     {
         private readonly IWebDriver selenium;
         private readonly ElementFinder elementFinder;

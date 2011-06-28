@@ -2,7 +2,7 @@
 
 namespace Coypu.Drivers.Selenium
 {
-    public class Dialogs
+    internal class Dialogs
     {
         private readonly RemoteWebDriver selenium;
 

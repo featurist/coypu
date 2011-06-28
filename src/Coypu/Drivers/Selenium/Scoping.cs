@@ -4,7 +4,7 @@ using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class Scoping
+    internal class Scoping
     {
         private readonly RemoteWebDriver selenium;
         private Func<Element> findScope;
