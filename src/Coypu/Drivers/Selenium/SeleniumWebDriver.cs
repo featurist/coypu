@@ -79,9 +79,9 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(iframeFinder.FindIFrame(locator), "Failed to find frame: " + locator);
         }
 
-        public Element FindLink(string locator)
+        public Element FindLink(string linkText)
         {
-            return BuildElement(Find(By.LinkText(locator)).FirstOrDefault(), "No such link: " + locator);
+            return BuildElement(Find(By.LinkText(linkText)).FirstOrDefault(), "No such link: " + linkText);
         }
 
         public Element FindId(string id) 

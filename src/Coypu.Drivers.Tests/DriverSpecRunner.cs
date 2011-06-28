@@ -9,6 +9,9 @@ using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
+    // To run the driver tests type "rake testdrivers > driver_test_results.txt" 
+    // in the command line at the root of the repository
+
     public class DriverSpecRunner : nspec
     {
         private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";

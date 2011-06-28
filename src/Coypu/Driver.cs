@@ -7,7 +7,7 @@ namespace Coypu
     public interface Driver : IDisposable
     {
         Element FindButton(string locator);
-        Element FindLink(string locator);
+        Element FindLink(string linkText);
         Element FindField(string locator);
         void Click(Element element);
         void Visit(string url);

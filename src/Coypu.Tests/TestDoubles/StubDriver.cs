@@ -16,7 +16,7 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public Element FindLink(string locator)
+        public Element FindLink(string linkText)
         {
             return null;
         }

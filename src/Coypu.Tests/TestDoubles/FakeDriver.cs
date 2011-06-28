@@ -115,10 +115,10 @@ namespace Coypu.Tests.TestDoubles
             return stubbedButtons[locator];
         }
 
-        public Element FindLink(string locator)
+        public Element FindLink(string linkText)
         {
-            findLinkRequests.Add(locator);
-            return stubbedLinks[locator];
+            findLinkRequests.Add(linkText);
+            return stubbedLinks[linkText];
         }
 
         public Element FindField(string locator)
