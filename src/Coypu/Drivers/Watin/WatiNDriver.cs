@@ -176,10 +176,10 @@ namespace Coypu.Drivers.Watin
             return new WatiNElement(element);
         }
 
-        public Element FindLink(string locator)
+        public Element FindLink(string linkText)
         {
-            var link = FindFirst(Watin.Links, Find.ByText(locator));
-            return BuildElement(link, "Failed to find link with text: " + locator);
+            var link = FindFirst(Watin.Links, Find.ByText(linkText));
+            return BuildElement(link, "Failed to find link with text: " + linkText);
         }
 
         public Element FindField(string locator)

@@ -23,6 +23,10 @@ namespace Coypu
             this.robustWrapper = robustWrapper;
         }
 
+        /// <summary>
+        /// Supply a value for the text field
+        /// </summary>
+        /// <param name="value">The value to fill in</param>
         public void With(string value)
         {
             robustWrapper.Robustly(
