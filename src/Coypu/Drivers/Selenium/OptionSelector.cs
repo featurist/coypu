@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class OptionSelector
+    internal class OptionSelector
     {
         public void Select(Element element, string option)
         {

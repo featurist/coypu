@@ -3,7 +3,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class MouseControl
+    internal class MouseControl
     {
         private readonly IWebDriver selenium;
 

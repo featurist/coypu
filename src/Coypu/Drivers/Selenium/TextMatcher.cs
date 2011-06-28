@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class TextMatcher
+    internal class TextMatcher
     {
         public bool TextMatches(IWebElement e, string locator) 
         {

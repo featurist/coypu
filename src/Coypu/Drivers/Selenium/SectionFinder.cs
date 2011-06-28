@@ -6,7 +6,7 @@ using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SectionFinder
+    internal class SectionFinder
     {
         private readonly RemoteWebDriver selenium;
         private readonly ElementFinder elementFinder;

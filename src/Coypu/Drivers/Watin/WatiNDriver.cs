@@ -14,8 +14,11 @@ namespace Coypu.Drivers.Watin
         readonly string[] sectionTagNames = new[] { "SECTION", "DIV" };
         readonly string[] headerTagNames = new[] { "H1", "H2", "H3", "H4", "H5", "H6" };
         public bool Disposed { get; private set; }
-
         private WatiN.Core.Browser watinInstance;
+
+        internal WatiNDriver()
+        {
+        }
 
         private WatiN.Core.Browser Watin 
         { 

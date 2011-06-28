@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class FieldFinder
+    internal class FieldFinder
     {
         private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file" };
         public static readonly string[] InputButtonTypes = new[] { "button", "submit", "image" };

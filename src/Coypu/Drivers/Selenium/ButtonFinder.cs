@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class ButtonFinder
+    internal class ButtonFinder
     {
         private readonly ElementFinder elementFinder;
         private readonly TextMatcher textMatcher;

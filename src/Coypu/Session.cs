@@ -201,7 +201,7 @@ namespace Coypu
         /// <summary>
         /// Check that text does not appear on the page
         /// 
-        /// Returns as soon as the text no longer appears, or when the Configuration.Timeout is reached.
+        /// Returns as soon as the text does not appear, or when the Configuration.Timeout is reached.
         /// </summary>
         /// <param name="text">The exact text expected not to be found</param>
         /// <returns>Whether the text does not appear</returns>
@@ -213,7 +213,7 @@ namespace Coypu
         /// <summary>
         /// Check that text does not appear on the page using a regular expression
         /// 
-        /// Returns as soon as the text no longer appears, or when the Configuration.Timeout is reached.
+        /// Returns as soon as the text does not appear, or when the Configuration.Timeout is reached.
         /// </summary>
         /// <param name="pattern">The regular expression expected not to match</param>
         /// <returns>Whether the text does not appear</returns>
@@ -222,22 +222,49 @@ namespace Coypu
             return Query(() => driver.HasContentMatch(pattern), false);
         }
 
-
+        /// <summary>
+        /// Check that an element matching a CSS selector appears on the page. 
+        /// 
+        /// Returns as soon as the element appears, or when the Configuration.Timeout is reached.
+        /// </summary>
+        /// <param name="cssSelector">CSS selector</param>
+        /// <returns>Whether an element appears</returns>
         public bool HasCss(string cssSelector)
         {
             return Query(() => driver.HasCss(cssSelector), true);
         }
 
+        /// <summary>
+        /// Check that an element matching a CSS selector does not appear on the page. 
+        /// 
+        /// Returns as soon as the element does not appear, or when the Configuration.Timeout is reached.
+        /// </summary>
+        /// <param name="cssSelector">CSS selector</param>
+        /// <returns>Whether an element does not appear</returns>
         public bool HasNoCss(string cssSelector)
         {
             return Query(() => driver.HasCss(cssSelector), false);
         }
 
+        /// <summary>
+        /// Check that an element matching an XPath query appears on the page. 
+        /// 
+        /// Returns as soon as the element appears, or when the Configuration.Timeout is reached.
+        /// </summary>
+        /// <param name="xpath">XPath query</param>
+        /// <returns>Whether an element appears</returns>
         public bool HasXPath(string xpath)
         {
             return Query(() => driver.HasXPath(xpath), true);
         }
 
+        /// <summary>
+        /// Check that an element matching an XPath query appears on the page. 
+        /// 
+        /// Returns as soon as the element appears, or when the Configuration.Timeout is reached.
+        /// </summary>
+        /// <param name="xpath">XPath query</param>
+        /// <returns>Whether an element appears</returns>
         public bool HasNoXPath(string xpath)
         {
             return Query(() => driver.HasXPath(xpath), false);

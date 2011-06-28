@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class ElementFinder
+    internal class ElementFinder
     {
         private readonly Scoping scoping;
 
