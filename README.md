@@ -340,6 +340,14 @@ Interact with the current dialog like so:
 
 	browser.AcceptDialog();
 	browser.CancelDialog();
+  
+#### Varying the timeout
+
+When you need an unusually long (or short) timeout for a particular interaction you can use `WithIndividualTimeout`, temporarilly overriding the `Configuration.Timeout`:
+
+	browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
+	browser.Click("Upload");
+	browser.WithIndividualTimeout(Timespan.FromSeconds(60), () => browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
 	
 ## More tricks/tips
 

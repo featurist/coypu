@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Selenium
                 case (Browser.Chrome):
                     return new ChromeDriver();
                 default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, this.GetType());
+                    throw new BrowserNotSupportedException(Configuration.Browser, GetType());
             }
         }
     }

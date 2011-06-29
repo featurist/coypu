@@ -9,20 +9,39 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     public class When_querying_with_any_finder : When_inspecting
     {
         [Test]
-        public void Has_queries_robustly_with_zero_timeout()
+        public void Has_queries_robustly_with_zero_timeout() 
+        {
+            spyRobustWrapper.AlwaysReturnFromQuery(true, true);
+
+            Configuration.Timeout = TimeSpan.FromSeconds(21);
+
+            var queryTimeout = TimeSpan.MaxValue;
+            session.Has(() =>
+            {
+                queryTimeout = Configuration.Timeout;
+                return new StubElement();
+            });
+            ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
+
+            Assert.That(queryTimeout, Is.EqualTo(TimeSpan.Zero));
+            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(21)));
+        }
+
+        [Test]
+        public void Has_resets_timeout_on_error() 
         {
             spyRobustWrapper.AlwaysReturnFromQuery(true, true);
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
-            var queryTimeout = TimeSpan.MaxValue;
-            session.Has(() =>
-                            {
-                                queryTimeout = Configuration.Timeout;
-                                return new StubElement();
-                            });
-            ((Func<bool>) spyRobustWrapper.DeferredQueries[0])();
+            session.Has(() => { throw new ExplicitlyThrownTestException("Some unexpected exception"); });
+            try 
+            {
+                ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
+                Assert.Fail("Expected an ExplicitlyThrownTestException");
+            } 
+            catch (ExplicitlyThrownTestException) { }
 
-            Assert.That(queryTimeout, Is.EqualTo(TimeSpan.Zero));
+            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(10)));
         }
 
         [Test]
@@ -78,6 +97,24 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
 
             Assert.That(queryTimeout, Is.EqualTo(TimeSpan.Zero));
+        }
+
+        [Test]
+        public void HasNo_resets_timeout_on_error() 
+        {
+            spyRobustWrapper.AlwaysReturnFromQuery(false, true);
+
+            Configuration.Timeout = TimeSpan.FromSeconds(10);
+            
+            session.HasNo(() => { throw new ExplicitlyThrownTestException("Some unexpected exception"); });
+            try
+            {
+                ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
+                Assert.Fail("Expected an ExplicitlyThrownTestException");
+            } 
+            catch (ExplicitlyThrownTestException) { }
+
+            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(10)));
         }
 
         [Test]

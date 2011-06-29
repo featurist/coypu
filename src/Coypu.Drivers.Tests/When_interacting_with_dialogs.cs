@@ -1,11 +1,8 @@
 ﻿using System;
-using Coypu.Drivers.Selenium;
-using Coypu.Drivers.Watin;
 using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
-    [NotSupportedBy(typeof(WatiNDriver), typeof(SeleniumWebDriver))] // Doesnt work with webdriver + FF 4
     internal class When_interacting_with_dialogs : DriverSpecs
     {
         internal override void Specs()

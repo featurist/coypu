@@ -6,6 +6,10 @@ namespace Coypu
     public static class Browser
     {
         private static Session session;
+
+        /// <summary>
+        /// The current browser session. Will start a new session if one does not already exist.
+        /// </summary>
         public static Session Session
         {
             get
@@ -28,11 +32,17 @@ namespace Coypu
             return (Driver) Activator.CreateInstance(Configuration.Driver);
         }
 
+        /// <summary>
+        /// End the current session, closing any open browser.
+        /// </summary>
         public static void EndSession()
         {
             if (SessionIsActive) session.Dispose();
         }
         
+        /// <summary>
+        /// Whether there is an active session
+        /// </summary>
         public static bool SessionIsActive
         {
             get {return session != null;}

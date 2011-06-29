@@ -9,14 +9,14 @@ namespace Coypu
         private readonly RobustWrapper robustWrapper;
         private readonly Element element;
 
-        public FillInWith(string locator, Driver driver, RobustWrapper robustWrapper)
+        internal FillInWith(string locator, Driver driver, RobustWrapper robustWrapper)
         {
             this.locator = locator;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
         }
 
-        public FillInWith(Element element, Driver driver, RobustWrapper robustWrapper)
+        internal FillInWith(Element element, Driver driver, RobustWrapper robustWrapper)
         {
             this.element = element;
             this.driver = driver;
@@ -27,6 +27,7 @@ namespace Coypu
         /// Supply a value for the text field
         /// </summary>
         /// <param name="value">The value to fill in</param>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value)
         {
             robustWrapper.Robustly(

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Coypu.Drivers;
 
 namespace Coypu.Robustness
 {
