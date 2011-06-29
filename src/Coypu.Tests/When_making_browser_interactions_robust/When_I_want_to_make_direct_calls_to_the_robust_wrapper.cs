@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void RobustAction_is_exposed_on_the_session()
         {
             var calledOnWrapper = false;
-            session.Robustly(() =>
+            session.RetryUntilTimeout(() =>
             {
                 calledOnWrapper = true;
             });
@@ -26,7 +26,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             Func<string> function = () => "The expected result";
             
-            var immediateResult = session.Robustly(function);
+            var immediateResult = session.RetryUntilTimeout(function);
             Assert.That(immediateResult, Is.EqualTo("immediate result"));
 
             var actualResult = ((Func<string>)spyRobustWrapper.DeferredFunctions[0])();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Coypu.Drivers
+namespace Coypu
 {
     public class MissingHtmlException : Exception
     {

@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Coypu.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -133,12 +134,10 @@
     <Compile Include="Drivers\Watin\WatiNElement.cs" />
     <Compile Include="Drivers\Watin\WatiNExtensions.cs" />
     <Compile Include="Drivers\Watin\WatiNDriver.cs" />
-    <Compile Include="Drivers\DriverNotSupportedException.cs" />
-    <Compile Include="Drivers\MissingHtmlException.cs" />
+    <Compile Include="MissingHtmlException.cs" />
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
     <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
     <Compile Include="Drivers\Selenium\SeleniumWebDriver.cs" />
-    <Compile Include="Drivers\WebDriver.cs" />
     <Compile Include="FillInWith.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />

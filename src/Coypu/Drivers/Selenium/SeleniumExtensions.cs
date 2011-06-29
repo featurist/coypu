@@ -5,28 +5,29 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    public static class SeleniumExtensions
+    internal static class SeleniumExtensions
     {
-        public static bool IsDisplayed(this IWebElement webElement)
+        internal static bool IsDisplayed(this IWebElement webElement)
         {
             return webElement.Displayed;
         }
 
-        public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements)
+        internal static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements)
         {
             return elements.FirstOrDefault(IsDisplayed);
         }
 
-        public static bool AnyDisplayed(this IEnumerable<IWebElement> elements)
+        internal static bool AnyDisplayed(this IEnumerable<IWebElement> elements)
         {
             return elements.Any(IsDisplayed);
         }
-        public static bool AnyDisplayed(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
+
+        internal static bool AnyDisplayed(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
         {
             return elements.Any(e => predicate(e) && IsDisplayed(e));
         }
 
-        public static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
+        internal static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
         {
             return elements.FirstOrDefault(e => predicate(e) && IsDisplayed(e));
         }

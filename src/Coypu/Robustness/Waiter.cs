@@ -2,7 +2,7 @@
 
 namespace Coypu.Robustness
 {
-    public interface Waiter
+    internal interface Waiter
     {
         void Wait(TimeSpan duration);
     }
