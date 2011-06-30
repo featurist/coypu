@@ -8,6 +8,7 @@
         Firefox,
         InternetExplorer,
         Chrome,
-        Safari
+        Safari,
+        Android
     }
 }
