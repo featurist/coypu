@@ -16,10 +16,6 @@ namespace Coypu.Drivers.Watin
         public bool Disposed { get; private set; }
         private WatiN.Core.Browser watinInstance;
 
-        internal WatiNDriver()
-        {
-        }
-
         private WatiN.Core.Browser Watin 
         { 
             get 
