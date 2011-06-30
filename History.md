@@ -1,3 +1,14 @@
+# Version 0.2.4
+
+Release date: 2011-06-30
+
+### Added
+Adding doc comments to Session API
+Enabled AndroidDriver for Selenium
+
+### Changed
+Bunch of stuff that should have been internal
+
 # Version 0.2.3
 
 Release date: 2011-06-27

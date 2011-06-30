@@ -34,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Coypu.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -134,11 +135,13 @@
     <Compile Include="Drivers\Watin\WatiNElement.cs" />
     <Compile Include="Drivers\Watin\WatiNExtensions.cs" />
     <Compile Include="Drivers\Watin\WatiNDriver.cs" />
+    <Compile Include="FillInWith.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MissingHtmlException.cs" />
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
     <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
     <Compile Include="Drivers\Selenium\SeleniumWebDriver.cs" />
-    <Compile Include="FillInWith.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />
     <Compile Include="Robustness\ThreadSleepWaiter.cs" />
