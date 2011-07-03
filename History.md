@@ -1,3 +1,20 @@
+# Version 0.2.5
+
+Release date: 2011-07-03
+
+### Fixed
+Fix issue #13 - HasNo methods are knackered
+
+# Version 0.2.4
+
+Release date: 2011-06-30
+
+### Added
+Adding doc comments to Session API
+
+### Changed
+Bunch of stuff that should have been internal
+
 # Version 0.2.3
 
 Release date: 2011-06-27

@@ -140,19 +140,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void HasNo_queries_robustly_Positive_case() 
+        public void HasNo_queries_robustly_reversing_result_Positive_case() 
         {
             spyRobustWrapper.AlwaysReturnFromQuery(false, true);
 
-            Assert.That(session.HasNo(() => new StubElement()), Is.True);
+            Assert.That(session.HasNo(() => new StubElement()), Is.False);
         }
 
         [Test]
-        public void HasNo_queries_robustly_Negitive_case() 
+        public void HasNo_queries_robustly_reversing_result_Negitive_case() 
         {
             spyRobustWrapper.AlwaysReturnFromQuery(false, false);
 
-            Assert.That(session.HasNo(() => new StubElement()), Is.False);
+            Assert.That(session.HasNo(() => new StubElement()), Is.True);
         }
 
     }
