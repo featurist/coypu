@@ -25,8 +25,13 @@ namespace Coypu.Drivers.Selenium
         private readonly OptionSelector optionSelector;
 
         public SeleniumWebDriver()
+            : this(new DriverFactory().NewRemoteWebDriver())
         {
-            selenium = new DriverFactory().NewRemoteWebDriver();
+        }
+
+        protected SeleniumWebDriver(RemoteWebDriver webDriver)
+        {
+            selenium = webDriver;
             scoping = new Scoping(selenium);
             elementFinder = new ElementFinder(scoping);
             fieldFinder = new FieldFinder(elementFinder);
