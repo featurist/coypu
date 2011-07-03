@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
+using OpenQA.Selenium.Firefox;
 
 namespace Coypu.AcceptanceTests
 {
@@ -80,6 +82,26 @@ namespace Coypu.AcceptanceTests
                 Assert.IsTrue(browser.HasContent("About Google"));
                 Assert.IsTrue(browser.HasNoContent("This doesn't exist!"));
             }
+        }
+
+        [Test]
+        public void SupplyYourOwnRemoteWebDriver()
+        {
+            Configuration.AppHost = "www.google.com";
+            Configuration.Driver = typeof(SeleniumHtmlUnitWebDriver);
+
+            using (Session browser = Browser.Session)
+            {
+                browser.Visit("/");
+                Assert.IsTrue(browser.HasContent("Google"));
+            }
+        }
+    }
+
+    public class SeleniumHtmlUnitWebDriver : SeleniumWebDriver
+    {
+        public SeleniumHtmlUnitWebDriver() : base(new FirefoxDriver())
+        {
         }
     }
 }
