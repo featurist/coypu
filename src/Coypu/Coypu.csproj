@@ -68,8 +68,7 @@
       <HintPath>..\..\lib\watin\net40\Interop.SHDocVw.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.1, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>..\packages\SeleniumDotNet-2.0RC.3.0.0.0\lib\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -77,12 +76,10 @@
       <HintPath>..\..\lib\watin\net40\Microsoft.mshtml.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\SeleniumDotNet-2.0RC.3.0.0.0\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Selenium.WebDriverBackedSelenium, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\Selenium.WebDriverBackedSelenium.dll</HintPath>
+      <HintPath>..\packages\SeleniumDotNet-2.0RC.3.0.0.0\lib\Selenium.WebDriverBackedSelenium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -97,20 +94,17 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="ThoughtWorks.Selenium.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\ThoughtWorks.Selenium.Core.dll</HintPath>
+      <HintPath>..\packages\SeleniumDotNet-2.0RC.3.0.0.0\lib\ThoughtWorks.Selenium.Core.dll</HintPath>
     </Reference>
     <Reference Include="WatiN.Core, Version=2.1.0.1196, Culture=neutral, PublicKeyToken=db7cfd3acb5ad44e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\watin\net40\WatiN.Core.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\WebDriver.dll</HintPath>
+      <HintPath>..\packages\SeleniumDotNet-2.0RC.3.0.0.0\lib\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="Webdriver.Support, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Webdriver\Webdriver.Support.dll</HintPath>
+      <HintPath>..\packages\SeleniumDotNet-2.0RC.3.0.0.0\lib\Webdriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

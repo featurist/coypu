@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
-using OpenQA.Selenium.Firefox;
 
 namespace Coypu.AcceptanceTests
 {
@@ -100,8 +99,9 @@ namespace Coypu.AcceptanceTests
 
     public class SeleniumHtmlUnitWebDriver : SeleniumWebDriver
     {
-        public SeleniumHtmlUnitWebDriver() : base(new FirefoxDriver())
+        public SeleniumHtmlUnitWebDriver() : base(new OpenQA.Selenium.Firefox.FirefoxDriver())
         {
+            
         }
     }
 }
