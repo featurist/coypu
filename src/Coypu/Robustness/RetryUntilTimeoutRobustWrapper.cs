@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace Coypu.Robustness
@@ -27,13 +28,13 @@ namespace Coypu.Robustness
         public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)
         {
             var interval = Configuration.RetryInterval;
-            var startTime = DateTime.Now;
+            var stopWatch = Stopwatch.StartNew();
             while (true)
             {
                 try
                 {
                     var result = function();
-                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, startTime))
+                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch))
                     {
                         WaitForInterval(interval);
                         continue;
@@ -43,7 +44,7 @@ namespace Coypu.Robustness
                 catch (NotSupportedException) { throw; }
                 catch (Exception)
                 {
-                    if (TimeoutExceeded(startTime))
+                    if (TimeoutExceeded(stopWatch))
                     {
                         throw;
                     }
@@ -57,14 +58,14 @@ namespace Coypu.Robustness
             Thread.Sleep(interval);
         }
 
-        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, DateTime startTime)
+        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch)
         {
-            return expectedResult != null && !result.Equals(expectedResult) && !TimeoutExceeded(startTime);
+            return expectedResult != null && !result.Equals(expectedResult) && !TimeoutExceeded(stopWatch);
         }
 
-        private bool TimeoutExceeded(DateTime startTime)
+        private bool TimeoutExceeded(Stopwatch stopWatch)
         {
-            return DateTime.Now - startTime >= Configuration.Timeout;
+            return stopWatch.ElapsedMilliseconds >= Configuration.Timeout.Milliseconds;
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)

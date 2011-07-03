@@ -1,35 +1,41 @@
+# Version 0.2.6
+
+Release date: 2011-07-04
+
+* Selenium WedDriver RC3 is now on nuget, so it's a dependency again.
+
 # Version 0.2.5
 
 Release date: 2011-07-03
 
 ### Fixed
-Fix issue #13 - HasNo methods are knackered
+* Fix issue #13 - HasNo methods are knackered
 
 # Version 0.2.4
 
 Release date: 2011-06-30
 
 ### Added
-Adding doc comments to Session API
+* Adding doc comments to Session API
 
 ### Changed
-Bunch of stuff that should have been internal
+* Bunch of stuff that should have been internal
 
 # Version 0.2.3
 
 Release date: 2011-06-27
 
 ### Changed
-Upgrade of Selenium WebDriver to 2.0rc3
+* Upgrade of Selenium WebDriver to 2.0rc3
 
 # Version 0.2.2
 
 Release date: 2011-06-27
 
 ### Added
-Rounded out the session API with FindSection, FindFieldset and FindId and make the Session.Driver internal. 
-Has(Func<Element>) and HasNot(Func<Element>) for custom queries.
-Robustly, Query & TryUntil are now callable directly on session.
+* Rounded out the session API with FindSection, FindFieldset and FindId and make the Session.Driver internal. 
+* Has(Func<Element>) and HasNot(Func<Element>) for custom queries.
+* Robustly, Query & TryUntil are now callable directly on session.
 
 # Version 0.2.1
 
