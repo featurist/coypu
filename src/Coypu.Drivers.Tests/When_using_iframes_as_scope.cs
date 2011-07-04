@@ -15,29 +15,25 @@ namespace Coypu.Drivers.Tests
                 };
             };
 
-            describe["within iframe one"] = () =>
+            it["finds elements among multiple scopes"] = () =>
             {
-                before = () =>
-                {
-                    driver.SetScope(() => driver.FindIFrame("I am iframe one"));
-                };
+                driver.SetScope(() => driver.FindIFrame("I am iframe one"));
+                driver.FindButton("scoped button").Id.should_be("iframe1ButtonId");
 
-                it["finds the element in the current scope"] = () =>
-                {
-                    driver.FindButton("scoped button").Id.should_be("iframe1ButtonId");
-                };
+                driver.ClearScope();
+
+                driver.SetScope(() => driver.FindIFrame("I am iframe two"));
+                driver.FindButton("scoped button").Id.should_be("iframe2ButtonId");
             };
-            describe["within iframe two"] = () =>
-            {
-                before = () =>
-                {
-                    driver.SetScope(() => driver.FindIFrame("I am iframe two"));
-                };
 
-                it["finds the element in the current scope"] = () =>
-                {
-                    driver.FindButton("scoped button").Id.should_be("iframe2ButtonId");
-                };
+            it["finds clears scope back to the whole window"] = () =>
+            {
+                driver.SetScope(() => driver.FindIFrame("I am iframe one"));
+                driver.FindButton("scoped button").Id.should_be("iframe1ButtonId");
+
+                driver.ClearScope();
+
+                driver.FindButton("scoped button").Id.should_be("scope1ButtonId");
             };
         }
     }

@@ -26,9 +26,9 @@ nunit :test => [:release_configuration, :compile] do |nunit|
 end
 
 desc 'testdrivers'
-nunit :testdrivers => :compile do |nunit|
+nunit :testdrivers => [:release_configuration, :compile] do |nunit|
   nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
-  nunit.assemblies = ["src\\Coypu.Drivers.Tests\\Coypu.Drivers.Tests.sln"]
+  nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\Release\\Coypu.Drivers.Tests.dll"]
 end
 
 desc 'package'
