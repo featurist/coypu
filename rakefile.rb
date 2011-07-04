@@ -98,5 +98,5 @@ def bump_version
     file.puts nuspec
   end
   sh "git add Coypu.nuspec"
-  sh "git commit -m \"bump version\""
+  #sh "git commit -m \"bump version\""
 end

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Coypu.Robustness;
 using NUnit.Framework;
 
@@ -11,13 +12,15 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void When_a_Function_throws_a_recurring_exception_It_retries_until_the_timeout_is_reached_then_rethrow()
         {
             var expectedTimeout = TimeSpan.FromMilliseconds(200);
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            const int retryIntervalMilliseconds = 10;
             Configuration.Timeout = expectedTimeout;
+            Configuration.RetryInterval = TimeSpan.FromMilliseconds(retryIntervalMilliseconds);
+
             var robustness = new RetryUntilTimeoutRobustWrapper();
 
             Func<object> function = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
-            var startTime = DateTime.Now;
+            var stopWatch = Stopwatch.StartNew();
             try
             {
                 robustness.Robustly(function);
@@ -27,11 +30,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             {
                 Assert.That(e.Message, Is.EqualTo("Fails every time"));
             }
-            var endTime = DateTime.Now;
+            stopWatch.Stop();
+            var actualDuration = stopWatch.ElapsedMilliseconds;
 
-            var actualDuration = (endTime - startTime);
-            var tollerance = TimeSpan.FromMilliseconds(50);
-            Assert.That(actualDuration, Is.InRange(expectedTimeout, expectedTimeout + tollerance));
+            const int tolerance = retryIntervalMilliseconds + When_waiting.ThreadSleepAccuracyMilliseconds;
+            Assert.That(actualDuration, Is.InRange(expectedTimeout.Milliseconds - tolerance, 
+                                                   expectedTimeout.Milliseconds + tolerance));
         }
 
         [Test]
@@ -77,13 +81,14 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_an_Action_throws_a_recurring_exception_It_retries_until_the_timeout_is_reached_then_rethrows()
         {
-            var timeout = TimeSpan.FromMilliseconds(200);
-            Configuration.Timeout = timeout;
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            var expectedTimeout = TimeSpan.FromMilliseconds(200);
+            const int retryInterval = 10;
+            Configuration.Timeout = expectedTimeout;
+            Configuration.RetryInterval = TimeSpan.FromMilliseconds(retryInterval);
             var robustness = new RetryUntilTimeoutRobustWrapper();
             Action action = () => { throw new ExplicitlyThrownTestException("Fails every time"); };
 
-            var startTime = DateTime.Now;
+            var stopWatch = Stopwatch.StartNew();
             try
             {
                 robustness.Robustly(action);
@@ -93,11 +98,13 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             {
                 Assert.That(e.Message, Is.EqualTo("Fails every time"));
             }
-            var endTime = DateTime.Now;
+            stopWatch.Stop();
 
-            var actualDuration = (endTime - startTime);
-            var tollerance = TimeSpan.FromMilliseconds(50);
-            Assert.That(actualDuration, Is.LessThan(timeout + tollerance));
+            var actualDuration = stopWatch.ElapsedMilliseconds;
+            const int tolerance = retryInterval + When_waiting.ThreadSleepAccuracyMilliseconds;
+
+            Assert.That(actualDuration, Is.InRange(expectedTimeout.Milliseconds - tolerance,
+                                                   expectedTimeout.Milliseconds + tolerance));
         }
 
         [Test]

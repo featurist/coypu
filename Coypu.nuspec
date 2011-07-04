@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Coypu</id>
-    <version>0.2.4</version>
+    <version>0.2.6</version>
     <authors>AdrianLongley, AndrewVos</authors>
     <owners>AdrianLongley, AndrewVos</owners>
     <projectUrl>https://github.com/ITV/Coypu</projectUrl>
@@ -11,6 +11,7 @@
     <description>Intuitive, robust browser automation for .Net</description>
     <tags></tags>
     <dependencies>
+      <dependency id="SeleniumDotNet-2.0RC" version="[3.0.0]" />
       <dependency id="WatiN" version="[2.1.0]" />
     </dependencies>
   </metadata>

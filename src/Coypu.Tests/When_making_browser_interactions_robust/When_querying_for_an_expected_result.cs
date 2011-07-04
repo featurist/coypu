@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Coypu.Robustness;
 using NUnit.Framework;
 
@@ -32,23 +33,25 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void When_the_expected_result_is_never_found_It_returns_the_actual_result_after_timeout()
         {
             var expectedTimeout = TimeSpan.FromMilliseconds(200);
+            const int retryInterval = 10;
             Configuration.Timeout = expectedTimeout;
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            Configuration.RetryInterval = TimeSpan.FromMilliseconds(retryInterval);
 
             var expectedResult = new object();
             var unexpectedResult = new object();
 
             Func<object> returnsUnexpectedResult = () => unexpectedResult;
 
-            var startTime = DateTime.Now;
+            var stopWatch = Stopwatch.StartNew();
             var actualResult = retryUntilTimeoutRobustWrapper.Query(returnsUnexpectedResult, expectedResult);
-            var endTime = DateTime.Now;
+            stopWatch.Stop();
 
             Assert.That(actualResult, Is.EqualTo(unexpectedResult));
 
-            var actualDuration = (endTime - startTime);
-            var discrepancy = TimeSpan.FromMilliseconds(50);
-            Assert.That(actualDuration, Is.InRange(expectedTimeout, expectedTimeout + discrepancy));
+            var actualDuration = stopWatch.ElapsedMilliseconds;
+            const int tolerance = retryInterval + When_waiting.ThreadSleepAccuracyMilliseconds;
+            Assert.That(actualDuration, Is.InRange(expectedTimeout.Milliseconds - tolerance, 
+                                                   expectedTimeout.Milliseconds + tolerance));
         }
 
         [Test]

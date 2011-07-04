@@ -217,7 +217,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContent(string text)
         {
-            return Query(() => driver.HasContent(text), false);
+            return !Query(() => driver.HasContent(text), false);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContentMatch(Regex pattern)
         {
-            return Query(() => driver.HasContentMatch(pattern), false);
+            return !Query(() => driver.HasContentMatch(pattern), false);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Coypu
         /// <returns>Whether an element does not appear</returns>
         public bool HasNoCss(string cssSelector)
         {
-            return Query(() => driver.HasCss(cssSelector), false);
+            return !Query(() => driver.HasCss(cssSelector), false);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasNoXPath(string xpath)
         {
-            return Query(() => driver.HasXPath(xpath), false);
+            return !Query(() => driver.HasXPath(xpath), false);
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return robustWrapper.Query(() => driver.HasDialog(withText), false);
+            return !robustWrapper.Query(() => driver.HasDialog(withText), false);
         }
 
         /// <summary>
@@ -594,7 +594,7 @@ namespace Coypu
         /// <param name="findElement">A function to find an element</param>
         public bool HasNo(Func<Element> findElement)
         {
-            return Query(BuildZeroTimeoutHasElementQuery(findElement), false);
+            return !Query(BuildZeroTimeoutHasElementQuery(findElement), false);
         }
 
         /// <summary>

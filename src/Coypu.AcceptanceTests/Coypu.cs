@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
-namespace Coypu.AcceptanceTests {
+namespace Coypu.AcceptanceTests
+{
     [TestFixture, Explicit]
-    public class CoypuComplete {
-
+    public class Coypu
+    {
         [TearDown]
-        public void TearDown() {
+        public void TearDown()
+        {
             Browser.EndSession();
         }
 
         [Test]
-        public void Retries_Autotrader() {
-            var browser = Browser.Session;
+        public void Retries_Autotrader()
+        {
+            Session browser = Browser.Session;
             browser.Visit("http://www.autotrader.co.uk/used-cars");
 
             browser.FillIn("postcode").With("N1 1AA");
@@ -31,8 +35,9 @@ namespace Coypu.AcceptanceTests {
 
 
         [Test]
-        public void Visibility_NewTwitterLogin() {
-            var browser = Browser.Session;
+        public void Visibility_NewTwitterLogin()
+        {
+            Session browser = Browser.Session;
             browser.Visit("http://www.twitter.com");
 
             browser.FillIn("session[username_or_email]").With("coyputester2");
@@ -41,17 +46,18 @@ namespace Coypu.AcceptanceTests {
             browser.ClickButton("Sign in");
         }
 
-
-        [Test, Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
-        public void FindingStuff_CarBuzz() {
-            var browser = Browser.Session;
+        [Test,
+         Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
+        public void FindingStuff_CarBuzz()
+        {
+            Session browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
             Console.WriteLine(browser.Has(() => browser.FindSection("Make")));
             Console.WriteLine(browser.HasNo(() => browser.FindSection("Bake")));
 
             browser.Click(() => browser.FindSection("Make"));
-            
+
             browser.Check("Audi");
             browser.Check("BMW");
             browser.Check("Mercedes");
@@ -62,7 +68,40 @@ namespace Coypu.AcceptanceTests {
             browser.ClickButton("4");
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));
+        }
 
+        [Test]
+        public void HasNoContentTest()
+        {
+            Configuration.AppHost = "www.google.com";
+
+            using (Session browser = Browser.Session)
+            {
+                browser.Visit("/");
+                Assert.IsTrue(browser.HasContent("About Google"));
+                Assert.IsTrue(browser.HasNoContent("This doesn't exist!"));
+            }
+        }
+
+        [Test]
+        public void SupplyYourOwnRemoteWebDriver()
+        {
+            Configuration.AppHost = "www.google.com";
+            Configuration.Driver = typeof(SeleniumHtmlUnitWebDriver);
+
+            using (Session browser = Browser.Session)
+            {
+                browser.Visit("/");
+                Assert.IsTrue(browser.HasContent("Google"));
+            }
+        }
+    }
+
+    public class SeleniumHtmlUnitWebDriver : SeleniumWebDriver
+    {
+        public SeleniumHtmlUnitWebDriver() : base(new OpenQA.Selenium.Firefox.FirefoxDriver())
+        {
+            
         }
     }
 }
