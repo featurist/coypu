@@ -48,7 +48,7 @@ Versions up to and including Firefox 5 are now supported.
 Only IE9 supports CSS & XPath and certain HTML features.
 
 ##### Chrome
-You will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu 0.2.0 download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
+You will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
 
 The Coypu WatiN-IE driver is further behind (though it is faster than WebDriver-IE) and could use some more features implementing. 
 

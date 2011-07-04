@@ -2,7 +2,12 @@
 
 Release date: 2011-07-04
 
+### Changed
 * Selenium WedDriver RC3 is now on nuget, so it's a dependency again.
+
+### Added
+* Enabled AndroidDriver for Selenium
+* SeleniumWebDriver now exposes a constructor overload that takes in an instance of RemoteWebDriver. This allows you to create your own derived drivers that can make use of the RemoteWebDriver (e.g. using HtmlUnitDriver) (citizenmatt)
 
 # Version 0.2.5
 

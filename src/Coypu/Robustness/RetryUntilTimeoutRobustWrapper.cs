@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Coypu.Robustness
 {
-    internal class RetryUntilTimeoutRobustWrapper : RobustWrapper
+    public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
         public void Robustly(Action action)
         {

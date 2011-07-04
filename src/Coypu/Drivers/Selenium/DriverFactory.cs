@@ -1,6 +1,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Android;
 using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
@@ -21,6 +22,8 @@ namespace Coypu.Drivers.Selenium
                     }
                 case (Browser.Chrome):
                     return new ChromeDriver();
+                case (Browser.Android):
+                    return new AndroidDriver();
                 default:
                     throw new BrowserNotSupportedException(Configuration.Browser, GetType());
             }
