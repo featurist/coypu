@@ -83,7 +83,7 @@
     <Compile Include="TestDoubles\SpyRobustWrapper.cs" />
     <Compile Include="TestDoubles\FakeDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_wrapping_any_function_or_action.cs" />
+    <Compile Include="When_making_browser_interactions_robust\When_retrying_any_function_or_action_until_a_timeout.cs" />
     <Compile Include="TestDoubles\StubElement.cs" />
   </ItemGroup>
   <ItemGroup>

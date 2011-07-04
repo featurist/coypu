@@ -5,10 +5,15 @@ using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture, Explicit]
-    public class Coypu
+    [TestFixture]
+    public class ExternalExamples
     {
-        [TearDown]
+        [SetUp]
+        public void SetUp() {
+            Configuration.Timeout = TimeSpan.FromSeconds(10);
+        }
+
+        [TestFixtureTearDown]
         public void TearDown()
         {
             Browser.EndSession();
@@ -34,7 +39,7 @@ namespace Coypu.AcceptanceTests
         }
 
 
-        [Test]
+        [Test, Explicit]
         public void Visibility_NewTwitterLogin()
         {
             Session browser = Browser.Session;
@@ -42,8 +47,6 @@ namespace Coypu.AcceptanceTests
 
             browser.FillIn("session[username_or_email]").With("coyputester2");
             browser.FillIn("session[password]").With("Nappybara");
-
-            browser.ClickButton("Sign in");
         }
 
         [Test,

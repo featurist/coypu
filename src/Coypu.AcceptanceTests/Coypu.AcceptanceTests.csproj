@@ -74,10 +74,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Examples.cs" />
+    <Compile Include="ApiExamples.cs" />
     <Compile Include="RawWebdriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Coypu.cs">
+    <Compile Include="ExternalExamples.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

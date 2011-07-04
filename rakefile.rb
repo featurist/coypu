@@ -14,20 +14,25 @@ task :compile => :compile_net35
   end
 end
 
+desc 'Build in Release configuration'
+task :release_configuration do
+  ENV['BUILD_CONFIGURATION'] = 'Release'
+end
+
 desc 'test'
-nunit :test => :compile do |nunit|
+nunit :test => [:release_configuration, :compile] do |nunit|
   nunit.command = 'lib\NUnit\nunit-console.exe'
-  nunit.assemblies = ['src\\Coypu.Tests\\Coypu.Tests.csproj']
+  nunit.assemblies = ['src\\Coypu.Tests\\bin\\Release\\Coypu.Tests.dll','src\\Coypu.AcceptanceTests\\bin\\Release\\Coypu.AcceptanceTests.dll']
 end
 
 desc 'testdrivers'
 nunit :testdrivers => :compile do |nunit|
   nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
-  nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\#{BUILD_CONFIGURATION.downcase}\\Coypu.Drivers.Tests.dll"]
+  nunit.assemblies = ["src\\Coypu.Drivers.Tests\\Coypu.Drivers.Tests.sln"]
 end
 
 desc 'package'
-task :package do
+task :package => :test do
   FileUtils.rm_rf('temp')
   [:net35, :net40].each do |version|
     Rake::Task["compile_#{version}"].invoke

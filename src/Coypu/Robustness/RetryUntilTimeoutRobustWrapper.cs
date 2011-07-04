@@ -28,13 +28,14 @@ namespace Coypu.Robustness
         public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)
         {
             var interval = Configuration.RetryInterval;
+            var timeout = Configuration.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)
             {
                 try
                 {
                     var result = function();
-                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch))
+                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch, timeout, interval))
                     {
                         WaitForInterval(interval);
                         continue;
@@ -44,7 +45,7 @@ namespace Coypu.Robustness
                 catch (NotSupportedException) { throw; }
                 catch (Exception)
                 {
-                    if (TimeoutExceeded(stopWatch))
+                    if (TimeoutReached(stopWatch, timeout, interval))
                     {
                         throw;
                     }
@@ -58,14 +59,14 @@ namespace Coypu.Robustness
             Thread.Sleep(interval);
         }
 
-        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch)
+        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
-            return expectedResult != null && !result.Equals(expectedResult) && !TimeoutExceeded(stopWatch);
+            return expectedResult != null && !result.Equals(expectedResult) && !TimeoutReached(stopWatch, timeout, interval);
         }
 
-        private bool TimeoutExceeded(Stopwatch stopWatch)
+        private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
-            return stopWatch.ElapsedMilliseconds >= Configuration.Timeout.TotalMilliseconds;
+            return TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval >= timeout;
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)
