@@ -17,8 +17,8 @@ namespace Coypu.Drivers.Tests
 
             it["returns all matches by css"] = () =>
             {
-                const string shouldNotFind = "#inspectingContent ul#cssTest li";
-                var all = driver.FindAllCss(shouldNotFind);
+                const string shouldFind = "#inspectingContent ul#cssTest li";
+                var all = driver.FindAllCss(shouldFind);
                 all.Count().should_be(3);
                 all.ElementAt(1).Text.should_be("two");
                 all.ElementAt(2).Text.should_be("Me! Pick me!");

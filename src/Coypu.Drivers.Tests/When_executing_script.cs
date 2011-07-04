@@ -10,7 +10,6 @@ namespace Coypu.Drivers.Tests
         {
             it["runs the script in the browser"] = () =>
             {
-                Thread.Sleep(5000);
                 driver.FindButton("firstButtonId").Text.should_be("first button");
 
                 driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';");

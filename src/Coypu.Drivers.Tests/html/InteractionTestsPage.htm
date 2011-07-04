@@ -195,11 +195,11 @@
   </section>
   <section>
       <h1>Dialogs</h1>
-      <a href="#alert" onclick="alert('You have triggered an alert and this is the text.');">
+      <a href="#alert" onclick="alert('You have triggered an alert and this is the text.');" id="alertTriggerLink">
         Trigger an alert
       </a>
       
-      <a href="#confirm" onclick="if(confirm('You have triggered a confirm and this is the text.')){this.innerHTML += ' - accepted';}else{this.innerHTML += ' - cancelled';}">
+      <a href="#confirm" onclick="if(confirm('You have triggered a confirm and this is the text.')){this.innerHTML += ' - accepted';}else{this.innerHTML += ' - cancelled';}"  id="confirmTriggerLink">
         Trigger a confirm
       </a>
   </section>

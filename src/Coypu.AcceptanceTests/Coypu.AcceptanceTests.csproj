@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Examples.cs" />
     <Compile Include="RawWebdriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Coypu.cs">
@@ -88,6 +89,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Coypu.Drivers.Tests\html\iFrame1.htm">
+      <Link>html\iFrame1.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Coypu.Drivers.Tests\html\iFrame2.htm">
+      <Link>html\iFrame2.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Coypu.Drivers.Tests\html\InteractionTestsPage.htm">
+      <Link>html\InteractionTestsPage.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -16,8 +16,8 @@ namespace Coypu.Drivers.Tests
 
             it["returns all matches by xpath"] = () =>
             {
-                const string shouldNotFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
-                var all = driver.FindAllXPath(shouldNotFind);
+                const string shouldFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
+                var all = driver.FindAllXPath(shouldFind);
                 all.Count().should_be(3);
                 all.ElementAt(1).Text.should_be("two");
                 all.ElementAt(2).Text.should_be("Me! Pick me!");

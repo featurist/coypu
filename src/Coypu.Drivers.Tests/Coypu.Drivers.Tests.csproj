@@ -180,9 +180,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="html\iFrame1.htm" />
-    <Content Include="html\iFrame2.htm" />
-    <Content Include="html\InteractionTestsPage.htm" />
+    <Content Include="html\iFrame1.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\iFrame2.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\InteractionTestsPage.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="results\driver_test_results.txt" />
   </ItemGroup>
   <ItemGroup>

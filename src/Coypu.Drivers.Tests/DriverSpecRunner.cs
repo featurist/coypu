@@ -86,9 +86,7 @@ namespace Coypu.Drivers.Tests
 
         private string GetTestHTMLPathLocation()
         {
-            var assemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
-            var projRoot = Path.Combine(assemblyDirectory,@"..\..\");
-            return new FileInfo(Path.Combine(projRoot,INTERACTION_TESTS_PAGE)).FullName;
+            return new FileInfo(INTERACTION_TESTS_PAGE).FullName;
         }
 
         public ActionRegister NSpecDescribe
