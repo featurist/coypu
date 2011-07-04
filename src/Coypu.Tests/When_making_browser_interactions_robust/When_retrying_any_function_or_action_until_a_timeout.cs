@@ -67,7 +67,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached()
         {
-            When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached(150, 100);
+            When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached(1500, 100);
             When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached(300, 70);
         }
 
@@ -93,8 +93,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             }
             catch (ExplicitlyThrownTestException) { stopWatch.Stop(); }
 
-            Assert.That(lastCall, Is.InRange(expectedTimeout.TotalMilliseconds - Configuration.RetryInterval.Milliseconds,
-                                             expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds));
+            Assert.That(lastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.ThreadSleepAccuracyMilliseconds),
+                                             expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds + When_waiting.ThreadSleepAccuracyMilliseconds));
         }
 
         [Test]

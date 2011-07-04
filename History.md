@@ -1,3 +1,10 @@
+# Version 0.2.7
+
+Release date: 2011-07-12
+
+### Fixed 
+* Don't click in file fields, was bringing up the browse dialog in some browsers
+
 # Version 0.2.6
 
 Release date: 2011-07-04

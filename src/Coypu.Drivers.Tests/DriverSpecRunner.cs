@@ -86,7 +86,7 @@ namespace Coypu.Drivers.Tests
 
         private string GetTestHTMLPathLocation()
         {
-            return new FileInfo(INTERACTION_TESTS_PAGE).FullName;
+            return new FileInfo(@"src\Coypu.Drivers.Tests\" + INTERACTION_TESTS_PAGE).FullName;
         }
 
         public ActionRegister NSpecDescribe

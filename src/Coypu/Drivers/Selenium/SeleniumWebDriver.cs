@@ -159,13 +159,13 @@ namespace Coypu.Drivers.Selenium
         private string GetContent()
         {
             return ScopeDefined
-                       ? GetText(".")
-                       : GetText("/html/body");
+                       ? GetText(By.XPath("."))
+                       : GetText(By.TagName("body"));
         }
 
-        private string GetText(string xpath)
+        private string GetText(By xPath)
         {
-            var pageText = Scope.FindElement(By.XPath(xpath)).Text;
+            var pageText = Scope.FindElement(xPath).Text;
             return NormalizeCRLFBetweenBrowserImplementations(pageText);
         }
 

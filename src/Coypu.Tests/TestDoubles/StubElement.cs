@@ -1,7 +1,9 @@
-﻿namespace Coypu.Tests.TestDoubles
+﻿using System.Collections.Generic;
+namespace Coypu.Tests.TestDoubles
 {
     public class StubElement : Element
     {
+        private Dictionary<string,string> attributes = new Dictionary<string,string>();
         private string id;
 
         public void SetId(string newId)
@@ -41,7 +43,15 @@
 
         public override string this[string attributeName]
         {
-            get { return string.Empty; }
+            get 
+            {
+                return attributes.ContainsKey(attributeName) ? attributes[attributeName] : string.Empty;
+            }
+        }
+
+        public void StubAttribute(string attributeName, string value)
+        { 
+            attributes[attributeName] = value; 
         }
     }
 }

@@ -38,6 +38,20 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void When_filling_in_file_field_It_doesnt_click() {
+            var element = new StubElement();
+            element.StubAttribute("type", "file");
+            driver.StubField("Some field locator", element);
+
+            session.FillIn("Some field locator").With("some value for the field");
+
+            Assert.That(driver.ClickedElements, Is.Empty);
+            spyRobustWrapper.DeferredActions.Single()();
+
+            Assert.That(driver.ClickedElements, Has.No.Member(element));
+        }
+
+        [Test]
         public void When_filling_in_an_field_already_found_It_sets_value_robustly()
         {
             var element = new StubElement();
