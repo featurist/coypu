@@ -10,6 +10,7 @@ namespace Coypu.Drivers.Selenium
         private Func<Element> findScope;
         private bool findingScope;
         private ISearchContext cachedScope;
+        private string outerWindowHandle;
 
         public Scoping(RemoteWebDriver selenium)
         {
@@ -25,6 +26,16 @@ namespace Coypu.Drivers.Selenium
         {
             findScope = null;
             cachedScope = null;
+            ClearWindowScope();
+        }
+
+        private void ClearWindowScope()
+        {
+            if (outerWindowHandle == null)
+                return;
+
+            selenium.SwitchTo().Window(outerWindowHandle);
+            outerWindowHandle = null;
         }
 
         public bool ScopeDefined()
@@ -59,6 +70,7 @@ namespace Coypu.Drivers.Selenium
 
         private ISearchContext FindFreshScope()
         {
+            outerWindowHandle = selenium.CurrentWindowHandle;
             var findFreshScope = (IWebElement) findScope().Native;
             if (findFreshScope.TagName == "iframe")
             {

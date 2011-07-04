@@ -65,7 +65,7 @@ namespace Coypu.Robustness
 
         private bool TimeoutExceeded(Stopwatch stopWatch)
         {
-            return stopWatch.ElapsedMilliseconds >= Configuration.Timeout.Milliseconds;
+            return stopWatch.ElapsedMilliseconds >= Configuration.Timeout.TotalMilliseconds;
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)

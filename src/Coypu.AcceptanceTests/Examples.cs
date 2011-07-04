@@ -1,10 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Coypu.AcceptanceTests
 {
+    /// <summary>
+    /// Simple examples for each API method - to show usage and check everything is wired up properly
+    /// </summary>
     [TestFixture]
     public class Examples
     {
@@ -16,7 +21,7 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            Console.WriteLine(Uri.IsWellFormedUriString("file:///" + new FileInfo(@"html\InteractionTestsPage.htm"),UriKind.Absolute));
+            Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\","/"));
         }
 
@@ -49,6 +54,13 @@ namespace Coypu.AcceptanceTests
         {
             browser.Check("uncheckedBox");
             Assert.IsTrue(browser.FindField("uncheckedBox").Selected);
+        }
+        
+        [Test]
+        public void Uncheck_example()
+        {
+            browser.Uncheck("checkedBox");
+            Assert.IsFalse(browser.FindField("checkedBox").Selected);
         }
 
         [Test]
@@ -177,126 +189,149 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(browser.FindLink("Trigger an alert").Id, Is.EqualTo("alertTriggerLink"));
         }
-/*
+
         [Test]
         public void FindSection_example()
         {
-            browser.FindSection();
+            Assert.That(browser.FindSection("Inspecting Content").Id, Is.EqualTo("inspectingContent"));
+            Assert.That(browser.FindSection("Div Section Two h2 with link").Id, Is.EqualTo("divSectionTwoWithLink"));
         }
 
         [Test]
         public void Has_example()
         {
-            browser.Has();
-        }
-
-        [Test]
-        public void HasContent_example()
-        {
-            browser.HasContent();
-        }
-
-        [Test]
-        public void HasContentMatch_example()
-        {
-            browser.HasContentMatch();
-        }
-
-        [Test]
-        public void HasCss_example()
-        {
-            browser.HasCss();
-        }
-
-        [Test]
-        public void HasDialog_example()
-        {
-            browser.HasDialog();
+            Assert.IsTrue(browser.Has(() => browser.FindSection("Inspecting Content")));
+            Assert.IsFalse(browser.Has(() => browser.FindCss("#no-such-element")));
         }
 
         [Test]
         public void HasNo_example()
         {
-            browser.HasNo();
+            Assert.IsTrue(browser.HasNo(() => browser.FindCss("#no-such-element")));
+            Assert.IsFalse(browser.HasNo(() => browser.FindSection("Inspecting Content")));
+        }
+
+        [Test]
+        public void HasContent_example()
+        {
+            Assert.IsTrue(browser.HasContent("This is what we are looking for"));
+            Assert.IsFalse(browser.HasContent("This is not in the page"));
         }
 
         [Test]
         public void HasNoContent_example()
         {
-            browser.HasNoContent();
+            Assert.IsTrue(browser.HasNoContent("This is not in the page"));
+            Assert.IsFalse(browser.HasNoContent("This is what we are looking for"));
+        }
+
+        [Test]
+        public void HasContentMatch_example()
+        {
+            Assert.IsTrue(browser.HasContentMatch(new Regex("This is what (we are|I am) looking for")));
+            Assert.IsFalse(browser.HasContentMatch(new Regex("This is ?n[o|']t in the page")));
         }
 
         [Test]
         public void HasNoContentMatch_example()
         {
-            browser.HasNoContentMatch();
+            Assert.IsTrue(browser.HasNoContentMatch(new Regex("This is ?n[o|']t in the page")));
+            Assert.IsFalse(browser.HasNoContentMatch(new Regex("This is what (we are|I am) looking for")));
+        }
+
+        [Test]
+        public void HasCss_example()
+        {
+            Assert.IsTrue(browser.HasCss("#inspectingContent ul#cssTest"));
+            Assert.IsFalse(browser.HasCss("#inspectingContent ul#nope"));
         }
 
         [Test]
         public void HasNoCss_example()
         {
-            browser.HasNoCss();
+            Assert.IsTrue(browser.HasNoCss("#inspectingContent ul#nope"));
+            Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
         }
 
         [Test]
-        public void HasNoDialog_example()
+        public void HasXPath_example()
         {
-            browser.HasNoDialog();
+            Assert.IsTrue(browser.HasXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
+            Assert.IsFalse(browser.HasXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
         }
 
         [Test]
-        public void HasNoXPath_example()
+        public void HasNoXpath_example()
         {
-            browser.HasNoXPath();
+            Assert.IsTrue(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
+            Assert.IsFalse(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
         }
+
 
         [Test]
         public void Hover_example()
         {
-            browser.Hover();
+            Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
+            browser.Hover(() => browser.FindId("hoverOnMeTest"));
+            Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me - hovered"));
         }
 
         [Test]
         public void Native_example()
         {
-            browser.Native;
+            var button = (IWebElement) browser.FindButton("clickMeTest").Native;
+            button.Click();
+            Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
         }
 
-        [Test]
-        public void Uncheck_example()
-        {
-            browser.Uncheck();
-        }
 
         [Test]
         public void Within_example()
         {
-            browser.Within();
-        }
+            const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
 
-        [Test]
-        public void WithIndividualTimeout_example()
-        {
-            browser.WithIndividualTimeout();
-        }
+            browser.Within(() => browser.FindId("scope1"),
+                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
 
+            browser.Within(() => browser.FindId("scope2"),
+                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
+        }
+        
         [Test]
         public void WithinFieldset_example()
         {
-            browser.WithinFieldset();
-        }
+            const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
 
-        [Test]
-        public void WithinIFrame_example()
-        {
-            browser.WithinIFrame();
+            browser.WithinFieldset("Scope 1",
+                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
+
+            browser.WithinFieldset("Scope 2",
+                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
         }
 
         [Test]
         public void WithinSection_example()
         {
-            browser.WithinSection();
+            const string selectorThatAppearsInMultipleScopes = "h2";
+
+            browser.WithinSection("Section One h1",
+                () => Assert.That(browser.FindCss(selectorThatAppearsInMultipleScopes).Text, Is.EqualTo("Section One h2")));
+
+            browser.WithinSection("Div Section Two h1",
+                () => Assert.That(browser.FindCss(selectorThatAppearsInMultipleScopes).Text, Is.EqualTo("Div Section Two h2")));
         }
- */
+
+        [Test]
+        public void WithinIFrame_example()
+        {
+            const string selectorThatAppearsInMultipleScopes = "scoped button";
+
+            browser.WithinIFrame("iframe1",
+                () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe1ButtonId")));
+
+            browser.WithinIFrame("iframe2",
+                () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe2ButtonId")));
+
+        }
     }
 }
