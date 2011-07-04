@@ -11,7 +11,7 @@
     <description>Intuitive, robust browser automation for .Net</description>
     <tags></tags>
     <dependencies>
-      <dependency id="SeleniumDotNet-2.0RC" version="[3.0.0]" />
+      <dependency id="SeleniumDotNet-2.0RC" version="[3.0.0.0]" />
       <dependency id="WatiN" version="[2.1.0]" />
     </dependencies>
   </metadata>
