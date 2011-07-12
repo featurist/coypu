@@ -372,5 +372,26 @@ namespace Coypu.AcceptanceTests
             browser.WithinIFrame("iframe2",
                 () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe2ButtonId")));
         }
+
+        [Test]
+        public void FillIn_file_example()
+        {
+            const string someLocalFile = @"local.file";
+            try
+            {
+                var directoryInfo = new DirectoryInfo(".");
+                var fullPath = Path.Combine(directoryInfo.FullName, someLocalFile);
+                using (File.Create(fullPath)) { }
+
+                browser.FillIn("forLabeledFileFieldId").With(fullPath);
+
+                var findAgain = browser.FindField("forLabeledFileFieldId");
+                Assert.That(findAgain.Value, Is.StringEnding("\\" + someLocalFile));
+            }
+            finally
+            {
+                File.Delete(someLocalFile);
+            }
+        }
     }
 }

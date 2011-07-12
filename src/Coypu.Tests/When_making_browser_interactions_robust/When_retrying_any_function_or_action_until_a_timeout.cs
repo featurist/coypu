@@ -93,8 +93,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             }
             catch (ExplicitlyThrownTestException) { stopWatch.Stop(); }
 
-            Assert.That(lastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.ThreadSleepAccuracyMilliseconds),
-                                             expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds + When_waiting.ThreadSleepAccuracyMilliseconds));
+            Assert.That(lastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
+                                             expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
         }
 
         [Test]
