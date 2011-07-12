@@ -33,9 +33,16 @@ namespace Coypu
             robustWrapper.Robustly(
                 () =>
                 {
-                    driver.Click(Field);
+                    if (Field["type"] != "file")
+                        BringIntoFocus();
+
                     driver.Set(Field, value);
                 });
+        }
+
+        private void BringIntoFocus() 
+        {
+            driver.Click(Field);
         }
 
         private Element Field

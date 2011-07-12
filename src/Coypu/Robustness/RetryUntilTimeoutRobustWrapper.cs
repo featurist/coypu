@@ -43,7 +43,7 @@ namespace Coypu.Robustness
                     return result;
                 }
                 catch (NotSupportedException) { throw; }
-                catch (Exception)
+                catch (Exception e)
                 {
                     if (TimeoutReached(stopWatch, timeout, interval))
                     {
@@ -66,7 +66,10 @@ namespace Coypu.Robustness
 
         private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
-            return TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval >= timeout;
+            var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
+            var timeoutReached = elapsedTimeToNextCall >= timeout;
+
+            return timeoutReached;
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)
