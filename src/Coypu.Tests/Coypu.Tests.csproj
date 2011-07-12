@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="TestDoubles\StubDriver.cs" />
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_state.cs" />
     <Compile Include="When_interacting_with_the_browser\When_querying_with_any_finder.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_clicking_any_element.cs" />

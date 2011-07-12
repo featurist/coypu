@@ -41,9 +41,15 @@ namespace Coypu.Tests.TestDoubles
             stubbedResults.Add(type,result);
         }
 
-        public void AlwaysReturnFromQuery<T>(T expected, T result)
+        public void StubQueryResult<T>(T expected, T result)
         {
             stubbedQueryResult[expected] = result;
+        }
+
+        public void StubQueryResult(bool result)
+        {
+            stubbedQueryResult[true] = result;
+            stubbedQueryResult[false] = result;
         }
 
         public class TryUntilArgs

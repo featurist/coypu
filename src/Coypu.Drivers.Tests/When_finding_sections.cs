@@ -29,16 +29,10 @@ namespace Coypu.Drivers.Tests
                     driver.FindSection("Section One h6").Id.should_be("sectionOne");
                     driver.FindSection("Section Two h6").Id.should_be("sectionTwo");
                 };
-                it["finds by section by id"] = () =>
-                {
-                    driver.FindSection("sectionOne").Native.should_be(driver.FindSection("Section One h1").Native);
-                    driver.FindSection("sectionTwo").Native.should_be(driver.FindSection("Section Two h1").Native);
-                };
-
                 it["finds section by id"] = () =>
                 {
-                    driver.FindSection("sectionOne").Native.should_be(driver.FindSection("Section One h1").Native);
-                    driver.FindSection("sectionTwo").Native.should_be(driver.FindSection("Section Two h1").Native);
+                    driver.FindSection("sectionOne").Id.should_be("sectionOne");
+                    driver.FindSection("sectionTwo").Id.should_be("SectionTwo");
                 };
 
                

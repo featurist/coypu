@@ -21,8 +21,26 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-            browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\","/"));
+            Configuration.Timeout = TimeSpan.FromMilliseconds(500);
+            ReloadTestPageWithDelay();
+        }
+
+        private void ApplyAsyncDelay()
+        {
+            // Hide the HTML then bring back after a short delay to test robustness
+            browser.ExecuteScript("window.holdIt = document.body.innerHTML;document.body.innerHTML = ''");
+            browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
+        }
+
+        private void ReloadTestPage()
+        {
+            browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+        }
+
+        private void ReloadTestPageWithDelay()
+        {
+            ReloadTestPage();
+            ApplyAsyncDelay();
         }
 
         [TestFixtureTearDown]
@@ -112,6 +130,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ExecuteScript_example()
         {
+            ReloadTestPage();
             Assert.That(browser.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;"),
                         Is.EqualTo("first button"));
         }
@@ -126,6 +145,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FindAllCss_example()
         {
+            ReloadTestPage();
+
             const string shouldFind = "#inspectingContent ul#cssTest li";
             var all = browser.FindAllCss(shouldFind);
             Assert.That(all.Count(), Is.EqualTo(3));
@@ -136,6 +157,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FindAllXPath_example()
         {
+            ReloadTestPage();
+
             const string shouldFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
             var all = browser.FindAllXPath(shouldFind);
             Assert.That(all.Count(), Is.EqualTo(3));
@@ -207,7 +230,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNo_example()
         {
+            browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">asdf</div>'");
             Assert.IsTrue(browser.HasNo(() => browser.FindCss("#no-such-element")));
+
+            ReloadTestPage();
             Assert.IsFalse(browser.HasNo(() => browser.FindSection("Inspecting Content")));
         }
 
@@ -221,7 +247,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoContent_example()
         {
+            browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
             Assert.IsTrue(browser.HasNoContent("This is not in the page"));
+
+            ReloadTestPage();
             Assert.IsFalse(browser.HasNoContent("This is what we are looking for"));
         }
 
@@ -235,7 +264,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoContentMatch_example()
         {
+            browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
             Assert.IsTrue(browser.HasNoContentMatch(new Regex("This is ?n[o|']t in the page")));
+
+            ReloadTestPage();
             Assert.IsFalse(browser.HasNoContentMatch(new Regex("This is what (we are|I am) looking for")));
         }
 
@@ -249,7 +281,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoCss_example()
         {
+            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
             Assert.IsTrue(browser.HasNoCss("#inspectingContent ul#nope"));
+
+            ReloadTestPage();
             Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
         }
 
@@ -257,13 +292,18 @@ namespace Coypu.AcceptanceTests
         public void HasXPath_example()
         {
             Assert.IsTrue(browser.HasXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
+
+            ReloadTestPage();
             Assert.IsFalse(browser.HasXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
         }
 
         [Test]
         public void HasNoXpath_example()
         {
+            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
             Assert.IsTrue(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
+
+            ReloadTestPage();
             Assert.IsFalse(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
         }
 
@@ -331,7 +371,6 @@ namespace Coypu.AcceptanceTests
 
             browser.WithinIFrame("iframe2",
                 () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe2ButtonId")));
-
         }
     }
 }

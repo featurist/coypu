@@ -2,7 +2,7 @@
 
 namespace Coypu.Robustness
 {
-    internal interface RobustWrapper
+    public interface RobustWrapper
     {
         void Robustly(Action action);
         TResult Robustly<TResult>(Func<TResult> function);

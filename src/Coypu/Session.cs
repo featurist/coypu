@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Coypu.Robustness;
 using System.Text.RegularExpressions;
 
@@ -666,5 +667,16 @@ namespace Coypu
                     };
             return query;
         }
+
+        public State FindState(params State[] states)
+        {
+            var foundState = Query(() => states.Any(s => s.CheckCondition()), true);
+            
+            if (!foundState)
+                throw new MissingHtmlException("None of the given states was reached within the configured timeout.");
+
+            return states.First(e => e.ConditionMet);
+        }
+
     }
 }

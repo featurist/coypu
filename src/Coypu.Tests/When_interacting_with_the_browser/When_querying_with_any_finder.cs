@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void Has_queries_robustly_with_zero_timeout() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(true, true);
+            spyRobustWrapper.StubQueryResult(true, true);
 
             Configuration.Timeout = TimeSpan.FromSeconds(21);
 
@@ -30,7 +30,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void Has_resets_timeout_on_error() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(true, true);
+            spyRobustWrapper.StubQueryResult(true, true);
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
             session.Has(() => { throw new ExplicitlyThrownTestException("Some unexpected exception"); });
@@ -47,7 +47,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void Has_wraps_query_to_return_true_if_found() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(true, true);
+            spyRobustWrapper.StubQueryResult(true, true);
 
             session.Has(() => new StubElement());
 
@@ -58,7 +58,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void Has_wraps_query_to_return_false_if_not_found() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(true, true);
+            spyRobustWrapper.StubQueryResult(true, true);
 
             session.Has(() => { throw new MissingHtmlException("Failed to find something"); });
 
@@ -69,7 +69,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void Has_queries_robustly_expecting_element_found_Positive_case() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(true, true);
+            spyRobustWrapper.StubQueryResult(true, true);
 
             Assert.That(session.Has(() => new StubElement()), Is.True);
         }
@@ -77,7 +77,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void Has_queries_robustly_expecting_element_found_Negitive_case()
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(true, false);
+            spyRobustWrapper.StubQueryResult(true, false);
 
             Assert.That(session.Has(() => new StubElement()), Is.False);
         }
@@ -85,7 +85,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void HasNo_queries_robustly_with_zero_timeout() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(false, true);
+            spyRobustWrapper.StubQueryResult(false, true);
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
             var queryTimeout = TimeSpan.MaxValue;
@@ -102,7 +102,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void HasNo_resets_timeout_on_error() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(false, true);
+            spyRobustWrapper.StubQueryResult(false, true);
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
             
@@ -120,7 +120,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void HasNo_wraps_query_to_return_true_if_found() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(false, true);
+            spyRobustWrapper.StubQueryResult(false, true);
 
             session.HasNo(() => new StubElement());
 
@@ -131,7 +131,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void HasNo_wraps_query_to_return_false_if_not_found() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(false, true);
+            spyRobustWrapper.StubQueryResult(false, true);
 
             session.HasNo(() => { throw new MissingHtmlException("Failed to find something"); });
 
@@ -142,7 +142,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void HasNo_queries_robustly_reversing_result_Positive_case() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(false, true);
+            spyRobustWrapper.StubQueryResult(false, true);
 
             Assert.That(session.HasNo(() => new StubElement()), Is.False);
         }
@@ -150,7 +150,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void HasNo_queries_robustly_reversing_result_Negitive_case() 
         {
-            spyRobustWrapper.AlwaysReturnFromQuery(false, false);
+            spyRobustWrapper.StubQueryResult(false, false);
 
             Assert.That(session.HasNo(() => new StubElement()), Is.True);
         }

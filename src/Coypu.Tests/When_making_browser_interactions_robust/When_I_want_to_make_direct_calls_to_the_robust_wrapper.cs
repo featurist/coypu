@@ -53,7 +53,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void Query_is_exposed_on_the_session()
         {
-            spyRobustWrapper.AlwaysReturnFromQuery("expected query result", "expected query result");
+            spyRobustWrapper.StubQueryResult("expected query result", "expected query result");
             Func<string> query = () => "query result";
 
             session.Query(query, "expected query result");

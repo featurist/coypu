@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
 
 namespace Coypu.Robustness
 {
@@ -8,7 +7,11 @@ namespace Coypu.Robustness
     {
         public void Wait(TimeSpan duration)
         {
-            Thread.Sleep(duration);
+            var stopWatch = Stopwatch.StartNew();
+            while(stopWatch.ElapsedMilliseconds < duration.TotalMilliseconds)
+            {
+            }
+            stopWatch.Stop();
         }
     }
 }

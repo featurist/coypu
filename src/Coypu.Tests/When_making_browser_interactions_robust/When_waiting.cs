@@ -8,7 +8,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     [TestFixture]
     public class When_waiting 
     {
-        public const int ThreadSleepAccuracyMilliseconds = 20;
+        public const int AccuracyMilliseconds = 10;
 
         [Test]
         public void It_sleeps_for_the_expected_time_Case_1()
@@ -32,7 +32,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var actualWait = stopWatch.ElapsedMilliseconds;
 
-            const int toleranceMilliseconds = ThreadSleepAccuracyMilliseconds;
+            const int toleranceMilliseconds = AccuracyMilliseconds;
 
             Assert.That(actualWait, Is.InRange(expectedDurationMilliseconds - toleranceMilliseconds, 
                                                expectedDurationMilliseconds + toleranceMilliseconds));

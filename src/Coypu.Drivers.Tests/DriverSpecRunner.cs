@@ -18,37 +18,80 @@ namespace Coypu.Drivers.Tests
 
         public Driver Driver { get; private set; }
 
+        public ActionRegister NSpecDescribe
+        {
+            get { return describe; }
+        }
+
+        public ActionRegister NSpecContext
+        {
+            get { return context; }
+        }
+
+        public ActionRegister NSpecIt
+        {
+            get { return it; }
+        }
+
+        public Action NSpecBefore
+        {
+            set { before = value; }
+        }
+
+        public Action NSpecAfter
+        {
+            set { before = value; }
+        }
+
         public void when_testing_each_driver()
         {
-            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_using_iframes_as_scope), Browser.Firefox);
-//            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Chrome);
-//            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
-//            LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+            var testDriver = Environment.GetEnvironmentVariable("driver");
+            var testBrowser = Environment.GetEnvironmentVariable("browser");
+            var testSuite = Environment.GetEnvironmentVariable("suite");
+            
+            if (testDriver != null && testBrowser != null && testSuite != null)
+            {
+                LoadSpecsFor(Type.GetType(testDriver),
+                             Type.GetType(testSuite),
+                             (Browser)Enum.Parse(typeof(Browser), testBrowser));
+            }
+            else
+            {
+                LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Firefox);
+                LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Chrome);
+                LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.InternetExplorer);
+                LoadSpecsFor(typeof (WatiNDriver), typeof (DriverSpecs), Browser.InternetExplorer);
+            }
         }
 
         private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
         {
             before = () =>
-                     {
-                         LoadTestHTML(driverType, browser);
-                         Driver.ClearScope();
-                     };
+                         {
+                             LoadTestHTML(driverType, browser);
+                             Driver.ClearScope();
+                         };
 
             Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(t => t.IsClass && t != typeof(DriverSpecs) && specsToRun.IsAssignableFrom(t) && IsSupported(t, driverType))
-                    .Do(LoadSpecs);
+                .Where(
+                    t =>
+                    t.IsClass && t != typeof (DriverSpecs) && specsToRun.IsAssignableFrom(t) &&
+                    IsSupported(t, driverType))
+                .Do(LoadSpecs);
 
-            it["cleans up"] = () => { if (!Driver.Disposed) Driver.Dispose();};
+            it["cleans up"] = () => { if (!Driver.Disposed) Driver.Dispose(); };
         }
 
         private bool IsSupported(Type t, Type driverType)
         {
-            return !t.GetCustomAttributes(typeof(NotSupportedByAttribute), true).Cast<NotSupportedByAttribute>().Any(a => a.Types.Contains(driverType));
+            return
+                !t.GetCustomAttributes(typeof (NotSupportedByAttribute), true).Cast<NotSupportedByAttribute>().Any(
+                    a => a.Types.Contains(driverType));
         }
 
         private void LoadSpecs(Type driverSpecsType)
         {
-            var specs = ((DriverSpecs)Activator.CreateInstance(driverSpecsType));
+            var specs = ((DriverSpecs) Activator.CreateInstance(driverSpecsType));
             specs.DriverSpecRunner = this;
 
             describe[driverSpecsType.Name.ToLowerInvariant().Replace('_', ' ')] = specs.Specs;
@@ -77,41 +120,18 @@ namespace Coypu.Drivers.Tests
                 if (driverType == Driver.GetType() && Configuration.Browser == browser)
                     return;
 
-                Driver.Dispose();  
-            } 
-            
+                Driver.Dispose();
+            }
+
             Configuration.Browser = browser;
-            Driver = (Driver)Activator.CreateInstance(driverType);
+            Driver = (Driver) Activator.CreateInstance(driverType);
         }
 
         private string GetTestHTMLPathLocation()
         {
-            return new FileInfo(@"src\Coypu.Drivers.Tests\" + INTERACTION_TESTS_PAGE).FullName;
-        }
-
-        public ActionRegister NSpecDescribe
-        {
-            get { return describe; }
-        }
-
-        public ActionRegister NSpecContext
-        {
-            get { return context; }
-        }
-
-        public ActionRegister NSpecIt
-        {
-            get { return it; }
-        }
-
-        public Action NSpecBefore
-        {
-            set { before = value; }
-        }
-
-        public Action NSpecAfter
-        {
-            set { before = value; }
+            string assembly = Assembly.GetExecutingAssembly().Location;
+            string projRoot = assembly + @"..\..\";
+            return new FileInfo(Path.Combine(projRoot, INTERACTION_TESTS_PAGE)).FullName;
         }
     }
 }
