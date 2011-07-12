@@ -453,17 +453,37 @@ namespace Coypu
         /// <code>
         ///   session.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
         ///   session.Click("Upload");
-        ///   session.WithIndividualTimeout(Timespan.FromSeconds(60), () => session.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
+        ///   session.WithIndividualTimeout(Timespan.FromSeconds(60), () => session.ClickButton("Delete bigfile.mp4"));
         ///      </code>
         /// </para>
         /// </summary>
         public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
         {
+            WithIndividualTimeout<object>(individualTimeout, () =>
+                                                         {
+                                                             action();
+                                                             return null;
+                                                         });
+        }
+
+        /// <summary>
+        /// <para>Use an <param name="individualTimeout" /> for everything you do within an <param name="action" /> - temporarilly overriding the <see cref="Configuration.Timeout"/></para>
+        /// <para>For when you need an unusually long (or short) timeout for a particular interaction.</para>
+        /// <para>E.g.:
+        /// <code>
+        ///   session.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
+        ///   session.Click("Upload");
+        ///   bool uploaded = session.WithIndividualTimeout(Timespan.FromSeconds(60), () => session.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
+        ///      </code>
+        /// </para>
+        /// </summary>
+        public T WithIndividualTimeout<T>(TimeSpan individualTimeout, Func<T> function)
+        {
             var defaultTimeout = Configuration.Timeout;
             Configuration.Timeout = individualTimeout;
             try
             {
-                action();
+                return function();
             }
             finally
             {
@@ -670,7 +690,7 @@ namespace Coypu
 
         public State FindState(params State[] states)
         {
-            var foundState = Query(() => states.Any(s => s.CheckCondition()), true);
+            var foundState = Query(() => WithIndividualTimeout(TimeSpan.Zero,() => states.Any(s => s.CheckCondition())), true);
             
             if (!foundState)
                 throw new MissingHtmlException("None of the given states was reached within the configured timeout.");

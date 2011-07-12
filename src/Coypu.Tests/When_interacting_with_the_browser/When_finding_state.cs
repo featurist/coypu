@@ -50,6 +50,39 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void It_uses_a_zero_timeout_when_evaluating_the_conditions()
+        {
+            var timeout1 = TimeSpan.MaxValue;
+            var timeout2 = TimeSpan.MaxValue;
+            var state1 = new State
+            {
+                Condition = () =>
+                {
+                    timeout1 = Configuration.Timeout;
+                    return false;
+                }
+            };
+            var state2 = new State
+            {
+                Condition = () =>
+                {
+                    timeout2 = Configuration.Timeout;
+                    return true;
+                }
+            };
+
+            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
+
+            Configuration.Timeout = TimeSpan.FromSeconds(1);
+
+            session.FindState(state1, state2);
+
+            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(timeout1, Is.EqualTo(TimeSpan.Zero));
+            Assert.That(timeout2, Is.EqualTo(TimeSpan.Zero));
+        }
+
+        [Test]
         public void It_checks_all_of_the_states_in_a_robust_query_expecting_true()
         {
             var queriedState1 = false;
@@ -85,10 +118,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.IsTrue(queriedState1);
             Assert.IsTrue(queriedState2);
-
-            Assert.Fail("Next: zero timout");
         }
 
+        
         [Test]
         public void When_query_returns_false_It_raises_an_exception()
         {
