@@ -10,9 +10,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_1()
         {
-            var state1 = new State { Condition = () => true };
-            var state2 = new State { Condition = () => false };
-            var state3 = new State { Condition = () => false };
+            var state1 = new State(() => true );
+            var state2 = new State(() => false );
+            var state3 = new State(() => false );
 
             session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
 
@@ -24,9 +24,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_2()
         {
-            var state1 = new State { Condition = () => false };
-            var state2 = new State { Condition = () => true };
-            var state3 = new State { Condition = () => false };
+            var state1 = new State(() => false );
+            var state2 = new State(() => true );
+            var state3 = new State(() => false );
 
             session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
 
@@ -38,9 +38,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_3()
         {
-            var state1 = new State { Condition = () => false };
-            var state2 = new State { Condition = () => false };
-            var state3 = new State { Condition = () => true };
+            var state1 = new State(() => false );
+            var state2 = new State(() => false );
+            var state3 = new State(() => true );
 
             session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
 
@@ -54,22 +54,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var timeout1 = TimeSpan.MaxValue;
             var timeout2 = TimeSpan.MaxValue;
-            var state1 = new State
-            {
-                Condition = () =>
+            var state1 = new State(() =>
                 {
                     timeout1 = Configuration.Timeout;
                     return false;
-                }
-            };
-            var state2 = new State
-            {
-                Condition = () =>
+                });
+            var state2 = new State( () =>
                 {
                     timeout2 = Configuration.Timeout;
                     return true;
-                }
-            };
+                });
 
             session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
 
@@ -87,23 +81,17 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var queriedState1 = false;
             var queriedState2 = false;
-            var state1 = new State
-            {
-                Condition = () =>
+            var state1 = new State(() =>
                 {
                     queriedState1 = true;
                     return false;
-                }
-            };
-            var state2 = new State
-            {
-                Condition = () =>
+                });
+            var state2 = new State(() =>
                 {
                     queriedState2 = true;
                     return true;
-                }
-            };
-            var state3 = new State { Condition = () => true };
+                });
+            var state3 = new State(() => true );
             state3.CheckCondition();
 
             spyRobustWrapper.StubQueryResult(true,true);
@@ -124,8 +112,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void When_query_returns_false_It_raises_an_exception()
         {
-            var state1 = new State { Condition = () => false };
-            var state2 = new State { Condition = () => false };
+            var state1 = new State(() => false );
+            var state2 = new State(() => false );
 
             spyRobustWrapper.StubQueryResult(true, false);
 

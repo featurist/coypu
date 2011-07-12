@@ -688,6 +688,23 @@ namespace Coypu
             return query;
         }
 
+        /// <summary>
+        /// <para>Find the first from a list of possible states that your page may arrive at.</para>
+        /// <para>Returns as soon as any of the possible states is found.</para>
+        /// <para>E.g.:</para>
+        /// 
+        /// <code>  
+        ///  var signedIn = new State(() => browser.HasContent("Signed in in as:"));
+        ///  var signedOut = new State(() => browser.HasContent("Please sign in"));
+        ///  
+        ///  if (browser.FindState(signedIn,signedOut) == signedIn) 
+        ///  {
+        ///    browser.ClickLink("Sign out");
+        ///  }
+        ///  </code>
+        ///  </summary>
+        /// <param name="states">The possible states you are expecting</param>
+        /// <returns></returns>
         public State FindState(params State[] states)
         {
             var foundState = Query(() => WithIndividualTimeout(TimeSpan.Zero,() => states.Any(s => s.CheckCondition())), true);

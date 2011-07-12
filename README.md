@@ -349,6 +349,29 @@ When you need an unusually long (or short) timeout for a particular interaction 
 	browser.Click("Upload");
 	browser.WithIndividualTimeout(Timespan.FromSeconds(60), () => browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
 	
+#### Finding states (nondeterministic testing)
+
+Sometimes you just can't predict what state the browser will be in. Not ideal for a reliable test, but if it's unavoidable then you can use the `Session.FindState` like this:
+
+  var signedIn = new State(() => browser.HasContent("Signed in in as:"));
+  var signedOut = new State(() => browser.HasContent("Please sign in"));
+
+  if (browser.FindState(signedIn,signedOut) == signedIn) 
+  {
+    browser.ClickLink("Sign out");
+  }
+
+It will return as soon as the first from your list of states is found, and throw if none of the states are found within the `Configuration.Timeout`
+
+Avoid this:
+  
+  if (browser.HasContent("Signed in in as:")) 
+  {
+    ...
+  }
+  
+otherwise you will have to wait for the full `Configuration.Timeout` in the negitive case.  
+  
 ## More tricks/tips
 
 So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 

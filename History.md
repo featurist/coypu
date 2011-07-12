@@ -2,6 +2,9 @@
 
 Release date: 2011-07-12
 
+### Added
+* FindState - finds the first to be reached from a list of possible states the page may be in
+
 ### Fixed 
 * Don't click in file fields, was bringing up the browse dialog in some browsers
 

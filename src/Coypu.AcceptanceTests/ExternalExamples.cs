@@ -74,19 +74,6 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void HasNoContentTest()
-        {
-            Configuration.AppHost = "www.google.com";
-
-            using (Session browser = Browser.Session)
-            {
-                browser.Visit("/");
-                Assert.IsTrue(browser.HasContent("About Google"));
-                Assert.IsTrue(browser.HasNoContent("This doesn't exist!"));
-            }
-        }
-
-        [Test]
         public void SupplyYourOwnRemoteWebDriver()
         {
             Configuration.AppHost = "www.google.com";
