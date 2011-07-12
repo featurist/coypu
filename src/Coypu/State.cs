@@ -9,16 +9,21 @@ namespace Coypu
     {
         private Func<bool> condition;
 
+
+        ///<summary>
+        /// Describe a possible state for the page with a condition to identify this state.
+        ///</summary>
+        ///<param name="condition">How to identify this state</param>
         public State(Func<bool> condition) 
         {
             this.condition = condition;
         }
 
-        public bool ConditionMet { get; private set; }
+        internal bool ConditionWasMet { get; private set; }
 
-        public bool CheckCondition()
+        internal bool CheckCondition()
         {
-            return ConditionMet = condition();
+            return ConditionWasMet = condition();
         }
     }
 }

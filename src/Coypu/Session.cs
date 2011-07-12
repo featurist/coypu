@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Coypu.Robustness;
 using System.Text.RegularExpressions;
 
@@ -15,6 +14,8 @@ namespace Coypu
         private readonly RobustWrapper robustWrapper;
         private readonly Clicker clicker;
         private readonly UrlBuilder urlBuilder;
+        private readonly TemporaryTimeouts temporaryTimeouts;
+        private readonly StateFinder stateFinder;
         internal bool WasDisposed { get; private set; }
 
         internal Driver Driver
@@ -36,6 +37,8 @@ namespace Coypu
             this.driver = driver;
             clicker = new Clicker(driver, waiter);
             urlBuilder = new UrlBuilder();
+            temporaryTimeouts = new TemporaryTimeouts();
+            stateFinder = new StateFinder(robustWrapper,temporaryTimeouts);
         }
 
         /// <summary>
@@ -459,7 +462,7 @@ namespace Coypu
         /// </summary>
         public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
         {
-            WithIndividualTimeout<object>(individualTimeout, () =>
+            temporaryTimeouts.WithIndividualTimeout<object>(individualTimeout, () =>
                                                          {
                                                              action();
                                                              return null;
@@ -467,7 +470,7 @@ namespace Coypu
         }
 
         /// <summary>
-        /// <para>Use an <param name="individualTimeout" /> for everything you do within an <param name="action" /> - temporarilly overriding the <see cref="Configuration.Timeout"/></para>
+        /// <para>Use an <param name="individualTimeout" /> for everything you do within a <param name="function" /> - temporarilly overriding the <see cref="Configuration.Timeout"/></para>
         /// <para>For when you need an unusually long (or short) timeout for a particular interaction.</para>
         /// <para>E.g.:
         /// <code>
@@ -479,16 +482,7 @@ namespace Coypu
         /// </summary>
         public T WithIndividualTimeout<T>(TimeSpan individualTimeout, Func<T> function)
         {
-            var defaultTimeout = Configuration.Timeout;
-            Configuration.Timeout = individualTimeout;
-            try
-            {
-                return function();
-            }
-            finally
-            {
-                Configuration.Timeout = defaultTimeout;
-            }
+            return temporaryTimeouts.WithIndividualTimeout(individualTimeout, function);
         }
 
         /// <summary>
@@ -606,7 +600,7 @@ namespace Coypu
         /// <param name="findElement">A function to find an element</param>
         public bool Has(Func<Element> findElement) 
         {
-            return Query(BuildZeroTimeoutHasElementQuery(findElement), true);
+            return Query(new ZeroTimeoutQueryBuilder().BuildZeroTimeoutHasElementQuery(findElement), true);
         }
 
         /// <summary>
@@ -615,7 +609,7 @@ namespace Coypu
         /// <param name="findElement">A function to find an element</param>
         public bool HasNo(Func<Element> findElement)
         {
-            return !Query(BuildZeroTimeoutHasElementQuery(findElement), false);
+            return !Query(new ZeroTimeoutQueryBuilder().BuildZeroTimeoutHasElementQuery(findElement), false);
         }
 
         /// <summary>
@@ -664,30 +658,6 @@ namespace Coypu
             robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        private static Func<bool> BuildZeroTimeoutHasElementQuery(Func<Element> findElement)
-        {
-            Func<bool> query =
-                () =>
-                    {
-                        var outerTimeout = Configuration.Timeout;
-                        Configuration.Timeout = TimeSpan.Zero;
-                        try
-                        {
-                            findElement();
-                            return true;
-                        }
-                        catch (MissingHtmlException)
-                        {
-                            return false;
-                        }
-                        finally
-                        {
-                            Configuration.Timeout = outerTimeout;
-                        }
-                    };
-            return query;
-        }
-
         /// <summary>
         /// <para>Find the first from a list of possible states that your page may arrive at.</para>
         /// <para>Returns as soon as any of the possible states is found.</para>
@@ -707,13 +677,7 @@ namespace Coypu
         /// <returns></returns>
         public State FindState(params State[] states)
         {
-            var foundState = Query(() => WithIndividualTimeout(TimeSpan.Zero,() => states.Any(s => s.CheckCondition())), true);
-            
-            if (!foundState)
-                throw new MissingHtmlException("None of the given states was reached within the configured timeout.");
-
-            return states.First(e => e.ConditionMet);
+            return stateFinder.FindState(states);
         }
-
     }
 }
