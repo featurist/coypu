@@ -20,10 +20,10 @@ namespace Coypu.Drivers.Tests
 
         public void when_testing_each_driver()
         {
-            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Firefox);
-            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Chrome);
-            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
-            LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(When_using_iframes_as_scope), Browser.Firefox);
+//            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.Chrome);
+//            LoadSpecsFor(typeof(SeleniumWebDriver), typeof(DriverSpecs), Browser.InternetExplorer);
+//            LoadSpecsFor(typeof(WatiNDriver), typeof(DriverSpecs), Browser.InternetExplorer);
         }
 
         private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
