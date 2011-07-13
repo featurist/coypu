@@ -58,9 +58,9 @@ namespace Coypu.Drivers.Tests
             else
             {
                 LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Firefox);
-                LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Chrome);
-                LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.InternetExplorer);
-                LoadSpecsFor(typeof (WatiNDriver), typeof (DriverSpecs), Browser.InternetExplorer);
+                //LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Chrome);
+                //LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.InternetExplorer);
+                //LoadSpecsFor(typeof (WatiNDriver), typeof (DriverSpecs), Browser.InternetExplorer);
             }
         }
 

@@ -8,11 +8,13 @@ namespace Coypu.Drivers.Selenium
     {
         private readonly ElementFinder elementFinder;
         private readonly TextMatcher textMatcher;
+        private readonly XPath xPath;
 
-        public ButtonFinder(ElementFinder elementFinder, TextMatcher textMatcher)
+        public ButtonFinder(ElementFinder elementFinder, TextMatcher textMatcher, XPath xPath)
         {
             this.elementFinder = elementFinder;
             this.textMatcher = textMatcher;
+            this.xPath = xPath;
         }
 
         public IWebElement FindButton2(string locator)
@@ -24,7 +26,7 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindButtonByIdNameOrValue(string locator) 
         {
-            var xpathToFind = String.Format(".//*[@id = \"{0}\" or @name = \"{0}\" or @value = \"{0}\"]", locator);
+            var xpathToFind = xPath.Format(".//*[@id = {0} or @name = {0} or @value = {0} or @alt = {0}]", locator);
             return elementFinder.Find(By.XPath(xpathToFind)).FirstOrDefault(IsButton);
         }
 
@@ -32,12 +34,13 @@ namespace Coypu.Drivers.Selenium
         {
             return
                 elementFinder.Find(By.TagName("button")).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
-                elementFinder.Find(By.ClassName("button")).FirstOrDefault(e => textMatcher.TextMatches(e, locator));
+                elementFinder.Find(By.ClassName("button")).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
+                elementFinder.Find(By.XPath(".//*[@role = 'button']")).FirstOrDefault(e => textMatcher.TextMatches(e, locator));
         }
 
         private bool IsButton(IWebElement e)
         {
-            return e.TagName == "button" || IsInputButton(e);
+            return e.TagName == "button" || IsInputButton(e) || e.GetAttribute("role") == "button";
         }
 
         private bool IsInputButton(IWebElement e)

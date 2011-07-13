@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using OpenQA.Selenium;
 
@@ -9,10 +8,12 @@ namespace Coypu.Drivers.Selenium
         private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file" };
         public static readonly string[] InputButtonTypes = new[] { "button", "submit", "image" };
         private readonly ElementFinder elementFinder;
+        private readonly XPath xPath;
 
-        public FieldFinder(ElementFinder elementFinder)
+        public FieldFinder(ElementFinder elementFinder, XPath xPath)
         {
             this.elementFinder = elementFinder;
+            this.xPath = xPath;
         }
 
         public IWebElement FindField(string locator)
@@ -47,18 +48,18 @@ namespace Coypu.Drivers.Selenium
         private IWebElement FindLabelByText(string locator)
         {
             return
-                elementFinder.Find(By.XPath(String.Format(".//label[text() = \"{0}\"]", locator))).FirstOrDefault() ??
-                elementFinder.Find(By.XPath(String.Format(".//label[contains(text(),\"{0}\")]", locator))).FirstOrDefault();
+                elementFinder.Find(By.XPath(xPath.Format(".//label[text() = {0}]", locator))).FirstOrDefault() ??
+                elementFinder.Find(By.XPath(xPath.Format(".//label[contains(text(),{0})]", locator))).FirstOrDefault();
         }
 
         private IWebElement FindFieldByPlaceholder(string placeholder)
         {
-            return elementFinder.Find(By.XPath(String.Format(".//input[@placeholder = \"{0}\"]", placeholder))).FirstOrDefault(IsField);
+            return elementFinder.Find(By.XPath(xPath.Format(".//input[@placeholder = {0}]", placeholder))).FirstOrDefault(IsField);
         }
 
         private IWebElement FindFieldByIdOrName(string locator)
         {
-            var xpathToFind = String.Format(".//*[@id = \"{0}\" or @name = \"{0}\"]", locator);
+            var xpathToFind = xPath.Format(".//*[@id = {0} or @name = {0}]", locator);
             return elementFinder.Find(By.XPath(xpathToFind)).FirstOrDefault(IsField);
         }
 

@@ -27,6 +27,7 @@
         <button id="secondButtonId" name="secondButtonName"> second button</button>
         <button id="thirdButtonId" name="thirdButtonName">
           third button</button>
+
         
         <input type="text" id="firstTextInputId" name="firstTextInputName" value="first text input" />
         <input type="hidden" id="firstHiddenInputId" name="firstHiddenInputName" value="first hidden input" />
@@ -41,10 +42,15 @@
         
         <input type="image" src="img.jpg" id="firstImageButtonId" name="firstImageButtonName" value="first image button" />
         <input type="image" src="img2.jpg" id="secondImageButtonId" name="secondImageButtonName" value="second image button" />
+
+        <img src="img2.jpg" id="roleImageButtonId" role="button" alt="I'm an image with the role of button" />
+        <span id="roleSpanButtonId" role="button">I'm a span with the role of button</span>        
         
         <input type="button" id="clickMeTest" onclick="this.value += ' - clicked'; return false;" value="Click me" />
         
         <button id="firstInvisibleInputId" style="visibility:hidden">I am an invisible button</button>
+
+        <input type="image" id="buttonWithBothQuotesId" value="I&apos;m an image button with &quot;both&quot; types of quote in my value" />
       </fieldset>
       <fieldset>
         <legend>Fields</legend>
@@ -138,6 +144,8 @@
         second link</a>
       <a style="display:none" href="#invisible">I am an invisible link by visibility</a>
       <a style="visibility:hidden" href="#invisible">I am an invisible link by display</a>
+
+      <a id="linkWithBothQuotesId" href="#quotes">I'm a link with "both" types of quote in my text</a>
   </section>
   <section id="inspectingContent" >
       <h1>Inspecting Content</h1>

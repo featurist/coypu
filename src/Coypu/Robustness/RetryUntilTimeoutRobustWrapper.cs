@@ -43,7 +43,7 @@ namespace Coypu.Robustness
                     return result;
                 }
                 catch (NotSupportedException) { throw; }
-                catch (Exception e)
+                catch (Exception)
                 {
                     if (TimeoutReached(stopWatch, timeout, interval))
                     {

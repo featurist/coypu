@@ -8,11 +8,13 @@ namespace Coypu.Drivers.Selenium
     {
         private readonly IWebDriver selenium;
         private readonly ElementFinder elementFinder;
+        private readonly XPath xPath;
 
-        public IFrameFinder(IWebDriver selenium, ElementFinder elementFinder)
+        public IFrameFinder(IWebDriver selenium, ElementFinder elementFinder, XPath xPath)
         {
             this.selenium = selenium;
             this.elementFinder = elementFinder;
+            this.xPath = xPath;
         }
 
         public IWebElement FindIFrame(string locator)
@@ -30,7 +32,7 @@ namespace Coypu.Drivers.Selenium
                 var frame = selenium.SwitchTo().Frame(e);
                 return
                     frame.Title == locator ||
-                    frame.FindElements(By.XPath(String.Format(".//h1[text() = \"{0}\"]", locator))).Any();
+                    frame.FindElements(By.XPath(xPath.Format(".//h1[text() = {0}]", locator))).Any();
             }
             finally
             {

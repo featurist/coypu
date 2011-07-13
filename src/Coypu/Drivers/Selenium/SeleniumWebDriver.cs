@@ -23,6 +23,7 @@ namespace Coypu.Drivers.Selenium
         private readonly Dialogs dialogs;
         private readonly MouseControl mouseControl;
         private readonly OptionSelector optionSelector;
+        private readonly XPath xPath;
 
         public SeleniumWebDriver()
             : this(new DriverFactory().NewRemoteWebDriver())
@@ -32,12 +33,13 @@ namespace Coypu.Drivers.Selenium
         protected SeleniumWebDriver(RemoteWebDriver webDriver)
         {
             selenium = webDriver;
+            xPath = new XPath();
             scoping = new Scoping(selenium);
-            elementFinder = new ElementFinder(scoping);
-            fieldFinder = new FieldFinder(elementFinder);
-            iframeFinder = new IFrameFinder(selenium, elementFinder);
+            elementFinder = new ElementFinder(scoping,xPath);
+            fieldFinder = new FieldFinder(elementFinder, xPath);
+            iframeFinder = new IFrameFinder(selenium, elementFinder,xPath);
             textMatcher = new TextMatcher();
-            buttonFinder = new ButtonFinder(elementFinder, textMatcher);
+            buttonFinder = new ButtonFinder(elementFinder, textMatcher, xPath);
             sectionFinder = new SectionFinder(selenium, elementFinder,textMatcher);
             dialogs = new Dialogs(selenium);
             mouseControl = new MouseControl(selenium);
@@ -97,7 +99,7 @@ namespace Coypu.Drivers.Selenium
         public Element FindFieldset(string locator)
         {
             var fieldset =
-                Find(By.XPath(string.Format(".//fieldset[legend[text() = \"{0}\"]]", locator))).FirstOrDefault() ??
+                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator))).FirstOrDefault() ??
                 Find(By.Id(locator)).FirstOrDefault(e => e.TagName == "fieldset");
 
             return BuildElement(fieldset, "Failed to find fieldset: " + locator);

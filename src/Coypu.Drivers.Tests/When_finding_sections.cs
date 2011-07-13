@@ -32,7 +32,7 @@ namespace Coypu.Drivers.Tests
                 it["finds section by id"] = () =>
                 {
                     driver.FindSection("sectionOne").Id.should_be("sectionOne");
-                    driver.FindSection("sectionTwo").Id.should_be("SectionTwo");
+                    driver.FindSection("sectionTwo").Id.should_be("sectionTwo");
                 };
 
                

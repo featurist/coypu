@@ -129,6 +129,7 @@
     <Compile Include="Drivers\Watin\WatiNElement.cs" />
     <Compile Include="Drivers\Watin\WatiNExtensions.cs" />
     <Compile Include="Drivers\Watin\WatiNDriver.cs" />
+    <Compile Include="Drivers\XPath.cs" />
     <Compile Include="FillInWith.cs">
       <SubType>Code</SubType>
     </Compile>

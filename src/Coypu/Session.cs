@@ -664,7 +664,7 @@ namespace Coypu
         /// <para>E.g.:</para>
         /// 
         /// <code>  
-        ///  var signedIn = new State(() => browser.HasContent("Signed in in as:"));
+        ///  var signedIn = new State(() => browser.HasContent("Signed in as:"));
         ///  var signedOut = new State(() => browser.HasContent("Please sign in"));
         ///  
         ///  if (browser.FindState(signedIn,signedOut) == signedIn) 

@@ -19,9 +19,15 @@ namespace Coypu.Drivers.Tests
                  Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
              };
 
-            it["does not find visibility:hidden links"] =    () =>
+            it["does not find visibility:hidden links"] = () =>
             {
                 Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
+            };
+
+            it["finds a link with both types of quote in its text"] = () =>
+            {
+                var link = driver.FindLink("I'm a link with \"both\" types of quote in my text");
+                Assert.That(link.Id, Is.EqualTo("linkWithBothQuotesId"));
             };
         }
     }
