@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
         {
             describe["scope 1"] = () =>
             {
-                  before = () => driver.SetScope(() => driver.FindId("scope1"));
+                before = () => driver.SetScope(() => driver.FindId("scope1"));
 
                 it["finds content within scope"] = () =>
                 {

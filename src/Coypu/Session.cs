@@ -679,5 +679,10 @@ namespace Coypu
         {
             return stateFinder.FindState(states);
         }
+
+        public void SaveWebRequest(string resource, string saveAs)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
