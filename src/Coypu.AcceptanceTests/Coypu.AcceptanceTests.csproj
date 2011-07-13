@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiExamples.cs" />
+    <Compile Include="WebRequests.cs" />
     <Compile Include="States.cs" />
     <Compile Include="RawWebdriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="sites\site_with_secure_resources.rb" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Coypu.Drivers.Tests\html\iFrame1.htm">
@@ -108,6 +110,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
