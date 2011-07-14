@@ -153,6 +153,9 @@
     <Compile Include="TemporaryTimeouts.cs" />
     <Compile Include="ConfiguredHostUrlBuilder.cs" />
     <Compile Include="IWebResources.cs" />
+    <Compile Include="WebClientWithCookies.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ZeroTimeoutQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,8 @@ namespace Coypu
     {
         public void DownloadFile(string resource, string saveAs, IEnumerable<Cookie> cookies)
         {
-            new WebClient().DownloadFile(resource, saveAs);
+            new WebClientWithCookies(cookies).DownloadFile(resource, saveAs);
         }
+
     }
 }

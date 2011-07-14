@@ -1,3 +1,14 @@
+# Version 0.2.8
+
+Release date: 2011-07-14
+
+### Added
+* SaveWebResource saves a resource from the web directly using the current browser session's cookies
+* Find buttons by role='button' attr 
+
+### Fixed
+* Escaping both types of quotes in xpath literals
+
 # Version 0.2.7
 
 Release date: 2011-07-12

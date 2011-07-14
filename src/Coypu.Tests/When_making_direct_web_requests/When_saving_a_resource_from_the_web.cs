@@ -59,7 +59,4 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             stubUrlBuilder.SetStubUrl(virtualPath, fullyQualifiedPath);
         }
     }
-
-
-
 }

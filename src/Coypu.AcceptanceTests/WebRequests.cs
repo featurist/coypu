@@ -8,26 +8,22 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class WebRequests
     {
+        private Session browser {
+            get { return Browser.Session; }
+        }
+        
         [SetUp]
         public void SetUp()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
             Configuration.Port = 4567;
-
-            // myNancyController.Start(4567);
+            browser.Visit("/");
         }
-
-        private Session browser
-        {
-            get { return Browser.Session; }
-        }
-
 
         [TestFixtureTearDown]
         public void TearDown()
         {
             Browser.EndSession();
-            // myNancyController.Stop(4567);
         }
 
         [Test]
@@ -41,12 +37,12 @@ namespace Coypu.AcceptanceTests
             Assert.That(File.ReadAllBytes(saveAs), Is.EqualTo(expectedResource));
         }
 
-        [Test, Ignore("Pending")]
+        [Test]
         public void It_saves_a_restricted_file_from_a_site_you_are_logged_into()
         {
             var saveAs = TempFileName();
             var expectedResource = Encoding.Default.GetBytes("bdd");
-
+            
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
             Assert.That(File.ReadAllBytes(saveAs), Is.Not.EqualTo(expectedResource));
 
