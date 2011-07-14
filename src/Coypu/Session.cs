@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using Coypu.Robustness;
 using System.Text.RegularExpressions;
 
@@ -12,12 +14,11 @@ namespace Coypu
     {
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
+        private readonly ResourceDownloader resourceDownloader;
         private readonly Clicker clicker;
         private readonly UrlBuilder urlBuilder;
         private readonly TemporaryTimeouts temporaryTimeouts;
         private readonly StateFinder stateFinder;
-        private WebResources webResources;
-        private FileSystem fileSystem;
 
         internal bool WasDisposed { get; private set; }
 
@@ -34,12 +35,11 @@ namespace Coypu
             get { return driver.Native; }
         }
 
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, WebResources webResources, FileSystem fileSystem, UrlBuilder urlBuilder)
+        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, ResourceDownloader resourceDownloader, UrlBuilder urlBuilder)
         {
             this.driver = driver;
             this.robustWrapper = robustWrapper;
-            this.webResources = webResources;
-            this.fileSystem = fileSystem;
+            this.resourceDownloader = resourceDownloader;
             clicker = new Clicker(driver, waiter);
             this.urlBuilder = urlBuilder;
             temporaryTimeouts = new TemporaryTimeouts();
@@ -687,9 +687,7 @@ namespace Coypu
 
         public void SaveWebResource(string resource, string saveAs)
         {
-            fileSystem.SaveAs(webResources.Get(resource).GetResponseStream(), saveAs);
-            throw new NotImplementedException();
+            resourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs,null);
         }
-
     }
 }

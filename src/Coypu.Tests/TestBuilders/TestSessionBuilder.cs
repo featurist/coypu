@@ -6,25 +6,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 {
     internal class TestSessionBuilder
     {
-        internal static Session Build(WebResources webResources, FileSystem fileSystem)
+        internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter, ResourceDownloader resourceDownloader, UrlBuilder urlBuilder)
         {
-            return Build(new FakeDriver(), new SpyRobustWrapper(), new FakeWaiter(), webResources, fileSystem);
-        }
-
-        internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter)
-        {
-            return Build(driver, robustWrapper, waiter, null, null);
-        }
-
-        internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter,
-                                      WebResources webResources, FileSystem fileSystem)
-        {
-            return Build(driver, robustWrapper, waiter, webResources, fileSystem, new ConfiguredHostUrlBuilder());
-        }
-
-        internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter, WebResources webResources, FileSystem fileSystem, UrlBuilder urlBuilder)
-        {
-            return new Session(driver, robustWrapper, waiter, webResources, fileSystem, urlBuilder);
+            return new Session(driver, robustWrapper, waiter, resourceDownloader, urlBuilder);
         }
     }
 }

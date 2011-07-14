@@ -13,6 +13,8 @@ namespace Coypu.AcceptanceTests
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
             Configuration.Port = 4567;
+
+            // myNancyController.Start(4567);
         }
 
         private Session browser
@@ -25,9 +27,10 @@ namespace Coypu.AcceptanceTests
         public void TearDown()
         {
             Browser.EndSession();
+            // myNancyController.Stop(4567);
         }
 
-        [Test,Ignore("Pending")]
+        [Test]
         public void It_saves_a_resource_from_the_web()
         {
             var saveAs = TempFileName();

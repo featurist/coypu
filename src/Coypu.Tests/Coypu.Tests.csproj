@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestDoubles\SpyFileSystem.cs" />
+    <Compile Include="TestDoubles\SpyResourceDownloader.cs" />
     <Compile Include="TestDoubles\StubDriver.cs" />
     <Compile Include="TestDoubles\StubWebResources.cs" />
     <Compile Include="TestDoubles\StubWebResponse.cs" />
