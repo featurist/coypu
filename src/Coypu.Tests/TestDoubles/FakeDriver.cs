@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.TestDoubles
@@ -38,6 +39,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<string> findButtonRequests = new List<string>();
         private readonly IList<string> findLinkRequests = new List<string>();
         private Func<Element> findScope;
+        private IList<Cookie> stubbedCookies;
 
         public IEnumerable<Element> ClickedElements
         {
@@ -134,6 +136,11 @@ namespace Coypu.Tests.TestDoubles
         public void Hover(Element element)
         {
             hoveredElements.Add(element);
+        }
+
+        public IEnumerable<Cookie> GetBrowserCookies()
+        {
+            return stubbedCookies;
         }
 
         public void Visit(string url)
@@ -363,6 +370,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubId(string id, Element element)
         {
             stubbedIDs.Add(id, element);
+        }
+
+        public void StubCookies(List<Cookie> cookies)
+        {
+            stubbedCookies = cookies;
         }
     }
 }

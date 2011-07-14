@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
+using Cookie = System.Net.Cookie;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -199,6 +200,11 @@ namespace Coypu.Drivers.Selenium
         public void Hover(Element element)
         {
             mouseControl.Hover(element);
+        }
+
+        public IEnumerable<Cookie> GetBrowserCookies()
+        {
+            throw new NotSupportedException();
         }
 
         public void Set(Element element, string value) 

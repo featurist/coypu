@@ -687,7 +687,7 @@ namespace Coypu
 
         public void SaveWebResource(string resource, string saveAs)
         {
-            resourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs,null);
+            resourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs,driver.GetBrowserCookies());
         }
     }
 }

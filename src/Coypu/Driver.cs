@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Coypu
@@ -37,5 +38,6 @@ namespace Coypu
         Element FindId(string id);
         Element FindIFrame(string locator);
         void Hover(Element element);
+        IEnumerable<Cookie> GetBrowserCookies();
     }
 }

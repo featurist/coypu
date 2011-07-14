@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using WatiN.Core;
 using WatiN.Core.Constraints;
@@ -115,6 +116,11 @@ namespace Coypu.Drivers.Watin
         public void Hover(Element element)
         {
             (WatiNElement(element)).MouseEnter();
+        }
+
+        public IEnumerable<Cookie> GetBrowserCookies()
+        {
+            throw new NotSupportedException();
         }
 
         private bool HasElement(IElementContainer elementContainer, string tagName, string text)

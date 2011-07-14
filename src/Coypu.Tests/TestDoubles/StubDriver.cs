@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.TestDoubles
@@ -159,6 +160,11 @@ namespace Coypu.Tests.TestDoubles
 
         public void Hover(Element element)
         {   
+        }
+
+        public IEnumerable<Cookie> GetBrowserCookies()
+        {
+            return new List<Cookie>();
         }
     }
 }
