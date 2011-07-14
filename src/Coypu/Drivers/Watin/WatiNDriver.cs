@@ -120,7 +120,7 @@ namespace Coypu.Drivers.Watin
 
         public IEnumerable<Cookie> GetBrowserCookies()
         {
-            throw new NotSupportedException();
+            return Enumerable.Empty<Cookie>();
         }
 
         private bool HasElement(IElementContainer elementContainer, string tagName, string text)

@@ -57,10 +57,14 @@ namespace Coypu.Drivers.Tests
             }
             else
             {
-                LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Firefox);
-                //LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.Chrome);
-                //LoadSpecsFor(typeof (SeleniumWebDriver), typeof (DriverSpecs), Browser.InternetExplorer);
-                //LoadSpecsFor(typeof (WatiNDriver), typeof (DriverSpecs), Browser.InternetExplorer);
+                var suite = testSuite == null 
+                                ? typeof (DriverSpecs)
+                                : Type.GetType(testSuite);
+
+                LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Firefox);
+                LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);
+                LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);
+                LoadSpecsFor(typeof (WatiNDriver), suite, Browser.InternetExplorer);
             }
         }
 

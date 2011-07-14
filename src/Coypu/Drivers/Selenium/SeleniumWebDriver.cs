@@ -204,7 +204,7 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<Cookie> GetBrowserCookies()
         {
-            throw new NotSupportedException();
+            return Enumerable.Empty<Cookie>();
         }
 
         public void Set(Element element, string value) 
