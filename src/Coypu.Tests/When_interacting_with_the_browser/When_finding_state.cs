@@ -15,7 +15,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(() => false );
             var state3 = new State(() => false );
 
-            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), fakeWaiter);
 
             var foundState = session.FindState(state1, state2, state3);
 
@@ -29,7 +29,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(() => true );
             var state3 = new State(() => false );
 
-            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), fakeWaiter);
 
             var foundState = session.FindState(state1, state2, state3);
 
@@ -43,7 +43,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(() => false );
             var state3 = new State(() => true );
 
-            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), fakeWaiter);
 
             var foundState = session.FindState(state1, state2, state3);
 
@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                     return true;
                 });
 
-            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), fakeWaiter);
 
             Configuration.Timeout = TimeSpan.FromSeconds(1);
 

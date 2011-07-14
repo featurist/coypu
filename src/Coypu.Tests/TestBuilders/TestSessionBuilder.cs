@@ -19,7 +19,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter,
                                       WebResources webResources, FileSystem fileSystem)
         {
-            return new Session(driver, robustWrapper, waiter, webResources, fileSystem);
+            return Build(driver, robustWrapper, waiter, webResources, fileSystem, new ConfiguredHostUrlBuilder());
+        }
+
+        internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter, WebResources webResources, FileSystem fileSystem, UrlBuilder urlBuilder)
+        {
+            return new Session(driver, robustWrapper, waiter, webResources, fileSystem, urlBuilder);
         }
     }
 }

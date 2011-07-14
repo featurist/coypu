@@ -34,14 +34,14 @@ namespace Coypu
             get { return driver.Native; }
         }
 
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, WebResources webResources, FileSystem fileSystem)
+        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, WebResources webResources, FileSystem fileSystem, UrlBuilder urlBuilder)
         {
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.webResources = webResources;
             this.fileSystem = fileSystem;
             clicker = new Clicker(driver, waiter);
-            urlBuilder = new UrlBuilder();
+            this.urlBuilder = urlBuilder;
             temporaryTimeouts = new TemporaryTimeouts();
             stateFinder = new StateFinder(robustWrapper,temporaryTimeouts);
         }

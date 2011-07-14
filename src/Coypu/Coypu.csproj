@@ -134,6 +134,7 @@
     <Compile Include="FillInWith.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UrlBuilder.cs" />
     <Compile Include="MissingHtmlException.cs" />
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
     <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
@@ -149,7 +150,7 @@
     <Compile Include="State.cs" />
     <Compile Include="StateFinder.cs" />
     <Compile Include="TemporaryTimeouts.cs" />
-    <Compile Include="UrlBuilder.cs" />
+    <Compile Include="ConfiguredHostUrlBuilder.cs" />
     <Compile Include="WebResources.cs" />
     <Compile Include="ZeroTimeoutQueryBuilder.cs" />
   </ItemGroup>

@@ -12,15 +12,33 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected FakeDriver driver;
         protected SpyRobustWrapper spyRobustWrapper;
         protected Session session;
-        protected FakeWaiter FakeWaiter;
+        protected FakeWaiter fakeWaiter;
+        protected StubUrlBuilder stubUrlBuilder;
 
         [SetUp]
         public void SetUp()
         {
             driver = new FakeDriver();
             spyRobustWrapper = new SpyRobustWrapper();
-            FakeWaiter = new FakeWaiter();
-            session = TestSessionBuilder.Build(driver, spyRobustWrapper, FakeWaiter);
+            fakeWaiter = new FakeWaiter();
+            stubUrlBuilder = new StubUrlBuilder();
+            session = TestSessionBuilder.Build(driver, spyRobustWrapper, fakeWaiter, new StubWebResources(),
+                                               new SpyFileSystem(), stubUrlBuilder);
+        }
+    }
+
+    public class StubUrlBuilder : UrlBuilder
+    {
+        private Dictionary<string,string> urls = new Dictionary<string, string>();
+
+        public void SetStubUrl(string virtualPath, string url)
+        {
+            urls[virtualPath] = url;
+        }
+
+        public string GetFullyQualifiedUrl(string virtualPath)
+        {
+            return urls[virtualPath];
         }
     }
 
