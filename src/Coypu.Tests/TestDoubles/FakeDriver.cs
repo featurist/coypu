@@ -143,6 +143,10 @@ namespace Coypu.Tests.TestDoubles
             return stubbedCookies;
         }
 
+        public void SetBrowserCookies(Cookie cookie)
+        {
+        }
+
         public void Visit(string url)
         {
             visits.Add(url);

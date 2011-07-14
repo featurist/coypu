@@ -166,5 +166,10 @@ namespace Coypu.Tests.TestDoubles
         {
             return new List<Cookie>();
         }
+
+        public void SetBrowserCookies(Cookie cookie)
+        {
+            
+        }
     }
 }

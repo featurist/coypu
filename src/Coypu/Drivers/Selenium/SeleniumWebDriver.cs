@@ -204,7 +204,7 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<Cookie> GetBrowserCookies()
         {
-            return Enumerable.Empty<Cookie>();
+            return selenium.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
         }
 
         public void Set(Element element, string value) 
