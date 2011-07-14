@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Coypu.Robustness;
 using Coypu.Tests.TestDoubles;
+using Coypu.Tests.When_making_browser_interactions_robust;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -11,19 +12,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected FakeDriver driver;
         protected SpyRobustWrapper spyRobustWrapper;
         protected Session session;
-        protected MockSleepWaiter mockSleepWaiter;
+        protected FakeWaiter FakeWaiter;
 
         [SetUp]
         public void SetUp()
         {
             driver = new FakeDriver();
             spyRobustWrapper = new SpyRobustWrapper();
-            mockSleepWaiter = new MockSleepWaiter();
-            session = new Session(driver, spyRobustWrapper, mockSleepWaiter);
+            FakeWaiter = new FakeWaiter();
+            session = TestSessionBuilder.Build(driver, spyRobustWrapper, FakeWaiter);
         }
     }
 
-    public class MockSleepWaiter : Waiter
+    public class FakeWaiter : Waiter
     {
         private Action<TimeSpan> doOnWait = ms => { };
 

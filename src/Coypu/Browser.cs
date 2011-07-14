@@ -24,7 +24,7 @@ namespace Coypu
 
         private static void StartNewSession()
         {
-            session = new Session(NewWebDriver(), new RetryUntilTimeoutRobustWrapper(), new ThreadSleepWaiter());
+            session = new Session(NewWebDriver(), new RetryUntilTimeoutRobustWrapper(), new ThreadSleepWaiter(), null, null);
         }
 
         private static Driver NewWebDriver()

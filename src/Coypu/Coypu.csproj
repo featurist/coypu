@@ -130,6 +130,7 @@
     <Compile Include="Drivers\Watin\WatiNExtensions.cs" />
     <Compile Include="Drivers\Watin\WatiNDriver.cs" />
     <Compile Include="Drivers\XPath.cs" />
+    <Compile Include="FileSystem.cs" />
     <Compile Include="FillInWith.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +150,7 @@
     <Compile Include="StateFinder.cs" />
     <Compile Include="TemporaryTimeouts.cs" />
     <Compile Include="UrlBuilder.cs" />
+    <Compile Include="WebResources.cs" />
     <Compile Include="ZeroTimeoutQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

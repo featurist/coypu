@@ -16,6 +16,9 @@ namespace Coypu
         private readonly UrlBuilder urlBuilder;
         private readonly TemporaryTimeouts temporaryTimeouts;
         private readonly StateFinder stateFinder;
+        private WebResources webResources;
+        private FileSystem fileSystem;
+
         internal bool WasDisposed { get; private set; }
 
         internal Driver Driver
@@ -31,10 +34,12 @@ namespace Coypu
             get { return driver.Native; }
         }
 
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter)
+        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, WebResources webResources, FileSystem fileSystem)
         {
-            this.robustWrapper = robustWrapper;
             this.driver = driver;
+            this.robustWrapper = robustWrapper;
+            this.webResources = webResources;
+            this.fileSystem = fileSystem;
             clicker = new Clicker(driver, waiter);
             urlBuilder = new UrlBuilder();
             temporaryTimeouts = new TemporaryTimeouts();
@@ -680,9 +685,11 @@ namespace Coypu
             return stateFinder.FindState(states);
         }
 
-        public void SaveWebRequest(string resource, string saveAs)
+        public void SaveWebResource(string resource, string saveAs)
         {
+            fileSystem.SaveAs(webResources.Get(resource).GetResponseStream(), saveAs);
             throw new NotImplementedException();
         }
+
     }
 }

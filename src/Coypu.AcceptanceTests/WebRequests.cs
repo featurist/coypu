@@ -33,7 +33,7 @@ namespace Coypu.AcceptanceTests
             var saveAs = TempFileName();
             var expectedResource = Encoding.Default.GetBytes("bdd");
 
-            browser.SaveWebRequest("/resource/bdd", saveAs);
+            browser.SaveWebResource("/resource/bdd", saveAs);
 
             Assert.That(File.ReadAllBytes(saveAs), Is.EqualTo(expectedResource));
         }
@@ -44,12 +44,12 @@ namespace Coypu.AcceptanceTests
             var saveAs = TempFileName();
             var expectedResource = Encoding.Default.GetBytes("bdd");
 
-            browser.SaveWebRequest("/restricted_resource/bdd", saveAs);
+            browser.SaveWebResource("/restricted_resource/bdd", saveAs);
             Assert.That(File.ReadAllBytes(saveAs), Is.Not.EqualTo(expectedResource));
 
             browser.Visit("/auto_login");
 
-            browser.SaveWebRequest("/restricted_resource/bdd", saveAs);
+            browser.SaveWebResource("/restricted_resource/bdd", saveAs);
             Assert.That(File.ReadAllBytes(saveAs), Is.EqualTo(expectedResource));
         }
 

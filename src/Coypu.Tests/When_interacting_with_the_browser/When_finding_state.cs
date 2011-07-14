@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Tests.When_making_browser_interactions_robust;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -14,7 +15,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(() => false );
             var state3 = new State(() => false );
 
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
 
             var foundState = session.FindState(state1, state2, state3);
 
@@ -28,7 +29,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(() => true );
             var state3 = new State(() => false );
 
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
 
             var foundState = session.FindState(state1, state2, state3);
 
@@ -42,7 +43,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(() => false );
             var state3 = new State(() => true );
 
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
 
             var foundState = session.FindState(state1, state2, state3);
 
@@ -65,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                     return true;
                 });
 
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), mockSleepWaiter);
+            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), FakeWaiter);
 
             Configuration.Timeout = TimeSpan.FromSeconds(1);
 

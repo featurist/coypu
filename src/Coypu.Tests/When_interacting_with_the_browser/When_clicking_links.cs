@@ -60,7 +60,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Configuration.WaitBeforeClick = expectedWait;
 
             var waiterCalled = false;
-            mockSleepWaiter.DoOnWait(milliseconds =>
+            FakeWaiter.DoOnWait(milliseconds =>
                                     {
                                         Assert.That(milliseconds, Is.EqualTo(expectedWait));
 
