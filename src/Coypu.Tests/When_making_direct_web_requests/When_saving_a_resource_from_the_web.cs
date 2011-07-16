@@ -1,62 +1,112 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using Coypu.Tests.When_interacting_with_the_browser;
+using Coypu.WebRequests;
 using NUnit.Framework;
 
-namespace Coypu.Tests.When_making_browser_interactions_robust
+namespace Coypu.Tests.When_making_direct_web_requests
 {
     [TestFixture]
     public class When_saving_a_resource_from_the_web
     {
         private StubUrlBuilder stubUrlBuilder;
         private Session session;
-        private SpyResourceDownloader stubResourceDownloader;
+        private SpyRestrictedResourceDownloader _stubRestrictedResourceDownloader;
         private FakeDriver driver;
 
         [SetUp]
         public void SetUp()
         {
             stubUrlBuilder = new StubUrlBuilder();
-            stubResourceDownloader = new SpyResourceDownloader();
+            _stubRestrictedResourceDownloader = new SpyRestrictedResourceDownloader();
 
             driver = new FakeDriver();
-            session = TestSessionBuilder.Build(driver, new SpyRobustWrapper(), new FakeWaiter(), stubResourceDownloader, stubUrlBuilder);
+            session = TestSessionBuilder.Build(driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
         }
 
         [Test]
-        public void It_requests_the_resource_from_the_given_url_and_saves_to_given_location() 
+        public void It_downloads_the_resource_from_the_given_url_and_saves_to_the_given_location()
         {
             StubResourceUrl("/resources/someresource", "http://built.by/url_builder", stubUrlBuilder);
 
             session.SaveWebResource("/resources/someresource", @"T:\saveme\here.please");
 
-            var downloadedFile = stubResourceDownloader.DownloadedFiles.Single();
+            var downloadedFile = _stubRestrictedResourceDownloader.DownloadedFiles.Single();
 
             Assert.That(downloadedFile.Resource, Is.EqualTo("http://built.by/url_builder"));
             Assert.That(downloadedFile.SaveAs, Is.EqualTo(@"T:\saveme\here.please"));
         }
 
         [Test]
-        public void It_requests_the_resource_with_the_current_driver_cookies()
+        public void It_passes_the_current_driver_cookies_to_the_resource_downloader()
         {
             StubResourceUrl("/resources/someresource", "http://built.by/url_builder", stubUrlBuilder);
-            var cookies = new List<Cookie>{new Cookie("SomeCookie", "some value")};
+            var cookies = new List<Cookie> { new Cookie("SomeCookie", "some value") };
 
             driver.StubCookies(cookies);
 
             session.SaveWebResource("/resources/someresource", @"T:\saveme\here.please");
 
-            var downloadedFile = stubResourceDownloader.DownloadedFiles.Single();
+            var downloadedFile = _stubRestrictedResourceDownloader.DownloadedFiles.Single();
 
             Assert.That(downloadedFile.Cookies, Is.EqualTo(cookies));
         }
 
-      
-        private void StubResourceUrl(string virtualPath, string fullyQualifiedPath, StubUrlBuilder stubUrlBuilder)
+
+        private static void StubResourceUrl(string virtualPath, string fullyQualifiedPath, StubUrlBuilder stubUrlBuilder)
         {
             stubUrlBuilder.SetStubUrl(virtualPath, fullyQualifiedPath);
+        }
+
+        [Test]
+        public void It_injects_cookies_into_the_web_request()
+        {
+            var requestUri = new Uri("http://cookiemonster.love/cookies/");
+            var expectedCookies = new List<Cookie>
+                                      {
+                                          new Cookie("n1","v1","/","cookiemonster.love"),
+                                          new Cookie("n2","v2","/","cookiemonster.love"),
+                                          new Cookie("n3","v3","/cookies/","cookiemonster.love"),
+                                      };
+
+            var webClient = new WebClientWithCookiesTestExtensionYuk();
+
+            webClient.SetCookies(expectedCookies);
+            var webRequest = webClient.GetWebRequest(requestUri);
+
+            var actualCookies = ((HttpWebRequest)webRequest).CookieContainer.GetCookies(requestUri);
+
+            Assert.That(actualCookies.Count, Is.EqualTo(3));
+            Assert.That(actualCookies, Has.Member(expectedCookies[0]));
+            Assert.That(actualCookies, Has.Member(expectedCookies[1]));
+            Assert.That(actualCookies, Has.Member(expectedCookies[2]));
+        }
+
+        [Test]
+        public void It_handles_non_http_requests_without_trying_to_inect_cookies()
+        {
+            var requestUri = new Uri("ftp://cookiemonster.love/cookies/");
+            var expectedCookies = new List<Cookie>{new Cookie("n1","v1","/","cookiemonster.love")};
+
+            var webClient = new WebClientWithCookiesTestExtensionYuk();
+
+            webClient.SetCookies(expectedCookies);
+            var webRequest = webClient.GetWebRequest(requestUri);
+
+            Assert.That(webRequest, Is.InstanceOf(typeof(FtpWebRequest)));
+        }
+    }
+
+    
+    internal class WebClientWithCookiesTestExtensionYuk : WebClientWithCookies
+    {
+        internal new WebRequest GetWebRequest(Uri address)
+        {
+            return base.GetWebRequest(address);
         }
     }
 }

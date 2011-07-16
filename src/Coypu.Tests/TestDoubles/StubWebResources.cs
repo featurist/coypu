@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Coypu.Tests.TestDoubles
 {
-    public class StubWebResources : IWebResources
+    public class StubWebResources
     {
         private readonly Dictionary<string, WebResponse> resources = new Dictionary<string, WebResponse>();
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Coypu.Robustness;
+using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
-using Coypu.Tests.When_making_browser_interactions_robust;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -10,9 +10,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     public abstract class BrowserInteractionTests
     {
         protected FakeDriver driver;
-        protected SpyRobustWrapper spyRobustWrapper;
-        protected Session session;
         protected FakeWaiter fakeWaiter;
+        protected Session session;
+        protected SpyRobustWrapper spyRobustWrapper;
         protected StubUrlBuilder stubUrlBuilder;
 
         [SetUp]
@@ -22,22 +22,27 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper = new SpyRobustWrapper();
             fakeWaiter = new FakeWaiter();
             stubUrlBuilder = new StubUrlBuilder();
-            session = TestSessionBuilder.Build(driver, spyRobustWrapper, fakeWaiter, new SpyResourceDownloader(), stubUrlBuilder);
+            session = TestSessionBuilder.Build(driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
+                                               stubUrlBuilder);
         }
     }
 
     public class StubUrlBuilder : UrlBuilder
     {
-        private Dictionary<string,string> urls = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> urls = new Dictionary<string, string>();
 
-        public void SetStubUrl(string virtualPath, string url)
-        {
-            urls[virtualPath] = url;
-        }
+        #region UrlBuilder Members
 
         public string GetFullyQualifiedUrl(string virtualPath)
         {
             return urls[virtualPath];
+        }
+
+        #endregion
+
+        public void SetStubUrl(string virtualPath, string url)
+        {
+            urls[virtualPath] = url;
         }
     }
 
@@ -45,10 +50,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     {
         private Action<TimeSpan> doOnWait = ms => { };
 
+        #region Waiter Members
+
         public void Wait(TimeSpan duration)
         {
             doOnWait(duration);
         }
+
+        #endregion
 
         public void DoOnWait(Action<TimeSpan> action)
         {

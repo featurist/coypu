@@ -1,18 +1,14 @@
-﻿using System.Linq;
-using Coypu.Tests.TestDoubles;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
     [TestFixture]
     public class When_building_urls
     {
-        private ConfiguredHostUrlBuilder configuredHostUrlBuilder;
-
         [SetUp]
         public void SetUp()
         {
-            configuredHostUrlBuilder = new ConfiguredHostUrlBuilder();
+            _currentConfigurationUrlBuilder = new CurrentConfigurationUrlBuilder();
         }
 
         [TearDown]
@@ -23,40 +19,39 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Configuration.SSL = default(bool);
         }
 
-        [Test]
-        public void It_forms_url_from_host_port_and_virtual_path()
-        {
-            Configuration.AppHost = "im.theho.st";
-            Configuration.Port = 81;
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("/visit/me"), Is.EqualTo("http://im.theho.st:81/visit/me"));
-        }
+        private CurrentConfigurationUrlBuilder _currentConfigurationUrlBuilder;
 
         [Test]
         public void It_defaults_to_localhost()
         {
             Configuration.Port = 81;
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("/visit/me"), Is.EqualTo("http://localhost:81/visit/me"));
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("/visit/me"),
+                        Is.EqualTo("http://localhost:81/visit/me"));
         }
 
         [Test]
         public void It_defaults_to_port_80()
         {
             Configuration.AppHost = "im.theho.st";
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("/visit/me"), Is.EqualTo("http://im.theho.st/visit/me"));
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("/visit/me"),
+                        Is.EqualTo("http://im.theho.st/visit/me"));
         }
 
         [Test]
-        public void It_handles_trailing_slashes_in_host()
+        public void It_forms_url_from_host_port_and_virtual_path()
         {
-            Configuration.AppHost = "im.theho.st/";
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("/visit/me"), Is.EqualTo("http://im.theho.st/visit/me"));
+            Configuration.AppHost = "im.theho.st";
+            Configuration.Port = 81;
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("/visit/me"),
+                        Is.EqualTo("http://im.theho.st:81/visit/me"));
         }
 
         [Test]
         public void It_handles_missing_leading_slashes_in_virtual_path()
         {
             Configuration.AppHost = "im.theho.st";
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("visit/me"), Is.EqualTo("http://im.theho.st/visit/me"));
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("visit/me"),
+                        Is.EqualTo("http://im.theho.st/visit/me"));
         }
 
         [Test]
@@ -64,24 +59,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Configuration.AppHost = "im.theho.st/";
             Configuration.Port = 123;
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("visit/me"), Is.EqualTo("http://im.theho.st:123/visit/me"));
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("visit/me"),
+                        Is.EqualTo("http://im.theho.st:123/visit/me"));
         }
 
         [Test]
-        public void It_supports_SSL()
+        public void It_handles_trailing_slashes_in_host()
         {
-            Configuration.AppHost = "im.theho.st";
-            Configuration.SSL = true;
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("/visit/me"), Is.EqualTo("https://im.theho.st/visit/me"));
-        }
-
-        [Test]
-        public void It_supports_SSL_with_ports()
-        {
-            Configuration.AppHost = "im.theho.st";
-            Configuration.Port = 321;
-            Configuration.SSL = true;
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("/visit/me"), Is.EqualTo("https://im.theho.st:321/visit/me"));
+            Configuration.AppHost = "im.theho.st/";
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("/visit/me"),
+                        Is.EqualTo("http://im.theho.st/visit/me"));
         }
 
         [Test]
@@ -91,8 +78,29 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Configuration.Port = 321;
             Configuration.SSL = true;
 
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here"), Is.EqualTo("http://www.someother.site/over.here"));
-            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here"), Is.EqualTo("file:///C:/local/file.here"));
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here"),
+                        Is.EqualTo("http://www.someother.site/over.here"));
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here"),
+                        Is.EqualTo("file:///C:/local/file.here"));
+        }
+
+        [Test]
+        public void It_supports_SSL()
+        {
+            Configuration.AppHost = "im.theho.st";
+            Configuration.SSL = true;
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("/visit/me"),
+                        Is.EqualTo("https://im.theho.st/visit/me"));
+        }
+
+        [Test]
+        public void It_supports_SSL_with_ports()
+        {
+            Configuration.AppHost = "im.theho.st";
+            Configuration.Port = 321;
+            Configuration.SSL = true;
+            Assert.That(_currentConfigurationUrlBuilder.GetFullyQualifiedUrl("/visit/me"),
+                        Is.EqualTo("https://im.theho.st:321/visit/me"));
         }
     }
 }
