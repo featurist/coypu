@@ -74,14 +74,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiExamples.cs" />
-    <Compile Include="WebRequests.cs" />
-    <Compile Include="States.cs" />
-    <Compile Include="RawWebdriver.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ApiExamples.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ExternalExamples.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RawWebdriver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sites\SinatraSite.cs" />
+    <Compile Include="States.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebRequests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu\Coypu.csproj">
@@ -91,7 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="sites\site_with_secure_resources.rb" />
+    <None Include="sites\site_with_secure_resources.rb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Coypu.Drivers.Tests\html\iFrame1.htm">

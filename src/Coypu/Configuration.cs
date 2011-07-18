@@ -12,13 +12,27 @@ namespace Coypu
         const int DEFAULT_PORT = 80;
         const double DEFAULT_TIMEOUT_SECONDS = 10;
         const double DEFAULT_INTERVAL_SECONDS = 0.1;
+        
+        private static string appHost;
 
         static Configuration()
         {
+            Reset();
+        }
+
+        /// <summary>
+        /// Reset all configuration settings to their default values
+        /// </summary>
+        public static void Reset()
+        {
+            AppHost = DEFAULT_APP_HOST;
+            Port = DEFAULT_PORT;
+            SSL = false;
             Timeout = TimeSpan.FromSeconds(DEFAULT_TIMEOUT_SECONDS);
             RetryInterval = TimeSpan.FromSeconds(DEFAULT_INTERVAL_SECONDS);
             Browser = Drivers.Browser.Firefox;
             Driver = typeof(SeleniumWebDriver);
+            WaitBeforeClick = TimeSpan.Zero;
         }
 
         /// <summary>
@@ -51,7 +65,6 @@ namespace Coypu
         /// </summary>
         public static TimeSpan WaitBeforeClick { get; set; }
 
-        private static string appHost;
 
         /// <summary>
         /// <para>The host of the website you are testing, e.g. 'github.com'</para>
@@ -59,21 +72,16 @@ namespace Coypu
         /// </summary>
         public static string AppHost
         {
-            get { return appHost == default(string) ? DEFAULT_APP_HOST : appHost;}
+            get { return appHost;}
             set { appHost = value == null ? null : value.TrimEnd('/'); }
         }
 
-        private static int port;
 
         /// <summary>
         /// <para>The port of the website you are testing</para>
         /// <para>Default: 80</para>
         /// </summary>
-        public static int Port
-        {
-            get { return port == default(int) ? DEFAULT_PORT : port;}
-            set { port = value; }
-        }
+        public static int Port { get; set; }
 
         /// <summary>
         /// <para>Whether to use the HTTPS protocol to connect to website you are testing</para>

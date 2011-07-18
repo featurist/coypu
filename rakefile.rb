@@ -19,17 +19,32 @@ task :release_configuration do
   ENV['BUILD_CONFIGURATION'] = 'Release'
 end
 
-desc 'test'
-nunit :test => [:release_configuration, :compile] do |nunit|
-  nunit.command = 'lib\NUnit\nunit-console.exe'
-  nunit.assemblies = ['src\\Coypu.Tests\\bin\\Release\\Coypu.Tests.dll','src\\Coypu.AcceptanceTests\\bin\\Release\\Coypu.AcceptanceTests.dll']
+namespace :test do
+
+  desc 'driver tests only'
+  nunit :drivers => [:release_configuration, :compile] do |nunit|
+    nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
+    nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\Release\\Coypu.Drivers.Tests.dll"]
+  end
+
+  desc 'unit tests only'
+  nunit :unit => [:release_configuration, :compile] do |nunit|
+    nunit.command = 'lib\NUnit\nunit-console.exe'
+    nunit.assemblies = ['src\\Coypu.Tests\\bin\\Release\\Coypu.Tests.dll']
+  end
+
+  desc 'acceptance tests only'
+  nunit :acceptance => [:release_configuration, :compile] do |nunit|
+    nunit.command = 'lib\NUnit\nunit-console.exe'
+    nunit.assemblies = ['src\\Coypu.AcceptanceTests\\bin\\Release\\Coypu.AcceptanceTests.dll']
+  end
+  
+  nunit :all => [:release_configuration, :compile] do |nunit|
+    nunit.command = 'lib\NUnit\nunit-console.exe'
+    nunit.assemblies = ['src\\Coypu.Tests\\bin\\Release\\Coypu.Tests.dll','src\\Coypu.AcceptanceTests\\bin\\Release\\Coypu.AcceptanceTests.dll']
+  end
 end
 
-desc 'testdrivers'
-nunit :testdrivers => [:release_configuration, :compile] do |nunit|
-  nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
-  nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\Release\\Coypu.Drivers.Tests.dll"]
-end
 
 desc 'package'
 task :package => :test do

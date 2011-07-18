@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Coypu.AcceptanceTests.sites;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -8,6 +9,8 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class WebRequests
     {
+        private SinatraSite sinatraSite;
+
         private Session browser {
             get { return Browser.Session; }
         }
@@ -15,15 +18,18 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
+            sinatraSite = new SinatraSite("site_with_secure_resources");
+
             Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
             Configuration.Port = 4567;
             browser.Visit("/");
         }
 
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDown()
         {
             Browser.EndSession();
+            sinatraSite.Dispose();
         }
 
         [Test]

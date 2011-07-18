@@ -12,15 +12,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [SetUp]
         public void SetUp()
         {
+            Configuration.Reset();
             configuredHostUrlBuilder = new ConfiguredHostUrlBuilder();
         }
 
         [TearDown]
         public void TearDown()
         {
-            Configuration.AppHost = default(string);
-            Configuration.Port = default(int);
-            Configuration.SSL = default(bool);
+            Configuration.Reset();
         }
 
         [Test]
@@ -85,11 +84,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void It_ignores_host_etc_when_supplied_a_fully_qualified_url()
-        {
+        public void It_ignores_host_when_supplied_a_fully_qualified_url() {
             Configuration.AppHost = "im.theho.st";
             Configuration.Port = 321;
             Configuration.SSL = true;
+
+            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here"), Is.EqualTo("http://www.someother.site/over.here"));
+            Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here"), Is.EqualTo("file:///C:/local/file.here"));
+        }
+
+        [Test]
+        public void It_ignores_port_when_supplied_a_fully_qualified_url() {
+            Configuration.Port = 321;
 
             Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here"), Is.EqualTo("http://www.someother.site/over.here"));
             Assert.That(configuredHostUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here"), Is.EqualTo("file:///C:/local/file.here"));

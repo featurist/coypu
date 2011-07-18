@@ -9,20 +9,26 @@ namespace Coypu.AcceptanceTests
     public class ExternalExamples
     {
         [SetUp]
-        public void SetUp() {
+        public void SetUp() 
+        {
+            Configuration.Reset();
+
+            Configuration.AppHost = "www.google.com";
+            Configuration.Driver = typeof(SeleniumHtmlUnitWebDriver);
+
             Configuration.Timeout = TimeSpan.FromSeconds(10);
         }
-
-        [TestFixtureTearDown]
+        [TearDown]
         public void TearDown()
         {
+            Configuration.Reset();
             Browser.EndSession();
         }
 
         [Test]
         public void Retries_Autotrader()
         {
-            Session browser = Browser.Session;
+            var browser = Browser.Session;
             browser.Visit("http://www.autotrader.co.uk/used-cars");
 
             browser.FillIn("postcode").With("N1 1AA");
@@ -42,7 +48,7 @@ namespace Coypu.AcceptanceTests
         [Test, Explicit]
         public void Visibility_NewTwitterLogin()
         {
-            Session browser = Browser.Session;
+            var browser = Browser.Session;
             browser.Visit("http://www.twitter.com");
 
             browser.FillIn("session[username_or_email]").With("coyputester2");
@@ -53,7 +59,7 @@ namespace Coypu.AcceptanceTests
          Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
         public void FindingStuff_CarBuzz()
         {
-            Session browser = Browser.Session;
+            var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
             Console.WriteLine(browser.Has(() => browser.FindSection("Make")));
