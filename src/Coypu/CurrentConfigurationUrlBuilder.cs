@@ -2,7 +2,7 @@
 
 namespace Coypu
 {
-    internal class ConfiguredHostUrlBuilder : UrlBuilder
+    internal class CurrentConfigurationUrlBuilder : UrlBuilder
     {
         public string GetFullyQualifiedUrl(string virtualPath)
         {

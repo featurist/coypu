@@ -1,6 +1,6 @@
 # Version 0.2.8
 
-Release date: 2011-07-14
+Release date: 2011-07-18
 
 ### Added
 * SaveWebResource saves a resource from the web directly using the current browser session's cookies

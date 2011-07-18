@@ -1,5 +1,6 @@
 ﻿using System;
 using Coypu.Robustness;
+using Coypu.WebRequests;
 
 namespace Coypu
 {
@@ -24,7 +25,11 @@ namespace Coypu
 
         private static void StartNewSession()
         {
-            session = new Session(NewWebDriver(), new RetryUntilTimeoutRobustWrapper(), new ThreadSleepWaiter(), new WebClientResourceDownloader(), new ConfiguredHostUrlBuilder());
+            session = new Session(NewWebDriver(), 
+                new RetryUntilTimeoutRobustWrapper(), 
+                new ThreadSleepWaiter(), 
+                new WebClientWithCookies(), 
+                new CurrentConfigurationUrlBuilder());
         }
 
         private static Driver NewWebDriver()

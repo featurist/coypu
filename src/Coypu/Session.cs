@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using Coypu.Robustness;
 using System.Text.RegularExpressions;
+using Coypu.WebRequests;
 
 namespace Coypu
 {
@@ -14,7 +15,7 @@ namespace Coypu
     {
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
-        private readonly ResourceDownloader resourceDownloader;
+        private readonly RestrictedResourceDownloader restrictedResourceDownloader;
         private readonly Clicker clicker;
         private readonly UrlBuilder urlBuilder;
         private readonly TemporaryTimeouts temporaryTimeouts;
@@ -35,11 +36,11 @@ namespace Coypu
             get { return driver.Native; }
         }
 
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, ResourceDownloader resourceDownloader, UrlBuilder urlBuilder)
+        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader _restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
             this.driver = driver;
             this.robustWrapper = robustWrapper;
-            this.resourceDownloader = resourceDownloader;
+            this.restrictedResourceDownloader = _restrictedResourceDownloader;
             clicker = new Clicker(driver, waiter);
             this.urlBuilder = urlBuilder;
             temporaryTimeouts = new TemporaryTimeouts();
@@ -685,9 +686,16 @@ namespace Coypu
             return stateFinder.FindState(states);
         }
 
+        /// <summary>
+        /// Saves a resource from the web to a local file using the cookies from the current browser session.
+        /// Allows you to sign in through the browser and then directly download a resource restricted to signed-in users.
+        /// </summary>
+        /// <param name="resource"> The location of the resource to download</param>
+        /// <param name="saveAs">Path to save the file to</param>
         public void SaveWebResource(string resource, string saveAs)
         {
-            resourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs, driver.GetBrowserCookies());
+            restrictedResourceDownloader.SetCookies(driver.GetBrowserCookies());
+            restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs);
         }
     }
 }

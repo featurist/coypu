@@ -130,8 +130,8 @@
     <Compile Include="Drivers\Watin\WatiNExtensions.cs" />
     <Compile Include="Drivers\Watin\WatiNDriver.cs" />
     <Compile Include="Drivers\XPath.cs" />
-    <Compile Include="ResourceDownloader.cs" />
-    <Compile Include="WebClientResourceDownloader.cs" />
+    <Compile Include="WebRequests\RequestCookieInjector.cs" />
+    <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />
     <Compile Include="FillInWith.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -151,11 +151,11 @@
     <Compile Include="State.cs" />
     <Compile Include="StateFinder.cs" />
     <Compile Include="TemporaryTimeouts.cs" />
-    <Compile Include="ConfiguredHostUrlBuilder.cs" />
-    <Compile Include="IWebResources.cs" />
-    <Compile Include="WebClientWithCookies.cs">
+    <Compile Include="CurrentConfigurationUrlBuilder.cs" />
+    <Compile Include="WebRequests\WebClientWithCookies.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="WebRequests\WebRequestCookieInjector.cs" />
     <Compile Include="ZeroTimeoutQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

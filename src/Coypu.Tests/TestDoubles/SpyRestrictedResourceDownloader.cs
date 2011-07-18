@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using Coypu.WebRequests;
 
 namespace Coypu.Tests.TestDoubles
 {
-    public class SpyResourceDownloader : ResourceDownloader
+    public class SpyRestrictedResourceDownloader : RestrictedResourceDownloader
     {
         private readonly IList<DownloadedFile> downloadedFiles = new List<DownloadedFile>();
 
@@ -12,9 +13,16 @@ namespace Coypu.Tests.TestDoubles
             get { return downloadedFiles; }
         }
 
-        public void DownloadFile(string resource, string saveAs, IEnumerable<Cookie> cookies)
+        public void SetCookies(IEnumerable<Cookie> cookies)
         {
-            DownloadedFiles.Add(new DownloadedFile(resource, saveAs, cookies));
+            this.Cookies = cookies;
+        }
+
+        protected IEnumerable<Cookie> Cookies { get; private set; }
+
+        public void DownloadFile(string resource, string saveAs)
+        {
+            DownloadedFiles.Add(new DownloadedFile(resource, saveAs, Cookies));
         }
     }
 
@@ -22,13 +30,13 @@ namespace Coypu.Tests.TestDoubles
     {
         public string Resource { get; private set; }
         public string SaveAs { get; private set; }
-        public IEnumerable<Cookie> Cookies { get; private set; }
+        public IEnumerable<Cookie> Cookies { get; set; }
 
         public DownloadedFile(string resource, string saveAs, IEnumerable<Cookie> cookies)
         {
-            Cookies = cookies;
             Resource = resource;
             SaveAs = saveAs;
+            Cookies = cookies;
         }
     }
 }

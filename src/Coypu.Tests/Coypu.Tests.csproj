@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestDoubles\SpyResourceDownloader.cs" />
+    <Compile Include="TestDoubles\SpyRestrictedResourceDownloader.cs" />
     <Compile Include="TestDoubles\StubDriver.cs" />
     <Compile Include="TestDoubles\StubWebResources.cs" />
     <Compile Include="TestDoubles\StubWebResponse.cs" />
@@ -82,7 +82,9 @@
     <Compile Include="ExplicitlyThrownTestException.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_waiting.cs" />
     <Compile Include="TestBuilders\TestSessionBuilder.cs" />
-    <Compile Include="When_making_direct_web_requests\When_saving_a_resource_from_the_web.cs" />
+    <Compile Include="When_making_direct_web_requests\When_saving_a_resource_from_the_web.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="When_starting_and_ending_sessions.cs" />
     <Compile Include="When_interacting_with_the_browser\When_visiting.cs" />
     <Compile Include="When_interacting_with_the_browser\When_completing_forms.cs" />
