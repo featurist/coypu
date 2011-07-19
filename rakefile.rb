@@ -47,7 +47,7 @@ end
 
 
 desc 'package'
-task :package => :'test:all' do
+task :package do # => :'test:all' do
   FileUtils.rm_rf('temp')
   [:net35, :net40].each do |version|
     Rake::Task["compile_#{version}"].invoke
@@ -65,6 +65,7 @@ task :package => :'test:all' do
   end
   package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}
   sh 'nuget Pack Coypu.nuspec'
+  sh 'o build-wrap -quiet'
 end
 
 desc 'publish'
@@ -81,7 +82,7 @@ namespace :version do
       bump_version do |version|
         version.major = version.major + 1
         version.minor = 0
-	version.patch = 0
+        version.patch = 0
       end
     end
     desc "bump minor version"
@@ -112,6 +113,11 @@ def bump_version
   yield version
   new_version = "#{version.major}.#{version.minor}.#{version.patch}"
   puts "Bumped #{version_string} to #{new_version}"
+  
+  File.open('version', 'w') do |file|
+    file.puts new_version
+  end
+  
   new_version_xml = "<version>#{new_version}</version>"
   nuspec.gsub!(version_regex, new_version_xml)
   File.open('Coypu.nuspec', 'w') do |file|
