@@ -1,3 +1,10 @@
+# Version 0.2.9
+
+Release date: 2011-07-21
+
+### Changed
+* Update to Selenium WebDriver 2.1.0
+
 # Version 0.2.8
 
 Release date: 2011-07-18

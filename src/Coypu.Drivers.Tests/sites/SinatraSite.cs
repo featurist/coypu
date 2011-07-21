@@ -8,9 +8,8 @@ namespace Coypu.Drivers.Tests.Sites
     {
         private readonly Process process;
 
-        public SinatraSite(string name)
+        public SinatraSite(string sitePath)
         {
-            var sitePath = string.Format(@"src\Coypu.AcceptanceTests\sites\{0}.rb", name);
             var processStartInfo = new ProcessStartInfo("ruby", "\"" + new FileInfo(sitePath).FullName + "\"");
             processStartInfo.UseShellExecute = false;
             processStartInfo.RedirectStandardOutput = true;

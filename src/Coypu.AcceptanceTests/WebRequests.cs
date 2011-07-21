@@ -18,7 +18,7 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            sinatraSite = new SinatraSite("site_with_secure_resources");
+            sinatraSite = new SinatraSite(string.Format(@"sites\{0}.rb", "site_with_secure_resources"));
 
             Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
             Configuration.Port = 4567;

@@ -62,7 +62,7 @@ namespace Coypu.Drivers.Tests
                                 ? typeof (DriverSpecs)
                                 : Type.GetType(testSuite);
 
-                using (new SinatraSite("site_with_secure_resources"))
+                using (new SinatraSite(string.Format(@"src\Coypu.AcceptanceTests\sites\{0}.rb", "site_with_secure_resources")))
                 {
                     LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Firefox);
                     LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);

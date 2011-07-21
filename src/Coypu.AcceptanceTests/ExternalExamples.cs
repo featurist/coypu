@@ -33,6 +33,8 @@ namespace Coypu.AcceptanceTests
 
             browser.FillIn("postcode").With("N1 1AA");
             
+            browser.Click(() => browser.FindField("make"));
+            
             browser.Select("citroen").From("make");
             browser.Select("c4_grand_picasso").From("model");
 

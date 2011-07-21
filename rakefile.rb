@@ -47,7 +47,7 @@ end
 
 
 desc 'package'
-task :package do # => :'test:all' do
+task :package => :'test:all' do
   FileUtils.rm_rf('temp')
   [:net35, :net40].each do |version|
     Rake::Task["compile_#{version}"].invoke
