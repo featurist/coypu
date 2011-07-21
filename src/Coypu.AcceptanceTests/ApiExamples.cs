@@ -221,6 +221,18 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void SelectFrom_example()
+        {
+            var textField = browser.FindField("containerLabeledSelectFieldId");
+            Assert.That(textField.SelectedOption, Is.EqualTo("select two option one"));
+
+            browser.Select("select2value2").From("containerLabeledSelectFieldId");
+
+            textField = browser.FindField("containerLabeledSelectFieldId");
+            Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
+        }
+
+        [Test]
         public void Has_example()
         {
             Assert.IsTrue(browser.Has(() => browser.FindSection("Inspecting Content")));

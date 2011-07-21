@@ -91,6 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="sites\SinatraSite.cs" />
     <Compile Include="When_getting_cookies.cs" />
     <Compile Include="When_hovering.cs" />
     <Compile Include="When_using_iframes_as_scope.cs" />

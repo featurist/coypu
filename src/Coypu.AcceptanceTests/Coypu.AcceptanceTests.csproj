@@ -84,7 +84,6 @@
     <Compile Include="RawWebdriver.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sites\SinatraSite.cs" />
     <Compile Include="States.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +91,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj">
+      <Project>{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}</Project>
+      <Name>Coypu.Drivers.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Coypu\Coypu.csproj">
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
       <Name>Coypu</Name>

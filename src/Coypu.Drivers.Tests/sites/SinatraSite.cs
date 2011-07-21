@@ -2,15 +2,15 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace Coypu.AcceptanceTests.sites
+namespace Coypu.Drivers.Tests.Sites
 {
-    internal class SinatraSite : IDisposable
+    public class SinatraSite : IDisposable
     {
         private readonly Process process;
 
-        internal SinatraSite(string name)
+        public SinatraSite(string name)
         {
-            var sitePath = string.Format(@"sites\{0}.rb", name);
+            var sitePath = string.Format(@"src\Coypu.AcceptanceTests\sites\{0}.rb", name);
             var processStartInfo = new ProcessStartInfo("ruby", "\"" + new FileInfo(sitePath).FullName + "\"");
             processStartInfo.UseShellExecute = false;
             processStartInfo.RedirectStandardOutput = true;

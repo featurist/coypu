@@ -32,7 +32,7 @@ namespace Coypu.AcceptanceTests
             browser.Visit("http://www.autotrader.co.uk/used-cars");
 
             browser.FillIn("postcode").With("N1 1AA");
-
+            
             browser.Select("citroen").From("make");
             browser.Select("c4_grand_picasso").From("model");
 

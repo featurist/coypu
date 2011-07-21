@@ -1,78 +1,1643 @@
-(in c:/dev/Coypu)
 Microsoft (R) Build Engine Version 3.5.30729.4926
-[Microsoft .NET Framework, Version 2.0.50727.4961]
+[Microsoft .NET Framework, Version 2.0.50727.4927]
 Copyright (C) Microsoft Corporation 2007. All rights reserved.
 
-Build started 13/07/2011 01:42:24.
-Project "c:\dev\Coypu\src\Coypu.sln" on node 0 (default targets).
+Build started 21/07/2011 16:49:25.
+Project "d:\projects\Coypu\src\Coypu.sln" on node 0 (default targets).
   Building solution configuration "Release|Any CPU".
-Project "c:\dev\Coypu\src\Coypu.sln" (1) is building "c:\dev\Coypu\src\Coypu\Coypu.csproj" (2) on node 0 (default targets).
+Project "d:\projects\Coypu\src\Coypu.sln" (1) is building "d:\projects\Coypu\src\Coypu\Coypu.csproj" (2) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
-CoreCompile:
-Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+Browser.cs(7,25): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Browser'
+Driver.cs(8,22): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver'
+Driver.cs(10,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindButton(string)'
+Driver.cs(11,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindLink(string)'
+Driver.cs(12,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindField(string)'
+Driver.cs(13,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Click(Coypu.Element)'
+Driver.cs(14,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Visit(string)'
+Driver.cs(15,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Set(Coypu.Element, string)'
+Driver.cs(16,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Select(Coypu.Element, string)'
+Driver.cs(18,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasContent(string)'
+Driver.cs(19,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasContentMatch(System.Text.RegularExpressions.Regex)'
+Driver.cs(20,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasCss(string)'
+Driver.cs(21,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasXPath(string)'
+Driver.cs(22,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasDialog(string)'
+Driver.cs(23,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindCss(string)'
+Driver.cs(24,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindXPath(string)'
+Driver.cs(25,30): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindAllCss(string)'
+Driver.cs(26,30): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindAllXPath(string)'
+Driver.cs(27,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Check(Coypu.Element)'
+Driver.cs(28,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Uncheck(Coypu.Element)'
+Driver.cs(29,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Choose(Coypu.Element)'
+Driver.cs(31,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.AcceptModalDialog()'
+Driver.cs(32,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.CancelModalDialog()'
+Driver.cs(33,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.SetScope(System.Func<Coypu.Element>)'
+Driver.cs(34,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.ClearScope()'
+Driver.cs(35,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.ExecuteScript(string)'
+Driver.cs(36,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindFieldset(string)'
+Driver.cs(37,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindSection(string)'
+Driver.cs(38,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindId(string)'
+Driver.cs(39,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindIFrame(string)'
+Driver.cs(40,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Hover(Coypu.Element)'
+Driver.cs(41,29): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.GetBrowserCookies()'
+Driver.cs(17,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Native'
+Driver.cs(30,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Disposed'
+Drivers\Browser.cs(8,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Firefox'
+Drivers\Browser.cs(9,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.InternetExplorer'
+Drivers\Browser.cs(10,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Chrome'
+Drivers\Browser.cs(11,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Safari'
+Drivers\Browser.cs(12,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Android'
+Drivers\BrowserNotSupportedException.cs(10,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.BrowserNotSupportedException.BrowserNotSupportedException(Coypu.Drivers.Browser, System.Type)'
+Drivers\Watin\WatiNDriver.cs(13,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver'
+Drivers\Watin\WatiNDriver.cs(39,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.SetScope(System.Func<Coypu.Element>)'
+Drivers\Watin\WatiNDriver.cs(46,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.ClearScope()'
+Drivers\Watin\WatiNDriver.cs(51,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.ExecuteScript(string)'
+Drivers\Watin\WatiNDriver.cs(57,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindFieldset(string)'
+Drivers\Watin\WatiNDriver.cs(83,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindSection(string)'
+Drivers\Watin\WatiNDriver.cs(101,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindId(string)'
+Drivers\Watin\WatiNDriver.cs(107,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindIFrame(string)'
+Drivers\Watin\WatiNDriver.cs(116,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Hover(Coypu.Element)'
+Drivers\Watin\WatiNDriver.cs(121,36): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.GetBrowserCookies()'
+Drivers\Watin\WatiNDriver.cs(133,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindButton(string)'
+Drivers\Watin\WatiNDriver.cs(155,48): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Filter<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, WatiN.Core.Constraints.Constraint)'
+Drivers\Watin\WatiNDriver.cs(160,48): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Filter<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, System.Predicate<TComponent>)'
+Drivers\Watin\WatiNDriver.cs(165,35): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindFirst<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, WatiN.Core.Constraints.Constraint)'
+Drivers\Watin\WatiNDriver.cs(170,35): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindFirst<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, System.Predicate<TComponent>)'
+Drivers\Watin\WatiNDriver.cs(175,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.BuildElement(WatiN.Core.Element, string)'
+Drivers\Watin\WatiNDriver.cs(184,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindLink(string)'
+Drivers\Watin\WatiNDriver.cs(190,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindField(string)'
+Drivers\Watin\WatiNDriver.cs(246,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Click(Coypu.Element)'
+Drivers\Watin\WatiNDriver.cs(256,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Visit(string)'
+Drivers\Watin\WatiNDriver.cs(261,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Set(Coypu.Element, string)'
+Drivers\Watin\WatiNDriver.cs(273,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Select(Coypu.Element, string)'
+Drivers\Watin\WatiNDriver.cs(290,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasContent(string)'
+Drivers\Watin\WatiNDriver.cs(297,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasContentMatch(System.Text.RegularExpressions.Regex)'
+Drivers\Watin\WatiNDriver.cs(304,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Check(Coypu.Element)'
+Drivers\Watin\WatiNDriver.cs(309,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Uncheck(Coypu.Element)'
+Drivers\Watin\WatiNDriver.cs(314,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Choose(Coypu.Element)'
+Drivers\Watin\WatiNDriver.cs(319,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasDialog(string)'
+Drivers\Watin\WatiNDriver.cs(324,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.AcceptModalDialog()'
+Drivers\Watin\WatiNDriver.cs(329,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.CancelModalDialog()'
+Drivers\Watin\WatiNDriver.cs(334,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasCss(string)'
+Drivers\Watin\WatiNDriver.cs(339,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasXPath(string)'
+Drivers\Watin\WatiNDriver.cs(344,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindCss(string)'
+Drivers\Watin\WatiNDriver.cs(349,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindXPath(string)'
+Drivers\Watin\WatiNDriver.cs(354,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindAllCss(string)'
+Drivers\Watin\WatiNDriver.cs(359,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(string)'
+Drivers\Watin\WatiNDriver.cs(364,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Dispose()'
+Drivers\Watin\WatiNDriver.cs(17,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Disposed'
+Drivers\Watin\WatiNDriver.cs(285,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Native'
+FillInWith.cs(5,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.FillInWith'
+Drivers\Selenium\SeleniumWebDriver.cs(12,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver'
+Drivers\Selenium\SeleniumWebDriver.cs(29,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.SeleniumWebDriver()'
+Drivers\Selenium\SeleniumWebDriver.cs(34,19): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.SeleniumWebDriver(OpenQA.Selenium.Remote.RemoteWebDriver)'
+Drivers\Selenium\SeleniumWebDriver.cs(65,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.SetScope(System.Func<Coypu.Element>)'
+Drivers\Selenium\SeleniumWebDriver.cs(70,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.ClearScope()'
+Drivers\Selenium\SeleniumWebDriver.cs(75,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindField(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(80,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindButton(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(85,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindIFrame(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(90,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindLink(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(95,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindId(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(100,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindFieldset(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(109,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(114,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindCss(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(119,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindXPath(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(124,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindAllCss(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(129,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindAllXPath(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(152,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasContent(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(157,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasContentMatch(System.Text.RegularExpressions.Regex)'
+Drivers\Selenium\SeleniumWebDriver.cs(175,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasCss(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(180,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasXPath(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(185,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasDialog(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(190,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Visit(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(195,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Click(Coypu.Element)'
+Drivers\Selenium\SeleniumWebDriver.cs(200,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Hover(Coypu.Element)'
+Drivers\Selenium\SeleniumWebDriver.cs(205,36): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.GetBrowserCookies()'
+Drivers\Selenium\SeleniumWebDriver.cs(210,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Set(Coypu.Element, string)'
+Drivers\Selenium\SeleniumWebDriver.cs(218,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Select(Coypu.Element, string)'
+Drivers\Selenium\SeleniumWebDriver.cs(223,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.AcceptModalDialog()'
+Drivers\Selenium\SeleniumWebDriver.cs(228,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.CancelModalDialog()'
+Drivers\Selenium\SeleniumWebDriver.cs(233,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Check(Coypu.Element)'
+Drivers\Selenium\SeleniumWebDriver.cs(241,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Uncheck(Coypu.Element)'
+Drivers\Selenium\SeleniumWebDriver.cs(249,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Choose(Coypu.Element)'
+Drivers\Selenium\SeleniumWebDriver.cs(254,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.ExecuteScript(string)'
+Drivers\Selenium\SeleniumWebDriver.cs(278,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Dispose()'
+Drivers\Selenium\SeleniumWebDriver.cs(14,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Disposed'
+Drivers\Selenium\SeleniumWebDriver.cs(50,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Native'
+Robustness\RobustWrapper.cs(5,22): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper'
+Robustness\RobustWrapper.cs(7,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.Robustly(System.Action)'
+Robustness\RobustWrapper.cs(8,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.Robustly<TResult>(System.Func<TResult>)'
+Robustness\RobustWrapper.cs(9,11): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.Query<T>(System.Func<T>, T)'
+Robustness\RobustWrapper.cs(10,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.TryUntil(System.Action, System.Func<bool>, System.TimeSpan)'
+SelectFrom.cs(5,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.SelectFrom'
+Robustness\RetryUntilTimeoutRobustWrapper.cs(7,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper'
+Robustness\RetryUntilTimeoutRobustWrapper.cs(9,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Robustly(System.Action)'
+Robustness\RetryUntilTimeoutRobustWrapper.cs(18,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Robustly<TResult>(System.Func<TResult>)'
+Robustness\RetryUntilTimeoutRobustWrapper.cs(23,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Query<T>(System.Func<T>, T)'
+Robustness\RetryUntilTimeoutRobustWrapper.cs(28,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Robustly<TResult>(System.Func<TResult>, object)'
+Robustness\RetryUntilTimeoutRobustWrapper.cs(75,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.TryUntil(System.Action, System.Func<bool>, System.TimeSpan)'
+_CopyFilesMarkedCopyLocal:
+  Copying file from "..\..\lib\Webdriver\Castle.Core.dll" to "bin\Release\Castle.Core.dll".
+  Copying file from "..\packages\WatiN.2.1.0\lib\net35\Interop.SHDocVw.dll" to "bin\Release\Interop.SHDocVw.dll".
+  Copying file from "..\..\lib\Webdriver\Ionic.Zip.Reduced.dll" to "bin\Release\Ionic.Zip.Reduced.dll".
+  Copying file from "..\packages\WatiN.2.1.0\lib\net35\Microsoft.mshtml.dll" to "bin\Release\Microsoft.mshtml.dll".
+  Copying file from "..\..\lib\Webdriver\Newtonsoft.Json.dll" to "bin\Release\Newtonsoft.Json.dll".
+  Copying file from "..\..\lib\Webdriver\Selenium.WebDriverBackedSelenium.dll" to "bin\Release\Selenium.WebDriverBackedSelenium.dll".
+  Copying file from "..\..\lib\Webdriver\ThoughtWorks.Selenium.Core.dll" to "bin\Release\ThoughtWorks.Selenium.Core.dll".
+  Copying file from "..\packages\WatiN.2.1.0\lib\net35\WatiN.Core.dll" to "bin\Release\WatiN.Core.dll".
+  Copying file from "..\..\lib\Webdriver\WebDriver.dll" to "bin\Release\WebDriver.dll".
+  Copying file from "..\..\lib\Webdriver\Webdriver.Support.dll" to "bin\Release\Webdriver.Support.dll".
+  Copying file from "..\..\lib\Webdriver\WebDriver.pdb" to "bin\Release\WebDriver.pdb".
+  Copying file from "..\..\lib\Webdriver\WebDriver.xml" to "bin\Release\WebDriver.xml".
+  Copying file from "..\packages\WatiN.2.1.0\lib\net35\WatiN.Core.xml" to "bin\Release\WatiN.Core.xml".
+  Copying file from "..\..\lib\Webdriver\Selenium.WebDriverBackedSelenium.pdb" to "bin\Release\Selenium.WebDriverBackedSelenium.pdb".
+  Copying file from "..\..\lib\Webdriver\Selenium.WebDriverBackedSelenium.xml" to "bin\Release\Selenium.WebDriverBackedSelenium.xml".
+  Copying file from "..\..\lib\Webdriver\Webdriver.Support.pdb" to "bin\Release\Webdriver.Support.pdb".
+  Copying file from "..\..\lib\Webdriver\Webdriver.Support.xml" to "bin\Release\Webdriver.Support.xml".
+  Copying file from "..\..\lib\Webdriver\ThoughtWorks.Selenium.Core.pdb" to "bin\Release\ThoughtWorks.Selenium.Core.pdb".
+  Copying file from "..\..\lib\Webdriver\ThoughtWorks.Selenium.Core.xml" to "bin\Release\ThoughtWorks.Selenium.Core.xml".
 _CopyOutOfDateSourceItemsToOutputDirectory:
 Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
-  Coypu -> c:\dev\Coypu\src\Coypu\bin\Release\Coypu.dll
-Done Building Project "c:\dev\Coypu\src\Coypu\Coypu.csproj" (default targets).
-Project "c:\dev\Coypu\src\Coypu.sln" (1) is building "c:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) on node 0 (default targets).
+  Copying file from "obj\Release\Coypu.dll" to "bin\Release\Coypu.dll".
+  Coypu -> d:\projects\Coypu\src\Coypu\bin\Release\Coypu.dll
+  Copying file from "obj\Release\Coypu.pdb" to "bin\Release\Coypu.pdb".
+Done Building Project "d:\projects\Coypu\src\Coypu\Coypu.csproj" (default targets).
+Project "d:\projects\Coypu\src\Coypu.sln" (1) is building "d:\projects\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
-Project "c:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "c:\dev\Coypu\src\Coypu\Coypu.csproj" (2:2) on node 0 (GetTargetPath target(s)).
+Project "d:\projects\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "d:\projects\Coypu\src\Coypu\Coypu.csproj" (2:2) on node 0 (GetTargetPath target(s)).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-Done Building Project "c:\dev\Coypu\src\Coypu\Coypu.csproj" (GetTargetPath target(s)).
-Project "c:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "c:\dev\Coypu\src\Coypu\Coypu.csproj" (2:3) on node 0 (GetNativeManifest target(s)).
+Done Building Project "d:\projects\Coypu\src\Coypu\Coypu.csproj" (GetTargetPath target(s)).
+Project "d:\projects\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "d:\projects\Coypu\src\Coypu\Coypu.csproj" (2:3) on node 0 (GetNativeManifest target(s)).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-Done Building Project "c:\dev\Coypu\src\Coypu\Coypu.csproj" (GetNativeManifest target(s)).
-CoreCompile:
-Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
-Project "c:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "c:\dev\Coypu\src\Coypu\Coypu.csproj" (2:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
+Done Building Project "d:\projects\Coypu\src\Coypu\Coypu.csproj" (GetNativeManifest target(s)).
+C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+_CopyFilesMarkedCopyLocal:
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.dll" to "bin\Release\Coypu.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Interop.SHDocVw.dll" to "bin\Release\Interop.SHDocVw.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WatiN.Core.dll" to "bin\Release\WatiN.Core.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.pdb" to "bin\Release\Coypu.pdb".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.xml" to "bin\Release\Coypu.xml".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WatiN.Core.xml" to "bin\Release\WatiN.Core.xml".
+Project "d:\projects\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (3) is building "d:\projects\Coypu\src\Coypu\Coypu.csproj" (2:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-Done Building Project "c:\dev\Coypu\src\Coypu\Coypu.csproj" (GetCopyToOutputDirectoryItems target(s)).
-_CopyOutOfDateSourceItemsToOutputDirectory:
-Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
-CopyFilesToOutputDirectory:
-  Coypu.AcceptanceTests -> c:\dev\Coypu\src\Coypu.AcceptanceTests\bin\Release\Coypu.AcceptanceTests.dll
-Done Building Project "c:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (default targets).
-Project "c:\dev\Coypu\src\Coypu.sln" (1) is building "c:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (4) on node 0 (default targets).
-Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
-EntityDeploy:
-  Processing 0 EDMX files.
-  Finished processing 0 EDMX files.
+Done Building Project "d:\projects\Coypu\src\Coypu\Coypu.csproj" (GetCopyToOutputDirectoryItems target(s)).
 _CopyOutOfDateSourceItemsToOutputDirectory:
 Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 _CopyOutOfDateSourceItemsToOutputDirectoryAlways:
-  Copying file from "c:\dev\Coypu\src\Coypu.Drivers.Tests\html\iFrame1.htm" to "bin\Release\html\iFrame1.htm".
-  Copying file from "c:\dev\Coypu\src\Coypu.Drivers.Tests\html\iFrame2.htm" to "bin\Release\html\iFrame2.htm".
-  Copying file from "c:\dev\Coypu\src\Coypu.Drivers.Tests\html\InteractionTestsPage.htm" to "bin\Release\html\InteractionTestsPage.htm".
+  Copying file from "d:\projects\Coypu\src\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb" to "bin\Release\sites\site_with_secure_resources.rb".
+CopyFilesToOutputDirectory:
+  Copying file from "obj\Release\Coypu.AcceptanceTests.dll" to "bin\Release\Coypu.AcceptanceTests.dll".
+  Coypu.AcceptanceTests -> d:\projects\Coypu\src\Coypu.AcceptanceTests\bin\Release\Coypu.AcceptanceTests.dll
+  Copying file from "obj\Release\Coypu.AcceptanceTests.pdb" to "bin\Release\Coypu.AcceptanceTests.pdb".
+Done Building Project "d:\projects\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (default targets).
+Project "d:\projects\Coypu\src\Coypu.sln" (1) is building "d:\projects\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (4) on node 0 (default targets).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+EntityDeploy:
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+_CopyFilesMarkedCopyLocal:
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.dll" to "bin\Release\Coypu.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.pdb" to "bin\Release\Coypu.pdb".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.xml" to "bin\Release\Coypu.xml".
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copying file from "d:\projects\Coypu\src\Coypu.Drivers.Tests\html\iFrame1.htm" to "bin\Release\html\iFrame1.htm".
+  Copying file from "d:\projects\Coypu\src\Coypu.Drivers.Tests\html\iFrame2.htm" to "bin\Release\html\iFrame2.htm".
+  Copying file from "d:\projects\Coypu\src\Coypu.Drivers.Tests\html\InteractionTestsPage.htm" to "bin\Release\html\InteractionTestsPage.htm".
 _CopyAppConfigFile:
 Skipping target "_CopyAppConfigFile" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
   Copying file from "obj\Release\Coypu.Drivers.Tests.dll" to "bin\Release\Coypu.Drivers.Tests.dll".
-  Coypu.Drivers.Tests -> c:\dev\Coypu\src\Coypu.Drivers.Tests\bin\Release\Coypu.Drivers.Tests.dll
+  Coypu.Drivers.Tests -> d:\projects\Coypu\src\Coypu.Drivers.Tests\bin\Release\Coypu.Drivers.Tests.dll
   Copying file from "obj\Release\Coypu.Drivers.Tests.pdb" to "bin\Release\Coypu.Drivers.Tests.pdb".
-Done Building Project "c:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (default targets).
-Project "c:\dev\Coypu\src\Coypu.sln" (1) is building "c:\dev\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (5) on node 0 (default targets).
+Done Building Project "d:\projects\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (default targets).
+Project "d:\projects\Coypu\src\Coypu.sln" (1) is building "d:\projects\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (5) on node 0 (default targets).
 Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
 EntityDeploy:
   Processing 0 EDMX files.
   Finished processing 0 EDMX files.
-CoreCompile:
-Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+_CopyFilesMarkedCopyLocal:
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.dll" to "bin\Release\Coypu.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WebDriver.dll" to "bin\Release\WebDriver.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Newtonsoft.Json.dll" to "bin\Release\Newtonsoft.Json.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Interop.SHDocVw.dll" to "bin\Release\Interop.SHDocVw.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Ionic.Zip.Reduced.dll" to "bin\Release\Ionic.Zip.Reduced.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WatiN.Core.dll" to "bin\Release\WatiN.Core.dll".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WebDriver.pdb" to "bin\Release\WebDriver.pdb".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WebDriver.xml" to "bin\Release\WebDriver.xml".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.pdb" to "bin\Release\Coypu.pdb".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\Coypu.xml" to "bin\Release\Coypu.xml".
+  Copying file from "d:\projects\Coypu\src\Coypu\bin\Release\WatiN.Core.xml" to "bin\Release\WatiN.Core.xml".
 _CopyOutOfDateSourceItemsToOutputDirectory:
 Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
 CopyFilesToOutputDirectory:
-  Coypu.Tests -> c:\dev\Coypu\src\Coypu.Tests\bin\Release\Coypu.Tests.dll
-Done Building Project "c:\dev\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default targets).
-Done Building Project "c:\dev\Coypu\src\Coypu.sln" (default targets).
+  Copying file from "obj\Release\Coypu.Tests.dll" to "bin\Release\Coypu.Tests.dll".
+  Coypu.Tests -> d:\projects\Coypu\src\Coypu.Tests\bin\Release\Coypu.Tests.dll
+  Copying file from "obj\Release\Coypu.Tests.pdb" to "bin\Release\Coypu.Tests.pdb".
+Done Building Project "d:\projects\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default targets).
+Done Building Project "d:\projects\Coypu\src\Coypu.sln" (default targets).
 
 Build succeeded.
-    0 Warning(s)
+
+"d:\projects\Coypu\src\Coypu.sln" (default target) (1) ->
+"d:\projects\Coypu\src\Coypu\Coypu.csproj" (default target) (2) ->
+(ResolveAssemblyReferences target) -> 
+  C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+
+
+"d:\projects\Coypu\src\Coypu.sln" (default target) (1) ->
+"d:\projects\Coypu\src\Coypu\Coypu.csproj" (default target) (2) ->
+(CoreCompile target) -> 
+  Browser.cs(7,25): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Browser'
+  Driver.cs(8,22): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver'
+  Driver.cs(10,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindButton(string)'
+  Driver.cs(11,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindLink(string)'
+  Driver.cs(12,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindField(string)'
+  Driver.cs(13,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Click(Coypu.Element)'
+  Driver.cs(14,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Visit(string)'
+  Driver.cs(15,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Set(Coypu.Element, string)'
+  Driver.cs(16,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Select(Coypu.Element, string)'
+  Driver.cs(18,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasContent(string)'
+  Driver.cs(19,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasContentMatch(System.Text.RegularExpressions.Regex)'
+  Driver.cs(20,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasCss(string)'
+  Driver.cs(21,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasXPath(string)'
+  Driver.cs(22,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.HasDialog(string)'
+  Driver.cs(23,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindCss(string)'
+  Driver.cs(24,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindXPath(string)'
+  Driver.cs(25,30): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindAllCss(string)'
+  Driver.cs(26,30): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindAllXPath(string)'
+  Driver.cs(27,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Check(Coypu.Element)'
+  Driver.cs(28,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Uncheck(Coypu.Element)'
+  Driver.cs(29,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Choose(Coypu.Element)'
+  Driver.cs(31,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.AcceptModalDialog()'
+  Driver.cs(32,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.CancelModalDialog()'
+  Driver.cs(33,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.SetScope(System.Func<Coypu.Element>)'
+  Driver.cs(34,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.ClearScope()'
+  Driver.cs(35,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.ExecuteScript(string)'
+  Driver.cs(36,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindFieldset(string)'
+  Driver.cs(37,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindSection(string)'
+  Driver.cs(38,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindId(string)'
+  Driver.cs(39,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.FindIFrame(string)'
+  Driver.cs(40,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Hover(Coypu.Element)'
+  Driver.cs(41,29): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.GetBrowserCookies()'
+  Driver.cs(17,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Native'
+  Driver.cs(30,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Driver.Disposed'
+  Drivers\Browser.cs(8,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Firefox'
+  Drivers\Browser.cs(9,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.InternetExplorer'
+  Drivers\Browser.cs(10,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Chrome'
+  Drivers\Browser.cs(11,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Safari'
+  Drivers\Browser.cs(12,9): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Browser.Android'
+  Drivers\BrowserNotSupportedException.cs(10,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.BrowserNotSupportedException.BrowserNotSupportedException(Coypu.Drivers.Browser, System.Type)'
+  Drivers\Watin\WatiNDriver.cs(13,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver'
+  Drivers\Watin\WatiNDriver.cs(39,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.SetScope(System.Func<Coypu.Element>)'
+  Drivers\Watin\WatiNDriver.cs(46,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.ClearScope()'
+  Drivers\Watin\WatiNDriver.cs(51,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.ExecuteScript(string)'
+  Drivers\Watin\WatiNDriver.cs(57,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindFieldset(string)'
+  Drivers\Watin\WatiNDriver.cs(83,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindSection(string)'
+  Drivers\Watin\WatiNDriver.cs(101,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindId(string)'
+  Drivers\Watin\WatiNDriver.cs(107,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindIFrame(string)'
+  Drivers\Watin\WatiNDriver.cs(116,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Hover(Coypu.Element)'
+  Drivers\Watin\WatiNDriver.cs(121,36): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.GetBrowserCookies()'
+  Drivers\Watin\WatiNDriver.cs(133,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindButton(string)'
+  Drivers\Watin\WatiNDriver.cs(155,48): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Filter<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, WatiN.Core.Constraints.Constraint)'
+  Drivers\Watin\WatiNDriver.cs(160,48): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Filter<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, System.Predicate<TComponent>)'
+  Drivers\Watin\WatiNDriver.cs(165,35): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindFirst<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, WatiN.Core.Constraints.Constraint)'
+  Drivers\Watin\WatiNDriver.cs(170,35): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindFirst<TComponent>(WatiN.Core.Interfaces.IComponentCollection<TComponent>, System.Predicate<TComponent>)'
+  Drivers\Watin\WatiNDriver.cs(175,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.BuildElement(WatiN.Core.Element, string)'
+  Drivers\Watin\WatiNDriver.cs(184,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindLink(string)'
+  Drivers\Watin\WatiNDriver.cs(190,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindField(string)'
+  Drivers\Watin\WatiNDriver.cs(246,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Click(Coypu.Element)'
+  Drivers\Watin\WatiNDriver.cs(256,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Visit(string)'
+  Drivers\Watin\WatiNDriver.cs(261,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Set(Coypu.Element, string)'
+  Drivers\Watin\WatiNDriver.cs(273,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Select(Coypu.Element, string)'
+  Drivers\Watin\WatiNDriver.cs(290,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasContent(string)'
+  Drivers\Watin\WatiNDriver.cs(297,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasContentMatch(System.Text.RegularExpressions.Regex)'
+  Drivers\Watin\WatiNDriver.cs(304,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Check(Coypu.Element)'
+  Drivers\Watin\WatiNDriver.cs(309,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Uncheck(Coypu.Element)'
+  Drivers\Watin\WatiNDriver.cs(314,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Choose(Coypu.Element)'
+  Drivers\Watin\WatiNDriver.cs(319,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasDialog(string)'
+  Drivers\Watin\WatiNDriver.cs(324,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.AcceptModalDialog()'
+  Drivers\Watin\WatiNDriver.cs(329,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.CancelModalDialog()'
+  Drivers\Watin\WatiNDriver.cs(334,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasCss(string)'
+  Drivers\Watin\WatiNDriver.cs(339,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.HasXPath(string)'
+  Drivers\Watin\WatiNDriver.cs(344,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindCss(string)'
+  Drivers\Watin\WatiNDriver.cs(349,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindXPath(string)'
+  Drivers\Watin\WatiNDriver.cs(354,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindAllCss(string)'
+  Drivers\Watin\WatiNDriver.cs(359,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(string)'
+  Drivers\Watin\WatiNDriver.cs(364,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Dispose()'
+  Drivers\Watin\WatiNDriver.cs(17,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Disposed'
+  Drivers\Watin\WatiNDriver.cs(285,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Watin.WatiNDriver.Native'
+  FillInWith.cs(5,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.FillInWith'
+  Drivers\Selenium\SeleniumWebDriver.cs(12,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver'
+  Drivers\Selenium\SeleniumWebDriver.cs(29,16): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.SeleniumWebDriver()'
+  Drivers\Selenium\SeleniumWebDriver.cs(34,19): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.SeleniumWebDriver(OpenQA.Selenium.Remote.RemoteWebDriver)'
+  Drivers\Selenium\SeleniumWebDriver.cs(65,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.SetScope(System.Func<Coypu.Element>)'
+  Drivers\Selenium\SeleniumWebDriver.cs(70,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.ClearScope()'
+  Drivers\Selenium\SeleniumWebDriver.cs(75,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindField(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(80,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindButton(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(85,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindIFrame(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(90,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindLink(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(95,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindId(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(100,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindFieldset(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(109,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindSection(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(114,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindCss(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(119,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindXPath(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(124,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindAllCss(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(129,37): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.FindAllXPath(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(152,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasContent(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(157,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasContentMatch(System.Text.RegularExpressions.Regex)'
+  Drivers\Selenium\SeleniumWebDriver.cs(175,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasCss(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(180,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasXPath(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(185,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.HasDialog(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(190,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Visit(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(195,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Click(Coypu.Element)'
+  Drivers\Selenium\SeleniumWebDriver.cs(200,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Hover(Coypu.Element)'
+  Drivers\Selenium\SeleniumWebDriver.cs(205,36): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.GetBrowserCookies()'
+  Drivers\Selenium\SeleniumWebDriver.cs(210,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Set(Coypu.Element, string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(218,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Select(Coypu.Element, string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(223,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.AcceptModalDialog()'
+  Drivers\Selenium\SeleniumWebDriver.cs(228,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.CancelModalDialog()'
+  Drivers\Selenium\SeleniumWebDriver.cs(233,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Check(Coypu.Element)'
+  Drivers\Selenium\SeleniumWebDriver.cs(241,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Uncheck(Coypu.Element)'
+  Drivers\Selenium\SeleniumWebDriver.cs(249,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Choose(Coypu.Element)'
+  Drivers\Selenium\SeleniumWebDriver.cs(254,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.ExecuteScript(string)'
+  Drivers\Selenium\SeleniumWebDriver.cs(278,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Dispose()'
+  Drivers\Selenium\SeleniumWebDriver.cs(14,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Disposed'
+  Drivers\Selenium\SeleniumWebDriver.cs(50,23): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Drivers.Selenium.SeleniumWebDriver.Native'
+  Robustness\RobustWrapper.cs(5,22): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper'
+  Robustness\RobustWrapper.cs(7,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.Robustly(System.Action)'
+  Robustness\RobustWrapper.cs(8,17): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.Robustly<TResult>(System.Func<TResult>)'
+  Robustness\RobustWrapper.cs(9,11): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.Query<T>(System.Func<T>, T)'
+  Robustness\RobustWrapper.cs(10,14): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RobustWrapper.TryUntil(System.Action, System.Func<bool>, System.TimeSpan)'
+  SelectFrom.cs(5,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.SelectFrom'
+  Robustness\RetryUntilTimeoutRobustWrapper.cs(7,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper'
+  Robustness\RetryUntilTimeoutRobustWrapper.cs(9,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Robustly(System.Action)'
+  Robustness\RetryUntilTimeoutRobustWrapper.cs(18,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Robustly<TResult>(System.Func<TResult>)'
+  Robustness\RetryUntilTimeoutRobustWrapper.cs(23,18): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Query<T>(System.Func<T>, T)'
+  Robustness\RetryUntilTimeoutRobustWrapper.cs(28,24): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.Robustly<TResult>(System.Func<TResult>, object)'
+  Robustness\RetryUntilTimeoutRobustWrapper.cs(75,21): warning CS1591: Missing XML comment for publicly visible type or member 'Coypu.Robustness.RetryUntilTimeoutRobustWrapper.TryUntil(System.Action, System.Func<bool>, System.TimeSpan)'
+
+
+"d:\projects\Coypu\src\Coypu.sln" (default target) (1) ->
+"d:\projects\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (default target) (3) ->
+(ResolveAssemblyReferences target) -> 
+  C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+
+
+"d:\projects\Coypu\src\Coypu.sln" (default target) (1) ->
+"d:\projects\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (default target) (4) ->
+  C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+
+
+"d:\projects\Coypu\src\Coypu.sln" (default target) (1) ->
+"d:\projects\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default target) (5) ->
+  C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning MSB3088: Could not read state file "obj\Release\ResolveAssemblyReference.cache". Unable to find assembly 'Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+
+    132 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.73
+Time Elapsed 00:00:02.73
+Started ChromeDriver
+port=61450
+.\test\automation\proxy_launcher.cc(280): error: Value of: browser_proxy.get()
+  Actual: false
+Expected: true
+Started ChromeDriver
+port=64278
+.\test\automation\proxy_launcher.cc(280): error: Value of: browser_proxy.get()
+  Actual: false
+Expected: true
+Started ChromeDriver
+port=64328
+.\test\automation\proxy_launcher.cc(282): error: Value of: browser_proxy->ApplyAccelerator(IDC_CLOSE_WINDOW)
+  Actual: false
+Expected: true
+Started ChromeDriver
+port=64351
+.\test\automation\proxy_launcher.cc(280): error: Value of: browser_proxy.get()
+  Actual: false
+Expected: true
+Started ChromeDriver
+port=64373
+.\test\automation\proxy_launcher.cc(280): error: Value of: browser_proxy.get()
+  Actual: false
+Expected: true
+Started ChromeDriver
+port=64396
+Started ChromeDriver
+port=64417
+.\test\automation\proxy_launcher.cc(282): error: Value of: browser_proxy->ApplyAccelerator(IDC_CLOSE_WINDOW)
+  Actual: false
+Expected: true
+
+DriverSpecRunner
+  when testing each driver
+    and the driver is SeleniumWebDriver
+      and the browser is Firefox
+        cleans up
+        when getting cookies
+          gets all the cookies
+          gets the cookie path
+        when hovering
+          mouses over the underlying element
+        when using iframes as scope
+          finds elements among multiple scopes
+          finds clears scope back to the whole window
+          elements withing iframes are not found in outer scope
+            does not find something in an iframe
+        when finding iframes
+          finds by header text
+          finds by id
+          finds by title
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath
+        when finding an element by css
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by id ends with
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+          finds img elements with role='button' by alt text
+          finds any elements with role='button' by text
+          finds an image button with both types of quote in my value
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+            finds by id ends with
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+          finds a link with both types of quote in its text
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds section by id
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+          finds text by regex
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples
+          only finds visible elements
+        when inspecting dialog text
+          finds exact text in alert
+          finds exact text in confirm
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples
+        when interacting with dialogs
+          accepts alerts
+          confirms
+            when accepting
+              clears dialog
+              returns true
+            when cancelling
+              clears dialog
+              returns false
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded
+    and the driver is SeleniumWebDriver
+      and the browser is Chrome
+        cleans up
+        when getting cookies
+          gets all the cookies
+          gets the cookie path
+        when hovering
+          mouses over the underlying element
+        when using iframes as scope
+          finds elements among multiple scopes
+          finds clears scope back to the whole window
+          elements withing iframes are not found in outer scope
+            does not find something in an iframe
+        when finding iframes
+          finds by header text
+          finds by id
+          finds by title
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath
+        when finding an element by css
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by id ends with
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+          finds img elements with role='button' by alt text
+          finds any elements with role='button' by text
+          finds an image button with both types of quote in my value
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+            finds by id ends with
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+          finds a link with both types of quote in its text
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds section by id
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+          finds text by regex
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples
+          only finds visible elements
+        when inspecting dialog text
+          finds exact text in alert - FAILED - Internal Chrome error:
+          finds exact text in confirm - FAILED - Exception has been thrown by the target of an invocation.
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples
+        when interacting with dialogs
+          accepts alerts - FAILED - Internal Chrome error:
+          confirms
+            when accepting
+              clears dialog - FAILED - Internal Chrome error:
+              returns true - FAILED - Internal Chrome error:
+            when cancelling
+              clears dialog - FAILED - Internal Chrome error:
+              returns false - FAILED - Alerts are not supported for this version of Chrome
+        when selecting options
+          sets text of selected option - FAILED - String lengths are both 21. Strings differ at index 18., Expected: "select two option two", But was: "select two option one", -----------------------------^
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value - FAILED - String lengths are both 13. Strings differ at index 12., Expected: "select2value2", But was: "select2value1", -----------------------^
+          fires change event when selecting an option - FAILED - Expected string length 41 but was 31. Strings differ at index 31., Expected: "containerLabeledSelectFieldName - changed", But was: "containerLabeledSelectFieldName", ------------------------------------------^
+        when uploading files
+          sets the path to be uploaded - FAILED - Expected: String ending with "\local.file", But was: <string.Empty>
+    and the driver is SeleniumWebDriver
+      and the browser is InternetExplorer
+        cleans up
+        when getting cookies
+          gets all the cookies
+          gets the cookie path - FAILED - Expected string length 9 but was 1. Strings differ at index 1., Expected: "/resource", But was: "/", ------------^
+        when hovering
+          mouses over the underlying element
+        when using iframes as scope
+          finds elements among multiple scopes
+          finds clears scope back to the whole window
+          elements withing iframes are not found in outer scope
+            does not find something in an iframe
+        when finding iframes
+          finds by header text
+          finds by id
+          finds by title
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches
+          returns all matches by css
+        when finding all elements by xpath
+          returns empty if no matches
+          returns all matches by xpath
+        when finding an element by css
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding an element by xpath
+          finds present examples
+          does not find missing examples
+          only finds visible elements
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by id ends with
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs
+          finds img elements with role='button' by alt text
+          finds any elements with role='button' by text
+          finds an image button with both types of quote in my value
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select
+            finds textarea
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+            finds by id ends with
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none
+          does not find visibility:hidden links
+          finds a link with both types of quote in its text - FAILED - Object reference not set to an instance of an object.
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds section by id
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source
+          does not find single line text displayed over multiple lines in source
+          finds text by regex
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples
+          finds present examples
+          only finds visible elements
+        when inspecting dialog text
+          finds exact text in alert
+          finds exact text in confirm
+        when inspecting xpath
+          does not find missing examples
+          only finds visible elements
+          finds present examples
+        when interacting with dialogs
+          accepts alerts - FAILED - No alert is active
+          confirms
+            when accepting
+              clears dialog - FAILED - No alert is active
+              returns true
+            when cancelling
+              clears dialog - FAILED - No alert is active
+              returns false
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value
+          fires change event when selecting an option
+        when uploading files
+          sets the path to be uploaded
+    and the driver is WatiNDriver
+      and the browser is InternetExplorer
+        cleans up - FAILED - The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+        when getting cookies
+          gets all the cookies - FAILED - Specified method is not supported.
+          gets the cookie path - FAILED - Specified method is not supported.
+        when hovering
+          mouses over the underlying element - FAILED - Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
+        when using iframes as scope
+          finds elements among multiple scopes - FAILED - Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+          finds clears scope back to the whole window - FAILED - Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+          elements withing iframes are not found in outer scope
+            does not find something in an iframe
+        when finding iframes
+          finds by header text - FAILED - Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+          finds by id - FAILED - Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+          finds by title - FAILED - Failed to find frame: iframe one title
+        when accessing attributes
+          exposes element attributes
+        when checking
+          checks an unchecked checkbox
+          leaves a checked checkbox checked
+          unchecks a checked checkbox
+          leaves an unchecked checkbox unchecked
+          fires onclick event
+          fires onclick event
+        when choosing
+          chooses radio button from list
+          fires onclick event
+        when clicking
+          clicks the underlying element
+        when executing script
+          runs the script in the browser
+          returns the result
+        when finding all elements by css
+          returns empty if no matches - FAILED - Not yet implemented in WatiNDriver
+          returns all matches by css - FAILED - Not yet implemented in WatiNDriver
+        when finding all elements by xpath
+          returns empty if no matches - FAILED - Not yet implemented in WatiNDriver
+          returns all matches by xpath - FAILED - Not yet implemented in WatiNDriver
+        when finding an element by css
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+          does not find missing examples - FAILED - Expected not to find something at: #inspectingContent p.css-missing-test, Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+          only finds visible elements - FAILED - Expected not to find something at: #inspectingContent p.css-test img.invisible, Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+        when finding an element by xpath
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+          does not find missing examples - FAILED - Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-missing-test'], Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+          only finds visible elements - FAILED - Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/img, Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+        when finding buttons
+          finds a particular button by its text
+          finds a particular button by its id
+          finds a particular button by its name - FAILED - Expected string length 13 but was 14. Strings differ at index 0., Expected: "second button", But was: " second button", -----------^
+          finds a particular input button by its value
+          finds a particular input button by its id
+          finds a particular input button by id ends with - FAILED - Failed to find button with text, id or name: rdInputButtonId
+          finds a particular input button by its name
+          finds a particular submit button by its value
+          finds a particular submit button by its id
+          finds a particular submit button by its name
+          finds image buttons - FAILED - Failed to find button with text, id or name: firstImageButtonId
+          does not find text inputs
+          does not find hidden inputs
+          does not find invisible inputs - FAILED - Expected: <Coypu.MissingHtmlException>, But was: null
+          finds img elements with role='button' by alt text - FAILED - Failed to find button with text, id or name: I'm an image with the role of button
+          finds any elements with role='button' by text - FAILED - Failed to find button with text, id or name: I'm a span with the role of button
+          finds an image button with both types of quote in my value - FAILED - Failed to find button with text, id or name: I'm an image button with "both" types of quote in my value
+        when finding buttons within scope
+          within scope1
+            finds button by name
+            finds input button by value
+            finds button by text
+          within scope2
+            finds button by name
+            finds input button by value
+            finds button by text
+        when finding sections as divs
+          finds by div by id
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds by h2 text within child link
+        when finding fields
+          finds text field by placeholder
+          finds radio button by value
+          finding by for attribute
+            finds text input
+            finds password field
+            finds select field
+            finds checkbox
+            finds radio button
+            finds textarea
+            finds file input
+          finding by container label
+            finds text input
+            finds password
+            finds checkbox
+            finds radio
+            finds select - FAILED - Failed to find field with label, id, name or placeholder: select field in a label container
+            finds textarea - FAILED - Failed to find field with label, id, name or placeholder: textarea field in a label container
+            finds file field
+          finding by id
+            finds field
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio
+            finds password
+            finds file
+            finds by id ends with - FAILED - Failed to find field with label, id, name or placeholder: tainerLabeledFileFieldId
+          finding by name
+            finds text input
+            finds textarea
+            finds select
+            finds checkbox
+            finds radio button
+            finds password input
+            finds file input
+        when finding fieldsets
+          finds by legend text
+          finds by id
+          finds only fieldsets
+        when finding fields within scope
+          within scope1
+            finds text input by for
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+          within scope2
+            finds text input
+            finds text input in container label
+            finds text input by placeholder
+            finds text input by name
+            finds radio button by value
+            finds not find text input by id outside scope
+        when finding links
+          finds link by text
+          does not find display:none - FAILED - Expected: <Coypu.MissingHtmlException>, But was: null
+          does not find visibility:hidden links
+          finds a link with both types of quote in its text
+        when finding sections
+          only finds div and section
+          finding sections by header text
+            finds by h1 text
+            finds by h2 text
+            finds by h3 text
+            finds by h6 text
+            finds section by id
+        when inspecting content
+          does not find missing text
+          finds text with parts marked up variously
+          finds text in a table row - FAILED - Expected: True, But was: False
+          finds text in a list
+          finds text split over multiple lines in source
+          finds text displayed over multiple lines in source - FAILED - Expected: True, But was: False
+          does not find single line text displayed over multiple lines in source
+          finds text by regex - FAILED - Expected: True, But was: False
+        when inspecting content within scope
+          scope 1
+            finds content within scope
+            does not find content outside scope
+          scope 2
+            finds content within scope
+            does not find content outside scope
+        when inspecting css
+          does not find missing examples - FAILED - Not yet implemented in WatiNDriver
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+          only finds visible elements - FAILED - Not yet implemented in WatiNDriver
+        when inspecting dialog text
+          finds exact text in alert - FAILED - Not yet implemented in WatiNDriver
+          finds exact text in confirm - FAILED - Not yet implemented in WatiNDriver
+        when inspecting xpath
+          does not find missing examples - FAILED - Not yet implemented in WatiNDriver
+          only finds visible elements - FAILED - Not yet implemented in WatiNDriver
+          finds present examples - FAILED - Not yet implemented in WatiNDriver
+        when interacting with dialogs
+          accepts alerts - FAILED - Not yet implemented in WatiNDriver
+          confirms
+            when accepting
+              clears dialog - FAILED - Not yet implemented in WatiNDriver
+              returns true - FAILED - Not yet implemented in WatiNDriver
+            when cancelling
+              clears dialog - FAILED - Not yet implemented in WatiNDriver
+              returns false - FAILED - Not yet implemented in WatiNDriver
+        when selecting options
+          sets text of selected option
+        when setting fields
+          sets value of text input field
+          sets value of textarea field
+          selects option by text or value - FAILED - The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+          fires change event when selecting an option - FAILED - The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+        when uploading files
+          sets the path to be uploaded - FAILED - The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+
+**** FAILURES ****
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when inspecting dialog text. finds exact text in confirm.
+Exception has been thrown by the target of an invocation.
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandle& ctor, Boolean& bNeedSecurityCheck)
+   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceImpl(Boolean publicOnly, Boolean skipVisibilityChecks, Boolean fillCache)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   at Coypu.Drivers.Tests.DriverSpecRunner.EnsureDriver(Type driverType, Browser browser) in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 130
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 106
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 75
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when interacting with dialogs. confirms. when accepting. clears dialog.
+Internal Chrome error:
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 951
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebElement.cs:line 322
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.Click(Element element) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 197
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 29
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when interacting with dialogs. confirms. when accepting. returns true.
+Internal Chrome error:
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 951
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebElement.cs:line 322
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.Click(Element element) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 197
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__4() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 39
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when interacting with dialogs. confirms. when cancelling. clears dialog.
+Internal Chrome error:
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 951
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebElement.cs:line 322
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.Click(Element element) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 197
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__6() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 51
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when interacting with dialogs. confirms. when cancelling. returns false.
+Alerts are not supported for this version of Chrome
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 951
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteAlert.Dismiss() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteAlert.cs:line 59
+   at Coypu.Drivers.Selenium.Dialogs.CancelModalDialog() in d:\projects\Coypu\src\Coypu\Drivers\Selenium\Dialogs.cs:line 28
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.CancelModalDialog() in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 230
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__7() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 62
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when interacting with dialogs. accepts alerts.
+Internal Chrome error:
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 951
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteWebElement.Click() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebElement.cs:line 322
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.Click(Element element) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 197
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when selecting options. sets text of selected option.
+String lengths are both 21. Strings differ at index 18., Expected: "select two option two", But was: "select two option one", -----------------------------^
+   at Coypu.Drivers.Tests.When_selecting_options.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_selecting_options.cs:line 18
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when setting fields. selects option by text or value.
+String lengths are both 13. Strings differ at index 12., Expected: "select2value2", But was: "select2value1", -----------------------^
+   at Coypu.Drivers.Tests.When_setting_fields.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_setting_fields.cs:line 39
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when setting fields. fires change event when selecting an option.
+Expected string length 41 but was 31. Strings differ at index 31., Expected: "containerLabeledSelectFieldName - changed", But was: "containerLabeledSelectFieldName", ------------------------------------------^
+   at Coypu.Drivers.Tests.When_setting_fields.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_setting_fields.cs:line 54
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is Chrome. when uploading files. sets the path to be uploaded.
+Expected: String ending with "\local.file", But was: <string.Empty>
+   at Coypu.Drivers.Tests.When_uploading_files.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_uploading_files.cs:line 23
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when getting cookies. gets the cookie path.
+JavaScript error (UnexpectedJavaScriptError)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 978
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteWebDriver.ExecuteScriptInternal(String script, Boolean async, Object[] args) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 1012
+   at OpenQA.Selenium.Remote.RemoteWebDriver.ExecuteScript(String script, Object[] args) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 395
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.ExecuteScript(String javascript) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 256
+   at Coypu.Drivers.Tests.When_getting_cookies.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_getting_cookies.cs:line 11
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when finding links. finds a link with both types of quote in its text.
+Object reference not set to an instance of an object.
+   at OpenQA.Selenium.Remote.RemoteWebDriver.GetElementsFromResponse(Response response) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 733
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElements(String mechanism, String value) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 844
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElementsByLinkText(String linkText) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 510
+   at OpenQA.Selenium.By.<>c__DisplayClass6.<LinkText>b__5(ISearchContext context) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\By.cs:line 80
+   at OpenQA.Selenium.By.FindElements(ISearchContext context) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\By.cs:line 238
+   at OpenQA.Selenium.Remote.RemoteWebDriver.FindElements(By by) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 303
+   at Coypu.Drivers.Selenium.ElementFinder.Find(By by) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\ElementFinder.cs:line 28
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.FindLink(String linkText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 92
+   at Coypu.Drivers.Tests.When_finding_links.<Specs>b__5() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_links.cs:line 29
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when accepting. clears dialog.
+No alert is active
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 975
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteAlert.get_Text() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteAlert.cs:line 49
+   at Coypu.Drivers.Selenium.Dialogs.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\Dialogs.cs:line 16
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 187
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 32
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when cancelling. clears dialog.
+No alert is active
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 975
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteAlert.get_Text() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteAlert.cs:line 49
+   at Coypu.Drivers.Selenium.Dialogs.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\Dialogs.cs:line 16
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 187
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__6() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 54
+
+DriverSpecRunner. when testing each driver. and the driver is SeleniumWebDriver. and the browser is InternetExplorer. when interacting with dialogs. accepts alerts.
+No alert is active
+   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 975
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(DriverCommand driverCommandToExecute, Dictionary`2 parameters) in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteWebDriver.cs:line 798
+   at OpenQA.Selenium.Remote.RemoteAlert.get_Text() in c:\Projects\WebDriver\trunk\dotnet\src\WebDriver\Remote\RemoteAlert.cs:line 49
+   at Coypu.Drivers.Selenium.Dialogs.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\Dialogs.cs:line 16
+   at Coypu.Drivers.Selenium.SeleniumWebDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Selenium\SeleniumWebDriver.cs:line 187
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 17
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when getting cookies. gets all the cookies.
+RunScript failed
+   at WatiN.Core.Native.InternetExplorer.IEUtils.RunScript(String scriptCode, String language, IHTMLWindow2 window)
+   at WatiN.Core.Native.InternetExplorer.IEDocument.RunScript(String scriptCode, String language)
+   at WatiN.Core.Document.RunScript(String scriptCode, String language)
+   at WatiN.Core.Document.RunScript(String javaScriptCode)
+   at WatiN.Core.Document.Eval(String javaScriptCode)
+   at Coypu.Drivers.Watin.WatiNDriver.ExecuteScript(String javascript) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 53
+   at Coypu.Drivers.Tests.When_getting_cookies.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_getting_cookies.cs:line 11
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when getting cookies. gets the cookie path.
+RunScript failed
+   at WatiN.Core.Native.InternetExplorer.IEUtils.RunScript(String scriptCode, String language, IHTMLWindow2 window)
+   at WatiN.Core.Native.InternetExplorer.IEDocument.RunScript(String scriptCode, String language)
+   at WatiN.Core.Document.RunScript(String scriptCode, String language)
+   at WatiN.Core.Document.RunScript(String javaScriptCode)
+   at WatiN.Core.Document.Eval(String javaScriptCode)
+   at Coypu.Drivers.Watin.WatiNDriver.ExecuteScript(String javascript) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 53
+   at Coypu.Drivers.Tests.When_getting_cookies.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_getting_cookies.cs:line 11
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when hovering. mouses over the underlying element.
+Expected string length 21 but was 11. Strings differ at index 11., Expected: "Hover on me - hovered", But was: "Hover on me", ----------------------^
+   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. finds elements among multiple scopes.
+Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+   at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
+   at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__4() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 20
+   at Coypu.Drivers.Watin.WatiNDriver.SetScope(Func`1 find) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 41
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 20
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. finds clears scope back to the whole window.
+Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+   at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
+   at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__7() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 31
+   at Coypu.Drivers.Watin.WatiNDriver.SetScope(Func`1 find) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 41
+   at Coypu.Drivers.Tests.When_using_iframes_as_scope.<Specs>b__6() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_using_iframes_as_scope.cs:line 31
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by header text.
+Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+   at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
+   at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
+   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 11
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by id.
+Unable to cast object of type 'WatiN.Core.Frame' to type 'WatiN.Core.Element'.
+   at System.Linq.Enumerable.<CastIterator>d__aa`1.MoveNext()
+   at System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
+   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 17
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by title.
+Failed to find frame: iframe one title
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindIFrame(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 0
+   at Coypu.Drivers.Tests.When_finding_iframes.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_iframes.cs:line 23
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by css. returns empty if no matches.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllCss(String cssSelector) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 356
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 15
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by css. returns all matches by css.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllCss(String cssSelector) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 356
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_css.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_css.cs:line 21
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns empty if no matches.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(String xpath) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 361
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns all matches by xpath.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.FindAllXPath(String xpath) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 361
+   at Coypu.Drivers.Tests.When_finding_all_elements_by_xpath.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_all_elements_by_xpath.cs:line 20
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. finds present examples.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.FindCss(String cssSelector) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 346
+   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. does not find missing examples.
+Expected not to find something at: #inspectingContent p.css-missing-test, Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 23
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. only finds visible elements.
+Expected not to find something at: #inspectingContent p.css-test img.invisible, Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+   at Coypu.Drivers.Tests.When_finding_an_element_by_css.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_css.cs:line 29
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. finds present examples.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.FindXPath(String xpath) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 351
+   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. does not find missing examples.
+Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-missing-test'], Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 23
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. only finds visible elements.
+Expected not to find something at: //*[@id = 'inspectingContent']//p[@class='css-test']/img, Expected: <Coypu.MissingHtmlException>, But was: <System.NotSupportedException>
+   at Coypu.Drivers.Tests.When_finding_an_element_by_xpath.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_an_element_by_xpath.cs:line 29
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular button by its name.
+Expected string length 13 but was 14. Strings differ at index 0., Expected: "second button", But was: " second button", -----------^
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 25
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular input button by id ends with.
+Failed to find button with text, id or name: rdInputButtonId
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__5() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 43
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds image buttons.
+Failed to find button with text, id or name: firstImageButtonId
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__a() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 72
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. does not find invisible inputs.
+Expected: <Coypu.MissingHtmlException>, But was: null
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__f() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 88
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds img elements with role='button' by alt text.
+Failed to find button with text, id or name: I'm an image with the role of button
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__11() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 93
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds any elements with role='button' by text.
+Failed to find button with text, id or name: I'm a span with the role of button
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__12() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 98
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds an image button with both types of quote in my value.
+Failed to find button with text, id or name: I'm an image button with "both" types of quote in my value
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindButton(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 142
+   at Coypu.Drivers.Tests.When_finding_buttons.<Specs>b__13() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_buttons.cs:line 103
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds select.
+Failed to find field with label, id, name or placeholder: select field in a label container
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 194
+   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__d() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 60
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds textarea.
+Failed to find field with label, id, name or placeholder: textarea field in a label container
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 194
+   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__e() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 64
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds by id ends with.
+Failed to find field with label, id, name or placeholder: tainerLabeledFileFieldId
+   at Coypu.Drivers.Watin.WatiNDriver.BuildElement(Element element, String description) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 179
+   at Coypu.Drivers.Watin.WatiNDriver.FindField(String locator) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 194
+   at Coypu.Drivers.Tests.When_finding_fields.<Specs>b__19() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_fields.cs:line 109
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding links. does not find display:none.
+Expected: <Coypu.MissingHtmlException>, But was: null
+   at Coypu.Drivers.Tests.When_finding_links.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_finding_links.cs:line 19
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text in a table row.
+Expected: True, But was: False
+   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 22
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text displayed over multiple lines in source.
+Expected: True, But was: False
+   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__5() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 37
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text by regex.
+Expected: True, But was: False
+   at Coypu.Drivers.Tests.When_inspecting_content.<Specs>b__7() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_content.cs:line 48
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. does not find missing examples.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
+   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 13
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. finds present examples.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
+   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 19
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. only finds visible elements.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasCss(String cssSelector) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 336
+   at Coypu.Drivers.Tests.When_inspecting_css.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_css.cs:line 28
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting dialog text. finds exact text in alert.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 321
+   at Coypu.Drivers.Tests.When_inspecting_dialog_text.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_dialog_text.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting dialog text. finds exact text in confirm.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 321
+   at Coypu.Drivers.Tests.When_inspecting_dialog_text.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_dialog_text.cs:line 24
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. does not find missing examples.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 341
+   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 14
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. only finds visible elements.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 341
+   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__1() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 20
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. finds present examples.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasXPath(String xpath) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 341
+   at Coypu.Drivers.Tests.When_inspecting_xpath.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_inspecting_xpath.cs:line 26
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when accepting. clears dialog.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 321
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__3() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 30
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when accepting. returns true.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.AcceptModalDialog() in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 326
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__4() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 40
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when cancelling. clears dialog.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 321
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__6() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 52
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when cancelling. returns false.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.CancelModalDialog() in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 331
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__7() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 62
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. accepts alerts.
+Not yet implemented in WatiNDriver
+   at Coypu.Drivers.Watin.WatiNDriver.HasDialog(String withText) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 321
+   at Coypu.Drivers.Tests.When_interacting_with_dialogs.<Specs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_interacting_with_dialogs.cs:line 15
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when setting fields. selects option by text or value.
+The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+   at mshtml.HTMLDocumentClass.IHTMLDocument2_get_url()
+   at WatiN.Core.Native.InternetExplorer.IEDocument.get_Url()
+   at WatiN.Core.Document.get_Url()
+   at WatiN.Core.Element.get_NativeElement()
+   at WatiN.Core.Element.GetAttributeValueImpl(String attributeName)
+   at WatiN.Core.Component.GetAttributeValue(String attributeName)
+   at WatiN.Core.Option.setSelected(Boolean value, Boolean WaitForComplete)
+   at WatiN.Core.Option.Select()
+   at WatiN.Core.SelectList.SelectSingle(Constraint findBy)
+   at WatiN.Core.SelectList.SelectByTextOrValue(Constraint findBy)
+   at WatiN.Core.SelectList.Select(String text)
+   at Coypu.Drivers.Watin.WatiNDriver.Select(Element element, String option) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 277
+   at Coypu.Drivers.Tests.When_setting_fields.<Specs>b__2() in d:\projects\Coypu\src\Coypu.Drivers.Tests\When_setting_fields.cs:line 41
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when setting fields. fires change event when selecting an option.
+The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 258
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 106
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 75
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when uploading files. sets the path to be uploaded.
+The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 258
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 106
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 75
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. cleans up.
+The RPC server is unavailable. (Exception from HRESULT: 0x800706BA)
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in d:\projects\Coypu\src\Coypu\Drivers\Watin\WatiNDriver.cs:line 258
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 106
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in d:\projects\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 75
+
+592 Examples, 70 Failed, 0 Pending
+(in d:/projects/Coypu)

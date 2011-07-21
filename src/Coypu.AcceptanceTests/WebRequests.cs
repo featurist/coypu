@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Coypu.AcceptanceTests.sites;
+using Coypu.Drivers.Tests.Sites;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests

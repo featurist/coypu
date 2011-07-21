@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Tests.Sites;
 using Coypu.Drivers.Watin;
 using NSpec;
 using NSpec.Domain;
@@ -61,10 +62,13 @@ namespace Coypu.Drivers.Tests
                                 ? typeof (DriverSpecs)
                                 : Type.GetType(testSuite);
 
-                LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Firefox);
-                LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);
-                LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);
-                LoadSpecsFor(typeof (WatiNDriver), suite, Browser.InternetExplorer);
+                using (new SinatraSite("site_with_secure_resources"))
+                {
+                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Firefox);
+                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);
+                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);
+                    LoadSpecsFor(typeof (WatiNDriver), suite, Browser.InternetExplorer);
+                }
             }
         }
 
