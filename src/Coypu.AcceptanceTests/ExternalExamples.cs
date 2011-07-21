@@ -14,7 +14,7 @@ namespace Coypu.AcceptanceTests
             Configuration.Reset();
 
             Configuration.AppHost = "www.google.com";
-            Configuration.Driver = typeof(SeleniumHtmlUnitWebDriver);
+            Configuration.Driver = typeof(SeleniumWebDriver);
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
         }
