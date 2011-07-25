@@ -81,37 +81,5 @@ namespace Coypu.Tests
             Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on stub driver"));
         }
 
-        [Test]
-        public void With_individual_timeout_uses_individual_timout_for_action_then_resets()
-        {
-            var defaultTimeout = TimeSpan.FromSeconds(123);
-            var individualTimeout = TimeSpan.FromSeconds(321);
-            
-            Configuration.Timeout = defaultTimeout;
-            Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
-
-            var usedTimeout = default(TimeSpan);
-
-            Browser.Session.WithIndividualTimeout(individualTimeout, () => usedTimeout = Configuration.Timeout);
-
-            Assert.That(usedTimeout, Is.EqualTo(individualTimeout));
-            Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
-        }
-
-        [Test]
-        public void With_individual_timeout_always_resets()
-        {
-            var defaultTimeout = TimeSpan.FromSeconds(123);
-            var individualTimeout = TimeSpan.FromSeconds(321);
-
-            Configuration.Timeout = defaultTimeout;
-
-            Action actionThatErrors = () => { throw new ExplicitlyThrownTestException("Error in individual timeout action"); };
-
-            Assert.Throws<ExplicitlyThrownTestException>(() => Browser.Session.WithIndividualTimeout(individualTimeout, actionThatErrors));
-
-            Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
-        }
-
     }
 }

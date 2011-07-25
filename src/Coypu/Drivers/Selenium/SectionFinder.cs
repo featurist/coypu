@@ -1,20 +1,18 @@
 using System;
 using System.Linq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
     internal class SectionFinder
     {
-        private readonly RemoteWebDriver selenium;
         private readonly ElementFinder elementFinder;
         private readonly TextMatcher textMatcher;
 
-        public SectionFinder(RemoteWebDriver selenium, ElementFinder elementFinder, TextMatcher textMatcher)
+        readonly string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
+
+        public SectionFinder(ElementFinder elementFinder, TextMatcher textMatcher)
         {
-            this.selenium = selenium;
             this.elementFinder = elementFinder;
             this.textMatcher = textMatcher;
         }
@@ -33,23 +31,21 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindSectionByHeaderText(string locator, string sectionTag) 
         {
-            string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
             var headersXPath = String.Join(" or ", headerTags);
             var withAHeader = elementFinder.Find(By.XPath(String.Format(".//{0}[{1}]", sectionTag, headersXPath)));
 
-            var childHeaderSelector = GetChildHeaderSelector(headerTags);
-            return
-                withAHeader.FirstDisplayedOrDefault(e => e.FindElements(childHeaderSelector).Any(h => textMatcher.TextMatches(h, locator)));
+            return withAHeader.FirstDisplayedOrDefault(e => WhereAHeaderMatches(e, locator));
         }
 
-        private By GetChildHeaderSelector(string[] headerTags) 
+        private bool WhereAHeaderMatches(ISearchContext e, string locator)
         {
-            if (selenium is ChromeDriver) {
-                var namePredicate = String.Join(" or ",
-                                                headerTags.Select(t => String.Format("name() = '{0}'", t)).ToArray());
-                return By.XPath(String.Format("./*[{0}]", namePredicate));
-            }
-            return By.CssSelector(String.Join(",", headerTags));
+            return e.FindElements(GetChildHeaderSelector()).Any(h => textMatcher.TextMatches(h, locator));
+        }
+
+        private By GetChildHeaderSelector() 
+        {
+            var namePredicate = String.Join(" or ", headerTags.Select(t => String.Format("name() = '{0}'", t)).ToArray());
+            return By.XPath(String.Format("./*[{0}]", namePredicate));
         }
 
         private static bool IsSection(IWebElement e) 

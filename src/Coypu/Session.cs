@@ -500,10 +500,26 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
         public void Within(Func<Element> findScope, Action doThis)
         {
+            Within<object>(findScope, () =>
+                                          {
+                                              doThis();
+                                              return null;
+                                          });
+        }
+
+        /// <summary>
+        /// <para>Restrict interactions to elements within a particular scope within the page by supplying a function to find the scope and a function to return something from within that scope.</para>
+        /// <para>Will refind the scope if necessary for each interaction within the action to support full or partial page reloads.</para>
+        /// </summary>
+        /// <param name="findScope">A function to find the scope </param>
+        /// <param name="doThis">A function to find something within this scope</param>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
+        public T Within<T>(Func<Element> findScope, Func<T> findThis)
+        {
             try
             {
                 driver.SetScope(findScope);
-                doThis();
+                return findThis();
             }
             finally
             {
