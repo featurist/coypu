@@ -1,3 +1,13 @@
+# Version 0.2.10
+
+Release date: 2011-07-25
+
+### Fixed
+* FindSection patched to remove compound css selector after this broke in WebDriver 2.1
+
+### Added
+* Overload for Within that returns a result from within the given scope
+
 # Version 0.2.9
 
 Release date: 2011-07-21

@@ -1,4 +1,5 @@
 using System;
+using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
@@ -6,6 +7,18 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     [TestFixture]
     public class With_individual_timeout 
     {
+        [SetUp]
+        public void SetUp() 
+        {
+            Configuration.Driver = typeof(FakeDriver);
+        }
+
+        [TearDown]
+        public void TearDown() 
+        {
+            Browser.EndSession();
+        }
+
         [Test]
         public void It_uses_individual_timeout_for_action_then_resets() 
         {
