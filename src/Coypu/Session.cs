@@ -512,6 +512,26 @@ namespace Coypu
         }
 
         /// <summary>
+        /// <para>Restrict interactions to elements within a particular scope within the page by supplying a function to find the scope and a function to return something from within that scope.</para>
+        /// <para>Will refind the scope if necessary for each interaction within the action to support full or partial page reloads.</para>
+        /// </summary>
+        /// <param name="findScope">A function to find the scope </param>
+        /// <param name="doThis">A function to find something within this scope</param>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
+        public T Within<T>(Func<Element> findScope, Func<T> findThis)
+        {
+            try
+            {
+                driver.SetScope(findScope);
+                return findThis();
+            }
+            finally
+            {
+                driver.ClearScope();
+            }
+        }
+
+        /// <summary>
         /// <para>Restrict interactions to elements within a particular fieldset, located by the text of a child legend element or id.</para>
         /// <para>Will refind the fieldset if necessary for each interaction within the action to support full or partial page reloads.</para>
         /// <para>E.g. to restrict scope to this:
