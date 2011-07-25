@@ -65,7 +65,7 @@ task :package => :'test:all' do
   end
   package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}
   sh 'nuget Pack Coypu.nuspec'
-  sh 'o build-wrap -quiet'
+  #sh 'o build-wrap -quiet'
 end
 
 desc 'publish'
