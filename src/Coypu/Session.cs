@@ -500,15 +500,11 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
         public void Within(Func<Element> findScope, Action doThis)
         {
-            try
-            {
-                driver.SetScope(findScope);
-                doThis();
-            }
-            finally
-            {
-                driver.ClearScope();
-            }
+            Within<object>(findScope, () =>
+                                          {
+                                              doThis();
+                                              return null;
+                                          });
         }
 
         /// <summary>
