@@ -38,7 +38,7 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.0rc3 and supports Firefox (fastest), IE (slowest) and Chrome as the browser.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.1 and supports Firefox (fastest), IE (slowest) and Chrome as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
 ##### Firefox
 
