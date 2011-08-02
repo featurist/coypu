@@ -36,6 +36,11 @@ namespace Coypu
             get { return driver.Native; }
         }
 
+        public Uri Location
+        {
+            get { return driver.Location; }
+        }
+
         internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader _restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
             this.driver = driver;

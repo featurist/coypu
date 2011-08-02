@@ -40,6 +40,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<string> findLinkRequests = new List<string>();
         private Func<Element> findScope;
         private IList<Cookie> stubbedCookies;
+        private Uri stubbedLocation;
 
         public IEnumerable<Element> ClickedElements
         {
@@ -220,6 +221,11 @@ namespace Coypu.Tests.TestDoubles
 
         public bool Disposed { get; private set; }
 
+        public Uri Location
+        {
+            get { return stubbedLocation; }
+        }
+
         public void AcceptModalDialog()
         {
             ModalDialogsAccepted++;
@@ -379,6 +385,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubCookies(List<Cookie> cookies)
         {
             stubbedCookies = cookies;
+        }
+
+        public void StubLocation(Uri location)
+        {
+            stubbedLocation = location;
         }
     }
 }

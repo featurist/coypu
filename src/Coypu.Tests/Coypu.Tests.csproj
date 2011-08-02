@@ -59,6 +59,7 @@
     <Compile Include="TestDoubles\StubWebResources.cs" />
     <Compile Include="TestDoubles\StubWebResponse.cs" />
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
     <Compile Include="When_interacting_with_the_browser\When_constructing_xpath.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_state.cs" />

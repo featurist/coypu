@@ -113,6 +113,11 @@ namespace Coypu.Tests.TestDoubles
             get { return false; }
         }
 
+        public Uri Location
+        {
+            get { return null; }
+        }
+
         public void AcceptModalDialog()
         {
             

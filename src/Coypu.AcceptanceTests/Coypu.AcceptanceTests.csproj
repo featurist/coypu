@@ -83,6 +83,7 @@
     <Compile Include="ApiExamples.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Location.cs" />
     <Compile Include="ExternalExamples.cs">
       <SubType>Code</SubType>
     </Compile>

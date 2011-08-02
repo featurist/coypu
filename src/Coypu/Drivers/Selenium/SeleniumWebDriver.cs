@@ -13,6 +13,11 @@ namespace Coypu.Drivers.Selenium
     {
         public bool Disposed { get; private set; }
 
+        public Uri Location
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         private RemoteWebDriver selenium;
         private readonly Scoping scoping;
         private readonly ElementFinder elementFinder;
