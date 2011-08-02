@@ -64,10 +64,10 @@ namespace Coypu.Drivers.Tests
 
                 using (new SinatraSite(string.Format(@"src\Coypu.AcceptanceTests\sites\{0}.rb", "site_with_secure_resources")))
                 {
-                    LoadSpecsFor(typeof (SeleniumWebDriver), typeof(When_finding_sections_as_divs), Browser.Firefox);
-    //                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);
-    //                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);
-    //                    LoadSpecsFor(typeof (WatiNDriver), suite, Browser.InternetExplorer);
+                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Firefox);
+                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);
+                    LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);
+                    LoadSpecsFor(typeof (WatiNDriver), suite, Browser.InternetExplorer);
                 }
             }
         }
