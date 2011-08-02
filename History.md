@@ -1,3 +1,13 @@
+# Version 0.3.0
+
+Release date: 2011-08-02
+
+### Fixed
+* FindSection not working across all versions of Firefox
+
+### Changed
+* Will bump the minor version for any API/behaviour changes from now on as I should have been doing - bump to 0.3.0 to break with 0.2.x 
+
 # Version 0.2.10
 
 Release date: 2011-07-25
