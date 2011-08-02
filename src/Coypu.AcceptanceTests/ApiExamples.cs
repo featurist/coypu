@@ -21,7 +21,7 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
+            Configuration.Timeout = TimeSpan.FromMilliseconds(2000);
             ReloadTestPageWithDelay();
         }
 

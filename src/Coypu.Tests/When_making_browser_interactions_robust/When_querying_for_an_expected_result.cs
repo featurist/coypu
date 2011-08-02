@@ -52,8 +52,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             stopWatch.Stop();
 
             Assert.That(actualResult, Is.EqualTo(unexpectedResult));
-            Assert.That(lastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval, 
-                                             expectedTimeout.Milliseconds));
+            Assert.That(lastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
+                                             expectedTimeout.Milliseconds + retryInterval));
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             stopWatch = Stopwatch.StartNew();
 
             Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsTwiceTimesThenReturnOppositeResult, expectedResult), Is.EqualTo(unexpectedResult));
-            Assert.That(tries, Is.GreaterThan(3));
+            Assert.That(tries, Is.GreaterThanOrEqualTo(3));
             Assert.That(lastTry, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
                                             expectedTimeout.Milliseconds));
         }

@@ -41,7 +41,7 @@ namespace Coypu.Drivers.Selenium
             iframeFinder = new IFrameFinder(selenium, elementFinder,xPath);
             textMatcher = new TextMatcher();
             buttonFinder = new ButtonFinder(elementFinder, textMatcher, xPath);
-            sectionFinder = new SectionFinder(elementFinder,textMatcher);
+            sectionFinder = new SectionFinder(elementFinder, textMatcher);
             dialogs = new Dialogs(selenium);
             mouseControl = new MouseControl(selenium);
             optionSelector = new OptionSelector();

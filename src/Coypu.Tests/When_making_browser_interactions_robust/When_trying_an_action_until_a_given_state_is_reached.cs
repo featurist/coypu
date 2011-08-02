@@ -62,8 +62,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             stopwatch.Stop();
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
 
-            Assert.That(elapsedMilliseconds, Is.InRange(Configuration.Timeout.TotalMilliseconds - Configuration.RetryInterval.Milliseconds,
-                                                        Configuration.Timeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds));
+            Assert.That(elapsedMilliseconds, Is.InRange(Configuration.Timeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
+                                                        Configuration.Timeout.TotalMilliseconds + (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds)));
         }
 
         [Test]

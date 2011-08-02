@@ -39,13 +39,7 @@ namespace Coypu.Drivers.Selenium
 
         private bool WhereAHeaderMatches(ISearchContext e, string locator)
         {
-            return e.FindElements(GetChildHeaderSelector()).Any(h => textMatcher.TextMatches(h, locator));
-        }
-
-        private By GetChildHeaderSelector() 
-        {
-            var namePredicate = String.Join(" or ", headerTags.Select(t => String.Format("name() = '{0}'", t)).ToArray());
-            return By.XPath(String.Format("./*[{0}]", namePredicate));
+            return e.FindElements(By.XPath("./*")).Any(h => headerTags.Contains(h.TagName) && textMatcher.TextMatches(h, locator));
         }
 
         private static bool IsSection(IWebElement e) 
