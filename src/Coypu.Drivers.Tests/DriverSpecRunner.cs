@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Tests.Sites;
 using Coypu.Drivers.Watin;
@@ -46,24 +47,25 @@ namespace Coypu.Drivers.Tests
 
         public void when_testing_each_driver()
         {
-            var testDriver = Environment.GetEnvironmentVariable("driver");
-            var testBrowser = Environment.GetEnvironmentVariable("browser");
-            var testSuite = Environment.GetEnvironmentVariable("suite");
+            using (new SinatraSite(string.Format(@"src\Coypu.AcceptanceTests\sites\{0}.rb", "site_with_secure_resources")))
+            {
+                var testDriver = Environment.GetEnvironmentVariable("driver");
+                var testBrowser = Environment.GetEnvironmentVariable("browser");
+                var testSuite = Environment.GetEnvironmentVariable("suite");
             
-            if (testDriver != null && testBrowser != null && testSuite != null)
-            {
-                LoadSpecsFor(Type.GetType(testDriver),
-                             Type.GetType(testSuite),
-                             (Browser)Enum.Parse(typeof(Browser), testBrowser));
-            }
-            else
-            {
-                var suite = testSuite == null 
-                                ? typeof (DriverSpecs)
-                                : Type.GetType(testSuite);
-
-                using (new SinatraSite(string.Format(@"src\Coypu.AcceptanceTests\sites\{0}.rb", "site_with_secure_resources")))
+                if (testDriver != null && testBrowser != null && testSuite != null)
                 {
+                    LoadSpecsFor(Type.GetType(testDriver),
+                                 Type.GetType(testSuite),
+                                 (Browser)Enum.Parse(typeof(Browser), testBrowser));
+                }
+                else
+                {
+                    var suite = testSuite == null 
+                                    ? typeof (DriverSpecs)
+                                    : Type.GetType(testSuite);
+
+                
                     LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Firefox);
                     LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.Chrome);
                     LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);

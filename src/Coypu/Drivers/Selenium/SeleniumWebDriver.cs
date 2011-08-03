@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Selenium
 
         public Uri Location
         {
-            get { throw new NotImplementedException(); }
+            get { return new Uri(selenium.Url); }
         }
 
         private RemoteWebDriver selenium;

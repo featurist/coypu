@@ -16,11 +16,6 @@ namespace Coypu.Drivers.Watin
         readonly string[] headerTagNames = new[] { "H1", "H2", "H3", "H4", "H5", "H6" };
         public bool Disposed { get; private set; }
 
-        public Uri Location
-        {
-            get { throw new NotSupportedException(); }
-        }
-
         private WatiN.Core.Browser watinInstance;
 
         private WatiN.Core.Browser Watin 
@@ -299,7 +294,7 @@ namespace Coypu.Drivers.Watin
                 ? Scope.Text.Contains(text) 
                 : Watin.ContainsText(text);
         }
-        
+
         public bool HasContentMatch(Regex pattern)
         {
             return Scope != null
@@ -367,12 +362,15 @@ namespace Coypu.Drivers.Watin
             throw new NotSupportedException("Not yet implemented in WatiNDriver");
         }
 
+        public Uri Location
+        {
+            get { return watinInstance.Uri; }
+        }
+
         public void Dispose()
         {
             Watin.Dispose();
             Disposed = true;
         }
-
-
     }
 }

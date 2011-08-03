@@ -38,8 +38,8 @@ namespace Coypu.AcceptanceTests
             browser.Visit("/");
             Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
 
-            browser.Visit("/some_other_page");
-            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/some_other_page")));
+            browser.Visit("/auto_login");
+            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
         }
 
 

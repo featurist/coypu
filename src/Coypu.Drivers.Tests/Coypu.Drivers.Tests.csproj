@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_inspecting_location.cs" />
     <Compile Include="sites\SinatraSite.cs" />
     <Compile Include="When_getting_cookies.cs" />
     <Compile Include="When_hovering.cs" />
