@@ -71,7 +71,7 @@ namespace Coypu.Drivers.Tests
                     LoadSpecsFor(typeof (SeleniumWebDriver), suite, Browser.InternetExplorer);
                     LoadSpecsFor(typeof (WatiNDriver), suite, Browser.InternetExplorer);
                 }
-            }
+            }       
         }
 
         private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)

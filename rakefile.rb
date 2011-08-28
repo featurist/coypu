@@ -3,10 +3,11 @@ require 'ostruct'
 
 BUILD_CONFIGURATION = ENV['BUILD_CONFIGURATION'] || 'Release'
 
+
 task :default => :compile
 task :compile => :compile_net35
 
-[:net35, :net40].each do |version|
+[:net40].each do |version|
   msbuild "compile_#{version.to_s}".to_sym do |msbuild|
     msbuild.solution = 'src/Coypu.sln'
     msbuild.use version
@@ -22,55 +23,62 @@ end
 namespace :test do
 
   desc 'driver tests only'
-  nunit :drivers => [:release_configuration, :compile] do |nunit|
+  nunit :drivers => [:compile] do |nunit|
     nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
-    nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\Release\\Coypu.Drivers.Tests.dll"]
+    nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.Drivers.Tests.dll"]
   end
 
   desc 'unit tests only'
-  nunit :unit => [:release_configuration, :compile] do |nunit|
+  nunit :unit => [:compile] do |nunit|
     nunit.command = 'lib\NUnit\nunit-console.exe'
-    nunit.assemblies = ['src\\Coypu.Tests\\bin\\Release\\Coypu.Tests.dll']
+    nunit.assemblies = ["src\\Coypu.Tests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.Tests.dll"]
   end
 
   desc 'acceptance tests only'
-  nunit :acceptance => [:release_configuration, :compile] do |nunit|
+  nunit :acceptance => [:compile] do |nunit|
     nunit.command = 'lib\NUnit\nunit-console.exe'
-    nunit.assemblies = ['src\\Coypu.AcceptanceTests\\bin\\Release\\Coypu.AcceptanceTests.dll']
+    nunit.assemblies = ["src\\Coypu.AcceptanceTests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.AcceptanceTests.dll"]
   end
   
-  nunit :all => [:release_configuration, :compile] do |nunit|
+  nunit :all => [:compile] do |nunit|
     nunit.command = 'lib\NUnit\nunit-console.exe'
-    nunit.assemblies = ['src\\Coypu.Tests\\bin\\Release\\Coypu.Tests.dll','src\\Coypu.AcceptanceTests\\bin\\Release\\Coypu.AcceptanceTests.dll']
+    nunit.assemblies = ["src\\Coypu.Tests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.Tests.dll","src\\Coypu.AcceptanceTests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.AcceptanceTests.dll"]
   end
 end
 
 
 desc 'package'
-task :package => :'test:all' do
+task :package do # => [:release_configuration,:'test:all'] do
   FileUtils.rm_rf('temp')
-  [:net35, :net40].each do |version|
-    Rake::Task["compile_#{version}"].invoke
-    FileUtils.mkdir_p("temp/#{version}")
-	
-	exclude_files = [
-					'src/Coypu/bin/Release/Microsoft.mshtml.dll',
-					'src/Coypu/bin/Release/WatiN.Core.dll',
-					'src/Coypu/bin/Release/WatiN.Core.xml',
-					'src/Coypu/bin/Release/chromedriver.exe',
-					'src/Coypu/bin/Release/Coypu.pdb',
-					]
-	include_files = Dir.glob('src/Coypu/bin/Release/*').reject{|f| exclude_files.include?(f)}
-	include_files.each {|f| FileUtils.cp(f, "temp/#{version}")}
-  end
+  FileUtils.mkdir_p("temp/net40")
+  Rake::Task["compile_net40"].invoke
+  
+  exclude_files = [
+          'src/Coypu/bin/Release/Microsoft.mshtml.dll',
+          'src/Coypu/bin/Release/WatiN.Core.dll',
+          'src/Coypu/bin/Release/WatiN.Core.xml',
+          'src/Coypu/bin/Release/chromedriver.exe',
+          'src/Coypu/bin/Release/Coypu.pdb',
+          ]
+  include_files = Dir.glob('src/Coypu/bin/Release/*').reject{|f| exclude_files.include?(f)}
+  include_files.each {|f| FileUtils.cp(f, "temp/net40")}
+
   package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}
   sh 'nuget Pack Coypu.nuspec'
+  sh 'nuget Pack Coypu.Watin.nuspec'
   #sh 'o build-wrap -quiet'
 end
 
 desc 'publish'
 task :publish => :package do
-  package_file = Dir.glob('Coypu*.nupkg').first
+  package_file = Dir.glob('Coypu.*.nupkg').first
+  sh "nuget Push #{package_file}"
+  FileUtils.rm(package_file)
+end
+
+desc 'publish Coypu-WatiN'
+task :publish_watin => :package_watin do
+  package_file = Dir.glob('Coypu-WatiN*.nupkg').first
   sh "nuget Push #{package_file}"
   FileUtils.rm(package_file)
 end

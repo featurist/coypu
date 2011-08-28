@@ -1,0 +1,1803 @@
+Microsoft (R) Build Engine Version 3.5.30729.4926
+[Microsoft .NET Framework, Version 2.0.50727.4961]
+Copyright (C) Microsoft Corporation 2007. All rights reserved.
+
+Build started 28/08/2011 11:57:57.
+Project "C:\dev\Coypu\src\Coypu.sln" on node 0 (default targets).
+  Building solution configuration "Release|Any CPU".
+Project "C:\dev\Coypu\src\Coypu.sln" (1) is building "C:\dev\Coypu\src\Coypu\Coypu.csproj" (2) on node 0 (default targets).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+EntityDeploy:
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  Coypu -> C:\dev\Coypu\src\Coypu\bin\Release\Coypu.dll
+Done Building Project "C:\dev\Coypu\src\Coypu\Coypu.csproj" (default targets).
+Project "C:\dev\Coypu\src\Coypu.sln" (1) is building "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3) on node 0 (default targets).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+EntityDeploy:
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3) is building "C:\dev\Coypu\src\Coypu\Coypu.csproj" (2:2) on node 0 (GetTargetPath target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu\Coypu.csproj" (GetTargetPath target(s)).
+Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3) is building "C:\dev\Coypu\src\Coypu\Coypu.csproj" (2:3) on node 0 (GetNativeManifest target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu\Coypu.csproj" (GetNativeManifest target(s)).
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3) is building "C:\dev\Coypu\src\Coypu\Coypu.csproj" (2:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu\Coypu.csproj" (GetCopyToOutputDirectoryItems target(s)).
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  Coypu.Drivers.Watin -> C:\dev\Coypu\src\Coypu.Drivers.Watin\bin\Release\Coypu.Drivers.Watin.dll
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (default targets).
+Project "C:\dev\Coypu\src\Coypu.sln" (1) is building "C:\dev\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (4) on node 0 (default targets).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+EntityDeploy:
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  Coypu.Tests -> C:\dev\Coypu\src\Coypu.Tests\bin\Release\Coypu.Tests.dll
+Done Building Project "C:\dev\Coypu\src\Coypu.Tests\Coypu.Tests.csproj" (default targets).
+Project "C:\dev\Coypu\src\Coypu.sln" (1) is building "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5) on node 0 (default targets).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+EntityDeploy:
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5) is building "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3:2) on node 0 (GetTargetPath target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (GetTargetPath target(s)).
+Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5) is building "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3:3) on node 0 (GetNativeManifest target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (GetNativeManifest target(s)).
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5) is building "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (3:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj" (GetCopyToOutputDirectoryItems target(s)).
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copying file from "C:\dev\Coypu\src\Coypu.Drivers.Tests\html\iFrame1.htm" to "bin\Release\html\iFrame1.htm".
+  Copying file from "C:\dev\Coypu\src\Coypu.Drivers.Tests\html\iFrame2.htm" to "bin\Release\html\iFrame2.htm".
+  Copying file from "C:\dev\Coypu\src\Coypu.Drivers.Tests\html\InteractionTestsPage.htm" to "bin\Release\html\InteractionTestsPage.htm".
+_CopyAppConfigFile:
+Skipping target "_CopyAppConfigFile" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  Coypu.Drivers.Tests -> C:\dev\Coypu\src\Coypu.Drivers.Tests\bin\Release\Coypu.Drivers.Tests.dll
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (default targets).
+Project "C:\dev\Coypu\src\Coypu.sln" (1) is building "C:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (6) on node 0 (default targets).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+EntityDeploy:
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+Project "C:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (6) is building "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5:2) on node 0 (GetTargetPath target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (GetTargetPath target(s)).
+Project "C:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (6) is building "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5:3) on node 0 (GetNativeManifest target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (GetNativeManifest target(s)).
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+Project "C:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (6) is building "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (5:4) on node 0 (GetCopyToOutputDirectoryItems target(s)).
+Project file contains ToolsVersion="4.0", which is not supported by this version of MSBuild. Treating the project as if it had ToolsVersion="3.5".
+Done Building Project "C:\dev\Coypu\src\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj" (GetCopyToOutputDirectoryItems target(s)).
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copying file from "C:\dev\Coypu\src\Coypu.Drivers.Tests\html\iFrame1.htm" to "bin\Release\html\iFrame1.htm".
+  Copying file from "C:\dev\Coypu\src\Coypu.Drivers.Tests\html\iFrame2.htm" to "bin\Release\html\iFrame2.htm".
+  Copying file from "C:\dev\Coypu\src\Coypu.Drivers.Tests\html\InteractionTestsPage.htm" to "bin\Release\html\InteractionTestsPage.htm".
+  Copying file from "C:\dev\Coypu\src\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb" to "bin\Release\sites\site_with_secure_resources.rb".
+CopyFilesToOutputDirectory:
+  Coypu.AcceptanceTests -> C:\dev\Coypu\src\Coypu.AcceptanceTests\bin\Release\Coypu.AcceptanceTests.dll
+Done Building Project "C:\dev\Coypu\src\Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj" (default targets).
+Done Building Project "C:\dev\Coypu\src\Coypu.sln" (default targets).
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.63
+
+DriverSpecRunner
+  when testing each driver
+    and the driver is WatiNDriver
+      and the browser is InternetExplorer
+        cleans up - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when inspecting location
+          gets the current browser location - FAILED - Expected: <http://localhost:4567/>, But was: <file:///C:/dev/Coypu/src/Coypu.Drivers.Tests/bin/Release/html/InteractionTestsPage.htm>
+          not just when set by visit - FAILED - Expected: <http://localhost:4567/resource/js_redirect>, But was: <file:///C:/dev/Coypu/src/Coypu.Drivers.Tests/bin/Release/html/InteractionTestsPage.htm>
+        when getting cookies
+          gets all the cookies - FAILED - Specified method is not supported.
+          gets the cookie path - FAILED - Specified method is not supported.
+        when hovering
+          mouses over the underlying element - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when using iframes as scope
+          finds elements among multiple scopes - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds clears scope back to the whole window - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          elements withing iframes are not found in outer scope
+            does not find something in an iframe - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding iframes
+          finds by header text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds by id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds by title - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when accessing attributes
+          exposes element attributes - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when checking
+          checks an unchecked checkbox - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          leaves a checked checkbox checked - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          unchecks a checked checkbox - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          leaves an unchecked checkbox unchecked - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          fires onclick event - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          fires onclick event - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when choosing
+          chooses radio button from list - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          fires onclick event - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when clicking
+          clicks the underlying element - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when executing script
+          runs the script in the browser - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          returns the result - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding all elements by css
+          returns empty if no matches - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          returns all matches by css - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding all elements by xpath
+          returns empty if no matches - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          returns all matches by xpath - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding an element by css
+          finds present examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find missing examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          only finds visible elements - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding an element by xpath
+          finds present examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find missing examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          only finds visible elements - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding buttons
+          finds a particular button by its text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular button by its id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular button by its name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular input button by its value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular input button by its id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular input button by id ends with - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular input button by its name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular submit button by its value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular submit button by its id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a particular submit button by its name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds image buttons - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find text inputs - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find hidden inputs - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find invisible inputs - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds img elements with role='button' by alt text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds any elements with role='button' by text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds an image button with both types of quote in my value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding buttons within scope
+          within scope1
+            finds button by name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds input button by value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds button by text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          within scope2
+            finds button by name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds input button by value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds button by text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding sections as divs
+          finds by div by id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finding sections by header text
+            finds by h1 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h2 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h3 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h6 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h2 text within child link - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding fields
+          finds text field by placeholder - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds radio button by value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finding by for attribute
+            finds text input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds password field - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds select field - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds checkbox - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds radio button - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds textarea - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds file input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finding by container label
+            finds text input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds password - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds checkbox - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds radio - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds select - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds textarea - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds file field - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finding by id
+            finds field - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds textarea - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds select - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds checkbox - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds radio - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds password - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds file - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by id ends with - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finding by name
+            finds text input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds textarea - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds select - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds checkbox - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds radio button - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds password input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds file input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding fieldsets
+          finds by legend text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds by id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds only fieldsets - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding fields within scope
+          within scope1
+            finds text input by for - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds text input in container label - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds text input by placeholder - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds text input by name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds radio button by value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds not find text input by id outside scope - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          within scope2
+            finds text input - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds text input in container label - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds text input by placeholder - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds text input by name - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds radio button by value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds not find text input by id outside scope - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding links
+          finds link by text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find display:none - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find visibility:hidden links - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds a link with both types of quote in its text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when finding sections
+          only finds div and section - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finding sections by header text
+            finds by h1 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h2 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h3 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds by h6 text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            finds section by id - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when inspecting content
+          does not find missing text - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds text with parts marked up variously - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds text in a table row - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds text in a list - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds text split over multiple lines in source - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds text displayed over multiple lines in source - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          does not find single line text displayed over multiple lines in source - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds text by regex - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when inspecting content within scope
+          scope 1
+            finds content within scope - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            does not find content outside scope - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          scope 2
+            finds content within scope - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            does not find content outside scope - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when inspecting css
+          does not find missing examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds present examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          only finds visible elements - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when inspecting dialog text
+          finds exact text in alert - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds exact text in confirm - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when inspecting xpath
+          does not find missing examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          only finds visible elements - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          finds present examples - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when interacting with dialogs
+          accepts alerts - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          confirms
+            when accepting
+              clears dialog - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+              returns true - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+            when cancelling
+              clears dialog - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+              returns false - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when selecting options
+          sets text of selected option - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when setting fields
+          sets value of text input field - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          sets value of textarea field - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          selects option by text or value - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+          fires change event when selecting an option - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+        when uploading files
+          sets the path to be uploaded - FAILED - The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+
+**** FAILURES ****
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting location. gets the current browser location.
+Expected: <http://localhost:4567/>, But was: <file:///C:/dev/Coypu/src/Coypu.Drivers.Tests/bin/Release/html/InteractionTestsPage.htm>
+   at Coypu.Drivers.Tests.When_inspecting_location.<Specs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\When_inspecting_location.cs:line 13
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting location. not just when set by visit.
+Expected: <http://localhost:4567/resource/js_redirect>, But was: <file:///C:/dev/Coypu/src/Coypu.Drivers.Tests/bin/Release/html/InteractionTestsPage.htm>
+   at Coypu.Drivers.Tests.When_inspecting_location.<Specs>b__1() in c:\dev\Coypu\src\Coypu.Drivers.Tests\When_inspecting_location.cs:line 24
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when getting cookies. gets all the cookies.
+Specified method is not supported.
+   at Coypu.Drivers.Watin.WatiNDriver.GetBrowserCookies() in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 124
+   at Coypu.Drivers.Tests.When_getting_cookies.<Specs>b__1() in c:\dev\Coypu\src\Coypu.Drivers.Tests\When_getting_cookies.cs:line 24
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when getting cookies. gets the cookie path.
+Specified method is not supported.
+   at Coypu.Drivers.Watin.WatiNDriver.GetBrowserCookies() in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 124
+   at Coypu.Drivers.Tests.When_getting_cookies.<Specs>b__4() in c:\dev\Coypu\src\Coypu.Drivers.Tests\When_getting_cookies.cs:line 34
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when hovering. mouses over the underlying element.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at mshtml.HTMLBodyClass.IHTMLDOMNode_get_parentNode()
+   at WatiN.Core.Native.InternetExplorer.IEElement.get_Parent()
+   at WatiN.Core.Element.get_Parent()
+   at Coypu.Drivers.Watin.WatiNExtensions.IsDisplayed(Element element) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNExtensions.cs:line 15
+   at Coypu.Drivers.Watin.WatiNExtensions.IsDisplayed(Element element) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNExtensions.cs:line 15
+   at Coypu.Drivers.Watin.WatiNExtensions.IsDisplayed(Element element) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNExtensions.cs:line 15
+   at Coypu.Drivers.Watin.WatiNExtensions.<>c__DisplayClass4.<FirstDisplayedOrDefault>b__3(Element e) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNExtensions.cs:line 30
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   at Coypu.Drivers.Watin.WatiNExtensions.FirstDisplayedOrDefault(IEnumerable`1 elements, Element scope) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNExtensions.cs:line 30
+   at Coypu.Drivers.Watin.WatiNDriver.FindId(String id) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 104
+   at Coypu.Drivers.Tests.When_hovering.<Specs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\When_hovering.cs:line 11
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. elements withing iframes are not found in outer scope. does not find something in an iframe.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. finds elements among multiple scopes.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when using iframes as scope. finds clears scope back to the whole window.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by header text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding iframes. finds by title.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when accessing attributes. exposes element attributes.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when checking. checks an unchecked checkbox.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when checking. leaves a checked checkbox checked.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when checking. unchecks a checked checkbox.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when checking. leaves an unchecked checkbox unchecked.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when checking. fires onclick event.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when checking. fires onclick event.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when choosing. chooses radio button from list.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when choosing. fires onclick event.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when clicking. clicks the underlying element.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when executing script. runs the script in the browser.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when executing script. returns the result.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by css. returns empty if no matches.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by css. returns all matches by css.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns empty if no matches.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding all elements by xpath. returns all matches by xpath.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. finds present examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. does not find missing examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by css. only finds visible elements.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. finds present examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. does not find missing examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding an element by xpath. only finds visible elements.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular button by its text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular button by its id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular button by its name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular input button by its value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular input button by its id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular input button by id ends with.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular input button by its name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular submit button by its value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular submit button by its id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds a particular submit button by its name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds image buttons.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. does not find text inputs.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. does not find hidden inputs.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. does not find invisible inputs.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds img elements with role='button' by alt text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds any elements with role='button' by text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons. finds an image button with both types of quote in my value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons within scope. within scope1. finds button by name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons within scope. within scope1. finds input button by value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons within scope. within scope1. finds button by text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons within scope. within scope2. finds button by name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons within scope. within scope2. finds input button by value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding buttons within scope. within scope2. finds button by text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections as divs. finding sections by header text. finds by h1 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections as divs. finding sections by header text. finds by h2 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections as divs. finding sections by header text. finds by h3 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections as divs. finding sections by header text. finds by h6 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections as divs. finding sections by header text. finds by h2 text within child link.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections as divs. finds by div by id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds text input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds password field.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds select field.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds checkbox.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds radio button.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds textarea.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by for attribute. finds file input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds text input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds password.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds checkbox.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds radio.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds select.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds textarea.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by container label. finds file field.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds field.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds textarea.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds select.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds checkbox.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds radio.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds password.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds file.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by id. finds by id ends with.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds text input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds textarea.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds select.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds checkbox.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds radio button.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds password input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finding by name. finds file input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finds text field by placeholder.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields. finds radio button by value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fieldsets. finds by legend text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fieldsets. finds by id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fieldsets. finds only fieldsets.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope1. finds text input by for.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope1. finds text input in container label.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope1. finds text input by placeholder.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope1. finds text input by name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope1. finds radio button by value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope1. finds not find text input by id outside scope.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope2. finds text input.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope2. finds text input in container label.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope2. finds text input by placeholder.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope2. finds text input by name.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope2. finds radio button by value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding fields within scope. within scope2. finds not find text input by id outside scope.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding links. finds link by text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding links. does not find display:none.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding links. does not find visibility:hidden links.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding links. finds a link with both types of quote in its text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h1 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h2 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h3 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds by h6 text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. finding sections by header text. finds section by id.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when finding sections. only finds div and section.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. does not find missing text.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text with parts marked up variously.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text in a table row.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text in a list.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text split over multiple lines in source.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text displayed over multiple lines in source.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. does not find single line text displayed over multiple lines in source.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content. finds text by regex.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content within scope. scope 1. finds content within scope.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content within scope. scope 1. does not find content outside scope.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content within scope. scope 2. finds content within scope.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting content within scope. scope 2. does not find content outside scope.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. does not find missing examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. finds present examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting css. only finds visible elements.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting dialog text. finds exact text in alert.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting dialog text. finds exact text in confirm.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. does not find missing examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. only finds visible elements.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when inspecting xpath. finds present examples.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when accepting. clears dialog.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when accepting. returns true.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when cancelling. clears dialog.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. confirms. when cancelling. returns false.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when interacting with dialogs. accepts alerts.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when selecting options. sets text of selected option.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when setting fields. sets value of text input field.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when setting fields. sets value of textarea field.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when setting fields. selects option by text or value.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when setting fields. fires change event when selecting an option.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. when uploading files. sets the path to be uploaded.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+DriverSpecRunner. when testing each driver. and the driver is WatiNDriver. and the browser is InternetExplorer. cleans up.
+The object invoked has disconnected from its clients. (Exception from HRESULT: 0x80010108 (RPC_E_DISCONNECTED))
+   at SHDocVw.InternetExplorerClass.Navigate2(Object& URL, Object& Flags, Object& TargetFrameName, Object& PostData, Object& Headers)
+   at WatiN.Core.Native.InternetExplorer.IEBrowser.NavigateTo(Uri url)
+   at WatiN.Core.Browser.GoTo(Uri url)
+   at WatiN.Core.Browser.GoTo(String url)
+   at Coypu.Drivers.Watin.WatiNDriver.Visit(String url) in c:\dev\Coypu\src\Coypu.Drivers.Watin\WatiNDriver.cs:line 259
+   at Coypu.Drivers.Tests.DriverSpecRunner.LoadTestHTML(Type driverType, Browser browser) in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 112
+   at Coypu.Drivers.Tests.DriverSpecRunner.<>c__DisplayClass3.<LoadDriverSpecs>b__0() in c:\dev\Coypu\src\Coypu.Drivers.Tests\DriverSpecRunner.cs:line 81
+
+150 Examples, 150 Failed, 0 Pending
+(in C:/dev/Coypu)
+F, [2011-08-28T12:01:35.931451 #888] FATAL -- : NUnit Failed. See Build Log For Detail
+Terminate batch job (Y/N)? 

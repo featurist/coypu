@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Tests", "Coypu.Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Drivers.Tests", "Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj", "{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Drivers.Watin", "Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj", "{A4ADBB2C-A3C3-4984-8991-C39E991167DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Coypu</id>
+    <id>Coypu.Watin</id>
     <version>0.4.0</version>
-    <authors>AdrianLongley, AndrewVos</authors>
-    <owners>AdrianLongley, AndrewVos</owners>
+    <authors>AdrianLongley</authors>
+    <owners>AdrianLongley</owners>
     <projectUrl>https://github.com/ITV/Coypu</projectUrl>
     <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Intuitive, robust browser automation for .Net</description>
+    <description>WatiN driver for Coypu</description>
     <tags></tags>
     <dependencies>
-      <dependency id="Selenium.WebDriver" version="[2.5.1]" />
+      <dependency id="Coypu" version="[0.3.1]" />
+      <dependency id="WatiN" version="[2.1.0]" />
     </dependencies>
   </metadata>
     <files>
-      <file src="temp\net40\*.*" target="lib\net40" />
+      <file src="src\Coypu.Drivers.Watin\bin\Release\Coypu.Drivers.Watin.dll" target="lib\net40" />
     </files>
 </package>

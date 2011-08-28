@@ -8,15 +8,15 @@ namespace Coypu
     /// </summary>
     public class MissingHtmlException : Exception
     {
-        internal MissingHtmlException(string message) : base(message)
+        public MissingHtmlException(string message) : base(message)
         {
         }
 
-        internal MissingHtmlException(string message, Exception innerException) : base(message, innerException)
-        {
+        public MissingHtmlException(string message, Exception innerException) : base(message, innerException)
+        {                         
         }
 
-        internal MissingHtmlException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public MissingHtmlException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

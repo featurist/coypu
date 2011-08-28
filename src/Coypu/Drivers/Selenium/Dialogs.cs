@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Remote;
+﻿using System;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -13,9 +14,16 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasDialog(string withText)
         {
-            return selenium.SwitchTo() != null &&
-                   selenium.SwitchTo().Alert() != null &&
-                   selenium.SwitchTo().Alert().Text == withText;
+            try
+            {
+                return selenium.SwitchTo() != null &&
+                       selenium.SwitchTo().Alert() != null &&
+                       selenium.SwitchTo().Alert().Text == withText;
+            }
+            catch (OpenQA.Selenium.NoAlertPresentException)
+            {
+                return false;
+            }
         }
 
         public void AcceptModalDialog()

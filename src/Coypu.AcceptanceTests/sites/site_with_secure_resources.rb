@@ -13,3 +13,4 @@ get "/restricted_resource/:value" do
     params[:value]
   end
 end
+
