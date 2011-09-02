@@ -7,7 +7,7 @@ BUILD_CONFIGURATION = ENV['BUILD_CONFIGURATION'] || 'Release'
 task :default => :compile
 task :compile => :compile_net35
 
-[:net40].each do |version|
+[:net35,:net40].each do |version|
   msbuild "compile_#{version.to_s}".to_sym do |msbuild|
     msbuild.solution = 'src/Coypu.sln'
     msbuild.use version
@@ -48,7 +48,7 @@ end
 
 
 desc 'package'
-task :package do # => [:release_configuration,:'test:all'] do
+task :package => [:release_configuration,:'test:all'] do
   FileUtils.rm_rf('temp')
   FileUtils.mkdir_p("temp/net40")
   Rake::Task["compile_net40"].invoke

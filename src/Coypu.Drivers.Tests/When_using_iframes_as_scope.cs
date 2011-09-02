@@ -35,6 +35,14 @@ namespace Coypu.Drivers.Tests
 
                 driver.FindButton("scoped button").Id.should_be("scope1ButtonId");
             };
+
+            it["can fill in a text input within an IFrame"] = () =>
+            {
+                driver.SetScope(() => driver.FindIFrame("I am iframe one"));
+                driver.Set(driver.FindField("text input in iframe"), "filled in");
+
+                Assert.That(driver.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
+            };
         }
     }
 

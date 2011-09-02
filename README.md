@@ -38,11 +38,14 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
-`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium 2.1 and supports Firefox (fastest), IE (slowest) and Chrome as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
+##### Selenium WebDriver
+`Coypu.Drivers.Selenium.SeleniumWebDriver` uses Selenium WebDriver 2.5 and supports Firefox (fastest), IE (slowest) and Chrome as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
+
+The Selenium Driver is included in the Coypu package.
 
 ##### Firefox
 
-Versions up to and including Firefox 5 are now supported.
+Versions up to and including Firefox 6 are now supported.
 
 ##### Internet Explorer
 Only IE9 supports CSS & XPath and certain HTML features.
@@ -62,6 +65,10 @@ Choose your driver/browser combination like so:
 	Configuration.Browser = Drivers.Browser.Firefox;
  
 These settings are the default configuration.
+
+##### WatiN
+
+There is a seperate package called Coypu.Watin containing a driver for WatiN which has less features implemented than the Selenium Driver to date but might be useful for IE testing -- it is certainly faster than Selenium for IE.
 
 #### Timeout
 

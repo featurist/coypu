@@ -386,6 +386,17 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void Multiple_interactions_within_iframe_example()
+        {
+            browser.WithinIFrame("I am iframe one", () =>
+                {
+                    browser.FillIn("text input in iframe").With("filled in");
+                    Assert.That(browser.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
+                });
+
+        }
+            
+        [Test]
         public void FillIn_file_example()
         {
             const string someLocalFile = @"local.file";

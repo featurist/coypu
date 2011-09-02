@@ -1,3 +1,17 @@
+# Version 0.4.0
+
+Release date: 2011-09-02
+
+### Added
+* Expose browser's current location
+
+### Changed
+* Split out WatiN driver into seperate Coypu.Watin package, only WebDriver is included in Coypu by default.
+* Reference official Selenium on nuget and make a dependency of Coypu.nuget
+
+### Fixed
+* Error on second use of IFrame scope within the same block
+
 # Version 0.3.0
 
 Release date: 2011-08-02

@@ -58,7 +58,7 @@ namespace Coypu.Drivers.Selenium
             findingScope = true;
             try
             {
-                return cachedScope == null
+                return cachedScope == null || cachedScope is RemoteWebDriver
                            ? (cachedScope = FindFreshScope())
                            : (cachedScope = CheckForStaleElement());
             }
@@ -70,6 +70,8 @@ namespace Coypu.Drivers.Selenium
 
         private ISearchContext FindFreshScope()
         {
+            ClearWindowScope();
+
             outerWindowHandle = selenium.CurrentWindowHandle;
             var findFreshScope = (IWebElement) findScope().Native;
             if (findFreshScope.TagName == "iframe")
