@@ -44,7 +44,6 @@ Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration
 The Selenium Driver is included in the Coypu package.
 
 ##### Firefox
-
 Versions up to and including Firefox 6 are now supported.
 
 ##### Internet Explorer
@@ -53,11 +52,20 @@ Only IE9 supports CSS & XPath and certain HTML features.
 ##### Chrome
 You will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
 
-The Coypu WatiN-IE driver is further behind (though it is faster than WebDriver-IE) and could use some more features implementing. 
+##### HtmlUnit
+You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
+
+1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `Configuration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
+2. Install a JRE
+3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ]http://seleniumhq.org/download
+4. Run "java -jar selenium-server-standalong-x.x.x.jar"
+
+And off you go.
+
+##### Android
+Selenium WebDriver also supports Android so long as you have the Android remote driver running (Selenium defaults to port 8080).
 
 Check the driver_test_results.txt file for the latest report on driver/browser support.
-
-A goal for the future would be a driver for a headless browser such as zombie.js - http://zombie.labnotes.org/
 
 Choose your driver/browser combination like so:
 
@@ -80,7 +88,7 @@ All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()`
 
 Setup timeout/retry like so:
 
-	Configuration.Timeout = TimeSpan.FromSeconds(10);
+	Configuration.Timeout = TimeSpan.FromSeconds(1);
 	Configuration.RetryInterval = TimeSpan.FromSeconds(0.1);
 	
 These settings are the default configuration.
