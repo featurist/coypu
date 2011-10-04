@@ -1,5 +1,6 @@
 ﻿    using System;
-using Coypu.Robustness;
+    using System.Reflection;
+    using Coypu.Robustness;
 using Coypu.WebRequests;
 
 namespace Coypu
@@ -34,7 +35,14 @@ namespace Coypu
 
         private static Driver NewWebDriver()
         {
-            return (Driver) Activator.CreateInstance(Configuration.Driver);
+            try
+            {
+                return (Driver) Activator.CreateInstance(Configuration.Driver);
+            }
+            catch (TargetInvocationException e)
+            {
+                throw e.InnerException;
+            }
         }
 
         /// <summary>

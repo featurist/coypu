@@ -10,7 +10,7 @@ namespace Coypu
     {
         const string DEFAULT_APP_HOST = "localhost";
         const int DEFAULT_PORT = 80;
-        const double DEFAULT_TIMEOUT_SECONDS = 10;
+        const double DEFAULT_TIMEOUT_SECONDS = 1;
         const double DEFAULT_INTERVAL_SECONDS = 0.1;
         
         private static string appHost;

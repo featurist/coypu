@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Coypu.AcceptanceTests
 {
@@ -82,24 +83,23 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void SupplyYourOwnRemoteWebDriver()
+        public void HtmlUnitDriver()
         {
             Configuration.AppHost = "www.google.com";
-            Configuration.Driver = typeof(SeleniumHtmlUnitWebDriver);
+            Configuration.Browser = Drivers.Browser.HtmlUnit;
 
-            using (Session browser = Browser.Session)
+            try
             {
-                browser.Visit("/");
-                Assert.IsTrue(browser.HasContent("Google"));
+                using (Session browser = Browser.Session)
+                {
+                    browser.Visit("/");
+                }
+                Assert.Fail("Expected an exception attempting to connect to HtmlUnit driver");
             }
-        }
-    }
-
-    public class SeleniumHtmlUnitWebDriver : SeleniumWebDriver
-    {
-        public SeleniumHtmlUnitWebDriver() : base(new OpenQA.Selenium.Firefox.FirefoxDriver())
-        {
-            
+            catch (WebDriverException e)
+            {
+                Assert.That(e.Message, Is.StringContaining("No connection could be made because the target machine actively refused it 127.0.0.1:4444"));
+            }
         }
     }
 }

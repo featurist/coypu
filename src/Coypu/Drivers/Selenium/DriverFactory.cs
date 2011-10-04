@@ -24,6 +24,10 @@ namespace Coypu.Drivers.Selenium
                     return new ChromeDriver();
                 case (Browser.Android):
                     return new AndroidDriver();
+                case (Browser.HtmlUnit):
+                    return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
+                case (Browser.HtmlUnitWithJavaScript):
+                    return new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript());
                 default:
                     throw new BrowserNotSupportedException(Configuration.Browser, GetType());
             }

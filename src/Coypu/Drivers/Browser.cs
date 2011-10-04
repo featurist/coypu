@@ -9,6 +9,8 @@
         InternetExplorer,
         Chrome,
         Safari,
-        Android
+        Android,
+        HtmlUnit,
+        HtmlUnitWithJavaScript
     }
 }
