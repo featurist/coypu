@@ -48,8 +48,8 @@
       <Private>True</Private>
       <HintPath>..\packages\WatiN.2.1.0\lib\net35\Microsoft.mshtml.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Net35">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\net35\Newtonsoft.Json.Net35.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.3\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NSpec, Version=0.9.41.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,9 +75,9 @@
     <Reference Include="WatiN.Core">
       <HintPath>..\packages\WatiN.2.1.0\lib\net35\WatiN.Core.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=2.5.1.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.7.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.5.1\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.7.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
