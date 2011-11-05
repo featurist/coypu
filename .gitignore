@@ -25,3 +25,4 @@ Coypu*.zip
 Coypu*.nupkg
 chromedriver.log
 Coypu-*.wrap
+src/packages
