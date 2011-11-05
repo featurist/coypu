@@ -60,6 +60,9 @@
     <OutputPath>bin\x86\x86\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json.Net35">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.2\lib\net35\Newtonsoft.Json.Net35.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -73,9 +76,9 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=2.5.1.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.8.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.5.1\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.8.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
