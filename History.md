@@ -1,8 +1,22 @@
+# Version 0.5.3
+
+Release date: 2011-11-06
+
+### Changed
+* Selenium 2.11.0 or later
+
+# Version 0.5.2
+
+Release date: 2011-10-18
+
+### Fixed
+* Proj dependencies broken
+
 # Version 0.5.1
 
 Release date: 2011-10-18
 
-# Fixed
+### Fixed
 * Dependency on Newtonsoft.Json via Selenium.WebDriver broken
 * You may need to Uninstall-Package for Coypu, Selenium.WebDriver and Newtonsoft.Json then Install-Package Coypu
 
