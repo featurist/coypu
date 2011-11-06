@@ -5,7 +5,7 @@ BUILD_CONFIGURATION = ENV['BUILD_CONFIGURATION'] || 'Release'
 
 
 task :default => :compile
-task :compile => :compile_net35
+task :compile => :compile_net40
 
 [:net35,:net40].each do |version|
   msbuild "compile_#{version.to_s}".to_sym do |msbuild|
