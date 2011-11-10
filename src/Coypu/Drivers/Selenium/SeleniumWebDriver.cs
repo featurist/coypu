@@ -15,7 +15,16 @@ namespace Coypu.Drivers.Selenium
 
         public Uri Location
         {
-            get { return new Uri(selenium.Url); }
+            get
+            {
+                ForceFindScope();
+                return new Uri(selenium.Url);
+            }
+        }
+
+        private void ForceFindScope()
+        {
+            var scope = Scope;
         }
 
         private RemoteWebDriver selenium;

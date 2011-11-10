@@ -48,7 +48,7 @@ end
 
 
 desc 'package'
-task :package => [:release_configuration,:'test:all'] do
+task :package => [:release_configuration, :compile] do
   FileUtils.rm_rf('temp')
   FileUtils.mkdir_p("temp/net40")
   Rake::Task["compile_net40"].invoke

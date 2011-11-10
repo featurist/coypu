@@ -33,7 +33,7 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void It_exposes_the_current_url()
+        public void It_exposes_the_current_page_location()
         {
             browser.Visit("/");
             Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
@@ -42,6 +42,18 @@ namespace Coypu.AcceptanceTests
             Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
         }
 
+        private void ReloadTestPage()
+        {
+            browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+        }
 
+        [Test]
+        public void It_exposes_the_location_of_an_iframe_scope()
+        {
+            ReloadTestPage();
+            browser.WithinIFrame("iframe1", () =>
+                Assert.That(browser.Location.AbsolutePath, Is.StringContaining("iFrame1.htm"))
+                );
+        }
     }
 }

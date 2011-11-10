@@ -1,3 +1,10 @@
+# Version 0.5.4
+
+Release date: 2011-11-10
+
+### Fixed
+* Session.Location not respecting iframe scope
+
 # Version 0.5.3
 
 Release date: 2011-11-06
