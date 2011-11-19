@@ -61,8 +61,8 @@ namespace Coypu.Drivers.Tests
                 }
                 else
                 {
-                    var suite = testSuite == null 
-                                    ? typeof (DriverSpecs)
+                    var suite = testSuite == null
+                                    ? typeof(DriverSpecs)
                                     : Type.GetType(testSuite);
 
                 

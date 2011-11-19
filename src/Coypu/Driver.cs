@@ -29,6 +29,7 @@ namespace Coypu
         void Choose(Element field);
         bool Disposed { get; }
         Uri Location { get; }
+        bool ConsiderInvisibleElements { get; set; }
         void AcceptModalDialog();
         void CancelModalDialog();
         void SetScope(Func<Element> find);

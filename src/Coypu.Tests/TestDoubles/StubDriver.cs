@@ -118,6 +118,12 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
+        public bool ConsiderInvisibleElements
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         public void AcceptModalDialog()
         {
             

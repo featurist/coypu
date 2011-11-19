@@ -416,5 +416,26 @@ namespace Coypu.AcceptanceTests
                 File.Delete(someLocalFile);
             }
         }
+
+        [Test]
+        public void ConsideringVisibleElements_action_example()
+        {
+            browser.ConsideringInvisibleElements(
+                () =>
+                {
+                    browser.FindButton("firstInvisibleInputId");
+                }
+            );
+        }
+        [Test]
+        public void ConsideringVisibleElements_func_example()
+        {
+            var button = browser.ConsideringInvisibleElements(
+                () => browser.FindButton("firstInvisibleInputId"));
+
+            Assert.That(button.Id, Is.EqualTo("firstInvisibleInputId"));
+
+            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId"));
+        }
     }
 }

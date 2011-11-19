@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_forced_to_consider_invisible_elements.cs" />
     <Compile Include="When_inspecting_location.cs" />
     <Compile Include="sites\SinatraSite.cs" />
     <Compile Include="When_getting_cookies.cs" />

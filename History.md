@@ -1,3 +1,10 @@
+# Version 0.6.0
+
+Release date: 2011-11-19
+
+### Added
+* ConsideringInvisibleElements scope added to sessions - for when you reeeeeally need it
+
 # Version 0.5.4
 
 Release date: 2011-11-10

@@ -718,5 +718,28 @@ namespace Coypu
             restrictedResourceDownloader.SetCookies(driver.GetBrowserCookies());
             restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs);
         }
+
+        public void ConsideringInvisibleElements(Action action)
+        {
+            ConsideringInvisibleElements<object>(
+                () =>
+                    {
+                        action();
+                        return null;
+                    });
+        }
+
+        public T ConsideringInvisibleElements<T>(Func<T> func)
+        {
+            try
+            {
+                driver.ConsiderInvisibleElements = true;
+                return func();
+            }
+            finally
+            {
+                driver.ConsiderInvisibleElements = false;
+            }
+        }
     }
 }

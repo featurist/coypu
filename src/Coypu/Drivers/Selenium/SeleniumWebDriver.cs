@@ -22,6 +22,12 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
+        public bool ConsiderInvisibleElements
+        {
+            get { return elementFinder.ConsiderInvisibleElements; }
+            set { elementFinder.ConsiderInvisibleElements = value; }
+        }
+
         private void ForceFindScope()
         {
             var scope = Scope;

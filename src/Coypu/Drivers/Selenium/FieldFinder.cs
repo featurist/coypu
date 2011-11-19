@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 
@@ -75,7 +76,12 @@ namespace Coypu.Drivers.Selenium
 
         private bool IsInputField(IWebElement e)
         {
-            return e.TagName == "input" && FieldInputTypes.Contains(e.GetAttribute("type"));
+            var inputTypes = FieldInputTypes;
+            if (elementFinder.ConsiderInvisibleElements)
+            {
+                inputTypes = inputTypes.Concat(new[]{"hidden"}).ToArray();
+            }
+            return e.TagName == "input" && inputTypes.Contains(e.GetAttribute("type"));
         }
     }
 }

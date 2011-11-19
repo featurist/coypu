@@ -367,6 +367,12 @@ namespace Coypu.Drivers.Watin
             get { return watinInstance.Uri; }
         }
 
+        public bool ConsiderInvisibleElements
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         public void Dispose()
         {
             Watin.Dispose();

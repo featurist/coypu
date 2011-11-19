@@ -16,6 +16,8 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
+        public bool ConsiderInvisibleElements { get; set; }
+
         public IEnumerable<IWebElement> FindByPartialId(string id)
         {
             var xpath = String.Format(".//*[substring(@id, string-length(@id) - {0} + 1, string-length(@id)) = {1}]",
@@ -30,7 +32,7 @@ namespace Coypu.Drivers.Selenium
 
         public bool IsDisplayed(IWebElement e)
         {
-            return e.IsDisplayed();
+            return e.IsDisplayed() || ConsiderInvisibleElements;
         }
     }
 }

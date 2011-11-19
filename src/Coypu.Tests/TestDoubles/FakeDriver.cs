@@ -295,6 +295,8 @@ namespace Coypu.Tests.TestDoubles
 
         public int ModalDialogsCancelled { get; private set; }
 
+        public bool ConsiderInvisibleElements { get; set; }
+
         public bool HasContent(string text)
         {
             hasContentQueries.Add(text);
