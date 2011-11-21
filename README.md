@@ -101,6 +101,10 @@ Non-visible elements can get in the way of finding the elements that we are real
 
 What we are really trying to do here is interact with the browser in the way that a human would. It's probably best to avoid hacking around with elements not accessible to the user where possible to avoid invalidating our tests in any case.
 
+#### However...
+
+If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `Session.ConsideringInvisibleElements()` which temporarily suspends this restriction for one action/function.
+
 ### Disclaimer
 
 Coypu is still rather new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
