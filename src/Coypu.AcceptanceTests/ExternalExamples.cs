@@ -34,7 +34,7 @@ namespace Coypu.AcceptanceTests
 
             browser.FillIn("postcode").With("N1 1AA");
             
-            browser.Click(() => browser.FindField("make"));
+            browser.Click(browser.FindField("make"));
             
             browser.Select("citroen").From("make");
             browser.Select("c4_grand_picasso").From("model");
@@ -65,8 +65,8 @@ namespace Coypu.AcceptanceTests
             var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
-            Console.WriteLine(browser.Has(() => browser.FindSection("Make")));
-            Console.WriteLine(browser.HasNo(() => browser.FindSection("Bake")));
+            Console.WriteLine(browser.Has(browser.FindSection("Make"));
+            Console.WriteLine(browser.HasNo(browser.FindSection("Bake"));
 
             browser.Click(() => browser.FindSection("Make"));
 
@@ -76,7 +76,7 @@ namespace Coypu.AcceptanceTests
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
 
-            browser.Click(() => browser.FindSection("Seats"));
+            browser.Click(browser.FindSection("Seats"));
             browser.ClickButton("4");
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));

@@ -37,9 +37,9 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public void SetScope(Func<Element> find)
+        public void SetScope(Element scope)
         {
-            Scope = (WatiN.Core.Element)find().Native;
+            Scope = (WatiN.Core.Element)scope().Native;
         }
 
         private WatiN.Core.Element Scope { get; set; }

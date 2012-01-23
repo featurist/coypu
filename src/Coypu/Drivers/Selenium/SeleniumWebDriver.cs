@@ -82,9 +82,9 @@ namespace Coypu.Drivers.Selenium
             get { return scoping.ScopeDefined(); }
         }
 
-        public void SetScope(Func<Element> find)
+        public void SetScope(Element scope)
         {
-            scoping.SetScope(find);
+            scoping.SetScope(scope);
         }
 
         public void ClearScope()

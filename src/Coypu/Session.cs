@@ -159,9 +159,9 @@ namespace Coypu
         /// <param name="locator">The text of the link</param>
         /// <returns>A link</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Element FindLink(string locator)
+        public ScopedElement FindLink(string locator)
         {
-            return RetryUntilTimeout(() => driver.FindLink(locator));
+            return new ScopedElement(new LinkFinder(driver, locator));
         }
 
         /// <summary>
@@ -497,112 +497,6 @@ namespace Coypu
         }
 
         /// <summary>
-        /// <para>Restrict interactions to elements within a particular scope within the page by supplying a function to find the scope and an action to perform within that scope.</para>
-        /// <para>Will refind the scope if necessary for each interaction within the action to support full or partial page reloads.</para>
-        /// </summary>
-        /// <param name="findScope">A function to find the scope </param>
-        /// <param name="doThis">The interactions to perform within this scope</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
-        public void Within(Func<Element> findScope, Action doThis)
-        {
-            Within<object>(findScope, () =>
-                                          {
-                                              doThis();
-                                              return null;
-                                          });
-        }
-
-        /// <summary>
-        /// <para>Restrict interactions to elements within a particular scope within the page by supplying a function to find the scope and a function to return something from within that scope.</para>
-        /// <para>Will refind the scope if necessary for each interaction within the action to support full or partial page reloads.</para>
-        /// </summary>
-        /// <param name="findScope">A function to find the scope </param>
-        /// <param name="doThis">A function to find something within this scope</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
-        public T Within<T>(Func<Element> findScope, Func<T> findThis)
-        {
-            try
-            {
-                driver.SetScope(findScope);
-                return findThis();
-            }
-            finally
-            {
-                driver.ClearScope();
-            }
-        }
-
-        /// <summary>
-        /// <para>Restrict interactions to elements within a particular fieldset, located by the text of a child legend element or id.</para>
-        /// <para>Will refind the fieldset if necessary for each interaction within the action to support full or partial page reloads.</para>
-        /// <para>E.g. to restrict scope to this:
-        /// 
-        /// <code>    
-        ///     &lt;fieldset&gt;	
-        ///         &lt;legend&gt;Advanced search&lt;/legend&gt;
-        ///         ...
-        ///     &lt;/fieldset&gt;
-        /// </code>
-        /// </para>
-        /// <para>use this:</para>
-        /// <para>
-        /// <code>    WithinFieldset("Advanced search", () => {...})</code>
-        /// </para> 
-        /// </summary>
-        /// <param name="locator">The text of a child legend element or fieldset id</param>
-        /// <param name="doThis">The interactions to perform within this scope</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
-        public void WithinFieldset(string locator, Action doThis)
-        {
-            Within(() => driver.FindFieldset(locator), doThis);
-        }
-
-        /// <summary>
-        /// <para>Restrict interactions to elements within a particular section, located by the text of a child heading element or id.</para>
-        /// <para>Will refind the section if necessary for each interaction within the action to support full or partial page reloads.</para>
-        /// <para>Sections are identified by the text of their child heading element, or by id.</para>
-        /// <para>E.g. to find this:
-        /// 
-        /// <code>  
-        ///  &lt;div&gt;	
-        ///      &lt;h2&gt;Search results&lt;/h2&gt;
-        ///      ...
-        ///  &lt;/div&gt;</code>
-        ///
-        /// or this:
-        ///
-        /// <code>  
-        ///  &lt;section&gt;
-        ///      &lt;h3&gt;Search results&lt;/h3&gt;
-        ///      ...
-        ///  &lt;/section&gt;</code>
-        /// </para>
-        /// <para>use this:</para>
-        /// <para>
-        /// <code>    WithinSection("Search results", () => {...})</code>
-        /// </para>
-        /// </summary>
-        /// <param name="locator">The text of a child heading element or section id</param>
-        /// <param name="doThis">The interactions to perform within this scope</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
-        public void WithinSection(string locator, Action doThis)
-        {
-            Within(() => driver.FindSection(locator), doThis);
-        }
-
-        /// <summary>
-        /// <para>Restrict interactions to elements within a particular iframe, located by its id, title or the text of the top h1 element within the frame.</para>
-        /// <para>Will refind the iframe if necessary for each interaction within the action to support full or partial page reloads.</para>
-        /// </summary>
-        /// <param name="locator">The id or title of the iframe, or the text of the first h1 element within the frame</param>
-        /// <param name="doThis">The interactions to perform within this scope</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if an element cannot be found</exception>
-        public void WithinIFrame(string locator, Action doThis)
-        {
-            Within(() => driver.FindIFrame(locator), doThis);
-        }
-
-        /// <summary>
         /// Executes custom javascript in the browser
         /// </summary>
         /// <param name="javascript">JavaScript to execute</param>
@@ -741,5 +635,36 @@ namespace Coypu
                 driver.ConsiderInvisibleElements = false;
             }
         }
+    }
+
+    public class LinkFinder : Coypu.ElementFinder
+    {
+        private readonly Driver driver;
+        private readonly string locator;
+
+        public LinkFinder(Driver driver, string locator)
+        {
+            this.driver = driver;
+            this.locator = locator;
+        }
+
+        public Element Now()
+        {
+            try
+            {
+                return driver.FindLink(locator);
+            }
+        }
+
+        public TimeSpan Timeout
+        {
+            get; set;
+        }
+    }
+
+    public interface ElementFinder
+    {
+        Element Now();
+        TimeSpan Timeout { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace Coypu.AcceptanceTests
         {
             browser.ClickLink("Trigger a confirm");
             browser.CancelModalDialog();
-            browser.FindLink("Trigger a confirm - cancelled");
+            browser.FindLink("Trigger a confirm - cancelled").Now();
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me"));
 
-            browser.Click(() => browser.FindButton("clickMeTest"));
+            browser.Click(browser.FindButton("clickMeTest"));
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
         }
 
@@ -235,18 +235,18 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Has_example()
         {
-            Assert.IsTrue(browser.Has(() => browser.FindSection("Inspecting Content")));
-            Assert.IsFalse(browser.Has(() => browser.FindCss("#no-such-element")));
+            Assert.IsTrue(browser.Has(browser.FindSection("Inspecting Content"));
+            Assert.IsFalse(browser.Has(browser.FindCss("#no-such-element"));
         }
 
         [Test]
         public void HasNo_example()
         {
             browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">asdf</div>'");
-            Assert.IsTrue(browser.HasNo(() => browser.FindCss("#no-such-element")));
+            Assert.IsTrue(browser.HasNo(browser.FindCss("#no-such-element"));
 
             ReloadTestPage();
-            Assert.IsFalse(browser.HasNo(() => browser.FindSection("Inspecting Content")));
+            Assert.IsFalse(browser.HasNo(browser.FindSection("Inspecting Content"));
         }
 
         [Test]
@@ -324,7 +324,7 @@ namespace Coypu.AcceptanceTests
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
-            browser.Hover(() => browser.FindId("hoverOnMeTest"));
+            browser.Hover(browser.FindId("hoverOnMeTest");
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me - hovered"));
         }
 
@@ -342,10 +342,10 @@ namespace Coypu.AcceptanceTests
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
 
-            browser.Within(() => browser.FindId("scope1"),
+            browser.Within(browser.FindId("scope1"),
                 () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
 
-            browser.Within(() => browser.FindId("scope2"),
+            browser.Within(browser.FindId("scope2"),
                 () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
         }
         
@@ -388,12 +388,9 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Multiple_interactions_within_iframe_example()
         {
-            browser.WithinIFrame("I am iframe one", () =>
-                {
-                    browser.FillIn("text input in iframe").With("filled in");
-                    Assert.That(browser.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
-                });
-
+            var iframe = browser.FindIframe("I am iframe one");
+            iframe.FillIn("text input in iframe").With("filled in");
+            Assert.That(iframe.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
         }
             
         [Test]
@@ -420,18 +417,12 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ConsideringVisibleElements_action_example()
         {
-            browser.ConsideringInvisibleElements(
-                () =>
-                {
-                    browser.FindButton("firstInvisibleInputId");
-                }
-            );
+            browser.FindButton("firstInvisibleInputId").ConsideringInvisibleElements();
         }
         [Test]
         public void ConsideringVisibleElements_func_example()
         {
-            var button = browser.ConsideringInvisibleElements(
-                () => browser.FindButton("firstInvisibleInputId"));
+            var button = browser.FindButton("firstInvisibleInputId").ConsideringInvisibleElements();
 
             Assert.That(button.Id, Is.EqualTo("firstInvisibleInputId"));
 

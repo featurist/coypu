@@ -38,9 +38,11 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
         private readonly IList<string> findButtonRequests = new List<string>();
         private readonly IList<string> findLinkRequests = new List<string>();
-        private Func<Element> findScope;
+        private Element scope;
         private IList<Cookie> stubbedCookies;
         private Uri stubbedLocation;
+        private Element lastUsedScope;
+        private TimeSpan lastUsedTimeout;
 
         public IEnumerable<Element> ClickedElements
         {
@@ -236,19 +238,20 @@ namespace Coypu.Tests.TestDoubles
             ModalDialogsCancelled++;
         }
 
-        public void SetScope(Func<Element> find)
+        public void SetScope(Element newScope)
         {
-            findScope = find;
+            scope = newScope;
+            lastUsedScope = newScope;
         }
 
         public Element Scope
         {
-            get { return findScope == null ? null : findScope();}
+            get { return scope; }
         }
 
         public void ClearScope()
         {
-            findScope = null;
+            scope = null;
         }
 
         public string ExecuteScript(string javascript)
@@ -296,6 +299,16 @@ namespace Coypu.Tests.TestDoubles
         public int ModalDialogsCancelled { get; private set; }
 
         public bool ConsiderInvisibleElements { get; set; }
+
+        public Element LastUsedScope
+        {
+            get { return lastUsedScope; }
+        }
+
+        public object LastUsedTimeout
+        {
+            get { return lastUsedTimeout; }
+        }
 
         public bool HasContent(string text)
         {

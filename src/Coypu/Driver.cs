@@ -32,7 +32,7 @@ namespace Coypu
         bool ConsiderInvisibleElements { get; set; }
         void AcceptModalDialog();
         void CancelModalDialog();
-        void SetScope(Func<Element> find);
+        void SetScope(Element scope);
         void ClearScope();
         string ExecuteScript(string javascript);
         Element FindFieldset(string locator);

@@ -1,5 +1,7 @@
 using System;
+using Coypu.Robustness;
 using Coypu.Tests.TestDoubles;
+using Coypu.Tests.When_interacting_with_the_browser;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
@@ -28,11 +30,13 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Configuration.Timeout = defaultTimeout;
             Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
 
-            var usedTimeout = default(TimeSpan);
+            var fakeDriver = new FakeDriver();
+            fakeDriver.StubLink("bob",new ScopedElement(new LinkFinder(fakeDriver,"bob")));
+            var session = new Session(fakeDriver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
 
-            Browser.Session.WithIndividualTimeout(individualTimeout, () => usedTimeout = Configuration.Timeout);
+            session.FindLink("find me longtime").WithIndividualTimeout(individualTimeout);
 
-            Assert.That(usedTimeout, Is.EqualTo(individualTimeout));
+            Assert.That(fakeDriver.LastUsedTimeout, Is.EqualTo(individualTimeout));
             Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
         }
 
