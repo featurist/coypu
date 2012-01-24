@@ -9,7 +9,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_sets_the_scope_on_the_driver() 
         {
-            var expectedScope = new Scope(null);
+            var expectedScope = new DriverScope();
 
             expectedScope.FindField("some field");
 
