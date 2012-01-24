@@ -10,7 +10,6 @@ namespace Coypu
     public class Session : DriverScope, IDisposable
     {
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
-        private readonly TemporaryTimeouts temporaryTimeouts;
 
         internal bool WasDisposed { get; private set; }
 
@@ -35,15 +34,10 @@ namespace Coypu
             get { return driver.Location; }
         }
 
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader _restrictedResourceDownloader, UrlBuilder urlBuilder)
+        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
+            : base(driver,robustWrapper,waiter,urlBuilder)
         {
-            this.driver = driver;
-            this.robustWrapper = robustWrapper;
-            restrictedResourceDownloader = _restrictedResourceDownloader;
-            clicker = new Clicker(driver, waiter);
-            this.urlBuilder = urlBuilder;
-            temporaryTimeouts = new TemporaryTimeouts();
-            stateFinder = new StateFinder(robustWrapper, temporaryTimeouts);
+            this.restrictedResourceDownloader = restrictedResourceDownloader;
         }
 
         /// <summary>

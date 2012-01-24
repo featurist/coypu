@@ -12,6 +12,27 @@ namespace Coypu
         internal Clicker clicker;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
+        internal TemporaryTimeouts temporaryTimeouts;
+
+        internal DriverScope(Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
+        {
+            this.driver = driver;
+            this.robustWrapper = robustWrapper;
+            clicker = new Clicker(driver, waiter);
+            this.urlBuilder = urlBuilder;
+            temporaryTimeouts = new TemporaryTimeouts();
+            stateFinder = new StateFinder(robustWrapper, temporaryTimeouts);
+        }
+
+        internal DriverScope(DriverScope outer)
+        {
+            driver = outer.driver;
+            robustWrapper = outer.robustWrapper;
+            clicker = outer.clicker;
+            urlBuilder = outer.urlBuilder;
+            temporaryTimeouts = outer.temporaryTimeouts;
+            stateFinder = outer.stateFinder;
+        }
 
         /// <summary>
         /// Click a button, input of type button|submit|image or div with the css class "button"
