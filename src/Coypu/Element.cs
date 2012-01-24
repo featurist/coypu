@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Coypu
+﻿namespace Coypu
 {
     /// <summary>
     /// An HTML element
@@ -39,68 +37,5 @@ namespace Coypu
         /// The attributes of the HTML element
         /// </summary>
         string this[string attributeName] { get; }
-    }
-
-    public class ScopedElement : Element
-    {
-        private readonly ElementFinder elementFinder;
-        private readonly Session session;
-
-        public ScopedElement(ElementFinder elementFinder, Session session)
-        {
-            this.elementFinder = elementFinder;
-            this.session = session;
-            throw new System.NotImplementedException();
-        }
-
-        public Element Now()
-        {
-            return elementFinder.Now();
-        }
-
-        public string Id
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public string Text
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public string Value
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public string Name
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public string SelectedOption
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public bool Selected
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public object Native
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public string this[string attributeName]
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public ScopedElement WithIndividualTimeout(TimeSpan individualTimeout)
-        {
-            elementFinder.Timeout = individualTimeout;
-        }
     }
 }

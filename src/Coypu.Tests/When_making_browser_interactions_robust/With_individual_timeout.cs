@@ -31,10 +31,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
 
             var fakeDriver = new FakeDriver();
-            fakeDriver.StubLink("bob",new ScopedElement(new LinkFinder(fakeDriver,"bob")));
+            fakeDriver.StubLink("bob",new StubElement());
             var session = new Session(fakeDriver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
 
-            session.FindLink("find me longtime").WithIndividualTimeout(individualTimeout);
+            session.FindLink("bob").WithIndividualTimeout(individualTimeout).Now();
 
             Assert.That(fakeDriver.LastUsedTimeout, Is.EqualTo(individualTimeout));
             Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));

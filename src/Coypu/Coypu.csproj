@@ -89,6 +89,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="DriverScope.cs" />
     <Compile Include="Drivers\Browser.cs" />
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />
     <Compile Include="Drivers\Selenium\ButtonFinder.cs" />
@@ -103,6 +104,10 @@
     <Compile Include="Drivers\Selenium\Scoping.cs" />
     <Compile Include="Drivers\Selenium\TextMatcher.cs" />
     <Compile Include="Drivers\XPath.cs" />
+    <Compile Include="ElementFinder.cs" />
+    <Compile Include="ElementScope.cs" />
+    <Compile Include="LinkFinder.cs" />
+    <Compile Include="Scope.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />
     <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />
     <Compile Include="FillInWith.cs">

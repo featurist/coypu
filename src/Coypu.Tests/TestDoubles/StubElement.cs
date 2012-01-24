@@ -11,37 +11,42 @@ namespace Coypu.Tests.TestDoubles
             id = newId;
         }
 
-        public override string Id
+        public string Id
         {
             get { return id; }
         }
 
-        public override string Text
+        public string Text
         {
             get { return string.Empty; }
         }
 
-        public override string Value
+        public string Value
         {
             get { return string.Empty; }
         }
 
-        public override string Name
+        public string Name
         {
             get { return string.Empty; }
         }
 
-        public override string SelectedOption
+        public string SelectedOption
         {
             get { return string.Empty; }
         }
 
-        public override bool Selected
+        public bool Selected
         {
             get { return false; }
         }
 
-        public override string this[string attributeName]
+        public object Native
+        {
+            get { return null; }
+        }
+
+        public string this[string attributeName]
         {
             get 
             {
