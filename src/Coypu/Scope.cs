@@ -77,7 +77,7 @@ namespace Coypu
         /// <param name="locator">The text of the link</param>
         /// <returns>A link</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Scope FindLink(string locator);
+        ElementScope FindLink(string locator);
 
         /// <summary>
         /// Find the first form field of any type to appear within the <see cref="Configuration.Timeout"/>
@@ -349,7 +349,6 @@ namespace Coypu
         /// <returns></returns>
         State FindState(params State[] states);
 
-        void ConsideringInvisibleElements(Action action);
-        T ConsideringInvisibleElements<T>(Func<T> func);
+        TScope ConsideringInvisibleElements<TScope>() where TScope : Scope;
     }
 }

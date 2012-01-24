@@ -5,7 +5,7 @@ namespace Coypu
         private readonly ElementFinder elementFinder;
         private readonly Scope outer;
 
-        public ElementScope(ElementFinder elementFinder, DriverScope outer) : base(outer)
+        public ElementScope(ElementFinder elementFinder, DriverScope outer) : base(elementFinder, outer)
         {
             this.elementFinder = elementFinder;
             this.outer = outer;

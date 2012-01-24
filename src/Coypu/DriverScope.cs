@@ -5,14 +5,16 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-    public class DriverScope : Scope
+    public abstract class DriverScope : Scope
     {
+        private readonly ElementFinder elementFinder;
         protected Driver driver;
         protected RobustWrapper robustWrapper;
         internal Clicker clicker;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
         internal TemporaryTimeouts temporaryTimeouts;
+        private bool consideringInvisibleElements;
 
         internal DriverScope(Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
@@ -24,8 +26,9 @@ namespace Coypu
             stateFinder = new StateFinder(robustWrapper, temporaryTimeouts);
         }
 
-        internal DriverScope(DriverScope outer)
+        internal DriverScope(ElementFinder elementFinder, DriverScope outer)
         {
+            this.elementFinder = elementFinder;
             driver = outer.driver;
             robustWrapper = outer.robustWrapper;
             clicker = outer.clicker;
@@ -129,7 +132,7 @@ namespace Coypu
         /// <param name="locator">The text of the link</param>
         /// <returns>A link</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Scope FindLink(string locator)
+        public ElementScope FindLink(string locator)
         {
             return new ElementScope(new LinkFinder(driver, locator), this);
         }
@@ -497,27 +500,16 @@ namespace Coypu
             return stateFinder.FindState(states);
         }
 
-        public void ConsideringInvisibleElements(Action action)
+        public TScope ConsideringInvisibleElements<TScope>() where TScope : Scope
         {
-            ConsideringInvisibleElements<object>(
-                () =>
-                    {
-                        action();
-                        return null;
-                    });
+            this.consideringInvisibleElements = true;
+            return (Scope) this;
         }
 
-        public T ConsideringInvisibleElements<T>(Func<T> func)
+
+        public Element Now()
         {
-            try
-            {
-                driver.ConsiderInvisibleElements = true;
-                return func();
-            }
-            finally
-            {
-                driver.ConsiderInvisibleElements = false;
-            }
+            return elementFinder.Find();
         }
     }
 }

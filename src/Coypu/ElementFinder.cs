@@ -4,7 +4,7 @@ namespace Coypu
 {
     public interface ElementFinder
     {
-        Element Now();
+        Element Find();
         TimeSpan Timeout { get; set; }
     }
 }

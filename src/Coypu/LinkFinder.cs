@@ -13,7 +13,7 @@ namespace Coypu
             this.locator = locator;
         }
 
-        public Element Now()
+        public Element Find()
         {           
                 return driver.FindLink(locator);
             

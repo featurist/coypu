@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var expectedScope = new DriverScope();
 
-            expectedScope.FindField("some field");
+            expectedScope.FindLink("some field").Now();
 
             Assert.That(driver.LastUsedScope, Is.SameAs(expectedScope));
 

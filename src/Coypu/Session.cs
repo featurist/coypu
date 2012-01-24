@@ -7,7 +7,7 @@ namespace Coypu
     /// <summary>
     /// A browser session
     /// </summary>
-    public class Session : DriverScope, IDisposable
+    public class Session : DriverScope<Session>, IDisposable
     {
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
 
