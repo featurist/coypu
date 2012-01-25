@@ -4,35 +4,35 @@ using System.Text.RegularExpressions;
 
 namespace Coypu
 {
-    public interface Scope
+    public interface Scope<out TConcrete>
     {
         /// <summary>
         /// Click a button, input of type button|submit|image or div with the css class "button"
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void ClickButton(string locator);
+        TConcrete ClickButton(string locator);
 
         /// <summary>
         /// Click the first matching link
         /// </summary>
         /// <param name="locator">The text of the link</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void ClickLink(string locator);
+        TConcrete ClickLink(string locator);
 
         /// <summary>
         /// Click a previously found element
         /// </summary>
         /// <param name="element">The element to click</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void Click(Element element);
+        TConcrete Click(Element element);
 
         /// <summary>
         /// Find and click an element robustly
         /// </summary>
         /// <param name="findElement">How to find the element</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void Click(Func<Element> findElement);
+        TConcrete Click(Func<Element> findElement);
 
         /// <summary>
         /// <para>Click a button, input of type button|submit|image or div with the css class "button".</para>
@@ -44,7 +44,7 @@ namespace Coypu
         /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries);
+        TConcrete ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries);
 
         /// <summary>
         /// <para>Click a link and wait for a condition to be satisfied for a specified time otherwise click and wait again.</para> 
@@ -55,13 +55,7 @@ namespace Coypu
         /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries);
-
-        /// <summary>
-        /// Visit a url in the browser
-        /// </summary>
-        /// <param name="virtualPath">Virtual paths will use the Configuration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
-        void Visit(string virtualPath);
+        TConcrete ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries);
 
         /// <summary>
         /// Find the first input of type button|submit|image or div with the css class "button" to appear within the <see cref="Configuration.Timeout"/> .
@@ -69,7 +63,7 @@ namespace Coypu
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <returns>A button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Element FindButton(string locator);
+        ElementScope FindButton(string locator);
 
         /// <summary>
         /// Find the first matching link to appear within the <see cref="Configuration.Timeout"/>
@@ -85,7 +79,7 @@ namespace Coypu
         /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the value of a radio button, the last part of the id (for asp.net forms testing)</param>
         /// <returns>A form field</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Element FindField(string locator);
+        ElementScope FindField(string locator);
 
         /// <summary>
         /// Find the first matching text field to appear within the <see cref="Configuration.Timeout"/> to fill in.
@@ -169,14 +163,14 @@ namespace Coypu
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
         /// <returns>The first matchin element</returns>
-        Element FindCss(string cssSelector);
+        ElementScope FindCss(string cssSelector);
 
         /// <summary>
         /// Find an element matching an XPath query
         /// </summary>
         /// <param name="xpath">XPath query</param>
         /// <returns>The first matchin element</returns>
-        Element FindXPath(string xpath);
+        ElementScope FindXPath(string xpath);
 
         /// <summary>
         /// Find all elements matching a CSS selector at the current moment. Does not wait until the <see cref="Configuration.Timeout"/> but returns as soon as the driver does.
@@ -219,7 +213,7 @@ namespace Coypu
         /// <param name="locator">The text of a child heading element or section id</param>
         /// <returns>An element</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Element FindSection(string locator);
+        ElementScope FindSection(string locator);
 
         /// <summary>
         /// <para>Find the first matching fieldset to appear within the <see cref="Configuration.Timeout"/></para>
@@ -240,7 +234,7 @@ namespace Coypu
         /// <param name="locator">The text of a child legend element or fieldset id</param>
         /// <returns>An element</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Element FindFieldset(string locator);
+        ElementScope FindFieldset(string locator);
 
         /// <summary>
         /// Find the first matching element with specified id to appear within the <see cref="Configuration.Timeout"/>
@@ -248,28 +242,28 @@ namespace Coypu
         /// <param name="id">Element id</param>
         /// <returns>An elemenet</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Element FindId(string id);
+        ElementScope FindId(string id);
 
         /// <summary>
         /// Check the first checkbox to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, name or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void Check(string locator);
+        TConcrete Check(string locator);
 
         /// <summary>
         /// Uncheck the first checkbox to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, name or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void Uncheck(string locator);
+        TConcrete Uncheck(string locator);
 
         /// <summary>
         /// Choose the first radio button to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, the name, the value or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        void Choose(string locator);
+        TConcrete Choose(string locator);
 
         /// <summary>
         /// Executes custom javascript in the browser
@@ -349,6 +343,6 @@ namespace Coypu
         /// <returns></returns>
         State FindState(params State[] states);
 
-        TScope ConsideringInvisibleElements<TScope>() where TScope : Scope;
+        TConcrete ConsideringInvisibleElements();
     }
 }

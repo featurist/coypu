@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Coypu.Robustness;
 using Coypu.WebRequests;
 
@@ -7,11 +9,26 @@ namespace Coypu
     /// <summary>
     /// A browser session
     /// </summary>
-    public class Session : DriverScope<Session>, IDisposable
+    public class Session : Scope<Session>, IDisposable
     {
+        private readonly Driver driver;
+        private readonly RobustWrapper robustWrapper;
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
+        private readonly UrlBuilder urlBuilder;
 
         internal bool WasDisposed { get; private set; }
+        private readonly DriverScope driverScope;
+        private readonly TemporaryTimeouts temporaryTimeouts;
+
+        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
+        {
+            this.driverScope = new DriverScope(driver, robustWrapper, waiter, urlBuilder);
+            this.driver = driver;
+            this.robustWrapper = robustWrapper;
+            this.restrictedResourceDownloader = restrictedResourceDownloader;
+            this.urlBuilder = urlBuilder;
+            this.temporaryTimeouts = new TemporaryTimeouts();
+        }
 
         internal Driver Driver
         {
@@ -32,12 +49,6 @@ namespace Coypu
         public Uri Location
         {
             get { return driver.Location; }
-        }
-
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
-            : base(driver,robustWrapper,waiter,urlBuilder)
-        {
-            this.restrictedResourceDownloader = restrictedResourceDownloader;
         }
 
         /// <summary>
@@ -78,7 +89,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog()
         {
-            RetryUntilTimeout(() => driver.AcceptModalDialog());
+            driverScope.RetryUntilTimeout(() => driver.AcceptModalDialog());
         }
 
         /// <summary>
@@ -87,7 +98,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog()
         {
-            RetryUntilTimeout(() => driver.CancelModalDialog());
+            driverScope.RetryUntilTimeout(() => driver.CancelModalDialog());
         }
 
         /// <summary>
@@ -136,6 +147,222 @@ namespace Coypu
         {
             restrictedResourceDownloader.SetCookies(driver.GetBrowserCookies());
             restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs);
+        }
+
+        public Session ClickButton(string locator)
+        {
+            driverScope.ClickButton(locator);
+            return this;
+        }
+
+        public Session ClickLink(string locator)
+        {
+            driverScope.ClickLink(locator);
+            return this;
+        }
+
+        public Session Click(Element element)
+        {
+            driverScope.Click(element);
+            return this;
+        }
+
+        public Session Click(Func<Element> findElement)
+        {
+            driverScope.Click(findElement);
+            return this;
+        }
+
+        public Session ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        {
+            driverScope.ClickButton(locator, until, waitBetweenRetries);
+            return this;
+        }
+
+        public Session ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        {
+            driverScope.ClickLink(locator, until, waitBetweenRetries);
+            return this;
+        }
+
+        /// <summary>
+        /// Visit a url in the browser
+        /// </summary>
+        /// <param name="virtualPath">Virtual paths will use the Configuration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
+        public Session Visit(string virtualPath)
+        {
+            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath));
+            return this;
+        }
+
+        public ElementScope FindButton(string locator)
+        {
+            return driverScope.FindButton(locator);
+        }
+
+        public ElementScope FindLink(string locator)
+        {
+            return driverScope.FindLink(locator);
+        }
+
+        public ElementScope FindField(string locator)
+        {
+            return driverScope.FindField(locator);
+        }
+
+        public FillInWith FillIn(string locator)
+        {
+            return driverScope.FillIn(locator);
+        }
+
+        public FillInWith FillIn(Element element)
+        {
+            return driverScope.FillIn(element);
+;        }
+
+        public SelectFrom Select(string option)
+        {
+            return driverScope.Select(option);
+        }
+
+        public bool HasContent(string text)
+        {
+            return driverScope.HasContent(text);
+        }
+
+        public bool HasContentMatch(Regex pattern)
+        {
+            return driverScope.HasContentMatch(pattern);
+        }
+
+        public bool HasNoContent(string text)
+        {
+            return driverScope.HasNoContent(text);
+        }
+
+        public bool HasNoContentMatch(Regex pattern)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasCss(string cssSelector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasNoCss(string cssSelector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasXPath(string xpath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasNoXPath(string xpath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Element FindCss(string cssSelector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Element FindXPath(string xpath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Element> FindAllCss(string cssSelector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Element> FindAllXPath(string xpath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Element FindSection(string locator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Element FindFieldset(string locator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Element FindId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Check(string locator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Uncheck(string locator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Choose(string locator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ExecuteScript(string javascript)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Hover(Func<Element> findElement)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Has(Func<Element> findElement)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasNo(Func<Element> findElement)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RetryUntilTimeout(Action action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Query<T>(Func<T> query, T expecting)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public State FindState(params State[] states)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Scope ConsideringInvisibleElements()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -5,7 +5,7 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-    public abstract class DriverScope : Scope
+    public class DriverScope : Scope<DriverScope>
     {
         private readonly ElementFinder elementFinder;
         protected Driver driver;
@@ -42,9 +42,10 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void ClickButton(string locator)
+        public DriverScope ClickButton(string locator)
         {
             RetryUntilTimeout(() => clicker.FindAndClickButton(locator));
+            return this;
         }
 
         /// <summary>
@@ -52,9 +53,10 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the link</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void ClickLink(string locator)
+        public DriverScope ClickLink(string locator)
         {
             RetryUntilTimeout(() => clicker.FindAndClickLink(locator));
+            return this;
         }
 
         /// <summary>
@@ -62,9 +64,10 @@ namespace Coypu
         /// </summary>
         /// <param name="element">The element to click</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void Click(Element element)
+        public DriverScope Click(Element element)
         {
             RetryUntilTimeout(() => driver.Click(element));
+            return this;
         }
 
         /// <summary>
@@ -72,9 +75,10 @@ namespace Coypu
         /// </summary>
         /// <param name="findElement">How to find the element</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void Click(Func<Element> findElement)
+        public DriverScope Click(Func<Element> findElement)
         {
             RetryUntilTimeout(() => driver.Click(findElement()));
+            return this;
         }
 
         /// <summary>
@@ -87,9 +91,10 @@ namespace Coypu
         /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        public DriverScope ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
         {
             TryUntil(() => ClickButton(locator), until, waitBetweenRetries);
+            return this;
         }
 
         /// <summary>
@@ -101,18 +106,10 @@ namespace Coypu
         /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        public DriverScope ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
         {
             TryUntil(() => ClickLink(locator), until, waitBetweenRetries);
-        }
-
-        /// <summary>
-        /// Visit a url in the browser
-        /// </summary>
-        /// <param name="virtualPath">Virtual paths will use the Configuration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
-        public void Visit(string virtualPath)
-        {
-            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath));
+            return this;
         }
 
         /// <summary>
@@ -121,7 +118,7 @@ namespace Coypu
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <returns>A button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Element FindButton(string locator)
+        public ElementScope FindButton(string locator)
         {
             return RetryUntilTimeout(() => driver.FindButton(locator));
         }
@@ -143,7 +140,7 @@ namespace Coypu
         /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the value of a radio button, the last part of the id (for asp.net forms testing)</param>
         /// <returns>A form field</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Element FindField(string locator)
+        public ElementScope FindField(string locator)
         {
             return RetryUntilTimeout(() => driver.FindField(locator));
         }
@@ -263,7 +260,7 @@ namespace Coypu
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
         /// <returns>The first matchin element</returns>
-        public Element FindCss(string cssSelector)
+        public ElementScope FindCss(string cssSelector)
         {
             return RetryUntilTimeout(() => driver.FindCss(cssSelector));
         }
@@ -273,7 +270,7 @@ namespace Coypu
         /// </summary>
         /// <param name="xpath">XPath query</param>
         /// <returns>The first matchin element</returns>
-        public Element FindXPath(string xpath)
+        public ElementScope FindXPath(string xpath)
         {
             return RetryUntilTimeout(() => driver.FindXPath(xpath));
         }
@@ -325,7 +322,7 @@ namespace Coypu
         /// <param name="locator">The text of a child heading element or section id</param>
         /// <returns>An element</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Element FindSection(string locator)
+        public ElementScope FindSection(string locator)
         {
             return RetryUntilTimeout(() => driver.FindSection(locator));
         }
@@ -349,7 +346,7 @@ namespace Coypu
         /// <param name="locator">The text of a child legend element or fieldset id</param>
         /// <returns>An element</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Element FindFieldset(string locator)
+        public ElementScope FindFieldset(string locator)
         {
             return RetryUntilTimeout(() => driver.FindFieldset(locator));
         }
@@ -360,7 +357,7 @@ namespace Coypu
         /// <param name="id">Element id</param>
         /// <returns>An elemenet</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public Element FindId(string id)
+        public ElementScope FindId(string id)
         {
             return RetryUntilTimeout(() => driver.FindId(id));
         }
@@ -370,7 +367,7 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void Check(string locator)
+        public DriverScope Check(string locator)
         {
             RetryUntilTimeout(() => driver.Check(driver.FindField(locator)));
         }
@@ -380,7 +377,7 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void Uncheck(string locator)
+        public DriverScope Uncheck(string locator)
         {
             RetryUntilTimeout(() => driver.Uncheck(driver.FindField(locator)));
         }
@@ -390,7 +387,7 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void Choose(string locator)
+        public DriverScope Choose(string locator)
         {
             RetryUntilTimeout(() => driver.Choose(driver.FindField(locator)));
         }
@@ -500,10 +497,10 @@ namespace Coypu
             return stateFinder.FindState(states);
         }
 
-        public TScope ConsideringInvisibleElements<TScope>() where TScope : Scope
+        public DriverScope ConsideringInvisibleElements()
         {
             this.consideringInvisibleElements = true;
-            return (Scope) this;
+            return this;
         }
 
 

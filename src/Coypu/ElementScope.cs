@@ -1,11 +1,11 @@
 namespace Coypu
 {
-    public class ElementScope : DriverScope, Element
+    public class ElementScope : Element, Scope
     {
         private readonly ElementFinder elementFinder;
         private readonly Scope outer;
 
-        public ElementScope(ElementFinder elementFinder, DriverScope outer) : base(elementFinder, outer)
+        public ElementScope(ElementFinder elementFinder, DriverScope outer)
         {
             this.elementFinder = elementFinder;
             this.outer = outer;
