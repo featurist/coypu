@@ -13,16 +13,16 @@ namespace Coypu
             this.waiter = waiter;
         }
 
-        public void FindAndClickButton(string locator)
+        public void FindAndClickButton(string locator, DriverScope scope)
         {
-            var findLink = driver.FindButton(locator);
+            var findLink = driver.FindButton(locator, scope);
             waiter.Wait(Configuration.WaitBeforeClick);
             driver.Click(findLink);
         }
 
-        public void FindAndClickLink(string locator)
+        public void FindAndClickLink(string locator, DriverScope scope)
         {
-            var findLink = driver.FindLink(locator);
+            var findLink = driver.FindLink(locator, scope);
             waiter.Wait(Configuration.WaitBeforeClick);
             driver.Click(findLink);
         }

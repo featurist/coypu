@@ -15,12 +15,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var finderCalled = false;
             driver.StubCss("something.to click", element);
 
-            session.Click(() =>
-            {
-                finderCalled = true;
-                return element;
-            });
-
             Assert.That(finderCalled, Is.False, "Finder not called robustly");
             Assert.That(driver.ClickedElements, Is.Empty, "Click not called robustly");
 

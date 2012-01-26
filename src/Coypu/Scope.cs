@@ -21,20 +21,6 @@ namespace Coypu
         TConcrete ClickLink(string locator);
 
         /// <summary>
-        /// Click a previously found element
-        /// </summary>
-        /// <param name="element">The element to click</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete Click(Element element);
-
-        /// <summary>
-        /// Find and click an element robustly
-        /// </summary>
-        /// <param name="findElement">How to find the element</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete Click(Func<Element> findElement);
-
-        /// <summary>
         /// <para>Click a button, input of type button|submit|image or div with the css class "button".</para>
         /// <para>Wait for a condition to be satisfied for a specified time otherwise click and wait again.</para>
         /// <para>Continues until the expected condition is satisfied or the <see cref="Configuration.Timeout"/> is reached.</para>
@@ -275,8 +261,15 @@ namespace Coypu
         /// <summary>
         /// Hover the mouse over an element
         /// </summary>
-        /// <param name="findElement">A function to find the element</param>
-        void Hover(Func<Element> findElement);
+        /// <param name="element">The element</param>
+        TConcrete Hover(Element element);
+
+        /// <summary>
+        /// Click a previously found element
+        /// </summary>
+        /// <param name="element">The element to click</param>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
+        TConcrete Click(Element element);
 
         /// <summary>
         /// Query whether an element appears within the <see cref="Configuration.Timeout"/>

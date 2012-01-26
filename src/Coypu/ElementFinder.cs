@@ -2,9 +2,20 @@ using System;
 
 namespace Coypu
 {
-    public interface ElementFinder
+    public abstract class ElementFinder
     {
-        Element Find();
-        TimeSpan Timeout { get; set; }
+        protected readonly Driver Driver;
+        protected readonly string Locator;
+        protected readonly DriverScope Scope;
+
+        protected ElementFinder(Driver driver, string locator, DriverScope scope)
+        {
+            Driver = driver;
+            Locator = locator;
+            Scope = scope;
+        }
+
+        internal abstract Element Find();
+        internal TimeSpan Timeout { get; set; }
     }
 }

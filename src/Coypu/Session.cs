@@ -70,7 +70,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return robustWrapper.Query(() => driver.HasDialog(withText), true);
+            return robustWrapper.Query(() => driver.HasDialog(withText,driverScope), true);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return !robustWrapper.Query(() => driver.HasDialog(withText), false);
+            return !robustWrapper.Query(() => driver.HasDialog(withText, driverScope), false);
         }
 
         /// <summary>
@@ -158,18 +158,6 @@ namespace Coypu
         public Session ClickLink(string locator)
         {
             driverScope.ClickLink(locator);
-            return this;
-        }
-
-        public Session Click(Element element)
-        {
-            driverScope.Click(element);
-            return this;
-        }
-
-        public Session Click(Func<Element> findElement)
-        {
-            driverScope.Click(findElement);
             return this;
         }
 
@@ -323,9 +311,16 @@ namespace Coypu
             return driverScope.ExecuteScript(javascript);
         }
 
-        public void Hover(Func<Element> findElement)
+        public Session Click(Element element)
         {
-            driverScope.Hover(findElement);
+            driverScope.Click(element);
+            return this;
+        }
+
+        public Session Hover(Element element)
+        {
+            driverScope.Hover(element);
+            return this;
         }
 
         public bool Has(Func<Element> findElement)

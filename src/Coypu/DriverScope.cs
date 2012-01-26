@@ -5,7 +5,7 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-    internal class DriverScope : Scope<DriverScope>
+    public class DriverScope : Scope<DriverScope>
     {
         private readonly ElementFinder elementFinder;
         protected Driver driver;
@@ -44,7 +44,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope ClickButton(string locator)
         {
-            RetryUntilTimeout(() => clicker.FindAndClickButton(locator));
+            RetryUntilTimeout(() => clicker.FindAndClickButton(locator, this));
             return this;
         }
 
@@ -55,7 +55,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope ClickLink(string locator)
         {
-            RetryUntilTimeout(() => clicker.FindAndClickLink(locator));
+            RetryUntilTimeout(() => clicker.FindAndClickLink(locator, this));
             return this;
         }
 
@@ -67,17 +67,6 @@ namespace Coypu
         public DriverScope Click(Element element)
         {
             RetryUntilTimeout(() => driver.Click(element));
-            return this;
-        }
-
-        /// <summary>
-        /// Find and click an element robustly
-        /// </summary>
-        /// <param name="findElement">How to find the element</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope Click(Func<Element> findElement)
-        {
-            RetryUntilTimeout(() => driver.Click(findElement()));
             return this;
         }
 
@@ -120,7 +109,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindButton(string locator)
         {
-            return RetryUntilTimeout(() => driver.FindButton(locator));
+            return new ElementScope(new ButtonFinder(driver, locator, this), this);
         }
 
         /// <summary>
@@ -131,7 +120,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindLink(string locator)
         {
-            return new ElementScope(new LinkFinder(driver, locator), this);
+            return new ElementScope(new LinkFinder(driver, locator,this), this);
         }
 
         /// <summary>
@@ -142,7 +131,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindField(string locator)
         {
-            return RetryUntilTimeout(() => driver.FindField(locator));
+            return new ElementScope(new FieldFinder(driver, locator, this), this);
         }
 
         /// <summary>
@@ -182,7 +171,7 @@ namespace Coypu
         /// <returns>Whether the text appears</returns>
         public bool HasContent(string text)
         {
-            return Query(() => driver.HasContent(text), true);
+            return Query(() => driver.HasContent(text,this), true);
         }
 
         /// <summary>
@@ -192,7 +181,7 @@ namespace Coypu
         /// <returns>Whether the page text matches</returns>
         public bool HasContentMatch(Regex pattern)
         {
-            return Query(() => driver.HasContentMatch(pattern), true);
+            return Query(() => driver.HasContentMatch(pattern,this), true);
         }
 
         /// <summary>
@@ -202,7 +191,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContent(string text)
         {
-            return !Query(() => driver.HasContent(text), false);
+            return !Query(() => driver.HasContent(text,this), false);
         }
 
         /// <summary>
@@ -212,7 +201,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContentMatch(Regex pattern)
         {
-            return !Query(() => driver.HasContentMatch(pattern), false);
+            return !Query(() => driver.HasContentMatch(pattern, this), false);
         }
 
         /// <summary>
@@ -222,7 +211,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasCss(string cssSelector)
         {
-            return Query(() => driver.HasCss(cssSelector), true);
+            return Query(() => driver.HasCss(cssSelector,this), true);
         }
 
         /// <summary>
@@ -232,7 +221,7 @@ namespace Coypu
         /// <returns>Whether an element does not appear</returns>
         public bool HasNoCss(string cssSelector)
         {
-            return !Query(() => driver.HasCss(cssSelector), false);
+            return !Query(() => driver.HasCss(cssSelector,this), false);
         }
 
         /// <summary>
@@ -242,7 +231,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasXPath(string xpath)
         {
-            return Query(() => driver.HasXPath(xpath), true);
+            return Query(() => driver.HasXPath(xpath,this), true);
         }
 
         /// <summary>
@@ -252,7 +241,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasNoXPath(string xpath)
         {
-            return !Query(() => driver.HasXPath(xpath), false);
+            return !Query(() => driver.HasXPath(xpath,this), false);
         }
 
         /// <summary>
@@ -262,7 +251,7 @@ namespace Coypu
         /// <returns>The first matchin element</returns>
         public ElementScope FindCss(string cssSelector)
         {
-            return RetryUntilTimeout(() => driver.FindCss(cssSelector));
+            return new ElementScope(new CssFinder(driver, cssSelector, this), this);
         }
 
         /// <summary>
@@ -272,7 +261,7 @@ namespace Coypu
         /// <returns>The first matchin element</returns>
         public ElementScope FindXPath(string xpath)
         {
-            return RetryUntilTimeout(() => driver.FindXPath(xpath));
+            return new ElementScope(new XPathFinder(driver, xpath, this), this);
         }
 
         /// <summary>
@@ -282,7 +271,7 @@ namespace Coypu
         /// <returns>All matching elements</returns>
         public IEnumerable<Element> FindAllCss(string cssSelector)
         {
-            return driver.FindAllCss(cssSelector);
+            return driver.FindAllCss(cssSelector, this);
         }
 
         /// <summary>
@@ -292,7 +281,7 @@ namespace Coypu
         /// <returns>All matching elements</returns>
         public IEnumerable<Element> FindAllXPath(string xpath)
         {
-            return driver.FindAllXPath(xpath);
+            return driver.FindAllXPath(xpath, this);
         }
 
         /// <summary>
@@ -324,7 +313,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindSection(string locator)
         {
-            return RetryUntilTimeout(() => driver.FindSection(locator));
+            return new ElementScope(new SectionFinder(driver, locator, this), this);
         }
 
         /// <summary>
@@ -348,7 +337,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindFieldset(string locator)
         {
-            return RetryUntilTimeout(() => driver.FindFieldset(locator));
+            return new ElementScope(new FieldsetFinder(driver, locator, this), this);
         }
 
         /// <summary>
@@ -359,7 +348,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindId(string id)
         {
-            return RetryUntilTimeout(() => driver.FindId(id));
+            return new ElementScope(new IdFinder(driver, id, this), this);
         }
 
         /// <summary>
@@ -369,7 +358,8 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Check(string locator)
         {
-            RetryUntilTimeout(() => driver.Check(driver.FindField(locator)));
+            RetryUntilTimeout(() => driver.Check(driver.FindField(locator,this)));
+            return this;
         }
 
         /// <summary>
@@ -379,7 +369,8 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Uncheck(string locator)
         {
-            RetryUntilTimeout(() => driver.Uncheck(driver.FindField(locator)));
+            RetryUntilTimeout(() => driver.Uncheck(driver.FindField(locator,this)));
+            return this;
         }
 
         /// <summary>
@@ -389,7 +380,8 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Choose(string locator)
         {
-            RetryUntilTimeout(() => driver.Choose(driver.FindField(locator)));
+            RetryUntilTimeout(() => driver.Choose(driver.FindField(locator,this)));
+            return this;
         }
 
         /// <summary>
@@ -406,9 +398,10 @@ namespace Coypu
         /// Hover the mouse over an element
         /// </summary>
         /// <param name="findElement">A function to find the element</param>
-        public void Hover(Func<Element> findElement)
+        public DriverScope Hover(Element element)
         {
-            RetryUntilTimeout(() => driver.Hover(findElement()));
+            RetryUntilTimeout(() => driver.Hover(element));
+            return this;
         }
 
         /// <summary>

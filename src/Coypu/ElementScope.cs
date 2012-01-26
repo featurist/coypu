@@ -60,15 +60,9 @@ namespace Coypu
             return elementFinder.Find();
         }
 
-        public ElementScope ClickButton(string locator)
+        public ElementScope Click()
         {
-            driverScope.ClickButton(locator);
-            return this;
-        }
-
-        public ElementScope ClickLink(string locator)
-        {
-            driverScope.ClickLink(locator);
+            Click(Now());
             return this;
         }
 
@@ -78,9 +72,27 @@ namespace Coypu
             return this;
         }
 
-        public ElementScope Click(Func<Element> findElement)
+        public ElementScope Hover()
         {
-            driverScope.Click(findElement);
+            Hover(Now());
+            return this;
+        }
+
+        public ElementScope Hover(Element element)
+        {
+            driverScope.Hover(element);
+            return this;
+        }
+
+        public ElementScope ClickButton(string locator)
+        {
+            driverScope.ClickButton(locator);
+            return this;
+        }
+
+        public ElementScope ClickLink(string locator)
+        {
+            driverScope.ClickLink(locator);
             return this;
         }
 
@@ -224,11 +236,6 @@ namespace Coypu
             return driverScope.ExecuteScript(javascript);
         }
 
-        public void Hover(Func<Element> findElement)
-        {
-            driverScope.Hover(findElement);
-        }
-
         public bool Has(Func<Element> findElement)
         {
             return driverScope.Has(findElement);
@@ -269,5 +276,6 @@ namespace Coypu
             driverScope.ConsideringInvisibleElements();
             return this;
         }
+
     }
 }
