@@ -9,11 +9,17 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_sets_the_scope_on_the_driver() 
         {
-            var expectedScope = new DriverScope();
+            var section = new StubElement();
+            var expectedLink = new StubElement();
+            driver.StubSection("some section",section);
+            driver.StubLink("some link", expectedLink, section);
 
-            expectedScope.FindLink("some field").Now();
+            var outerScope = new Session();
+            var innerScope = outerScope.FindSection("some section");
+            var actualLink = innerScope.FindLink("some link");
 
-            Assert.That(driver.LastUsedScope, Is.SameAs(expectedScope));
+            Assert.That(driver.Scopes[0], Is.Null);
+            Assert.That(driver.Scopes[1], Is.EqualTo(innerScope));
 
         }
 

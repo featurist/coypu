@@ -5,7 +5,7 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-    public class DriverScope : Scope<DriverScope>
+    internal class DriverScope : Scope<DriverScope>
     {
         private readonly ElementFinder elementFinder;
         protected Driver driver;

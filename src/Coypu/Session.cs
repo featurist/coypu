@@ -242,127 +242,131 @@ namespace Coypu
 
         public bool HasNoContentMatch(Regex pattern)
         {
-            throw new NotImplementedException();
+            return driverScope.HasContentMatch(pattern);
         }
 
         public bool HasCss(string cssSelector)
         {
-            throw new NotImplementedException();
+            return driverScope.HasCss(cssSelector);
         }
 
         public bool HasNoCss(string cssSelector)
         {
-            throw new NotImplementedException();
+            return driverScope.HasNoCss(cssSelector);
         }
 
         public bool HasXPath(string xpath)
         {
-            throw new NotImplementedException();
+            return driverScope.HasXPath(xpath);
         }
 
         public bool HasNoXPath(string xpath)
         {
-            throw new NotImplementedException();
+            return driverScope.HasNoXPath(xpath);
         }
 
-        public Element FindCss(string cssSelector)
+        public ElementScope FindCss(string cssSelector)
         {
-            throw new NotImplementedException();
+            return driverScope.FindCss(cssSelector);
         }
 
-        public Element FindXPath(string xpath)
+        public ElementScope FindXPath(string xpath)
         {
-            throw new NotImplementedException();
+            return driverScope.FindXPath(xpath);
         }
 
         public IEnumerable<Element> FindAllCss(string cssSelector)
         {
-            throw new NotImplementedException();
+            return driverScope.FindAllCss(cssSelector);
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath)
         {
-            throw new NotImplementedException();
+            return driverScope.FindAllXPath(xpath);
         }
 
-        public Element FindSection(string locator)
+        public ElementScope FindSection(string locator)
         {
-            throw new NotImplementedException();
+            return driverScope.FindSection(locator);
         }
 
-        public Element FindFieldset(string locator)
+        public ElementScope FindFieldset(string locator)
         {
-            throw new NotImplementedException();
+            return driverScope.FindFieldset(locator);
         }
 
-        public Element FindId(string id)
+        public ElementScope FindId(string id)
         {
-            throw new NotImplementedException();
+            return driverScope.FindId(id);
         }
 
-        public void Check(string locator)
+        public Session Check(string locator)
         {
-            throw new NotImplementedException();
+            driverScope.Check(locator);
+            return this;
         }
 
-        public void Uncheck(string locator)
+        public Session Uncheck(string locator)
         {
-            throw new NotImplementedException();
+            driverScope.Uncheck(locator);
+            return this;
         }
 
-        public void Choose(string locator)
+        public Session Choose(string locator)
         {
-            throw new NotImplementedException();
+            driverScope.Choose(locator);
+            return this;
         }
 
         public string ExecuteScript(string javascript)
         {
-            throw new NotImplementedException();
+            return driverScope.ExecuteScript(javascript);
         }
 
         public void Hover(Func<Element> findElement)
         {
-            throw new NotImplementedException();
+            driverScope.Hover(findElement);
         }
 
         public bool Has(Func<Element> findElement)
         {
-            throw new NotImplementedException();
+            return driverScope.Has(findElement);
         }
 
         public bool HasNo(Func<Element> findElement)
         {
-            throw new NotImplementedException();
+            return driverScope.HasNo(findElement);
         }
 
         public void RetryUntilTimeout(Action action)
         {
-            throw new NotImplementedException();
+            driverScope.RetryUntilTimeout(action);
         }
 
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
         {
-            throw new NotImplementedException();
+            return driverScope.RetryUntilTimeout(function);
         }
 
         public T Query<T>(Func<T> query, T expecting)
         {
-            throw new NotImplementedException();
+            return driverScope.Query(query, expecting);
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
-            throw new NotImplementedException();
+            driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
         public State FindState(params State[] states)
         {
-            throw new NotImplementedException();
+            return driverScope.FindState(states);
         }
 
-        public Scope ConsideringInvisibleElements()
+        public Session ConsideringInvisibleElements()
         {
-            throw new NotImplementedException();
+            driverScope.ConsideringInvisibleElements();
+            return this;
         }
     }
 }

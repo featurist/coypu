@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -41,8 +42,9 @@ namespace Coypu.Tests.TestDoubles
         private Element scope;
         private IList<Cookie> stubbedCookies;
         private Uri stubbedLocation;
-        private Element lastUsedScope;
+        private IList<Element> scopes = new List<Element>();
         private TimeSpan lastUsedTimeout;
+        private readonly IList<ScopedStubElement> scopedLinks = new List<ScopedStubElement>();
 
         public IEnumerable<Element> ClickedElements
         {
@@ -123,7 +125,15 @@ namespace Coypu.Tests.TestDoubles
         public Element FindLink(string linkText)
         {
             findLinkRequests.Add(linkText);
-            return stubbedLinks[linkText];
+
+            return stubbedLinks.ContainsKey(linkText) 
+                ? stubbedLinks[linkText] 
+                : FindScopedElement(scopedLinks, linkText);
+        }
+
+        private Element FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator)
+        {
+            return (Element) collection.Single(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
         }
 
         public Element FindField(string locator)
@@ -241,7 +251,7 @@ namespace Coypu.Tests.TestDoubles
         public void SetScope(Element newScope)
         {
             scope = newScope;
-            lastUsedScope = newScope;
+            scopes.Add(scope);
         }
 
         public Element Scope
@@ -300,9 +310,9 @@ namespace Coypu.Tests.TestDoubles
 
         public bool ConsiderInvisibleElements { get; set; }
 
-        public Element LastUsedScope
+        public IList<Element> Scopes
         {
-            get { return lastUsedScope; }
+            get { return scopes; }
         }
 
         public object LastUsedTimeout
@@ -382,9 +392,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedFieldsets.Add(locator, fieldset);
         }
         
-        public void StubSection(string locator, Element fieldset)
+        public void StubSection(string locator, Element section)
         {
-            stubbedSections.Add(locator, fieldset);
+            stubbedSections.Add(locator, section);
         }
 
         public void StubIFrame(string locator, Element iframe)
@@ -406,5 +416,17 @@ namespace Coypu.Tests.TestDoubles
         {
             stubbedLocation = location;
         }
+
+        public void StubLink(string locator, StubElement section, StubElement scope)
+        {
+            scopedLinks.Add(new ScopedStubElement {Locator = locator, Element = section, Scope = scope});
+        }
+    }
+
+    class ScopedStubElement
+    {
+        public string Locator;
+        public StubElement Element;
+        public StubElement Scope;
     }
 }
