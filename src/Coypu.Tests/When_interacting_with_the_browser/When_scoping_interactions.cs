@@ -18,17 +18,22 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var innerScope = outerScope.FindSection("some section");
             var actualLink = innerScope.FindLink("some link");
 
-            Assert.That(driver.Scopes[0], Is.Null);
-            Assert.That(driver.Scopes[1], Is.EqualTo(innerScope));
+            Assert.That(actualLink, Is.SameAs(expectedLink));
 
         }
 
         [Test]
         public void It_clears_the_scope_afterwards() 
         {
-            var expectedScope = new StubElement();
+            var section = new StubElement();
+            var expectedLink = new StubElement();
+            driver.StubSection("some section", section);
+            driver.StubLink("some link", expectedLink, section);
 
-            expectedScope.FindField("some field");
+            var outerScope = new Session();
+            var innerScope = outerScope.FindSection("some section");
+            
+            innerScope.FindLink("some link");
 
             Assert.That(driver.Scope, Is.Null);
         }
