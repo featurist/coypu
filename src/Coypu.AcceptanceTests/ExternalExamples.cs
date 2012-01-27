@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Coypu.AcceptanceTests
 {
@@ -64,8 +65,8 @@ namespace Coypu.AcceptanceTests
             var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
-            Console.WriteLine(browser.Has(browser.FindSection("Make"));
-            Console.WriteLine(browser.HasNo(browser.FindSection("Bake"));
+            Console.WriteLine(browser.Has(browser.FindSection("Make")));
+            Console.WriteLine(browser.HasNo(browser.FindSection("Bake")));
 
             browser.Check("Audi");
             browser.Check("BMW");

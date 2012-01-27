@@ -337,5 +337,7 @@ namespace Coypu
         State FindState(params State[] states);
 
         TConcrete ConsideringInvisibleElements();
+
+        TConcrete WithIndividualTimeout(TimeSpan timeout);
     }
 }

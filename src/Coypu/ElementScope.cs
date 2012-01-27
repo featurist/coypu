@@ -277,5 +277,10 @@ namespace Coypu
             return this;
         }
 
+        public ElementScope WithIndividualTimeout(TimeSpan timeout)
+        {
+            driverScope.WithIndividualTimeout(timeout);
+            return this;
+        }
     }
 }

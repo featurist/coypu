@@ -7,12 +7,14 @@ namespace Coypu
         private readonly string option;
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
+        private readonly DriverScope scope;
 
-        internal SelectFrom(string option, Driver driver, RobustWrapper robustWrapper)
+        internal SelectFrom(string option, Driver driver, RobustWrapper robustWrapper, DriverScope scope)
         {
             this.option = option;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
+            this.scope = scope;
         }
 
         /// <summary>
@@ -22,7 +24,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void From(string locator)
         {
-            robustWrapper.Robustly(() => driver.Select(driver.FindField(locator), option));
+            robustWrapper.Robustly(() => driver.Select(driver.FindField(locator,scope), option));
         }
     }
 }

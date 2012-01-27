@@ -116,13 +116,13 @@ namespace Coypu.Tests.TestDoubles
             get { return findLinkRequests; }
         }
 
-        public Element FindButton(string locator)
+        public Element FindButton(string locator, DriverScope scope)
         {
             findButtonRequests.Add(locator);
             return stubbedButtons[locator];
         }
 
-        public Element FindLink(string linkText)
+        public Element FindLink(string linkText, DriverScope scope)
         {
             findLinkRequests.Add(linkText);
 
@@ -136,7 +136,7 @@ namespace Coypu.Tests.TestDoubles
             return (Element) collection.Single(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
         }
 
-        public Element FindField(string locator)
+        public Element FindField(string locator, DriverScope scope)
         {
             return stubbedTextFields[locator];
         }
@@ -194,7 +194,6 @@ namespace Coypu.Tests.TestDoubles
         {
             stubbedHasCssResults.Add(cssSelector, result);
         }
-
 
         public void StubHasXPath(string xpath, bool result)
         {
@@ -269,22 +268,22 @@ namespace Coypu.Tests.TestDoubles
             return stubbedExecuteScriptResults[javascript];
         }
 
-        public Element FindFieldset(string locator)
+        public Element FindFieldset(string locator, DriverScope scope)
         {
             return stubbedFieldsets[locator];
         }
 
-        public Element FindSection(string locator)
+        public Element FindSection(string locator, DriverScope scope)
         {
             return stubbedSections[locator];
         }
 
-        public Element FindId(string id)
+        public Element FindId(string id, DriverScope scope)
         {
             return stubbedIDs[id];
         }
 
-        public Element FindIFrame(string locator)
+        public Element FindIFrame(string locator, DriverScope scope)
         {
             return stubbedIFrames[locator];
         }
@@ -320,24 +319,24 @@ namespace Coypu.Tests.TestDoubles
             get { return lastUsedTimeout; }
         }
 
-        public bool HasContent(string text)
+        public bool HasContent(string text, DriverScope scope)
         {
             hasContentQueries.Add(text);
             return stubbedHasContentResults[text];
         }
-        
-        public bool HasContentMatch(Regex pattern)
+
+        public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
             hasContentMatchQueries.Add(pattern);
             return stubbedHasContentMatchResults[pattern];
         }
 
-        public bool HasCss(string cssSelector)
+        public bool HasCss(string cssSelector, DriverScope scope)
         {
             return stubbedHasCssResults[cssSelector];
         }
 
-        public bool HasXPath(string xpath)
+        public bool HasXPath(string xpath, DriverScope scope)
         {
             return stubbedHasXPathResults[xpath];
         }
@@ -347,22 +346,22 @@ namespace Coypu.Tests.TestDoubles
             return stubbedHasDialogResults[withText];
         }
 
-        public Element FindCss(string cssSelector)
+        public Element FindCss(string cssSelector, DriverScope scope)
         {
             return stubbedCssResults[cssSelector];
         }
 
-        public Element FindXPath(string xpath)
+        public Element FindXPath(string xpath, DriverScope scope)
         {
             return stubbedXPathResults[xpath];
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
         {
             return stubbedAllCssResults[cssSelector];
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
         {
             return stubbedAllXPathResults[xpath];
         }

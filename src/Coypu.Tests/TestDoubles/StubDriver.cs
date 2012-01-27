@@ -12,17 +12,17 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public Element FindButton(string locator)
+        public Element FindButton(string locator,DriverScope scope)
         {
             return null;
         }
 
-        public Element FindLink(string linkText)
+        public Element FindLink(string linkText, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindField(string locator)
+        public Element FindField(string locator, DriverScope scope)
         {
             return null;
         }
@@ -48,22 +48,22 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on stub driver"; }
         }
 
-        public bool HasContent(string text)
-        {
-            return false;
-        }
-        
-        public bool HasContentMatch(Regex pattern)
+        public bool HasContent(string text, DriverScope scope)
         {
             return false;
         }
 
-        public bool HasCss(string cssSelector)
+        public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
             return false;
         }
 
-        public bool HasXPath(string xpath)
+        public bool HasCss(string cssSelector, DriverScope scope)
+        {
+            return false;
+        }
+
+        public bool HasXPath(string xpath, DriverScope scope)
         {
             return false;
         }
@@ -73,22 +73,22 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public Element FindCss(string cssSelector)
+        public Element FindCss(string cssSelector, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindXPath(string xpath)
+        public Element FindXPath(string xpath, DriverScope scope)
         {
             return null;
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
         {
             return Enumerable.Empty<Element>();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
         {
             return Enumerable.Empty<Element>();
         }
@@ -149,22 +149,22 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public Element FindFieldset(string locator)
+        public Element FindFieldset(string locator, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindSection(string locator)
+        public Element FindSection(string locator, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindId(string id)
+        public Element FindId(string id, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindIFrame(string locator)
+        public Element FindIFrame(string locator, DriverScope scope)
         {
             return null;
         }

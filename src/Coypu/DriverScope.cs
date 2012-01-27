@@ -15,6 +15,7 @@ namespace Coypu
         internal StateFinder stateFinder;
         internal TemporaryTimeouts temporaryTimeouts;
         private bool consideringInvisibleElements;
+        private TimeSpan _individualTimeout;
 
         internal DriverScope(Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
@@ -151,7 +152,7 @@ namespace Coypu
         /// <returns>With</returns>
         public FillInWith FillIn(Element element)
         {
-            return new FillInWith(element, driver, robustWrapper);
+            return new FillInWith(element, driver, robustWrapper, this);
         }
 
         /// <summary>
@@ -161,7 +162,7 @@ namespace Coypu
         /// <returns>From</returns>
         public SelectFrom Select(string option)
         {
-            return new SelectFrom(option, driver, robustWrapper);
+            return new SelectFrom(option, driver, robustWrapper, this);
         }
 
         /// <summary>
@@ -494,6 +495,18 @@ namespace Coypu
         {
             this.consideringInvisibleElements = true;
             return this;
+        }
+
+        public DriverScope WithIndividualTimeout(TimeSpan timeout)
+        {
+            this.IndividualTimeout = timeout;
+            return this;
+        }
+
+        protected TimeSpan IndividualTimeout
+        {
+            get {return _individualTimeout;}
+            private set { throw new NotImplementedException(); }
         }
 
 

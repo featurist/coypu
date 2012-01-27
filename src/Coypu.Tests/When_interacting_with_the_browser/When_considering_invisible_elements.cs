@@ -50,8 +50,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_clears_the_scope_after_exception_in_function() 
         {
-            Assert.Throws<ExplicitlyThrownTestException>(
-                () => session.ConsideringInvisibleElements<object>());
+            Assert.Throws<ExplicitlyThrownTestException>(() => session.ConsideringInvisibleElements());
 
             Assert.That(driver.ConsiderInvisibleElements, Is.False);
         }

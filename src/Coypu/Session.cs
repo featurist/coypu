@@ -30,6 +30,11 @@ namespace Coypu
             this.temporaryTimeouts = new TemporaryTimeouts();
         }
 
+        internal DriverScope DriverScope
+        {
+            get { return driverScope; }
+        }
+
         internal Driver Driver
         {
             get { return driver; }
@@ -361,6 +366,12 @@ namespace Coypu
         public Session ConsideringInvisibleElements()
         {
             driverScope.ConsideringInvisibleElements();
+            return this;
+        }
+
+        public Session WithIndividualTimeout(TimeSpan timeout)
+        {
+            driverScope.WithIndividualTimeout(timeout);
             return this;
         }
     }

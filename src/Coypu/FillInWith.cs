@@ -7,6 +7,7 @@ namespace Coypu
         private readonly string locator;
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
+        private readonly DriverScope scope;
         private readonly Element element;
 
         internal FillInWith(string locator, Driver driver, RobustWrapper robustWrapper)
@@ -16,11 +17,12 @@ namespace Coypu
             this.robustWrapper = robustWrapper;
         }
 
-        internal FillInWith(Element element, Driver driver, RobustWrapper robustWrapper)
+        internal FillInWith(Element element, Driver driver, RobustWrapper robustWrapper, DriverScope scope)
         {
             this.element = element;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
+            this.scope = scope;
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace Coypu
 
         private Element Field
         {
-            get { return element ?? driver.FindField(locator); }
+            get { return element ?? driver.FindField(locator, scope); }
         }
     }
 }

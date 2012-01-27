@@ -100,7 +100,7 @@ namespace Coypu.Drivers.Selenium
 
         public Element FindSection(string locator, DriverScope scope)
         {
-            return BuildElement(sectionFinder.FindSection(locator), "Failed to find section: " + locator);
+            return BuildElement(sectionFinder.FindSection(locator,scope), "Failed to find section: " + locator);
         }
 
         public Element FindCss(string cssSelector,DriverScope scope)
