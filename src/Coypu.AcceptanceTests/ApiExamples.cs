@@ -235,18 +235,18 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Has_example()
         {
-            Assert.IsTrue(browser.Has(browser.FindSection("Inspecting Content"));
-            Assert.IsFalse(browser.Has(browser.FindCss("#no-such-element"));
+            Assert.IsTrue(browser.Has(browser.FindSection("Inspecting Content")));
+            Assert.IsFalse(browser.Has(browser.FindCss("#no-such-element")));
         }
 
         [Test]
         public void HasNo_example()
         {
             browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">asdf</div>'");
-            Assert.IsTrue(browser.HasNo(browser.FindCss("#no-such-element"));
+            Assert.IsTrue(browser.HasNo(browser.FindCss("#no-such-element")));
 
             ReloadTestPage();
-            Assert.IsFalse(browser.HasNo(browser.FindSection("Inspecting Content"));
+            Assert.IsFalse(browser.HasNo(browser.FindSection("Inspecting Content")));
         }
 
         [Test]
@@ -324,7 +324,7 @@ namespace Coypu.AcceptanceTests
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
-            browser.Hover(browser.FindId("hoverOnMeTest");
+            browser.Hover(browser.FindId("hoverOnMeTest"));
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me - hovered"));
         }
 
@@ -342,11 +342,12 @@ namespace Coypu.AcceptanceTests
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
 
-            browser.Within(browser.FindId("scope1"),
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
+            var expectingScope1 = browser.FindId("scope1").FindField(locatorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindId("scope2").FindField(locatorThatAppearsInMultipleScopes);
 
-            browser.Within(browser.FindId("scope2"),
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
+            Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
+
         }
         
         [Test]
@@ -354,11 +355,11 @@ namespace Coypu.AcceptanceTests
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
 
-            browser.WithinFieldset("Scope 1",
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
+            var expectingScope1 = browser.FindFieldset("Scope 1").FindField(locatorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindFieldset("Scope 2").FindField(locatorThatAppearsInMultipleScopes);
 
-            browser.WithinFieldset("Scope 2",
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
+            Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
         }
 
         [Test]
@@ -366,11 +367,11 @@ namespace Coypu.AcceptanceTests
         {
             const string selectorThatAppearsInMultipleScopes = "h2";
 
-            browser.WithinSection("Section One h1",
-                () => Assert.That(browser.FindCss(selectorThatAppearsInMultipleScopes).Text, Is.EqualTo("Section One h2")));
+            var expectingScope1 = browser.FindSection("Section One h1").FindCss(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindSection("Div Section Two h1").FindCss(selectorThatAppearsInMultipleScopes);
 
-            browser.WithinSection("Div Section Two h1",
-                () => Assert.That(browser.FindCss(selectorThatAppearsInMultipleScopes).Text, Is.EqualTo("Div Section Two h2")));
+            Assert.That(expectingScope1.Text, Is.EqualTo("Section One h2"));
+            Assert.That(expectingScope2.Text, Is.EqualTo("Div Section Two h2"));
         }
 
         [Test]
@@ -378,11 +379,11 @@ namespace Coypu.AcceptanceTests
         {
             const string selectorThatAppearsInMultipleScopes = "scoped button";
 
-            browser.WithinIFrame("iframe1",
-                () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe1ButtonId")));
+            var expectingScope1 = browser.FindIFrame("iframe1").FindButton(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindIFrame("iframe2").FindButton(selectorThatAppearsInMultipleScopes);
 
-            browser.WithinIFrame("iframe2",
-                () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe2ButtonId")));
+            Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("iframe1ButtonId"));
         }
 
         [Test]

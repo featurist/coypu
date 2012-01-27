@@ -17,7 +17,6 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                ForceFindScope();
                 return new Uri(selenium.Url);
             }
         }
@@ -28,13 +27,7 @@ namespace Coypu.Drivers.Selenium
             set { elementFinder.ConsiderInvisibleElements = value; }
         }
 
-        private void ForceFindScope()
-        {
-            var scope = Scope;
-        }
-
         private RemoteWebDriver selenium;
-        private readonly Scoping scoping;
         private readonly ElementFinder elementFinder;
         private readonly FieldFinder fieldFinder;
         private readonly IFrameFinder iframeFinder;
@@ -55,8 +48,7 @@ namespace Coypu.Drivers.Selenium
         {
             selenium = webDriver;
             xPath = new XPath();
-            scoping = new Scoping(selenium);
-            elementFinder = new ElementFinder(scoping,xPath);
+            elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
             iframeFinder = new IFrameFinder(selenium, elementFinder,xPath);
             textMatcher = new TextMatcher();
@@ -72,88 +64,68 @@ namespace Coypu.Drivers.Selenium
             get { return selenium; }
         }
 
-        private ISearchContext Scope
+        public Element FindField(string locator, DriverScope scope)
         {
-            get { return scoping.Scope; }
+            return BuildElement(fieldFinder.FindField(locator,scope), "No such field: " + locator);
         }
 
-        private bool ScopeDefined
+        public Element FindButton(string locator, DriverScope scope)
         {
-            get { return scoping.ScopeDefined(); }
+            return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
         }
 
-        public void SetScope(Element scope)
+        public Element FindIFrame(string locator, DriverScope scope) 
         {
-            scoping.SetScope(scope);
+            return BuildElement(iframeFinder.FindIFrame(locator, scope), "Failed to find frame: " + locator);
         }
 
-        public void ClearScope()
+        public Element FindLink(string linkText, DriverScope scope)
         {
-            scoping.ClearScope();
+            return BuildElement(Find(By.LinkText(linkText), scope).FirstOrDefault(), "No such link: " + linkText);
         }
 
-        public Element FindField(string locator)
+        public Element FindId(string id,DriverScope scope ) 
         {
-            return BuildElement(fieldFinder.FindField(locator), "No such field: " + locator);
+            return BuildElement(Find(By.Id(id), scope).FirstDisplayedOrDefault(), "Failed to find id: " + id);
         }
 
-        public Element FindButton(string locator)
-        {
-            return BuildElement(buttonFinder.FindButton2(locator),"No such button: " + locator);
-        }
-
-        public Element FindIFrame(string locator) 
-        {
-            return BuildElement(iframeFinder.FindIFrame(locator), "Failed to find frame: " + locator);
-        }
-
-        public Element FindLink(string linkText)
-        {
-            return BuildElement(Find(By.LinkText(linkText)).FirstOrDefault(), "No such link: " + linkText);
-        }
-
-        public Element FindId(string id) 
-        {
-            return BuildElement(Find(By.Id(id)).FirstDisplayedOrDefault(), "Failed to find id: " + id);
-        }
-
-        public Element FindFieldset(string locator)
+        public Element FindFieldset(string locator, DriverScope scope)
         {
             var fieldset =
-                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator))).FirstOrDefault() ??
-                Find(By.Id(locator)).FirstOrDefault(e => e.TagName == "fieldset");
+                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator)),scope).FirstOrDefault() ??
+                Find(By.Id(locator),scope).FirstOrDefault(e => e.TagName == "fieldset");
 
             return BuildElement(fieldset, "Failed to find fieldset: " + locator);
         }
 
-        public Element FindSection(string locator)
+        public Element FindSection(string locator, DriverScope scope)
         {
             return BuildElement(sectionFinder.FindSection(locator), "Failed to find section: " + locator);
         }
 
-        public Element FindCss(string cssSelector)
+        public Element FindCss(string cssSelector,DriverScope scope)
         {
-            return BuildElement(Find(By.CssSelector(cssSelector)).FirstOrDefault(),"No element found by css: " + cssSelector);
+            return BuildElement(Find(By.CssSelector(cssSelector),scope).FirstOrDefault(),"No element found by css: " + cssSelector);
         }
 
-        public Element FindXPath(string xpath)
+        public Element FindXPath(string xpath, DriverScope scope)
         {
-            return BuildElement(Find(By.XPath(xpath)).FirstOrDefault(),"No element found by xpath: " + xpath);
+            return BuildElement(Find(By.XPath(xpath),scope).FirstOrDefault(),"No element found by xpath: " + xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return Find(By.CssSelector(cssSelector)).Select(e => BuildElement(e)).Cast<Element>();
+            return Find(By.CssSelector(cssSelector),scope).Select(e => BuildElement(e)).Cast<Element>();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
         {
-            return Find(By.XPath(xpath)).Select(e => BuildElement(e)).Cast<Element>();
+            return Find(By.XPath(xpath), scope).Select(e => BuildElement(e)).Cast<Element>();
         }
 
-        private IEnumerable<IWebElement> Find(By by)
+        private IEnumerable<IWebElement> Find(By by, DriverScope scope)
         {
-            return elementFinder.Find(by);
+            return elementFinder.Find(by, scope);
         }
 
         private Element BuildElement(IWebElement element, string failureMessage)
@@ -169,37 +141,38 @@ namespace Coypu.Drivers.Selenium
             return new SeleniumElement(element);
         }
 
-        public bool HasContent(string text)
+        public bool HasContent(string text, DriverScope scope)
         {
-            return GetContent().Contains(text);
+            return GetContent(scope).Contains(text);
         }
 
-        public bool HasContentMatch(Regex pattern)
+        public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
-            return pattern.IsMatch(GetContent());
+            return pattern.IsMatch(GetContent(scope));
         }
 
-        private string GetContent()
+        private string GetContent(DriverScope scope)
         {
-            return ScopeDefined
-                       ? GetText(By.XPath("."))
-                       : GetText(By.TagName("body"));
+            return scope is DocumentDriverScope
+                       ? GetText(By.XPath("."),scope)
+                       : GetText(By.TagName("body"), scope);
         }
 
-        private string GetText(By xPath)
+        private string GetText(By xPath, DriverScope scope)
         {
-            var pageText = Scope.FindElement(xPath).Text;
+            
+            var pageText = ElementFinder.SeleniumScope(scope).FindElement(xPath).Text;
             return NormalizeCRLFBetweenBrowserImplementations(pageText);
         }
 
-        public bool HasCss(string cssSelector)
+        public bool HasCss(string cssSelector, DriverScope scope)
         {
-            return Find(By.CssSelector(cssSelector)).Any();
+            return Find(By.CssSelector(cssSelector), scope).Any();
         }
 
-        public bool HasXPath(string xpath)
+        public bool HasXPath(string xpath, DriverScope scope)
         {
-            return Find(By.XPath(xpath)).Any();
+            return Find(By.XPath(xpath), scope).Any();
         }
 
         public bool HasDialog(string withText)

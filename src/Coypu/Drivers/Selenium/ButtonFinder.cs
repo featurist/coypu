@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using OpenQA.Selenium;
 
@@ -17,25 +16,25 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IWebElement FindButton2(string locator)
+        public IWebElement FindButton(string locator, DriverScope scope)
         {
-            return FindButtonByText(locator) ??
-                   FindButtonByIdNameOrValue(locator) ??
-                   elementFinder.FindByPartialId(locator).FirstOrDefault(IsButton);
+            return FindButtonByText(locator, scope) ??
+                   FindButtonByIdNameOrValue(locator, scope) ??
+                   elementFinder.FindByPartialId(locator, scope).FirstOrDefault(IsButton);
         }
 
-        private IWebElement FindButtonByIdNameOrValue(string locator) 
+        private IWebElement FindButtonByIdNameOrValue(string locator, DriverScope scope) 
         {
             var xpathToFind = xPath.Format(".//*[@id = {0} or @name = {0} or @value = {0} or @alt = {0}]", locator);
-            return elementFinder.Find(By.XPath(xpathToFind)).FirstOrDefault(IsButton);
+            return elementFinder.Find(By.XPath(xpathToFind),scope).FirstOrDefault(IsButton);
         }
 
-        private IWebElement FindButtonByText(string locator) 
+        private IWebElement FindButtonByText(string locator, DriverScope scope) 
         {
             return
-                elementFinder.Find(By.TagName("button")).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
-                elementFinder.Find(By.ClassName("button")).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
-                elementFinder.Find(By.XPath(".//*[@role = 'button']")).FirstOrDefault(e => textMatcher.TextMatches(e, locator));
+                elementFinder.Find(By.TagName("button"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
+                elementFinder.Find(By.ClassName("button"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
+                elementFinder.Find(By.XPath(".//*[@role = 'button']"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator));
         }
 
         private bool IsButton(IWebElement e)

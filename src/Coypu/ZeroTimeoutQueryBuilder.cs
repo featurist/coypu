@@ -4,7 +4,7 @@ namespace Coypu
 {
     internal class ZeroTimeoutQueryBuilder
     {
-        internal Func<bool> BuildZeroTimeoutHasElementQuery(Func<Element> findElement)
+        internal Func<bool> BuildZeroTimeoutHasElementQuery(ElementScope elementScope)
         {
             Func<bool> query =
                 () =>
@@ -13,7 +13,7 @@ namespace Coypu
                         Configuration.Timeout = TimeSpan.Zero;
                         try
                         {
-                            findElement();
+                            elementScope.Now();
                             return true;
                         }
                         catch (MissingHtmlException)

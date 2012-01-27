@@ -19,7 +19,7 @@ namespace Coypu
         bool HasContentMatch(Regex pattern, DriverScope scope);
         bool HasCss(string cssSelector, DriverScope scope);
         bool HasXPath(string xpath, DriverScope scope);
-        bool HasDialog(string withText, DriverScope scope);
+        bool HasDialog(string withText);
         Element FindCss(string cssSelector, DriverScope scope);
         Element FindXPath(string xpath, DriverScope scope);
         IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope);
@@ -32,8 +32,6 @@ namespace Coypu
         bool ConsiderInvisibleElements { get; set; }
         void AcceptModalDialog();
         void CancelModalDialog();
-        void SetScope(Element scope);
-        void ClearScope();
         string ExecuteScript(string javascript);
         Element FindFieldset(string locato, DriverScope scoper);
         Element FindSection(string locator, DriverScope scope);

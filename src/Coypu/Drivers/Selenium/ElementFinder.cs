@@ -7,27 +7,30 @@ namespace Coypu.Drivers.Selenium
 {
     internal class ElementFinder
     {
-        private readonly Scoping scoping;
         private readonly XPath xPath;
 
-        public ElementFinder(Scoping scoping, XPath xPath)
+        public ElementFinder(XPath xPath)
         {
-            this.scoping = scoping;
             this.xPath = xPath;
         }
 
         public bool ConsiderInvisibleElements { get; set; }
 
-        public IEnumerable<IWebElement> FindByPartialId(string id)
+        public IEnumerable<IWebElement> FindByPartialId(string id, DriverScope scope)
         {
             var xpath = String.Format(".//*[substring(@id, string-length(@id) - {0} + 1, string-length(@id)) = {1}]",
                                       id.Length, xPath.Literal(id));
-            return Find(By.XPath(xpath));
+            return Find(By.XPath(xpath),scope);
         }
 
-        public IEnumerable<IWebElement> Find(By by)
+        public IEnumerable<IWebElement> Find(By by, DriverScope scope)
         {
-            return scoping.Scope.FindElements(by).Where(IsDisplayed);
+            return SeleniumScope(scope).FindElements(by).Where(IsDisplayed);
+        }
+
+        public static ISearchContext SeleniumScope(DriverScope scope)
+        {
+            return (ISearchContext) scope.Now();
         }
 
         public bool IsDisplayed(IWebElement e)

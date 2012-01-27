@@ -236,12 +236,12 @@ namespace Coypu
             return driverScope.ExecuteScript(javascript);
         }
 
-        public bool Has(Func<Element> findElement)
+        public bool Has(ElementScope findElement)
         {
             return driverScope.Has(findElement);
         }
 
-        public bool HasNo(Func<Element> findElement)
+        public bool HasNo(ElementScope findElement)
         {
             return driverScope.HasNo(findElement);
         }

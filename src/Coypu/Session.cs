@@ -22,7 +22,7 @@ namespace Coypu
 
         internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
-            this.driverScope = new DriverScope(driver, robustWrapper, waiter, urlBuilder);
+            this.driverScope = new DocumentDriverScope(driver, robustWrapper, waiter, urlBuilder);
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.restrictedResourceDownloader = restrictedResourceDownloader;
@@ -70,7 +70,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return robustWrapper.Query(() => driver.HasDialog(withText,driverScope), true);
+            return robustWrapper.Query(() => driver.HasDialog(withText), true);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return !robustWrapper.Query(() => driver.HasDialog(withText, driverScope), false);
+            return !robustWrapper.Query(() => driver.HasDialog(withText), false);
         }
 
         /// <summary>
@@ -323,12 +323,12 @@ namespace Coypu
             return this;
         }
 
-        public bool Has(Func<Element> findElement)
+        public bool Has(ElementScope findElement)
         {
             return driverScope.Has(findElement);
         }
 
-        public bool HasNo(Func<Element> findElement)
+        public bool HasNo(ElementScope findElement)
         {
             return driverScope.HasNo(findElement);
         }

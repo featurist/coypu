@@ -408,7 +408,7 @@ namespace Coypu
         /// Query whether an element appears within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
-        public bool Has(Func<Element> findElement) 
+        public bool Has(ElementScope findElement) 
         {
             return Query(new ZeroTimeoutQueryBuilder().BuildZeroTimeoutHasElementQuery(findElement), true);
         }
@@ -417,7 +417,7 @@ namespace Coypu
         /// Query whether an element does not appear. Returns as soon as the element does not appear or after the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
-        public bool HasNo(Func<Element> findElement)
+        public bool HasNo(ElementScope findElement)
         {
             return !Query(new ZeroTimeoutQueryBuilder().BuildZeroTimeoutHasElementQuery(findElement), false);
         }
@@ -500,6 +500,16 @@ namespace Coypu
         public Element Now()
         {
             return elementFinder.Find();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DocumentDriverScope : DriverScope
+    {
+        internal DocumentDriverScope(Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder) : base(driver, robustWrapper, waiter, urlBuilder)
+        {
         }
     }
 }

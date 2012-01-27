@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -16,27 +15,27 @@ namespace Coypu.Drivers.Selenium
             Native = seleniumElement;
         }
 
-        public override string Id
+        public string Id
         {
             get { return NativeSeleniumElement.GetAttribute("id"); }
         }
 
-        public override string Text
+        public string Text
         {
             get { return NativeSeleniumElement.Text; }
         }
 
-        public override string Value
+        public string Value
         {
             get { return NativeSeleniumElement.GetAttribute("value"); }
         }
 
-        public override string Name
+        public string Name
         {
             get { return NativeSeleniumElement.GetAttribute("name"); }
         }
 
-        public override string SelectedOption
+        public string SelectedOption
         {
             get
             {
@@ -47,12 +46,14 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public override bool Selected
+        public bool Selected
         {
             get { return NativeSeleniumElement.Selected; }
         }
 
-        public override string this[string attributeName]
+        public object Native { get; set; }
+
+        public string this[string attributeName]
         {
             get { return NativeSeleniumElement.GetAttribute(attributeName); }
         }

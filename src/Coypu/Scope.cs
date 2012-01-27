@@ -275,13 +275,13 @@ namespace Coypu
         /// Query whether an element appears within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
-        bool Has(Func<Element> findElement);
+        bool Has(ElementScope findElement);
 
         /// <summary>
         /// Query whether an element does not appear. Returns as soon as the element does not appear or after the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
-        bool HasNo(Func<Element> findElement);
+        bool HasNo(ElementScope findElement);
 
         /// <summary>
         /// <para>Retry an action on any exception until it succeeds. Once the <see cref="Configuration.Timeout"/> is passed any exception will be rethrown.</para>
