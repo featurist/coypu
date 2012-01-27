@@ -2,8 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {
@@ -436,6 +439,27 @@ namespace Coypu.AcceptanceTests
             Assert.That(button.Id, Is.EqualTo("firstInvisibleInputId"));
 
             Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId"));
+        }
+
+        [Test]
+        public void CustomProfile()
+        {
+            Configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
+
+            Browser.Session.Visit("https://www.relishapp.com/");
+        }
+
+        public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+        {
+            public CustomFirefoxProfileSeleniumWebDriver() : base(CustomProfile())
+            {
+            }
+
+            private static RemoteWebDriver CustomProfile()
+            {
+                var yourCustomProfile = new FirefoxProfile();
+                return new FirefoxDriver(yourCustomProfile);
+            }
         }
     }
 }
