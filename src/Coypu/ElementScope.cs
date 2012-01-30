@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Robustness;
 
 namespace Coypu
 {
@@ -55,7 +56,7 @@ namespace Coypu
             get { throw new System.NotImplementedException(); }
         }
 
-        public Element Now()
+        public virtual Element Now()
         {
             return elementFinder.Find();
         }
@@ -287,6 +288,23 @@ namespace Coypu
         {
             driverScope.WithIndividualTimeout(timeout);
             return this;
+        }
+    }
+
+    internal class RobustElementScope : ElementScope
+    {
+        private readonly ElementFinder elementFinder;
+        private readonly RobustWrapper robustWrapper;
+
+        internal RobustElementScope(ElementFinder elementFinder, DriverScope driverScope, RobustWrapper robustWrapper) : base(elementFinder, driverScope)
+        {
+            this.elementFinder = elementFinder;
+            this.robustWrapper = robustWrapper;
+        }
+
+        public override Element Now()
+        {
+            return robustWrapper.RobustlyFind(elementFinder);
         }
     }
 }

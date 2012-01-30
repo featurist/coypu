@@ -119,7 +119,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindButton(string locator)
         {
-            return new ElementScope(new ButtonFinder(driver, locator, this), this);
+            return new RobustElementScope(new ButtonFinder(driver, locator, this), this,robustWrapper);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindLink(string locator)
         {
-            return new ElementScope(new LinkFinder(driver, locator,this), this);
+            return new RobustElementScope(new LinkFinder(driver, locator,this), this, robustWrapper);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindField(string locator)
         {
-            return new ElementScope(new FieldFinder(driver, locator, this), this);
+            return new RobustElementScope(new FieldFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Coypu
         /// <returns>The first matchin element</returns>
         public ElementScope FindCss(string cssSelector)
         {
-            return new ElementScope(new CssFinder(driver, cssSelector, this), this);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace Coypu
         /// <returns>The first matchin element</returns>
         public ElementScope FindXPath(string xpath)
         {
-            return new ElementScope(new XPathFinder(driver, xpath, this), this);
+            return new RobustElementScope(new XPathFinder(driver, xpath, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindSection(string locator)
         {
-            return new ElementScope(new SectionFinder(driver, locator, this), this);
+            return new RobustElementScope(new SectionFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindFieldset(string locator)
         {
-            return new ElementScope(new FieldsetFinder(driver, locator, this), this);
+            return new RobustElementScope(new FieldsetFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindId(string id)
         {
-            return new ElementScope(new IdFinder(driver, id, this), this);
+            return new RobustElementScope(new IdFinder(driver, id, this), this, robustWrapper);
         }
 
         /// <summary>

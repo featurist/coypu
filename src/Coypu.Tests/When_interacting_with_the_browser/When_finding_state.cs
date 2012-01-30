@@ -161,6 +161,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             tryThis();
         }
 
+        public Element RobustlyFind(ElementFinder elementFinder)
+        {
+            return elementFinder.Find();
+        }
+
+        public void RobustlyDo(DriverAction action)
+        {
+            action.Act();
+        }
+
         #endregion
     }
 }

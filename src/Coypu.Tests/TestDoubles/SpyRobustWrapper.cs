@@ -8,6 +8,8 @@ namespace Coypu.Tests.TestDoubles
     {
         public IList<Action> DeferredActions = new List<Action>();
         public IList<object> DeferredFunctions = new List<object>();
+        public IList<ElementFinder> DeferredFinders = new List<ElementFinder>();
+        public IList<DriverAction> DeferredDriverActions = new List<DriverAction>();
         public IList<object> DeferredQueries = new List<object>();
         public IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
         
@@ -34,6 +36,17 @@ namespace Coypu.Tests.TestDoubles
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
             DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
+        }
+
+        public Element RobustlyFind(ElementFinder elementFinder)
+        {
+            DeferredFinders.Add(elementFinder);
+            return (Element) stubbedResults[typeof (Element)];
+        }
+
+        public void RobustlyDo(DriverAction action)
+        {
+            DeferredDriverActions.Add(action);
         }
 
         public void AlwaysReturnFromRobustly(Type type, object result)

@@ -94,5 +94,69 @@ namespace Coypu.Robustness
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
+
+        
+        public Element RobustlyFind(ElementFinder elementFinder)
+        {
+            return RobustlyFind(elementFinder, null);
+        }
+
+        public Element RobustlyFind(ElementFinder elementFinder, object expectedResult)
+        {
+            var interval = Configuration.RetryInterval;
+            var timeout = Configuration.Timeout;
+            var stopWatch = Stopwatch.StartNew();
+            while (true)
+            {
+                try
+                {
+                    var result = elementFinder.Find();
+                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch, timeout, interval))
+                    {
+                        WaitForInterval(interval);
+                        continue;
+                    }
+                    return result;
+                }
+                catch (NotSupportedException) { throw; }
+                catch (Exception)
+                {
+                    if (TimeoutReached(stopWatch, timeout, interval))
+                    {
+                        throw;
+                    }
+                    WaitForInterval(interval);
+                }
+            }
+        }
+
+        public void RobustlyDo(DriverAction action)
+        {
+            var interval = Configuration.RetryInterval;
+            var timeout = Configuration.Timeout;
+            var stopWatch = Stopwatch.StartNew();
+            while (true)
+            {
+                try
+                {
+                    action.Act();
+                    WaitForInterval(interval);
+                }
+                catch (NotSupportedException) { throw; }
+                catch (Exception)
+                {
+                    if (TimeoutReached(stopWatch, timeout, interval))
+                    {
+                        throw;
+                    }
+                    WaitForInterval(interval);
+                }
+            }
+        }
+    }
+
+    public interface DriverAction
+    {
+        void Act();
     }
 }
