@@ -6,6 +6,7 @@ temp/
 _ReSharper.*
 *.ReSharper.user
 *.csproj.user
+*.sln.*.user
 *.resharper.user
 *.resharper
 *.suo
