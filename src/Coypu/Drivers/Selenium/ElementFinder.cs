@@ -14,8 +14,6 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public bool ConsiderInvisibleElements { get; set; }
-
         public IEnumerable<IWebElement> FindByPartialId(string id, DriverScope scope)
         {
             var xpath = String.Format(".//*[substring(@id, string-length(@id) - {0} + 1, string-length(@id)) = {1}]",
@@ -25,7 +23,7 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<IWebElement> Find(By by, DriverScope scope)
         {
-            return SeleniumScope(scope).FindElements(by).Where(IsDisplayed);
+            return SeleniumScope(scope).FindElements(by).Where(e => IsDisplayed(e,scope));
         }
 
         public static ISearchContext SeleniumScope(DriverScope scope)
@@ -33,9 +31,9 @@ namespace Coypu.Drivers.Selenium
             return (ISearchContext) scope.Now();
         }
 
-        public bool IsDisplayed(IWebElement e)
+        public bool IsDisplayed(IWebElement e, DriverScope scope)
         {
-            return e.IsDisplayed() || ConsiderInvisibleElements;
+            return scope.ConsiderInvisibleElements || e.IsDisplayed();
         }
     }
 }

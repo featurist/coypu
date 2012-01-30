@@ -12,12 +12,21 @@ namespace Coypu
         protected RobustWrapper robustWrapper;
         internal Clicker clicker;
         internal UrlBuilder urlBuilder;
+
         internal StateFinder stateFinder;
+
         internal TemporaryTimeouts temporaryTimeouts;
+
         private bool consideringInvisibleElements;
+
         private TimeSpan _individualTimeout;
 
-        internal DriverScope(Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
+        public bool ConsiderInvisibleElements
+        {
+            get { return consideringInvisibleElements; }
+        }
+
+        internal DriverScope(ElementFinder finder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
             this.driver = driver;
             this.robustWrapper = robustWrapper;
@@ -497,6 +506,12 @@ namespace Coypu
             return this;
         }
 
+        public DriverScope ConsideringOnlyVisibleElements()
+        {
+            this.consideringInvisibleElements = false;
+            return this;
+        }
+
         public DriverScope WithIndividualTimeout(TimeSpan timeout)
         {
             this.IndividualTimeout = timeout;
@@ -513,16 +528,6 @@ namespace Coypu
         public Element Now()
         {
             return elementFinder.Find();
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class DocumentDriverScope : DriverScope
-    {
-        internal DocumentDriverScope(Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder) : base(driver, robustWrapper, waiter, urlBuilder)
-        {
         }
     }
 }

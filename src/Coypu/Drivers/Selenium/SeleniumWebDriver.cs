@@ -21,10 +21,9 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public bool ConsiderInvisibleElements
+        public Element DocumentElement
         {
-            get { return elementFinder.ConsiderInvisibleElements; }
-            set { elementFinder.ConsiderInvisibleElements = value; }
+            get { throw new NotImplementedException(); }
         }
 
         private RemoteWebDriver selenium;
@@ -153,7 +152,7 @@ namespace Coypu.Drivers.Selenium
 
         private string GetContent(DriverScope scope)
         {
-            return scope is DocumentDriverScope
+            return scope == DocumentElement
                        ? GetText(By.XPath("."),scope)
                        : GetText(By.TagName("body"), scope);
         }

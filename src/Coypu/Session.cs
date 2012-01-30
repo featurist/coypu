@@ -22,12 +22,12 @@ namespace Coypu
 
         internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
-            this.driverScope = new DocumentDriverScope(driver, robustWrapper, waiter, urlBuilder);
+            driverScope = new DriverScope(new DocumentElementFinder(driver), driver, robustWrapper, waiter, urlBuilder);
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.restrictedResourceDownloader = restrictedResourceDownloader;
             this.urlBuilder = urlBuilder;
-            this.temporaryTimeouts = new TemporaryTimeouts();
+            temporaryTimeouts = new TemporaryTimeouts();
         }
 
         internal DriverScope DriverScope
@@ -211,7 +211,7 @@ namespace Coypu
         public FillInWith FillIn(Element element)
         {
             return driverScope.FillIn(element);
-;        }
+        }
 
         public SelectFrom Select(string option)
         {
@@ -366,6 +366,12 @@ namespace Coypu
         public Session ConsideringInvisibleElements()
         {
             driverScope.ConsideringInvisibleElements();
+            return this;
+        }
+
+        public Session ConsideringOnlyVisibleElements()
+        {
+            driverScope.ConsideringOnlyVisibleElements();
             return this;
         }
 

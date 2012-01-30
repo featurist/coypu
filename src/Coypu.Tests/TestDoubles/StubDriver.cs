@@ -118,10 +118,9 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
-        public bool ConsiderInvisibleElements
+        public Element DocumentElement
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return null; }
         }
 
         public void AcceptModalDialog()

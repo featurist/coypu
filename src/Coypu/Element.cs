@@ -33,6 +33,7 @@
         /// The native element returned by your chosen driver
         /// </summary>
         object Native { get; }
+
         /// <summary>
         /// The attributes of the HTML element
         /// </summary>

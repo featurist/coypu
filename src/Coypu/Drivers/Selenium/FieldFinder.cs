@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Selenium
                    FindFieldByIdOrName(locator, scope) ??
                    FindFieldByPlaceholder(locator, scope) ??
                    FindRadioButtonFromValue(locator, scope) ??
-                   elementFinder.FindByPartialId(locator, scope).FirstOrDefault(IsField);
+                   elementFinder.FindByPartialId(locator, scope).FirstOrDefault(e => IsField(e, scope));
         }
 
         private IWebElement FindRadioButtonFromValue(string locator,DriverScope scope)
@@ -40,7 +40,7 @@ namespace Coypu.Drivers.Selenium
 
             var field = id != null
                             ? FindFieldById(id, scope)
-                            : label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(IsField);
+                            : label.FindElements(By.XPath("*")).FirstDisplayedOrDefault(e => IsField(e, scope));
 
             return field;
         }
@@ -54,29 +54,29 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindFieldByPlaceholder(string placeholder,DriverScope scope)
         {
-            return elementFinder.Find(By.XPath(xPath.Format(".//input[@placeholder = {0}]", placeholder)), scope).FirstOrDefault(IsField);
+            return elementFinder.Find(By.XPath(xPath.Format(".//input[@placeholder = {0}]", placeholder)), scope).FirstOrDefault(e => IsField(e, scope));
         }
 
         private IWebElement FindFieldByIdOrName(string locator, DriverScope scope)
         {
             var xpathToFind = xPath.Format(".//*[@id = {0} or @name = {0}]", locator);
-            return elementFinder.Find(By.XPath(xpathToFind), scope).FirstOrDefault(IsField);
+            return elementFinder.Find(By.XPath(xpathToFind), scope).FirstOrDefault(e => IsField(e,scope));
         }
 
         private IWebElement FindFieldById(string id, DriverScope scope)
         {
-            return elementFinder.Find(By.Id(id), scope).FirstOrDefault(IsField);
+            return elementFinder.Find(By.Id(id), scope).FirstOrDefault(e => IsField(e,scope));
         }
 
-        private bool IsField(IWebElement e)
+        private bool IsField(IWebElement e, DriverScope scope)
         {
-            return IsInputField(e) || e.TagName == "select" || e.TagName == "textarea";
+            return IsInputField(e, scope) || e.TagName == "select" || e.TagName == "textarea";
         }
 
-        private bool IsInputField(IWebElement e)
+        private bool IsInputField(IWebElement e, DriverScope scope)
         {
             var inputTypes = FieldInputTypes;
-            if (elementFinder.ConsiderInvisibleElements)
+            if (scope.ConsiderInvisibleElements)
             {
                 inputTypes = inputTypes.Concat(new[]{"hidden"}).ToArray();
             }

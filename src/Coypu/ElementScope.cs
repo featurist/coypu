@@ -277,6 +277,12 @@ namespace Coypu
             return this;
         }
 
+        public ElementScope ConsideringOnlyVisibleElements()
+        {
+            driverScope.ConsideringOnlyVisibleElements();
+            return this;
+        }
+
         public ElementScope WithIndividualTimeout(TimeSpan timeout)
         {
             driverScope.WithIndividualTimeout(timeout);

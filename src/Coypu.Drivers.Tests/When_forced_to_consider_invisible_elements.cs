@@ -10,28 +10,24 @@ namespace Coypu.Drivers.Tests
         {
             it["does find hidden inputs"] = () =>
             {
-                driver.ConsiderInvisibleElements = true;
                 try
                 {
                     Assert.That(driver.FindField("firstHiddenInputId").Value, Is.EqualTo("first hidden input"));
                 }
                 finally
                 {
-                    driver.ConsiderInvisibleElements = false;    
                 }
                 Assert.Throws<MissingHtmlException>(() => driver.FindField("firstHiddenInputId"));
             };
 
             it["does find invisible elements"] = () =>
             {
-                driver.ConsiderInvisibleElements = true;
                 try
                 {
                     Assert.That(driver.FindButton("firstInvisibleInputId").Name, Is.EqualTo("firstInvisibleInputName"));
                 }
                 finally
                 {
-                    driver.ConsiderInvisibleElements = false; 
                 }
                 Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstInvisibleInputId"));
             };

@@ -88,6 +88,7 @@
     <Compile Include="Clicker.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="DocumentElementFinder.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="DriverScope.cs" />
     <Compile Include="Drivers\Browser.cs" />

@@ -237,6 +237,11 @@ namespace Coypu.Tests.TestDoubles
             get { return stubbedLocation; }
         }
 
+        public Element DocumentElement
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public void AcceptModalDialog()
         {
             ModalDialogsAccepted++;
@@ -306,8 +311,6 @@ namespace Coypu.Tests.TestDoubles
         public int ModalDialogsAccepted { get; private set; }
 
         public int ModalDialogsCancelled { get; private set; }
-
-        public bool ConsiderInvisibleElements { get; set; }
 
         public IList<Element> Scopes
         {
