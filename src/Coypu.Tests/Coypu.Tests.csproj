@@ -77,7 +77,6 @@
     <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_clicking_any_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_executing_script.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_clicking_any_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_clicking_links.cs" />
     <Compile Include="When_interacting_with_the_browser\When_scoping_interactions.cs" />
     <Compile Include="When_interacting_with_the_browser\When_interacting_with_modal_dialogs.cs" />

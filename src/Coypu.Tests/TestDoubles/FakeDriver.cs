@@ -132,7 +132,7 @@ namespace Coypu.Tests.TestDoubles
 
         private Element FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator, DriverScope scope)
         {
-            return (Element) collection.Single(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
+            return collection.Single(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope).Element;
         }
 
         public Element FindField(string locator, DriverScope scope)

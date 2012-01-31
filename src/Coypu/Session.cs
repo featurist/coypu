@@ -235,7 +235,7 @@ namespace Coypu
 
         public bool HasNoContentMatch(Regex pattern)
         {
-            return driverScope.HasContentMatch(pattern);
+            return driverScope.HasNoContentMatch(pattern);
         }
 
         public bool HasCss(string cssSelector)
@@ -314,12 +314,6 @@ namespace Coypu
         public string ExecuteScript(string javascript)
         {
             return driverScope.ExecuteScript(javascript);
-        }
-
-        public Session Click(Element element)
-        {
-            driverScope.Click(element);
-            return this;
         }
 
         public Session Hover(Element element)

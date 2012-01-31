@@ -265,13 +265,6 @@ namespace Coypu
         TConcrete Hover(Element element);
 
         /// <summary>
-        /// Click a previously found element
-        /// </summary>
-        /// <param name="element">The element to click</param>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete Click(Element element);
-
-        /// <summary>
         /// Query whether an element appears within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>

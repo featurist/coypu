@@ -16,7 +16,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             var innerScope = session.FindSection("some section");
 
-            driver.StubLink("some link", expectedLink, innerScope);
+            driver.StubLink("some link", expectedLink, innerScope.DriverScope);
 
             var actualLink = innerScope.FindLink("some link").Now();
 

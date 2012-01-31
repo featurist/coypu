@@ -5,145 +5,42 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
     [TestFixture]
-    public class When_querying_with_any_finder : When_inspecting
+    public class When_querying_with_any_finder : BrowserInteractionTests
     {
         [Test]
-        public void Has_queries_robustly_with_zero_timeout() 
+        public void It_reports_that_a_findable_element_exists()
         {
-            spyRobustWrapper.StubQueryResult(true, true);
+            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            driver.StubLink("Sign out", new StubElement());
 
-            Configuration.Timeout = TimeSpan.FromSeconds(21);
-
-            var queryTimeout = TimeSpan.MaxValue;
-            session.Has(session.FindLink("Sign out"));
-            ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-
-            Assert.That(queryTimeout, Is.EqualTo(TimeSpan.Zero));
-            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(21)));
+            Assert.That(session.FindLink("Sign out").Exists());
         }
 
         [Test]
-        public void Has_resets_timeout_on_error() 
+        public void It_reports_that_a_missing_element_does_not_exist()
         {
-            spyRobustWrapper.StubQueryResult(true, true);
+            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            driver.StubLink("Sign out", new StubElement());
 
-            Configuration.Timeout = TimeSpan.FromSeconds(10);
-            session.Has(new ElementScope(new AlwaysExceptionsErrorFinder(), session.DriverScope, spyRobustWrapper));
-            try 
-            {
-                ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-                Assert.Fail("Expected an ExplicitlyThrownTestException");
-            } 
-            catch (ExplicitlyThrownTestException) { }
-
-            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(10)));
+            Assert.That(session.FindLink("Sign in").Exists(), Is.EqualTo(false));
         }
 
         [Test]
-        public void Has_wraps_query_to_return_true_if_found() 
+        public void It_reports_that_a_missing_element_is_missing()
         {
-            spyRobustWrapper.StubQueryResult(true, true);
+            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            driver.StubLink("Sign out", new StubElement());
 
-            session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper));
-
-            var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-            Assert.That(deferredResult, Is.True);
+            Assert.That(session.FindLink("Sign in").Missing(), Is.EqualTo(false));
         }
 
         [Test]
-        public void Has_wraps_query_to_return_false_if_not_found() 
+        public void It_reports_that_a_findable_element_is_not_missing()
         {
-            spyRobustWrapper.StubQueryResult(true, true);
+            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            driver.StubLink("Sign out", new StubElement());
 
-            session.Has(new ElementScope(new AlwaysMissingElementFinder(), session.DriverScope, spyRobustWrapper));
-
-            var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-            Assert.That(deferredResult, Is.False);
-        }
-
-        [Test]
-        public void Has_queries_robustly_expecting_element_found_Positive_case() 
-        {
-            spyRobustWrapper.StubQueryResult(true, true);
-
-            Assert.That(session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.True);
-        }
-
-        [Test]
-        public void Has_queries_robustly_expecting_element_found_Negitive_case()
-        {
-            spyRobustWrapper.StubQueryResult(true, false);
-
-            Assert.That(session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.False);
-        }
-
-        [Test]
-        public void HasNo_queries_robustly_with_zero_timeout() 
-        {
-            spyRobustWrapper.StubQueryResult(false, true);
-
-            Configuration.Timeout = TimeSpan.FromSeconds(10);
-            var queryTimeout = TimeSpan.MaxValue;
-            session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper));
-            ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-
-            Assert.That(queryTimeout, Is.EqualTo(TimeSpan.Zero));
-        }
-
-        [Test]
-        public void HasNo_resets_timeout_on_error() 
-        {
-            spyRobustWrapper.StubQueryResult(false, true);
-
-            Configuration.Timeout = TimeSpan.FromSeconds(10);
-
-            session.HasNo(new ElementScope(new AlwaysExceptionsErrorFinder(), session.DriverScope, spyRobustWrapper));
-            try
-            {
-                ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-                Assert.Fail("Expected an ExplicitlyThrownTestException");
-            } 
-            catch (ExplicitlyThrownTestException) { }
-
-            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(10)));
-        }
-
-        [Test]
-        public void HasNo_wraps_query_to_return_true_if_found() 
-        {
-            spyRobustWrapper.StubQueryResult(false, true);
-
-            session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper));
-
-            var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-            Assert.That(deferredResult, Is.True);
-        }
-
-        [Test]
-        public void HasNo_wraps_query_to_return_false_if_not_found() 
-        {
-            spyRobustWrapper.StubQueryResult(false, true);
-
-            session.HasNo(new ElementScope(new AlwaysMissingElementFinder(), session.DriverScope, spyRobustWrapper));
-
-            var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
-            Assert.That(deferredResult, Is.False);
-        }
-
-        [Test]
-        public void HasNo_queries_robustly_reversing_result_Positive_case() 
-        {
-            spyRobustWrapper.StubQueryResult(false, true);
-
-            Assert.That(session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.False);
-        }
-
-        [Test]
-        public void HasNo_queries_robustly_reversing_result_Negitive_case() 
-        {
-            spyRobustWrapper.StubQueryResult(false, false);
-
-            Assert.That(session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.True);
+            Assert.That(session.FindLink("Sign out").Missing(), Is.EqualTo(false));
         }
 
     }
