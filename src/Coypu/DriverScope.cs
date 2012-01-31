@@ -76,7 +76,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Click(Element element)
         {
-            RetryUntilTimeout(() => driver.Click(element));
+            driver.Click(element);
             return this;
         }
 
@@ -407,10 +407,10 @@ namespace Coypu
         /// <summary>
         /// Hover the mouse over an element
         /// </summary>
-        /// <param name="findElement">A function to find the element</param>
+        /// <param name="findElement">The element to hover over</param>
         public DriverScope Hover(Element element)
         {
-            RetryUntilTimeout(() => driver.Hover(element));
+            driver.Hover(element);
             return this;
         }
 

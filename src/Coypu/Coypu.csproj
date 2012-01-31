@@ -108,6 +108,7 @@
     <Compile Include="ElementFinder.cs" />
     <Compile Include="ElementScope.cs" />
     <Compile Include="LinkFinder.cs" />
+    <Compile Include="RobustElementScope.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />
     <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />

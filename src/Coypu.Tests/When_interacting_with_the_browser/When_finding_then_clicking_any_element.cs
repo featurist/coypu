@@ -12,15 +12,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_makes_robust_call_to_find_then_click_element_on_underlying_driver()
         {
             var element = new StubElement();
-            var finderCalled = false;
             driver.StubCss("something.to click", element);
 
-            Assert.That(finderCalled, Is.False, "Finder not called robustly");
+            session.FindCss("something.to click").Click();
+
+            Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
             Assert.That(driver.ClickedElements, Is.Empty, "Click not called robustly");
 
-            spyRobustWrapper.DeferredActions.Single()();
+            spyRobustWrapper.DeferredDriverActions.Single().Act();
 
-            Assert.That(finderCalled, Is.True);
+            Assert.That(driver.FindCssRequests.Single(), Is.EqualTo("something.to click"));
             Assert.That(driver.ClickedElements, Has.Member(element));
         }
     }

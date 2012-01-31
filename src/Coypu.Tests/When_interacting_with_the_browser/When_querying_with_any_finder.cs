@@ -28,7 +28,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper.StubQueryResult(true, true);
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
-            session.Has(new ElementScope(new AlwaysExceptionsErrorFinder(), session.DriverScope));
+            session.Has(new ElementScope(new AlwaysExceptionsErrorFinder(), session.DriverScope, spyRobustWrapper));
             try 
             {
                 ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
@@ -44,7 +44,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(true, true);
 
-            session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope));
+            session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper));
 
             var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
             Assert.That(deferredResult, Is.True);
@@ -55,7 +55,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(true, true);
 
-            session.Has(new ElementScope(new AlwaysMissingElementFinder(), session.DriverScope));
+            session.Has(new ElementScope(new AlwaysMissingElementFinder(), session.DriverScope, spyRobustWrapper));
 
             var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
             Assert.That(deferredResult, Is.False);
@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(true, true);
 
-            Assert.That(session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope)), Is.True);
+            Assert.That(session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.True);
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(true, false);
 
-            Assert.That(session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope)), Is.False);
+            Assert.That(session.Has(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.False);
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
             var queryTimeout = TimeSpan.MaxValue;
-            session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope));
+            session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper));
             ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
 
             Assert.That(queryTimeout, Is.EqualTo(TimeSpan.Zero));
@@ -97,7 +97,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Configuration.Timeout = TimeSpan.FromSeconds(10);
 
-            session.HasNo(new ElementScope(new AlwaysExceptionsErrorFinder(), session.DriverScope));
+            session.HasNo(new ElementScope(new AlwaysExceptionsErrorFinder(), session.DriverScope, spyRobustWrapper));
             try
             {
                 ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
@@ -113,7 +113,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(false, true);
 
-            session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope));
+            session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper));
 
             var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
             Assert.That(deferredResult, Is.True);
@@ -124,7 +124,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(false, true);
 
-            session.HasNo(new ElementScope(new AlwaysMissingElementFinder(), session.DriverScope));
+            session.HasNo(new ElementScope(new AlwaysMissingElementFinder(), session.DriverScope, spyRobustWrapper));
 
             var deferredResult = ((Func<bool>)spyRobustWrapper.DeferredQueries[0])();
             Assert.That(deferredResult, Is.False);
@@ -135,7 +135,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(false, true);
 
-            Assert.That(session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope)), Is.False);
+            Assert.That(session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.False);
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             spyRobustWrapper.StubQueryResult(false, false);
 
-            Assert.That(session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope)), Is.True);
+            Assert.That(session.HasNo(new ElementScope(new AlwaysFindsElementFinder(), session.DriverScope, spyRobustWrapper)), Is.True);
         }
 
     }

@@ -9,11 +9,13 @@ namespace Coypu
     {
         private readonly ElementFinder elementFinder;
         private readonly DriverScope driverScope;
+        private readonly RobustWrapper robustWrapper;
 
-        public ElementScope(ElementFinder elementFinder, DriverScope driverScope)
+        public ElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper)
         {
             this.elementFinder = elementFinder;
-            this.driverScope = driverScope;
+            this.driverScope = new DriverScope(elementFinder,outerScope);
+            this.robustWrapper = robustWrapper;
         }
 
         public string Id
@@ -58,12 +60,12 @@ namespace Coypu
 
         public virtual Element Now()
         {
-            return elementFinder.Find();
+            return driverScope.Now();
         }
 
         public ElementScope Click()
         {
-            Click(Now());
+            robustWrapper.RobustlyDo(new ClickDriverAction(elementFinder, driverScope));
             return this;
         }
 
@@ -75,7 +77,7 @@ namespace Coypu
 
         public ElementScope Hover()
         {
-            Hover(Now());
+            robustWrapper.RobustlyDo(new HoverDriverAction(elementFinder,driverScope));
             return this;
         }
 
@@ -291,20 +293,40 @@ namespace Coypu
         }
     }
 
-    internal class RobustElementScope : ElementScope
+    internal class HoverDriverAction : DriverAction
     {
         private readonly ElementFinder elementFinder;
-        private readonly RobustWrapper robustWrapper;
+        private readonly DriverScope driverScope;
 
-        internal RobustElementScope(ElementFinder elementFinder, DriverScope driverScope, RobustWrapper robustWrapper) : base(elementFinder, driverScope)
+        internal HoverDriverAction(ElementFinder elementFinder, DriverScope driverScope)
         {
             this.elementFinder = elementFinder;
-            this.robustWrapper = robustWrapper;
+            this.driverScope = driverScope;
         }
 
-        public override Element Now()
+        public void Act()
         {
-            return robustWrapper.RobustlyFind(elementFinder);
+            var element = elementFinder.Find();
+            driverScope.Hover(element);
+        }
+    }
+
+    internal class ClickDriverAction : DriverAction
+    {
+        private readonly ElementFinder elementFinder;
+        private readonly DriverScope driverScope;
+
+
+        internal ClickDriverAction(ElementFinder elementFinder, DriverScope driverScope)
+        {
+            this.elementFinder = elementFinder;
+            this.driverScope = driverScope;
+        }
+
+        public void Act()
+        {
+            var element = elementFinder.Find();
+            driverScope.Click(element);
         }
     }
 }

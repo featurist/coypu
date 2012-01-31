@@ -12,8 +12,9 @@ namespace Coypu.Tests.TestDoubles
         public IList<DriverAction> DeferredDriverActions = new List<DriverAction>();
         public IList<object> DeferredQueries = new List<object>();
         public IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
-        
-        private readonly IDictionary<Type,object> stubbedResults = new Dictionary<Type, object>();
+
+        private readonly IDictionary<Type, object> stubbedResults = new Dictionary<Type, object>();
+        private readonly IDictionary<Element, object> stubbedFinds = new Dictionary<Element, object>();
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
 
         public void Robustly(Action action)

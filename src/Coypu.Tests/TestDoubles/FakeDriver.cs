@@ -39,10 +39,9 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
         private readonly IList<string> findButtonRequests = new List<string>();
         private readonly IList<string> findLinkRequests = new List<string>();
-        private Element scope;
+        private readonly IList<string> findCssRequests = new List<string>();
         private IList<Cookie> stubbedCookies;
         private Uri stubbedLocation;
-        private IList<Element> scopes = new List<Element>();
         private TimeSpan lastUsedTimeout;
         private readonly IList<ScopedStubElement> scopedLinks = new List<ScopedStubElement>();
 
@@ -128,10 +127,10 @@ namespace Coypu.Tests.TestDoubles
 
             return stubbedLinks.ContainsKey(linkText) 
                 ? stubbedLinks[linkText] 
-                : FindScopedElement(scopedLinks, linkText);
+                : FindScopedElement(scopedLinks, linkText, scope);
         }
 
-        private Element FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator)
+        private Element FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator, DriverScope scope)
         {
             return (Element) collection.Single(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
         }
@@ -252,22 +251,6 @@ namespace Coypu.Tests.TestDoubles
             ModalDialogsCancelled++;
         }
 
-        public void SetScope(Element newScope)
-        {
-            scope = newScope;
-            scopes.Add(scope);
-        }
-
-        public Element Scope
-        {
-            get { return scope; }
-        }
-
-        public void ClearScope()
-        {
-            scope = null;
-        }
-
         public string ExecuteScript(string javascript)
         {
             return stubbedExecuteScriptResults[javascript];
@@ -312,14 +295,15 @@ namespace Coypu.Tests.TestDoubles
 
         public int ModalDialogsCancelled { get; private set; }
 
-        public IList<Element> Scopes
-        {
-            get { return scopes; }
-        }
 
         public object LastUsedTimeout
         {
             get { return lastUsedTimeout; }
+        }
+
+        public IList<string> FindCssRequests
+        {
+            get { return findCssRequests; }
         }
 
         public bool HasContent(string text, DriverScope scope)
@@ -351,6 +335,7 @@ namespace Coypu.Tests.TestDoubles
 
         public Element FindCss(string cssSelector, DriverScope scope)
         {
+            FindCssRequests.Add(cssSelector);
             return stubbedCssResults[cssSelector];
         }
 
@@ -419,7 +404,7 @@ namespace Coypu.Tests.TestDoubles
             stubbedLocation = location;
         }
 
-        public void StubLink(string locator, StubElement section, StubElement scope)
+        public void StubLink(string locator, StubElement section, DriverScope scope)
         {
             scopedLinks.Add(new ScopedStubElement {Locator = locator, Element = section, Scope = scope});
         }
@@ -429,6 +414,6 @@ namespace Coypu.Tests.TestDoubles
     {
         public string Locator;
         public StubElement Element;
-        public StubElement Scope;
+        public DriverScope Scope;
     }
 }
