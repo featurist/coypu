@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'sinatra'
 
 get "/resource/:value" do
