@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Coypu.Drivers.Tests")]
-[assembly: AssemblyCopyright("Copyright © ITV plc 2011")]
+[assembly: AssemblyCopyright("Copyright © Adrian Longley,ITV plc and contributors 2011-2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
