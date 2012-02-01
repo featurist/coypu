@@ -1,6 +1,6 @@
 using System;
 
-namespace Coypu
+namespace Coypu.Finders
 {
     public abstract class ElementFinder
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Finders;
 using Coypu.Robustness;
 
 namespace Coypu
@@ -516,6 +517,11 @@ namespace Coypu
         {
             this.IndividualTimeout = timeout;
             return this;
+        }
+
+        public bool Exists()
+        {
+            throw new NotImplementedException();
         }
 
         protected TimeSpan IndividualTimeout

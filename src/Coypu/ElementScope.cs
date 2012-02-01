@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Actions;
+using Coypu.Finders;
+using Coypu.Queries;
 using Coypu.Robustness;
 
 namespace Coypu
@@ -290,42 +293,10 @@ namespace Coypu
             DriverScope.WithIndividualTimeout(timeout);
             return this;
         }
-    }
 
-    internal class HoverDriverAction : DriverAction
-    {
-        private readonly ElementFinder elementFinder;
-        private readonly DriverScope driverScope;
-
-        internal HoverDriverAction(ElementFinder elementFinder, DriverScope driverScope)
+        public bool Exists()
         {
-            this.elementFinder = elementFinder;
-            this.driverScope = driverScope;
-        }
-
-        public void Act()
-        {
-            var element = elementFinder.Find();
-            driverScope.Hover(element);
-        }
-    }
-
-    internal class ClickDriverAction : DriverAction
-    {
-        private readonly ElementFinder elementFinder;
-        private readonly DriverScope driverScope;
-
-
-        internal ClickDriverAction(ElementFinder elementFinder, DriverScope driverScope)
-        {
-            this.elementFinder = elementFinder;
-            this.driverScope = driverScope;
-        }
-
-        public void Act()
-        {
-            var element = elementFinder.Find();
-            driverScope.Click(element);
+            return robustWrapper.Query(new ElementExistsQuery(driverScope));
         }
     }
 }

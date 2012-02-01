@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Coypu.Finders;
+using Coypu.Queries;
 using Coypu.Robustness;
 
 namespace Coypu.Tests.TestDoubles
@@ -32,6 +34,12 @@ namespace Coypu.Tests.TestDoubles
         {
             DeferredQueries.Add(query);
             return (T)stubbedQueryResult[expecting];
+        }
+
+        public bool Query(ElementQuery query)
+        {
+            //TODO
+            throw new NotImplementedException();
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)

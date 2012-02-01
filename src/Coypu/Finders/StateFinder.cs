@@ -2,7 +2,7 @@
 using System.Linq;
 using Coypu.Robustness;
 
-namespace Coypu
+namespace Coypu.Finders
 {
     internal class StateFinder
     {

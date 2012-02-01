@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using Coypu.Finders;
+using Coypu.Queries;
 
 namespace Coypu.Robustness
 {
@@ -23,6 +25,11 @@ namespace Coypu.Robustness
         public T Query<T>(Func<T> query, T expecting)
         {
             return Robustly(query, expecting);
+        }
+
+        public bool Query(ElementQuery query)
+        {
+            throw new NotImplementedException();
         }
 
         public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)

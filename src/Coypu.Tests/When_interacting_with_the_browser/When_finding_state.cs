@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Finders;
+using Coypu.Queries;
 using Coypu.Robustness;
 using Coypu.Tests.TestBuilders;
 using NUnit.Framework;
@@ -154,6 +156,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public T Query<T>(Func<T> query, T expecting)
         {
             return query();
+        }
+
+        public bool Query(ElementQuery query)
+        {
+            try
+            {
+                query.Run();
+            }
+            catch (Exception)
+            {
+                return query.ExpectingResult == false;
+            }
+            return query.ExpectingResult == true;
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)

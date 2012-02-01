@@ -404,9 +404,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedLocation = location;
         }
 
-        public void StubLink(string locator, StubElement section, DriverScope scope)
+        public void StubLink(string locator, StubElement element, DriverScope scope)
         {
-            scopedLinks.Add(new ScopedStubElement {Locator = locator, Element = section, Scope = scope});
+            scopedLinks.Add(new ScopedStubElement {Locator = locator, Element = element, Scope = scope});
         }
     }
 

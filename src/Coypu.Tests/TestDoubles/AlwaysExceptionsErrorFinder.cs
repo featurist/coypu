@@ -1,6 +1,8 @@
+using Coypu.Finders;
+
 namespace Coypu.Tests.TestDoubles
 {
-    public class AlwaysExceptionsErrorFinder : ElementFinder
+    internal class AlwaysExceptionsErrorFinder : ElementFinder
     {
         public AlwaysExceptionsErrorFinder()
             : base(null, null, null)
@@ -13,7 +15,7 @@ namespace Coypu.Tests.TestDoubles
         }
     }
 
-    public class AlwaysFindsElementFinder : ElementFinder
+    internal class AlwaysFindsElementFinder : ElementFinder
     {
         private readonly Element element;
 
@@ -32,7 +34,7 @@ namespace Coypu.Tests.TestDoubles
         }
     }
 
-    public class AlwaysMissingElementFinder : ElementFinder
+    internal class AlwaysMissingElementFinder : ElementFinder
     {
         public AlwaysMissingElementFinder() : base(null,null,null)
         {

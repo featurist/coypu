@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Finders;
 using Coypu.Robustness;
 using Coypu.WebRequests;
 

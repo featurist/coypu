@@ -1,3 +1,4 @@
+using Coypu.Finders;
 using Coypu.Robustness;
 
 namespace Coypu

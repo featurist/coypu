@@ -1,4 +1,4 @@
-namespace Coypu
+namespace Coypu.Finders
 {
     internal class DocumentElementFinder : ElementFinder
     {

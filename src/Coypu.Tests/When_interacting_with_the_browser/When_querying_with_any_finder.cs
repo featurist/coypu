@@ -43,5 +43,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(session.FindLink("Sign out").Missing(), Is.EqualTo(false));
         }
 
+        [Test]
+        public void It_checks_for_missing_elements_with_a_ElementMissingQuery()
+        {
+            Assert.Fail("pending");
+        }
+        [Test]
+        public void It_checks_for_existing_elements_with_an_ElementExiststQuery()
+        {
+            Assert.Fail("pending");
+        }
+
     }
 }

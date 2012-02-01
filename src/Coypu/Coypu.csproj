@@ -85,10 +85,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\ClickDriverAction.cs" />
+    <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Browser.cs" />
-    <Compile Include="DocumentElementFinder.cs" />
+    <Compile Include="CssFinder.cs" />
+    <Compile Include="Finders\FieldFinder.cs" />
+    <Compile Include="Finders\FieldsetFinder.cs" />
+    <Compile Include="Finders\DocumentElementFinder.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="DriverScope.cs" />
     <Compile Include="Drivers\Browser.cs" />
@@ -105,11 +110,18 @@
     <Compile Include="Drivers\Selenium\Scoping.cs" />
     <Compile Include="Drivers\Selenium\TextMatcher.cs" />
     <Compile Include="Drivers\XPath.cs" />
-    <Compile Include="ElementFinder.cs" />
+    <Compile Include="Actions\HoverDriverAction.cs" />
+    <Compile Include="Finders\IdFinder.cs" />
+    <Compile Include="Queries\ElementQuery.cs" />
+    <Compile Include="Queries\ElementExistsQuery.cs" />
+    <Compile Include="Finders\ElementFinder.cs" />
+    <Compile Include="Queries\ElementMissingQuery.cs" />
     <Compile Include="ElementScope.cs" />
-    <Compile Include="LinkFinder.cs" />
+    <Compile Include="Finders\LinkFinder.cs" />
+    <Compile Include="Queries\Query.cs" />
     <Compile Include="RobustElementScope.cs" />
     <Compile Include="Scope.cs" />
+    <Compile Include="Finders\SectionFinder.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />
     <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />
     <Compile Include="FillInWith.cs">
@@ -129,13 +141,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robustness\RetryUntilTimeoutRobustWrapper.cs" />
     <Compile Include="State.cs" />
-    <Compile Include="StateFinder.cs" />
+    <Compile Include="Finders\StateFinder.cs" />
     <Compile Include="TemporaryTimeouts.cs" />
     <Compile Include="CurrentConfigurationUrlBuilder.cs" />
     <Compile Include="WebRequests\WebClientWithCookies.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WebRequests\WebRequestCookieInjector.cs" />
+    <Compile Include="Finders\XPathFinder.cs" />
     <Compile Include="ZeroTimeoutQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
