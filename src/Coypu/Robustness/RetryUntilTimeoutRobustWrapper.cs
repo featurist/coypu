@@ -27,7 +27,7 @@ namespace Coypu.Robustness
             return Robustly(query, expecting);
         }
 
-        public bool Query(ElementQuery query)
+        public bool Query(ElementPresenceQuery query)
         {
             throw new NotImplementedException();
         }

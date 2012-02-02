@@ -112,7 +112,7 @@
     <Compile Include="Drivers\XPath.cs" />
     <Compile Include="Actions\HoverDriverAction.cs" />
     <Compile Include="Finders\IdFinder.cs" />
-    <Compile Include="Queries\ElementQuery.cs" />
+    <Compile Include="Queries\ElementPresenceQuery.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />
     <Compile Include="Finders\ElementFinder.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />

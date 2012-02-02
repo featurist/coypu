@@ -132,7 +132,12 @@ namespace Coypu.Tests.TestDoubles
 
         private Element FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator, DriverScope scope)
         {
-            return collection.Single(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope).Element;
+            var element = collection.FirstOrDefault(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
+
+            if (element != null)
+                return element.Element;
+
+            throw new MissingHtmlException("Element not found: " + locator);
         }
 
         public Element FindField(string locator, DriverScope scope)
@@ -251,6 +256,14 @@ namespace Coypu.Tests.TestDoubles
             ModalDialogsCancelled++;
         }
 
+        private Element Find(IDictionary<string, Element> dictionary, string locator)
+        {
+            if (dictionary.ContainsKey(locator))
+                return dictionary[locator];
+
+            throw new MissingHtmlException("Element not found: " + locator);
+        }
+
         public string ExecuteScript(string javascript)
         {
             return stubbedExecuteScriptResults[javascript];
@@ -258,22 +271,22 @@ namespace Coypu.Tests.TestDoubles
 
         public Element FindFieldset(string locator, DriverScope scope)
         {
-            return stubbedFieldsets[locator];
+            return Find(stubbedFieldsets,locator);
         }
 
         public Element FindSection(string locator, DriverScope scope)
         {
-            return stubbedSections[locator];
+            return Find(stubbedSections,locator);
         }
 
         public Element FindId(string id, DriverScope scope)
         {
-            return stubbedIDs[id];
+            return Find(stubbedIDs,id);
         }
 
         public Element FindIFrame(string locator, DriverScope scope)
         {
-            return stubbedIFrames[locator];
+            return Find(stubbedIFrames,locator);
         }
 
         public void Set(Element element, string value)
@@ -336,12 +349,12 @@ namespace Coypu.Tests.TestDoubles
         public Element FindCss(string cssSelector, DriverScope scope)
         {
             FindCssRequests.Add(cssSelector);
-            return stubbedCssResults[cssSelector];
+            return Find(stubbedCssResults,cssSelector);
         }
 
         public Element FindXPath(string xpath, DriverScope scope)
         {
-            return stubbedXPathResults[xpath];
+            return Find(stubbedXPathResults,xpath);
         }
 
         public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)

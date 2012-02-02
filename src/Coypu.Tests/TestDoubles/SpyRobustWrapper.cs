@@ -36,7 +36,7 @@ namespace Coypu.Tests.TestDoubles
             return (T)stubbedQueryResult[expecting];
         }
 
-        public bool Query(ElementQuery query)
+        public bool Query(ElementPresenceQuery query)
         {
             //TODO
             throw new NotImplementedException();

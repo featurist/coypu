@@ -141,8 +141,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
     public class ImmediateSingleExecutionFakeRobustWrapper : RobustWrapper
     {
-        #region RobustWrapper Members
-
         public void Robustly(Action action)
         {
             action();
@@ -158,17 +156,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             return query();
         }
 
-        public bool Query(ElementQuery query)
+        public bool Query(ElementPresenceQuery query)
         {
-            try
-            {
-                query.Run();
-            }
-            catch (Exception)
-            {
-                return query.ExpectingResult == false;
-            }
-            return query.ExpectingResult == true;
+            query.Run();
+            return query.ExpectedOutcomeFound;
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
@@ -185,7 +176,5 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             action.Act();
         }
-
-        #endregion
     }
 }

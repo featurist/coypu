@@ -1,12 +1,12 @@
 namespace Coypu.Queries
 {
-    internal class ElementMissingQuery : ElementQuery
+    internal class ElementMissingQuery : ElementPresenceQuery
     {
         public ElementMissingQuery(DriverScope driverScope) : base(driverScope)
         {
         }
 
-        public override bool ExpectingResult
+        public override bool ExpectedResult
         {
             get { return false; }
         }

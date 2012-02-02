@@ -298,5 +298,10 @@ namespace Coypu
         {
             return robustWrapper.Query(new ElementExistsQuery(driverScope));
         }
+
+        public bool Missing()
+        {
+            return robustWrapper.Query(new ElementMissingQuery(driverScope));
+        }
     }
 }

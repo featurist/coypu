@@ -1,5 +1,4 @@
-﻿using System;
-using Coypu.Tests.TestDoubles;
+﻿using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -31,7 +30,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement());
 
-            Assert.That(session.FindLink("Sign in").Missing(), Is.EqualTo(false));
+            Assert.That(session.FindLink("Sign in").Missing());
         }
 
         [Test]
@@ -44,12 +43,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void It_checks_for_missing_elements_with_a_ElementMissingQuery()
+        public void It_checks_for_missing_elements_with_a_RobustQuery()
         {
             Assert.Fail("pending");
         }
         [Test]
-        public void It_checks_for_existing_elements_with_an_ElementExiststQuery()
+        public void It_checks_for_existing_elements_with_a_RobustQuery()
         {
             Assert.Fail("pending");
         }
