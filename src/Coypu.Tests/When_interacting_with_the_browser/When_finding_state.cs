@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Coypu.Finders;
-using Coypu.Queries;
-using Coypu.Robustness;
 using Coypu.Tests.TestBuilders;
+using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -136,45 +134,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             {
                 Assert.That(e.Message, Is.EqualTo("None of the given states was reached within the configured timeout."));
             }
-        }
-    }
-
-    public class ImmediateSingleExecutionFakeRobustWrapper : RobustWrapper
-    {
-        public void Robustly(Action action)
-        {
-            action();
-        }
-
-        public TResult Robustly<TResult>(Func<TResult> function)
-        {
-            return function();
-        }
-
-        public T Query<T>(Func<T> query, T expecting)
-        {
-            return query();
-        }
-
-        public bool Query(ElementPresenceQuery query)
-        {
-            query.Run();
-            return query.ExpectedOutcomeFound;
-        }
-
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
-        {
-            tryThis();
-        }
-
-        public Element RobustlyFind(ElementFinder elementFinder)
-        {
-            return elementFinder.Find();
-        }
-
-        public void RobustlyDo(DriverAction action)
-        {
-            action.Act();
         }
     }
 }

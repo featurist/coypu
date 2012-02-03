@@ -21,7 +21,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Browser.EndSession();
         }
 
-        [Test]
+
+        [Test] // Next: Timeout needs to be supplied from driverScope in each robustWrapper call
         public void It_uses_individual_timeout_for_action_then_resets() 
         {
             var defaultTimeout = TimeSpan.FromSeconds(123);

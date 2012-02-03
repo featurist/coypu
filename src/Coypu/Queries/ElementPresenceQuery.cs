@@ -23,10 +23,5 @@ namespace Coypu.Queries
                 Result = false;
             }
         }
-
-        public bool ExpectedOutcomeFound
-        {
-            get { return Result == ExpectedResult; }
-        }
     }
 }

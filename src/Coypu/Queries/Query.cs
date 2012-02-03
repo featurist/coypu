@@ -1,6 +1,6 @@
 namespace Coypu.Queries
 {
-    internal interface Query<out TReturn>
+    public interface Query<out TReturn>
     {
         void Run();
         TReturn ExpectedResult { get; }

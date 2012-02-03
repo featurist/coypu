@@ -519,17 +519,7 @@ namespace Coypu
             return this;
         }
 
-        public bool Exists()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected TimeSpan IndividualTimeout
-        {
-            get {return _individualTimeout;}
-            private set { throw new NotImplementedException(); }
-        }
-
+        protected TimeSpan IndividualTimeout { get; private set; }
 
         public Element Now()
         {

@@ -1,4 +1,5 @@
-﻿using Coypu.Tests.TestDoubles;
+﻿using Coypu.Queries;
+using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -43,15 +44,37 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void It_checks_for_missing_elements_with_a_RobustQuery()
-        {
-            Assert.Fail("pending");
-        }
-        [Test]
         public void It_checks_for_existing_elements_with_a_RobustQuery()
         {
-            Assert.Fail("pending");
+            driver.StubLink("Sign out", new StubElement());
+            session.FindLink("Sign in").Exists();
+            session.FindLink("Sign out").Exists();
+
+            var firstQuery = (ElementExistsQuery) spyRobustWrapper.QueriesRan[0];
+            var secondQuery = (ElementExistsQuery) spyRobustWrapper.QueriesRan[1];
+
+            firstQuery.Run();
+            Assert.That(firstQuery.Result, Is.False);
+
+            secondQuery.Run();
+            Assert.That(secondQuery.Result, Is.True);
         }
 
+        [Test]
+        public void It_checks_for_missing_elements_with_a_RobustQuery()
+        {
+            driver.StubLink("Sign out", new StubElement());
+            session.FindLink("Sign in").Missing();
+            session.FindLink("Sign out").Missing();
+
+            var firstQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan[0];
+            var secondQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan[1];
+
+            firstQuery.Run();
+            Assert.That(firstQuery.Result, Is.True);
+
+            secondQuery.Run();
+            Assert.That(secondQuery.Result, Is.False);
+        }
     }
 }

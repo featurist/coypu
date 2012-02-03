@@ -309,7 +309,7 @@ namespace Coypu.Tests.TestDoubles
         public int ModalDialogsCancelled { get; private set; }
 
 
-        public object LastUsedTimeout
+        public TimeSpan LastUsedTimeout
         {
             get { return lastUsedTimeout; }
         }

@@ -8,16 +8,17 @@ namespace Coypu.Tests.TestDoubles
 {
     public class SpyRobustWrapper : RobustWrapper
     {
-        public IList<Action> DeferredActions = new List<Action>();
-        public IList<object> DeferredFunctions = new List<object>();
-        public IList<ElementFinder> DeferredFinders = new List<ElementFinder>();
-        public IList<DriverAction> DeferredDriverActions = new List<DriverAction>();
-        public IList<object> DeferredQueries = new List<object>();
-        public IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
+        internal IList<Action> DeferredActions = new List<Action>();
+        internal IList<object> DeferredFunctions = new List<object>();
+        internal IList<ElementFinder> DeferredFinders = new List<ElementFinder>();
+        internal IList<DriverAction> DeferredDriverActions = new List<DriverAction>();
+        internal IList<object> DeferredQueries = new List<object>();
+        internal IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
 
         private readonly IDictionary<Type, object> stubbedResults = new Dictionary<Type, object>();
         private readonly IDictionary<Element, object> stubbedFinds = new Dictionary<Element, object>();
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
+        internal IList<object> QueriesRan = new List<object>();
 
         public void Robustly(Action action)
         {
@@ -36,10 +37,10 @@ namespace Coypu.Tests.TestDoubles
             return (T)stubbedQueryResult[expecting];
         }
 
-        public bool Query(ElementPresenceQuery query)
+        public T Query<T>(Query<T> query)
         {
-            //TODO
-            throw new NotImplementedException();
+            QueriesRan.Add(query);
+            return default(T);
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
