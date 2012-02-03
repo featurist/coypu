@@ -20,11 +20,16 @@ namespace Coypu
 
         private bool consideringInvisibleElements;
 
-        private TimeSpan _individualTimeout;
+        private TimeSpan individualTimeout;
 
         public bool ConsiderInvisibleElements
         {
             get { return consideringInvisibleElements; }
+        }
+
+        internal TimeSpan IndividualTimeout
+        {
+            get { return individualTimeout; }
         }
 
         internal DriverScope(ElementFinder finder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
@@ -152,7 +157,7 @@ namespace Coypu
         /// <returns>With</returns>
         public FillInWith FillIn(string locator)
         {
-            return new FillInWith(locator, driver, robustWrapper);
+            return new FillInWith(locator, driver, robustWrapper,this);
         }
 
         /// <summary>
@@ -515,11 +520,10 @@ namespace Coypu
 
         public DriverScope WithIndividualTimeout(TimeSpan timeout)
         {
-            this.IndividualTimeout = timeout;
+            this.individualTimeout = timeout;
             return this;
         }
 
-        protected TimeSpan IndividualTimeout { get; private set; }
 
         public Element Now()
         {

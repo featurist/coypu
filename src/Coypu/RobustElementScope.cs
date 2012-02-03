@@ -8,15 +8,16 @@ namespace Coypu
         private readonly ElementFinder elementFinder;
         private readonly RobustWrapper robustWrapper;
 
-        internal RobustElementScope(ElementFinder elementFinder, DriverScope driverScope, RobustWrapper robustWrapper)
-            : base(elementFinder, driverScope, robustWrapper)
+        internal RobustElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper)
+            : base(elementFinder, outerScope, robustWrapper)
         {
             this.elementFinder = elementFinder;
             this.robustWrapper = robustWrapper;
-        }
+        }   
 
         public override Element Now()
         {
+            elementFinder.Timeout = DriverScope.IndividualTimeout;
             return robustWrapper.RobustlyFind(elementFinder);
         }
     }

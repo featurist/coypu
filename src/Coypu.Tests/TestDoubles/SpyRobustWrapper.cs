@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Coypu.Finders;
 using Coypu.Queries;
 using Coypu.Robustness;
@@ -15,7 +16,7 @@ namespace Coypu.Tests.TestDoubles
         internal IList<object> DeferredQueries = new List<object>();
         internal IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
 
-        private readonly IDictionary<Type, object> stubbedResults = new Dictionary<Type, object>();
+        private readonly IList<object> stubbedResults = new List<object>();
         private readonly IDictionary<Element, object> stubbedFinds = new Dictionary<Element, object>();
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
         internal IList<object> QueriesRan = new List<object>();
@@ -28,7 +29,7 @@ namespace Coypu.Tests.TestDoubles
         public TResult Robustly<TResult>(Func<TResult> function)
         {
             DeferredFunctions.Add(function);
-            return (TResult)stubbedResults[typeof(TResult)];
+            return stubbedResults.OfType<TResult>().FirstOrDefault();
         }
 
         public T Query<T>(Func<T> query, T expecting)
@@ -51,7 +52,7 @@ namespace Coypu.Tests.TestDoubles
         public Element RobustlyFind(ElementFinder elementFinder)
         {
             DeferredFinders.Add(elementFinder);
-            return (Element) stubbedResults[typeof (Element)];
+            return stubbedResults.OfType<Element>().FirstOrDefault();
         }
 
         public void RobustlyDo(DriverAction action)
@@ -59,9 +60,9 @@ namespace Coypu.Tests.TestDoubles
             DeferredDriverActions.Add(action);
         }
 
-        public void AlwaysReturnFromRobustly(Type type, object result)
+        public void AlwaysReturnFromRobustly<T>(T result)
         {
-            stubbedResults.Add(type,result);
+            stubbedResults.Add(result);
         }
 
         public void StubQueryResult<T>(T expected, T result)

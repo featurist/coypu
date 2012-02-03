@@ -63,7 +63,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var expectedImmediateResult = new StubElement();
             var expectedDeferredResult = new StubElement();
 
-            spyRobustWrapper.AlwaysReturnFromRobustly(typeof(Element), expectedImmediateResult);
+            spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult);
             stub(locator, expectedDeferredResult);
 
             var actualImmediateResult = subject(locator).Now();

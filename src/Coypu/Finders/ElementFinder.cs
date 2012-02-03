@@ -5,16 +5,17 @@ namespace Coypu.Finders
     public abstract class ElementFinder
     {
         protected readonly Driver Driver;
-        protected readonly string Locator;
+        private readonly string _locator;
         protected readonly DriverScope Scope;
 
         protected ElementFinder(Driver driver, string locator, DriverScope scope)
         {
             Driver = driver;
-            Locator = locator;
+            _locator = locator;
             Scope = scope;
         }
 
+        internal string Locator { get { return _locator; } }
         internal abstract Element Find();
         internal TimeSpan Timeout { get; set; }
     }

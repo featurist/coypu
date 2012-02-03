@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void RobustFunction_is_exposed_on_the_session()
         {
-            spyRobustWrapper.AlwaysReturnFromRobustly(typeof(string), "immediate result");
+            spyRobustWrapper.AlwaysReturnFromRobustly("immediate result");
 
             Func<string> function = () => "The expected result";
             
