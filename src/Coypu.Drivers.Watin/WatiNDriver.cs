@@ -15,32 +15,27 @@ namespace Coypu.Drivers.Watin
     {
         readonly string[] sectionTagNames = new[] { "SECTION", "DIV" };
         readonly string[] headerTagNames = new[] { "H1", "H2", "H3", "H4", "H5", "H6" };
-        public bool Disposed { get; private set; }
 
-        private WatiN.Core.Browser watinInstance;
+        private readonly ElementFinder elementFinder;
+        private readonly ButtonFinder buttonFinder;
+
         private DialogHandler watinDialogHandler;
 
-        private WatiN.Core.Browser Watin 
-        { 
-            get 
-            {
-                return watinInstance ?? (watinInstance = NewDriver());
-            }
-        }
-
-        private WatiN.Core.Browser NewDriver()
+        public WatiNDriver()
         {
+            if (Configuration.Browser != Browser.InternetExplorer)
+                throw new BrowserNotSupportedException(Configuration.Browser, GetType());
+
             Settings.AutoMoveMousePointerToTopLeft = false;
 
-            WatiN.Core.Browser browser;
-            switch (Configuration.Browser)
-            {
-                case (Browser.InternetExplorer):
-                    browser = new IEWithDialogWaiter();
-                    break;
-                default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, GetType());
-            }
+            Watin = CreateBrowser();
+            elementFinder = new ElementFinder(this);
+            buttonFinder = new ButtonFinder(elementFinder, Watin);
+        }
+
+        private WatiN.Core.Browser CreateBrowser()
+        {
+            var browser = new IEWithDialogWaiter();
 
             watinDialogHandler = new DialogHandler();
             browser.AddDialogHandler(watinDialogHandler);
@@ -48,12 +43,14 @@ namespace Coypu.Drivers.Watin
             return browser;
         }
 
+        private WatiN.Core.Browser Watin { get; set; }
+
         public void SetScope(Func<Element> find)
         {
             Scope = (WatiN.Core.Element)find().Native;
         }
 
-        private WatiN.Core.Element Scope { get; set; }
+        public WatiN.Core.Element Scope { get; set; }
 
         public void ClearScope()
         {
@@ -144,19 +141,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindButton(string locator)
         {
-            var button = FindFirst(Watin.Buttons, e => TextMatches(e,locator) ||
-                                                       e.Id == locator ||
-                                                       e.Name == locator ||
-                                                       e.Value == locator);
-            if (button == null)
-            {
-                var buttonTags = Watin.Elements.Filter(e => e.TagName == "BUTTON");
-                button = FindFirst(buttonTags, e => TextMatches(e,locator) ||
-                                                    e.Id == locator ||
-                                                    e.Name == locator);
-            }
-
-            return BuildElement(button, "Failed to find button with text, id or name: " + locator);
+            return BuildElement(buttonFinder.FindButton(locator), "Failed to find button with text, id or name: " + locator);
         }
 
         private bool TextMatches(WatiN.Core.Element element, string expectedText)
@@ -379,7 +364,7 @@ namespace Coypu.Drivers.Watin
 
         public Uri Location
         {
-            get { return watinInstance.Uri; }
+            get { return Watin.Uri; }
         }
 
         public bool ConsiderInvisibleElements
@@ -387,6 +372,8 @@ namespace Coypu.Drivers.Watin
             get { throw new NotImplementedException("ConsiderInvisibleElements getter not yet implemented in WatiNDriver"); }
             set { throw new NotImplementedException("ConsiderInvisibleElements setter not yet implemented in WatiNDriver"); }
         }
+
+        public bool Disposed { get; private set; }
 
         public void Dispose()
         {
