@@ -55,6 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DialogHandler.cs" />
+    <Compile Include="IEWithDialogWaiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WatiNDriver.cs" />
     <Compile Include="WatiNElement.cs" />

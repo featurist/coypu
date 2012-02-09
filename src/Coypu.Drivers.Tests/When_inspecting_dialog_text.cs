@@ -11,7 +11,7 @@ namespace Coypu.Drivers.Tests
                 using (driver)
                 {
                     driver.Click(driver.FindLink("Trigger an alert"));
-                    driver.HasDialog("You have triggered an alert and this is the text.");
+                    driver.HasDialog("You have triggered an alert and this is the text.").should_be_true();
                     driver.HasDialog("You have triggered a different alert and this is the different text.").should_be_false();
                 }
             };
@@ -21,7 +21,7 @@ namespace Coypu.Drivers.Tests
                 using (driver)
                 {
                     driver.Click(driver.FindLink("Trigger a confirm"));
-                    driver.HasDialog("You have triggered a confirm and this is the text.");
+                    driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
                     driver.HasDialog("You have triggered a different confirm and this is the different text.").should_be_false();
                 }
             };

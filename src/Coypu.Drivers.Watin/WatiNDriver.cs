@@ -17,24 +17,34 @@ namespace Coypu.Drivers.Watin
         public bool Disposed { get; private set; }
 
         private WatiN.Core.Browser watinInstance;
+        private DialogHandler watinDialogHandler;
 
         private WatiN.Core.Browser Watin 
         { 
             get 
-            { 
+            {
                 return watinInstance ?? (watinInstance = NewDriver());
             }
         }
 
         private WatiN.Core.Browser NewDriver()
         {
+            Settings.AutoMoveMousePointerToTopLeft = false;
+
+            WatiN.Core.Browser browser;
             switch (Configuration.Browser)
             {
                 case (Browser.InternetExplorer):
-                    return new IE();
+                    browser = new IEWithDialogWaiter();
+                    break;
                 default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, this.GetType());
+                    throw new BrowserNotSupportedException(Configuration.Browser, GetType());
             }
+
+            watinDialogHandler = new DialogHandler();
+            browser.AddDialogHandler(watinDialogHandler);
+
+            return browser;
         }
 
         public void SetScope(Func<Element> find)
@@ -246,7 +256,11 @@ namespace Coypu.Drivers.Watin
 
         public void Click(Element element)
         {
-            WatiNElement(element).Click();
+            // If we use Click, then we can get a deadlock if IE is displaying a modal dialog.
+            // (Yay COM STA!) Our override of the IE class makes sure the WaitForComplete will
+            // check to see if the main window is disabled before continuing with the normal wait
+            WatiNElement(element).ClickNoWait();
+            Watin.WaitForComplete();
         }
 
         private WatiN.Core.Element WatiNElement(Element element)
@@ -319,47 +333,48 @@ namespace Coypu.Drivers.Watin
 
         public bool HasDialog(string withText)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            watinDialogHandler.WaitUntilExists();
+            return watinDialogHandler.Message == withText;
         }
 
         public void AcceptModalDialog()
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("AcceptModalDialog not yet implemented in WatiNDriver");
         }
 
         public void CancelModalDialog()
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("CancelModalDialog not yet implemented in WatiNDriver");
         }
 
         public bool HasCss(string cssSelector)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("HasCss not yet implemented in WatiNDriver");
         }
 
         public bool HasXPath(string xpath)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("HasXPath not yet implemented in WatiNDriver");
         }
 
         public Element FindCss(string cssSelector)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("FindCss not yet implemented in WatiNDriver");
         }
 
         public Element FindXPath(string xpath)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("FindXPath not yet implemented in WatiNDriver");
         }
 
         public IEnumerable<Element> FindAllCss(string cssSelector)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("FindAllCss not yet implemented in WatiNDriver");
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("FindAllXPath not yet implemented in WatiNDriver");
         }
 
         public Uri Location
@@ -369,12 +384,13 @@ namespace Coypu.Drivers.Watin
 
         public bool ConsiderInvisibleElements
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { throw new NotImplementedException("ConsiderInvisibleElements getter not yet implemented in WatiNDriver"); }
+            set { throw new NotImplementedException("ConsiderInvisibleElements setter not yet implemented in WatiNDriver"); }
         }
 
         public void Dispose()
         {
+            watinDialogHandler.Dispose();
             Watin.Dispose();
             Disposed = true;
         }
