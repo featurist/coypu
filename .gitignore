@@ -4,9 +4,7 @@ deploy
 deploy/*
 temp/
 _ReSharper.*
-*.ReSharper.user
-*.csproj.user
-*.resharper.user
+*.user
 *.resharper
 *.suo
 *.cache
