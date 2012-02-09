@@ -21,7 +21,11 @@ namespace Coypu.Drivers.Watin
 
         public override string Text
         {
-            get { return NativeWatiNElement.Text ?? NativeWatiNElement.OuterText; }
+            get
+            {
+                var text = NativeWatiNElement.Text ?? NativeWatiNElement.OuterText;
+                return text != null ? text.Trim() : null;
+            }
         }
 
         public override string Value
