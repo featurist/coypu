@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+
 using WatiN.Core;
 using WatiN.Core.Constraints;
 using WatiN.Core.Exceptions;
@@ -333,18 +334,17 @@ namespace Coypu.Drivers.Watin
 
         public bool HasDialog(string withText)
         {
-            watinDialogHandler.WaitUntilExists();
-            return watinDialogHandler.Message == withText;
+            return watinDialogHandler.Exists() && watinDialogHandler.Message == withText;
         }
 
         public void AcceptModalDialog()
         {
-            throw new NotSupportedException("AcceptModalDialog not yet implemented in WatiNDriver");
+            watinDialogHandler.ClickOk();
         }
 
         public void CancelModalDialog()
         {
-            throw new NotSupportedException("CancelModalDialog not yet implemented in WatiNDriver");
+            watinDialogHandler.ClickCancel();
         }
 
         public bool HasCss(string cssSelector)

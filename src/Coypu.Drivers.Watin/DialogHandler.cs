@@ -29,16 +29,28 @@ namespace Coypu.Drivers.Watin
             return alertHandler.CanHandleDialog(window, mainWindowHwnd) || confirmHandler.CanHandleDialog(window, mainWindowHwnd);
         }
 
-        public void WaitUntilExists(int waitDurationInSeconds = 30)
+        private void WaitUntilExists(int waitDurationInSeconds = 30)
         {
             new TryFuncUntilTimeOut(TimeSpan.FromSeconds(waitDurationInSeconds)).Try(Exists);
             if (!Exists())
                 throw new WatiNException(string.Format("Dialog not available within {0} seconds.", waitDurationInSeconds));
         }
 
-        private bool Exists()
+        private void WaitUntilNoLongerExists(int waitDurationInSeconds = 30)
+        {
+            new TryFuncUntilTimeOut(TimeSpan.FromSeconds(waitDurationInSeconds)).Try(NotExists);
+            if (Exists())
+                throw new WatiNException(string.Format("Dialog still available after {0} seconds.", waitDurationInSeconds));
+        }
+
+        public bool Exists()
         {
             return alertHandler.Exists() || confirmHandler.Exists();
+        }
+
+        private bool NotExists()
+        {
+            return !alertHandler.Exists() && !confirmHandler.Exists();
         }
 
         public string Message
@@ -55,10 +67,26 @@ namespace Coypu.Drivers.Watin
 
         public void Dispose()
         {
+            if (Exists())
+                ClickOk();
+        }
+
+        public void ClickOk()
+        {
+            WaitUntilExists();
             if (alertHandler.Exists())
                 alertHandler.OKButton.Click();
+            else if (confirmHandler.Exists())
+                confirmHandler.OKButton.Click();
+            WaitUntilNoLongerExists();
+        }
+
+        public void ClickCancel()
+        {
+            WaitUntilExists();
             if (confirmHandler.Exists())
                 confirmHandler.CancelButton.Click();
+            WaitUntilNoLongerExists();
         }
     }
 }

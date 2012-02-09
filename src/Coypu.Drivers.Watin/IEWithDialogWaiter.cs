@@ -1,4 +1,7 @@
+using System;
+
 using WatiN.Core;
+using WatiN.Core.Interfaces;
 using WatiN.Core.Native.InternetExplorer;
 using WatiN.Core.Native.Windows;
 
@@ -6,28 +9,38 @@ namespace Coypu.Drivers.Watin
 {
     public class IEWithDialogWaiter : IE
     {
+        private HasDialogHandler hasDialogHandler;
+
         public override void WaitForComplete(int waitForCompleteTimeOut)
         {
-            WaitForComplete(new IEWaitForCompleteWithDialogs((IEBrowser)NativeBrowser, waitForCompleteTimeOut));
-        }
-    }
+            if (hasDialogHandler == null)
+            {
+                hasDialogHandler = new HasDialogHandler();
+                DialogWatcher.Add(hasDialogHandler);
+            }
 
-    public class IEWaitForCompleteWithDialogs : IEWaitForComplete
-    {
-        private readonly IEBrowser ieBrowser;
-
-        public IEWaitForCompleteWithDialogs(IEBrowser ieBrowser, int waitForCompleteTimeOut)
-            : base(ieBrowser, waitForCompleteTimeOut)
-        {
-            this.ieBrowser = ieBrowser;
+            WaitForComplete(new IEWaitForCompleteWithDialogs((IEBrowser)NativeBrowser, waitForCompleteTimeOut, hasDialogHandler.HasDialog));
         }
 
-        protected override void WaitForCompleteOrTimeout()
+        private class HasDialogHandler : IDialogHandler
         {
-            if (ieBrowser != null && !new Hwnd(ieBrowser.hWnd).IsWindowEnabled)
-                return;
+            private Window lastSeenWindow;
 
-            base.WaitForCompleteOrTimeout();
+            public bool HandleDialog(Window window)
+            {
+                return false;
+            }
+
+            public bool CanHandleDialog(Window window, IntPtr mainWindowHwnd)
+            {
+                lastSeenWindow = window;
+                return false;
+            }
+
+            public bool HasDialog()
+            {
+                return lastSeenWindow != null && lastSeenWindow.Exists();
+            }
         }
     }
 }
