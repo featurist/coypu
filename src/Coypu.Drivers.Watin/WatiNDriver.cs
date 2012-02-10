@@ -4,10 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 
+using SHDocVw;
+
 using WatiN.Core;
 using WatiN.Core.Constraints;
 using WatiN.Core.Exceptions;
 using WatiN.Core.Interfaces;
+
+using mshtml;
 
 namespace Coypu.Drivers.Watin
 {
@@ -129,7 +133,35 @@ namespace Coypu.Drivers.Watin
 
         public IEnumerable<Cookie> GetBrowserCookies()
         {
-            throw new NotSupportedException();
+            var ieBrowser = Watin as IE;
+            if (ieBrowser == null)
+                throw new NotSupportedException("Only supported for Internet Explorer");
+
+            var persistentCookies = GetPersistentCookies(ieBrowser).ToList();
+            var documentCookies = GetCookiesFromDocument(ieBrowser);
+
+            var sessionCookies = documentCookies.Except(persistentCookies, new CookieNameEqualityComparer());
+
+            return persistentCookies.Concat(sessionCookies).ToList();
+        }
+
+        private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
+        {
+            return ieBrowser.GetCookiesForUrl(Location).Cast<Cookie>();
+        }
+
+        private IEnumerable<Cookie> GetCookiesFromDocument(IE ieBrowser)
+        {
+            var document = ((IWebBrowser2)ieBrowser.InternetExplorer).Document as IHTMLDocument2;
+            if (document == null)
+                throw new InvalidOperationException("Cannot get IE document for cookies");
+
+            return from untrimmedCookie in document.cookie.Split(';')
+                   let cookie = untrimmedCookie.Trim()
+                   let index = cookie.IndexOf('=')
+                   let name = cookie.Substring(0, index)
+                   let value = cookie.Substring(index + 1, cookie.Length - index - 1)
+                   select new Cookie(name, value);
         }
 
         private bool HasElement(IElementContainer elementContainer, string tagName, string text)
