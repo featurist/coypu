@@ -124,7 +124,7 @@ namespace Coypu.Drivers.Watin
 
         public void Hover(Element element)
         {
-            (WatiNElement(element)).MouseEnter();
+            (WatiNElement(element)).FireEvent("onmouseover");
         }
 
         public IEnumerable<Cookie> GetBrowserCookies()
