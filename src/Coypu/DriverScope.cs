@@ -11,7 +11,7 @@ namespace Coypu
     {
         private readonly ElementFinder elementFinder;
         protected Driver driver;
-        protected RobustWrapper robustWrapper;
+        internal RobustWrapper robustWrapper;
         internal Clicker clicker;
         internal UrlBuilder urlBuilder;
 
@@ -375,7 +375,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Check(string locator)
         {
-            RetryUntilTimeout(() => driver.Check(driver.FindField(locator,this)));
+            robustWrapper.RobustlyDo(new Check(driver, this, locator));
             return this;
         }
 
@@ -386,7 +386,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Uncheck(string locator)
         {
-            RetryUntilTimeout(() => driver.Uncheck(driver.FindField(locator,this)));
+            robustWrapper.RobustlyDo(new Uncheck(driver, this, locator));
             return this;
         }
 
@@ -397,7 +397,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Choose(string locator)
         {
-            robustWrapper.RobustlyDo(new ChooseDriverAction(driver, this, locator));
+            robustWrapper.RobustlyDo(new Choose(driver, this, locator));
             return this;
         }
 

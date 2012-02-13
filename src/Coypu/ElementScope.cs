@@ -14,7 +14,7 @@ namespace Coypu
         private readonly DriverScope driverScope;
         private readonly RobustWrapper robustWrapper;
 
-        public ElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper)
+        internal ElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper)
         {
             this.elementFinder = elementFinder;
             this.driverScope = new DriverScope(elementFinder,outerScope);
@@ -73,13 +73,13 @@ namespace Coypu
 
         public ElementScope Click()
         {
-            robustWrapper.RobustlyDo(new ClickDriverAction(elementFinder, DriverScope));
+            robustWrapper.RobustlyDo(new Click(elementFinder, DriverScope));
             return this;
         }
 
         public ElementScope Hover()
         {
-            robustWrapper.RobustlyDo(new HoverDriverAction(elementFinder,DriverScope));
+            robustWrapper.RobustlyDo(new Hover(elementFinder,DriverScope));
             return this;
         }
 

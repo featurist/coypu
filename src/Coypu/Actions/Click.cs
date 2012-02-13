@@ -3,13 +3,13 @@ using Coypu.Robustness;
 
 namespace Coypu.Actions
 {
-    internal class ClickDriverAction : DriverAction
+    internal class Click : DriverAction
     {
         private readonly ElementFinder elementFinder;
         private readonly DriverScope driverScope;
 
 
-        internal ClickDriverAction(ElementFinder elementFinder, DriverScope driverScope)
+        internal Click(ElementFinder elementFinder, DriverScope driverScope)
         {
             this.elementFinder = elementFinder;
             this.driverScope = driverScope;

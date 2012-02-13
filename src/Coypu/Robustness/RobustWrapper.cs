@@ -4,7 +4,7 @@ using Coypu.Queries;
 
 namespace Coypu.Robustness
 {
-    public interface RobustWrapper
+    internal interface RobustWrapper
     {
         void Robustly(Action action);
         TResult Robustly<TResult>(Func<TResult> function);

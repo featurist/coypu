@@ -3,12 +3,12 @@ using Coypu.Robustness;
 
 namespace Coypu.Actions
 {
-    internal class HoverDriverAction : DriverAction
+    internal class Hover : DriverAction
     {
         private readonly ElementFinder elementFinder;
         private readonly DriverScope driverScope;
 
-        internal HoverDriverAction(ElementFinder elementFinder, DriverScope driverScope)
+        internal Hover(ElementFinder elementFinder, DriverScope driverScope)
         {
             this.elementFinder = elementFinder;
             this.driverScope = driverScope;

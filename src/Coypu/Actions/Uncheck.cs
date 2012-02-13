@@ -2,13 +2,13 @@ using Coypu.Robustness;
 
 namespace Coypu.Actions
 {
-    internal class ChooseDriverAction : DriverAction
+    internal class Uncheck : DriverAction
     {
         private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string locator;
 
-        internal ChooseDriverAction(Driver driver, DriverScope scope, string locator)
+        internal Uncheck(Driver driver, DriverScope scope, string locator)
         {
             this.driver = driver;
             this.scope = scope;
@@ -17,7 +17,7 @@ namespace Coypu.Actions
 
         public void Act()
         {
-            driver.Choose(driver.FindField(locator,scope));
+            driver.Uncheck(driver.FindField(locator, scope));
         }
     }
 }

@@ -85,8 +85,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\ClickDriverAction.cs" />
-    <Compile Include="Actions\ChooseDriverAction.cs" />
+    <Compile Include="Actions\Check.cs" />
+    <Compile Include="Actions\Click.cs" />
+    <Compile Include="Actions\Choose.cs" />
+    <Compile Include="Actions\FillIn.cs" />
+    <Compile Include="Actions\Select.cs" />
+    <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="Configuration.cs" />
@@ -111,7 +115,7 @@
     <Compile Include="Drivers\Selenium\Scoping.cs" />
     <Compile Include="Drivers\Selenium\TextMatcher.cs" />
     <Compile Include="Drivers\XPath.cs" />
-    <Compile Include="Actions\HoverDriverAction.cs" />
+    <Compile Include="Actions\Hover.cs" />
     <Compile Include="Finders\IdFinder.cs" />
     <Compile Include="Queries\ElementPresenceQuery.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />
