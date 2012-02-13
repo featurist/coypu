@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\ClickDriverAction.cs" />
+    <Compile Include="Actions\ChooseDriverAction.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Clicker.cs" />
     <Compile Include="Configuration.cs" />

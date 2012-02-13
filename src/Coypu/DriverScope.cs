@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Robustness;
 
@@ -396,7 +397,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Choose(string locator)
         {
-            RetryUntilTimeout(() => driver.Choose(driver.FindField(locator,this)));
+            robustWrapper.RobustlyDo(new ChooseDriverAction(driver, this, locator));
             return this;
         }
 

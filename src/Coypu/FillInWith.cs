@@ -2,13 +2,14 @@
 
 namespace Coypu
 {
-    public class FillInWith
+    public class FillInWith : DriverAction
     {
         private readonly string locator;
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
         private readonly DriverScope scope;
         private Element element;
+        private string value;
 
         internal FillInWith(string locator, Driver driver, RobustWrapper robustWrapper, DriverScope scope)
         {
@@ -53,10 +54,9 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value)
         {
-            //TODO: Make the find, click? and set into a DriverAction class
-            robustWrapper.RobustlyDo(new FillInWithDriverAction(this, value));
+            this.value = value;
+            robustWrapper.RobustlyDo(this);
         }
-
 
         internal Element Field
         {
@@ -78,15 +78,21 @@ namespace Coypu
             if (Field["type"] != "file")
                 BringIntoFocus();
         }
+
+        public void Act()
+        {
+            Focus();
+            Set(value);
+        }
     }
 
-    public class FillInWithDriverAction : DriverAction
+    internal class FillInWithDriverAction : DriverAction
     {
         private readonly FillInWith fillInWith;
         private readonly string value;
 
 
-        public FillInWithDriverAction(FillInWith fillInWith, string value)
+        internal FillInWithDriverAction(FillInWith fillInWith, string value)
         {
             this.fillInWith = fillInWith;
             this.value = value;
@@ -98,5 +104,24 @@ namespace Coypu
             fillInWith.Set(value);
         }
 
+    }
+
+    internal class ChooseDriverAction : DriverAction
+    {
+        private readonly Driver driver;
+        private readonly DriverScope scope;
+        private readonly string locator;
+
+        internal ChooseDriverAction(Driver driver, DriverScope scope, string locator)
+        {
+            this.driver = driver;
+            this.scope = scope;
+            this.locator = locator;
+        }
+
+        public void Act()
+        {
+            driver.Choose(driver.FindField(locator,scope));
+        }
     }
 }
