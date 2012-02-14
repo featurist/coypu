@@ -1,8 +1,8 @@
 namespace Coypu.Queries
 {
-    public abstract class ElementPresenceQuery : Query<bool>
+    internal abstract class ElementPresenceQuery : Query<bool>
     {
-        protected readonly DriverScope driverScope;
+        private readonly DriverScope driverScope;
         public abstract bool ExpectedResult { get; }
         public bool Result { get; private set; }
 
@@ -16,11 +16,11 @@ namespace Coypu.Queries
             try
             {
                 driverScope.Now();
-                Result = true;
+                Result = ExpectedResult;
             }
             catch (MissingHtmlException)
             {
-                Result = false;
+                Result = !ExpectedResult;
             }
         }
     }

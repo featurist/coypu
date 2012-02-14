@@ -77,7 +77,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return robustWrapper.Query(() => driver.HasDialog(withText), true);
+            return robustWrapper.Query(() => driver.HasDialog(withText),true);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return !robustWrapper.Query(() => driver.HasDialog(withText), false);
+            return !robustWrapper.Query(() => driver.HasDialog(withText),false);
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace Coypu.Tests.TestDoubles
             return function();
         }
 
-        public T Query<T>(Func<T> query, T expecting)
+        public T Query<T>(Func<T> query, T expectedResult)
         {
             return query();
         }

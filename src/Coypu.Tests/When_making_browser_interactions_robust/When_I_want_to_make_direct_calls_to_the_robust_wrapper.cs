@@ -1,4 +1,5 @@
 ﻿using System;
+using Coypu.Queries;
 using Coypu.Tests.When_interacting_with_the_browser;
 using NUnit.Framework;
 
@@ -58,9 +59,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             session.Query(query, "expected query result");
 
-            var actualResult = ((Func<string>)spyRobustWrapper.DeferredQueries[0])();
+            var robustQuery = ((Query<string>)spyRobustWrapper.QueriesRan[0]);
+            robustQuery.Run();
 
-            Assert.That(actualResult, Is.EqualTo("query result"));
+
+            Assert.That(robustQuery.Result, Is.EqualTo("query result"));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Queries;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -25,8 +26,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            var actualDeferredResult = spyRobustWrapper.DeferredQueries.Cast<Func<bool>>().Single()();
-            Assert.That(actualDeferredResult, Is.EqualTo(stubResult));
+            var actualQuery = spyRobustWrapper.QueriesRan.Cast<Query<bool>>().Single();
+            actualQuery.Run();
+            Assert.That(actualQuery.Result, Is.EqualTo(stubResult));
         }
 
         protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
@@ -38,9 +40,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            var actualDeferredResult = spyRobustWrapper.DeferredQueries.Cast<Func<bool>>().Single()();
+            var actualQuery = spyRobustWrapper.QueriesRan.Cast<Query<bool>>().Single();
+            actualQuery.Run();
 
-            Assert.That(actualDeferredResult, Is.EqualTo(stubResult));
+            Assert.That(actualQuery.Result, Is.EqualTo(stubResult));
         }
     }
 }

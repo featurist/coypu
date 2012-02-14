@@ -1,28 +1,15 @@
 namespace Coypu.Queries
 {
-    public class ElementExistsQuery : Query<bool>
+    internal class ElementExistsQuery : ElementPresenceQuery
     {
-        protected readonly DriverScope driverScope;
-        public bool ExpectedResult { get; private set; }
-        public bool Result { get; private set; }
-
         public ElementExistsQuery(DriverScope driverScope)
+            : base(driverScope)
         {
-            this.driverScope = driverScope;
-            ExpectedResult = true;
         }
 
-        public void Run()
+        public override bool ExpectedResult
         {
-            try
-            {
-                driverScope.Now();
-                Result = true;
-            }
-            catch (MissingHtmlException)
-            {
-                Result = false;
-            }
+            get { return true; }
         }
     }
 }

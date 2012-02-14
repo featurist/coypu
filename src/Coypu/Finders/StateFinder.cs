@@ -17,7 +17,7 @@ namespace Coypu.Finders
 
         internal State FindState(params State[] states)
         {
-            var foundState = robustWrapper.Query(() => temporaryTimeouts.WithIndividualTimeout(TimeSpan.Zero,() => states.Any(s => s.CheckCondition())), true);
+            var foundState = robustWrapper.Query(() => temporaryTimeouts.WithIndividualTimeout(TimeSpan.Zero,() => states.Any(s => s.CheckCondition())),true);
             
             if (!foundState)
                 throw new MissingHtmlException("None of the given states was reached within the configured timeout.");
