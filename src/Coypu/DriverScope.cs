@@ -12,7 +12,7 @@ namespace Coypu
         private readonly ElementFinder elementFinder;
         protected Driver driver;
         internal RobustWrapper robustWrapper;
-        internal Clicker clicker;
+        private readonly Waiter waiter;
         internal UrlBuilder urlBuilder;
 
         internal StateFinder stateFinder;
@@ -37,7 +37,7 @@ namespace Coypu
         {
             this.driver = driver;
             this.robustWrapper = robustWrapper;
-            clicker = new Clicker(driver, waiter);
+            this.waiter = waiter;
             this.urlBuilder = urlBuilder;
             temporaryTimeouts = new TemporaryTimeouts();
             stateFinder = new StateFinder(robustWrapper, temporaryTimeouts);
@@ -48,7 +48,6 @@ namespace Coypu
             this.elementFinder = elementFinder;
             driver = outer.driver;
             robustWrapper = outer.robustWrapper;
-            clicker = outer.clicker;
             urlBuilder = outer.urlBuilder;
             temporaryTimeouts = outer.temporaryTimeouts;
             stateFinder = outer.stateFinder;
@@ -61,7 +60,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope ClickButton(string locator)
         {
-            RetryUntilTimeout(() => clicker.FindAndClickButton(locator, this));
+            RetryUntilTimeout(new WaitThenClick(driver,waiter,new ButtonFinder(driver,locator,this)));
             return this;
         }
 
@@ -72,7 +71,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope ClickLink(string locator)
         {
-            RetryUntilTimeout(() => clicker.FindAndClickLink(locator, this));
+            robustWrapper.RobustlyDo(new WaitThenClick(driver, waiter, new LinkFinder(driver, locator, this)));
             return this;
         }
 
@@ -457,6 +456,11 @@ namespace Coypu
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
         {
             return robustWrapper.Robustly(function);
+        }
+
+        private void RetryUntilTimeout(DriverAction driverAction)
+        {
+            robustWrapper.RobustlyDo(driverAction);
         }
 
         /// <summary>

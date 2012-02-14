@@ -49,6 +49,11 @@ namespace Coypu.Tests.TestDoubles
             DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
         }
 
+        public void TryUntil(DriverAction tryThis, DriverPredicate until, TimeSpan waitBeforeRetry)
+        {
+            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
+        }
+
         public Element RobustlyFind(ElementFinder elementFinder)
         {
             DeferredFinders.Add(elementFinder);
@@ -78,15 +83,24 @@ namespace Coypu.Tests.TestDoubles
 
         public class TryUntilArgs
         {
-            public Action TryThis { get; private set; }
-            public Func<bool> Until { get; private set; }
+            public Action TryThisAction { get; private set; }
+            public Func<bool> UntilThisFunction { get; private set; }
             public TimeSpan WaitBeforeRetry { get; private set; }
+            protected DriverAction TryThisDriverAction { get; private set; }
+            protected DriverPredicate UntilThisPredicate { get; private set; }
 
             public TryUntilArgs(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
             {
                 WaitBeforeRetry = waitBeforeRetry;
-                TryThis = tryThis;
-                Until = until;
+                TryThisAction = tryThis;
+                UntilThisFunction = until;
+            }
+
+            public TryUntilArgs(DriverAction tryThis, DriverPredicate until, TimeSpan waitBeforeRetry)
+            {
+                WaitBeforeRetry = waitBeforeRetry;
+                TryThisDriverAction = tryThis;
+                UntilThisPredicate = until;
             }
         }
     }

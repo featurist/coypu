@@ -92,7 +92,7 @@
     <Compile Include="Actions\Select.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
-    <Compile Include="Clicker.cs" />
+    <Compile Include="Actions\Clicker.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="CssFinder.cs" />

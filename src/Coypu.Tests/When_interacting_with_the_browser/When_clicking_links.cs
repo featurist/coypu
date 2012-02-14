@@ -47,7 +47,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             ExecuteDeferedRobustAction();
             AssertClicked(linkToBeClicked);
 
-            Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
+            Assert.That(tryUntilArgs.UntilThisFunction(), Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
         }
 
@@ -89,7 +89,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
         {
             var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
-            tryUntilArgs.TryThis();
+            tryUntilArgs.TryThisAction();
             return tryUntilArgs;
         }
 

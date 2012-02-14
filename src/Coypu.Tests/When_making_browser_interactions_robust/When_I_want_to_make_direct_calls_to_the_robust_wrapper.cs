@@ -45,8 +45,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var tryUntil = spyRobustWrapper.DeferredTryUntils[0];
 
-            Assert.That(tryUntil.TryThis, Is.SameAs(tryThis));
-            Assert.That(tryUntil.Until, Is.SameAs(until));
+            Assert.That(tryUntil.TryThisAction, Is.SameAs(tryThis));
+            Assert.That(tryUntil.UntilThisFunction, Is.SameAs(until));
             Assert.That(tryUntil.WaitBeforeRetry, Is.EqualTo(waitBeforeRetry));
         }
 
