@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Finders;
+using Coypu.Predicates;
 using Coypu.Robustness;
 using Coypu.WebRequests;
 
@@ -173,7 +174,19 @@ namespace Coypu
             return this;
         }
 
+        public Session ClickButton(string locator, BrowserSessionPredicate until, TimeSpan waitBetweenRetries)
+        {
+            driverScope.ClickButton(locator, until, waitBetweenRetries);
+            return this;
+        }
+
         public Session ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        {
+            driverScope.ClickLink(locator, until, waitBetweenRetries);
+            return this;
+        }
+
+        public Session ClickLink(string locator, BrowserSessionPredicate until, TimeSpan waitBetweenRetries)
         {
             driverScope.ClickLink(locator, until, waitBetweenRetries);
             return this;
@@ -349,6 +362,11 @@ namespace Coypu
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+        {
+            driverScope.TryUntil(tryThis, until, waitBeforeRetry);
+        }
+
+        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
         {
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }

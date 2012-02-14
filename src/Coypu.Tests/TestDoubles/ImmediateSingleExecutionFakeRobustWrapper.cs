@@ -1,5 +1,6 @@
 using System;
 using Coypu.Finders;
+using Coypu.Predicates;
 using Coypu.Queries;
 using Coypu.Robustness;
 
@@ -31,6 +32,11 @@ namespace Coypu.Tests.TestDoubles
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
             tryThis();
+        }
+
+        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+        {
+            tryThis.Act();
         }
 
         public Element RobustlyFind(ElementFinder elementFinder)

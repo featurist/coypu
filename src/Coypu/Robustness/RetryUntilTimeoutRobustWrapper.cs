@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using Coypu.Finders;
+using Coypu.Predicates;
 using Coypu.Queries;
 
 namespace Coypu.Robustness
@@ -102,7 +103,12 @@ namespace Coypu.Robustness
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
-        
+        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public Element RobustlyFind(ElementFinder elementFinder)
         {
             return RobustlyFind(elementFinder, null);

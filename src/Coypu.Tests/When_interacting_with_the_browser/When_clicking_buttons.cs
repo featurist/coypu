@@ -38,10 +38,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var tryUntilArgs = GetTryUntilArgs();
 
             AssertButtonNotClickedYet(buttonToBeClicked);
-            ExecuteDeferedRobustAction();
+            tryUntilArgs.TryThisDriverAction.Act();
             AssertClicked(buttonToBeClicked);
 
-            Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
+            Assert.That(tryUntilArgs.UntilThisPredicate.Satisfied(session), Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
         }
 
@@ -82,9 +82,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
         {
-            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
-            tryUntilArgs.TryThis();
-            return tryUntilArgs;
+            return spyRobustWrapper.DeferredTryUntils.Single();
         }
 
         private void ExecuteDeferedRobustAction()

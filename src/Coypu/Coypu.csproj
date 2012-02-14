@@ -117,6 +117,7 @@
     <Compile Include="Drivers\XPath.cs" />
     <Compile Include="Actions\Hover.cs" />
     <Compile Include="Finders\IdFinder.cs" />
+    <Compile Include="Predicates\LambdaPredicate.cs" />
     <Compile Include="Queries\ElementPresenceQuery.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />
     <Compile Include="Finders\ElementFinder.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\Query.cs" />
     <Compile Include="RobustElementScope.cs" />
+    <Compile Include="Predicates\BrowserSessionPredicate.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Finders\SectionFinder.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />

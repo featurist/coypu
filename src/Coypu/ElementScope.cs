@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
+using Coypu.Predicates;
 using Coypu.Queries;
 using Coypu.Robustness;
 
@@ -267,6 +268,11 @@ namespace Coypu
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+        {
+            DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
+        }
+
+        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
         {
             DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
