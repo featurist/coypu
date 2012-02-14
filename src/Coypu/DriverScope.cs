@@ -223,7 +223,7 @@ namespace Coypu
         }
 
         /// <summary>
-        /// CQuery whether text appears on the page within the <see cref="Configuration.Timeout"/>
+        /// Query whether text appears on the page within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="text">The exact text to find</param>
         /// <returns>Whether the text appears</returns>
