@@ -118,11 +118,16 @@
     <Compile Include="Actions\Hover.cs" />
     <Compile Include="Finders\IdFinder.cs" />
     <Compile Include="Queries\ContentMatchQuery.cs" />
+    <Compile Include="Queries\CssQuery.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />
     <Compile Include="Queries\HasContentMatchQuery.cs" />
     <Compile Include="Queries\HasContentQuery.cs" />
+    <Compile Include="Queries\HasCssQuery.cs" />
     <Compile Include="Queries\HasNoContentMatchQuery.cs" />
     <Compile Include="Queries\HasNoContentQuery.cs" />
+    <Compile Include="Queries\HasNoCssQuery.cs" />
+    <Compile Include="Queries\HasNoXPathQuery.cs" />
+    <Compile Include="Queries\HasXPathQuery.cs" />
     <Compile Include="Queries\LambdaQuery.cs" />
     <Compile Include="Predicates\LambdaPredicate.cs" />
     <Compile Include="Queries\ElementPresenceQuery.cs" />
@@ -132,6 +137,7 @@
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\Query.cs" />
     <Compile Include="Queries\ContentQuery.cs" />
+    <Compile Include="Queries\XPathQuery.cs" />
     <Compile Include="RobustElementScope.cs" />
     <Compile Include="Predicates\BrowserSessionPredicate.cs" />
     <Compile Include="Scope.cs" />

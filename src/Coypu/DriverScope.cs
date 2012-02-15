@@ -253,7 +253,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContent(string text)
         {
-            return Query(new HasContentQuery(driver, outer, text));
+            return Query(new HasNoContentQuery(driver, outer, text));
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasCss(string cssSelector)
         {
-            return Query(() => driver.HasCss(cssSelector, outer), true);
+            return Query(new HasCssQuery(driver, outer, cssSelector));
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Coypu
         /// <returns>Whether an element does not appear</returns>
         public bool HasNoCss(string cssSelector)
         {
-            return !Query(() => driver.HasCss(cssSelector, outer), false);
+            return Query(new HasNoCssQuery(driver, outer, cssSelector));
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasXPath(string xpath)
         {
-            return Query(() => driver.HasXPath(xpath, outer), true);
+            return Query(new HasXPathQuery(driver, outer, xpath));
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasNoXPath(string xpath)
         {
-            return !Query(() => driver.HasXPath(xpath, outer), false);
+            return Query(new HasNoXPathQuery(driver, outer, xpath));
         }
 
         /// <summary>

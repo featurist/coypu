@@ -42,7 +42,7 @@ namespace Coypu.Tests.TestDoubles
         public T Query<T>(Query<T> query)
         {
             QueriesRan.Add(query);
-            return default(T);
+            return (T)stubbedQueryResult[query.ExpectedResult];
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
