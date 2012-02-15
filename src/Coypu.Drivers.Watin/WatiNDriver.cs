@@ -49,9 +49,20 @@ namespace Coypu.Drivers.Watin
 
         private WatiN.Core.Browser Watin { get; set; }
 
+        private static WatiN.Core.Element WatiNElement(Element element)
+        {
+            return WatiNElement<WatiN.Core.Element>(element);
+        }
+
+        private static T WatiNElement<T>(Element element)
+            where T : WatiN.Core.Element
+        {
+            return element.Native as T;
+        }
+
         public void SetScope(Func<Element> find)
         {
-            Scope = (WatiN.Core.Element)find().Native;
+            Scope = WatiNElement(find());
         }
 
         public WatiN.Core.Element Scope { get; set; }
@@ -128,7 +139,7 @@ namespace Coypu.Drivers.Watin
 
         public void Hover(Element element)
         {
-            (WatiNElement(element)).FireEvent("onmouseover");
+            WatiNElement(element).FireEvent("onmouseover");
         }
 
         public IEnumerable<Cookie> GetBrowserCookies()
@@ -251,11 +262,6 @@ namespace Coypu.Drivers.Watin
             return container.Children().Any(child => child.Equals(element));
         }
 
-        private WatiN.Core.Element GetRadioButtonWithValue(string value)
-        {
-            return FindFirst(Watin.RadioButtons, r => r.GetAttributeValue("value") == value);
-        }
-
         private IEnumerable<WatiN.Core.Element> FindAllFields()
         {
             var textFields = Watin.TextFields.Cast<WatiN.Core.Element>();
@@ -277,13 +283,9 @@ namespace Coypu.Drivers.Watin
             // If we use Click, then we can get a deadlock if IE is displaying a modal dialog.
             // (Yay COM STA!) Our override of the IE class makes sure the WaitForComplete will
             // check to see if the main window is disabled before continuing with the normal wait
-            WatiNElement(element).ClickNoWait();
-            Watin.WaitForComplete();
-        }
-
-        private WatiN.Core.Element WatiNElement(Element element)
-        {
-            return ((WatiN.Core.Element) element.Native);
+            var nativeElement = WatiNElement(element);
+            nativeElement.ClickNoWait();
+            nativeElement.WaitForComplete();
         }
 
         public void Visit(string url)
@@ -293,25 +295,26 @@ namespace Coypu.Drivers.Watin
 
         public void Set(Element element, string value)
         {
-            var textField = element.Native as TextField;
+            var textField = WatiNElement<TextField>(element);
             if (textField != null)
             {
                 textField.Value = value;
                 return;
             }
-            var fileUpload = element.Native as FileUpload;
-            if (fileUpload != null) fileUpload.Set(value);
+            var fileUpload = WatiNElement<FileUpload>(element);
+            if (fileUpload != null)
+                fileUpload.Set(value);
         }
 
         public void Select(Element element, string option)
         {
             try
             {
-                ((SelectList) element.Native).Select(option);
+                WatiNElement<SelectList>(element).Select(option);
             }
             catch (WatiNException)
             {
-                ((SelectList) element.Native).SelectByValue(option);
+                WatiNElement<SelectList>(element).SelectByValue(option);
             }
         }
 
@@ -336,17 +339,17 @@ namespace Coypu.Drivers.Watin
 
         public void Check(Element field)
         {
-            ((CheckBox)field.Native).Checked = true;
+            WatiNElement<CheckBox>(field).Checked = true;
         }
 
         public void Uncheck(Element field)
         {
-            ((CheckBox)field.Native).Checked = false;
+            WatiNElement<CheckBox>(field).Checked = false;
         }
 
         public void Choose(Element field)
         {
-            ((RadioButton)field.Native).Checked = true;
+            WatiNElement<RadioButton>(field).Checked = true;
         }
 
         public bool HasDialog(string withText)

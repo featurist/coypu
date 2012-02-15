@@ -9,9 +9,15 @@ namespace Coypu.Drivers.Watin
             Native = watinElement;
         }
 
-        public WatiN.Core.Element NativeWatiNElement
+        private T GetNativeWatiNElement<T>()
+            where T : WatiN.Core.Element
         {
-            get { return (WatiN.Core.Element) Native; }
+            return Native as T;
+        }
+
+        private WatiN.Core.Element NativeWatiNElement
+        {
+            get { return GetNativeWatiNElement<WatiN.Core.Element>(); }
         }
 
         public override string Id
@@ -32,11 +38,8 @@ namespace Coypu.Drivers.Watin
         {
             get
             {
-                var textField = NativeWatiNElement as TextField;
-                
-                return textField != null 
-                    ? textField.Value 
-                    : this["value"];
+                var textField = GetNativeWatiNElement<TextField>();
+                return textField != null ? textField.Value : this["value"];
             }
         }
 
@@ -49,11 +52,8 @@ namespace Coypu.Drivers.Watin
         {
             get 
             { 
-                var selectList = NativeWatiNElement as SelectList;
-                
-                return selectList != null 
-                    ? selectList.SelectedOption.Text 
-                    : string.Empty;
+                var selectList = GetNativeWatiNElement<SelectList>();
+                return selectList != null ? selectList.SelectedOption.Text : string.Empty;
             }
         }
 
@@ -61,12 +61,12 @@ namespace Coypu.Drivers.Watin
         {
             get
             {
-                var checkbox = NativeWatiNElement as CheckBox;
+                var checkbox = GetNativeWatiNElement<CheckBox>();
                 if (checkbox != null)
                     return checkbox.Checked;
 
-                var radioButton = NativeWatiNElement as RadioButton;
-                if (radioButton  != null)
+                var radioButton = GetNativeWatiNElement<RadioButton>();
+                if (radioButton != null)
                     return radioButton.Checked;
 
                 return false;
