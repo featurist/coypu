@@ -82,12 +82,12 @@ namespace Coypu
 
         private WaitThenClick WaitThenClickLink(string locator)
         {
-            return new WaitThenClick(driver, waiter, new LinkFinder(driver, locator, outer));
+            return new WaitThenClick(driver, waiter, new LinkFinder(driver, locator, this));
         }
 
         private WaitThenClick WaitThenClickButton(string locator)
         {
-            return new WaitThenClick(driver,waiter,new ButtonFinder(driver,locator,outer));
+            return new WaitThenClick(driver,waiter,new ButtonFinder(driver,locator,this));
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindButton(string locator)
         {
-            return new RobustElementScope(new ButtonFinder(driver, locator, outer), this,robustWrapper);
+            return new RobustElementScope(new ButtonFinder(driver, locator, this), this,robustWrapper);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindLink(string locator)
         {
-            return new RobustElementScope(new LinkFinder(driver, locator, outer), this, robustWrapper);
+            return new RobustElementScope(new LinkFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindField(string locator)
         {
-            return new RobustElementScope(new FieldFinder(driver, locator, outer), this, robustWrapper);
+            return new RobustElementScope(new FieldFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Coypu
         /// <returns>With</returns>
         public FillInWith FillIn(string locator)
         {
-            return new FillInWith(locator, driver, robustWrapper,outer);
+            return new FillInWith(locator, driver, robustWrapper, this);
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Coypu
         /// <returns>With</returns>
         public FillInWith FillIn(Element element)
         {
-            return new FillInWith(element, driver, robustWrapper, outer);
+            return new FillInWith(element, driver, robustWrapper, this);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Coypu
         /// <returns>From</returns>
         public SelectFrom Select(string option)
         {
-            return new SelectFrom(option, driver, robustWrapper, outer);
+            return new SelectFrom(option, driver, robustWrapper, this);
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Coypu
         /// <returns>Whether the text appears</returns>
         public bool HasContent(string text)
         {
-            return Query(new HasContentQuery(driver, outer, text));
+            return Query(new HasContentQuery(driver, this, text));
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace Coypu
         /// <returns>Whether the page text matches</returns>
         public bool HasContentMatch(Regex pattern)
         {
-            return Query(new HasContentMatchQuery(driver, outer, pattern));
+            return Query(new HasContentMatchQuery(driver, this, pattern));
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContent(string text)
         {
-            return Query(new HasNoContentQuery(driver, outer, text));
+            return Query(new HasNoContentQuery(driver, this, text));
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Coypu
         /// <returns>Whether the text does not appear</returns>
         public bool HasNoContentMatch(Regex pattern)
         {
-            return Query(new HasNoContentMatchQuery(driver, outer, pattern));
+            return Query(new HasNoContentMatchQuery(driver, this, pattern));
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasCss(string cssSelector)
         {
-            return Query(new HasCssQuery(driver, outer, cssSelector));
+            return Query(new HasCssQuery(driver, this, cssSelector));
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Coypu
         /// <returns>Whether an element does not appear</returns>
         public bool HasNoCss(string cssSelector)
         {
-            return Query(new HasNoCssQuery(driver, outer, cssSelector));
+            return Query(new HasNoCssQuery(driver, this, cssSelector));
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasXPath(string xpath)
         {
-            return Query(new HasXPathQuery(driver, outer, xpath));
+            return Query(new HasXPathQuery(driver, this, xpath));
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasNoXPath(string xpath)
         {
-            return Query(new HasNoXPathQuery(driver, outer, xpath));
+            return Query(new HasNoXPathQuery(driver, this, xpath));
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Coypu
         /// <returns>The first matchin element</returns>
         public ElementScope FindCss(string cssSelector)
         {
-            return new RobustElementScope(new CssFinder(driver, cssSelector, outer), this, robustWrapper);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace Coypu
         /// <returns>The first matchin element</returns>
         public ElementScope FindXPath(string xpath)
         {
-            return new RobustElementScope(new XPathFinder(driver, xpath, outer), this, robustWrapper);
+            return new RobustElementScope(new XPathFinder(driver, xpath, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace Coypu
         /// <returns>All matching elements</returns>
         public IEnumerable<Element> FindAllCss(string cssSelector)
         {
-            return driver.FindAllCss(cssSelector, outer);
+            return driver.FindAllCss(cssSelector, this);
         }
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace Coypu
         /// <returns>All matching elements</returns>
         public IEnumerable<Element> FindAllXPath(string xpath)
         {
-            return driver.FindAllXPath(xpath, outer);
+            return driver.FindAllXPath(xpath, this);
         }
 
         /// <summary>
@@ -375,7 +375,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindSection(string locator)
         {
-            return new RobustElementScope(new SectionFinder(driver, locator, outer), this, robustWrapper);
+            return new RobustElementScope(new SectionFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindFieldset(string locator)
         {
-            return new RobustElementScope(new FieldsetFinder(driver, locator, outer), this, robustWrapper);
+            return new RobustElementScope(new FieldsetFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -410,7 +410,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindId(string id)
         {
-            return new RobustElementScope(new IdFinder(driver, id, outer), this, robustWrapper);
+            return new RobustElementScope(new IdFinder(driver, id, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -420,7 +420,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Check(string locator)
         {
-            RetryUntilTimeout(new Check(driver, outer, locator));
+            RetryUntilTimeout(new Check(driver, this, locator));
             return this;
         }
 
@@ -431,7 +431,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Uncheck(string locator)
         {
-            RetryUntilTimeout(new Uncheck(driver, outer, locator));
+            RetryUntilTimeout(new Uncheck(driver, this, locator));
             return this;
         }
 
@@ -442,7 +442,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public DriverScope Choose(string locator)
         {
-            RetryUntilTimeout(new Choose(driver, outer, locator));
+            RetryUntilTimeout(new Choose(driver, this, locator));
             return this;
         }
 
