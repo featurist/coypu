@@ -8,7 +8,6 @@ using SHDocVw;
 
 using WatiN.Core;
 using WatiN.Core.Constraints;
-using WatiN.Core.Exceptions;
 using WatiN.Core.Interfaces;
 
 using mshtml;
@@ -307,14 +306,7 @@ namespace Coypu.Drivers.Watin
 
         public void Select(Element element, string option)
         {
-            try
-            {
-                WatiNElement<SelectList>(element).Select(option);
-            }
-            catch (WatiNException)
-            {
-                WatiNElement<SelectList>(element).SelectByValue(option);
-            }
+            WatiNElement<SelectList>(element).SelectByTextOrValue(option);
         }
 
         public object Native
