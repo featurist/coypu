@@ -47,7 +47,7 @@ namespace Coypu.Drivers.Watin
             return browser;
         }
 
-        private WatiN.Core.Browser Watin { get; set; }
+        internal WatiN.Core.Browser Watin { get; private set; }
 
         private static WatiN.Core.Element WatiNElement(Element element)
         {
@@ -60,16 +60,30 @@ namespace Coypu.Drivers.Watin
             return element.Native as T;
         }
 
-        public void SetScope(Func<Element> find)
+        private static Element BuildElement(WatiN.Core.Element element, string description)
         {
-            Scope = WatiNElement(find());
+            if (element == null)
+                throw new MissingHtmlException(description);
+            return new WatiNElement(element);
         }
 
-        public WatiN.Core.Element Scope { get; set; }
+        public WatiN.Core.Element Scope
+        {
+            get { return elementFinder.Scope as WatiN.Core.Element; }
+        }
+
+        public void SetScope(Func<Element> find)
+        {
+            elementFinder.SetScope(() =>
+                                       {
+                                           var elementScope = WatiNElement(find());
+                                           return elementScope as IElementContainer ?? Watin;
+                                       });
+        }
 
         public void ClearScope()
         {
-            Scope = null;
+            elementFinder.ClearScope();
         }
 
         public string ExecuteScript(string javascript)
@@ -192,7 +206,7 @@ namespace Coypu.Drivers.Watin
             return !string.IsNullOrEmpty(element.OuterText) && element.OuterText.Trim() == expectedText.Trim();
         }
 
-        public IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
+        private IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
         {
             return collection.Filter(constraint).Cast<WatiN.Core.Element>().WithinScope(Scope);
         }
@@ -202,23 +216,9 @@ namespace Coypu.Drivers.Watin
             return collection.Filter(predicate).Cast<WatiN.Core.Element>().WithinScope(Scope);
         }
 
-        public WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
+        private WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
         {
             return Filter(collection, constraint).FirstDisplayedOrDefault(Scope);
-        }
-
-        public WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate) where TComponent : Component
-        {
-            return Filter(collection, predicate).FirstDisplayedOrDefault(Scope);
-        }
-
-        public Element BuildElement(WatiN.Core.Element element, string description)
-        {
-            if (element == null)
-            {
-                throw new MissingHtmlException(description);
-            }
-            return new WatiNElement(element);
         }
 
         public Element FindLink(string linkText)

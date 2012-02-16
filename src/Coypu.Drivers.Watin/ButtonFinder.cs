@@ -1,10 +1,6 @@
-using System;
-
-using WatiN.Core;
-
 namespace Coypu.Drivers.Watin
 {
-    public class ButtonFinder
+    internal class ButtonFinder
     {
         private readonly ElementFinder elementFinder;
         private readonly WatiN.Core.Browser browser;
