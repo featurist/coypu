@@ -70,6 +70,7 @@
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
     <Compile Include="TestDoubles\ImmediateSingleExecutionFakeRobustWrapper.cs" />
     <Compile Include="When_interacting_with_the_browser\When_considering_invisible_elements.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_insepcting_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
     <Compile Include="When_interacting_with_the_browser\When_constructing_xpath.cs" />

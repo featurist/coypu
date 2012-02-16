@@ -1,22 +1,19 @@
-using Coypu.Finders;
 using Coypu.Robustness;
 
 namespace Coypu.Actions
 {
     internal class Hover : DriverAction
     {
-        private readonly ElementFinder elementFinder;
         private readonly DriverScope driverScope;
 
-        internal Hover(ElementFinder elementFinder, DriverScope driverScope)
+        internal Hover(DriverScope driverScope)
         {
-            this.elementFinder = elementFinder;
             this.driverScope = driverScope;
         }
 
         public void Act()
         {
-            var element = elementFinder.Find();
+            var element = driverScope.Now();
             driverScope.Hover(element);
         }
     }

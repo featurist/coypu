@@ -11,50 +11,48 @@ namespace Coypu
 {
     public class ElementScope : Element, Scope<ElementScope>
     {
-        private readonly ElementFinder elementFinder;
         private readonly DriverScope driverScope;
         private readonly RobustWrapper robustWrapper;
 
         internal ElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper)
         {
-            this.elementFinder = elementFinder;
-            this.driverScope = new DriverScope(elementFinder,outerScope);
+            driverScope = new DriverScope(elementFinder, outerScope);
             this.robustWrapper = robustWrapper;
         }
 
         public string Id
         {
-            get { throw new System.NotImplementedException(); }
+            get { return Now().Id; }
         }
 
         public string Text
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public string Value
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public string Name
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public string SelectedOption
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public bool Selected
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public object Native
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         protected internal DriverScope DriverScope
@@ -64,23 +62,23 @@ namespace Coypu
 
         public string this[string attributeName]
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotImplementedException(); }
         }
 
         public virtual Element Now()
         {
-            return DriverScope.Now();
+            return driverScope.Now();
         }
 
         public ElementScope Click()
         {
-            robustWrapper.RobustlyDo(new Click(elementFinder, DriverScope));
+            robustWrapper.RobustlyDo(new Click(DriverScope));
             return this;
         }
 
         public ElementScope Hover()
         {
-            robustWrapper.RobustlyDo(new Hover(elementFinder,DriverScope));
+            robustWrapper.RobustlyDo(new Hover(DriverScope));
             return this;
         }
 
