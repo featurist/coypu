@@ -67,7 +67,7 @@ namespace Coypu.Drivers.Watin
             return new WatiNElement(element);
         }
 
-        public WatiN.Core.Element Scope
+        internal WatiN.Core.Element Scope
         {
             get { return elementFinder.Scope as WatiN.Core.Element; }
         }
@@ -211,7 +211,7 @@ namespace Coypu.Drivers.Watin
             return collection.Filter(constraint).Cast<WatiN.Core.Element>().WithinScope(Scope);
         }
 
-        public IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate) where TComponent : Component
+        internal IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate) where TComponent : Component
         {
             return collection.Filter(predicate).Cast<WatiN.Core.Element>().WithinScope(Scope);
         }
