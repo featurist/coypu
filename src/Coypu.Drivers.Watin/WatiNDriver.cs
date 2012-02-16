@@ -223,8 +223,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindLink(string linkText)
         {
-            var link = FindFirst(Watin.Links, Find.ByText(linkText));
-            return BuildElement(link, "Failed to find link with text: " + linkText);
+            return BuildElement(elementFinder.FindLink(linkText), "Failed to find link with text: " + linkText);
         }
 
         public Element FindField(string locator)
