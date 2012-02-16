@@ -88,7 +88,9 @@ namespace Coypu.Drivers.Watin
         public string ExecuteScript(string javascript)
         {
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
-            return Watin.Eval(stripReturn);
+            var retval = Watin.Eval(stripReturn);
+            Watin.WaitForComplete();
+            return retval;
         }
 
         public Element FindFieldset(string locator)

@@ -1,6 +1,10 @@
 require 'rubygems'
 require 'sinatra'
 
+get "/" do
+  "home"
+end
+
 get "/resource/:value" do
   params[:value]
 end
