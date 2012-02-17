@@ -27,32 +27,32 @@ namespace Coypu
 
         public string Text
         {
-            get { throw new NotImplementedException(); }
+            get { return Now().Text; }
         }
 
         public string Value
         {
-            get { throw new NotImplementedException(); }
+            get { return Now().Value; }
         }
 
         public string Name
         {
-            get { throw new NotImplementedException(); }
+            get { return Now().Name; }
         }
 
         public string SelectedOption
         {
-            get { throw new NotImplementedException(); }
+            get { return Now().SelectedOption; }
         }
 
         public bool Selected
         {
-            get { throw new NotImplementedException(); }
+            get { return Now().Selected; }
         }
 
         public object Native
         {
-            get { throw new NotImplementedException(); }
+            get { return Now().Native; }
         }
 
         protected internal DriverScope DriverScope
@@ -258,6 +258,11 @@ namespace Coypu
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
         {
             return DriverScope.RetryUntilTimeout(function);
+        }
+
+        public void RetryUntilTimeout(DriverAction driverAction)
+        {
+            DriverScope.RetryUntilTimeout(driverAction);
         }
 
         public T Query<T>(Func<T> query, T expecting)

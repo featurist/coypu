@@ -346,5 +346,7 @@ namespace Coypu
         /// <param name="waitBeforeRetry">How long to wait for the condition</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry);
+
+        void RetryUntilTimeout(DriverAction driverAction);
     }
 }

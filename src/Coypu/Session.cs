@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Predicates;
+using Coypu.Queries;
 using Coypu.Robustness;
 using Coypu.WebRequests;
 
@@ -14,7 +16,6 @@ namespace Coypu
     public class Session : Scope<Session>, IDisposable
     {
         private readonly Driver driver;
-        private readonly RobustWrapper robustWrapper;
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
         private readonly UrlBuilder urlBuilder;
 
@@ -26,7 +27,6 @@ namespace Coypu
         {
             driverScope = new DriverScope(new DocumentElementFinder(driver), driver, robustWrapper, waiter, urlBuilder);
             this.driver = driver;
-            this.robustWrapper = robustWrapper;
             this.restrictedResourceDownloader = restrictedResourceDownloader;
             this.urlBuilder = urlBuilder;
             temporaryTimeouts = new TemporaryTimeouts();
@@ -77,7 +77,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return robustWrapper.Query(() => driver.HasDialog(withText),true);
+            return Query(new HasDialogQuery(driver, withText));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return !robustWrapper.Query(() => driver.HasDialog(withText),false);
+            return Query(new HasNoDialogQuery(driver, withText));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog()
         {
-            driverScope.RetryUntilTimeout(() => driver.AcceptModalDialog());
+            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver));
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog()
         {
-            driverScope.RetryUntilTimeout(() => driver.CancelModalDialog());
+            driverScope.RetryUntilTimeout(new CancelModalDialog(driver));
         }
 
         /// <summary>
@@ -356,9 +356,19 @@ namespace Coypu
             return driverScope.RetryUntilTimeout(function);
         }
 
+        public void RetryUntilTimeout(DriverAction driverAction)
+        {
+            driverScope.RetryUntilTimeout(driverAction);
+        }
+
         public T Query<T>(Func<T> query, T expecting)
         {
             return driverScope.Query(query, expecting);
+        }
+
+        public T Query<T>(Query<T> query)
+        {
+            return driverScope.Query(query);
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)

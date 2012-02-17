@@ -88,6 +88,8 @@
     <Compile Include="Actions\Check.cs" />
     <Compile Include="Actions\Click.cs" />
     <Compile Include="Actions\Choose.cs" />
+    <Compile Include="Actions\AcceptModalDialog.cs" />
+    <Compile Include="Actions\CancelModalDialog.cs" />
     <Compile Include="Actions\FillIn.cs" />
     <Compile Include="Actions\Select.cs" />
     <Compile Include="Actions\Uncheck.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Actions\Hover.cs" />
     <Compile Include="Finders\IdFinder.cs" />
     <Compile Include="Queries\ContentMatchQuery.cs" />
+    <Compile Include="Queries\DialogQuery.cs" />
     <Compile Include="Queries\CssQuery.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />
     <Compile Include="Queries\HasContentMatchQuery.cs" />

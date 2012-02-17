@@ -504,7 +504,12 @@ namespace Coypu
             return robustWrapper.Robustly(function);
         }
 
-        private void RetryUntilTimeout(DriverAction driverAction)
+        /// <summary>
+        /// <para>Retry an action on any exception until it succeeds. Once the <see cref="Configuration.Timeout"/> is passed any exception will be rethrown.</para>
+        /// <para>Waits for the <see cref="Configuration.RetryInterval"/> between retries</para>
+        /// </summary>
+        /// <param name="function">A function</param>
+        public void RetryUntilTimeout(DriverAction driverAction)
         {
             robustWrapper.RobustlyDo(driverAction);
         }
