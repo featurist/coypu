@@ -58,7 +58,9 @@
     <Compile Include="Constraints.cs" />
     <Compile Include="CookieNameEqualityComparer.cs" />
     <Compile Include="DialogHandler.cs" />
+    <Compile Include="ElementContainerExtensions.cs" />
     <Compile Include="ElementFinder.cs" />
+    <Compile Include="Fieldset.cs" />
     <Compile Include="IEWaitForCompleteWithDialogs.cs" />
     <Compile Include="IEWithDialogWaiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

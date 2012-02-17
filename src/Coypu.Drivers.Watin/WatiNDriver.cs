@@ -23,6 +23,11 @@ namespace Coypu.Drivers.Watin
 
         private DialogHandler watinDialogHandler;
 
+        static WatiNDriver()
+        {
+            ElementFactory.RegisterElementType(typeof(Fieldset));
+        }
+
         public WatiNDriver()
         {
             if (Configuration.Browser != Browser.InternetExplorer)
@@ -96,28 +101,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindFieldset(string locator)
         {
-            var fieldsets = Watin.Elements.Filter(IsFieldset);
-            var fieldset =
-                FindFirst(fieldsets, Find.ById(locator)) ??
-                FindFieldsetByLegend(locator);
-
-            return BuildElement(fieldset, "Failed to find fieldset: " + locator);
-        }
-
-        private WatiN.Core.Element FindFieldsetByLegend(string locator)
-        {
-            var legend = Watin.Elements.Filter(e => e.TagName == "LEGEND")
-                                       .Filter(Find.ByText(locator))
-                                       .FirstDisplayedOrDefault();
-
-            return legend != null && IsFieldset(legend.Parent) 
-                    ? legend.Parent 
-                    : null;
-        }
-
-        private bool IsFieldset(WatiN.Core.Element e)
-        {
-            return e.TagName == "FIELDSET";
+            return BuildElement(elementFinder.FindFieldset(locator), "Failed to find fieldset: " + locator);
         }
 
         public Element FindSection(string locator)

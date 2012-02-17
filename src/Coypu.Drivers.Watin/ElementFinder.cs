@@ -64,6 +64,17 @@ namespace Coypu.Drivers.Watin
             return Scope.Elements.First(Constraints.WithId(id) & Constraints.NotHidden());
         }
 
+        public WatiN.Core.Element FindFieldset(string locator)
+        {
+            var withId = Constraints.WithId(locator);
+            var withLegend = Constraints.HasElement("legend", Find.ByText(locator));
+            var hasLocator = withId | withLegend;
+
+            var notHidden = Constraints.NotHidden();
+
+            return Scope.Fieldsets().First(hasLocator & notHidden);
+        }
+
         public Frame FindFrame(string locator)
         {
             return GetDocument().Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
