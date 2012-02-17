@@ -144,8 +144,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindId(string id)
         {
-            var element = Watin.Elements.Filter(Find.ById(id)).FirstDisplayedOrDefault(Scope);
-            return BuildElement(element, "Failed to find id: " + id);
+            return BuildElement(elementFinder.FindElement(id), "Failed to find id: " + id);
         }
 
         public Element FindIFrame(string locator)

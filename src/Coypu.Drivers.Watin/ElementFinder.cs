@@ -59,14 +59,19 @@ namespace Coypu.Drivers.Watin
             return Scope.Elements.First(isButton & hasLocator & notHidden);
         }
 
-        public WatiN.Core.Element FindLink(string linkText)
+        public WatiN.Core.Element FindElement(string id)
         {
-            return Scope.Links.First(Find.ByText(linkText) & Constraints.NotHidden());
+            return Scope.Elements.First(Constraints.WithId(id) & Constraints.NotHidden());
         }
 
         public Frame FindFrame(string locator)
         {
             return GetDocument().Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
+        }
+
+        public WatiN.Core.Element FindLink(string linkText)
+        {
+            return Scope.Links.First(Find.ByText(linkText) & Constraints.NotHidden());
         }
     }
 }
