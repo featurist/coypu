@@ -16,10 +16,10 @@ namespace Coypu.Drivers.Tests
                     var fullPath = Path.Combine(directoryInfo.FullName,someLocalFile);
                     using (File.Create(fullPath)) { }
 
-                    var textField = driver.FindField("forLabeledFileFieldId");
+                    var textField = driver.FindField("forLabeledFileFieldId", Root);
                     driver.Set(textField, fullPath);
 
-                    var findAgain = driver.FindField("forLabeledFileFieldId");
+                    var findAgain = driver.FindField("forLabeledFileFieldId", Root);
                     findAgain.Value.should_end_with("\\" + someLocalFile);
                 }
                 finally

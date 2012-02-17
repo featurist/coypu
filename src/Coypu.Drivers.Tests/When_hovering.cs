@@ -8,10 +8,10 @@ namespace Coypu.Drivers.Tests
         {
             it["mouses over the underlying element"] = () =>
             {
-                var element = driver.FindId("hoverOnMeTest");
-                driver.FindId("hoverOnMeTest").Text.should_be("Hover on me");
+                var element = driver.FindId("hoverOnMeTest", Root);
+                driver.FindId("hoverOnMeTest", Root).Text.should_be("Hover on me");
                 driver.Hover(element);
-                driver.FindId("hoverOnMeTest").Text.should_be("Hover on me - hovered");
+                driver.FindId("hoverOnMeTest", Root).Text.should_be("Hover on me - hovered");
             };
         }
     }

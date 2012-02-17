@@ -39,3 +39,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("0.6.0.0")]
 [assembly: AssemblyFileVersion("0.6.0.0")]
 [assembly: InternalsVisibleTo("Coypu.Tests")]
+[assembly: InternalsVisibleTo("Coypu.Drivers.Tests")]

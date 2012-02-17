@@ -1,10 +1,12 @@
 ﻿using System;
+using Coypu.Finders;
 using NSpec.Domain;
 
 namespace Coypu.Drivers.Tests
 {
     public class DriverSpecs
     {
+        private DriverScope root;
         public DriverSpecRunner DriverSpecRunner { get; set; }
 
         protected Driver driver { get { return DriverSpecRunner.Driver; } }
@@ -18,6 +20,11 @@ namespace Coypu.Drivers.Tests
         {
             // Override in each class with specs
             // TODO: Make this abstract -- but nspec needs a bug fix first
+        }
+
+        protected DriverScope Root
+        {
+            get { return root ?? (root = new DriverScope(new DocumentElementFinder(driver), null, null, null, null)); }
         }
     }
 }

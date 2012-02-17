@@ -8,20 +8,20 @@ namespace Coypu.Drivers.Tests
         {
             it["finds by header text"] = () =>
             {
-                driver.FindIFrame("I am iframe one").Id.should_be("iframe1");
-                driver.FindIFrame("I am iframe two").Id.should_be("iframe2");
+                driver.FindIFrame("I am iframe one", Root).Id.should_be("iframe1");
+                driver.FindIFrame("I am iframe two", Root).Id.should_be("iframe2");
             };
 
             it["finds by id"] = () =>
             {
-                driver.FindIFrame("iframe1").Id.should_be("iframe1");
-                driver.FindIFrame("iframe2").Id.should_be("iframe2");
+                driver.FindIFrame("iframe1", Root).Id.should_be("iframe1");
+                driver.FindIFrame("iframe2", Root).Id.should_be("iframe2");
             };
 
             it["finds by title"] = () =>
             {
-                driver.FindIFrame("iframe one title").Id.should_be("iframe1");
-                driver.FindIFrame("iframe two title").Id.should_be("iframe2");
+                driver.FindIFrame("iframe one title", Root).Id.should_be("iframe1");
+                driver.FindIFrame("iframe two title", Root).Id.should_be("iframe2");
             };
         }
     }

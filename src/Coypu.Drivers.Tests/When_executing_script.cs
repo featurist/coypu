@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using Coypu.Drivers.Watin;
-using NSpec;
+﻿using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
@@ -10,11 +8,11 @@ namespace Coypu.Drivers.Tests
         {
             it["runs the script in the browser"] = () =>
             {
-                driver.FindButton("firstButtonId").Text.should_be("first button");
+                driver.FindButton("firstButtonId", Root).Text.should_be("first button");
 
                 driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';");
 
-                driver.FindButton("firstButtonId").Text.should_be("script executed");
+                driver.FindButton("firstButtonId", Root).Text.should_be("script executed");
             };
 
             it["returns the result"] = () =>

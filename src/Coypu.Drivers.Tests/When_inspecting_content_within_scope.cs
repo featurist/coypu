@@ -9,28 +9,28 @@ namespace Coypu.Drivers.Tests
         {
             describe["scope 1"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindId("scope1"));
+                before = () => driver.SetScope(() => driver.FindId("scope1", Root));
 
                 it["finds content within scope"] = () =>
                 {
-                    driver.HasContent("Scope 1").should_be_true();
+                    driver.HasContent("Scope 1", Root).should_be_true();
                 };
                 it["does not find content outside scope"] = () =>
                 {
-                    driver.HasContent("Scope 2").should_be_false();
+                    driver.HasContent("Scope 2", Root).should_be_false();
                 };
             };
             describe["scope 2"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindId("scope2"));
+                before = () => driver.SetScope(() => driver.FindId("scope2", Root));
 
                 it["finds content within scope"] = () =>
                 {
-                    driver.HasContent("Scope 2").should_be_true();
+                    driver.HasContent("Scope 2", Root).should_be_true();
                 };
                 it["does not find content outside scope"] = () =>
                 {
-                    driver.HasContent("Scope 1").should_be_false();
+                    driver.HasContent("Scope 1", Root).should_be_false();
                 };
             };
         }

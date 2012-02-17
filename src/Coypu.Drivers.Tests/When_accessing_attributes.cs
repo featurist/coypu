@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
         {
             it["exposes element attributes"] = () => 
             {
-                var formWithAttributesToTest = driver.FindId("attributeTestForm");
+                var formWithAttributesToTest = driver.FindId("attributeTestForm", Root);
                 formWithAttributesToTest["id"].should_be("attributeTestForm");
                 formWithAttributesToTest["method"].should_be("post");
                 formWithAttributesToTest["action"].should_be("http://somesite.com/action.htm");

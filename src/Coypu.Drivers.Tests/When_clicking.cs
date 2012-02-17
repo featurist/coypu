@@ -8,10 +8,10 @@ namespace Coypu.Drivers.Tests
         {
             it["clicks the underlying element"] = () =>
             {
-                var element = driver.FindButton("clickMeTest");
-                driver.FindButton("clickMeTest").Value.should_be("Click me");
+                var element = driver.FindButton("clickMeTest", Root);
+                driver.FindButton("clickMeTest", Root).Value.should_be("Click me");
                 driver.Click(element);
-                driver.FindButton("clickMeTest").Value.should_be("Click me - clicked");
+                driver.FindButton("clickMeTest", Root).Value.should_be("Click me - clicked");
             };
         }
     }

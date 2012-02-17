@@ -11,28 +11,28 @@ namespace Coypu.Drivers.Tests
             {
                 it["finds by h1 text"] = () =>
                 {
-                    driver.FindSection("Section One h1").Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h1").Id.should_be("sectionTwo");
+                    driver.FindSection("Section One h1", Root).Id.should_be("sectionOne");
+                    driver.FindSection("Section Two h1", Root).Id.should_be("sectionTwo");
                 };
                 it["finds by h2 text"] = () =>
                 {
-                    driver.FindSection("Section One h2").Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h2").Id.should_be("sectionTwo");
+                    driver.FindSection("Section One h2", Root).Id.should_be("sectionOne");
+                    driver.FindSection("Section Two h2", Root).Id.should_be("sectionTwo");
                 };
                 it["finds by h3 text"] = () =>
                 {
-                    driver.FindSection("Section One h3").Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h3").Id.should_be("sectionTwo");
+                    driver.FindSection("Section One h3", Root).Id.should_be("sectionOne");
+                    driver.FindSection("Section Two h3", Root).Id.should_be("sectionTwo");
                 };
                 it["finds by h6 text"] = () =>
                 {
-                    driver.FindSection("Section One h6").Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h6").Id.should_be("sectionTwo");
+                    driver.FindSection("Section One h6", Root).Id.should_be("sectionOne");
+                    driver.FindSection("Section Two h6", Root).Id.should_be("sectionTwo");
                 };
                 it["finds section by id"] = () =>
                 {
-                    driver.FindSection("sectionOne").Id.should_be("sectionOne");
-                    driver.FindSection("sectionTwo").Id.should_be("sectionTwo");
+                    driver.FindSection("sectionOne", Root).Id.should_be("sectionOne");
+                    driver.FindSection("sectionTwo", Root).Id.should_be("sectionTwo");
                 };
 
                
@@ -40,8 +40,8 @@ namespace Coypu.Drivers.Tests
             
             it["only finds div and section"] = () =>
             {
-                Assert.Throws<MissingHtmlException>(() => driver.FindSection("scope1TextInputFieldId"));
-                Assert.Throws<MissingHtmlException>(() => driver.FindSection("fieldsetScope2"));
+                Assert.Throws<MissingHtmlException>(() => driver.FindSection("scope1TextInputFieldId", Root));
+                Assert.Throws<MissingHtmlException>(() => driver.FindSection("fieldsetScope2", Root));
             };
         }
     }

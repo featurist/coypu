@@ -2,10 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Tests.Sites;
-using Coypu.Drivers.Watin;
 using NSpec;
 using NSpec.Domain;
 

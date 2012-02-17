@@ -9,18 +9,18 @@ namespace Coypu.Drivers.Tests
         {
             it["finds by legend text"] = () =>
             {
-                driver.FindFieldset("Scope 1").Id.should_be("fieldsetScope1");
-                driver.FindFieldset("Scope 2").Id.should_be("fieldsetScope2");
+                driver.FindFieldset("Scope 1", Root).Id.should_be("fieldsetScope1");
+                driver.FindFieldset("Scope 2", Root).Id.should_be("fieldsetScope2");
             };
             it["finds by id"] = () =>
             {
-                driver.FindFieldset("fieldsetScope1").Native.should_be(driver.FindFieldset("Scope 1").Native);
-                driver.FindFieldset("fieldsetScope2").Native.should_be(driver.FindFieldset("Scope 2").Native);
+                driver.FindFieldset("fieldsetScope1", Root).Native.should_be(driver.FindFieldset("Scope 1", Root).Native);
+                driver.FindFieldset("fieldsetScope2", Root).Native.should_be(driver.FindFieldset("Scope 2", Root).Native);
             };
             it["finds only fieldsets"] = () =>
             {
-                Assert.Throws<MissingHtmlException>(() => driver.FindFieldset("scope1TextInputFieldId"));
-                Assert.Throws<MissingHtmlException>(() => driver.FindFieldset("sectionOne"));
+                Assert.Throws<MissingHtmlException>(() => driver.FindFieldset("scope1TextInputFieldId", Root));
+                Assert.Throws<MissingHtmlException>(() => driver.FindFieldset("sectionOne", Root));
             };
         }
     }

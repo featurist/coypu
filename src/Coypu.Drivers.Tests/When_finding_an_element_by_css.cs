@@ -1,5 +1,4 @@
-﻿using Coypu.Drivers.Watin;
-using NSpec;
+﻿using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -11,22 +10,22 @@ namespace Coypu.Drivers.Tests
             it["finds present examples"] = () => 
             {
                 var shouldFind = "#inspectingContent p.css-test span";
-                driver.FindCss(shouldFind).Text.should_be("This");
+                driver.FindCss(shouldFind, Root).Text.should_be("This");
 
                 shouldFind = "ul#cssTest li:nth-child(3)";
-                driver.FindCss(shouldFind).Text.should_be("Me! Pick me!");
+                driver.FindCss(shouldFind, Root).Text.should_be("Me! Pick me!");
             };
 
             it["does not find missing examples"] = () =>
             {
                 const string shouldNotFind = "#inspectingContent p.css-missing-test";
-                Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
+                Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind, Root), "Expected not to find something at: " + shouldNotFind);
             };
 
             it["only finds visible elements"] = () =>
             {
                 const string shouldNotFind = "#inspectingContent p.css-test img.invisible";
-                Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind), "Expected not to find something at: " + shouldNotFind);
+                Assert.Throws<MissingHtmlException>(() => driver.FindCss(shouldNotFind,Root), "Expected not to find something at: " + shouldNotFind);
             };
         }
     }

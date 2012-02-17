@@ -9,12 +9,12 @@ namespace Coypu.Drivers.Tests
         {
             it["sets text of selected option"] = () =>
             {
-                var textField = driver.FindField("containerLabeledSelectFieldId");
+                var textField = driver.FindField("containerLabeledSelectFieldId", Root);
                 textField.SelectedOption.should_be("select two option one");
 
                 driver.Select(textField, "select2value2");
 
-                textField = driver.FindField("containerLabeledSelectFieldId");
+                textField = driver.FindField("containerLabeledSelectFieldId", Root);
                 textField.SelectedOption.should_be("select two option two");
             };
         }

@@ -12,24 +12,24 @@ namespace Coypu.Drivers.Tests
             {
                 try
                 {
-                    Assert.That(driver.FindField("firstHiddenInputId").Value, Is.EqualTo("first hidden input"));
+                    Assert.That(driver.FindField("firstHiddenInputId", Root).Value, Is.EqualTo("first hidden input"));
                 }
                 finally
                 {
                 }
-                Assert.Throws<MissingHtmlException>(() => driver.FindField("firstHiddenInputId"));
+                Assert.Throws<MissingHtmlException>(() => driver.FindField("firstHiddenInputId", Root));
             };
 
             it["does find invisible elements"] = () =>
             {
                 try
                 {
-                    Assert.That(driver.FindButton("firstInvisibleInputId").Name, Is.EqualTo("firstInvisibleInputName"));
+                    Assert.That(driver.FindButton("firstInvisibleInputId", Root).Name, Is.EqualTo("firstInvisibleInputName"));
                 }
                 finally
                 {
                 }
-                Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstInvisibleInputId"));
+                Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstInvisibleInputId", Root));
             };
         }
     }

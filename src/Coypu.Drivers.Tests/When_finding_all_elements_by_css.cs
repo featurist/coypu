@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Coypu.Drivers.Watin;
 using NSpec;
 using NUnit.Framework;
 
@@ -12,13 +11,13 @@ namespace Coypu.Drivers.Tests
             it["returns empty if no matches"] = () => 
             {
                 const string shouldNotFind = "#inspectingContent p.css-missing-test";
-                Assert.That(driver.FindAllCss(shouldNotFind), Is.Empty);
+                Assert.That(driver.FindAllCss(shouldNotFind,Root), Is.Empty);
             };
 
             it["returns all matches by css"] = () =>
             {
                 const string shouldFind = "#inspectingContent ul#cssTest li";
-                var all = driver.FindAllCss(shouldFind);
+                var all = driver.FindAllCss(shouldFind,Root);
                 all.Count().should_be(3);
                 all.ElementAt(1).Text.should_be("two");
                 all.ElementAt(2).Text.should_be("Me! Pick me!");
