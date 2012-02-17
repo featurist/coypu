@@ -43,6 +43,11 @@ namespace Coypu.Drivers.Tests
                 driver.FindButton("rdInputButtonId").Value.should_be("third input button");
             };
 
+            it["finds a particular input button by id before finding by id ends with"] = () =>
+            {
+                driver.FindButton("otherButtonId").Id.should_be("otherButtonId");
+            };
+
             it["finds a particular input button by its name"] = () =>
             {
                 driver.FindButton("secondInputButtonId").Value.should_be("second input button");

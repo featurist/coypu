@@ -108,6 +108,11 @@ namespace Coypu.Drivers.Tests
                 {
                     driver.FindField("tainerLabeledFileFieldId").Name.should_be("containerLabeledFileFieldName");
                 };
+
+                it["finds by complete id before finding by id ends with"] = () =>
+                {
+                    driver.FindField("checkedBox").Id.should_be("checkedBox");
+                };
             };
             describe["finding by name"] = () =>
             {
