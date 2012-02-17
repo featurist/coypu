@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
@@ -93,7 +94,7 @@ namespace Coypu.Drivers.Watin
         {
             WatiN.Core.Element field = null;
 
-            var label = Scope.Labels.First(Find.ByText(locator));
+            var label = Scope.Labels.First(Find.ByText(new Regex(locator)));
             if (label != null)
             {
                 var notHidden = Constraints.NotHidden();
