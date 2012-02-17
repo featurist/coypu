@@ -8,7 +8,7 @@ namespace Coypu.Finders
 
         internal override Element Find()
         {
-            return Driver.DocumentElement;
+            return Driver.Window;
         }
     }
 }

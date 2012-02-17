@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Selenium
 
         public static ISearchContext SeleniumScope(DriverScope scope)
         {
-            return (ISearchContext) scope.Now();
+            return (ISearchContext) scope.Now().Native;
         }
 
         public bool IsDisplayed(IWebElement e, DriverScope scope)

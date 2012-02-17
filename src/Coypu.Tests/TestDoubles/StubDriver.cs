@@ -118,7 +118,7 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
-        public Element DocumentElement
+        public Element Window
         {
             get { return null; }
         }

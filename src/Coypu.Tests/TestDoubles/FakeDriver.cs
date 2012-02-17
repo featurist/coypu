@@ -241,7 +241,7 @@ namespace Coypu.Tests.TestDoubles
             get { return stubbedLocation; }
         }
 
-        public Element DocumentElement
+        public Element Window
         {
             get { throw new NotImplementedException(); }
         }

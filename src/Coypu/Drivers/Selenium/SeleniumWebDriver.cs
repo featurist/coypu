@@ -21,9 +21,9 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public Element DocumentElement
+        public Element Window
         {
-            get { throw new NotImplementedException(); }
+            get { return new SeleniumSearchContext(selenium); }
         }
 
         private RemoteWebDriver selenium;
@@ -152,7 +152,7 @@ namespace Coypu.Drivers.Selenium
 
         private string GetContent(DriverScope scope)
         {
-            return scope == DocumentElement
+            return scope == Window
                        ? GetText(By.XPath("."),scope)
                        : GetText(By.TagName("body"), scope);
         }

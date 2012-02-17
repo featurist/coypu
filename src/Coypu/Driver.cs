@@ -29,7 +29,7 @@ namespace Coypu
         void Choose(Element field);
         bool Disposed { get; }
         Uri Location { get; }
-        Element DocumentElement { get; }
+        Element Window { get; }
         void AcceptModalDialog();
         void CancelModalDialog();
         string ExecuteScript(string javascript);
