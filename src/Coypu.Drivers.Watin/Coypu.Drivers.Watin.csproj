@@ -58,6 +58,7 @@
     <Compile Include="Constraints.cs" />
     <Compile Include="CookieNameEqualityComparer.cs" />
     <Compile Include="DialogHandler.cs" />
+    <Compile Include="ElementCollectionExtensions.cs" />
     <Compile Include="ElementContainerExtensions.cs" />
     <Compile Include="ElementFinder.cs" />
     <Compile Include="Fieldset.cs" />
@@ -68,7 +69,6 @@
     <Compile Include="SelectListExtensions.cs" />
     <Compile Include="WatiNDriver.cs" />
     <Compile Include="WatiNElement.cs" />
-    <Compile Include="WatiNExtensions.cs" />
     <Compile Include="WatiNFrame.cs" />
   </ItemGroup>
   <ItemGroup>

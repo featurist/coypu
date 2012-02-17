@@ -7,9 +7,6 @@ using System.Text.RegularExpressions;
 using SHDocVw;
 
 using WatiN.Core;
-using WatiN.Core.Constraints;
-using WatiN.Core.Interfaces;
-
 using mshtml;
 
 namespace Coypu.Drivers.Watin
@@ -160,11 +157,6 @@ namespace Coypu.Drivers.Watin
             return BuildElement(elementFinder.FindButton(locator), "Failed to find button with text, id or name: " + locator);
         }
 
-        private IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
-        {
-            return collection.Filter(constraint).Cast<WatiN.Core.Element>().WithinScope(Scope);
-        }
-
         public Element FindLink(string linkText)
         {
             return BuildElement(elementFinder.FindLink(linkText), "Failed to find link with text: " + linkText);
@@ -172,53 +164,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindField(string locator)
         {
-            //var allFields = FindAllFields();
-
-            //var field = FindFieldByLabel(locator, allFields) ??
-            //            allFields.FirstDisplayedOrDefault(
-            //                Scope, f => f.Id == locator ||
-            //                            f.Name == locator ||
-            //                            HasAttribute(f, "value", locator) ||
-            //                            HasAttribute(f, "placeholder", locator));
-
             return BuildElement(elementFinder.FindField(locator), "Failed to find field with label, id, name or placeholder: " + locator);
-        }
-
-        private bool HasAttribute(WatiN.Core.Element element, string attributeName, string attributeValue)
-        {
-            return element.GetAttributeValue(attributeName) == attributeValue;
-        }
-
-        private WatiN.Core.Element FindFieldByLabel(string locator, IEnumerable<WatiN.Core.Element> allFields)
-        {
-            var label = (Label)Filter(Watin.Labels, Find.ByText(locator)).FirstWithinScopeOrDefault(Scope);
-            if (label != null)
-            {
-                return allFields.FirstDisplayedOrDefault(Scope, f => f.Id == label.For) ??
-                       allFields.FirstDisplayedOrDefault(Scope, f => IsElementInContainer(f, label));
-            }
-            return null;
-        }
-
-        private bool IsElementInContainer(WatiN.Core.Element element, IElementContainer container)
-        {
-            return container.Children().Any(child => child.Equals(element));
-        }
-
-        private IEnumerable<WatiN.Core.Element> FindAllFields()
-        {
-            var textFields = Watin.TextFields.Cast<WatiN.Core.Element>();
-            var selects = Watin.SelectLists.Cast<WatiN.Core.Element>();
-            var checkboxes = Watin.CheckBoxes.Cast<WatiN.Core.Element>();
-            var radioButtons = Watin.RadioButtons.Cast<WatiN.Core.Element>();
-            var fileUploads = Watin.FileUploads.Cast<WatiN.Core.Element>();
-
-            return fileUploads
-                    .Union(textFields)
-                    .Union(selects)
-                    .Union(checkboxes)
-                    .Union(radioButtons)
-                    .Union(fileUploads);
         }
 
         public void Click(Element element)

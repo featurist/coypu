@@ -47,16 +47,18 @@ namespace Coypu.Drivers.Watin
                            | Find.ByElement(e => e.TagName == "INPUT" && e.GetAttributeValue("type") == "image")
                            | Find.By("role", "button");
 
-            var hasLocator = Find.ById(locator)
-                             | Constraints.WithPartialId(locator)
-                             | Find.ByName(locator)
-                             | Find.ByText(locator)
-                             | Find.ByValue(locator)
-                             | Find.ByAlt(locator);
+            var byText = Find.ByText(locator);
+            var byIdNameValueOrAlt = Find.ById(locator)
+                                     | Find.ByName(locator)
+                                     | Find.ByValue(locator)
+                                     | Find.ByAlt(locator);
+            var byPartialId = Constraints.WithPartialId(locator);
+            var hasLocator = byText | byIdNameValueOrAlt | byPartialId;
 
             var notHidden = Constraints.NotHidden();
 
-            return Scope.Elements.First(isButton & hasLocator & notHidden);
+            var candidates = Scope.Elements.Filter(isButton & hasLocator & notHidden);
+            return candidates.FirstMatching(byText, byIdNameValueOrAlt, byPartialId);
         }
 
         public WatiN.Core.Element FindElement(string id)
@@ -66,29 +68,22 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindField(string locator)
         {
-            // Find all fields -> TextFields, SelectLists, CheckBoxes, RadioButtons, FileUploads
-
-            // Find field by label
-            //   Check all labels with text locator
-            //   If find label, find the field (from all fields) in scope with same id as for
-            //                  or, find field (from all fields) within the scope of the label
-
-            // Or, all fields in scope with matching id, name, value or placeholder
-
             var field = FindFieldByLabel(locator);
             if (field == null)
             {
                 var isField = Constraints.IsField();
 
-                var hasLocator = Find.ById(locator)
-                                 | Constraints.WithPartialId(locator)
-                                 | Find.ByName(locator)
-                                 | Find.ByValue(locator)
-                                 | Find.By("placeholder", locator);
+                var byIdOrName = Find.ById(locator) | Find.ByName(locator);
+                var byPlaceholder = Find.By("placeholder", locator);
+                var radioButtonByValue = Constraints.OfType<RadioButton>() & Find.ByValue(locator);
+                var byPartialId = Constraints.WithPartialId(locator);
+
+                var hasLocator = byIdOrName | byPlaceholder | radioButtonByValue | byPartialId;
 
                 var notHidden = Constraints.NotHidden();
 
-                field = Scope.Elements.First(isField & hasLocator & notHidden);
+                var candidates = Scope.Elements.Filter(isField & hasLocator & notHidden);
+                field = candidates.FirstMatching(byIdOrName, byPlaceholder, radioButtonByValue, byPartialId);
             }
 
             return field;
