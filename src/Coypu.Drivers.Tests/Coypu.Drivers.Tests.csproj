@@ -195,6 +195,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Coypu.Tests\Coypu.Tests.csproj">
+      <Project>{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}</Project>
+      <Name>Coypu.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Coypu\Coypu.csproj">
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
       <Name>Coypu</Name>

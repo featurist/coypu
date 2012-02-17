@@ -514,6 +514,11 @@ namespace Coypu
             robustWrapper.RobustlyDo(driverAction);
         }
 
+        public ElementScope FindIFrame(string locator)
+        {
+            return new RobustElementScope(new IFrameFinder(driver, locator, this), this, robustWrapper);
+        }
+
         /// <summary>
         /// <para>Execute a query repeatedly until either the expected result is returned or the <see cref="Configuration.Timeout"/> is passed.</para>
         /// <para>Once the <see cref="Configuration.Timeout"/> is passed any result will be returned or any exception will be rethrown.</para>

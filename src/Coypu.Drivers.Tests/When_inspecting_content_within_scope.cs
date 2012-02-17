@@ -1,4 +1,5 @@
 ﻿using System;
+using Coypu.Finders;
 using NSpec;
 
 namespace Coypu.Drivers.Tests
@@ -7,30 +8,31 @@ namespace Coypu.Drivers.Tests
     {
         internal override void Specs()
         {
+            DriverScope scope = null;
             describe["scope 1"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindId("scope1", Root));
+                before = () => scope = new DriverScope(new IdFinder(driver, "scope1", Root), null);
 
                 it["finds content within scope"] = () =>
                 {
-                    driver.HasContent("Scope 1", Root).should_be_true();
+                    driver.HasContent("Scope 1", scope).should_be_true();
                 };
                 it["does not find content outside scope"] = () =>
                 {
-                    driver.HasContent("Scope 2", Root).should_be_false();
+                    driver.HasContent("Scope 2", scope).should_be_false();
                 };
             };
             describe["scope 2"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindId("scope2", Root));
+                before = () => scope = new DriverScope(new IdFinder(driver, "scope2", Root), null);
 
                 it["finds content within scope"] = () =>
                 {
-                    driver.HasContent("Scope 2", Root).should_be_true();
+                    driver.HasContent("Scope 2", scope).should_be_true();
                 };
                 it["does not find content outside scope"] = () =>
                 {
-                    driver.HasContent("Scope 1", Root).should_be_false();
+                    driver.HasContent("Scope 1", scope).should_be_false();
                 };
             };
         }

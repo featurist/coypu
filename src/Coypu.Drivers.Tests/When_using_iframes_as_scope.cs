@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -17,31 +18,27 @@ namespace Coypu.Drivers.Tests
 
             it["finds elements among multiple scopes"] = () =>
             {
-                driver.SetScope(() => driver.FindIFrame("I am iframe one", Root));
-                driver.FindButton("scoped button", Root).Id.should_be("iframe1ButtonId");
+                var iframeOne = new DriverScope(new IFrameFinder(driver, "I am iframe one", Root), null);
+                var iframeTwo = new DriverScope(new IFrameFinder(driver, "I am iframe two", Root), null);
 
-                driver.ClearScope();
-
-                driver.SetScope(() => driver.FindIFrame("I am iframe two", Root));
-                driver.FindButton("scoped button", Root).Id.should_be("iframe2ButtonId");
+                driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
+                driver.FindButton("scoped button", iframeTwo).Id.should_be("iframe2ButtonId");
             };
 
             it["finds clears scope back to the whole window"] = () =>
             {
-                driver.SetScope(() => driver.FindIFrame("I am iframe one", Root));
-                driver.FindButton("scoped button", Root).Id.should_be("iframe1ButtonId");
-
-                driver.ClearScope();
+                var iframeOne = new DriverScope(new IFrameFinder(driver, "I am iframe one", Root), null);
+                driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
 
                 driver.FindButton("scoped button", Root).Id.should_be("scope1ButtonId");
             };
 
             it["can fill in a text input within an IFrame"] = () =>
             {
-                driver.SetScope(() => driver.FindIFrame("I am iframe one", Root));
-                driver.Set(driver.FindField("text input in iframe", Root), "filled in");
+                var iframeOne = new DriverScope(new IFrameFinder(driver, "I am iframe one", Root), null);
+                driver.Set(driver.FindField("text input in iframe", iframeOne), "filled in");
 
-                Assert.That(driver.FindField("text input in iframe", Root).Value, Is.EqualTo("filled in"));
+                Assert.That(driver.FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));
             };
         }
     }

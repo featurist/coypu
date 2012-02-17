@@ -297,6 +297,11 @@ namespace Coypu
             return driverScope.FindSection(locator);
         }
 
+        public ElementScope FindIFrame(string locator)
+        {
+            return driverScope.FindIFrame(locator);
+        }
+
         public ElementScope FindFieldset(string locator)
         {
             return driverScope.FindFieldset(locator);

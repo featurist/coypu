@@ -74,11 +74,7 @@ namespace Coypu.Drivers.Tests
 
         private void LoadDriverSpecs(Type driverType, Browser browser, Type specsToRun)
         {
-            before = () =>
-                         {
-                             LoadTestHTML(driverType, browser);
-                             Driver.ClearScope();
-                         };
+            before = () => LoadTestHTML(driverType, browser);
 
             Assembly.GetExecutingAssembly().GetTypes()
                 .Where(

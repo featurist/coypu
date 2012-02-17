@@ -1,4 +1,6 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using Coypu.Tests.TestDoubles;
+using NSpec;
 
 namespace Coypu.Drivers.Tests
 {
@@ -6,38 +8,40 @@ namespace Coypu.Drivers.Tests
     {
         internal override void Specs()
         {
+            DriverScope scope = null;
+
             describe["within scope1"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindId("scope1", Root));
+                before = () => scope = new DriverScope(new IdFinder(driver, "scope1", Root), null);
 
                 it["finds button by name"] = () =>
                 {
-                    driver.FindButton("scopedButtonName", Root).Id.should_be("scope1ButtonId");
+                    driver.FindButton("scopedButtonName", scope).Id.should_be("scope1ButtonId");
                 };
                 it["finds input button by value"] = () =>
                 {
-                    driver.FindButton("scoped input button", Root).Id.should_be("scope1InputButtonId");
+                    driver.FindButton("scoped input button", scope).Id.should_be("scope1InputButtonId");
                 };
                 it["finds button by text"] = () =>
                 {
-                    driver.FindButton("scoped button", Root).Id.should_be("scope1ButtonId");
+                    driver.FindButton("scoped button", scope).Id.should_be("scope1ButtonId");
                 };
             };
             describe["within scope2"] = () =>
             {
-                before = () => driver.SetScope(() => driver.FindId("scope2", Root));
+                before = () => scope = new DriverScope(new IdFinder(driver, "scope2", Root), null);
 
                 it["finds button by name"] = () =>
                 {
-                    driver.FindButton("scopedButtonName", Root).Id.should_be("scope2ButtonId");
+                    driver.FindButton("scopedButtonName", scope).Id.should_be("scope2ButtonId");
                 };
                 it["finds input button by value"] = () =>
                 {
-                    driver.FindButton("scoped input button", Root).Id.should_be("scope2InputButtonId");
+                    driver.FindButton("scoped input button", scope).Id.should_be("scope2InputButtonId");
                 };
                 it["finds button by text"] = () =>
                 {
-                    driver.FindButton("scoped button", Root).Id.should_be("scope2ButtonId");
+                    driver.FindButton("scoped button", scope).Id.should_be("scope2ButtonId");
                 };
             };
         }

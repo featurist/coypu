@@ -15,13 +15,9 @@ namespace Coypu.Tests.TestDoubles
         }
     }
 
-    internal class AlwaysFindsElementFinder : ElementFinder
+    public class AlwaysFindsElementFinder : ElementFinder
     {
         private readonly Element element;
-
-        public AlwaysFindsElementFinder(): this(new StubElement())
-        {
-        }
 
         public AlwaysFindsElementFinder(Element element) : base (null,null,null)
         {
