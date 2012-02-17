@@ -172,16 +172,16 @@ namespace Coypu.Drivers.Watin
 
         public Element FindField(string locator)
         {
-            var allFields = FindAllFields();
+            //var allFields = FindAllFields();
 
-            var field = FindFieldByLabel(locator, allFields) ??
-                        allFields.FirstDisplayedOrDefault(
-                            Scope, f => f.Id == locator ||
-                                        f.Name == locator ||
-                                        HasAttribute(f, "value", locator) ||
-                                        HasAttribute(f, "placeholder", locator));
+            //var field = FindFieldByLabel(locator, allFields) ??
+            //            allFields.FirstDisplayedOrDefault(
+            //                Scope, f => f.Id == locator ||
+            //                            f.Name == locator ||
+            //                            HasAttribute(f, "value", locator) ||
+            //                            HasAttribute(f, "placeholder", locator));
 
-            return BuildElement(field, "Failed to find field with label, id, name or placeholder: " + locator);
+            return BuildElement(elementFinder.FindField(locator), "Failed to find field with label, id, name or placeholder: " + locator);
         }
 
         private bool HasAttribute(WatiN.Core.Element element, string attributeName, string attributeValue)

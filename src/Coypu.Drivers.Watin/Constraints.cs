@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using WatiN.Core;
+using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
@@ -28,6 +30,22 @@ namespace Coypu.Drivers.Watin
             return new ComponentConstraint(new HasElementComparer(tagNames, locator));
         }
 
+        public static Constraint OfType<T>()
+            where T : WatiN.Core.Element
+        {
+            return new ElementConstraint(new TypeComparer(typeof(T)));
+        }
+
+        public static Constraint OfType(params Type[] types)
+        {
+            return new ElementConstraint(new TypesComparer(types));
+        }
+
+        public static Constraint IsField()
+        {
+            return OfType(typeof(TextField), typeof(SelectList), typeof(CheckBox), typeof(RadioButton), typeof(FileUpload));
+        }
+
         private class StringEndsWithComparer : WatiN.Core.Comparers.Comparer<string>
         {
             private readonly string id;
@@ -39,7 +57,7 @@ namespace Coypu.Drivers.Watin
 
             public override bool Compare(string value)
             {
-                return value != null && value.EndsWith(id);
+                return value != null && id != null && value.EndsWith(id);
             }
         }
 
@@ -68,6 +86,21 @@ namespace Coypu.Drivers.Watin
             {
                 var container = component as IElementContainer;
                 return container != null && container.ElementsWithTag(tagNames).Exists(locator);
+            }
+        }
+
+        private class TypesComparer : WatiN.Core.Comparers.Comparer<WatiN.Core.Element>
+        {
+            private readonly Type[] types;
+
+            public TypesComparer(params Type[] types)
+            {
+                this.types = types;
+            }
+
+            public override bool Compare(WatiN.Core.Element element)
+            {
+                return types.Contains(element.GetType());
             }
         }
     }
