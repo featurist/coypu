@@ -4,7 +4,7 @@ namespace Coypu.Drivers.Watin
 {
     internal class WatiNElement : Element
     {
-        internal WatiNElement(object watinElement)
+        internal WatiNElement(WatiN.Core.Element watinElement)
         {
             Native = watinElement;
         }

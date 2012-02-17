@@ -66,6 +66,13 @@ namespace Coypu.Drivers.Watin
             return new WatiNElement(element);
         }
 
+        private static Element BuildElement(Frame frame, string description)
+        {
+            if (frame == null)
+                throw new MissingHtmlException(description);
+            return new WatiNFrame(frame);
+        }
+
         internal WatiN.Core.Element Scope
         {
             get { return elementFinder.Scope as WatiN.Core.Element; }
@@ -145,11 +152,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindIFrame(string locator)
         {
-            var frame = Filter(Watin.Frames, f => HasElement(f, "h1", locator) ||
-                                                  f.Title == locator ||
-                                                  f.Id == locator).FirstOrDefault();
-
-            return BuildElement(frame, "Failed to find frame: " + locator);
+            return BuildElement(elementFinder.FindFrame(locator), "Failed to find frame: " + locator);
         }
 
         public void Hover(Element element)
@@ -188,13 +191,6 @@ namespace Coypu.Drivers.Watin
                    let name = cookie.Substring(0, index)
                    let value = cookie.Substring(index + 1, cookie.Length - index - 1)
                    select new Cookie(name, value);
-        }
-
-        private bool HasElement(IElementContainer elementContainer, string tagName, string text)
-        {
-            return elementContainer.ElementsWithTag(new List<ElementTag> { new ElementTag(tagName) })
-                    .Filter(Find.ByText(text))
-                    .Any();
         }
 
         public Element FindButton(string locator)

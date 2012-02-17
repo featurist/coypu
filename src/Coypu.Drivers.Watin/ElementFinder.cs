@@ -1,9 +1,5 @@
 using System;
-using System.IO;
-using System.Linq;
 using WatiN.Core;
-using WatiN.Core.Comparers;
-using WatiN.Core.Constraints;
 using WatiN.Core.Interfaces;
 
 namespace Coypu.Drivers.Watin
@@ -17,6 +13,11 @@ namespace Coypu.Drivers.Watin
         {
             this.driver = driver;
             ClearScope();
+        }
+
+        private Document GetDocument()
+        {
+            return driver.Watin;
         }
 
         internal IElementContainer Scope
@@ -41,11 +42,6 @@ namespace Coypu.Drivers.Watin
             findScope = GetDocument;
         }
 
-        private IElementContainer GetDocument()
-        {
-            return driver.Watin;
-        }
-
         public WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate)
             where TComponent : Component
         {
@@ -54,20 +50,12 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindLink(string linkText)
         {
-            return Scope.Links.First(Find.ByText(linkText) & NotHidden());
+            return Scope.Links.First(Find.ByText(linkText) & Constraints.NotHidden());
         }
 
-        private static Constraint NotHidden()
+        public Frame FindFrame(string locator)
         {
-            return new ElementConstraint(new DisplayNotNoneComparer());
-        }
-
-        private class DisplayNotNoneComparer : Comparer<WatiN.Core.Element>
-        {
-            public override bool Compare(WatiN.Core.Element value)
-            {
-                return value.Style.Display != "none";
-            }
+            return GetDocument().Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
         }
     }
 }
