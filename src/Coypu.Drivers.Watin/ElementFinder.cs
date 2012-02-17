@@ -47,7 +47,8 @@ namespace Coypu.Drivers.Watin
                            | Find.ByElement(e => e.TagName == "INPUT" && e.GetAttributeValue("type") == "image")
                            | Find.By("role", "button");
 
-            var hasLocator = Constraints.WithId(locator)
+            var hasLocator = Find.ById(locator)
+                             | Constraints.WithPartialId(locator)
                              | Find.ByName(locator)
                              | Find.ByText(locator)
                              | Find.ByValue(locator)
@@ -60,7 +61,7 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindElement(string id)
         {
-            return Scope.Elements.First(Constraints.WithId(id) & Constraints.NotHidden());
+            return Scope.Elements.First(Find.ById(id) & Constraints.NotHidden());
         }
 
         public WatiN.Core.Element FindField(string locator)
@@ -79,7 +80,8 @@ namespace Coypu.Drivers.Watin
             {
                 var isField = Constraints.IsField();
 
-                var hasLocator = Constraints.WithId(locator)
+                var hasLocator = Find.ById(locator)
+                                 | Constraints.WithPartialId(locator)
                                  | Find.ByName(locator)
                                  | Find.ByValue(locator)
                                  | Find.By("placeholder", locator);
@@ -101,15 +103,18 @@ namespace Coypu.Drivers.Watin
             {
                 var notHidden = Constraints.NotHidden();
 
-                field = Scope.Elements.First(Constraints.WithId(label.For) & notHidden)
-                        ?? label.Elements.First(notHidden);
+                if (!string.IsNullOrEmpty(label.For))
+                    field = Scope.Elements.First(Find.ById(label.For) & notHidden);
+
+                if (field == null)
+                    field = label.Elements.First(Constraints.IsField() & notHidden);
             }
             return field;
         }
 
         public WatiN.Core.Element FindFieldset(string locator)
         {
-            var withId = Constraints.WithId(locator);
+            var withId = Find.ById(locator);
             var withLegend = Constraints.HasElement("legend", Find.ByText(locator));
             var hasLocator = withId | withLegend;
 
@@ -132,7 +137,7 @@ namespace Coypu.Drivers.Watin
         {
             var isSection = Constraints.OfType(typeof(Section), typeof(Div));
 
-            var hasLocator = Constraints.WithId(locator)
+            var hasLocator = Find.ById(locator)
                              | Constraints.HasElement(new[] { "h1", "h2", "h3", "h4", "h5", "h6" }, Find.ByText(locator));
 
             var notHidden = Constraints.NotHidden();

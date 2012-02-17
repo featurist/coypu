@@ -10,7 +10,7 @@ namespace Coypu.Drivers.Watin
 {
     internal static class Constraints
     {
-        public static Constraint WithId(string id)
+        public static Constraint WithPartialId(string id)
         {
             return Find.ById(new StringEndsWithComparer(id));
         }
