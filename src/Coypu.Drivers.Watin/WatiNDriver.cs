@@ -20,7 +20,6 @@ namespace Coypu.Drivers.Watin
         readonly string[] headerTagNames = new[] { "H1", "H2", "H3", "H4", "H5", "H6" };
 
         private readonly ElementFinder elementFinder;
-        private readonly ButtonFinder buttonFinder;
 
         private DialogHandler watinDialogHandler;
 
@@ -33,7 +32,6 @@ namespace Coypu.Drivers.Watin
 
             Watin = CreateBrowser();
             elementFinder = new ElementFinder(this);
-            buttonFinder = new ButtonFinder(elementFinder, Watin);
         }
 
         private WatiN.Core.Browser CreateBrowser()
@@ -73,7 +71,7 @@ namespace Coypu.Drivers.Watin
             return new WatiNFrame(frame);
         }
 
-        internal WatiN.Core.Element Scope
+        private WatiN.Core.Element Scope
         {
             get { return elementFinder.Scope as WatiN.Core.Element; }
         }
@@ -195,7 +193,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindButton(string locator)
         {
-            return BuildElement(buttonFinder.FindButton(locator), "Failed to find button with text, id or name: " + locator);
+            return BuildElement(elementFinder.FindButton(locator), "Failed to find button with text, id or name: " + locator);
         }
 
         private bool TextMatches(WatiN.Core.Element element, string expectedText)
@@ -206,11 +204,6 @@ namespace Coypu.Drivers.Watin
         private IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
         {
             return collection.Filter(constraint).Cast<WatiN.Core.Element>().WithinScope(Scope);
-        }
-
-        internal IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate) where TComponent : Component
-        {
-            return collection.Filter(predicate).Cast<WatiN.Core.Element>().WithinScope(Scope);
         }
 
         private WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component

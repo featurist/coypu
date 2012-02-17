@@ -55,12 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonFinder.cs" />
     <Compile Include="Constraints.cs" />
     <Compile Include="CookieNameEqualityComparer.cs" />
     <Compile Include="DialogHandler.cs" />
     <Compile Include="ElementFinder.cs" />
-    <Compile Include="ElementMatcher.cs" />
     <Compile Include="IEWaitForCompleteWithDialogs.cs" />
     <Compile Include="IEWithDialogWaiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

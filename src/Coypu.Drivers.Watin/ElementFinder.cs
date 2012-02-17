@@ -1,6 +1,6 @@
 using System;
 using WatiN.Core;
-using WatiN.Core.Interfaces;
+using WatiN.Core.Comparers;
 
 namespace Coypu.Drivers.Watin
 {
@@ -42,10 +42,21 @@ namespace Coypu.Drivers.Watin
             findScope = GetDocument;
         }
 
-        public WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate)
-            where TComponent : Component
+        public WatiN.Core.Element FindButton(string locator)
         {
-            return driver.Filter(collection, predicate).FirstDisplayedOrDefault(driver.Scope);
+            var isButton = Find.ByElement(new TypeComparer(typeof (Button)))
+                           | Find.ByElement(e => e.TagName == "INPUT" && e.GetAttributeValue("type") == "image")
+                           | Find.By("role", "button");
+
+            var hasLocator = Constraints.WithId(locator)
+                             | Find.ByName(locator)
+                             | Find.ByText(locator)
+                             | Find.ByValue(locator)
+                             | Find.ByAlt(locator);
+
+            var notHidden = Constraints.NotHidden();
+
+            return Scope.Elements.First(isButton & hasLocator & notHidden);
         }
 
         public WatiN.Core.Element FindLink(string linkText)

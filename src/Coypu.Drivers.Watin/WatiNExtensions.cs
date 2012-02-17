@@ -6,7 +6,7 @@ namespace Coypu.Drivers.Watin
 {
     internal static class WatiNExtensions
     {
-        internal static bool IsDisplayed(this WatiN.Core.Element element)
+        private static bool IsDisplayed(this WatiN.Core.Element element)
         {
             if (string.Equals(element.Style.Display, "none"))
             {
@@ -35,11 +35,6 @@ namespace Coypu.Drivers.Watin
             return elements.FirstOrDefault(e => predicate(e) && IsDisplayed(e) && IsWithinScope(e, scope));
         }
 
-        internal static WatiN.Core.Element FirstWithinScopeOrDefault(this IEnumerable<WatiN.Core.Element> elements, WatiN.Core.Element scope, Func<WatiN.Core.Element, bool> predicate)
-        {
-            return elements.FirstOrDefault(e => predicate(e) && IsWithinScope(e, scope));
-        }
-
         internal static IEnumerable<WatiN.Core.Element> WithinScope(this IEnumerable<WatiN.Core.Element> elements, WatiN.Core.Element scope)
         {
             return elements.Where(e => IsWithinScope(e, scope));
@@ -59,11 +54,6 @@ namespace Coypu.Drivers.Watin
                 parent = parent.Parent;
             }
             return false;
-        }
-
-        internal static bool AnyDisplayed(this IEnumerable<WatiN.Core.Element> elements)
-        {
-            return elements.Any(IsDisplayed);
         }
 
         internal static WatiN.Core.Element FirstDisplayedOrDefault(this IEnumerable<WatiN.Core.Element> elements, Func<WatiN.Core.Element, bool> predicate)
