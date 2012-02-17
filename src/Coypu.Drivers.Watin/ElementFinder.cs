@@ -84,5 +84,18 @@ namespace Coypu.Drivers.Watin
         {
             return Scope.Links.First(Find.ByText(linkText) & Constraints.NotHidden());
         }
+
+        public WatiN.Core.Element FindSection(string locator)
+        {
+            var isSection = Find.ByElement(new TypeComparer(typeof(Section)))
+                            | Find.ByElement(new TypeComparer(typeof(Div)));
+
+            var hasLocator = Constraints.WithId(locator)
+                             | Constraints.HasElement(new[] { "h1", "h2", "h3", "h4", "h5", "h6" }, Find.ByText(locator));
+
+            var notHidden = Constraints.NotHidden();
+
+            return Scope.Elements.First(isSection & hasLocator & notHidden);
+        }
     }
 }

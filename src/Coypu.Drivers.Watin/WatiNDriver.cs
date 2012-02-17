@@ -16,9 +16,6 @@ namespace Coypu.Drivers.Watin
 {
     public class WatiNDriver : Driver
     {
-        readonly string[] sectionTagNames = new[] { "SECTION", "DIV" };
-        readonly string[] headerTagNames = new[] { "H1", "H2", "H3", "H4", "H5", "H6" };
-
         private readonly ElementFinder elementFinder;
 
         private DialogHandler watinDialogHandler;
@@ -26,6 +23,7 @@ namespace Coypu.Drivers.Watin
         static WatiNDriver()
         {
             ElementFactory.RegisterElementType(typeof(Fieldset));
+            ElementFactory.RegisterElementType(typeof(Section));
         }
 
         public WatiNDriver()
@@ -106,20 +104,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindSection(string locator)
         {
-            var section = Watin.Elements.FirstDisplayedOrDefault(e => e.Id == locator && IsSection(e)) ??
-                          Watin.Elements
-                                 .Where(e => headerTagNames.Contains(e.TagName) && 
-                                             TextMatches(e,locator) &&
-                                             sectionTagNames.Contains(e.Parent.TagName))
-                               .Select(h => h.Parent)
-                               .FirstDisplayedOrDefault();
-
-            return BuildElement(section, "Failed to find section: " + locator);
-        }
-
-        private bool IsSection(WatiN.Core.Element e)
-        {
-            return sectionTagNames.Contains(e.TagName);
+            return BuildElement(elementFinder.FindSection(locator), "Failed to find section: " + locator);
         }
 
         public Element FindId(string id)
@@ -175,19 +160,9 @@ namespace Coypu.Drivers.Watin
             return BuildElement(elementFinder.FindButton(locator), "Failed to find button with text, id or name: " + locator);
         }
 
-        private bool TextMatches(WatiN.Core.Element element, string expectedText)
-        {
-            return !string.IsNullOrEmpty(element.OuterText) && element.OuterText.Trim() == expectedText.Trim();
-        }
-
         private IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
         {
             return collection.Filter(constraint).Cast<WatiN.Core.Element>().WithinScope(Scope);
-        }
-
-        private WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
-        {
-            return Filter(collection, constraint).FirstDisplayedOrDefault(Scope);
         }
 
         public Element FindLink(string linkText)

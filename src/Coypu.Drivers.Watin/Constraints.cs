@@ -1,5 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+
 using WatiN.Core;
-using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
@@ -18,10 +20,15 @@ namespace Coypu.Drivers.Watin
 
         public static Constraint HasElement(string tagName, Constraint locator)
         {
-            return new ComponentConstraint(new HasElementComparer(tagName, locator));
+            return new ComponentConstraint(new HasElementComparer(new[] { tagName }, locator));
         }
 
-        private class StringEndsWithComparer : Comparer<string>
+        public static Constraint HasElement(IEnumerable<string> tagNames, Constraint locator)
+        {
+            return new ComponentConstraint(new HasElementComparer(tagNames, locator));
+        }
+
+        private class StringEndsWithComparer : WatiN.Core.Comparers.Comparer<string>
         {
             private readonly string id;
 
@@ -36,7 +43,7 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        private class DisplayNotNoneComparer : Comparer<WatiN.Core.Element>
+        private class DisplayNotNoneComparer : WatiN.Core.Comparers.Comparer<WatiN.Core.Element>
         {
             public override bool Compare(WatiN.Core.Element value)
             {
@@ -44,21 +51,23 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        private class HasElementComparer : Comparer<Component>
+        private class HasElementComparer : WatiN.Core.Comparers.Comparer<Component>
         {
-            private readonly string tagName;
+            private readonly IList<ElementTag> tagNames;
             private readonly Constraint locator;
 
-            public HasElementComparer(string tagName, Constraint locator)
+            public HasElementComparer(IEnumerable<string> tagNames, Constraint locator)
             {
-                this.tagName = tagName;
+                this.tagNames = (from tagName in tagNames
+                                 from tag in ElementTag.ToElementTags(tagName)
+                                 select tag).ToList();
                 this.locator = locator;
             }
 
             public override bool Compare(Component component)
             {
                 var container = component as IElementContainer;
-                return container != null && container.ElementWithTag(tagName, locator).Exists;
+                return container != null && container.ElementsWithTag(tagNames).Exists(locator);
             }
         }
     }

@@ -8,5 +8,10 @@ namespace Coypu.Drivers.Watin
         {
             return elementContainer.ElementsOfType<Fieldset>();
         }
+
+        public static ElementCollection<Section> Sections(this IElementContainer elementContainer)
+        {
+            return elementContainer.ElementsOfType<Section>();
+        }
     }
 }
