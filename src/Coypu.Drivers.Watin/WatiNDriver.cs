@@ -78,11 +78,7 @@ namespace Coypu.Drivers.Watin
 
         public void SetScope(Func<Element> find)
         {
-            elementFinder.SetScope(() =>
-                                       {
-                                           var elementScope = WatiNElement(find());
-                                           return elementScope as IElementContainer ?? Watin;
-                                       });
+            elementFinder.SetScope(() => find().Native as IElementContainer ?? Watin);
         }
 
         public void ClearScope()
