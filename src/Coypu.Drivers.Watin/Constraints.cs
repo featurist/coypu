@@ -15,9 +15,9 @@ namespace Coypu.Drivers.Watin
             return Find.ById(new StringEndsWithComparer(id));
         }
 
-        public static Constraint NotHidden()
+        public static Constraint IsVisible()
         {
-            return new ElementConstraint(new DisplayNotNoneComparer());
+            return new ElementConstraint(new IsVisibleComparer());
         }
 
         public static Constraint HasElement(string tagName, Constraint locator)
@@ -61,11 +61,11 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        private class DisplayNotNoneComparer : WatiN.Core.Comparers.Comparer<WatiN.Core.Element>
+        private class IsVisibleComparer : WatiN.Core.Comparers.Comparer<WatiN.Core.Element>
         {
-            public override bool Compare(WatiN.Core.Element value)
+            public override bool Compare(WatiN.Core.Element element)
             {
-                return value.Style.Display != "none";
+                return element.Style.Display != "none" && element.Style.GetAttributeValue("visibility") != "hidden";
             }
         }
 

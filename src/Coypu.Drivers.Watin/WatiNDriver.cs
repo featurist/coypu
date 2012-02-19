@@ -61,6 +61,11 @@ namespace Coypu.Drivers.Watin
         {
             if (element == null)
                 throw new MissingHtmlException(description);
+            return BuildElement(element);
+        }
+
+        private static Element BuildElement(WatiN.Core.Element element)
+        {
             return new WatiNElement(element);
         }
 
@@ -209,11 +214,16 @@ namespace Coypu.Drivers.Watin
         {
             return Scope != null
                 ? Scope.Text.Contains(text) 
-                : Watin.ContainsText(text);
+                : Watin.Text.Contains(text);
         }
 
         public bool HasContentMatch(Regex pattern)
         {
+            var text = Watin.Text;
+            text = Regex.Replace(text, "(\r\n)+", "\r\n");
+
+            Console.WriteLine(text);
+
             return Scope != null
                 ? pattern.IsMatch(Scope.Text) 
                 : Watin.ContainsText(pattern);
@@ -251,7 +261,7 @@ namespace Coypu.Drivers.Watin
 
         public bool HasCss(string cssSelector)
         {
-            throw new NotSupportedException("HasCss not yet implemented in WatiNDriver");
+            return elementFinder.HasCss(cssSelector);
         }
 
         public bool HasXPath(string xpath)
@@ -261,7 +271,7 @@ namespace Coypu.Drivers.Watin
 
         public Element FindCss(string cssSelector)
         {
-            throw new NotSupportedException("FindCss not yet implemented in WatiNDriver");
+            return BuildElement(elementFinder.FindCss(cssSelector), "No element found by css: " + cssSelector);
         }
 
         public Element FindXPath(string xpath)
@@ -271,7 +281,8 @@ namespace Coypu.Drivers.Watin
 
         public IEnumerable<Element> FindAllCss(string cssSelector)
         {
-            throw new NotSupportedException("FindAllCss not yet implemented in WatiNDriver");
+            return (from e in elementFinder.FindAllCss(cssSelector)
+                    select BuildElement(e)).ToList();
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath)
