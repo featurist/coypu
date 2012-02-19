@@ -15,9 +15,9 @@ namespace Coypu.Drivers.Watin
             return Find.ById(new StringEndsWithComparer(id));
         }
 
-        public static Constraint IsVisible()
+        public static Constraint IsVisible(bool considerInvisibleElements)
         {
-            return new ElementConstraint(new IsVisibleComparer());
+            return considerInvisibleElements ? (Constraint) Find.Any : new ElementConstraint(new IsVisibleComparer());
         }
 
         public static Constraint HasElement(string tagName, Constraint locator)

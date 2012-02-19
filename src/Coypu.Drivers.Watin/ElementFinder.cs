@@ -34,6 +34,8 @@ namespace Coypu.Drivers.Watin
             }
         }
 
+        public bool ConsiderInvisibleElements { get; set; }
+
         public void SetScope(Func<IElementContainer> findElementContainer)
         {
             findScope = findElementContainer;
@@ -58,7 +60,7 @@ namespace Coypu.Drivers.Watin
             var byPartialId = Constraints.WithPartialId(locator);
             var hasLocator = byText | byIdNameValueOrAlt | byPartialId;
 
-            var isVisible = Constraints.IsVisible();
+            var isVisible = Constraints.IsVisible(ConsiderInvisibleElements);
 
             var candidates = Scope.Elements.Filter(isButton & hasLocator & isVisible);
             return candidates.FirstMatching(byText, byIdNameValueOrAlt, byPartialId);
@@ -66,7 +68,7 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindElement(string id)
         {
-            return Scope.Elements.First(Find.ById(id) & Constraints.IsVisible());
+            return Scope.Elements.First(Find.ById(id) & Constraints.IsVisible(ConsiderInvisibleElements));
         }
 
         public WatiN.Core.Element FindField(string locator)
@@ -83,7 +85,7 @@ namespace Coypu.Drivers.Watin
 
                 var hasLocator = byIdOrName | byPlaceholder | radioButtonByValue | byPartialId;
 
-                var isVisible = Constraints.IsVisible();
+                var isVisible = Constraints.IsVisible(ConsiderInvisibleElements);
 
                 var candidates = Scope.Elements.Filter(isField & hasLocator & isVisible);
                 field = candidates.FirstMatching(byIdOrName, byPlaceholder, radioButtonByValue, byPartialId);
@@ -99,7 +101,7 @@ namespace Coypu.Drivers.Watin
             var label = Scope.Labels.First(Find.ByText(new Regex(locator)));
             if (label != null)
             {
-                var isVisible = Constraints.IsVisible();
+                var isVisible = Constraints.IsVisible(ConsiderInvisibleElements);
 
                 if (!string.IsNullOrEmpty(label.For))
                     field = Scope.Elements.First(Find.ById(label.For) & isVisible);
@@ -116,7 +118,7 @@ namespace Coypu.Drivers.Watin
             var withLegend = Constraints.HasElement("legend", Find.ByText(locator));
             var hasLocator = withId | withLegend;
 
-            var isVisible = Constraints.IsVisible();
+            var isVisible = Constraints.IsVisible(ConsiderInvisibleElements);
 
             return Scope.Fieldsets().First(hasLocator & isVisible);
         }
@@ -128,7 +130,7 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindLink(string linkText)
         {
-            return Scope.Links.First(Find.ByText(linkText) & Constraints.IsVisible());
+            return Scope.Links.First(Find.ByText(linkText) & Constraints.IsVisible(ConsiderInvisibleElements));
         }
 
         public WatiN.Core.Element FindSection(string locator)
@@ -138,7 +140,7 @@ namespace Coypu.Drivers.Watin
             var hasLocator = Find.ById(locator)
                              | Constraints.HasElement(new[] { "h1", "h2", "h3", "h4", "h5", "h6" }, Find.ByText(locator));
 
-            var isVisible = Constraints.IsVisible();
+            var isVisible = Constraints.IsVisible(ConsiderInvisibleElements);
 
             return Scope.Elements.First(isSection & hasLocator & isVisible);
         }
@@ -146,7 +148,7 @@ namespace Coypu.Drivers.Watin
         public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector)
         {
             // TODO: This is restricting by hidden items, but there are no tests for that!
-            var isVisible = Constraints.IsVisible();
+            var isVisible = Constraints.IsVisible(ConsiderInvisibleElements);
             return (from element in GetDocument().Elements.Filter(Find.BySelector(cssSelector))
                     where element.Matches(isVisible)
                     select element).ToList();
@@ -154,7 +156,7 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindCss(string cssSelector)
         {
-            return GetDocument().Elements.Filter(Find.BySelector(cssSelector)).First(Constraints.IsVisible());
+            return GetDocument().Elements.Filter(Find.BySelector(cssSelector)).First(Constraints.IsVisible(ConsiderInvisibleElements));
         }
 
         public bool HasCss(string cssSelector)

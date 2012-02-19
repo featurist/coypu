@@ -297,8 +297,8 @@ namespace Coypu.Drivers.Watin
 
         public bool ConsiderInvisibleElements
         {
-            get { throw new NotImplementedException("ConsiderInvisibleElements getter not yet implemented in WatiNDriver"); }
-            set { throw new NotImplementedException("ConsiderInvisibleElements setter not yet implemented in WatiNDriver"); }
+            get { return elementFinder.ConsiderInvisibleElements; }
+            set { elementFinder.ConsiderInvisibleElements = value; }
         }
 
         public bool Disposed { get; private set; }
