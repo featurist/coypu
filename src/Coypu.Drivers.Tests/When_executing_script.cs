@@ -1,24 +1,26 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_executing_script : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Runs_the_script_in_the_browser()
         {
-            it["runs the script in the browser"] = () =>
-            {
-                driver.FindButton("firstButtonId", Root).Text.should_be("first button");
+            Driver.FindButton("firstButtonId", Root).Text.should_be("first button");
 
-                driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';");
+            Driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';");
 
-                driver.FindButton("firstButtonId", Root).Text.should_be("script executed");
-            };
+            Driver.FindButton("firstButtonId", Root).Text.should_be("script executed");
+        }
 
-            it["returns the result"] = () =>
-            {
-                driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;").should_be("first button");
-            };
+
+        [Test]
+        public void Returns_the_result()
+
+        {
+            Driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;").should_be("first button");
         }
     }
 }

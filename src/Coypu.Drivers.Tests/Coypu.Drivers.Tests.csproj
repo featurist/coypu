@@ -84,6 +84,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_finding_fields_by_container_label.cs" />
+    <Compile Include="When_finding_fields_by_for_attribute.cs" />
+    <Compile Include="When_finding_fields_by_name.cs" />
+    <Compile Include="When_finding_fields_by_placeholder.cs" />
+    <Compile Include="When_finding_fields_id.cs" />
     <Compile Include="When_forced_to_consider_invisible_elements.cs" />
     <Compile Include="When_inspecting_location.cs" />
     <Compile Include="sites\SinatraSite.cs" />
@@ -91,9 +96,6 @@
     <Compile Include="When_hovering.cs" />
     <Compile Include="When_using_iframes_as_scope.cs" />
     <Compile Include="When_finding_iframes.cs" />
-    <Compile Include="DriverSpecRunner.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DriverSpecs.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -135,7 +137,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="When_finding_sections_as_divs.cs" />
-    <Compile Include="When_finding_fields.cs">
+    <Compile Include="When_finding_fields_by_id_ends_with.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="When_finding_fieldsets.cs">

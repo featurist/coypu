@@ -5,45 +5,47 @@ namespace Coypu.Drivers.Tests
 {
     internal class When_finding_sections : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Finds_by_h1_text()
         {
-            describe["finding sections by header text"] = () =>
-            {
-                it["finds by h1 text"] = () =>
-                {
-                    driver.FindSection("Section One h1", Root).Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h1", Root).Id.should_be("sectionTwo");
-                };
-                it["finds by h2 text"] = () =>
-                {
-                    driver.FindSection("Section One h2", Root).Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h2", Root).Id.should_be("sectionTwo");
-                };
-                it["finds by h3 text"] = () =>
-                {
-                    driver.FindSection("Section One h3", Root).Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h3", Root).Id.should_be("sectionTwo");
-                };
-                it["finds by h6 text"] = () =>
-                {
-                    driver.FindSection("Section One h6", Root).Id.should_be("sectionOne");
-                    driver.FindSection("Section Two h6", Root).Id.should_be("sectionTwo");
-                };
-                it["finds section by id"] = () =>
-                {
-                    driver.FindSection("sectionOne", Root).Id.should_be("sectionOne");
-                    driver.FindSection("sectionTwo", Root).Id.should_be("sectionTwo");
-                };
+            Driver.FindSection("Section One h1", Root).Id.should_be("sectionOne");
+            Driver.FindSection("Section Two h1", Root).Id.should_be("sectionTwo");
+        }
 
-               
-            };
-            
-            it["only finds div and section"] = () =>
-            {
-                Assert.Throws<MissingHtmlException>(() => driver.FindSection("scope1TextInputFieldId", Root));
-                Assert.Throws<MissingHtmlException>(() => driver.FindSection("fieldsetScope2", Root));
-            };
+        [Test]
+        public void Finds_by_h2_text()
+        {
+            Driver.FindSection("Section One h2", Root).Id.should_be("sectionOne");
+            Driver.FindSection("Section Two h2", Root).Id.should_be("sectionTwo");
+        }
+
+        [Test]
+        public void Finds_by_h3_text()
+        {
+            Driver.FindSection("Section One h3", Root).Id.should_be("sectionOne");
+            Driver.FindSection("Section Two h3", Root).Id.should_be("sectionTwo");
+        }
+
+        [Test]
+        public void Finds_by_h6_text()
+        {
+            Driver.FindSection("Section One h6", Root).Id.should_be("sectionOne");
+            Driver.FindSection("Section Two h6", Root).Id.should_be("sectionTwo");
+        }
+
+        [Test]
+        public void Finds_section_by_id()
+        {
+            Driver.FindSection("sectionOne", Root).Id.should_be("sectionOne");
+            Driver.FindSection("sectionTwo", Root).Id.should_be("sectionTwo");
+        }
+
+
+        [Test]
+        public void Only_finds_div_and_section()
+        {
+            Assert.Throws<MissingHtmlException>(() => Driver.FindSection("scope1TextInputFieldId", Root));
+            Assert.Throws<MissingHtmlException>(() => Driver.FindSection("fieldsetScope2", Root));
         }
     }
-
 }

@@ -1,18 +1,18 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_clicking : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Clicks_the_underlying_element()
+
         {
-            it["clicks the underlying element"] = () =>
-            {
-                var element = driver.FindButton("clickMeTest", Root);
-                driver.FindButton("clickMeTest", Root).Value.should_be("Click me");
-                driver.Click(element);
-                driver.FindButton("clickMeTest", Root).Value.should_be("Click me - clicked");
-            };
+            var element = Driver.FindButton("clickMeTest", Root);
+            Driver.FindButton("clickMeTest", Root).Value.should_be("Click me");
+            Driver.Click(element);
+            Driver.FindButton("clickMeTest", Root).Value.should_be("Click me - clicked");
         }
     }
 }

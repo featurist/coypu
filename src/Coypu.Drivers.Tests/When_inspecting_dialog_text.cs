@@ -1,30 +1,33 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_inspecting_dialog_text : DriverSpecs
     {
-        internal override void Specs()
-        {
-            it["finds exact text in alert"] = () => 
-            {
-                using (driver)
-                {
-                    driver.Click(driver.FindLink("Trigger an alert", Root));
-                    driver.HasDialog("You have triggered an alert and this is the text.");
-                    driver.HasDialog("You have triggered a different alert and this is the different text.").should_be_false();
-                }
-            };
+        [Test]
+        public void Finds_exact_text_in_alert()
 
-            it["finds exact text in confirm"] = () =>
+        {
+            using (Driver)
             {
-                using (driver)
-                {
-                    driver.Click(driver.FindLink("Trigger a confirm", Root));
-                    driver.HasDialog("You have triggered a confirm and this is the text.");
-                    driver.HasDialog("You have triggered a different confirm and this is the different text.").should_be_false();
-                }
-            };
+                Driver.Click(Driver.FindLink("Trigger an alert", Root));
+                Driver.HasDialog("You have triggered an alert and this is the text.");
+                Driver.HasDialog("You have triggered a different alert and this is the different text.").should_be_false();
+            }
+        }
+
+
+        [Test]
+        public void Finds_exact_text_in_confirm()
+
+        {
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.HasDialog("You have triggered a confirm and this is the text.");
+                Driver.HasDialog("You have triggered a different confirm and this is the different text.").should_be_false();
+            }
         }
     }
 }

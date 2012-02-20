@@ -1,74 +1,83 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_checking : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Checks_an_unchecked_checkbox()
         {
-            it["checks an unchecked checkbox"] = () =>
-            {
-                var checkbox = driver.FindField("uncheckedBox", Root);
-                checkbox.Selected.should_be_false();
-    
-                driver.Check(checkbox);
+            var checkbox = Driver.FindField("uncheckedBox", Root);
+            checkbox.Selected.should_be_false();
 
-                var findAgain = driver.FindField("uncheckedBox", Root);
-                findAgain.Selected.should_be_true();
-            };
+            Driver.Check(checkbox);
 
-            it["leaves a checked checkbox checked"] = () =>
-            {
-                var checkbox = driver.FindField("checkedBox", Root);
-                checkbox.Selected.should_be_true();
+            var findAgain = Driver.FindField("uncheckedBox", Root);
+            findAgain.Selected.should_be_true();
+        }
 
-                driver.Check(checkbox);
 
-                var findAgain = driver.FindField("checkedBox", Root);
-                findAgain.Selected.should_be_true();
-            };
+        [Test]
+        public void Leaves_a_checked_checkbox_checked()
+        {
+            var checkbox = Driver.FindField("checkedBox", Root);
+            checkbox.Selected.should_be_true();
 
-            it["unchecks a checked checkbox"] = () =>
-            {
-                var checkbox = driver.FindField("checkedBox", Root);
-                checkbox.Selected.should_be_true();
+            Driver.Check(checkbox);
 
-                driver.Uncheck(checkbox);
+            var findAgain = Driver.FindField("checkedBox", Root);
+            findAgain.Selected.should_be_true();
+        }
 
-                var findAgain = driver.FindField("checkedBox", Root);
-                findAgain.Selected.should_be_false();
-            };
 
-            it["leaves an unchecked checkbox unchecked"] = () =>
-            {
-                var checkbox = driver.FindField("uncheckedBox", Root);
-                checkbox.Selected.should_be_false();
+        [Test]
+        public void Unchecks_a_checked_checkbox()
+        {
+            var checkbox = Driver.FindField("checkedBox", Root);
+            checkbox.Selected.should_be_true();
 
-                driver.Uncheck(checkbox);
+            Driver.Uncheck(checkbox);
 
-                var findAgain = driver.FindField("uncheckedBox", Root);
-                findAgain.Selected.should_be_false();
-            };
+            var findAgain = Driver.FindField("checkedBox", Root);
+            findAgain.Selected.should_be_false();
+        }
 
-            it["fires onclick event"] = () =>
-            {
-                var checkbox = driver.FindField("uncheckedBox", Root);
-                checkbox.Value.should_be("unchecked");
 
-                driver.Check(checkbox);
+        [Test]
+        public void Leaves_an_unchecked_checkbox_unchecked()
+        {
+            var checkbox = Driver.FindField("uncheckedBox", Root);
+            checkbox.Selected.should_be_false();
 
-                driver.FindField("uncheckedBox", Root).Value.should_be("unchecked - clicked");
-            };
+            Driver.Uncheck(checkbox);
 
-            it["fires onclick event"] = () =>
-            {
-                var checkbox = driver.FindField("checkedBox", Root);
-                checkbox.Value.should_be("checked");
+            var findAgain = Driver.FindField("uncheckedBox", Root);
+            findAgain.Selected.should_be_false();
+        }
 
-                driver.Uncheck(checkbox);
 
-                driver.FindField("checkedBox", Root).Value.should_be("checked - clicked");
-            };
+        [Test]
+        public void Fires_onclick_event_on_check()
+        {
+            var checkbox = Driver.FindField("uncheckedBox", Root);
+            checkbox.Value.should_be("unchecked");
+
+            Driver.Check(checkbox);
+
+            Driver.FindField("uncheckedBox", Root).Value.should_be("unchecked - clicked");
+        }
+
+
+        [Test]
+        public void Fires_onclick_event_on_uncheck()
+        {
+            var checkbox = Driver.FindField("checkedBox", Root);
+            checkbox.Value.should_be("checked");
+
+            Driver.Uncheck(checkbox);
+
+            Driver.FindField("checkedBox", Root).Value.should_be("checked - clicked");
         }
     }
 }

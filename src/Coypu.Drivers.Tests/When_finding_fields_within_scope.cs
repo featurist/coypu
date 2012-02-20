@@ -1,5 +1,4 @@
-﻿using System;
-using Coypu.Finders;
+﻿using Coypu.Finders;
 using NSpec;
 using NUnit.Framework;
 
@@ -7,68 +6,57 @@ namespace Coypu.Drivers.Tests
 {
     internal class When_finding_fields_within_scope : DriverSpecs
     {
-        internal override void Specs()
+        private DriverScope scope1;
+        private DriverScope scope2;
+
+        [SetUp]
+        public void SetUpScope()
         {
-            DriverScope scope = null;
-            describe["within scope1"] = () =>
-            {
-                before = () => scope = new DriverScope(new IdFinder(driver, "scope1", Root), null);
+            scope1 = new DriverScope(new IdFinder(Driver, "scope1", Root), null);
+            scope2 = new DriverScope(new IdFinder(Driver, "scope2", Root), null);
+        }
 
-                it["finds text input by for"] = () =>
-                {
-                    driver.FindField("scoped text input field linked by for", scope).Id.should_be("scope1TextInputFieldId");
-                };
-                it["finds text input in container label"] = () =>
-                {
-                    driver.FindField("scoped text input field in a label container", scope).Id.should_be("scope1ContainerLabeledTextInputFieldId");
-                };
-                it["finds text input by placeholder"] = () =>
-                {
-                    driver.FindField("scoped text input field with a placeholder", scope).Id.should_be("scope1TextInputFieldWithPlaceholder");
-                };
-                it["finds text input by name"] = () =>
-                {
-                    driver.FindField("containerLabeledTextInputFieldName", scope).Id.should_be("scope1ContainerLabeledTextInputFieldId");
-                };
-                it["finds radio button by value"] = () =>
-                {
-                    driver.FindField("scoped radio field one val", scope).Id.should_be("scope1RadioFieldId");
-                };
-                it["finds not find text input by id outside scope"] = () =>
-                {
-                    Assert.Throws<MissingHtmlException>(() => driver.FindField("containerLabeledTextInputFieldId", scope));
-                };
-            };
-            describe["within scope2"] = () =>
-            {
-                before = () => scope = new DriverScope(new IdFinder(driver, "scope2", Root), null);
+        [Test]
+        public void Finds_text_input_by_for()
+        {
+            Driver.FindField("scoped text input field linked by for", scope1).Id.should_be("scope1TextInputFieldId");
+            Driver.FindField("scoped text input field linked by for", scope2).Id.should_be("scope1TextInputFieldId");
+        }
 
-                it["finds text input"] = () =>
-                {
-                    driver.FindField("scoped text input field linked by for", scope).Id.should_be("scope2TextInputFieldId");
-                };
-                it["finds text input in container label"] = () =>
-                {
-                    driver.FindField("scoped text input field in a label container", scope).Id.should_be("scope2ContainerLabeledTextInputFieldId");
-                };
-                it["finds text input by placeholder"] = () =>
-                {
-                    driver.FindField("scoped text input field with a placeholder", scope).Id.should_be("scope2TextInputFieldWithPlaceholder");
-                };
-                it["finds text input by name"] = () =>
-                {
-                    driver.FindField("containerLabeledTextInputFieldName", scope).Id.should_be("scope2ContainerLabeledTextInputFieldId");
-                };
-                it["finds radio button by value"] = () =>
-                {
-                    driver.FindField("scoped radio field one val", scope).Id.should_be("scope2RadioFieldId");
-                };
-                it["finds not find text input by id outside scope"] = () =>
-                {
-                    Assert.Throws<MissingHtmlException>(() => driver.FindField("containerLabeledTextInputFieldId", scope));
-                };
+        [Test]
+        public void Finds_text_input_in_container_label()
+        {
+            Driver.FindField("scoped text input field in a label container", scope1).Id.should_be("scope1ContainerLabeledTextInputFieldId");
+            Driver.FindField("scoped text input field in a label container", scope2).Id.should_be("scope1ContainerLabeledTextInputFieldId");
+        }
 
-            };
+        [Test]
+        public void Finds_text_input_by_placeholder()
+        {
+            Driver.FindField("scoped text input field with a placeholder", scope1).Id.should_be("scope1TextInputFieldWithPlaceholder");
+            Driver.FindField("scoped text input field with a placeholder", scope2).Id.should_be("scope1TextInputFieldWithPlaceholder");
+        }
+
+        [Test]
+        public void Finds_text_input_by_name()
+        {
+            Driver.FindField("containerLabeledTextInputFieldName", scope1).Id.should_be("scope1ContainerLabeledTextInputFieldId");
+            Driver.FindField("containerLabeledTextInputFieldName", scope2).Id.should_be("scope1ContainerLabeledTextInputFieldId");
+        }
+
+        [Test]
+        public void Finds_radio_button_by_value()
+        {
+            Driver.FindField("scoped radio field one val", scope1).Id.should_be("scope1RadioFieldId");
+            Driver.FindField("scoped radio field one val", scope2).Id.should_be("scope1RadioFieldId");
+        }
+
+        [Test]
+        public void Finds_not_find_text_input_by_id_outside_scope()
+        {
+            Assert.Throws<MissingHtmlException>(() => Driver.FindField("containerLabeledTextInputFieldId", scope1));
+            Assert.Throws<MissingHtmlException>(() => Driver.FindField("containerLabeledTextInputFieldId", scope2));
         }
     }
+
 }
