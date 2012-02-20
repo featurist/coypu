@@ -12,43 +12,43 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public void SetUpScope()
         {
-            scope1 = new DriverScope(new IdFinder(Driver, "scope1", Root), null);
-            scope2 = new DriverScope(new IdFinder(Driver, "scope2", Root), null);
+            scope1 = new DriverScope(new IdFinder(Driver, "scope1", Root), Driver,null,null,null);
+            scope2 = new DriverScope(new IdFinder(Driver, "scope2", Root), Driver,null,null,null);
         }
 
         [Test]
         public void Finds_text_input_by_for()
         {
             Driver.FindField("scoped text input field linked by for", scope1).Id.should_be("scope1TextInputFieldId");
-            Driver.FindField("scoped text input field linked by for", scope2).Id.should_be("scope1TextInputFieldId");
+            Driver.FindField("scoped text input field linked by for", scope2).Id.should_be("scope2TextInputFieldId");
         }
 
         [Test]
         public void Finds_text_input_in_container_label()
         {
             Driver.FindField("scoped text input field in a label container", scope1).Id.should_be("scope1ContainerLabeledTextInputFieldId");
-            Driver.FindField("scoped text input field in a label container", scope2).Id.should_be("scope1ContainerLabeledTextInputFieldId");
+            Driver.FindField("scoped text input field in a label container", scope2).Id.should_be("scope2ContainerLabeledTextInputFieldId");
         }
 
         [Test]
         public void Finds_text_input_by_placeholder()
         {
             Driver.FindField("scoped text input field with a placeholder", scope1).Id.should_be("scope1TextInputFieldWithPlaceholder");
-            Driver.FindField("scoped text input field with a placeholder", scope2).Id.should_be("scope1TextInputFieldWithPlaceholder");
+            Driver.FindField("scoped text input field with a placeholder", scope2).Id.should_be("scope2TextInputFieldWithPlaceholder");
         }
 
         [Test]
         public void Finds_text_input_by_name()
         {
             Driver.FindField("containerLabeledTextInputFieldName", scope1).Id.should_be("scope1ContainerLabeledTextInputFieldId");
-            Driver.FindField("containerLabeledTextInputFieldName", scope2).Id.should_be("scope1ContainerLabeledTextInputFieldId");
+            Driver.FindField("containerLabeledTextInputFieldName", scope2).Id.should_be("scope2ContainerLabeledTextInputFieldId");
         }
 
         [Test]
         public void Finds_radio_button_by_value()
         {
             Driver.FindField("scoped radio field one val", scope1).Id.should_be("scope1RadioFieldId");
-            Driver.FindField("scoped radio field one val", scope2).Id.should_be("scope1RadioFieldId");
+            Driver.FindField("scoped radio field one val", scope2).Id.should_be("scope2RadioFieldId");
         }
 
         [Test]

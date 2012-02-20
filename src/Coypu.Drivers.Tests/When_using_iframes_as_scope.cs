@@ -16,8 +16,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_elements_among_multiple_scopes()
         {
-            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), null);
-            var iframeTwo = new DriverScope(new IFrameFinder(Driver, "I am iframe two", Root), null);
+            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
+            var iframeTwo = new DriverScope(new IFrameFinder(Driver, "I am iframe two", Root), Driver,null,null,null);
 
             Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
             Driver.FindButton("scoped button", iframeTwo).Id.should_be("iframe2ButtonId");
@@ -27,7 +27,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_clears_scope_back_to_the_whole_window()
         {
-            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), null);
+            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
             Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
 
             Driver.FindButton("scoped button", Root).Id.should_be("scope1ButtonId");
@@ -37,7 +37,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Can_fill_in_a_text_input_within_an_iframe()
         {
-            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), null);
+            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
             Driver.Set(Driver.FindField("text input in iframe", iframeOne), "filled in");
 
             Assert.That(Driver.FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));

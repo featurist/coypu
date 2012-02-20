@@ -1,9 +1,22 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using Coypu.Drivers.Selenium;
 using Coypu.Finders;
 using NUnit.Framework;
+
+namespace NUnit.Tests
+{
+    public class AssmeblyTearDown
+    {
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
+            if (driver != null && !driver.Disposed)
+                driver.Dispose();
+        }
+    }
+}
 
 namespace Coypu.Drivers.Tests
 {
@@ -11,28 +24,14 @@ namespace Coypu.Drivers.Tests
     {
         private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
         private DriverScope root;
+        private static Driver driver;
+
+        private const Browser browser = Browser.Firefox;
+        private static readonly Type driverType = typeof (SeleniumWebDriver);
 
         [SetUp]
         public void SetUp()
         {
-            SetUpDriver(Browser.Firefox, typeof(SeleniumWebDriver));
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Driver.Dispose();
-        }
-
-        private void SetUpDriver(Browser browser, Type driverType)
-        {
-            EnsureDriver(driverType, browser);
-            LoadTestHTML(driverType, browser);
-        }
-
-        private void LoadTestHTML(Type driverType, Browser browser)
-        {
-            EnsureDriver(driverType, browser);
             Driver.Visit(GetTestHTMLPathLocation());
         }
 
@@ -46,20 +45,28 @@ namespace Coypu.Drivers.Tests
             get { return root ?? (root = new DriverScope(new DocumentElementFinder(Driver), null, null, null, null)); }
         }
 
-        private void EnsureDriver(Type driverType, Browser browser)
+        private static void EnsureDriver()
         {
-            if (Driver != null && !Driver.Disposed)
+            if (driver != null && !driver.Disposed)
             {
-                if (driverType == Driver.GetType() && Configuration.Browser == browser)
+                if (driverType == driver.GetType() && Configuration.Browser == browser)
                     return;
 
-                Driver.Dispose();
+                driver.Dispose();
             }
 
             Configuration.Browser = browser;
-            Driver = (Driver)Activator.CreateInstance(driverType);
+            driver = (Driver)Activator.CreateInstance(driverType);
         }
 
-        protected Driver Driver { get; private set; }
+        public static Driver Driver
+        {
+            get
+            {
+                EnsureDriver();
+                return driver;
+
+            }
+        }
     }
 }
