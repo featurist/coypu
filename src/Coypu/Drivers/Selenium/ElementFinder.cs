@@ -31,16 +31,19 @@ namespace Coypu.Drivers.Selenium
             var outerWindowHandle = selenium.CurrentWindowHandle;
             var frame = context as IWebElement;
             if (frame != null && frame.TagName == "iframe")
-                selenium.SwitchTo().Frame(frame);
-            try
             {
-                return context.FindElements(by).Where(e => IsDisplayed(e,scope));
+                var scopeFrame = selenium.SwitchTo().Frame(frame);
+                try
+                {
+                    return scopeFrame.FindElements(by).Where(e => IsDisplayed(e, scope));
+                }
+                finally
+                {
+                    if (outerWindowHandle != null)
+                        selenium.SwitchTo().Window(outerWindowHandle);
+                }
             }
-            finally
-            {
-                if (outerWindowHandle == null)
-                  selenium.SwitchTo().Window(outerWindowHandle);
-            }
+            return context.FindElements(by).Where(e => IsDisplayed(e, scope));
         }
 
         public static ISearchContext SeleniumScope(DriverScope scope)
