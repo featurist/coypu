@@ -207,7 +207,13 @@ namespace Coypu.Drivers.Selenium
         {
             var seleniumElement = SeleniumElement(element);
 
-            seleniumElement.Clear();
+            try
+            {
+                seleniumElement.Clear();
+            }
+            catch (InvalidOperationException) // Non user-editable elements (file inputs)
+            {
+            }
             seleniumElement.SendKeys(value);
         }
 
