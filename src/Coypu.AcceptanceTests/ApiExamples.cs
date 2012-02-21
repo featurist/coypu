@@ -407,18 +407,18 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void ConsideringVisibleElements_action_example()
+        public void ConsideringInvisibleElements()
         {
-            browser.FindButton("firstInvisibleInputId").ConsideringInvisibleElements();
+            browser.ConsideringInvisibleElements().FindButton("firstInvisibleInputId").Now();
         }
+
         [Test]
-        public void ConsideringVisibleElements_func_example()
+        public void ConsideringVisibleElements()
         {
-            var button = browser.FindButton("firstInvisibleInputId").ConsideringInvisibleElements();
-
-            Assert.That(button.Id, Is.EqualTo("firstInvisibleInputId"));
-
-            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId"));
+            Assert.Throws<MissingHtmlException>(() => browser
+                .ConsideringInvisibleElements()
+                .ConsideringOnlyVisibleElements()
+                .FindButton("firstInvisibleInputId").Now());
         }
     }
 }
