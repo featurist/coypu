@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Queries;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
@@ -40,8 +41,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.IsFalse(queriedState1);
             Assert.IsFalse(queriedState2);
 
-            var query = ((Func<bool>) spyRobustWrapper.DeferredQueries.Single());
-            Assert.IsTrue(query());
+            var query = (Query<bool>) spyRobustWrapper.QueriesRan.Single();
+            query.Run();
+            Assert.IsTrue(query.Result);
 
             Assert.IsTrue(queriedState1);
             Assert.IsTrue(queriedState2);

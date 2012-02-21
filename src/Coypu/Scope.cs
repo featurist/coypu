@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Actions;
 using Coypu.Predicates;
 using Coypu.Robustness;
 
@@ -345,7 +346,7 @@ namespace Coypu
         /// <param name="until">The condition to be met</param>
         /// <param name="waitBeforeRetry">How long to wait for the condition</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry);
+        void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry);
 
         void RetryUntilTimeout(DriverAction driverAction);
         ElementScope FindIFrame(string locator);

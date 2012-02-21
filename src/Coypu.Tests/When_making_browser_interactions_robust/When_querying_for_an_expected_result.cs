@@ -19,6 +19,14 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         [Test]
+        public void TODO_below()
+        {
+            Assert.Fail();
+        }
+
+        /*
+
+        [Test]
         public void When_the_expected_result_is_found_It_returns_the_expected_result_immediately()
         {
             var expectedResult = new object();
@@ -59,9 +67,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_exceptions_are_always_thrown_It_rethrows_eventually()
         {
-            Func<bool> alwaysThrows = () => { throw new ExplicitlyThrownTestException("This query always errors"); };
+            Func<bool> alwaysThrows = () => { throw new TestException("This query always errors"); };
 
-            Assert.Throws<ExplicitlyThrownTestException>(() => retryUntilTimeoutRobustWrapper.Query(alwaysThrows,true));
+            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Query(alwaysThrows,true));
         }
 
         [Test]
@@ -75,7 +83,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
                         tries++;
                         if (tries < 3)
                         {
-                            throw new ExplicitlyThrownTestException("This query always errors");
+                            throw new TestException("This query always errors");
                         }
                         return expectedResult;
                     };
@@ -118,7 +126,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
                         tries++;
                         if (tries <= 2)
                         {
-                            throw new ExplicitlyThrownTestException("This query always errors");
+                            throw new TestException("This query always errors");
                         }
                         lastTry = stopWatch.ElapsedMilliseconds;
                         return unexpectedResult;
@@ -130,5 +138,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.That(lastTry, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
                                             expectedTimeout.Milliseconds));
         }
+         */
     }
 }

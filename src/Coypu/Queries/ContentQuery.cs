@@ -5,7 +5,7 @@ namespace Coypu.Queries
         private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string text;
-        public abstract bool ExpectedResult { get; }
+        public abstract object ExpectedResult { get; }
         public bool Result { get; private set; }
 
         protected ContentQuery(Driver driver, DriverScope scope, string text)
@@ -17,7 +17,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasContent(text, scope) == ExpectedResult;
+            Result = driver.HasContent(text, scope) == (bool)ExpectedResult;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Coypu.Tests.TestDoubles
 
         internal override Element Find()
         {
-            throw new ExplicitlyThrownTestException("I always fail");
+            throw new TestException("I always fail");
         }
     }
 

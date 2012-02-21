@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Predicates;
 using Coypu.Queries;
@@ -9,31 +10,15 @@ namespace Coypu.Robustness
 {
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
-        public void Robustly(Action action)
+
+        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
-            Robustly<object>(() =>
-                         {
-                             action();
-                             return null;
-                         });
+            var outcome = Query(new ActionSatisfiesPredicateQuery(tryThis,until,waitBeforeRetry));
+            if (!outcome)
+                throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
-        public TResult Robustly<TResult>(Func<TResult> function)
-        {
-            return Robustly(function, null);
-        }
-
-        public T Query<T>(Func<T> query, T expecting)
-        {
-            return Robustly(query, expecting);
-        }
-
-        public T Query<T>(Query<T> query)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)
+        public TResult Query<TResult>(Query<TResult> query)
         {
             var interval = Configuration.RetryInterval;
             var timeout = Configuration.Timeout;
@@ -42,8 +27,9 @@ namespace Coypu.Robustness
             {
                 try
                 {
-                    var result = function();
-                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch, timeout, interval))
+                    query.Run();
+                    var result = query.Result;
+                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, timeout, interval))
                     {
                         WaitForInterval(interval);
                         continue;
@@ -62,59 +48,7 @@ namespace Coypu.Robustness
             }
         }
 
-        private void WaitForInterval(TimeSpan interval)
-        {
-            Thread.Sleep(interval);
-            }
-
-        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
-        {
-            return expectedResult != null && !result.Equals(expectedResult) && !TimeoutReached(stopWatch, timeout, interval);
-        }
-
-        private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
-        {
-            var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
-            var timeoutReached = elapsedTimeToNextCall >= timeout;
-
-            return timeoutReached;
-        }
-
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)
-        {
-            var outcome = Robustly(() =>
-                                        {
-                                            tryThis();
-                                            bool result;
-                                            var outerTimeout = Configuration.Timeout;
-                                            try
-                                            {
-                                                Configuration.Timeout = retryAfter;
-                                                result = until();
-                                            }
-                                            finally
-                                            {
-                                                Configuration.Timeout = outerTimeout;
-                                            }
-                                            return result;
-                                        }
-                                    , true);
-            if (!outcome)
-                throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
-        }
-
-        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public Element RobustlyFind(ElementFinder elementFinder)
-        {
-            return RobustlyFind(elementFinder, null);
-        }
-
-        public Element RobustlyFind(ElementFinder elementFinder, object expectedResult)
         {
             var interval = Configuration.RetryInterval;
             var timeout = Configuration.Timeout;
@@ -123,13 +57,7 @@ namespace Coypu.Robustness
             {
                 try
                 {
-                    var result = elementFinder.Find();
-                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch, timeout, interval))
-                    {
-                        WaitForInterval(interval);
-                        continue;
-                    }
-                    return result;
+                    return elementFinder.Find();
                 }
                 catch (NotSupportedException) { throw; }
                 catch (Exception)
@@ -166,10 +94,23 @@ namespace Coypu.Robustness
                 }
             }
         }
-    }
 
-    public interface DriverAction
-    {
-        void Act();
+        private void WaitForInterval(TimeSpan interval)
+        {
+            Thread.Sleep(interval);
+        }
+
+        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
+        {
+            return expectedResult != null && !result.Equals(expectedResult) && !TimeoutReached(stopWatch, timeout, interval);
+        }
+
+        private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
+        {
+            var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
+            var timeoutReached = elapsedTimeToNextCall >= timeout;
+
+            return timeoutReached;
+        }
     }
 }

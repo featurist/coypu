@@ -127,7 +127,7 @@ namespace Coypu
         /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope ClickButton(string locator, BrowserSessionPredicate until, TimeSpan waitBetweenRetries)
+        public DriverScope ClickButton(string locator, Predicate until, TimeSpan waitBetweenRetries)
         {
             TryUntil(WaitThenClickButton(locator), until, waitBetweenRetries);
             return this;
@@ -142,7 +142,7 @@ namespace Coypu
         /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope ClickLink(string locator, BrowserSessionPredicate until, TimeSpan waitBetweenRetries)
+        public DriverScope ClickLink(string locator, Predicate until, TimeSpan waitBetweenRetries)
         {
             TryUntil(WaitThenClickLink(locator), until, waitBetweenRetries);
             return this;
@@ -491,7 +491,7 @@ namespace Coypu
         /// <param name="action">An action</param>
         public void RetryUntilTimeout(Action action)
         {
-            robustWrapper.Robustly(action);
+            robustWrapper.RobustlyDo(new LambdaDriverAction(action));
         }
 
         /// <summary>
@@ -501,7 +501,7 @@ namespace Coypu
         /// <param name="function">A function</param>
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
         {
-            return robustWrapper.Robustly(function);
+            return robustWrapper.Query(new LambdaQuery<TResult>(function));
         }
 
         /// <summary>
@@ -553,7 +553,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
-            robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
+            robustWrapper.TryUntil(new LambdaDriverAction(tryThis), new LambdaPredicate(until), waitBeforeRetry);
         }
 
         /// <summary>
@@ -565,7 +565,7 @@ namespace Coypu
         /// <param name="until">The condition to be met</param>
         /// <param name="waitBeforeRetry">How long to wait for the condition</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
             robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
         }

@@ -5,7 +5,7 @@ namespace Coypu.Queries
         private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string cssSelector;
-        public abstract bool ExpectedResult { get; }
+        public abstract object ExpectedResult { get; }
         public bool Result { get; private set; }
 
         protected CssQuery(Driver driver, DriverScope scope, string cssSelector)
@@ -17,7 +17,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasCss(cssSelector, scope) == ExpectedResult;
+            Result = driver.HasCss(cssSelector, scope) == (bool) ExpectedResult;
         }
     }
 }

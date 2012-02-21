@@ -7,7 +7,7 @@ namespace Coypu.Queries
         private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly Regex text;
-        public abstract bool ExpectedResult { get; }
+        public abstract object ExpectedResult { get; }
         public bool Result { get; private set; }
 
         protected ContentMatchQuery(Driver driver, DriverScope scope, Regex text)
@@ -19,7 +19,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasContentMatch(text, scope) == ExpectedResult;
+            Result = driver.HasContentMatch(text, scope) == (bool) ExpectedResult;
         }
     }
 }

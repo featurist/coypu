@@ -174,7 +174,7 @@ namespace Coypu
             return this;
         }
 
-        public Session ClickButton(string locator, BrowserSessionPredicate until, TimeSpan waitBetweenRetries)
+        public Session ClickButton(string locator, Predicate until, TimeSpan waitBetweenRetries)
         {
             driverScope.ClickButton(locator, until, waitBetweenRetries);
             return this;
@@ -186,7 +186,7 @@ namespace Coypu
             return this;
         }
 
-        public Session ClickLink(string locator, BrowserSessionPredicate until, TimeSpan waitBetweenRetries)
+        public Session ClickLink(string locator, Predicate until, TimeSpan waitBetweenRetries)
         {
             driverScope.ClickLink(locator, until, waitBetweenRetries);
             return this;
@@ -381,7 +381,7 @@ namespace Coypu
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }

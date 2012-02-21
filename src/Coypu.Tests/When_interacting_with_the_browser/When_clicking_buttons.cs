@@ -41,7 +41,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             tryUntilArgs.TryThisDriverAction.Act();
             AssertClicked(buttonToBeClicked);
 
-            Assert.That(tryUntilArgs.UntilThisPredicate.Satisfied(session), Is.EqualTo(stubUntil));
+            Assert.That(tryUntilArgs.UntilThisPredicate.Satisfied(), Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using Coypu.Actions;
+using Coypu.Queries;
 using Coypu.Robustness;
 using NUnit.Framework;
 
@@ -9,205 +11,258 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     public class When_retrying_any_function_or_action_until_a_timeout
     {
         [Test]
-        public void When_a_Function_succeeds_first_time_It_only_tries_once() 
+        public void When_a_query_succeeds_first_time_It_only_tries_once() 
         {
-            var retries = 0;
-            var expectedReturnValue = new object();
-            Func<object> alwaysSucceeds = () =>
-            {
-                retries++;
-                return expectedReturnValue;
-            };
+            var alwaysSucceedsQuery = new AlwaysSucceedsQuery<object>(new object());
+            var actualResult = new RetryUntilTimeoutRobustWrapper().Query(alwaysSucceedsQuery);
 
-            var actualResult = new RetryUntilTimeoutRobustWrapper().Robustly(alwaysSucceeds);
-
-            Assert.That(retries, Is.EqualTo(1));
-            Assert.That(actualResult, Is.SameAs(expectedReturnValue));
+            Assert.That(alwaysSucceedsQuery.Tries, Is.EqualTo(1));
+            Assert.That(actualResult, Is.SameAs(alwaysSucceedsQuery.Result));
         }
-
+        
         [Test]
-        public void When_a_Function_throws_an_exception_first_time_It_retries()
+        public void When_a_query_throws_an_exception_first_time_It_retries()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 
-            var tries = 0;
-            var expectedReturnValue = new object();
-            Func<object> throwsOnce = () =>
-                                        {
-                                            tries++;
-                                            if (tries == 1)
-                                                throw new Exception("Fails first time");
+            var result = new object();
+            var query = new ThrowsSecondTimeQuery<object>(result);
 
-                                            return expectedReturnValue;
-                                        };
+            var actualReturnValue = new RetryUntilTimeoutRobustWrapper().Query(query);
 
-            var actualReturnValue = new RetryUntilTimeoutRobustWrapper().Robustly(throwsOnce);
-
-            Assert.That(tries, Is.EqualTo(2));
-            Assert.That(actualReturnValue, Is.SameAs(expectedReturnValue));
+            Assert.That(query.Tries, Is.EqualTo(2));
+            Assert.That(actualReturnValue, Is.SameAs(query.Result));
         }
 
         [Test]
-        public void When_a_Function_always_throws_an_exception_It_rethrows_eventually()
+        public void When_a_query_always_throws_an_exception_It_rethrows_eventually()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            var query = new AlwaysThrowsQuery<object,TestException>(new object());
 
-            var retries = 0;
-            Func<object> alwaysThrows = () =>
-                                            {
-                                                retries++;
-                                                throw new ExplicitlyThrownTestException("Function fails every time");
-                                            };
-            Assert.Throws<ExplicitlyThrownTestException>(() => new RetryUntilTimeoutRobustWrapper().Robustly(alwaysThrows));
-            Assert.That(retries, Is.GreaterThan(2));
+            Assert.Throws<TestException>(() => new RetryUntilTimeoutRobustWrapper().Query(query));
+            Assert.That(query.Tries, Is.GreaterThan(2));
         }
 
         [Test]
-        public void When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached()
+        public void When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached()
         {
-            When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached(1500, 100);
-            When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached(300, 70);
+            When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached(1500, 100);
+            When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached(300, 70);
         }
 
-        private void When_a_Function_always_throws_an_exception_It_retries_until_the_timeout_is_reached(int timeoutMilliseconds, int intervalMilliseconds)
+        private void When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached(int timeoutMilliseconds, int intervalMilliseconds)
         {
             var expectedTimeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
             Configuration.Timeout = expectedTimeout;
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(intervalMilliseconds);
 
-            Stopwatch stopWatch = null;
-            long lastCall = 0;
-            Func<object> alwaysThrows = () =>
-                                            {
-                                                lastCall = stopWatch.ElapsedMilliseconds;
-                                                throw new ExplicitlyThrownTestException("Function fails every time");
-                                            };
+            var query = new AlwaysThrowsQuery<object,TestException>(null);
 
             var retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
-            
-            try {
-                stopWatch = Stopwatch.StartNew();
-                retryUntilTimeoutRobustWrapper.Robustly(alwaysThrows);
+
+            try
+            {
+                retryUntilTimeoutRobustWrapper.Query(query);
+                Assert.Fail("Expecting test exception");
             }
-            catch (ExplicitlyThrownTestException) { stopWatch.Stop(); }
+            catch (TestException){}
 
-            Assert.That(lastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
-                                             expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
+            Assert.That(query.LastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
+                                                   expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
         }
-
+        
+        
         [Test]
-        public void When_a_Function_throws_a_not_supported_exception_It_does_not_retry()
+        public void When_a_query_throws_a_not_supported_exception_It_does_not_retry()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            
             var robustness = new RetryUntilTimeoutRobustWrapper();
-            var tries = 0;
-            Func<object> function = () =>
-            {
-                tries++;
-                throw new NotSupportedException("Fails first time");
-            };
 
-            Assert.Throws<NotSupportedException>(() => robustness.Robustly(function));
-            Assert.That(tries, Is.EqualTo(1));
+            var query = new AlwaysThrowsQuery<object, NotSupportedException>(new object());
+            Assert.Throws<NotSupportedException>(() => robustness.Query(query));
+            Assert.That(query.Tries, Is.EqualTo(1));
         }
 
         [Test]
-        public void When_a_Action_succeeds_first_time_It_only_tries_once() 
+        public void When_an_action_succeeds_first_time_It_only_tries_once()
         {
-            var retries = 0;
-            Action alwaysSucceeds = () => { retries++;};
+            var alwaysSucceedsQuery = new AlwaysSucceedsQuery<object>(new object());
+            new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(alwaysSucceedsQuery));
 
-            new RetryUntilTimeoutRobustWrapper().Robustly(alwaysSucceeds);
-
-            Assert.That(retries, Is.EqualTo(1));
+            Assert.That(alwaysSucceedsQuery.Tries, Is.EqualTo(1));
         }
 
         [Test]
-        public void When_a_Action_throws_an_exception_first_time_It_retries() 
+        public void When_an_action_throws_an_exception_first_time_It_retries()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 
-            var tries = 0;
-            Action throwsOnce = () =>
-            {
-                tries++;
-                if (tries == 1)
-                    throw new Exception("Fails first time");
-            };
+            var result = new object();
+            var query = new ThrowsSecondTimeQuery<object>(result);
 
-            new RetryUntilTimeoutRobustWrapper().Robustly(throwsOnce);
+            new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(query));
 
-            Assert.That(tries, Is.EqualTo(2));
+            Assert.That(query.Tries, Is.EqualTo(2));
         }
 
         [Test]
-        public void When_a_Action_always_throws_an_exception_It_rethrows_eventually()
+        public void When_an_action_always_throws_an_exception_It_rethrows_eventually()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            var query = new AlwaysThrowsQuery<object, TestException>(new object());
 
-            var retries = 0;
-            Action alwaysThrows = () =>
-            {
-                retries++;
-                throw new ExplicitlyThrownTestException("Action fails every time");
-            };
-            Assert.Throws<ExplicitlyThrownTestException>(() => new RetryUntilTimeoutRobustWrapper().Robustly(alwaysThrows));
-            Assert.That(retries, Is.GreaterThan(2));
+            Assert.Throws<TestException>(() => new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(query)));
+            Assert.That(query.Tries, Is.GreaterThan(2));
         }
 
         [Test]
-        public void When_a_Action_always_throws_an_exception_It_retries_until_the_timeout_is_reached() {
-            When_a_Action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(150, 100);
-            When_a_Action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(300, 70);
+        public void When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached()
+        {
+            When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(1500, 100);
+            When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(300, 70);
         }
 
-        private void When_a_Action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(int timeoutMilliseconds, int intervalMilliseconds) 
+        private void When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(int timeoutMilliseconds, int intervalMilliseconds)
         {
             var expectedTimeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
             Configuration.Timeout = expectedTimeout;
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(intervalMilliseconds);
 
-            Stopwatch stopWatch = null;
-            long lastCall = 0;
-            
-            Action alwaysThrows = () =>
-            {
-                lastCall = stopWatch.ElapsedMilliseconds;
-                throw new ExplicitlyThrownTestException("Action fails every time");
-            };
+            var query = new AlwaysThrowsQuery<object, TestException>(null);
 
             var retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
 
-            try {
-                stopWatch = Stopwatch.StartNew();
-                retryUntilTimeoutRobustWrapper.Robustly(alwaysThrows);
-            } 
-            catch (ExplicitlyThrownTestException) { stopWatch.Stop(); }
+            try
+            {
+                retryUntilTimeoutRobustWrapper.RobustlyDo(new TestDriverAction(query));
+                Assert.Fail("Expecting test exception");
+            }
+            catch (TestException) { }
 
-            Assert.That(lastCall, Is.InRange(expectedTimeout.TotalMilliseconds - Configuration.RetryInterval.Milliseconds,
-                                             expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds));
+            Assert.That(query.LastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
+                                                   expectedTimeout.TotalMilliseconds + Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
         }
+
 
         [Test]
-        public void When_an_Action_throws_a_not_supported_exception_It_retries()
+        public void When_an_action_throws_a_not_supported_exception_It_does_not_retry()
         {
             Configuration.Timeout = TimeSpan.FromMilliseconds(100);
-            var robustness = new RetryUntilTimeoutRobustWrapper();
-            var tries = 0;
-            Action action = () =>
-            {
-                tries++;
-                throw new NotSupportedException("Fails first time");
-            };
+            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
 
-            Assert.Throws<NotSupportedException>(() => robustness.Robustly(action));
-            Assert.That(tries, Is.EqualTo(1));
+            var robustness = new RetryUntilTimeoutRobustWrapper();
+
+            var query = new AlwaysThrowsQuery<object, NotSupportedException>(new object());
+            Assert.Throws<NotSupportedException>(() => robustness.RobustlyDo(new TestDriverAction(query)));
+            Assert.That(query.Tries, Is.EqualTo(1));
         }
 
+
+
+        public class AlwaysSucceedsQuery<T> : Query<T>
+        {
+            private readonly T returns;
+
+            public AlwaysSucceedsQuery(T returns)
+            {
+                this.returns = returns;
+            }
+
+            public void Run()
+            {
+                Tries++;
+            }
+
+            public object ExpectedResult
+            {
+                get { return null; }
+            }
+
+            public T Result
+            {
+                get { return returns; }
+            }
+
+            public int Tries { get; set; }
+        }
+
+        public class ThrowsSecondTimeQuery<T> : Query<T>
+        {
+            private readonly T result;
+
+            public ThrowsSecondTimeQuery(T result)
+            {
+                this.result = result;
+            }
+
+            public void Run()
+            {
+                Tries++;
+                if (Tries == 1)
+                    throw new TestException("Fails first time");
+            }
+
+            public object ExpectedResult
+            {
+                get { return null; }
+            }
+
+            public T Result
+            {
+                get { return result; }
+            }
+
+            public int Tries { get; set; }
+        }
+
+        public class AlwaysThrowsQuery<TResult, TException> : Query<TResult> where TException : Exception
+        {
+            private readonly Stopwatch stopWatch = new Stopwatch();
+            private readonly TResult result;
+
+            public AlwaysThrowsQuery(TResult result)
+            {
+                stopWatch.Start();
+                this.result = result;
+            }
+
+            public void Run()
+            {
+                Tries++;
+                LastCall = stopWatch.ElapsedMilliseconds;
+                throw (TException) Activator.CreateInstance(typeof(TException),"Test Exception");
+            }
+
+            public object ExpectedResult
+            {
+                get { return null; }
+            }
+
+            public TResult Result
+            {
+                get { return result; }
+            }
+
+            public int Tries { get; set; }
+            public long LastCall { get; set; }
+        }
+
+        public class TestDriverAction : DriverAction
+        {
+            public Query<object> FakeQuery { get; set; }
+
+            public TestDriverAction(Query<object> fakeQuery)
+            {
+                FakeQuery = fakeQuery;
+            }
+
+            public void Act()
+            {
+                FakeQuery.Run();
+            }
+        }
     }
 }

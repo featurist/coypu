@@ -2,7 +2,7 @@ using System;
 
 namespace Coypu.Predicates
 {
-    internal class LambdaPredicate : BrowserSessionPredicate
+    internal class LambdaPredicate : Predicate
     {
         private readonly Func<bool> predicate;
 
@@ -11,7 +11,7 @@ namespace Coypu.Predicates
             this.predicate = predicate;
         }
 
-        public bool Satisfied(Session session)
+        public bool Satisfied()
         {
             return predicate();
         }

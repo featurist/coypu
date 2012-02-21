@@ -4,7 +4,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly string text;
-        public abstract bool ExpectedResult { get; }
+        public abstract object ExpectedResult { get; }
         public bool Result { get; private set; }
 
         protected DialogQuery(Driver driver, string text)
@@ -15,7 +15,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasDialog(text) == ExpectedResult;
+            Result = driver.HasDialog(text) == (bool)ExpectedResult;
         }
     }
 
@@ -26,7 +26,7 @@ namespace Coypu.Queries
         {
         }
 
-        public override bool ExpectedResult
+        public override object ExpectedResult
         {
             get { return true; }
         }
@@ -39,7 +39,7 @@ namespace Coypu.Queries
         {
         }
 
-        public override bool ExpectedResult
+        public override object ExpectedResult
         {
             get { return false; }
         }

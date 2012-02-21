@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Predicates;
 using Coypu.Queries;
@@ -10,34 +11,13 @@ namespace Coypu.Tests.TestDoubles
 {
     public class SpyRobustWrapper : RobustWrapper
     {
-        internal IList<Action> DeferredActions = new List<Action>();
-        internal IList<object> DeferredFunctions = new List<object>();
         internal IList<ElementFinder> DeferredFinders = new List<ElementFinder>();
         internal IList<DriverAction> DeferredDriverActions = new List<DriverAction>();
-        internal IList<object> DeferredQueries = new List<object>();
         internal IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
 
         private readonly IList<object> stubbedResults = new List<object>();
-        private readonly IDictionary<Element, object> stubbedFinds = new Dictionary<Element, object>();
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
         internal IList<object> QueriesRan = new List<object>();
-
-        public void Robustly(Action action)
-        {
-            DeferredActions.Add(action);
-        }
-
-        public TResult Robustly<TResult>(Func<TResult> function)
-        {
-            DeferredFunctions.Add(function);
-            return stubbedResults.OfType<TResult>().FirstOrDefault();
-        }
-
-        public T Query<T>(Func<T> query, T expecting)
-        {
-            DeferredQueries.Add(query);
-            return (T)stubbedQueryResult[expecting];
-        }
 
         public T Query<T>(Query<T> query)
         {
@@ -45,12 +25,7 @@ namespace Coypu.Tests.TestDoubles
             return (T)stubbedQueryResult[query.ExpectedResult];
         }
 
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
-        {
-            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
-        }
-
-        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
             DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
         }
@@ -88,7 +63,7 @@ namespace Coypu.Tests.TestDoubles
             public Func<bool> UntilThisFunction { get; private set; }
             public TimeSpan WaitBeforeRetry { get; private set; }
             public DriverAction TryThisDriverAction { get; private set; }
-            public BrowserSessionPredicate UntilThisPredicate { get; private set; }
+            public Predicate UntilThisPredicate { get; private set; }
 
             public TryUntilArgs(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
             {
@@ -97,7 +72,7 @@ namespace Coypu.Tests.TestDoubles
                 UntilThisFunction = until;
             }
 
-            public TryUntilArgs(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+            public TryUntilArgs(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
             {
                 WaitBeforeRetry = waitBeforeRetry;
                 TryThisDriverAction = tryThis;

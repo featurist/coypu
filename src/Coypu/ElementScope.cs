@@ -280,7 +280,7 @@ namespace Coypu
             DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, BrowserSessionPredicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
             DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }

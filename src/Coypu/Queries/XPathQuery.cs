@@ -5,7 +5,7 @@ namespace Coypu.Queries
         private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string xpath;
-        public abstract bool ExpectedResult { get; }
+        public abstract object ExpectedResult { get; }
         public bool Result { get; private set; }
 
         protected XPathQuery(Driver driver, DriverScope scope, string xpath)
@@ -17,7 +17,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasXPath(xpath, scope) == ExpectedResult;
+            Result = driver.HasXPath(xpath, scope) == (bool) ExpectedResult;
         }
     }
 }

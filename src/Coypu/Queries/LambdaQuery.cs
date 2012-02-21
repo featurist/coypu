@@ -6,10 +6,15 @@ namespace Coypu.Queries
     {
         private readonly Func<T> _query;
 
-        public T ExpectedResult { get; private set; }
+        public object ExpectedResult { get; private set; }
         public T Result { get; private set; }
 
-        public LambdaQuery(Func<T> query, T expectedResult)
+        public LambdaQuery(Func<T> query)
+        {
+            _query = query;
+        }
+
+        public LambdaQuery(Func<T> query, object expectedResult)
         {
             _query = query;
             ExpectedResult = expectedResult;

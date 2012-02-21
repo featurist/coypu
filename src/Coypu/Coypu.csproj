@@ -91,6 +91,7 @@
     <Compile Include="Actions\AcceptModalDialog.cs" />
     <Compile Include="Actions\CancelModalDialog.cs" />
     <Compile Include="Actions\FillIn.cs" />
+    <Compile Include="Actions\LambdaDriverAction.cs" />
     <Compile Include="Actions\Select.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
@@ -142,7 +143,9 @@
     <Compile Include="Queries\ContentQuery.cs" />
     <Compile Include="Queries\XPathQuery.cs" />
     <Compile Include="RobustElementScope.cs" />
-    <Compile Include="Predicates\BrowserSessionPredicate.cs" />
+    <Compile Include="Predicates\Predicate.cs" />
+    <Compile Include="Actions\DriverAction.cs" />
+    <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Finders\SectionFinder.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />

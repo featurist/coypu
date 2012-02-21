@@ -11,16 +11,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindAllCss_should_make_direct_call_to_underlying_driver()
         {
-            Should_find_robustly(session.FindAllCss, driver.StubAllCss);
+            Should_make_direct_call(session.FindAllCss, driver.StubAllCss);
         }
 
         [Test]
         public void FindAllXPath_should_make_direct_call_to_underlying_driver()
         {
-            Should_find_robustly(session.FindAllXPath, driver.StubAllXPath);
+            Should_make_direct_call(session.FindAllXPath, driver.StubAllXPath);
         }
 
-        protected void Should_find_robustly(Func<string, IEnumerable<Element>> subject, Action<string, IEnumerable<Element>> stub)
+        protected void Should_make_direct_call(Func<string, IEnumerable<Element>> subject, Action<string, IEnumerable<Element>> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -31,7 +31,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var actualImmediateResult = subject(locator);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
-            Assert.That(spyRobustWrapper.DeferredFunctions, Is.Empty);
+            Assert.That(spyRobustWrapper.DeferredFinders, Is.Empty);
         }
     }
 }
