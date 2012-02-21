@@ -4,17 +4,14 @@ using Coypu.Drivers.Selenium;
 using Coypu.Finders;
 using NUnit.Framework;
 
-namespace NUnit.Tests
+public class AssmeblyTearDown
 {
-    public class AssmeblyTearDown
+    [TestFixtureTearDown]
+    public void TearDown()
     {
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
-            if (driver != null && !driver.Disposed)
-                driver.Dispose();
-        }
+        var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
+        if (driver != null && !driver.Disposed)
+            driver.Dispose();
     }
 }
 
@@ -23,7 +20,7 @@ namespace Coypu.Drivers.Tests
     public class DriverSpecs
     {
         private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
-        private DriverScope root;
+        private static DriverScope root;
         private static Driver driver;
 
         private const Browser browser = Browser.Firefox;
@@ -40,7 +37,7 @@ namespace Coypu.Drivers.Tests
             return new FileInfo(Path.Combine(@"..\..\", INTERACTION_TESTS_PAGE)).FullName;
         }
 
-        protected DriverScope Root
+        protected static DriverScope Root
         {
             get { return root ?? (root = new DriverScope(new DocumentElementFinder(Driver), null, null, null, null)); }
         }
@@ -57,6 +54,7 @@ namespace Coypu.Drivers.Tests
 
             Configuration.Browser = browser;
             driver = (Driver)Activator.CreateInstance(driverType);
+            root = null;
         }
 
         public static Driver Driver

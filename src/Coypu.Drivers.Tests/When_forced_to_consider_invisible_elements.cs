@@ -7,16 +7,31 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Does_find_hidden_inputs()
         {
-            Assert.That(Driver.FindField("firstHiddenInputId", Root).Value, Is.EqualTo("first hidden input"));
+            Root.ConsideringInvisibleElements();
+            try
+            {
+                Assert.That(Driver.FindField("firstHiddenInputId", Root).Value, Is.EqualTo("first hidden input"));
+            }
+            finally
+            {
+                Root.ConsideringOnlyVisibleElements();
+            }
             Assert.Throws<MissingHtmlException>(() => Driver.FindField("firstHiddenInputId", Root));
         }
 
 
         [Test]
         public void Does_find_invisible_elements()
-
         {
-            Assert.That(Driver.FindButton("firstInvisibleInputId", Root).Name, Is.EqualTo("firstInvisibleInputName"));
+            Root.ConsideringInvisibleElements();
+            try
+            {
+                Assert.That(Driver.FindButton("firstInvisibleInputId", Root).Name, Is.EqualTo("firstInvisibleInputName"));
+            }
+            finally
+            {
+                Root.ConsideringOnlyVisibleElements();
+            }
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstInvisibleInputId", Root));
         }
     }

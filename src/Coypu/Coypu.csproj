@@ -114,7 +114,6 @@
     <Compile Include="Drivers\Selenium\DriverFactory.cs" />
     <Compile Include="Drivers\Selenium\ElementFinder.cs" />
     <Compile Include="Drivers\Selenium\FieldFinder.cs" />
-    <Compile Include="Drivers\Selenium\Scoping.cs" />
     <Compile Include="Drivers\Selenium\TextMatcher.cs" />
     <Compile Include="Drivers\XPath.cs" />
     <Compile Include="Actions\Hover.cs" />

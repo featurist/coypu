@@ -12,7 +12,6 @@ namespace Coypu.Drivers.Tests
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("iframe1ButtonId", Root));
         }
 
-
         [Test]
         public void Finds_elements_among_multiple_scopes()
         {
@@ -23,7 +22,6 @@ namespace Coypu.Drivers.Tests
             Driver.FindButton("scoped button", iframeTwo).Id.should_be("iframe2ButtonId");
         }
 
-
         [Test]
         public void Finds_clears_scope_back_to_the_whole_window()
         {
@@ -32,7 +30,6 @@ namespace Coypu.Drivers.Tests
 
             Driver.FindButton("scoped button", Root).Id.should_be("scope1ButtonId");
         }
-
 
         [Test]
         public void Can_fill_in_a_text_input_within_an_iframe()

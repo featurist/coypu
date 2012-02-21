@@ -47,7 +47,7 @@ namespace Coypu.Drivers.Selenium
         {
             selenium = webDriver;
             xPath = new XPath();
-            elementFinder = new ElementFinder(xPath);
+            elementFinder = new ElementFinder(xPath,selenium);
             fieldFinder = new FieldFinder(elementFinder, xPath);
             iframeFinder = new IFrameFinder(selenium, elementFinder,xPath);
             textMatcher = new TextMatcher();
@@ -153,8 +153,8 @@ namespace Coypu.Drivers.Selenium
         private string GetContent(DriverScope scope)
         {
             return scope == Window
-                       ? GetText(By.XPath("."),scope)
-                       : GetText(By.TagName("body"), scope);
+                       ? GetText(By.TagName("body"), scope)
+                       : GetText(By.XPath("."), scope);
         }
 
         private string GetText(By xPath, DriverScope scope)
