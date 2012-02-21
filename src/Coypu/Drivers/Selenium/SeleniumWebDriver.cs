@@ -23,7 +23,11 @@ namespace Coypu.Drivers.Selenium
 
         public Element Window
         {
-            get { return new SeleniumSearchContext(selenium); }
+            get
+            {
+                Console.WriteLine("By.Window");
+                return new SeleniumSearchContext(selenium);
+            }
         }
 
         private RemoteWebDriver selenium;

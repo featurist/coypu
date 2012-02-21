@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
@@ -10,6 +11,7 @@ namespace Coypu.Drivers.Selenium
     {
         private readonly XPath xPath;
         private readonly RemoteWebDriver selenium;
+        private string _outerWindowHandle;
 
         public ElementFinder(XPath xPath, RemoteWebDriver selenium)
         {
@@ -28,21 +30,17 @@ namespace Coypu.Drivers.Selenium
         {
             var context = SeleniumScope(scope);
 
-            var outerWindowHandle = selenium.CurrentWindowHandle;
+            if (context == selenium && _outerWindowHandle != null)
+                selenium.SwitchTo().Window(_outerWindowHandle);
+
+            _outerWindowHandle = selenium.CurrentWindowHandle;
             var frame = context as IWebElement;
             if (frame != null && frame.TagName == "iframe")
             {
-                var scopeFrame = selenium.SwitchTo().Frame(frame);
-                try
-                {
-                    return scopeFrame.FindElements(by).Where(e => IsDisplayed(e, scope));
-                }
-                finally
-                {
-                    if (outerWindowHandle != null)
-                        selenium.SwitchTo().Window(outerWindowHandle);
-                }
+                selenium.SwitchTo().Frame(frame);
+                context = selenium;
             }
+            Console.WriteLine(by);
             return context.FindElements(by).Where(e => IsDisplayed(e, scope));
         }
 

@@ -34,10 +34,30 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Can_fill_in_a_text_input_within_an_iframe()
         {
-            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
+            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
             Driver.Set(Driver.FindField("text input in iframe", iframeOne), "filled in");
 
             Assert.That(Driver.FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));
+        }
+
+        [Test]
+        public void Can_scope_around_an_iframe()
+        {
+            var body = new DriverScope(new CssFinder(Driver, "body", Root), Driver, null, null, null);
+            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", body), Driver, null, null, null);
+
+            Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
+
+            Driver.FindButton("scoped button", body).Id.should_be("scope1ButtonId");
+        }
+
+        [Test]
+        public void Can_scope_inside_an_iframe()
+        {
+            var iframeOne = new DriverScope(new IFrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
+            var iframeForm = new DriverScope(new CssFinder(Driver, "form", iframeOne), Driver, null, null, null);
+
+            Driver.FindField("text input in iframe", iframeForm);
         }
     }
 }

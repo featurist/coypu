@@ -4,14 +4,19 @@ using Coypu.Drivers.Selenium;
 using Coypu.Finders;
 using NUnit.Framework;
 
-public class AssmeblyTearDown
+
+namespace NUnit.Framework
 {
-    [TestFixtureTearDown]
-    public void TearDown()
+    [TestFixture]
+    public class AssmeblyTearDown
     {
-        var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
-        if (driver != null && !driver.Disposed)
-            driver.Dispose();
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
+            if (driver != null && !driver.Disposed)
+                driver.Dispose();
+        }
     }
 }
 
