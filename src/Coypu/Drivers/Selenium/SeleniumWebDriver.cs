@@ -156,15 +156,15 @@ namespace Coypu.Drivers.Selenium
 
         private string GetContent(DriverScope scope)
         {
-            return scope == Window
-                       ? GetText(By.TagName("body"), scope)
-                       : GetText(By.XPath("."), scope);
+            var seleniumScope = ElementFinder.SeleniumScope(scope);
+            return seleniumScope == Window.Native
+                       ? GetText(By.TagName("body"), seleniumScope)
+                       : GetText(By.XPath("."), seleniumScope);
         }
 
-        private string GetText(By xPath, DriverScope scope)
-        {
-            
-            var pageText = ElementFinder.SeleniumScope(scope).FindElement(xPath).Text;
+        private string GetText(By xpath, ISearchContext seleniumScope)
+        {   
+            var pageText = seleniumScope.FindElement(xpath).Text;
             return NormalizeCRLFBetweenBrowserImplementations(pageText);
         }
 
