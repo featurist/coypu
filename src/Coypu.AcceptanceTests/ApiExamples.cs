@@ -100,16 +100,7 @@ namespace Coypu.AcceptanceTests
             var element = browser.FindButton("clickMeTest");
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me"));
 
-            browser.Click(element);
-            Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
-        }
-
-        [Test]
-        public void Click_with_finder_example()
-        {
-            Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me"));
-
-            browser.Click(browser.FindButton("clickMeTest"));
+            element.Click();
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
         }
 
@@ -383,13 +374,13 @@ namespace Coypu.AcceptanceTests
             var expectingScope2 = browser.FindIFrame("iframe2").FindButton(selectorThatAppearsInMultipleScopes);
 
             Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
-            Assert.That(expectingScope2.Id, Is.EqualTo("iframe1ButtonId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
         }
 
         [Test]
         public void Multiple_interactions_within_iframe_example()
         {
-            var iframe = browser.FindIframe("I am iframe one");
+            var iframe = browser.FindIFrame("I am iframe one");
             iframe.FillIn("text input in iframe").With("filled in");
             Assert.That(iframe.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
         }

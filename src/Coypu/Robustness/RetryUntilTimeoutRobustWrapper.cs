@@ -65,7 +65,7 @@ namespace Coypu.Robustness
         private void WaitForInterval(TimeSpan interval)
         {
             Thread.Sleep(interval);
-        }
+            }
 
         private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
@@ -153,7 +153,7 @@ namespace Coypu.Robustness
                 try
                 {
                     action.Act();
-                    WaitForInterval(interval);
+                    return;
                 }
                 catch (NotSupportedException) { throw; }
                 catch (Exception)

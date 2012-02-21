@@ -34,7 +34,7 @@ namespace Coypu.AcceptanceTests
 
             browser.FillIn("postcode").With("N1 1AA");
             
-            browser.Click(browser.FindField("make"));
+            browser.FindField("make").Click();
             
             browser.Select("citroen").From("make");
             browser.Select("c4_grand_picasso").From("model");
@@ -74,7 +74,7 @@ namespace Coypu.AcceptanceTests
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
 
-            browser.Click(browser.FindSection("Seats"));
+            browser.FindSection("Seats").Click();
             browser.ClickButton("4");
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));

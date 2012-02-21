@@ -51,8 +51,8 @@ namespace Coypu.AcceptanceTests
         public void It_exposes_the_location_of_an_iframe_scope()
         {
             ReloadTestPage();
-            var iframe = browser.FindIframe("iframe1");
-            Assert.That(iframe.Location.AbsolutePath, Is.StringContaining("iFrame1.htm"));
+            browser.FindIFrame("iframe1").Now();
+            Assert.That(browser.Location.AbsolutePath, Is.StringContaining("iFrame1.htm"));
         }
     }
 }
