@@ -34,7 +34,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
         {
             stub(locator, stubResult);
-            spyRobustWrapper.StubQueryResult(false, !stubResult);
+            spyRobustWrapper.StubQueryResult(true, !stubResult);
 
             var actualImmediateResult = subject(locator);
 

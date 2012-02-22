@@ -19,20 +19,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         [Test]
-        public void TODO_below()
-        {
-            Assert.Fail();
-        }
-
-        /*
-
-        [Test]
         public void When_the_expected_result_is_found_It_returns_the_expected_result_immediately()
         {
             var expectedResult = new object();
-            Func<object> returnsTrueImmediately = () => expectedResult;
 
-            var actualResult = retryUntilTimeoutRobustWrapper.Query(returnsTrueImmediately,expectedResult);
+            var actualResult = retryUntilTimeoutRobustWrapper.Query(new AlwaysSucceedsQuery<object>(expectedResult, expectedResult));
 
             Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
@@ -48,63 +39,39 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var unexpectedResult = new object();
 
-            long lastCall = 0;
-            var stopWatch = Stopwatch.StartNew();
-            Func<object> returnsUnexpectedResult = () =>
-                                                       {
-                                                           lastCall = stopWatch.ElapsedMilliseconds;
-                                                           return unexpectedResult;
-                                                       };
+            var query = new AlwaysSucceedsQuery<object>(unexpectedResult, expectedResult);
             
-            var actualResult = retryUntilTimeoutRobustWrapper.Query(returnsUnexpectedResult,expectedResult);
-            stopWatch.Stop();
+            var actualResult = retryUntilTimeoutRobustWrapper.Query(query);
 
             Assert.That(actualResult, Is.EqualTo(unexpectedResult));
-            Assert.That(lastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
+            Assert.That(query.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
                                              expectedTimeout.Milliseconds + retryInterval));
         }
 
         [Test]
         public void When_exceptions_are_always_thrown_It_rethrows_eventually()
         {
-            Func<bool> alwaysThrows = () => { throw new TestException("This query always errors"); };
-
-            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Query(alwaysThrows,true));
+            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Query(new AlwaysThrowsQuery<TestException>()));
         }
 
         [Test]
         public void When_exceptions_are_thrown_It_retries_And_when_expected_result_found_subsequently_It_returns_expected_result_immediately()
         {
-            var tries = 0;
+            const int throwsHowManyTimes = 2;
             var expectedResult = new object();
-            Func<object> throwsFirstTimeThenReturnsExpectedResult =
-                () =>
-                    {
-                        tries++;
-                        if (tries < 3)
-                        {
-                            throw new TestException("This query always errors");
-                        }
-                        return expectedResult;
-                    };
+            var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes);
 
-            Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsFirstTimeThenReturnsExpectedResult, expectedResult), Is.EqualTo(expectedResult));
-            Assert.That(tries, Is.EqualTo(3));
+            Assert.That(retryUntilTimeoutRobustWrapper.Query(query), Is.EqualTo(expectedResult));
+            Assert.That(query.Tries, Is.EqualTo(throwsHowManyTimes + 1));
         }
 
         [Test]
         public void When_a_not_supported_exception_is_thrown_It_does_not_retry()
         {
-            var tries = 0;
-            Func<bool> throwsNotSupported =
-                () =>
-                {
-                    tries++;
-                    throw new NotSupportedException("This query always errors");
-                };
+            var throwsNotSupported = new AlwaysThrowsQuery<NotSupportedException>();
 
-            Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Query(throwsNotSupported,true));
-            Assert.That(tries, Is.EqualTo(1));
+            Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Query(throwsNotSupported));
+            Assert.That(throwsNotSupported.Tries, Is.EqualTo(1));
         }
 
         [Test]
@@ -117,27 +84,13 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var expectedResult = new object();
             var unexpectedResult = new object();
-            var tries = 0;
-            long lastTry = 0;
-            Stopwatch stopWatch = null;
-            Func<object> throwsTwiceTimesThenReturnOppositeResult =
-                () =>
-                    {
-                        tries++;
-                        if (tries <= 2)
-                        {
-                            throw new TestException("This query always errors");
-                        }
-                        lastTry = stopWatch.ElapsedMilliseconds;
-                        return unexpectedResult;
-                    };
-            stopWatch = Stopwatch.StartNew();
 
-            Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsTwiceTimesThenReturnOppositeResult,expectedResult), Is.EqualTo(unexpectedResult));
-            Assert.That(tries, Is.GreaterThanOrEqualTo(3));
-            Assert.That(lastTry, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
-                                            expectedTimeout.Milliseconds));
+            var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2);
+
+            Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
+            Assert.That(throwsTwiceTimesThenReturnOppositeResult.Tries, Is.GreaterThanOrEqualTo(3));
+            Assert.That(throwsTwiceTimesThenReturnOppositeResult.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
+                                                                                      expectedTimeout.Milliseconds));
         }
-         */
     }
 }

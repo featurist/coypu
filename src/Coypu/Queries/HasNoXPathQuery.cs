@@ -1,15 +1,23 @@
 namespace Coypu.Queries
 {
-    internal class HasNoXPathQuery : XPathQuery
+    internal class HasNoXPathQuery : Query<bool>
     {
-        public HasNoXPathQuery(Driver driver, DriverScope scope, string xpath)
-            : base(driver, scope, xpath)
+        private readonly Driver driver;
+        private readonly DriverScope scope;
+        private readonly string xpath;
+        public object ExpectedResult { get { return true; } }
+        public bool Result { get; private set; }
+
+        protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath)
         {
+            this.driver = driver;
+            this.scope = scope;
+            this.xpath = xpath;
         }
 
-        public override object ExpectedResult
+        public void Run()
         {
-            get { return false; }
+            Result = !driver.HasXPath(xpath, scope);
         }
     }
 }

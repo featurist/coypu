@@ -88,9 +88,11 @@
     <Compile Include="When_interacting_with_the_browser\When_inspecting_the_page.cs" />
     <Compile Include="TestException.cs" />
     <Compile Include="TestBuilders\TestSessionBuilder.cs" />
+    <Compile Include="When_making_browser_interactions_robust\TestActions.cs" />
+    <Compile Include="When_making_browser_interactions_robust\TestQueries.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_I_want_to_make_direct_calls_to_the_robust_wrapper.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_querying_for_an_expected_result.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_retrying_any_function_or_action_until_a_timeout.cs" />
+    <Compile Include="When_making_browser_interactions_robust\When_retrying_until_a_timeout.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_trying_an_action_until_a_given_state_is_reached.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_waiting.cs" />
     <Compile Include="When_making_browser_interactions_robust\With_individual_timeout.cs" />

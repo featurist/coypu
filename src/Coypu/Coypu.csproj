@@ -122,7 +122,6 @@
     <Compile Include="Finders\IFrameFinder.cs" />
     <Compile Include="Queries\ContentMatchQuery.cs" />
     <Compile Include="Queries\DialogQuery.cs" />
-    <Compile Include="Queries\CssQuery.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />
     <Compile Include="Queries\HasContentMatchQuery.cs" />
     <Compile Include="Queries\HasContentQuery.cs" />
@@ -140,8 +139,6 @@
     <Compile Include="ElementScope.cs" />
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\Query.cs" />
-    <Compile Include="Queries\ContentQuery.cs" />
-    <Compile Include="Queries\XPathQuery.cs" />
     <Compile Include="RobustElementScope.cs" />
     <Compile Include="Predicates\Predicate.cs" />
     <Compile Include="Actions\DriverAction.cs" />

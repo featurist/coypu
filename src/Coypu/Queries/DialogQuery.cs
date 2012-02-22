@@ -1,13 +1,13 @@
 namespace Coypu.Queries
 {
-    internal abstract class DialogQuery : Query<bool>
+    internal class HasDialogQuery : Query<bool>
     {
         private readonly Driver driver;
         private readonly string text;
-        public abstract object ExpectedResult { get; }
+        public object ExpectedResult { get { return true; } }
         public bool Result { get; private set; }
 
-        protected DialogQuery(Driver driver, string text)
+        protected internal HasDialogQuery(Driver driver, string text)
         {
             this.driver = driver;
             this.text = text;
@@ -15,33 +15,26 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasDialog(text) == (bool)ExpectedResult;
+            Result = driver.HasDialog(text);
         }
     }
 
-    internal class HasDialogQuery : DialogQuery
+    internal class HasNoDialogQuery : Query<bool>
     {
-        internal HasDialogQuery(Driver driver, string text)
-            : base(driver, text)
+        private readonly Driver driver;
+        private readonly string text;
+        public object ExpectedResult { get { return true; } }
+        public bool Result { get; private set; }
+
+        protected internal HasNoDialogQuery(Driver driver, string text)
         {
+            this.driver = driver;
+            this.text = text;
         }
 
-        public override object ExpectedResult
+        public void Run()
         {
-            get { return true; }
-        }
-    }
-
-    internal class HasNoDialogQuery : DialogQuery
-    {
-        internal HasNoDialogQuery(Driver driver, string text)
-            : base(driver, text)
-        {
-        }
-
-        public override object ExpectedResult
-        {
-            get { return false; }
+            Result = !driver.HasDialog(text);
         }
     }
 }

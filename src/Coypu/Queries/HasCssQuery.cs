@@ -1,15 +1,23 @@
 namespace Coypu.Queries
 {
-    internal class HasCssQuery : CssQuery
+    internal class HasCssQuery : Query<bool>
     {
-        public HasCssQuery(Driver driver, DriverScope scope, string cssSelector)
-            : base(driver, scope, cssSelector)
+        private readonly Driver driver;
+        private readonly DriverScope scope;
+        private readonly string cssSelector;
+        public object ExpectedResult { get { return true; } }
+        public bool Result { get; private set; }
+
+        protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector)
         {
+            this.driver = driver;
+            this.scope = scope;
+            this.cssSelector = cssSelector;
         }
 
-        public override object ExpectedResult
+        public void Run()
         {
-            get { return true; }
+            Result = driver.HasCss(cssSelector, scope);
         }
     }
 }

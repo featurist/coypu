@@ -18,11 +18,12 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<object> stubbedResults = new List<object>();
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
         internal IList<object> QueriesRan = new List<object>();
+        public static readonly object NO_EXPECTED_RESULT = new object();
 
         public T Query<T>(Query<T> query)
         {
             QueriesRan.Add(query);
-            return (T)stubbedQueryResult[query.ExpectedResult];
+            return (T)stubbedQueryResult[query.ExpectedResult ?? NO_EXPECTED_RESULT];
         }
 
         public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
@@ -46,31 +47,16 @@ namespace Coypu.Tests.TestDoubles
             stubbedResults.Add(result);
         }
 
-        public void StubQueryResult<T>(T expected, T result)
+        public void StubQueryResult<T>(T expectedResult, T result)
         {
-            stubbedQueryResult[expected] = result;
-        }
-
-        public void StubQueryResult(bool result)
-        {
-            stubbedQueryResult[true] = result;
-            stubbedQueryResult[false] = result;
+            stubbedQueryResult[expectedResult] = result;
         }
 
         public class TryUntilArgs
         {
-            public Action TryThisAction { get; private set; }
-            public Func<bool> UntilThisFunction { get; private set; }
             public TimeSpan WaitBeforeRetry { get; private set; }
             public DriverAction TryThisDriverAction { get; private set; }
             public Predicate UntilThisPredicate { get; private set; }
-
-            public TryUntilArgs(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
-            {
-                WaitBeforeRetry = waitBeforeRetry;
-                TryThisAction = tryThis;
-                UntilThisFunction = until;
-            }
 
             public TryUntilArgs(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
             {

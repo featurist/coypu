@@ -1,15 +1,23 @@
 namespace Coypu.Queries
 {
-    internal class HasContentQuery : ContentQuery
+    internal class HasContentQuery : Query<bool>
     {
-        public HasContentQuery(Driver driver, DriverScope scope, string text)
-            : base(driver, scope, text)
+        private readonly Driver driver;
+        private readonly DriverScope scope;
+        private readonly string text;
+        public object ExpectedResult { get { return true; } }
+        public bool Result { get; private set; }
+
+        internal HasContentQuery(Driver driver, DriverScope scope, string text)
         {
+            this.driver = driver;
+            this.scope = scope;
+            this.text = text;
         }
 
-        public override object ExpectedResult
+        public void Run()
         {
-            get { return true; }
+            Result = driver.HasContent(text, scope);
         }
     }
 }

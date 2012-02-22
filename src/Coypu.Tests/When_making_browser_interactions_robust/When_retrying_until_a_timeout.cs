@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
-using Coypu.Actions;
-using Coypu.Queries;
 using Coypu.Robustness;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
 {
     [TestFixture]
-    public class When_retrying_any_function_or_action_until_a_timeout
+    public class When_retrying_until_a_timeout
     {
         [Test]
         public void When_a_query_succeeds_first_time_It_only_tries_once() 
@@ -38,7 +35,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_a_query_always_throws_an_exception_It_rethrows_eventually()
         {
-            var query = new AlwaysThrowsQuery<object,TestException>(new object());
+            var query = new AlwaysThrowsQuery<TestException>();
 
             Assert.Throws<TestException>(() => new RetryUntilTimeoutRobustWrapper().Query(query));
             Assert.That(query.Tries, Is.GreaterThan(2));
@@ -57,7 +54,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Configuration.Timeout = expectedTimeout;
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(intervalMilliseconds);
 
-            var query = new AlwaysThrowsQuery<object,TestException>(null);
+            var query = new AlwaysThrowsQuery<TestException>();
 
             var retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
 
@@ -81,7 +78,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             
             var robustness = new RetryUntilTimeoutRobustWrapper();
 
-            var query = new AlwaysThrowsQuery<object, NotSupportedException>(new object());
+            var query = new AlwaysThrowsQuery< NotSupportedException>();
             Assert.Throws<NotSupportedException>(() => robustness.Query(query));
             Assert.That(query.Tries, Is.EqualTo(1));
         }
@@ -112,7 +109,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_an_action_always_throws_an_exception_It_rethrows_eventually()
         {
-            var query = new AlwaysThrowsQuery<object, TestException>(new object());
+            var query = new AlwaysThrowsQuery<TestException>();
 
             Assert.Throws<TestException>(() => new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(query)));
             Assert.That(query.Tries, Is.GreaterThan(2));
@@ -131,7 +128,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Configuration.Timeout = expectedTimeout;
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(intervalMilliseconds);
 
-            var query = new AlwaysThrowsQuery<object, TestException>(null);
+            var query = new AlwaysThrowsQuery<TestException>();
 
             var retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
 
@@ -155,114 +152,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var robustness = new RetryUntilTimeoutRobustWrapper();
 
-            var query = new AlwaysThrowsQuery<object, NotSupportedException>(new object());
+            var query = new AlwaysThrowsQuery<NotSupportedException>();
             Assert.Throws<NotSupportedException>(() => robustness.RobustlyDo(new TestDriverAction(query)));
             Assert.That(query.Tries, Is.EqualTo(1));
-        }
-
-
-
-        public class AlwaysSucceedsQuery<T> : Query<T>
-        {
-            private readonly T returns;
-
-            public AlwaysSucceedsQuery(T returns)
-            {
-                this.returns = returns;
-            }
-
-            public void Run()
-            {
-                Tries++;
-            }
-
-            public object ExpectedResult
-            {
-                get { return null; }
-            }
-
-            public T Result
-            {
-                get { return returns; }
-            }
-
-            public int Tries { get; set; }
-        }
-
-        public class ThrowsSecondTimeQuery<T> : Query<T>
-        {
-            private readonly T result;
-
-            public ThrowsSecondTimeQuery(T result)
-            {
-                this.result = result;
-            }
-
-            public void Run()
-            {
-                Tries++;
-                if (Tries == 1)
-                    throw new TestException("Fails first time");
-            }
-
-            public object ExpectedResult
-            {
-                get { return null; }
-            }
-
-            public T Result
-            {
-                get { return result; }
-            }
-
-            public int Tries { get; set; }
-        }
-
-        public class AlwaysThrowsQuery<TResult, TException> : Query<TResult> where TException : Exception
-        {
-            private readonly Stopwatch stopWatch = new Stopwatch();
-            private readonly TResult result;
-
-            public AlwaysThrowsQuery(TResult result)
-            {
-                stopWatch.Start();
-                this.result = result;
-            }
-
-            public void Run()
-            {
-                Tries++;
-                LastCall = stopWatch.ElapsedMilliseconds;
-                throw (TException) Activator.CreateInstance(typeof(TException),"Test Exception");
-            }
-
-            public object ExpectedResult
-            {
-                get { return null; }
-            }
-
-            public TResult Result
-            {
-                get { return result; }
-            }
-
-            public int Tries { get; set; }
-            public long LastCall { get; set; }
-        }
-
-        public class TestDriverAction : DriverAction
-        {
-            public Query<object> FakeQuery { get; set; }
-
-            public TestDriverAction(Query<object> fakeQuery)
-            {
-                FakeQuery = fakeQuery;
-            }
-
-            public void Act()
-            {
-                FakeQuery.Run();
-            }
         }
     }
 }

@@ -2,16 +2,24 @@ using System.Text.RegularExpressions;
 
 namespace Coypu.Queries
 {
-    internal class HasNoContentMatchQuery : ContentMatchQuery
+    internal class HasNoContentMatchQuery : Query<bool>
     {
-        public HasNoContentMatchQuery(Driver driver, DriverScope scope, Regex text)
-            : base(driver, scope, text)
+        private readonly Driver driver;
+        private readonly DriverScope scope;
+        private readonly Regex text;
+        public object ExpectedResult { get { return true; } }
+        public bool Result { get; private set; }
+
+        protected internal HasNoContentMatchQuery(Driver driver, DriverScope scope, Regex text)
         {
+            this.driver = driver;
+            this.scope = scope;
+            this.text = text;
         }
 
-        public override object ExpectedResult
+        public void Run()
         {
-            get { return false; }
-        }
+            Result = !driver.HasContentMatch(text, scope);
+        }    
     }
 }
