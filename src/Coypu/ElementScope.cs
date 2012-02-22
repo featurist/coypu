@@ -217,7 +217,7 @@ namespace Coypu
             return DriverScope.FindId(id);
         }
 
-        public ElementScope FindIFrame(string locator)
+        public IFrameElementScope FindIFrame(string locator)
         {
             return DriverScope.FindIFrame(locator);
         }

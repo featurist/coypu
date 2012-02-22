@@ -58,6 +58,11 @@ namespace Coypu
             stateFinder = outer.stateFinder;
         }
 
+        public Uri Location
+        {
+            get { return driver.Location; }
+        }
+
         /// <summary>
         /// Click a button, input of type button|submit|image or div with the css class "button"
         /// </summary>
@@ -514,9 +519,9 @@ namespace Coypu
             robustWrapper.RobustlyDo(driverAction);
         }
 
-        public ElementScope FindIFrame(string locator)
+        public IFrameElementScope FindIFrame(string locator)
         {
-            return new RobustElementScope(new IFrameFinder(driver, locator, this), this, robustWrapper);
+            return new IFrameElementScope(new IFrameFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>

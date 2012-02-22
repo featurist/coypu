@@ -349,6 +349,6 @@ namespace Coypu
         void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry);
 
         void RetryUntilTimeout(DriverAction driverAction);
-        ElementScope FindIFrame(string locator);
+        IFrameElementScope FindIFrame(string locator);
     }
 }

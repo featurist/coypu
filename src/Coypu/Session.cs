@@ -55,7 +55,7 @@ namespace Coypu
         /// </summary>
         public Uri Location
         {
-            get { return driver.Location; }
+            get { return DriverScope.Location; }
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace Coypu
             return driverScope.FindSection(locator);
         }
 
-        public ElementScope FindIFrame(string locator)
+        public IFrameElementScope FindIFrame(string locator)
         {
             return driverScope.FindIFrame(locator);
         }

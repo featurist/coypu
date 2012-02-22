@@ -3,7 +3,7 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-    internal class RobustElementScope : ElementScope
+    public class RobustElementScope : ElementScope
     {
         private readonly ElementFinder elementFinder;
         private readonly RobustWrapper robustWrapper;
