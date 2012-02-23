@@ -3,255 +3,173 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+
+using SHDocVw;
+
 using WatiN.Core;
-using WatiN.Core.Constraints;
-using WatiN.Core.Exceptions;
-using WatiN.Core.Interfaces;
+using mshtml;
 
 namespace Coypu.Drivers.Watin
 {
     public class WatiNDriver : Driver
     {
-        readonly string[] sectionTagNames = new[] { "SECTION", "DIV" };
-        readonly string[] headerTagNames = new[] { "H1", "H2", "H3", "H4", "H5", "H6" };
-        public bool Disposed { get; private set; }
+        private readonly ElementFinder elementFinder;
 
-        private WatiN.Core.Browser watinInstance;
+        private DialogHandler watinDialogHandler;
 
-        private WatiN.Core.Browser Watin 
-        { 
-            get 
-            { 
-                return watinInstance ?? (watinInstance = NewDriver());
-            }
+        static WatiNDriver()
+        {
+            ElementFactory.RegisterElementType(typeof(Fieldset));
+            ElementFactory.RegisterElementType(typeof(Section));
         }
 
-        private WatiN.Core.Browser NewDriver()
+        public WatiNDriver()
         {
-            switch (Configuration.Browser)
-            {
-                case (Browser.InternetExplorer):
-                    return new IE();
-                default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, this.GetType());
-            }
+            if (Configuration.Browser != Browser.InternetExplorer)
+                throw new BrowserNotSupportedException(Configuration.Browser, GetType());
+
+            Settings.AutoMoveMousePointerToTopLeft = false;
+
+            Watin = CreateBrowser();
+            elementFinder = new ElementFinder();
         }
 
-        public void SetScope(Element scope)
+        private WatiN.Core.Browser CreateBrowser()
         {
-            Scope = (WatiN.Core.Element)scope().Native;
+            var browser = new IEWithDialogWaiter();
+
+            watinDialogHandler = new DialogHandler();
+            browser.AddDialogHandler(watinDialogHandler);
+
+            return browser;
         }
 
-        private WatiN.Core.Element Scope { get; set; }
+        internal WatiN.Core.Browser Watin { get; private set; }
 
-        public void ClearScope()
+        private static WatiN.Core.Element WatiNElement(Element element)
         {
-            Scope = null;
+            return WatiNElement<WatiN.Core.Element>(element);
+        }
+
+        private static T WatiNElement<T>(Element element)
+            where T : WatiN.Core.Element
+        {
+            return element.Native as T;
+        }
+
+        private static Element BuildElement(WatiN.Core.Element element, string description)
+        {
+            if (element == null)
+                throw new MissingHtmlException(description);
+            return BuildElement(element);
+        }
+
+        private static Element BuildElement(WatiN.Core.Element element)
+        {
+            return new WatiNElement(element);
+        }
+
+        private static Element BuildElement(WatiN.Core.Browser browser)
+        {
+            return new WatiNBrowser(browser);
+        }
+
+        private static Element BuildElement(Frame frame, string description)
+        {
+            if (frame == null)
+                throw new MissingHtmlException(description);
+            return new WatiNFrame(frame);
         }
 
         public string ExecuteScript(string javascript)
         {
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
-            return Watin.Eval(stripReturn);
+            var retval = Watin.Eval(stripReturn);
+            Watin.WaitForComplete();
+            return retval;
         }
 
-        public Element FindFieldset(string locator)
+        public Element FindFieldset(string locator, DriverScope scope)
         {
-            var fieldsets = Watin.Elements.Filter(IsFieldset);
-            var fieldset =
-                FindFirst(fieldsets, Find.ById(locator)) ??
-                FindFieldsetByLegend(locator);
-
-            return BuildElement(fieldset, "Failed to find fieldset: " + locator);
+            return BuildElement(elementFinder.FindFieldset(locator, scope), "Failed to find fieldset: " + locator);
         }
 
-        private WatiN.Core.Element FindFieldsetByLegend(string locator)
+        public Element FindSection(string locator, DriverScope scope)
         {
-            var legend = Watin.Elements.Filter(e => e.TagName == "LEGEND")
-                                       .Filter(Find.ByText(locator))
-                                       .FirstDisplayedOrDefault();
-
-            return legend != null && IsFieldset(legend.Parent) 
-                    ? legend.Parent 
-                    : null;
+            return BuildElement(elementFinder.FindSection(locator, scope), "Failed to find section: " + locator);
         }
 
-        private bool IsFieldset(WatiN.Core.Element e)
+        public Element FindId(string id, DriverScope scope)
         {
-            return e.TagName == "FIELDSET";
+            return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
         }
 
-        public Element FindSection(string locator)
+        public Element FindIFrame(string locator, DriverScope scope)
         {
-            var section = Watin.Elements.FirstDisplayedOrDefault(e => e.Id == locator && IsSection(e)) ??
-                          Watin.Elements
-                                 .Where(e => headerTagNames.Contains(e.TagName) && 
-                                             TextMatches(e,locator) &&
-                                             sectionTagNames.Contains(e.Parent.TagName))
-                               .Select(h => h.Parent)
-                               .FirstDisplayedOrDefault();
-
-            return BuildElement(section, "Failed to find section: " + locator);
-        }
-
-        private bool IsSection(WatiN.Core.Element e)
-        {
-            return sectionTagNames.Contains(e.TagName);
-        }
-
-        public Element FindId(string id)
-        {
-            var element = Watin.Elements.Filter(Find.ById(id)).FirstDisplayedOrDefault(Scope);
-            return BuildElement(element, "Failed to find id: " + id);
-        }
-
-        public Element FindIFrame(string locator)
-        {
-            var frame = Filter(Watin.Frames, f => HasElement(f, "h1", locator) ||
-                                                  f.Title == locator ||
-                                                  f.Id == locator).FirstOrDefault();
-
-            return BuildElement(frame, "Failed to find frame: " + locator);
+            return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }
 
         public void Hover(Element element)
         {
-            (WatiNElement(element)).MouseEnter();
+            WatiNElement(element).FireEvent("onmouseover");
         }
 
         public IEnumerable<Cookie> GetBrowserCookies()
         {
-            throw new NotSupportedException();
+            var ieBrowser = Watin as IE;
+            if (ieBrowser == null)
+                throw new NotSupportedException("Only supported for Internet Explorer");
+
+            var persistentCookies = GetPersistentCookies(ieBrowser).ToList();
+            var documentCookies = GetCookiesFromDocument(ieBrowser);
+
+            var sessionCookies = documentCookies.Except(persistentCookies, new CookieNameEqualityComparer());
+
+            return persistentCookies.Concat(sessionCookies).ToList();
         }
 
-        private bool HasElement(IElementContainer elementContainer, string tagName, string text)
+        private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
-            return elementContainer.ElementsWithTag(new List<ElementTag> { new ElementTag(tagName) })
-                    .Filter(Find.ByText(text))
-                    .Any();
+            return ieBrowser.GetCookiesForUrl(Location).Cast<Cookie>();
         }
 
-        public Element FindButton(string locator)
+        private IEnumerable<Cookie> GetCookiesFromDocument(IE ieBrowser)
         {
-            var button = FindFirst(Watin.Buttons, e => TextMatches(e,locator) ||
-                                                       e.Id == locator ||
-                                                       e.Name == locator ||
-                                                       e.Value == locator);
-            if (button == null)
-            {
-                var buttonTags = Watin.Elements.Filter(e => e.TagName == "BUTTON");
-                button = FindFirst(buttonTags, e => TextMatches(e,locator) ||
-                                                    e.Id == locator ||
-                                                    e.Name == locator);
-            }
+            var document = ((IWebBrowser2)ieBrowser.InternetExplorer).Document as IHTMLDocument2;
+            if (document == null)
+                throw new InvalidOperationException("Cannot get IE document for cookies");
 
-            return BuildElement(button, "Failed to find button with text, id or name: " + locator);
+            return from untrimmedCookie in document.cookie.Split(';')
+                   let cookie = untrimmedCookie.Trim()
+                   let index = cookie.IndexOf('=')
+                   let name = cookie.Substring(0, index)
+                   let value = cookie.Substring(index + 1, cookie.Length - index - 1)
+                   select new Cookie(name, value);
         }
 
-        private bool TextMatches(WatiN.Core.Element element, string expectedText)
+        public Element FindButton(string locator, DriverScope scope)
         {
-            return !string.IsNullOrEmpty(element.OuterText) && element.OuterText.Trim() == expectedText.Trim();
+            return BuildElement(elementFinder.FindButton(locator, scope), "Failed to find button with text, id or name: " + locator);
         }
 
-        public IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
+        public Element FindLink(string linkText, DriverScope scope)
         {
-            return collection.Filter(constraint).Cast<WatiN.Core.Element>().WithinScope(Scope);
+            return BuildElement(elementFinder.FindLink(linkText, scope), "Failed to find link with text: " + linkText);
         }
 
-        public IEnumerable<WatiN.Core.Element> Filter<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate) where TComponent : Component
+        public Element FindField(string locator, DriverScope scope)
         {
-            return collection.Filter(predicate).Cast<WatiN.Core.Element>().WithinScope(Scope);
-        }
-
-        public WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Constraint constraint) where TComponent : Component
-        {
-            return Filter(collection, constraint).FirstDisplayedOrDefault(Scope);
-        }
-
-        public WatiN.Core.Element FindFirst<TComponent>(IComponentCollection<TComponent> collection, Predicate<TComponent> predicate) where TComponent : Component
-        {
-            return Filter(collection, predicate).FirstDisplayedOrDefault(Scope);
-        }
-
-        public Element BuildElement(WatiN.Core.Element element, string description)
-        {
-            if (element == null)
-            {
-                throw new MissingHtmlException(description);
-            }
-            return new WatiNElement(element);
-        }
-
-        public Element FindLink(string linkText)
-        {
-            var link = FindFirst(Watin.Links, Find.ByText(linkText));
-            return BuildElement(link, "Failed to find link with text: " + linkText);
-        }
-
-        public Element FindField(string locator)
-        {
-            var allFields = FindAllFields();
-
-            var field = FindFieldByLabel(locator, allFields) ??
-                        allFields.FirstDisplayedOrDefault(
-                            Scope, f => f.Id == locator ||
-                                        f.Name == locator ||
-                                        HasAttribute(f, "value", locator) ||
-                                        HasAttribute(f, "placeholder", locator));
-
-            return BuildElement(field, "Failed to find field with label, id, name or placeholder: " + locator);
-        }
-
-        private bool HasAttribute(WatiN.Core.Element element, string attributeName, string attributeValue)
-        {
-            return element.GetAttributeValue(attributeName) == attributeValue;
-        }
-
-        private WatiN.Core.Element FindFieldByLabel(string locator, IEnumerable<WatiN.Core.Element> allFields)
-        {
-            var label = (Label)Filter(Watin.Labels, Find.ByText(locator)).FirstWithinScopeOrDefault(Scope);
-            if (label != null)
-            {
-                return allFields.FirstDisplayedOrDefault(Scope, f => f.Id == label.For) ??
-                       allFields.FirstDisplayedOrDefault(Scope, f => IsElementInContainer(f, label));
-            }
-            return null;
-        }
-
-        private bool IsElementInContainer(WatiN.Core.Element element, IElementContainer container)
-        {
-            return container.Children().Any(child => child.Equals(element));
-        }
-
-        private WatiN.Core.Element GetRadioButtonWithValue(string value)
-        {
-            return FindFirst(Watin.RadioButtons, r => r.GetAttributeValue("value") == value);
-        }
-
-        private IEnumerable<WatiN.Core.Element> FindAllFields()
-        {
-            var textFields = Watin.TextFields.Cast<WatiN.Core.Element>();
-            var selects = Watin.SelectLists.Cast<WatiN.Core.Element>();
-            var checkboxes = Watin.CheckBoxes.Cast<WatiN.Core.Element>();
-            var radioButtons = Watin.RadioButtons.Cast<WatiN.Core.Element>();
-            var fileUploads = Watin.FileUploads.Cast<WatiN.Core.Element>();
-
-            return fileUploads
-                    .Union(textFields)
-                    .Union(selects)
-                    .Union(checkboxes)
-                    .Union(radioButtons)
-                    .Union(fileUploads);
+            return BuildElement(elementFinder.FindField(locator, scope), "Failed to find field with label, id, name or placeholder: " + locator);
         }
 
         public void Click(Element element)
         {
-            WatiNElement(element).Click();
-        }
-
-        private WatiN.Core.Element WatiNElement(Element element)
-        {
-            return ((WatiN.Core.Element) element.Native);
+            // If we use Click, then we can get a deadlock if IE is displaying a modal dialog.
+            // (Yay COM STA!) Our override of the IE class makes sure the WaitForComplete will
+            // check to see if the main window is disabled before continuing with the normal wait
+            var nativeElement = WatiNElement(element);
+            nativeElement.ClickNoWait();
+            nativeElement.WaitForComplete();
         }
 
         public void Visit(string url)
@@ -261,26 +179,20 @@ namespace Coypu.Drivers.Watin
 
         public void Set(Element element, string value)
         {
-            var textField = element.Native as TextField;
+            var textField = WatiNElement<TextField>(element);
             if (textField != null)
             {
                 textField.Value = value;
                 return;
             }
-            var fileUpload = element.Native as FileUpload;
-            if (fileUpload != null) fileUpload.Set(value);
+            var fileUpload = WatiNElement<FileUpload>(element);
+            if (fileUpload != null)
+                fileUpload.Set(value);
         }
 
         public void Select(Element element, string option)
         {
-            try
-            {
-                ((SelectList) element.Native).Select(option);
-            }
-            catch (WatiNException)
-            {
-                ((SelectList) element.Native).SelectByValue(option);
-            }
+            WatiNElement<SelectList>(element).SelectByTextOrValue(option);
         }
 
         public object Native
@@ -288,87 +200,102 @@ namespace Coypu.Drivers.Watin
             get { return Watin; }
         }
 
-        public bool HasContent(string text)
+        public bool HasContent(string text, DriverScope scope)
         {
-            return Scope != null
-                ? Scope.Text.Contains(text) 
-                : Watin.ContainsText(text);
+            var watiNScope = ElementFinder.WatiNScope(scope);
+            if(watiNScope == Window.Native)
+            {
+                return ((WatiN.Core.Browser) Window.Native).Text.Contains(text);
+            }
+            return ((WatiN.Core.Element)watiNScope).Text.Contains(text);
         }
 
-        public bool HasContentMatch(Regex pattern)
+        public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
-            return Scope != null
-                ? pattern.IsMatch(Scope.Text) 
-                : Watin.ContainsText(pattern);
+            var watiNScope = ElementFinder.WatiNScope(scope);
+            if (watiNScope == Window.Native)
+            {
+                return ((WatiN.Core.Browser)Window.Native).ContainsText(pattern);
+            }
+            return pattern.IsMatch(((WatiN.Core.Element)watiNScope).Text);
         }
 
         public void Check(Element field)
         {
-            ((CheckBox)field.Native).Checked = true;
+            WatiNElement<CheckBox>(field).Checked = true;
         }
 
         public void Uncheck(Element field)
         {
-            ((CheckBox)field.Native).Checked = false;
+            WatiNElement<CheckBox>(field).Checked = false;
         }
 
         public void Choose(Element field)
         {
-            ((RadioButton)field.Native).Checked = true;
+            WatiNElement<RadioButton>(field).Checked = true;
         }
 
         public bool HasDialog(string withText)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            return watinDialogHandler.Exists() && watinDialogHandler.Message == withText;
+        }
+
+        public Element Window
+        {
+            get { return BuildElement(Watin); }
         }
 
         public void AcceptModalDialog()
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            watinDialogHandler.ClickOk();
         }
 
         public void CancelModalDialog()
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            watinDialogHandler.ClickCancel();
         }
 
-        public bool HasCss(string cssSelector)
+        public bool HasCss(string cssSelector, DriverScope scope)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            return elementFinder.HasCss(cssSelector, scope);
         }
 
-        public bool HasXPath(string xpath)
+        public bool HasXPath(string xpath, DriverScope scope)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("HasXPath not yet implemented in WatiNDriver");
         }
 
-        public Element FindCss(string cssSelector)
+        public Element FindCss(string cssSelector, DriverScope scope)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            return BuildElement(elementFinder.FindCss(cssSelector, scope), "No element found by css: " + cssSelector);
         }
 
-        public Element FindXPath(string xpath)
+        public Element FindXPath(string xpath, DriverScope scope)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("FindXPath not yet implemented in WatiNDriver");
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            return (from e in elementFinder.FindAllCss(cssSelector, scope)
+                    select BuildElement(e)).ToList();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
         {
-            throw new NotSupportedException("Not yet implemented in WatiNDriver");
+            throw new NotSupportedException("FindAllXPath not yet implemented in WatiNDriver");
         }
 
         public Uri Location
         {
-            get { return watinInstance.Uri; }
+            get { return Watin.Uri; }
         }
+
+        public bool Disposed { get; private set; }
 
         public void Dispose()
         {
+            watinDialogHandler.Dispose();
             Watin.Dispose();
             Disposed = true;
         }

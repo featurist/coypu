@@ -4,72 +4,78 @@ namespace Coypu.Drivers.Watin
 {
     internal class WatiNElement : Element
     {
-        internal WatiNElement(object watinElement)
+        internal WatiNElement(WatiN.Core.Element watinElement)
         {
             Native = watinElement;
         }
 
-        public WatiN.Core.Element NativeWatiNElement
+        private T GetNativeWatiNElement<T>()
+            where T : WatiN.Core.Element
         {
-            get { return (WatiN.Core.Element) Native; }
+            return Native as T;
         }
 
-        public override string Id
+        private WatiN.Core.Element NativeWatiNElement
+        {
+            get { return GetNativeWatiNElement<WatiN.Core.Element>(); }
+        }
+
+        public string Id
         {
             get { return NativeWatiNElement.Id; }
         }
 
-        public override string Text
-        {
-            get { return NativeWatiNElement.Text ?? NativeWatiNElement.OuterText; }
-        }
-
-        public override string Value
+        public string Text
         {
             get
             {
-                var textField = NativeWatiNElement as TextField;
-                
-                return textField != null 
-                    ? textField.Value 
-                    : this["value"];
+                var text = NativeWatiNElement.Text ?? NativeWatiNElement.OuterText;
+                return text != null ? text.Trim() : null;
             }
         }
 
-        public override string Name
+        public string Value
+        {
+            get
+            {
+                var textField = GetNativeWatiNElement<TextField>();
+                return textField != null ? textField.Value : this["value"];
+            }
+        }
+
+        public string Name
         {
             get { return NativeWatiNElement.Name; }
         }
 
-        public override string SelectedOption
+        public string SelectedOption
         {
             get 
             { 
-                var selectList = NativeWatiNElement as SelectList;
-                
-                return selectList != null 
-                    ? selectList.SelectedOption.Text 
-                    : string.Empty;
+                var selectList = GetNativeWatiNElement<SelectList>();
+                return selectList != null ? selectList.SelectedOption.Text : string.Empty;
             }
         }
 
-        public override bool Selected
+        public bool Selected
         {
             get
             {
-                var checkbox = NativeWatiNElement as CheckBox;
+                var checkbox = GetNativeWatiNElement<CheckBox>();
                 if (checkbox != null)
                     return checkbox.Checked;
 
-                var radioButton = NativeWatiNElement as RadioButton;
-                if (radioButton  != null)
+                var radioButton = GetNativeWatiNElement<RadioButton>();
+                if (radioButton != null)
                     return radioButton.Checked;
 
                 return false;
             }
         }
 
-        public override string this[string attributeName]
+        public object Native { get; private set; }
+
+        public string this[string attributeName]
         {
             get { return NativeWatiNElement.GetAttributeValue(attributeName); }
         }

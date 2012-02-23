@@ -48,7 +48,7 @@ end
 
 
 desc 'package'
-task :package => [:release_configuration, :compile] do
+task :package => [:release_configuration,:compile] do
   FileUtils.rm_rf('temp')
   FileUtils.mkdir_p("temp/net40")
   Rake::Task["compile_net40"].invoke
@@ -77,7 +77,7 @@ task :publish => :package do
 end
 
 desc 'publish Coypu-WatiN'
-task :publish_watin => :package_watin do
+task :publish_watin => :package do
   package_file = Dir.glob('Coypu-WatiN*.nupkg').first
   sh "nuget Push #{package_file}"
   FileUtils.rm(package_file)

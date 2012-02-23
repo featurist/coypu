@@ -6,7 +6,6 @@ namespace Coypu.Actions
     {
         private readonly DriverScope driverScope;
 
-
         internal Click(DriverScope driverScope)
         {
             this.driverScope = driverScope;

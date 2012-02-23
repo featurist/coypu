@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Coypu.Watin</id>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <authors>AdrianLongley</authors>
     <owners>AdrianLongley</owners>
-    <projectUrl>https://github.com/ITV/Coypu</projectUrl>
+    <projectUrl>https://github.com/coypu/Coypu</projectUrl>
     <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>WatiN driver for Coypu</description>
     <tags></tags>
     <dependencies>
-      <dependency id="Coypu" version="[0.3.1]" />
+      <dependency id="Coypu" version="[0.6.0, 0.7.0)" />
       <dependency id="WatiN" version="[2.1.0]" />
     </dependencies>
   </metadata>

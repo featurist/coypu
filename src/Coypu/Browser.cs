@@ -26,11 +26,20 @@ namespace Coypu
 
         private static void StartNewSession()
         {
-            session = new Session(NewWebDriver(), 
-                new RetryUntilTimeoutRobustWrapper(), 
-                new ThreadSleepWaiter(), 
-                new WebClientWithCookies(), 
-                new CurrentConfigurationUrlBuilder());
+            session = NewSession();
+        }
+
+        /// <summary>
+        /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
+        /// </summary>
+        /// <returns>The new session</returns>
+        public static Session NewSession()
+        {
+            return new Session(NewWebDriver(),
+                               new RetryUntilTimeoutRobustWrapper(),
+                               new ThreadSleepWaiter(),
+                               new WebClientWithCookies(),
+                               new CurrentConfigurationUrlBuilder());
         }
 
         private static Driver NewWebDriver()
@@ -52,13 +61,13 @@ namespace Coypu
         {
             if (SessionIsActive) session.Dispose();
         }
-        
+
         /// <summary>
         /// Whether there is an active session
         /// </summary>
         public static bool SessionIsActive
         {
-            get {return session != null;}
+            get { return session != null; }
         }
     }
 }

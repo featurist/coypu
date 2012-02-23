@@ -2,8 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {
@@ -139,7 +142,7 @@ namespace Coypu.AcceptanceTests
             ReloadTestPage();
 
             const string shouldFind = "#inspectingContent ul#cssTest li";
-            var all = browser.FindAllCss(shouldFind);
+            var all = browser.FindAllCss(shouldFind).ToList();
             Assert.That(all.Count(), Is.EqualTo(3));
             Assert.That(all.ElementAt(1).Text, Is.EqualTo("two"));
             Assert.That(all.ElementAt(2).Text, Is.EqualTo("Me! Pick me!"));
@@ -151,7 +154,7 @@ namespace Coypu.AcceptanceTests
             ReloadTestPage();
 
             const string shouldFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
-            var all = browser.FindAllXPath(shouldFind);
+            var all = browser.FindAllXPath(shouldFind).ToArray();
             Assert.That(all.Count(), Is.EqualTo(3));
             Assert.That(all.ElementAt(1).Text, Is.EqualTo("two"));
             Assert.That(all.ElementAt(2).Text, Is.EqualTo("Me! Pick me!"));
@@ -332,20 +335,19 @@ namespace Coypu.AcceptanceTests
         public void Within_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
-
+            
             var expectingScope1 = browser.FindId("scope1").FindField(locatorThatAppearsInMultipleScopes);
             var expectingScope2 = browser.FindId("scope2").FindField(locatorThatAppearsInMultipleScopes);
 
             Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
-
         }
         
         [Test]
         public void WithinFieldset_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
-
+            
             var expectingScope1 = browser.FindFieldset("Scope 1").FindField(locatorThatAppearsInMultipleScopes);
             var expectingScope2 = browser.FindFieldset("Scope 2").FindField(locatorThatAppearsInMultipleScopes);
 
@@ -416,9 +418,30 @@ namespace Coypu.AcceptanceTests
         public void ConsideringVisibleElements()
         {
             Assert.Throws<MissingHtmlException>(() => browser
-                .ConsideringInvisibleElements()
-                .ConsideringOnlyVisibleElements()
-                .FindButton("firstInvisibleInputId").Now());
+                                                          .ConsideringInvisibleElements()
+                                                          .ConsideringOnlyVisibleElements()
+                                                          .FindButton("firstInvisibleInputId").Now());
+        }
+
+        [Test]
+        public void CustomProfile()
+        {
+            Configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
+
+            Browser.Session.Visit("https://www.relishapp.com/");
+        }
+
+        public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+        {
+            public CustomFirefoxProfileSeleniumWebDriver() : base(CustomProfile())
+            {
+            }
+
+            private static RemoteWebDriver CustomProfile()
+            {
+                var yourCustomProfile = new FirefoxProfile();
+                return new FirefoxDriver(yourCustomProfile);
+            }
         }
     }
 }

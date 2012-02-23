@@ -39,24 +39,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.SHDocVw">
-      <HintPath>..\packages\WatiN.2.1.0\lib\net35\Interop.SHDocVw.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.1.8\lib\net20\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <Private>True</Private>
-      <HintPath>..\packages\WatiN.2.1.0\lib\net35\Microsoft.mshtml.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.6\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSpec, Version=0.9.41.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NSpec, Version=0.9.58.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\nspec.0.9.41\lib\NSpec.dll</HintPath>
+      <HintPath>..\packages\nspec.0.9.58\lib\NSpec.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\nspec.0.9.41\lib\nunit.framework.dll</HintPath>
@@ -75,17 +66,16 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WatiN.Core">
-      <HintPath>..\packages\WatiN.2.1.0\lib\net35\WatiN.Core.dll</HintPath>
-    </Reference>
     <Reference Include="WebDriver, Version=2.19.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Selenium.WebDriver.2.19.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DebuggerShim.cs" />
     <Compile Include="When_finding_fields_by_container_label.cs" />
     <Compile Include="When_finding_fields_by_for_attribute.cs" />
+    <Compile Include="When_finding_fields_by_id_ends_with.cs" />
     <Compile Include="When_finding_fields_by_name.cs" />
     <Compile Include="When_finding_fields_by_placeholder.cs" />
     <Compile Include="When_finding_fields_id.cs" />
@@ -137,7 +127,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="When_finding_sections_as_divs.cs" />
-    <Compile Include="When_finding_fields_by_id_ends_with.cs">
+    <Compile Include="When_finding_fields_by_value.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="When_finding_fieldsets.cs">
@@ -194,9 +184,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj">
+      <Project>{A4ADBB2C-A3C3-4984-8991-C39E991167DA}</Project>
+      <Name>Coypu.Drivers.Watin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Coypu.Tests\Coypu.Tests.csproj">
       <Project>{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}</Project>
       <Name>Coypu.Tests</Name>

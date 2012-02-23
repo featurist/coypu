@@ -18,7 +18,6 @@ namespace Coypu.Drivers.Tests
 
         [Test]
         public void Finds_content_within_scope()
-
         {
             Driver.HasContent("Scope 1", scope1).should_be_true();
             Driver.HasContent("Scope 2", scope2).should_be_true();
@@ -26,7 +25,6 @@ namespace Coypu.Drivers.Tests
 
         [Test]
         public void Does_not_find_content_outside_scope()
-
         {
             Driver.HasContent("Scope 2", scope1).should_be_false();
             Driver.HasContent("Scope 1", scope2).should_be_false();

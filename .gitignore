@@ -4,10 +4,14 @@ deploy
 deploy/*
 temp/
 _ReSharper.*
+<<<<<<< HEAD
 *.ReSharper.user
 *.csproj.user
 *.sln.*.user
 *.resharper.user
+=======
+*.user
+>>>>>>> citizenmatt-watin
 *.resharper
 *.suo
 *.cache

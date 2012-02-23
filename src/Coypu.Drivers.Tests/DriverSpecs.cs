@@ -1,24 +1,32 @@
 ﻿using System;
 using System.IO;
-using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Tests.Sites;
+using Coypu.Drivers.Watin;
 using Coypu.Finders;
 using NUnit.Framework;
 
-
-namespace NUnit.Framework
+[SetUpFixture]
+public class AssmeblyTearDown
 {
-    [TestFixture]
-    public class AssmeblyTearDown
+    private SinatraSite sinatraSite;
+
+    [SetUp]
+    public void StartSinatra()
     {
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
-            if (driver != null && !driver.Disposed)
-                driver.Dispose();
-        }
+        sinatraSite = new SinatraSite(@"..\..\..\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        sinatraSite.Dispose();
+
+        var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
+        if (driver != null && !driver.Disposed)
+            driver.Dispose();
     }
 }
+
 
 namespace Coypu.Drivers.Tests
 {
@@ -28,8 +36,8 @@ namespace Coypu.Drivers.Tests
         private static DriverScope root;
         private static Driver driver;
 
-        private const Browser browser = Browser.Firefox;
-        private static readonly Type driverType = typeof (SeleniumWebDriver);
+        private const Browser browser = Browser.InternetExplorer;
+        private static readonly Type driverType = typeof (WatiNDriver);
 
         [SetUp]
         public void SetUp()

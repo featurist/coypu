@@ -21,6 +21,7 @@ namespace Coypu.Robustness
         public TResult Query<TResult>(Query<TResult> query)
         {
             var interval = Configuration.RetryInterval;
+            //TODO: timeout should come from Query
             var timeout = Configuration.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)
@@ -51,6 +52,7 @@ namespace Coypu.Robustness
         public Element RobustlyFind(ElementFinder elementFinder)
         {
             var interval = Configuration.RetryInterval;
+            // TODO: Should be elementFinder.Timeout
             var timeout = Configuration.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)
@@ -74,6 +76,7 @@ namespace Coypu.Robustness
         public void RobustlyDo(DriverAction action)
         {
             var interval = Configuration.RetryInterval;
+            // TODO: timeout should come from action DriverScope
             var timeout = Configuration.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)

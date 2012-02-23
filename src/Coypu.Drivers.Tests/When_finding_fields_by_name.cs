@@ -3,16 +3,10 @@ using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_fields_by_name : DriverSpecs
-    {
-        [Test]
-        public void Finds_by_id_ends_with()
-        {
-            Driver.FindField("tainerLabeledFileFieldId", Root).Name.should_be("containerLabeledFileFieldName");
-        }
+    internal class When_finding_fields_by_name : DriverSpecs {
 
 
-        [Test]
+    [Test]
         public void Finds_text_input()
         {
             Driver.FindField("containerLabeledTextInputFieldName", Root).Value.should_be("text input field two val");
