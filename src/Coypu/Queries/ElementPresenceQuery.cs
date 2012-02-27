@@ -1,3 +1,5 @@
+using System;
+
 namespace Coypu.Queries
 {
     internal abstract class ElementPresenceQuery : Query<bool>
@@ -9,6 +11,11 @@ namespace Coypu.Queries
         protected ElementPresenceQuery(DriverScope driverScope)
         {
             this.driverScope = driverScope;
+        }
+
+        public TimeSpan Timeout
+        {
+            get { return driverScope.IndividualTimeout; }
         }
 
         public void Run()

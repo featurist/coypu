@@ -1,3 +1,5 @@
+using System;
+
 namespace Coypu.Queries
 {
     internal class HasNoXPathQuery : Query<bool>
@@ -7,6 +9,11 @@ namespace Coypu.Queries
         private readonly string xpath;
         public object ExpectedResult { get { return true; } }
         public bool Result { get; private set; }
+
+        public TimeSpan Timeout
+        {
+            get { return scope.IndividualTimeout; }
+        }
 
         protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath)
         {

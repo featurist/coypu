@@ -1,5 +1,3 @@
-using System;
-
 namespace Coypu.Finders
 {
     public abstract class ElementFinder
@@ -17,6 +15,5 @@ namespace Coypu.Finders
 
         internal string Locator { get { return _locator; } }
         internal abstract Element Find();
-        internal TimeSpan Timeout { get; set; }
     }
 }

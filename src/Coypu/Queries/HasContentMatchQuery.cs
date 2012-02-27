@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 
 namespace Coypu.Queries
@@ -9,6 +10,11 @@ namespace Coypu.Queries
         private readonly Regex text;
         public object ExpectedResult { get { return true; } }
         public bool Result { get; private set; }
+
+        public TimeSpan Timeout
+        {
+            get { return scope.IndividualTimeout; }
+        }
 
         protected internal HasContentMatchQuery(Driver driver, DriverScope scope, Regex text)
         {

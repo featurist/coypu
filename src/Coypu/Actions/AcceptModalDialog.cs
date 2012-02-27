@@ -1,19 +1,17 @@
-using Coypu.Robustness;
+using System;
 
 namespace Coypu.Actions
 {
     internal class AcceptModalDialog : DriverAction
     {
-        private readonly Driver driver;
-
-        internal AcceptModalDialog(Driver driver)
+        internal AcceptModalDialog(Driver driver, TimeSpan timeout)
+            : base(driver, timeout)
         {
-            this.driver = driver;
         }
 
-        public void Act()
+        public override void Act()
         {
-            driver.AcceptModalDialog();
+            Driver.AcceptModalDialog();
         }
     }
 }

@@ -77,7 +77,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return Query(new HasDialogQuery(driver, withText));
+            return Query(new HasDialogQuery(driver, withText, driverScope.IndividualTimeout));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return Query(new HasNoDialogQuery(driver, withText));
+            return Query(new HasNoDialogQuery(driver, withText, timeout: driverScope.IndividualTimeout));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog()
         {
-            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver));
+            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver, DriverScope.IndividualTimeout));
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog()
         {
-            driverScope.RetryUntilTimeout(new CancelModalDialog(driver));
+            driverScope.RetryUntilTimeout(new CancelModalDialog(driver,DriverScope.IndividualTimeout));
         }
 
         /// <summary>

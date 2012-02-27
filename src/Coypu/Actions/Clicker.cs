@@ -1,27 +1,25 @@
-﻿using Coypu.Actions;
+﻿using System;
 using Coypu.Finders;
 using Coypu.Robustness;
 
-namespace Coypu
+namespace Coypu.Actions
 {
     internal class WaitThenClick : DriverAction
     {
-        private readonly Driver driver;
         private readonly Waiter waiter;
         private readonly ElementFinder elementFinder;
 
-        internal WaitThenClick(Driver driver, Waiter waiter, ElementFinder elementFinder)
+        internal WaitThenClick(Driver driver, TimeSpan timeout, Waiter waiter, ElementFinder elementFinder) : base(driver,timeout)
         {
-            this.driver = driver;
             this.waiter = waiter;
             this.elementFinder = elementFinder;
         }
 
-        public void Act()
+        public override void Act()
         {
             var element = elementFinder.Find();
             waiter.Wait(Configuration.WaitBeforeClick);
-            driver.Click(element);
+            Driver.Click(element);
         }
     }
 }

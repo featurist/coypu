@@ -124,6 +124,7 @@
     <Compile Include="Queries\ContentMatchQuery.cs" />
     <Compile Include="Queries\DialogQuery.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />
+    <Compile Include="Queries\ElementQuery.cs" />
     <Compile Include="Queries\HasContentMatchQuery.cs" />
     <Compile Include="Queries\HasContentQuery.cs" />
     <Compile Include="Queries\HasCssQuery.cs" />
@@ -173,7 +174,6 @@
     </Compile>
     <Compile Include="WebRequests\WebRequestCookieInjector.cs" />
     <Compile Include="Finders\XPathFinder.cs" />
-    <Compile Include="ZeroTimeoutQueryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

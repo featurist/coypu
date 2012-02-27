@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using Coypu.Actions;
-using Coypu.Finders;
 using Coypu.Predicates;
 using Coypu.Queries;
 
@@ -11,9 +10,9 @@ namespace Coypu.Robustness
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
 
-        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overrallTimeout)
         {
-            var outcome = Query(new ActionSatisfiesPredicateQuery(tryThis,until,waitBeforeRetry));
+            var outcome = Query(new ActionSatisfiesPredicateQuery(tryThis,until,waitBeforeRetry,overrallTimeout));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
@@ -36,55 +35,6 @@ namespace Coypu.Robustness
                         continue;
                     }
                     return result;
-                }
-                catch (NotSupportedException) { throw; }
-                catch (Exception)
-                {
-                    if (TimeoutReached(stopWatch, timeout, interval))
-                    {
-                        throw;
-                    }
-                    WaitForInterval(interval);
-                }
-            }
-        }
-
-        public Element RobustlyFind(ElementFinder elementFinder)
-        {
-            var interval = Configuration.RetryInterval;
-            // TODO: Should be elementFinder.Timeout
-            var timeout = Configuration.Timeout;
-            var stopWatch = Stopwatch.StartNew();
-            while (true)
-            {
-                try
-                {
-                    return elementFinder.Find();
-                }
-                catch (NotSupportedException) { throw; }
-                catch (Exception)
-                {
-                    if (TimeoutReached(stopWatch, timeout, interval))
-                    {
-                        throw;
-                    }
-                    WaitForInterval(interval);
-                }
-            }
-        }
-
-        public void RobustlyDo(DriverAction action)
-        {
-            var interval = Configuration.RetryInterval;
-            // TODO: timeout should come from action DriverScope
-            var timeout = Configuration.Timeout;
-            var stopWatch = Stopwatch.StartNew();
-            while (true)
-            {
-                try
-                {
-                    action.Act();
-                    return;
                 }
                 catch (NotSupportedException) { throw; }
                 catch (Exception)

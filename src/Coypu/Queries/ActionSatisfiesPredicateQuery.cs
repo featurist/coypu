@@ -10,11 +10,14 @@ namespace Coypu.Queries
         private readonly Predicate until;
         private readonly TimeSpan waitBeforeRetry;
 
-        internal ActionSatisfiesPredicateQuery(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
+        public TimeSpan Timeout { get; private set; }
+
+        internal ActionSatisfiesPredicateQuery(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overallTimeout)
         {
             this.tryThis = tryThis;
             this.until = until;
             this.waitBeforeRetry = waitBeforeRetry;
+            Timeout = overallTimeout;
         }
 
         public void Run()

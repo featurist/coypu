@@ -1,3 +1,5 @@
+using System;
+
 namespace Coypu.Queries
 {
     internal class HasNoCssQuery : Query<bool>
@@ -6,6 +8,13 @@ namespace Coypu.Queries
         private readonly DriverScope scope;
         private readonly string cssSelector;
 
+        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector)
+        {
+            this.driver = driver;
+            this.scope = scope;
+            this.cssSelector = cssSelector;
+        }
+
         public object ExpectedResult
         {
             get { return true; }
@@ -13,11 +22,9 @@ namespace Coypu.Queries
 
         public bool Result { get; private set; }
 
-        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector)
+        public TimeSpan Timeout
         {
-            this.driver = driver;
-            this.scope = scope;
-            this.cssSelector = cssSelector;
+            get { return scope.IndividualTimeout; }
         }
 
         public void Run()

@@ -87,7 +87,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void When_an_action_succeeds_first_time_It_only_tries_once()
         {
             var alwaysSucceedsQuery = new AlwaysSucceedsQuery<object>(new object());
-            new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(alwaysSucceedsQuery));
+            new RetryUntilTimeoutRobustWrapper().Query(new TestDriverAction(alwaysSucceedsQuery));
 
             Assert.That(alwaysSucceedsQuery.Tries, Is.EqualTo(1));
         }
@@ -101,7 +101,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var result = new object();
             var query = new ThrowsSecondTimeQuery<object>(result);
 
-            new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(query));
+            new RetryUntilTimeoutRobustWrapper().Query(new TestDriverAction(query));
 
             Assert.That(query.Tries, Is.EqualTo(2));
         }
@@ -111,7 +111,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             var query = new AlwaysThrowsQuery<TestException>();
 
-            Assert.Throws<TestException>(() => new RetryUntilTimeoutRobustWrapper().RobustlyDo(new TestDriverAction(query)));
+            Assert.Throws<TestException>(() => new RetryUntilTimeoutRobustWrapper().Query(new TestDriverAction(query)));
             Assert.That(query.Tries, Is.GreaterThan(2));
         }
 
@@ -134,7 +134,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             try
             {
-                retryUntilTimeoutRobustWrapper.RobustlyDo(new TestDriverAction(query));
+                retryUntilTimeoutRobustWrapper.Query(new TestDriverAction(query));
                 Assert.Fail("Expecting test exception");
             }
             catch (TestException) { }
@@ -153,7 +153,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var robustness = new RetryUntilTimeoutRobustWrapper();
 
             var query = new AlwaysThrowsQuery<NotSupportedException>();
-            Assert.Throws<NotSupportedException>(() => robustness.RobustlyDo(new TestDriverAction(query)));
+            Assert.Throws<NotSupportedException>(() => robustness.Query(new TestDriverAction(query)));
             Assert.That(query.Tries, Is.EqualTo(1));
         }
     }

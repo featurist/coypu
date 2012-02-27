@@ -1,23 +1,21 @@
-using Coypu.Robustness;
+using System;
 
 namespace Coypu.Actions
 {
     internal class Choose : DriverAction
     {
-        private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string locator;
 
-        internal Choose(Driver driver, DriverScope scope, string locator)
+        internal Choose(Driver driver, DriverScope scope, string locator) : base(driver,scope.IndividualTimeout)
         {
-            this.driver = driver;
             this.scope = scope;
             this.locator = locator;
         }
 
-        public void Act()
+        public override void Act()
         {
-            driver.Choose(driver.FindField(locator, scope));
+            Driver.Choose(Driver.FindField(locator, scope));
         }
     }
 }

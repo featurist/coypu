@@ -1,3 +1,5 @@
+using System;
+
 namespace Coypu.Queries
 {
     internal class HasXPathQuery : Query<bool>
@@ -8,6 +10,11 @@ namespace Coypu.Queries
         public object ExpectedResult { get { return true; } }
         public bool Result { get; private set; }
 
+        public TimeSpan Timeout
+        {
+            get { return scope.IndividualTimeout; }
+        }
+
         protected internal HasXPathQuery(Driver driver, DriverScope scope, string xpath)
         {
             this.driver = driver;
@@ -17,8 +24,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = driver.HasXPath(xpath, scope)
-                ;
+            Result = driver.HasXPath(xpath, scope);
         }
     }
 }

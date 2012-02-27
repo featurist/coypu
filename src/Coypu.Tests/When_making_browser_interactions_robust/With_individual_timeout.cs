@@ -1,8 +1,5 @@
 using System;
-using System.Linq;
-using Coypu.Robustness;
 using Coypu.Tests.TestDoubles;
-using Coypu.Tests.When_interacting_with_the_browser;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
@@ -37,7 +34,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             session.FindLink("bob").WithIndividualTimeout(individualTimeout).Now();
 
-            Assert.That(spyRobustWrapper.DeferredFinders.Single().Timeout, Is.EqualTo(individualTimeout));
+            Assert.Fail("Assert timeout used for query");
             Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
         }
 

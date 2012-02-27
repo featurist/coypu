@@ -1,19 +1,16 @@
-using Coypu.Robustness;
+using System;
 
 namespace Coypu.Actions
 {
     internal class CancelModalDialog : DriverAction
     {
-        private readonly Driver driver;
-
-        internal CancelModalDialog(Driver driver)
+        internal CancelModalDialog(Driver driver, TimeSpan timeout) : base(driver, timeout)
         {
-            this.driver = driver;
         }
 
-        public void Act()
+        public override void Act()
         {
-            driver.CancelModalDialog();
+            Driver.CancelModalDialog();
         }
     }
 }

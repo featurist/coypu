@@ -1,4 +1,5 @@
 using Coypu.Finders;
+using Coypu.Queries;
 using Coypu.Robustness;
 
 namespace Coypu
@@ -17,8 +18,7 @@ namespace Coypu
 
         public override Element Now()
         {
-            elementFinder.Timeout = DriverScope.IndividualTimeout;
-            return robustWrapper.RobustlyFind(elementFinder);
+            return robustWrapper.Query(new ElementQuery(elementFinder, DriverScope.IndividualTimeout));
         }
     }
 }

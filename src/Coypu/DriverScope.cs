@@ -12,7 +12,6 @@ namespace Coypu
     public class DriverScope : Scope<DriverScope>
     {
         private readonly ElementFinder elementFinder;
-        private readonly DriverScope outer;
         protected Driver driver;
         internal RobustWrapper robustWrapper;
         private readonly Waiter waiter;
@@ -50,7 +49,6 @@ namespace Coypu
         internal DriverScope(ElementFinder elementFinder, DriverScope outer)
         {
             this.elementFinder = elementFinder;
-            this.outer = outer;
             driver = outer.driver;
             robustWrapper = outer.robustWrapper;
             urlBuilder = outer.urlBuilder;
@@ -87,12 +85,12 @@ namespace Coypu
 
         private WaitThenClick WaitThenClickLink(string locator)
         {
-            return new WaitThenClick(driver, waiter, new LinkFinder(driver, locator, this));
+            return new WaitThenClick(driver, IndividualTimeout, waiter, new LinkFinder(driver, locator, this));
         }
 
         private WaitThenClick WaitThenClickButton(string locator)
         {
-            return new WaitThenClick(driver,waiter,new ButtonFinder(driver,locator,this));
+            return new WaitThenClick(driver, IndividualTimeout, waiter, new ButtonFinder(driver, locator, this));
         }
 
         /// <summary>
@@ -176,7 +174,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public ElementScope FindButton(string locator)
         {
-            return new RobustElementScope(new ButtonFinder(driver, locator, this), this,robustWrapper);
+            return new RobustElementScope(new ButtonFinder(driver, locator, this), this, robustWrapper);
         }
 
         /// <summary>
@@ -475,9 +473,9 @@ namespace Coypu
         /// Query whether an element appears within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
-        public bool Has(ElementScope findElement) 
+        public bool Has(ElementScope findElement)
         {
-            return Query(new ZeroTimeoutQueryBuilder().BuildZeroTimeoutHasElementQuery(findElement), true);
+            return findElement.Exists();
         }
 
         /// <summary>
@@ -486,7 +484,7 @@ namespace Coypu
         /// <param name="findElement">A function to find an element</param>
         public bool HasNo(ElementScope findElement)
         {
-            return !Query(new ZeroTimeoutQueryBuilder().BuildZeroTimeoutHasElementQuery(findElement), false);
+            return findElement.Missing();
         }
 
         /// <summary>
@@ -496,7 +494,6 @@ namespace Coypu
         /// <param name="action">An action</param>
         public void RetryUntilTimeout(Action action)
         {
-            robustWrapper.RobustlyDo(new LambdaDriverAction(action));
         }
 
         /// <summary>
@@ -506,7 +503,7 @@ namespace Coypu
         /// <param name="function">A function</param>
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
         {
-            return robustWrapper.Query(new LambdaQuery<TResult>(function));
+            return robustWrapper.Query(new LambdaQuery<TResult>(function,timeout:IndividualTimeout));
         }
 
         /// <summary>
@@ -516,7 +513,6 @@ namespace Coypu
         /// <param name="function">A function</param>
         public void RetryUntilTimeout(DriverAction driverAction)
         {
-            robustWrapper.RobustlyDo(driverAction);
         }
 
         public IFrameElementScope FindIFrame(string locator)
@@ -533,7 +529,7 @@ namespace Coypu
         /// <param name="expecting">Expected result</param>
         public T Query<T>(Func<T> query, T expecting)
         {
-            return robustWrapper.Query(new LambdaQuery<T>(query,expecting));
+            return robustWrapper.Query(new LambdaQuery<T>(query, expecting));
         }
 
         /// <summary>
@@ -558,7 +554,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
-            robustWrapper.TryUntil(new LambdaDriverAction(tryThis), new LambdaPredicate(until), waitBeforeRetry);
+            robustWrapper.TryUntil(new LambdaDriverAction(tryThis, TimeSpan.Zero), new LambdaPredicate(until), waitBeforeRetry, individualTimeout);
         }
 
         /// <summary>
@@ -572,7 +568,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
-            robustWrapper.TryUntil(tryThis, until, waitBeforeRetry);
+            robustWrapper.TryUntil(tryThis, until, waitBeforeRetry, IndividualTimeout);
         }
 
         /// <summary>
@@ -599,19 +595,19 @@ namespace Coypu
 
         public DriverScope ConsideringInvisibleElements()
         {
-            this.consideringInvisibleElements = true;
+            consideringInvisibleElements = true;
             return this;
         }
 
         public DriverScope ConsideringOnlyVisibleElements()
         {
-            this.consideringInvisibleElements = false;
+            consideringInvisibleElements = false;
             return this;
         }
 
         public DriverScope WithIndividualTimeout(TimeSpan timeout)
         {
-            this.individualTimeout = timeout;
+            individualTimeout = timeout;
             return this;
         }
 

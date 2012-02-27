@@ -1,37 +1,33 @@
-using Coypu.Robustness;
-
 namespace Coypu.Actions
 {
     internal class FillIn : DriverAction
     {
         private readonly string locator;
-        private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string value;
         private readonly Element element;
 
-        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value)
+        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value) : base(driver,scope.IndividualTimeout)
         {
             this.locator = locator;
             this.element = element;
-            this.driver = driver;
             this.scope = scope;
             this.value = value;
         }
 
         internal Element Field
         {
-            get { return element ?? driver.FindField(locator, scope); }
+            get { return element ?? Driver.FindField(locator, scope); }
         }
 
         private void BringIntoFocus()
         {
-            driver.Click(Field);
+            Driver.Click(Field);
         }
 
         internal void Set()
         {
-            driver.Set(Field, value);
+            Driver.Set(Field, value);
         }
 
         internal void Focus()
@@ -40,7 +36,7 @@ namespace Coypu.Actions
                 BringIntoFocus();
         }
 
-        public void Act()
+        public override void Act()
         {
             Focus();
             Set();

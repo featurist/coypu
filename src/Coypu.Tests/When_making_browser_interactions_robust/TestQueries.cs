@@ -45,6 +45,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             get { return result; }
         }
 
+        public TimeSpan Timeout
+        {
+            get { return TimeSpan.Zero; }
+        }
     }
 
     public class ThrowsSecondTimeQuery<T> : Query<T>
@@ -74,6 +78,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         public int Tries { get; set; }
+
+        public TimeSpan Timeout
+        {
+            get { return TimeSpan.Zero; }
+        }
     }
 
     public class AlwaysThrowsQuery<TException> : Query<object> where TException : Exception
@@ -105,18 +114,23 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public int Tries { get; set; }
         public long LastCall { get; set; }
+
+        public TimeSpan Timeout
+        {
+            get { return TimeSpan.Zero; }
+        }
     }
 
     public class TestDriverAction : DriverAction
     {
         public Query<object> FakeQuery { get; set; }
 
-        public TestDriverAction(Query<object> fakeQuery)
+        public TestDriverAction(Query<object> fakeQuery) : base(null,TimeSpan.Zero)
         {
             FakeQuery = fakeQuery;
         }
 
-        public void Act()
+        public override void Act()
         {
             FakeQuery.Run();
         }
@@ -161,6 +175,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public int Tries { get; set; }
         public long LastCall { get; set; }
+
+
+        public TimeSpan Timeout
+        {
+            get { return TimeSpan.Zero; }
+        }
 
     }
 }

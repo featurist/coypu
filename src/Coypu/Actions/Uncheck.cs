@@ -1,23 +1,19 @@
-using Coypu.Robustness;
-
 namespace Coypu.Actions
 {
     internal class Uncheck : DriverAction
     {
-        private readonly Driver driver;
         private readonly DriverScope scope;
         private readonly string locator;
 
-        internal Uncheck(Driver driver, DriverScope scope, string locator)
+        internal Uncheck(Driver driver, DriverScope scope, string locator) : base(driver,scope.IndividualTimeout)
         {
-            this.driver = driver;
             this.scope = scope;
             this.locator = locator;
         }
 
-        public void Act()
+        public override void Act()
         {
-            driver.Uncheck(driver.FindField(locator, scope));
+            Driver.Uncheck(Driver.FindField(locator, scope));
         }
     }
 }

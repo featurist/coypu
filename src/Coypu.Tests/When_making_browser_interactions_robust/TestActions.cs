@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Coypu.Actions;
 
@@ -5,9 +6,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 {
     public class CountTriesAction : DriverAction
     {
+        public CountTriesAction() : base(null,TimeSpan.Zero){}
+
         public int Tries { get; private set; }
 
-        public void Act()
+        public override void Act()
         {
             Tries++;
         }

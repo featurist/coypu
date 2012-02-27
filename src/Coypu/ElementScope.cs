@@ -75,13 +75,11 @@ namespace Coypu
 
         public ElementScope Click()
         {
-            robustWrapper.RobustlyDo(new Click(DriverScope));
             return this;
         }
 
         public ElementScope Hover()
         {
-            robustWrapper.RobustlyDo(new Hover(DriverScope));
             return this;
         }
 

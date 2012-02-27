@@ -6,12 +6,12 @@ namespace Coypu.Actions
     {
         private readonly Action action;
 
-        public LambdaDriverAction(Action action)
+        public LambdaDriverAction(Action action, TimeSpan timeout) : base(null, timeout)
         {
             this.action = action;
         }
 
-        public void Act()
+        public override void Act()
         {
             action();
         }

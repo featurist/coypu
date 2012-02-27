@@ -1,3 +1,5 @@
+using System;
+
 namespace Coypu.Queries
 {
     internal class HasNoContentQuery : Query<bool>
@@ -7,6 +9,11 @@ namespace Coypu.Queries
         private readonly string text;
         public object ExpectedResult { get { return true; } }
         public bool Result { get; private set; }
+
+        public TimeSpan Timeout
+        {
+            get { return scope.IndividualTimeout; }
+        }
 
         protected internal HasNoContentQuery(Driver driver, DriverScope scope, string text)
         {
