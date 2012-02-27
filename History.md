@@ -1,3 +1,33 @@
+# Version 0.7.2
+
+Release date: 2012-02-27
+
+### Updated
+* Minimum Selenium.WebDriver is now 2.19.0
+
+### Added to Coypu.WatiN 0.6.0
+* Watin will now consider invisible elements (citizenmatt)
+* Watin can now find by css (citizenmatt)
+* Watin handles FindField and partial ID correctly (citizenmatt)
+* Watin - Only buttons and fields now match by partial id (citizenmatt)
+* Watin frames can now be used as scopes (citizenmatt)
+* Watin - Find frames support (citizenmatt)
+* Watin - Options in a select list are now selected by text or value (citizenmatt)
+* WatiNDriver now supports cookies (citizenmatt)
+* WatiNDriver now supports hover (citizenmatt)
+* Added support for Accept/CancelModalDialog to WatiNDriver (citizenmatt)
+* Added HasDialog support to WatiNDriver (citizenmatt)
+
+### Changed
+* Selenium 2.11.0 or later
+
+# Version 0.7.0
+
+Release date: 2011-02-01
+
+### Added
+* Simple support for multiple sessions
+
 # Version 0.6.0
 
 Release date: 2011-11-19
