@@ -400,7 +400,7 @@ namespace Coypu.AcceptanceTests
         }
             
         [Test]
-        public void FillIn_file_example()
+        public void  FillIn_file_example()
         {
             const string someLocalFile = @"local.file";
             try
