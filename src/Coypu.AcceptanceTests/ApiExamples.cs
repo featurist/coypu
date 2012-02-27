@@ -348,8 +348,11 @@ namespace Coypu.AcceptanceTests
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
             
-            var expectingScope1 = browser.FindFieldset("Scope 1").FindField(locatorThatAppearsInMultipleScopes);
-            var expectingScope2 = browser.FindFieldset("Scope 2").FindField(locatorThatAppearsInMultipleScopes);
+            var expectingScope1 = browser.FindFieldset("Scope 1")
+                                         .FindField(locatorThatAppearsInMultipleScopes);
+
+            var expectingScope2 = browser.FindFieldset("Scope 2")
+                                         .FindField(locatorThatAppearsInMultipleScopes);
 
             Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
@@ -388,7 +391,7 @@ namespace Coypu.AcceptanceTests
         }
             
         [Test]
-        public void FillIn_file_example()
+        public void  FillIn_file_example()
         {
             const string someLocalFile = @"local.file";
             try

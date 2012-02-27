@@ -19,7 +19,7 @@ namespace Coypu.Finders
         internal State FindState(params State[] states)
         {
             var query = new LambdaQuery<bool>(() => temporaryTimeouts.WithIndividualTimeout(TimeSpan.Zero, () => states.Any(s => s.CheckCondition())),true);
-            var foundState = robustWrapper.Query(query);
+            var foundState = robustWrapper.Robustly(query);
             
             if (!foundState)
                 throw new MissingHtmlException("None of the given states was reached within the configured timeout.");

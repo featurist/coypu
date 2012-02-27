@@ -31,7 +31,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var actualImmediateResult = subject(locator);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
-            Assert.That(spyRobustWrapper.DeferredFinders, Is.Empty);
+            Assert.That(spyRobustWrapper.NoQueriesRan, Is.True, "Expected no robust queries run");
         }
     }
 }

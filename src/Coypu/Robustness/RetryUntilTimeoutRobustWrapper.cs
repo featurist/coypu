@@ -12,16 +12,15 @@ namespace Coypu.Robustness
 
         public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overrallTimeout)
         {
-            var outcome = Query(new ActionSatisfiesPredicateQuery(tryThis,until,waitBeforeRetry,overrallTimeout));
+            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis,until,waitBeforeRetry,overrallTimeout));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
-        public TResult Query<TResult>(Query<TResult> query)
+        public TResult Robustly<TResult>(Query<TResult> query)
         {
             var interval = Configuration.RetryInterval;
-            //TODO: timeout should come from Query
-            var timeout = Configuration.Timeout;
+            var timeout = query.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)
             {

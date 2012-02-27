@@ -24,7 +24,7 @@ namespace Coypu.Queries
 
         public TimeSpan Timeout
         {
-            get { return scope.IndividualTimeout; }
+            get { return scope.Timeout; }
         }
 
         public void Run()

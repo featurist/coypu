@@ -60,18 +60,24 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
+            var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
+
             var expectedImmediateResult = new StubElement();
             var expectedDeferredResult = new StubElement();
 
             spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult);
             stub(locator, expectedDeferredResult);
 
-            var actualImmediateResult = subject(locator).Now();
+            var actualImmediateResult = subject(locator).WithTimeout(individualTimeout).Now();
+
             Assert.That(actualImmediateResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
-            var actualDeferredResult = spyRobustWrapper.DeferredFinders.Single().Find();
-            Assert.That(actualDeferredResult, Is.SameAs(expectedDeferredResult));
+            var query = spyRobustWrapper.QueriesRan<Element>().Single();
+            query.Run();
+            
+            Assert.That(query.Result, Is.SameAs(expectedDeferredResult));
+            Assert.That(query.Timeout, Is.EqualTo(individualTimeout));
         }
     }
 }

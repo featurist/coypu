@@ -13,7 +13,7 @@ namespace Coypu.Queries
 
         public TimeSpan Timeout
         {
-            get { return scope.IndividualTimeout; }
+            get { return scope.Timeout; }
         }
 
         protected internal HasContentMatchQuery(Driver driver, DriverScope scope, Regex text)

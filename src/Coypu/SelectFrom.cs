@@ -1,4 +1,5 @@
-﻿using Coypu.Robustness;
+﻿using Coypu.Actions;
+using Coypu.Robustness;
 
 namespace Coypu
 {
@@ -24,6 +25,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void From(string locator)
         {
+            robustWrapper.Robustly(new Select(driver, scope, locator, option));
         }
 
     }

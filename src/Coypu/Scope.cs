@@ -335,7 +335,7 @@ namespace Coypu
         TConcrete ConsideringInvisibleElements();
         TConcrete ConsideringOnlyVisibleElements();
 
-        TConcrete WithIndividualTimeout(TimeSpan timeout);
+        TConcrete WithTimeout(TimeSpan timeout);
 
         /// <summary>
         /// <para>Execute an action repeatedly until a condition is met.</para>

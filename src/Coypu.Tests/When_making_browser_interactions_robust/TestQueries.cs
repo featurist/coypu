@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using Coypu.Actions;
 using Coypu.Queries;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
@@ -11,18 +10,20 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         private T result;
         private readonly T actualResult;
         private readonly T expecting;
+        private readonly TimeSpan _timeout;
 
         public int Tries { get; set; }
         public long LastCall { get; set; }
 
-        public AlwaysSucceedsQuery(T actualResult)
+        public AlwaysSucceedsQuery(T actualResult, TimeSpan timeout)
         {
+            _timeout = timeout;
             this.actualResult = actualResult;
-            this.stopWatch.Start();
+            stopWatch.Start();
         }
 
-        public AlwaysSucceedsQuery(T actualResult, T expecting)
-            : this(actualResult)
+        public AlwaysSucceedsQuery(T actualResult, T expecting, TimeSpan timeout)
+            : this(actualResult,timeout)
         {
             this.expecting = expecting;
         }
@@ -47,17 +48,19 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public TimeSpan Timeout
         {
-            get { return TimeSpan.Zero; }
+            get { return _timeout; }
         }
     }
 
     public class ThrowsSecondTimeQuery<T> : Query<T>
     {
         private readonly T result;
+        public TimeSpan Timeout { get; set; }
 
-        public ThrowsSecondTimeQuery(T result)
+        public ThrowsSecondTimeQuery(T result, TimeSpan timeout)
         {
             this.result = result;
+            Timeout = timeout;
         }
 
         public void Run()
@@ -79,18 +82,15 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public int Tries { get; set; }
 
-        public TimeSpan Timeout
-        {
-            get { return TimeSpan.Zero; }
-        }
     }
 
     public class AlwaysThrowsQuery<TException> : Query<object> where TException : Exception
     {
         private readonly Stopwatch stopWatch = new Stopwatch();
         
-        public AlwaysThrowsQuery()
+        public AlwaysThrowsQuery(TimeSpan timeout)
         {
+            Timeout = timeout;
             stopWatch.Start();
         }
 
@@ -115,25 +115,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public int Tries { get; set; }
         public long LastCall { get; set; }
 
-        public TimeSpan Timeout
-        {
-            get { return TimeSpan.Zero; }
-        }
-    }
-
-    public class TestDriverAction : DriverAction
-    {
-        public Query<object> FakeQuery { get; set; }
-
-        public TestDriverAction(Query<object> fakeQuery) : base(null,TimeSpan.Zero)
-        {
-            FakeQuery = fakeQuery;
-        }
-
-        public override void Act()
-        {
-            FakeQuery.Run();
-        }
+        public TimeSpan Timeout { get; set; }
     }
 
     public class ThrowsThenSubsequentlySucceedsQuery<T> : Query<T>

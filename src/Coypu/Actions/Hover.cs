@@ -4,7 +4,7 @@ namespace Coypu.Actions
     {
         private readonly DriverScope driverScope;
 
-        internal Hover(DriverScope driverScope) : base(null, driverScope.IndividualTimeout)
+        internal Hover(DriverScope driverScope) : base(null, driverScope.Timeout)
         {
             this.driverScope = driverScope;
         }

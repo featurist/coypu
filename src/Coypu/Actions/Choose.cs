@@ -7,7 +7,7 @@ namespace Coypu.Actions
         private readonly DriverScope scope;
         private readonly string locator;
 
-        internal Choose(Driver driver, DriverScope scope, string locator) : base(driver,scope.IndividualTimeout)
+        internal Choose(Driver driver, DriverScope scope, string locator) : base(driver,scope.Timeout)
         {
             this.scope = scope;
             this.locator = locator;

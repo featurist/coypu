@@ -7,7 +7,7 @@ namespace Coypu.Actions
         private readonly string value;
         private readonly Element element;
 
-        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value) : base(driver,scope.IndividualTimeout)
+        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value) : base(driver,scope.Timeout)
         {
             this.locator = locator;
             this.element = element;

@@ -18,7 +18,7 @@ namespace Coypu
 
         public override Element Now()
         {
-            return robustWrapper.Query(new ElementQuery(elementFinder, DriverScope.IndividualTimeout));
+            return robustWrapper.Robustly(new ElementQuery(elementFinder, DriverScope.Timeout));
         }
     }
 }

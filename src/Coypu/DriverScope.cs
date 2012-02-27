@@ -23,16 +23,16 @@ namespace Coypu
 
         private bool consideringInvisibleElements;
 
-        private TimeSpan individualTimeout;
+        private TimeSpan timeout;
 
         public bool ConsiderInvisibleElements
         {
             get { return consideringInvisibleElements; }
         }
 
-        internal TimeSpan IndividualTimeout
+        internal TimeSpan Timeout
         {
-            get { return individualTimeout; }
+            get { return timeout; }
         }
 
         internal DriverScope(ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
@@ -44,6 +44,7 @@ namespace Coypu
             this.urlBuilder = urlBuilder;
             temporaryTimeouts = new TemporaryTimeouts();
             stateFinder = new StateFinder(robustWrapper, temporaryTimeouts);
+            this.timeout = Configuration.Timeout;
         }
 
         internal DriverScope(ElementFinder elementFinder, DriverScope outer)
@@ -54,6 +55,7 @@ namespace Coypu
             urlBuilder = outer.urlBuilder;
             temporaryTimeouts = outer.temporaryTimeouts;
             stateFinder = outer.stateFinder;
+            timeout = outer.Timeout;
         }
 
         public Uri Location
@@ -85,12 +87,12 @@ namespace Coypu
 
         private WaitThenClick WaitThenClickLink(string locator)
         {
-            return new WaitThenClick(driver, IndividualTimeout, waiter, new LinkFinder(driver, locator, this));
+            return new WaitThenClick(driver, Timeout, waiter, new LinkFinder(driver, locator, this));
         }
 
         private WaitThenClick WaitThenClickButton(string locator)
         {
-            return new WaitThenClick(driver, IndividualTimeout, waiter, new ButtonFinder(driver, locator, this));
+            return new WaitThenClick(driver, Timeout, waiter, new ButtonFinder(driver, locator, this));
         }
 
         /// <summary>
@@ -494,6 +496,7 @@ namespace Coypu
         /// <param name="action">An action</param>
         public void RetryUntilTimeout(Action action)
         {
+            robustWrapper.Robustly(new LambdaDriverAction(action,Timeout));
         }
 
         /// <summary>
@@ -503,7 +506,7 @@ namespace Coypu
         /// <param name="function">A function</param>
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
         {
-            return robustWrapper.Query(new LambdaQuery<TResult>(function,timeout:IndividualTimeout));
+            return robustWrapper.Robustly(new LambdaQuery<TResult>(function,timeout:Timeout));
         }
 
         /// <summary>
@@ -513,6 +516,7 @@ namespace Coypu
         /// <param name="function">A function</param>
         public void RetryUntilTimeout(DriverAction driverAction)
         {
+            Query(driverAction);
         }
 
         public IFrameElementScope FindIFrame(string locator)
@@ -529,7 +533,7 @@ namespace Coypu
         /// <param name="expecting">Expected result</param>
         public T Query<T>(Func<T> query, T expecting)
         {
-            return robustWrapper.Query(new LambdaQuery<T>(query, expecting));
+            return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting));
         }
 
         /// <summary>
@@ -540,7 +544,7 @@ namespace Coypu
         /// <param name="query">A query</param>
         public T Query<T>(Query<T> query)
         {
-            return robustWrapper.Query(query);
+            return robustWrapper.Robustly(query);
         }
 
         /// <summary>
@@ -554,7 +558,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
-            robustWrapper.TryUntil(new LambdaDriverAction(tryThis, TimeSpan.Zero), new LambdaPredicate(until), waitBeforeRetry, individualTimeout);
+            robustWrapper.TryUntil(new LambdaDriverAction(tryThis, TimeSpan.Zero), new LambdaPredicate(until), waitBeforeRetry, timeout);
         }
 
         /// <summary>
@@ -568,7 +572,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
         {
-            robustWrapper.TryUntil(tryThis, until, waitBeforeRetry, IndividualTimeout);
+            robustWrapper.TryUntil(tryThis, until, waitBeforeRetry, Timeout);
         }
 
         /// <summary>
@@ -605,9 +609,9 @@ namespace Coypu
             return this;
         }
 
-        public DriverScope WithIndividualTimeout(TimeSpan timeout)
+        public DriverScope WithTimeout(TimeSpan timeout)
         {
-            individualTimeout = timeout;
+            this.timeout = timeout;
             return this;
         }
 

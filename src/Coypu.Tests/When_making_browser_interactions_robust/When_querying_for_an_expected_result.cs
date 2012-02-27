@@ -13,7 +13,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(200);
             Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
             retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
         }
@@ -23,7 +22,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             var expectedResult = new object();
 
-            var actualResult = retryUntilTimeoutRobustWrapper.Query(new AlwaysSucceedsQuery<object>(expectedResult, expectedResult));
+            var actualResult = retryUntilTimeoutRobustWrapper.Robustly(new AlwaysSucceedsQuery<object>(expectedResult, expectedResult, TimeSpan.FromMilliseconds(200)));
 
             Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
@@ -39,9 +38,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var unexpectedResult = new object();
 
-            var query = new AlwaysSucceedsQuery<object>(unexpectedResult, expectedResult);
+            var query = new AlwaysSucceedsQuery<object>(unexpectedResult, expectedResult, TimeSpan.FromMilliseconds(200));
             
-            var actualResult = retryUntilTimeoutRobustWrapper.Query(query);
+            var actualResult = retryUntilTimeoutRobustWrapper.Robustly(query);
 
             Assert.That(actualResult, Is.EqualTo(unexpectedResult));
             Assert.That(query.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
@@ -51,7 +50,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_exceptions_are_always_thrown_It_rethrows_eventually()
         {
-            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Query(new AlwaysThrowsQuery<TestException>()));
+            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Robustly(new AlwaysThrowsQuery<TestException>(TimeSpan.FromMilliseconds(200))));
         }
 
         [Test]
@@ -61,16 +60,16 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes);
 
-            Assert.That(retryUntilTimeoutRobustWrapper.Query(query), Is.EqualTo(expectedResult));
+            Assert.That(retryUntilTimeoutRobustWrapper.Robustly(query), Is.EqualTo(expectedResult));
             Assert.That(query.Tries, Is.EqualTo(throwsHowManyTimes + 1));
         }
 
         [Test]
         public void When_a_not_supported_exception_is_thrown_It_does_not_retry()
         {
-            var throwsNotSupported = new AlwaysThrowsQuery<NotSupportedException>();
+            var throwsNotSupported = new AlwaysThrowsQuery<NotSupportedException>(TimeSpan.FromMilliseconds(200));
 
-            Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Query(throwsNotSupported));
+            Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Robustly(throwsNotSupported));
             Assert.That(throwsNotSupported.Tries, Is.EqualTo(1));
         }
 
@@ -87,7 +86,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2);
 
-            Assert.That(retryUntilTimeoutRobustWrapper.Query(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
+            Assert.That(retryUntilTimeoutRobustWrapper.Robustly(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
             Assert.That(throwsTwiceTimesThenReturnOppositeResult.Tries, Is.GreaterThanOrEqualTo(3));
             Assert.That(throwsTwiceTimesThenReturnOppositeResult.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
                                                                                       expectedTimeout.Milliseconds));

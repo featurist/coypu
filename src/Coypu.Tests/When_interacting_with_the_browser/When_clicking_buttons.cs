@@ -87,12 +87,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private void ExecuteDeferedRobustAction()
         {
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<object>().Single().Run();
         }
 
         private void ExecuteLastDeferedRobustAction()
         {
-            spyRobustWrapper.DeferredDriverActions.Last().Act();
+            spyRobustWrapper.QueriesRan<object>().Last().Run();
         }
 
         private StubElement StubButtonToBeClicked(string locator)

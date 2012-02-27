@@ -8,7 +8,7 @@ namespace Coypu.Tests.TestDoubles
 {
     public class ImmediateSingleExecutionFakeRobustWrapper : RobustWrapper
     {
-        public T Query<T>(Query<T> query)
+        public T Robustly<T>(Query<T> query)
         {
             query.Run();
             return query.Result;

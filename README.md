@@ -43,16 +43,16 @@ Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration
 
 The Selenium Driver is included in the Coypu package.
 
-##### Firefox
+###### Firefox
 Versions up to and including Firefox 6 are now supported.
 
-##### Internet Explorer
-Only IE9 supports CSS & XPath and certain HTML features.
+###### Internet Explorer
+Only IE9 supports CSS & XPath and certain HTML features. The WatiN driver is notably faster in IE than the WebDriver IE driver, so is recommended for testing in Internet Explorer. The WatiN driver comes in a seperate package (see below).
 
-##### Chrome
+###### Chrome
 You will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
 
-##### HtmlUnit
+###### HtmlUnit
 You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
 
 1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `Configuration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
@@ -61,6 +61,12 @@ You can run the headless HtmlUnit driver for Selenium on windows too, you just n
 4. Run "java -jar selenium-server-standalong-x.x.x.jar"
 
 And off you go.
+
+##### WatiN
+
+There is a seperate package called Coypu.WatiN containing a driver for WatiN which is now almost fully featured (thanks to citizenmatt) and runs considerably faster than the WebDriver IE driver.
+
+This driver only supports Internet Explorer as the browser.
 
 ##### Android
 Selenium WebDriver also supports Android so long as you have the Android remote driver running (Selenium defaults to port 8080).
@@ -73,10 +79,6 @@ Choose your driver/browser combination like so:
 	Configuration.Browser = Drivers.Browser.Firefox;
  
 These settings are the default configuration.
-
-##### WatiN
-
-There is a seperate package called Coypu.Watin containing a driver for WatiN which has less features implemented than the Selenium Driver to date but might be useful for IE testing -- it is certainly faster than Selenium for IE.
 
 #### Timeout
 

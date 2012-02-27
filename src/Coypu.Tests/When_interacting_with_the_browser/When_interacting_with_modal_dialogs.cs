@@ -12,7 +12,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session.AcceptModalDialog();
 
             Assert.That(driver.ModalDialogsAccepted, Is.EqualTo(0));
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+
+            spyRobustWrapper.QueriesRan<object>().Single().Run();
+
             Assert.That(driver.ModalDialogsAccepted, Is.EqualTo(1));
         }
 
@@ -22,7 +24,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session.CancelModalDialog();
 
             Assert.That(driver.ModalDialogsCancelled, Is.EqualTo(0));
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<object>().Single().Run();
             Assert.That(driver.ModalDialogsCancelled, Is.EqualTo(1));
         }
 

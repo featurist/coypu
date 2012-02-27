@@ -15,7 +15,7 @@ namespace Coypu.Queries
 
         public TimeSpan Timeout
         {
-            get { return driverScope.IndividualTimeout; }
+            get { return driverScope.Timeout; }
         }
 
         public void Run()

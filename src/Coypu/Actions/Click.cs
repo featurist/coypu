@@ -4,7 +4,7 @@ namespace Coypu.Actions
     {
         private readonly DriverScope driverScope;
 
-        internal Click(DriverScope driverScope) : base(null,driverScope.IndividualTimeout)
+        internal Click(DriverScope driverScope) : base(null,driverScope.Timeout)
         {
             this.driverScope = driverScope;
         }

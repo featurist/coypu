@@ -41,7 +41,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.IsFalse(queriedState1);
             Assert.IsFalse(queriedState2);
 
-            var query = (Query<bool>) spyRobustWrapper.QueriesRan.Single();
+            var query = spyRobustWrapper.QueriesRan<bool>().Single();
             query.Run();
             Assert.IsTrue(query.Result);
 

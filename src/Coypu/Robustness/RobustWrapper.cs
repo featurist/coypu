@@ -7,7 +7,7 @@ namespace Coypu.Robustness
 {
     internal interface RobustWrapper
     {
-        T Query<T>(Query<T> query);
+        T Robustly<T>(Query<T> query);
         void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overallTimeout);
     }
 }

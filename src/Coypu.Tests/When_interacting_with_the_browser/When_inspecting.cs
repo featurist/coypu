@@ -9,12 +9,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     {
         protected void Queries_robustly(bool stubResult, Func<string, bool> subject, Action<string, bool> stub)
         {
-            Queries_robustly<string>(stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
+            Queries_robustly(stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
         }
 
         protected void Queries_robustly_reversing_result(bool stubResult, Func<string, bool> subject, Action<string, bool> stub)
         {
-            Queries_robustly_reversing_result<string>(stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
+            Queries_robustly_reversing_result(stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
         }
 
         protected void Queries_robustly<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
@@ -22,13 +22,17 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             stub(locator, stubResult);
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
+            var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
+            session.WithTimeout(individualTimeout);
+
             var actualImmediateResult = subject(locator);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            var actualQuery = spyRobustWrapper.QueriesRan.Cast<Query<bool>>().Single();
+            var actualQuery = spyRobustWrapper.QueriesRan<bool>().Single();
             actualQuery.Run();
             Assert.That(actualQuery.Result, Is.EqualTo(stubResult));
+            Assert.That(actualQuery.Timeout, Is.EqualTo(individualTimeout));
         }
 
         protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
@@ -40,7 +44,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            var actualQuery = spyRobustWrapper.QueriesRan.Cast<Query<bool>>().Single();
+            var actualQuery = spyRobustWrapper.QueriesRan<bool>().Single();
             actualQuery.Run();
 
             Assert.That(actualQuery.Result, Is.EqualTo(!stubResult));

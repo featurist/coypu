@@ -75,11 +75,13 @@ namespace Coypu
 
         public ElementScope Click()
         {
+            driverScope.Click(Now());
             return this;
         }
 
         public ElementScope Hover()
         {
+            DriverScope.Hover(Now());
             return this;
         }
 
@@ -303,20 +305,20 @@ namespace Coypu
             return this;
         }
 
-        public ElementScope WithIndividualTimeout(TimeSpan timeout)
+        public ElementScope WithTimeout(TimeSpan timeout)
         {
-            DriverScope.WithIndividualTimeout(timeout);
+            DriverScope.WithTimeout(timeout);
             return this;
         }
 
         public bool Exists()
         {
-            return robustWrapper.Query(new ElementExistsQuery(driverScope));
+            return robustWrapper.Robustly(new ElementExistsQuery(driverScope));
         }
 
         public bool Missing()
         {
-            return robustWrapper.Query(new ElementMissingQuery(driverScope));
+            return robustWrapper.Robustly(new ElementMissingQuery(driverScope));
         }
     }
 }

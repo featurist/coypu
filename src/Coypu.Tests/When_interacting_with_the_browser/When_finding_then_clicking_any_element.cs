@@ -9,19 +9,21 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     public class When_finding_then_clicking_any_element : BrowserInteractionTests
     {
         [Test]
-        public void It_makes_robust_call_to_find_then_click_element_on_underlying_driver()
+        public void It_makes_robust_call_to_find_then_clicks_element_on_underlying_driver()
         {
             var element = new StubElement();
             driver.StubCss("something.to click", element);
+            spyRobustWrapper.AlwaysReturnFromRobustly(element);
 
-            session.FindCss("something.to click").Click();
+            var elementScope = session.FindCss("something.to click");
 
             Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
-            Assert.That(driver.ClickedElements, Is.Empty, "Click not called robustly");
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            elementScope.Click();
 
+            spyRobustWrapper.QueriesRan<Element>().Single().Run();
             Assert.That(driver.FindCssRequests.Single(), Is.EqualTo("something.to click"));
+
             Assert.That(driver.ClickedElements, Has.Member(element));
         }
     }

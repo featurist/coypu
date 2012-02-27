@@ -1,4 +1,5 @@
-﻿using Coypu.Queries;
+﻿using System.Linq;
+using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -52,8 +53,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session.FindLink("Sign in").Exists();
             session.FindLink("Sign out").Exists();
 
-            var firstQuery = (ElementExistsQuery) spyRobustWrapper.QueriesRan[0];
-            var secondQuery = (ElementExistsQuery) spyRobustWrapper.QueriesRan[1];
+            var firstQuery = (ElementExistsQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
+            var secondQuery = (ElementExistsQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
 
             firstQuery.Run();
             Assert.That(firstQuery.Result, Is.False);
@@ -71,8 +72,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session.FindLink("Sign in").Missing();
             session.FindLink("Sign out").Missing();
 
-            var firstQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan[0];
-            var secondQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan[1];
+            var firstQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
+            var secondQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
 
             firstQuery.Run();
             Assert.That(firstQuery.Result, Is.True);

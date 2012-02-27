@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -19,23 +20,17 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Browser.EndSession();
         }
 
-
         [Test]
-        public void It_uses_individual_timeout_for_action_then_resets() 
+        public void It_uses_individual_timeout_for_query_leaving() 
         {
-            var defaultTimeout = TimeSpan.FromSeconds(123);
             var individualTimeout = TimeSpan.FromSeconds(321);
-
-            Configuration.Timeout = defaultTimeout;
-            Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
 
             var spyRobustWrapper = new SpyRobustWrapper();
             var session = new Session(null, spyRobustWrapper, null, null, null);
 
-            session.FindLink("bob").WithIndividualTimeout(individualTimeout).Now();
+            session.FindLink("bob").WithTimeout(individualTimeout).Now();
 
-            Assert.Fail("Assert timeout used for query");
-            Assert.That(Configuration.Timeout, Is.EqualTo(defaultTimeout));
+            Assert.That(spyRobustWrapper.QueriesRan<Element>().Single().Timeout, Is.EqualTo(individualTimeout));
         }
 
         [Test]
@@ -47,7 +42,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var session = new Session(null, spyRobustWrapper, null, null, null);
 
-            var actualElement = session.FindLink("bob").WithIndividualTimeout(TimeSpan.FromSeconds(321)).Now();
+            var actualElement = session.FindLink("bob").WithTimeout(TimeSpan.FromSeconds(321)).Now();
 
             Assert.That(actualElement, Is.SameAs(expectedElement));
         }

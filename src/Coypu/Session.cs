@@ -77,7 +77,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return Query(new HasDialogQuery(driver, withText, driverScope.IndividualTimeout));
+            return Query(new HasDialogQuery(driver, withText, driverScope.Timeout));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return Query(new HasNoDialogQuery(driver, withText, timeout: driverScope.IndividualTimeout));
+            return Query(new HasNoDialogQuery(driver, withText, timeout: driverScope.Timeout));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog()
         {
-            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver, DriverScope.IndividualTimeout));
+            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver, DriverScope.Timeout));
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog()
         {
-            driverScope.RetryUntilTimeout(new CancelModalDialog(driver,DriverScope.IndividualTimeout));
+            driverScope.RetryUntilTimeout(new CancelModalDialog(driver,DriverScope.Timeout));
         }
 
         /// <summary>
@@ -115,11 +115,11 @@ namespace Coypu
         /// <code>
         ///   session.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
         ///   session.Click("Upload");
-        ///   session.WithIndividualTimeout(Timespan.FromSeconds(60), () => session.ClickButton("Delete bigfile.mp4"));
+        ///   session.WithTimeout(Timespan.FromSeconds(60), () => session.ClickButton("Delete bigfile.mp4"));
         ///      </code>
         /// </para>
         /// </summary>
-        public void WithIndividualTimeout(TimeSpan individualTimeout, Action action)
+        public void WithTimeout(TimeSpan individualTimeout, Action action)
         {
             temporaryTimeouts.WithIndividualTimeout<object>(individualTimeout, () =>
                                                                                    {
@@ -135,11 +135,11 @@ namespace Coypu
         /// <code>
         ///   session.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
         ///   session.Click("Upload");
-        ///   bool uploaded = session.WithIndividualTimeout(Timespan.FromSeconds(60), () => session.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
+        ///   bool uploaded = session.WithTimeout(Timespan.FromSeconds(60), () => session.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
         ///      </code>
         /// </para>
         /// </summary>
-        public T WithIndividualTimeout<T>(TimeSpan individualTimeout, Func<T> function)
+        public T WithTimeout<T>(TimeSpan individualTimeout, Func<T> function)
         {
             return temporaryTimeouts.WithIndividualTimeout(individualTimeout, function);
         }
@@ -403,9 +403,9 @@ namespace Coypu
             return this;
         }
 
-        public Session WithIndividualTimeout(TimeSpan timeout)
+        public Session WithTimeout(TimeSpan timeout)
         {
-            driverScope.WithIndividualTimeout(timeout);
+            driverScope.WithTimeout(timeout);
             return this;
         }
     }

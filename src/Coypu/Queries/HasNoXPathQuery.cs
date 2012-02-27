@@ -12,7 +12,7 @@ namespace Coypu.Queries
 
         public TimeSpan Timeout
         {
-            get { return scope.IndividualTimeout; }
+            get { return scope.Timeout; }
         }
 
         protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath)

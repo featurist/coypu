@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.SetFields, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.SetFields.Keys, Has.Member(element));
             Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
@@ -32,7 +33,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.ClickedElements,Is.Empty);
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.ClickedElements, Has.Member(element));
         }
@@ -46,7 +48,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             session.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.ClickedElements, Is.Empty);
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.ClickedElements, Has.No.Member(element));
         }
@@ -60,7 +63,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.SetFields, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.SetFields.Keys, Has.Member(element));
             Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
@@ -76,7 +79,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.SelectedOptions, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.SelectedOptions.Keys, Has.Member(element));
             Assert.That(driver.SelectedOptions[element], Is.EqualTo("some option to select"));
@@ -92,7 +95,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.CheckedElements, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.CheckedElements, Has.Member(element));
         }
@@ -107,7 +110,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.UncheckedElements, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.UncheckedElements, Has.Member(element));
         }
@@ -122,7 +125,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.ChosenElements, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredDriverActions.Single().Act();
+            spyRobustWrapper.QueriesRan<Object>().Single().Run();
 
             Assert.That(driver.ChosenElements, Has.Member(element));
         }

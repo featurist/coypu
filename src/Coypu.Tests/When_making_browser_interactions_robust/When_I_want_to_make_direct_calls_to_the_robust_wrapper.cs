@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using Coypu.Tests.When_interacting_with_the_browser;
 using NUnit.Framework;
@@ -18,7 +17,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             {
                 calledOnWrapper = true;
             });
-            spyRobustWrapper.QueriesRan<Query<object>>().First().Run();
+            spyRobustWrapper.QueriesRan<object>().First().Run();
             Assert.That(calledOnWrapper, Is.True);
         }
 
@@ -31,7 +30,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             Assert.That(session.RetryUntilTimeout(function), Is.EqualTo("immediate result"));
 
-            var query = spyRobustWrapper.QueriesRan<Query<string>>().First();
+            var query = spyRobustWrapper.QueriesRan<string>().First();
             query.Run();
 
             Assert.That(query.Result, Is.EqualTo("The expected result"));
@@ -70,7 +69,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             Assert.That(session.Query(query, "expected query result"), Is.EqualTo("immediate query result"));
 
-            var robustQuery = spyRobustWrapper.QueriesRan<Query<string>>().First();
+            var robustQuery = spyRobustWrapper.QueriesRan<string>().First();
             robustQuery.Run();
 
             Assert.That(robustQuery.Result, Is.EqualTo("query result"));
