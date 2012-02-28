@@ -13,6 +13,20 @@ namespace Coypu.Drivers.Watin
             return (IElementContainer)scope.Now().Native;
         }
 
+        private static Document WatiNDocumentScope(DriverScope scope)
+        {
+            var nativeScope = WatiNScope(scope);
+            while (!(nativeScope is Document) && nativeScope is WatiN.Core.Element)
+            {
+                nativeScope = ((WatiN.Core.Element) nativeScope).DomContainer;
+            }
+
+            var documentScope = nativeScope as Document;
+            if (documentScope == null)
+                throw new InvalidOperationException("Cannot find frame from a scope that isn't a document or a frame");
+            return documentScope;
+        }
+
         public WatiN.Core.Element FindButton(string locator, DriverScope scope)
         {
             var isButton = Constraints.OfType<Button>()
@@ -92,15 +106,7 @@ namespace Coypu.Drivers.Watin
 
         public Frame FindFrame(string locator, DriverScope scope)
         {
-            return GetDocument(scope).Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
-        }
-
-        private Document GetDocument(DriverScope scope)
-        {
-            var documentScope = WatiNScope(scope) as Document;
-            if (documentScope == null)
-                throw new InvalidOperationException("Cannot find frame from a scope that isn't a document or a frame");
-            return documentScope;
+            return WatiNDocumentScope(scope).Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
         }
 
         public WatiN.Core.Element FindLink(string linkText, DriverScope scope)
