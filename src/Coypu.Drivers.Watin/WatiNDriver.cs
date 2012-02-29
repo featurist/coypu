@@ -44,6 +44,13 @@ namespace Coypu.Drivers.Watin
             return browser;
         }
 
+        public void SetBrowser(WatiN.Core.Browser browser)
+        {
+            Watin.Dispose();
+            browser.AddDialogHandler(watinDialogHandler);
+            Watin = browser;
+        }
+
         internal WatiN.Core.Browser Watin { get; private set; }
 
         private static WatiN.Core.Element WatiNElement(Element element)
