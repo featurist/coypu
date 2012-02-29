@@ -137,7 +137,7 @@ namespace Coypu.Drivers.Watin
 
         public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return FindAllCssDeferred(cssSelector, scope).ToList();
+            return FindAllCssDeferred(cssSelector, scope);
         }
 
         public WatiN.Core.Element FindCss(string cssSelector, DriverScope scope)
@@ -148,6 +148,30 @@ namespace Coypu.Drivers.Watin
         public bool HasCss(string cssSelector, DriverScope scope)
         {
             var element = FindCss(cssSelector, scope);
+            return element != null && element.Exists;
+        }
+
+        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, DriverScope scope)
+        {
+            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
+            return from element in WatiNScope(scope).XPath(xpath)
+                   where element.Matches(isVisible)
+                   select element;
+        }
+
+        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, DriverScope scope)
+        {
+            return FindAllXPathDeferred(xpath, scope);
+        }
+
+        public WatiN.Core.Element FindXPath(string xpath, DriverScope scope)
+        {
+            return FindAllXPathDeferred(xpath, scope).FirstOrDefault();
+        }
+
+        public bool HasXPath(string xpath, DriverScope scope)
+        {
+            var element = FindXPath(xpath, scope);
             return element != null && element.Exists;
         }
     }
