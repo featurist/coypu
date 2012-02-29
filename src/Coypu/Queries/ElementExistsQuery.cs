@@ -3,7 +3,7 @@ namespace Coypu.Queries
     internal class ElementExistsQuery : ElementPresenceQuery
     {
         public ElementExistsQuery(DriverScope driverScope)
-            : base(driverScope)
+            : base(driverScope, true)
         {
         }
 

@@ -5,12 +5,14 @@ namespace Coypu.Queries
     internal abstract class ElementPresenceQuery : Query<bool>
     {
         private readonly DriverScope driverScope;
+        private readonly bool resultOnFound;
         public abstract object ExpectedResult { get; }
         public bool Result { get; private set; }
 
-        protected ElementPresenceQuery(DriverScope driverScope)
+        protected ElementPresenceQuery(DriverScope driverScope, bool resultOnFound)
         {
             this.driverScope = driverScope;
+            this.resultOnFound = resultOnFound;
         }
 
         public TimeSpan Timeout
@@ -23,11 +25,11 @@ namespace Coypu.Queries
             try
             {
                 driverScope.Now();
-                Result = (bool) ExpectedResult;
+                Result = resultOnFound;
             }
             catch (MissingHtmlException)
             {
-                Result = !(bool)ExpectedResult;
+                Result = !resultOnFound;
             }
         }
     }

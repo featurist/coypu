@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_checks_for_missing_elements_with_a_RobustQuery()
         {
-            spyRobustWrapper.StubQueryResult(false, false);
+            spyRobustWrapper.StubQueryResult(true, false);
 
             driver.StubLink("Sign out", new StubElement());
             session.FindLink("Sign in").Missing();
