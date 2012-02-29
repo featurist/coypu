@@ -262,7 +262,7 @@ namespace Coypu.Drivers.Watin
 
         public bool HasXPath(string xpath, DriverScope scope)
         {
-            throw new NotSupportedException("HasXPath not yet implemented in WatiNDriver");
+            return elementFinder.HasXPath(xpath, scope);
         }
 
         public Element FindCss(string cssSelector, DriverScope scope)
@@ -272,18 +272,19 @@ namespace Coypu.Drivers.Watin
 
         public Element FindXPath(string xpath, DriverScope scope)
         {
-            throw new NotSupportedException("FindXPath not yet implemented in WatiNDriver");
+            return BuildElement(elementFinder.FindXPath(xpath, scope), "No element found by xpath: " + xpath);
         }
 
         public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return (from e in elementFinder.FindAllCss(cssSelector, scope)
-                    select BuildElement(e)).ToList();
+            return from element in elementFinder.FindAllCss(cssSelector, scope)
+                   select BuildElement(element);
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
         {
-            throw new NotSupportedException("FindAllXPath not yet implemented in WatiNDriver");
+            return from element in elementFinder.FindAllXPath(xpath, scope)
+                   select BuildElement(element);
         }
 
         public Uri Location

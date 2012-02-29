@@ -13,6 +13,20 @@ namespace Coypu.Drivers.Watin
             return (IElementContainer)scope.Now().Native;
         }
 
+        private static Document WatiNDocumentScope(DriverScope scope)
+        {
+            var nativeScope = WatiNScope(scope);
+            while (!(nativeScope is Document) && nativeScope is WatiN.Core.Element)
+            {
+                nativeScope = ((WatiN.Core.Element) nativeScope).DomContainer;
+            }
+
+            var documentScope = nativeScope as Document;
+            if (documentScope == null)
+                throw new InvalidOperationException("Cannot find frame from a scope that isn't a document or a frame");
+            return documentScope;
+        }
+
         public WatiN.Core.Element FindButton(string locator, DriverScope scope)
         {
             var isButton = Constraints.OfType<Button>()
@@ -92,15 +106,7 @@ namespace Coypu.Drivers.Watin
 
         public Frame FindFrame(string locator, DriverScope scope)
         {
-            return GetDocument(scope).Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
-        }
-
-        private Document GetDocument(DriverScope scope)
-        {
-            var documentScope = WatiNScope(scope) as Document;
-            if (documentScope == null)
-                throw new InvalidOperationException("Cannot find frame from a scope that isn't a document or a frame");
-            return documentScope;
+            return WatiNDocumentScope(scope).Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
         }
 
         public WatiN.Core.Element FindLink(string linkText, DriverScope scope)
@@ -131,7 +137,7 @@ namespace Coypu.Drivers.Watin
 
         public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return FindAllCssDeferred(cssSelector, scope).ToList();
+            return FindAllCssDeferred(cssSelector, scope);
         }
 
         public WatiN.Core.Element FindCss(string cssSelector, DriverScope scope)
@@ -142,6 +148,30 @@ namespace Coypu.Drivers.Watin
         public bool HasCss(string cssSelector, DriverScope scope)
         {
             var element = FindCss(cssSelector, scope);
+            return element != null && element.Exists;
+        }
+
+        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, DriverScope scope)
+        {
+            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
+            return from element in WatiNScope(scope).XPath(xpath)
+                   where element.Matches(isVisible)
+                   select element;
+        }
+
+        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, DriverScope scope)
+        {
+            return FindAllXPathDeferred(xpath, scope);
+        }
+
+        public WatiN.Core.Element FindXPath(string xpath, DriverScope scope)
+        {
+            return FindAllXPathDeferred(xpath, scope).FirstOrDefault();
+        }
+
+        public bool HasXPath(string xpath, DriverScope scope)
+        {
+            var element = FindXPath(xpath, scope);
             return element != null && element.Exists;
         }
     }
