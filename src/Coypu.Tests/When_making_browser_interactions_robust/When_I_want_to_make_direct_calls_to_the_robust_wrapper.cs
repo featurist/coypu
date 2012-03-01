@@ -54,7 +54,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.That(tried, Is.True);
 
             Assert.That(triedUntil, Is.False);
-            tryUntil.UntilThisPredicate.Satisfied();
+            tryUntil.Until.Satisfied();
             Assert.That(triedUntil, Is.True);
 
             Assert.That(tryUntil.WaitBeforeRetry, Is.EqualTo(waitBeforeRetry));

@@ -64,7 +64,14 @@ namespace Coypu
             if (WasDisposed)
                 return;
 
+            Console.Write("Disposing driver...");
+
             driver.Dispose();
+
+            Console.Write("closed.");
+            Browser.OpenDrivers--;
+            Console.WriteLine(Browser.OpenDrivers + " drivers open.");
+
             WasDisposed = true;
         }
 
@@ -130,15 +137,9 @@ namespace Coypu
             return this;
         }
 
-        public Session ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        public Session ClickButton(string locator, Query<bool> until)
         {
-            driverScope.ClickButton(locator, until, waitBetweenRetries);
-            return this;
-        }
-
-        public Session ClickButton(string locator, Predicate until, TimeSpan waitBetweenRetries)
-        {
-            driverScope.ClickButton(locator, until, waitBetweenRetries);
+            driverScope.ClickButton(locator, until);
             return this;
         }
 
@@ -148,7 +149,7 @@ namespace Coypu
             return this;
         }
 
-        public Session ClickLink(string locator, Predicate until, TimeSpan waitBetweenRetries)
+        public Session ClickLink(string locator, Query<bool> until, TimeSpan waitBetweenRetries)
         {
             driverScope.ClickLink(locator, until, waitBetweenRetries);
             return this;
@@ -343,7 +344,7 @@ namespace Coypu
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry)
         {
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }

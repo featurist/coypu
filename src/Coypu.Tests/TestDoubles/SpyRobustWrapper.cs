@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Coypu.Actions;
-using Coypu.Predicates;
 using Coypu.Queries;
 using Coypu.Robustness;
 
@@ -44,9 +43,9 @@ namespace Coypu.Tests.TestDoubles
             return default(T);
         }
 
-        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overallTimeout)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout)
         {
-            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry, overallTimeout));
+            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, overallTimeout));
         }
 
         public bool ZeroTimeout { get; set; }
@@ -63,17 +62,15 @@ namespace Coypu.Tests.TestDoubles
 
         public class TryUntilArgs
         {
-            public TimeSpan WaitBeforeRetry { get; private set; }
             public TimeSpan OverallTimeout { get; private set; }
             public DriverAction TryThisDriverAction { get; private set; }
-            public Predicate UntilThisPredicate { get; private set; }
+            public Query<bool> Until { get; private set; }
 
-            public TryUntilArgs(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overallTimeout)
+            public TryUntilArgs(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout)
             {
-                WaitBeforeRetry = waitBeforeRetry;
                 OverallTimeout = overallTimeout;
                 TryThisDriverAction = tryThis;
-                UntilThisPredicate = until;
+                Until = until;
             }
         }
     }

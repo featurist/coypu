@@ -50,7 +50,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_exceptions_are_always_thrown_It_rethrows_eventually()
         {
-            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Robustly(new AlwaysThrowsQuery<TestException>(TimeSpan.FromMilliseconds(200))));
+            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Robustly(new AlwaysThrowsQuery<object, TestException>(TimeSpan.FromMilliseconds(200))));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_a_not_supported_exception_is_thrown_It_does_not_retry()
         {
-            var throwsNotSupported = new AlwaysThrowsQuery<NotSupportedException>(TimeSpan.FromMilliseconds(200));
+            var throwsNotSupported = new AlwaysThrowsQuery<object, NotSupportedException>(TimeSpan.FromMilliseconds(200));
 
             Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Robustly(throwsNotSupported));
             Assert.That(throwsNotSupported.Tries, Is.EqualTo(1));

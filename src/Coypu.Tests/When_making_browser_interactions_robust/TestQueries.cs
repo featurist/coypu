@@ -84,7 +84,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
     }
 
-    public class AlwaysThrowsQuery<TException> : Query<object> where TException : Exception
+    public class AlwaysThrowsQuery<TResult,TException> : Query<TResult> where TException : Exception
     {
         private readonly Stopwatch stopWatch = new Stopwatch();
         
@@ -103,13 +103,13 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public object ExpectedResult
         {
-            get { return null; }
+            get { return default(TResult); }
         }
 
 
-        public object Result
+        public TResult Result
         {
-            get { return null; }
+            get { return default(TResult); }
         }
 
         public int Tries { get; set; }

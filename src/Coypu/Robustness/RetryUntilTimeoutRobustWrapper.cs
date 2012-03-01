@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using Coypu.Actions;
-using Coypu.Predicates;
 using Coypu.Queries;
 
 namespace Coypu.Robustness
@@ -10,9 +9,9 @@ namespace Coypu.Robustness
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
 
-        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overrallTimeout)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overrallTimeout)
         {
-            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis,until,waitBeforeRetry,overrallTimeout));
+            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis,until,overrallTimeout));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }

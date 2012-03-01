@@ -40,7 +40,7 @@ namespace Coypu.Drivers.Selenium
                 selenium.SwitchTo().Frame(frame);
                 context = selenium;
             }
-            Console.WriteLine(by);
+            //Console.WriteLine(by);
             return context.FindElements(by).Where(e => IsDisplayed(e, scope));
         }
 

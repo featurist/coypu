@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -32,8 +33,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
-
-            session.ClickButton("Some button locator", () => stubUntil, waitBetweenRetries);
+            var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs + 1000);
+            
+            session.WithTimeout(overallTimeout)
+                   .ClickButton("Some button locator",new LambdaQuery<bool>(() => stubUntil, waitBetweenRetries));
 
             var tryUntilArgs = GetTryUntilArgs();
 
@@ -41,8 +44,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             tryUntilArgs.TryThisDriverAction.Act();
             AssertClicked(buttonToBeClicked);
 
-            Assert.That(tryUntilArgs.UntilThisPredicate.Satisfied(), Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
+            Assert.That(tryUntilArgs.Until.Timeout, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 
         [TestCase(200)]

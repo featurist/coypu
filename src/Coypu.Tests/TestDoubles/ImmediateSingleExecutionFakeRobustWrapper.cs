@@ -14,7 +14,7 @@ namespace Coypu.Tests.TestDoubles
             return query.Result;
         }
 
-        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overallTimeout)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout)
         {
             tryThis.Act();
         }

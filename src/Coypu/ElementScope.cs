@@ -100,12 +100,6 @@ namespace Coypu
             return this;
         }
 
-        public ElementScope ClickButton(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
-        {
-            DriverScope.ClickButton(locator, until, waitBetweenRetries);
-            return this;
-        }
-
         public ElementScope ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
         {
             DriverScope.ClickLink(locator, until, waitBetweenRetries);
@@ -280,7 +274,7 @@ namespace Coypu
             DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry)
         {
             DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }

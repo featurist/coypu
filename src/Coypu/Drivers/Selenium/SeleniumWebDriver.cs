@@ -25,7 +25,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                Console.WriteLine("By.Window");
+                //Console.WriteLine("By.Window");
                 return new SeleniumSearchContext(selenium);
             }
         }

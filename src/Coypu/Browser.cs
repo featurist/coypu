@@ -42,11 +42,21 @@ namespace Coypu
                                new CurrentConfigurationUrlBuilder());
         }
 
+        public static int OpenDrivers { get; set; }
+
         private static Driver NewWebDriver()
         {
             try
             {
-                return (Driver) Activator.CreateInstance(Configuration.Driver);
+                Console.Write("New  driver...");
+
+                var driver = (Driver) Activator.CreateInstance(Configuration.Driver);
+
+                Console.WriteLine("open.");
+                OpenDrivers++;
+                Console.WriteLine(OpenDrivers + " drivers open.");
+
+                return driver;
             }
             catch (TargetInvocationException e)
             {
