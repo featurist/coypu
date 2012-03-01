@@ -22,6 +22,7 @@ namespace Coypu
         private bool consideringInvisibleElements;
 
         private TimeSpan timeout;
+        private ElementFound element;
 
         public bool ConsiderInvisibleElements
         {
@@ -51,6 +52,7 @@ namespace Coypu
             robustWrapper = outer.robustWrapper;
             urlBuilder = outer.urlBuilder;
             stateFinder = outer.stateFinder;
+            waiter = outer.waiter;
             timeout = outer.Timeout;
         }
 
@@ -96,7 +98,7 @@ namespace Coypu
         /// </summary>
         /// <param name="element">The element to click</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope Click(Element element)
+        public DriverScope Click(ElementFound element)
         {
             driver.Click(element);
             return this;
@@ -332,7 +334,7 @@ namespace Coypu
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
         /// <returns>All matching elements</returns>
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector)
         {
             return driver.FindAllCss(cssSelector, this);
         }
@@ -342,7 +344,7 @@ namespace Coypu
         /// </summary>
         /// <param name="xpath">XPath query</param>
         /// <returns>All matching elements</returns>
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath)
         {
             return driver.FindAllXPath(xpath, this);
         }
@@ -460,6 +462,7 @@ namespace Coypu
         /// <summary>
         /// Hover the mouse over an element
         /// </summary>
+        /// <param name="element"> </param>
         /// <param name="findElement">The element to hover over</param>
         public DriverScope Hover(Element element)
         {
@@ -612,9 +615,12 @@ namespace Coypu
         }
 
 
-        public Element Now()
+        public ElementFound Now()
         {
-            return elementFinder.Find();
+            if (element == null || element.Stale)
+                element = elementFinder.Find();
+
+            return element;
         }
     }
 }

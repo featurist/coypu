@@ -21,7 +21,7 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public Element Window
+        public ElementFound Window
         {
             get
             {
@@ -67,32 +67,32 @@ namespace Coypu.Drivers.Selenium
             get { return selenium; }
         }
 
-        public Element FindField(string locator, DriverScope scope)
+        public ElementFound FindField(string locator, DriverScope scope)
         {
             return BuildElement(fieldFinder.FindField(locator,scope), "No such field: " + locator);
         }
 
-        public Element FindButton(string locator, DriverScope scope)
+        public ElementFound FindButton(string locator, DriverScope scope)
         {
             return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
         }
 
-        public Element FindIFrame(string locator, DriverScope scope) 
+        public ElementFound FindIFrame(string locator, DriverScope scope) 
         {
             return BuildElement(iframeFinder.FindIFrame(locator, scope), "Failed to find frame: " + locator);
         }
 
-        public Element FindLink(string linkText, DriverScope scope)
+        public ElementFound FindLink(string linkText, DriverScope scope)
         {
             return BuildElement(Find(By.LinkText(linkText), scope).FirstOrDefault(), "No such link: " + linkText);
         }
 
-        public Element FindId(string id,DriverScope scope ) 
+        public ElementFound FindId(string id,DriverScope scope ) 
         {
             return BuildElement(Find(By.Id(id), scope).FirstDisplayedOrDefault(), "Failed to find id: " + id);
         }
 
-        public Element FindFieldset(string locator, DriverScope scope)
+        public ElementFound FindFieldset(string locator, DriverScope scope)
         {
             var fieldset =
                 Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator)),scope).FirstOrDefault() ??
@@ -101,29 +101,29 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(fieldset, "Failed to find fieldset: " + locator);
         }
 
-        public Element FindSection(string locator, DriverScope scope)
+        public ElementFound FindSection(string locator, DriverScope scope)
         {
             return BuildElement(sectionFinder.FindSection(locator,scope), "Failed to find section: " + locator);
         }
 
-        public Element FindCss(string cssSelector,DriverScope scope)
+        public ElementFound FindCss(string cssSelector,DriverScope scope)
         {
             return BuildElement(Find(By.CssSelector(cssSelector),scope).FirstOrDefault(),"No element found by css: " + cssSelector);
         }
 
-        public Element FindXPath(string xpath, DriverScope scope)
+        public ElementFound FindXPath(string xpath, DriverScope scope)
         {
             return BuildElement(Find(By.XPath(xpath),scope).FirstOrDefault(),"No element found by xpath: " + xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return Find(By.CssSelector(cssSelector),scope).Select(e => BuildElement(e)).Cast<Element>();
+            return Find(By.CssSelector(cssSelector),scope).Select(e => BuildElement(e)).Cast<ElementFound>();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
-            return Find(By.XPath(xpath), scope).Select(e => BuildElement(e)).Cast<Element>();
+            return Find(By.XPath(xpath), scope).Select(e => BuildElement(e)).Cast<ElementFound>();
         }
 
         private IEnumerable<IWebElement> Find(By by, DriverScope scope)
@@ -131,7 +131,7 @@ namespace Coypu.Drivers.Selenium
             return elementFinder.Find(by, scope);
         }
 
-        private Element BuildElement(IWebElement element, string failureMessage)
+        private ElementFound BuildElement(IWebElement element, string failureMessage)
         {
             if (element == null)
                 throw new MissingHtmlException(failureMessage);

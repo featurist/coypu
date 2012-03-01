@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
+using Coypu.Queries;
 
 namespace Coypu.AcceptanceTests
 {
@@ -42,9 +43,9 @@ namespace Coypu.AcceptanceTests
         {
             ShowStateAsync("state1", 500);
 
-            var state1 = new State(() => browser.HasContent("State one reached"));
-            var state2 = new State(() => browser.HasContent("State two reached"));
-            var state3 = new State(() => browser.HasContent("State three reached"));
+            var state1 = new State(new LambdaQuery<bool>(() => browser.HasContent("State one reached"),true));
+            var state2 = new State(new LambdaQuery<bool>(() => browser.HasContent("State two reached"),true));
+            var state3 = new State(new LambdaQuery<bool>(() => browser.HasContent("State three reached"),true));
 
             State foundState = browser.FindState(state1, state2, state3);
 
@@ -56,9 +57,9 @@ namespace Coypu.AcceptanceTests
         {
             ShowStateAsync("state2", 500);
 
-            var state1 = new State(() => browser.HasContent("State one reached"));
-            var state2 = new State(() => browser.HasContent("State two reached"));
-            var state3 = new State(() => browser.HasContent("State three reached"));
+            var state1 = new State(new LambdaQuery<bool>(() => browser.HasContent("State one reached")));
+            var state2 = new State(new LambdaQuery<bool>(() => browser.HasContent("State two reached")));
+            var state3 = new State(new LambdaQuery<bool>(() => browser.HasContent("State three reached")));
 
             State foundState = browser.FindState(state1, state2, state3);
 
@@ -71,9 +72,9 @@ namespace Coypu.AcceptanceTests
         {
             ShowStateAsync("state3", 500);
 
-            var state1 = new State(() => browser.HasContent("State one reached"));
-            var state2 = new State(() => browser.HasContent("State two reached"));
-            var state3 = new State(() => browser.HasContent("State three reached"));
+            var state1 = new State(new LambdaQuery<bool>(() => browser.HasContent("State one reached")));
+            var state2 = new State(new LambdaQuery<bool>(() => browser.HasContent("State two reached")));
+            var state3 = new State(new LambdaQuery<bool>(() => browser.HasContent("State three reached")));
 
             State foundState = browser.FindState(state1, state2, state3);
 
@@ -83,9 +84,9 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Page_reaches_none_of_three_possible_states()
         {
-            var state1 = new State(() => browser.HasContent("State one reached"));
-            var state2 = new State(() => browser.HasContent("State two reached"));
-            var state3 = new State(() => browser.HasContent("State three reached"));
+            var state1 = new State(new LambdaQuery<bool>(() => browser.HasContent("State one reached")));
+            var state2 = new State(new LambdaQuery<bool>(() => browser.HasContent("State two reached")));
+            var state3 = new State(new LambdaQuery<bool>(() => browser.HasContent("State three reached")));
 
             Assert.Throws<MissingHtmlException>(() => browser.FindState(state1, state2, state3));
         }

@@ -68,7 +68,7 @@ namespace Coypu
             }
         }
 
-        public virtual Element Now()
+        public virtual ElementFound Now()
         {
             return driverScope.Now();
         }
@@ -195,12 +195,12 @@ namespace Coypu
             return DriverScope.FindXPath(xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector)
         {
             return DriverScope.FindAllCss(cssSelector);
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath)
         {
             return DriverScope.FindAllXPath(xpath);
         }

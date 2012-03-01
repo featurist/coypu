@@ -2,7 +2,7 @@ using System;
 
 namespace Coypu.Queries
 {
-    internal class ElementQuery : Query<Element>
+    internal class ElementQuery : Query<ElementFound>
     {
         private readonly DriverScope driverScope;
 
@@ -13,7 +13,7 @@ namespace Coypu.Queries
             Timeout = driverScope.Timeout;
         }
 
-        public Element Result { get; set; }
+        public ElementFound Result { get; set; }
         public TimeSpan Timeout { get; set; }
 
         public object ExpectedResult

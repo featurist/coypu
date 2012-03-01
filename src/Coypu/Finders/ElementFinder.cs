@@ -14,6 +14,6 @@ namespace Coypu.Finders
         }
 
         internal string Locator { get { return _locator; } }
-        internal abstract Element Find();
+        internal abstract ElementFound Find();
     }
 }

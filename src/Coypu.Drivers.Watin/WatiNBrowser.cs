@@ -2,7 +2,7 @@ using System;
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNBrowser : Element
+    internal class WatiNBrowser : ElementFound
     {
         private readonly WatiN.Core.Browser browser;
 
@@ -44,6 +44,11 @@ namespace Coypu.Drivers.Watin
         public object Native
         {
             get { return browser; }
+        }
+
+        public bool Stale
+        {
+            get { return false; }
         }
 
         public string this[string attributeName]

@@ -6,7 +6,7 @@ namespace Coypu.Finders
         {
         }
 
-        internal override Element Find()
+        internal override ElementFound Find()
         {
             return Driver.Window;
         }

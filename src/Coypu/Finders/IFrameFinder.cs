@@ -4,7 +4,7 @@ namespace Coypu.Finders
     {
         internal IFrameFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
 
-        internal override Element Find()
+        internal override ElementFound Find()
         {
             return Driver.FindIFrame(Locator, Scope);
         }

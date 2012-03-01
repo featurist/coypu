@@ -12,17 +12,17 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public Element FindButton(string locator,DriverScope scope)
+        public ElementFound FindButton(string locator,DriverScope scope)
         {
             return null;
         }
 
-        public Element FindLink(string linkText, DriverScope scope)
+        public ElementFound FindLink(string linkText, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindField(string locator, DriverScope scope)
+        public ElementFound FindField(string locator, DriverScope scope)
         {
             return null;
         }
@@ -73,24 +73,24 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public Element FindCss(string cssSelector, DriverScope scope)
+        public ElementFound FindCss(string cssSelector, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindXPath(string xpath, DriverScope scope)
+        public ElementFound FindXPath(string xpath, DriverScope scope)
         {
             return null;
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return Enumerable.Empty<Element>();
+            return Enumerable.Empty<ElementFound>();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
-            return Enumerable.Empty<Element>();
+            return Enumerable.Empty<ElementFound>();
         }
 
         public void Check(Element field)
@@ -118,7 +118,7 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
-        public Element Window
+        public ElementFound Window
         {
             get { return null; }
         }
@@ -133,7 +133,7 @@ namespace Coypu.Tests.TestDoubles
             
         }
 
-        public void SetScope(Element findScope)
+        public void SetScope(ElementFound findScope)
         {
             
         }
@@ -148,22 +148,22 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public Element FindFieldset(string locator, DriverScope scope)
+        public ElementFound FindFieldset(string locator, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindSection(string locator, DriverScope scope)
+        public ElementFound FindSection(string locator, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindId(string id, DriverScope scope)
+        public ElementFound FindId(string id, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindIFrame(string locator, DriverScope scope)
+        public ElementFound FindIFrame(string locator, DriverScope scope)
         {
             return null;
         }

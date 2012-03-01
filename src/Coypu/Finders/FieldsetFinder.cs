@@ -4,7 +4,7 @@ namespace Coypu.Finders
     {
         internal FieldsetFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
 
-        internal override Element Find()
+        internal override ElementFound Find()
         {
             return Driver.FindFieldset(Locator, Scope);
         }

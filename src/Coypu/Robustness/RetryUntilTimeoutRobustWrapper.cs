@@ -23,7 +23,7 @@ namespace Coypu.Robustness
         {
             var interval = Configuration.RetryInterval;
             //var timeout = ZeroTimeout ? TimeSpan.Zero : query.Timeout;
-            throw new NotImplementedException("Next - Respect RobustWrapper.ZeroTimeout over query.Timeout");
+            //throw new NotImplementedException("Next - Respect RobustWrapper.ZeroTimeout over query.Timeout");
             var timeout = query.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)

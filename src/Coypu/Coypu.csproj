@@ -94,8 +94,9 @@
     <Compile Include="Actions\LambdaDriverAction.cs" />
     <Compile Include="Actions\Select.cs" />
     <Compile Include="Actions\Uncheck.cs" />
+    <Compile Include="Drivers\Selenium\SeleniumSearchContext.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
-    <Compile Include="Actions\Clicker.cs" />
+    <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="CssFinder.cs" />
@@ -155,7 +156,7 @@
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
     <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
     <Compile Include="Drivers\Selenium\SeleniumWebDriver.cs" />
-    <Compile Include="Element.cs" />
+    <Compile Include="ElementFound.cs" />
     <Compile Include="Robustness\RobustWrapper.cs" />
     <Compile Include="Robustness\StopwatchWaiter.cs" />
     <Compile Include="Robustness\Waiter.cs" />

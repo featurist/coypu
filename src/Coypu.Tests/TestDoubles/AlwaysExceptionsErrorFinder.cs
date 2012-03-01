@@ -9,7 +9,7 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        internal override Element Find()
+        internal override ElementFound Find()
         {
             throw new TestException("I always fail");
         }
@@ -17,14 +17,14 @@ namespace Coypu.Tests.TestDoubles
 
     public class AlwaysFindsElementFinder : ElementFinder
     {
-        private readonly Element element;
+        private readonly ElementFound element;
 
-        public AlwaysFindsElementFinder(Element element) : base (null,null,null)
+        public AlwaysFindsElementFinder(ElementFound element) : base (null,null,null)
         {
             this.element = element;
         }
 
-        internal override Element Find()
+        internal override ElementFound Find()
         {
             return element;
         }
@@ -37,7 +37,7 @@ namespace Coypu.Tests.TestDoubles
             
         }
 
-        internal override Element Find()
+        internal override ElementFound Find()
         {
             throw new MissingHtmlException("From AlwaysMissingElementFinder");
         }

@@ -20,18 +20,18 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<string> visits = new List<string>();
         private readonly IDictionary<Element, string> setFields = new Dictionary<Element, string>();
         private readonly IDictionary<Element, string> selectedOptions = new Dictionary<Element, string>();
-        private readonly Dictionary<string, Element> stubbedButtons = new Dictionary<string, Element>();
-        private readonly Dictionary<string, Element> stubbedLinks = new Dictionary<string, Element>();
-        private readonly Dictionary<string, Element> stubbedTextFields = new Dictionary<string, Element>();
-        private readonly Dictionary<string, Element> stubbedCssResults = new Dictionary<string, Element>();
-        private readonly Dictionary<string, Element> stubbedXPathResults = new Dictionary<string, Element>();
-        private readonly IDictionary<string, IEnumerable<Element>> stubbedAllCssResults = new Dictionary<string, IEnumerable<Element>>();
-        private readonly IDictionary<string, IEnumerable<Element>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<Element>>();
+        private readonly Dictionary<string, ElementFound> stubbedButtons = new Dictionary<string, ElementFound>();
+        private readonly Dictionary<string, ElementFound> stubbedLinks = new Dictionary<string, ElementFound>();
+        private readonly Dictionary<string, ElementFound> stubbedTextFields = new Dictionary<string, ElementFound>();
+        private readonly Dictionary<string, ElementFound> stubbedCssResults = new Dictionary<string, ElementFound>();
+        private readonly Dictionary<string, ElementFound> stubbedXPathResults = new Dictionary<string, ElementFound>();
+        private readonly IDictionary<string, IEnumerable<ElementFound>> stubbedAllCssResults = new Dictionary<string, IEnumerable<ElementFound>>();
+        private readonly IDictionary<string, IEnumerable<ElementFound>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<ElementFound>>();
         private readonly IDictionary<string, string> stubbedExecuteScriptResults = new Dictionary<string, string>();
-        private readonly IDictionary<string, Element> stubbedFieldsets = new Dictionary<string, Element>();
-        private readonly IDictionary<string, Element> stubbedSections = new Dictionary<string, Element>();
-        private readonly IDictionary<string, Element> stubbedIFrames = new Dictionary<string, Element>();
-        private readonly IDictionary<string, Element> stubbedIDs = new Dictionary<string, Element>();
+        private readonly IDictionary<string, ElementFound> stubbedFieldsets = new Dictionary<string, ElementFound>();
+        private readonly IDictionary<string, ElementFound> stubbedSections = new Dictionary<string, ElementFound>();
+        private readonly IDictionary<string, ElementFound> stubbedIFrames = new Dictionary<string, ElementFound>();
+        private readonly IDictionary<string, ElementFound> stubbedIDs = new Dictionary<string, ElementFound>();
         private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
         private readonly IDictionary<Regex, bool> stubbedHasContentMatchResults = new Dictionary<Regex, bool>();
         private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
@@ -115,13 +115,13 @@ namespace Coypu.Tests.TestDoubles
             get { return findLinkRequests; }
         }
 
-        public Element FindButton(string locator, DriverScope scope)
+        public ElementFound FindButton(string locator, DriverScope scope)
         {
             findButtonRequests.Add(locator);
             return stubbedButtons[locator];
         }
 
-        public Element FindLink(string linkText, DriverScope scope)
+        public ElementFound FindLink(string linkText, DriverScope scope)
         {
             findLinkRequests.Add(linkText);
 
@@ -130,7 +130,7 @@ namespace Coypu.Tests.TestDoubles
                 : FindScopedElement(scopedLinks, linkText, scope);
         }
 
-        private Element FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator, DriverScope scope)
+        private ElementFound FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator, DriverScope scope)
         {
             var element = collection.FirstOrDefault(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
 
@@ -140,7 +140,7 @@ namespace Coypu.Tests.TestDoubles
             throw new MissingHtmlException("Element not found: " + locator);
         }
 
-        public Element FindField(string locator, DriverScope scope)
+        public ElementFound FindField(string locator, DriverScope scope)
         {
             return stubbedTextFields[locator];
         }
@@ -169,17 +169,17 @@ namespace Coypu.Tests.TestDoubles
             visits.Add(url);
         }
 
-        public void StubButton(string locator, Element element)
+        public void StubButton(string locator, ElementFound element)
         {
             stubbedButtons[locator] = element;
         }
 
-        public void StubLink(string locator, Element element)
+        public void StubLink(string locator, ElementFound element)
         {
             stubbedLinks[locator] = element;
         }
 
-        public void StubField(string locator, Element element)
+        public void StubField(string locator, ElementFound element)
         {
             stubbedTextFields[locator] = element;
         }
@@ -209,22 +209,22 @@ namespace Coypu.Tests.TestDoubles
             stubbedHasDialogResults.Add(text, result);
         }
 
-        public void StubCss(string cssSelector, Element result)
+        public void StubCss(string cssSelector, ElementFound result)
         {
             stubbedCssResults.Add(cssSelector, result);
         }
 
-        public void StubXPath(string cssSelector, Element result)
+        public void StubXPath(string cssSelector, ElementFound result)
         {
             stubbedXPathResults.Add(cssSelector, result);
         }
 
-        public void StubAllCss(string cssSelector, IEnumerable<Element> result)
+        public void StubAllCss(string cssSelector, IEnumerable<ElementFound> result)
         {
             stubbedAllCssResults.Add(cssSelector, result);
         }
 
-        public void StubAllXPath(string xpath, IEnumerable<Element> result)
+        public void StubAllXPath(string xpath, IEnumerable<ElementFound> result)
         {
             stubbedAllXPathResults.Add(xpath, result);
         }
@@ -241,7 +241,7 @@ namespace Coypu.Tests.TestDoubles
             get { return stubbedLocation; }
         }
 
-        public Element Window
+        public ElementFound Window
         {
             get { throw new NotImplementedException(); }
         }
@@ -256,7 +256,7 @@ namespace Coypu.Tests.TestDoubles
             ModalDialogsCancelled++;
         }
 
-        private Element Find(IDictionary<string, Element> dictionary, string locator)
+        private ElementFound Find(IDictionary<string, ElementFound> dictionary, string locator)
         {
             if (dictionary.ContainsKey(locator))
                 return dictionary[locator];
@@ -269,22 +269,22 @@ namespace Coypu.Tests.TestDoubles
             return stubbedExecuteScriptResults[javascript];
         }
 
-        public Element FindFieldset(string locator, DriverScope scope)
+        public ElementFound FindFieldset(string locator, DriverScope scope)
         {
             return Find(stubbedFieldsets,locator);
         }
 
-        public Element FindSection(string locator, DriverScope scope)
+        public ElementFound FindSection(string locator, DriverScope scope)
         {
             return Find(stubbedSections,locator);
         }
 
-        public Element FindId(string id, DriverScope scope)
+        public ElementFound FindId(string id, DriverScope scope)
         {
             return Find(stubbedIDs,id);
         }
 
-        public Element FindIFrame(string locator, DriverScope scope)
+        public ElementFound FindIFrame(string locator, DriverScope scope)
         {
             return Find(stubbedIFrames,locator);
         }
@@ -346,23 +346,23 @@ namespace Coypu.Tests.TestDoubles
             return stubbedHasDialogResults[withText];
         }
 
-        public Element FindCss(string cssSelector, DriverScope scope)
+        public ElementFound FindCss(string cssSelector, DriverScope scope)
         {
             FindCssRequests.Add(cssSelector);
             return Find(stubbedCssResults,cssSelector);
         }
 
-        public Element FindXPath(string xpath, DriverScope scope)
+        public ElementFound FindXPath(string xpath, DriverScope scope)
         {
             return Find(stubbedXPathResults,xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
             return stubbedAllCssResults[cssSelector];
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
             return stubbedAllXPathResults[xpath];
         }
@@ -387,22 +387,22 @@ namespace Coypu.Tests.TestDoubles
             stubbedExecuteScriptResults.Add(script, scriptReturnValue);
         }
 
-        public void StubFieldset(string locator, Element fieldset)
+        public void StubFieldset(string locator, ElementFound fieldset)
         {
             stubbedFieldsets.Add(locator, fieldset);
         }
         
-        public void StubSection(string locator, Element section)
+        public void StubSection(string locator, ElementFound section)
         {
             stubbedSections.Add(locator, section);
         }
 
-        public void StubIFrame(string locator, Element iframe)
+        public void StubIFrame(string locator, ElementFound iframe)
         {
             stubbedIFrames.Add(locator, iframe);
         }
 
-        public void StubId(string id, Element element)
+        public void StubId(string id, ElementFound element)
         {
             stubbedIDs.Add(id, element);
         }

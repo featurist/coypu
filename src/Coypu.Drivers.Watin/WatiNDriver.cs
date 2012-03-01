@@ -57,24 +57,24 @@ namespace Coypu.Drivers.Watin
             return element.Native as T;
         }
 
-        private static Element BuildElement(WatiN.Core.Element element, string description)
+        private static ElementFound BuildElement(WatiN.Core.Element element, string description)
         {
             if (element == null)
                 throw new MissingHtmlException(description);
             return BuildElement(element);
         }
 
-        private static Element BuildElement(WatiN.Core.Element element)
+        private static ElementFound BuildElement(WatiN.Core.Element element)
         {
             return new WatiNElement(element);
         }
 
-        private static Element BuildElement(WatiN.Core.Browser browser)
+        private static ElementFound BuildElement(WatiN.Core.Browser browser)
         {
             return new WatiNBrowser(browser);
         }
 
-        private static Element BuildElement(Frame frame, string description)
+        private static ElementFound BuildElement(Frame frame, string description)
         {
             if (frame == null)
                 throw new MissingHtmlException(description);
@@ -89,22 +89,22 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
-        public Element FindFieldset(string locator, DriverScope scope)
+        public ElementFound FindFieldset(string locator, DriverScope scope)
         {
             return BuildElement(elementFinder.FindFieldset(locator, scope), "Failed to find fieldset: " + locator);
         }
 
-        public Element FindSection(string locator, DriverScope scope)
+        public ElementFound FindSection(string locator, DriverScope scope)
         {
             return BuildElement(elementFinder.FindSection(locator, scope), "Failed to find section: " + locator);
         }
 
-        public Element FindId(string id, DriverScope scope)
+        public ElementFound FindId(string id, DriverScope scope)
         {
             return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
         }
 
-        public Element FindIFrame(string locator, DriverScope scope)
+        public ElementFound FindIFrame(string locator, DriverScope scope)
         {
             return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }
@@ -147,17 +147,17 @@ namespace Coypu.Drivers.Watin
                    select new Cookie(name, value);
         }
 
-        public Element FindButton(string locator, DriverScope scope)
+        public ElementFound FindButton(string locator, DriverScope scope)
         {
             return BuildElement(elementFinder.FindButton(locator, scope), "Failed to find button with text, id or name: " + locator);
         }
 
-        public Element FindLink(string linkText, DriverScope scope)
+        public ElementFound FindLink(string linkText, DriverScope scope)
         {
             return BuildElement(elementFinder.FindLink(linkText, scope), "Failed to find link with text: " + linkText);
         }
 
-        public Element FindField(string locator, DriverScope scope)
+        public ElementFound FindField(string locator, DriverScope scope)
         {
             return BuildElement(elementFinder.FindField(locator, scope), "Failed to find field with label, id, name or placeholder: " + locator);
         }
@@ -240,7 +240,7 @@ namespace Coypu.Drivers.Watin
             return watinDialogHandler.Exists() && watinDialogHandler.Message == withText;
         }
 
-        public Element Window
+        public ElementFound Window
         {
             get { return BuildElement(Watin); }
         }
@@ -265,23 +265,23 @@ namespace Coypu.Drivers.Watin
             return elementFinder.HasXPath(xpath, scope);
         }
 
-        public Element FindCss(string cssSelector, DriverScope scope)
+        public ElementFound FindCss(string cssSelector, DriverScope scope)
         {
             return BuildElement(elementFinder.FindCss(cssSelector, scope), "No element found by css: " + cssSelector);
         }
 
-        public Element FindXPath(string xpath, DriverScope scope)
+        public ElementFound FindXPath(string xpath, DriverScope scope)
         {
             return BuildElement(elementFinder.FindXPath(xpath, scope), "No element found by xpath: " + xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
             return from element in elementFinder.FindAllCss(cssSelector, scope)
                    select BuildElement(element);
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
             return from element in elementFinder.FindAllXPath(xpath, scope)
                    select BuildElement(element);

@@ -244,12 +244,12 @@ namespace Coypu
             return driverScope.FindXPath(xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector)
         {
             return driverScope.FindAllCss(cssSelector);
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath)
         {
             return driverScope.FindAllXPath(xpath);
         }

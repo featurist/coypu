@@ -16,7 +16,7 @@ namespace Coypu
             this.robustWrapper = robustWrapper;
         }   
 
-        public override Element Now()
+        public override ElementFound Now()
         {
             return robustWrapper.Robustly(new ElementQuery(DriverScope));
         }

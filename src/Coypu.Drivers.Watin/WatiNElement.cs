@@ -2,7 +2,7 @@
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNElement : Element
+    internal class WatiNElement : ElementFound
     {
         internal WatiNElement(WatiN.Core.Element watinElement)
         {
@@ -74,6 +74,12 @@ namespace Coypu.Drivers.Watin
         }
 
         public object Native { get; private set; }
+
+
+        public bool Stale
+        {
+            get { return NativeWatiNElement.Exists; }
+        }
 
         public string this[string attributeName]
         {

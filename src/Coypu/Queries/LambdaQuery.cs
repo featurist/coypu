@@ -2,7 +2,7 @@ using System;
 
 namespace Coypu.Queries
 {
-    internal class LambdaQuery<T> : Query<T>
+    public class LambdaQuery<T> : Query<T>
     {
         public TimeSpan Timeout { get; private set; }
         private readonly Func<T> _query;

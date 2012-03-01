@@ -21,7 +21,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             elementScope.Click();
 
-            spyRobustWrapper.QueriesRan<Element>().Single().Run();
+            spyRobustWrapper.QueriesRan<ElementFound>().Single().Run();
             Assert.That(driver.FindCssRequests.Single(), Is.EqualTo("something.to click"));
 
             Assert.That(driver.ClickedElements, Has.Member(element));

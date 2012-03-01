@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 namespace Coypu.Tests.TestDoubles
 {
-    public class StubElement : Element
+    public class StubElement : ElementFound
     {
         private readonly Dictionary<string,string> attributes = new Dictionary<string,string>();
 
@@ -18,6 +18,11 @@ namespace Coypu.Tests.TestDoubles
         public bool Selected { get; set; }
 
         public object Native { get; set; }
+
+        public bool Stale
+        {
+            get { throw new System.NotImplementedException(); }
+        }
 
         public string this[string attributeName]
         {

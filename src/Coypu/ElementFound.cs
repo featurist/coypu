@@ -3,8 +3,16 @@
     /// <summary>
     /// An HTML element
     /// </summary>
-    public interface Element
+    public interface ElementFound : Element
     {
+        /// <summary>
+        /// The native element is no longer attached to the DOM
+        /// </summary>
+        bool Stale { get; }
+    }
+
+    public interface Element {
+
         /// <summary>
         /// The value of the 'id' attribute
         /// </summary>

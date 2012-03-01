@@ -166,14 +166,14 @@ namespace Coypu
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
         /// <returns>All matching elements</returns>
-        IEnumerable<Element> FindAllCss(string cssSelector);
+        IEnumerable<ElementFound> FindAllCss(string cssSelector);
 
         /// <summary>
         /// Find all elements matching an XPath query at the current moment. Does not wait until the <see cref="Configuration.Timeout"/> but returns as soon as the driver does.
         /// </summary>
         /// <param name="xpath">XPath query</param>
         /// <returns>All matching elements</returns>
-        IEnumerable<Element> FindAllXPath(string xpath);
+        IEnumerable<ElementFound> FindAllXPath(string xpath);
 
         /// <summary>
         /// <para>Find the first matching section to appear within the <see cref="Configuration.Timeout"/></para>

@@ -7,9 +7,9 @@ namespace Coypu
 {
     public interface Driver : IDisposable
     {
-        Element FindButton(string locator, DriverScope scope);
-        Element FindLink(string linkText, DriverScope scope);
-        Element FindField(string locator, DriverScope scope);
+        ElementFound FindButton(string locator, DriverScope scope);
+        ElementFound FindLink(string linkText, DriverScope scope);
+        ElementFound FindField(string locator, DriverScope scope);
         void Click(Element element);
         void Visit(string url);
         void Set(Element element, string value);
@@ -20,23 +20,23 @@ namespace Coypu
         bool HasCss(string cssSelector, DriverScope scope);
         bool HasXPath(string xpath, DriverScope scope);
         bool HasDialog(string withText);
-        Element FindCss(string cssSelector, DriverScope scope);
-        Element FindXPath(string xpath, DriverScope scope);
-        IEnumerable<Element> FindAllCss(string cssSelector, DriverScope scope);
-        IEnumerable<Element> FindAllXPath(string xpath, DriverScope scope);
+        ElementFound FindCss(string cssSelector, DriverScope scope);
+        ElementFound FindXPath(string xpath, DriverScope scope);
+        IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope);
+        IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope);
         void Check(Element field);
         void Uncheck(Element field);
         void Choose(Element field);
         bool Disposed { get; }
         Uri Location { get; }
-        Element Window { get; }
+        ElementFound Window { get; }
         void AcceptModalDialog();
         void CancelModalDialog();
         string ExecuteScript(string javascript);
-        Element FindFieldset(string locato, DriverScope scoper);
-        Element FindSection(string locator, DriverScope scope);
-        Element FindId(string id, DriverScope scope);
-        Element FindIFrame(string locator, DriverScope scope);
+        ElementFound FindFieldset(string locato, DriverScope scoper);
+        ElementFound FindSection(string locator, DriverScope scope);
+        ElementFound FindId(string id, DriverScope scope);
+        ElementFound FindIFrame(string locator, DriverScope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
     }

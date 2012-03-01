@@ -20,7 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Should_make_direct_call(session.FindAllXPath, driver.StubAllXPath);
         }
 
-        protected void Should_make_direct_call(Func<string, IEnumerable<Element>> subject, Action<string, IEnumerable<Element>> stub)
+        protected void Should_make_direct_call(Func<string, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
