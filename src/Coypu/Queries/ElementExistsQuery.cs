@@ -1,32 +1,21 @@
-using System;
-
 namespace Coypu.Queries
 {
-    internal class ElementExistsQuery : Query<bool>
+    internal class ElementExistsQuery : DriverScopeQuery<bool>
     {
-        private readonly DriverScope driverScope;
-        public bool Result { get; private set; }
-
-        public object ExpectedResult
+        public override object ExpectedResult
         {
             get { return true; }
         }
 
-        protected internal ElementExistsQuery(DriverScope driverScope)
+        protected internal ElementExistsQuery(DriverScope driverScope) : base(driverScope)
         {
-            this.driverScope = driverScope;
         }
 
-        public TimeSpan Timeout
-        {
-            get { return driverScope.Timeout; }
-        }
-
-        public void Run()
+        public override void Run()
         {
             try
             {
-                driverScope.Now();
+                DriverScope.Now();
                 Result = true;
             }
             catch (MissingHtmlException)

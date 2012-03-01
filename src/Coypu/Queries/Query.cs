@@ -8,5 +8,6 @@ namespace Coypu.Queries
         object ExpectedResult { get; }
         TReturn Result { get; }
         TimeSpan Timeout { get; }
+        TimeSpan RetryInterval { get; }
     }
 }

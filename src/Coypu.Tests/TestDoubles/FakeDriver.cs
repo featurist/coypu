@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -42,8 +43,15 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<string> findCssRequests = new List<string>();
         private IList<Cookie> stubbedCookies;
         private Uri stubbedLocation;
-        private TimeSpan lastUsedTimeout;
         private readonly IList<ScopedStubElement> scopedLinks = new List<ScopedStubElement>();
+
+        public FakeDriver() {}
+        public FakeDriver(Browser browser)
+        {
+            Browser = browser;
+        }
+
+        public Browser Browser { get; private set; }
 
         public IEnumerable<Element> ClickedElements
         {
@@ -307,12 +315,6 @@ namespace Coypu.Tests.TestDoubles
         public int ModalDialogsAccepted { get; private set; }
 
         public int ModalDialogsCancelled { get; private set; }
-
-
-        public TimeSpan LastUsedTimeout
-        {
-            get { return lastUsedTimeout; }
-        }
 
         public IList<string> FindCssRequests
         {

@@ -7,13 +7,15 @@ namespace Coypu.Queries
     {
         private readonly DriverAction tryThis;
         private readonly Query<bool> until;
+        public TimeSpan RetryInterval { get; private set; }
 
         public TimeSpan Timeout { get; private set; }
 
-        internal ActionSatisfiesPredicateQuery(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout)
+        internal ActionSatisfiesPredicateQuery(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan retryInterval)
         {
             this.tryThis = tryThis;
             this.until = until;
+            RetryInterval = retryInterval;
             Timeout = overallTimeout;
         }
 

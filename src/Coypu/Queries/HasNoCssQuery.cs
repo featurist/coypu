@@ -1,35 +1,24 @@
-using System;
-
 namespace Coypu.Queries
 {
-    internal class HasNoCssQuery : Query<bool>
+    internal class HasNoCssQuery : DriverScopeQuery<bool>
     {
         private readonly Driver driver;
-        private readonly DriverScope scope;
         private readonly string cssSelector;
 
-        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector)
+        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector) : base(scope)
         {
             this.driver = driver;
-            this.scope = scope;
             this.cssSelector = cssSelector;
         }
 
-        public object ExpectedResult
+        public override object ExpectedResult
         {
             get { return true; }
         }
 
-        public bool Result { get; private set; }
-
-        public TimeSpan Timeout
+        public override void Run()
         {
-            get { return scope.Timeout; }
-        }
-
-        public void Run()
-        {
-            Result = !driver.HasCss(cssSelector, scope);
+            Result = !driver.HasCss(cssSelector, DriverScope);
         }
     }
 }

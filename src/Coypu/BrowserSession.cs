@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
-using Coypu.Predicates;
 using Coypu.Queries;
 using Coypu.Robustness;
 using Coypu.WebRequests;
@@ -13,19 +12,43 @@ namespace Coypu
     /// <summary>
     /// A browser session
     /// </summary>
-    public class Session : Scope<Session>, IDisposable
+    public class BrowserSession : Scope<BrowserSession>, IDisposable
     {
         private readonly Driver driver;
+        private readonly Configuration configuration;
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
         private readonly UrlBuilder urlBuilder;
 
         internal bool WasDisposed { get; private set; }
         private readonly DriverScope driverScope;
 
-        internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
+        /// <summary>
+        /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
+        /// </summary>
+        /// <returns>The new session with default configuration </returns>
+        public BrowserSession() : this(Configuration.Default())
         {
-            driverScope = new DriverScope(new DocumentElementFinder(driver), driver, robustWrapper, waiter, urlBuilder);
-            this.driver = driver;
+        }
+
+        /// <summary>
+        /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
+        /// </summary>
+        /// <param name="configuration">Your configuration for this session</param>
+        /// <returns>The new session</returns>
+        public BrowserSession(Configuration configuration) : this(new ActivatorDriverFactory(),
+                               configuration,
+                               new RetryUntilTimeoutRobustWrapper(),
+                               new ThreadSleepWaiter(),
+                               new WebClientWithCookies(),
+                               new FullyQualifiedUrlBuilder())
+        {
+        }
+
+        internal BrowserSession(DriverFactory driverFactory, Configuration configuration, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
+        {
+            driver = driverFactory.NewWebDriver(configuration.Driver, configuration.Browser);
+            driverScope = new DriverScope(configuration,new DocumentElementFinder(driver), driver, robustWrapper, waiter, urlBuilder);
+            this.configuration = configuration;
             this.restrictedResourceDownloader = restrictedResourceDownloader;
             this.urlBuilder = urlBuilder;
         }
@@ -69,8 +92,8 @@ namespace Coypu
             driver.Dispose();
 
             Console.Write("closed.");
-            Browser.OpenDrivers--;
-            Console.WriteLine(Browser.OpenDrivers + " drivers open.");
+            ActivatorDriverFactory.OpenDrivers--;
+            Console.WriteLine(ActivatorDriverFactory.OpenDrivers + " drivers open.");
 
             WasDisposed = true;
         }
@@ -82,7 +105,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText)
         {
-            return Query(new HasDialogQuery(driver, withText, driverScope.Timeout));
+            return Query(new HasDialogQuery(driver, withText, driverScope));
         }
 
         /// <summary>
@@ -92,7 +115,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText)
         {
-            return Query(new HasNoDialogQuery(driver, withText, timeout: driverScope.Timeout));
+            return Query(new HasNoDialogQuery(driver, withText, driverScope));
         }
 
         /// <summary>
@@ -101,7 +124,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog()
         {
-            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver, DriverScope.Timeout));
+            driverScope.RetryUntilTimeout(new AcceptModalDialog(driver, DriverScope.Timeout,DriverScope.RetryInterval));
         }
 
         /// <summary>
@@ -110,7 +133,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog()
         {
-            driverScope.RetryUntilTimeout(new CancelModalDialog(driver,DriverScope.Timeout));
+            driverScope.RetryUntilTimeout(new CancelModalDialog(driver,DriverScope.Timeout, DriverScope.RetryInterval));
         }
 
         /// <summary>
@@ -122,36 +145,30 @@ namespace Coypu
         public void SaveWebResource(string resource, string saveAs)
         {
             restrictedResourceDownloader.SetCookies(driver.GetBrowserCookies());
-            restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource), saveAs);
+            restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource,configuration), saveAs);
         }
 
-        public Session ClickButton(string locator)
+        public BrowserSession ClickButton(string locator)
         {
             driverScope.ClickButton(locator);
             return this;
         }
 
-        public Session ClickLink(string locator)
+        public BrowserSession ClickLink(string locator)
         {
             driverScope.ClickLink(locator);
             return this;
         }
 
-        public Session ClickButton(string locator, Query<bool> until)
+        public BrowserSession ClickButton(string locator, Query<bool> until)
         {
             driverScope.ClickButton(locator, until);
             return this;
         }
 
-        public Session ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
+        public BrowserSession ClickLink(string locator, Query<bool> until)
         {
-            driverScope.ClickLink(locator, until, waitBetweenRetries);
-            return this;
-        }
-
-        public Session ClickLink(string locator, Query<bool> until, TimeSpan waitBetweenRetries)
-        {
-            driverScope.ClickLink(locator, until, waitBetweenRetries);
+            driverScope.ClickLink(locator, until);
             return this;
         }
 
@@ -159,9 +176,9 @@ namespace Coypu
         /// Visit a url in the browser
         /// </summary>
         /// <param name="virtualPath">Virtual paths will use the Configuration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
-        public Session Visit(string virtualPath)
+        public BrowserSession Visit(string virtualPath)
         {
-            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath));
+            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath,configuration));
             return this;
         }
 
@@ -275,19 +292,19 @@ namespace Coypu
             return driverScope.FindId(id);
         }
 
-        public Session Check(string locator)
+        public BrowserSession Check(string locator)
         {
             driverScope.Check(locator);
             return this;
         }
 
-        public Session Uncheck(string locator)
+        public BrowserSession Uncheck(string locator)
         {
             driverScope.Uncheck(locator);
             return this;
         }
 
-        public Session Choose(string locator)
+        public BrowserSession Choose(string locator)
         {
             driverScope.Choose(locator);
             return this;
@@ -298,7 +315,7 @@ namespace Coypu
             return driverScope.ExecuteScript(javascript);
         }
 
-        public Session Hover(Element element)
+        public BrowserSession Hover(Element element)
         {
             driverScope.Hover(element);
             return this;
@@ -344,9 +361,9 @@ namespace Coypu
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Query<bool> until)
         {
-            driverScope.TryUntil(tryThis, until, waitBeforeRetry);
+            driverScope.TryUntil(tryThis, until);
         }
 
         public State FindState(params State[] states)
@@ -354,19 +371,19 @@ namespace Coypu
             return driverScope.FindState(states);
         }
 
-        public Session ConsideringInvisibleElements()
+        public BrowserSession ConsideringInvisibleElements()
         {
             driverScope.ConsideringInvisibleElements();
             return this;
         }
 
-        public Session ConsideringOnlyVisibleElements()
+        public BrowserSession ConsideringOnlyVisibleElements()
         {
             driverScope.ConsideringOnlyVisibleElements();
             return this;
         }
 
-        public Session WithTimeout(TimeSpan timeout)
+        public BrowserSession WithTimeout(TimeSpan timeout)
         {
             driverScope.WithTimeout(timeout);
             return this;

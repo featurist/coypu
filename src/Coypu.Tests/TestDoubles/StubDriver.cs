@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
     public class StubDriver : Driver
     {
+        public StubDriver() {}
+
+        public StubDriver(Browser browser){}
+
         public void Dispose()
         {
         }

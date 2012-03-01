@@ -4,8 +4,8 @@ namespace Coypu.Actions
 {
     internal class AcceptModalDialog : DriverAction
     {
-        internal AcceptModalDialog(Driver driver, TimeSpan timeout)
-            : base(driver, timeout)
+        internal AcceptModalDialog(Driver driver, TimeSpan timeout, TimeSpan retryInterval)
+            : base(driver, timeout, retryInterval)
         {
         }
 

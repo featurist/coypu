@@ -3,29 +3,21 @@ using System.Text.RegularExpressions;
 
 namespace Coypu.Queries
 {
-    internal class HasNoContentMatchQuery : Query<bool>
+    internal class HasNoContentMatchQuery : DriverScopeQuery<bool>
     {
         private readonly Driver driver;
-        private readonly DriverScope scope;
         private readonly Regex text;
-        public object ExpectedResult { get { return true; } }
-        public bool Result { get; private set; }
+        public override object ExpectedResult { get { return true; } }
 
-        public TimeSpan Timeout
-        {
-            get { return scope.Timeout; }
-        }
-
-        protected internal HasNoContentMatchQuery(Driver driver, DriverScope scope, Regex text)
+        protected internal HasNoContentMatchQuery(Driver driver, DriverScope scope, Regex text) : base(scope)
         {
             this.driver = driver;
-            this.scope = scope;
             this.text = text;
         }
 
-        public void Run()
+        public override void Run()
         {
-            Result = !driver.HasContentMatch(text, scope);
+            Result = !driver.HasContentMatch(text, DriverScope);
         }    
     }
 }

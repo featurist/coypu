@@ -42,8 +42,8 @@ namespace Coypu.Drivers.Selenium
         private readonly OptionSelector optionSelector;
         private readonly XPath xPath;
 
-        public SeleniumWebDriver()
-            : this(new DriverFactory().NewRemoteWebDriver())
+        public SeleniumWebDriver(Browser browser)
+            : this(new DriverFactory().NewRemoteWebDriver(browser))
         {
         }
 
@@ -211,7 +211,10 @@ namespace Coypu.Drivers.Selenium
             {
                 seleniumElement.Clear();
             }
-            catch (InvalidOperationException) // Non user-editable elements (file inputs)
+            catch (InvalidElementStateException) // Non user-editable elements (file inputs) - chrome/IE
+            {
+            }
+            catch(InvalidOperationException)  // Non user-editable elements (file inputs) - firefox
             {
             }
             seleniumElement.SendKeys(value);

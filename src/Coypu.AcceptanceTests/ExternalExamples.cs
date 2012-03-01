@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -9,27 +10,29 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class ExternalExamples
     {
+        private Configuration configuration;
+        private BrowserSession browser;
+
         [SetUp]
-        public void SetUp() 
+        public void SetUp()
         {
-            Configuration.Reset();
+            configuration = Configuration.Default();
+            configuration.AppHost = "www.google.com";
+            configuration.Driver = typeof(SeleniumWebDriver);
 
-            Configuration.AppHost = "www.google.com";
-            Configuration.Driver = typeof(SeleniumWebDriver);
+            configuration.Timeout = TimeSpan.FromSeconds(10);
 
-            Configuration.Timeout = TimeSpan.FromSeconds(10);
+            browser = new BrowserSession(configuration);
         }
         [TearDown]
         public void TearDown()
         {
-            Configuration.Reset();
-            Browser.EndSession();
+            browser.Dispose();
         }
 
         [Test]
         public void Retries_Autotrader()
         {
-            var browser = Browser.Session;
             browser.Visit("http://www.autotrader.co.uk/used-cars");
 
             browser.FillIn("postcode").With("N1 1AA");
@@ -51,7 +54,6 @@ namespace Coypu.AcceptanceTests
         [Test, Explicit]
         public void Visibility_NewTwitterLogin()
         {
-            var browser = Browser.Session;
             browser.Visit("http://www.twitter.com");
 
             browser.FillIn("session[username_or_email]").With("coyputester2");
@@ -62,7 +64,6 @@ namespace Coypu.AcceptanceTests
          Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
         public void FindingStuff_CarBuzz()
         {
-            var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
             Console.WriteLine(browser.Has(browser.FindSection("Make")));
@@ -83,14 +84,14 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HtmlUnitDriver()
         {
-            Configuration.AppHost = "www.google.com";
-            Configuration.Browser = Drivers.Browser.HtmlUnit;
+            configuration.AppHost = "www.google.com";
+            configuration.Browser = Browser.HtmlUnit;
 
             try
             {
-                using (Session browser = Browser.Session)
+                using (var htmlUnit = new BrowserSession(configuration))
                 {
-                    browser.Visit("/");
+                    htmlUnit.Visit("/");
                 }
                 Assert.Fail("Expected an exception attempting to connect to HtmlUnit driver");
             }

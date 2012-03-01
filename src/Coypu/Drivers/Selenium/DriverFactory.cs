@@ -8,9 +8,9 @@ namespace Coypu.Drivers.Selenium
 {
     internal class DriverFactory
     {
-        public RemoteWebDriver NewRemoteWebDriver()
+        public RemoteWebDriver NewRemoteWebDriver(Browser browser)
         {
-            switch (Configuration.Browser)
+            switch (browser)
             {
                 case (Browser.Firefox):
                     return new FirefoxDriver();
@@ -29,7 +29,7 @@ namespace Coypu.Drivers.Selenium
                 case (Browser.HtmlUnitWithJavaScript):
                     return new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript());
                 default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, GetType());
+                    throw new BrowserNotSupportedException(browser, GetType());
             }
         }
     }

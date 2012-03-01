@@ -13,7 +13,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void RobustAction_is_exposed_on_the_session()
         {
             var calledOnWrapper = false;
-            session.RetryUntilTimeout(() =>
+            browserSession.RetryUntilTimeout(() =>
             {
                 calledOnWrapper = true;
             });
@@ -28,7 +28,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             spyRobustWrapper.StubQueryResult(SpyRobustWrapper.NO_EXPECTED_RESULT, "immediate result");
 
-            Assert.That(session.RetryUntilTimeout(function), Is.EqualTo("immediate result"));
+            Assert.That(browserSession.RetryUntilTimeout(function), Is.EqualTo("immediate result"));
 
             var query = spyRobustWrapper.QueriesRan<string>().First();
             query.Run();
@@ -43,9 +43,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var triedUntil = false;
             Action tryThis = () => tried = true;
             Func<bool> until = () => triedUntil = true;
-            var waitBeforeRetry = TimeSpan.FromMilliseconds(1234);
+            var overallTimeout = TimeSpan.FromMilliseconds(1234);
 
-            session.TryUntil(tryThis,until,waitBeforeRetry);
+            browserSession.WithTimeout(overallTimeout)
+                   .TryUntil(tryThis, until, overallTimeout);
 
             var tryUntil = spyRobustWrapper.DeferredTryUntils[0];
 
@@ -54,10 +55,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.That(tried, Is.True);
 
             Assert.That(triedUntil, Is.False);
-            tryUntil.Until.Satisfied();
+            tryUntil.Until.Run();
             Assert.That(triedUntil, Is.True);
 
-            Assert.That(tryUntil.WaitBeforeRetry, Is.EqualTo(waitBeforeRetry));
+            Assert.That(tryUntil.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 
         [Test]
@@ -67,7 +68,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             spyRobustWrapper.StubQueryResult("expected query result", "immediate query result");
 
-            Assert.That(session.Query(query, "expected query result"), Is.EqualTo("immediate query result"));
+            Assert.That(browserSession.Query(query, "expected query result"), Is.EqualTo("immediate query result"));
 
             var robustQuery = spyRobustWrapper.QueriesRan<string>().First();
             robustQuery.Run();

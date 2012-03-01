@@ -15,12 +15,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Id, Is.EqualTo("actual-id"));
+            Assert.That(browserSession.FindId("some-element").Id, Is.EqualTo("actual-id"));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming<ElementFound>();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -31,12 +30,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Text, Is.EqualTo("actual-text"));
+            Assert.That(browserSession.FindId("some-element").Text, Is.EqualTo("actual-text"));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -47,12 +45,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Value, Is.EqualTo("actual-value"));
+            Assert.That(browserSession.FindId("some-element").Value, Is.EqualTo("actual-value"));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -64,12 +61,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element")["href"], Is.EqualTo("http://some.href"));
+            Assert.That(browserSession.FindId("some-element")["href"], Is.EqualTo("http://some.href"));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -80,12 +76,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Name, Is.EqualTo("actual-name"));
+            Assert.That(browserSession.FindId("some-element").Name, Is.EqualTo("actual-name"));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -96,12 +91,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").SelectedOption, Is.EqualTo("actual-selected-option"));
+            Assert.That(browserSession.FindId("some-element").SelectedOption, Is.EqualTo("actual-selected-option"));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -112,12 +106,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Selected, Is.EqualTo(true));
+            Assert.That(browserSession.FindId("some-element").Selected, Is.EqualTo(true));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -128,12 +121,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Selected, Is.EqualTo(false));
-            
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            Assert.That(browserSession.FindId("some-element").Selected, Is.EqualTo(false));
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            RunQueryAndCheckTiming();
+
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
 
         [Test]
@@ -145,12 +137,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(session.FindId("some-element").Native, Is.SameAs(native));
+            Assert.That(browserSession.FindId("some-element").Native, Is.SameAs(native));
 
-            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
-            query.Run();
+            RunQueryAndCheckTiming();
 
-            Assert.That(query.Result, Is.SameAs(stubElement));
+            Assert.That(queryResult, Is.SameAs(stubElement));
         }
     }
 }

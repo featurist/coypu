@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Coypu.Queries;
+using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -11,37 +12,37 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_findable_element_exists()
         {
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(Configuration.Default(),driver,new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement());
 
-            Assert.That(session.FindLink("Sign out").Exists());
+            Assert.That(browserSession.FindLink("Sign out").Exists());
         }
 
         [Test]
         public void It_reports_that_a_missing_element_does_not_exist()
         {
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(Configuration.Default(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement());
 
-            Assert.That(session.FindLink("Sign in").Exists(), Is.EqualTo(false));
+            Assert.That(browserSession.FindLink("Sign in").Exists(), Is.EqualTo(false));
         }
 
         [Test]
         public void It_reports_that_a_missing_element_is_missing()
         {
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(Configuration.Default(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement());
 
-            Assert.That(session.FindLink("Sign in").Missing());
+            Assert.That(browserSession.FindLink("Sign in").Missing());
         }
 
         [Test]
         public void It_reports_that_a_findable_element_is_not_missing()
         {
-            session = new Session(driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(Configuration.Default(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement());
 
-            Assert.That(session.FindLink("Sign out").Missing(), Is.EqualTo(false));
+            Assert.That(browserSession.FindLink("Sign out").Missing(), Is.EqualTo(false));
         }
 
         [Test]
@@ -50,16 +51,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper.StubQueryResult(true,false);
 
             driver.StubLink("Sign out", new StubElement());
-            session.FindLink("Sign in").Exists();
-            session.FindLink("Sign out").Exists();
+            browserSession.FindLink("Sign in").Exists();
+            browserSession.FindLink("Sign out").Exists();
 
-            var firstQuery = (ElementExistsQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
-            var secondQuery = (ElementExistsQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
+            var firstQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
+            var secondQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
 
-            firstQuery.Run();
+            RunQueryAndCheckTiming(firstQuery);
             Assert.That(firstQuery.Result, Is.False);
 
-            secondQuery.Run();
+            RunQueryAndCheckTiming(secondQuery);
             Assert.That(secondQuery.Result, Is.True);
         }
 
@@ -69,16 +70,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper.StubQueryResult(false, false);
 
             driver.StubLink("Sign out", new StubElement());
-            session.FindLink("Sign in").Missing();
-            session.FindLink("Sign out").Missing();
+            browserSession.FindLink("Sign in").Missing();
+            browserSession.FindLink("Sign out").Missing();
 
-            var firstQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
-            var secondQuery = (ElementMissingQuery)spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
+            var firstQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
+            var secondQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
 
-            firstQuery.Run();
+            RunQueryAndCheckTiming(firstQuery);
             Assert.That(firstQuery.Result, Is.True);
 
-            secondQuery.Run();
+            RunQueryAndCheckTiming(secondQuery);
             Assert.That(secondQuery.Result, Is.False);
         }
     }

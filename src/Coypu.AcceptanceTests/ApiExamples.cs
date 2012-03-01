@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Watin;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -16,15 +18,28 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class Examples
     {
-        private Session browser
+        private BrowserSession browser;
+
+        [TestFixtureSetUp]
+        public void SetUpFixture()
         {
-            get { return Browser.Session; }
+            var configuration = Configuration.Default();
+            configuration.Timeout = TimeSpan.FromMilliseconds(2000);
+            configuration.Browser = Browser.Firefox;
+            configuration.Driver = typeof(SeleniumWebDriver);
+            browser = new BrowserSession(configuration);
+
+        }
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            browser.Dispose();
         }
 
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(2000);
             ReloadTestPageWithDelay();
         }
 
@@ -44,12 +59,6 @@ namespace Coypu.AcceptanceTests
         {
             ReloadTestPage();
             ApplyAsyncDelay();
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            Browser.EndSession();
         }
 
         [Test]
@@ -429,14 +438,16 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void CustomProfile()
         {
-            Configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
+            var configuration = Configuration.Default();
+            configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
 
-            Browser.Session.Visit("https://www.relishapp.com/");
+
+            using (new BrowserSession(configuration).Visit("https://www.relishapp.com/")) {}
         }
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver() : base(CustomProfile())
+            public CustomFirefoxProfileSeleniumWebDriver(Browser browser) : base(CustomProfile())
             {
             }
 

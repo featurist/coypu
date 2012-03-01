@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
-using Coypu.Predicates;
 using Coypu.Queries;
 using Coypu.Robustness;
 
@@ -23,17 +22,6 @@ namespace Coypu
         /// <param name="locator">The text of the link</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         TConcrete ClickLink(string locator);
-
-        /// <summary>
-        /// <para>Click a link and wait for a condition to be satisfied for a specified time otherwise click and wait again.</para> 
-        /// <para>Continues until the expected condition is satisfied or the <see cref="Configuration.Timeout"/> is reached.</para>
-        /// </summary>
-        /// <param name="locator">The text of the link</param>
-        /// <param name="until">The condition to be satisfied</param>
-        /// <param name="waitBetweenRetries">How long to wait for the condition to be satisfied before clicking again</param>
-        /// <returns>The first matching button</returns>
-        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries);
 
         /// <summary>
         /// Find the first input of type button|submit|image or div with the css class "button" to appear within the <see cref="Configuration.Timeout"/> .
@@ -333,9 +321,8 @@ namespace Coypu
         /// </summary>
         /// <param name="tryThis">The action to try</param>
         /// <param name="until">The condition to be met</param>
-        /// <param name="waitBeforeRetry">How long to wait for the condition</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry);
+        void TryUntil(DriverAction tryThis, Query<bool> until);
 
         void RetryUntilTimeout(DriverAction driverAction);
         IFrameElementScope FindIFrame(string locator);

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using Coypu.Queries;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -23,16 +21,15 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
             var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
-            session.WithTimeout(individualTimeout);
+            browserSession.WithTimeout(individualTimeout);
 
             var actualImmediateResult = subject(locator);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            var actualQuery = spyRobustWrapper.QueriesRan<bool>().Single();
-            actualQuery.Run();
-            Assert.That(actualQuery.Result, Is.EqualTo(stubResult));
-            Assert.That(actualQuery.Timeout, Is.EqualTo(individualTimeout));
+            RunQueryAndCheckTiming<bool>(individualTimeout);
+
+            Assert.That(queryResult, Is.EqualTo(stubResult));
         }
 
         protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
@@ -44,10 +41,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            var actualQuery = spyRobustWrapper.QueriesRan<bool>().Single();
-            actualQuery.Run();
+            RunQueryAndCheckTiming<bool>();
 
-            Assert.That(actualQuery.Result, Is.EqualTo(!stubResult));
+            Assert.That(queryResult, Is.EqualTo(!stubResult));
         }
     }
 }

@@ -7,11 +7,13 @@ namespace Coypu.Actions
     {
         protected readonly Driver Driver;
         public TimeSpan Timeout { get; private set; }
+        public TimeSpan RetryInterval { get; private set; }
 
-        protected DriverAction(Driver driver, TimeSpan timeout)
+        protected DriverAction(Driver driver, TimeSpan timeout, TimeSpan retryInterval)
         {
             Driver = driver;
             Timeout = timeout;
+            RetryInterval = retryInterval;
         }
 
         public abstract void Act();

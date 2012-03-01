@@ -88,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="sites\site_with_secure_resources.rb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

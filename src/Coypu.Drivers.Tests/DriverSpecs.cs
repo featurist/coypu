@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Tests.Sites;
 using Coypu.Drivers.Watin;
 using Coypu.Finders;
@@ -37,7 +38,7 @@ namespace Coypu.Drivers.Tests
         private static Driver driver;
 
         private const Browser browser = Browser.InternetExplorer;
-        private static readonly Type driverType = typeof (WatiNDriver);
+        private static readonly Type driverType = typeof (SeleniumWebDriver);
 
         [SetUp]
         public void SetUp()
@@ -52,21 +53,20 @@ namespace Coypu.Drivers.Tests
 
         protected static DriverScope Root
         {
-            get { return root ?? (root = new DriverScope(new DocumentElementFinder(Driver), null, null, null, null)); }
+            get { return root ?? (root = new DriverScope(Configuration.Default(), new DocumentElementFinder(Driver), null, null, null, null)); }
         }
 
         private static void EnsureDriver()
         {
             if (driver != null && !driver.Disposed)
             {
-                if (driverType == driver.GetType() && Configuration.Browser == browser)
+                if (driverType == driver.GetType())
                     return;
 
                 driver.Dispose();
             }
 
-            Configuration.Browser = browser;
-            driver = (Driver)Activator.CreateInstance(driverType);
+            driver = (Driver)Activator.CreateInstance(driverType,browser);
             root = null;
         }
 

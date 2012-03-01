@@ -94,11 +94,12 @@
     <Compile Include="Actions\LambdaDriverAction.cs" />
     <Compile Include="Actions\Select.cs" />
     <Compile Include="Actions\Uncheck.cs" />
+    <Compile Include="ActivatorDriverFactory.cs" />
+    <Compile Include="DriverFactory.cs" />
     <Compile Include="Drivers\Selenium\SeleniumSearchContext.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Browser.cs" />
     <Compile Include="CssFinder.cs" />
     <Compile Include="Finders\FieldFinder.cs" />
     <Compile Include="Finders\FieldsetFinder.cs" />
@@ -123,25 +124,25 @@
     <Compile Include="Finders\IFrameFinder.cs" />
     <Compile Include="IFrameElementScope.cs" />
     <Compile Include="Queries\DialogQuery.cs" />
+    <Compile Include="Queries\DriverScopeQuery.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />
     <Compile Include="Queries\ElementQuery.cs" />
     <Compile Include="Queries\HasContentMatchQuery.cs" />
     <Compile Include="Queries\HasContentQuery.cs" />
     <Compile Include="Queries\HasCssQuery.cs" />
+    <Compile Include="Queries\HasDialogQuery.cs" />
     <Compile Include="Queries\HasNoContentMatchQuery.cs" />
     <Compile Include="Queries\HasNoContentQuery.cs" />
     <Compile Include="Queries\HasNoCssQuery.cs" />
     <Compile Include="Queries\HasNoXPathQuery.cs" />
     <Compile Include="Queries\HasXPathQuery.cs" />
     <Compile Include="Queries\LambdaQuery.cs" />
-    <Compile Include="Predicates\LambdaPredicate.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />
     <Compile Include="Finders\ElementFinder.cs" />
     <Compile Include="ElementScope.cs" />
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\Query.cs" />
     <Compile Include="RobustElementScope.cs" />
-    <Compile Include="Predicates\Predicate.cs" />
     <Compile Include="Actions\DriverAction.cs" />
     <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
     <Compile Include="Scope.cs" />
@@ -161,12 +162,12 @@
     <Compile Include="Robustness\StopwatchWaiter.cs" />
     <Compile Include="Robustness\Waiter.cs" />
     <Compile Include="SelectFrom.cs" />
-    <Compile Include="Session.cs" />
+    <Compile Include="BrowserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robustness\RetryUntilTimeoutRobustWrapper.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Finders\StateFinder.cs" />
-    <Compile Include="CurrentConfigurationUrlBuilder.cs" />
+    <Compile Include="FullyQualifiedUrlBuilder.cs" />
     <Compile Include="WebRequests\WebClientWithCookies.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -178,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="Predicates\" />
   </ItemGroup>
   <!--Import Project="..\..\wraps\openwrap\build\OpenWrap.CSharp.targets" /-->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

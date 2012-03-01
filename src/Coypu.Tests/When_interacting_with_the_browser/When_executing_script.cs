@@ -13,7 +13,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             driver.StubExecuteScript(script, expectedReturnValue);
 
-            Assert.That(session.ExecuteScript(script), Is.EqualTo(expectedReturnValue));
+            Assert.That(browserSession.ExecuteScript(script), Is.EqualTo(expectedReturnValue));
         }
     }
 }

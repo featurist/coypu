@@ -1,6 +1,5 @@
 ﻿using System;
 using Coypu.Actions;
-using Coypu.Predicates;
 using Coypu.Queries;
 
 namespace Coypu.Robustness

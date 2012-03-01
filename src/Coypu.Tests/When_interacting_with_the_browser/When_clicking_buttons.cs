@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Actions;
 using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
@@ -14,10 +15,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
 
-            session.ClickButton("Some button locator");
+            browserSession.ClickButton("Some button locator");
 
             AssertButtonNotClickedYet(buttonToBeClicked);
-            ExecuteDeferedRobustAction();
+
+            RunQueryAndCheckTiming();
+
             AssertClicked(buttonToBeClicked);
         }
 
@@ -35,15 +38,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
             var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs + 1000);
             
-            session.WithTimeout(overallTimeout)
+            browserSession.WithTimeout(overallTimeout)
                    .ClickButton("Some button locator",new LambdaQuery<bool>(() => stubUntil, waitBetweenRetries));
 
-            var tryUntilArgs = GetTryUntilArgs();
+            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
 
             AssertButtonNotClickedYet(buttonToBeClicked);
             tryUntilArgs.TryThisDriverAction.Act();
             AssertClicked(buttonToBeClicked);
 
+            tryUntilArgs.Until.Run();
             Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.Until.Timeout, Is.EqualTo(waitBetweenRetries));
             Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
@@ -55,7 +59,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var stubButtonToBeClicked = StubButtonToBeClicked("Some button locator");
             var expectedWait = TimeSpan.FromMilliseconds(waitMs);
-            Configuration.WaitBeforeClick = expectedWait;
+            configuration.WaitBeforeClick = expectedWait;
 
             var waiterCalled = false;
             fakeWaiter.DoOnWait(milliseconds =>
@@ -67,8 +71,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
                 waiterCalled = true;
             });
-            session.ClickButton("Some button locator");
-            ExecuteLastDeferedRobustAction();
+            browserSession.ClickButton("Some button locator");
+            spyRobustWrapper.QueriesRan<object>().Last().Run();
 
             Assert.That(waiterCalled, "The waiter was not called");
             AssertClicked(stubButtonToBeClicked);
@@ -82,21 +86,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         private void AssertButtonNotClickedYet(StubElement buttonToBeClicked)
         {
             Assert.That(driver.ClickedElements, Has.No.Member(buttonToBeClicked));
-        }
-
-        private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
-        {
-            return spyRobustWrapper.DeferredTryUntils.Single();
-        }
-
-        private void ExecuteDeferedRobustAction()
-        {
-            spyRobustWrapper.QueriesRan<object>().Single().Run();
-        }
-
-        private void ExecuteLastDeferedRobustAction()
-        {
-            spyRobustWrapper.QueriesRan<object>().Last().Run();
         }
 
         private StubElement StubButtonToBeClicked(string locator)

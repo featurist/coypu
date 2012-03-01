@@ -11,7 +11,7 @@ namespace Coypu.Robustness
 
         public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overrallTimeout)
         {
-            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis,until,overrallTimeout));
+            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis,until,overrallTimeout,until.RetryInterval));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
@@ -20,9 +20,8 @@ namespace Coypu.Robustness
 
         public TResult Robustly<TResult>(Query<TResult> query)
         {
-            var interval = Configuration.RetryInterval;
+            var interval = query.RetryInterval;
             //var timeout = ZeroTimeout ? TimeSpan.Zero : query.Timeout;
-            //throw new NotImplementedException("Next - Respect RobustWrapper.ZeroTimeout over query.Timeout");
             var timeout = query.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)
@@ -39,8 +38,11 @@ namespace Coypu.Robustness
                     return result;
                 }
                 catch (NotSupportedException) { throw; }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Timeout: " + timeout);
+                    Console.WriteLine("Interval: " + interval);
                     if (TimeoutReached(stopWatch, timeout, interval))
                     {
                         throw;
@@ -63,6 +65,7 @@ namespace Coypu.Robustness
         private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
             var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
+            Console.WriteLine("Elapsed: " + elapsedTimeToNextCall);
             var timeoutReached = elapsedTimeToNextCall >= timeout;
 
             return timeoutReached;

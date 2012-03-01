@@ -9,20 +9,22 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     public class When_trying_an_action_until_a_given_state_is_reached
     {
         private RetryUntilTimeoutRobustWrapper retryUntilTimeoutRobustWrapper;
+        private TimeSpan retryInterval;
+        private TimeSpan timeout;
 
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(200);
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            timeout = TimeSpan.FromMilliseconds(200);
+            retryInterval = TimeSpan.FromMilliseconds(10);
             retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
         }
 
         [Test]
         public void When_state_exists_It_returns_immediately()
         {
-            var toTry = new CountTriesAction();
-            var until = new AlwaysSucceedsQuery<bool>(true,TimeSpan.Zero);
+            var toTry = new CountTriesAction(timeout,retryInterval);
+            var until = new AlwaysSucceedsQuery<bool>(true,TimeSpan.Zero,retryInterval);
             
             retryUntilTimeoutRobustWrapper.TryUntil(toTry, until,TimeSpan.FromMilliseconds(20));
 
@@ -32,8 +34,8 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_state_exists_after_three_tries_It_tries_three_times()
         {
-            var toTry = new CountTriesAction();
-            var until = new ThrowsThenSubsequentlySucceedsQuery<bool>(true,true,3,TimeSpan.FromMilliseconds(1000));
+            var toTry = new CountTriesAction(timeout,retryInterval);
+            var until = new ThrowsThenSubsequentlySucceedsQuery<bool>(true, true, 2, TimeSpan.FromMilliseconds(1000), retryInterval);
 
             retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(100));
 
@@ -43,11 +45,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_state_never_exists_It_fails_after_timeout()
         {
-            var timeout = TimeSpan.FromMilliseconds(200);
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            timeout = TimeSpan.FromMilliseconds(200);
+            retryInterval = TimeSpan.FromMilliseconds(10);
 
-            var toTry = new CountTriesAction();
-            var until = new AlwaysSucceedsQuery<bool>(false,false,TimeSpan.Zero);
+            var toTry = new CountTriesAction(timeout,retryInterval);
+            var until = new AlwaysSucceedsQuery<bool>(false, false, TimeSpan.Zero, retryInterval);
 
             var stopwatch = Stopwatch.StartNew();
             Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout));
@@ -55,22 +57,22 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             stopwatch.Stop();
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
 
-            Assert.That(elapsedMilliseconds, Is.InRange(Configuration.Timeout.TotalMilliseconds - (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
-                                                        Configuration.Timeout.TotalMilliseconds + (Configuration.RetryInterval.Milliseconds + When_waiting.AccuracyMilliseconds)));
+            Assert.That(elapsedMilliseconds, Is.InRange(timeout.TotalMilliseconds - (retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
+                                                        timeout.TotalMilliseconds + (retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds)));
         }
 
 
         [Test]
         public void It_applies_the_retryAfter_timeout_within_until()
         {
-            var timeout = TimeSpan.FromMilliseconds(200);
-            Configuration.RetryInterval = TimeSpan.FromMilliseconds(10);
+            timeout = TimeSpan.FromMilliseconds(200);
+            retryInterval = TimeSpan.FromMilliseconds(10);
             
-            var toTry = new CountTriesAction();
+            var toTry = new CountTriesAction(timeout,retryInterval);
             var retryAfter = TimeSpan.FromMilliseconds(20);
-            var until = new AlwaysThrowsQuery<bool,TestException>(retryAfter);
+            var until = new AlwaysThrowsQuery<bool, TestException>(timeout, retryAfter);
 
-            Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until,timeout));
+            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout));
 
             Assert.That(toTry.Tries, Is.GreaterThan(1));
             Assert.That(toTry.Tries, Is.LessThan(12));

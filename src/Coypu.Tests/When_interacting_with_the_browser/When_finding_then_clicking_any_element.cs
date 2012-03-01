@@ -15,13 +15,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             driver.StubCss("something.to click", element);
             spyRobustWrapper.AlwaysReturnFromRobustly(element);
 
-            var elementScope = session.FindCss("something.to click");
+            var elementScope = browserSession.FindCss("something.to click");
 
             Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
 
             elementScope.Click();
 
-            spyRobustWrapper.QueriesRan<ElementFound>().Single().Run();
+            RunQueryAndCheckTiming();
+
             Assert.That(driver.FindCssRequests.Single(), Is.EqualTo("something.to click"));
 
             Assert.That(driver.ClickedElements, Has.Member(element));

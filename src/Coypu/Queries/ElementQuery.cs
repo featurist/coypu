@@ -1,29 +1,19 @@
-using System;
-
 namespace Coypu.Queries
 {
-    internal class ElementQuery : Query<ElementFound>
+    internal class ElementQuery : DriverScopeQuery<ElementFound>
     {
-        private readonly DriverScope driverScope;
-
-
-        public ElementQuery(DriverScope driverScope)
+        public ElementQuery(DriverScope driverScope) : base(driverScope)
         {
-            this.driverScope = driverScope;
-            Timeout = driverScope.Timeout;
         }
 
-        public ElementFound Result { get; set; }
-        public TimeSpan Timeout { get; set; }
-
-        public object ExpectedResult
+        public override object ExpectedResult
         {
             get { return null; }
         }
 
-        public void Run()
+        public override void Run()
         {
-            Result = driverScope.Now();
+            Result = DriverScope.Now();
         }
     }
 }

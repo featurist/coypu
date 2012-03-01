@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Coypu.Tests.TestDoubles;
+﻿using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -14,11 +12,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some field locator", element);
 
-            session.FillIn("Some field locator").With("some value for the field");
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.SetFields, Has.No.Member(element));
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SetFields.Keys, Has.Member(element));
             Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
@@ -30,11 +28,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some field locator", element);
 
-            session.FillIn("Some field locator").With("some value for the field");
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.ClickedElements,Is.Empty);
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.ClickedElements, Has.Member(element));
         }
@@ -45,11 +43,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             element.StubAttribute("type", "file");
             driver.StubField("Some field locator", element);
 
-            session.FillIn("Some field locator").With("some value for the field");
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
-            Assert.That(driver.ClickedElements, Is.Empty);
-
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.ClickedElements, Has.No.Member(element));
         }
@@ -59,11 +55,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var element = new StubElement();
 
-            session.FillIn(element).With("some value for the field");
+            browserSession.FillIn(element).With("some value for the field");
 
             Assert.That(driver.SetFields, Has.No.Member(element));
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SetFields.Keys, Has.Member(element));
             Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
@@ -75,11 +71,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some select field locator", element);
 
-            session.Select("some option to select").From("Some select field locator");
+            browserSession.Select("some option to select").From("Some select field locator");
 
             Assert.That(driver.SelectedOptions, Has.No.Member(element));
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SelectedOptions.Keys, Has.Member(element));
             Assert.That(driver.SelectedOptions[element], Is.EqualTo("some option to select"));
@@ -91,11 +87,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some checkbox locator", element);
 
-            session.Check("Some checkbox locator");
+            browserSession.Check("Some checkbox locator");
 
             Assert.That(driver.CheckedElements, Has.No.Member(element));
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.CheckedElements, Has.Member(element));
         }
@@ -106,11 +102,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some checkbox locator", element);
 
-            session.Uncheck("Some checkbox locator");
+            browserSession.Uncheck("Some checkbox locator");
 
             Assert.That(driver.UncheckedElements, Has.No.Member(element));
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.UncheckedElements, Has.Member(element));
         }
@@ -121,13 +117,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some radio locator", element);
 
-            session.Choose("Some radio locator");
+            browserSession.Choose("Some radio locator");
 
             Assert.That(driver.ChosenElements, Has.No.Member(element));
 
-            spyRobustWrapper.QueriesRan<Object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.ChosenElements, Has.Member(element));
         }
+
     }
 }

@@ -5,7 +5,8 @@ namespace Coypu.Actions
         private readonly DriverScope scope;
         private readonly string locator;
 
-        internal Uncheck(Driver driver, DriverScope scope, string locator) : base(driver,scope.Timeout)
+        internal Uncheck(Driver driver, DriverScope scope, string locator) 
+            : base(driver,scope.Timeout,scope.RetryInterval)
         {
             this.scope = scope;
             this.locator = locator;

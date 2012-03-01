@@ -8,16 +8,28 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class States
     {
+        private Configuration configuration;
+        private BrowserSession browser;
+
+        [TestFixtureSetUp]
+        public void SetUpFixture()
+        {
+            configuration = Configuration.Default();
+            configuration.Timeout = TimeSpan.FromMilliseconds(1000);
+            browser = new BrowserSession(configuration);
+        }
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            browser.Dispose();
+        }
+
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
+            
             ReloadTestPage();
-        }
-
-        private Session browser
-        {
-            get { return Browser.Session; }
         }
 
         private void ShowStateAsync(string id, int delayMilliseconds)
@@ -30,12 +42,6 @@ namespace Coypu.AcceptanceTests
         private void ReloadTestPage()
         {
             browser.Visit("file:///" + new FileInfo(@"html\states.htm").FullName.Replace("\\", "/"));
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            Browser.EndSession();
         }
 
         [Test]

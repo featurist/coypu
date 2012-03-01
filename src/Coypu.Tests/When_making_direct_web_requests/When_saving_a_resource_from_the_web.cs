@@ -14,9 +14,10 @@ namespace Coypu.Tests.When_making_direct_web_requests
     public class When_saving_a_resource_from_the_web
     {
         private StubUrlBuilder stubUrlBuilder;
-        private Session session;
+        private BrowserSession browserSession;
         private SpyRestrictedResourceDownloader _stubRestrictedResourceDownloader;
         private FakeDriver driver;
+        private Configuration configuration;
 
         [SetUp]
         public void SetUp()
@@ -25,7 +26,8 @@ namespace Coypu.Tests.When_making_direct_web_requests
             _stubRestrictedResourceDownloader = new SpyRestrictedResourceDownloader();
 
             driver = new FakeDriver();
-            session = TestSessionBuilder.Build(driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
+            configuration = Configuration.Default();
+            browserSession = TestSessionBuilder.Build(configuration, driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
         }
 
         [Test]
@@ -33,7 +35,7 @@ namespace Coypu.Tests.When_making_direct_web_requests
         {
             StubResourceUrl("/resources/someresource", "http://built.by/url_builder", stubUrlBuilder);
 
-            session.SaveWebResource("/resources/someresource", @"T:\saveme\here.please");
+            browserSession.SaveWebResource("/resources/someresource", @"T:\saveme\here.please");
 
             var downloadedFile = _stubRestrictedResourceDownloader.DownloadedFiles.Single();
 
@@ -49,7 +51,7 @@ namespace Coypu.Tests.When_making_direct_web_requests
 
             driver.StubCookies(cookies);
 
-            session.SaveWebResource("/resources/someresource", @"T:\saveme\here.please");
+            browserSession.SaveWebResource("/resources/someresource", @"T:\saveme\here.please");
 
             var downloadedFile = _stubRestrictedResourceDownloader.DownloadedFiles.Single();
 

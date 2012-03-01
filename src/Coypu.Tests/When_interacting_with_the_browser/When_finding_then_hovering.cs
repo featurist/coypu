@@ -14,11 +14,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             driver.StubCss("something.to hover", element);
             spyRobustWrapper.AlwaysReturnFromRobustly(element);
 
-            session.FindCss("something.to hover").Hover();
+            browserSession.FindCss("something.to hover").Hover();
 
             Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
 
-            spyRobustWrapper.QueriesRan<object>().Single().Run();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.FindCssRequests.Single(), Is.EqualTo("something.to hover"));
             Assert.That(driver.HoveredElements, Has.Member(element));

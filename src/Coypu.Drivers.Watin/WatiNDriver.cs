@@ -23,10 +23,10 @@ namespace Coypu.Drivers.Watin
             ElementFactory.RegisterElementType(typeof(Section));
         }
 
-        public WatiNDriver()
+        public WatiNDriver(Browser browser)
         {
-            if (Configuration.Browser != Browser.InternetExplorer)
-                throw new BrowserNotSupportedException(Configuration.Browser, GetType());
+            if (browser != Browser.InternetExplorer)
+                throw new BrowserNotSupportedException(browser, GetType());
 
             Settings.AutoMoveMousePointerToTopLeft = false;
 

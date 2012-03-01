@@ -11,13 +11,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindAllCss_should_make_direct_call_to_underlying_driver()
         {
-            Should_make_direct_call(session.FindAllCss, driver.StubAllCss);
+            Should_make_direct_call(browserSession.FindAllCss, driver.StubAllCss);
         }
 
         [Test]
         public void FindAllXPath_should_make_direct_call_to_underlying_driver()
         {
-            Should_make_direct_call(session.FindAllXPath, driver.StubAllXPath);
+            Should_make_direct_call(browserSession.FindAllXPath, driver.StubAllXPath);
         }
 
         protected void Should_make_direct_call(Func<string, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>> stub)

@@ -1,30 +1,21 @@
-using System;
-
 namespace Coypu.Queries
 {
-    internal class HasNoXPathQuery : Query<bool>
+    internal class HasNoXPathQuery : DriverScopeQuery<bool>
     {
         private readonly Driver driver;
-        private readonly DriverScope scope;
         private readonly string xpath;
-        public object ExpectedResult { get { return true; } }
-        public bool Result { get; private set; }
+        public override object ExpectedResult { get { return true; } }
 
-        public TimeSpan Timeout
-        {
-            get { return scope.Timeout; }
-        }
 
-        protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath)
+        protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath) : base(scope)
         {
             this.driver = driver;
-            this.scope = scope;
             this.xpath = xpath;
         }
 
-        public void Run()
+        public override void Run()
         {
-            Result = !driver.HasXPath(xpath, scope);
+            Result = !driver.HasXPath(xpath, DriverScope);
         }
     }
 }

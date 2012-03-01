@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
-using Coypu.Predicates;
 using Coypu.Queries;
 using Coypu.Robustness;
 
@@ -97,12 +96,6 @@ namespace Coypu
         public ElementScope ClickLink(string locator)
         {
             DriverScope.ClickLink(locator);
-            return this;
-        }
-
-        public ElementScope ClickLink(string locator, Func<bool> until, TimeSpan waitBetweenRetries)
-        {
-            DriverScope.ClickLink(locator, until, waitBetweenRetries);
             return this;
         }
 
@@ -274,9 +267,9 @@ namespace Coypu
             DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Query<bool> until)
         {
-            DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
+            DriverScope.TryUntil(tryThis, until);
         }
 
         public State FindState(params State[] states)
