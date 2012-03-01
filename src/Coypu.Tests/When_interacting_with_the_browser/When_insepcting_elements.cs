@@ -56,6 +56,23 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void It_finds_element_robustly_and_returns_attributes()
+        {
+            var stubElement = new StubElement();
+            stubElement.StubAttribute("href","http://some.href");
+            driver.StubId("some-element", stubElement);
+
+            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
+
+            Assert.That(session.FindId("some-element")["href"], Is.EqualTo("http://some.href"));
+
+            var query = spyRobustWrapper.QueriesRan<ElementFound>().Single();
+            query.Run();
+
+            Assert.That(query.Result, Is.SameAs(stubElement));
+        }
+
+        [Test]
         public void It_finds_element_robustly_and_returns_name()
         {
             var stubElement = new StubElement { Name = "actual-name" };

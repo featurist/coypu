@@ -62,10 +62,7 @@ namespace Coypu
 
         public string this[string attributeName]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return Now()[attributeName]; }
         }
 
         public virtual ElementFound Now()
