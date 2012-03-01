@@ -309,8 +309,7 @@ namespace Coypu.Drivers.Selenium
 
             AcceptAnyAlert();
 
-            selenium.Close();
-            selenium.Dispose();
+            selenium.Quit();
             selenium = null;
             Disposed = true;
         }
