@@ -21,7 +21,6 @@ namespace Coypu
 
         internal bool WasDisposed { get; private set; }
         private readonly DriverScope driverScope;
-        private readonly TemporaryTimeouts temporaryTimeouts;
 
         internal Session(Driver driver, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
@@ -29,7 +28,6 @@ namespace Coypu
             this.driver = driver;
             this.restrictedResourceDownloader = restrictedResourceDownloader;
             this.urlBuilder = urlBuilder;
-            temporaryTimeouts = new TemporaryTimeouts();
         }
 
         internal DriverScope DriverScope
@@ -106,42 +104,6 @@ namespace Coypu
         public void CancelModalDialog()
         {
             driverScope.RetryUntilTimeout(new CancelModalDialog(driver,DriverScope.Timeout));
-        }
-
-        /// <summary>
-        /// <para>Use an <param name="individualTimeout" /> for everything you do within an <param name="action" /> - temporarilly overriding the <see cref="Configuration.Timeout"/></para>
-        /// <para>For when you need an unusually long (or short) timeout for a particular interaction.</para>
-        /// <para>E.g.:
-        /// <code>
-        ///   session.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
-        ///   session.Click("Upload");
-        ///   session.WithTimeout(Timespan.FromSeconds(60), () => session.ClickButton("Delete bigfile.mp4"));
-        ///      </code>
-        /// </para>
-        /// </summary>
-        public void WithTimeout(TimeSpan individualTimeout, Action action)
-        {
-            temporaryTimeouts.WithIndividualTimeout<object>(individualTimeout, () =>
-                                                                                   {
-                                                                                       action();
-                                                                                       return null;
-                                                                                   });
-        }
-
-        /// <summary>
-        /// <para>Use an <param name="individualTimeout" /> for everything you do within a <param name="function" /> - temporarilly overriding the <see cref="Configuration.Timeout"/></para>
-        /// <para>For when you need an unusually long (or short) timeout for a particular interaction.</para>
-        /// <para>E.g.:
-        /// <code>
-        ///   session.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
-        ///   session.Click("Upload");
-        ///   bool uploaded = session.WithTimeout(Timespan.FromSeconds(60), () => session.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
-        ///      </code>
-        /// </para>
-        /// </summary>
-        public T WithTimeout<T>(TimeSpan individualTimeout, Func<T> function)
-        {
-            return temporaryTimeouts.WithIndividualTimeout(individualTimeout, function);
         }
 
         /// <summary>

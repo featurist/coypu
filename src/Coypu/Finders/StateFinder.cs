@@ -8,17 +8,26 @@ namespace Coypu.Finders
     internal class StateFinder
     {
         private readonly RobustWrapper robustWrapper;
-        private readonly TemporaryTimeouts temporaryTimeouts;
 
-        public StateFinder(RobustWrapper robustWrapper, TemporaryTimeouts temporaryTimeouts)
+        public StateFinder(RobustWrapper robustWrapper)
         {
             this.robustWrapper = robustWrapper;
-            this.temporaryTimeouts = temporaryTimeouts;
         }
 
         internal State FindState(params State[] states)
         {
-            var query = new LambdaQuery<bool>(() => temporaryTimeouts.WithIndividualTimeout(TimeSpan.Zero, () => states.Any(s => s.CheckCondition())),true);
+            var query = new LambdaQuery<bool>(() => {
+                                                        var defaultTimeout = Configuration.Timeout;
+                                                        Configuration.Timeout = TimeSpan.Zero;
+                                                        try
+                                                        {
+                                                            return ((Func<bool>)(() => states.Any(s => s.CheckCondition())))();
+                                                        }
+                                                        finally
+                                                        {
+                                                            Configuration.Timeout = defaultTimeout;
+                                                        }
+            },true);
             var foundState = robustWrapper.Robustly(query);
             
             if (!foundState)

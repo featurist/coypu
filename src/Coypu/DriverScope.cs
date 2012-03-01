@@ -19,8 +19,6 @@ namespace Coypu
 
         internal StateFinder stateFinder;
 
-        internal TemporaryTimeouts temporaryTimeouts;
-
         private bool consideringInvisibleElements;
 
         private TimeSpan timeout;
@@ -42,8 +40,7 @@ namespace Coypu
             this.robustWrapper = robustWrapper;
             this.waiter = waiter;
             this.urlBuilder = urlBuilder;
-            temporaryTimeouts = new TemporaryTimeouts();
-            stateFinder = new StateFinder(robustWrapper, temporaryTimeouts);
+            stateFinder = new StateFinder(robustWrapper);
             this.timeout = Configuration.Timeout;
         }
 
@@ -53,7 +50,6 @@ namespace Coypu
             driver = outer.driver;
             robustWrapper = outer.robustWrapper;
             urlBuilder = outer.urlBuilder;
-            temporaryTimeouts = outer.temporaryTimeouts;
             stateFinder = outer.stateFinder;
             timeout = outer.Timeout;
         }

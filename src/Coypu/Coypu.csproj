@@ -165,7 +165,6 @@
     <Compile Include="Robustness\RetryUntilTimeoutRobustWrapper.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Finders\StateFinder.cs" />
-    <Compile Include="TemporaryTimeouts.cs" />
     <Compile Include="CurrentConfigurationUrlBuilder.cs" />
     <Compile Include="WebRequests\WebClientWithCookies.cs">
       <SubType>Component</SubType>

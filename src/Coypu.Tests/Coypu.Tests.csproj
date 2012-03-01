@@ -95,7 +95,6 @@
     <Compile Include="When_making_browser_interactions_robust\When_retrying_until_a_timeout.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_trying_an_action_until_a_given_state_is_reached.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_waiting.cs" />
-    <Compile Include="When_making_browser_interactions_robust\With_individual_timeout.cs" />
     <Compile Include="When_making_direct_web_requests\When_saving_a_resource_from_the_web.cs">
       <SubType>Component</SubType>
     </Compile>
