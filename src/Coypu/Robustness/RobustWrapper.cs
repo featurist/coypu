@@ -9,5 +9,6 @@ namespace Coypu.Robustness
     {
         T Robustly<T>(Query<T> query);
         void TryUntil(DriverAction tryThis, Predicate until, TimeSpan waitBeforeRetry, TimeSpan overallTimeout);
+        bool ZeroTimeout { get; set; }
     }
 }

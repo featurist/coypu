@@ -49,6 +49,8 @@ namespace Coypu.Tests.TestDoubles
             DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry, overallTimeout));
         }
 
+        public bool ZeroTimeout { get; set; }
+
         public void AlwaysReturnFromRobustly(object result)
         {
             alwaysReturn = result;

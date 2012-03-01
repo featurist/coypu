@@ -17,9 +17,13 @@ namespace Coypu.Robustness
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
+        public bool ZeroTimeout { get; set; }
+
         public TResult Robustly<TResult>(Query<TResult> query)
         {
             var interval = Configuration.RetryInterval;
+            //var timeout = ZeroTimeout ? TimeSpan.Zero : query.Timeout;
+            throw new NotImplementedException("Next - Respect RobustWrapper.ZeroTimeout over query.Timeout");
             var timeout = query.Timeout;
             var stopWatch = Stopwatch.StartNew();
             while (true)

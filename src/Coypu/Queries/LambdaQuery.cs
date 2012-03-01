@@ -10,6 +10,11 @@ namespace Coypu.Queries
         public object ExpectedResult { get; private set; }
         public T Result { get; private set; }
 
+        public LambdaQuery(Func<T> query)
+        {
+            _query = query;
+        }
+
         public LambdaQuery(Func<T> query, TimeSpan timeout)
         {
             Timeout = timeout;
