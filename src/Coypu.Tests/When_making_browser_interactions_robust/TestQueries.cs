@@ -125,13 +125,15 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         private readonly T actualResult;
         private readonly T expectedResult;
         private readonly int throwsHowManyTimes;
+        private readonly TimeSpan _timeout;
 
-        public ThrowsThenSubsequentlySucceedsQuery(T actualResult, T expectedResult, int throwsHowManyTimes)
+        public ThrowsThenSubsequentlySucceedsQuery(T actualResult, T expectedResult, int throwsHowManyTimes, TimeSpan timeout)
         {
             stopWatch.Start();
             this.actualResult = actualResult;
             this.expectedResult = expectedResult;
             this.throwsHowManyTimes = throwsHowManyTimes;
+            _timeout = timeout;
         }
 
         public void Run()
@@ -161,7 +163,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public TimeSpan Timeout
         {
-            get { return TimeSpan.Zero; }
+            get { return _timeout; }
         }
 
     }

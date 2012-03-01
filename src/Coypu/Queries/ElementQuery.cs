@@ -1,16 +1,16 @@
 using System;
-using Coypu.Finders;
 
 namespace Coypu.Queries
 {
     internal class ElementQuery : Query<Element>
     {
-        private readonly ElementFinder elementFinder;
+        private readonly DriverScope driverScope;
 
-        public ElementQuery(ElementFinder elementFinder, TimeSpan timeout)
+
+        public ElementQuery(DriverScope driverScope)
         {
-            Timeout = timeout;
-            this.elementFinder = elementFinder;
+            this.driverScope = driverScope;
+            Timeout = driverScope.Timeout;
         }
 
         public Element Result { get; set; }
@@ -23,7 +23,7 @@ namespace Coypu.Queries
 
         public void Run()
         {
-            Result = elementFinder.Find();
+            Result = driverScope.Now();
         }
     }
 }

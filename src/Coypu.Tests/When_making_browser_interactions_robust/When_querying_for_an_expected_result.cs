@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var unexpectedResult = new object();
 
-            var query = new AlwaysSucceedsQuery<object>(unexpectedResult, expectedResult, TimeSpan.FromMilliseconds(200));
+            var query = new AlwaysSucceedsQuery<object>(unexpectedResult, expectedResult, expectedTimeout);
             
             var actualResult = retryUntilTimeoutRobustWrapper.Robustly(query);
 
@@ -58,7 +58,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             const int throwsHowManyTimes = 2;
             var expectedResult = new object();
-            var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes);
+            var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes, TimeSpan.FromMilliseconds(100));
 
             Assert.That(retryUntilTimeoutRobustWrapper.Robustly(query), Is.EqualTo(expectedResult));
             Assert.That(query.Tries, Is.EqualTo(throwsHowManyTimes + 1));
@@ -84,12 +84,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var unexpectedResult = new object();
 
-            var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2);
+            var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2, expectedTimeout);
 
             Assert.That(retryUntilTimeoutRobustWrapper.Robustly(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
             Assert.That(throwsTwiceTimesThenReturnOppositeResult.Tries, Is.GreaterThanOrEqualTo(3));
             Assert.That(throwsTwiceTimesThenReturnOppositeResult.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryInterval,
-                                                                                      expectedTimeout.Milliseconds));
+                                                                                      expectedTimeout.Milliseconds + retryInterval));
         }
     }
 }

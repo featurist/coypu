@@ -1,15 +1,38 @@
+using System;
+
 namespace Coypu.Queries
 {
-    internal class ElementMissingQuery : ElementPresenceQuery
+    internal class ElementMissingQuery : Query<bool>
     {
-        public ElementMissingQuery(DriverScope driverScope)
-            : base(driverScope)
+        private readonly DriverScope driverScope;
+        public bool Result { get; private set; }
+
+        public object ExpectedResult
         {
+            get { return true; }
         }
 
-        public override object ExpectedResult
+        protected internal ElementMissingQuery(DriverScope driverScope)
         {
-            get { return false; }
+            this.driverScope = driverScope;
+        }
+
+        public TimeSpan Timeout
+        {
+            get { return driverScope.Timeout; }
+        }
+
+        public void Run()
+        {
+            try
+            {
+                driverScope.Now();
+                Result = false;
+            }
+            catch (MissingHtmlException)
+            {
+                Result = true;
+            }
         }
     }
 }
