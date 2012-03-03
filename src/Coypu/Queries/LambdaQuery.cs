@@ -23,10 +23,11 @@ namespace Coypu.Queries
             _query = query;
         }
 
-        public LambdaQuery(Func<T> query, object expectedResult)
+        public LambdaQuery(Func<T> query, object expectedResult, TimeSpan timeout)
         {
             _query = query;
             ExpectedResult = expectedResult;
+            Timeout = timeout;
         }
 
         public void Run()

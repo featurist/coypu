@@ -506,7 +506,7 @@ namespace Coypu
         /// <param name="expecting">Expected result</param>
         public T Query<T>(Func<T> query, T expecting)
         {
-            return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting));
+            return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting, Timeout));
         }
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace Coypu
         /// <returns></returns>
         public State FindState(params State[] states)
         {
-            return stateFinder.FindState(states);
+            return stateFinder.FindState(Timeout,states);
         }
 
         public DriverScope ConsideringInvisibleElements()

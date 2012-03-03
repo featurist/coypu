@@ -49,9 +49,9 @@ namespace Coypu.AcceptanceTests
         {
             ShowStateAsync("state1", 500);
 
-            var state1 = new State(new LambdaQuery<bool>(() => browser.HasContent("State one reached"),true));
-            var state2 = new State(new LambdaQuery<bool>(() => browser.HasContent("State two reached"),true));
-            var state3 = new State(new LambdaQuery<bool>(() => browser.HasContent("State three reached"),true));
+            var state1 = new State(() => browser.HasContent("State one reached"));
+            var state2 = new State(() => browser.HasContent("State two reached"));
+            var state3 = new State(() => browser.HasContent("State three reached"));
 
             State foundState = browser.FindState(state1, state2, state3);
 

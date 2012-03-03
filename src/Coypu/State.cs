@@ -1,4 +1,5 @@
-﻿using Coypu.Queries;
+﻿using System;
+using Coypu.Queries;
 
 namespace Coypu
 {
@@ -13,9 +14,18 @@ namespace Coypu
         /// Describe a possible state for the page with a condition to identify this state.
         ///</summary>
         ///<param name="condition">How to identify this state</param>
-        public State(Query<bool> condition) 
+        public State(Query<bool> condition)
         {
             this.condition = condition;
+        }
+
+        ///<summary>
+        /// Describe a possible state for the page with a condition to identify this state.
+        ///</summary>
+        ///<param name="condition">How to identify this state</param>
+        public State(Func<bool> condition)
+        {
+            this.condition = new LambdaQuery<bool>(condition,true, TimeSpan.Zero);
         }
 
         internal bool ConditionWasMet { get; private set; }

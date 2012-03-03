@@ -2,10 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Coypu.Actions;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
-using Coypu.Drivers.Watin;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -25,7 +23,7 @@ namespace Coypu.AcceptanceTests
         public void SetUpFixture()
         {
             var configuration = Configuration.Default();
-            configuration.Timeout = TimeSpan.FromMilliseconds(20000);
+            configuration.Timeout = TimeSpan.FromMilliseconds(2000);
             configuration.Browser = Browser.Firefox;
             configuration.Driver = typeof(SeleniumWebDriver);
             browser = new BrowserSession(configuration);
@@ -383,7 +381,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void TryUntil_example()
         {
-            browser.TryUntil(() => browser.ClickButton("try this"),
+            browser.WithTimeout(TimeSpan.FromMilliseconds(5000)).TryUntil(() => browser.ClickButton("try this"),
                              () => browser.HasContent("try until 5"),
                              TimeSpan.FromMilliseconds(50));
         }
@@ -451,7 +449,10 @@ namespace Coypu.AcceptanceTests
             configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
 
 
-            using (new BrowserSession(configuration).Visit("https://www.relishapp.com/")) {}
+            using (var browser = new BrowserSession(configuration))
+            {
+                browser.Visit("https://www.relishapp.com/");
+            }
         }
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
