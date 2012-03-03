@@ -264,12 +264,12 @@ namespace Coypu
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
         {
-            DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
+            DriverScope.TryUntil(tryThis, until,waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until)
+        public void TryUntil(DriverAction tryThis, Query<bool> until,TimeSpan waitBeforeRetry)
         {
-            DriverScope.TryUntil(tryThis, until);
+            DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
         public State FindState(params State[] states)

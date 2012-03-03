@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Coypu.Actions;
 using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
@@ -39,7 +38,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs + 1000);
             
             browserSession.WithTimeout(overallTimeout)
-                   .ClickButton("Some button locator",new LambdaQuery<bool>(() => stubUntil, waitBetweenRetries));
+                   .ClickButton("Some button locator", new LambdaQuery<bool>(() => stubUntil), waitBetweenRetries);
 
             var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
 
@@ -49,7 +48,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             tryUntilArgs.Until.Run();
             Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.Until.Timeout, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
             Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 

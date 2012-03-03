@@ -286,7 +286,6 @@ namespace Coypu
         /// </summary>
         /// <param name="tryThis">The action to try</param>
         /// <param name="until">The condition to be met</param>
-        /// <param name="waitBeforeRetry">How long to wait for the condition</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry);
 
@@ -316,13 +315,14 @@ namespace Coypu
 
         /// <summary>
         /// <para>Execute an action repeatedly until a condition is met.</para>
-        /// <para>Allows the time specified in <paramref name="waitBeforeRetry"/> for the <paramref name="until"/> predicate to be met before each retry.</para>
+        /// <para>Allows the time specified in <paramref name="waitBeforeRetry"/> for the <paramref name="until"/> query to return the expected value before each retry.</para>
         /// <para>Once the <see cref="Configuration.Timeout"/> is passed a Coypu.MissingHtmlException will be thrown.</para>
         /// </summary>
         /// <param name="tryThis">The action to try</param>
         /// <param name="until">The condition to be met</param>
+        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        void TryUntil(DriverAction tryThis, Query<bool> until);
+        void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry);
 
         void RetryUntilTimeout(DriverAction driverAction);
         IFrameElementScope FindIFrame(string locator);

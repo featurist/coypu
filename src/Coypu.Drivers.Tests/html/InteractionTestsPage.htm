@@ -296,9 +296,14 @@
   <iframe src="iFrame1.htm" id="iframe1" title="iframe one title"></iframe>
   <iframe src="iFrame2.htm" id="iframe2" title="iframe two title"></iframe>
 
-  <section>
-    <h2>Hovering</h2>
-    <span id="hoverOnMeTest" onmouseover="this.innerHTML += ' - hovered'; return false;">Hover on me</span>
-  </section>
+    <section>
+        <h2>Hovering</h2>
+        <span id="hoverOnMeTest" onmouseover="this.innerHTML += ' - hovered'; return false;">Hover on me</span>
+    </section>
+    <script>
+        window.tryThisCount = 0;
+    </script>
+    <button onclick="window.tryThisCount ++; document.getElementById('tries').innerHTML += ' try until ' + window.tryThisCount;">try this</button>
+    <span id="tries"></span>
 </body>
 </html>

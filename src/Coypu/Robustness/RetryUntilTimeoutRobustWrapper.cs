@@ -8,21 +8,42 @@ namespace Coypu.Robustness
 {
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
-
-        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overrallTimeout)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
         {
-            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis,until,overrallTimeout,until.RetryInterval));
+            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
         public bool ZeroTimeout { get; set; }
+        private TimeSpan? overrideTimeout;
+
+        public void SetOverrideTimeout(TimeSpan timeout)
+        {
+            overrideTimeout = timeout;
+        }
+
+        public void ClearOverrideTimeout()
+        {
+            overrideTimeout = null;
+        }
 
         public TResult Robustly<TResult>(Query<TResult> query)
         {
             var interval = query.RetryInterval;
-            //var timeout = ZeroTimeout ? TimeSpan.Zero : query.Timeout;
-            var timeout = query.Timeout;
+            TimeSpan timeout;
+            if (ZeroTimeout)
+            {
+                timeout = TimeSpan.Zero;
+            }
+            else if (overrideTimeout.HasValue)
+            {
+                timeout = overrideTimeout.Value;
+            }
+            else {
+                timeout = query.Timeout;
+            }
+
             var stopWatch = Stopwatch.StartNew();
             while (true)
             {

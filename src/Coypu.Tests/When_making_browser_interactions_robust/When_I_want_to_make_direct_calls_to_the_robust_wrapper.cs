@@ -46,7 +46,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var overallTimeout = TimeSpan.FromMilliseconds(1234);
 
             browserSession.WithTimeout(overallTimeout)
-                   .TryUntil(tryThis, until, overallTimeout);
+                   .TryUntil(tryThis, until,TimeSpan.Zero);
 
             var tryUntil = spyRobustWrapper.DeferredTryUntils[0];
 

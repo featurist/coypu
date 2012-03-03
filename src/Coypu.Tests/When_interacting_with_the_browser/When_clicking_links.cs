@@ -37,7 +37,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var overallTimeout = TimeSpan.FromSeconds(waitBeforeRetrySecs + 1000);
             var linkToBeClicked = StubLinkToBeClicked("Some link locator");
 
-            browserSession.WithTimeout(overallTimeout).ClickLink("Some link locator", new LambdaQuery<bool>(() => stubUntil,waitBetweenRetries) );
+            browserSession.WithTimeout(overallTimeout).ClickLink("Some link locator", new LambdaQuery<bool>(() => stubUntil), waitBetweenRetries);
 
             var tryUntilArgs = GetTryUntilArgs();
 
@@ -47,7 +47,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             tryUntilArgs.Until.Run();
             Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.Until.Timeout, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
             Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 

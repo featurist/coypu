@@ -26,7 +26,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var toTry = new CountTriesAction(timeout,retryInterval);
             var until = new AlwaysSucceedsQuery<bool>(true,TimeSpan.Zero,retryInterval);
             
-            retryUntilTimeoutRobustWrapper.TryUntil(toTry, until,TimeSpan.FromMilliseconds(20));
+            retryUntilTimeoutRobustWrapper.TryUntil(toTry, until,TimeSpan.FromMilliseconds(20), retryInterval);
 
             Assert.That(toTry.Tries, Is.EqualTo(1));
         }
@@ -37,7 +37,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var toTry = new CountTriesAction(timeout,retryInterval);
             var until = new ThrowsThenSubsequentlySucceedsQuery<bool>(true, true, 2, TimeSpan.FromMilliseconds(1000), retryInterval);
 
-            retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(100));
+            retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(100), retryInterval);
 
             Assert.That(toTry.Tries, Is.EqualTo(3));
         }
@@ -52,7 +52,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var until = new AlwaysSucceedsQuery<bool>(false, false, TimeSpan.Zero, retryInterval);
 
             var stopwatch = Stopwatch.StartNew();
-            Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout));
+            Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout, retryInterval));
 
             stopwatch.Stop();
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
@@ -72,7 +72,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var retryAfter = TimeSpan.FromMilliseconds(20);
             var until = new AlwaysThrowsQuery<bool, TestException>(timeout, retryAfter);
 
-            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout));
+            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout, retryInterval));
 
             Assert.That(toTry.Tries, Is.GreaterThan(1));
             Assert.That(toTry.Tries, Is.LessThan(12));

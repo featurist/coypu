@@ -160,15 +160,15 @@ namespace Coypu
             return this;
         }
 
-        public BrowserSession ClickButton(string locator, Query<bool> until)
+        public BrowserSession ClickButton(string locator, Query<bool> until, TimeSpan waitBeforeRetry)
         {
-            driverScope.ClickButton(locator, until);
+            driverScope.ClickButton(locator, until, waitBeforeRetry);
             return this;
         }
 
-        public BrowserSession ClickLink(string locator, Query<bool> until)
+        public BrowserSession ClickLink(string locator, Query<bool> until, TimeSpan waitBeforeRetry)
         {
-            driverScope.ClickLink(locator, until);
+            driverScope.ClickLink(locator, until, waitBeforeRetry);
             return this;
         }
 
@@ -361,9 +361,9 @@ namespace Coypu
             driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry)
         {
-            driverScope.TryUntil(tryThis, until);
+            driverScope.TryUntil(tryThis, until, waitBeforeRetry);
         }
 
         public State FindState(params State[] states)

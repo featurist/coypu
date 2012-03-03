@@ -43,12 +43,19 @@ namespace Coypu.Tests.TestDoubles
             return default(T);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
         {
-            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, overallTimeout));
+            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, overallTimeout, waitBeforeRetry));
         }
 
         public bool ZeroTimeout { get; set; }
+        public void SetOverrideTimeout(TimeSpan timeout)
+        {
+        }
+
+        public void ClearOverrideTimeout()
+        {
+        }
 
         public void AlwaysReturnFromRobustly(object result)
         {
@@ -63,12 +70,14 @@ namespace Coypu.Tests.TestDoubles
         public class TryUntilArgs
         {
             public TimeSpan OverallTimeout { get; private set; }
+            public TimeSpan WaitBeforeRetry { get; private set; }
             public DriverAction TryThisDriverAction { get; private set; }
             public Query<bool> Until { get; private set; }
 
-            public TryUntilArgs(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout)
+            public TryUntilArgs(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
             {
                 OverallTimeout = overallTimeout;
+                WaitBeforeRetry = waitBeforeRetry;
                 TryThisDriverAction = tryThis;
                 Until = until;
             }

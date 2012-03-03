@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Coypu.Actions;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Watin;
@@ -24,7 +25,7 @@ namespace Coypu.AcceptanceTests
         public void SetUpFixture()
         {
             var configuration = Configuration.Default();
-            configuration.Timeout = TimeSpan.FromMilliseconds(2000);
+            configuration.Timeout = TimeSpan.FromMilliseconds(20000);
             configuration.Browser = Browser.Firefox;
             configuration.Driver = typeof(SeleniumWebDriver);
             browser = new BrowserSession(configuration);
@@ -377,6 +378,14 @@ namespace Coypu.AcceptanceTests
 
             Assert.That(expectingScope1.Text, Is.EqualTo("Section One h2"));
             Assert.That(expectingScope2.Text, Is.EqualTo("Div Section Two h2"));
+        }
+
+        [Test]
+        public void TryUntil_example()
+        {
+            browser.TryUntil(() => browser.ClickButton("try this"),
+                             () => browser.HasContent("try until 5"),
+                             TimeSpan.FromMilliseconds(50));
         }
 
         [Test]
