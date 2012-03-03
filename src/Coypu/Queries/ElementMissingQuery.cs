@@ -22,6 +22,7 @@ namespace Coypu.Queries
             {
                 Result = true;
             }
+
         }
     }
 }

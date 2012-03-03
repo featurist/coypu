@@ -37,7 +37,7 @@ namespace Coypu.Drivers.Tests
         private static DriverScope root;
         private static Driver driver;
 
-        private const Browser browser = Browser.InternetExplorer;
+        private const Browser browser = Browser.Firefox;
         private static readonly Type driverType = typeof (SeleniumWebDriver);
 
         [SetUp]
