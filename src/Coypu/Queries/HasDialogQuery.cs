@@ -6,7 +6,7 @@ namespace Coypu.Queries
         private readonly string text;
         public override object ExpectedResult { get { return true; } }
 
-        protected internal HasDialogQuery(Driver driver, string text, DriverScope driverScope) : base(driverScope)
+        protected internal HasDialogQuery(Driver driver, string text, DriverScope driverScope, Options options) : base(driverScope,options)
         {
             this.driver = driver;
             this.text = text;

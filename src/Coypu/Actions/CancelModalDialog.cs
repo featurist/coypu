@@ -1,11 +1,8 @@
-using System;
-
 namespace Coypu.Actions
 {
     internal class CancelModalDialog : DriverAction
     {
-        internal CancelModalDialog(Driver driver, TimeSpan timeout, TimeSpan retryInterval)
-            : base(driver, timeout, retryInterval)
+        internal CancelModalDialog(Driver driver, Options options) : base(driver,options)
         {
         }
 

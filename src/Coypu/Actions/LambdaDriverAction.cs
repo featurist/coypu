@@ -6,8 +6,8 @@ namespace Coypu.Actions
     {
         private readonly Action action;
 
-        public LambdaDriverAction(Action action, TimeSpan timeout, TimeSpan retryInterval)
-            : base(null, timeout, retryInterval)
+        public LambdaDriverAction(Action action, Options options)
+            : base(null, options)
         {
             this.action = action;
         }

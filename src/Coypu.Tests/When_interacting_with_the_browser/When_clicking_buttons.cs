@@ -36,9 +36,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
             var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs + 1000);
-            
-            browserSession.WithTimeout(overallTimeout)
-                   .ClickButton("Some button locator", new LambdaQuery<bool>(() => stubUntil), waitBetweenRetries);
+
+            var options = new Options {Timeout = overallTimeout};
+            browserSession.ClickButton("Some button locator", new LambdaQuery<bool>(() => stubUntil), waitBetweenRetries, options);
 
             var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
 

@@ -6,7 +6,8 @@ namespace Coypu
 {
     public class IFrameElementScope : RobustElementScope
     {
-        internal IFrameElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper) : base(elementFinder, outerScope, robustWrapper)
+        internal IFrameElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper, Options options) 
+            : base(elementFinder, outerScope, robustWrapper,options)
         {
         }
 

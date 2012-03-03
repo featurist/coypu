@@ -5,25 +5,27 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 {
     public class When_inspecting : BrowserInteractionTests
     {
-        protected void Queries_robustly(bool stubResult, Func<string, bool> subject, Action<string, bool> stub)
+        protected void Queries_robustly(bool stubResult, Func<string, Options, bool> subject, Action<string, bool> stub)
         {
             Queries_robustly(stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
         }
 
-        protected void Queries_robustly_reversing_result(bool stubResult, Func<string, bool> subject, Action<string, bool> stub)
+        protected void Queries_robustly_reversing_result(bool stubResult, Func<string, Options, bool> subject, Action<string, bool> stub)
         {
             Queries_robustly_reversing_result(stubResult, subject, stub, "Find me " + DateTime.Now.Ticks);
         }
 
-        protected void Queries_robustly<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
+        protected void Queries_robustly<T>(bool stubResult, Func<T, Options, bool> subject, Action<T, bool> stub, T locator)
         {
             stub(locator, stubResult);
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
             var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
-            browserSession.WithTimeout(individualTimeout);
 
-            var actualImmediateResult = subject(locator);
+            var options = new Configuration();
+            options.Timeout = individualTimeout;
+
+            var actualImmediateResult = subject(locator, options);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
@@ -32,12 +34,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(queryResult, Is.EqualTo(stubResult));
         }
 
-        protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, bool> subject, Action<T, bool> stub, T locator)
+        protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T,Options, bool> subject, Action<T, bool> stub, T locator)
         {
             stub(locator, stubResult);
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
-            var actualImmediateResult = subject(locator);
+            var actualImmediateResult = subject(locator,configuration);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 

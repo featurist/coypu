@@ -22,7 +22,7 @@ namespace Coypu.AcceptanceTests
         [TestFixtureSetUp]
         public void SetUpFixture()
         {
-            var configuration = Configuration.Default();
+            var configuration = new Configuration();
             configuration.Timeout = TimeSpan.FromMilliseconds(2000);
             configuration.Browser = Browser.Firefox;
             configuration.Driver = typeof(SeleniumWebDriver);
@@ -326,7 +326,7 @@ namespace Coypu.AcceptanceTests
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
-            browser.Hover(browser.FindId("hoverOnMeTest"));
+            browser.FindId("hoverOnMeTest").Hover();
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me - hovered"));
         }
 
@@ -381,9 +381,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void TryUntil_example()
         {
-            browser.WithTimeout(TimeSpan.FromMilliseconds(5000)).TryUntil(() => browser.ClickButton("try this"),
+            browser.TryUntil(() => browser.ClickButton("try this"),
                              () => browser.HasContent("try until 5"),
-                             TimeSpan.FromMilliseconds(50));
+                             TimeSpan.FromMilliseconds(50),
+                             new Options {Timeout = TimeSpan.FromMilliseconds(5000)});
         }
 
         [Test]
@@ -430,22 +431,19 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ConsideringInvisibleElements()
         {
-            browser.ConsideringInvisibleElements().FindButton("firstInvisibleInputId").Now();
+            browser.FindButton("firstInvisibleInputId", new Options{ConsiderInvisibleElements = true}).Now();
         }
 
         [Test]
-        public void ConsideringVisibleElements()
+        public void ConsideringOnlyVisibleElements()
         {
-            Assert.Throws<MissingHtmlException>(() => browser
-                                                          .ConsideringInvisibleElements()
-                                                          .ConsideringOnlyVisibleElements()
-                                                          .FindButton("firstInvisibleInputId").Now());
+            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId").Now());
         }
 
         [Test]
         public void CustomProfile()
         {
-            var configuration = Configuration.Default();
+            var configuration = new Configuration();
             configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
 
 

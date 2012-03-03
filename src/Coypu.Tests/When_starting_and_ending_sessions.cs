@@ -11,7 +11,7 @@ namespace Coypu.Tests
         [SetUp]
         public void SetUp()
         {
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             configuration.Driver = typeof (FakeDriver);
         }
 

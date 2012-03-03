@@ -14,7 +14,7 @@ namespace Coypu.AcceptanceTests
         [TestFixtureSetUp]
         public void SetUpFixture()
         {
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             configuration.Timeout = TimeSpan.FromMilliseconds(1000);
             browser = new BrowserSession(configuration);
         }

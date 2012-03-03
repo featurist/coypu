@@ -8,7 +8,7 @@ namespace Coypu.Queries
         private readonly string text;
         public override object ExpectedResult { get { return true; } }
 
-        internal HasContentQuery(Driver driver, DriverScope scope, string text) : base(scope)
+        internal HasContentQuery(Driver driver, DriverScope scope, string text, Options options) : base(scope,options)
         {
             this.driver = driver;
             this.text = text;

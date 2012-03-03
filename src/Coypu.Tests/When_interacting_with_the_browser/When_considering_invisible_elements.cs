@@ -10,11 +10,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Assert.That(browserSession.DriverScope.ConsiderInvisibleElements, Is.False);
 
-            browserSession.ConsideringInvisibleElements();
+            browserSession.ClickButton("invisible", new Options{ConsiderInvisibleElements = true});
 
             Assert.That(browserSession.DriverScope.ConsiderInvisibleElements, Is.True);
 
-            browserSession.ConsideringOnlyVisibleElements();
+            browserSession.ClickButton("visible");
 
             Assert.That(browserSession.DriverScope.ConsiderInvisibleElements, Is.False);
         }

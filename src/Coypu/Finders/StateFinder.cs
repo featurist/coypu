@@ -14,7 +14,7 @@ namespace Coypu.Finders
             this.robustWrapper = robustWrapper;
         }
 
-        internal State FindState(TimeSpan timeout, params State[] states)
+        internal State FindState(Options options, params State[] states)
         {
             var query = new LambdaQuery<bool>(() =>
             {
@@ -28,7 +28,7 @@ namespace Coypu.Finders
                 {
                     robustWrapper.ZeroTimeout = was;
                 }
-            }, true,timeout);
+            }, true, options);
 
             var foundState = robustWrapper.Robustly(query);
 

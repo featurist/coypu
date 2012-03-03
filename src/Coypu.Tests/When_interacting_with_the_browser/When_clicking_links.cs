@@ -37,7 +37,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var overallTimeout = TimeSpan.FromSeconds(waitBeforeRetrySecs + 1000);
             var linkToBeClicked = StubLinkToBeClicked("Some link locator");
 
-            browserSession.WithTimeout(overallTimeout).ClickLink("Some link locator", new LambdaQuery<bool>(() => stubUntil), waitBetweenRetries);
+            var options = new Options{Timeout = overallTimeout};
+            browserSession.ClickLink("Some link locator", new LambdaQuery<bool>(() => stubUntil), waitBetweenRetries,options);
 
             var tryUntilArgs = GetTryUntilArgs();
 

@@ -16,7 +16,7 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             configuration.AppHost = "www.google.com";
             configuration.Driver = typeof(SeleniumWebDriver);
 

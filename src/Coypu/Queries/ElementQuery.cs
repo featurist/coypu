@@ -2,7 +2,7 @@ namespace Coypu.Queries
 {
     internal class ElementQuery : DriverScopeQuery<ElementFound>
     {
-        public ElementQuery(DriverScope driverScope) : base(driverScope)
+        public ElementQuery(DriverScope driverScope, Options options) : base(driverScope,options)
         {
         }
 

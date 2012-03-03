@@ -26,7 +26,7 @@ namespace Coypu.Tests.When_making_direct_web_requests
             _stubRestrictedResourceDownloader = new SpyRestrictedResourceDownloader();
 
             driver = new FakeDriver();
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             browserSession = TestSessionBuilder.Build(configuration, driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
         }
 

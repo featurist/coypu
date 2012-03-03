@@ -20,7 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Should_make_direct_call(browserSession.FindAllXPath, driver.StubAllXPath);
         }
 
-        protected void Should_make_direct_call(Func<string, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>> stub)
+        protected void Should_make_direct_call(Func<string, Options, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -28,7 +28,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             stub(locator, expectedImmediateResult);
 
-            var actualImmediateResult = subject(locator);
+            var actualImmediateResult = subject(locator,configuration);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
             Assert.That(spyRobustWrapper.NoQueriesRan, Is.True, "Expected no robust queries run");

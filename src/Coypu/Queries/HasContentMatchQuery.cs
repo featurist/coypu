@@ -8,7 +8,7 @@ namespace Coypu.Queries
         private readonly Regex text;
         public override object ExpectedResult { get { return true; } }
 
-        protected internal HasContentMatchQuery(Driver driver, DriverScope scope, Regex text) : base(scope)
+        protected internal HasContentMatchQuery(Driver driver, DriverScope scope, Regex text, Options options) : base(scope,options)
         {
             this.driver = driver;
             this.text = text;

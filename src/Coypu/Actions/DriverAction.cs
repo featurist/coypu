@@ -9,11 +9,11 @@ namespace Coypu.Actions
         public TimeSpan Timeout { get; private set; }
         public TimeSpan RetryInterval { get; private set; }
 
-        protected DriverAction(Driver driver, TimeSpan timeout, TimeSpan retryInterval)
+        protected DriverAction(Driver driver, Options options)
         {
             Driver = driver;
-            Timeout = timeout;
-            RetryInterval = retryInterval;
+            Timeout = options.Timeout;
+            RetryInterval = options.RetryInterval;
         }
 
         public abstract void Act();

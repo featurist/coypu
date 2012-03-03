@@ -8,11 +8,11 @@ namespace Coypu.Queries
         public TimeSpan Timeout { get; private set; }
         public TimeSpan RetryInterval { get; private set; }
 
-        internal DriverScopeQuery(DriverScope driverScope)
+        internal DriverScopeQuery(DriverScope driverScope, Options options)
         {
             DriverScope = driverScope;
-            Timeout = driverScope.Timeout;
-            RetryInterval = driverScope.RetryInterval;
+            Timeout = options.Timeout;
+            RetryInterval = options.RetryInterval;
         }
 
         public abstract void Run();

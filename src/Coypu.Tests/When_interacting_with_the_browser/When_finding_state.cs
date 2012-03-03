@@ -15,7 +15,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         internal BrowserSession BuildSession(RobustWrapper robustWrapper)
         {
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             return TestSessionBuilder.Build(configuration,new FakeDriver(), robustWrapper, new FakeWaiter(), null, null);
         }
 
@@ -44,7 +44,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             var session = BuildSession(robustWrapper);
 
-            Assert.That(session.FindState(state1, state2, state3), Is.SameAs(state3));
+            Assert.That(session.FindState(new [] {state1, state2, state3}), Is.SameAs(state3));
 
             Assert.IsFalse(queriedState1);
             Assert.IsFalse(queriedState2);

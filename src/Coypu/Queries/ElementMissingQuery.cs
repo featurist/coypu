@@ -7,7 +7,8 @@ namespace Coypu.Queries
             get { return true; }
         }
 
-        protected internal ElementMissingQuery(DriverScope driverScope) : base(driverScope)
+        protected internal ElementMissingQuery(DriverScope driverScope, Options options)
+            : base(driverScope, options)
         {
         }
 

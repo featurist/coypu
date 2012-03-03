@@ -55,7 +55,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Should_find_robustly(browserSession.FindXPath, driver.StubXPath);
         }
 
-        protected void Should_find_robustly(Func<string, ElementScope> subject, Action<string, ElementFound> stub)
+        protected void Should_find_robustly(Func<string, Options, ElementScope> subject, Action<string, ElementFound> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -67,7 +67,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult);
             stub(locator, expectedDeferredResult);
 
-            var actualImmediateResult = subject(locator).WithTimeout(individualTimeout).Now();
+            configuration.Timeout = individualTimeout;
+
+            var actualImmediateResult = subject(locator, configuration).Now();
 
             Assert.That(actualImmediateResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));

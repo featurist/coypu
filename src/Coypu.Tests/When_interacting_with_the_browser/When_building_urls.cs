@@ -8,7 +8,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [SetUp]
         public void SetUp()
         {
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             fullyQualifiedUrlBuilder = new FullyQualifiedUrlBuilder();
         }
 

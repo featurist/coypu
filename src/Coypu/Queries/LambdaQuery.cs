@@ -17,17 +17,19 @@ namespace Coypu.Queries
             _query = query;
         }
 
-        public LambdaQuery(Func<T> query, TimeSpan timeout)
+        public LambdaQuery(Func<T> query, Options options)
         {
-            Timeout = timeout;
+            Timeout = options.Timeout;
+            RetryInterval = options.RetryInterval;
             _query = query;
         }
 
-        public LambdaQuery(Func<T> query, object expectedResult, TimeSpan timeout)
+        public LambdaQuery(Func<T> query, object expectedResult, Options options)
         {
             _query = query;
             ExpectedResult = expectedResult;
-            Timeout = timeout;
+            Timeout = options.Timeout;
+            RetryInterval = options.RetryInterval;
         }
 
         public void Run()

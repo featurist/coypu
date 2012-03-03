@@ -25,7 +25,7 @@ namespace Coypu
         ///<param name="condition">How to identify this state</param>
         public State(Func<bool> condition)
         {
-            this.condition = new LambdaQuery<bool>(condition,true, TimeSpan.Zero);
+            this.condition = new LambdaQuery<bool>(condition,true, new Options{Timeout = TimeSpan.Zero});
         }
 
         internal bool ConditionWasMet { get; private set; }

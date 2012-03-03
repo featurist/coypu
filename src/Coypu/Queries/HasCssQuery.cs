@@ -8,7 +8,7 @@ namespace Coypu.Queries
         private readonly string cssSelector;
         public override object ExpectedResult { get { return true; } }
 
-        protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector) : base(scope)
+        protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector, Options options) : base(scope,options)
         {
             this.driver = driver;
             this.cssSelector = cssSelector;

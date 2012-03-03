@@ -26,7 +26,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper = new SpyRobustWrapper();
             fakeWaiter = new FakeWaiter();
             stubUrlBuilder = new StubUrlBuilder();
-            configuration = Configuration.Default();
+            configuration = new Configuration();
             browserSession = TestSessionBuilder.Build(configuration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
                                                       stubUrlBuilder);
         }

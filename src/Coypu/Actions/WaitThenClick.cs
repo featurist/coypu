@@ -6,14 +6,14 @@ namespace Coypu.Actions
 {
     internal class WaitThenClick : DriverAction
     {
-        private readonly TimeSpan waitBeforeClick;
+        private readonly Options options;
         private readonly Waiter waiter;
         private readonly ElementFinder elementFinder;
 
-        internal WaitThenClick(Driver driver, TimeSpan timeout, TimeSpan waitBeforeClick, TimeSpan retryInterval, Waiter waiter, ElementFinder elementFinder)
-            : base(driver,timeout,retryInterval)
+        internal WaitThenClick(Driver driver, Options options, Waiter waiter, ElementFinder elementFinder)
+            : base(driver,options)
         {
-            this.waitBeforeClick = waitBeforeClick;
+            this.options = options;
             this.waiter = waiter;
             this.elementFinder = elementFinder;
         }
@@ -21,7 +21,7 @@ namespace Coypu.Actions
         public override void Act()
         {
             var element = elementFinder.Find();
-            waiter.Wait(waitBeforeClick);
+            waiter.Wait(options.WaitBeforeClick);
             Driver.Click(element);
         }
     }

@@ -69,161 +69,155 @@ namespace Coypu
             return driverScope.Now();
         }
 
-        public ElementScope Click()
+        public ElementScope Click(Options options = null)
         {
-            driverScope.Click(Now());
+            driverScope.Click(options);
             return this;
         }
 
-        public ElementScope Hover()
+        public ElementScope Hover(Options options = null)
         {
-            DriverScope.Hover(Now());
+            driverScope.Hover(options);
             return this;
         }
 
-        public ElementScope Hover(Element element)
+        public ElementScope ClickButton(string locator, Options options = null)
         {
-            DriverScope.Hover(element);
+            DriverScope.ClickButton(locator, options);
             return this;
         }
 
-        public ElementScope ClickButton(string locator)
+        public ElementScope ClickLink(string locator, Options options = null)
         {
-            DriverScope.ClickButton(locator);
+            DriverScope.ClickLink(locator, options);
             return this;
         }
 
-        public ElementScope ClickLink(string locator)
+        public ElementScope FindButton(string locator, Options options = null)
         {
-            DriverScope.ClickLink(locator);
+            return DriverScope.FindButton(locator, options);
+        }
+
+        public ElementScope FindLink(string locator, Options options = null)
+        {
+            return DriverScope.FindLink(locator, options);
+        }
+
+        public ElementScope FindField(string locator, Options options = null)
+        {
+            return DriverScope.FindField(locator, options);
+        }
+
+        public FillInWith FillIn(string locator, Options options = null)
+        {
+            return DriverScope.FillIn(locator, options);
+        }
+
+        public FillInWith FillIn(Element element, Options options = null)
+        {
+            return DriverScope.FillIn(element, options);
+        }
+
+        public SelectFrom Select(string option, Options options = null)
+        {
+            return DriverScope.Select(option, options);
+        }
+
+        public bool HasContent(string text, Options options = null)
+        {
+            return DriverScope.HasContent(text, options);
+        }
+
+        public bool HasContentMatch(Regex pattern, Options options = null)
+        {
+            return DriverScope.HasContentMatch(pattern, options);
+        }
+
+        public bool HasNoContent(string text, Options options = null)
+        {
+            return DriverScope.HasNoContent(text, options);
+        }
+
+        public bool HasNoContentMatch(Regex pattern, Options options = null)
+        {
+            return DriverScope.HasContentMatch(pattern, options);
+        }
+
+        public bool HasCss(string cssSelector, Options options = null)
+        {
+            return DriverScope.HasCss(cssSelector, options);
+        }
+
+        public bool HasNoCss(string cssSelector, Options options = null)
+        {
+            return DriverScope.HasNoCss(cssSelector, options);
+        }
+
+        public bool HasXPath(string xpath, Options options = null)
+        {
+            return DriverScope.HasXPath(xpath, options);
+        }
+
+        public bool HasNoXPath(string xpath, Options options = null)
+        {
+            return DriverScope.HasNoXPath(xpath, options);
+        }
+
+        public ElementScope FindCss(string cssSelector, Options options = null)
+        {
+            return DriverScope.FindCss(cssSelector, options);
+        }
+
+        public ElementScope FindXPath(string xpath, Options options = null)
+        {
+            return DriverScope.FindXPath(xpath, options);
+        }
+
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Options options = null)
+        {
+            return DriverScope.FindAllCss(cssSelector, options);
+        }
+
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Options options = null)
+        {
+            return DriverScope.FindAllXPath(xpath, options);
+        }
+
+        public ElementScope FindSection(string locator, Options options = null)
+        {
+            return DriverScope.FindSection(locator, options);
+        }
+
+        public ElementScope FindFieldset(string locator, Options options = null)
+        {
+            return DriverScope.FindFieldset(locator, options);
+        }
+
+        public ElementScope FindId(string id, Options options = null)
+        {
+            return DriverScope.FindId(id, options);
+        }
+
+        public IFrameElementScope FindIFrame(string locator, Options options = null)
+        {
+            return DriverScope.FindIFrame(locator, options);
+        }
+
+        public ElementScope Check(string locator, Options options = null)
+        {
+            DriverScope.Check(locator, options);
             return this;
         }
 
-        public ElementScope FindButton(string locator)
+        public ElementScope Uncheck(string locator, Options options = null)
         {
-            return DriverScope.FindButton(locator);
-        }
-
-        public ElementScope FindLink(string locator)
-        {
-            return DriverScope.FindLink(locator);
-        }
-
-        public ElementScope FindField(string locator)
-        {
-            return DriverScope.FindField(locator);
-        }
-
-        public FillInWith FillIn(string locator)
-        {
-            return DriverScope.FillIn(locator);
-        }
-
-        public FillInWith FillIn(Element element)
-        {
-            return DriverScope.FillIn(element);
-        }
-
-        public SelectFrom Select(string option)
-        {
-            return DriverScope.Select(option);
-        }
-
-        public bool HasContent(string text)
-        {
-            return DriverScope.HasContent(text);
-        }
-
-        public bool HasContentMatch(Regex pattern)
-        {
-            return DriverScope.HasContentMatch(pattern);
-        }
-
-        public bool HasNoContent(string text)
-        {
-            return DriverScope.HasNoContent(text);
-        }
-
-        public bool HasNoContentMatch(Regex pattern)
-        {
-            return DriverScope.HasContentMatch(pattern);
-        }
-
-        public bool HasCss(string cssSelector)
-        {
-            return DriverScope.HasCss(cssSelector);
-        }
-
-        public bool HasNoCss(string cssSelector)
-        {
-            return DriverScope.HasNoCss(cssSelector);
-        }
-
-        public bool HasXPath(string xpath)
-        {
-            return DriverScope.HasXPath(xpath);
-        }
-
-        public bool HasNoXPath(string xpath)
-        {
-            return DriverScope.HasNoXPath(xpath);
-        }
-
-        public ElementScope FindCss(string cssSelector)
-        {
-            return DriverScope.FindCss(cssSelector);
-        }
-
-        public ElementScope FindXPath(string xpath)
-        {
-            return DriverScope.FindXPath(xpath);
-        }
-
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector)
-        {
-            return DriverScope.FindAllCss(cssSelector);
-        }
-
-        public IEnumerable<ElementFound> FindAllXPath(string xpath)
-        {
-            return DriverScope.FindAllXPath(xpath);
-        }
-
-        public ElementScope FindSection(string locator)
-        {
-            return DriverScope.FindSection(locator);
-        }
-
-        public ElementScope FindFieldset(string locator)
-        {
-            return DriverScope.FindFieldset(locator);
-        }
-
-        public ElementScope FindId(string id)
-        {
-            return DriverScope.FindId(id);
-        }
-
-        public IFrameElementScope FindIFrame(string locator)
-        {
-            return DriverScope.FindIFrame(locator);
-        }
-
-        public ElementScope Check(string locator)
-        {
-            DriverScope.Check(locator);
+            DriverScope.Uncheck(locator, options);
             return this;
         }
 
-        public ElementScope Uncheck(string locator)
+        public ElementScope Choose(string locator, Options options = null)
         {
-            DriverScope.Uncheck(locator);
-            return this;
-        }
-
-        public ElementScope Choose(string locator)
-        {
-            DriverScope.Choose(locator);
+            DriverScope.Choose(locator, options);
             return this;
         }
 
@@ -242,14 +236,14 @@ namespace Coypu
             return DriverScope.HasNo(findElement);
         }
 
-        public void RetryUntilTimeout(Action action)
+        public void RetryUntilTimeout(Action action, Options options = null)
         {
-            DriverScope.RetryUntilTimeout(action);
+            DriverScope.RetryUntilTimeout(action,options);
         }
 
-        public TResult RetryUntilTimeout<TResult>(Func<TResult> function)
+        public TResult RetryUntilTimeout<TResult>(Func<TResult> function, Options options = null)
         {
-            return DriverScope.RetryUntilTimeout(function);
+            return DriverScope.RetryUntilTimeout(function,options);
         }
 
         public void RetryUntilTimeout(DriverAction driverAction)
@@ -257,19 +251,19 @@ namespace Coypu
             DriverScope.RetryUntilTimeout(driverAction);
         }
 
-        public T Query<T>(Func<T> query, T expecting)
+        public T Query<T>(Func<T> query, T expecting, Options options = null)
         {
-            return DriverScope.Query(query, expecting);
+            return DriverScope.Query(query, expecting,options);
         }
 
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            DriverScope.TryUntil(tryThis, until,waitBeforeRetry);
+            DriverScope.TryUntil(tryThis, until,waitBeforeRetry, options);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until,TimeSpan waitBeforeRetry)
+        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            DriverScope.TryUntil(tryThis, until, waitBeforeRetry);
+            DriverScope.TryUntil(tryThis, until, waitBeforeRetry, options);
         }
 
         public State FindState(params State[] states)
@@ -277,32 +271,19 @@ namespace Coypu
             return DriverScope.FindState(states);
         }
 
-        public ElementScope ConsideringInvisibleElements()
+        public State FindState(State[] states, Options options = null)
         {
-            DriverScope.ConsideringInvisibleElements();
-            return this;
+            return DriverScope.FindState(states,options);
         }
 
-        public ElementScope ConsideringOnlyVisibleElements()
+        public bool Exists(Options options = null)
         {
-            DriverScope.ConsideringOnlyVisibleElements();
-            return this;
+            return robustWrapper.Robustly(new ElementExistsQuery(driverScope, DriverScope.Default(options)));
         }
 
-        public ElementScope WithTimeout(TimeSpan timeout)
+        public bool Missing(Options options = null)
         {
-            DriverScope.WithTimeout(timeout);
-            return this;
-        }
-
-        public bool Exists()
-        {
-            return robustWrapper.Robustly(new ElementExistsQuery(driverScope));
-        }
-
-        public bool Missing()
-        {
-            return robustWrapper.Robustly(new ElementMissingQuery(driverScope));
+            return robustWrapper.Robustly(new ElementMissingQuery(driverScope, DriverScope.Default(options)));
         }
     }
 }

@@ -31,19 +31,7 @@ namespace Coypu.Robustness
         public TResult Robustly<TResult>(Query<TResult> query)
         {
             var interval = query.RetryInterval;
-            TimeSpan timeout;
-            if (ZeroTimeout)
-            {
-                timeout = TimeSpan.Zero;
-            }
-            else if (overrideTimeout.HasValue)
-            {
-                timeout = overrideTimeout.Value;
-            }
-            else {
-                timeout = query.Timeout;
-            }
-
+            var timeout = Timeout(query);
             var stopWatch = Stopwatch.StartNew();
             while (true)
             {
@@ -71,6 +59,24 @@ namespace Coypu.Robustness
                     WaitForInterval(interval);
                 }
             }
+        }
+
+        private TimeSpan Timeout<TResult>(Query<TResult> query)
+        {
+            TimeSpan timeout;
+            if (ZeroTimeout)
+            {
+                timeout = TimeSpan.Zero;
+            }
+            else if (overrideTimeout.HasValue)
+            {
+                timeout = overrideTimeout.Value;
+            }
+            else
+            {
+                timeout = query.Timeout;
+            }
+            return timeout;
         }
 
         private void WaitForInterval(TimeSpan interval)

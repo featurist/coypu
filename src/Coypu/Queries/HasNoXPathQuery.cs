@@ -7,7 +7,8 @@ namespace Coypu.Queries
         public override object ExpectedResult { get { return true; } }
 
 
-        protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath) : base(scope)
+        protected internal HasNoXPathQuery(Driver driver, DriverScope scope, string xpath, Options options)
+            : base(scope, options)
         {
             this.driver = driver;
             this.xpath = xpath;
