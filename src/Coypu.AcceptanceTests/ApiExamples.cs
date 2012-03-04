@@ -439,17 +439,28 @@ namespace Coypu.AcceptanceTests
         {
             Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId").Now());
         }
+        
+        [Test]
+        public void WindowScoping_example()
+        {
+            var mainWindow = browser;
+
+            mainWindow.ClickButton("Open pop up window");
+
+            var popUp = mainWindow.FindWindow("Pop Up Window");
+
+            Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
+            Assert.That(popUp.FindButton("scoped button").Id, Is.EqualTo("popUpButtonId"));
+        }
 
         [Test]
         public void CustomProfile()
         {
-            var configuration = new Configuration();
-            configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
+            var configuration = new Configuration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
 
-
-            using (var browser = new BrowserSession(configuration))
+            using (var custom = new BrowserSession(configuration))
             {
-                browser.Visit("https://www.relishapp.com/");
+                custom.Visit("https://www.relishapp.com/");
             }
         }
 

@@ -20,13 +20,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Should_make_direct_call(browserSession.FindAllXPath, driver.StubAllXPath);
         }
 
-        protected void Should_make_direct_call(Func<string, Options, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>> stub)
+        protected void Should_make_direct_call(Func<string, Options, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>, DriverScope> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
             var expectedImmediateResult = new[] {new StubElement()};
 
-            stub(locator, expectedImmediateResult);
+            stub(locator, expectedImmediateResult, browserSession.DriverScope);
 
             var actualImmediateResult = subject(locator,configuration);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));

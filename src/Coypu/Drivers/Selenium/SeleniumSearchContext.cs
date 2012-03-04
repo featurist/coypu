@@ -13,27 +13,27 @@ namespace Coypu.Drivers.Selenium
 
         public string Id
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new System.NotSupportedException(); }
         }
 
         public string Text
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new System.NotSupportedException(); }
         }
 
         public string Value
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new System.NotSupportedException(); }
         }
 
         public string Name
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new System.NotSupportedException(); }
         }
 
         public string SelectedOption
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new System.NotSupportedException(); }
         }
 
         public bool Selected

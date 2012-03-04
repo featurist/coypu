@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Tests
 
         {
             Driver.Visit("http://localhost:4567/auto_login");
-            Driver.ExecuteScript("document.location.href = 'http://localhost:4567/resource/js_redirect'");
+            Driver.ExecuteScript("document.location.href = 'http://localhost:4567/resource/js_redirect'", Root);
 
             Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/resource/js_redirect")));
         }

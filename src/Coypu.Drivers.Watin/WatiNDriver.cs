@@ -88,8 +88,10 @@ namespace Coypu.Drivers.Watin
             return new WatiNFrame(frame);
         }
 
-        public string ExecuteScript(string javascript)
+        public string ExecuteScript(string javascript, DriverScope scope)
         {
+            // TODO: scope is the current window in which to accept a dialog
+
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
             var retval = Watin.Eval(stripReturn);
             Watin.WaitForComplete();
@@ -133,6 +135,11 @@ namespace Coypu.Drivers.Watin
             var sessionCookies = documentCookies.Except(persistentCookies, new CookieNameEqualityComparer());
 
             return persistentCookies.Concat(sessionCookies).ToList();
+        }
+
+        public ElementFound FindWindow(string locator, DriverScope scope)
+        {
+            throw new NotSupportedException(); //TODO implement FindWindow for WatiN
         }
 
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
@@ -242,8 +249,9 @@ namespace Coypu.Drivers.Watin
             WatiNElement<RadioButton>(field).Checked = true;
         }
 
-        public bool HasDialog(string withText)
+        public bool HasDialog(string withText, DriverScope scope)
         {
+            // TODO: scope is the current window in which to look for a dialog
             return watinDialogHandler.Exists() && watinDialogHandler.Message == withText;
         }
 
@@ -252,13 +260,15 @@ namespace Coypu.Drivers.Watin
             get { return BuildElement(Watin); }
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(DriverScope scope)
         {
+            // TODO: scope is the current window in which to accept a dialog
             watinDialogHandler.ClickOk();
         }
 
-        public void CancelModalDialog()
+        public void CancelModalDialog(DriverScope scope)
         {
+            // TODO: scope is the current window in which to accept a dialog
             watinDialogHandler.ClickCancel();
         }
 

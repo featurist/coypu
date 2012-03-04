@@ -429,7 +429,7 @@ namespace Coypu
         /// <returns>Anything returned from the script</returns>
         public string ExecuteScript(string javascript)
         {
-            return driver.ExecuteScript(javascript);
+            return driver.ExecuteScript(javascript,this);
         }
 
         /// <summary>

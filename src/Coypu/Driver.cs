@@ -19,7 +19,7 @@ namespace Coypu
         bool HasContentMatch(Regex pattern, DriverScope scope);
         bool HasCss(string cssSelector, DriverScope scope);
         bool HasXPath(string xpath, DriverScope scope);
-        bool HasDialog(string withText);
+        bool HasDialog(string withText, DriverScope scope);
         ElementFound FindCss(string cssSelector, DriverScope scope);
         ElementFound FindXPath(string xpath, DriverScope scope);
         IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope);
@@ -30,14 +30,15 @@ namespace Coypu
         bool Disposed { get; }
         Uri Location { get; }
         ElementFound Window { get; }
-        void AcceptModalDialog();
-        void CancelModalDialog();
-        string ExecuteScript(string javascript);
+        void AcceptModalDialog(DriverScope scope);
+        void CancelModalDialog(DriverScope scope);
+        string ExecuteScript(string javascript, DriverScope scope);
         ElementFound FindFieldset(string locato, DriverScope scoper);
         ElementFound FindSection(string locator, DriverScope scope);
         ElementFound FindId(string id, DriverScope scope);
         ElementFound FindIFrame(string locator, DriverScope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
+        ElementFound FindWindow(string locator, DriverScope scope);
     }
 }

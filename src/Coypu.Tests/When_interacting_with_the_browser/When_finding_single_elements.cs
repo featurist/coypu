@@ -10,52 +10,64 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindButton_should_make_robust_call_to_underlying_driver()
         {
-            Should_find_robustly(browserSession.FindButton, driver.StubButton);
+            Should_find_robustly(browserSession.FindButton, elementScope.FindButton, driver.StubButton);
         }
 
         [Test]
         public void FindLink_should_make_robust_call_to_underlying_driver()
         {
-            Should_find_robustly(browserSession.FindLink, driver.StubLink);
+            Should_find_robustly(browserSession.FindLink, elementScope.FindLink, driver.StubLink);
         }
 
         [Test]
         public void FindField_should_make_robust_call_to_underlying_driver()
         {
-            Should_find_robustly(browserSession.FindField, driver.StubField);
+            Should_find_robustly(browserSession.FindField, elementScope.FindField, driver.StubField);
         }
 
         [Test]
         public void FindCss_should_make_robust_call_to_underlying_driver()
         {
-            Should_find_robustly(browserSession.FindCss, driver.StubCss);
+            Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss);
         }
 
         [Test]
         public void FindId_should_make_robust_call_to_underlying_driver() 
         {
-            Should_find_robustly(browserSession.FindId, driver.StubId);
+            Should_find_robustly(browserSession.FindId, elementScope.FindId, driver.StubId);
         }
 
         [Test]
         public void FindSection_should_make_robust_call_to_underlying_driver() 
         {
-            Should_find_robustly(browserSession.FindSection, driver.StubSection);
+            Should_find_robustly(browserSession.FindSection, elementScope.FindSection, driver.StubSection);
         }
 
         [Test]
         public void FindFieldset_should_make_robust_call_to_underlying_driver() 
         {
-            Should_find_robustly(browserSession.FindFieldset, driver.StubFieldset);
+            Should_find_robustly(browserSession.FindFieldset, elementScope.FindFieldset, driver.StubFieldset);
+        }
+
+        [Test]
+        public void FindIFrame_should_make_robust_call_to_underlying_driver()
+        {
+            Should_find_robustly(browserSession.FindIFrame, elementScope.FindIFrame, driver.StubIFrame);
+        }
+
+        [Test]
+        public void FindWindow_should_make_robust_call_to_underlying_driver()
+        {
+            Should_find_robustly(browserSession.FindWindow, null, driver.StubWindow);
         }
 
         [Test]
         public void FindXPath_should_make_robust_call_to_underlying_driver() 
         {
-            Should_find_robustly(browserSession.FindXPath, driver.StubXPath);
+            Should_find_robustly(browserSession.FindXPath,elementScope.FindXPath, driver.StubXPath);
         }
 
-        protected void Should_find_robustly(Func<string, Options, ElementScope> subject, Action<string, ElementFound> stub)
+        protected void Should_find_robustly(Func<string, Options, ElementScope> subject, Func<string, Options, ElementScope> scope, Action<string, ElementFound, DriverScope> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -65,18 +77,29 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var expectedDeferredResult = new StubElement();
 
             spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult);
-            stub(locator, expectedDeferredResult);
 
-            configuration.Timeout = individualTimeout;
+            stub(locator, expectedDeferredResult,browserSession.DriverScope);
+            stub(locator, expectedDeferredResult,elementScope.DriverScope);
 
-            var actualImmediateResult = subject(locator, configuration).Now();
+            var options = new Options{Timeout = individualTimeout};
 
-            Assert.That(actualImmediateResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
-            Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
+            VerifyFoundRobustly(subject, 0, locator, expectedDeferredResult, expectedImmediateResult, options);
 
-            RunQueryAndCheckTiming<ElementFound>(individualTimeout);
-            
-            Assert.That(queryResult, Is.SameAs(expectedDeferredResult));
+            if (scope != null)
+                VerifyFoundRobustly(scope, 1, locator, expectedDeferredResult, expectedImmediateResult, options);
+        }
+
+        private void VerifyFoundRobustly(Func<string, Options, ElementScope> scope, int driverCallIndex, string locator, StubElement expectedDeferredResult, StubElement expectedImmediateResult, Options options)
+        {
+            var sub = scope;
+            var scopedResult = sub(locator, options).Now();
+
+            Assert.That(scopedResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
+            Assert.That(scopedResult, Is.SameAs(expectedImmediateResult));
+
+            var elementScopeResult = RunQueryAndCheckTiming<ElementFound>(options.Timeout, driverCallIndex);
+
+            Assert.That(elementScopeResult, Is.SameAs(expectedDeferredResult));
         }
     }
 }

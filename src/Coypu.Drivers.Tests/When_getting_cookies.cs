@@ -10,9 +10,9 @@ namespace Coypu.Drivers.Tests
         public void SetUpCookies()
         {
             Driver.Visit("http://localhost:4567/resource/cookie_test");
-            Driver.ExecuteScript("document.cookie = 'cookie1=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '");
-            Driver.ExecuteScript("document.cookie = 'cookie1=; expires=Fri, 27 Jul 2001 02:47:11 UTC;  path=/resource'");
-            Driver.ExecuteScript("document.cookie = 'cookie2=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '");
+            Driver.ExecuteScript("document.cookie = 'cookie1=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '", Root);
+            Driver.ExecuteScript("document.cookie = 'cookie1=; expires=Fri, 27 Jul 2001 02:47:11 UTC;  path=/resource'", Root);
+            Driver.ExecuteScript("document.cookie = 'cookie2=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '", Root);
             Driver.Visit("http://localhost:4567/resource/cookie_test");
         }
 
@@ -20,8 +20,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Gets_all_the_session_cookies()
         {
-            Driver.ExecuteScript("document.cookie = 'cookie1=value1; '");
-            Driver.ExecuteScript("document.cookie = 'cookie2=value2; '");
+            Driver.ExecuteScript("document.cookie = 'cookie1=value1; '", Root);
+            Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
 
             var cookies = Driver.GetBrowserCookies().ToArray();
 
@@ -34,8 +34,8 @@ namespace Coypu.Drivers.Tests
         {
             var expires = DateTime.UtcNow.AddDays(2);
 
-            Driver.ExecuteScript(string.Format("document.cookie = 'cookie1=value11; expires={0} '", expires.ToString("R")));
-            Driver.ExecuteScript(string.Format("document.cookie = 'cookie2=value22; expires={0} '", expires.ToString("R")));
+            Driver.ExecuteScript(string.Format("document.cookie = 'cookie1=value11; expires={0} '", expires.ToString("R")), Root);
+            Driver.ExecuteScript(string.Format("document.cookie = 'cookie2=value22; expires={0} '", expires.ToString("R")), Root);
 
 
             var cookies = Driver.GetBrowserCookies().ToArray();
@@ -51,7 +51,7 @@ namespace Coypu.Drivers.Tests
         public void Gets_the_cookie_path()
 
         {
-            Driver.ExecuteScript("document.cookie = 'cookie1=value1; path=/resource'");
+            Driver.ExecuteScript("document.cookie = 'cookie1=value1; path=/resource'", Root);
 
             var cookies = Driver.GetBrowserCookies().ToArray();
 

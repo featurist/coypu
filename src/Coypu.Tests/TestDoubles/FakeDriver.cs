@@ -9,41 +9,45 @@ namespace Coypu.Tests.TestDoubles
 {
     public class FakeDriver : Driver
     {
-        private readonly IList<Element> clickedElements = new List<Element>();
-        private readonly IList<Element> hoveredElements = new List<Element>();
-        private readonly IList<Element> checkedElements = new List<Element>();
-        private readonly IList<Element> uncheckedElements = new List<Element>();
-        private readonly IList<Element> chosenElements = new List<Element>();
-        private readonly IList<string> hasContentQueries = new List<string>();
-        private readonly IList<Regex> hasContentMatchQueries = new List<Regex>();
-        private readonly IList<string> hasCssQueries = new List<string>();
-        private readonly IList<string> hasXPathQueries = new List<string>();
-        private readonly IList<string> visits = new List<string>();
-        private readonly IDictionary<Element, string> setFields = new Dictionary<Element, string>();
-        private readonly IDictionary<Element, string> selectedOptions = new Dictionary<Element, string>();
-        private readonly Dictionary<string, ElementFound> stubbedButtons = new Dictionary<string, ElementFound>();
-        private readonly Dictionary<string, ElementFound> stubbedLinks = new Dictionary<string, ElementFound>();
-        private readonly Dictionary<string, ElementFound> stubbedTextFields = new Dictionary<string, ElementFound>();
-        private readonly Dictionary<string, ElementFound> stubbedCssResults = new Dictionary<string, ElementFound>();
-        private readonly Dictionary<string, ElementFound> stubbedXPathResults = new Dictionary<string, ElementFound>();
-        private readonly IDictionary<string, IEnumerable<ElementFound>> stubbedAllCssResults = new Dictionary<string, IEnumerable<ElementFound>>();
-        private readonly IDictionary<string, IEnumerable<ElementFound>> stubbedAllXPathResults = new Dictionary<string, IEnumerable<ElementFound>>();
-        private readonly IDictionary<string, string> stubbedExecuteScriptResults = new Dictionary<string, string>();
-        private readonly IDictionary<string, ElementFound> stubbedFieldsets = new Dictionary<string, ElementFound>();
-        private readonly IDictionary<string, ElementFound> stubbedSections = new Dictionary<string, ElementFound>();
-        private readonly IDictionary<string, ElementFound> stubbedIFrames = new Dictionary<string, ElementFound>();
-        private readonly IDictionary<string, ElementFound> stubbedIDs = new Dictionary<string, ElementFound>();
-        private readonly IDictionary<string, bool> stubbedHasContentResults = new Dictionary<string, bool>();
-        private readonly IDictionary<Regex, bool> stubbedHasContentMatchResults = new Dictionary<Regex, bool>();
-        private readonly IDictionary<string, bool> stubbedHasCssResults = new Dictionary<string, bool>();
-        private readonly IDictionary<string, bool> stubbedHasXPathResults = new Dictionary<string, bool>();
-        private readonly IDictionary<string, bool> stubbedHasDialogResults = new Dictionary<string, bool>();
-        private readonly IList<string> findButtonRequests = new List<string>();
-        private readonly IList<string> findLinkRequests = new List<string>();
-        private readonly IList<string> findCssRequests = new List<string>();
+        public readonly IList<Element> ClickedElements = new List<Element>();
+        public readonly IList<Element> HoveredElements = new List<Element>();
+        public readonly IList<Element> CheckedElements = new List<Element>();
+        public readonly IList<Element> UncheckedElements = new List<Element>();
+        public readonly IList<Element> ChosenElements = new List<Element>();
+        public readonly IList<string> HasContentQueries = new List<string>();
+        public readonly IList<Regex> HasContentMatchQueries = new List<Regex>();
+        public readonly IList<string> HasCssQueries = new List<string>();
+        public readonly IList<string> HasXPathQueries = new List<string>();
+        public readonly IList<string> Visits = new List<string>();
+        public readonly IDictionary<Element, string> SetFields = new Dictionary<Element, string>();
+        public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
+        private readonly IList<ScopedStubResult> stubbedButtons = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedLinks = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedTextFields = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedCssResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedXPathResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedAllCssResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedAllXPathResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedExecuteScriptResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedFieldsets = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedSections = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedIFrames = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedIDs = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedHasContentResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedHasContentMatchResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedHasCssResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedHasXPathResults = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
+        private readonly List<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
+        public readonly IList<string> FindButtonRequests = new List<string>();
+        public readonly IList<string> FindLinkRequests = new List<string>();
+        public readonly IList<string> FindCssRequests = new List<string>();
         private IList<Cookie> stubbedCookies;
         private Uri stubbedLocation;
-        private readonly IList<ScopedStubElement> scopedLinks = new List<ScopedStubElement>();
+
+        public List<DriverScope> ModalDialogsAccepted = new List<DriverScope>();
+        public List<DriverScope> ModalDialogsCancelled = new List<DriverScope>();
+
 
         public FakeDriver() {}
         public FakeDriver(Browser browser)
@@ -51,116 +55,53 @@ namespace Coypu.Tests.TestDoubles
             Browser = browser;
         }
 
+        
+        class ScopedStubResult
+        {
+            public object Locator;
+            public object Result;
+            public DriverScope Scope;
+        }
+
+
         public Browser Browser { get; private set; }
-
-        public IEnumerable<Element> ClickedElements
-        {
-            get { return clickedElements; }
-        }
-
-        public IEnumerable<Element> HoveredElements
-        {
-            get { return hoveredElements; }
-        }
-
-        public IDictionary<Element, string> SetFields
-        {
-            get { return setFields; }
-        }
-
-        public IDictionary<Element, string> SelectedOptions
-        {
-            get { return selectedOptions; }
-        }
-
-        public IEnumerable<Element> CheckedElements
-        {
-            get { return checkedElements; }
-        }
-
-        public IEnumerable<Element> ChosenElements
-        {
-            get { return chosenElements; }
-        }
-
-        public IEnumerable<Element> UncheckedElements
-        {
-            get { return uncheckedElements; }
-        }
-
-        public IEnumerable<string> Visits
-        {
-            get { return visits; }
-        }
-
-        public IEnumerable<string> HasContentQueries
-        {
-            get { return hasContentQueries; }
-        }
-
-        public IEnumerable<Regex> HasContentMatchQueries
-        {
-            get { return hasContentMatchQueries; }
-        }
-
-        public IEnumerable<string> HasCssQueries
-        {
-            get { return hasCssQueries; }
-        }
-
-        public IEnumerable<string> HasXPathQueries
-        {
-            get { return hasXPathQueries; }
-        }
-
-        public IEnumerable<string> FindButtonRequests
-        {
-            get { return findButtonRequests; }
-        }
-
-        public IEnumerable<string> FindLinkRequests
-        {
-            get { return findLinkRequests; }
-        }
 
         public ElementFound FindButton(string locator, DriverScope scope)
         {
-            findButtonRequests.Add(locator);
-            return stubbedButtons[locator];
+            FindButtonRequests.Add(locator);
+            return Find<ElementFound>(stubbedButtons,locator,scope);
+        }
+
+        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, DriverScope scope)
+        {
+            var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope);
+            if (scopedStubResult == null)
+            {
+                throw new MissingHtmlException("Element not found: " + locator);
+            }
+            return (T) scopedStubResult.Result;
         }
 
         public ElementFound FindLink(string linkText, DriverScope scope)
         {
-            findLinkRequests.Add(linkText);
+            FindLinkRequests.Add(linkText);
 
-            return stubbedLinks.ContainsKey(linkText) 
-                ? stubbedLinks[linkText] 
-                : FindScopedElement(scopedLinks, linkText, scope);
-        }
-
-        private ElementFound FindScopedElement(IEnumerable<ScopedStubElement> collection, string locator, DriverScope scope)
-        {
-            var element = collection.FirstOrDefault(scopedLink => scopedLink.Locator == locator && scopedLink.Scope == scope);
-
-            if (element != null)
-                return element.Element;
-
-            throw new MissingHtmlException("Element not found: " + locator);
+            return Find<ElementFound>(stubbedLinks, linkText, scope);
         }
 
         public ElementFound FindField(string locator, DriverScope scope)
         {
-            return stubbedTextFields[locator];
+            return Find<ElementFound>(stubbedTextFields, locator, scope);
         }
 
         public void Click(Element element)
         {
-            clickedElements.Add(element);
+            ClickedElements.Add(element);
         }
 
         public void Hover(Element element)
         {
-            hoveredElements.Add(element);
+            HoveredElements.Add(element);
         }
 
         public IEnumerable<Cookie> GetBrowserCookies()
@@ -174,67 +115,67 @@ namespace Coypu.Tests.TestDoubles
 
         public void Visit(string url)
         {
-            visits.Add(url);
+            Visits.Add(url);
         }
 
-        public void StubButton(string locator, ElementFound element)
+        public void StubButton(string locator, ElementFound element, DriverScope scope)
         {
-            stubbedButtons[locator] = element;
+            stubbedButtons.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
         }
 
-        public void StubLink(string locator, ElementFound element)
+        public void StubLink(string locator, ElementFound element, DriverScope scope)
         {
-            stubbedLinks[locator] = element;
+            stubbedLinks.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
         }
 
-        public void StubField(string locator, ElementFound element)
+        public void StubField(string locator, ElementFound element, DriverScope scope)
         {
-            stubbedTextFields[locator] = element;
+            stubbedTextFields.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
         }
 
-        public void StubHasContent(string text, bool result)
+        public void StubHasContent(string text, bool result, DriverScope scope)
         {
-            stubbedHasContentResults.Add(text, result);
+            stubbedHasContentResults.Add(new ScopedStubResult { Locator = text, Scope = scope, Result = result });
         }
 
-        public void StubHasContentMatch(Regex pattern, bool result)
+        public void StubHasContentMatch(Regex pattern, bool result, DriverScope scope)
         {
-            stubbedHasContentMatchResults.Add(pattern, result);
+            stubbedHasContentMatchResults.Add(new ScopedStubResult { Locator = pattern, Scope = scope, Result = result });
         }
 
-        public void StubHasCss(string cssSelector, bool result)
+        public void StubHasCss(string cssSelector, bool result, DriverScope scope)
         {
-            stubbedHasCssResults.Add(cssSelector, result);
+            stubbedHasCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
         }
 
-        public void StubHasXPath(string xpath, bool result)
+        public void StubHasXPath(string xpath, bool result, DriverScope scope)
         {
-            stubbedHasXPathResults.Add(xpath, result);
+            stubbedHasXPathResults.Add(new ScopedStubResult { Locator = xpath, Scope = scope, Result = result });
         }
 
-        public void StubDialog(string text, bool result)
+        public void StubDialog(string text, bool result, DriverScope scope)
         {
-            stubbedHasDialogResults.Add(text, result);
+            stubbedHasDialogResults.Add(new ScopedStubResult { Locator = text, Scope = scope, Result = result });
         }
 
-        public void StubCss(string cssSelector, ElementFound result)
+        public void StubCss(string cssSelector, ElementFound result, DriverScope scope)
         {
-            stubbedCssResults.Add(cssSelector, result);
+            stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
         }
 
-        public void StubXPath(string cssSelector, ElementFound result)
+        public void StubXPath(string cssSelector, ElementFound result, DriverScope scope)
         {
-            stubbedXPathResults.Add(cssSelector, result);
+            stubbedXPathResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
         }
 
-        public void StubAllCss(string cssSelector, IEnumerable<ElementFound> result)
+        public void StubAllCss(string cssSelector, IEnumerable<ElementFound> result, DriverScope scope)
         {
-            stubbedAllCssResults.Add(cssSelector, result);
+            stubbedAllCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
         }
 
-        public void StubAllXPath(string xpath, IEnumerable<ElementFound> result)
+        public void StubAllXPath(string xpath, IEnumerable<ElementFound> result, DriverScope scope)
         {
-            stubbedAllXPathResults.Add(xpath, result);
+            stubbedAllXPathResults.Add(new ScopedStubResult { Locator = xpath, Scope = scope, Result = result });
         }
 
         public void Dispose()
@@ -254,57 +195,49 @@ namespace Coypu.Tests.TestDoubles
             get { throw new NotImplementedException(); }
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(DriverScope scope)
         {
-            ModalDialogsAccepted++;
+            ModalDialogsAccepted.Add(scope);
         }
 
-        public void CancelModalDialog()
+        public void CancelModalDialog(DriverScope scope)
         {
-            ModalDialogsCancelled++;
+            ModalDialogsCancelled.Add(scope);
         }
 
-        private ElementFound Find(IDictionary<string, ElementFound> dictionary, string locator)
+        public string ExecuteScript(string javascript, DriverScope scope)
         {
-            if (dictionary.ContainsKey(locator))
-                return dictionary[locator];
-
-            throw new MissingHtmlException("Element not found: " + locator);
-        }
-
-        public string ExecuteScript(string javascript)
-        {
-            return stubbedExecuteScriptResults[javascript];
+            return Find<string>(stubbedExecuteScriptResults, javascript, scope);
         }
 
         public ElementFound FindFieldset(string locator, DriverScope scope)
         {
-            return Find(stubbedFieldsets,locator);
+            return Find<ElementFound>(stubbedFieldsets, locator, scope);
         }
 
         public ElementFound FindSection(string locator, DriverScope scope)
         {
-            return Find(stubbedSections,locator);
+            return Find<ElementFound>(stubbedSections, locator, scope);
         }
 
         public ElementFound FindId(string id, DriverScope scope)
         {
-            return Find(stubbedIDs,id);
+            return Find<ElementFound>(stubbedIDs, id, scope);
         }
 
         public ElementFound FindIFrame(string locator, DriverScope scope)
         {
-            return Find(stubbedIFrames,locator);
+            return Find<ElementFound>(stubbedIFrames, locator, scope);
         }
 
         public void Set(Element element, string value)
         {
-            setFields.Add(element, value);
+            SetFields.Add(element, value);
         }
 
         public void Select(Element element, string option)
         {
-            selectedOptions.Add(element, option);
+            SelectedOptions.Add(element, option);
         }
 
         public object Native
@@ -312,101 +245,92 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on fake driver"; }
         }
 
-        public int ModalDialogsAccepted { get; private set; }
-
-        public int ModalDialogsCancelled { get; private set; }
-
-        public IList<string> FindCssRequests
-        {
-            get { return findCssRequests; }
-        }
-
         public bool HasContent(string text, DriverScope scope)
         {
-            hasContentQueries.Add(text);
-            return stubbedHasContentResults[text];
+            HasContentQueries.Add(text);
+            return Find<bool>(stubbedHasContentResults, text, scope);
         }
 
         public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
-            hasContentMatchQueries.Add(pattern);
-            return stubbedHasContentMatchResults[pattern];
+            HasContentMatchQueries.Add(pattern);
+            return Find<bool>(stubbedHasContentMatchResults, pattern, scope);
         }
 
         public bool HasCss(string cssSelector, DriverScope scope)
         {
-            return stubbedHasCssResults[cssSelector];
+            return Find<bool>(stubbedHasCssResults, cssSelector, scope);
         }
 
         public bool HasXPath(string xpath, DriverScope scope)
         {
-            return stubbedHasXPathResults[xpath];
+            return Find<bool>(stubbedHasXPathResults, xpath, scope);
         }
 
-        public bool HasDialog(string withText)
+        public bool HasDialog(string withText, DriverScope scope)
         {
-            return stubbedHasDialogResults[withText];
+            return Find<bool>(stubbedHasDialogResults, withText, scope);
         }
 
         public ElementFound FindCss(string cssSelector, DriverScope scope)
         {
             FindCssRequests.Add(cssSelector);
-            return Find(stubbedCssResults,cssSelector);
+            return Find<ElementFound>(stubbedCssResults, cssSelector, scope);
         }
 
         public ElementFound FindXPath(string xpath, DriverScope scope)
         {
-            return Find(stubbedXPathResults,xpath);
+            return Find<ElementFound>(stubbedXPathResults, xpath, scope);
         }
 
         public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return stubbedAllCssResults[cssSelector];
+            return Find<IEnumerable<ElementFound>>(stubbedAllCssResults, cssSelector, scope);
         }
 
         public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
-            return stubbedAllXPathResults[xpath];
+            return Find<IEnumerable<ElementFound>>(stubbedAllXPathResults, xpath, scope);
         }
 
         public void Check(Element field)
         {
-            checkedElements.Add(field);
+            CheckedElements.Add(field);
         }
 
         public void Uncheck(Element field)
         {
-            uncheckedElements.Add(field);
+            UncheckedElements.Add(field);
         }
 
         public void Choose(Element field)
         {
-            chosenElements.Add(field);
+            ChosenElements.Add(field);
         }
 
-        public void StubExecuteScript(string script, string scriptReturnValue)
+        public void StubExecuteScript(string script, string scriptReturnValue, DriverScope scope)
         {
-            stubbedExecuteScriptResults.Add(script, scriptReturnValue);
+            stubbedExecuteScriptResults.Add(new ScopedStubResult{Locator = script, Scope =  scope, Result = scriptReturnValue});
         }
 
-        public void StubFieldset(string locator, ElementFound fieldset)
+        public void StubFieldset(string locator, ElementFound fieldset, DriverScope scope)
         {
-            stubbedFieldsets.Add(locator, fieldset);
-        }
-        
-        public void StubSection(string locator, ElementFound section)
-        {
-            stubbedSections.Add(locator, section);
+            stubbedFieldsets.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = fieldset});
         }
 
-        public void StubIFrame(string locator, ElementFound iframe)
+        public void StubSection(string locator, ElementFound section, DriverScope scope)
         {
-            stubbedIFrames.Add(locator, iframe);
+            stubbedSections.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = section});
         }
 
-        public void StubId(string id, ElementFound element)
+        public void StubIFrame(string locator, ElementFound iframe, DriverScope scope)
         {
-            stubbedIDs.Add(id, element);
+            stubbedIFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = iframe });
+        }
+
+        public void StubId(string id, ElementFound element, DriverScope scope)
+        {
+            stubbedIDs.Add(new ScopedStubResult { Locator = id, Scope = scope, Result = element });
         }
 
         public void StubCookies(List<Cookie> cookies)
@@ -419,16 +343,16 @@ namespace Coypu.Tests.TestDoubles
             stubbedLocation = location;
         }
 
-        public void StubLink(string locator, StubElement element, DriverScope scope)
+        public void StubWindow(string locator, ElementFound window, DriverScope scope)
         {
-            scopedLinks.Add(new ScopedStubElement {Locator = locator, Element = element, Scope = scope});
+            stubbedWindows.Add(new ScopedStubResult {Locator = locator, Scope = scope, Result = window});
+        }
+
+        public ElementFound FindWindow(string locator, DriverScope scope)
+        {
+            return Find<ElementFound>(stubbedWindows, locator, scope);
         }
     }
 
-    class ScopedStubElement
-    {
-        public string Locator;
-        public StubElement Element;
-        public DriverScope Scope;
-    }
+
 }

@@ -11,9 +11,9 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Trigger an alert", Root));
-                Driver.HasDialog("You have triggered an alert and this is the text.").should_be_true();
-                Driver.AcceptModalDialog();
-                Driver.HasDialog("You have triggered an alert and this is the text.").should_be_false();
+                Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_true();
+                Driver.AcceptModalDialog(Root);
+                Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_false();
             }
         }
 
@@ -24,9 +24,9 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Trigger a confirm", Root));
-                Driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
-                Driver.AcceptModalDialog();
-                Driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
+                Driver.AcceptModalDialog(Root);
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
             }
         }
 
@@ -36,7 +36,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Trigger a confirm", Root));
-                Driver.AcceptModalDialog();
+                Driver.AcceptModalDialog(Root);
                 Driver.FindLink("Trigger a confirm - accepted", Root).should_not_be_null();
             }
         }
@@ -48,9 +48,9 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Trigger a confirm", Root));
-                Driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
-                Driver.CancelModalDialog();
-                Driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
+                Driver.CancelModalDialog(Root);
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
             }
         }
 
@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Trigger a confirm", Root));
-                Driver.CancelModalDialog();
+                Driver.CancelModalDialog(Root);
                 Driver.FindLink("Trigger a confirm - cancelled", Root).should_not_be_null();
             }
         }

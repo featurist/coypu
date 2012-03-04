@@ -17,6 +17,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected SpyRobustWrapper spyRobustWrapper;
         protected StubUrlBuilder stubUrlBuilder;
         protected Configuration configuration;
+        protected ElementScope elementScope;
         protected object queryResult;
 
         [SetUp]
@@ -29,6 +30,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             configuration = new Configuration();
             browserSession = TestSessionBuilder.Build(configuration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
                                                       stubUrlBuilder);
+
+            elementScope = browserSession.FindXPath(".");
         }
 
         protected object RunQueryAndCheckTiming()
@@ -49,6 +52,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout)
         {
             var query = spyRobustWrapper.QueriesRan<T>().Single();
+            RunQueryAndCheckTiming(query, timeout);
+
+            return query.Result;
+        }
+
+        protected T RunQueryAndCheckTiming<T>(TimeSpan timeout, int index)
+        {
+            var query = spyRobustWrapper.QueriesRan<T>().ElementAt(index);
             RunQueryAndCheckTiming(query, timeout);
 
             return query.Result;

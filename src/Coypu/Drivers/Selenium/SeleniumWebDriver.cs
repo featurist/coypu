@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -25,7 +26,6 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                //Console.WriteLine("By.Window");
                 return new SeleniumSearchContext(selenium);
             }
         }
@@ -156,9 +156,9 @@ namespace Coypu.Drivers.Selenium
 
         private string GetContent(DriverScope scope)
         {
-            var seleniumScope = ElementFinder.SeleniumScope(scope);
+            var seleniumScope = elementFinder.SeleniumScope(scope);
             return seleniumScope == Window.Native
-                       ? GetText(By.TagName("body"), seleniumScope)
+                       ? GetText(By.CssSelector("body"), seleniumScope)
                        : GetText(By.XPath("."), seleniumScope);
         }
 
@@ -178,8 +178,9 @@ namespace Coypu.Drivers.Selenium
             return Find(By.XPath(xpath), scope).Any();
         }
 
-        public bool HasDialog(string withText)
+        public bool HasDialog(string withText, DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             return dialogs.HasDialog(withText);
         }
 
@@ -201,6 +202,41 @@ namespace Coypu.Drivers.Selenium
         public IEnumerable<Cookie> GetBrowserCookies()
         {
             return selenium.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
+        }
+
+        public ElementFound FindWindow(string titleOrName, DriverScope scope)
+        {
+            return new WindowHandle(selenium, FindWindowHandle(titleOrName));
+        }
+
+        private string FindWindowHandle(string titleOrName)
+        {
+            var currentHandle = selenium.CurrentWindowHandle;
+            string matchingWindowHandle = null;
+
+            try
+            {
+                selenium.SwitchTo().Window(titleOrName);
+                matchingWindowHandle = selenium.CurrentWindowHandle;
+            }
+            catch (NoSuchWindowException)
+            {
+                foreach (var windowHandle in selenium.WindowHandles)
+                {
+                    selenium.SwitchTo().Window(windowHandle);
+                    if (windowHandle == titleOrName || selenium.Title == titleOrName)
+                    {
+                        matchingWindowHandle = windowHandle;
+                        break;
+                    }
+                }
+            }
+
+            if (matchingWindowHandle == null)
+                throw new MissingHtmlException("No such window found: " + titleOrName);
+
+            selenium.SwitchTo().Window(currentHandle);
+            return matchingWindowHandle;
         }
 
         public void Set(Element element, string value) 
@@ -225,13 +261,15 @@ namespace Coypu.Drivers.Selenium
             optionSelector.Select(element, option);
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.AcceptModalDialog();
         }
 
-        public void CancelModalDialog()
+        public void CancelModalDialog(DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.CancelModalDialog();
         }
 
@@ -256,8 +294,9 @@ namespace Coypu.Drivers.Selenium
             SeleniumElement(field).Click();
         }
 
-        public string ExecuteScript(string javascript)
+        public string ExecuteScript(string javascript, DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             var result = selenium.ExecuteScript(javascript);
             return result == null ? null : result.ToString();
         }

@@ -4,7 +4,7 @@ using Coypu.Queries;
 
 namespace Coypu.Robustness
 {
-    internal interface RobustWrapper
+    public interface RobustWrapper
     {
         T Robustly<T>(Query<T> query);
         void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry);

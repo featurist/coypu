@@ -10,7 +10,7 @@ namespace Coypu.Drivers.Tests
         {
             Driver.FindButton("firstButtonId", Root).Text.should_be("first button");
 
-            Driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';");
+            Driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';", Root);
 
             Driver.FindButton("firstButtonId", Root).Text.should_be("script executed");
         }
@@ -20,7 +20,7 @@ namespace Coypu.Drivers.Tests
         public void Returns_the_result()
 
         {
-            Driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;").should_be("first button");
+            Driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;", Root).should_be("first button");
         }
     }
 }

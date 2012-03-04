@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
@@ -28,8 +27,12 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<IWebElement> Find(By by, DriverScope scope)
         {
-            var context = SeleniumScope(scope);
+            return SeleniumScope(scope).FindElements(by).Where(e => IsDisplayed(e, scope));
+        }
 
+        public ISearchContext SeleniumScope(DriverScope scope)
+        {
+            var context = (ISearchContext) scope.Now().Native;
             if (context == selenium && _outerWindowHandle != null)
                 selenium.SwitchTo().Window(_outerWindowHandle);
 
@@ -40,13 +43,8 @@ namespace Coypu.Drivers.Selenium
                 selenium.SwitchTo().Frame(frame);
                 context = selenium;
             }
-            //Console.WriteLine(by);
-            return context.FindElements(by).Where(e => IsDisplayed(e, scope));
-        }
 
-        public static ISearchContext SeleniumScope(DriverScope scope)
-        {
-            return (ISearchContext) scope.Now().Native;
+            return context;
         }
 
         public bool IsDisplayed(IWebElement e, DriverScope scope)

@@ -73,7 +73,7 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public bool HasDialog(string withText)
+        public bool HasDialog(string withText, DriverScope scope)
         {
             return false;
         }
@@ -128,14 +128,12 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(DriverScope scope)
         {
-            
         }
 
-        public void CancelModalDialog()
+        public void CancelModalDialog(DriverScope scope)
         {
-            
         }
 
         public void SetScope(ElementFound findScope)
@@ -148,7 +146,7 @@ namespace Coypu.Tests.TestDoubles
             
         }
 
-        public string ExecuteScript(string javascript)
+        public string ExecuteScript(string javascript, DriverScope scope)
         {
             return null;
         }
@@ -182,9 +180,13 @@ namespace Coypu.Tests.TestDoubles
             return new List<Cookie>();
         }
 
+        public ElementFound FindWindow(string locator, DriverScope scope)
+        {
+            return null;
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
-            
         }
     }
 }

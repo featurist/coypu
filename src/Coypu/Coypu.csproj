@@ -95,12 +95,15 @@
     <Compile Include="Actions\Select.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="ActivatorDriverFactory.cs" />
+    <Compile Include="BrowserWindow.cs" />
     <Compile Include="DriverFactory.cs" />
     <Compile Include="Drivers\Selenium\SeleniumSearchContext.cs" />
+    <Compile Include="Drivers\Selenium\WindowHandle.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="CssFinder.cs" />
+    <Compile Include="Finders\WindowFinder.cs" />
     <Compile Include="Finders\FieldFinder.cs" />
     <Compile Include="Finders\FieldsetFinder.cs" />
     <Compile Include="Finders\DocumentElementFinder.cs" />

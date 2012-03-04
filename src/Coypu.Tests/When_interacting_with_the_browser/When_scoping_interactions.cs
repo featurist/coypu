@@ -13,7 +13,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             browserSession = TestSessionBuilder.Build(new Configuration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), fakeWaiter, null, stubUrlBuilder);
             var section = new StubElement();
             var expectedLink = new StubElement();
-            driver.StubSection("some section",section);
+            driver.StubSection("some section", section, browserSession.DriverScope);
 
             var innerScope = browserSession.FindSection("some section");
 

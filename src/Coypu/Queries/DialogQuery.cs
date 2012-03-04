@@ -14,7 +14,7 @@ namespace Coypu.Queries
 
         public override void Run()
         {
-            Result = !driver.HasDialog(text);
+            Result = !driver.HasDialog(text,DriverScope);
         }
     }
 }
