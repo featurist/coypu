@@ -22,10 +22,12 @@ namespace Coypu.AcceptanceTests
         [TestFixtureSetUp]
         public void SetUpFixture()
         {
-            var configuration = new Configuration();
-            configuration.Timeout = TimeSpan.FromMilliseconds(2000);
-            configuration.Browser = Browser.Firefox;
-            configuration.Driver = typeof(SeleniumWebDriver);
+            var configuration = new Configuration
+                                    {
+                                        Timeout = TimeSpan.FromMilliseconds(2000),
+                                        Browser = Browser.Firefox,
+                                        Driver = typeof (SeleniumWebDriver)
+                                    };
             browser = new BrowserSession(configuration);
 
         }
@@ -445,12 +447,15 @@ namespace Coypu.AcceptanceTests
         {
             var mainWindow = browser;
 
-            mainWindow.ClickButton("Open pop up window");
+            mainWindow.ClickLink("Open pop up window");
 
             var popUp = mainWindow.FindWindow("Pop Up Window");
 
             Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
             Assert.That(popUp.FindButton("scoped button").Id, Is.EqualTo("popUpButtonId"));
+
+            // And back
+            Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
         }
 
         [Test]

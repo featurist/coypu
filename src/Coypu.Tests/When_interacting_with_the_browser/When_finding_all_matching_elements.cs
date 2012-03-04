@@ -26,7 +26,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             var expectedImmediateResult = new[] {new StubElement()};
 
-            stub(locator, expectedImmediateResult, browserSession.DriverScope);
+            stub(locator, expectedImmediateResult, browserSession);
 
             var actualImmediateResult = subject(locator,configuration);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));

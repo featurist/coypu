@@ -5,14 +5,16 @@ namespace Coypu.Drivers.Selenium
 {
     internal class SeleniumElement : ElementFound
     {
-        private IWebElement NativeSeleniumElement
+        private readonly IWebElement native;
+
+        protected IWebElement NativeSeleniumElement
         {
-            get { return (IWebElement) Native; }
+            get { return native; }
         }
 
         public SeleniumElement(IWebElement seleniumElement)
         {
-            Native = seleniumElement;
+            native = seleniumElement;
         }
 
         public string Id
@@ -51,7 +53,10 @@ namespace Coypu.Drivers.Selenium
             get { return NativeSeleniumElement.Selected; }
         }
 
-        public object Native { get; set; }
+        public virtual object Native
+        {
+            get { return native; }
+        }
 
         public bool Stale
         {

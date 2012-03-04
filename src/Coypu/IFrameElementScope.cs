@@ -16,7 +16,7 @@ namespace Coypu
             get
             {
                 FindXPath("/*").Now();
-                return DriverScope.Location;
+                return driver.Location;
             }
         }
     }

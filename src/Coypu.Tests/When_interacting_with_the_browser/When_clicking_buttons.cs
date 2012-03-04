@@ -90,7 +90,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         private StubElement StubButtonToBeClicked(string locator)
         {
             var buttonToBeClicked = new StubElement {Id = Guid.NewGuid().ToString()};
-            driver.StubButton(locator, buttonToBeClicked, browserSession.DriverScope);
+            driver.StubButton(locator, buttonToBeClicked, browserSession);
             return buttonToBeClicked;
         }
     }

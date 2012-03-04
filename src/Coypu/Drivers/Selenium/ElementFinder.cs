@@ -2,20 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {
     internal class ElementFinder
     {
         private readonly XPath xPath;
-        private readonly RemoteWebDriver selenium;
-        private string _outerWindowHandle;
 
-        public ElementFinder(XPath xPath, RemoteWebDriver selenium)
+        public ElementFinder(XPath xPath)
         {
             this.xPath = xPath;
-            this.selenium = selenium;
         }
 
         public IEnumerable<IWebElement> FindByPartialId(string id, DriverScope scope)
@@ -32,19 +28,7 @@ namespace Coypu.Drivers.Selenium
 
         public ISearchContext SeleniumScope(DriverScope scope)
         {
-            var context = (ISearchContext) scope.Now().Native;
-            if (context == selenium && _outerWindowHandle != null)
-                selenium.SwitchTo().Window(_outerWindowHandle);
-
-            _outerWindowHandle = selenium.CurrentWindowHandle;
-            var frame = context as IWebElement;
-            if (frame != null && frame.TagName == "iframe")
-            {
-                selenium.SwitchTo().Frame(frame);
-                context = selenium;
-            }
-
-            return context;
+            return (ISearchContext) scope.Now().Native;
         }
 
         public bool IsDisplayed(IWebElement e, DriverScope scope)

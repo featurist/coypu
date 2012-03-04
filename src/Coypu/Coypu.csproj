@@ -97,7 +97,7 @@
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="DriverFactory.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumSearchContext.cs" />
+    <Compile Include="Drivers\Selenium\SeleniumFrame.cs" />
     <Compile Include="Drivers\Selenium\WindowHandle.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
@@ -148,6 +148,7 @@
     <Compile Include="RobustElementScope.cs" />
     <Compile Include="Actions\DriverAction.cs" />
     <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
+    <Compile Include="RobustWindowScope.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Finders\SectionFinder.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />

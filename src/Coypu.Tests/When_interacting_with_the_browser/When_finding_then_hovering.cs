@@ -11,16 +11,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_makes_robust_call_to_find_then_hover_element_on_underlying_driver()
         {
             var element = new StubElement();
-            driver.StubCss("something.to hover", element, browserSession.DriverScope);
+            driver.StubCss("something.to hover", element, browserSession);
             spyRobustWrapper.AlwaysReturnFromRobustly(element);
 
             browserSession.FindCss("something.to hover").Hover();
 
-            Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
-
             RunQueryAndCheckTiming();
 
-            Assert.That(driver.FindCssRequests.Single(), Is.EqualTo("something.to hover"));
+            Assert.That(driver.FindCssRequests, Is.Empty, "Finder call not deferred");
             Assert.That(driver.HoveredElements, Has.Member(element));
         }
     }

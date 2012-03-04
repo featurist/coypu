@@ -8,13 +8,13 @@ using Coypu.Robustness;
 
 namespace Coypu
 {
-    public class DriverScope : Scope<DriverScope>
+    public class DriverScope : Scope
     {
-        private readonly Configuration configuration;
+        protected readonly Configuration configuration;
         private readonly ElementFinder elementFinder;
         protected Driver driver;
         internal RobustWrapper robustWrapper;
-        private readonly Waiter waiter;
+        protected readonly Waiter waiter;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
         private ElementFound element;
@@ -22,8 +22,8 @@ namespace Coypu
 
         internal DriverScope(Configuration configuration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
+            this.elementFinder = elementFinder ?? new DocumentElementFinder(driver);
             this.configuration = configuration;
-            this.elementFinder = elementFinder;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.waiter = waiter;
@@ -53,12 +53,12 @@ namespace Coypu
             get { return Default(options).ConsiderInvisibleElements; }
         }
 
-        private Options SetOptions(Options options)
+        protected Options SetOptions(Options options)
         {
             return this.options = Default(options);
         }
 
-        internal Options Default(Options options)
+        private Options Default(Options options)
         {
             return options ?? configuration;
         }
@@ -68,10 +68,9 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope ClickButton(string locator, Options options = null)
+        public void ClickButton(string locator, Options options = null)
         {
             RetryUntilTimeout(WaitThenClickButton(locator, SetOptions(options)));
-            return this;
         }
 
         /// <summary>
@@ -79,10 +78,9 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the link</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope ClickLink(string locator, Options options = null)
+        public void ClickLink(string locator, Options options = null)
         {
             RetryUntilTimeout(WaitThenClickLink(locator, SetOptions(options)));
-            return this;
         }
 
         private WaitThenClick WaitThenClickLink(string locator, Options options)
@@ -394,10 +392,9 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope Check(string locator, Options options = null)
+        public void Check(string locator, Options options = null)
         {
             RetryUntilTimeout(new Check(driver, this, locator, SetOptions(options)));
-            return this;
         }
 
         /// <summary>
@@ -405,10 +402,9 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope Uncheck(string locator, Options options = null)
+        public void Uncheck(string locator, Options options = null)
         {
             RetryUntilTimeout(new Uncheck(driver, this, locator, SetOptions(options)));
-            return this;
         }
 
         /// <summary>
@@ -416,10 +412,9 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public DriverScope Choose(string locator, Options options = null)
+        public void Choose(string locator, Options options = null)
         {
             RetryUntilTimeout(new Choose(driver, this, locator, SetOptions(options)));
-            return this;
         }
 
         /// <summary>
@@ -549,7 +544,12 @@ namespace Coypu
             return stateFinder.FindState(SetOptions(options), states);
         }
 
-        public ElementFound Now()
+        public virtual ElementFound Now()
+        {
+            return FindElement();
+        }
+
+        protected internal ElementFound FindElement()
         {
             if (element == null || element.Stale)
                 element = elementFinder.Find();

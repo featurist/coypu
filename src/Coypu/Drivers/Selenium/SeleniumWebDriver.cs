@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return new SeleniumSearchContext(selenium);
+                return new WindowHandle(selenium, selenium.CurrentWindowHandle);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Coypu.Drivers.Selenium
         {
             selenium = webDriver;
             xPath = new XPath();
-            elementFinder = new ElementFinder(xPath,selenium);
+            elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
             iframeFinder = new IFrameFinder(selenium, elementFinder,xPath);
             textMatcher = new TextMatcher();
@@ -79,7 +79,12 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindIFrame(string locator, DriverScope scope) 
         {
-            return BuildElement(iframeFinder.FindIFrame(locator, scope), "Failed to find frame: " + locator);
+            var element = iframeFinder.FindIFrame(locator, scope);
+
+            if (element == null)
+                throw new MissingHtmlException("Failed to find frame: " + locator);
+
+            return new SeleniumFrame(element,selenium);
         }
 
         public ElementFound FindLink(string linkText, DriverScope scope)

@@ -49,21 +49,21 @@ namespace Coypu
         public bool ConsiderInvisibleElements { get; set; }
     }
 
-    public interface Scope<out TConcrete>
+    public interface Scope
     {
         /// <summary>
         /// Click a button, input of type button|submit|image or div with the css class "button"
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete ClickButton(string locator, Options options = null);
+        void ClickButton(string locator, Options options = null);
 
         /// <summary>
         /// Click the first matching link
         /// </summary>
         /// <param name="locator">The text of the link</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete ClickLink(string locator, Options options = null);
+        void ClickLink(string locator, Options options = null);
 
         /// <summary>
         /// Find the first input of type button|submit|image or div with the css class "button" to appear within the <see cref="Configuration.Timeout"/> .
@@ -257,21 +257,21 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete Check(string locator, Options options = null);
+        void Check(string locator, Options options = null);
 
         /// <summary>
         /// Uncheck the first checkbox to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, name or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete Uncheck(string locator, Options options = null);
+        void Uncheck(string locator, Options options = null);
 
         /// <summary>
         /// Choose the first radio button to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, the name, the value or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        TConcrete Choose(string locator, Options options = null);
+        void Choose(string locator, Options options = null);
 
         /// <summary>
         /// Executes custom javascript in the browser

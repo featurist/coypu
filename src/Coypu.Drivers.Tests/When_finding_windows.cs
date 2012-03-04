@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -22,9 +23,20 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
+        public void Finds_scoped_by_window()
+        {
+            Driver.Click(Driver.FindLink("Open pop up window", Root));
+            
+            var popUp = new DriverScope(new Configuration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+
+            Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+            Assert.That(Driver.HasContent("I am a pop up window", Root), Is.False);
+        }
+
+        [Test]
         public void Errors_on_no_such_window()
         {
-            Driver.Click(Driver.FindButton("Open pop up window", Root));
+            Driver.Click(Driver.FindLink("Open pop up window", Root));
             Assert.Throws<MissingHtmlException>(() => Driver.FindWindow("Not A Window", Root));
             ;
         }

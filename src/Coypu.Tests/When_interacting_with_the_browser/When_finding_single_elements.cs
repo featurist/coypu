@@ -67,7 +67,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Should_find_robustly(browserSession.FindXPath,elementScope.FindXPath, driver.StubXPath);
         }
 
-        protected void Should_find_robustly(Func<string, Options, ElementScope> subject, Func<string, Options, ElementScope> scope, Action<string, ElementFound, DriverScope> stub)
+        protected void Should_find_robustly(Func<string, Options, DriverScope> subject, Func<string, Options, DriverScope> scope, Action<string, ElementFound, DriverScope> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -78,8 +78,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult);
 
-            stub(locator, expectedDeferredResult,browserSession.DriverScope);
-            stub(locator, expectedDeferredResult,elementScope.DriverScope);
+            stub(locator, expectedDeferredResult,browserSession);
+            stub(locator, expectedDeferredResult,elementScope);
 
             var options = new Options{Timeout = individualTimeout};
 
@@ -89,7 +89,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                 VerifyFoundRobustly(scope, 1, locator, expectedDeferredResult, expectedImmediateResult, options);
         }
 
-        private void VerifyFoundRobustly(Func<string, Options, ElementScope> scope, int driverCallIndex, string locator, StubElement expectedDeferredResult, StubElement expectedImmediateResult, Options options)
+        private void VerifyFoundRobustly(Func<string, Options, DriverScope> scope, int driverCallIndex, string locator, StubElement expectedDeferredResult, StubElement expectedImmediateResult, Options options)
         {
             var sub = scope;
             var scopedResult = sub(locator, options).Now();

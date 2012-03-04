@@ -13,7 +13,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.ModalDialogsAccepted.Any(), Is.False);
             RunQueryAndCheckTiming();
-            Assert.That(driver.ModalDialogsAccepted.Single(), Is.SameAs(browserSession.DriverScope));
+            Assert.That(driver.ModalDialogsAccepted.Single(), Is.SameAs(browserSession));
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(driver.ModalDialogsCancelled.Any(), Is.False);
             RunQueryAndCheckTiming();
-            Assert.That(driver.ModalDialogsCancelled.Single(), Is.SameAs(browserSession.DriverScope));
+            Assert.That(driver.ModalDialogsCancelled.Single(), Is.SameAs(browserSession));
         }
 
     }

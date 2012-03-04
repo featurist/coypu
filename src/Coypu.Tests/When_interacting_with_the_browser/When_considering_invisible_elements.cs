@@ -8,15 +8,15 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_sets_the_driver_scope_to_consider_invisible_elements()
         {
-            Assert.That(browserSession.DriverScope.ConsiderInvisibleElements, Is.False);
+            Assert.That(browserSession.ConsiderInvisibleElements, Is.False);
 
             browserSession.ClickButton("invisible", new Options{ConsiderInvisibleElements = true});
 
-            Assert.That(browserSession.DriverScope.ConsiderInvisibleElements, Is.True);
+            Assert.That(browserSession.ConsiderInvisibleElements, Is.True);
 
             browserSession.ClickButton("visible");
 
-            Assert.That(browserSession.DriverScope.ConsiderInvisibleElements, Is.False);
+            Assert.That(browserSession.ConsiderInvisibleElements, Is.False);
         }
     }
 }

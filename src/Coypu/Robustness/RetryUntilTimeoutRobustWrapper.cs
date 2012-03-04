@@ -49,9 +49,7 @@ namespace Coypu.Robustness
                 catch (NotSupportedException) { throw; }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine("Timeout: " + timeout);
-                    Console.WriteLine("Interval: " + interval);
+                    //Console.WriteLine(ex.Message);
                     if (TimeoutReached(stopWatch, timeout, interval))
                     {
                         throw;
@@ -92,7 +90,6 @@ namespace Coypu.Robustness
         private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
             var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
-            Console.WriteLine("Elapsed: " + elapsedTimeToNextCall);
             var timeoutReached = elapsedTimeToNextCall >= timeout;
 
             return timeoutReached;

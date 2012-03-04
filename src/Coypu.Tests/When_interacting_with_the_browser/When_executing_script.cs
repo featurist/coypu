@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             const string script = "document.getElementById('asdf').click();";
             const string expectedReturnValue = "script return value";
 
-            driver.StubExecuteScript(script, expectedReturnValue, browserSession.DriverScope);
+            driver.StubExecuteScript(script, expectedReturnValue, browserSession);
 
             Assert.That(browserSession.ExecuteScript(script), Is.EqualTo(expectedReturnValue));
         }

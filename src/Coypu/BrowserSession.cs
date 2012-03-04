@@ -35,9 +35,14 @@ namespace Coypu
         }
 
         internal BrowserSession(DriverFactory driver, Configuration configuration, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
-            : base(driver.NewWebDriver(configuration.Driver, configuration.Browser), configuration, robustWrapper, waiter, urlBuilder)
+            : base(configuration, null, driver.NewWebDriver(configuration.Driver, configuration.Browser), robustWrapper, waiter, urlBuilder)
         {
             this.restrictedResourceDownloader = restrictedResourceDownloader;
+        }
+
+        public Driver Driver
+        {
+            get { return driver; }
         }
 
         /// <summary>
@@ -52,9 +57,9 @@ namespace Coypu
             restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource, configuration), saveAs);
         }
 
-        public ElementScope FindWindow(string titleOrName, Options options = null)
+        public BrowserWindow FindWindow(string titleOrName, Options options = null)
         {
-            return new RobustElementScope(new WindowFinder(driver, titleOrName, DriverScope), DriverScope, robustWrapper, options);
+            return new RobustWindowScope(driver, configuration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, titleOrName, this));
         }
     }
 }

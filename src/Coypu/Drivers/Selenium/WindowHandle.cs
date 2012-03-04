@@ -26,8 +26,7 @@ namespace Coypu.Drivers.Selenium
                 var currentWindowHandle = selenium.CurrentWindowHandle;
                 try
                 {
-                    selenium.SwitchTo().Window(windowHandle);
-                    return selenium.FindElement(By.CssSelector("body")).Text;
+                    return ((ISearchContext)Native).FindElement(By.CssSelector("body")).Text;
                 }
                 finally
                 {
@@ -58,7 +57,11 @@ namespace Coypu.Drivers.Selenium
 
         public object Native
         {
-            get { return windowHandle; }
+            get 
+            {
+                selenium.SwitchTo().Window(windowHandle);
+                return selenium;
+            }
         }
 
         public bool Stale
