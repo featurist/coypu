@@ -92,5 +92,15 @@ namespace Coypu
             driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath,configuration));
         }
 
+        /// <summary>
+        /// Fill in a previously found text field
+        /// </summary>
+        /// <param name="element">The text field</param>
+        /// <returns>With</returns>
+        public FillInWith FillIn(Element element, Options options = null)
+        {
+            return new FillInWith(element, driver, robustWrapper, this, SetOptions(options));
+        }
+
     }
 }

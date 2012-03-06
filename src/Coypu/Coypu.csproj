@@ -126,6 +126,7 @@
     <Compile Include="Finders\IdFinder.cs" />
     <Compile Include="Finders\IFrameFinder.cs" />
     <Compile Include="IFrameElementScope.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Queries\DialogQuery.cs" />
     <Compile Include="Queries\DriverScopeQuery.cs" />
     <Compile Include="Queries\ElementMissingQuery.cs" />
@@ -139,11 +140,13 @@
     <Compile Include="Queries\HasNoCssQuery.cs" />
     <Compile Include="Queries\HasNoXPathQuery.cs" />
     <Compile Include="Queries\HasXPathQuery.cs" />
+    <Compile Include="Queries\LambdaPredicateQuery.cs" />
     <Compile Include="Queries\LambdaQuery.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />
     <Compile Include="Finders\ElementFinder.cs" />
     <Compile Include="ElementScope.cs" />
     <Compile Include="Finders\LinkFinder.cs" />
+    <Compile Include="Queries\PredicateQuery.cs" />
     <Compile Include="Queries\Query.cs" />
     <Compile Include="RobustElementScope.cs" />
     <Compile Include="Actions\DriverAction.cs" />

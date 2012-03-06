@@ -5,49 +5,7 @@ using Coypu.Actions;
 using Coypu.Queries;
 
 namespace Coypu
-{
-    /// <summary>
-    /// Options for how Coypu interacts with the browser.
-    /// </summary>
-    public class Options
-    {
-        const double DEFAULT_TIMEOUT_SECONDS = 1;
-        const double DEFAULT_INTERVAL_SECONDS = 0.1;
-
-        /// <summary>
-        /// New default options
-        /// </summary>
-        public Options()
-        {
-            Timeout = TimeSpan.FromSeconds(DEFAULT_TIMEOUT_SECONDS);
-            RetryInterval = TimeSpan.FromSeconds(DEFAULT_INTERVAL_SECONDS);
-            WaitBeforeClick = TimeSpan.Zero;
-        }
-
-        /// <summary>
-        /// <para>When retrying, how long to wait for elements to appear or actions to complete without error.</para>
-        /// <para>Default: 1sec</para>
-        /// </summary>
-        public TimeSpan Timeout { get; set; }
-
-        /// <summary>
-        /// <para>How long to wait between retries</para>
-        /// <para>Default: 100ms</para>
-        /// </summary>
-        public TimeSpan RetryInterval { get; set; }
-
-        /// <summary>
-        /// <para>How long to wait between finding an element and clicking it.</para>
-        /// <para>Default: zero</para>
-        /// </summary>
-        public TimeSpan WaitBeforeClick { get; set; }
-
-        /// <summary>
-        /// <para>By default Coypu will exclude any invisible elements, this allows you to override that behaviour</para>
-        /// <para>Default: true</para>
-        /// </summary>
-        public bool ConsiderInvisibleElements { get; set; }
-    }
+{   
 
     public interface Scope
     {
@@ -55,6 +13,11 @@ namespace Coypu
         /// Click a button, input of type button|submit|image or div with the css class "button"
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         void ClickButton(string locator, Options options = null);
 
@@ -62,6 +25,11 @@ namespace Coypu
         /// Click the first matching link
         /// </summary>
         /// <param name="locator">The text of the link</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         void ClickLink(string locator, Options options = null);
 
@@ -69,6 +37,11 @@ namespace Coypu
         /// Find the first input of type button|submit|image or div with the css class "button" to appear within the <see cref="Configuration.Timeout"/> .
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>A button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementScope FindButton(string locator, Options options = null);
@@ -77,6 +50,11 @@ namespace Coypu
         /// Find the first matching link to appear within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="locator">The text of the link</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>A link</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementScope FindLink(string locator, Options options = null);
@@ -85,6 +63,11 @@ namespace Coypu
         /// Find the first form field of any type to appear within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the value of a radio button, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>A form field</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementScope FindField(string locator, Options options = null);
@@ -93,20 +76,23 @@ namespace Coypu
         /// Find the first matching text field to appear within the <see cref="Configuration.Timeout"/> to fill in.
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>With</returns>
         FillInWith FillIn(string locator, Options options = null);
-
-        /// <summary>
-        /// Fill in a previously found text field
-        /// </summary>
-        /// <param name="element">The text field</param>
-        /// <returns>With</returns>
-        FillInWith FillIn(Element element, Options options = null);
 
         /// <summary>
         /// Select an option from a select element
         /// </summary>
         /// <param name="option">The text or value of the option to select</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>From</returns>
         SelectFrom Select(string option, Options options = null);
 
@@ -114,6 +100,11 @@ namespace Coypu
         /// Query whether text appears on the page within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="text">The exact text to find</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether the text appears</returns>
         bool HasContent(string text, Options options = null);
 
@@ -121,6 +112,11 @@ namespace Coypu
         /// Query whether text appears on the page using a regular expression within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="pattern">The regular expression to match</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether the page text matches</returns>
         bool HasContentMatch(Regex pattern, Options options = null);
 
@@ -128,6 +124,11 @@ namespace Coypu
         /// Query whether text does not appear on the page. Returns as soon as the text does not appear, or when the <see cref="Configuration.Timeout"/> is reached.
         /// </summary>
         /// <param name="text">The exact text expected not to be found</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether the text does not appear</returns>
         bool HasNoContent(string text, Options options = null);
 
@@ -135,6 +136,11 @@ namespace Coypu
         /// Query whether text does not appear on the page using a regular expression. Returns as soon as the text does not appear, or when the <see cref="Configuration.Timeout"/> is reached.
         /// </summary>
         /// <param name="pattern">The regular expression expected not to match</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether the text does not appear</returns>
         bool HasNoContentMatch(Regex pattern, Options options = null);
 
@@ -142,6 +148,11 @@ namespace Coypu
         /// Query whether an element matching a CSS selector appears on the page within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether an element appears</returns>
         bool HasCss(string cssSelector, Options options = null);
 
@@ -149,6 +160,11 @@ namespace Coypu
         /// Query whether an element matching a CSS selector does not appear on the page. Returns as soon as the element does not appear, or when the <see cref="Configuration.Timeout"/> is reached.
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether an element does not appear</returns>
         bool HasNoCss(string cssSelector, Options options = null);
 
@@ -156,6 +172,11 @@ namespace Coypu
         /// Query whether an element matching an XPath query appears on the page within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="xpath">XPath query</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether an element appears</returns>
         bool HasXPath(string xpath, Options options = null);
 
@@ -163,6 +184,11 @@ namespace Coypu
         /// Query whether an element matching an XPath query appears on the page. Returns as soon as the element appears, or when the <see cref="Configuration.Timeout"/> is reached.
         /// </summary>
         /// <param name="xpath">XPath query</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether an element appears</returns>
         bool HasNoXPath(string xpath, Options options = null);
 
@@ -170,6 +196,11 @@ namespace Coypu
         /// Find an element matching a CSS selector
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matchin element</returns>
         ElementScope FindCss(string cssSelector, Options options = null);
 
@@ -177,6 +208,11 @@ namespace Coypu
         /// Find an element matching an XPath query
         /// </summary>
         /// <param name="xpath">XPath query</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matchin element</returns>
         ElementScope FindXPath(string xpath, Options options = null);
 
@@ -184,6 +220,11 @@ namespace Coypu
         /// Find all elements matching a CSS selector at the current moment. Does not wait until the <see cref="Configuration.Timeout"/> but returns as soon as the driver does.
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>All matching elements</returns>
         IEnumerable<ElementFound> FindAllCss(string cssSelector, Options options = null);
 
@@ -191,6 +232,11 @@ namespace Coypu
         /// Find all elements matching an XPath query at the current moment. Does not wait until the <see cref="Configuration.Timeout"/> but returns as soon as the driver does.
         /// </summary>
         /// <param name="xpath">XPath query</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>All matching elements</returns>
         IEnumerable<ElementFound> FindAllXPath(string xpath, Options options = null);
 
@@ -220,6 +266,11 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of a child heading element or section id</param>
         /// <returns>An element</returns>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementScope FindSection(string locator, Options options = null);
 
@@ -241,6 +292,11 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of a child legend element or fieldset id</param>
         /// <returns>An element</returns>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementScope FindFieldset(string locator, Options options = null);
 
@@ -248,6 +304,11 @@ namespace Coypu
         /// Find the first matching element with specified id to appear within the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="id">Element id</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>An elemenet</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementScope FindId(string id, Options options = null);
@@ -256,6 +317,11 @@ namespace Coypu
         /// Check the first checkbox to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, name or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         void Check(string locator, Options options = null);
 
@@ -263,6 +329,11 @@ namespace Coypu
         /// Uncheck the first checkbox to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, name or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         void Uncheck(string locator, Options options = null);
 
@@ -270,6 +341,11 @@ namespace Coypu
         /// Choose the first radio button to appear within the <see cref="Configuration.Timeout"/> matching the text of the associated label element, the id, the name, the value or the last part of the id (for asp.net forms testing).
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         void Choose(string locator, Options options = null);
 
@@ -290,6 +366,7 @@ namespace Coypu
         /// Query whether an element does not appear. Returns as soon as the element does not appear or after the <see cref="Configuration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
+        /// 
         bool HasNo(ElementScope findElement);
 
         /// <summary>
@@ -297,6 +374,11 @@ namespace Coypu
         /// <para>Waits for the <see cref="Configuration.RetryInterval"/> between retries</para>
         /// </summary>
         /// <param name="action">An action</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         void RetryUntilTimeout(Action action, Options options = null);
 
         /// <summary>
@@ -304,6 +386,11 @@ namespace Coypu
         /// <para>Waits for the <see cref="Configuration.RetryInterval"/> between retries</para>
         /// </summary>
         /// <param name="function">A function</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         TResult RetryUntilTimeout<TResult>(Func<TResult> function, Options options = null);
 
         /// <summary>
@@ -313,6 +400,11 @@ namespace Coypu
         /// </summary>
         /// <param name="query">A query</param>
         /// <param name="expecting">Expected result</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         T Query<T>(Func<T> query, T expecting, Options options = null);
 
         /// <summary>
@@ -322,6 +414,12 @@ namespace Coypu
         /// </summary>
         /// <param name="tryThis">The action to try</param>
         /// <param name="until">The condition to be met</param>
+        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>        
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
         void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null);
 
@@ -332,9 +430,14 @@ namespace Coypu
         /// </summary>
         /// <param name="tryThis">The action to try</param>
         /// <param name="until">The condition to be met</param>
-        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>
+        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>        
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan waitBeforeRetry, Options options = null);
+        void TryUntil(DriverAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
 
         /// <summary>
         /// <para>Find the first from a list of possible states that your page may arrive at.</para>
@@ -371,11 +474,57 @@ namespace Coypu
         ///  </code>
         ///  </summary>
         /// <param name="states">The possible states you are expecting</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns></returns>
         State FindState(State[] states, Options options = null);
 
         void RetryUntilTimeout(DriverAction driverAction);
 
         IFrameElementScope FindIFrame(string locator, Options options = null);
+
+        /// <summary>
+        /// <para>Click a button, input of type button|submit|image or div with the css class "button".</para>
+        /// <para>Wait for a condition to be satisfied for a specified time otherwise click and wait again.</para>
+        /// <para>Continues until the expected condition is satisfied or the <see cref="Configuration.Timeout"/> is reached.</para>
+        /// </summary>
+        /// <param name="locator">The text/value, name or id of the button</param>
+        /// <param name="until">The condition to be satisfied</param>
+        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>   
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>The first matching button</returns>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
+        DriverScope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+
+        /// <summary>
+        /// <para>Click a link and wait for a condition to be satisfied for a specified time otherwise click and wait again.</para> 
+        /// <para>Continues until the expected condition is satisfied or the <see cref="Configuration.Timeout"/> is reached.</para>
+        /// </summary>
+        /// <param name="locator">The text of the link</param>
+        /// <param name="until">The condition to be satisfied</param>
+        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>   
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>The first matching button</returns>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
+        DriverScope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+
+        /// <summary>
+        /// <para>Execute a query repeatedly until either the expected result is returned or the <see cref="Configuration.Timeout"/> is passed.</para>
+        /// <para>Once the <see cref="Configuration.Timeout"/> is passed any result will be returned or any exception will be rethrown.</para>
+        /// <para>Waits for the <see cref="Configuration.RetryInterval"/> between retries.</para>
+        /// </summary>
+        /// <param name="query">A query</param>
+        T Query<T>(Query<T> query);
     }
 }

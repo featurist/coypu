@@ -1,3 +1,4 @@
+using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
 using Coypu.Robustness;
@@ -54,6 +55,11 @@ namespace Coypu
             get { return Now()[attributeName]; }
         }
 
+        public ElementScope Click(Options options = null)
+        {
+            RetryUntilTimeout(new Click(this, driver, SetOptions(options)));
+            return this;
+        }
 
         public bool Exists(Options options = null)
         {
