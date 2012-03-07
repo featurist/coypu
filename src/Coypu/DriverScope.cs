@@ -294,8 +294,14 @@ namespace Coypu
         protected internal ElementFound FindElement()
         {
             if (element == null || element.Stale)
+            {
+                Console.WriteLine("Stale scope: " + elementFinder.Locator);
                 element = elementFinder.Find();
-
+            }
+            else
+            {
+                Console.WriteLine("Cached scope: " + elementFinder.Locator);
+            }
             return element;
         }
     }

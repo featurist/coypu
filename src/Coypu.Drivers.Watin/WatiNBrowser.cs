@@ -18,7 +18,10 @@ namespace Coypu.Drivers.Watin
 
         public string Text
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return browser.Text;
+            }
         }
 
         public string Value

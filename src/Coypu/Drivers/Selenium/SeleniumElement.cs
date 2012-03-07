@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -65,7 +66,11 @@ namespace Coypu.Drivers.Selenium
                 try
                 {
                     NativeSeleniumElement.FindElement(By.XPath("."));
-                    return false;
+                    return !NativeSeleniumElement.Displayed;
+                }
+                catch(InvalidOperationException)
+                {
+                    return true;
                 }
                 catch (StaleElementReferenceException)
                 {

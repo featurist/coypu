@@ -52,7 +52,7 @@ namespace Coypu.Drivers.Watin
 
         public bool Stale
         {
-            get { return ((Frame) Native).FrameElement.Exists; }
+            get { return !((Frame) Native).FrameElement.Exists; }
         }
         
         public string this[string attributeName]

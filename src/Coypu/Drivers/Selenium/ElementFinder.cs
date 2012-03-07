@@ -23,7 +23,9 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<IWebElement> Find(By by, DriverScope scope)
         {
-            return SeleniumScope(scope).FindElements(by).Where(e => IsDisplayed(e, scope));
+            var context = SeleniumScope(scope);
+            Console.WriteLine("Find by: " + @by);
+            return context.FindElements(by).Where(e => IsDisplayed(e, scope));
         }
 
         public ISearchContext SeleniumScope(DriverScope scope)

@@ -1,4 +1,5 @@
-﻿using WatiN.Core;
+﻿using System;
+using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
 {
@@ -78,7 +79,10 @@ namespace Coypu.Drivers.Watin
 
         public bool Stale
         {
-            get { return NativeWatiNElement.Exists; }
+            get
+            {
+                return !NativeWatiNElement.Exists;
+            }
         }
 
         public string this[string attributeName]

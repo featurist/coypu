@@ -21,7 +21,7 @@ namespace Coypu.Tests.TestDoubles
 
         public bool Stale
         {
-            get { throw new System.NotImplementedException(); }
+            get { return false; }
         }
 
         public string this[string attributeName]
