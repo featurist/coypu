@@ -58,7 +58,7 @@ You can run the headless HtmlUnit driver for Selenium on windows too, you just n
 1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `Configuration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
 2. Install a JRE
 3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ]http://seleniumhq.org/download
-4. Run "java -jar selenium-server-standalong-x.x.x.jar"
+4. Run "java -jar selenium-server-standalone-x.x.x.jar"
 
 And off you go.
 
