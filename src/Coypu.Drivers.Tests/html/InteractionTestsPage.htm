@@ -217,9 +217,10 @@
       <input type="submit" value="Attributes" />
   </form>
 
- 
+  <button onclick="document.getElementById('scope1').innerHTML = '';">empty scope1</button>
+  <button onclick="document.getElementById('scope1').style.display = 'none';">hide scope1</button>
   <div id="scope1">
-      <fieldset id="fieldsetScope1">
+    <fieldset id="fieldsetScope1">
       <legend>Scope 1</legend>
       
         <label for="scope1TextInputFieldId">scoped text input field linked by for</label>
@@ -292,10 +293,13 @@
       <a href="#">with link</a>
     </h2>
   </div>
-
-  <iframe src="iFrame1.htm" id="iframe1" title="iframe one title"></iframe>
-  <iframe src="iFrame2.htm" id="iframe2" title="iframe two title"></iframe>
-
+  
+    <div id="iframes">
+        <iframe src="iFrame1.htm" id="iframe1" title="iframe one title"></iframe>
+        <iframe src="iFrame2.htm" id="iframe2" title="iframe two title"></iframe>
+    </div>
+    <button onclick="document.getElementById('iframes').style.display = 'none';">hide frames</button>
+    <button onclick="document.getElementById('iframes').innerHTML = '';">destroy frames</button>
     <section>
         <h2>Hovering</h2>
         <span id="hoverOnMeTest" onmouseover="this.innerHTML += ' - hovered'; return false;">Hover on me</span>

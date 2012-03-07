@@ -49,7 +49,7 @@ namespace Coypu.Robustness
                 catch (NotSupportedException) { throw; }
                 catch (Exception ex)
                 {
-                    //Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Message);
                     if (TimeoutReached(stopWatch, timeout, interval))
                     {
                         throw;

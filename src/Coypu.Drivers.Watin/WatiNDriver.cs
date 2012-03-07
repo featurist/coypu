@@ -216,12 +216,7 @@ namespace Coypu.Drivers.Watin
 
         public bool HasContent(string text, DriverScope scope)
         {
-            var watiNScope = ElementFinder.WatiNScope(scope);
-            if(watiNScope == Window.Native)
-            {
-                return ((WatiN.Core.Browser) Window.Native).Text.Contains(text);
-            }
-            return ((WatiN.Core.Element)watiNScope).Text.Contains(text);
+            return scope.Now().Text.Contains(text);
         }
 
         public bool HasContentMatch(Regex pattern, DriverScope scope)

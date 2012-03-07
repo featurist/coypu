@@ -12,6 +12,7 @@ namespace Coypu.Drivers.Selenium
 {
     public class SeleniumWebDriver : Driver
     {
+        private readonly Browser _browser;
         public bool Disposed { get; private set; }
 
         public Uri Location
@@ -45,6 +46,7 @@ namespace Coypu.Drivers.Selenium
         public SeleniumWebDriver(Browser browser)
             : this(new DriverFactory().NewRemoteWebDriver(browser))
         {
+            _browser = browser;
         }
 
         protected SeleniumWebDriver(RemoteWebDriver webDriver)
@@ -162,7 +164,7 @@ namespace Coypu.Drivers.Selenium
         private string GetContent(DriverScope scope)
         {
             var seleniumScope = elementFinder.SeleniumScope(scope);
-            return seleniumScope == Window.Native
+            return seleniumScope is RemoteWebDriver
                        ? GetText(By.CssSelector("body"), seleniumScope)
                        : GetText(By.XPath("."), seleniumScope);
         }
@@ -216,7 +218,7 @@ namespace Coypu.Drivers.Selenium
 
         private string FindWindowHandle(string titleOrName)
         {
-            var currentHandle = selenium.CurrentWindowHandle;
+            var currentHandle = GetCurrentWindowHandle();
             string matchingWindowHandle = null;
 
             try
@@ -242,6 +244,18 @@ namespace Coypu.Drivers.Selenium
 
             selenium.SwitchTo().Window(currentHandle);
             return matchingWindowHandle;
+        }
+
+        private string GetCurrentWindowHandle()
+        {
+            try
+            {
+                return selenium.CurrentWindowHandle;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
 
         public void Set(Element element, string value) 

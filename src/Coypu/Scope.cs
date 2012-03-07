@@ -7,6 +7,9 @@ using Coypu.Queries;
 namespace Coypu
 {   
 
+    /// <summary>
+    /// The scope for any browser interaction: a browser window, frame or element.
+    /// </summary>
     public interface Scope
     {
         /// <summary>
