@@ -16,9 +16,7 @@ namespace Coypu.Drivers.Selenium
                     return new FirefoxDriver();
                 case (Browser.InternetExplorer):
                     {
-                        DesiredCapabilities ieCapabilities = DesiredCapabilities.InternetExplorer();
-                        ieCapabilities.SetCapability("ignoreProtectedModeSettings", true);
-                        return new InternetExplorerDriver(ieCapabilities);
+                        return new InternetExplorerDriver(new InternetExplorerOptions{IntroduceInstabilityByIgnoringProtectedModeSettings = true});
                     }
                 case (Browser.Chrome):
                     return new ChromeDriver();

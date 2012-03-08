@@ -43,7 +43,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
 
             AssertButtonNotClickedYet(buttonToBeClicked);
-            tryUntilArgs.TryThisDriverAction.Act();
+            tryUntilArgs.TryThisBrowserAction.Act();
             AssertClicked(buttonToBeClicked);
 
             tryUntilArgs.Until.Run();

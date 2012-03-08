@@ -1,5 +1,4 @@
-﻿using System;
-using Coypu.Finders;
+﻿using Coypu.Finders;
 using Coypu.Robustness;
 
 namespace Coypu.Actions
@@ -11,7 +10,7 @@ namespace Coypu.Actions
         private readonly ElementFinder elementFinder;
 
         internal WaitThenClick(Driver driver, Options options, Waiter waiter, ElementFinder elementFinder)
-            : base(driver,options)
+            : base(driver, options)
         {
             this.options = options;
             this.waiter = waiter;

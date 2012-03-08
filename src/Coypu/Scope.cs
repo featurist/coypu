@@ -440,7 +440,7 @@ namespace Coypu
         /// 
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        void TryUntil(DriverAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+        void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
 
         /// <summary>
         /// <para>Find the first from a list of possible states that your page may arrive at.</para>
@@ -485,7 +485,7 @@ namespace Coypu
         /// <returns></returns>
         State FindState(State[] states, Options options = null);
 
-        void RetryUntilTimeout(DriverAction driverAction);
+        void RetryUntilTimeout(BrowserAction driverAction);
 
         IFrameElementScope FindIFrame(string locator, Options options = null);
 

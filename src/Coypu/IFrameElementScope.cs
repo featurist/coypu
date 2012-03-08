@@ -11,7 +11,7 @@ namespace Coypu
         {
         }
 
-        public Uri Location
+        public override Uri Location
         {
             get
             {

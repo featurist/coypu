@@ -7,12 +7,9 @@ namespace Coypu
 {
     public class ElementScope : DriverScope, Element
     {
-        private readonly RobustWrapper robustWrapper;
-
         internal ElementScope(ElementFinder elementFinder, DriverScope outer, RobustWrapper robustWrapper)
             : base(elementFinder, outer)
         {
-            this.robustWrapper = robustWrapper;
         }
 
         public string Id

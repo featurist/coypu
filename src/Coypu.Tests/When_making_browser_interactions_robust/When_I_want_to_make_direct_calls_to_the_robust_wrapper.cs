@@ -51,7 +51,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var tryUntil = spyRobustWrapper.DeferredTryUntils[0];
 
             Assert.That(tried, Is.False);
-            tryUntil.TryThisDriverAction.Act();
+            tryUntil.TryThisBrowserAction.Act();
             Assert.That(tried, Is.True);
 
             Assert.That(triedUntil, Is.False);

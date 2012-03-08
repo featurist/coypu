@@ -43,7 +43,7 @@ namespace Coypu.Tests.TestDoubles
             return default(T);
         }
 
-        public void TryUntil(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
         {
             DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, overallTimeout, waitBeforeRetry));
         }
@@ -71,14 +71,14 @@ namespace Coypu.Tests.TestDoubles
         {
             public TimeSpan OverallTimeout { get; private set; }
             public TimeSpan WaitBeforeRetry { get; private set; }
-            public DriverAction TryThisDriverAction { get; private set; }
+            public BrowserAction TryThisBrowserAction { get; private set; }
             public Query<bool> Until { get; private set; }
 
-            public TryUntilArgs(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
+            public TryUntilArgs(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
             {
                 OverallTimeout = overallTimeout;
                 WaitBeforeRetry = waitBeforeRetry;
-                TryThisDriverAction = tryThis;
+                TryThisBrowserAction = tryThis;
                 Until = until;
             }
         }

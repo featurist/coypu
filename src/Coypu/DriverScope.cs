@@ -43,7 +43,7 @@ namespace Coypu
             configuration = outer.configuration;
         }
 
-        public Uri Location
+        public virtual Uri Location
         {
             get { return driver.Location; }
         }
@@ -237,7 +237,7 @@ namespace Coypu
 
         public void RetryUntilTimeout(Action action, Options options = null)
         {
-            robustWrapper.Robustly(new LambdaDriverAction(action,SetOptions(options)));
+            robustWrapper.Robustly(new LambdaBrowserAction(action,SetOptions(options)));
         }
 
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function, Options options = null)
@@ -245,7 +245,7 @@ namespace Coypu
             return robustWrapper.Robustly(new LambdaQuery<TResult>(function,SetOptions(options)));
         }
 
-        public void RetryUntilTimeout(DriverAction driverAction)
+        public void RetryUntilTimeout(BrowserAction driverAction)
         {
             Query(driverAction);
         }
@@ -268,10 +268,10 @@ namespace Coypu
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null)
         {
             options = SetOptions(options);
-            robustWrapper.TryUntil(new LambdaDriverAction(tryThis, options), new LambdaPredicateQuery(until,options), options.Timeout, waitBeforeRetry);
+            robustWrapper.TryUntil(new LambdaBrowserAction(tryThis, options), new LambdaPredicateQuery(until,options), options.Timeout, waitBeforeRetry);
         }
 
-        public void TryUntil(DriverAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
             robustWrapper.TryUntil(tryThis, until, SetOptions(options).Timeout, waitBeforeRetry);
         }

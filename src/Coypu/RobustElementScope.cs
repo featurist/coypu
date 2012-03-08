@@ -7,13 +7,11 @@ namespace Coypu
 {
     public class RobustElementScope : ElementScope
     {
-        private readonly RobustWrapper robustWrapper;
         private readonly Options options;
 
         internal RobustElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper, Options options)
             : base(elementFinder, outerScope, robustWrapper)
         {
-            this.robustWrapper = robustWrapper;
             this.options = options;
         }
 

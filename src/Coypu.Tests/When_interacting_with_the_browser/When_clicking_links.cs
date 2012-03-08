@@ -43,7 +43,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var tryUntilArgs = GetTryUntilArgs();
 
             AssertButtonNotClickedYet(linkToBeClicked);
-            tryUntilArgs.TryThisDriverAction.Act();
+            tryUntilArgs.TryThisBrowserAction.Act();
             AssertClicked(linkToBeClicked);
 
             tryUntilArgs.Until.Run();

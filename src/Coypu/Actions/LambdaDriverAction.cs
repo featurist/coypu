@@ -2,12 +2,12 @@ using System;
 
 namespace Coypu.Actions
 {
-    public class LambdaDriverAction : DriverAction
+    public class LambdaBrowserAction : BrowserAction
     {
         private readonly Action action;
 
-        public LambdaDriverAction(Action action, Options options)
-            : base(null, options)
+        public LambdaBrowserAction(Action action, Options options)
+            : base(options)
         {
             this.action = action;
         }

@@ -6,7 +6,7 @@ namespace Coypu.Queries
 {
     internal class ActionSatisfiesPredicateQuery : Query<bool>
     {
-        private readonly DriverAction tryThis;
+        private readonly BrowserAction tryThis;
         private readonly Query<bool> until;
         private readonly TimeSpan waitBeforeRetry;
         private readonly RobustWrapper robustWrapper;
@@ -14,7 +14,7 @@ namespace Coypu.Queries
 
         public TimeSpan Timeout { get; private set; }
 
-        internal ActionSatisfiesPredicateQuery(DriverAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, RobustWrapper robustWrapper)
+        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, RobustWrapper robustWrapper)
         {
             this.tryThis = tryThis;
             this.until = until;

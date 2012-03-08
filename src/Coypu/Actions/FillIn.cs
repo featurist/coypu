@@ -7,7 +7,7 @@ namespace Coypu.Actions
         private readonly string value;
         private readonly Element element;
 
-        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value, Options options) 
+        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value, Options options)
             : base(driver,options)
         {
             this.locator = locator;

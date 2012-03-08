@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\BrowserAction.cs" />
     <Compile Include="Actions\Check.cs" />
     <Compile Include="Actions\Click.cs" />
     <Compile Include="Actions\Choose.cs" />
