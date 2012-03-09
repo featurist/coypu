@@ -8,6 +8,7 @@ namespace Coypu.Queries
 
         public LambdaPredicateQuery(Func<bool> query)
         {
+            this.query = query;
         }
 
         public LambdaPredicateQuery(Func<bool> query, Options options) : base(options)

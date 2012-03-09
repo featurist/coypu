@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using Coypu.Drivers;
-using Coypu.Tests.TestDoubles;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.When_interacting_with_the_browser

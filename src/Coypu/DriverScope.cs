@@ -245,9 +245,9 @@ namespace Coypu
             return robustWrapper.Robustly(new LambdaQuery<TResult>(function,SetOptions(options)));
         }
 
-        public void RetryUntilTimeout(BrowserAction driverAction)
+        public void RetryUntilTimeout(BrowserAction action)
         {
-            Query(driverAction);
+            Query(action);
         }
 
         public IFrameElementScope FindIFrame(string locator, Options options = null)
@@ -286,6 +286,11 @@ namespace Coypu
             return stateFinder.FindState(SetOptions(options), states);
         }
 
+        /// <summary>
+        /// Try and find this scope now
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public virtual ElementFound Now()
         {
             return FindElement();
