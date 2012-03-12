@@ -38,6 +38,13 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
 
+Choose your driver/browser combination like so:
+
+	Configuration.Driver = typeof (SeleniumWebDriver);
+	Configuration.Browser = Drivers.Browser.Firefox;
+ 
+These settings are the default configuration.
+
 ##### Selenium WebDriver
 `Coypu.Drivers.Selenium.SeleniumWebDriver` depends on Selenium WebDriver 2.7.0 and supports Firefox (fastest), IE (slowest) and Chrome as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
@@ -47,20 +54,28 @@ The Selenium Driver is included in the Coypu package.
 Versions up to and including Firefox 6 are now supported.
 
 ###### Internet Explorer
+
+You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/selenium/wiki/InternetExplorerDriver)
+
 Only IE9 supports CSS & XPath and certain HTML features. The WatiN driver is notably faster in IE than the WebDriver IE driver, so is recommended for testing in Internet Explorer. The WatiN driver comes in a seperate package (see below).
 
 ###### Chrome
-You will need the chromedriver.exe on your PATH or in the bin of your test project. While it comes packaged in the Coypu download zip, it is not in the Nuget package. See: http://code.google.com/p/selenium/wiki/ChromeDriver.
+You will need the chromedriver.exe on your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/chromedriver/downloads/list)
 
 ###### HtmlUnit
 You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
 
 1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `Configuration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
 2. Install a JRE
-3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ]http://seleniumhq.org/download
+3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ](http://seleniumhq.org/download)
 4. Run "java -jar selenium-server-standalone-x.x.x.jar"
 
 And off you go.
+
+###### Android
+Selenium WebDriver also supports Android so long as you have the Android remote driver running (Selenium defaults to port 8080).
+
+Check the driver_test_results.txt file for the latest report on driver/browser support.
 
 ##### WatiN
 
@@ -68,17 +83,10 @@ There is a seperate package called Coypu.WatiN containing a driver for WatiN whi
 
 This driver only supports Internet Explorer as the browser.
 
-##### Android
-Selenium WebDriver also supports Android so long as you have the Android remote driver running (Selenium defaults to port 8080).
+You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu like so:
 
-Check the driver_test_results.txt file for the latest report on driver/browser support.
-
-Choose your driver/browser combination like so:
-
-	Configuration.Driver = typeof (SeleniumWebDriver);
-	Configuration.Browser = Drivers.Browser.Firefox;
- 
-These settings are the default configuration.
+	Configuration.Driver = typeof (WatinDriver);
+	Configuration.Browser = Drivers.Browser.InternetExplorer;
 
 #### Timeout
 
@@ -107,9 +115,9 @@ What we are really trying to do here is interact with the browser in the way tha
 
 If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `Session.ConsideringInvisibleElements()` which temporarily suspends this restriction for one action/function.
 
-### Disclaimer
+### Missing features
 
-Coypu is still rather new. While we have started using it internally, there is plenty it doesn't cover yet. It is pretty well tested however.
+There is plenty Coypu doesn't cover yet, what there is is pretty well tested however, and pretty simple to extend.
 
 If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
