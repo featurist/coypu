@@ -11,7 +11,7 @@ namespace Coypu
         const string DEFAULT_APP_HOST = "localhost";
         const int DEFAULT_PORT = 80;
         
-        private static string appHost;
+        private string appHost;
 
         /// <summary>
         /// New default configuration
