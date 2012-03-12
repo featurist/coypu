@@ -96,7 +96,7 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindId(string id,DriverScope scope ) 
         {
-            return BuildElement(Find(By.Id(id), scope).FirstDisplayedOrDefault(), "Failed to find id: " + id);
+            return BuildElement(Find(By.Id(id), scope).FirstOrDefault(), "Failed to find id: " + id);
         }
 
         public ElementFound FindFieldset(string locator, DriverScope scope)
