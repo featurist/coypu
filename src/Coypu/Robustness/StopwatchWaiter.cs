@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Coypu.Robustness
 {
-    internal class ThreadSleepWaiter : Waiter
+    internal class StopwatchWaiter : Waiter
     {
         public void Wait(TimeSpan duration)
         {

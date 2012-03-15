@@ -28,7 +28,7 @@ namespace Coypu
             : this(new ActivatorDriverFactory(),
                    configuration,
                    new RetryUntilTimeoutRobustWrapper(),
-                   new ThreadSleepWaiter(),
+                   new StopwatchWaiter(),
                    new WebClientWithCookies(),
                    new FullyQualifiedUrlBuilder())
         {

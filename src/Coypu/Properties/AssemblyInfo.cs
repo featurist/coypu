@@ -36,8 +36,8 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.7.2.0")]
-[assembly: AssemblyFileVersion("0.7.2.0")]
+[assembly: AssemblyVersion("0.8.0.0")]
+[assembly: AssemblyFileVersion("0.8.0.0")]
 [assembly: InternalsVisibleTo("Coypu.Tests")]
 [assembly: InternalsVisibleTo("Coypu.Drivers.Tests")]
 
