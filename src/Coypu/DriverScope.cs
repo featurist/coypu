@@ -13,7 +13,7 @@ namespace Coypu
         protected readonly Configuration configuration;
         private readonly ElementFinder elementFinder;
         protected Driver driver;
-        internal RobustWrapper robustWrapper;
+        protected RobustWrapper robustWrapper;
         protected readonly Waiter waiter;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
@@ -99,17 +99,17 @@ namespace Coypu
 
         public ElementScope FindButton(string locator, Options options = null)
         {
-            return new RobustElementScope(new ButtonFinder(driver, locator, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new ButtonFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public ElementScope FindLink(string locator, Options options = null)
         {
-            return new RobustElementScope(new LinkFinder(driver, locator, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new LinkFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public ElementScope FindField(string locator, Options options = null)
         {
-            return new RobustElementScope(new FieldFinder(driver, locator, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new FieldFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public FillInWith FillIn(string locator, Options options = null)
@@ -164,12 +164,12 @@ namespace Coypu
 
         public ElementScope FindCss(string cssSelector, Options options = null)
         {
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, SetOptions(options));
         }
 
         public ElementScope FindXPath(string xpath, Options options = null)
         {
-            return new RobustElementScope(new XPathFinder(driver, xpath, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new XPathFinder(driver, xpath, this), this, SetOptions(options));
         }
 
         public IEnumerable<ElementFound> FindAllCss(string cssSelector, Options options = null)
@@ -186,17 +186,17 @@ namespace Coypu
 
         public ElementScope FindSection(string locator, Options options = null)
         {
-            return new RobustElementScope(new SectionFinder(driver, locator, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new SectionFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public ElementScope FindFieldset(string locator, Options options = null)
         {
-            return new RobustElementScope(new FieldsetFinder(driver, locator, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new FieldsetFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public ElementScope FindId(string id, Options options = null)
         {
-            return new RobustElementScope(new IdFinder(driver, id, this), this, robustWrapper, SetOptions(options));
+            return new RobustElementScope(new IdFinder(driver, id, this), this, SetOptions(options));
         }
 
         public void Check(string locator, Options options = null)
@@ -252,7 +252,7 @@ namespace Coypu
 
         public IFrameElementScope FindIFrame(string locator, Options options = null)
         {
-            return new IFrameElementScope(new IFrameFinder(driver, locator, this), this, robustWrapper, SetOptions(options));
+            return new IFrameElementScope(new IFrameFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public T Query<T>(Func<T> query, T expecting, Options options = null)

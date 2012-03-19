@@ -1,13 +1,12 @@
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
-using Coypu.Robustness;
 
 namespace Coypu
 {
     public class ElementScope : DriverScope, Element
     {
-        internal ElementScope(ElementFinder elementFinder, DriverScope outer, RobustWrapper robustWrapper)
+        internal ElementScope(ElementFinder elementFinder, DriverScope outer)
             : base(elementFinder, outer)
         {
         }

@@ -1,7 +1,6 @@
 using System;
 using Coypu.Finders;
 using Coypu.Queries;
-using Coypu.Robustness;
 
 namespace Coypu
 {
@@ -9,8 +8,8 @@ namespace Coypu
     {
         private readonly Options options;
 
-        internal RobustElementScope(ElementFinder elementFinder, DriverScope outerScope, RobustWrapper robustWrapper, Options options)
-            : base(elementFinder, outerScope, robustWrapper)
+        internal RobustElementScope(ElementFinder elementFinder, DriverScope outerScope, Options options)
+            : base(elementFinder, outerScope)
         {
             this.options = options;
         }
