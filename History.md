@@ -1,3 +1,10 @@
+# Version 0.7.3
+
+Release date: 2012-03-20
+
+### Fixed
+* Quit not Close + Dispose fixes HtmlUnit & Chrome not closing properly
+
 # Version 0.7.2
 
 Release date: 2012-02-27
