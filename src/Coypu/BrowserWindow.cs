@@ -9,40 +9,11 @@ namespace Coypu
     /// <summary>
     /// A browser window belonging to a particular browser session
     /// </summary>
-    public class BrowserWindow : DriverScope, IDisposable
+    public class BrowserWindow : DriverScope
     {
         internal BrowserWindow(Configuration configuration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder) 
             : base(configuration, elementFinder, driver, robustWrapper, waiter, urlBuilder)
         {
-        }
-
-        internal bool WasDisposed { get; private set; }
-
-        /// <summary>
-        /// The native driver for the Coypu.Driver / browser combination you supplied. E.g. for SeleniumWebDriver + Firefox it will currently be a OpenQA.Selenium.Firefox.FirefoxDriver.
-        /// </summary>
-        public object Native
-        {
-            get { return driver.Native; }
-        }
-
-        /// <summary>
-        /// Disposes the current session, closing any open browser.
-        /// </summary>
-        public void Dispose()
-        {
-            if (WasDisposed)
-                return;
-
-            Console.WriteLine("Disposing driver");
-
-            driver.Dispose();
-
-            Console.WriteLine("Disposed");
-            ActivatorDriverFactory.OpenDrivers--;
-            Console.WriteLine(ActivatorDriverFactory.OpenDrivers + " driver(s) open.");
-
-            WasDisposed = true;
         }
 
         /// <summary>

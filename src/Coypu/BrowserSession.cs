@@ -1,4 +1,5 @@
-﻿using Coypu.Finders;
+﻿using System;
+using Coypu.Finders;
 using Coypu.Robustness;
 using Coypu.WebRequests;
 
@@ -7,9 +8,10 @@ namespace Coypu
     /// <summary>
     /// A browser session
     /// </summary>
-    public class BrowserSession : BrowserWindow
+    public class BrowserSession : BrowserWindow, IDisposable
     {
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
+        internal bool WasDisposed { get; private set; }
 
         /// <summary>
         /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
@@ -46,6 +48,14 @@ namespace Coypu
         }
 
         /// <summary>
+        /// The native driver for the Coypu.Driver / browser combination you supplied. E.g. for SeleniumWebDriver + Firefox it will currently be a OpenQA.Selenium.Firefox.FirefoxDriver.
+        /// </summary>
+        public object Native
+        {
+            get { return driver.Native; }
+        }
+
+        /// <summary>
         /// Saves a resource from the web to a local file using the cookies from the current browser session.
         /// Allows you to sign in through the browser and then directly download a resource restricted to signed-in users.
         /// </summary>
@@ -60,6 +70,25 @@ namespace Coypu
         public BrowserWindow FindWindow(string titleOrName, Options options = null)
         {
             return new RobustWindowScope(driver, configuration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, titleOrName, this));
+        }
+
+        /// <summary>
+        /// Disposes the current session, closing any open browser.
+        /// </summary>
+        public void Dispose()
+        {
+            if (WasDisposed)
+                return;
+
+            Console.WriteLine("Disposing driver");
+
+            driver.Dispose();
+
+            Console.WriteLine("Disposed");
+            ActivatorDriverFactory.OpenDrivers--;
+            Console.WriteLine(ActivatorDriverFactory.OpenDrivers + " driver(s) open.");
+
+            WasDisposed = true;
         }
     }
 }
