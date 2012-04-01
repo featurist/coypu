@@ -105,7 +105,7 @@ This driver only supports Internet Explorer as the browser.
 
 You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu like so:
 
-	Configuration.Driver = typeof (WatinDriver);
+	Configuration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
 	Configuration.Browser = Drivers.Browser.InternetExplorer;
 
 #### Waits, retries and timeout
