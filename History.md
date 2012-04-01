@@ -1,3 +1,22 @@
+# Version 0.8.0
+
+Release date: 2012-04-01
+
+** NOTE: Many breaking changes **
+
+Check the README for the latest API
+
+### Removed
+* Static configuration and static Browser.Session - use new BrowserSession(Configuration) and manage lifetime yourself.
+
+### Updated
+* Find methods return ElementScope with deferred execution. This replaces the browser.Within() functionality.
+* Timing Options can be passed to every method to override configuration. This replaces browser.WithIndividualTimeout()
+
+### Added
+* Nested scopes
+* Windows as scopes
+
 # Version 0.7.2
 
 Release date: 2012-02-27

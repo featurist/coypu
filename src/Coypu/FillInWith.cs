@@ -1,4 +1,5 @@
-﻿using Coypu.Robustness;
+﻿using Coypu.Actions;
+using Coypu.Robustness;
 
 namespace Coypu
 {
@@ -7,20 +8,26 @@ namespace Coypu
         private readonly string locator;
         private readonly Driver driver;
         private readonly RobustWrapper robustWrapper;
+        private readonly DriverScope scope;
+        private readonly Options options;
         private readonly Element element;
 
-        internal FillInWith(string locator, Driver driver, RobustWrapper robustWrapper)
+        internal FillInWith(string locator, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
         {
             this.locator = locator;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
+            this.scope = scope;
+            this.options = options;
         }
 
-        internal FillInWith(Element element, Driver driver, RobustWrapper robustWrapper)
+        internal FillInWith(Element element, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
         {
             this.element = element;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
+            this.scope = scope;
+            this.options = options;
         }
 
         /// <summary>
@@ -30,24 +37,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value)
         {
-            robustWrapper.Robustly(
-                () =>
-                {
-                    if (Field["type"] != "file")
-                        BringIntoFocus();
-
-                    driver.Set(Field, value);
-                });
-        }
-
-        private void BringIntoFocus() 
-        {
-            driver.Click(Field);
-        }
-
-        private Element Field
-        {
-            get { return element ?? driver.FindField(locator); }
+            robustWrapper.Robustly(new FillIn(driver, scope, locator, element, value,options));
         }
     }
 }

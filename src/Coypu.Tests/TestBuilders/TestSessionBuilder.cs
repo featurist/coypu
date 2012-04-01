@@ -1,14 +1,15 @@
 ﻿using Coypu.Robustness;
+using Coypu.Tests.When_interacting_with_the_browser;
 using Coypu.WebRequests;
 
 namespace Coypu.Tests.TestBuilders
 {
     internal class TestSessionBuilder
     {
-        internal static Session Build(Driver driver, RobustWrapper robustWrapper, Waiter waiter,
-                                      RestrictedResourceDownloader _restrictedResourceDownloader, UrlBuilder urlBuilder)
+        internal static BrowserSession Build(Configuration configuration, Driver driver, RobustWrapper robustWrapper, Waiter waiter,
+                                      RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
-            return new Session(driver, robustWrapper, waiter, _restrictedResourceDownloader, urlBuilder);
+            return new BrowserSession(new StubDriverFactory(driver), configuration, robustWrapper, waiter, restrictedResourceDownloader, urlBuilder);
         }
     }
 }

@@ -11,6 +11,15 @@ namespace Coypu.Drivers.Watin
     {
         private HasDialogHandler hasDialogHandler;
 
+        public IEWithDialogWaiter()
+        {
+        }
+
+        public IEWithDialogWaiter(IEBrowser browser) 
+            : base(browser)
+        {
+        }
+
         public override void WaitForComplete(int waitForCompleteTimeOut)
         {
             if (hasDialogHandler == null)

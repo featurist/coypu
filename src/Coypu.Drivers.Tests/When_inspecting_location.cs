@@ -5,24 +5,26 @@ namespace Coypu.Drivers.Tests
 {
     internal class When_inspecting_location : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Gets_the_current_browser_location()
+
         {
-            it["gets the current browser location"] = () =>
-            {
-                driver.Visit("http://localhost:4567");
-                Assert.That(driver.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
+            Driver.Visit("http://localhost:4567");
+            Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
 
-                driver.Visit("http://localhost:4567/auto_login");
-                Assert.That(driver.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
-            };
+            Driver.Visit("http://localhost:4567/auto_login");
+            Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+        }
 
-            it["not just when set by visit"] = () =>
-            {
-                driver.Visit("http://localhost:4567/auto_login");
-                driver.ExecuteScript("document.location.href = 'http://localhost:4567/resource/js_redirect'");
 
-                Assert.That(driver.Location, Is.EqualTo(new Uri("http://localhost:4567/resource/js_redirect")));
-            };
+        [Test]
+        public void Not_just_when_set_by_visit()
+
+        {
+            Driver.Visit("http://localhost:4567/auto_login");
+            Driver.ExecuteScript("document.location.href = 'http://localhost:4567/resource/js_redirect'", Root);
+
+            Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/resource/js_redirect")));
         }
     }
 }

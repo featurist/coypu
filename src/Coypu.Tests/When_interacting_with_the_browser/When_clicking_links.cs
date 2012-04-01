@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -8,21 +9,17 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     [TestFixture]
     public class When_clicking_links : BrowserInteractionTests
     {
-        [TearDown]
-        public void TearDown()
-        {
-            Configuration.WaitBeforeClick = TimeSpan.Zero;
-        }
-
         [Test]
         public void It_robustly_finds_by_text_and_clicks()
         {
             var linkToBeClicked = StubLinkToBeClicked("Some link locator");
 
-            session.ClickLink("Some link locator");
+            browserSession.ClickLink("Some link locator");
 
             AssertButtonNotClickedYet(linkToBeClicked);
-            ExecuteDeferedRobustAction();
+
+            RunQueryAndCheckTiming();
+
             AssertClicked(linkToBeClicked);
         }
 
@@ -37,18 +34,22 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int waitBeforeRetrySecs)
         {
             var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
+            var overallTimeout = TimeSpan.FromSeconds(waitBeforeRetrySecs + 1000);
             var linkToBeClicked = StubLinkToBeClicked("Some link locator");
 
-            session.ClickLink("Some link locator", () => stubUntil, waitBetweenRetries);
+            var options = new Options{Timeout = overallTimeout};
+            browserSession.ClickLink("Some link locator", new LambdaPredicateQuery(() => stubUntil), waitBetweenRetries,options);
 
             var tryUntilArgs = GetTryUntilArgs();
 
             AssertButtonNotClickedYet(linkToBeClicked);
-            ExecuteDeferedRobustAction();
+            tryUntilArgs.TryThisBrowserAction.Act();
             AssertClicked(linkToBeClicked);
 
-            Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
+            tryUntilArgs.Until.Run();
+            Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 
         [TestCase(200)]
@@ -57,7 +58,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var stubLinkToBeClicked = StubLinkToBeClicked("Some link locator");
             var expectedWait = TimeSpan.FromMilliseconds(waitMs);
-            Configuration.WaitBeforeClick = expectedWait;
+            configuration.WaitBeforeClick = expectedWait;
 
             var waiterCalled = false;
             fakeWaiter.DoOnWait(milliseconds =>
@@ -69,7 +70,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
                                         waiterCalled = true;
                                     });
-            session.ClickLink("Some link locator");
+            browserSession.ClickLink("Some link locator");
             ExecuteLastDeferedRobustAction();
 
             Assert.That(waiterCalled, "The waiter was not called");
@@ -88,26 +89,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
         {
-            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
-            tryUntilArgs.TryThis();
-            return tryUntilArgs;
-        }
-
-        private void ExecuteDeferedRobustAction()
-        {
-            spyRobustWrapper.DeferredActions.Single()();
+            return spyRobustWrapper.DeferredTryUntils.Single();
         }
 
         private void ExecuteLastDeferedRobustAction()
         {
-            spyRobustWrapper.DeferredActions.Last()();
+            spyRobustWrapper.QueriesRan<object>().Last().Run();
         }
 
         private StubElement StubLinkToBeClicked(string someLinkLocator)
         {
-            var linkToBeClicked = new StubElement();
-            linkToBeClicked.SetId(Guid.NewGuid().ToString());
-            driver.StubLink(someLinkLocator, linkToBeClicked);
+            var linkToBeClicked = new StubElement { Id = Guid.NewGuid().ToString() };
+            driver.StubLink(someLinkLocator, linkToBeClicked, browserSession);
             return linkToBeClicked;
         }
     }

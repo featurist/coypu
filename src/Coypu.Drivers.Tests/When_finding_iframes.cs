@@ -1,29 +1,29 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_finding_iframes : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Finds_by_header_text()
         {
-            it["finds by header text"] = () =>
-            {
-                driver.FindIFrame("I am iframe one").Id.should_be("iframe1");
-                driver.FindIFrame("I am iframe two").Id.should_be("iframe2");
-            };
+            Driver.FindIFrame("I am iframe one", Root).Id.should_be("iframe1");
+            Driver.FindIFrame("I am iframe two", Root).Id.should_be("iframe2");
+        }
 
-            it["finds by id"] = () =>
-            {
-                driver.FindIFrame("iframe1").Id.should_be("iframe1");
-                driver.FindIFrame("iframe2").Id.should_be("iframe2");
-            };
+        [Test]
+        public void Finds_by_id()
+        {
+            Driver.FindIFrame("iframe1", Root).Id.should_be("iframe1");
+            Driver.FindIFrame("iframe2", Root).Id.should_be("iframe2");
+        }
 
-            it["finds by title"] = () =>
-            {
-                driver.FindIFrame("iframe one title").Id.should_be("iframe1");
-                driver.FindIFrame("iframe two title").Id.should_be("iframe2");
-            };
+        [Test]
+        public void Finds_by_title()
+        {
+            Driver.FindIFrame("iframe one title", Root).Id.should_be("iframe1");
+            Driver.FindIFrame("iframe two title", Root).Id.should_be("iframe2");
         }
     }
-
 }

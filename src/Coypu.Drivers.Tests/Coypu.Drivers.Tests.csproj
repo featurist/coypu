@@ -45,12 +45,18 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.6\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSpec, Version=0.9.41.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NSpec, Version=0.9.58.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\nspec.0.9.41\lib\NSpec.dll</HintPath>
+      <HintPath>..\packages\nspec.0.9.58\lib\NSpec.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\nspec.0.9.41\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -72,6 +78,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_elements_are_stale.cs" />
+    <Compile Include="When_finding_windows.cs" />
+    <Compile Include="When_finding_fields_by_container_label.cs" />
+    <Compile Include="When_finding_fields_by_for_attribute.cs" />
+    <Compile Include="When_finding_fields_by_id_ends_with.cs" />
+    <Compile Include="When_finding_fields_by_name.cs" />
+    <Compile Include="When_finding_fields_by_placeholder.cs" />
+    <Compile Include="When_finding_fields_id.cs" />
     <Compile Include="When_forced_to_consider_invisible_elements.cs" />
     <Compile Include="When_inspecting_location.cs" />
     <Compile Include="sites\SinatraSite.cs" />
@@ -79,9 +93,6 @@
     <Compile Include="When_hovering.cs" />
     <Compile Include="When_using_iframes_as_scope.cs" />
     <Compile Include="When_finding_iframes.cs" />
-    <Compile Include="DriverSpecRunner.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DriverSpecs.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -123,7 +134,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="When_finding_sections_as_divs.cs" />
-    <Compile Include="When_finding_fields.cs">
+    <Compile Include="When_finding_fields_by_value.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="When_finding_fieldsets.cs">
@@ -167,6 +178,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\popUp.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\iFrame1.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -180,12 +194,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj">
       <Project>{A4ADBB2C-A3C3-4984-8991-C39E991167DA}</Project>
       <Name>Coypu.Drivers.Watin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Coypu.Tests\Coypu.Tests.csproj">
+      <Project>{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}</Project>
+      <Name>Coypu.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Coypu\Coypu.csproj">
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>

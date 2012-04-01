@@ -4,39 +4,41 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    internal class SeleniumElement : Element
+    internal class SeleniumElement : ElementFound
     {
-        private IWebElement NativeSeleniumElement
+        private readonly IWebElement native;
+
+        protected IWebElement NativeSeleniumElement
         {
-            get { return (IWebElement) Native; }
+            get { return native; }
         }
 
         public SeleniumElement(IWebElement seleniumElement)
         {
-            Native = seleniumElement;
+            native = seleniumElement;
         }
 
-        public override string Id
+        public string Id
         {
             get { return NativeSeleniumElement.GetAttribute("id"); }
         }
 
-        public override string Text
+        public string Text
         {
             get { return NativeSeleniumElement.Text; }
         }
 
-        public override string Value
+        public string Value
         {
             get { return NativeSeleniumElement.GetAttribute("value"); }
         }
 
-        public override string Name
+        public string Name
         {
             get { return NativeSeleniumElement.GetAttribute("name"); }
         }
 
-        public override string SelectedOption
+        public string SelectedOption
         {
             get
             {
@@ -47,12 +49,37 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public override bool Selected
+        public bool Selected
         {
             get { return NativeSeleniumElement.Selected; }
         }
 
-        public override string this[string attributeName]
+        public virtual object Native
+        {
+            get { return native; }
+        }
+
+        public bool Stale
+        {
+            get
+            {
+                try
+                {
+                    NativeSeleniumElement.FindElement(By.XPath("."));
+                    return !NativeSeleniumElement.Displayed;
+                }
+                catch(InvalidOperationException)
+                {
+                    return true;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return true;
+                }
+            }
+        }
+
+        public string this[string attributeName]
         {
             get { return NativeSeleniumElement.GetAttribute(attributeName); }
         }

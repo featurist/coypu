@@ -17,22 +17,22 @@ namespace Coypu.Drivers.Selenium
             this.textMatcher = textMatcher;
         }
 
-        public IWebElement FindSection(string locator)
+        public IWebElement FindSection(string locator, DriverScope scope)
         {
-            return FindSectionByHeaderText(locator) ??
-                   elementFinder.Find(By.Id(locator)).FirstDisplayedOrDefault(IsSection);
+            return FindSectionByHeaderText(locator,scope) ??
+                   elementFinder.Find(By.Id(locator),scope).FirstDisplayedOrDefault(IsSection);
         }
 
-        private IWebElement FindSectionByHeaderText(string locator) 
+        private IWebElement FindSectionByHeaderText(string locator, DriverScope scope) 
         {
-            return FindSectionByHeaderText(locator, "section") ??
-                   FindSectionByHeaderText(locator, "div");
+            return FindSectionByHeaderText(locator, "section",scope) ??
+                   FindSectionByHeaderText(locator, "div",scope);
         }
 
-        private IWebElement FindSectionByHeaderText(string locator, string sectionTag) 
+        private IWebElement FindSectionByHeaderText(string locator, string sectionTag, DriverScope scope) 
         {
             var headersXPath = String.Join(" or ", headerTags);
-            var withAHeader = elementFinder.Find(By.XPath(String.Format(".//{0}[{1}]", sectionTag, headersXPath)));
+            var withAHeader = elementFinder.Find(By.XPath(String.Format(".//{0}[{1}]", sectionTag, headersXPath)),scope);
 
             return withAHeader.FirstDisplayedOrDefault(e => WhereAHeaderMatches(e, locator));
         }

@@ -1,38 +1,33 @@
-﻿using System;
+﻿using Coypu.Finders;
 using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_inspecting_content_within_scope : DriverSpecs
     {
-        internal override void Specs()
+        private DriverScope scope1;
+        private DriverScope scope2;
+
+        [SetUp]
+        public void SetUpScope()
         {
-            describe["scope 1"] = () =>
-            {
-                before = () => driver.SetScope(() => driver.FindId("scope1"));
+            scope1 = new DriverScope(new Configuration(), new IdFinder(Driver, "scope1", Root), Driver,null,null,null);
+            scope2 = new DriverScope(new Configuration(), new IdFinder(Driver, "scope2", Root), Driver,null,null,null);
+        }
 
-                it["finds content within scope"] = () =>
-                {
-                    driver.HasContent("Scope 1").should_be_true();
-                };
-                it["does not find content outside scope"] = () =>
-                {
-                    driver.HasContent("Scope 2").should_be_false();
-                };
-            };
-            describe["scope 2"] = () =>
-            {
-                before = () => driver.SetScope(() => driver.FindId("scope2"));
+        [Test]
+        public void Finds_content_within_scope()
+        {
+            Driver.HasContent("Scope 1", scope1).should_be_true();
+            Driver.HasContent("Scope 2", scope2).should_be_true();
+        }
 
-                it["finds content within scope"] = () =>
-                {
-                    driver.HasContent("Scope 2").should_be_true();
-                };
-                it["does not find content outside scope"] = () =>
-                {
-                    driver.HasContent("Scope 1").should_be_false();
-                };
-            };
+        [Test]
+        public void Does_not_find_content_outside_scope()
+        {
+            Driver.HasContent("Scope 2", scope1).should_be_false();
+            Driver.HasContent("Scope 1", scope2).should_be_false();
         }
     }
 }

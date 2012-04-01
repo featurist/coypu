@@ -1,34 +1,36 @@
-﻿using System;
-using NSpec;
+﻿using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_finding_links : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Finds_link_by_text()
         {
-            it["finds link by text"] = () =>
-            {
-                driver.FindLink("first link").Id.should_be("firstLinkId");
-                driver.FindLink("second link").Id.should_be("secondLinkId");
-            };
+            Driver.FindLink("first link", Root).Id.should_be("firstLinkId");
+            Driver.FindLink("second link", Root).Id.should_be("secondLinkId");
+        }
 
-            it["does not find display:none"] = () =>
-             {
-                 Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by display"));
-             };
+        [Test]
+        public void Does_not_find_display_none()
+        {
+            Assert.Throws<MissingHtmlException>(() => Driver.FindLink("I am an invisible link by display", Root));
+        }
 
-            it["does not find visibility:hidden links"] = () =>
-            {
-                Assert.Throws<MissingHtmlException>(() => driver.FindLink("I am an invisible link by visibility"));
-            };
 
-            it["finds a link with both types of quote in its text"] = () =>
-            {
-                var link = driver.FindLink("I'm a link with \"both\" types of quote in my text");
-                Assert.That(link.Id, Is.EqualTo("linkWithBothQuotesId"));
-            };
+        [Test]
+        public void Does_not_find_visibility_hidden_links()
+        {
+            Assert.Throws<MissingHtmlException>(() => Driver.FindLink("I am an invisible link by visibility", Root));
+        }
+
+
+        [Test]
+        public void Finds_a_link_with_both_types_of_quote_in_its_text()
+        {
+            var link = Driver.FindLink("I'm a link with \"both\" types of quote in my text", Root);
+            Assert.That(link.Id, Is.EqualTo("linkWithBothQuotesId"));
         }
     }
 }

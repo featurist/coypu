@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -16,15 +17,28 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class Examples
     {
-        private Session browser
+        private BrowserSession browser;
+
+        [TestFixtureSetUp]
+        public void SetUpFixture()
         {
-            get { return Browser.Session; }
+            var configuration = new Configuration
+                                    {
+                                        Timeout = TimeSpan.FromMilliseconds(2000),
+                                    };
+            browser = new BrowserSession(configuration);
+
+        }
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            browser.Dispose();
         }
 
         [SetUp]
         public void SetUp()
         {
-            Configuration.Timeout = TimeSpan.FromMilliseconds(2000);
             ReloadTestPageWithDelay();
         }
 
@@ -46,12 +60,6 @@ namespace Coypu.AcceptanceTests
             ApplyAsyncDelay();
         }
 
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            Browser.EndSession();
-        }
-
         [Test]
         public void AcceptModalDialog_example()
         {
@@ -67,7 +75,7 @@ namespace Coypu.AcceptanceTests
         {
             browser.ClickLink("Trigger a confirm");
             browser.CancelModalDialog();
-            browser.FindLink("Trigger a confirm - cancelled");
+            browser.FindLink("Trigger a confirm - cancelled").Now();
         }
 
         [Test]
@@ -103,16 +111,7 @@ namespace Coypu.AcceptanceTests
             var element = browser.FindButton("clickMeTest");
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me"));
 
-            browser.Click(element);
-            Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
-        }
-
-        [Test]
-        public void Click_with_finder_example()
-        {
-            Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me"));
-
-            browser.Click(() => browser.FindButton("clickMeTest"));
+            element.Click();
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
         }
 
@@ -151,7 +150,7 @@ namespace Coypu.AcceptanceTests
             ReloadTestPage();
 
             const string shouldFind = "#inspectingContent ul#cssTest li";
-            var all = browser.FindAllCss(shouldFind);
+            var all = browser.FindAllCss(shouldFind).ToList();
             Assert.That(all.Count(), Is.EqualTo(3));
             Assert.That(all.ElementAt(1).Text, Is.EqualTo("two"));
             Assert.That(all.ElementAt(2).Text, Is.EqualTo("Me! Pick me!"));
@@ -163,7 +162,7 @@ namespace Coypu.AcceptanceTests
             ReloadTestPage();
 
             const string shouldFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
-            var all = browser.FindAllXPath(shouldFind);
+            var all = browser.FindAllXPath(shouldFind).ToArray();
             Assert.That(all.Count(), Is.EqualTo(3));
             Assert.That(all.ElementAt(1).Text, Is.EqualTo("two"));
             Assert.That(all.ElementAt(2).Text, Is.EqualTo("Me! Pick me!"));
@@ -238,18 +237,18 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Has_example()
         {
-            Assert.IsTrue(browser.Has(() => browser.FindSection("Inspecting Content")));
-            Assert.IsFalse(browser.Has(() => browser.FindCss("#no-such-element")));
+            Assert.IsTrue(browser.Has(browser.FindSection("Inspecting Content")));
+            Assert.IsFalse(browser.Has(browser.FindCss("#no-such-element")));
         }
 
         [Test]
         public void HasNo_example()
         {
             browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">asdf</div>'");
-            Assert.IsTrue(browser.HasNo(() => browser.FindCss("#no-such-element")));
+            Assert.IsTrue(browser.HasNo(browser.FindCss("#no-such-element")));
 
             ReloadTestPage();
-            Assert.IsFalse(browser.HasNo(() => browser.FindSection("Inspecting Content")));
+            Assert.IsFalse(browser.HasNo(browser.FindSection("Inspecting Content")));
         }
 
         [Test]
@@ -327,7 +326,7 @@ namespace Coypu.AcceptanceTests
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
-            browser.Hover(() => browser.FindId("hoverOnMeTest"));
+            browser.FindId("hoverOnMeTest").Hover();
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me - hovered"));
         }
 
@@ -344,24 +343,27 @@ namespace Coypu.AcceptanceTests
         public void Within_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
+            
+            var expectingScope1 = browser.FindId("scope1").FindField(locatorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindId("scope2").FindField(locatorThatAppearsInMultipleScopes);
 
-            browser.Within(() => browser.FindId("scope1"),
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
-
-            browser.Within(() => browser.FindId("scope2"),
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
+            Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
         }
         
         [Test]
         public void WithinFieldset_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
+            
+            var expectingScope1 = browser.FindFieldset("Scope 1")
+                                         .FindField(locatorThatAppearsInMultipleScopes);
 
-            browser.WithinFieldset("Scope 1",
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope1TextInputFieldId")));
+            var expectingScope2 = browser.FindFieldset("Scope 2")
+                                         .FindField(locatorThatAppearsInMultipleScopes);
 
-            browser.WithinFieldset("Scope 2",
-                () => Assert.That(browser.FindField(locatorThatAppearsInMultipleScopes).Id, Is.EqualTo("scope2TextInputFieldId")));
+            Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
         }
 
         [Test]
@@ -369,11 +371,20 @@ namespace Coypu.AcceptanceTests
         {
             const string selectorThatAppearsInMultipleScopes = "h2";
 
-            browser.WithinSection("Section One h1",
-                () => Assert.That(browser.FindCss(selectorThatAppearsInMultipleScopes).Text, Is.EqualTo("Section One h2")));
+            var expectingScope1 = browser.FindSection("Section One h1").FindCss(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindSection("Div Section Two h1").FindCss(selectorThatAppearsInMultipleScopes);
 
-            browser.WithinSection("Div Section Two h1",
-                () => Assert.That(browser.FindCss(selectorThatAppearsInMultipleScopes).Text, Is.EqualTo("Div Section Two h2")));
+            Assert.That(expectingScope1.Text, Is.EqualTo("Section One h2"));
+            Assert.That(expectingScope2.Text, Is.EqualTo("Div Section Two h2"));
+        }
+
+        [Test]
+        public void TryUntil_example()
+        {
+            browser.TryUntil(() => browser.ClickButton("try this"),
+                             () => browser.HasContent("try until 5"),
+                             TimeSpan.FromMilliseconds(50),
+                             new Options {Timeout = TimeSpan.FromMilliseconds(5000)});
         }
 
         [Test]
@@ -381,22 +392,19 @@ namespace Coypu.AcceptanceTests
         {
             const string selectorThatAppearsInMultipleScopes = "scoped button";
 
-            browser.WithinIFrame("iframe1",
-                () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe1ButtonId")));
+            var expectingScope1 = browser.FindIFrame("iframe1").FindButton(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindIFrame("iframe2").FindButton(selectorThatAppearsInMultipleScopes);
 
-            browser.WithinIFrame("iframe2",
-                () => Assert.That(browser.FindButton(selectorThatAppearsInMultipleScopes).Id, Is.EqualTo("iframe2ButtonId")));
+            Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
         }
 
         [Test]
         public void Multiple_interactions_within_iframe_example()
         {
-            browser.WithinIFrame("I am iframe one", () =>
-                {
-                    browser.FillIn("text input in iframe").With("filled in");
-                    Assert.That(browser.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
-                });
-
+            var iframe = browser.FindIFrame("I am iframe one");
+            iframe.FillIn("text input in iframe").With("filled in");
+            Assert.That(iframe.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
         }
             
         [Test]
@@ -421,37 +429,47 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void ConsideringVisibleElements_action_example()
+        public void ConsideringInvisibleElements()
         {
-            browser.ConsideringInvisibleElements(
-                () =>
-                {
-                    browser.FindButton("firstInvisibleInputId");
-                }
-            );
+            browser.FindButton("firstInvisibleInputId", new Options{ConsiderInvisibleElements = true}).Now();
         }
+
         [Test]
-        public void ConsideringVisibleElements_func_example()
+        public void ConsideringOnlyVisibleElements()
         {
-            var button = browser.ConsideringInvisibleElements(
-                () => browser.FindButton("firstInvisibleInputId"));
+            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId").Now());
+        }
+        
+        [Test]
+        public void WindowScoping_example()
+        {
+            var mainWindow = browser;
 
-            Assert.That(button.Id, Is.EqualTo("firstInvisibleInputId"));
+            mainWindow.ClickLink("Open pop up window");
 
-            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId"));
+            var popUp = mainWindow.FindWindow("Pop Up Window");
+
+            Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
+            Assert.That(popUp.FindButton("scoped button").Id, Is.EqualTo("popUpButtonId"));
+
+            // And back
+            Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
         }
 
         [Test]
         public void CustomProfile()
         {
-            Configuration.Driver = typeof (CustomFirefoxProfileSeleniumWebDriver);
+            var configuration = new Configuration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
 
-            Browser.Session.Visit("https://www.relishapp.com/");
+            using (var custom = new BrowserSession(configuration))
+            {
+                custom.Visit("https://www.relishapp.com/");
+            }
         }
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver() : base(CustomProfile())
+            public CustomFirefoxProfileSeleniumWebDriver(Browser browser) : base(CustomProfile())
             {
             }
 

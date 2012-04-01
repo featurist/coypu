@@ -1,18 +1,18 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_hovering : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Mouses_over_the_underlying_element()
+
         {
-            it["mouses over the underlying element"] = () =>
-            {
-                var element = driver.FindId("hoverOnMeTest");
-                driver.FindId("hoverOnMeTest").Text.should_be("Hover on me");
-                driver.Hover(element);
-                driver.FindId("hoverOnMeTest").Text.should_be("Hover on me - hovered");
-            };
+            var element = Driver.FindId("hoverOnMeTest", Root);
+            Driver.FindId("hoverOnMeTest", Root).Text.should_be("Hover on me");
+            Driver.Hover(element);
+            Driver.FindId("hoverOnMeTest", Root).Text.should_be("Hover on me - hovered");
         }
     }
 }

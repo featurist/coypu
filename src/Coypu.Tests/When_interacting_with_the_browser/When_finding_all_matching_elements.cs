@@ -11,27 +11,27 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindAllCss_should_make_direct_call_to_underlying_driver()
         {
-            Should_find_robustly(session.FindAllCss, driver.StubAllCss);
+            Should_make_direct_call(browserSession.FindAllCss, driver.StubAllCss);
         }
 
         [Test]
         public void FindAllXPath_should_make_direct_call_to_underlying_driver()
         {
-            Should_find_robustly(session.FindAllXPath, driver.StubAllXPath);
+            Should_make_direct_call(browserSession.FindAllXPath, driver.StubAllXPath);
         }
 
-        protected void Should_find_robustly(Func<string, IEnumerable<Element>> subject, Action<string, IEnumerable<Element>> stub)
+        protected void Should_make_direct_call(Func<string, Options, IEnumerable<ElementFound>> subject, Action<string, IEnumerable<ElementFound>, DriverScope> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
             var expectedImmediateResult = new[] {new StubElement()};
 
-            stub(locator, expectedImmediateResult);
+            stub(locator, expectedImmediateResult, browserSession);
 
-            var actualImmediateResult = subject(locator);
+            var actualImmediateResult = subject(locator,configuration);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
-            Assert.That(spyRobustWrapper.DeferredFunctions, Is.Empty);
+            Assert.That(spyRobustWrapper.NoQueriesRan, Is.True, "Expected no robust queries run");
         }
     }
 }

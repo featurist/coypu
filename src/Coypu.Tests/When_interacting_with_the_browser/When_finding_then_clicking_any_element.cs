@@ -9,24 +9,22 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     public class When_finding_then_clicking_any_element : BrowserInteractionTests
     {
         [Test]
-        public void It_makes_robust_call_to_find_then_click_element_on_underlying_driver()
+        public void It_makes_robust_call_to_find_then_clicks_element_on_underlying_driver()
         {
             var element = new StubElement();
-            var finderCalled = false;
-            driver.StubCss("something.to click", element);
+            driver.StubCss("something.to click", element, browserSession);
+            spyRobustWrapper.AlwaysReturnFromRobustly(element);
 
-            session.Click(() =>
-            {
-                finderCalled = true;
-                return element;
-            });
+            var elementScope = browserSession.FindCss("something.to click");
 
-            Assert.That(finderCalled, Is.False, "Finder not called robustly");
-            Assert.That(driver.ClickedElements, Is.Empty, "Click not called robustly");
+            Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
 
-            spyRobustWrapper.DeferredActions.Single()();
+            elementScope.Click();
 
-            Assert.That(finderCalled, Is.True);
+            RunQueryAndCheckTiming();
+
+            Assert.That(driver.FindCssRequests.Any(), Is.False, "Scope finder was not deferred");
+
             Assert.That(driver.ClickedElements, Has.Member(element));
         }
     }

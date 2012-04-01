@@ -1,67 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Coypu.Actions;
+using Coypu.Queries;
 using Coypu.Robustness;
 
 namespace Coypu.Tests.TestDoubles
 {
     public class SpyRobustWrapper : RobustWrapper
     {
-        public IList<Action> DeferredActions = new List<Action>();
-        public IList<object> DeferredFunctions = new List<object>();
-        public IList<object> DeferredQueries = new List<object>();
-        public IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
-        
-        private readonly IDictionary<Type,object> stubbedResults = new Dictionary<Type, object>();
+        internal IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
+
+        private object alwaysReturn;
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
+        private readonly IList<object> queriesRan = new List<object>();
+        public static readonly object NO_EXPECTED_RESULT = new object();
 
-        public void Robustly(Action action)
+        public IEnumerable<Query<T>> QueriesRan<T>()
         {
-            DeferredActions.Add(action);
+            return queriesRan.OfType<Query<T>>();
         }
 
-        public TResult Robustly<TResult>(Func<TResult> function)
+        public IEnumerable<DriverAction> ActionsRan()
         {
-            DeferredFunctions.Add(function);
-            return (TResult)stubbedResults[typeof(TResult)];
+            return queriesRan.OfType<DriverAction>();
         }
 
-        public T Query<T>(Func<T> query, T expecting)
+        public bool NoQueriesRan { get { return !queriesRan.Any(); } }
+
+        public T Robustly<T>(Query<T> query)
         {
-            DeferredQueries.Add(query);
-            return (T)stubbedQueryResult[expecting];
+            queriesRan.Add(query);
+
+            if (alwaysReturn != null)
+                return (T) alwaysReturn;
+
+            var key = query.ExpectedResult ?? NO_EXPECTED_RESULT;
+            
+            if (stubbedQueryResult.ContainsKey(key))
+                return (T)stubbedQueryResult[key];
+
+            return default(T);
         }
 
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
         {
-            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, waitBeforeRetry));
+            DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, overallTimeout, waitBeforeRetry));
         }
 
-        public void AlwaysReturnFromRobustly(Type type, object result)
+        public bool ZeroTimeout { get; set; }
+        public void SetOverrideTimeout(TimeSpan timeout)
         {
-            stubbedResults.Add(type,result);
         }
 
-        public void StubQueryResult<T>(T expected, T result)
+        public void ClearOverrideTimeout()
         {
-            stubbedQueryResult[expected] = result;
         }
 
-        public void StubQueryResult(bool result)
+        public void AlwaysReturnFromRobustly(object result)
         {
-            stubbedQueryResult[true] = result;
-            stubbedQueryResult[false] = result;
+            alwaysReturn = result;
+        }
+
+        public void StubQueryResult<T>(T expectedResult, T result)
+        {
+            stubbedQueryResult[expectedResult] = result;
         }
 
         public class TryUntilArgs
         {
-            public Action TryThis { get; private set; }
-            public Func<bool> Until { get; private set; }
+            public TimeSpan OverallTimeout { get; private set; }
             public TimeSpan WaitBeforeRetry { get; private set; }
+            public BrowserAction TryThisBrowserAction { get; private set; }
+            public Query<bool> Until { get; private set; }
 
-            public TryUntilArgs(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
+            public TryUntilArgs(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
             {
+                OverallTimeout = overallTimeout;
                 WaitBeforeRetry = waitBeforeRetry;
-                TryThis = tryThis;
+                TryThisBrowserAction = tryThis;
                 Until = until;
             }
         }

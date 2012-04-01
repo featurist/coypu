@@ -9,12 +9,8 @@ PM> Install-Package Coypu
 Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
 
 ## Coypu is
-* A robust wrapper for browser automation tools on .Net, such as Selenium WebDriver that eases automating ajax-heavy websites
+* A robust wrapper for browser automation tools on .Net, such as Selenium WebDriver that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS & JS
 * A more intuitive DSL for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
-
-## Coypu is not
-* A port of Capybara to .Net
-* An acceptance testing framework
 
 ## Demo
 
@@ -22,16 +18,40 @@ Check out a [demo of Coypu](http://skillsmatter.com/podcast/open-source-dot-net/
 
 ## Using Coypu
 
+#### Browser session
+
+Open a browser session like so:
+
+	var browser = new BrowserSession();
+	
+When you are done with the browser session:
+
+	browser.Dispose();
+
+or:
+
+	using (var browser = new BrowserSession()) 
+	{
+		...
+	}
+	
 ### Configuration
+
+To configure Coypu pass an instance of `Coypu.Configuration` to the constructor of BrowserSession:
+
+    var browserSession = new BrowserSession(new Configuration{...});
 
 #### Website under test
 
 Configure the website you are testing as follows
 
-	Configuration.AppHost = "autotrader.co.uk";
-	Configuration.Port = "5555";
-	Configuration.SSL = true|false;
-	
+	var configuration = new Configuration 
+	{
+	  AppHost = "autotrader.co.uk",
+	  Port = "5555",
+	  SSL = true|false
+	};
+
 If you don't specify any of these, Coypu will default to http, localhost and port 80.
 
 #### Driver
@@ -40,18 +60,18 @@ Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration
 
 Choose your driver/browser combination like so:
 
-	Configuration.Driver = typeof (SeleniumWebDriver);
-	Configuration.Browser = Drivers.Browser.Firefox;
+	configuration.Driver = typeof (SeleniumWebDriver);
+	configuration.Browser = Drivers.Browser.Firefox;
  
 These settings are the default configuration.
 
 ##### Selenium WebDriver
-`Coypu.Drivers.Selenium.SeleniumWebDriver` depends on Selenium WebDriver 2.7.0 and supports Firefox (fastest), IE (slowest) and Chrome as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Firefox, IE (slowest) and Chrome (Fastest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
 The Selenium Driver is included in the Coypu package.
 
 ###### Firefox
-Versions up to and including Firefox 6 are now supported.
+WebDriver is generally stable with the last but one release of FireFox in my experience
 
 ###### Internet Explorer
 
@@ -88,20 +108,22 @@ You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu li
 	Configuration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
 	Configuration.Browser = Drivers.Browser.InternetExplorer;
 
-#### Timeout
+#### Waits, retries and timeout
 
-Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It doesn't try to monitor XmlHttpRequests or hook into any ready events, just catches exceptions -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
+Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It just catches exceptions and retries -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
 
-This is a rather blunt approach but the only truly robust method of using Selenium WebDriver against heavily asynchronous websites that we have found.
+This is a rather blunt approach that goes well beyond WebDriver's ImplicitWait, for example, but the only truly robust strategy for heavily asynchronous websites, where elements are flying in and out of the DOM constantly, that I have found.
 
 All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately.
 
 Setup timeout/retry like so:
 
-	Configuration.Timeout = TimeSpan.FromSeconds(1);
-	Configuration.RetryInterval = TimeSpan.FromSeconds(0.1);
+	configuration.Timeout = TimeSpan.FromSeconds(1);
+	configuration.RetryInterval = TimeSpan.FromSeconds(0.1);
 	
 These settings are the default configuration.
+
+All methods in the API take an optional final parameter of a `Coypu.Options`. By passing this in you can override these timing settings for just that call.
 
 ### Visible elements
 
@@ -113,44 +135,21 @@ What we are really trying to do here is interact with the browser in the way tha
 
 #### However...
 
-If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `Session.ConsideringInvisibleElements()` which temporarily suspends this restriction for one action/function.
+If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `configuration/options.ConsideringInvisibleElements = true` which overrides this restriction.
 
 ### Missing features
 
-There is plenty Coypu doesn't cover yet, what there is is pretty well tested however, and pretty simple to extend.
+There is plenty Coypu doesn't cover yet, what there is is pretty well tested however, and hopefully simple to extend.
 
 If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
-	var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) Browser.Session.Native);
+	var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) browserSession.Native);
 	
 But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
 
 ### DSL
 
 Here are some examples to get you started using Coypu
-
-	using Coypu;
-
-#### Browser session
-
-Access the current browser session via the static `Browser.Session`. This will open a browser if required.
-
-	var browser = Browser.Session;
-	
-If you need to close the browser and start a new session next time `Browser.Session` is accessed then it's:
-
-	Browser.EndSession();
-
-or just dispose the current session like so:
-
-	browser.Dispose();
-
-or so:
-
-	using (var browser = Browser.Session) 
-	{
-		...		
-	}
 	
 #### Navigating
 	
@@ -201,13 +200,15 @@ Links are found by the text of the link
 
 	browser.ClickLink("Reset search");
 
-Click any other element by passing a function that tells Coypu how to find it:
+Click any other element by calling the Click method on the returned `ElementScope`:
 	
-	browser.Click(() => browser.FindCss("span#i-should-be-a-link"));
+	browser.FindCss("span#i-should-be-a-link").Click();
 
-The above is the recommended, robust way to click, as Coypu can retry the find and click together if there is an exception after the element is found as the driver goes to click it.
+In this example, due to the way Coypu defers execution of finders, the FindCss will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
+
+This introduces the idea of `Scope`. The browser.Find methods return a Scope on which you may perform actions, or make further scoped queries. There is more on scope below.
 	
-Alternatively you can pass an element you have already found directly to `Click()`:
+The last way to click is to pass an element you have already found directly to `Click()`:
 
 	var allToClick = browser.FindAllCss("span.clickable")
 	foreach(var element in allToClick)
@@ -217,13 +218,20 @@ Alternatively you can pass an element you have already found directly to `Click(
 	
 #### Finding single elements
 
-Find methods return the first matching `Coypu.Element`. The locator arguments are case sensitive.
+Find methods return a `Coypu.ElementScope` that is scoped to the first matching element. The locator arguments are case sensitive.
 
 	var element = browser.FindField("Username");
 	var element = browser.FindButton("GO");
 	var element = browser.FindLink("Home");
 	var element = browser.FindCss("table#menu");
 	var element = browser.FindXPath("Username");
+	
+You can read attributes of these elements like so:
+
+    browser.FindLink("Home").Id
+    browser.FindLink("Home").Text
+    browser.FindLink("Home")["href"]
+    browser.FindLink("Home")["rel"]
 
 #### Finding multiple elements	
 	
@@ -237,33 +245,9 @@ FindAll methods return all matching elements:
 
 #### Hover
 
-Hover over an element by passing a function that tells Coypu how to find it:
+Hover over an element
 
-	browser.Hover(() => browser.FindCss("span#hoverOnMe"));
-	
-#### Scope
-
-When you want perform operations only within a particular part of the page define a scope by using Within:
-
-	browser.Within(() => browser.FindCss("form.searchForm"), () =>
-	{
-		browser.FillIn("postcode").With("N1 1AA");
-
-		browser.Select("citroen").From("make");
-		browser.Select("c4_grand_picasso").From("model");
-
-		browser.FillIn("Add keyword:").With("vtr");
-
-		browser.ClickButton("Search");
-	}
-	
-The first parameter is a `Func<Element>` which allows you to find a `Coypu.Element` in any way you see fit. 
-
-The actual finding of this element is deferred by the driver until each and every time it tries to find any element inside the Within block.
-
-If you are used to the Capybara implementation of within then there is a subtle difference here. If the scope Element itself drops out of the DOM and then reappears part way through executing the within block (due to Ajax or page refreshes) then Coypu will just find it again (with all the usual wait & retries) and carry on regardless.
-
-NOTE: Nested scopes are not currently supported - the inner scope will simply replace the outer scope at the moment.
+	browser.FindCss("span#hoverOnMe").Hover();
 
 #### Fieldsets / Sections
 
@@ -298,32 +282,71 @@ use this:
 
 **These work particularly well when used as scopes:**
 
-	browser.WithinFieldset("Advanced search", () =>
-	{
-		browser.FillIn("First name").With("Philip");
-		browser.FillIn("Middle initial").With("J");
-		browser.FillIn("Last name").With("Fry");
+#### Scope
 
-		browser.Click("Find");
-	});
+When you want perform operations only within a particular part of the page, find the scope you want then use this as the scope for further finds and interactions as in the previous fieldset/section example.
 
-or:	
-	
-	browser.WithinSection("Search results", () =>
-	{
-		Assert.That(browser.HasContent("1 friend found"));
-		Assert.That(browser.HasContent("Philip J Fry"));
-	});	
+    var advancedSearch = browser.WithinFieldset("Advanced search");
+    var searchResults = browser.WithinSection("Search results");
+
+    advancedSearch.FillIn("First name").With("Philip");
+    advancedSearch.FillIn("Middle initial").With("J");
+    advancedSearch.FillIn("Last name").With("Fry");
+
+    advancedSearch.Click("Find");
+
+    Assert.That(searchResults.HasContent("1 friend found"));
+    Assert.That(searchResults.HasContent("Philip J Fry"));
+
+The actual finding of the scope is deferred until the driver needs to interact with or find any element inside the Scope. If the scope becomes stale at any time it will be re-found.
+
+**So in the above example, it doesn't matter what happens between clicking 'Find' and the search results loading. The search results area could be ripped out of the DOM and refreshed, there could be a full page refresh, or even a pop up window closed and reopened, so long as the session remains active.**
+
+This means you have tests much more loosely coupled to the implementation of your website. Consider the search example above and the possible permutations of HTML and JS that would satisfy that test.
 
 #### Scoping within iframes
 
 To restrict the scope to an iframe, locate the iframe by its id, title or the text of an h1 element within the frame:
 
-	browser.WithinIFrame("@coypu_news on Twitter", () =>
-	{
-		Assert.That(browser.HasContent("Coypu 0.2.0 released"));
-	});	
+	var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
+
+	Assert.That(twitterFrame.HasContent("Coypu 0.8.0 released"));	
+
+
+#### Scoping within windows
+
+To restrict the scope to a browser window (or tab), locate the window by its title or name:
+
+	var surveyPopup = browser.FindWindow("Customer Survey");
+
+	surveyPopup.Select("Not Satisfied").From("How did we handle your enquiry?");	
+	surveyPopup.ClickButton("Submit");
 	
+	browser.ClickLink("Logout"); // Using the original window scope again - there is no need to switch back, just use the correct scope
+	
+Switching between frames and windows is a particular pain in WebDriver as you may well know. Check out this example of how Coypu handles windows from a Coypu acceptance test:
+
+    Visit("InteractionTestsPage.htm");
+
+    browser.ClickLink("Open pop up window");
+
+    var popUp = browser.FindWindow("Pop Up Window");
+    var button = popUp.FindButton("button in popup");
+
+    Assert.That(button.Exists());
+    Assert.That(popUp.HasContent("I am a pop up window"));
+
+    popUp.ExecuteScript("self.close()");
+
+    Assert.That(button.Missing());
+
+    browser.ClickLink("Open pop up window");
+
+    Assert.That(popUp.HasContent("I am a pop up window"));
+    Assert.That(button.Exists());
+    
+    button.Click();
+
 #### Executing javascript in the browser
 
 You can execute javascript like so:
@@ -372,11 +395,11 @@ Interact with the current dialog like so:
   
 #### Varying the timeout
 
-When you need an unusually long (or short) timeout for a particular interaction you can use `WithIndividualTimeout`, temporarilly overriding the `Configuration.Timeout`:
+When you need an unusually long (or short) timeout for a particular interaction you can override the timeout just for this call by passing in a `Coypu.Options` like this:
 
 	browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
-	browser.Click("Upload");
-	browser.WithIndividualTimeout(Timespan.FromSeconds(60), () => browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully"));
+	browser.ClickButton("Upload");
+	browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } );
 	
 #### Finding states (nondeterministic testing)
 
@@ -418,15 +441,17 @@ This is far from ideal as you are coupling the click to the expected result rath
 
 #### Tell Coypu to wait a short time between first finding links/buttons and clicking them:
 
-	Configuration.WaitBeforeClick = Timespan.FromMiliseconds(0.2);
+	configuration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
 		
-WARNING: Setting this in global config means adding time to *every* click in your tests, so again this should be used as a last resort and kept as low as possible.
+WARNING: Setting this in your driver configuration means adding time to *every* click in your tests. You might be better off doing this just when you need it:
+
+    browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
 
 ## License
 
 (The MIT License)
 
-Copyright &copy; ITV plc, Adrian Longley & Contributors 2011
+Copyright &copy; Adrian Longley, ITV plc & Contributors 2012
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

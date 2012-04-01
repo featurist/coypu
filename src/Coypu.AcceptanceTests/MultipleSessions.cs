@@ -9,9 +9,9 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Two_browser_sessions_can_be_controlled_independently()
         {
-            using (var sessionOne = Browser.NewSession())
+            using (var sessionOne = new BrowserSession())
             {
-                using (var sessionTwo = Browser.NewSession())
+                using (var sessionTwo = new BrowserSession())
                 {
 
                     VisitTestPage(sessionOne);
@@ -26,9 +26,9 @@ namespace Coypu.AcceptanceTests
             }
         }
 
-        private void VisitTestPage(Session session)
+        private void VisitTestPage(BrowserSession browserSession)
         {
-            session.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+            browserSession.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
         }
     }
 }

@@ -1,13 +1,15 @@
 ﻿using System.IO;
 using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_uploading_files : DriverSpecs
     {
-        internal override void Specs()
-        {
-            it["sets the path to be uploaded"] = () =>
+
+  [Test]
+  public void Sets_the_path_to_be_uploaded()
+
             {
                 const string someLocalFile = @"local.file";
                 try
@@ -16,17 +18,16 @@ namespace Coypu.Drivers.Tests
                     var fullPath = Path.Combine(directoryInfo.FullName,someLocalFile);
                     using (File.Create(fullPath)) { }
 
-                    var textField = driver.FindField("forLabeledFileFieldId");
-                    driver.Set(textField, fullPath);
+                    var textField = Driver.FindField("forLabeledFileFieldId", Root);
+                    Driver.Set(textField, fullPath);
 
-                    var findAgain = driver.FindField("forLabeledFileFieldId");
+                    var findAgain = Driver.FindField("forLabeledFileFieldId", Root);
                     findAgain.Value.should_end_with("\\" + someLocalFile);
                 }
                 finally
                 {
                     File.Delete(someLocalFile);
                 }
-            };
+            }
         }
     }
-}

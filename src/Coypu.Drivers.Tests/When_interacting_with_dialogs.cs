@@ -1,70 +1,68 @@
-﻿using System;
-using NSpec;
+﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_interacting_with_dialogs : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Accepts_alerts()
         {
-            it["accepts alerts"] = () => 
+            using (Driver)
             {
-                using(driver)
-                {
-                    driver.Click(driver.FindLink("Trigger an alert"));
-                    driver.HasDialog("You have triggered an alert and this is the text.").should_be_true();
-                    driver.AcceptModalDialog();
-                    driver.HasDialog("You have triggered an alert and this is the text.").should_be_false();
-                };
-            };
+                Driver.Click(Driver.FindLink("Trigger an alert", Root));
+                Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_true();
+                Driver.AcceptModalDialog(Root);
+                Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_false();
+            }
+        }
 
-            describe["confirms"] = () =>
+
+        [Test]
+        public void Clears_dialog()
+        {
+            using (Driver)
             {
-                describe["when accepting"] = () =>
-                {
-                    it["clears dialog"] = () =>
-                    {
-                        using(driver)
-                        {
-                            driver.Click(driver.FindLink("Trigger a confirm"));
-                            driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
-                            driver.AcceptModalDialog();
-                            driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
-                        };
-                    };
-                    it["returns true"] = () =>
-                    {
-                        using(driver)
-                        {
-                            driver.Click(driver.FindLink("Trigger a confirm"));
-                            driver.AcceptModalDialog();
-                            driver.FindLink("Trigger a confirm - accepted").should_not_be_null();
-                        };
-                    };
-                };
-                describe["when cancelling"] = () =>
-                {
-                    it["clears dialog"] = () =>
-                    {
-                        using(driver)
-                        {
-                            driver.Click(driver.FindLink("Trigger a confirm"));
-                            driver.HasDialog("You have triggered a confirm and this is the text.").should_be_true();
-                            driver.CancelModalDialog();
-                            driver.HasDialog("You have triggered a confirm and this is the text.").should_be_false();
-                        };
-                    };
-                    it["returns false"] = () =>
-                    {
-                        using(driver)
-                        {
-                            driver.Click(driver.FindLink("Trigger a confirm"));
-                            driver.CancelModalDialog();
-                            driver.FindLink("Trigger a confirm - cancelled").should_not_be_null();
-                        };
-                    };
-                };
-            };
+                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
+                Driver.AcceptModalDialog(Root);
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+            }
+        }
+
+        [Test]
+        public void Returns_true()
+        {
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.AcceptModalDialog(Root);
+                Driver.FindLink("Trigger a confirm - accepted", Root).should_not_be_null();
+            }
+        }
+
+
+        [Test]
+        public void Cancel_Clears_dialog()
+        {
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
+                Driver.CancelModalDialog(Root);
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+            }
+        }
+
+        [Test]
+        public void Cancel_Returns_false()
+        {
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.CancelModalDialog(Root);
+                Driver.FindLink("Trigger a confirm - cancelled", Root).should_not_be_null();
+            }
         }
     }
 }

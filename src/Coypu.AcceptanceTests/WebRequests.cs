@@ -10,25 +10,26 @@ namespace Coypu.AcceptanceTests
     public class WebRequests
     {
         private SinatraSite sinatraSite;
+        private BrowserSession browser;
 
-        private Session browser {
-            get { return Browser.Session; }
-        }
-        
         [SetUp]
         public void SetUp()
         {
             sinatraSite = new SinatraSite(string.Format(@"sites\{0}.rb", "site_with_secure_resources"));
 
-            Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
-            Configuration.Port = 4567;
+            var configuration = new Configuration();
+
+            configuration.Timeout = TimeSpan.FromMilliseconds(1000);
+            configuration.Port = 4567;
+
+            browser = new BrowserSession(configuration);
             browser.Visit("/");
         }
 
         [TearDown]
         public void TearDown()
         {
-            Browser.EndSession();
+            browser.Dispose();
             sinatraSite.Dispose();
         }
 

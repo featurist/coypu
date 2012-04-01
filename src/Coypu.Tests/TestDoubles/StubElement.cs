@@ -1,47 +1,30 @@
 ﻿using System.Collections.Generic;
 namespace Coypu.Tests.TestDoubles
 {
-    public class StubElement : Element
+    public class StubElement : ElementFound
     {
-        private Dictionary<string,string> attributes = new Dictionary<string,string>();
-        private string id;
+        private readonly Dictionary<string,string> attributes = new Dictionary<string,string>();
 
-        public void SetId(string newId)
-        {
-            id = newId;
-        }
+        public string Id { get; set; }
 
-        public override string Id
-        {
-            get { return id; }
-        }
+        public string Text { get; set; }
 
-        public override string Text
-        {
-            get { return string.Empty; }
-        }
+        public string Value { get; set; }
 
-        public override string Value
-        {
-            get { return string.Empty; }
-        }
+        public string Name { get; set; }
 
-        public override string Name
-        {
-            get { return string.Empty; }
-        }
+        public string SelectedOption { get; set; }
 
-        public override string SelectedOption
-        {
-            get { return string.Empty; }
-        }
+        public bool Selected { get; set; }
 
-        public override bool Selected
+        public object Native { get; set; }
+
+        public bool Stale
         {
             get { return false; }
         }
 
-        public override string this[string attributeName]
+        public string this[string attributeName]
         {
             get 
             {

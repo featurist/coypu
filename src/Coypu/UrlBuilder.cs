@@ -1,7 +1,7 @@
 namespace Coypu
 {
-    internal interface UrlBuilder
+    public interface UrlBuilder
     {
-        string GetFullyQualifiedUrl(string virtualPath);
+        string GetFullyQualifiedUrl(string virtualPath, Configuration configuration);
     }
 }

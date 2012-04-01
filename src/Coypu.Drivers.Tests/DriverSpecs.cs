@@ -1,23 +1,83 @@
 ﻿using System;
-using NSpec.Domain;
+using System.IO;
+using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Tests.Sites;
+using Coypu.Drivers.Watin;
+using Coypu.Finders;
+using NUnit.Framework;
+
+[SetUpFixture]
+public class AssmeblyTearDown
+{
+    private SinatraSite sinatraSite;
+
+    [SetUp]
+    public void StartSinatra()
+    {
+        sinatraSite = new SinatraSite(@"..\..\..\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        sinatraSite.Dispose();
+
+        var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
+        if (driver != null && !driver.Disposed)
+            driver.Dispose();
+    }
+}
+
 
 namespace Coypu.Drivers.Tests
 {
     public class DriverSpecs
     {
-        public DriverSpecRunner DriverSpecRunner { get; set; }
+        private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
+        private static DriverScope root;
+        private static Driver driver;
 
-        protected Driver driver { get { return DriverSpecRunner.Driver; } }
-        protected ActionRegister describe { get { return DriverSpecRunner.NSpecDescribe; } }
-        protected ActionRegister context { get { return DriverSpecRunner.NSpecContext; } }
-        protected ActionRegister it { get { return DriverSpecRunner.NSpecIt; } }
-        protected Action before { set { DriverSpecRunner.NSpecBefore = value; } }
-        protected Action after { set { DriverSpecRunner.NSpecAfter = value; } }
+        private const Browser browser = Browser.Firefox;
+        private static readonly Type driverType = typeof (SeleniumWebDriver);
 
-        internal virtual void Specs()
+        [SetUp]
+        public void SetUp()
         {
-            // Override in each class with specs
-            // TODO: Make this abstract -- but nspec needs a bug fix first
+            Driver.Visit(GetTestHTMLPathLocation());
+        }
+
+        private string GetTestHTMLPathLocation()
+        {
+            return new FileInfo(Path.Combine(@"..\..\", INTERACTION_TESTS_PAGE)).FullName;
+        }
+
+        protected static DriverScope Root
+        {
+            get { return root ?? (root = new DriverScope(new Configuration(), new DocumentElementFinder(Driver), null, null, null, null)); }
+        }
+
+        private static void EnsureDriver()
+        {
+            if (driver != null && !driver.Disposed)
+            {
+                if (driverType == driver.GetType())
+                    return;
+
+                driver.Dispose();
+            }
+
+            driver = (Driver)Activator.CreateInstance(driverType,browser);
+            root = null;
+        }
+
+        public static Driver Driver
+        {
+            get
+            {
+                EnsureDriver();
+                return driver;
+
+            }
         }
     }
 }

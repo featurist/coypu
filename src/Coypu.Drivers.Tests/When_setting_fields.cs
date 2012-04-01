@@ -1,60 +1,70 @@
 ﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_setting_fields : DriverSpecs
     {
-        internal override void Specs()
-        {
-            it["sets value of text input field"] = () =>
+            
+  [Test]
+  public void Sets_value_of_text_input_field()
+
             {
-                var textField = driver.FindField("containerLabeledTextInputFieldName");
-                driver.Set(textField, "New text input value");
+                var textField = Driver.FindField("containerLabeledTextInputFieldName", Root);
+                Driver.Set(textField, "New text input value");
 
                 textField.Value.should_be("New text input value");
 
-                var findAgain = driver.FindField("containerLabeledTextInputFieldName");
+                var findAgain = Driver.FindField("containerLabeledTextInputFieldName", Root);
                 findAgain.Value.should_be("New text input value");
-            };
+            }
 
-            it["sets value of textarea field"] = () =>
+            
+    [Test]
+    public void Sets_value_of_textarea_field()
+  
             {
-                var textField = driver.FindField("containerLabeledTextareaFieldName");
-                driver.Set(textField, "New textarea value");
+                var textField = Driver.FindField("containerLabeledTextareaFieldName", Root);
+                Driver.Set(textField, "New textarea value");
 
                 textField.Value.should_be("New textarea value");
 
-                var findAgain = driver.FindField("containerLabeledTextareaFieldName");
+                var findAgain = Driver.FindField("containerLabeledTextareaFieldName", Root);
                 findAgain.Value.should_be("New textarea value");
-            };
+            }
 
-            it["selects option by text or value"] = () =>
+            
+    [Test]
+    public void Selects_option_by_text_or_value()
+  
             {
-                var textField = driver.FindField("containerLabeledSelectFieldId");
+                var textField = Driver.FindField("containerLabeledSelectFieldId", Root);
                 textField.Value.should_be("select2value1");
 
-                driver.Select(textField, "select two option two");
+                Driver.Select(textField, "select two option two");
 
-                var findAgain = driver.FindField("containerLabeledSelectFieldId");
+                var findAgain = Driver.FindField("containerLabeledSelectFieldId", Root);
                 findAgain.Value.should_be("select2value2");
 
-                driver.Select(textField, "select2value1");
+                Driver.Select(textField, "select2value1");
 
-                var andAgain = driver.FindField("containerLabeledSelectFieldId");
+                var andAgain = Driver.FindField("containerLabeledSelectFieldId", Root);
                 andAgain.Value.should_be("select2value1");
-            };
+            }
                            
-            it["fires change event when selecting an option"] = () =>
+            
+    [Test]
+    public void Fires_change_event_when_selecting_an_option()
+  
             {
-                var textField = driver.FindField("containerLabeledSelectFieldId");
+                var textField = Driver.FindField("containerLabeledSelectFieldId", Root);
                 textField.Name.should_be("containerLabeledSelectFieldName");
 
-                driver.Select(textField, "select two option two");
+                Driver.Select(textField, "select two option two");
 
-                driver.FindField("containerLabeledSelectFieldId").Name.should_be("containerLabeledSelectFieldName - changed");
-            };
+                Driver.FindField("containerLabeledSelectFieldId", Root).Name.should_be("containerLabeledSelectFieldName - changed");
+            }
 
 
         }
     }
-}

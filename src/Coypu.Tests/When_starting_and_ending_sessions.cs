@@ -1,5 +1,4 @@
-﻿using System;
-using Coypu.Tests.TestDoubles;
+﻿using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests
@@ -7,78 +6,61 @@ namespace Coypu.Tests
     [TestFixture]
     public class When_starting_and_ending_sessions
     {
+        private Configuration configuration;
+
         [SetUp]
         public void SetUp()
         {
-            Configuration.Driver = typeof (FakeDriver);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Browser.EndSession();
+            configuration = new Configuration();
+            configuration.Driver = typeof (FakeDriver);
         }
 
         [Test]
-        public void A_session_is_always_available()
+        public void Dispose_handles_a_disposed_session()
         {
-            Assert.That(Browser.Session, Is.TypeOf(typeof (Session)));
+            var browserSession = new BrowserSession(configuration);
 
-            Browser.EndSession();
-
-            Assert.That(Browser.Session, Is.TypeOf(typeof (Session)));
-        }
-
-        [Test]
-        public void After_end_a_new_session_is_available()
-        {
-            var firstSession = Browser.Session;
-            Assert.That(firstSession, Is.TypeOf(typeof(Session)));
-
-            Browser.EndSession();
-
-            Assert.That(Browser.Session, Is.Not.SameAs(firstSession));
-        }
-
-        [Test]
-        public void End_ignores_a_null_session()
-        {
-            Browser.EndSession();
+            browserSession.Dispose();
+            browserSession.Dispose();
         }
 
         [Test]
         public void After_disposing_the_session_a_new_session_is_available()
         {
-            Session firstSession;
-            using (var session = Browser.Session)
+            BrowserSession firstBrowserSession;
+            using (var session = new BrowserSession(configuration))
             {
-                firstSession = session;
+                firstBrowserSession = session;
             }
-            Assert.That(Browser.Session, Is.Not.SameAs(firstSession));
+            using (var session = new BrowserSession(configuration))
+            {
+                Assert.That(session, Is.Not.SameAs(firstBrowserSession));
+            }
         }
 
         [Test]
         public void A_session_gets_its_driver_from_config()
         {
-            Configuration.Driver = typeof (FakeDriver);
-            Assert.That(Browser.Session.Driver, Is.TypeOf(typeof (FakeDriver)));
+            configuration.Driver = typeof (FakeDriver);
+            using (var browserSession = new BrowserSession(configuration))
+            {
+                Assert.That(browserSession.Driver, Is.TypeOf(typeof(FakeDriver)));
+            }
 
-            Browser.EndSession();
-
-            Configuration.Driver = typeof (StubDriver);
-            Assert.That(Browser.Session.Driver, Is.TypeOf(typeof (StubDriver)));
+            configuration.Driver = typeof(StubDriver);
+            using (var browserSession = new BrowserSession(configuration))
+            {
+                Assert.That(browserSession.Driver, Is.TypeOf(typeof(StubDriver)));
+            }
         }
 
         [Test]
         public void Session_exposes_native_driver_if_you_really_need_it()
         {
-            Configuration.Driver = typeof (FakeDriver);
-            Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on fake driver"));
-
-            Browser.EndSession();
-
-            Configuration.Driver = typeof (StubDriver);
-            Assert.That(Browser.Session.Native, Is.EqualTo("Native driver on stub driver"));
+            using (var browserSession = new BrowserSession(configuration))
+            {
+                Assert.That(browserSession.Native, Is.EqualTo("Native driver on fake driver"));
+            }
         }
 
     }
