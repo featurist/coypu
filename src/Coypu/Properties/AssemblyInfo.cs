@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -40,4 +41,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("0.8.0.0")]
 [assembly: InternalsVisibleTo("Coypu.Tests")]
 [assembly: InternalsVisibleTo("Coypu.Drivers.Tests")]
-

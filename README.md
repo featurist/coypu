@@ -286,8 +286,8 @@ use this:
 
 When you want perform operations only within a particular part of the page, find the scope you want then use this as the scope for further finds and interactions as in the previous fieldset/section example.
 
-    var advancedSearch = browser.WithinFieldset("Advanced search");
-    var searchResults = browser.WithinSection("Search results");
+    var advancedSearch = browser.FindFieldset("Advanced search");
+    var searchResults = browser.FindSection("Search results");
 
     advancedSearch.FillIn("First name").With("Philip");
     advancedSearch.FillIn("Middle initial").With("J");
@@ -326,7 +326,7 @@ To restrict the scope to a browser window (or tab), locate the window by its tit
 	
 Switching between frames and windows is a particular pain in WebDriver as you may well know. Check out this example of how Coypu handles windows from a Coypu acceptance test:
 
-    Visit("InteractionTestsPage.htm");
+    browser.Visit("InteractionTestsPage.htm");
 
     browser.ClickLink("Open pop up window");
 
@@ -432,7 +432,7 @@ If the driver reports it had found and clicked your element successfully but not
 
 #### Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
-	var until = () => browser.FindCss("#SearchResults");
+	var until = () => browser.FindCss("#SearchResults").Exists();
 	var waitBetweenRetries = TimeSpan.Seconds(2);
 
 	browser.ClickButton("Search", until, waitBetweenRetries);
