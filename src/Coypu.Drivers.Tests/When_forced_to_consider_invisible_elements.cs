@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
         {
             get
             {
-                var configuration = new Configuration();
+                var configuration = new SessionConfiguration();
                 configuration.ConsiderInvisibleElements = true;
 
                 var rootConsideringInvisibleElements = new DriverScope(configuration, new DocumentElementFinder(Driver), null, null, null, null);

@@ -4,17 +4,17 @@ namespace Coypu
 {
     internal class FullyQualifiedUrlBuilder : UrlBuilder
     {
-        public string GetFullyQualifiedUrl(string virtualPath, Configuration configuration)
+        public string GetFullyQualifiedUrl(string virtualPath, SessionConfiguration SessionConfiguration)
         {
             if (Uri.IsWellFormedUriString(virtualPath, UriKind.Absolute))
                 return virtualPath;
 
             virtualPath = virtualPath.TrimStart('/');
-            var scheme = configuration.SSL ? "https" : "http";
+            var scheme = SessionConfiguration.SSL ? "https" : "http";
 
-            return configuration.Port == 80
-                       ? String.Format("{0}://{1}/{2}", scheme, configuration.AppHost, virtualPath)
-                       : String.Format("{0}://{1}:{2}/{3}", scheme, configuration.AppHost, configuration.Port, virtualPath);
+            return SessionConfiguration.Port == 80
+                       ? String.Format("{0}://{1}/{2}", scheme, SessionConfiguration.AppHost, virtualPath)
+                       : String.Format("{0}://{1}:{2}/{3}", scheme, SessionConfiguration.AppHost, SessionConfiguration.Port, virtualPath);
         }
     }
 }

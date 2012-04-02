@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
 
-            var options = new Configuration {Timeout = individualTimeout};
+            var options = new SessionConfiguration {Timeout = individualTimeout};
 
             var actualImmediateResult = subject(locator, options);
 
@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             stub(locator, stubResult, browserSession);
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
-            var actualImmediateResult = subject(locator,configuration);
+            var actualImmediateResult = subject(locator,SessionConfiguration);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 

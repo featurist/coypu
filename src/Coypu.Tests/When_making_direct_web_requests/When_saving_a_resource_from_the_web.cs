@@ -17,7 +17,7 @@ namespace Coypu.Tests.When_making_direct_web_requests
         private BrowserSession browserSession;
         private SpyRestrictedResourceDownloader _stubRestrictedResourceDownloader;
         private FakeDriver driver;
-        private Configuration configuration;
+        private SessionConfiguration SessionConfiguration;
 
         [SetUp]
         public void SetUp()
@@ -26,8 +26,8 @@ namespace Coypu.Tests.When_making_direct_web_requests
             _stubRestrictedResourceDownloader = new SpyRestrictedResourceDownloader();
 
             driver = new FakeDriver();
-            configuration = new Configuration();
-            browserSession = TestSessionBuilder.Build(configuration, driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
+            SessionConfiguration = new SessionConfiguration();
+            browserSession = TestSessionBuilder.Build(SessionConfiguration, driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
         }
 
         [Test]

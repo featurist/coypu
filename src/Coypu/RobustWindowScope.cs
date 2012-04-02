@@ -8,8 +8,8 @@ namespace Coypu
     {
         private readonly Options options;
 
-        internal RobustWindowScope(Driver driver, Configuration configuration, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder, Options options, WindowFinder windowFinder) 
-            : base(configuration,windowFinder,driver, robustWrapper, waiter, urlBuilder)
+        internal RobustWindowScope(Driver driver, SessionConfiguration SessionConfiguration, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder, Options options, WindowFinder windowFinder) 
+            : base(SessionConfiguration,windowFinder,driver, robustWrapper, waiter, urlBuilder)
         {
             this.options = options;
         }

@@ -15,11 +15,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         internal BrowserSession BuildSession(RobustWrapper robustWrapper)
         {
-            configuration = new Configuration();
-            return TestSessionBuilder.Build(configuration,new FakeDriver(), robustWrapper, new FakeWaiter(), null, null);
+            SessionConfiguration = new SessionConfiguration();
+            return TestSessionBuilder.Build(SessionConfiguration,new FakeDriver(), robustWrapper, new FakeWaiter(), null, null);
         }
 
-        private Configuration configuration;
+        private SessionConfiguration SessionConfiguration;
 
         [Test]
         public void It_checks_all_of_the_states_in_a_robust_query_expecting_true()
@@ -60,9 +60,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_1()
         {
-            var state1 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
             
             var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
             var foundState = session.FindState(state1, state2, state3);
@@ -73,9 +73,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_2()
         {
-            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state2 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
             var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
             var foundState = session.FindState(state1, state2, state3);
@@ -86,9 +86,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_3()
         {
-            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state3 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, configuration.RetryInterval));
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state3 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
             var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
             var foundState = session.FindState(state1, state2, state3);
@@ -126,8 +126,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void When_query_returns_false_It_raises_an_exception()
         {
-            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
-            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, configuration.RetryInterval));
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
             var robustWrapper = new SpyRobustWrapper();
             robustWrapper.StubQueryResult(true, false);

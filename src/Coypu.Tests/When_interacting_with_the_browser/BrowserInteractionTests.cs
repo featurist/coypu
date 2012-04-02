@@ -16,7 +16,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected BrowserSession browserSession;
         protected SpyRobustWrapper spyRobustWrapper;
         protected StubUrlBuilder stubUrlBuilder;
-        protected Configuration configuration;
+        protected SessionConfiguration SessionConfiguration;
         protected ElementScope elementScope;
         protected object queryResult;
 
@@ -27,8 +27,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper = new SpyRobustWrapper();
             fakeWaiter = new FakeWaiter();
             stubUrlBuilder = new StubUrlBuilder();
-            configuration = new Configuration();
-            browserSession = TestSessionBuilder.Build(configuration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
+            SessionConfiguration = new SessionConfiguration();
+            browserSession = TestSessionBuilder.Build(SessionConfiguration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
                                                       stubUrlBuilder);
 
             elementScope = browserSession.FindXPath(".");
@@ -46,7 +46,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>()
         {
-            return RunQueryAndCheckTiming<T>(configuration.Timeout);
+            return RunQueryAndCheckTiming<T>(SessionConfiguration.Timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout)
@@ -67,7 +67,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query)
         {
-            return RunQueryAndCheckTiming(query, configuration.Timeout);
+            return RunQueryAndCheckTiming(query, SessionConfiguration.Timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query, TimeSpan timeout)
@@ -77,7 +77,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             queryResult = query.Result;
 
             Assert.That(query.Timeout, Is.EqualTo(timeout));
-            Assert.That(query.RetryInterval, Is.EqualTo(configuration.RetryInterval));
+            Assert.That(query.RetryInterval, Is.EqualTo(SessionConfiguration.RetryInterval));
 
             return query.Result;
         }
@@ -102,7 +102,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     {
         private readonly Dictionary<string, string> urls = new Dictionary<string, string>();
 
-        public string GetFullyQualifiedUrl(string virtualPath, Configuration configuration)
+        public string GetFullyQualifiedUrl(string virtualPath, SessionConfiguration SessionConfiguration)
         {
             return urls[virtualPath];
         }

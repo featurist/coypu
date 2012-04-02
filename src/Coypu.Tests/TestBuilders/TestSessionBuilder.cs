@@ -6,10 +6,10 @@ namespace Coypu.Tests.TestBuilders
 {
     internal class TestSessionBuilder
     {
-        internal static BrowserSession Build(Configuration configuration, Driver driver, RobustWrapper robustWrapper, Waiter waiter,
+        internal static BrowserSession Build(SessionConfiguration SessionConfiguration, Driver driver, RobustWrapper robustWrapper, Waiter waiter,
                                       RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
         {
-            return new BrowserSession(new StubDriverFactory(driver), configuration, robustWrapper, waiter, restrictedResourceDownloader, urlBuilder);
+            return new BrowserSession(new StubDriverFactory(driver), SessionConfiguration, robustWrapper, waiter, restrictedResourceDownloader, urlBuilder);
         }
     }
 }

@@ -10,19 +10,19 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class ExternalExamples
     {
-        private Configuration configuration;
+        private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
 
         [SetUp]
         public void SetUp()
         {
-            configuration = new Configuration();
-            configuration.AppHost = "www.google.com";
-            configuration.Driver = typeof(SeleniumWebDriver);
+            SessionConfiguration = new SessionConfiguration();
+            SessionConfiguration.AppHost = "www.google.com";
+            SessionConfiguration.Driver = typeof(SeleniumWebDriver);
 
-            configuration.Timeout = TimeSpan.FromSeconds(10);
+            SessionConfiguration.Timeout = TimeSpan.FromSeconds(10);
 
-            browser = new BrowserSession(configuration);
+            browser = new BrowserSession(SessionConfiguration);
         }
         [TearDown]
         public void TearDown()
@@ -84,12 +84,12 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HtmlUnitDriver()
         {
-            configuration.AppHost = "www.google.com";
-            configuration.Browser = Browser.HtmlUnit;
+            SessionConfiguration.AppHost = "www.google.com";
+            SessionConfiguration.Browser = Drivers.Browser.HtmlUnit;
 
             try
             {
-                using (var htmlUnit = new BrowserSession(configuration))
+                using (var htmlUnit = new BrowserSession(SessionConfiguration))
                 {
                     htmlUnit.Visit("/");
                 }

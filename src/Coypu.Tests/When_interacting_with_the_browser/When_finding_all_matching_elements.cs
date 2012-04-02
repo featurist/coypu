@@ -28,7 +28,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             stub(locator, expectedImmediateResult, browserSession);
 
-            var actualImmediateResult = subject(locator,configuration);
+            var actualImmediateResult = subject(locator,SessionConfiguration);
             Assert.That(actualImmediateResult, Is.SameAs(expectedImmediateResult));
 
             Assert.That(spyRobustWrapper.NoQueriesRan, Is.True, "Expected no robust queries run");

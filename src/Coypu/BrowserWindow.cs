@@ -11,13 +11,13 @@ namespace Coypu
     /// </summary>
     public class BrowserWindow : DriverScope
     {
-        internal BrowserWindow(Configuration configuration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder) 
-            : base(configuration, elementFinder, driver, robustWrapper, waiter, urlBuilder)
+        internal BrowserWindow(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder) 
+            : base(SessionConfiguration, elementFinder, driver, robustWrapper, waiter, urlBuilder)
         {
         }
 
         /// <summary>
-        /// Check that a dialog with the specified text appears within the <see cref="Configuration.Timeout"/>
+        /// Check that a dialog with the specified text appears within the <see cref="SessionConfiguration.Timeout"/>
         /// </summary>
         /// <param name="withText">Dialog text</param>
         /// <returns>Whether an element appears</returns>
@@ -27,7 +27,7 @@ namespace Coypu
         }
 
         /// <summary>
-        /// Check that a dialog with the specified is not present. Returns as soon as the dialog is not present, or when the <see cref="Configuration.Timeout"/> is reached.
+        /// Check that a dialog with the specified is not present. Returns as soon as the dialog is not present, or when the <see cref="SessionConfiguration.Timeout"/> is reached.
         /// </summary>
         /// <param name="withText">Dialog text</param>
         /// <returns>Whether an element does not appears</returns>
@@ -37,7 +37,7 @@ namespace Coypu
         }
 
         /// <summary>
-        /// Accept the first modal dialog to appear within the <see cref="Configuration.Timeout"/>
+        /// Accept the first modal dialog to appear within the <see cref="SessionConfiguration.Timeout"/>
         /// </summary>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog(Options options = null)
@@ -46,7 +46,7 @@ namespace Coypu
         }
 
         /// <summary>
-        /// Cancel the first modal dialog to appear within the <see cref="Configuration.Timeout"/>
+        /// Cancel the first modal dialog to appear within the <see cref="SessionConfiguration.Timeout"/>
         /// </summary>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog(Options options = null)
@@ -57,10 +57,10 @@ namespace Coypu
         /// <summary>
         /// Visit a url in the browser
         /// </summary>
-        /// <param name="virtualPath">Virtual paths will use the Configuration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
+        /// <param name="virtualPath">Virtual paths will use the SessionConfiguration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
         public void Visit(string virtualPath)
         {
-            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath,configuration));
+            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath,SessionConfiguration));
         }
 
         /// <summary>

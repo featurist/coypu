@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_findable_element_exists()
         {
-            browserSession = TestSessionBuilder.Build(new Configuration(),driver,new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(),driver,new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement(), browserSession);
 
             Assert.That(browserSession.FindLink("Sign out").Exists());
@@ -20,7 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_missing_element_does_not_exist()
         {
-            browserSession = TestSessionBuilder.Build(new Configuration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement(), browserSession);
 
             Assert.That(browserSession.FindLink("Sign in").Exists(), Is.EqualTo(false));
@@ -29,7 +29,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_missing_element_is_missing()
         {
-            browserSession = TestSessionBuilder.Build(new Configuration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement(), browserSession);
 
             Assert.That(browserSession.FindLink("Sign in").Missing());
@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_findable_element_is_not_missing()
         {
-            browserSession = TestSessionBuilder.Build(new Configuration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
             driver.StubLink("Sign out", new StubElement(), browserSession);
 
             Assert.That(browserSession.FindLink("Sign out").Missing(), Is.EqualTo(false));

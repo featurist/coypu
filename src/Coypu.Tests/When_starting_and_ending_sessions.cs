@@ -6,19 +6,19 @@ namespace Coypu.Tests
     [TestFixture]
     public class When_starting_and_ending_sessions
     {
-        private Configuration configuration;
+        private SessionConfiguration SessionConfiguration;
 
         [SetUp]
         public void SetUp()
         {
-            configuration = new Configuration();
-            configuration.Driver = typeof (FakeDriver);
+            SessionConfiguration = new SessionConfiguration();
+            SessionConfiguration.Driver = typeof (FakeDriver);
         }
 
         [Test]
         public void Dispose_handles_a_disposed_session()
         {
-            var browserSession = new BrowserSession(configuration);
+            var browserSession = new BrowserSession(SessionConfiguration);
 
             browserSession.Dispose();
             browserSession.Dispose();
@@ -28,11 +28,11 @@ namespace Coypu.Tests
         public void After_disposing_the_session_a_new_session_is_available()
         {
             BrowserSession firstBrowserSession;
-            using (var session = new BrowserSession(configuration))
+            using (var session = new BrowserSession(SessionConfiguration))
             {
                 firstBrowserSession = session;
             }
-            using (var session = new BrowserSession(configuration))
+            using (var session = new BrowserSession(SessionConfiguration))
             {
                 Assert.That(session, Is.Not.SameAs(firstBrowserSession));
             }
@@ -41,14 +41,14 @@ namespace Coypu.Tests
         [Test]
         public void A_session_gets_its_driver_from_config()
         {
-            configuration.Driver = typeof (FakeDriver);
-            using (var browserSession = new BrowserSession(configuration))
+            SessionConfiguration.Driver = typeof (FakeDriver);
+            using (var browserSession = new BrowserSession(SessionConfiguration))
             {
                 Assert.That(browserSession.Driver, Is.TypeOf(typeof(FakeDriver)));
             }
 
-            configuration.Driver = typeof(StubDriver);
-            using (var browserSession = new BrowserSession(configuration))
+            SessionConfiguration.Driver = typeof(StubDriver);
+            using (var browserSession = new BrowserSession(SessionConfiguration))
             {
                 Assert.That(browserSession.Driver, Is.TypeOf(typeof(StubDriver)));
             }
@@ -57,7 +57,7 @@ namespace Coypu.Tests
         [Test]
         public void Session_exposes_native_driver_if_you_really_need_it()
         {
-            using (var browserSession = new BrowserSession(configuration))
+            using (var browserSession = new BrowserSession(SessionConfiguration))
             {
                 Assert.That(browserSession.Native, Is.EqualTo("Native driver on fake driver"));
             }

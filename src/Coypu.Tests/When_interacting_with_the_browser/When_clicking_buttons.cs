@@ -58,7 +58,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var stubButtonToBeClicked = StubButtonToBeClicked("Some button locator");
             var expectedWait = TimeSpan.FromMilliseconds(waitMs);
-            configuration.WaitBeforeClick = expectedWait;
+            SessionConfiguration.WaitBeforeClick = expectedWait;
 
             var waiterCalled = false;
             fakeWaiter.DoOnWait(milliseconds =>

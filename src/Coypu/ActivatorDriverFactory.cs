@@ -11,14 +11,8 @@ namespace Coypu
         {
             try
             {
-                Console.Write("New  driver...");
-
                 var driver = (Driver)Activator.CreateInstance(driverType, browser);
-
-                Console.WriteLine("open.");
                 OpenDrivers++;
-                Console.WriteLine(OpenDrivers + " drivers open.");
-
                 return driver;
             }
             catch (TargetInvocationException e)

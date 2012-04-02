@@ -22,7 +22,7 @@ namespace Coypu.AcceptanceTests
         [TestFixtureSetUp]
         public void SetUpFixture()
         {
-            var configuration = new Configuration
+            var configuration = new SessionConfiguration
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
                                     };
@@ -459,7 +459,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void CustomProfile()
         {
-            var configuration = new Configuration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
+            var configuration = new SessionConfiguration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
 
             using (var custom = new BrowserSession(configuration))
             {

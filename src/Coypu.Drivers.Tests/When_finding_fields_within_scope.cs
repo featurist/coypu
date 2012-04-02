@@ -12,8 +12,8 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public void SetUpScope()
         {
-            scope1 = new DriverScope(new Configuration(),new IdFinder(Driver, "scope1", Root), Driver,null,null,null);
-            scope2 = new DriverScope(new Configuration(), new IdFinder(Driver, "scope2", Root), Driver, null, null, null);
+            scope1 = new DriverScope(new SessionConfiguration(),new IdFinder(Driver, "scope1", Root), Driver,null,null,null);
+            scope2 = new DriverScope(new SessionConfiguration(), new IdFinder(Driver, "scope2", Root), Driver, null, null, null);
         }
 
         [Test]

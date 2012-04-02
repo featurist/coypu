@@ -6,7 +6,7 @@ namespace Coypu
     /// <summary>
     /// Global configuration settings
     /// </summary>
-    public class Configuration : Options
+    public class SessionConfiguration : Options
     {
         const string DEFAULT_APP_HOST = "localhost";
         const int DEFAULT_PORT = 80;
@@ -16,7 +16,7 @@ namespace Coypu
         /// <summary>
         /// New default configuration
         /// </summary>
-        public Configuration()
+        public SessionConfiguration()
         {
             AppHost = DEFAULT_APP_HOST;
             Port = DEFAULT_PORT;
@@ -59,5 +59,10 @@ namespace Coypu
         /// <para>Default: false</para>
         /// </summary>
         public bool SSL { get; set; }
+
+        // The following methods are obsolete in 0.8.0 and up, and will throw NotSupportedException
+        // They to be kept here for a while to ease transition to 0.8.0 and should be removed in 0.9.0
+
+
     }
 }

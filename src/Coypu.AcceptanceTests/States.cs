@@ -8,15 +8,15 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class States
     {
-        private Configuration configuration;
+        private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
 
         [TestFixtureSetUp]
         public void SetUpFixture()
         {
-            configuration = new Configuration();
-            configuration.Timeout = TimeSpan.FromMilliseconds(1000);
-            browser = new BrowserSession(configuration);
+            SessionConfiguration = new SessionConfiguration();
+            SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
+            browser = new BrowserSession(SessionConfiguration);
         }
 
         [TestFixtureTearDown]

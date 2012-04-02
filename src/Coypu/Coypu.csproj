@@ -103,7 +103,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
-    <Compile Include="Configuration.cs" />
+    <Compile Include="SessionConfiguration.cs" />
     <Compile Include="Finders\CssFinder.cs" />
     <Compile Include="Finders\WindowFinder.cs" />
     <Compile Include="Finders\FieldFinder.cs" />

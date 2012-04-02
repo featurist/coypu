@@ -53,7 +53,7 @@ namespace Coypu.Drivers.Tests
 
         protected static DriverScope Root
         {
-            get { return root ?? (root = new DriverScope(new Configuration(), new DocumentElementFinder(Driver), null, null, null, null)); }
+            get { return root ?? (root = new DriverScope(new SessionConfiguration(), new DocumentElementFinder(Driver), null, null, null, null)); }
         }
 
         private static void EnsureDriver()

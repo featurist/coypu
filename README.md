@@ -37,15 +37,15 @@ or:
 	
 ### Configuration
 
-To configure Coypu pass an instance of `Coypu.Configuration` to the constructor of BrowserSession:
+To configure Coypu pass an instance of `Coypu.SessionConfiguration` to the constructor of BrowserSession:
 
-    var browserSession = new BrowserSession(new Configuration{...});
+    var browserSession = new BrowserSession(new SessionConfiguration{...});
 
 #### Website under test
 
 Configure the website you are testing as follows
 
-	var configuration = new Configuration 
+	var sessionConfiguration = new SessionConfiguration 
 	{
 	  AppHost = "autotrader.co.uk",
 	  Port = "5555",
@@ -56,12 +56,12 @@ If you don't specify any of these, Coypu will default to http, localhost and por
 
 #### Driver
 
-Coypu drivers implement the `Coypu.Driver` interface and read the `Configuration.Browser` setting to pick the correct browser.
+Coypu drivers implement the `Coypu.Driver` interface and read the `SessionConfiguration.Browser` setting to pick the correct browser.
 
 Choose your driver/browser combination like so:
 
-	configuration.Driver = typeof (SeleniumWebDriver);
-	configuration.Browser = Drivers.Browser.Firefox;
+	sessionConfiguration.Driver = typeof (SeleniumWebDriver);
+	sessionConfiguration.Browser = Drivers.Browser.Firefox;
  
 These settings are the default configuration.
 
@@ -85,7 +85,7 @@ You will need the chromedriver.exe on your PATH or in the bin of your test proje
 ###### HtmlUnit
 You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
 
-1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `Configuration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
+1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `sessionConfiguration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
 2. Install a JRE
 3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ](http://seleniumhq.org/download)
 4. Run "java -jar selenium-server-standalone-x.x.x.jar"
@@ -105,8 +105,8 @@ This driver only supports Internet Explorer as the browser.
 
 You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu like so:
 
-	Configuration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
-	Configuration.Browser = Drivers.Browser.InternetExplorer;
+	sessionConfiguration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
+	sessionConfiguration.Browser = Drivers.Browser.InternetExplorer;
 
 #### Waits, retries and timeout
 
@@ -118,12 +118,12 @@ All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()`
 
 Setup timeout/retry like so:
 
-	configuration.Timeout = TimeSpan.FromSeconds(1);
-	configuration.RetryInterval = TimeSpan.FromSeconds(0.1);
+	sessionConfiguration.Timeout = TimeSpan.FromSeconds(1);
+	sessionConfiguration.RetryInterval = TimeSpan.FromSeconds(0.1);
 	
 These settings are the default configuration.
 
-All methods in the API take an optional final parameter of a `Coypu.Options`. By passing this in you can override these timing settings for just that call.
+All methods in the DSL take an optional final parameter of a `Coypu.Options`. By passing this in you can override these timing settings for just that call.
 
 ### Visible elements
 
@@ -135,11 +135,9 @@ What we are really trying to do here is interact with the browser in the way tha
 
 #### However...
 
-If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `configuration/options.ConsideringInvisibleElements = true` which overrides this restriction.
+If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `sessionConfiguration/options.ConsideringInvisibleElements = true` which overrides this restriction.
 
 ### Missing features
-
-There is plenty Coypu doesn't cover yet, what there is is pretty well tested however, and hopefully simple to extend.
 
 If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
@@ -155,7 +153,7 @@ Here are some examples to get you started using Coypu
 	
 	browser.Visit("/used-cars")
 	
-If you need to step away and visit a site outside of the `Configuration.AppHost` then you can use a fully qualified Uri:
+If you need to step away and visit a site outside of the `SessionConfiguration.AppHost` then you can use a fully qualified Uri:
 
 	browser.Visit("https://gmail.com")
 	browser.Visit("file:///C:/users/adiel/localstuff.htm")
@@ -413,7 +411,7 @@ Sometimes you just can't predict what state the browser will be in. Not ideal fo
 	  browser.ClickLink("Sign out");
 	}
 
-It will return as soon as the first from your list of states is found, and throw if none of the states are found within the `Configuration.Timeout`
+It will return as soon as the first from your list of states is found, and throw if none of the states are found within the `SessionConfiguration.Timeout`
 
 Avoid this:
   
@@ -422,7 +420,7 @@ Avoid this:
 	  ...
 	}
   
-otherwise you will have to wait for the full `Configuration.Timeout` in the negitive case.  
+otherwise you will have to wait for the full `SessionConfiguration.Timeout` in the negitive case.  
   
 ## More tricks/tips
 
@@ -441,9 +439,9 @@ This is far from ideal as you are coupling the click to the expected result rath
 
 #### Tell Coypu to wait a short time between first finding links/buttons and clicking them:
 
-	configuration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
+	sessionConfiguration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
 		
-WARNING: Setting this in your driver configuration means adding time to *every* click in your tests. You might be better off doing this just when you need it:
+WARNING: Setting this in your session configuration means adding time to *every* click in that session. You might be better off doing this just when you need it:
 
     browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
 

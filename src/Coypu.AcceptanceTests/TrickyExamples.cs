@@ -17,11 +17,11 @@ namespace Coypu.AcceptanceTests
         [TestFixtureSetUp]
         public void SetUpFixture()
         {
-            var configuration = new Configuration
+            var configuration = new SessionConfiguration
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
                                         Driver = typeof(SeleniumWebDriver),
-                                        Browser = Browser.Firefox
+                                        Browser = Drivers.Browser.Firefox
                                     };
             browser = new BrowserSession(configuration);
 

@@ -10,7 +10,7 @@ namespace Coypu
 {
     public class DriverScope : Scope
     {
-        protected readonly Configuration configuration;
+        protected readonly SessionConfiguration SessionConfiguration;
         private readonly ElementFinder elementFinder;
         protected Driver driver;
         protected RobustWrapper robustWrapper;
@@ -20,10 +20,10 @@ namespace Coypu
         private ElementFound element;
         private Options options;
 
-        internal DriverScope(Configuration configuration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
+        internal DriverScope(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
             this.elementFinder = elementFinder ?? new DocumentElementFinder(driver);
-            this.configuration = configuration;
+            this.SessionConfiguration = SessionConfiguration;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.waiter = waiter;
@@ -39,8 +39,8 @@ namespace Coypu
             urlBuilder = outer.urlBuilder;
             stateFinder = outer.stateFinder;
             waiter = outer.waiter;
-            options = outer.configuration;
-            configuration = outer.configuration;
+            options = outer.SessionConfiguration;
+            SessionConfiguration = outer.SessionConfiguration;
         }
 
         public virtual Uri Location
@@ -60,7 +60,7 @@ namespace Coypu
 
         private Options Default(Options options)
         {
-            return options ?? configuration;
+            return options ?? SessionConfiguration;
         }
 
         public void ClickButton(string locator, Options options = null)
@@ -299,14 +299,7 @@ namespace Coypu
         protected internal ElementFound FindElement()
         {
             if (element == null || element.Stale)
-            {
-                Console.WriteLine("Stale scope: " + elementFinder.Locator);
                 element = elementFinder.Find();
-            }
-            else
-            {
-                Console.WriteLine("Cached scope: " + elementFinder.Locator);
-            }
             return element;
         }
     }

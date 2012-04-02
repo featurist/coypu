@@ -27,7 +27,7 @@ namespace Coypu.Drivers.Tests
         {
             Driver.Click(Driver.FindLink("Open pop up window", Root));
             
-            var popUp = new DriverScope(new Configuration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+            var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
 
             Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
             Assert.That(Driver.HasContent("I am a pop up window", Root), Is.False);
