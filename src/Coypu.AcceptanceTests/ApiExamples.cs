@@ -469,7 +469,7 @@ namespace Coypu.AcceptanceTests
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver(Browser browser) : base(CustomProfile())
+            public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser) : base(CustomProfile())
             {
             }
 

@@ -80,13 +80,9 @@ namespace Coypu
             if (WasDisposed)
                 return;
 
-            Console.WriteLine("Disposing driver");
-
             driver.Dispose();
 
-            Console.WriteLine("Disposed");
             ActivatorDriverFactory.OpenDrivers--;
-            Console.WriteLine(ActivatorDriverFactory.OpenDrivers + " driver(s) open.");
 
             WasDisposed = true;
         }

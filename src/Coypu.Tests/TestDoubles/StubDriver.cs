@@ -11,7 +11,7 @@ namespace Coypu.Tests.TestDoubles
     {
         public StubDriver() {}
 
-        public StubDriver(Browser browser){}
+        public StubDriver(Drivers.Browser browser){}
 
         public void Dispose()
         {

@@ -25,20 +25,6 @@ namespace Coypu.Tests
         }
 
         [Test]
-        public void After_disposing_the_session_a_new_session_is_available()
-        {
-            BrowserSession firstBrowserSession;
-            using (var session = new BrowserSession(SessionConfiguration))
-            {
-                firstBrowserSession = session;
-            }
-            using (var session = new BrowserSession(SessionConfiguration))
-            {
-                Assert.That(session, Is.Not.SameAs(firstBrowserSession));
-            }
-        }
-
-        [Test]
         public void A_session_gets_its_driver_from_config()
         {
             SessionConfiguration.Driver = typeof (FakeDriver);

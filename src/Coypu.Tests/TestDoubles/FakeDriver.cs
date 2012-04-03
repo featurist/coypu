@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -50,7 +49,7 @@ namespace Coypu.Tests.TestDoubles
 
 
         public FakeDriver() {}
-        public FakeDriver(Browser browser)
+        public FakeDriver(Drivers.Browser browser)
         {
             Browser = browser;
         }
@@ -64,7 +63,7 @@ namespace Coypu.Tests.TestDoubles
         }
 
 
-        public Browser Browser { get; private set; }
+        public Drivers.Browser Browser { get; private set; }
 
         public ElementFound FindButton(string locator, DriverScope scope)
         {

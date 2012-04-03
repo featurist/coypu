@@ -11,7 +11,7 @@
     <description>Intuitive, robust browser automation for .Net</description>
     <tags></tags>
     <dependencies>
-      <dependency id="Selenium.WebDriver" version="[2.19.0, 3.0.0)" />
+      <dependency id="Selenium.WebDriver" version="[2.20.0, 3.0.0)" />
     </dependencies>
   </metadata>
     <files>
