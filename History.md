@@ -2,7 +2,7 @@
 
 Release date: 2012-04-01
 
-** NOTE: Many breaking changes **
+** NOTE: Breaking changes **
 
 Check the README for the latest API
 
