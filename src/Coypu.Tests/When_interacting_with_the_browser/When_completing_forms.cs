@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Coypu.Tests.TestDoubles;
+﻿using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -11,13 +10,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_filling_in_a_text_field_It_finds_field_and_sets_value_robustly()
         {
             var element = new StubElement();
-            driver.StubField("Some field locator", element);
+            driver.StubField("Some field locator", element, browserSession);
 
-            session.FillIn("Some field locator").With("some value for the field");
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.SetFields, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SetFields.Keys, Has.Member(element));
             Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
@@ -27,12 +26,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_filling_in_a_field_It_clicks_to_ensure_focus()
         {
             var element = new StubElement();
-            driver.StubField("Some field locator", element);
+            driver.StubField("Some field locator", element, browserSession);
 
-            session.FillIn("Some field locator").With("some value for the field");
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.ClickedElements,Is.Empty);
-            spyRobustWrapper.DeferredActions.Single()();
+
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.ClickedElements, Has.Member(element));
         }
@@ -41,12 +41,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_filling_in_file_field_It_doesnt_click() {
             var element = new StubElement();
             element.StubAttribute("type", "file");
-            driver.StubField("Some field locator", element);
+            driver.StubField("Some field locator", element, browserSession);
 
-            session.FillIn("Some field locator").With("some value for the field");
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
-            Assert.That(driver.ClickedElements, Is.Empty);
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.ClickedElements, Has.No.Member(element));
         }
@@ -56,11 +55,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var element = new StubElement();
 
-            session.FillIn(element).With("some value for the field");
+            browserSession.FillIn(element).With("some value for the field");
 
             Assert.That(driver.SetFields, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SetFields.Keys, Has.Member(element));
             Assert.That(driver.SetFields[element], Is.EqualTo("some value for the field"));
@@ -70,13 +69,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_selecting_an_option_It_finds_field_and_selects_option_robustly()
         {
             var element = new StubElement();
-            driver.StubField("Some select field locator", element);
+            driver.StubField("Some select field locator", element, browserSession);
 
-            session.Select("some option to select").From("Some select field locator");
+            browserSession.Select("some option to select").From("Some select field locator");
 
             Assert.That(driver.SelectedOptions, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SelectedOptions.Keys, Has.Member(element));
             Assert.That(driver.SelectedOptions[element], Is.EqualTo("some option to select"));
@@ -86,13 +85,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_checking_a_checkbox_It_find_fields_and_checks_robustly()
         {
             var element = new StubElement();
-            driver.StubField("Some checkbox locator", element);
+            driver.StubField("Some checkbox locator", element, browserSession);
 
-            session.Check("Some checkbox locator");
+            browserSession.Check("Some checkbox locator");
 
             Assert.That(driver.CheckedElements, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.CheckedElements, Has.Member(element));
         }
@@ -101,13 +100,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_unchecking_a_checkbox_It_finds_field_and_unchecks_robustly()
         {
             var element = new StubElement();
-            driver.StubField("Some checkbox locator", element);
+            driver.StubField("Some checkbox locator", element, browserSession);
 
-            session.Uncheck("Some checkbox locator");
+            browserSession.Uncheck("Some checkbox locator");
 
             Assert.That(driver.UncheckedElements, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.UncheckedElements, Has.Member(element));
         }
@@ -116,15 +115,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void When_choosing_a_radio_button_It_finds_field_and_chooses_robustly()
         {
             var element = new StubElement();
-            driver.StubField("Some radio locator", element);
+            driver.StubField("Some radio locator", element, browserSession);
 
-            session.Choose("Some radio locator");
+            browserSession.Choose("Some radio locator");
 
             Assert.That(driver.ChosenElements, Has.No.Member(element));
 
-            spyRobustWrapper.DeferredActions.Single()();
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.ChosenElements, Has.Member(element));
         }
+
     }
 }

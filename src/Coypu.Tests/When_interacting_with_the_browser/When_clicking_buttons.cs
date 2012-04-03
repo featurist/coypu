@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -13,10 +14,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
 
-            session.ClickButton("Some button locator");
+            browserSession.ClickButton("Some button locator");
 
             AssertButtonNotClickedYet(buttonToBeClicked);
-            ExecuteDeferedRobustAction();
+
+            RunQueryAndCheckTiming();
+
             AssertClicked(buttonToBeClicked);
         }
 
@@ -32,17 +35,21 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
             var buttonToBeClicked = StubButtonToBeClicked("Some button locator");
+            var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs + 1000);
 
-            session.ClickButton("Some button locator", () => stubUntil, waitBetweenRetries);
+            var options = new Options {Timeout = overallTimeout};
+            browserSession.ClickButton("Some button locator", new LambdaPredicateQuery(() => stubUntil), waitBetweenRetries, options);
 
-            var tryUntilArgs = GetTryUntilArgs();
+            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
 
             AssertButtonNotClickedYet(buttonToBeClicked);
-            ExecuteDeferedRobustAction();
+            tryUntilArgs.TryThisBrowserAction.Act();
             AssertClicked(buttonToBeClicked);
 
-            Assert.That(tryUntilArgs.Until(), Is.EqualTo(stubUntil));
+            tryUntilArgs.Until.Run();
+            Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 
         [TestCase(200)]
@@ -51,7 +58,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var stubButtonToBeClicked = StubButtonToBeClicked("Some button locator");
             var expectedWait = TimeSpan.FromMilliseconds(waitMs);
-            Configuration.WaitBeforeClick = expectedWait;
+            SessionConfiguration.WaitBeforeClick = expectedWait;
 
             var waiterCalled = false;
             fakeWaiter.DoOnWait(milliseconds =>
@@ -63,8 +70,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
                 waiterCalled = true;
             });
-            session.ClickButton("Some button locator");
-            ExecuteLastDeferedRobustAction();
+            browserSession.ClickButton("Some button locator");
+            spyRobustWrapper.QueriesRan<object>().Last().Run();
 
             Assert.That(waiterCalled, "The waiter was not called");
             AssertClicked(stubButtonToBeClicked);
@@ -80,28 +87,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(driver.ClickedElements, Has.No.Member(buttonToBeClicked));
         }
 
-        private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
-        {
-            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
-            tryUntilArgs.TryThis();
-            return tryUntilArgs;
-        }
-
-        private void ExecuteDeferedRobustAction()
-        {
-            spyRobustWrapper.DeferredActions.Single()();
-        }
-
-        private void ExecuteLastDeferedRobustAction()
-        {
-            spyRobustWrapper.DeferredActions.Last()();
-        }
-
         private StubElement StubButtonToBeClicked(string locator)
         {
-            var buttonToBeClicked = new StubElement();
-            buttonToBeClicked.SetId(Guid.NewGuid().ToString());
-            driver.StubButton(locator, buttonToBeClicked);
+            var buttonToBeClicked = new StubElement {Id = Guid.NewGuid().ToString()};
+            driver.StubButton(locator, buttonToBeClicked, browserSession);
             return buttonToBeClicked;
         }
     }

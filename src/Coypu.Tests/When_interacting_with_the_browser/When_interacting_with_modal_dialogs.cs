@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -10,21 +9,21 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void AcceptDialog_should_make_robust_call_to_underlying_driver()
         {
-            session.AcceptModalDialog();
+            browserSession.AcceptModalDialog();
 
-            Assert.That(driver.ModalDialogsAccepted, Is.EqualTo(0));
-            spyRobustWrapper.DeferredActions.Single()();
-            Assert.That(driver.ModalDialogsAccepted, Is.EqualTo(1));
+            Assert.That(driver.ModalDialogsAccepted.Any(), Is.False);
+            RunQueryAndCheckTiming();
+            Assert.That(driver.ModalDialogsAccepted.Single(), Is.SameAs(browserSession));
         }
 
         [Test]
         public void CancelDialog_should_make_robust_call_to_underlying_driver()
         {
-            session.CancelModalDialog();
+            browserSession.CancelModalDialog();
 
-            Assert.That(driver.ModalDialogsCancelled, Is.EqualTo(0));
-            spyRobustWrapper.DeferredActions.Single()();
-            Assert.That(driver.ModalDialogsCancelled, Is.EqualTo(1));
+            Assert.That(driver.ModalDialogsCancelled.Any(), Is.False);
+            RunQueryAndCheckTiming();
+            Assert.That(driver.ModalDialogsCancelled.Single(), Is.SameAs(browserSession));
         }
 
     }

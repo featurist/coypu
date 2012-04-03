@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var driverLocation = new Uri("https://blank.org:8080/actual_location");
             driver.StubLocation(driverLocation);
-            Assert.That(session.Location, Is.EqualTo(driverLocation));
+            Assert.That(browserSession.Location, Is.EqualTo(driverLocation));
         }
     }
 }

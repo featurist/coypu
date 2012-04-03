@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using OpenQA.Selenium;
 
@@ -17,16 +16,17 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IWebElement FindIFrame(string locator)
+        public IWebElement FindIFrame(string locator, DriverScope scope)
         {
-            var frame = elementFinder.Find(By.TagName("iframe")).FirstOrDefault(e => e.GetAttribute("id") == locator ||
-                                                                                     e.GetAttribute("title") == locator ||
-                                                                                     FrameContentsMatch(e, locator));
+            var frame = elementFinder.Find(By.TagName("iframe"), scope).FirstOrDefault(e => e.GetAttribute("id") == locator ||
+                                                                                            e.GetAttribute("title") == locator ||
+                                                                                            FrameContentsMatch(e, locator));
             return frame;
         }
 
         private bool FrameContentsMatch(IWebElement e, string locator)
         {
+            var currentHandle = selenium.CurrentWindowHandle;
             try
             {
                 var frame = selenium.SwitchTo().Frame(e);
@@ -36,7 +36,7 @@ namespace Coypu.Drivers.Selenium
             }
             finally
             {
-                selenium.SwitchTo().DefaultContent();
+                selenium.SwitchTo().Window(currentHandle);
             }
         }
     }

@@ -53,14 +53,7 @@ task :package => [:release_configuration,:compile] do
   FileUtils.mkdir_p("temp/net40")
   Rake::Task["compile_net40"].invoke
   
-  exclude_files = [
-          'src/Coypu/bin/Release/Microsoft.mshtml.dll',
-          'src/Coypu/bin/Release/WatiN.Core.dll',
-          'src/Coypu/bin/Release/WatiN.Core.xml',
-          'src/Coypu/bin/Release/chromedriver.exe',
-          'src/Coypu/bin/Release/Coypu.pdb',
-          ]
-  include_files = Dir.glob('src/Coypu/bin/Release/*').reject{|f| exclude_files.include?(f)}
+  include_files = Dir.glob('src/Coypu/bin/Release/Coypu.dll')
   include_files.each {|f| FileUtils.cp(f, "temp/net40")}
 
   package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}

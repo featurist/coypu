@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -9,32 +10,34 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class ExternalExamples
     {
+        private SessionConfiguration SessionConfiguration;
+        private BrowserSession browser;
+
         [SetUp]
-        public void SetUp() 
+        public void SetUp()
         {
-            Configuration.Reset();
+            SessionConfiguration = new SessionConfiguration();
+            SessionConfiguration.AppHost = "www.google.com";
+            SessionConfiguration.Driver = typeof(SeleniumWebDriver);
 
-            Configuration.AppHost = "www.google.com";
-            Configuration.Driver = typeof(SeleniumWebDriver);
+            SessionConfiguration.Timeout = TimeSpan.FromSeconds(10);
 
-            Configuration.Timeout = TimeSpan.FromSeconds(10);
+            browser = new BrowserSession(SessionConfiguration);
         }
         [TearDown]
         public void TearDown()
         {
-            Configuration.Reset();
-            Browser.EndSession();
+            browser.Dispose();
         }
 
         [Test]
         public void Retries_Autotrader()
         {
-            var browser = Browser.Session;
             browser.Visit("http://www.autotrader.co.uk/used-cars");
 
             browser.FillIn("postcode").With("N1 1AA");
             
-            browser.Click(() => browser.FindField("make"));
+            browser.FindField("make").Click();
             
             browser.Select("citroen").From("make");
             browser.Select("c4_grand_picasso").From("model");
@@ -51,7 +54,6 @@ namespace Coypu.AcceptanceTests
         [Test, Explicit]
         public void Visibility_NewTwitterLogin()
         {
-            var browser = Browser.Session;
             browser.Visit("http://www.twitter.com");
 
             browser.FillIn("session[username_or_email]").With("coyputester2");
@@ -62,13 +64,10 @@ namespace Coypu.AcceptanceTests
          Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
         public void FindingStuff_CarBuzz()
         {
-            var browser = Browser.Session;
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
-            Console.WriteLine(browser.Has(() => browser.FindSection("Make")));
-            Console.WriteLine(browser.HasNo(() => browser.FindSection("Bake")));
-
-            browser.Click(() => browser.FindSection("Make"));
+            Console.WriteLine(browser.Has(browser.FindSection("Make")));
+            Console.WriteLine(browser.HasNo(browser.FindSection("Bake")));
 
             browser.Check("Audi");
             browser.Check("BMW");
@@ -76,7 +75,7 @@ namespace Coypu.AcceptanceTests
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
 
-            browser.Click(() => browser.FindSection("Seats"));
+            browser.FindSection("Seats").Click();
             browser.ClickButton("4");
 
             Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));
@@ -85,14 +84,14 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HtmlUnitDriver()
         {
-            Configuration.AppHost = "www.google.com";
-            Configuration.Browser = Drivers.Browser.HtmlUnit;
+            SessionConfiguration.AppHost = "www.google.com";
+            SessionConfiguration.Browser = Drivers.Browser.HtmlUnit;
 
             try
             {
-                using (Session browser = Browser.Session)
+                using (var htmlUnit = new BrowserSession(SessionConfiguration))
                 {
-                    browser.Visit("/");
+                    htmlUnit.Visit("/");
                 }
                 Assert.Fail("Expected an exception attempting to connect to HtmlUnit driver");
             }

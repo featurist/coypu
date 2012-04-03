@@ -1,12 +1,15 @@
 ﻿using System;
+using Coypu.Actions;
+using Coypu.Queries;
 
 namespace Coypu.Robustness
 {
     public interface RobustWrapper
     {
-        void Robustly(Action action);
-        TResult Robustly<TResult>(Func<TResult> function);
-        T Query<T>(Func<T> query, T expecting);
-        void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry);
+        T Robustly<T>(Query<T> query);
+        void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry);
+        bool ZeroTimeout { get; set; }
+        void SetOverrideTimeout(TimeSpan timeout);
+        void ClearOverrideTimeout();
     }
 }

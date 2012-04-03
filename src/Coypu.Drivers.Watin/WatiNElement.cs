@@ -2,7 +2,7 @@
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNElement : Element
+    internal class WatiNElement : ElementFound
     {
         internal WatiNElement(WatiN.Core.Element watinElement)
         {
@@ -20,12 +20,12 @@ namespace Coypu.Drivers.Watin
             get { return GetNativeWatiNElement<WatiN.Core.Element>(); }
         }
 
-        public override string Id
+        public string Id
         {
             get { return NativeWatiNElement.Id; }
         }
 
-        public override string Text
+        public string Text
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public override string Value
+        public string Value
         {
             get
             {
@@ -43,12 +43,12 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public override string Name
+        public string Name
         {
             get { return NativeWatiNElement.Name; }
         }
 
-        public override string SelectedOption
+        public string SelectedOption
         {
             get 
             { 
@@ -57,7 +57,7 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public override bool Selected
+        public bool Selected
         {
             get
             {
@@ -73,7 +73,19 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public override string this[string attributeName]
+        public object Native { get; private set; }
+
+
+        public bool Stale
+        {
+            get
+            {
+                return !NativeWatiNElement.Exists ||
+                       !(NativeWatiNElement.Style.Display == "none" || NativeWatiNElement.Style.GetAttributeValue("visibility") != "hidden");
+            }
+        }
+
+        public string this[string attributeName]
         {
             get { return NativeWatiNElement.GetAttributeValue(attributeName); }
         }

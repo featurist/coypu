@@ -87,10 +87,12 @@
     <Compile Include="States.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TrickyExamples.cs" />
     <Compile Include="WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="sites\site_with_secure_resources.rb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -108,6 +110,9 @@
     <Content Include="..\Coypu.Drivers.Tests\html\InteractionTestsPage.htm">
       <Link>html\InteractionTestsPage.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\tricky.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="html\states.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

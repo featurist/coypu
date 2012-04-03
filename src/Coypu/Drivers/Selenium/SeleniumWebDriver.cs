@@ -11,30 +11,26 @@ namespace Coypu.Drivers.Selenium
 {
     public class SeleniumWebDriver : Driver
     {
+        private readonly Browser _browser;
         public bool Disposed { get; private set; }
 
         public Uri Location
         {
             get
             {
-                ForceFindScope();
                 return new Uri(selenium.Url);
             }
         }
 
-        public bool ConsiderInvisibleElements
+        public ElementFound Window
         {
-            get { return elementFinder.ConsiderInvisibleElements; }
-            set { elementFinder.ConsiderInvisibleElements = value; }
-        }
-
-        private void ForceFindScope()
-        {
-            var scope = Scope;
+            get
+            {
+                return new WindowHandle(selenium, selenium.CurrentWindowHandle);
+            }
         }
 
         private RemoteWebDriver selenium;
-        private readonly Scoping scoping;
         private readonly ElementFinder elementFinder;
         private readonly FieldFinder fieldFinder;
         private readonly IFrameFinder iframeFinder;
@@ -46,17 +42,17 @@ namespace Coypu.Drivers.Selenium
         private readonly OptionSelector optionSelector;
         private readonly XPath xPath;
 
-        public SeleniumWebDriver()
-            : this(new DriverFactory().NewRemoteWebDriver())
+        public SeleniumWebDriver(Browser browser)
+            : this(new DriverFactory().NewRemoteWebDriver(browser))
         {
+            _browser = browser;
         }
 
         protected SeleniumWebDriver(RemoteWebDriver webDriver)
         {
             selenium = webDriver;
             xPath = new XPath();
-            scoping = new Scoping(selenium);
-            elementFinder = new ElementFinder(scoping,xPath);
+            elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
             iframeFinder = new IFrameFinder(selenium, elementFinder,xPath);
             textMatcher = new TextMatcher();
@@ -72,91 +68,76 @@ namespace Coypu.Drivers.Selenium
             get { return selenium; }
         }
 
-        private ISearchContext Scope
+        public ElementFound FindField(string locator, DriverScope scope)
         {
-            get { return scoping.Scope; }
+            return BuildElement(fieldFinder.FindField(locator,scope), "No such field: " + locator);
         }
 
-        private bool ScopeDefined
+        public ElementFound FindButton(string locator, DriverScope scope)
         {
-            get { return scoping.ScopeDefined(); }
+            return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
         }
 
-        public void SetScope(Func<Element> find)
+        public ElementFound FindIFrame(string locator, DriverScope scope) 
         {
-            scoping.SetScope(find);
+            var element = iframeFinder.FindIFrame(locator, scope);
+
+            if (element == null)
+                throw new MissingHtmlException("Failed to find frame: " + locator);
+
+            return new SeleniumFrame(element,selenium);
         }
 
-        public void ClearScope()
+        public ElementFound FindLink(string linkText, DriverScope scope)
         {
-            scoping.ClearScope();
+            return BuildElement(Find(By.LinkText(linkText), scope).FirstOrDefault(), "No such link: " + linkText);
         }
 
-        public Element FindField(string locator)
+        public ElementFound FindId(string id,DriverScope scope ) 
         {
-            return BuildElement(fieldFinder.FindField(locator), "No such field: " + locator);
+            return BuildElement(Find(By.Id(id), scope).FirstOrDefault(), "Failed to find id: " + id);
         }
 
-        public Element FindButton(string locator)
-        {
-            return BuildElement(buttonFinder.FindButton2(locator),"No such button: " + locator);
-        }
-
-        public Element FindIFrame(string locator) 
-        {
-            return BuildElement(iframeFinder.FindIFrame(locator), "Failed to find frame: " + locator);
-        }
-
-        public Element FindLink(string linkText)
-        {
-            return BuildElement(Find(By.LinkText(linkText)).FirstOrDefault(), "No such link: " + linkText);
-        }
-
-        public Element FindId(string id) 
-        {
-            return BuildElement(Find(By.Id(id)).FirstDisplayedOrDefault(), "Failed to find id: " + id);
-        }
-
-        public Element FindFieldset(string locator)
+        public ElementFound FindFieldset(string locator, DriverScope scope)
         {
             var fieldset =
-                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator))).FirstOrDefault() ??
-                Find(By.Id(locator)).FirstOrDefault(e => e.TagName == "fieldset");
+                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator)),scope).FirstOrDefault() ??
+                Find(By.Id(locator),scope).FirstOrDefault(e => e.TagName == "fieldset");
 
             return BuildElement(fieldset, "Failed to find fieldset: " + locator);
         }
 
-        public Element FindSection(string locator)
+        public ElementFound FindSection(string locator, DriverScope scope)
         {
-            return BuildElement(sectionFinder.FindSection(locator), "Failed to find section: " + locator);
+            return BuildElement(sectionFinder.FindSection(locator,scope), "Failed to find section: " + locator);
         }
 
-        public Element FindCss(string cssSelector)
+        public ElementFound FindCss(string cssSelector,DriverScope scope)
         {
-            return BuildElement(Find(By.CssSelector(cssSelector)).FirstOrDefault(),"No element found by css: " + cssSelector);
+            return BuildElement(Find(By.CssSelector(cssSelector),scope).FirstOrDefault(),"No element found by css: " + cssSelector);
         }
 
-        public Element FindXPath(string xpath)
+        public ElementFound FindXPath(string xpath, DriverScope scope)
         {
-            return BuildElement(Find(By.XPath(xpath)).FirstOrDefault(),"No element found by xpath: " + xpath);
+            return BuildElement(Find(By.XPath(xpath),scope).FirstOrDefault(),"No element found by xpath: " + xpath);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return Find(By.CssSelector(cssSelector)).Select(e => BuildElement(e)).Cast<Element>();
+            return Find(By.CssSelector(cssSelector),scope).Select(e => BuildElement(e)).Cast<ElementFound>();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
-            return Find(By.XPath(xpath)).Select(e => BuildElement(e)).Cast<Element>();
+            return Find(By.XPath(xpath), scope).Select(e => BuildElement(e)).Cast<ElementFound>();
         }
 
-        private IEnumerable<IWebElement> Find(By by)
+        private IEnumerable<IWebElement> Find(By by, DriverScope scope)
         {
-            return elementFinder.Find(by);
+            return elementFinder.Find(by, scope);
         }
 
-        private Element BuildElement(IWebElement element, string failureMessage)
+        private ElementFound BuildElement(IWebElement element, string failureMessage)
         {
             if (element == null)
                 throw new MissingHtmlException(failureMessage);
@@ -169,41 +150,43 @@ namespace Coypu.Drivers.Selenium
             return new SeleniumElement(element);
         }
 
-        public bool HasContent(string text)
+        public bool HasContent(string text, DriverScope scope)
         {
-            return GetContent().Contains(text);
+            return GetContent(scope).Contains(text);
         }
 
-        public bool HasContentMatch(Regex pattern)
+        public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
-            return pattern.IsMatch(GetContent());
+            return pattern.IsMatch(GetContent(scope));
         }
 
-        private string GetContent()
+        private string GetContent(DriverScope scope)
         {
-            return ScopeDefined
-                       ? GetText(By.XPath("."))
-                       : GetText(By.TagName("body"));
+            var seleniumScope = elementFinder.SeleniumScope(scope);
+            return seleniumScope is RemoteWebDriver
+                       ? GetText(By.CssSelector("body"), seleniumScope)
+                       : GetText(By.XPath("."), seleniumScope);
         }
 
-        private string GetText(By xPath)
-        {
-            var pageText = Scope.FindElement(xPath).Text;
+        private string GetText(By xpath, ISearchContext seleniumScope)
+        {   
+            var pageText = seleniumScope.FindElement(xpath).Text;
             return NormalizeCRLFBetweenBrowserImplementations(pageText);
         }
 
-        public bool HasCss(string cssSelector)
+        public bool HasCss(string cssSelector, DriverScope scope)
         {
-            return Find(By.CssSelector(cssSelector)).Any();
+            return Find(By.CssSelector(cssSelector), scope).Any();
         }
 
-        public bool HasXPath(string xpath)
+        public bool HasXPath(string xpath, DriverScope scope)
         {
-            return Find(By.XPath(xpath)).Any();
+            return Find(By.XPath(xpath), scope).Any();
         }
 
-        public bool HasDialog(string withText)
+        public bool HasDialog(string withText, DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             return dialogs.HasDialog(withText);
         }
 
@@ -227,6 +210,53 @@ namespace Coypu.Drivers.Selenium
             return selenium.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
         }
 
+        public ElementFound FindWindow(string titleOrName, DriverScope scope)
+        {
+            return new WindowHandle(selenium, FindWindowHandle(titleOrName));
+        }
+
+        private string FindWindowHandle(string titleOrName)
+        {
+            var currentHandle = GetCurrentWindowHandle();
+            string matchingWindowHandle = null;
+
+            try
+            {
+                selenium.SwitchTo().Window(titleOrName);
+                matchingWindowHandle = selenium.CurrentWindowHandle;
+            }
+            catch (NoSuchWindowException)
+            {
+                foreach (var windowHandle in selenium.WindowHandles)
+                {
+                    selenium.SwitchTo().Window(windowHandle);
+                    if (windowHandle == titleOrName || selenium.Title == titleOrName)
+                    {
+                        matchingWindowHandle = windowHandle;
+                        break;
+                    }
+                }
+            }
+
+            if (matchingWindowHandle == null)
+                throw new MissingHtmlException("No such window found: " + titleOrName);
+
+            selenium.SwitchTo().Window(currentHandle);
+            return matchingWindowHandle;
+        }
+
+        private string GetCurrentWindowHandle()
+        {
+            try
+            {
+                return selenium.CurrentWindowHandle;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
+
         public void Set(Element element, string value) 
         {
             var seleniumElement = SeleniumElement(element);
@@ -235,9 +265,11 @@ namespace Coypu.Drivers.Selenium
             {
                 seleniumElement.Clear();
             }
-            catch (InvalidOperationException)
+            catch (InvalidElementStateException) // Non user-editable elements (file inputs) - chrome/IE
             {
-                // Not user-editable
+            }
+            catch(InvalidOperationException)  // Non user-editable elements (file inputs) - firefox
+            {
             }
             seleniumElement.SendKeys(value);
         }
@@ -247,13 +279,15 @@ namespace Coypu.Drivers.Selenium
             optionSelector.Select(element, option);
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.AcceptModalDialog();
         }
 
-        public void CancelModalDialog()
+        public void CancelModalDialog(DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.CancelModalDialog();
         }
 
@@ -278,8 +312,9 @@ namespace Coypu.Drivers.Selenium
             SeleniumElement(field).Click();
         }
 
-        public string ExecuteScript(string javascript)
+        public string ExecuteScript(string javascript, DriverScope scope)
         {
+            elementFinder.SeleniumScope(scope);
             var result = selenium.ExecuteScript(javascript);
             return result == null ? null : result.ToString();
         }

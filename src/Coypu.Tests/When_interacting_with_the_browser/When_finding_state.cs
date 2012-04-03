@@ -1,47 +1,57 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Queries;
 using Coypu.Robustness;
 using Coypu.Tests.TestBuilders;
+using Coypu.Tests.TestDoubles;
+using Coypu.Tests.When_making_browser_interactions_robust;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
     [TestFixture]
-    public class When_finding_state : BrowserInteractionTests
+    public class When_finding_state
     {
-        private void BuildSession()
+
+        internal BrowserSession BuildSession(RobustWrapper robustWrapper)
         {
-            session = TestSessionBuilder.Build(driver, new ImmediateSingleExecutionFakeRobustWrapper(), fakeWaiter, null,
-                                               null);
+            SessionConfiguration = new SessionConfiguration();
+            return TestSessionBuilder.Build(SessionConfiguration,new FakeDriver(), robustWrapper, new FakeWaiter(), null, null);
         }
+
+        private SessionConfiguration SessionConfiguration;
 
         [Test]
         public void It_checks_all_of_the_states_in_a_robust_query_expecting_true()
         {
             bool queriedState1 = false;
             bool queriedState2 = false;
-            var state1 = new State(() =>
+            var state1 = new State(new LambdaQuery<bool>(() =>
                                        {
                                            queriedState1 = true;
                                            return false;
-                                       });
-            var state2 = new State(() =>
+                                       }));
+            var state2 = new State(new LambdaQuery<bool>(() =>
                                        {
                                            queriedState2 = true;
                                            return true;
-                                       });
-            var state3 = new State(() => true);
+                                       }));
+            var state3 = new State(new LambdaQuery<bool>(() => true));
             state3.CheckCondition();
 
-            spyRobustWrapper.StubQueryResult(true, true);
+            var robustWrapper = new SpyRobustWrapper();
+            robustWrapper.StubQueryResult(true, true);
 
-            Assert.That(session.FindState(state1, state2, state3), Is.SameAs(state3));
+            var session = BuildSession(robustWrapper);
+
+            Assert.That(session.FindState(new [] {state1, state2, state3}), Is.SameAs(state3));
 
             Assert.IsFalse(queriedState1);
             Assert.IsFalse(queriedState2);
 
-            var query = ((Func<bool>) spyRobustWrapper.DeferredQueries.Single());
-            Assert.IsTrue(query());
+            var query = robustWrapper.QueriesRan<bool>().Single();
+            query.Run();
+            Assert.IsTrue(query.Result);
 
             Assert.IsTrue(queriedState1);
             Assert.IsTrue(queriedState2);
@@ -50,13 +60,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_1()
         {
-            var state1 = new State(() => true);
-            var state2 = new State(() => false);
-            var state3 = new State(() => false);
-
-            BuildSession();
-
-            State foundState = session.FindState(state1, state2, state3);
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            
+            var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
+            var foundState = session.FindState(state1, state2, state3);
 
             Assert.That(foundState, Is.SameAs(state1));
         }
@@ -64,13 +73,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_2()
         {
-            var state1 = new State(() => false);
-            var state2 = new State(() => true);
-            var state3 = new State(() => false);
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
-            BuildSession();
-
-            State foundState = session.FindState(state1, state2, state3);
+            var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
+            var foundState = session.FindState(state1, state2, state3);
 
             Assert.That(foundState, Is.SameAs(state2));
         }
@@ -78,13 +86,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_state_that_was_found_first_Example_3()
         {
-            var state1 = new State(() => false);
-            var state2 = new State(() => false);
-            var state3 = new State(() => true);
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state3 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
-            BuildSession();
-
-            State foundState = session.FindState(state1, state2, state3);
+            var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
+            var foundState = session.FindState(state1, state2, state3);
 
             Assert.That(foundState, Is.SameAs(state3));
         }
@@ -92,38 +99,40 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_uses_a_zero_timeout_when_evaluating_the_conditions()
         {
-            TimeSpan timeout1 = TimeSpan.MaxValue;
-            TimeSpan timeout2 = TimeSpan.MaxValue;
-            var state1 = new State(() =>
-                                       {
-                                           timeout1 = Configuration.Timeout;
-                                           return false;
-                                       });
-            var state2 = new State(() =>
-                                       {
-                                           timeout2 = Configuration.Timeout;
-                                           return true;
-                                       });
+            var robustWrapper = new ImmediateSingleExecutionFakeRobustWrapper();
+            var zeroTimeout1 = false;
+            var zeroTimeout2 = false;
+            var state1 = new State(new LambdaQuery<bool>(() =>
+                                                             {
+                                                                 zeroTimeout1 = robustWrapper.ZeroTimeout;
+                                                                 return false;
+                                                             }));
+            var state2 = new State(new LambdaQuery<bool>(() =>
+                                                             {
+                                                                 zeroTimeout2 = robustWrapper.ZeroTimeout;
+                                                                 return true;
+                                                             }));
 
-            BuildSession();
-
-            Configuration.Timeout = TimeSpan.FromSeconds(1);
-
+            var session = BuildSession(robustWrapper);
             session.FindState(state1, state2);
 
-            Assert.That(Configuration.Timeout, Is.EqualTo(TimeSpan.FromSeconds(1)));
-            Assert.That(timeout1, Is.EqualTo(TimeSpan.Zero));
-            Assert.That(timeout2, Is.EqualTo(TimeSpan.Zero));
+            Assert.That(zeroTimeout1, Is.EqualTo(true));
+            Assert.That(zeroTimeout2, Is.EqualTo(true));
+
+            Assert.That(robustWrapper.ZeroTimeout, Is.EqualTo(false));
         }
 
 
         [Test]
         public void When_query_returns_false_It_raises_an_exception()
         {
-            var state1 = new State(() => false);
-            var state2 = new State(() => false);
+            var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
+            var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
-            spyRobustWrapper.StubQueryResult(true, false);
+            var robustWrapper = new SpyRobustWrapper();
+            robustWrapper.StubQueryResult(true, false);
+            
+            var session = BuildSession(robustWrapper);
 
             try
             {
@@ -135,32 +144,5 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                 Assert.That(e.Message, Is.EqualTo("None of the given states was reached within the configured timeout."));
             }
         }
-    }
-
-    public class ImmediateSingleExecutionFakeRobustWrapper : RobustWrapper
-    {
-        #region RobustWrapper Members
-
-        public void Robustly(Action action)
-        {
-            action();
-        }
-
-        public TResult Robustly<TResult>(Func<TResult> function)
-        {
-            return function();
-        }
-
-        public T Query<T>(Func<T> query, T expecting)
-        {
-            return query();
-        }
-
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry)
-        {
-            tryThis();
-        }
-
-        #endregion
     }
 }

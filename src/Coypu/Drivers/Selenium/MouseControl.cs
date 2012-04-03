@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -14,7 +13,7 @@ namespace Coypu.Drivers.Selenium
 
         public void Hover(Element element)
         {
-            var sequenceBuilder = new Actions(selenium);
+            var sequenceBuilder = new OpenQA.Selenium.Interactions.Actions(selenium);
             var actionSequenceBuilder = sequenceBuilder.MoveToElement((IWebElement) element.Native);
             var action = actionSequenceBuilder.Build();
             action.Perform();

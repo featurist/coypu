@@ -2,7 +2,7 @@ using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNFrame : Element
+    internal class WatiNFrame : ElementFound
     {
         public WatiNFrame(Frame frame)
         {
@@ -14,12 +14,12 @@ namespace Coypu.Drivers.Watin
             get { return Native as Frame; }
         }
 
-        public override string Id
+        public string Id
         {
             get { return Frame.Id; }
         }
 
-        public override string Text
+        public string Text
         {
             get
             {
@@ -28,27 +28,34 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public override string Value
+        public string Value
         {
             get { return null; }
         }
 
-        public override string Name
+        public string Name
         {
             get { return Frame.Name; }
         }
 
-        public override string SelectedOption
+        public string SelectedOption
         {
             get { return string.Empty; }
         }
 
-        public override bool Selected
+        public bool Selected
         {
             get { return false; }
         }
 
-        public override string this[string attributeName]
+        public object Native { get; private set; }
+
+        public bool Stale
+        {
+            get { return !((Frame) Native).FrameElement.Exists; }
+        }
+        
+        public string this[string attributeName]
         {
             get { return Frame.GetAttributeValue(attributeName); }
         }

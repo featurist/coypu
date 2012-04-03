@@ -10,7 +10,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_uses_a_fully_qualified_url_from_the_url_builder()
         {
             stubUrlBuilder.SetStubUrl("/some/resource", "http://blank.org");
-            session.Visit("/some/resource");
+            browserSession.Visit("/some/resource");
             Assert.That(driver.Visits.Single(), Is.EqualTo("http://blank.org"));
         }
     }

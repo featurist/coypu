@@ -2,10 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Coypu</id>
-    <version>0.7.3</version>
+    <version>0.8.0</version>
     <authors>AdrianLongley</authors>
     <owners>AdrianLongley</owners>
-    <projectUrl>https://github.com/coypu/coypu</projectUrl>
+    <projectUrl>https://github.com/featurist/coypu</projectUrl>
     <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Intuitive, robust browser automation for .Net</description>

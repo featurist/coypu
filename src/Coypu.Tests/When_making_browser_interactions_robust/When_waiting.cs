@@ -24,7 +24,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public void It_sleeps_for_the_expected_time(int expectedDurationMilliseconds) 
         {
-            var waiter = new ThreadSleepWaiter();
+            var waiter = new StopwatchWaiter();
             var stopWatch = Stopwatch.StartNew();
             var expectedDuration = TimeSpan.FromMilliseconds(expectedDurationMilliseconds);
 

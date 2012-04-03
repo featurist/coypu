@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
@@ -20,7 +21,7 @@ namespace Coypu.Drivers.Selenium
                        selenium.SwitchTo().Alert() != null &&
                        selenium.SwitchTo().Alert().Text == withText;
             }
-            catch (OpenQA.Selenium.NoAlertPresentException)
+            catch (NoAlertPresentException)
             {
                 return false;
             }

@@ -1,41 +1,45 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using Coypu.Actions;
+using Coypu.Queries;
 
 namespace Coypu.Robustness
 {
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
-        public void Robustly(Action action)
+        public void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
         {
-            Robustly<object>(() =>
-                         {
-                             action();
-                             return null;
-                         });
+            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
+            if (!outcome)
+                throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
-        public TResult Robustly<TResult>(Func<TResult> function)
+        public bool ZeroTimeout { get; set; }
+        private TimeSpan? overrideTimeout;
+
+        public void SetOverrideTimeout(TimeSpan timeout)
         {
-            return Robustly(function, null);
+            overrideTimeout = timeout;
         }
 
-        public T Query<T>(Func<T> query, T expecting)
+        public void ClearOverrideTimeout()
         {
-            return Robustly(query, expecting);
+            overrideTimeout = null;
         }
 
-        public TResult Robustly<TResult>(Func<TResult> function, object expectedResult)
+        public TResult Robustly<TResult>(Query<TResult> query)
         {
-            var interval = Configuration.RetryInterval;
-            var timeout = Configuration.Timeout;
+            var interval = query.RetryInterval;
+            var timeout = Timeout(query);
             var stopWatch = Stopwatch.StartNew();
             while (true)
             {
                 try
                 {
-                    var result = function();
-                    if (ExpectedResultNotFoundWithinTimeout(expectedResult, result, stopWatch, timeout, interval))
+                    query.Run();
+                    var result = query.Result;
+                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, timeout, interval))
                     {
                         WaitForInterval(interval);
                         continue;
@@ -54,6 +58,24 @@ namespace Coypu.Robustness
             }
         }
 
+        private TimeSpan Timeout<TResult>(Query<TResult> query)
+        {
+            TimeSpan timeout;
+            if (ZeroTimeout)
+            {
+                timeout = TimeSpan.Zero;
+            }
+            else if (overrideTimeout.HasValue)
+            {
+                timeout = overrideTimeout.Value;
+            }
+            else
+            {
+                timeout = query.Timeout;
+            }
+            return timeout;
+        }
+
         private void WaitForInterval(TimeSpan interval)
         {
             Thread.Sleep(interval);
@@ -70,29 +92,6 @@ namespace Coypu.Robustness
             var timeoutReached = elapsedTimeToNextCall >= timeout;
 
             return timeoutReached;
-        }
-
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan retryAfter)
-        {
-            var outcome = Robustly(() =>
-                                        {
-                                            tryThis();
-                                            bool result;
-                                            var outerTimeout = Configuration.Timeout;
-                                            try
-                                            {
-                                                Configuration.Timeout = retryAfter;
-                                                result = until();
-                                            }
-                                            finally
-                                            {
-                                                Configuration.Timeout = outerTimeout;
-                                            }
-                                            return result;
-                                        }
-                                    , true);
-            if (!outcome)
-                throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
     }
 }

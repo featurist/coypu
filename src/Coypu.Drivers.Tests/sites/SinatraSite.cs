@@ -11,6 +11,7 @@ namespace Coypu.Drivers.Tests.Sites
         public SinatraSite(string sitePath)
         {
             var processStartInfo = new ProcessStartInfo("ruby", "\"" + new FileInfo(sitePath).FullName + "\"");
+            processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             processStartInfo.UseShellExecute = false;
             processStartInfo.RedirectStandardOutput = true;
             process = Process.Start(processStartInfo);
@@ -18,8 +19,11 @@ namespace Coypu.Drivers.Tests.Sites
 
         public void Dispose()
         {
-            process.Kill();
-            process.Dispose();
+            if (!process.HasExited)
+            {
+                process.Kill();
+                process.Dispose();
+            }
         }
     }
 }

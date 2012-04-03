@@ -1,49 +1,63 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_using_iframes_as_scope : DriverSpecs
     {
-        internal override void Specs()
+        [Test]
+        public void Does_not_find_something_in_an_iframe()
         {
-            describe["elements withing iframes are not found in outer scope"] = () =>
-            {
-                it["does not find something in an iframe"] = () =>
-                {
-                    Assert.Throws<MissingHtmlException>(() => driver.FindButton("iframe1ButtonId"));
-                };
-            };
+            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("iframe1ButtonId", Root));
+        }
 
-            it["finds elements among multiple scopes"] = () =>
-            {
-                driver.SetScope(() => driver.FindIFrame("I am iframe one"));
-                driver.FindButton("scoped button").Id.should_be("iframe1ButtonId");
+        [Test]
+        public void Finds_elements_among_multiple_scopes()
+        {
+            var iframeOne = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
+            var iframeTwo = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe two", Root), Driver,null,null,null);
 
-                driver.ClearScope();
+            Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
+            Driver.FindButton("scoped button", iframeTwo).Id.should_be("iframe2ButtonId");
+        }
 
-                driver.SetScope(() => driver.FindIFrame("I am iframe two"));
-                driver.FindButton("scoped button").Id.should_be("iframe2ButtonId");
-            };
+        [Test]
+        public void Finds_clears_scope_back_to_the_whole_window()
+        {
+            var iframeOne = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
+            Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
 
-            it["finds clears scope back to the whole window"] = () =>
-            {
-                driver.SetScope(() => driver.FindIFrame("I am iframe one"));
-                driver.FindButton("scoped button").Id.should_be("iframe1ButtonId");
+            Driver.FindButton("scoped button", Root).Id.should_be("scope1ButtonId");
+        }
 
-                driver.ClearScope();
+        [Test]
+        public void Can_fill_in_a_text_input_within_an_iframe()
+        {
+            var iframeOne = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
+            Driver.Set(Driver.FindField("text input in iframe", iframeOne), "filled in");
 
-                driver.FindButton("scoped button").Id.should_be("scope1ButtonId");
-            };
+            Assert.That(Driver.FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));
+        }
 
-            it["can fill in a text input within an IFrame"] = () =>
-            {
-                driver.SetScope(() => driver.FindIFrame("I am iframe one"));
-                driver.Set(driver.FindField("text input in iframe"), "filled in");
+        [Test]
+        public void Can_scope_around_an_iframe()
+        {
+            var body = new DriverScope(new SessionConfiguration(), new CssFinder(Driver, "body", Root), Driver, null, null, null);
+            var iframeOne = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe one", body), Driver, null, null, null);
 
-                Assert.That(driver.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
-            };
+            Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
+
+            Driver.FindButton("scoped button", body).Id.should_be("scope1ButtonId");
+        }
+
+        [Test]
+        public void Can_scope_inside_an_iframe()
+        {
+            var iframeOne = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
+            var iframeForm = new DriverScope(new SessionConfiguration(), new CssFinder(Driver, "form", iframeOne), Driver, null, null, null);
+
+            Driver.FindField("text input in iframe", iframeForm);
         }
     }
-
 }

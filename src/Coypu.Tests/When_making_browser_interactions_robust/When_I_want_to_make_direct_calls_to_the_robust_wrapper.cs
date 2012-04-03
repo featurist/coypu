@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Coypu.Tests.TestDoubles;
 using Coypu.Tests.When_interacting_with_the_browser;
 using NUnit.Framework;
 
@@ -11,56 +13,67 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void RobustAction_is_exposed_on_the_session()
         {
             var calledOnWrapper = false;
-            session.RetryUntilTimeout(() =>
+            browserSession.RetryUntilTimeout(() =>
             {
                 calledOnWrapper = true;
             });
-            spyRobustWrapper.DeferredActions[0]();
+            spyRobustWrapper.QueriesRan<object>().First().Run();
             Assert.That(calledOnWrapper, Is.True);
         }
 
         [Test]
         public void RobustFunction_is_exposed_on_the_session()
         {
-            spyRobustWrapper.AlwaysReturnFromRobustly(typeof(string), "immediate result");
-
             Func<string> function = () => "The expected result";
-            
-            var immediateResult = session.RetryUntilTimeout(function);
-            Assert.That(immediateResult, Is.EqualTo("immediate result"));
 
-            var actualResult = ((Func<string>)spyRobustWrapper.DeferredFunctions[0])();
+            spyRobustWrapper.StubQueryResult(SpyRobustWrapper.NO_EXPECTED_RESULT, "immediate result");
 
-            Assert.That(actualResult, Is.EqualTo("The expected result"));
+            Assert.That(browserSession.RetryUntilTimeout(function), Is.EqualTo("immediate result"));
+
+            var query = spyRobustWrapper.QueriesRan<string>().First();
+            query.Run();
+
+            Assert.That(query.Result, Is.EqualTo("The expected result"));
         }
 
         [Test]
         public void TryUntil_is_exposed_on_the_session()
         {
-            Action tryThis = () => {};
-            Func<bool> until = () => true;
-            var waitBeforeRetry = TimeSpan.FromMilliseconds(1234);
+            var tried = false;
+            var triedUntil = false;
+            Action tryThis = () => tried = true;
+            Func<bool> until = () => triedUntil = true;
+            var overallTimeout = TimeSpan.FromMilliseconds(1234);
 
-            session.TryUntil(tryThis,until,waitBeforeRetry);
+            var options = new Options { Timeout = overallTimeout };
+            browserSession.TryUntil(tryThis, until,TimeSpan.Zero,options);
 
             var tryUntil = spyRobustWrapper.DeferredTryUntils[0];
 
-            Assert.That(tryUntil.TryThis, Is.SameAs(tryThis));
-            Assert.That(tryUntil.Until, Is.SameAs(until));
-            Assert.That(tryUntil.WaitBeforeRetry, Is.EqualTo(waitBeforeRetry));
+            Assert.That(tried, Is.False);
+            tryUntil.TryThisBrowserAction.Act();
+            Assert.That(tried, Is.True);
+
+            Assert.That(triedUntil, Is.False);
+            tryUntil.Until.Run();
+            Assert.That(triedUntil, Is.True);
+
+            Assert.That(tryUntil.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 
         [Test]
         public void Query_is_exposed_on_the_session()
         {
-            spyRobustWrapper.StubQueryResult("expected query result", "expected query result");
             Func<string> query = () => "query result";
 
-            session.Query(query, "expected query result");
+            spyRobustWrapper.StubQueryResult("expected query result", "immediate query result");
 
-            var actualResult = ((Func<string>)spyRobustWrapper.DeferredQueries[0])();
+            Assert.That(browserSession.Query(query, "expected query result"), Is.EqualTo("immediate query result"));
 
-            Assert.That(actualResult, Is.EqualTo("query result"));
+            var robustQuery = spyRobustWrapper.QueriesRan<string>().First();
+            robustQuery.Run();
+
+            Assert.That(robustQuery.Result, Is.EqualTo("query result"));
         }
     }
 }

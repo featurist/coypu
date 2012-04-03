@@ -9,26 +9,26 @@ namespace Coypu.AcceptanceTests
     public class Location
     {
         private SinatraSite sinatraSite;
+        private BrowserSession browser;
 
-        private Session browser
-        {
-            get { return Browser.Session; }
-        }
 
         [SetUp]
         public void SetUp()
         {
             sinatraSite = new SinatraSite(string.Format(@"sites\{0}.rb", "site_with_secure_resources"));
 
-            Configuration.Timeout = TimeSpan.FromMilliseconds(1000);
-            Configuration.Port = 4567;
+            SessionConfiguration SessionConfiguration = new SessionConfiguration();
+            SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
+            SessionConfiguration.Port = 4567;
+            browser = new BrowserSession(SessionConfiguration);
+
             browser.Visit("/");
         }
 
         [TearDown]
         public void TearDown()
         {
-            Browser.EndSession();
+            browser.Dispose();
             sinatraSite.Dispose();
         }
 
@@ -51,9 +51,7 @@ namespace Coypu.AcceptanceTests
         public void It_exposes_the_location_of_an_iframe_scope()
         {
             ReloadTestPage();
-            browser.WithinIFrame("iframe1", () =>
-                Assert.That(browser.Location.AbsolutePath, Is.StringContaining("iFrame1.htm"))
-                );
+            Assert.That(browser.FindIFrame("iframe1").Location.AbsolutePath, Is.StringContaining("iFrame1.htm"));
         }
     }
 }

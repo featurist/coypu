@@ -1,40 +1,37 @@
-﻿using System;
-using NSpec;
+﻿using Coypu.Finders;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_forced_to_find_invisible_elements : DriverSpecs
     {
-        internal override void Specs()
+        private static DriverScope RootConsideringInvisibleElements
         {
-            it["does find hidden inputs"] = () =>
+            get
             {
-                driver.ConsiderInvisibleElements = true;
-                try
-                {
-                    Assert.That(driver.FindField("firstHiddenInputId").Value, Is.EqualTo("first hidden input"));
-                }
-                finally
-                {
-                    driver.ConsiderInvisibleElements = false;    
-                }
-                Assert.Throws<MissingHtmlException>(() => driver.FindField("firstHiddenInputId"));
-            };
+                var configuration = new SessionConfiguration();
+                configuration.ConsiderInvisibleElements = true;
 
-            it["does find invisible elements"] = () =>
-            {
-                driver.ConsiderInvisibleElements = true;
-                try
-                {
-                    Assert.That(driver.FindButton("firstInvisibleInputId").Name, Is.EqualTo("firstInvisibleInputName"));
-                }
-                finally
-                {
-                    driver.ConsiderInvisibleElements = false; 
-                }
-                Assert.Throws<MissingHtmlException>(() => driver.FindButton("firstInvisibleInputId"));
-            };
+                var rootConsideringInvisibleElements = new DriverScope(configuration, new DocumentElementFinder(Driver), null, null, null, null);
+                return rootConsideringInvisibleElements;
+            }
+        }
+
+        [Test]
+        public void Does_find_hidden_inputs()
+        {
+            Assert.That(Driver.FindField("firstHiddenInputId", RootConsideringInvisibleElements).Value, Is.EqualTo("first hidden input"));
+
+            Assert.Throws<MissingHtmlException>(() => Driver.FindField("firstHiddenInputId", Root));
+        }
+
+
+        [Test]
+        public void Does_find_invisible_elements()
+        {
+            Assert.That(Driver.FindButton("firstInvisibleInputId", RootConsideringInvisibleElements).Name, Is.EqualTo("firstInvisibleInputName"));
+
+            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstInvisibleInputId", Root));
         }
     }
 }

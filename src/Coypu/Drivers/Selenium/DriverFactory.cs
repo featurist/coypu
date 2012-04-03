@@ -8,17 +8,15 @@ namespace Coypu.Drivers.Selenium
 {
     internal class DriverFactory
     {
-        public RemoteWebDriver NewRemoteWebDriver()
+        public RemoteWebDriver NewRemoteWebDriver(Browser browser)
         {
-            switch (Configuration.Browser)
+            switch (browser)
             {
                 case (Browser.Firefox):
                     return new FirefoxDriver();
                 case (Browser.InternetExplorer):
                     {
-                        DesiredCapabilities ieCapabilities = DesiredCapabilities.InternetExplorer();
-                        ieCapabilities.SetCapability("ignoreProtectedModeSettings", true);
-                        return new InternetExplorerDriver(ieCapabilities);
+                        return new InternetExplorerDriver(new InternetExplorerOptions{IntroduceInstabilityByIgnoringProtectedModeSettings = true});
                     }
                 case (Browser.Chrome):
                     return new ChromeDriver();
@@ -29,7 +27,7 @@ namespace Coypu.Drivers.Selenium
                 case (Browser.HtmlUnitWithJavaScript):
                     return new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript());
                 default:
-                    throw new BrowserNotSupportedException(Configuration.Browser, GetType());
+                    throw new BrowserNotSupportedException(browser, GetType());
             }
         }
     }

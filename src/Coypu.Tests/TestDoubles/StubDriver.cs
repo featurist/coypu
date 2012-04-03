@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
     public class StubDriver : Driver
     {
+        public StubDriver() {}
+
+        public StubDriver(Browser browser){}
+
         public void Dispose()
         {
         }
 
-        public Element FindButton(string locator)
+        public ElementFound FindButton(string locator,DriverScope scope)
         {
             return null;
         }
 
-        public Element FindLink(string linkText)
+        public ElementFound FindLink(string linkText, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindField(string locator)
+        public ElementFound FindField(string locator, DriverScope scope)
         {
             return null;
         }
@@ -48,49 +53,49 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on stub driver"; }
         }
 
-        public bool HasContent(string text)
-        {
-            return false;
-        }
-        
-        public bool HasContentMatch(Regex pattern)
+        public bool HasContent(string text, DriverScope scope)
         {
             return false;
         }
 
-        public bool HasCss(string cssSelector)
+        public bool HasContentMatch(Regex pattern, DriverScope scope)
         {
             return false;
         }
 
-        public bool HasXPath(string xpath)
+        public bool HasCss(string cssSelector, DriverScope scope)
         {
             return false;
         }
 
-        public bool HasDialog(string withText)
+        public bool HasXPath(string xpath, DriverScope scope)
         {
             return false;
         }
 
-        public Element FindCss(string cssSelector)
+        public bool HasDialog(string withText, DriverScope scope)
+        {
+            return false;
+        }
+
+        public ElementFound FindCss(string cssSelector, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindXPath(string xpath)
+        public ElementFound FindXPath(string xpath, DriverScope scope)
         {
             return null;
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
         {
-            return Enumerable.Empty<Element>();
+            return Enumerable.Empty<ElementFound>();
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
         {
-            return Enumerable.Empty<Element>();
+            return Enumerable.Empty<ElementFound>();
         }
 
         public void Check(Element field)
@@ -118,23 +123,20 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
-        public bool ConsiderInvisibleElements
+        public ElementFound Window
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return null; }
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(DriverScope scope)
         {
-            
         }
 
-        public void CancelModalDialog()
+        public void CancelModalDialog(DriverScope scope)
         {
-            
         }
 
-        public void SetScope(Func<Element> findScope)
+        public void SetScope(ElementFound findScope)
         {
             
         }
@@ -144,27 +146,27 @@ namespace Coypu.Tests.TestDoubles
             
         }
 
-        public string ExecuteScript(string javascript)
+        public string ExecuteScript(string javascript, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindFieldset(string locator)
+        public ElementFound FindFieldset(string locator, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindSection(string locator)
+        public ElementFound FindSection(string locator, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindId(string id)
+        public ElementFound FindId(string id, DriverScope scope)
         {
             return null;
         }
 
-        public Element FindIFrame(string locator)
+        public ElementFound FindIFrame(string locator, DriverScope scope)
         {
             return null;
         }
@@ -178,9 +180,13 @@ namespace Coypu.Tests.TestDoubles
             return new List<Cookie>();
         }
 
+        public ElementFound FindWindow(string locator, DriverScope scope)
+        {
+            return null;
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
-            
         }
     }
 }
