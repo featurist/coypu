@@ -177,7 +177,7 @@ namespace Coypu
     public class Session : BrowserSession
     {
         public const string OBSOLETE_IN_0_8 = "No longer supported in 0.8.0 and above - will be removed in the next minor release.";
-        public const string SEE_README = OBSOLETE_IN_0_8 + "\r\n  See README for latest DSL: https://github.com/coypu/coypu/blob/master/README.md";
+        public const string SEE_README = OBSOLETE_IN_0_8 + "\r\n  See README for latest DSL: https://github.com/featurist/coypu/blob/master/README.md";
         public const string USE_NEW_BROWSER_SESSION = SEE_README + "\r\n  Use constructor: new BrowerSession(SessionConfiguration) instead.";
 
         [Obsolete(USE_NEW_BROWSER_SESSION)]
