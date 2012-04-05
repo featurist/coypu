@@ -108,7 +108,13 @@ You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu li
 	sessionConfiguration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
 	sessionConfiguration.Browser = Drivers.Browser.InternetExplorer;
 
-#### Waits, retries and timeout
+### SpecFlow scenarios
+
+If you are using SpecFlow for your acceptance tests then you will probably want to configure it to provide a single Browser Session scoped to each scenario. SpecFlow supports some basic dependency injection which you can use to acheive this as follows:
+
+<script src="https://gist.github.com/2301407#CustomDependencies.cs"></script>
+  
+### Waits, retries and timeout
 
 Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It just catches exceptions and retries -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
 
