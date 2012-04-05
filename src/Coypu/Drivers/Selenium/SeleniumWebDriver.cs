@@ -257,21 +257,33 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public void Set(Element element, string value) 
+        public void Set(Element element, string value, bool forceAllEvents) 
         {
             var seleniumElement = SeleniumElement(element);
-
             try
             {
                 seleniumElement.Clear();
             }
             catch (InvalidElementStateException) // Non user-editable elements (file inputs) - chrome/IE
             {
+                seleniumElement.SendKeys(value);
+                return;
             }
             catch(InvalidOperationException)  // Non user-editable elements (file inputs) - firefox
             {
+                seleniumElement.SendKeys(value);
+                return;
             }
-            seleniumElement.SendKeys(value);
+            SetByIdOrSendKeys(value, seleniumElement, forceAllEvents);
+        }
+
+        private void SetByIdOrSendKeys(string value, IWebElement seleniumElement, bool forceAllEvents)
+        {
+            var id = seleniumElement.GetAttribute("id");
+            if (string.IsNullOrEmpty(id) || forceAllEvents)
+                seleniumElement.SendKeys(value);
+            else
+                selenium.ExecuteScript(string.Format("document.getElementById('{0}').value = {1}", id, Newtonsoft.Json.JsonConvert.ToString(value)));
         }
 
         public void Select(Element element, string option)

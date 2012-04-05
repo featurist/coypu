@@ -35,7 +35,7 @@ namespace Coypu.Drivers.Tests
         public void Can_fill_in_a_text_input_within_an_iframe()
         {
             var iframeOne = new DriverScope(new SessionConfiguration(), new IFrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
-            Driver.Set(Driver.FindField("text input in iframe", iframeOne), "filled in");
+            Driver.Set(Driver.FindField("text input in iframe", iframeOne), "filled in", false);
 
             Assert.That(Driver.FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));
         }

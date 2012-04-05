@@ -191,7 +191,7 @@ namespace Coypu.Drivers.Watin
             Watin.GoTo(url);
         }
 
-        public void Set(Element element, string value)
+        public void Set(Element element, string value, bool forceAllEvents)
         {
             var textField = WatiNElement<TextField>(element);
             if (textField != null)

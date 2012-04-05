@@ -19,7 +19,7 @@ namespace Coypu.Drivers.Tests
                     using (File.Create(fullPath)) { }
 
                     var textField = Driver.FindField("forLabeledFileFieldId", Root);
-                    Driver.Set(textField, fullPath);
+                    Driver.Set(textField, fullPath,false);
 
                     var findAgain = Driver.FindField("forLabeledFileFieldId", Root);
                     findAgain.Value.should_end_with("\\" + someLocalFile);

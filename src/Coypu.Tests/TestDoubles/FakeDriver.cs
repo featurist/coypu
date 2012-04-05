@@ -229,7 +229,7 @@ namespace Coypu.Tests.TestDoubles
             return Find<ElementFound>(stubbedIFrames, locator, scope);
         }
 
-        public void Set(Element element, string value)
+        public void Set(Element element, string value, bool forceAllEvents)
         {
             SetFields.Add(element, value);
         }

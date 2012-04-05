@@ -18,8 +18,9 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindField(string locator, DriverScope scope)
         {
-            return FindFieldFromLabel(locator, scope) ??
-                   FindFieldByIdOrName(locator, scope) ??
+            return FindFieldById(locator, scope) ??
+                   FindFieldFromLabel(locator, scope) ??
+                   FindFieldByName(locator, scope) ??
                    FindFieldByPlaceholder(locator, scope) ??
                    FindRadioButtonFromValue(locator, scope) ??
                    elementFinder.FindByPartialId(locator, scope).FirstOrDefault(e => IsField(e, scope));
@@ -57,15 +58,14 @@ namespace Coypu.Drivers.Selenium
             return elementFinder.Find(By.XPath(xPath.Format(".//input[@placeholder = {0}]", placeholder)), scope).FirstOrDefault(e => IsField(e, scope));
         }
 
-        private IWebElement FindFieldByIdOrName(string locator, DriverScope scope)
-        {
-            var xpathToFind = xPath.Format(".//*[@id = {0} or @name = {0}]", locator);
-            return elementFinder.Find(By.XPath(xpathToFind), scope).FirstOrDefault(e => IsField(e,scope));
-        }
-
         private IWebElement FindFieldById(string id, DriverScope scope)
         {
-            return elementFinder.Find(By.Id(id), scope).FirstOrDefault(e => IsField(e,scope));
+            return elementFinder.Find(By.Id(id), scope).FirstOrDefault(e => IsField(e, scope));
+        }
+
+        private IWebElement FindFieldByName(string name, DriverScope scope)
+        {
+            return elementFinder.Find(By.Name(name), scope).FirstOrDefault(e => IsField(e, scope));
         }
 
         private bool IsField(IWebElement e, DriverScope scope)

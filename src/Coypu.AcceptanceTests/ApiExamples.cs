@@ -145,6 +145,13 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void FillInWith_nojs_example()
+        {
+            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value",true);
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value"));
+        }
+
+        [Test]
         public void FindAllCss_example()
         {
             ReloadTestPage();

@@ -5,20 +5,27 @@ namespace Coypu.Actions
         private readonly string locator;
         private readonly DriverScope scope;
         private readonly string value;
-        private readonly Element element;
+        private  Element element;
+        private readonly bool forceAllEvents;
 
-        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value, Options options)
+        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value, bool forceAllEvents, Options options)
             : base(driver,options)
         {
             this.locator = locator;
             this.element = element;
             this.scope = scope;
             this.value = value;
+            this.forceAllEvents = forceAllEvents;
         }
 
         internal Element Field
         {
-            get { return element ?? Driver.FindField(locator, scope); }
+            get
+            {
+                if (element == null)
+                    element = Driver.FindField(locator, scope);
+                return element;
+            }
         }
 
         private void BringIntoFocus()
@@ -28,7 +35,7 @@ namespace Coypu.Actions
 
         internal void Set()
         {
-            Driver.Set(Field, value);
+            Driver.Set(Field, value,forceAllEvents);
         }
 
         internal void Focus()
