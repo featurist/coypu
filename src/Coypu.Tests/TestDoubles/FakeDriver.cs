@@ -18,7 +18,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> HasCssQueries = new List<string>();
         public readonly IList<string> HasXPathQueries = new List<string>();
         public readonly IList<string> Visits = new List<string>();
-        public readonly IDictionary<Element, string> SetFields = new Dictionary<Element, string>();
+        public readonly IDictionary<Element, SetFieldParams> SetFields = new Dictionary<Element, SetFieldParams>();
         public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
         private readonly IList<ScopedStubResult> stubbedButtons = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedLinks = new List<ScopedStubResult>();
@@ -231,7 +231,7 @@ namespace Coypu.Tests.TestDoubles
 
         public void Set(Element element, string value, bool forceAllEvents)
         {
-            SetFields.Add(element, value);
+            SetFields.Add(element, new SetFieldParams{Value = value, ForceAllEvents = forceAllEvents});
         }
 
         public void Select(Element element, string option)
@@ -353,5 +353,10 @@ namespace Coypu.Tests.TestDoubles
         }
     }
 
+    public class SetFieldParams
+    {
+        public bool ForceAllEvents { get; set; }
 
+        public string Value { get; set; }
+    }
 }

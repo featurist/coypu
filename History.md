@@ -1,3 +1,11 @@
+# Version 0.8.2
+
+Release date: 2012-04-05
+
+### Fixed
+
+* FillIn now uses JS by default for speed in WebDriver.
+
 # Version 0.8.1
 
 Release date: 2012-04-05

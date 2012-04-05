@@ -37,7 +37,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value)
         {
-            With(value,true);
+            With(value,false);
         }
         /// <summary>
         /// Supply a value for the text field
