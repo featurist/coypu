@@ -18,7 +18,7 @@ namespace Coypu.AcceptanceTests
                     VisitTestPage(sessionTwo);
 
                     sessionOne.FillIn(sessionOne.FindCss("input[type=text]")).With("from session one");
-                    sessionOne.FillIn(sessionTwo.FindCss("input[type=text]")).With("from session two");
+                    sessionTwo.FillIn(sessionTwo.FindCss("input[type=text]")).With("from session two");
 
                     Assert.That(sessionOne.FindCss("input[type=text]").Value, Is.EqualTo("from session one"));
                     Assert.That(sessionTwo.FindCss("input[type=text]").Value, Is.EqualTo("from session two"));

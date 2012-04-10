@@ -13,7 +13,7 @@ namespace Coypu.Queries
 
         public override bool ExpectedResult
         {
-            get { return false; }
+            get { return true; }
         }
 
         public override bool Run()

@@ -46,7 +46,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public void When_state_never_exists_It_fails_after_timeout()
         {
             var toTry = new CountTriesAction(options);
-            var until = new AlwaysSucceedsPredicateQuery(false, false, TimeSpan.Zero, options.RetryInterval);
+            var until = new AlwaysSucceedsPredicateQuery(false, TimeSpan.Zero, options.RetryInterval);
 
             var stopwatch = Stopwatch.StartNew();
             var timeout1 = TimeSpan.FromMilliseconds(200);

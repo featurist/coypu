@@ -23,12 +23,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             stopWatch.Start();
         }
 
-        public AlwaysSucceedsPredicateQuery(bool actualResult, bool expecting, TimeSpan timeout, TimeSpan retryInterval)
-            : this(actualResult, timeout, retryInterval)
-        {
-            this.expecting = expecting;
-        }
-
         public override bool Predicate()
         {
             Tries++;
