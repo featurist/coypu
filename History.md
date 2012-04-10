@@ -1,3 +1,11 @@
+# Version 0.8.3
+
+Release date: 2012-04-10
+
+### Fixed
+
+* Only yse JS to fillin in js-supporting drivers, i.e. not HtmlUnit
+
 # Version 0.8.2
 
 Release date: 2012-04-05
