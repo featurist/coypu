@@ -56,11 +56,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var firstQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
             var secondQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
 
-            RunQueryAndCheckTiming(firstQuery);
-            Assert.That(firstQuery.Result, Is.False);
+            var firstQueryResult = RunQueryAndCheckTiming(firstQuery);
+            Assert.That(firstQueryResult, Is.False);
 
-            RunQueryAndCheckTiming(secondQuery);
-            Assert.That(secondQuery.Result, Is.True);
+            var secondQueryResult = RunQueryAndCheckTiming(secondQuery);
+            Assert.That(secondQueryResult, Is.True);
         }
 
         [Test]
@@ -75,11 +75,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var firstQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
             var secondQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
 
-            RunQueryAndCheckTiming(firstQuery);
-            Assert.That(firstQuery.Result, Is.True);
+            var firstQueryResult = RunQueryAndCheckTiming(firstQuery);
+            Assert.That(firstQueryResult, Is.True);
 
-            RunQueryAndCheckTiming(secondQuery);
-            Assert.That(secondQuery.Result, Is.False);
+            var secondQueryResult = RunQueryAndCheckTiming(secondQuery);
+            Assert.That(secondQueryResult, Is.False);
         }
     }
 }

@@ -15,8 +15,7 @@ namespace Coypu.Queries
             RetryInterval = options.RetryInterval;
         }
 
-        public abstract void Run();
-        public abstract object ExpectedResult { get; }
-        public T Result { get; set; }
+        public abstract T Run();
+        public abstract T ExpectedResult { get; }
     }
 }

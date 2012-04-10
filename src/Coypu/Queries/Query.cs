@@ -4,9 +4,8 @@ namespace Coypu.Queries
 {
     public interface Query<out TReturn>
     {
-        void Run();
-        object ExpectedResult { get; }
-        TReturn Result { get; }
+        TReturn Run();
+        TReturn ExpectedResult { get; }
         TimeSpan Timeout { get; }
         TimeSpan RetryInterval { get; }
     }

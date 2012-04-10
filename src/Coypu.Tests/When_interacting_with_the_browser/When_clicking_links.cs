@@ -46,8 +46,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             tryUntilArgs.TryThisBrowserAction.Act();
             AssertClicked(linkToBeClicked);
 
-            tryUntilArgs.Until.Run();
-            Assert.That(tryUntilArgs.Until.Result, Is.EqualTo(stubUntil));
+            var queryResult = tryUntilArgs.Until.Run();
+            Assert.That(queryResult, Is.EqualTo(stubUntil));
             Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
             Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }

@@ -18,7 +18,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected StubUrlBuilder stubUrlBuilder;
         protected SessionConfiguration SessionConfiguration;
         protected ElementScope elementScope;
-        protected object queryResult;
 
         [SetUp]
         public void SetUp()
@@ -52,17 +51,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout)
         {
             var query = spyRobustWrapper.QueriesRan<T>().Single();
-            RunQueryAndCheckTiming(query, timeout);
-
-            return query.Result;
+            return RunQueryAndCheckTiming(query, timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout, int index)
         {
             var query = spyRobustWrapper.QueriesRan<T>().ElementAt(index);
-            RunQueryAndCheckTiming(query, timeout);
-
-            return query.Result;
+            return RunQueryAndCheckTiming(query, timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query)
@@ -72,14 +67,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query, TimeSpan timeout)
         {
-            query.Run();
-
-            queryResult = query.Result;
+            var queryResult = query.Run();
 
             Assert.That(query.Timeout, Is.EqualTo(timeout));
             Assert.That(query.RetryInterval, Is.EqualTo(SessionConfiguration.RetryInterval));
 
-            return query.Result;
+            return queryResult;
         }
     }
 

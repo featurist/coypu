@@ -31,9 +31,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.That(browserSession.RetryUntilTimeout(function), Is.EqualTo("immediate result"));
 
             var query = spyRobustWrapper.QueriesRan<string>().First();
-            query.Run();
+            var queryResult = query.Run();
 
-            Assert.That(query.Result, Is.EqualTo("The expected result"));
+            Assert.That(queryResult, Is.EqualTo("The expected result"));
         }
 
         [Test]
@@ -71,9 +71,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.That(browserSession.Query(query, "expected query result"), Is.EqualTo("immediate query result"));
 
             var robustQuery = spyRobustWrapper.QueriesRan<string>().First();
-            robustQuery.Run();
+            var queryResult = robustQuery.Run();
 
-            Assert.That(robustQuery.Result, Is.EqualTo("query result"));
+            Assert.That(queryResult, Is.EqualTo("query result"));
         }
     }
 }

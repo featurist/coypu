@@ -5,10 +5,10 @@ namespace Coypu.Drivers.Selenium
 {
     internal class WindowHandle : ElementFound
     {
-        private readonly RemoteWebDriver selenium;
+        private readonly IWebDriver selenium;
         private readonly string windowHandle;
 
-        public WindowHandle(RemoteWebDriver selenium, string windowHandle)
+        public WindowHandle(IWebDriver selenium, string windowHandle)
         {
             this.selenium = selenium;
             this.windowHandle = windowHandle;

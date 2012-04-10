@@ -4,7 +4,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly string text;
-        public override object ExpectedResult { get { return true; } }
+        public override bool ExpectedResult { get { return true; } }
 
         protected internal HasNoContentQuery(Driver driver, DriverScope scope, string text, Options options) : base(scope,options)
         {
@@ -12,9 +12,9 @@ namespace Coypu.Queries
             this.text = text;
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            Result = !driver.HasContent(text, DriverScope);
+            return !driver.HasContent(text, DriverScope);
         }
     }
 }

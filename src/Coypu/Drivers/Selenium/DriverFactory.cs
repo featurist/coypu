@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Selenium
 {
     internal class DriverFactory
     {
-        public RemoteWebDriver NewRemoteWebDriver(Browser browser)
+        public RemoteWebDriver NewWebDriver(Browser browser)
         {
             switch (browser)
             {

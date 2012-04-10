@@ -28,7 +28,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            RunQueryAndCheckTiming<bool>(individualTimeout);
+            var queryResult = RunQueryAndCheckTiming<bool>(individualTimeout);
 
             Assert.That(queryResult, Is.EqualTo(stubResult));
         }
@@ -36,13 +36,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, Options, bool> subject, Action<T, bool, DriverScope> stub, T locator)
         {
             stub(locator, stubResult, browserSession);
-            spyRobustWrapper.StubQueryResult(true, !stubResult);
+            spyRobustWrapper.StubQueryResult(false, !stubResult);
 
             var actualImmediateResult = subject(locator,SessionConfiguration);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 
-            RunQueryAndCheckTiming<bool>();
+            var queryResult = RunQueryAndCheckTiming<bool>();
 
             Assert.That(queryResult, Is.EqualTo(!stubResult));
         }

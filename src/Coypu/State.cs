@@ -32,8 +32,7 @@ namespace Coypu
 
         internal bool CheckCondition()
         {
-            condition.Run();
-            return ConditionWasMet = condition.Result;
+            return ConditionWasMet = condition.Run();
         }
     }
 }

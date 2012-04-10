@@ -11,14 +11,14 @@ namespace Coypu.Queries
             this.cssSelector = cssSelector;
         }
 
-        public override object ExpectedResult
+        public override bool ExpectedResult
         {
-            get { return true; }
+            get { return false; }
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            Result = !driver.HasCss(cssSelector, DriverScope);
+            return !driver.HasCss(cssSelector, DriverScope);
         }
     }
 }

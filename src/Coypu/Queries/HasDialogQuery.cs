@@ -4,7 +4,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly string text;
-        public override object ExpectedResult { get { return true; } }
+        public override bool ExpectedResult { get { return true; } }
 
         protected internal HasDialogQuery(Driver driver, string text, DriverScope driverScope, Options options) : base(driverScope,options)
         {
@@ -12,9 +12,9 @@ namespace Coypu.Queries
             this.text = text;
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            Result = driver.HasDialog(text,DriverScope);
+            return driver.HasDialog(text,DriverScope);
         }
     }
 }

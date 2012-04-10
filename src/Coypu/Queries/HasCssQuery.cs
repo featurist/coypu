@@ -6,7 +6,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly string cssSelector;
-        public override object ExpectedResult { get { return true; } }
+        public override bool ExpectedResult { get { return true; } }
 
         protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector, Options options) : base(scope,options)
         {
@@ -14,9 +14,9 @@ namespace Coypu.Queries
             this.cssSelector = cssSelector;
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            Result = driver.HasCss(cssSelector, DriverScope);
+            return driver.HasCss(cssSelector, DriverScope);
         }
     }
 }

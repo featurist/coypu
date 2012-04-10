@@ -48,7 +48,8 @@ namespace Coypu.Drivers.Tests
 
         private string GetTestHTMLPathLocation()
         {
-            return new FileInfo(Path.Combine(@"..\..\", INTERACTION_TESTS_PAGE)).FullName;
+            var file = new FileInfo(Path.Combine(@"..\..\", INTERACTION_TESTS_PAGE)).FullName;
+            return "file:///" + file.Replace('\\', '/');
         }
 
         protected static DriverScope Root

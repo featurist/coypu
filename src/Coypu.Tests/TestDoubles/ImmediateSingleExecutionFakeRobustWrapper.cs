@@ -9,11 +9,10 @@ namespace Coypu.Tests.TestDoubles
     {
         public T Robustly<T>(Query<T> query)
         {
-            query.Run();
-            return query.Result;
+            return query.Run();
         }
 
-        public void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
         {
             tryThis.Act();
         }

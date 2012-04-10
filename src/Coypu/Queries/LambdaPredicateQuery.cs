@@ -16,9 +16,9 @@ namespace Coypu.Queries
             this.query = query;
         }
 
-        public override void Run()
+        public override bool Predicate()
         {
-            Result = query();
+            return query();
         }
     }
 }

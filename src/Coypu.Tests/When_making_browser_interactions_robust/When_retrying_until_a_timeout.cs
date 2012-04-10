@@ -10,23 +10,24 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_a_query_succeeds_first_time_It_only_tries_once() 
         {
-            var alwaysSucceedsQuery = new AlwaysSucceedsQuery<object>(new object(),TimeSpan.Zero,TimeSpan.Zero);
+            var expectedResult = new object();
+            var alwaysSucceedsQuery = new AlwaysSucceedsQuery<object>(expectedResult,TimeSpan.Zero,TimeSpan.Zero);
             var actualResult = new RetryUntilTimeoutRobustWrapper().Robustly(alwaysSucceedsQuery);
 
             Assert.That(alwaysSucceedsQuery.Tries, Is.EqualTo(1));
-            Assert.That(actualResult, Is.SameAs(alwaysSucceedsQuery.Result));
+            Assert.That(actualResult, Is.SameAs(expectedResult));
         }
         
         [Test]
         public void When_a_query_throws_an_exception_first_time_It_retries()
         {
-            var result = new object();
-            var query = new ThrowsSecondTimeQuery<object>(result, TimeSpan.FromMilliseconds(100),TimeSpan.FromMilliseconds(10));
+            var expectedResult = new object();
+            var query = new ThrowsSecondTimeQuery<object>(expectedResult, TimeSpan.FromMilliseconds(100),TimeSpan.FromMilliseconds(10));
 
             var actualReturnValue = new RetryUntilTimeoutRobustWrapper().Robustly(query);
 
             Assert.That(query.Tries, Is.EqualTo(2));
-            Assert.That(actualReturnValue, Is.SameAs(query.Result));
+            Assert.That(actualReturnValue, Is.SameAs(expectedResult));
         }
 
         [Test]

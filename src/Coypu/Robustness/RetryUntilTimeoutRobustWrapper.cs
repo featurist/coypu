@@ -8,7 +8,7 @@ namespace Coypu.Robustness
 {
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
-        public void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
         {
             var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
             if (!outcome)
@@ -37,8 +37,7 @@ namespace Coypu.Robustness
             {
                 try
                 {
-                    query.Run();
-                    var result = query.Result;
+                    var result = query.Run();
                     if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, timeout, interval))
                     {
                         WaitForInterval(interval);

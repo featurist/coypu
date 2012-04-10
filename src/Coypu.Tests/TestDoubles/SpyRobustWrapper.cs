@@ -35,7 +35,8 @@ namespace Coypu.Tests.TestDoubles
             if (alwaysReturn != null)
                 return (T) alwaysReturn;
 
-            var key = query.ExpectedResult ?? NO_EXPECTED_RESULT;
+            Object key = query.ExpectedResult;
+            if (key == null) key = NO_EXPECTED_RESULT;
             
             if (stubbedQueryResult.ContainsKey(key))
                 return (T)stubbedQueryResult[key];
@@ -43,7 +44,7 @@ namespace Coypu.Tests.TestDoubles
             return default(T);
         }
 
-        public void TryUntil(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
         {
             DeferredTryUntils.Add(new TryUntilArgs(tryThis, until, overallTimeout, waitBeforeRetry));
         }

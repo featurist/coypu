@@ -6,7 +6,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly string xpath;
-        public override object ExpectedResult { get { return true; } }
+        public override bool ExpectedResult { get { return true; } }
 
 
         protected internal HasXPathQuery(Driver driver, DriverScope scope, string xpath, Options options)
@@ -17,9 +17,9 @@ namespace Coypu.Queries
             this.xpath = xpath;
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            Result = driver.HasXPath(xpath, DriverScope);
+            return driver.HasXPath(xpath, DriverScope);
         }
     }
 }

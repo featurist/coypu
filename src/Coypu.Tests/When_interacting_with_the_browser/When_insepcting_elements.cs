@@ -17,7 +17,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Id, Is.EqualTo("actual-id"));
 
-            RunQueryAndCheckTiming<ElementFound>();
+            var queryResult = RunQueryAndCheckTiming<ElementFound>();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -32,7 +32,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Text, Is.EqualTo("actual-text"));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -47,7 +47,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Value, Is.EqualTo("actual-value"));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -63,7 +63,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element")["href"], Is.EqualTo("http://some.href"));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -78,7 +78,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Name, Is.EqualTo("actual-name"));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -93,7 +93,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").SelectedOption, Is.EqualTo("actual-selected-option"));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -108,7 +108,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Selected, Is.EqualTo(true));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -123,7 +123,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Selected, Is.EqualTo(false));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
@@ -139,7 +139,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(browserSession.FindId("some-element").Native, Is.SameAs(native));
 
-            RunQueryAndCheckTiming();
+            var queryResult = RunQueryAndCheckTiming();
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }

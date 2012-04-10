@@ -7,7 +7,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly Regex text;
-        public override object ExpectedResult { get { return true; } }
+        public override bool ExpectedResult { get { return true; } }
 
         protected internal HasNoContentMatchQuery(Driver driver, DriverScope scope, Regex text, Options options)
             : base(scope, options)
@@ -16,9 +16,9 @@ namespace Coypu.Queries
             this.text = text;
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            Result = !driver.HasContentMatch(text, DriverScope);
+            return !driver.HasContentMatch(text, DriverScope);
         }    
     }
 }

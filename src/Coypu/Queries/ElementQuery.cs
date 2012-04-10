@@ -6,14 +6,14 @@ namespace Coypu.Queries
         {
         }
 
-        public override object ExpectedResult
+        public override ElementFound ExpectedResult
         {
             get { return null; }
         }
 
-        public override void Run()
+        public override ElementFound Run()
         {
-            Result = DriverScope.FindElement();
+            return DriverScope.FindElement();
         }
     }
 }

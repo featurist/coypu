@@ -2,7 +2,7 @@ namespace Coypu.Queries
 {
     internal class ElementMissingQuery : DriverScopeQuery<bool>
     {
-        public override object ExpectedResult
+        public override bool ExpectedResult
         {
             get { return true; }
         }
@@ -12,18 +12,17 @@ namespace Coypu.Queries
         {
         }
 
-        public override void Run()
+        public override bool Run()
         {
             try
             {
                 DriverScope.FindElement();
-                Result = false;
+                return false;
             }
             catch (MissingHtmlException)
             {
-                Result = true;
+                return true;
             }
-
         }
     }
 }

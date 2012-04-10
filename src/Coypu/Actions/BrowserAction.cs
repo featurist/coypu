@@ -16,17 +16,13 @@ namespace Coypu.Actions
 
         public abstract void Act();
 
-        public void Run()
+        public object Run()
         {
             Act();
+            return null;
         }
 
         public object ExpectedResult
-        {
-            get { return null; }
-        }
-
-        public object Result
         {
             get { return null; }
         }

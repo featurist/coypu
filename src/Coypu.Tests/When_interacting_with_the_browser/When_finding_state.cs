@@ -50,8 +50,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.IsFalse(queriedState2);
 
             var query = robustWrapper.QueriesRan<bool>().Single();
-            query.Run();
-            Assert.IsTrue(query.Result);
+            var queryResult = query.Run();
+            Assert.IsTrue(queryResult);
 
             Assert.IsTrue(queriedState1);
             Assert.IsTrue(queriedState2);

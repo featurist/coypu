@@ -6,9 +6,9 @@ namespace Coypu.Drivers.Selenium
 {
     internal class Dialogs
     {
-        private readonly RemoteWebDriver selenium;
+        private readonly IWebDriver selenium;
 
-        public Dialogs(RemoteWebDriver selenium)
+        public Dialogs(IWebDriver selenium)
         {
             this.selenium = selenium;
         }

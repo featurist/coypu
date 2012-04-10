@@ -15,11 +15,14 @@ namespace Coypu.Queries
             RetryInterval = options.RetryInterval;
         }
 
-        public bool Result { get; protected set; }
+        public abstract bool Predicate();
 
-        public abstract void Run();
+        public bool Run()
+        {
+            return Predicate();
+        }
 
-        public object ExpectedResult
+        public bool ExpectedResult 
         {
             get { return true; }
         }

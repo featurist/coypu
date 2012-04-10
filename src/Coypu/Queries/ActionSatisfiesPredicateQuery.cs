@@ -7,14 +7,14 @@ namespace Coypu.Queries
     internal class ActionSatisfiesPredicateQuery : Query<bool>
     {
         private readonly BrowserAction tryThis;
-        private readonly Query<bool> until;
+        private readonly PredicateQuery until;
         private readonly TimeSpan waitBeforeRetry;
         private readonly RobustWrapper robustWrapper;
         public TimeSpan RetryInterval { get; private set; }
 
         public TimeSpan Timeout { get; private set; }
 
-        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, Query<bool> until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, RobustWrapper robustWrapper)
+        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, RobustWrapper robustWrapper)
         {
             this.tryThis = tryThis;
             this.until = until;
@@ -24,27 +24,24 @@ namespace Coypu.Queries
             Timeout = overallTimeout;
         }
 
-        public void Run()
+        public bool Run()
         {
             tryThis.Act();
 
             try
             {
                 robustWrapper.SetOverrideTimeout(waitBeforeRetry);
-                until.Run();
+                return until.Predicate();
             }
             finally
             {
                 robustWrapper.ClearOverrideTimeout();
             }
-            Result = until.Result;
         }
 
-        public object ExpectedResult
+        public bool ExpectedResult
         {
             get { return true; }
         }
-
-        public bool Result { get; private set; }
     }
 }

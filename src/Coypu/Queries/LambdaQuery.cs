@@ -9,8 +9,7 @@ namespace Coypu.Queries
 
         private readonly Func<T> _query;
 
-        public object ExpectedResult { get; private set; }
-        public T Result { get; private set; }
+        public T ExpectedResult { get; private set; }
 
         public LambdaQuery(Func<T> query)
         {
@@ -24,7 +23,7 @@ namespace Coypu.Queries
             _query = query;
         }
 
-        public LambdaQuery(Func<T> query, object expectedResult, Options options)
+        public LambdaQuery(Func<T> query, T expectedResult, Options options)
         {
             _query = query;
             ExpectedResult = expectedResult;
@@ -32,9 +31,9 @@ namespace Coypu.Queries
             RetryInterval = options.RetryInterval;
         }
 
-        public void Run()
+        public T Run()
         {
-            Result = _query();
+            return _query();
         }
 
     }
