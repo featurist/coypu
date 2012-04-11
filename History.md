@@ -1,6 +1,6 @@
 # Version 0.8.3
 
-Release date: 2012-04-10
+Release date: 2012-04-11
 
 ### Fixed
 

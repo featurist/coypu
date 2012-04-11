@@ -1,3 +1,5 @@
+using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -8,27 +10,29 @@ namespace Coypu.Drivers.Selenium
 {
     internal class DriverFactory
     {
-        public RemoteWebDriver NewWebDriver(Browser browser)
-        {
-            switch (browser)
-            {
-                case (Browser.Firefox):
-                    return new FirefoxDriver();
-                case (Browser.InternetExplorer):
-                    {
-                        return new InternetExplorerDriver(new InternetExplorerOptions{IntroduceInstabilityByIgnoringProtectedModeSettings = true});
-                    }
-                case (Browser.Chrome):
-                    return new ChromeDriver();
-                case (Browser.Android):
-                    return new AndroidDriver();
-                case (Browser.HtmlUnit):
-                    return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
-                case (Browser.HtmlUnitWithJavaScript):
-                    return new RemoteWebDriver(DesiredCapabilities.HtmlUnitWithJavaScript());
-                default:
-                    throw new BrowserNotSupportedException(browser, GetType());
+        public IWebDriver NewWebDriver(Browser browser)  {
+            if (browser == Browser.Firefox)
+                return new FirefoxDriver();
+            if (browser == Browser.InternetExplorer) {
+                var options = new InternetExplorerOptions();
+                return new InternetExplorerDriver(options);
             }
+            if (browser == Browser.Chrome)
+                return new ChromeDriver();
+            if (browser == Browser.Android)
+                return new AndroidDriver();
+            if (browser == Browser.HtmlUnit)
+                return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
+            if (browser == Browser.HtmlUnitWithJavaScript) {
+                DesiredCapabilities desiredCapabilities = DesiredCapabilities.HtmlUnit();
+                desiredCapabilities.IsJavaScriptEnabled = true;
+                return new RemoteWebDriver(desiredCapabilities);
+            }
+            return browserNotSupported(browser,null);
+        }
+
+        private IWebDriver browserNotSupported(Browser browser, Exception inner) {
+            throw new BrowserNotSupportedException(browser, GetType(), inner);
         }
     }
 }

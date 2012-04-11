@@ -49,7 +49,7 @@ namespace Coypu.Drivers.Selenium
             _browser = browser;
         }
 
-        protected SeleniumWebDriver(RemoteWebDriver webDriver)
+        protected SeleniumWebDriver(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
             xPath = new XPath();
@@ -64,9 +64,9 @@ namespace Coypu.Drivers.Selenium
             optionSelector = new OptionSelector();
         }
 
-        protected bool NoJavascript 
-        { 
-            get { return NO_JS_BROWSERS.Contains(_browser); }
+        protected bool NoJavascript
+        {
+            get { return !_browser.Javascript; }
         }
 
         private IJavaScriptExecutor JavaScriptExecutor

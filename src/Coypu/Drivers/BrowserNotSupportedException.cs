@@ -8,7 +8,12 @@ namespace Coypu.Drivers
     public class BrowserNotSupportedException : Exception
     {
         public BrowserNotSupportedException(Browser browser, Type driverType)
-            : base(string.Format("{0} is not supported by {1}", browser, driverType.Name))
+            : this( browser,driverType, null)
+        {
+        }
+
+        public BrowserNotSupportedException(Browser browser, Type driverType, Exception inner)
+            : base(string.Format("{0} is not supported by {1}", browser, driverType.Name), inner)
         {
         }
     }
