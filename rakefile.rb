@@ -53,7 +53,7 @@ task :package => [:release_configuration,:compile] do
   FileUtils.mkdir_p("temp/net40")
   Rake::Task["compile_net40"].invoke
   
-  include_files = Dir.glob('src/Coypu/bin/Release/Coypu.dll')
+  include_files = Dir.glob('src/Coypu/bin/Release/Coypu*.{dll,xml}')
   include_files.each {|f| FileUtils.cp(f, "temp/net40")}
 
   package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}

@@ -43,7 +43,8 @@ namespace Coypu.Drivers.Watin
 
         public static Constraint IsField()
         {
-            return OfType(typeof(TextField), typeof(SelectList), typeof(CheckBox), typeof(RadioButton), typeof(FileUpload));
+            return OfType(typeof (TextField), typeof (SelectList), typeof (CheckBox), typeof (RadioButton), typeof (FileUpload))
+                   | new AttributeConstraint("type", "email");
         }
 
         private class StringEndsWithComparer : WatiN.Core.Comparers.Comparer<string>
@@ -86,6 +87,24 @@ namespace Coypu.Drivers.Watin
             {
                 var container = component as IElementContainer;
                 return container != null && container.ElementsWithTag(tagNames).Exists(locator);
+            }
+        }
+
+        private class AttrbiuteComparer : WatiN.Core.Comparers.Comparer<Component>
+        {
+            private readonly string attributeName;
+            private readonly string attributeValue;
+
+            public AttrbiuteComparer(string attributeName, string attributeValue)
+            {
+                this.attributeName = attributeName;
+                this.attributeValue = attributeValue;
+            }
+
+            public override bool Compare(Component component)
+            {
+                var element = component as Element;
+                return element != null && element[attributeName] == attributeValue;
             }
         }
 

@@ -1,3 +1,19 @@
+# Version 0.8.5
+
+Release date: 2012-04-12
+
+### Fixed
+
+* Coypu.xml not being packaged
+
+# Version 0.8.4
+
+Release date: 2012-04-12
+
+### Fixed
+
+* Finds fields with type=email 
+
 # Version 0.8.3
 
 Release date: 2012-04-11

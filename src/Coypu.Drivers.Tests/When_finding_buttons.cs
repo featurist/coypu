@@ -87,6 +87,12 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
+        public void Does_not_find_email_inputs()
+        {
+            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstEmailInputId", Root));
+        }
+
+        [Test]
         public void Does_not_find_hidden_inputs()
         {
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstHiddenInputId", Root));

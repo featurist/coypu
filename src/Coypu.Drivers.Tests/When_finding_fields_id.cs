@@ -12,6 +12,13 @@ namespace Coypu.Drivers.Tests
             Driver.FindField("containerLabeledTextInputFieldId", Root).Value.should_be("text input field two val");
         }
 
+
+        [Test]
+        public void Finds_email_field()
+        {
+            Driver.FindField("containerLabeledEmailInputFieldId", Root).Value.should_be("email input field two val");
+        }
+
         [Test]
         public void Finds_textarea()
         {
