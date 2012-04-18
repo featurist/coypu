@@ -1,3 +1,11 @@
+# Version 0.8.6
+
+Release date: 2012-04-18
+
+### Updated
+
+* WebDrier 2.21 - Fixes hover
+
 # Version 0.8.5
 
 Release date: 2012-04-12

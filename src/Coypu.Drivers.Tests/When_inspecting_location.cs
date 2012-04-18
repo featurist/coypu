@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -23,6 +24,9 @@ namespace Coypu.Drivers.Tests
         {
             Driver.Visit("http://localhost:4567/auto_login");
             Driver.ExecuteScript("document.location.href = 'http://localhost:4567/resource/js_redirect'", Root);
+
+            // Seems like WebDriver is not waiting on JS, has exec been made asnyc?
+            Thread.Sleep(500);
 
             Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/resource/js_redirect")));
         }

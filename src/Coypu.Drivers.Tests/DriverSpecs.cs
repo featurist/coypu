@@ -37,8 +37,8 @@ namespace Coypu.Drivers.Tests
         private static DriverScope root;
         private static Driver driver;
 
-        private static readonly Browser browser = Browser.InternetExplorer;
-        private static readonly Type driverType = typeof (WatiNDriver);
+        private static readonly Browser browser = Browser.Firefox;
+        private static readonly Type driverType = typeof (SeleniumWebDriver);
 
         [SetUp]
         public void SetUp()
