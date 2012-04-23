@@ -31,6 +31,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedFieldsets = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedSections = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedIFrames = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedFrames = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedIDs = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasContentResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasContentMatchResults = new List<ScopedStubResult>();
@@ -229,6 +230,11 @@ namespace Coypu.Tests.TestDoubles
             return Find<ElementFound>(stubbedIFrames, locator, scope);
         }
 
+        public ElementFound FindFrame(string locator, DriverScope scope)
+        {
+            return Find<ElementFound>(stubbedFrames, locator, scope);
+        }
+
         public void Set(Element element, string value, bool forceAllEvents)
         {
             SetFields.Add(element, new SetFieldParams{Value = value, ForceAllEvents = forceAllEvents});
@@ -325,6 +331,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubIFrame(string locator, ElementFound iframe, DriverScope scope)
         {
             stubbedIFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = iframe });
+        }
+
+        public void StubFrame(string locator, ElementFound frame, DriverScope scope)
+        {
+            stubbedFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = frame });
         }
 
         public void StubId(string id, ElementFound element, DriverScope scope)

@@ -226,6 +226,11 @@ namespace Coypu.Drivers.Selenium
             return new WindowHandle(webDriver, FindWindowHandle(titleOrName));
         }
 
+        public ElementFound FindFrame(string locator, DriverScope root)
+        {
+            throw new NotImplementedException();
+        }
+
         private string FindWindowHandle(string titleOrName)
         {
             var currentHandle = GetCurrentWindowHandle();

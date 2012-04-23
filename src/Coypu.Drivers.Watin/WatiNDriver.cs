@@ -142,6 +142,11 @@ namespace Coypu.Drivers.Watin
             throw new NotSupportedException(); //TODO implement FindWindow for WatiN
         }
 
+        public ElementFound FindFrame(string locator, DriverScope root)
+        {
+            throw new NotImplementedException();
+        }
+
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
             return ieBrowser.GetCookiesForUrl(Location).Cast<Cookie>();

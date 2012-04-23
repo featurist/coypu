@@ -185,6 +185,11 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
+        public ElementFound FindFrame(string locator, DriverScope root)
+        {
+            return null;
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
         }

@@ -67,9 +67,9 @@ namespace Coypu
             restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource, SessionConfiguration), saveAs);
         }
 
-        public BrowserWindow FindWindow(string titleOrName, Options options = null)
+        public BrowserWindow FindWindow(string locator, Options options = null)
         {
-            return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, titleOrName, this));
+            return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, locator, this));
         }
 
         /// <summary>
