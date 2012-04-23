@@ -12,23 +12,6 @@ namespace Coypu.Drivers.Selenium
     public class SeleniumWebDriver : Driver
     {
         public bool Disposed { get; private set; }
-
-        public Uri Location
-        {
-            get
-            {
-                return new Uri(webDriver.Url);
-            }
-        }
-
-        public ElementFound Window
-        {
-            get
-            {
-                return new WindowHandle(webDriver, webDriver.CurrentWindowHandle);
-            }
-        }
-
         private IWebDriver webDriver;
         private readonly ElementFinder elementFinder;
         private readonly FieldFinder fieldFinder;
@@ -62,6 +45,19 @@ namespace Coypu.Drivers.Selenium
             dialogs = new Dialogs(this.webDriver);
             mouseControl = new MouseControl(this.webDriver);
             optionSelector = new OptionSelector();
+        }
+
+        public Uri Location(DriverScope scope)
+        {
+            throw new NotImplementedException("Consider scope");
+        }
+
+        public ElementFound Window
+        {
+            get
+            {
+                return new WindowHandle(webDriver, webDriver.CurrentWindowHandle);
+            }
         }
 
         protected bool NoJavascript

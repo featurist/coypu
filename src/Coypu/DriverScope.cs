@@ -45,7 +45,7 @@ namespace Coypu
 
         public virtual Uri Location
         {
-            get { return driver.Location; }
+            get { return driver.Location(this); }
         }
 
         public bool ConsiderInvisibleElements
@@ -250,9 +250,9 @@ namespace Coypu
             Query(action);
         }
 
-        public IFrameElementScope FindIFrame(string locator, Options options = null)
+        public RobustElementScope FindIFrame(string locator, Options options = null)
         {
-            return new IFrameElementScope(new IFrameFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new IFrameFinder(driver, locator, this), this, SetOptions(options));
         }
 
         public T Query<T>(Func<T> query, T expecting, Options options = null)

@@ -38,11 +38,11 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedHasXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
         private readonly List<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
+        private readonly List<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<string> FindCssRequests = new List<string>();
         private IList<Cookie> stubbedCookies;
-        private Uri stubbedLocation;
 
         public List<DriverScope> ModalDialogsAccepted = new List<DriverScope>();
         public List<DriverScope> ModalDialogsCancelled = new List<DriverScope>();
@@ -184,9 +184,9 @@ namespace Coypu.Tests.TestDoubles
 
         public bool Disposed { get; private set; }
 
-        public Uri Location
+        public Uri Location(DriverScope scope)
         {
-            get { return stubbedLocation; }
+            return Find<Uri>(stubbedLocations, null, scope);
         }
 
         public ElementFound Window
@@ -337,9 +337,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedCookies = cookies;
         }
 
-        public void StubLocation(Uri location)
+        public void StubLocation(Uri location, DriverScope scope)
         {
-            stubbedLocation = location;
+            stubbedLocations.Add(new ScopedStubResult {Result = location, Scope = scope});
         }
 
         public void StubWindow(string locator, ElementFound window, DriverScope scope)
