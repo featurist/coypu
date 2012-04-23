@@ -128,7 +128,6 @@
     <Compile Include="Actions\Hover.cs" />
     <Compile Include="Finders\IdFinder.cs" />
     <Compile Include="Finders\IFrameFinder.cs" />
-    <Compile Include="IFrameElementScope.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Queries\DialogQuery.cs" />
     <Compile Include="Queries\DriverScopeQuery.cs" />

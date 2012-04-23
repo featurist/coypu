@@ -149,7 +149,7 @@ namespace Coypu.Drivers.Watin
 
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
-            return ieBrowser.GetCookiesForUrl(Location).Cast<Cookie>();
+            return ieBrowser.GetCookiesForUrl(Watin.Uri).Cast<Cookie>();
         }
 
         private IEnumerable<Cookie> GetCookiesFromDocument(IE ieBrowser)
@@ -304,9 +304,10 @@ namespace Coypu.Drivers.Watin
                    select BuildElement(element);
         }
 
-        public Uri Location
+        public Uri Location(DriverScope scope)
         {
-            get { return Watin.Uri; }
+                //return Watin.Uri;
+                throw new NotImplementedException("Consider scope");
         }
 
         public bool Disposed { get; private set; }

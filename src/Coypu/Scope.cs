@@ -328,7 +328,7 @@ namespace Coypu
         /// 
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>An element</returns>
-        IFrameElementScope FindIFrame(string locator, Options options = null);
+        RobustElementScope FindIFrame(string locator, Options options = null);
 
         /// <summary>
         /// Find the first matching element with specified id to appear within the configured timeout

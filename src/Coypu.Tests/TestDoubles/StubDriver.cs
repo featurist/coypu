@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -118,9 +117,9 @@ namespace Coypu.Tests.TestDoubles
             get { return false; }
         }
 
-        public Uri Location
+        Uri Driver.Location(DriverScope scope)
         {
-            get { return null; }
+            return null;
         }
 
         public ElementFound Window

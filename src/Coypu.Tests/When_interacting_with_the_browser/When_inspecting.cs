@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             stub(locator, stubResult, browserSession);
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
-            var actualImmediateResult = subject(locator,SessionConfiguration);
+            var actualImmediateResult = subject(locator,sessionConfiguration);
 
             Assert.That(actualImmediateResult, Is.EqualTo(!stubResult), "Result was not found robustly");
 

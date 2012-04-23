@@ -28,7 +28,7 @@ namespace Coypu
         void Uncheck(Element field);
         void Choose(Element field);
         bool Disposed { get; }
-        Uri Location { get; }
+        Uri Location(DriverScope scope);
         ElementFound Window { get; }
         void AcceptModalDialog(DriverScope scope);
         void CancelModalDialog(DriverScope scope);

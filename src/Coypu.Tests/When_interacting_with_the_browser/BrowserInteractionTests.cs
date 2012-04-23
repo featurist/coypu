@@ -16,7 +16,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected BrowserSession browserSession;
         protected SpyRobustWrapper spyRobustWrapper;
         protected StubUrlBuilder stubUrlBuilder;
-        protected SessionConfiguration SessionConfiguration;
+        protected SessionConfiguration sessionConfiguration;
         protected ElementScope elementScope;
 
         [SetUp]
@@ -26,8 +26,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             spyRobustWrapper = new SpyRobustWrapper();
             fakeWaiter = new FakeWaiter();
             stubUrlBuilder = new StubUrlBuilder();
-            SessionConfiguration = new SessionConfiguration();
-            browserSession = TestSessionBuilder.Build(SessionConfiguration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
+            sessionConfiguration = new SessionConfiguration();
+            browserSession = TestSessionBuilder.Build(sessionConfiguration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
                                                       stubUrlBuilder);
 
             elementScope = browserSession.FindXPath(".");
@@ -45,7 +45,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>()
         {
-            return RunQueryAndCheckTiming<T>(SessionConfiguration.Timeout);
+            return RunQueryAndCheckTiming<T>(sessionConfiguration.Timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout)
@@ -62,7 +62,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query)
         {
-            return RunQueryAndCheckTiming(query, SessionConfiguration.Timeout);
+            return RunQueryAndCheckTiming(query, sessionConfiguration.Timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query, TimeSpan timeout)
@@ -70,7 +70,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var queryResult = query.Run();
 
             Assert.That(query.Timeout, Is.EqualTo(timeout));
-            Assert.That(query.RetryInterval, Is.EqualTo(SessionConfiguration.RetryInterval));
+            Assert.That(query.RetryInterval, Is.EqualTo(sessionConfiguration.RetryInterval));
 
             return queryResult;
         }
