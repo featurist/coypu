@@ -20,7 +20,7 @@ namespace Coypu.AcceptanceTests
             var configuration = new SessionConfiguration
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
-                                        Driver = typeof(SeleniumWebDriver),
+                                        Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu"),
                                         Browser = Drivers.Browser.Parse("firefox")
                                     };
             browser = new BrowserSession(configuration);
