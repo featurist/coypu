@@ -99,6 +99,7 @@
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="DriverFactory.cs" />
+    <Compile Include="Drivers\NoSuchBrowserException.cs" />
     <Compile Include="Drivers\Selenium\FrameFinder.cs" />
     <Compile Include="Drivers\Selenium\SeleniumFrame.cs" />
     <Compile Include="Drivers\Selenium\WindowHandle.cs" />
