@@ -308,9 +308,9 @@ The actual finding of the scope is deferred until the driver needs to interact w
 
 This means you have tests much more loosely coupled to the implementation of your website. Consider the search example above and the possible permutations of HTML and JS that would satisfy that test.
 
-#### Scoping within iframes
+#### Scoping within frames / iframes
 
-To restrict the scope to an iframe, locate the iframe by its id, title or the text of an h1 element within the frame:
+To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
 
 	var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
 

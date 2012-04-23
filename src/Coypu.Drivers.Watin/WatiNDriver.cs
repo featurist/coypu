@@ -113,11 +113,6 @@ namespace Coypu.Drivers.Watin
             return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
         }
 
-        public ElementFound FindIFrame(string locator, DriverScope scope)
-        {
-            return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
-        }
-
         public void Hover(Element element)
         {
             WatiNElement(element).FireEvent("onmouseover");
@@ -142,9 +137,9 @@ namespace Coypu.Drivers.Watin
             throw new NotSupportedException(); //TODO implement FindWindow for WatiN
         }
 
-        public ElementFound FindFrame(string locator, DriverScope root)
+        public ElementFound FindFrame(string locator, DriverScope scope)
         {
-            throw new NotImplementedException();
+            return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }
 
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)

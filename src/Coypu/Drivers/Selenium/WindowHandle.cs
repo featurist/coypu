@@ -1,5 +1,4 @@
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
 {

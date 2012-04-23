@@ -72,15 +72,5 @@ namespace Coypu
         {
             return new FillInWith(element, driver, robustWrapper, this, SetOptions(options));
         }
-
-        /// <summary>
-        /// Find a frame (not iframe) within a frameset in this window
-        /// </summary>
-        /// <param name="locator">The name or title of the frame</param>
-        public BrowserWindow FindFrame(string locator, Options options = null)
-        {
-            return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, locator, this));
-        }
-
     }
 }

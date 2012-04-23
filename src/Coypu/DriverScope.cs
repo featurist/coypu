@@ -250,9 +250,15 @@ namespace Coypu
             Query(action);
         }
 
-        public RobustElementScope FindIFrame(string locator, Options options = null)
+        public ElementScope FindFrame(string locator, Options options = null)
         {
-            return new RobustElementScope(new IFrameFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new FrameFinder(driver, locator, this), this, SetOptions(options));
+        }
+
+        [Obsolete("Use FindFrame which will find both iframes and old school frameset frames. This method will be removed in version 0.9")]
+        public ElementScope FindIFrame(string locator, Options options = null)
+        {
+            return FindFrame(locator, options);
         }
 
         public T Query<T>(Func<T> query, T expecting, Options options = null)

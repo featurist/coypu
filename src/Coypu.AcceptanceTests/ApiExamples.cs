@@ -52,7 +52,12 @@ namespace Coypu.AcceptanceTests
 
         private void ReloadTestPage()
         {
-            browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+            browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
+        }
+
+        private static string TestPageLocation(string page)
+        {
+            return "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
         }
 
         private void ReloadTestPageWithDelay()
@@ -90,7 +95,7 @@ namespace Coypu.AcceptanceTests
         public void Uncheck_example()
         {
             browser.Uncheck("checkedBox");
-            Assert.IsFalse(browser.FindField("checkedBox").Selected);
+            Assert.IsFalse(browser.Query(() => browser.FindField("checkedBox").Selected,false));
         }
 
         [Test]
@@ -410,6 +415,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void WithinFrame_example()
         {
+            browser.Visit(TestPageLocation("frameset.htm"));
+
             const string selectorThatAppearsInMultipleScopes = "scoped button";
 
             var expectingScope1 = browser.FindFrame("frame1").FindButton(selectorThatAppearsInMultipleScopes);

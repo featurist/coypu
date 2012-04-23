@@ -36,7 +36,6 @@ namespace Coypu
         ElementFound FindFieldset(string locator, DriverScope scoper);
         ElementFound FindSection(string locator, DriverScope scope);
         ElementFound FindId(string id, DriverScope scope);
-        ElementFound FindIFrame(string locator, DriverScope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
         ElementFound FindWindow(string locator, DriverScope scope);

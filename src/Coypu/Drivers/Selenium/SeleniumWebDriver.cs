@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Selenium
         private IWebDriver webDriver;
         private readonly ElementFinder elementFinder;
         private readonly FieldFinder fieldFinder;
-        private readonly IFrameFinder iframeFinder;
+        private readonly FrameFinder frameFinder;
         private readonly ButtonFinder buttonFinder;
         private readonly SectionFinder sectionFinder;
         private readonly TextMatcher textMatcher;
@@ -38,7 +38,7 @@ namespace Coypu.Drivers.Selenium
             xPath = new XPath();
             elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
-            iframeFinder = new IFrameFinder(this.webDriver, elementFinder,xPath);
+            frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
             buttonFinder = new ButtonFinder(elementFinder, textMatcher, xPath);
             sectionFinder = new SectionFinder(elementFinder, textMatcher);
@@ -49,7 +49,8 @@ namespace Coypu.Drivers.Selenium
 
         public Uri Location(DriverScope scope)
         {
-            throw new NotImplementedException("Consider scope");
+            elementFinder.SeleniumScope(scope);
+            return new Uri(webDriver.Url);
         }
 
         public ElementFound Window
@@ -85,14 +86,15 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
         }
 
-        public ElementFound FindIFrame(string locator, DriverScope scope) 
+
+        public ElementFound FindFrame(string locator, DriverScope scope)
         {
-            var element = iframeFinder.FindIFrame(locator, scope);
+            var element = frameFinder.FindFrame(locator, scope);
 
             if (element == null)
                 throw new MissingHtmlException("Failed to find frame: " + locator);
 
-            return new SeleniumFrame(element,webDriver);
+            return new SeleniumFrame(element, webDriver);
         }
 
         public ElementFound FindLink(string linkText, DriverScope scope)
@@ -220,11 +222,6 @@ namespace Coypu.Drivers.Selenium
         public ElementFound FindWindow(string titleOrName, DriverScope scope)
         {
             return new WindowHandle(webDriver, FindWindowHandle(titleOrName));
-        }
-
-        public ElementFound FindFrame(string locator, DriverScope root)
-        {
-            throw new NotImplementedException();
         }
 
         private string FindWindowHandle(string titleOrName)
