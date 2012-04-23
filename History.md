@@ -1,6 +1,14 @@
+# Version 0.8.8
+
+Release date: 2012-04-23
+
+### Added
+
+* Browser.Parse() helper for dynamic configuration of browser
+
 # Version 0.8.7
 
-Release date: 2012-04-3
+Release date: 2012-04-23
 
 ### Added
 

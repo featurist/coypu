@@ -65,6 +65,11 @@ Choose your driver/browser combination like so:
  
 These settings are the default configuration.
 
+If you want to configure these at runtime you could replace the following strings with strings read from your environment / configuration:
+
+	sessionConfiguration.Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu");
+	sessionConfiguration.Browser = Drivers.Browser.Parse("firefox);
+
 ##### Selenium WebDriver
 `Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Firefox, IE (slowest) and Chrome (Fastest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
