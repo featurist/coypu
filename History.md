@@ -1,3 +1,11 @@
+# Version 0.8.9
+
+Release date: 2012-04-24
+
+### Fixed
+
+* Dependency on WebDriver 2.21 broken
+
 # Version 0.8.8
 
 Release date: 2012-04-23
