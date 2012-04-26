@@ -1,3 +1,23 @@
+# Version 0.8.8
+
+Release date: 2012-04-23
+
+### Added
+
+* Browser.Parse() helper for dynamic configuration of browser
+
+# Version 0.8.7
+
+Release date: 2012-04-23
+
+### Added
+
+* FindFrame finds both iframes and old school frameset frames, FindIframe is now obsolete.
+
+### Fixed
+
+* Location respects window scope in all cases
+
 # Version 0.8.6
 
 Release date: 2012-04-18

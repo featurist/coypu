@@ -113,11 +113,6 @@ namespace Coypu.Drivers.Watin
             return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
         }
 
-        public ElementFound FindIFrame(string locator, DriverScope scope)
-        {
-            return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
-        }
-
         public void Hover(Element element)
         {
             WatiNElement(element).FireEvent("onmouseover");
@@ -142,9 +137,14 @@ namespace Coypu.Drivers.Watin
             throw new NotSupportedException(); //TODO implement FindWindow for WatiN
         }
 
+        public ElementFound FindFrame(string locator, DriverScope scope)
+        {
+            return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
+        }
+
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
-            return ieBrowser.GetCookiesForUrl(Location).Cast<Cookie>();
+            return ieBrowser.GetCookiesForUrl(Watin.Uri).Cast<Cookie>();
         }
 
         private IEnumerable<Cookie> GetCookiesFromDocument(IE ieBrowser)
@@ -299,9 +299,10 @@ namespace Coypu.Drivers.Watin
                    select BuildElement(element);
         }
 
-        public Uri Location
+        public Uri Location(DriverScope scope)
         {
-            get { return Watin.Uri; }
+                //return Watin.Uri;
+                throw new NotImplementedException("Consider scope");
         }
 
         public string Title

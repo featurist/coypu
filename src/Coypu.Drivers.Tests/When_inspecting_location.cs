@@ -11,10 +11,10 @@ namespace Coypu.Drivers.Tests
 
         {
             Driver.Visit("http://localhost:4567");
-            Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
+            Assert.That(Driver.Location(Root), Is.EqualTo(new Uri("http://localhost:4567/")));
 
             Driver.Visit("http://localhost:4567/auto_login");
-            Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+            Assert.That(Driver.Location(Root), Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
         }
 
 
@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Tests
             // Seems like WebDriver is not waiting on JS, has exec been made asnyc?
             Thread.Sleep(500);
 
-            Assert.That(Driver.Location, Is.EqualTo(new Uri("http://localhost:4567/resource/js_redirect")));
+            Assert.That(Driver.Location(Root), Is.EqualTo(new Uri("http://localhost:4567/resource/js_redirect")));
         }
     }
 }

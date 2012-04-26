@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_finding_frames.cs" />
     <Compile Include="When_elements_are_stale.cs" />
     <Compile Include="When_finding_windows.cs" />
     <Compile Include="When_finding_fields_by_container_label.cs" />
@@ -180,6 +181,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="html\frameset.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\frame1.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\frame2.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\popUp.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

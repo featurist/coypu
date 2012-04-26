@@ -65,6 +65,11 @@ Choose your driver/browser combination like so:
  
 These settings are the default configuration.
 
+If you want to configure these at runtime you could replace the following strings with strings read from your environment / configuration:
+
+	sessionConfiguration.Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu");
+	sessionConfiguration.Browser = Drivers.Browser.Parse("firefox);
+
 ##### Selenium WebDriver
 `Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Firefox, IE (slowest) and Chrome (Fastest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
@@ -311,9 +316,9 @@ The actual finding of the scope is deferred until the driver needs to interact w
 
 This means you have tests much more loosely coupled to the implementation of your website. Consider the search example above and the possible permutations of HTML and JS that would satisfy that test.
 
-#### Scoping within iframes
+#### Scoping within frames / iframes
 
-To restrict the scope to an iframe, locate the iframe by its id, title or the text of an h1 element within the frame:
+To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
 
 	var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
 

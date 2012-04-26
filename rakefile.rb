@@ -71,7 +71,7 @@ end
 
 desc 'publish Coypu-WatiN'
 task :publish_watin => :package do
-  package_file = Dir.glob('Coypu-WatiN*.nupkg').first
+  package_file = Dir.glob('Coypu.Watin.*.nupkg').first
   sh "nuget Push #{package_file}"
   FileUtils.rm(package_file)
 end

@@ -28,18 +28,18 @@ namespace Coypu
         void Uncheck(Element field);
         void Choose(Element field);
         bool Disposed { get; }
-        Uri Location { get; }
-        String Title { get; }
+        String Title(DriverScope scope);
+        Uri Location(DriverScope scope);
         ElementFound Window { get; }
         void AcceptModalDialog(DriverScope scope);
         void CancelModalDialog(DriverScope scope);
         string ExecuteScript(string javascript, DriverScope scope);
-        ElementFound FindFieldset(string locato, DriverScope scoper);
+        ElementFound FindFieldset(string locator, DriverScope scoper);
         ElementFound FindSection(string locator, DriverScope scope);
         ElementFound FindId(string id, DriverScope scope);
-        ElementFound FindIFrame(string locator, DriverScope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
         ElementFound FindWindow(string locator, DriverScope scope);
+        ElementFound FindFrame(string locator, DriverScope scope);
     }
 }

@@ -2,7 +2,7 @@
 <!-- saved from url=(0014)about:internet -->
 <html>
 <head>
-  <title>Test Page Title</title>
+  <title>Coypu interaction tests page</title>
 </head>
 <body>
   <form>
@@ -320,7 +320,12 @@
     <button onclick="window.tryThisCount ++; document.getElementById('tries').innerHTML += ' try until ' + window.tryThisCount;">try this</button>
     <span id="tries"></span>
     <a href="popup.htm" onclick="window.open(this.href,'popUpWindowName');return false;">
-      Open pop up window
+        Open pop up window
     </a>
+    
+    <frameset rows="200,*" frameborder="0" border="0" framespacing="0">
+	    <frame name="frame1" src="frame1.htm" marginheight="0" marginwidth="0" scrolling="auto" noresize>
+	    <frame name="frame2" src="frame2.htm" marginheight="0" marginwidth="0" scrolling="auto" noresize>
+    </frameset>
 </body>
 </html>

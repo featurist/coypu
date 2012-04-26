@@ -301,8 +301,8 @@ namespace Coypu
         ElementScope FindFieldset(string locator, Options options = null);
 
         /// <summary>
-        /// <para>Find the first matching IFrame to appear within the configured timeout.</para>
-        /// <para>IFrames are identified by the their id or title attributes, or by the text of the &lt;h1&gt; element in their content.</para>
+        /// <para>Find the first matching frame or iframe to appear within the configured timeout.</para>
+        /// <para>Frames are identified by the their id, name or title attributes, by their loaded page title, or by the text of the &lt;h1&gt; element in their content.</para>
         /// <para>E.g. to find this:
         /// 
         /// <code>    
@@ -315,9 +315,9 @@ namespace Coypu
         /// <para>use one of these:
         /// 
         /// <code>    
-        ///         FindIframe("myFrame")
-        ///         FindIframe("My I Frame")
-        ///         FindIframe("My Frame Header")
+        ///         Findframe("myFrame")
+        ///         Findframe("My I Frame")
+        ///         Findframe("My Frame Header")
         /// </code>
         /// </para>
         /// </summary>
@@ -328,7 +328,10 @@ namespace Coypu
         /// 
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>An element</returns>
-        IFrameElementScope FindIFrame(string locator, Options options = null);
+        ElementScope FindFrame(string locator, Options options = null);
+
+        [Obsolete("Use FindFrame which will find both iframes and old school frameset frames. This method will be removed in version 0.9")]
+        ElementScope FindIFrame(string locator, Options options = null);
 
         /// <summary>
         /// Find the first matching element with specified id to appear within the configured timeout

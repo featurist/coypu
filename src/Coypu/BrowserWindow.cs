@@ -78,7 +78,7 @@ namespace Coypu
         /// </summary>
         public string Title
         {
-            get { return driver.Title; }
+            get { return driver.Title(this); }
         }
     }
 }

@@ -99,6 +99,8 @@
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="DriverFactory.cs" />
+    <Compile Include="Drivers\NoSuchBrowserException.cs" />
+    <Compile Include="Drivers\Selenium\FrameFinder.cs" />
     <Compile Include="Drivers\Selenium\SeleniumFrame.cs" />
     <Compile Include="Drivers\Selenium\WindowHandle.cs" />
     <Compile Include="Element.cs" />
@@ -116,7 +118,6 @@
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />
     <Compile Include="Drivers\Selenium\ButtonFinder.cs" />
     <Compile Include="Drivers\Selenium\Dialogs.cs" />
-    <Compile Include="Drivers\Selenium\IFrameFinder.cs" />
     <Compile Include="Drivers\Selenium\MouseControl.cs" />
     <Compile Include="Drivers\Selenium\OptionSelector.cs" />
     <Compile Include="Drivers\Selenium\SectionFinder.cs" />
@@ -127,8 +128,7 @@
     <Compile Include="Drivers\XPath.cs" />
     <Compile Include="Actions\Hover.cs" />
     <Compile Include="Finders\IdFinder.cs" />
-    <Compile Include="Finders\IFrameFinder.cs" />
-    <Compile Include="IFrameElementScope.cs" />
+    <Compile Include="Finders\FrameFinder.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Queries\DialogQuery.cs" />
     <Compile Include="Queries\DriverScopeQuery.cs" />
