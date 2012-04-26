@@ -12,27 +12,10 @@ namespace Coypu.Drivers.Selenium
     public class SeleniumWebDriver : Driver
     {
         public bool Disposed { get; private set; }
-
-        public Uri Location
-        {
-            get
-            {
-                return new Uri(webDriver.Url);
-            }
-        }
-
-        public ElementFound Window
-        {
-            get
-            {
-                return new WindowHandle(webDriver, webDriver.CurrentWindowHandle);
-            }
-        }
-
         private IWebDriver webDriver;
         private readonly ElementFinder elementFinder;
         private readonly FieldFinder fieldFinder;
-        private readonly IFrameFinder iframeFinder;
+        private readonly FrameFinder frameFinder;
         private readonly ButtonFinder buttonFinder;
         private readonly SectionFinder sectionFinder;
         private readonly TextMatcher textMatcher;
@@ -55,13 +38,33 @@ namespace Coypu.Drivers.Selenium
             xPath = new XPath();
             elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
-            iframeFinder = new IFrameFinder(this.webDriver, elementFinder,xPath);
+            frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
             buttonFinder = new ButtonFinder(elementFinder, textMatcher, xPath);
             sectionFinder = new SectionFinder(elementFinder, textMatcher);
             dialogs = new Dialogs(this.webDriver);
             mouseControl = new MouseControl(this.webDriver);
             optionSelector = new OptionSelector();
+        }
+
+        public Uri Location(DriverScope scope)
+        {
+            elementFinder.SeleniumScope(scope);
+            return new Uri(webDriver.Url);
+        }
+
+        public String Title(DriverScope scope)
+        {
+            elementFinder.SeleniumScope(scope);
+            return webDriver.Title;
+        }
+
+        public ElementFound Window
+        {
+            get
+            {
+                return new WindowHandle(webDriver, webDriver.CurrentWindowHandle);
+            }
         }
 
         protected bool NoJavascript
@@ -89,14 +92,15 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
         }
 
-        public ElementFound FindIFrame(string locator, DriverScope scope) 
+
+        public ElementFound FindFrame(string locator, DriverScope scope)
         {
-            var element = iframeFinder.FindIFrame(locator, scope);
+            var element = frameFinder.FindFrame(locator, scope);
 
             if (element == null)
                 throw new MissingHtmlException("Failed to find frame: " + locator);
 
-            return new SeleniumFrame(element,webDriver);
+            return new SeleniumFrame(element, webDriver);
         }
 
         public ElementFound FindLink(string linkText, DriverScope scope)

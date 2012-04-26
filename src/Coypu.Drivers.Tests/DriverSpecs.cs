@@ -7,7 +7,7 @@ using Coypu.Finders;
 using NUnit.Framework;
 
 [SetUpFixture]
-public class AssmeblyTearDown
+public class AssemblyTearDown
 {
     private SinatraSite sinatraSite;
 
@@ -41,15 +41,20 @@ namespace Coypu.Drivers.Tests
         private static readonly Type driverType = typeof (SeleniumWebDriver);
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             Driver.Visit(GetTestHTMLPathLocation());
         }
 
-        private string GetTestHTMLPathLocation()
+        protected string GetTestHTMLPathLocation()
         {
-            var file = new FileInfo(Path.Combine(@"..\..\", INTERACTION_TESTS_PAGE)).FullName;
+            var file = new FileInfo(Path.Combine(@"..\..\", TestPage)).FullName;
             return "file:///" + file.Replace('\\', '/');
+        }
+
+        protected virtual string TestPage
+        {
+            get { return INTERACTION_TESTS_PAGE; }
         }
 
         protected static DriverScope Root

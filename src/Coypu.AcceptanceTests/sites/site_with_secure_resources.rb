@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 
 get "/" do
-  "home"
+  "<html><head><title>Sinatra has taken the stage</title></head><body>home</body></html>"
 end
 
 get "/resource/:value" do

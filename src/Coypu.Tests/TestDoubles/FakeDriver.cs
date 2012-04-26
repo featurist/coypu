@@ -30,19 +30,20 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedExecuteScriptResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedFieldsets = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedSections = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedIFrames = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedFrames = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedIDs = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasContentResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasContentMatchResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasCssResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
-        private readonly List<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedTitles = new List<ScopedStubResult>();
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<string> FindCssRequests = new List<string>();
         private IList<Cookie> stubbedCookies;
-        private Uri stubbedLocation;
 
         public List<DriverScope> ModalDialogsAccepted = new List<DriverScope>();
         public List<DriverScope> ModalDialogsCancelled = new List<DriverScope>();
@@ -184,9 +185,14 @@ namespace Coypu.Tests.TestDoubles
 
         public bool Disposed { get; private set; }
 
-        public Uri Location
+        public Uri Location(DriverScope scope)
         {
-            get { return stubbedLocation; }
+            return Find<Uri>(stubbedLocations, null, scope);
+        }
+
+        public string Title(DriverScope scope)
+        {
+            return Find<String>(stubbedTitles, null, scope);
         }
 
         public ElementFound Window
@@ -224,9 +230,9 @@ namespace Coypu.Tests.TestDoubles
             return Find<ElementFound>(stubbedIDs, id, scope);
         }
 
-        public ElementFound FindIFrame(string locator, DriverScope scope)
+        public ElementFound FindFrame(string locator, DriverScope scope)
         {
-            return Find<ElementFound>(stubbedIFrames, locator, scope);
+            return Find<ElementFound>(stubbedFrames, locator, scope);
         }
 
         public void Set(Element element, string value, bool forceAllEvents)
@@ -322,9 +328,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedSections.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = section});
         }
 
-        public void StubIFrame(string locator, ElementFound iframe, DriverScope scope)
+        public void StubFrame(string locator, ElementFound frame, DriverScope scope)
         {
-            stubbedIFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = iframe });
+            stubbedFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = frame });
         }
 
         public void StubId(string id, ElementFound element, DriverScope scope)
@@ -337,9 +343,14 @@ namespace Coypu.Tests.TestDoubles
             stubbedCookies = cookies;
         }
 
-        public void StubLocation(Uri location)
+        public void StubLocation(Uri location, DriverScope scope)
         {
-            stubbedLocation = location;
+            stubbedLocations.Add(new ScopedStubResult {Result = location, Scope = scope});
+        }
+
+        public void StubTitle(String title, DriverScope scope)
+        {
+            stubbedTitles.Add(new ScopedStubResult { Result = title, Scope = scope });
         }
 
         public void StubWindow(string locator, ElementFound window, DriverScope scope)

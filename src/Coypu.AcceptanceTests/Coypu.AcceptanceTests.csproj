@@ -100,6 +100,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Coypu.Drivers.Tests\html\frame1.htm">
+      <Link>html\frame1.htm</Link>
+    </Content>
+    <Content Include="..\Coypu.Drivers.Tests\html\frame2.htm">
+      <Link>html\frame2.htm</Link>
+    </Content>
+    <Content Include="..\Coypu.Drivers.Tests\html\frameset.htm">
+      <Link>html\frameset.htm</Link>
+    </Content>
     <Content Include="..\Coypu.Drivers.Tests\html\iFrame1.htm">
       <Link>html\iFrame1.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

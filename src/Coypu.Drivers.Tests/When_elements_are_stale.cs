@@ -29,9 +29,9 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Stale_iframe()
+        public void Stale_frame()
         {
-            var frame = Driver.FindIFrame("iframe1", Root);
+            var frame = Driver.FindFrame("iframe1", Root);
             frame.Stale.should_be_false();
 
             Driver.Click(Driver.FindButton("destroy frames",Root));
@@ -40,9 +40,9 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Stale_iframe_becomes_invisible()
+        public void Stale_frame_becomes_invisible()
         {
-            var frame = Driver.FindIFrame("iframe1", Root);
+            var frame = Driver.FindFrame("iframe1", Root);
             frame.Stale.should_be_false();
 
             Driver.Click(Driver.FindButton("hide frames", Root));

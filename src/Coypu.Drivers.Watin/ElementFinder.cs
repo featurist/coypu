@@ -106,7 +106,7 @@ namespace Coypu.Drivers.Watin
 
         public Frame FindFrame(string locator, DriverScope scope)
         {
-            return WatiNDocumentScope(scope).Frames.First(Find.ByTitle(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
+            return WatiNDocumentScope(scope).Frames.First(Find.ByTitle(locator) | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
         }
 
         public WatiN.Core.Element FindLink(string linkText, DriverScope scope)
