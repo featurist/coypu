@@ -7,7 +7,7 @@ using Coypu.Finders;
 using NUnit.Framework;
 
 [SetUpFixture]
-public class AssmeblyTearDown
+public class AssemblyTearDown
 {
     private SinatraSite sinatraSite;
 

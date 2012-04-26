@@ -75,6 +75,7 @@
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
     <Compile Include="When_interacting_with_the_browser\When_constructing_xpath.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_state.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_inspecting_title.cs" />
     <Compile Include="When_interacting_with_the_browser\When_querying_with_any_finder.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_clicking_any_element.cs" />

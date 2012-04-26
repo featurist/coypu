@@ -329,7 +329,6 @@ namespace Coypu.AcceptanceTests
             Assert.IsFalse(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
         }
 
-
         [Test]
         public void Hover_example()
         {
@@ -346,6 +345,11 @@ namespace Coypu.AcceptanceTests
             Assert.That(browser.FindButton("clickMeTest").Value, Is.EqualTo("Click me - clicked"));
         }
 
+        [Test]
+        public void Title_example()
+        {
+            Assert.That(browser.Title, Is.EqualTo("Test Page Title"));
+        }
 
         [Test]
         public void Within_example()

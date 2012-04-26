@@ -164,6 +164,9 @@ If you need to step away and visit a site outside of the `SessionConfiguration.A
 	browser.Visit("https://gmail.com")
 	browser.Visit("file:///C:/users/adiel/localstuff.htm")
 
+#### Getting the page title
+	browser.Title
+	
 #### Completing forms
 
 Form fields are found by label text, partial label text, id, name, placeholder or radio button value

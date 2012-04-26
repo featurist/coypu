@@ -21,6 +21,14 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
+        public string Title
+        {
+            get
+            {
+                return webDriver.Title;
+            }
+        }
+
         public ElementFound Window
         {
             get

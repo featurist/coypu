@@ -304,6 +304,11 @@ namespace Coypu.Drivers.Watin
             get { return Watin.Uri; }
         }
 
+        public string Title
+        {
+            get { return Watin.Title; }
+        }
+
         public bool Disposed { get; private set; }
 
         public void Dispose()

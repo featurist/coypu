@@ -123,6 +123,11 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
+        public string Title
+        {
+            get { return null; }
+        }
+
         public ElementFound Window
         {
             get { return null; }

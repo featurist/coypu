@@ -43,6 +43,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> FindCssRequests = new List<string>();
         private IList<Cookie> stubbedCookies;
         private Uri stubbedLocation;
+        private String stubbedTitle;
 
         public List<DriverScope> ModalDialogsAccepted = new List<DriverScope>();
         public List<DriverScope> ModalDialogsCancelled = new List<DriverScope>();
@@ -187,6 +188,11 @@ namespace Coypu.Tests.TestDoubles
         public Uri Location
         {
             get { return stubbedLocation; }
+        }
+
+        public string Title
+        {
+            get { return stubbedTitle; }
         }
 
         public ElementFound Window
@@ -340,6 +346,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubLocation(Uri location)
         {
             stubbedLocation = location;
+        }
+
+        public void StubTitle(String title)
+        {
+            stubbedTitle = title;
         }
 
         public void StubWindow(string locator, ElementFound window, DriverScope scope)
