@@ -353,7 +353,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Title_example()
         {
-            Assert.That(browser.Title, Is.EqualTo("Test Page Title"));
+            Assert.That(browser.Title, Is.EqualTo("Coypu interaction tests page"));
         }
 
         [Test]

@@ -305,9 +305,10 @@ namespace Coypu.Drivers.Watin
                 throw new NotImplementedException("Consider scope");
         }
 
-        public string Title
+        public string Title(DriverScope scope)
         {
-            get { return Watin.Title; }
+            //return Watin.Title;
+            throw new NotImplementedException("Consider scope");
         }
 
         public bool Disposed { get; private set; }

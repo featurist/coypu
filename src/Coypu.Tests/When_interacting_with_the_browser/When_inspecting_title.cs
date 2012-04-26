@@ -8,9 +8,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_returns_the_driver_page_title()
         {
-            var pageTitle = "Test page title";
-            driver.StubTitle(pageTitle);
-            Assert.That(driver.Title, Is.EqualTo(pageTitle));
+            var pageTitle = "Coypu interaction tests page";
+            driver.StubTitle(pageTitle, browserSession);
+            Assert.That(browserSession.Title, Is.EqualTo(pageTitle));
         }
     }
 }
