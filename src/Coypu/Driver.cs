@@ -29,6 +29,7 @@ namespace Coypu
         void Choose(Element field);
         bool Disposed { get; }
         Uri Location(Scope scope);
+        String Title(Scope scope);
         ElementFound Window { get; }
         void AcceptModalDialog(Scope scope);
         void CancelModalDialog(Scope scope);

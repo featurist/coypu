@@ -72,5 +72,13 @@ namespace Coypu
         {
             return new FillInWith(element, driver, robustWrapper, this, SetOptions(options));
         }
+
+        /// <summary>
+        /// Returns the page's title displayed in the browser
+        /// </summary>
+        public string Title
+        {
+            get { return driver.Title(this); }
+        }
     }
 }

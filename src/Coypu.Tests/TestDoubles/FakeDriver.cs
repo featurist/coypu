@@ -37,8 +37,9 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedHasCssResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
-        private readonly List<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
-        private readonly List<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
+        private readonly IList<ScopedStubResult> stubbedTitles = new List<ScopedStubResult>();
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<string> FindCssRequests = new List<string>();
@@ -187,6 +188,11 @@ namespace Coypu.Tests.TestDoubles
         public Uri Location(Scope scope)
         {
             return Find<Uri>(stubbedLocations, null, scope);
+        }
+
+        public string Title(Scope scope)
+        {
+            return Find<String>(stubbedTitles, null, scope);
         }
 
         public ElementFound Window
@@ -340,6 +346,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubLocation(Uri location, Scope scope)
         {
             stubbedLocations.Add(new ScopedStubResult {Result = location, Scope = scope});
+        }
+
+        public void StubTitle(String title, Scope scope)
+        {
+            stubbedTitles.Add(new ScopedStubResult { Result = title, Scope = scope });
         }
 
         public void StubWindow(string locator, ElementFound window, Scope scope)

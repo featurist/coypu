@@ -94,6 +94,7 @@
     <Compile Include="sites\SinatraSite.cs" />
     <Compile Include="When_getting_cookies.cs" />
     <Compile Include="When_hovering.cs" />
+    <Compile Include="When_inspecting_title.cs" />
     <Compile Include="When_using_iframes_as_scope.cs" />
     <Compile Include="When_finding_iframes.cs" />
     <Compile Include="DriverSpecs.cs">
