@@ -16,20 +16,20 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IWebElement FindButton(string locator, DriverScope scope)
+        public IWebElement FindButton(string locator, Scope scope)
         {
             return FindButtonByText(locator, scope) ??
                    FindButtonByIdNameOrValue(locator, scope) ??
                    elementFinder.FindByPartialId(locator, scope).FirstOrDefault(IsButton);
         }
 
-        private IWebElement FindButtonByIdNameOrValue(string locator, DriverScope scope) 
+        private IWebElement FindButtonByIdNameOrValue(string locator, Scope scope) 
         {
             var xpathToFind = xPath.Format(".//*[@id = {0} or @name = {0} or @value = {0} or @alt = {0}]", locator);
             return elementFinder.Find(By.XPath(xpathToFind),scope).FirstOrDefault(IsButton);
         }
 
-        private IWebElement FindButtonByText(string locator, DriverScope scope) 
+        private IWebElement FindButtonByText(string locator, Scope scope) 
         {
             return
                 elementFinder.Find(By.TagName("button"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??

@@ -7,38 +7,38 @@ namespace Coypu
 {
     public interface Driver : IDisposable
     {
-        ElementFound FindButton(string locator, DriverScope scope);
-        ElementFound FindLink(string linkText, DriverScope scope);
-        ElementFound FindField(string locator, DriverScope scope);
+        ElementFound FindButton(string locator, Scope scope);
+        ElementFound FindLink(string linkText, Scope scope);
+        ElementFound FindField(string locator, Scope scope);
         void Click(Element element);
         void Visit(string url);
         void Set(Element element, string value, bool forceAllEvents);
         void Select(Element element, string option);
         object Native { get; }
-        bool HasContent(string text, DriverScope scope);
-        bool HasContentMatch(Regex pattern, DriverScope scope);
-        bool HasCss(string cssSelector, DriverScope scope);
-        bool HasXPath(string xpath, DriverScope scope);
-        bool HasDialog(string withText, DriverScope scope);
-        ElementFound FindCss(string cssSelector, DriverScope scope);
-        ElementFound FindXPath(string xpath, DriverScope scope);
-        IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope);
-        IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope);
+        bool HasContent(string text, Scope scope);
+        bool HasContentMatch(Regex pattern, Scope scope);
+        bool HasCss(string cssSelector, Scope scope);
+        bool HasXPath(string xpath, Scope scope);
+        bool HasDialog(string withText, Scope scope);
+        ElementFound FindCss(string cssSelector, Scope scope);
+        ElementFound FindXPath(string xpath, Scope scope);
+        IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope);
+        IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope);
         void Check(Element field);
         void Uncheck(Element field);
         void Choose(Element field);
         bool Disposed { get; }
-        Uri Location(DriverScope scope);
+        Uri Location(Scope scope);
         ElementFound Window { get; }
-        void AcceptModalDialog(DriverScope scope);
-        void CancelModalDialog(DriverScope scope);
-        string ExecuteScript(string javascript, DriverScope scope);
-        ElementFound FindFieldset(string locator, DriverScope scoper);
-        ElementFound FindSection(string locator, DriverScope scope);
-        ElementFound FindId(string id, DriverScope scope);
+        void AcceptModalDialog(Scope scope);
+        void CancelModalDialog(Scope scope);
+        string ExecuteScript(string javascript, Scope scope);
+        ElementFound FindFieldset(string locator, Scope scoper);
+        ElementFound FindSection(string locator, Scope scope);
+        ElementFound FindId(string id, Scope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
-        ElementFound FindWindow(string locator, DriverScope scope);
-        ElementFound FindFrame(string locator, DriverScope scope);
+        ElementFound FindWindow(string locator, Scope scope);
+        ElementFound FindFrame(string locator, Scope scope);
     }
 }

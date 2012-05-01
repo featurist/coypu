@@ -550,7 +550,7 @@ namespace Coypu
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        DriverScope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+        Scope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
 
         /// <summary>
         /// <para>Click a link and wait for a condition to be satisfied for a specified time otherwise click and wait again.</para> 
@@ -566,7 +566,16 @@ namespace Coypu
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        DriverScope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+        Scope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
 
+        /// <summary>
+        /// Try and find this scope now
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
+        ElementFound Now();
+
+        Uri Location { get; }
+        bool ConsiderInvisibleElements { get; }
     }
 }

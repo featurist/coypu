@@ -83,14 +83,14 @@ namespace Coypu
             return new WaitThenClick(driver, SetOptions(options), waiter, new ButtonFinder(driver, locator, this));
         }
 
-        public DriverScope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
+        public Scope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
             options = SetOptions(options);
             TryUntil(WaitThenClickButton(locator, options), until, waitBeforeRetry, options);
             return this;
         }
 
-        public DriverScope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
+        public Scope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
             options = SetOptions(options);
             TryUntil(WaitThenClickLink(locator, options), until, waitBeforeRetry, options);
@@ -217,12 +217,6 @@ namespace Coypu
         public string ExecuteScript(string javascript)
         {
             return driver.ExecuteScript(javascript,this);
-        }
-
-        public DriverScope Hover(Options options = null)
-        {
-            RetryUntilTimeout(new Hover(this, driver, SetOptions(options)));
-            return this;
         }
 
         public bool Has(ElementScope findElement)

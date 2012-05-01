@@ -17,14 +17,14 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IWebElement FindFrame(string locator, DriverScope scope)
+        public IWebElement FindFrame(string locator, Scope scope)
         {
             var frame = FindFrameByTag(locator, scope, "iframe") ??
                         FindFrameByTag(locator, scope, "frame");
             return frame;
         }
 
-        private IWebElement FindFrameByTag(string locator, DriverScope scope, string tagNameToFind)
+        private IWebElement FindFrameByTag(string locator, Scope scope, string tagNameToFind)
         {
             return WebElement(locator, elementFinder.Find(By.TagName(tagNameToFind), scope));
         }

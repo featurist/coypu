@@ -4,9 +4,17 @@ using Coypu.Queries;
 
 namespace Coypu
 {
-    public class ElementScope : DriverScope, Element
+    public interface ElementScope : Scope, Element
     {
-        internal ElementScope(ElementFinder elementFinder, DriverScope outer)
+        bool Exists(Options options = null);
+        bool Missing(Options options = null);
+        ElementScope Click(Options options = null);
+        Scope Hover(Options options = null);
+    }
+
+    public class DeferredElementScope : DriverScope, ElementScope
+    {
+        internal DeferredElementScope(ElementFinder elementFinder, DriverScope outer)
             : base(elementFinder, outer)
         {
         }
@@ -54,6 +62,12 @@ namespace Coypu
         public ElementScope Click(Options options = null)
         {
             RetryUntilTimeout(new Click(this, driver, SetOptions(options)));
+            return this;
+        }
+
+        public Scope Hover(Options options = null)
+        {
+            RetryUntilTimeout(new Hover(this, driver, SetOptions(options)));
             return this;
         }
 

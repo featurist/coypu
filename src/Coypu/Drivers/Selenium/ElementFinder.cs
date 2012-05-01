@@ -14,25 +14,25 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IEnumerable<IWebElement> FindByPartialId(string id, DriverScope scope)
+        public IEnumerable<IWebElement> FindByPartialId(string id, Scope scope)
         {
             var xpath = String.Format(".//*[substring(@id, string-length(@id) - {0} + 1, string-length(@id)) = {1}]",
                                       id.Length, xPath.Literal(id));
             return Find(By.XPath(xpath),scope);
         }
 
-        public IEnumerable<IWebElement> Find(By by, DriverScope scope)
+        public IEnumerable<IWebElement> Find(By by, Scope scope)
         {
             var context = SeleniumScope(scope);
             return context.FindElements(by).Where(e => IsDisplayed(e, scope));
         }
 
-        public ISearchContext SeleniumScope(DriverScope scope)
+        public ISearchContext SeleniumScope(Scope scope)
         {
             return (ISearchContext) scope.Now().Native;
         }
 
-        public bool IsDisplayed(IWebElement e, DriverScope scope)
+        public bool IsDisplayed(IWebElement e, Scope scope)
         {
             return scope.ConsiderInvisibleElements || e.IsDisplayed();
         }

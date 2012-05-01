@@ -8,12 +8,12 @@ namespace Coypu.Drivers.Watin
 {
     internal class ElementFinder
     {
-        internal static IElementContainer WatiNScope(DriverScope scope)
+        internal static IElementContainer WatiNScope(Scope scope)
         {
             return (IElementContainer)scope.Now().Native;
         }
 
-        private static Document WatiNDocumentScope(DriverScope scope)
+        private static Document WatiNDocumentScope(Scope scope)
         {
             var nativeScope = WatiNScope(scope);
             while (!(nativeScope is Document) && nativeScope is WatiN.Core.Element)
@@ -27,7 +27,7 @@ namespace Coypu.Drivers.Watin
             return documentScope;
         }
 
-        public WatiN.Core.Element FindButton(string locator, DriverScope scope)
+        public WatiN.Core.Element FindButton(string locator, Scope scope)
         {
             var isButton = Constraints.OfType<Button>()
                            | Find.ByElement(e => e.TagName == "INPUT" && e.GetAttributeValue("type") == "image")
@@ -47,12 +47,12 @@ namespace Coypu.Drivers.Watin
             return candidates.FirstMatching(byText, byIdNameValueOrAlt, byPartialId);
         }
 
-        public WatiN.Core.Element FindElement(string id, DriverScope scope)
+        public WatiN.Core.Element FindElement(string id, Scope scope)
         {
             return WatiNScope(scope).Elements.First(Find.ById(id) & Constraints.IsVisible(scope.ConsiderInvisibleElements));
         }
 
-        public WatiN.Core.Element FindField(string locator, DriverScope scope)
+        public WatiN.Core.Element FindField(string locator, Scope scope)
         {
             var field = FindFieldByLabel(locator,scope);
             if (field == null)
@@ -75,7 +75,7 @@ namespace Coypu.Drivers.Watin
             return field;
         }
 
-        private WatiN.Core.Element FindFieldByLabel(string locator, DriverScope scope)
+        private WatiN.Core.Element FindFieldByLabel(string locator, Scope scope)
         {
             WatiN.Core.Element field = null;
 
@@ -93,7 +93,7 @@ namespace Coypu.Drivers.Watin
             return field;
         }
 
-        public WatiN.Core.Element FindFieldset(string locator, DriverScope scope)
+        public WatiN.Core.Element FindFieldset(string locator, Scope scope)
         {
             var withId = Find.ById(locator);
             var withLegend = Constraints.HasElement("legend", Find.ByText(locator));
@@ -104,17 +104,17 @@ namespace Coypu.Drivers.Watin
             return WatiNScope(scope).Fieldsets().First(hasLocator & isVisible);
         }
 
-        public Frame FindFrame(string locator, DriverScope scope)
+        public Frame FindFrame(string locator, Scope scope)
         {
             return WatiNDocumentScope(scope).Frames.First(Find.ByTitle(locator) | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
         }
 
-        public WatiN.Core.Element FindLink(string linkText, DriverScope scope)
+        public WatiN.Core.Element FindLink(string linkText, Scope scope)
         {
             return WatiNScope(scope).Links.First(Find.ByText(linkText) & Constraints.IsVisible(scope.ConsiderInvisibleElements));
         }
 
-        public WatiN.Core.Element FindSection(string locator, DriverScope scope)
+        public WatiN.Core.Element FindSection(string locator, Scope scope)
         {
             var isSection = Constraints.OfType(typeof(Section), typeof(Div));
 
@@ -126,7 +126,7 @@ namespace Coypu.Drivers.Watin
             return WatiNScope(scope).Elements.First(isSection & hasLocator & isVisible);
         }
 
-        private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, DriverScope scope)
+        private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope)
         {
             // TODO: This is restricting by hidden items, but there are no tests for that!
             var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
@@ -135,23 +135,23 @@ namespace Coypu.Drivers.Watin
                    select element;
         }
 
-        public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, Scope scope)
         {
             return FindAllCssDeferred(cssSelector, scope);
         }
 
-        public WatiN.Core.Element FindCss(string cssSelector, DriverScope scope)
+        public WatiN.Core.Element FindCss(string cssSelector, Scope scope)
         {
             return FindAllCssDeferred(cssSelector, scope).FirstOrDefault();
         }
 
-        public bool HasCss(string cssSelector, DriverScope scope)
+        public bool HasCss(string cssSelector, Scope scope)
         {
             var element = FindCss(cssSelector, scope);
             return element != null && element.Exists;
         }
 
-        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, DriverScope scope)
+        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, Scope scope)
         {
             var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
             return from element in WatiNScope(scope).XPath(xpath)
@@ -159,17 +159,17 @@ namespace Coypu.Drivers.Watin
                    select element;
         }
 
-        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, Scope scope)
         {
             return FindAllXPathDeferred(xpath, scope);
         }
 
-        public WatiN.Core.Element FindXPath(string xpath, DriverScope scope)
+        public WatiN.Core.Element FindXPath(string xpath, Scope scope)
         {
             return FindAllXPathDeferred(xpath, scope).FirstOrDefault();
         }
 
-        public bool HasXPath(string xpath, DriverScope scope)
+        public bool HasXPath(string xpath, Scope scope)
         {
             var element = FindXPath(xpath, scope);
             return element != null && element.Exists;

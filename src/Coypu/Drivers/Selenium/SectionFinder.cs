@@ -17,19 +17,19 @@ namespace Coypu.Drivers.Selenium
             this.textMatcher = textMatcher;
         }
 
-        public IWebElement FindSection(string locator, DriverScope scope)
+        public IWebElement FindSection(string locator, Scope scope)
         {
             return FindSectionByHeaderText(locator,scope) ??
                    elementFinder.Find(By.Id(locator),scope).FirstDisplayedOrDefault(IsSection);
         }
 
-        private IWebElement FindSectionByHeaderText(string locator, DriverScope scope) 
+        private IWebElement FindSectionByHeaderText(string locator, Scope scope) 
         {
             return FindSectionByHeaderText(locator, "section",scope) ??
                    FindSectionByHeaderText(locator, "div",scope);
         }
 
-        private IWebElement FindSectionByHeaderText(string locator, string sectionTag, DriverScope scope) 
+        private IWebElement FindSectionByHeaderText(string locator, string sectionTag, Scope scope) 
         {
             var headersXPath = String.Join(" or ", headerTags);
             var withAHeader = elementFinder.Find(By.XPath(String.Format(".//{0}[{1}]", sectionTag, headersXPath)),scope);

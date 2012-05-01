@@ -88,7 +88,7 @@ namespace Coypu.Drivers.Watin
             return new WatiNFrame(frame);
         }
 
-        public string ExecuteScript(string javascript, DriverScope scope)
+        public string ExecuteScript(string javascript, Scope scope)
         {
             // TODO: scope is the current window in which to accept a dialog
 
@@ -98,17 +98,17 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
-        public ElementFound FindFieldset(string locator, DriverScope scope)
+        public ElementFound FindFieldset(string locator, Scope scope)
         {
             return BuildElement(elementFinder.FindFieldset(locator, scope), "Failed to find fieldset: " + locator);
         }
 
-        public ElementFound FindSection(string locator, DriverScope scope)
+        public ElementFound FindSection(string locator, Scope scope)
         {
             return BuildElement(elementFinder.FindSection(locator, scope), "Failed to find section: " + locator);
         }
 
-        public ElementFound FindId(string id, DriverScope scope)
+        public ElementFound FindId(string id, Scope scope)
         {
             return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
         }
@@ -132,12 +132,12 @@ namespace Coypu.Drivers.Watin
             return persistentCookies.Concat(sessionCookies).ToList();
         }
 
-        public ElementFound FindWindow(string locator, DriverScope scope)
+        public ElementFound FindWindow(string locator, Scope scope)
         {
             throw new NotSupportedException(); //TODO implement FindWindow for WatiN
         }
 
-        public ElementFound FindFrame(string locator, DriverScope scope)
+        public ElementFound FindFrame(string locator, Scope scope)
         {
             return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }
@@ -161,17 +161,17 @@ namespace Coypu.Drivers.Watin
                    select new Cookie(name, value);
         }
 
-        public ElementFound FindButton(string locator, DriverScope scope)
+        public ElementFound FindButton(string locator, Scope scope)
         {
             return BuildElement(elementFinder.FindButton(locator, scope), "Failed to find button with text, id or name: " + locator);
         }
 
-        public ElementFound FindLink(string linkText, DriverScope scope)
+        public ElementFound FindLink(string linkText, Scope scope)
         {
             return BuildElement(elementFinder.FindLink(linkText, scope), "Failed to find link with text: " + linkText);
         }
 
-        public ElementFound FindField(string locator, DriverScope scope)
+        public ElementFound FindField(string locator, Scope scope)
         {
             return BuildElement(elementFinder.FindField(locator, scope), "Failed to find field with label, id, name or placeholder: " + locator);
         }
@@ -214,12 +214,12 @@ namespace Coypu.Drivers.Watin
             get { return Watin; }
         }
 
-        public bool HasContent(string text, DriverScope scope)
+        public bool HasContent(string text, Scope scope)
         {
             return scope.Now().Text.Contains(text);
         }
 
-        public bool HasContentMatch(Regex pattern, DriverScope scope)
+        public bool HasContentMatch(Regex pattern, Scope scope)
         {
             var watiNScope = ElementFinder.WatiNScope(scope);
             if (watiNScope == Window.Native)
@@ -244,7 +244,7 @@ namespace Coypu.Drivers.Watin
             WatiNElement<RadioButton>(field).Checked = true;
         }
 
-        public bool HasDialog(string withText, DriverScope scope)
+        public bool HasDialog(string withText, Scope scope)
         {
             // TODO: scope is the current window in which to look for a dialog
             return watinDialogHandler.Exists() && watinDialogHandler.Message == withText;
@@ -255,51 +255,51 @@ namespace Coypu.Drivers.Watin
             get { return BuildElement(Watin); }
         }
 
-        public void AcceptModalDialog(DriverScope scope)
+        public void AcceptModalDialog(Scope scope)
         {
             // TODO: scope is the current window in which to accept a dialog
             watinDialogHandler.ClickOk();
         }
 
-        public void CancelModalDialog(DriverScope scope)
+        public void CancelModalDialog(Scope scope)
         {
             // TODO: scope is the current window in which to accept a dialog
             watinDialogHandler.ClickCancel();
         }
 
-        public bool HasCss(string cssSelector, DriverScope scope)
+        public bool HasCss(string cssSelector, Scope scope)
         {
             return elementFinder.HasCss(cssSelector, scope);
         }
 
-        public bool HasXPath(string xpath, DriverScope scope)
+        public bool HasXPath(string xpath, Scope scope)
         {
             return elementFinder.HasXPath(xpath, scope);
         }
 
-        public ElementFound FindCss(string cssSelector, DriverScope scope)
+        public ElementFound FindCss(string cssSelector, Scope scope)
         {
             return BuildElement(elementFinder.FindCss(cssSelector, scope), "No element found by css: " + cssSelector);
         }
 
-        public ElementFound FindXPath(string xpath, DriverScope scope)
+        public ElementFound FindXPath(string xpath, Scope scope)
         {
             return BuildElement(elementFinder.FindXPath(xpath, scope), "No element found by xpath: " + xpath);
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope)
         {
             return from element in elementFinder.FindAllCss(cssSelector, scope)
                    select BuildElement(element);
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
         {
             return from element in elementFinder.FindAllXPath(xpath, scope)
                    select BuildElement(element);
         }
 
-        public Uri Location(DriverScope scope)
+        public Uri Location(Scope scope)
         {
                 //return Watin.Uri;
                 throw new NotImplementedException("Consider scope");

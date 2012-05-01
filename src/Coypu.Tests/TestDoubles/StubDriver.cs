@@ -16,17 +16,17 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public ElementFound FindButton(string locator,DriverScope scope)
+        public ElementFound FindButton(string locator,Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindLink(string linkText, DriverScope scope)
+        public ElementFound FindLink(string linkText, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindField(string locator, DriverScope scope)
+        public ElementFound FindField(string locator, Scope scope)
         {
             return null;
         }
@@ -52,47 +52,47 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on stub driver"; }
         }
 
-        public bool HasContent(string text, DriverScope scope)
+        public bool HasContent(string text, Scope scope)
         {
             return false;
         }
 
-        public bool HasContentMatch(Regex pattern, DriverScope scope)
+        public bool HasContentMatch(Regex pattern, Scope scope)
         {
             return false;
         }
 
-        public bool HasCss(string cssSelector, DriverScope scope)
+        public bool HasCss(string cssSelector, Scope scope)
         {
             return false;
         }
 
-        public bool HasXPath(string xpath, DriverScope scope)
+        public bool HasXPath(string xpath, Scope scope)
         {
             return false;
         }
 
-        public bool HasDialog(string withText, DriverScope scope)
+        public bool HasDialog(string withText, Scope scope)
         {
             return false;
         }
 
-        public ElementFound FindCss(string cssSelector, DriverScope scope)
+        public ElementFound FindCss(string cssSelector, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindXPath(string xpath, DriverScope scope)
+        public ElementFound FindXPath(string xpath, Scope scope)
         {
             return null;
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope)
         {
             return Enumerable.Empty<ElementFound>();
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, DriverScope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
         {
             return Enumerable.Empty<ElementFound>();
         }
@@ -117,7 +117,7 @@ namespace Coypu.Tests.TestDoubles
             get { return false; }
         }
 
-        Uri Driver.Location(DriverScope scope)
+        Uri Driver.Location(Scope scope)
         {
             return null;
         }
@@ -127,11 +127,11 @@ namespace Coypu.Tests.TestDoubles
             get { return null; }
         }
 
-        public void AcceptModalDialog(DriverScope scope)
+        public void AcceptModalDialog(Scope scope)
         {
         }
 
-        public void CancelModalDialog(DriverScope scope)
+        public void CancelModalDialog(Scope scope)
         {
         }
 
@@ -145,27 +145,27 @@ namespace Coypu.Tests.TestDoubles
             
         }
 
-        public string ExecuteScript(string javascript, DriverScope scope)
+        public string ExecuteScript(string javascript, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindFieldset(string locator, DriverScope scope)
+        public ElementFound FindFieldset(string locator, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindSection(string locator, DriverScope scope)
+        public ElementFound FindSection(string locator, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindId(string id, DriverScope scope)
+        public ElementFound FindId(string id, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindIFrame(string locator, DriverScope scope)
+        public ElementFound FindIFrame(string locator, Scope scope)
         {
             return null;
         }
@@ -179,12 +179,12 @@ namespace Coypu.Tests.TestDoubles
             return new List<Cookie>();
         }
 
-        public ElementFound FindWindow(string locator, DriverScope scope)
+        public ElementFound FindWindow(string locator, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindFrame(string locator, DriverScope root)
+        public ElementFound FindFrame(string locator, Scope root)
         {
             return null;
         }
