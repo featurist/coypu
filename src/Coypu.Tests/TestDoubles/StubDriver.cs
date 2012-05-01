@@ -122,6 +122,11 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
+        public string Title(DriverScope scope)
+        {
+            return null;
+        }
+
         public ElementFound Window
         {
             get { return null; }
