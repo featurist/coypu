@@ -53,7 +53,7 @@ namespace Coypu.Drivers.Selenium
             return new Uri(webDriver.Url);
         }
 
-        public String Title(DriverScope scope)
+        public String Title(Scope scope)
         {
             elementFinder.SeleniumScope(scope);
             return webDriver.Title;

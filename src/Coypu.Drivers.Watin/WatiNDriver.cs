@@ -305,7 +305,7 @@ namespace Coypu.Drivers.Watin
                 throw new NotImplementedException("Consider scope");
         }
 
-        public string Title(DriverScope scope)
+        public string Title(Scope scope)
         {
             //return Watin.Title;
             throw new NotImplementedException("Consider scope");

@@ -1,3 +1,11 @@
+# Version 0.8.10
+
+Release date: 2012-05-01
+
+### Added
+
+* Expose window title
+
 # Version 0.8.9
 
 Release date: 2012-04-24

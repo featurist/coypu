@@ -88,7 +88,7 @@ namespace Coypu
         }
 
         // The following methods are obsolete in 0.8.0 and up, and will throw NotSupportedException
-        // They to be kept here for a while to ease transition to 0.8.0 and should be removed in 0.9.0
+        // They to be kept here for a while to ease transition to 0.8.0 and should be removed before 1.0
 
         public const string SEE_README_SCOPE = Session.SEE_README + "\r\nE.g. browser.FindFieldset(\"Search\").Select(\"Mazda\").From(\"Make\");";
         public const string SEE_README_CONFIG = Session.SEE_README + "\r\n  Pass SessionConfiguration to new BrowserSession(), or override Options on each call.";

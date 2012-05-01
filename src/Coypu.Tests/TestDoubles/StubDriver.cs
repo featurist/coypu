@@ -122,7 +122,7 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public string Title(DriverScope scope)
+        public string Title(Scope scope)
         {
             return null;
         }

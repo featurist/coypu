@@ -79,7 +79,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RaceConditions.cs" />
     <Compile Include="When_finding_frames.cs" />
     <Compile Include="When_elements_are_stale.cs" />
     <Compile Include="When_finding_windows.cs" />
@@ -201,9 +200,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="html\InteractionTestsPage.htm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\race.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="results\driver_test_results.txt" />

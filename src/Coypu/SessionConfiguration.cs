@@ -61,7 +61,7 @@ namespace Coypu
         public bool SSL { get; set; }
 
         // The following methods are obsolete in 0.8.0 and up, and will throw NotSupportedException
-        // They to be kept here for a while to ease transition to 0.8.0 and should be removed in 0.9.0
+        // They to be kept here for a while to ease transition to 0.8.0 and should be removed before 1.0
 
 
     }
