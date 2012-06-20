@@ -422,8 +422,8 @@ namespace Coypu.AcceptanceTests
         {
             const string selectorThatAppearsInMultipleScopes = "scoped button";
 
-            var expectingScope1 = browser.FindIFrame("iframe1").FindButton(selectorThatAppearsInMultipleScopes);
-            var expectingScope2 = browser.FindIFrame("iframe2").FindButton(selectorThatAppearsInMultipleScopes);
+            var expectingScope1 = browser.FindFrame("iframe1").FindButton(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindFrame("iframe2").FindButton(selectorThatAppearsInMultipleScopes);
 
             Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
@@ -446,7 +446,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Multiple_interactions_within_iframe_example()
         {
-            var iframe = browser.FindIFrame("I am iframe one");
+            var iframe = browser.FindFrame("I am iframe one");
             iframe.FillIn("text input in iframe").With("filled in");
             Assert.That(iframe.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
         }

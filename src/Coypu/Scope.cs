@@ -330,9 +330,6 @@ namespace Coypu
         /// <returns>An element</returns>
         ElementScope FindFrame(string locator, Options options = null);
 
-        [Obsolete("Use FindFrame which will find both iframes and old school frameset frames. This method will be removed in version 0.9")]
-        ElementScope FindIFrame(string locator, Options options = null);
-
         /// <summary>
         /// Find the first matching element with specified id to appear within the configured timeout
         /// </summary>

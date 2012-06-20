@@ -65,7 +65,7 @@ namespace Coypu.AcceptanceTests
 
             var originalLocation = browser.Location;
 
-            var iframe = browser.FindIFrame("iframe1");
+            var iframe = browser.FindFrame("iframe1");
             var button = iframe.FindButton("scoped button");
 
             Assert.That(iframe.HasContent("I am iframe one"));

@@ -249,12 +249,6 @@ namespace Coypu
             return new RobustElementScope(new FrameFinder(driver, locator, this), this, SetOptions(options));
         }
 
-        [Obsolete("Use FindFrame which will find both iframes and old school frameset frames. This method will be removed in version 0.9")]
-        public ElementScope FindIFrame(string locator, Options options = null)
-        {
-            return FindFrame(locator, options);
-        }
-
         public T Query<T>(Func<T> query, T expecting, Options options = null)
         {
             return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting, SetOptions(options)));
