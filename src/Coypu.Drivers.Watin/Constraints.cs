@@ -58,7 +58,7 @@ namespace Coypu.Drivers.Watin
 
             public override bool Compare(string value)
             {
-                return value != null && id != null && value.EndsWith(id);
+                return value != null && id != null && value.EndsWith("_" + id);
             }
         }
 

@@ -42,7 +42,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_a_particular_input_button_by_id_ends_with()
         {
-            Driver.FindButton("rdInputButtonId", Root).Value.should_be("third input button");
+            Driver.FindButton("otherButtonId", Root).Id.should_be("_ctrl1_otherButtonId");
         }
 
         [Test]
@@ -125,7 +125,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_a_particular_input_button_by_id_before_finding_by_id_ends_with()
         {
-            Driver.FindButton("otherButtonId",Root).Id.should_be("otherButtonId");
+            Driver.FindButton("partialButtonId", Root).Id.should_be("partialButtonId");
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_by_id_ends_with()
         {
-            Driver.FindField("tainerLabeledFileFieldId", Root).Name.should_be("containerLabeledFileFieldName");
+            Driver.FindField("aspWebFormsContainerLabeledFileFieldId", Root).Id.should_be("_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldId");
         }
 
         [Test]
