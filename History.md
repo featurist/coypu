@@ -1,3 +1,14 @@
+# Version 0.10.0
+
+### Updated
+
+* WebDriver 2.23
+* Elements are only found by partial ID if there is a leading underscore 
+  - This was only intended for asp.net webforms testing and was causing too many collisions
+* Removed all Obsolete methods left over from < 0.8.0
+  
+Release date: 2012-06-20
+
 # Version 0.8.10
 
 Release date: 2012-05-01
