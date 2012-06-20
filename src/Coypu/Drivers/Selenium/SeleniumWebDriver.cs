@@ -201,7 +201,6 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasDialog(string withText, Scope scope)
         {
-            elementFinder.SeleniumScope(scope);
             return dialogs.HasDialog(withText);
         }
 
@@ -309,13 +308,11 @@ namespace Coypu.Drivers.Selenium
 
         public void AcceptModalDialog(Scope scope)
         {
-            elementFinder.SeleniumScope(scope);
             dialogs.AcceptModalDialog();
         }
 
         public void CancelModalDialog(Scope scope)
         {
-            elementFinder.SeleniumScope(scope);
             dialogs.CancelModalDialog();
         }
 

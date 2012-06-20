@@ -13,8 +13,13 @@ namespace Coypu.Drivers.Selenium
         public IWebDriver NewWebDriver(Browser browser)  {
             if (browser == Browser.Firefox)
                 return new FirefoxDriver();
-            if (browser == Browser.InternetExplorer) {
-                var options = new InternetExplorerOptions();
+            if (browser == Browser.InternetExplorer)
+            {
+                var options = new InternetExplorerOptions
+                    {
+                        IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                        EnableNativeEvents = true
+                    };
                 return new InternetExplorerDriver(options);
             }
             if (browser == Browser.Chrome)

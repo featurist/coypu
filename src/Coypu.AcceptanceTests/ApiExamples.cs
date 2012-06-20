@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Coypu.Drivers;
+using System.Threading;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -20,13 +20,13 @@ namespace Coypu.AcceptanceTests
         private BrowserSession browser;
 
         [TestFixtureSetUp]
-        public void SetUpFixture()
+        public void SetUpFixture()          
         {
             var configuration = new SessionConfiguration
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
                                         Browser = Drivers.Browser.Firefox
-                                    };
+                                       };
             browser = new BrowserSession(configuration);
 
         }
@@ -46,10 +46,11 @@ namespace Coypu.AcceptanceTests
         private void ApplyAsyncDelay()
         {
             // Hide the HTML then bring back after a short delay to test robustness
-            browser.ExecuteScript("window.holdIt = document.body.innerHTML;document.body.innerHTML = ''");
+            browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
+            browser.ExecuteScript("window.document.body.innerHTML = '';");
             browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
         }
-
+            
         private void ReloadTestPage()
         {
             browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
@@ -57,7 +58,9 @@ namespace Coypu.AcceptanceTests
 
         private static string TestPageLocation(string page)
         {
-            return "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            testPageLocation = "http://localhost/coypu/" + page;
+            return testPageLocation;
         }
 
         private void ReloadTestPageWithDelay()
@@ -79,6 +82,16 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void CancelModalDialog_example()
         {
+            browser.ClickLink("Trigger a confirm");
+            browser.CancelModalDialog();
+            browser.FindLink("Trigger a confirm - cancelled").Now();
+        }
+
+        [Test]
+        public void ModalDialog_while_multiple_windows_are_open()
+        {
+            browser.ClickLink("Open pop up window");
+            Thread.Sleep(1000);
             browser.ClickLink("Trigger a confirm");
             browser.CancelModalDialog();
             browser.FindLink("Trigger a confirm - cancelled").Now();

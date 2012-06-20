@@ -29,7 +29,7 @@ namespace Coypu.Drivers.Selenium
                 }
                 finally
                 {
-                    selenium.SwitchTo().Window(currentWindowHandle);
+                    SwitchTo(currentWindowHandle);
                 }
             }
         }
@@ -56,11 +56,16 @@ namespace Coypu.Drivers.Selenium
 
         public object Native
         {
-            get 
+            get
             {
-                selenium.SwitchTo().Window(windowHandle);
+                SwitchTo(windowHandle);
                 return selenium;
             }
+        }
+
+        private void SwitchTo(string windowName)
+        {
+            selenium.SwitchTo().Window(windowName);
         }
 
         public bool Stale

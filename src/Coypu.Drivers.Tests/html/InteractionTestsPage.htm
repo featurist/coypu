@@ -28,10 +28,13 @@
         <button id="thirdButtonId" name="thirdButtonName">
           third button</button>
         <button id="anotherButtonId" name="anotherButtonName">another button</button>
-        <button id="otherButtonId" name="otherButtonName">other button</button>
+        <button id="_ctrl1_otherButtonId" name="_ctrl1_otherButtonName">other button</button>
+        
+        <button id="_ctrl1_partialButtonId" name="_ctrl1_partialButtonName">other button</button>
+        <button id="partialButtonId" name="partialButtonName">partial button</button>
 
         
-        <input type="text" id="firstTextInputId" name="firstTextInputName" value="first text input" />
+          <input type="text" id="firstTextInputId" name="firstTextInputName" value="first text input" />
         <input type="hidden" id="firstHiddenInputId" name="firstHiddenInputName" value="first hidden input" />
         
         <input type="button" id="firstInputButtonId" name="firstInputButtonName" value="first input button" />
@@ -129,7 +132,12 @@
           <input type="file" id="containerLabeledFileFieldId" name="containerLabeledFileFieldName" />
         </label>
         
-        <input id="textInputFieldWithPlaceholder" placeholder="text input field with a placeholder" type="text" />
+        <label for="_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldId">
+          web forms style file field in a label container
+          <input type="file" id="_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldId" name="_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldName" />
+        </label>
+
+          <input id="textInputFieldWithPlaceholder" placeholder="text input field with a placeholder" type="text" />
         <input id="textareaFieldWithPlaceholder" placeholder="textarea field with a placeholder" type="text" />
 
         <input id="focusOnSetValue" onfocus="this.name = 'newNameSetOnFocus';" name="originalName">
