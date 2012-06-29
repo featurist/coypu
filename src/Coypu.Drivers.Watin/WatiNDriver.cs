@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using SHDocVw;
 
 using WatiN.Core;
+using WatiN.Core.Comparers;
+using WatiN.Core.Constraints;
 using mshtml;
 
 namespace Coypu.Drivers.Watin
@@ -134,7 +136,22 @@ namespace Coypu.Drivers.Watin
 
         public ElementFound FindWindow(string locator, Scope scope)
         {
-            throw new NotSupportedException(); //TODO implement FindWindow for WatiN
+            var by =
+                Find.ByTitle(locator) |
+                Find.By("hwnd", locator);
+
+            if (Uri.IsWellFormedUriString(locator,UriKind.Absolute))
+                by |= Find.ByUrl(locator);
+
+            try
+            {
+                var window = WatiN.Core.Browser.AttachTo<IE>(by);
+                return new WatiNBrowser(window);
+            }
+            catch (WatiN.Core.Exceptions.BrowserNotFoundException)
+            {
+                throw new MissingHtmlException("No such window found: " + locator);
+            }
         }
 
         public ElementFound FindFrame(string locator, Scope scope)
