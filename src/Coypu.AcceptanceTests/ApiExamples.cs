@@ -508,12 +508,13 @@ namespace Coypu.AcceptanceTests
             using (var custom = new BrowserSession(configuration))
             {
                 custom.Visit("https://www.relishapp.com/");
+                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
             }
         }
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser) : base(CustomProfile())
+            public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser) : base(CustomProfile(), browser)
             {
             }
 

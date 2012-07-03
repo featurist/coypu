@@ -23,18 +23,17 @@ namespace Coypu.Drivers.Selenium
         private readonly MouseControl mouseControl;
         private readonly OptionSelector optionSelector;
         private readonly XPath xPath;
-        private readonly Browser _browser;
-        private static readonly Browser[] NO_JS_BROWSERS = new []{Browser.HtmlUnit};
+        private readonly Browser browser;
 
         public SeleniumWebDriver(Browser browser)
-            : this(new DriverFactory().NewWebDriver(browser))
+            : this(new DriverFactory().NewWebDriver(browser),  browser)
         {
-            _browser = browser;
         }
 
-        protected SeleniumWebDriver(IWebDriver webDriver)
+        protected SeleniumWebDriver(IWebDriver webDriver, Browser browser)
         {
             this.webDriver = webDriver;
+            this.browser = browser;
             xPath = new XPath();
             elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
@@ -69,7 +68,7 @@ namespace Coypu.Drivers.Selenium
 
         protected bool NoJavascript
         {
-            get { return !_browser.Javascript; }
+            get { return !browser.Javascript; }
         }
 
         private IJavaScriptExecutor JavaScriptExecutor
@@ -340,7 +339,7 @@ namespace Coypu.Drivers.Selenium
         public string ExecuteScript(string javascript, Scope scope)
         {
             if (NoJavascript)
-                throw new NotSupportedException("Javascript is not supported by " + _browser);
+                throw new NotSupportedException("Javascript is not supported by " + browser);
 
             elementFinder.SeleniumScope(scope);
             var result = JavaScriptExecutor.ExecuteScript(javascript);
