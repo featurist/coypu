@@ -23,6 +23,10 @@ namespace Coypu.Queries
             {
                 return true;
             }
+            catch (MissingWindowException)
+            {
+                return true;
+            }
         }
     }
 }

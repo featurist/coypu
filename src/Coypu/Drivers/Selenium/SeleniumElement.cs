@@ -72,6 +72,10 @@ namespace Coypu.Drivers.Selenium
                 {
                     return true;
                 }
+                catch (NoSuchWindowException)
+                {
+                    return true;
+                }
                 catch (StaleElementReferenceException)
                 {
                     return true;

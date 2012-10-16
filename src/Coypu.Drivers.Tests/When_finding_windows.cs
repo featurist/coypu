@@ -37,8 +37,17 @@ namespace Coypu.Drivers.Tests
         public void Errors_on_no_such_window()
         {
             Driver.Click(Driver.FindLink("Open pop up window", Root));
-            Assert.Throws<MissingHtmlException>(() => Driver.FindWindow("Not A Window", Root));
-            ;
+            Assert.Throws<MissingWindowException>(() => Driver.FindWindow("Not A Window", Root));
+        }
+
+        [Test]
+        public void Errors_on_window_closed()
+        {
+            Driver.Click(Driver.FindLink("Open pop up window", Root));
+            var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+
+            Driver.ExecuteScript("self.close();", popUp);
+            Assert.Throws<MissingWindowException>(() => Driver.FindWindow("Open pop up window", Root));
         }
     }
 }

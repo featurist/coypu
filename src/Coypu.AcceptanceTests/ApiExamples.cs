@@ -59,7 +59,6 @@ namespace Coypu.AcceptanceTests
         private static string TestPageLocation(string page)
         {
             var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
-            testPageLocation = "http://localhost/coypu/" + page;
             return testPageLocation;
         }
 

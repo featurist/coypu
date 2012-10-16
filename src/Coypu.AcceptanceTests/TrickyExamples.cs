@@ -21,7 +21,7 @@ namespace Coypu.AcceptanceTests
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
                                         Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu"),
-                                        Browser = Drivers.Browser.Parse("firefox")
+                                        Browser = Drivers.Browser.Firefox
                                     };
             browser = new BrowserSession(configuration);
 

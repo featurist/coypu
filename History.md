@@ -1,3 +1,10 @@
+# Version 0.10.2
+
+### Updated
+
+* WebDriver 2.25.1
+* When a window is missing a MissingWindowException is thrown, rather than MissingHtmlException
+
 # Version 0.10.0
 
 ### Updated

@@ -252,7 +252,7 @@ namespace Coypu.Drivers.Selenium
             }
 
             if (matchingWindowHandle == null)
-                throw new MissingHtmlException("No such window found: " + titleOrName);
+                throw new MissingWindowException("No such window found: " + titleOrName);
 
             webDriver.SwitchTo().Window(currentHandle);
             return matchingWindowHandle;
@@ -263,6 +263,10 @@ namespace Coypu.Drivers.Selenium
             try
             {
                 return webDriver.CurrentWindowHandle;
+            }
+            catch(NoSuchWindowException)
+            {
+                return null;  
             }
             catch (InvalidOperationException)
             {

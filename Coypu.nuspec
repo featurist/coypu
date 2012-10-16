@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Coypu</id>
-    <version>0.10.1</version>
+    <version>0.10.2</version>
     <authors>AdrianLongley</authors>
     <owners>AdrianLongley</owners>
     <projectUrl>https://github.com/featurist/coypu</projectUrl>
@@ -11,7 +11,7 @@
     <description>Intuitive, robust browser automation for .Net</description>
     <tags></tags>
     <dependencies>
-      <dependency id="Selenium.WebDriver" version="[2.23.0]" />
+      <dependency id="Selenium.WebDriver" version="[2.25.1]" />
     </dependencies>
   </metadata>
     <files>
