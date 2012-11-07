@@ -70,6 +70,7 @@
     <Compile Include="ApiExamples.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="ExternalExamples.cs">

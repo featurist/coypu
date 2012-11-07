@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
@@ -172,16 +173,21 @@ namespace Coypu
             return new RobustElementScope(new XPathFinder(driver, xpath, this), this, SetOptions(options));
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Options options = null)
+        public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Options options = null)
         {
             SetOptions(options);
-            return driver.FindAllCss(cssSelector, this);
+            return AsSnapshotElementScopes(driver.FindAllCss(cssSelector, this));
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Options options = null)
+        public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Options options = null)
         {
             SetOptions(options);
-            return driver.FindAllXPath(xpath, this);
+            return AsSnapshotElementScopes(driver.FindAllXPath(xpath, this));
+        }
+
+        private IEnumerable<SnapshotElementScope> AsSnapshotElementScopes(IEnumerable<ElementFound> elementsFound)
+        {
+            return elementsFound.Select(elementFound => new SnapshotElementScope(elementFound, this));
         }
 
         public ElementScope FindSection(string locator, Options options = null)

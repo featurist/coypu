@@ -4,6 +4,9 @@ using Coypu.Queries;
 
 namespace Coypu
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ElementScope : Scope, Element
     {
         bool Exists(Options options = null);
@@ -59,26 +62,46 @@ namespace Coypu
             get { return Now()[attributeName]; }
         }
 
-        public ElementScope Click(Options options = null)
+        public virtual ElementScope Click(Options options = null)
         {
-            RetryUntilTimeout(new Click(this, driver, SetOptions(options)));
+            ClickAction(options).Act();
             return this;
         }
 
-        public Scope Hover(Options options = null)
+        internal Click ClickAction(Options options)
         {
-            RetryUntilTimeout(new Hover(this, driver, SetOptions(options)));
+            return new Click(this, driver, SetOptions(options));
+        }
+
+        public virtual Scope Hover(Options options = null)
+        {
+            HoverAction(options).Act();
             return this;
         }
 
-        public bool Exists(Options options = null)
+        internal Hover HoverAction(Options options)
         {
-            return robustWrapper.Robustly(new ElementExistsQuery(this, SetOptions(options)));
+            return new Hover(this, driver, SetOptions(options));
         }
 
-        public bool Missing(Options options = null)
+        public virtual bool Exists(Options options = null)
         {
-            return robustWrapper.Robustly(new ElementMissingQuery(this, SetOptions(options)));
+            return ExistsQuery(options).Run();
+        }
+
+        internal ElementExistsQuery ExistsQuery(Options options)
+        {
+            return new ElementExistsQuery(this, SetOptions(options));
+        }
+
+        public virtual bool Missing(Options options = null)
+        {
+            return MissingQuery(options).Run();
+        }
+
+        internal ElementMissingQuery MissingQuery(Options options)
+        {
+            return new ElementMissingQuery(this, SetOptions(options));
         }
     }
 }

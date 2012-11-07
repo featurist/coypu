@@ -157,6 +157,7 @@
     <Compile Include="RobustWindowScope.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Finders\SectionFinder.cs" />
+    <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />
     <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />
     <Compile Include="FillInWith.cs">
