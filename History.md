@@ -1,3 +1,15 @@
+# Version 0.10.3
+
+### Updated
+
+* WebDriver 2.26.0
+
+### Fixed
+
+* Dialogs scoped correctly to windows
+  - Fixes non user-triggered dialogs accessed directly after interacting with a different window
+
+
 # Version 0.10.2
 
 ### Updated

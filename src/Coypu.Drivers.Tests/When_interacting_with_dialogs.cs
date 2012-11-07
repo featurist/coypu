@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -62,6 +63,45 @@ namespace Coypu.Drivers.Tests
                 Driver.Click(Driver.FindLink("Trigger a confirm", Root));
                 Driver.CancelModalDialog(Root);
                 Driver.FindLink("Trigger a confirm - cancelled", Root).should_not_be_null();
+            }
+        }
+
+
+        [Test]
+        public void Finds_scope_first_for_alerts()
+        {
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Open pop up window", Root));
+                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+
+                Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},500);", Root);
+                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+                Driver.ExecuteScript("self.close();", popUp);
+
+                System.Threading.Thread.Sleep(500);
+                Driver.AcceptModalDialog(Root);
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+            }
+        }
+
+        [Test]
+        public void Finds_scope_first_for_confirms()
+        {
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Open pop up window", Root));
+                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+
+                Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('confirmTriggerLink').click();},500);", Root);
+                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+                Driver.ExecuteScript("self.close();", popUp);
+
+                System.Threading.Thread.Sleep(500);
+                Driver.CancelModalDialog(Root);
+                Driver.HasDialog("You have triggered a alert and this is the text.", Root).should_be_false();
             }
         }
     }

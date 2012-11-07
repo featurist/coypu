@@ -311,11 +311,13 @@ namespace Coypu.Drivers.Selenium
 
         public void AcceptModalDialog(Scope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.AcceptModalDialog();
         }
 
         public void CancelModalDialog(Scope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.CancelModalDialog();
         }
 

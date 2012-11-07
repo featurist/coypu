@@ -22,9 +22,7 @@ public class AssemblyTearDown
     {
         sinatraSite.Dispose();
 
-        var driver = Coypu.Drivers.Tests.DriverSpecs.Driver;
-        if (driver != null && !driver.Disposed)
-            driver.Dispose();
+        Coypu.Drivers.Tests.DriverSpecs.DisposeDriver();
     }
 }
 
@@ -83,6 +81,14 @@ namespace Coypu.Drivers.Tests
                 EnsureDriver();
                 return driver;
 
+            }
+        }
+
+        public static void DisposeDriver()
+        {
+            if (driver != null && !driver.Disposed)
+            {
+                driver.Dispose();
             }
         }
     }
