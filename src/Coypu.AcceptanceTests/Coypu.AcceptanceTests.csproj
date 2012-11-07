@@ -76,6 +76,7 @@
     <Compile Include="ApiExamples.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="ExternalExamples.cs">
       <SubType>Code</SubType>
@@ -140,6 +141,9 @@
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
       <Name>Coypu</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />
