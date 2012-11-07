@@ -325,8 +325,6 @@ To restrict the scope to a frame or iframe, locate the frame by its name,id, tit
 
 #### Scoping within windows
 
-*NOTE: FindWindow is only supported on SeleniumWebDriver. It not implemented in the Watin driver yet* 
-
 To restrict the scope to a browser window (or tab), locate the window by its title or name:
 
 	var surveyPopup = browser.FindWindow("Customer Survey");
