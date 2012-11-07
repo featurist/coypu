@@ -1,4 +1,14 @@
+# Version 0.11.0
+
+Release date: 2012-11-07
+
+### Updated
+
+* FindAll API now returns a list of snapshot element scopes
+
 # Version 0.10.3
+
+Release date: 2012-11-07
 
 ### Updated
 
@@ -9,7 +19,6 @@
 * Dialogs scoped correctly to windows
   - Fixes non user-triggered dialogs accessed directly after interacting with a different window
 
-
 # Version 0.10.2
 
 ### Updated
@@ -19,6 +28,8 @@
 
 # Version 0.10.0
 
+Release date: 2012-06-20
+
 ### Updated
 
 * WebDriver 2.23
@@ -26,8 +37,6 @@
   - This was only intended for asp.net webforms testing and was causing too many collisions
 * Removed all Obsolete methods left over from < 0.8.0
   
-Release date: 2012-06-20
-
 # Version 0.8.10
 
 Release date: 2012-05-01
