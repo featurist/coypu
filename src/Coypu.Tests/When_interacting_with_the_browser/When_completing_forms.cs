@@ -41,14 +41,27 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void When_filling_in_a_field_It_clicks_to_ensure_focus()
+        public void When_filling_in_a_field_It_doesnt_click_to_ensure_focus_by_default()
         {
             var element = new StubElement();
             driver.StubField("Some field locator", element, browserSession);
 
             browserSession.FillIn("Some field locator").With("some value for the field");
 
-            Assert.That(driver.ClickedElements,Is.Empty);
+            RunQueryAndCheckTiming();
+
+            Assert.That(driver.ClickedElements, Is.Empty);
+        }
+
+        [Test]
+        public void When_filling_in_a_field_with_force_all_events_It_clicks_to_ensure_focus()
+        {
+            var element = new StubElement();
+            driver.StubField("Some field locator", element, browserSession);
+
+            browserSession.FillIn("Some field locator").With("some value for the field",true);
+
+            Assert.That(driver.ClickedElements, Is.Empty);
 
             RunQueryAndCheckTiming();
 

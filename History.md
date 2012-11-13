@@ -1,3 +1,11 @@
+# Version 0.11.1
+
+Release date: 2012-11-13
+
+### Updated
+
+* FillIn only clicks on element first when forceAllEvents is set
+
 # Version 0.11.0
 
 Release date: 2012-11-07

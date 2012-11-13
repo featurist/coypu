@@ -30,7 +30,8 @@ namespace Coypu.Actions
 
         private void BringIntoFocus()
         {
-            Driver.Click(Field);
+            if (forceAllEvents)
+                Driver.Click(Field);
         }
 
         internal void Set()
