@@ -94,6 +94,7 @@
     <Compile Include="Actions\FillIn.cs" />
     <Compile Include="Actions\LambdaDriverAction.cs" />
     <Compile Include="Actions\Select.cs" />
+    <Compile Include="Actions\SendKeys.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="BrowserWindow.cs" />

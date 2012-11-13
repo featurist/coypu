@@ -19,6 +19,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> HasXPathQueries = new List<string>();
         public readonly IList<string> Visits = new List<string>();
         public readonly IDictionary<Element, SetFieldParams> SetFields = new Dictionary<Element, SetFieldParams>();
+        public readonly IDictionary<Element, string> SentKeys = new Dictionary<Element, string>();
         public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
         private readonly IList<ScopedStubResult> stubbedButtons = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedLinks = new List<ScopedStubResult>();
@@ -233,6 +234,11 @@ namespace Coypu.Tests.TestDoubles
         public ElementFound FindFrame(string locator, Scope scope)
         {
             return Find<ElementFound>(stubbedFrames, locator, scope);
+        }
+
+        public void SendKeys(Element element, string keys)
+        {
+            SentKeys.Add(element, keys);
         }
 
         public void Set(Element element, string value, bool forceAllEvents)

@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_sending_keys_to_elements.cs" />
     <Compile Include="When_finding_frames.cs" />
     <Compile Include="When_elements_are_stale.cs" />
     <Compile Include="When_finding_windows.cs" />

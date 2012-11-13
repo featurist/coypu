@@ -5,10 +5,15 @@ namespace Coypu.Actions
         private readonly string locator;
         private readonly DriverScope scope;
         private readonly string value;
-        private  Element element;
+        private Element element;
         private readonly bool forceAllEvents;
 
-        internal FillIn(Driver driver, DriverScope scope, string locator, Element element, string value, bool forceAllEvents, Options options)
+        internal FillIn(Driver driver, DriverScope scope, string locator, ElementScope element, string value, bool forceAllEvents, Options options)
+            : this(driver,scope,locator,element.Now(),value,forceAllEvents,options)
+        {
+        }
+
+        internal FillIn(Driver driver, DriverScope scope, string locator, ElementFound element, string value, bool forceAllEvents, Options options)
             : base(driver,options)
         {
             this.locator = locator;
@@ -36,7 +41,7 @@ namespace Coypu.Actions
 
         internal void Set()
         {
-            Driver.Set(Field, value,forceAllEvents);
+            Driver.Set(Field, value, forceAllEvents);
         }
 
         internal void Focus()

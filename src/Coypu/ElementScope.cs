@@ -12,7 +12,8 @@ namespace Coypu
         bool Exists(Options options = null);
         bool Missing(Options options = null);
         ElementScope Click(Options options = null);
-        Scope Hover(Options options = null);
+        ElementScope Hover(Options options = null);
+        ElementScope SendKeys(string keys, Options options = null);
     }
 
     public class DeferredElementScope : DriverScope, ElementScope
@@ -73,10 +74,21 @@ namespace Coypu
             return new Click(this, driver, SetOptions(options));
         }
 
-        public virtual Scope Hover(Options options = null)
+        public virtual ElementScope Hover(Options options = null)
         {
             HoverAction(options).Act();
             return this;
+        }
+
+        public virtual ElementScope SendKeys(string keys, Options options = null)
+        {
+            SendKeysAction(keys, options).Act();
+            return this;
+        }
+
+        internal SendKeys SendKeysAction(string keys, Options options)
+        {
+            return new SendKeys(keys, this, driver, SetOptions(options));
         }
 
         internal Hover HoverAction(Options options)

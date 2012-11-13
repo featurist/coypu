@@ -157,5 +157,25 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(driver.ChosenElements, Has.Member(element));
         }
 
+        [Test]
+        public void It_makes_robust_call_to_find_then_sends_keys_to_element_via_underlying_driver()
+        {
+            var element = new StubElement();
+            driver.StubCss("something.to click", element, browserSession);
+            spyRobustWrapper.AlwaysReturnFromRobustly(element);
+
+            var elementScope = browserSession.FindCss("something.to click");
+
+            Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
+
+            elementScope.SendKeys("some keys to press");
+
+            RunQueryAndCheckTiming();
+
+            Assert.That(driver.FindCssRequests.Any(), Is.False, "Scope finder was not deferred");
+
+            Assert.That(driver.SentKeys.Count, Is.EqualTo(1));
+            Assert.That(driver.SentKeys[element], Is.EqualTo("some keys to press"));
+        }
     }
 }

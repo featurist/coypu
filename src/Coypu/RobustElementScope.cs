@@ -25,9 +25,15 @@ namespace Coypu
             return this;
         }
 
-        public override Scope Hover(Options options = null)
+        public override ElementScope Hover(Options options = null)
         {
             RetryUntilTimeout(HoverAction(options));
+            return this;
+        }
+
+        public override ElementScope SendKeys(string keys, Options options = null)
+        {
+            RetryUntilTimeout(SendKeysAction(keys, options));
             return this;
         }
 
