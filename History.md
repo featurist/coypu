@@ -1,3 +1,15 @@
+# Version 0.11.2
+
+Release date: 2012-11-13
+
+### Fixed
+
+* FillIn now works when passed and ElementScope
+
+### Added
+
+* SendKeys added to ElementFound
+
 # Version 0.11.1
 
 Release date: 2012-11-13
