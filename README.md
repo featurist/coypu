@@ -113,7 +113,7 @@ You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu li
 	sessionConfiguration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
 	sessionConfiguration.Browser = Drivers.Browser.InternetExplorer;
 
-###     Flow scenarios
+### SpecFlow scenarios
 
 If you are using SpecFlow for your acceptance tests then you will probably want to configure it to provide a single Browser Session scoped to each scenario. SpecFlow supports some basic dependency injection which you can use to achieve this as shown in [this gist](https://gist.github.com/2301407).
   
