@@ -30,7 +30,7 @@ namespace Coypu.AcceptanceTests
             browser.Dispose();
         }
 
-        [Test]
+        [Test, Explicit]
         public void Retries_Autotrader()
         {
             browser.Visit("http://www.autotrader.co.uk/used-cars");

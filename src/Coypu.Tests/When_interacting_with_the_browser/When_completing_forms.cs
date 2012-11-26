@@ -41,14 +41,27 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void When_filling_in_a_field_It_clicks_to_ensure_focus()
+        public void When_filling_in_a_field_It_doesnt_click_to_ensure_focus_by_default()
         {
             var element = new StubElement();
             driver.StubField("Some field locator", element, browserSession);
 
             browserSession.FillIn("Some field locator").With("some value for the field");
 
-            Assert.That(driver.ClickedElements,Is.Empty);
+            RunQueryAndCheckTiming();
+
+            Assert.That(driver.ClickedElements, Is.Empty);
+        }
+
+        [Test]
+        public void When_filling_in_a_field_with_force_all_events_It_clicks_to_ensure_focus()
+        {
+            var element = new StubElement();
+            driver.StubField("Some field locator", element, browserSession);
+
+            browserSession.FillIn("Some field locator").With("some value for the field",true);
+
+            Assert.That(driver.ClickedElements, Is.Empty);
 
             RunQueryAndCheckTiming();
 
@@ -144,5 +157,25 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(driver.ChosenElements, Has.Member(element));
         }
 
+        [Test]
+        public void It_makes_robust_call_to_find_then_sends_keys_to_element_via_underlying_driver()
+        {
+            var element = new StubElement();
+            driver.StubCss("something.to click", element, browserSession);
+            spyRobustWrapper.AlwaysReturnFromRobustly(element);
+
+            var elementScope = browserSession.FindCss("something.to click");
+
+            Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
+
+            elementScope.SendKeys("some keys to press");
+
+            RunQueryAndCheckTiming();
+
+            Assert.That(driver.FindCssRequests.Any(), Is.False, "Scope finder was not deferred");
+
+            Assert.That(driver.SentKeys.Count, Is.EqualTo(1));
+            Assert.That(driver.SentKeys[element], Is.EqualTo("some keys to press"));
+        }
     }
 }

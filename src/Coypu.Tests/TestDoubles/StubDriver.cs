@@ -194,6 +194,10 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
+        public void SendKeys(Element element, string keys)
+        {
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
         }

@@ -159,6 +159,14 @@ namespace Coypu.Drivers.Watin
             return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }
 
+        public void SendKeys(Element element, string keys)
+        {
+            foreach (var key in keys)
+            {
+                WatiNElement<WatiN.Core.Element>(element).KeyPressNoWait(key);
+            }
+        }
+
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
             return ieBrowser.GetCookiesForUrl(Watin.Uri).Cast<Cookie>();

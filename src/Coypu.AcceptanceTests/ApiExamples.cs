@@ -163,6 +163,23 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void SendKeys_example()
+        {
+            browser.FindField("containerLabeledTextInputFieldName").SendKeys(" - send these keys");
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("text input field two val - send these keys"));
+        }
+
+        [Test]
+        public void FillInWith_element_example()
+        {
+            browser.FillIn(browser.FindField("containerLabeledTextInputFieldName")).With("New text input value - scope");
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value - scope"));
+            
+            browser.FillIn(browser.FindField("containerLabeledTextInputFieldName").Now()).With("New text input value - found");
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value - found"));
+        }
+
+        [Test]
         public void FillInWith_nojs_example()
         {
             browser.FillIn("containerLabeledTextInputFieldName").With("New text input value",true);

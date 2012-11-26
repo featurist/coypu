@@ -223,24 +223,24 @@ namespace Coypu
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
         /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
+        ///   <para>Override the way Coypu is configured to find elements for this call only.</para>
+        ///   <para>E.g. A longer wait:</para>
         /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>All matching elements</returns>
-        IEnumerable<ElementFound> FindAllCss(string cssSelector, Options options = null);
+        ///   <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>All matching elements as snapshot scopes which will not respect future changes in the document</returns>
+        IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Options options = null);
 
         /// <summary>
         /// Find all elements matching an XPath query at the current moment. Does not wait until the <see cref="SessionConfiguration.Timeout"/> but returns as soon as the driver does.
         /// </summary>
         /// <param name="xpath">XPath query</param>
         /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
+        ///   <para>Override the way Coypu is configured to find elements for this call only.</para>
+        ///   <para>E.g. A longer wait:</para>
         /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        ///   <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>All matching elements</returns>
-        IEnumerable<ElementFound> FindAllXPath(string xpath, Options options = null);
+        IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Options options = null);
 
         /// <summary>
         /// <para>Find the first matching section to appear within the configured timeout.</para>

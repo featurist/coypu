@@ -186,7 +186,7 @@
               <td>row</td>
             </tr>
         </table>
-        <ul>
+        <ul class="snapshot-scope">
             <li>Some</li>
             <li>text</li>
             <li>in</li>
@@ -218,7 +218,7 @@
             <img src="#" class="invisible" style="visibility:hidden" />
         </p>
         
-        <ul id="cssTest">
+        <ul id="cssTest" class="snapshot-scope">
             <li>one</li>
             <li>two</li>
             <li>Me! Pick me!</li>
@@ -333,6 +333,10 @@
     <span id="tries"></span>
     <a href="popup.htm" id="openPopupLink" target="popUpWindowName">
         Open pop up window
+    </a>
+    |
+    <a href="#modaldialog" id="openModalDialogLink" onclick="window.showModalDialog('popup.htm'); return false;">
+        Open modal dialog
     </a>
     
     <frameset rows="200,*" frameborder="0" border="0" framespacing="0">

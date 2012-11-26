@@ -41,5 +41,6 @@ namespace Coypu
         IEnumerable<Cookie> GetBrowserCookies();
         ElementFound FindWindow(string locator, Scope scope);
         ElementFound FindFrame(string locator, Scope scope);
+        void SendKeys(Element element, string keys);
     }
 }

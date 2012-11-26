@@ -218,6 +218,11 @@ namespace Coypu.Drivers.Selenium
             mouseControl.Hover(element);
         }
 
+        public void SendKeys(Element element, string keys)
+        {
+            SeleniumElement(element).SendKeys(keys);
+        }
+
         public IEnumerable<Cookie> GetBrowserCookies()
         {
             return webDriver.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
@@ -311,11 +316,13 @@ namespace Coypu.Drivers.Selenium
 
         public void AcceptModalDialog(Scope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.AcceptModalDialog();
         }
 
         public void CancelModalDialog(Scope scope)
         {
+            elementFinder.SeleniumScope(scope);
             dialogs.CancelModalDialog();
         }
 

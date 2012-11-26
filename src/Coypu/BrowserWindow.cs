@@ -68,7 +68,17 @@ namespace Coypu
         /// </summary>
         /// <param name="element">The text field</param>
         /// <returns>With</returns>
-        public FillInWith FillIn(Element element, Options options = null)
+        public FillInWith FillIn(ElementFound element, Options options = null)
+        {
+            return new FillInWith(element, driver, robustWrapper, this, SetOptions(options));
+        }
+
+        /// <summary>
+        /// Fill in a previously found text field
+        /// </summary>
+        /// <param name="element">The text field</param>
+        /// <returns>With</returns>
+        public FillInWith FillIn(ElementScope element, Options options = null)
         {
             return new FillInWith(element, driver, robustWrapper, this, SetOptions(options));
         }

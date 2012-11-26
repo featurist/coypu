@@ -1,3 +1,44 @@
+# Version 0.11.2
+
+Release date: 2012-11-13
+
+### Fixed
+
+* FillIn now works when passed and ElementScope
+
+### Added
+
+* SendKeys added to ElementFound
+
+# Version 0.11.1
+
+Release date: 2012-11-13
+
+### Updated
+
+* FillIn only clicks on element first when forceAllEvents is set
+
+# Version 0.11.0
+
+Release date: 2012-11-07
+
+### Updated
+
+* FindAll API now returns a list of snapshot element scopes
+
+# Version 0.10.3
+
+Release date: 2012-11-07
+
+### Updated
+
+* WebDriver 2.26.0
+
+### Fixed
+
+* Dialogs scoped correctly to windows
+  - Fixes non user-triggered dialogs accessed directly after interacting with a different window
+
 # Version 0.10.2
 
 ### Updated
@@ -7,6 +48,8 @@
 
 # Version 0.10.0
 
+Release date: 2012-06-20
+
 ### Updated
 
 * WebDriver 2.23
@@ -14,8 +57,6 @@
   - This was only intended for asp.net webforms testing and was causing too many collisions
 * Removed all Obsolete methods left over from < 0.8.0
   
-Release date: 2012-06-20
-
 # Version 0.8.10
 
 Release date: 2012-05-01

@@ -10,7 +10,7 @@ namespace Coypu
         private readonly RobustWrapper robustWrapper;
         private readonly DriverScope scope;
         private readonly Options options;
-        private readonly Element element;
+        private readonly ElementFound element;
 
         internal FillInWith(string locator, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
         {
@@ -21,7 +21,12 @@ namespace Coypu
             this.options = options;
         }
 
-        internal FillInWith(Element element, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
+        internal FillInWith(ElementScope element, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
+            : this(element.Now(),driver,robustWrapper,scope,options)
+        {
+        }
+
+        internal FillInWith(ElementFound element, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
         {
             this.element = element;
             this.driver = driver;

@@ -79,9 +79,9 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=2.25.1.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.26.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.25.1\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.26.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +94,7 @@
     <Compile Include="Actions\FillIn.cs" />
     <Compile Include="Actions\LambdaDriverAction.cs" />
     <Compile Include="Actions\Select.cs" />
+    <Compile Include="Actions\SendKeys.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="BrowserWindow.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="RobustWindowScope.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Finders\SectionFinder.cs" />
+    <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="WebRequests\RequestCookieInjector.cs" />
     <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />
     <Compile Include="FillInWith.cs">
