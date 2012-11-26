@@ -221,7 +221,14 @@ namespace Coypu.Drivers.Watin
             var textField = WatiNElement<TextField>(element);
             if (textField != null)
             {
-                textField.Value = value;
+                if (forceAllEvents)
+                {
+                    textField.TypeText(value);
+                }
+                else
+                {
+                    textField.Value = value;                    
+                }
                 return;
             }
             var fileUpload = WatiNElement<FileUpload>(element);

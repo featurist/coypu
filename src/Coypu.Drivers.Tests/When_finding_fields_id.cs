@@ -20,6 +20,12 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
+        public void Finds_tel_field()
+        {
+            Driver.FindField("containerLabeledTelInputFieldId", Root).Value.should_be("012345");
+        }
+
+        [Test]
         public void Finds_textarea()
         {
             Driver.FindField("containerLabeledTextareaFieldId", Root).Value.should_be("textarea field two val");
