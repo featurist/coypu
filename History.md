@@ -1,4 +1,12 @@
-# Version 0.11.2
+# Version 0.12.1
+
+Release date: 2012-11-28
+
+### Updated
+
+* Any element with class 'btn' is considered a button to match bootstrap convention
+
+# Version 0.12.0
 
 Release date: 2012-11-13
 

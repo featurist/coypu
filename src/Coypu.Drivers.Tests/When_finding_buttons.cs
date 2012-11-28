@@ -98,6 +98,7 @@ namespace Coypu.Drivers.Tests
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstTelInputId", Root));
         }
 
+
         [Test]
         public void Does_not_find_hidden_inputs()
         {
@@ -120,6 +121,18 @@ namespace Coypu.Drivers.Tests
         public void Finds_any_elements_with_role_button_by_text()
         {
             Assert.That(Driver.FindButton("I'm a span with the role of button", Root).Id, Is.EqualTo("roleSpanButtonId"));
+        }
+
+        [Test]
+        public void Finds_any_elements_with_class_button_by_text()
+        {
+            Assert.That(Driver.FindButton("I'm a span with the class of button", Root).Id, Is.EqualTo("classButtonSpanButtonId"));
+        }
+
+        [Test]
+        public void Finds_any_elements_with_class_btn_by_text()
+        {
+            Assert.That(Driver.FindButton("I'm a span with the class of btn", Root).Id, Is.EqualTo("classBtnSpanButtonId"));
         }
 
         [Test]

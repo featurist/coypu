@@ -31,7 +31,9 @@ namespace Coypu.Drivers.Watin
         {
             var isButton = Constraints.OfType<Button>()
                            | Find.ByElement(e => e.TagName == "INPUT" && e.GetAttributeValue("type") == "image")
-                           | Find.By("role", "button");
+                           | Find.By("role", "button")
+                           | Find.ByClass("button",false)
+                           | Find.ByClass("btn", false);
 
             var byText = Find.ByText(locator);
             var byIdNameValueOrAlt = Find.ById(locator)

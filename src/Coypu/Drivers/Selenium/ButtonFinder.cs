@@ -33,6 +33,7 @@ namespace Coypu.Drivers.Selenium
         {
             return
                 elementFinder.Find(By.TagName("button"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
+                elementFinder.Find(By.ClassName("btn"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
                 elementFinder.Find(By.ClassName("button"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator)) ??
                 elementFinder.Find(By.XPath(".//*[@role = 'button']"), scope).FirstOrDefault(e => textMatcher.TextMatches(e, locator));
         }
