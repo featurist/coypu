@@ -1,3 +1,12 @@
+# Version 0.12.2
+
+Release date: 2012-12-04
+
+### Fixed
+
+* Fixes #37 WATIN respect forceAllEvents (@AidenMontgomery)
+* Fixes #36 Allow interaction with input fields of type tel (@AidenMontgomery)
+
 # Version 0.12.1
 
 Release date: 2012-11-28
