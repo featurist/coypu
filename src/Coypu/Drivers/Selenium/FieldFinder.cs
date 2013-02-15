@@ -22,13 +22,12 @@ namespace Coypu.Drivers.Selenium
                    FindFieldFromLabel(locator, scope) ??
                    FindFieldByName(locator, scope) ??
                    FindFieldByPlaceholder(locator, scope) ??
-                   FindRadioButtonFromValue(locator, scope) ??
+                   FindRadioButtonOrCheckboxFromValue(locator, scope) ??
                    elementFinder.FindByPartialId(locator, scope).FirstOrDefault(e => IsField(e, scope));
         }
 
-        private IWebElement FindRadioButtonFromValue(string locator,Scope scope)
-        {
-            return elementFinder.Find(By.XPath(".//input[@type = 'radio']"), scope).FirstOrDefault(e => e.GetAttribute("value") == locator);
+        private IWebElement FindRadioButtonOrCheckboxFromValue(string locator, Scope scope) {
+            return elementFinder.Find(By.XPath(".//input[@type = 'checkbox' or @type = 'radio']"), scope).FirstOrDefault(e => e.GetAttribute("value") == locator);
         }
 
         private IWebElement FindFieldFromLabel(string locator,Scope scope)
