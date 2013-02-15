@@ -63,15 +63,15 @@ namespace Coypu.Drivers.Watin
 
                 var byIdOrName = Find.ById(locator) | Find.ByName(locator);
                 var byPlaceholder = Find.By("placeholder", locator);
-                var radioButtonByValue = Constraints.OfType<RadioButton>() & Find.ByValue(locator);
+                var radioButtonOrCheckboxByValue = (Constraints.OfType<RadioButton>() | Constraints.OfType<CheckBox>()) & Find.ByValue(locator);
                 var byPartialId = Constraints.WithPartialId(locator);
 
-                var hasLocator = byIdOrName | byPlaceholder | radioButtonByValue | byPartialId;
+                var hasLocator = byIdOrName | byPlaceholder | radioButtonOrCheckboxByValue | byPartialId;
 
                 var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
 
                 var candidates = WatiNScope(scope).Elements.Filter(isField & hasLocator & isVisible);
-                field = candidates.FirstMatching(byIdOrName, byPlaceholder, radioButtonByValue, byPartialId);
+                field = candidates.FirstMatching(byIdOrName, byPlaceholder, radioButtonOrCheckboxByValue, byPartialId);
             }
 
             return field;
