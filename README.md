@@ -48,7 +48,7 @@ Configure the website you are testing as follows
 	var sessionConfiguration = new SessionConfiguration 
 	{
 	  AppHost = "autotrader.co.uk",
-	  Port = "5555",
+	  Port = 5555,
 	  SSL = true|false
 	};
 
