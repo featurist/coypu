@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Coypu.Drivers.Selenium;
+using Coypu.Matchers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -296,18 +297,18 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasContent_example()
         {
-            Assert.IsTrue(browser.HasContent("This is what we are looking for"));
-            Assert.IsFalse(browser.HasContent("This is not in the page"));
+            Assert.That(browser, Shows.Content("This is what we are looking for"));
+            Assert.That(browser.HasContent("This is not in the page"), Is.False);
         }
 
         [Test]
         public void HasNoContent_example()
         {
             browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
-            Assert.IsTrue(browser.HasNoContent("This is not in the page"));
+            Assert.That(browser, Shows.No.Content("This is not in the page"));
 
             ReloadTestPage();
-            Assert.IsFalse(browser.HasNoContent("This is what we are looking for"));
+            Assert.That(browser.HasNoContent("This is what we are looking for"), Is.False);
         }
 
         [Test]
