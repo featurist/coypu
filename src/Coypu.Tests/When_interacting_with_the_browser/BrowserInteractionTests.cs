@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Coypu.Drivers;
 using Coypu.Queries;
 using Coypu.Robustness;
 using Coypu.Tests.TestBuilders;
@@ -86,6 +87,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         public Driver NewWebDriver(Type driverType, Drivers.Browser browser)
+        {
+            return driver;
+        }
+
+        public Driver NewWebDriver(Type driverType, Browser browser, IDictionary<Browser, object> browserOptions)
         {
             return driver;
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 
 namespace Coypu
@@ -23,6 +25,7 @@ namespace Coypu
             SSL = false;
             Browser = Drivers.Browser.Firefox;
             Driver = typeof (SeleniumWebDriver);
+            BrowserOptions = new Dictionary<Browser, object>();
         }
 
         /// <summary>
@@ -30,6 +33,15 @@ namespace Coypu
         /// <para>Default: Firefox</para>
         /// </summary>
         public Drivers.Browser Browser { get; set; }
+
+        /// <summary>
+        /// Specifies the native options for supported browsers (native options objects keyed by <see cref="Browser"/>).
+        /// </summary>
+        /// <remarks>This mechanism allows you to supply options for native browser types that are specific to the
+        /// driver implementation to be used.  For example, Selenium provides "options" classes for some of the supported
+        /// browser types (e.g. ChromeOptions, InternetExplorerOptions, PhantomJSOptions).  Adding them to this 
+        /// dictionary will make them available to the SeleniumWebDriver implementations.</remarks>
+        public IDictionary<Browser, object> BrowserOptions { get; set; }
 
         /// <summary>
         /// <para>Specifies the driver you would like to use to control the browser</para> 
@@ -59,6 +71,5 @@ namespace Coypu
         /// <para>Default: false</para>
         /// </summary>
         public bool SSL { get; set; }
-
     }
 }

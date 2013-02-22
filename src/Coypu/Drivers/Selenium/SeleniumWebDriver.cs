@@ -28,6 +28,12 @@ namespace Coypu.Drivers.Selenium
         public SeleniumWebDriver(Browser browser)
             : this(new DriverFactory().NewWebDriver(browser),  browser)
         {
+            
+        }
+
+        public SeleniumWebDriver(Browser browser, IDictionary<Browser, object> browserOptions)
+            : this(new DriverFactory().NewWebDriver(browser, browserOptions), browser)
+        {
         }
 
         protected SeleniumWebDriver(IWebDriver webDriver, Browser browser)

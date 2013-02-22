@@ -24,11 +24,11 @@ namespace Coypu
         /// <summary>
         /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
         /// </summary>
-        /// <param name="SessionConfigurationconfiguration for this session</param>
+        /// <param name="sessionConfiguration">Configuration for this session</param>
         /// <returns>The new session</returns>
-        public BrowserSession(SessionConfiguration SessionConfiguration)
+        public BrowserSession(SessionConfiguration sessionConfiguration)
             : this(new ActivatorDriverFactory(),
-                   SessionConfiguration,
+                   sessionConfiguration,
                    new RetryUntilTimeoutRobustWrapper(),
                    new StopwatchWaiter(),
                    new WebClientWithCookies(),
@@ -36,8 +36,8 @@ namespace Coypu
         {
         }
 
-        internal BrowserSession(DriverFactory driver, SessionConfiguration SessionConfiguration, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
-            : base(SessionConfiguration, null, driver.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), robustWrapper, waiter, urlBuilder)
+        internal BrowserSession(DriverFactory driver, SessionConfiguration sessionConfiguration, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
+            : base(sessionConfiguration, null, driver.NewWebDriver(sessionConfiguration.Driver, sessionConfiguration.Browser, sessionConfiguration.BrowserOptions), robustWrapper, waiter, urlBuilder)
         {
             this.restrictedResourceDownloader = restrictedResourceDownloader;
         }
