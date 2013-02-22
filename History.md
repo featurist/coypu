@@ -1,3 +1,17 @@
+# Version 0.12.5
+
+Release date: 2012-02-22
+
+# Added Shows.Content and Shows.No.Content NUnit matchers
+
+# Version 0.12.4
+
+Release date: 2012-02-15
+
+### Updated
+
+* WebDriver 2.29.1
+
 # Version 0.12.3
 
 Release date: 2012-12-12
