@@ -1,3 +1,11 @@
+# Version 0.12.6
+
+Release date: 2012-03-04	
+
+### Updated
+
+* WebDriver 2.31.1
+
 # Version 0.12.5
 
 Release date: 2012-02-22
