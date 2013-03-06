@@ -1,3 +1,11 @@
+# Version 0.12.7
+
+Release date: 2012-03-06
+
+### Fixed
+
+* WebDriver dependency is now correct: 2.31.1
+
 # Version 0.12.6
 
 Release date: 2012-03-04	
