@@ -49,6 +49,31 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void It_handles_protocol_provided_in_the_host()
+        {
+            SessionConfiguration.AppHost = "http://im.theho.st";
+            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
+                        Is.EqualTo("http://im.theho.st/visit/me"));
+        }
+
+        [Test]
+        public void It_handles_ssl_protocol_provided_in_the_host()
+        {
+            SessionConfiguration.AppHost = "https://im.theho.st";
+            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
+                        Is.EqualTo("https://im.theho.st/visit/me"));
+        }
+
+        [Test]
+        public void SSL_overrides_protocol_provided_in_the_host()
+        {
+            SessionConfiguration.AppHost = "http://im.theho.st";
+            SessionConfiguration.SSL = true;
+            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
+                        Is.EqualTo("https://im.theho.st/visit/me"));
+        }
+
+        [Test]
         public void It_handles_trailing_and_missing_leading_slashes_with_a_port()
         {
             SessionConfiguration.AppHost = "im.theho.st/";

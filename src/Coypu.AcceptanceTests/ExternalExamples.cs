@@ -30,6 +30,23 @@ namespace Coypu.AcceptanceTests
             browser.Dispose();
         }
 
+        [Test]
+        public void AppHostContainsScheme()
+        {
+            SessionConfiguration = new SessionConfiguration();
+            SessionConfiguration.AppHost = "http://www.google.co.uk";
+            SessionConfiguration.Driver = typeof(SeleniumWebDriver);
+
+            browser = new BrowserSession(SessionConfiguration);
+
+            browser.Visit("/");
+            Assert.That(browser.Location.ToString(), Is.EqualTo("http://www.google.co.uk"));
+
+            SessionConfiguration.AppHost = "https://www.google.co.uk";
+            browser.Visit("/");
+            Assert.That(browser.Location.ToString(), Is.EqualTo("https://www.google.co.uk"));
+        }
+
         [Test, Explicit]
         public void Retries_Autotrader()
         {

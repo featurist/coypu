@@ -45,7 +45,16 @@ namespace Coypu
         public string AppHost
         {
             get { return appHost;}
-            set { appHost = value == null ? null : value.TrimEnd('/'); }
+            set
+            {
+                if (Uri.IsWellFormedUriString(value, UriKind.Absolute))
+                {
+                    var uri = new Uri(value);
+                    SSL = uri.Scheme == "https";
+                    value = uri.Host;
+                }
+                appHost = value == null ? null : value.TrimEnd('/');
+            }
         }
 
         /// <summary>
