@@ -1,3 +1,11 @@
+# Version 0.12.8
+
+Release date: 2012-03-07
+
+### Updated
+
+* Configuration.AppHost may contain http:// or https://
+
 # Version 0.12.7
 
 Release date: 2012-03-06
