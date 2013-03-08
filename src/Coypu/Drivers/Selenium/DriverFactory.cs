@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Android;
+using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
@@ -33,6 +34,8 @@ namespace Coypu.Drivers.Selenium
                 desiredCapabilities.IsJavaScriptEnabled = true;
                 return new RemoteWebDriver(desiredCapabilities);
             }
+            if (browser == Browser.PhantomJS)
+                return new PhantomJSDriver();
             return browserNotSupported(browser,null);
         }
 

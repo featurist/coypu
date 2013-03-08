@@ -88,9 +88,6 @@
     <Compile Include="DriverSpecs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NotSupportedByAttribute.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="When_accessing_attributes.cs">
       <SubType>Code</SubType>
