@@ -1,3 +1,11 @@
+# Version 0.13.0
+
+Release date: 2012-03-07
+
+### Added
+
+* WebDriver now mostly supports PhantomJS so added to Coypu Browsers. Tests for iframes and modal dialogs fail in SeleniumWebdriver+PhantomJS
+
 # Version 0.12.8
 
 Release date: 2012-03-07
