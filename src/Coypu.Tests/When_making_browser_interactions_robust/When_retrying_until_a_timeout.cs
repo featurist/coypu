@@ -62,8 +62,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             }
             catch (TestException){}
 
-            Assert.That(query.LastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
-                                                   expectedTimeout.TotalMilliseconds + retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
+            Assert.That(query.LastCall,
+                        Is.GreaterThan(expectedTimeout.TotalMilliseconds -
+                                       (retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds)));
+            Assert.That(query.LastCall, Is.LessThan(
+                expectedTimeout.TotalMilliseconds + retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
+
         }
         
         
@@ -133,8 +137,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             }
             catch (TestException) { }
 
-            Assert.That(query.LastCall, Is.InRange(expectedTimeout.TotalMilliseconds - (retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds),
-                                                   expectedTimeout.TotalMilliseconds + retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
+            Assert.That(query.LastCall,
+                        Is.GreaterThan(expectedTimeout.TotalMilliseconds -
+                                       (retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds)));
+            Assert.That(query.LastCall, Is.LessThan(
+                expectedTimeout.TotalMilliseconds + retryInterval.Milliseconds + When_waiting.AccuracyMilliseconds));
         }
 
 

@@ -34,7 +34,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             const int toleranceMilliseconds = AccuracyMilliseconds;
 
-            Assert.That(actualWait, Is.InRange(expectedDurationMilliseconds - toleranceMilliseconds, 
+            Assert.That((int)actualWait, Is.InRange(expectedDurationMilliseconds - toleranceMilliseconds, 
                                                expectedDurationMilliseconds + toleranceMilliseconds));
         }
 
