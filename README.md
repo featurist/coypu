@@ -4,7 +4,7 @@ Coypu supports browser automation in .Net to help make tests readable, robust, f
 
 Coypu is on Nuget:
 
-PM> Install-Package Coypu
+    PM> Install-Package Coypu
 
 Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
 
@@ -86,6 +86,13 @@ Only IE9 supports CSS & XPath and certain HTML features. The WatiN driver is not
 
 ###### Chrome
 You will need the chromedriver.exe on your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/chromedriver/downloads/list)
+
+###### PhantomJS
+The headless webkit browser runs under Selenium WebDriver. It runs almost everything in Coypu, iframes are a particular problem where you might have to reach for chrome/firefox.
+
+You will need phantomjs.exe on your PATH or in the bin of your test project. You can get this from nuget or from [phantomjs.org](http://phantomjs.org/download.html)
+
+    PM> install-package phantomjs.exe
 
 ###### HtmlUnit
 You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
