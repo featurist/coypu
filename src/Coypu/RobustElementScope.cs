@@ -1,4 +1,5 @@
 using System;
+using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
 
@@ -19,32 +20,14 @@ namespace Coypu
             return robustWrapper.Robustly(new ElementQuery(this, options));
         }
 
-        public override ElementScope Click(Options options = null)
+        internal override void Try(DriverAction action)
         {
-            RetryUntilTimeout(ClickAction(options));
-            return this;
+            RetryUntilTimeout(action);
         }
 
-        public override ElementScope Hover(Options options = null)
+        internal override bool Try(Query<bool> query)
         {
-            RetryUntilTimeout(HoverAction(options));
-            return this;
-        }
-
-        public override ElementScope SendKeys(string keys, Options options = null)
-        {
-            RetryUntilTimeout(SendKeysAction(keys, options));
-            return this;
-        }
-
-        public override bool Exists(Options options = null)
-        {
-            return robustWrapper.Robustly(ExistsQuery(options));
-        }
-
-        public override bool Missing(Options options = null)
-        {
-            return robustWrapper.Robustly(MissingQuery(options));
+            return Query(query);
         }
     }
 }

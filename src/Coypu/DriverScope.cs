@@ -113,9 +113,9 @@ namespace Coypu
             return new RobustElementScope(new FieldFinder(driver, locator, this), this, SetOptions(options));
         }
 
-        public FillInWith FillIn(string locator, Options options = null)
-        {
-            return new FillInWith(locator, driver, robustWrapper, this, SetOptions(options));
+        public FillInWith FillIn(string locator, Options options = null) {
+            options = SetOptions(options);
+            return new FillInWith(locator, driver, robustWrapper, this, options);
         }
 
         public SelectFrom Select(string option, Options options = null)
@@ -207,12 +207,17 @@ namespace Coypu
 
         public void Check(string locator, Options options = null)
         {
-            RetryUntilTimeout(new Check(driver, this, locator, SetOptions(options)));
+            RetryUntilTimeout(new Check(driver, locator, this, SetOptions(options)));
         }
 
         public void Uncheck(string locator, Options options = null)
         {
             RetryUntilTimeout(new Uncheck(driver, this, locator, SetOptions(options)));
+        }
+
+        public void Uncheck(ElementScope checkbox, Options options = null)
+        {
+            throw new NotImplementedException();
         }
 
         public void Choose(string locator, Options options = null)

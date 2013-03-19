@@ -112,6 +112,21 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void Can_find_checkbox_and_check_it()
+        {
+            var checkbox = browser.FindCss("#uncheckedBox");
+            checkbox.Check();
+            Assert.IsTrue(browser.FindField("uncheckedBox").Selected);
+        }
+        
+        [Test]
+        public void Can_find_checkbox_and_uncheck_it() {
+            var checkbox = browser.FindCss("#checkedBox");
+            checkbox.Uncheck();
+            Assert.IsFalse(browser.Query(() => browser.FindField("checkedBox").Selected,false));
+        }
+
+        [Test]
         public void Choose_example()
         {
             browser.Choose("chooseRadio1");
@@ -173,11 +188,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FillInWith_element_example()
         {
-            browser.FillIn(browser.FindField("containerLabeledTextInputFieldName")).With("New text input value - scope");
+            browser.FindField("containerLabeledTextInputFieldName").FillInWith("New text input value - scope");
             Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value - scope"));
-            
-            browser.FillIn(browser.FindField("containerLabeledTextInputFieldName").Now()).With("New text input value - found");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value - found"));
         }
 
         [Test]
