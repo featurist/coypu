@@ -11,6 +11,7 @@ namespace Coypu
     public class BrowserSession : BrowserWindow, IDisposable
     {
         private readonly RestrictedResourceDownloader restrictedResourceDownloader;
+
         internal bool WasDisposed { get; private set; }
 
         /// <summary>
@@ -86,6 +87,5 @@ namespace Coypu
 
             WasDisposed = true;
         }
-
     }
 }

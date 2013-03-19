@@ -1,3 +1,6 @@
+using Coypu.Actions;
+using Coypu.Queries;
+
 namespace Coypu
 {
     /// <summary>
@@ -21,6 +24,16 @@ namespace Coypu
                 throw new MissingHtmlException(string.Format("Snapshot element scope has become stale. {0}",_elementFound));
             
             return _elementFound;
+        }
+
+        internal override void Try(DriverAction action)
+        {
+            action.Act();
+        }
+
+        internal override bool Try(Query<bool> query)
+        {
+            return query.Run();
         }
     }
 }

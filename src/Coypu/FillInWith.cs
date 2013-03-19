@@ -21,11 +21,6 @@ namespace Coypu
             this.options = options;
         }
 
-        internal FillInWith(ElementScope element, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
-            : this(element.Now(),driver,robustWrapper,scope,options)
-        {
-        }
-
         internal FillInWith(ElementFound element, Driver driver, RobustWrapper robustWrapper, DriverScope scope, Options options)
         {
             this.element = element;
@@ -52,7 +47,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value, bool forceAllEvents)
         {
-            robustWrapper.Robustly(new FillIn(driver, scope, locator, element, value, forceAllEvents, options));
+            robustWrapper.Robustly(new FillIn(driver, scope, locator, value, forceAllEvents, options));
         }
     }
 }

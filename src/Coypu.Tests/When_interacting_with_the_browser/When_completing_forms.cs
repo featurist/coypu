@@ -24,6 +24,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(driver.SetFields[element].ForceAllEvents, Is.EqualTo(false));
         }
 
+        [Test]
         public void When_filling_in_a_text_field_It_finds_field_and_sets_value_robustly_with_forceAllEvents()
         {
             var element = new StubElement();
@@ -79,21 +80,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             RunQueryAndCheckTiming();
 
             Assert.That(driver.ClickedElements, Has.No.Member(element));
-        }
-
-        [Test]
-        public void When_filling_in_an_field_already_found_It_sets_value_robustly()
-        {
-            var element = new StubElement();
-
-            browserSession.FillIn(element).With("some value for the field");
-
-            Assert.That(driver.SetFields, Has.No.Member(element));
-
-            RunQueryAndCheckTiming();
-
-            Assert.That(driver.SetFields.Keys, Has.Member(element));
-            Assert.That(driver.SetFields[element].Value, Is.EqualTo("some value for the field"));
         }
 
         [Test]
