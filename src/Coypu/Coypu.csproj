@@ -90,7 +90,8 @@
   <ItemGroup>
     <Compile Include="Actions\BrowserAction.cs" />
     <Compile Include="Actions\Check.cs" />
-    <Compile Include="Actions\Click.cs" />
+    <Compile Include="Actions\CheckElement.cs" />
+    <Compile Include="Actions\ClickAction.cs" />
     <Compile Include="Actions\Choose.cs" />
     <Compile Include="Actions\AcceptModalDialog.cs" />
     <Compile Include="Actions\CancelModalDialog.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="BrowserWindow.cs" />
+    <Compile Include="DeferredElementScope.cs" />
     <Compile Include="DriverFactory.cs" />
     <Compile Include="Drivers\NoSuchBrowserException.cs" />
     <Compile Include="Drivers\Selenium\FrameFinder.cs" />
