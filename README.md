@@ -198,6 +198,16 @@ Form fields are found by label text, partial label text, id, name, placeholder o
 	browser.Check("Additional ads")
 	browser.Uncheck("Additional ads")	
 
+If you need to fall back to CSS or XPath you can do:
+
+	// Text/File inputs
+    browser.FindCss("input[type=text].keywords").FillInWith("hybrid")
+
+    // Checkboxes
+    browser.FindCss("input[type=checkbox].additional-ads").Check()
+    browser.FindCss("input[type=checkbox].additional-ads").Uncheck()
+
+
 To help with asp.net testing, if there is no matching element based on the rules above then an element that ends with the locator will be matched.
 
 	browser.Check("radioTrade"); // matches id="_00123_some_aspnet_webforms_crap_radioTrade";

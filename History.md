@@ -1,3 +1,15 @@
+# Version 0.14.0
+
+Release date: 2012-03-20
+
+### Added
+
+* Added FillInWith/Check/Uncheck to ElementScope (@refractalize)
+
+### Removed
+
+* BrowserSession.FillIn(ElementScope) (@refractalize)
+
 # Version 0.13.0
 
 Release date: 2012-03-07
