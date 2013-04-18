@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
         public void Sets_value_of_text_input_field_with_id()
         {
             var textField = Driver.FindField("containerLabeledTextInputFieldName", Root);
-            Driver.Set(textField, "should be much quicker since it's set by js",true);
+            Driver.Set(textField, "should be much quicker since it's set by js");
 
             textField.Value.should_be("should be much quicker since it's set by js");
 
@@ -21,7 +21,7 @@ namespace Coypu.Drivers.Tests
         public void Sets_value_of_text_input_field_with_no_id()
         {
             var textField = Driver.FindField("Field with no id", Root);
-            Driver.Set(textField, "set by sendkeys", true);
+            Driver.Set(textField, "set by sendkeys");
 
             textField.Value.should_be("set by sendkeys");
 
@@ -34,7 +34,7 @@ namespace Coypu.Drivers.Tests
         public void Sets_value_of_textarea_field()
         {
             var textField = Driver.FindField("containerLabeledTextareaFieldName", Root);
-            Driver.Set(textField, "New textarea value",false);
+            Driver.Set(textField, "New textarea value");
 
             textField.Value.should_be("New textarea value");
 

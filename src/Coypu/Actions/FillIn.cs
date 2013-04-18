@@ -6,20 +6,18 @@ namespace Coypu.Actions
         private readonly DriverScope scope;
         private readonly string value;
         private ElementScope element;
-        private readonly bool forceAllEvents;
 
-        internal FillIn(Driver driver, ElementScope element, string value, bool forceAllEvents, Options options)
-            : this(driver,null,null,value,forceAllEvents,options) {
+        internal FillIn(Driver driver, ElementScope element, string value, Options options)
+            : this(driver,null,null,value,options) {
             this.element = element;
         }
 
-        internal FillIn(Driver driver, DriverScope scope, string locator, string value, bool forceAllEvents, Options options)
+        internal FillIn(Driver driver, DriverScope scope, string locator, string value, Options options)
             : base(driver,options)
         {
             this.locator = locator;
             this.scope = scope;
             this.value = value;
-            this.forceAllEvents = forceAllEvents;
         }
 
         internal Element Field
@@ -35,13 +33,12 @@ namespace Coypu.Actions
 
         private void BringIntoFocus()
         {
-            if (forceAllEvents)
-                Driver.Click(Field);
+            Driver.Click(Field);
         }
 
         internal void Set()
         {
-            Driver.Set(Field, value, forceAllEvents);
+            Driver.Set(Field, value);
         }
 
         internal void Focus()

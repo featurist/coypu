@@ -39,7 +39,7 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public void Set(Element element, string value, bool forceAllEvents)
+        public void Set(Element element, string value)
         {
         }
 

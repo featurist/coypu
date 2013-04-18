@@ -269,45 +269,21 @@ namespace Coypu.Drivers.Selenium
             {
                 return webDriver.CurrentWindowHandle;
             }
-            catch(NoSuchWindowException)
-            {
-                return null;  
-            }
-            catch (InvalidOperationException)
-            {
-                return null;
-            }
+            catch (NoSuchWindowException) {}
+            catch (InvalidOperationException) {}
+            return null;
         }
 
-        public void Set(Element element, string value, bool forceAllEvents) 
+        public void Set(Element element, string value) 
         {
-            var seleniumElement = SeleniumElement(element);
             try
             {
-                seleniumElement.Clear();
+                SeleniumElement(element).Clear();
             }
-            catch (InvalidElementStateException) // Non user-editable elements (file inputs) - chrome/IE
-            {
-                seleniumElement.SendKeys(value);
-                return;
-            }
-            catch(InvalidOperationException)  // Non user-editable elements (file inputs) - firefox
-            {
-                seleniumElement.SendKeys(value);
-                return;
-            }
-            SetByIdOrSendKeys(value, seleniumElement, forceAllEvents);
+            catch (InvalidElementStateException) { }// Non user-editable elements (file inputs) - chrome/IE
+            catch (InvalidOperationException) {} // Non user-editable elements (file inputs) - firefox
+            SendKeys(element, value);
         }
-
-        private void SetByIdOrSendKeys(string value, IWebElement seleniumElement, bool forceAllEvents)
-        {
-            var id = seleniumElement.GetAttribute("id");
-            if (string.IsNullOrEmpty(id) || forceAllEvents || NoJavascript)
-                seleniumElement.SendKeys(value);
-            else
-                JavaScriptExecutor.ExecuteScript(string.Format("document.getElementById('{0}').value = {1}", id, Newtonsoft.Json.JsonConvert.ToString(value)));
-        }
-
 
         public void Select(Element element, string option)
         {

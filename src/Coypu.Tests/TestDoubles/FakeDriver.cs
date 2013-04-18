@@ -241,9 +241,9 @@ namespace Coypu.Tests.TestDoubles
             SentKeys.Add(element, keys);
         }
 
-        public void Set(Element element, string value, bool forceAllEvents)
+        public void Set(Element element, string value)
         {
-            SetFields.Add(element, new SetFieldParams{Value = value, ForceAllEvents = forceAllEvents});
+            SetFields.Add(element, new SetFieldParams{Value = value});
         }
 
         public void Select(Element element, string option)
@@ -372,8 +372,6 @@ namespace Coypu.Tests.TestDoubles
 
     public class SetFieldParams
     {
-        public bool ForceAllEvents { get; set; }
-
         public string Value { get; set; }
     }
 }

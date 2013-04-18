@@ -216,19 +216,12 @@ namespace Coypu.Drivers.Watin
             Watin.GoTo(url);
         }
 
-        public void Set(Element element, string value, bool forceAllEvents)
+        public void Set(Element element, string value)
         {
             var textField = WatiNElement<TextField>(element);
             if (textField != null)
             {
-                if (forceAllEvents)
-                {
-                    textField.TypeText(value);
-                }
-                else
-                {
-                    textField.Value = value;                    
-                }
+                textField.TypeText(value);
                 return;
             }
             var fileUpload = WatiNElement<FileUpload>(element);

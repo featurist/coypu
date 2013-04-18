@@ -47,7 +47,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value, bool forceAllEvents)
         {
-            robustWrapper.Robustly(new FillIn(driver, scope, locator, value, forceAllEvents, options));
+            robustWrapper.Robustly(new FillIn(driver, scope, locator, value, options));
         }
     }
 }

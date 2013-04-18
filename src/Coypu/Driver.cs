@@ -12,7 +12,7 @@ namespace Coypu
         ElementFound FindField(string locator, Scope scope);
         void Click(Element element);
         void Visit(string url);
-        void Set(Element element, string value, bool forceAllEvents);
+        void Set(Element element, string value);
         void Select(Element element, string option);
         object Native { get; }
         bool HasContent(string text, Scope scope);
