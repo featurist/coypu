@@ -1,3 +1,11 @@
+# Version 0.15.2
+
+Release date: 2012-04-18
+
+### Fixed
+
+* One more place left to clean up forceAllEvents
+
 # Version 0.15.1
 
 Release date: 2012-04-18
