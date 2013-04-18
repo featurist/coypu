@@ -1,3 +1,11 @@
+# Version 0.15.1
+
+Release date: 2012-04-18
+
+### Fixed
+
+* Left forceAllEvents hanging in the API by mistake
+
 # Version 0.15.0
 
 Release date: 2012-04-18
