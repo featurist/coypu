@@ -113,7 +113,7 @@
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Matchers\Shows.cs" />
     <Compile Include="MissingWindowException.cs" />
-    <Compile Include="Queries\ElementFoundExtensions.cs" />
+    <Compile Include="ElementFoundExtensions.cs" />
     <Compile Include="Queries\FindAllCssWithPredicateQuery.cs" />
     <Compile Include="Queries\FindAllXPathWithPredicateQuery.cs" />
     <Compile Include="SessionConfiguration.cs" />

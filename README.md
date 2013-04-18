@@ -130,7 +130,7 @@ Most of the methods in the Coypu DSL are automatically retried on any driver err
 
 This is a rather blunt approach that goes well beyond WebDriver's ImplicitWait, for example, but the only truly robust strategy for heavily asynchronous websites, where elements are flying in and out of the DOM constantly, that I have found.
 
-All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately.
+All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately unless you supply a predicate to describe the expected state.
 
 Setup timeout/retry like so:
 
@@ -262,9 +262,17 @@ You can read attributes of these elements like so:
 
 #### Finding multiple elements	
 	
-FindAll methods return all matching elements:
+FindAll methods return all matching elements immediately with no retry:
 
 	foreach(var link in browser.FindAllCss("a")) 
+	{
+		var attributeValue = a["href"];
+		...
+	}
+
+If you are expecting a particular state to be reached then you can describe this in a predicate and Coypu will retry until it matches.
+
+	foreach(var link in browser.FindAllCss("a", (links) => links.Count() == 5)) 
 	{
 		var attributeValue = a["href"];
 		...

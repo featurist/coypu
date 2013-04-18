@@ -1,3 +1,16 @@
+# Version 0.15.0
+
+Release date: 2012-04-18
+
+### Added
+
+* FindAllCss and FindAllXPath now take a predicate which will be retried
+
+### Removed
+
+* Remove default fill in via Javascript. Native key events always fire now.
+
+
 # Version 0.14.0
 
 Release date: 2012-03-20
@@ -9,6 +22,7 @@ Release date: 2012-03-20
 ### Removed
 
 * BrowserSession.FillIn(ElementScope) (@refractalize)
+
 
 # Version 0.13.0
 
