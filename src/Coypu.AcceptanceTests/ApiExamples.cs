@@ -142,15 +142,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FillInWith_element_example()
         {
-            browser.FindField("containerLabeledTextInputFieldName").FillInWith("New text input value - scope");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
-                        Is.EqualTo("New text input value - scope"));
-        }
-
-        [Test]
-        public void FillInWith_nojs_example()
-        {
-            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value", true);
+            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value");
             Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
                         Is.EqualTo("New text input value"));
         }

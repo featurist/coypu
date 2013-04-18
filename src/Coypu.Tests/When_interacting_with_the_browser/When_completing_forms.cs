@@ -29,7 +29,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var element = new StubElement();
             driver.StubField("Some field locator", element, browserSession);
 
-            browserSession.FillIn("Some field locator").With("some value for the field",true);
+            browserSession.FillIn("Some field locator").With("some value for the field");
 
             Assert.That(driver.ClickedElements, Is.Empty);
 
