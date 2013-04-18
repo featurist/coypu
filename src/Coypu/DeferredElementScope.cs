@@ -63,7 +63,7 @@ namespace Coypu {
             return this;
         }
 
-        public ElementScope FillInWith(string value, bool forceAllEvents = false, Options options = null) 
+        public ElementScope FillInWith(string value, Options options = null) 
         {
             Try(new FillIn(driver, this, value, SetOptions(options)));
             return this;
