@@ -173,21 +173,32 @@ namespace Coypu
             return new RobustElementScope(new XPathFinder(driver, xpath, this), this, SetOptions(options));
         }
 
-        public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Options options = null)
+        public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            SetOptions(options);
-            return AsSnapshotElementScopes(driver.FindAllCss(cssSelector, this));
+            options = SetOptions(options);
+            if (predicate != null)
+                return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, options));
+
+            return FindAllCssNoPredicate(cssSelector);
         }
 
-        public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Options options = null)
+        internal IEnumerable<SnapshotElementScope> FindAllCssNoPredicate(string cssSelector)
         {
-            SetOptions(options);
-            return AsSnapshotElementScopes(driver.FindAllXPath(xpath, this));
+            return driver.FindAllCss(cssSelector, this).AsSnapshotElementScopes(this);
         }
 
-        private IEnumerable<SnapshotElementScope> AsSnapshotElementScopes(IEnumerable<ElementFound> elementsFound)
+        public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            return elementsFound.Select(elementFound => new SnapshotElementScope(elementFound, this));
+            options = SetOptions(options);
+            if (predicate != null)
+                return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, options));
+
+            return FindAllXPathNoPredicate(xpath);
+        }
+
+        internal IEnumerable<SnapshotElementScope> FindAllXPathNoPredicate(string xpath)
+        {
+            return driver.FindAllXPath(xpath, this).AsSnapshotElementScopes(this);
         }
 
         public ElementScope FindSection(string locator, Options options = null)

@@ -219,19 +219,21 @@ namespace Coypu
         ElementScope FindXPath(string xpath, Options options = null);
 
         /// <summary>
-        /// Find all elements matching a CSS selector at the current moment. Does not wait until the <see cref="SessionConfiguration.Timeout"/> but returns as soon as the driver does.
+        /// Find all elements matching a CSS selector. If a predicate is supplied this will wait until the predicate matches, otherwise this will return immediately.
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
+        /// <param name="predicate">A predicate to test the entire collection against. It will wait for this predicate before returning a list of matching elements.</param>
         /// <param name="options">
         ///   <para>Override the way Coypu is configured to find elements for this call only.</para>
         ///   <para>E.g. A longer wait:</para>
         /// 
         ///   <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>All matching elements as snapshot scopes which will not respect future changes in the document</returns>
-        IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Options options = null);
+        IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null,
+                                             Options options = null);
 
         /// <summary>
-        /// Find all elements matching an XPath query at the current moment. Does not wait until the <see cref="SessionConfiguration.Timeout"/> but returns as soon as the driver does.
+        /// Find all elements matching an XPath query. If a predicate is supplied this will wait until the predicate matches, otherwise this will return immediately.
         /// </summary>
         /// <param name="xpath">XPath query</param>
         /// <param name="options">
@@ -240,7 +242,7 @@ namespace Coypu
         /// 
         ///   <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>All matching elements</returns>
-        IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Options options = null);
+        IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null);
 
         /// <summary>
         /// <para>Find the first matching section to appear within the configured timeout.</para>

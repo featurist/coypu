@@ -16,58 +16,9 @@ namespace Coypu.AcceptanceTests
     /// Simple examples for each API method - to show usage and check everything is wired up properly
     /// </summary>
     [TestFixture]
-    public class Examples
+    public class Examples : WaitAndRetryExamples
     {
-        private BrowserSession browser;
-
-        [TestFixtureSetUp]
-        public void SetUpFixture()          
-        {
-            var configuration = new SessionConfiguration
-                                    {
-                                        Timeout = TimeSpan.FromMilliseconds(2000),
-                                        Browser = Drivers.Browser.Firefox
-                                       };
-            browser = new BrowserSession(configuration);
-
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            browser.Dispose();
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
-            ReloadTestPageWithDelay();
-        }
-
-        private void ApplyAsyncDelay()
-        {
-            // Hide the HTML then bring back after a short delay to test robustness
-            browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
-            browser.ExecuteScript("window.document.body.innerHTML = '';");
-            browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
-        }
-            
-        private void ReloadTestPage()
-        {
-            browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
-        }
-
-        private static string TestPageLocation(string page)
-        {
-            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
-            return testPageLocation;
-        }
-
-        private void ReloadTestPageWithDelay()
-        {
-            ReloadTestPage();
-            ApplyAsyncDelay();
-        }
+        
 
         [Test]
         public void AcceptModalDialog_example()
@@ -103,12 +54,12 @@ namespace Coypu.AcceptanceTests
             browser.Check("uncheckedBox");
             Assert.IsTrue(browser.FindField("uncheckedBox").Selected);
         }
-        
+
         [Test]
         public void Uncheck_example()
         {
             browser.Uncheck("checkedBox");
-            Assert.IsFalse(browser.Query(() => browser.FindField("checkedBox").Selected,false));
+            Assert.IsFalse(browser.Query(() => browser.FindField("checkedBox").Selected, false));
         }
 
         [Test]
@@ -118,12 +69,13 @@ namespace Coypu.AcceptanceTests
             checkbox.Check();
             Assert.IsTrue(browser.FindField("uncheckedBox").Selected);
         }
-        
+
         [Test]
-        public void Can_find_checkbox_and_uncheck_it() {
+        public void Can_find_checkbox_and_uncheck_it()
+        {
             var checkbox = browser.FindCss("#checkedBox");
             checkbox.Uncheck();
-            Assert.IsFalse(browser.Query(() => browser.FindField("checkedBox").Selected,false));
+            Assert.IsFalse(browser.Query(() => browser.FindField("checkedBox").Selected, false));
         }
 
         [Test]
@@ -175,28 +127,32 @@ namespace Coypu.AcceptanceTests
         public void FillInWith_example()
         {
             browser.FillIn("containerLabeledTextInputFieldName").With("New text input value");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value"));
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+                        Is.EqualTo("New text input value"));
         }
 
         [Test]
         public void SendKeys_example()
         {
             browser.FindField("containerLabeledTextInputFieldName").SendKeys(" - send these keys");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("text input field two val - send these keys"));
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+                        Is.EqualTo("text input field two val - send these keys"));
         }
 
         [Test]
         public void FillInWith_element_example()
         {
             browser.FindField("containerLabeledTextInputFieldName").FillInWith("New text input value - scope");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value - scope"));
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+                        Is.EqualTo("New text input value - scope"));
         }
 
         [Test]
         public void FillInWith_nojs_example()
         {
-            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value",true);
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value, Is.EqualTo("New text input value"));
+            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value", true);
+            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+                        Is.EqualTo("New text input value"));
         }
 
         [Test]
@@ -247,9 +203,12 @@ namespace Coypu.AcceptanceTests
         public void FindField_examples()
         {
             Assert.That(browser.FindField("text input field linked by for").Id, Is.EqualTo("forLabeledTextInputFieldId"));
-            Assert.That(browser.FindField("checkbox field in a label container").Id, Is.EqualTo("containerLabeledCheckboxFieldId"));
-            Assert.That(browser.FindField("containerLabeledSelectFieldId").Name, Is.EqualTo("containerLabeledSelectFieldName"));
-            Assert.That(browser.FindField("containerLabeledPasswordFieldName").Id, Is.EqualTo("containerLabeledPasswordFieldId"));
+            Assert.That(browser.FindField("checkbox field in a label container").Id,
+                        Is.EqualTo("containerLabeledCheckboxFieldId"));
+            Assert.That(browser.FindField("containerLabeledSelectFieldId").Name,
+                        Is.EqualTo("containerLabeledSelectFieldName"));
+            Assert.That(browser.FindField("containerLabeledPasswordFieldName").Id,
+                        Is.EqualTo("containerLabeledPasswordFieldId"));
         }
 
         [Test]
@@ -261,7 +220,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FindId_example()
         {
-            Assert.That(browser.FindId("containerLabeledSelectFieldId").Name, Is.EqualTo("containerLabeledSelectFieldName"));
+            Assert.That(browser.FindId("containerLabeledSelectFieldId").Name,
+                        Is.EqualTo("containerLabeledSelectFieldName"));
         }
 
         [Test]
@@ -316,7 +276,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoContent_example()
         {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
+            browser.ExecuteScript(
+                "document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
             Assert.That(browser, Shows.No.Content("This is not in the page"));
 
             ReloadTestPage();
@@ -333,7 +294,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoContentMatch_example()
         {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
+            browser.ExecuteScript(
+                "document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
             Assert.IsTrue(browser.HasNoContentMatch(new Regex("This is ?n[o|']t in the page")));
 
             ReloadTestPage();
@@ -350,7 +312,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoCss_example()
         {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            browser.ExecuteScript(
+                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
             Assert.IsTrue(browser.HasNoCss("#inspectingContent ul#nope"));
 
             ReloadTestPage();
@@ -369,7 +332,8 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoXpath_example()
         {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            browser.ExecuteScript(
+                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
             Assert.IsTrue(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
 
             ReloadTestPage();
@@ -402,19 +366,19 @@ namespace Coypu.AcceptanceTests
         public void Within_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
-            
+
             var expectingScope1 = browser.FindId("scope1").FindField(locatorThatAppearsInMultipleScopes);
             var expectingScope2 = browser.FindId("scope2").FindField(locatorThatAppearsInMultipleScopes);
 
             Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
         }
-        
+
         [Test]
         public void WithinFieldset_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
-            
+
             var expectingScope1 = browser.FindFieldset("Scope 1")
                                          .FindField(locatorThatAppearsInMultipleScopes);
 
@@ -479,16 +443,18 @@ namespace Coypu.AcceptanceTests
             iframe.FillIn("text input in iframe").With("filled in");
             Assert.That(iframe.FindField("text input in iframe").Value, Is.EqualTo("filled in"));
         }
-            
+
         [Test]
-        public void  FillIn_file_example()
+        public void FillIn_file_example()
         {
             const string someLocalFile = @"local.file";
             try
             {
                 var directoryInfo = new DirectoryInfo(".");
                 var fullPath = Path.Combine(directoryInfo.FullName, someLocalFile);
-                using (File.Create(fullPath)) { }
+                using (File.Create(fullPath))
+                {
+                }
 
                 browser.FillIn("forLabeledFileFieldId").With(fullPath);
 
@@ -504,7 +470,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ConsideringInvisibleElements()
         {
-            browser.FindButton("firstInvisibleInputId", new Options{ConsiderInvisibleElements = true}).Now();
+            browser.FindButton("firstInvisibleInputId", new Options {ConsiderInvisibleElements = true}).Now();
         }
 
         [Test]
@@ -512,7 +478,7 @@ namespace Coypu.AcceptanceTests
         {
             Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId").Now());
         }
-        
+
         [Test]
         public void WindowScoping_example()
         {
@@ -543,7 +509,8 @@ namespace Coypu.AcceptanceTests
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser) : base(CustomProfile(), browser)
+            public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser)
+                : base(CustomProfile(), browser)
             {
             }
 

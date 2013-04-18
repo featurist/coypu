@@ -74,6 +74,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             return queryResult;
         }
+
     }
 
     public class StubDriverFactory : DriverFactory

@@ -89,7 +89,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                 VerifyFoundRobustly(scope, 1, locator, expectedDeferredResult, expectedImmediateResult, options);
         }
 
-        private void VerifyFoundRobustly(Func<string, Options, Scope> scope, int driverCallIndex, string locator, StubElement expectedDeferredResult, StubElement expectedImmediateResult, Options options)
+        protected void VerifyFoundRobustly(Func<string, Options, Scope> scope, int driverCallIndex, string locator, StubElement expectedDeferredResult, StubElement expectedImmediateResult, Options options)
         {
             var sub = scope;
             var scopedResult = sub(locator, options).Now();

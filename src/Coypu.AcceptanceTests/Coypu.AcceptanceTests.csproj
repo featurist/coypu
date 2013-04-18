@@ -65,6 +65,7 @@
     <Compile Include="ApiExamples.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
@@ -79,6 +80,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TrickyExamples.cs" />
+    <Compile Include="WaitAndRetryExamples.cs" />
     <Compile Include="WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

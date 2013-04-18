@@ -1,5 +1,3 @@
-using System;
-
 namespace Coypu.Queries
 {
     internal class HasCssQuery : DriverScopeQuery<bool>
