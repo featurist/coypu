@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
@@ -148,10 +147,31 @@ namespace Coypu
             return Query(new HasCssQuery(driver, this, cssSelector, SetOptions(options)));
         }
 
+        public bool HasCss(string cssSelector, string text, Options options = null)
+        {
+            return Query(new HasCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+        }
+
+        public bool HasCss(string cssSelector, Regex text, Options options = null)
+        {
+            return Query(new HasCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+        }
+
         public bool HasNoCss(string cssSelector, Options options = null)
         {
             return Query(new HasNoCssQuery(driver, this, cssSelector, SetOptions(options)));
         }
+
+        public bool HasNoCss(string cssSelector, string text, Options options = null)
+        {
+            return Query(new HasNoCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+        }
+
+        public bool HasNoCss(string cssSelector, Regex text, Options options = null)
+        {
+            return Query(new HasNoCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+        }
+
 
         public bool HasXPath(string xpath, Options options = null)
         {

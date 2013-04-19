@@ -17,7 +17,6 @@ namespace Coypu
         object Native { get; }
         bool HasContent(string text, Scope scope);
         bool HasContentMatch(Regex pattern, Scope scope);
-        bool HasCss(string cssSelector, Scope scope);
         bool HasXPath(string xpath, Scope scope);
         bool HasDialog(string withText, Scope scope);
         ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null);

@@ -62,11 +62,6 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public bool HasCss(string cssSelector, Scope scope)
-        {
-            return false;
-        }
-
         public bool HasXPath(string xpath, Scope scope)
         {
             return false;

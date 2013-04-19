@@ -314,11 +314,51 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void HasCss_with_text_example()
+        {
+            Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: "two"));
+            Assert.False(browser.HasCss("#inspectingContent ul#cssTest li", text: "fifty"));
+        }
+
+        [Test]
+        public void HasCss_with_text_matching_example()
+        {
+            Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: new Regex("wo.*$")));
+            Assert.False(browser.HasCss("#inspectingContent ul#cssTest li", text: new Regex("fifty")));
+        }
+
+        [Test]
         public void HasNoCss_example()
         {
             browser.ExecuteScript(
                 "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
             Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope"));
+
+            ReloadTestPage();
+            Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
+        }
+
+        [Test]
+        public void HasNoCss_with_text_example()
+        {
+            browser.ExecuteScript(
+                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope", text: "This is not in the page"));
+
+            Assert.That(browser, Shows.No.Css("#inspectingContent ul#cssTest", text: "This is not the text"));
+
+            ReloadTestPage();
+            Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
+        }
+
+        [Test]
+        public void HasNoCss_with_text_matching_example()
+        {
+            browser.ExecuteScript(
+                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope", text: new Regex("not in the page$")));
+
+            Assert.That(browser, Shows.No.Css("#inspectingContent ul#cssTest", text: new Regex("not the text")));
 
             ReloadTestPage();
             Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));

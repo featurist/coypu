@@ -144,9 +144,6 @@
     <Compile Include="When_inspecting_content_within_scope.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="When_inspecting_css.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="When_inspecting_dialog_text.cs">
       <SubType>Code</SubType>
     </Compile>

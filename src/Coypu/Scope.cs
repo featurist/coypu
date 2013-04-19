@@ -159,6 +159,32 @@ namespace Coypu
         bool HasCss(string cssSelector, Options options = null);
 
         /// <summary>
+        /// Query whether an element matching a CSS selector appears on the page within the configured timeout
+        /// </summary>
+        /// <param name="cssSelector">CSS selector</param>
+        /// <param name="text">The text of the element must exactly match this text</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>Whether an element appears</returns>
+        bool HasCss(string cssSelector, string text, Options options = null);
+
+        /// <summary>
+        /// Query whether an element matching a CSS selector appears on the page within the configured timeout
+        /// </summary>
+        /// <param name="cssSelector">CSS selector</param>
+        /// <param name="text">The text of the element must match this pattern</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>Whether an element appears</returns>
+        bool HasCss(string cssSelector, Regex text, Options options = null);
+
+        /// <summary>
         /// Query whether an element matching a CSS selector does not appear on the page. Returns as soon as the element does not appear, or when the <see cref="SessionConfiguration.Timeout"/> is reached.
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
@@ -169,6 +195,8 @@ namespace Coypu
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>Whether an element does not appear</returns>
         bool HasNoCss(string cssSelector, Options options = null);
+        bool HasNoCss(string cssSelector, Regex trext, Options options = null);
+        bool HasNoCss(string cssSelector, string text, Options options = null);
 
         /// <summary>
         /// Query whether an element matching an XPath query appears on the page within the configured timeout

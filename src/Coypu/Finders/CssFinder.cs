@@ -25,7 +25,7 @@ namespace Coypu.Finders
             return Driver.FindCss(Locator, Scope, textPattern);
         }
 
-        private static Regex ExactTextAsRegex(string textEquals)
+        public static Regex ExactTextAsRegex(string textEquals)
         {
             Regex textMatches = null;
             if (textEquals != null)

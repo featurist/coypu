@@ -189,11 +189,6 @@ namespace Coypu.Drivers.Selenium
             return NormalizeCRLFBetweenBrowserImplementations(pageText);
         }
 
-        public bool HasCss(string cssSelector, Scope scope)
-        {
-            return Find(By.CssSelector(cssSelector), scope).Any();
-        }
-
         public bool HasXPath(string xpath, Scope scope)
         {
             return Find(By.XPath(xpath), scope).Any();

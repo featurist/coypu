@@ -55,30 +55,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void HasCss_queries_robustly_Positive_example()
-        {
-            Queries_robustly(true, browserSession.HasCss, driver.StubHasCss);
-        }
-
-        [Test]
-        public void HasCss_queries_robustly_Negative_example()
-        {
-            Queries_robustly(false, browserSession.HasCss, driver.StubHasCss);
-        }
-
-        [Test]
-        public void HasNoCss_queries_robustly_Positive_example()
-        {
-            Queries_robustly_reversing_result(true, browserSession.HasNoCss, driver.StubHasCss);
-        }
-
-        [Test]
-        public void HasNoCss_queries_robustly_Negative_example()
-        {
-            Queries_robustly_reversing_result(false, browserSession.HasNoCss, driver.StubHasCss);
-        }
-
-        [Test]
         public void HasXPath_queries_robustly_Positive_example()
         {
             Queries_robustly(true, browserSession.HasXPath, driver.StubHasXPath);

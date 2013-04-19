@@ -292,11 +292,6 @@ namespace Coypu.Drivers.Watin
             watinDialogHandler.ClickCancel();
         }
 
-        public bool HasCss(string cssSelector, Scope scope)
-        {
-            return elementFinder.HasCss(cssSelector, scope);
-        }
-
         public bool HasXPath(string xpath, Scope scope)
         {
             return elementFinder.HasXPath(xpath, scope);

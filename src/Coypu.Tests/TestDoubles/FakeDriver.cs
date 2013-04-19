@@ -159,12 +159,14 @@ namespace Coypu.Tests.TestDoubles
 
         public void StubCss(string cssSelector, ElementFound result, Scope scope)
         {
-            stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
+            if (result != null) 
+                stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
         }
 
         public void StubCss(string cssSelector, Regex textPattern, ElementFound result, Scope scope)
         {
-            stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, TextPattern = textPattern, Scope = scope, Result = result });
+            if (result != null)
+                stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, TextPattern = textPattern, Scope = scope, Result = result });
         }
 
         public void StubXPath(string cssSelector, ElementFound result, Scope scope)
@@ -271,11 +273,6 @@ namespace Coypu.Tests.TestDoubles
             return Find<bool>(stubbedHasContentMatchResults, pattern, scope);
         }
 
-        public bool HasCss(string cssSelector, Scope scope)
-        {
-            return Find<bool>(stubbedHasCssResults, cssSelector, scope);
-        }
-
         public bool HasXPath(string xpath, Scope scope)
         {
             return Find<bool>(stubbedHasXPathResults, xpath, scope);
@@ -292,7 +289,7 @@ namespace Coypu.Tests.TestDoubles
 
             var scopedStubResult = stubbedCssResults.FirstOrDefault(r => 
                 r.Locator.ToString() == cssSelector && 
-                RegexEqual(textPattern, r.TextPattern) && 
+                (textPattern == null || RegexEqual(textPattern, r.TextPattern)) && 
                 r.Scope == scope);
 
             if (scopedStubResult == null)
