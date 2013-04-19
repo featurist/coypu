@@ -424,7 +424,16 @@ The negative versions will wait for the element NOT to be present:
 
 	bool hasNoElement = browser.HasNoXPath("//ul[@class = 'menu']/li");
 
-N.B: Use the version you are expecting to ensure your test returns fast under normal circumstances
+#### Matchers
+
+There are NUnit matchers for some the queries above to help with your assertions:
+
+	Assert.That(browser, Shows.Content("In France, the coypu is known as a ragondin");
+	Assert.That(browser, Shows.No.Content("In France, the coypu is known as a ragondin");
+
+	Assert.That(browser, Shows.Css("ul.menu > li");
+	Assert.That(browser, Shows.Css("ul.menu > li", text: "Home");
+	Assert.That(browser, Shows.No.Css("ul.menu > li", text: "Admin");
 
 #### Dialogs
 
