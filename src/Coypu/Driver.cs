@@ -20,7 +20,7 @@ namespace Coypu
         bool HasCss(string cssSelector, Scope scope);
         bool HasXPath(string xpath, Scope scope);
         bool HasDialog(string withText, Scope scope);
-        ElementFound FindCss(string cssSelector, Scope scope);
+        ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null);
         ElementFound FindXPath(string xpath, Scope scope);
         IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope);
         IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope);

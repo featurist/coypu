@@ -18,8 +18,6 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class Examples : WaitAndRetryExamples
     {
-        
-
         [Test]
         public void AcceptModalDialog_example()
         {
@@ -185,6 +183,20 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void FindCss_with_text_example()
+        {
+            var two = browser.FindCss("#inspectingContent ul#cssTest li", text: "two");
+            Assert.That(two.Text, Is.EqualTo("two"));
+        }
+
+        [Test]
+        public void FindCss_with_text_matching()
+        {
+            var two = browser.FindCss("#inspectingContent ul#cssTest li", text: new Regex("wo"));
+            Assert.That(two.Text, Is.EqualTo("two"));
+        }
+
+        [Test]
         public void FindXPath_example()
         {
             var first = browser.FindXPath("//*[@id='inspectingContent']//ul[@id='cssTest']/li");
@@ -297,7 +309,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasCss_example()
         {
-            Assert.IsTrue(browser.HasCss("#inspectingContent ul#cssTest"));
+            Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest"));
             Assert.IsFalse(browser.HasCss("#inspectingContent ul#nope"));
         }
 
@@ -306,7 +318,7 @@ namespace Coypu.AcceptanceTests
         {
             browser.ExecuteScript(
                 "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-            Assert.IsTrue(browser.HasNoCss("#inspectingContent ul#nope"));
+            Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope"));
 
             ReloadTestPage();
             Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));

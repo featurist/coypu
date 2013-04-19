@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 using WatiN.Core;
 using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;

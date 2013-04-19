@@ -77,7 +77,7 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public ElementFound FindCss(string cssSelector, Scope scope)
+        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
             return null;
         }

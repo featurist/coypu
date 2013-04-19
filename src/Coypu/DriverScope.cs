@@ -168,6 +168,16 @@ namespace Coypu
             return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, SetOptions(options));
         }
 
+        public ElementScope FindCss(string cssSelector, string text, Options options = null)
+        {
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, text), this, SetOptions(options));
+        }
+
+        public ElementScope FindCss(string cssSelector, Regex text, Options options = null)
+        {
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, text), this, SetOptions(options));
+        }
+
         public ElementScope FindXPath(string xpath, Options options = null)
         {
             return new RobustElementScope(new XPathFinder(driver, xpath, this), this, SetOptions(options));

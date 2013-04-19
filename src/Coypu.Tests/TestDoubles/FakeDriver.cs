@@ -43,27 +43,25 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedTitles = new List<ScopedStubResult>();
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
-        public readonly IList<string> FindCssRequests = new List<string>();
+        public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
         private IList<Cookie> stubbedCookies;
 
         public List<Scope> ModalDialogsAccepted = new List<Scope>();
         public List<Scope> ModalDialogsCancelled = new List<Scope>();
-
 
         public FakeDriver() {}
         public FakeDriver(Drivers.Browser browser)
         {
             Browser = browser;
         }
-
         
         class ScopedStubResult
         {
             public object Locator;
             public object Result;
             public Scope Scope;
+            public Regex TextPattern;
         }
-
 
         public Drivers.Browser Browser { get; private set; }
 
@@ -162,6 +160,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubCss(string cssSelector, ElementFound result, Scope scope)
         {
             stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
+        }
+
+        public void StubCss(string cssSelector, Regex textPattern, ElementFound result, Scope scope)
+        {
+            stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, TextPattern = textPattern, Scope = scope, Result = result });
         }
 
         public void StubXPath(string cssSelector, ElementFound result, Scope scope)
@@ -283,10 +286,25 @@ namespace Coypu.Tests.TestDoubles
             return Find<bool>(stubbedHasDialogResults, withText, scope);
         }
 
-        public ElementFound FindCss(string cssSelector, Scope scope)
+        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
-            FindCssRequests.Add(cssSelector);
-            return Find<ElementFound>(stubbedCssResults, cssSelector, scope);
+            FindCssRequests.Add(new FindCssParams{CssSelector = cssSelector, TextPattern = textPattern});
+
+            var scopedStubResult = stubbedCssResults.FirstOrDefault(r => 
+                r.Locator.ToString() == cssSelector && 
+                RegexEqual(textPattern, r.TextPattern) && 
+                r.Scope == scope);
+
+            if (scopedStubResult == null)
+            {
+                throw new MissingHtmlException(string.Format("Element not found at: {0} with text matching: {1}", cssSelector, textPattern));
+            }
+            return (ElementFound) scopedStubResult.Result;
+        }
+
+        private static bool RegexEqual(Regex a, Regex b)
+        {
+            return (a.ToString() == b.ToString() && a.Options == b.Options);
         }
 
         public ElementFound FindXPath(string xpath, Scope scope)
@@ -373,5 +391,11 @@ namespace Coypu.Tests.TestDoubles
     public class SetFieldParams
     {
         public string Value { get; set; }
+    }
+
+    public class FindCssParams
+    {
+        public string CssSelector { get; set; }
+        public Regex TextPattern { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WatiN.Core;
+using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
 {
@@ -128,12 +129,17 @@ namespace Coypu.Drivers.Watin
             return WatiNScope(scope).Elements.First(isSection & hasLocator & isVisible);
         }
 
-        private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope)
+        private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope, Regex textPattern = null)
         {
             // TODO: This is restricting by hidden items, but there are no tests for that!
-            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
-            return from element in WatiNScope(scope).Elements.Filter(Find.BySelector(cssSelector))
-                   where element.Matches(isVisible)
+            var whereConstraints = Constraints.IsVisible(scope.ConsiderInvisibleElements);
+            Constraint querySelectorConstraint = Find.BySelector(cssSelector);
+
+            if (textPattern != null)
+                whereConstraints = whereConstraints & Find.ByText(textPattern);
+
+            return from element in WatiNScope(scope).Elements.Filter(querySelectorConstraint)
+                   where element.Matches(whereConstraints)
                    select element;
         }
 
@@ -142,9 +148,9 @@ namespace Coypu.Drivers.Watin
             return FindAllCssDeferred(cssSelector, scope);
         }
 
-        public WatiN.Core.Element FindCss(string cssSelector, Scope scope)
+        public WatiN.Core.Element FindCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
-            return FindAllCssDeferred(cssSelector, scope).FirstOrDefault();
+            return FindAllCssDeferred(cssSelector, scope, textPattern).FirstOrDefault();
         }
 
         public bool HasCss(string cssSelector, Scope scope)

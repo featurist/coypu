@@ -302,9 +302,9 @@ namespace Coypu.Drivers.Watin
             return elementFinder.HasXPath(xpath, scope);
         }
 
-        public ElementFound FindCss(string cssSelector, Scope scope)
+        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
-            return BuildElement(elementFinder.FindCss(cssSelector, scope), "No element found by css: " + cssSelector);
+            return BuildElement(elementFinder.FindCss(cssSelector, scope, textPattern), "No element found by css: " + cssSelector);
         }
 
         public ElementFound FindXPath(string xpath, Scope scope)

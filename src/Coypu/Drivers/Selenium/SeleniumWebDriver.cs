@@ -126,9 +126,10 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(sectionFinder.FindSection(locator,scope), "Failed to find section: " + locator);
         }
 
-        public ElementFound FindCss(string cssSelector,Scope scope)
+        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
-            return BuildElement(Find(By.CssSelector(cssSelector),scope).FirstOrDefault(),"No element found by css: " + cssSelector);
+            Func<IWebElement, bool> textMatches = e => textPattern == null || textMatcher.TextMatches(e, textPattern);
+            return BuildElement(Find(By.CssSelector(cssSelector),scope).FirstOrDefault(textMatches),"No element found by css: " + cssSelector);
         }
 
         public ElementFound FindXPath(string xpath, Scope scope)

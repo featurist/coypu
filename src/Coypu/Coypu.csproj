@@ -111,6 +111,10 @@
     <Compile Include="Element.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
+    <Compile Include="Matchers\HasContentMatcher.cs" />
+    <Compile Include="Matchers\HasCssMatcher.cs" />
+    <Compile Include="Matchers\HasNoContentMatcher.cs" />
+    <Compile Include="Matchers\HasNoCssMatcher.cs" />
     <Compile Include="Matchers\Shows.cs" />
     <Compile Include="MissingWindowException.cs" />
     <Compile Include="ElementFoundExtensions.cs" />
