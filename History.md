@@ -1,3 +1,13 @@
+# Version 0.16.0
+
+Release date: 2012-04-19
+
+### Added
+
+* FindCss can now take required text for it to match an element
+* HasCss and HasNoCss use get text filter via FindCss, and matchers
+
+
 # Version 0.15.2
 
 Release date: 2012-04-18
@@ -5,6 +15,7 @@ Release date: 2012-04-18
 ### Fixed
 
 * One more place left to clean up forceAllEvents
+
 
 # Version 0.15.1
 

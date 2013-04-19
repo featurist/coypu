@@ -204,9 +204,16 @@ If you need to fall back to CSS or XPath you can do:
     browser.FindCss("input[type=text].keywords").FillInWith("hybrid")
 
     // Checkboxes
-    browser.FindCss("input[type=checkbox].additional-ads").Check()
-    browser.FindCss("input[type=checkbox].additional-ads").Uncheck()
+    browser.FindCss("input[type=checkbox].additional-ads").Check();
+    browser.FindCss("input[type=checkbox].additional-ads").Uncheck();
 
+To restrict `FindCss()` to only elements matching some expected text you can do
+
+	browser.FindCss("ul.model li", text: "Citroen");
+
+or
+
+	browser.FindCss("ul.model li", text: new Regex("Citroen C\d"));
 
 To help with asp.net testing, if there is no matching element based on the rules above then an element that ends with the locator will be matched.
 
@@ -229,7 +236,7 @@ Links are found by the text of the link
 
 Click any other element by calling the Click method on the returned `ElementScope`:
 	
-	browser.FindCss("span#i-should-be-a-link").Click();
+	browser.FindCss("span#i-should-be-a-link", text: "Log in").Click();
 
 In this example, due to the way Coypu defers execution of finders, the FindCss will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
 
@@ -402,6 +409,8 @@ Look for text anywhere in the page:
 Check for the presence of an element:
 
 	bool hasElement = browser.HasCss("ul.menu > li");
+	bool hasElement = browser.HasCss("ul.menu > li", text: "Home");
+
 	bool hasElement = browser.HasXPath("//ul[@class = 'menu']/li");
 	
 The positive queries above will wait up to the configured timeout for a matching element to appear and return as soon as it does.
@@ -409,7 +418,10 @@ The positive queries above will wait up to the configured timeout for a matching
 The negative versions will wait for the element NOT to be present:
 
 	bool hasNoContent = browser.HasNoContent("In France, the coypu is known as a ragondin");
+
 	bool hasNoElement = browser.HasNoCss("ul.menu > li");
+	bool hasNoElement = browser.HasNoCss("ul.menu > li", text: "Admin");
+
 	bool hasNoElement = browser.HasNoXPath("//ul[@class = 'menu']/li");
 
 N.B: Use the version you are expecting to ensure your test returns fast under normal circumstances
