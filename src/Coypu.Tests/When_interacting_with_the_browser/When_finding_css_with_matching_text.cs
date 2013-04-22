@@ -14,7 +14,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var stubCssResult = new StubElement();
             Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss,
                                  input: "some text",
-                                 matchingPattern: new Regex("^some text$", RegexOptions.Multiline),
+                                 matchingPattern: new Regex("^some\\ text$", RegexOptions.Multiline),
+                                 expectedDeferredResult: stubCssResult,
+                                 expectedImmediateResult: new StubElement(),
+                                 stubCssResult: stubCssResult);
+        }
+
+        [Test]
+        public void FindCss_with_exact_text_should_excape_regex_chars()
+        {
+            var stubCssResult = new StubElement();
+            Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss,
+                                 input: "some (text) *",
+                                 matchingPattern: new Regex("^some\\ \\(text\\)\\ \\*$", RegexOptions.Multiline),
                                  expectedDeferredResult: stubCssResult,
                                  expectedImmediateResult: new StubElement(),
                                  stubCssResult: stubCssResult);
@@ -56,7 +68,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Should_find_robustly(browserSession.HasCss, elementScope.HasCss, driver.StubCss,
                                  suppliedText: "some text",
-                                 matchingPattern: new Regex("^some text$", RegexOptions.Multiline),
+                                 matchingPattern: new Regex("^some\\ text$", RegexOptions.Multiline),
                                  expectedDeferredResult: true,
                                  expectedImmediateResult: false,
                                  stubCssResult: new StubElement());
@@ -146,7 +158,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Should_find_robustly(browserSession.HasNoCss, elementScope.HasNoCss, driver.StubCss,
                                  suppliedText: "some text",
-                                 matchingPattern: new Regex("^some text$", RegexOptions.Multiline),
+                                 matchingPattern: new Regex("^some\\ text$", RegexOptions.Multiline),
                                  expectedDeferredResult: false,
                                  expectedImmediateResult: true,
                                  stubCssResult: new StubElement());

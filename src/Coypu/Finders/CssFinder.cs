@@ -29,7 +29,7 @@ namespace Coypu.Finders
         {
             Regex textMatches = null;
             if (textEquals != null)
-                textMatches = new Regex(string.Format("^{0}$", textEquals), RegexOptions.Multiline);
+                textMatches = new Regex(string.Format("^{0}$", Regex.Escape(textEquals)), RegexOptions.Multiline);
 
             return textMatches;
         }
