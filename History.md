@@ -1,3 +1,12 @@
+# Version 0.16.1
+
+Release date: 2012-04-22
+
+### Fixed
+
+* FindCss with exact text now escapes regex chars correctly
+
+
 # Version 0.16.0
 
 Release date: 2012-04-19
