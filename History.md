@@ -1,3 +1,14 @@
+# Version 0.16.2
+
+Release date: 2012-05-07
+
+### Updated
+
+* Selenium.WebDriver 2.32.1
+* WebDrver selects now use Selenium.Support
+* iframes found by css/xpath/id can be used as scopes (WebDriver only)
+
+
 # Version 0.16.1
 
 Release date: 2012-04-22
