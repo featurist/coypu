@@ -467,6 +467,18 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void WithinIFrame_FoundByCss_example()
+        {
+            const string selectorThatAppearsInMultipleScopes = "scoped button";
+
+            var expectingScope1 = browser.FindCss("iframe#iframe1").FindButton(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindCss("iframe#iframe2").FindButton(selectorThatAppearsInMultipleScopes);
+
+            Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
+            Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
+        }
+
+        [Test]
         public void WithinFrame_example()
         {
             browser.Visit(TestPageLocation("frameset.htm"));

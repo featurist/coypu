@@ -99,7 +99,7 @@ namespace Coypu.Drivers.Selenium
             if (element == null)
                 throw new MissingHtmlException("Failed to find frame: " + locator);
 
-            return new SeleniumFrame(element, webDriver);
+            return new SeleniumElement(element, webDriver);
         }
 
         public ElementFound FindLink(string linkText, Scope scope)
@@ -162,7 +162,7 @@ namespace Coypu.Drivers.Selenium
 
         private SeleniumElement BuildElement(IWebElement element)
         {
-            return new SeleniumElement(element);
+            return new SeleniumElement(element, webDriver);
         }
 
         public bool HasContent(string text, Scope scope)

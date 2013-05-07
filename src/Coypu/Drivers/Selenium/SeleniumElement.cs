@@ -7,15 +7,17 @@ namespace Coypu.Drivers.Selenium
     internal class SeleniumElement : ElementFound
     {
         private readonly IWebElement native;
+        private readonly IWebDriver webDriver;
+
+        public SeleniumElement(IWebElement seleniumElement, IWebDriver webDriver)
+        {
+            native = seleniumElement;
+            this.webDriver =  webDriver;
+        }
 
         protected IWebElement NativeSeleniumElement
         {
             get { return native; }
-        }
-
-        public SeleniumElement(IWebElement seleniumElement)
-        {
-            native = seleniumElement;
         }
 
         public string Id
@@ -56,8 +58,18 @@ namespace Coypu.Drivers.Selenium
 
         public virtual object Native
         {
-            get { return native; }
+            get
+            {
+                if (new []{"iframe","frame" }.Contains(NativeSeleniumElement.TagName.ToLower()))
+                {
+                    webDriver.SwitchTo().Frame(NativeSeleniumElement);
+                    return webDriver;
+                }
+                return NativeSeleniumElement;
+            }
         }
+
+        
 
         public bool Stale
         {

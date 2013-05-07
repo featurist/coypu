@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -7,15 +7,15 @@ namespace Coypu.Drivers.Selenium
     {
         public void Select(Element element, string option)
         {
-            var select = (IWebElement)element.Native;
-
-            var optionToSelect =
-                select.FindElements(By.TagName("option")).FirstOrDefault(e => e.Text == option || e.GetAttribute("value") == option);
-
-            if (optionToSelect == null)
-                throw new MissingHtmlException("No such option: " + option);
-
-            optionToSelect.Click();
+            var select = new SelectElement((IWebElement)element.Native);
+            try
+            {
+                select.SelectByText(option);
+            }
+            catch (NoSuchElementException)
+            {
+                select.SelectByValue(option);
+            }
         }
     }
 }

@@ -15,15 +15,44 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_elements_among_multiple_scopes()
         {
-            var iframeOne = new DriverScope(new SessionConfiguration(), new FrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
-            var iframeTwo = new DriverScope(new SessionConfiguration(), new FrameFinder(Driver, "I am iframe two", Root), Driver,null,null,null);
+            Finds_elements_among_multiple_scopes(new FrameFinder(Driver, "I am iframe one", Root),
+                                                 new FrameFinder(Driver, "I am iframe two", Root));
+        }
+
+        [Test]
+        public void Finds_elements_among_multiple_scopes_when_finding_by_css()
+        {
+            Finds_elements_among_multiple_scopes(new CssFinder(Driver, "iframe#iframe1", Root),
+                                                 new CssFinder(Driver, "iframe#iframe2", Root));
+        }
+
+        [Test]
+        public void Finds_elements_among_multiple_scopes_when_finding_by_xpath()
+        {
+            Finds_elements_among_multiple_scopes(new XPathFinder(Driver, "//iframe[@id='iframe1']", Root),
+                                                 new XPathFinder(Driver, "//iframe[@id='iframe2']", Root));
+        }
+
+        [Test]
+        public void Finds_elements_among_multiple_scopes_when_finding_by_id()
+        {
+            Finds_elements_among_multiple_scopes(new IdFinder(Driver, "iframe1", Root),
+                                                 new IdFinder(Driver, "iframe2", Root));
+        }
+
+        private static void Finds_elements_among_multiple_scopes(ElementFinder elementFinder1, ElementFinder elementFinder2)
+        {
+            var iframeOne = new DriverScope(new SessionConfiguration(), elementFinder1, Driver,
+                                            null, null, null);
+            var iframeTwo = new DriverScope(new SessionConfiguration(), elementFinder2, Driver,
+                                            null, null, null);
 
             Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
             Driver.FindButton("scoped button", iframeTwo).Id.should_be("iframe2ButtonId");
         }
 
         [Test]
-        public void Finds_clears_scope_back_to_the_whole_window()
+        public void Finds_clear_scope_back_to_the_whole_window()
         {
             var iframeOne = new DriverScope(new SessionConfiguration(), new FrameFinder(Driver, "I am iframe one", Root), Driver,null,null,null);
             Driver.FindButton("scoped button", iframeOne).Id.should_be("iframe1ButtonId");
@@ -56,7 +85,7 @@ namespace Coypu.Drivers.Tests
         {
             var iframeOne = new DriverScope(new SessionConfiguration(), new FrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
             var iframeForm = new DriverScope(new SessionConfiguration(), new CssFinder(Driver, "form", iframeOne), Driver, null, null, null);
-
+            
             Driver.FindField("text input in iframe", iframeForm);
         }
     }
