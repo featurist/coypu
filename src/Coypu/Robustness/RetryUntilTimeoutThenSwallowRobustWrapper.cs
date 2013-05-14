@@ -14,7 +14,9 @@ namespace Coypu.Robustness
         {
             try
             {
-                Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
+                var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
+                if (!outcome)
+                    throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
             }
             catch (MissingHtmlException)
             {   

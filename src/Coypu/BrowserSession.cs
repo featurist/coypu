@@ -30,7 +30,7 @@ namespace Coypu
         public BrowserSession(SessionConfiguration SessionConfiguration)
             : this(new ActivatorDriverFactory(),
                    SessionConfiguration,
-                   SessionConfiguration.RetryStrategy,
+                   SessionConfiguration.RetryStrategy, 
                    new StopwatchWaiter(),
                    new WebClientWithCookies(),
                    new FullyQualifiedUrlBuilder())
