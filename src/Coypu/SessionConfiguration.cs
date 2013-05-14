@@ -69,5 +69,11 @@ namespace Coypu
         /// </summary>
         public bool SSL { get; set; }
 
+
+        /// <summary>
+        /// <para>Retry strategy to use</para>
+        /// <para>Default: RetryUntilTimeoutRobustWrapper</para>
+        /// </summary>
+        public Robustness.RobustWrapper RetryStrategy { get; set; }
     }
 }
