@@ -3,6 +3,8 @@ using Coypu.Drivers.Selenium;
 
 namespace Coypu
 {
+    using Coypu.Robustness;
+
     /// <summary>
     /// Global configuration settings
     /// </summary>
@@ -23,6 +25,7 @@ namespace Coypu
             SSL = false;
             Browser = Drivers.Browser.Firefox;
             Driver = typeof (SeleniumWebDriver);
+            RetryStrategy = new RetryUntilTimeoutRobustWrapper();
         }
 
         /// <summary>
@@ -74,6 +77,6 @@ namespace Coypu
         /// <para>Retry strategy to use</para>
         /// <para>Default: RetryUntilTimeoutRobustWrapper</para>
         /// </summary>
-        public Robustness.RobustWrapper RetryStrategy { get; set; }
+        public RobustWrapper RetryStrategy { get; set; }
     }
 }
