@@ -8,7 +8,7 @@ namespace Coypu.Robustness
 {
     public class RetryUntilTimeoutRobustWrapper : RobustWrapper
     {
-        public virtual void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
         {
             var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
             if (!outcome)
@@ -28,7 +28,7 @@ namespace Coypu.Robustness
             overrideTimeout = null;
         }
 
-        public TResult Robustly<TResult>(Query<TResult> query)
+        public virtual TResult Robustly<TResult>(Query<TResult> query)
         {
             var interval = query.RetryInterval;
             var timeout = Timeout(query);
@@ -57,7 +57,7 @@ namespace Coypu.Robustness
             }
         }
 
-        private TimeSpan Timeout<TResult>(Query<TResult> query)
+        protected TimeSpan Timeout<TResult>(Query<TResult> query)
         {
             TimeSpan timeout;
             if (ZeroTimeout)
@@ -75,17 +75,17 @@ namespace Coypu.Robustness
             return timeout;
         }
 
-        private void WaitForInterval(TimeSpan interval)
+        protected void WaitForInterval(TimeSpan interval)
         {
             Thread.Sleep(interval);
         }
 
-        private bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
+        protected bool ExpectedResultNotFoundWithinTimeout<TResult>(object expectedResult, TResult result, Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
             return expectedResult != null && !result.Equals(expectedResult) && !TimeoutReached(stopWatch, timeout, interval);
         }
 
-        private bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
+        protected bool TimeoutReached(Stopwatch stopWatch, TimeSpan timeout, TimeSpan interval)
         {
             var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
             var timeoutReached = elapsedTimeToNextCall >= timeout;

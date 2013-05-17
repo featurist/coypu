@@ -5,21 +5,43 @@ using System.Text;
 
 namespace Coypu.Robustness
 {
+    using System.Diagnostics;
+
     using Coypu.Actions;
     using Coypu.Queries;
 
     public class RetryUntilTimeoutThenSwallowRobustWrapper : RetryUntilTimeoutRobustWrapper
     {
-        public override void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
+        public override TResult Robustly<TResult>(Query<TResult> query)
         {
-            try
+            var interval = query.RetryInterval;
+            var timeout = Timeout(query);
+            var stopWatch = Stopwatch.StartNew();
+            while (true)
             {
-                var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
-                if (!outcome)
-                    throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
-            }
-            catch (MissingHtmlException)
-            {   
+                try
+                {
+                    var result = query.Run();
+                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, timeout, interval))
+                    {
+                        WaitForInterval(interval);
+                        continue;
+                    }
+                    return result;
+                }
+                catch (NotSupportedException) { throw; }
+                catch (MissingHtmlException)
+                {
+                    return default(TResult);
+                }
+                catch (Exception)
+                {
+                    if (TimeoutReached(stopWatch, timeout, interval))
+                    {
+                        throw;
+                    }
+                    WaitForInterval(interval);
+                }
             }
         }
     }
