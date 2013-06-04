@@ -1,3 +1,12 @@
+# Version 0.16.3
+
+Release date: 2013-06-04
+
+### Removed
+
+* No longer a dependency on Newtonsoft.Json
+
+
 # Version 0.16.2
 
 Release date: 2013-05-07
