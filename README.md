@@ -478,8 +478,41 @@ Avoid this:
 	  ...
 	}
   
-otherwise you will have to wait for the full `SessionConfiguration.Timeout` in the negitive case.  
-  
+otherwise you will have to wait for the full `SessionConfiguration.Timeout` in the negitive case.
+
+## Using a custom Selemium WebDriver profile
+
+Sometimes you may want to define custom profile settings for your driver.
+
+You can do this by creating your own driver that derives from `Coypu.Drivers.Selenium.SeleniumWebDriver` using something like this:
+
+    public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+    {
+        public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser)
+            : base(CustomProfileDriver(), browser)
+        {
+        }
+
+        private static RemoteWebDriver CustomProfileDriver()
+        {
+            var yourCustomProfile = new FirefoxProfile();
+            return new FirefoxDriver(yourCustomProfile);
+        }
+    }
+
+and using it like this:
+
+    [Test]
+    public void CustomProfile()
+    {
+        var configuration = new SessionConfiguration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
+        using (var custom = new BrowserSession(configuration))
+        {
+            custom.Visit("http://www.featurist.co.uk/");
+            // etc.
+        }
+    }
+
 ## More tricks/tips
 
 So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 
