@@ -193,6 +193,10 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
+        public void MaximiseWindow(Scope scope)
+        {
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
         }

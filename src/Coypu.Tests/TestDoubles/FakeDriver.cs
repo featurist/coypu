@@ -44,6 +44,8 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
+        public readonly IList<Scope> MaximiseWindowCalls= new List<Scope>();
+
         private IList<Cookie> stubbedCookies;
 
         public List<Scope> ModalDialogsAccepted = new List<Scope>();
@@ -246,6 +248,11 @@ namespace Coypu.Tests.TestDoubles
             SentKeys.Add(element, keys);
         }
 
+        public void MaximiseWindow(Scope scope)
+        {
+            MaximiseWindowCalls.Add(scope);
+        }
+
         public void Set(Element element, string value)
         {
             SetFields.Add(element, new SetFieldParams{Value = value});
@@ -383,6 +390,7 @@ namespace Coypu.Tests.TestDoubles
         {
             return Find<ElementFound>(stubbedWindows, locator, scope);
         }
+
     }
 
     public class SetFieldParams

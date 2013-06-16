@@ -219,6 +219,12 @@ namespace Coypu.Drivers.Selenium
             SeleniumElement(element).SendKeys(keys);
         }
 
+        public void MaximiseWindow(Scope scope)
+        {
+            elementFinder.SeleniumScope(scope);
+            webDriver.Manage().Window.Maximize();
+        }
+
         public IEnumerable<Cookie> GetBrowserCookies()
         {
             return webDriver.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));

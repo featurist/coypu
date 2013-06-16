@@ -552,6 +552,19 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void MaximiseWindow()
+        {
+            var availWidth = float.Parse(browser.ExecuteScript("return window.screen.availWidth;"));
+            var initalWidth = float.Parse(browser.ExecuteScript("return window.outerWidth;"));
+
+            Assert.That(initalWidth, Is.LessThan(availWidth));
+
+            browser.MaximiseWindow();
+
+            Assert.That(float.Parse(browser.ExecuteScript("return window.outerWidth;")), Is.GreaterThanOrEqualTo(availWidth));
+        }
+
+        [Test]
         public void CustomProfile()
         {
             var configuration = new SessionConfiguration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};

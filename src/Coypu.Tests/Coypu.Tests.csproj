@@ -64,6 +64,7 @@
     <Compile Include="TestDoubles\AlwaysExceptionsErrorFinder.cs" />
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
     <Compile Include="TestDoubles\ImmediateSingleExecutionFakeRobustWrapper.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_css_with_matching_text.cs" />
     <Compile Include="When_interacting_with_the_browser\When_considering_invisible_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_checking_an_element.cs" />

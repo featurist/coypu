@@ -41,5 +41,6 @@ namespace Coypu
         ElementFound FindWindow(string locator, Scope scope);
         ElementFound FindFrame(string locator, Scope scope);
         void SendKeys(Element element, string keys);
+        void MaximiseWindow(Scope scope);
     }
 }

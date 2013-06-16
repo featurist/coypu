@@ -70,5 +70,10 @@ namespace Coypu
         {
             get { return driver.Title(this); }
         }
+
+        public void MaximiseWindow()
+        {
+            driver.MaximiseWindow(this);
+        }
     }
 }

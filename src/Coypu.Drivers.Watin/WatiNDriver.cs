@@ -167,6 +167,11 @@ namespace Coypu.Drivers.Watin
             }
         }
 
+        public void MaximiseWindow(Scope scope)
+        {
+            throw new NotImplementedException();
+        }
+
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
             return ieBrowser.GetCookiesForUrl(Watin.Uri).Cast<Cookie>();
