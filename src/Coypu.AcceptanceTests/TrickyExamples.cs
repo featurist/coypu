@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Watin;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -20,8 +21,8 @@ namespace Coypu.AcceptanceTests
             var configuration = new SessionConfiguration
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
-                                        Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu"),
-                                        Browser = Drivers.Browser.Firefox
+                                        Driver = typeof(SeleniumWebDriver),
+                                        Browser = Browser.Firefox
                                     };
             browser = new BrowserSession(configuration);
 
@@ -87,21 +88,35 @@ namespace Coypu.AcceptanceTests
             VisitTestPage("InteractionTestsPage.htm");
 
             browser.ClickLink("Open pop up window");
-            
+
+            var timeToClickManuallyInIE = new Options {Timeout = TimeSpan.FromSeconds(10)};
+
             var popUp = browser.FindWindow("Pop Up Window");
             var button = popUp.FindButton("scoped button");
-            
-            Assert.That(button.Exists());
+
+            Assert.That(button.Exists(timeToClickManuallyInIE));
             Assert.That(popUp.HasContent("I am a pop up window"));
 
-            popUp.ExecuteScript("self.close()");
+            CloseWindow(popUp);
 
             Assert.That(button.Missing());
 
             browser.ClickLink("Open pop up window");
 
-            Assert.That(popUp.HasContent("I am a pop up window"));
+            Assert.That(popUp.HasContent("I am a pop up window", timeToClickManuallyInIE));
             button.Click();
+        }
+
+        private static void CloseWindow(BrowserWindow popUp)
+        {
+            try
+            {
+                popUp.ExecuteScript("self.close();");
+            }
+            catch (Exception InvalidCastException)
+            {
+                // IE permissions
+            }
         }
     }
 }

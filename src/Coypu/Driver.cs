@@ -11,7 +11,7 @@ namespace Coypu
         ElementFound FindLink(string linkText, Scope scope);
         ElementFound FindField(string locator, Scope scope);
         void Click(Element element);
-        void Visit(string url);
+        void Visit(string url, Scope scope);
         void Set(Element element, string value);
         void Select(Element element, string option);
         object Native { get; }

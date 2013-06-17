@@ -41,7 +41,7 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public virtual void SetUp()
         {
-            Driver.Visit(GetTestHTMLPathLocation());
+            Driver.Visit(GetTestHTMLPathLocation(),Root);
         }
 
         protected string GetTestHTMLPathLocation()

@@ -35,7 +35,7 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public void Visit(string url)
+        public void Visit(string url, Scope scope)
         {
         }
 

@@ -9,6 +9,7 @@ using SHDocVw;
 using WatiN.Core;
 using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
+using WatiN.Core.Native.Windows;
 using mshtml;
 
 namespace Coypu.Drivers.Watin
@@ -40,10 +41,15 @@ namespace Coypu.Drivers.Watin
         {
             var browser = new IEWithDialogWaiter();
 
-            watinDialogHandler = new DialogHandler();
-            browser.AddDialogHandler(watinDialogHandler);
+            AddDialogHandler(browser);
 
             return browser;
+        }
+
+        private void AddDialogHandler(IEWithDialogWaiter browser)
+        {
+            watinDialogHandler = new DialogHandler();
+            browser.AddDialogHandler(watinDialogHandler);
         }
 
         public void SetBrowser(WatiN.Core.Browser browser)
@@ -66,21 +72,34 @@ namespace Coypu.Drivers.Watin
             return element.Native as T;
         }
 
-        private static ElementFound BuildElement(WatiN.Core.Element element, string description)
+        private ElementFound BuildElement(WatiN.Core.Element element, string description)
         {
             if (element == null)
                 throw new MissingHtmlException(description);
             return BuildElement(element);
         }
 
-        private static ElementFound BuildElement(WatiN.Core.Element element)
+        private ElementFound BuildElement(WatiN.Core.Element element)
         {
-            return new WatiNElement(element);
+            return new WatiNElement(element,Watin);
         }
 
         private static ElementFound BuildElement(WatiN.Core.Browser browser)
         {
             return new WatiNBrowser(browser);
+        }
+
+        private WatiN.Core.Browser GetWindowScope(Scope scope)
+        {
+            var elementScope = ElementFinder.WatiNScope(scope);
+            var browserScope = elementScope as WatiN.Core.Browser;
+
+            if (browserScope == null)
+            {
+                throw new InvalidOperationException("Window level operation called on an element scope");
+            }
+
+            return browserScope;
         }
 
         private static ElementFound BuildElement(Frame frame, string description)
@@ -93,9 +112,9 @@ namespace Coypu.Drivers.Watin
         public string ExecuteScript(string javascript, Scope scope)
         {
             // TODO: scope is the current window in which to accept a dialog
-
+            
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
-            var retval = Watin.Eval(stripReturn);
+            var retval = GetWindowScope(scope).Eval(stripReturn);
             Watin.WaitForComplete();
             return retval;
         }
@@ -136,22 +155,19 @@ namespace Coypu.Drivers.Watin
 
         public ElementFound FindWindow(string locator, Scope scope)
         {
+            return new WatiNBrowser(FindWindowHandle(locator));
+        }
+
+        private static Constraint FindWindowHandle(string locator)
+        {
             var by =
                 Find.ByTitle(locator) |
                 Find.By("hwnd", locator);
 
-            if (Uri.IsWellFormedUriString(locator,UriKind.Absolute))
+            if (Uri.IsWellFormedUriString(locator, UriKind.Absolute))
                 by |= Find.ByUrl(locator);
 
-            try
-            {
-                var window = WatiN.Core.Browser.AttachTo<IE>(by);
-                return new WatiNBrowser(window);
-            }
-            catch (WatiN.Core.Exceptions.BrowserNotFoundException)
-            {
-                throw new MissingHtmlException("No such window found: " + locator);
-            }
+            return by;
         }
 
         public ElementFound FindFrame(string locator, Scope scope)
@@ -169,7 +185,7 @@ namespace Coypu.Drivers.Watin
 
         public void MaximiseWindow(Scope scope)
         {
-            throw new NotImplementedException();
+            GetWindowScope(scope).ShowWindow(NativeMethods.WindowShowStyle.Maximize);
         }
 
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
@@ -216,9 +232,9 @@ namespace Coypu.Drivers.Watin
             nativeElement.WaitForComplete();
         }
 
-        public void Visit(string url)
+        public void Visit(string url, Scope scope)
         {
-            Watin.GoTo(url);
+            GetWindowScope(scope).GoTo(url);
         }
 
         public void Set(Element element, string value)
@@ -326,14 +342,12 @@ namespace Coypu.Drivers.Watin
 
         public Uri Location(Scope scope)
         {
-                //return Watin.Uri;
-                throw new NotImplementedException("Consider scope");
+            return GetWindowScope(scope).Uri;
         }
 
         public string Title(Scope scope)
         {
-            //return Watin.Title;
-            throw new NotImplementedException("Consider scope");
+            return GetWindowScope(scope).Title;
         }
 
         public bool Disposed { get; private set; }

@@ -60,7 +60,7 @@ namespace Coypu
         /// <param name="virtualPath">Virtual paths will use the SessionConfiguration.AppHost,Port,SSL settings. Otherwise supply a fully qualified URL.</param>
         public void Visit(string virtualPath)
         {
-            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath,SessionConfiguration));
+            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath,SessionConfiguration),this);
         }
 
         /// <summary>
@@ -70,6 +70,18 @@ namespace Coypu
         {
             get { return driver.Title(this); }
         }
+
+
+        /// <summary>
+        /// Executes custom javascript in the browser
+        /// </summary>
+        /// <param name="javascript">JavaScript to execute</param>
+        /// <returns>Anything returned from the script</returns>
+        public string ExecuteScript(string javascript) 
+        {
+            return driver.ExecuteScript(javascript, this);
+        }
+
 
         public void MaximiseWindow()
         {

@@ -13,7 +13,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             mainWindow.MaximiseWindow();
 
             Assert.That(driver.MaximiseWindowCalls.Single(), Is.SameAs(mainWindow));
+        }
 
+        [Test]
+        public void MaximiseWindow_acts_on_current_scope()
+        {
+            popupScope.MaximiseWindow();
+
+            Assert.That(driver.MaximiseWindowCalls.Single(), Is.SameAs(popupScope));
         }
     }
 }

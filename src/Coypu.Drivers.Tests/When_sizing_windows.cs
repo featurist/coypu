@@ -18,7 +18,14 @@ namespace Coypu.Drivers.Tests
             Driver.Click(Driver.FindLink("Open pop up window", Root));
             var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
 
-            AssertMaximisesWindow(popUp);
+            try
+            {
+                AssertMaximisesWindow(popUp);
+            }
+            finally
+            {
+                Driver.ExecuteScript("return self.close();", popUp);
+            }
         }
 
         private static void AssertMaximisesWindow(DriverScope driverScope)

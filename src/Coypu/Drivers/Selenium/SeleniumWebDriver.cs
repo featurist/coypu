@@ -196,11 +196,13 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasDialog(string withText, Scope scope)
         {
+            elementFinder.SeleniumScope(scope);
             return dialogs.HasDialog(withText);
         }
 
-        public void Visit(string url) 
+        public void Visit(string url, Scope scope) 
         {
+            elementFinder.SeleniumScope(scope);
             webDriver.Navigate().GoToUrl(url);
         }
 

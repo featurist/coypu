@@ -1,4 +1,5 @@
-﻿using Coypu.Finders;
+﻿using System;
+using Coypu.Finders;
 using NSpec;
 using NUnit.Framework;
 
@@ -78,11 +79,11 @@ namespace Coypu.Drivers.Tests
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},500);", Root);
                 Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
-                Driver.ExecuteScript("self.close();", popUp);
+                
 
                 System.Threading.Thread.Sleep(500);
                 Driver.AcceptModalDialog(Root);
-                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered a alert and this is the text.", Root).should_be_false();
             }
         }
 
@@ -97,11 +98,23 @@ namespace Coypu.Drivers.Tests
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('confirmTriggerLink').click();},500);", Root);
                 Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
-                Driver.ExecuteScript("self.close();", popUp);
+                CloseWindow(popUp);
 
                 System.Threading.Thread.Sleep(500);
                 Driver.CancelModalDialog(Root);
-                Driver.HasDialog("You have triggered a alert and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+            }
+        }
+
+        private static void CloseWindow(DriverScope popUp)
+        {
+            try
+            {
+                Driver.ExecuteScript("self.close();", popUp);
+            }
+            catch (Exception InvalidCastException)
+            {
+                // IE permissions
             }
         }
     }

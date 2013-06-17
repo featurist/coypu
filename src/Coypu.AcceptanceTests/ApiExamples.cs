@@ -448,7 +448,9 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void TryUntil_example()
         {
-            browser.TryUntil(() => browser.ClickButton("try this"),
+            var tryThisButton = browser.FindButton("try this");
+            Assert.That(tryThisButton.Exists());
+            browser.TryUntil(() => tryThisButton.Click(),
                              () => browser.HasContent("try until 5"),
                              TimeSpan.FromMilliseconds(50),
                              new Options {Timeout = TimeSpan.FromMilliseconds(5000)});

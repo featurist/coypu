@@ -435,13 +435,6 @@ namespace Coypu
         void Choose(string locator, Options options = null);
 
         /// <summary>
-        /// Executes custom javascript in the browser
-        /// </summary>
-        /// <param name="javascript">JavaScript to execute</param>
-        /// <returns>Anything returned from the script</returns>
-        string ExecuteScript(string javascript);
-
-        /// <summary>
         /// Query whether an element appears within the configured timeout
         /// </summary>
         /// <param name="findElement">A function to find an element</param>

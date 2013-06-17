@@ -18,6 +18,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected StubUrlBuilder stubUrlBuilder;
         protected SessionConfiguration sessionConfiguration;
         protected ElementScope elementScope;
+        protected BrowserWindow popupScope;
 
         [SetUp]
         public void SetUp()
@@ -31,6 +32,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                                                       stubUrlBuilder);
 
             elementScope = browserSession.FindXPath(".");
+            popupScope = browserSession.FindWindow("popup");
         }
 
         protected object RunQueryAndCheckTiming()

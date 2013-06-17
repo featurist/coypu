@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Coypu.Drivers.Watin;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests

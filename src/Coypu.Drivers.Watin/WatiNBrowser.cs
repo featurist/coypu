@@ -1,21 +1,40 @@
 using System;
+using WatiN.Core;
+using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
 {
     internal class WatiNBrowser : ElementFound
     {
         private readonly WatiN.Core.Browser browser;
+        private readonly Constraint windowHandle;
 
         public WatiNBrowser(WatiN.Core.Browser browser)
         {
             this.browser = browser;
         }
 
+        public WatiNBrowser (Constraint windowHandle)
+        {
+            this.windowHandle = windowHandle;
+            try
+            {
+                if (!WatiN.Core.Browser.Exists<IE>(windowHandle))
+                    throw new MissingWindowException("No such window found: " + windowHandle);
+                
+                browser = WatiN.Core.Browser.AttachTo<IE>(windowHandle);
+            }
+            catch (WatiN.Core.Exceptions.BrowserNotFoundException)
+            {
+                throw new MissingWindowException("No such window found: " + windowHandle);
+            }
+        }
+
         public string Id
         {
             get { throw new NotImplementedException(); }
         }
-
+                
         public string Text
         {
             get
@@ -46,12 +65,25 @@ namespace Coypu.Drivers.Watin
 
         public object Native
         {
-            get { return browser; }
+            get
+            {
+                return browser;
+            }
         }
 
         public bool Stale
         {
-            get { return false; }
+            get
+            {
+                try
+                {
+                    return !WatiN.Core.Browser.Exists<IE>(Find.By("hwnd", browser.hWnd.ToString()));
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    return true;
+                }
+            }
         }
 
         public string this[string attributeName]

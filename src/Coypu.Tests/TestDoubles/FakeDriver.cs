@@ -17,7 +17,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<Regex> HasContentMatchQueries = new List<Regex>();
         public readonly IList<string> HasCssQueries = new List<string>();
         public readonly IList<string> HasXPathQueries = new List<string>();
-        public readonly IList<string> Visits = new List<string>();
+        public readonly IList<ScopedRequest<string>> Visits = new List<ScopedRequest<string>>();
         public readonly IDictionary<Element, SetFieldParams> SetFields = new Dictionary<Element, SetFieldParams>();
         public readonly IDictionary<Element, string> SentKeys = new Dictionary<Element, string>();
         public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
@@ -64,6 +64,13 @@ namespace Coypu.Tests.TestDoubles
             public Scope Scope;
             public Regex TextPattern;
         }
+
+        public class ScopedRequest<T>
+        {
+            public T request;
+            public Scope Scope;
+        }
+
 
         public Drivers.Browser Browser { get; private set; }
 
@@ -114,9 +121,9 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public void Visit(string url)
+        public void Visit(string url, Scope scope)
         {
-            Visits.Add(url);
+            Visits.Add(new ScopedRequest<string>{request = url, Scope = scope});
         }
 
         public void StubButton(string locator, ElementFound element, Scope scope)

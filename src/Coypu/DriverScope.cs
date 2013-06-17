@@ -266,11 +266,6 @@ namespace Coypu
             RetryUntilTimeout(new Choose(driver, this, locator, SetOptions(options)));
         }
 
-        public string ExecuteScript(string javascript)
-        {
-            return driver.ExecuteScript(javascript,this);
-        }
-
         public bool Has(ElementScope findElement)
         {
             return findElement.Exists();

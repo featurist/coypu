@@ -4,8 +4,11 @@ namespace Coypu.Drivers.Watin
 {
     internal class WatiNElement : ElementFound
     {
-        internal WatiNElement(WatiN.Core.Element watinElement)
+        private readonly WatiN.Core.Browser browser;
+
+        internal WatiNElement(WatiN.Core.Element watinElement, WatiN.Core.Browser browser)
         {
+            this.browser = browser;
             Native = watinElement;
         }
 
@@ -18,6 +21,11 @@ namespace Coypu.Drivers.Watin
         private WatiN.Core.Element NativeWatiNElement
         {
             get { return GetNativeWatiNElement<WatiN.Core.Element>(); }
+        }
+
+        public WatiN.Core.Browser Browser
+        {
+            get { return browser; }
         }
 
         public string Id
