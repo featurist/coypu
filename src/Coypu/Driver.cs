@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -42,5 +43,6 @@ namespace Coypu
         ElementFound FindFrame(string locator, Scope scope);
         void SendKeys(Element element, string keys);
         void MaximiseWindow(Scope scope);
+        void ResizeTo(Size size, Scope Scope);
     }
 }

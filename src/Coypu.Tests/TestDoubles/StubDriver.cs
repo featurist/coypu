@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -194,6 +195,10 @@ namespace Coypu.Tests.TestDoubles
         }
 
         public void MaximiseWindow(Scope scope)
+        {
+        }
+
+        public void ResizeTo(Size size, Scope Scope)
         {
         }
 

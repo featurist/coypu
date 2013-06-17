@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -82,10 +83,22 @@ namespace Coypu
             return driver.ExecuteScript(javascript, this);
         }
 
-
+        /// <summary>
+        /// Maximises this browser window
+        /// </summary>
         public void MaximiseWindow()
         {
             driver.MaximiseWindow(this);
+        }
+
+        /// <summary>
+        /// Resizes this browser window to the supplied dimensions
+        /// </summary>
+        /// <param name="width">The required width</param>
+        /// <param name="height">The required height</param>
+        public void ResizeTo(int width, int height)
+        {
+            driver.ResizeTo(new Size(width: width, height: height), this);
         }
     }
 }

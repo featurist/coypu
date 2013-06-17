@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -557,13 +558,38 @@ namespace Coypu.AcceptanceTests
         public void MaximiseWindow()
         {
             var availWidth = float.Parse(browser.ExecuteScript("return window.screen.availWidth;"));
-            var initalWidth = float.Parse(browser.ExecuteScript("return window.outerWidth;"));
+            var initalWidth = GetOuterWidth();
 
             Assert.That(initalWidth, Is.LessThan(availWidth));
 
             browser.MaximiseWindow();
 
-            Assert.That(float.Parse(browser.ExecuteScript("return window.outerWidth;")), Is.GreaterThanOrEqualTo(availWidth));
+            Assert.That(GetOuterWidth(), Is.GreaterThanOrEqualTo(availWidth));
+        }
+
+        [Test]
+        public void ResizeWindow()
+        {
+            var initalWidth = GetOuterWidth();
+            var initialHeight = GetOuterHeight();
+
+            Assert.That(initalWidth, Is.Not.EqualTo(500));
+            Assert.That(initialHeight, Is.Not.EqualTo(600));
+
+            browser.ResizeTo(500, 600);
+
+            Assert.That(GetOuterWidth(), Is.EqualTo(500));
+            Assert.That(GetOuterHeight(), Is.EqualTo(600));
+        }
+
+        private float GetOuterHeight()
+        {
+            return float.Parse(browser.ExecuteScript("return window.outerHeight;"));
+        }
+
+        private float GetOuterWidth()
+        {
+            return float.Parse(browser.ExecuteScript("return window.outerWidth;"));
         }
 
         [Test]

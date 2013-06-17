@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -45,6 +46,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
         public readonly IList<Scope> MaximiseWindowCalls= new List<Scope>();
+        public readonly IList<ScopedRequest<Size>> ResizeToCalls = new List<ScopedRequest<Size>>();
 
         private IList<Cookie> stubbedCookies;
 
@@ -70,7 +72,6 @@ namespace Coypu.Tests.TestDoubles
             public T request;
             public Scope Scope;
         }
-
 
         public Drivers.Browser Browser { get; private set; }
 
@@ -258,6 +259,11 @@ namespace Coypu.Tests.TestDoubles
         public void MaximiseWindow(Scope scope)
         {
             MaximiseWindowCalls.Add(scope);
+        }
+
+        public void ResizeTo(Size size, Scope Scope)
+        {
+            ResizeToCalls.Add(new ScopedRequest<Size>{request = size, Scope = Scope});
         }
 
         public void Set(Element element, string value)

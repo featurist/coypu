@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -186,6 +187,11 @@ namespace Coypu.Drivers.Watin
         public void MaximiseWindow(Scope scope)
         {
             GetWindowScope(scope).ShowWindow(NativeMethods.WindowShowStyle.Maximize);
+        }
+
+        public void ResizeTo(Size size, Scope scope)
+        {
+            GetWindowScope(scope).SizeWindow(size.Width, size.Height);
         }
 
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)

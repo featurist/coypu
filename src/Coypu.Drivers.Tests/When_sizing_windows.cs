@@ -1,4 +1,5 @@
-﻿using Coypu.Finders;
+﻿using System.Drawing;
+using Coypu.Finders;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -38,6 +39,43 @@ namespace Coypu.Drivers.Tests
             Driver.MaximiseWindow(driverScope);
 
             Assert.That(float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope)), Is.GreaterThanOrEqualTo(availWidth));
+        }
+
+
+
+        [Test]
+        public void ResizesWindow()
+        {
+            AssertResizesWindow(Root);
+        }
+
+        [Test]
+        public void ResizesCorrectWindowScope()
+        {
+            Driver.Click(Driver.FindLink("Open pop up window", Root));
+            var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+
+            try
+            {
+                AssertResizesWindow(popUp);
+            }
+            finally
+            {
+                Driver.ExecuteScript("return self.close();", popUp);
+            }
+        }
+
+        private static void AssertResizesWindow(DriverScope driverScope)
+        {
+            var availWidth = float.Parse(Driver.ExecuteScript("return window.screen.availWidth;", driverScope));
+            var initalWidth = float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope));
+
+            Assert.That(initalWidth, Is.LessThan(availWidth));
+
+            Driver.ResizeTo(new Size(768, 500), driverScope);
+
+            Assert.That(float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope)), Is.EqualTo(768));
+            Assert.That(float.Parse(Driver.ExecuteScript("return window.outerHeight;", driverScope)), Is.EqualTo(500));
         }
     }
 }
