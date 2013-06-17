@@ -389,6 +389,17 @@ Switching between frames and windows is a particular pain in WebDriver as you ma
     
     button.Click();
 
+#### Window size
+
+Sometimes you need to maximise the window, or to set a particular width, perhaps for testing your responsive layout:
+
+	browser.MaximiseWindow();
+	browser.ResizeTo(768,1000);
+
+If you are dealing with multiple windows, just call these on the correct scope:
+
+    browser.FindWindow("Pop Up Window").MaximiseWindow();
+
 #### Executing javascript in the browser
 
 You can execute javascript like so:

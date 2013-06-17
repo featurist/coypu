@@ -1,3 +1,19 @@
+# Version 0.17.0
+
+Release date: 2013-06-17
+
+### Added
+
+* MaximiseWindow 
+
+#### Fixed
+
+* Visit now operates on the correct window in all browsers
+* WatiNDriver gets a bunch of fixes for window scope (ExecuteScript, Dialogs, Visit)
+* WatiNDriver now supports Title and Location
+* WatinDriver now passes the "tricky" window tests i.e. window references survive popups being closed and reopened just like the selenium driver does.
+
+
 # Version 0.16.3
 
 Release date: 2013-06-04
