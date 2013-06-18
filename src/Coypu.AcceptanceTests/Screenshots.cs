@@ -2,7 +2,6 @@
 using System.Drawing.Imaging;
 using System.IO;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace Coypu.AcceptanceTests
 {
@@ -13,18 +12,46 @@ namespace Coypu.AcceptanceTests
         public void SavesToSpecifiedLocation()
         {
             browser.Visit(TestPageLocation("test-card.jpg"));
+            browser.ResizeTo(800, 600);
 
-            browser.ResizeTo(800,600);
-            const string saveTo = "screenshot-test-card.jpg";
-            browser.SaveScreenshot(saveTo, ImageFormat.Jpeg);
-  
-            Assert.That(File.Exists(saveTo), "Expected screenshot saved to " + new FileInfo(saveTo).FullName);
-            var saved = Image.FromFile("screenshot-test-card.jpg");
+            SavesToSpecifiedLocation(browser);
+        }
 
-            var docWidth = float.Parse(browser.ExecuteScript("window.document.width"));
-            var docHeight = float.Parse(browser.ExecuteScript("window.document.height"));
-            Assert.That(saved.PhysicalDimension, Is.EqualTo(new SizeF(docWidth, docHeight)));
-                
+        [Test]
+        public void CapturesCorrectWindow()
+        {
+            browser.ClickLink("Open pop up window");
+            var popUp = browser.FindWindow("Pop Up Window");
+            popUp.Visit(TestPageLocation("test-card.jpg"));
+            popUp.ResizeTo(800, 600);
+
+            // Do something in the main window
+            browser.FindCss("legend").Click();
+
+            SavesToSpecifiedLocation(popUp);
+        }
+
+        private static void SavesToSpecifiedLocation(BrowserWindow browserWindow)
+        {
+            
+            const string fileName = "screenshot-test-card.jpg";
+            try
+            {
+                browserWindow.SaveScreenshot(fileName, ImageFormat.Jpeg);
+
+                Assert.That(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
+                using (var saved = Image.FromFile("screenshot-test-card.jpg"))
+                {
+                    var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;"));
+                    var docHeight = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientHeight;"));
+                    Assert.That(saved.PhysicalDimension, Is.EqualTo(new SizeF(docWidth, docHeight)));
+                }
+            }
+            finally
+            {
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+            }
         }
     }
 }

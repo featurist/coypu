@@ -6,7 +6,6 @@ namespace Coypu.Drivers.Tests
 {
     internal class When_sizing_windows : DriverSpecs
     {
-
         [Test]
         public void MaximisesWindow()
         {

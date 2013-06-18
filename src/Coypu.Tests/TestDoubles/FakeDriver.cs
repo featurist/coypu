@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -47,6 +48,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
         public readonly IList<Scope> MaximiseWindowCalls= new List<Scope>();
         public readonly IList<ScopedRequest<Size>> ResizeToCalls = new List<ScopedRequest<Size>>();
+        public readonly IList<ScopedRequest<string>> SaveScreenshotCalls = new List<ScopedRequest<string>>();
 
         private IList<Cookie> stubbedCookies;
 
@@ -59,6 +61,12 @@ namespace Coypu.Tests.TestDoubles
             Browser = browser;
         }
         
+        public class SaveScreenshotParams
+        {
+            public string SaveAs;
+            public ImageFormat ImageFormat;
+        }
+
         class ScopedStubResult
         {
             public object Locator;
@@ -69,7 +77,7 @@ namespace Coypu.Tests.TestDoubles
 
         public class ScopedRequest<T>
         {
-            public T request;
+            public T Request;
             public Scope Scope;
         }
 
@@ -124,7 +132,7 @@ namespace Coypu.Tests.TestDoubles
 
         public void Visit(string url, Scope scope)
         {
-            Visits.Add(new ScopedRequest<string>{request = url, Scope = scope});
+            Visits.Add(new ScopedRequest<string>{Request = url, Scope = scope});
         }
 
         public void StubButton(string locator, ElementFound element, Scope scope)
@@ -263,7 +271,16 @@ namespace Coypu.Tests.TestDoubles
 
         public void ResizeTo(Size size, Scope Scope)
         {
-            ResizeToCalls.Add(new ScopedRequest<Size>{request = size, Scope = Scope});
+            ResizeToCalls.Add(new ScopedRequest<Size>{Request = size, Scope = Scope});
+        }
+
+        public void SaveScreenshot(string fileName, Scope scope)
+        {
+            SaveScreenshotCalls.Add(new ScopedRequest<string>
+                {
+                    Request = fileName,
+                    Scope = scope
+                });
         }
 
         public void Set(Element element, string value)

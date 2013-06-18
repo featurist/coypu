@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_saving_screenshots.cs" />
     <Compile Include="When_sending_keys_to_elements.cs" />
     <Compile Include="When_finding_frames.cs" />
     <Compile Include="When_elements_are_stale.cs" />
@@ -169,6 +170,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\html\frame1.htm" />
+    <Content Include="bin\Debug\html\frame2.htm" />
+    <Content Include="bin\Debug\html\frameset.htm" />
+    <Content Include="bin\Debug\html\iFrame1.htm" />
+    <Content Include="bin\Debug\html\iFrame2.htm" />
+    <Content Include="bin\Debug\html\InteractionTestsPage.htm" />
+    <Content Include="bin\Debug\html\popUp.htm" />
+    <Content Include="bin\Debug\html\test-card.jpg" />
     <Content Include="html\frameset.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -189,6 +198,9 @@
     </Content>
     <Content Include="html\InteractionTestsPage.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\test-card.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="results\driver_test_results.txt" />
   </ItemGroup>

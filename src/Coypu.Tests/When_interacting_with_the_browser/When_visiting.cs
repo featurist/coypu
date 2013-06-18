@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             stubUrlBuilder.SetStubUrl("/some/resource", "http://blank.org");
             browserSession.Visit("/some/resource");
-            Assert.That(driver.Visits.Single().request, Is.EqualTo("http://blank.org"));
+            Assert.That(driver.Visits.Single().Request, Is.EqualTo("http://blank.org"));
             Assert.That(driver.Visits.Single().Scope, Is.EqualTo(browserSession));
         }
 
@@ -21,7 +21,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             stubUrlBuilder.SetStubUrl("/some/resource", "http://blank.org");
             popupScope.Visit("/some/resource");
             
-            Assert.That(driver.Visits.Single().request, Is.EqualTo("http://blank.org"));
+            Assert.That(driver.Visits.Single().Request, Is.EqualTo("http://blank.org"));
             Assert.That(driver.Visits.Single().Scope, Is.EqualTo(popupScope));
         }
     }

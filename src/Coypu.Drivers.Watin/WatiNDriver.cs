@@ -194,6 +194,11 @@ namespace Coypu.Drivers.Watin
             GetWindowScope(scope).SizeWindow(size.Width, size.Height);
         }
 
+        public void SaveScreenshot(string fileName, Scope scope)
+        {
+            GetWindowScope(scope).CaptureWebPageToFile(fileName);
+        }
+
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
             return ieBrowser.GetCookiesForUrl(Watin.Uri).Cast<Cookie>();

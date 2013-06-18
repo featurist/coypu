@@ -29,8 +29,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var mainWindow = browserSession;
             mainWindow.ResizeTo(500, 600);
 
-            Assert.That(driver.ResizeToCalls.Single().request.Width, Is.EqualTo(500));
-            Assert.That(driver.ResizeToCalls.Single().request.Height, Is.EqualTo(600));
+            Assert.That(driver.ResizeToCalls.Single().Request.Width, Is.EqualTo(500));
+            Assert.That(driver.ResizeToCalls.Single().Request.Height, Is.EqualTo(600));
             Assert.That(driver.ResizeToCalls.Single().Scope, Is.SameAs(mainWindow));
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -99,6 +100,11 @@ namespace Coypu
         public void ResizeTo(int width, int height)
         {
             driver.ResizeTo(new Size(width: width, height: height), this);
+        }
+
+        public void SaveScreenshot(string saveAs, ImageFormat imageFormat)
+        {
+            driver.SaveScreenshot(saveAs, this);
         }
     }
 }

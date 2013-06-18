@@ -117,7 +117,8 @@
       <Link>html\InteractionTestsPage.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\test-card.jpg">
+    <Content Include="..\Coypu.Drivers.Tests\html\test-card.jpg">
+      <Link>html\test-card.jpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="html\tricky.htm">

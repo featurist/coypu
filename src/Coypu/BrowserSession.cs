@@ -88,10 +88,5 @@ namespace Coypu
 
             WasDisposed = true;
         }
-
-        public void SaveScreenshot(string saveAs, ImageFormat imageFormat)
-        {
-               
-        }
     }
 }

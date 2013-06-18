@@ -44,5 +44,6 @@ namespace Coypu
         void SendKeys(Element element, string keys);
         void MaximiseWindow(Scope scope);
         void ResizeTo(Size size, Scope Scope);
+        void SaveScreenshot(string fileName, Scope scope);
     }
 }

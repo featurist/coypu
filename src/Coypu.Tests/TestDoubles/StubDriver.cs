@@ -202,6 +202,10 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
+        public void SaveScreenshot(string fileName, Scope scope)
+        {
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
         }
