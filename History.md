@@ -1,3 +1,12 @@
+# Version 0.18.0
+
+Release date: 2013-06-18
+
+### Added
+
+* SaveScreenshot(fileName)
+
+
 # Version 0.17.0
 
 Release date: 2013-06-17
