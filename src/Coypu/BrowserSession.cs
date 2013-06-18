@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Imaging;
 using Coypu.Finders;
 using Coypu.Robustness;
 using Coypu.WebRequests;
@@ -86,6 +87,11 @@ namespace Coypu
             ActivatorDriverFactory.OpenDrivers--;
 
             WasDisposed = true;
+        }
+
+        public void SaveScreenshot(string saveAs, ImageFormat imageFormat)
+        {
+               
         }
     }
 }
