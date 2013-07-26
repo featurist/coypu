@@ -40,12 +40,6 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Finds_a_particular_input_button_by_id_ends_with()
-        {
-            Driver.FindButton("otherButtonId", Root).Id.should_be("_ctrl1_otherButtonId");
-        }
-
-        [Test]
         public void Finds_a_particular_input_button_by_its_name()
         {
             Driver.FindButton("secondInputButtonId", Root).Value.should_be("second input button");
@@ -140,11 +134,6 @@ namespace Coypu.Drivers.Tests
         {
             var button = Driver.FindButton("I'm an image button with \"both\" types of quote in my value", Root);
             Assert.That(button.Id, Is.EqualTo("buttonWithBothQuotesId"));
-        }
-        [Test]
-        public void Finds_a_particular_input_button_by_id_before_finding_by_id_ends_with()
-        {
-            Driver.FindButton("partialButtonId", Root).Id.should_be("partialButtonId");
         }
     }
 }

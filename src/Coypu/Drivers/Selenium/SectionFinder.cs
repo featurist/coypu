@@ -9,42 +9,24 @@ namespace Coypu.Drivers.Selenium
         private readonly ElementFinder elementFinder;
         private readonly TextMatcher textMatcher;
 
+        readonly string[] sectionTags = { "section", "div"};
         readonly string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
+        private readonly XPath xPath;
 
-        public SectionFinder(ElementFinder elementFinder, TextMatcher textMatcher)
+        public SectionFinder(ElementFinder elementFinder, XPath xPath)
         {
             this.elementFinder = elementFinder;
-            this.textMatcher = textMatcher;
+            this.xPath = xPath;
         }
 
         public IWebElement FindSection(string locator, Scope scope)
         {
-            return FindSectionByHeaderText(locator,scope) ??
-                   elementFinder.Find(By.Id(locator),scope).FirstDisplayedOrDefault(IsSection);
-        }
-
-        private IWebElement FindSectionByHeaderText(string locator, Scope scope) 
-        {
-            return FindSectionByHeaderText(locator, "section",scope) ??
-                   FindSectionByHeaderText(locator, "div",scope);
-        }
-
-        private IWebElement FindSectionByHeaderText(string locator, string sectionTag, Scope scope) 
-        {
-            var headersXPath = String.Join(" or ", headerTags);
-            var withAHeader = elementFinder.Find(By.XPath(String.Format(".//{0}[{1}]", sectionTag, headersXPath)),scope);
-
-            return withAHeader.FirstDisplayedOrDefault(e => WhereAHeaderMatches(e, locator));
-        }
-
-        private bool WhereAHeaderMatches(ISearchContext e, string locator)
-        {
-            return e.FindElements(By.XPath("./*")).Any(h => headerTags.Contains(h.TagName) && textMatcher.TextMatches(h, locator));
-        }
-
-        private static bool IsSection(IWebElement e) 
-        {
-            return e.TagName == "section" || e.TagName == "div";
+            var xpath = xPath.Format(".//*[" + xPath.TagNamedOneOf(sectionTags) + " and (" +
+                                        "./*[" + xPath.TagNamedOneOf(headerTags) + " and normalize-space() = {0} ] or " +
+                                        "@id = {0}" + 
+                                     ")]",locator.Trim());
+           
+            return elementFinder.Find(By.XPath(xpath),scope).FirstOrDefault();
         }
     }
 }

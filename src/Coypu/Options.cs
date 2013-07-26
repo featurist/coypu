@@ -8,7 +8,7 @@ namespace Coypu
     public class Options
     {
         const double DEFAULT_TIMEOUT_SECONDS = 1;
-        const double DEFAULT_INTERVAL_SECONDS = 0.1;
+        const double DEFAULT_INTERVAL_SECONDS = 0.01;
 
         /// <summary>
         /// New default options

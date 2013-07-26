@@ -35,13 +35,13 @@ namespace Coypu.Drivers.Selenium
         {
             this.webDriver = webDriver;
             this.browser = browser;
-            xPath = new XPath();
+            xPath = new XPath(browser.UppercaseTagNames);
             elementFinder = new ElementFinder(xPath);
             fieldFinder = new FieldFinder(elementFinder, xPath);
             frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
-            buttonFinder = new ButtonFinder(elementFinder, textMatcher, xPath);
-            sectionFinder = new SectionFinder(elementFinder, textMatcher);
+            buttonFinder = new ButtonFinder(elementFinder, xPath);
+            sectionFinder = new SectionFinder(elementFinder, xPath);
             dialogs = new Dialogs(this.webDriver);
             mouseControl = new MouseControl(this.webDriver);
             optionSelector = new OptionSelector();
@@ -116,8 +116,8 @@ namespace Coypu.Drivers.Selenium
         public ElementFound FindFieldset(string locator, Scope scope)
         {
             var fieldset =
-                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}]]", locator)),scope).FirstOrDefault() ??
-                Find(By.Id(locator),scope).FirstOrDefault(e => e.TagName == "fieldset");
+                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}] or @id = {0}]", locator.Trim())), scope)
+                    .FirstOrDefault();
 
             return BuildElement(fieldset, "Failed to find fieldset: " + locator);
         }

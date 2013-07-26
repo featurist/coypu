@@ -78,7 +78,6 @@
     <Compile Include="When_finding_windows.cs" />
     <Compile Include="When_finding_fields_by_container_label.cs" />
     <Compile Include="When_finding_fields_by_for_attribute.cs" />
-    <Compile Include="When_finding_fields_by_id_ends_with.cs" />
     <Compile Include="When_finding_fields_by_name.cs" />
     <Compile Include="When_finding_fields_by_placeholder.cs" />
     <Compile Include="When_finding_fields_id.cs" />
@@ -170,14 +169,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\html\frame1.htm" />
-    <Content Include="bin\Debug\html\frame2.htm" />
-    <Content Include="bin\Debug\html\frameset.htm" />
-    <Content Include="bin\Debug\html\iFrame1.htm" />
-    <Content Include="bin\Debug\html\iFrame2.htm" />
-    <Content Include="bin\Debug\html\InteractionTestsPage.htm" />
-    <Content Include="bin\Debug\html\popUp.htm" />
-    <Content Include="bin\Debug\html\test-card.jpg" />
+    <Content Include="bin\Debug\IEDriverServer.exe" />
     <Content Include="html\frameset.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

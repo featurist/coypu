@@ -15,8 +15,9 @@ namespace Coypu.Drivers
         public bool Javascript { get; private set; }
         public bool ModalDialogs { get; private set; }
         public bool IFrames { get; private set; }
+        public bool UppercaseTagNames { get; private set; }
 
-        public static Browser Firefox                = new Browser { Javascript = true };
+        public static Browser Firefox                = new Browser { Javascript = true, UppercaseTagNames = true };
         public static Browser InternetExplorer       = new Browser { Javascript = true };
         public static Browser Chrome                 = new Browser { Javascript = true };
         public static Browser Safari                 = new Browser { Javascript = true };

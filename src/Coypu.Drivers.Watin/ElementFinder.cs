@@ -9,6 +9,13 @@ namespace Coypu.Drivers.Watin
 {
     internal class ElementFinder
     {
+        private XPath xPath;
+
+        internal ElementFinder()
+        {
+            xPath = new XPath();
+        }
+
         internal static IElementContainer WatiNScope(Scope scope)
         {
             return (IElementContainer)scope.Now().Native;
@@ -30,24 +37,7 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindButton(string locator, Scope scope)
         {
-            var isButton = Constraints.OfType<Button>()
-                           | Find.ByElement(e => e.TagName == "INPUT" && e.GetAttributeValue("type") == "image")
-                           | Find.By("role", "button")
-                           | Find.ByClass("button",false)
-                           | Find.ByClass("btn", false);
-
-            var byText = Find.ByText(locator);
-            var byIdNameValueOrAlt = Find.ById(locator)
-                                     | Find.ByName(locator)
-                                     | Find.ByValue(locator)
-                                     | Find.ByAlt(locator);
-            var byPartialId = Constraints.WithPartialId(locator);
-            var hasLocator = byText | byIdNameValueOrAlt | byPartialId;
-
-            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
-
-            var candidates = WatiNScope(scope).Elements.Filter(isButton & hasLocator & isVisible);
-            return candidates.FirstMatching(byText, byIdNameValueOrAlt, byPartialId);
+            return FindXPath(new XPath().ButtonXPath(locator), scope);
         }
 
         public WatiN.Core.Element FindElement(string id, Scope scope)
@@ -57,45 +47,11 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindField(string locator, Scope scope)
         {
-            var field = FindFieldByLabel(locator,scope);
-            if (field == null)
-            {
-                var isField = Constraints.IsField();
-
-                var byIdOrName = Find.ById(locator) | Find.ByName(locator);
-                var byPlaceholder = Find.By("placeholder", locator);
-                var radioButtonOrCheckboxByValue = (Constraints.OfType<RadioButton>() | Constraints.OfType<CheckBox>()) & Find.ByValue(locator);
-                var byPartialId = Constraints.WithPartialId(locator);
-
-                var hasLocator = byIdOrName | byPlaceholder | radioButtonOrCheckboxByValue | byPartialId;
-
-                var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
-
-                var candidates = WatiNScope(scope).Elements.Filter(isField & hasLocator & isVisible);
-                field = candidates.FirstMatching(byIdOrName, byPlaceholder, radioButtonOrCheckboxByValue, byPartialId);
-            }
-
-            return field;
+            return xPath.FieldXPaths(locator, scope)
+                    .Select(xpath => FindXPath(xpath, scope))
+                    .FirstOrDefault(element => element != null);
         }
-
-        private WatiN.Core.Element FindFieldByLabel(string locator, Scope scope)
-        {
-            WatiN.Core.Element field = null;
-
-            var label = WatiNScope(scope).Labels.First(Find.ByText(new Regex(locator)));
-            if (label != null)
-            {
-                var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
-
-                if (!string.IsNullOrEmpty(label.For))
-                    field = WatiNScope(scope).Elements.First(Find.ById(label.For) & isVisible);
-
-                if (field == null)
-                    field = label.Elements.First(Constraints.IsField() & isVisible);
-            }
-            return field;
-        }
-
+        
         public WatiN.Core.Element FindFieldset(string locator, Scope scope)
         {
             var withId = Find.ById(locator);

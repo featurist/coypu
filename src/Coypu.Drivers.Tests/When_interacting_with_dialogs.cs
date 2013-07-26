@@ -81,7 +81,7 @@ namespace Coypu.Drivers.Tests
                 Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
                 
 
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(700);
                 Driver.AcceptModalDialog(Root);
                 Driver.HasDialog("You have triggered a alert and this is the text.", Root).should_be_false();
             }
