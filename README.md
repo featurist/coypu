@@ -214,10 +214,6 @@ To restrict `FindCss()` to only elements matching some expected text you can do
 or
 
 	browser.FindCss("ul.model li", text: new Regex("Citroen C\d"));
-
-To help with asp.net testing, if there is no matching element based on the rules above then an element that ends with the locator will be matched.
-
-	browser.Check("radioTrade"); // matches id="_00123_some_aspnet_webforms_crap_radioTrade";
 	
 #### Clicking
 
@@ -225,10 +221,6 @@ Buttons are found by value/text, id or name.
 
 	browser.ClickButton("Search");
 	browser.ClickButton("search-used-vehicles");
-	
-To help with asp.net testing, if none of these match an id that ends with the locator will be matched.
-	
-	browser.ClickButton("btnSearch"); // matches id="_00123_some_aspnet_webforms_crap_btnSearch";
 	
 Links are found by the text of the link
 
@@ -365,6 +357,8 @@ To restrict the scope to a browser window (or tab), locate the window by its tit
 	surveyPopup.ClickButton("Submit");
 	
 	browser.ClickLink("Logout"); // Using the original window scope again - there is no need to switch back, just use the correct scope
+
+If no exact match is found Coypu will consider windows were the title contains the supplied value
 	
 Switching between frames and windows is a particular pain in WebDriver as you may well know. Check out this example of how Coypu handles windows from a Coypu acceptance test:
 

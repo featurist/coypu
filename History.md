@@ -1,3 +1,21 @@
+# Version 0.19.0
+
+Release date: 2013-07-31
+
+### Added
+
+* Windows found by title contains if no exact match
+
+### Updated
+
+* Selenium WebDriver 2.33.0
+* Refactoring to single xpaths for performance & standardisation across drivers
+
+### Removed
+
+* Fields and buttons are no longer found by ID ends with, only an exact match of ID
+
+
 # Version 0.18.0
 
 Release date: 2013-06-18

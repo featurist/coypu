@@ -14,13 +14,13 @@ public class AssemblyTearDown
     [SetUp]
     public void StartSinatra()
     {
-        sinatraSite = new SinatraSite(@"..\..\..\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb");
+        //sinatraSite = new SinatraSite(@"..\..\..\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb");
     }
 
     [TearDown]
     public void TearDown()
     {
-        sinatraSite.Dispose();
+        //sinatraSite.Dispose();
 
         Coypu.Drivers.Tests.DriverSpecs.DisposeDriver();
     }
