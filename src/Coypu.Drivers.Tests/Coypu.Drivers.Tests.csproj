@@ -170,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\IEDriverServer.exe" />
+    <Content Include="html\popUp2.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\frameset.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -25,6 +25,7 @@ namespace Coypu.Drivers.Selenium
         private readonly OptionSelector optionSelector;
         private readonly XPath xPath;
         private readonly Browser browser;
+        private readonly WindowHandleFinder windowHandleFinder;
 
         public SeleniumWebDriver(Browser browser)
             : this(new DriverFactory().NewWebDriver(browser),  browser)
@@ -42,6 +43,7 @@ namespace Coypu.Drivers.Selenium
             textMatcher = new TextMatcher();
             buttonFinder = new ButtonFinder(elementFinder, xPath);
             sectionFinder = new SectionFinder(elementFinder, xPath);
+            windowHandleFinder = new WindowHandleFinder(this.webDriver);
             dialogs = new Dialogs(this.webDriver);
             mouseControl = new MouseControl(this.webDriver);
             optionSelector = new OptionSelector();
@@ -250,48 +252,7 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindWindow(string titleOrName, Scope scope)
         {
-            return new WindowHandle(webDriver, FindWindowHandle(titleOrName));
-        }
-
-        private string FindWindowHandle(string titleOrName)
-        {
-            var currentHandle = GetCurrentWindowHandle();
-            string matchingWindowHandle = null;
-
-            try
-            {
-                webDriver.SwitchTo().Window(titleOrName);
-                matchingWindowHandle = webDriver.CurrentWindowHandle;
-            }
-            catch (NoSuchWindowException)
-            {
-                foreach (var windowHandle in webDriver.WindowHandles)
-                {
-                    webDriver.SwitchTo().Window(windowHandle);
-                    if (windowHandle == titleOrName || webDriver.Title == titleOrName)
-                    {
-                        matchingWindowHandle = windowHandle;
-                        break;
-                    }
-                }
-            }
-
-            if (matchingWindowHandle == null)
-                throw new MissingWindowException("No such window found: " + titleOrName);
-
-            webDriver.SwitchTo().Window(currentHandle);
-            return matchingWindowHandle;
-        }
-
-        private string GetCurrentWindowHandle()
-        {
-            try
-            {
-                return webDriver.CurrentWindowHandle;
-            }
-            catch (NoSuchWindowException) {}
-            catch (InvalidOperationException) {}
-            return null;
+            return new WindowHandle(webDriver, windowHandleFinder.FindWindowHandle(titleOrName));
         }
 
         public void Set(Element element, string value) 

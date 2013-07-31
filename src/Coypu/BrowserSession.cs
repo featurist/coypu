@@ -69,6 +69,16 @@ namespace Coypu
             restrictedResourceDownloader.DownloadFile(urlBuilder.GetFullyQualifiedUrl(resource, SessionConfiguration), saveAs);
         }
 
+        /// <summary>
+        /// Find an open browser window or tab by its title or name. If no exact match is found a partial match on title will be considered.
+        /// </summary>
+        /// <param name="locator">Window title or name</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>The matching BrowserWindow scope</returns>
         public BrowserWindow FindWindow(string locator, Options options = null)
         {
             return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, locator, this));
