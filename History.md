@@ -1,3 +1,12 @@
+# Version 0.19.1
+
+Release date: 2013-09-10
+
+### Updated
+
+* Selenium WebDriver 2.35.0
+
+
 # Version 0.19.0
 
 Release date: 2013-07-31
