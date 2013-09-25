@@ -324,7 +324,7 @@ namespace Coypu
 
         public State FindState(params State[] states)
         {
-            return stateFinder.FindState(SetOptions(options), states);
+            return stateFinder.FindState(SetOptions(SessionConfiguration), states);
         }
 
         /// <summary>
