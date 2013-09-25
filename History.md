@@ -1,3 +1,12 @@
+# Version 0.19.2
+
+Release date: 2013-09-25
+
+### Fixed
+
+* Find state (no options) was not respecting session configuration
+
+
 # Version 0.19.1
 
 Release date: 2013-09-10
