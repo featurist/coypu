@@ -1,3 +1,11 @@
+# Version 0.19.3
+
+Release date: 2013-09-26
+
+### Updated
+
+* Performance improvements for WebDriver
+
 # Version 0.19.2
 
 Release date: 2013-09-25
