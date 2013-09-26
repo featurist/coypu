@@ -68,12 +68,9 @@ namespace Coypu.Drivers.Selenium
             selenium.SwitchTo().Window(windowName);
         }
 
-        public bool Stale
+        public bool Stale(Options options)
         {
-            get
-            {
-                return !selenium.WindowHandles.Contains(windowHandle);
-            }
+            return !selenium.WindowHandles.Contains(windowHandle);
         }
 
         public string this[string attributeName]

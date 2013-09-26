@@ -37,7 +37,7 @@ namespace Coypu.Drivers.Selenium
             this.webDriver = webDriver;
             this.browser = browser;
             xPath = new XPath(browser.UppercaseTagNames);
-            elementFinder = new ElementFinder(xPath);
+            elementFinder = new ElementFinder();
             fieldFinder = new FieldFinder(elementFinder, xPath);
             frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
@@ -107,19 +107,18 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindLink(string linkText, Scope scope)
         {
-            return BuildElement(Find(By.LinkText(linkText), scope).FirstOrDefault(), "No such link: " + linkText);
+            return BuildElement(Find(By.LinkText(linkText), scope), "No such link: " + linkText);
         }
 
         public ElementFound FindId(string id,Scope scope ) 
         {
-            return BuildElement(Find(By.Id(id), scope).FirstOrDefault(), "Failed to find id: " + id);
+            return BuildElement(Find(By.Id(id), scope), "Failed to find id: " + id);
         }
 
         public ElementFound FindFieldset(string locator, Scope scope)
         {
             var fieldset =
-                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}] or @id = {0}]", locator.Trim())), scope)
-                    .FirstOrDefault();
+                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}] or @id = {0}]", locator.Trim())), scope);
 
             return BuildElement(fieldset, "Failed to find fieldset: " + locator);
         }
@@ -131,28 +130,36 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
-            Func<IWebElement, bool> textMatches = e => textPattern == null || textMatcher.TextMatches(e, textPattern);
-            return BuildElement(Find(By.CssSelector(cssSelector),scope).FirstOrDefault(textMatches),"No element found by css: " + cssSelector);
+            var textMatches = (textPattern == null)
+                ? (Func<IWebElement, bool>) null
+                : e => textMatcher.TextMatches(e, textPattern);
+
+            return BuildElement(Find(By.CssSelector(cssSelector), scope, textMatches), "No element found by css: " + cssSelector);
         }
 
         public ElementFound FindXPath(string xpath, Scope scope)
         {
-            return BuildElement(Find(By.XPath(xpath),scope).FirstOrDefault(),"No element found by xpath: " + xpath);
+            return BuildElement(Find(By.XPath(xpath),scope),"No element found by xpath: " + xpath);
         }
 
         public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope)
         {
-            return Find(By.CssSelector(cssSelector),scope).Select(e => BuildElement(e)).Cast<ElementFound>();
+            return FindAll(By.CssSelector(cssSelector),scope).Select(BuildElement).Cast<ElementFound>();
         }
 
         public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
         {
-            return Find(By.XPath(xpath), scope).Select(e => BuildElement(e)).Cast<ElementFound>();
+            return FindAll(By.XPath(xpath), scope).Select(BuildElement).Cast<ElementFound>();
         }
 
-        private IEnumerable<IWebElement> Find(By by, Scope scope)
+        private IWebElement Find(By by, Scope scope, Func<IWebElement, bool> predicate = null)
         {
-            return elementFinder.Find(by, scope);
+            return elementFinder.Find(by, scope, predicate);
+        }
+
+        private IEnumerable<IWebElement> FindAll(By by, Scope scope)
+        {
+            return elementFinder.FindAll(by, scope);
         }
 
         private ElementFound BuildElement(IWebElement element, string failureMessage)
@@ -194,7 +201,7 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasXPath(string xpath, Scope scope)
         {
-            return Find(By.XPath(xpath), scope).Any();
+            return Find(By.XPath(xpath), scope) != null;
         }
 
         public bool HasDialog(string withText, Scope scope)

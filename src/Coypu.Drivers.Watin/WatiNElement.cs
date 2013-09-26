@@ -84,13 +84,12 @@ namespace Coypu.Drivers.Watin
         public object Native { get; private set; }
 
 
-        public bool Stale
+        public bool Stale(Options options)
         {
-            get
-            {
-                return !NativeWatiNElement.Exists ||
-                       !(NativeWatiNElement.Style.Display == "none" || NativeWatiNElement.Style.GetAttributeValue("visibility") != "hidden");
-            }
+            return !NativeWatiNElement.Exists ||
+                   (!options.ConsiderInvisibleElements &&
+                   !(NativeWatiNElement.Style.Display == "none" ||
+                     NativeWatiNElement.Style.GetAttributeValue("visibility") != "hidden"));
         }
 
         public string this[string attributeName]

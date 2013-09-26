@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Selenium
 
         private IWebElement FindFrameByTag(string locator, Scope scope, string tagNameToFind)
         {
-            return WebElement(locator, elementFinder.Find(By.TagName(tagNameToFind), scope));
+            return WebElement(locator, elementFinder.FindAll(By.TagName(tagNameToFind), scope));
         }
 
         private IWebElement WebElement(string locator, IEnumerable<IWebElement> webElements)

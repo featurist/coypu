@@ -18,12 +18,12 @@ namespace Coypu
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
         private ElementFound element;
-        private Options options;
+        protected Options options;
 
         internal DriverScope(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
             this.elementFinder = elementFinder ?? new DocumentElementFinder(driver);
-            this.SessionConfiguration = SessionConfiguration;
+            this.options = this.SessionConfiguration = SessionConfiguration;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.waiter = waiter;
@@ -339,7 +339,7 @@ namespace Coypu
 
         protected internal ElementFound FindElement()
         {
-            if (element == null || element.Stale)
+            if (element == null || element.Stale(options))
                 element = elementFinder.Find();
             return element;
         }

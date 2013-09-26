@@ -8,6 +8,6 @@
         /// <summary>
         /// The native element is no longer attached to the DOM
         /// </summary>
-        bool Stale { get; }
+        bool Stale(Options options);
     }
 }

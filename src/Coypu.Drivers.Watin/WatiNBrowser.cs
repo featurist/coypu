@@ -71,18 +71,15 @@ namespace Coypu.Drivers.Watin
             }
         }
 
-        public bool Stale
+        public bool Stale(Options options)
         {
-            get
+            try
             {
-                try
-                {
-                    return !WatiN.Core.Browser.Exists<IE>(Find.By("hwnd", browser.hWnd.ToString()));
-                }
-                catch (System.Runtime.InteropServices.COMException)
-                {
-                    return true;
-                }
+                return !WatiN.Core.Browser.Exists<IE>(Find.By("hwnd", browser.hWnd.ToString()));
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                return true;
             }
         }
 

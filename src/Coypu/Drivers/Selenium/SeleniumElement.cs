@@ -71,27 +71,24 @@ namespace Coypu.Drivers.Selenium
 
         
 
-        public bool Stale
+        public bool Stale(Options options)
         {
-            get
+            try
             {
-                try
-                {
-                    NativeSeleniumElement.FindElement(By.XPath("."));
-                    return !NativeSeleniumElement.Displayed;
-                }
-                catch(InvalidOperationException)
-                {
-                    return true;
-                }
-                catch (NoSuchWindowException)
-                {
-                    return true;
-                }
-                catch (StaleElementReferenceException)
-                {
-                    return true;
-                }
+                NativeSeleniumElement.FindElement(By.XPath("."));
+                return !options.ConsiderInvisibleElements && !NativeSeleniumElement.Displayed;
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
+            catch (NoSuchWindowException)
+            {
+                return true;
+            }
+            catch (StaleElementReferenceException)
+            {
+                return true;
             }
         }
 

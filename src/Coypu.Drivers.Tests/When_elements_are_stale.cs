@@ -10,44 +10,46 @@ namespace Coypu.Drivers.Tests
         public void Stale_element_removed_from_DOM()
         {
             var elementWithinScope1 = Driver.FindFieldset("Scope 1", Root);
-            elementWithinScope1.Stale.should_be_false();
+            elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = true}).should_be_false();
 
             Driver.Click(Driver.FindButton("empty scope1", Root));
 
-            elementWithinScope1.Stale.should_be_true();
+            elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = true}).should_be_true();
         }
 
         [Test]
         public void Stale_element_became_invisible()
         {
             var elementWithinScope1 = Driver.FindFieldset("Scope 1", Root);
-            elementWithinScope1.Stale.should_be_false();
+            elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = false }).should_be_false();
 
             Driver.Click(Driver.FindButton("hide scope1", Root));
 
-            elementWithinScope1.Stale.should_be_true();
+            elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = false}).should_be_true();
+            elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = true }).should_be_false();
         }
 
         [Test]
         public void Stale_frame()
         {
             var frame = Driver.FindFrame("iframe1", Root);
-            frame.Stale.should_be_false();
+            frame.Stale(new Options()).should_be_false();
 
             Driver.Click(Driver.FindButton("destroy frames",Root));
 
-            frame.Stale.should_be_true();
+            frame.Stale(new Options()).should_be_true();
         }
 
         [Test]
         public void Stale_frame_becomes_invisible()
         {
             var frame = Driver.FindFrame("iframe1", Root);
-            frame.Stale.should_be_false();
+            frame.Stale(new Options { ConsiderInvisibleElements = false }).should_be_false();
 
             Driver.Click(Driver.FindButton("hide frames", Root));
 
-            frame.Stale.should_be_true();
+            frame.Stale(new Options { ConsiderInvisibleElements = false }).should_be_true();
+            frame.Stale(new Options { ConsiderInvisibleElements = true }).should_be_false();
         }
 
         [Test]
@@ -58,11 +60,11 @@ namespace Coypu.Drivers.Tests
             var popUpScope = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
 
             var popUpWindow = popUpScope.Now();
-            popUpWindow.Stale.should_be_false();
+            popUpWindow.Stale(new Options()).should_be_false();
 
             Driver.Click(Driver.FindButton("close", popUpScope));
 
-            popUpWindow.Stale.should_be_true();
+            popUpWindow.Stale(new Options()).should_be_true();
         }
     }
 }

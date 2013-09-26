@@ -19,9 +19,9 @@ namespace Coypu.Tests.TestDoubles
 
         public object Native { get; set; }
 
-        public bool Stale
+        public bool Stale(Options options)
         {
-            get { return false; }
+            return false;
         }
 
         public string this[string attributeName]

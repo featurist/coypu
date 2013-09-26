@@ -7,27 +7,35 @@ namespace Coypu.Drivers.Selenium
 {
     internal class ElementFinder
     {
-        private readonly XPath xPath;
-
-        public ElementFinder(XPath xPath)
-        {
-            this.xPath = xPath;
-        }
-
-        public IEnumerable<IWebElement> FindByPartialId(string id, Scope scope)
-        {
-            id = "_" + id;
-            var xpath = String.Format(".//*[substring(@id, string-length(@id) - {0} + 1, string-length(@id)) = {1}]",
-                                      id.Length, xPath.Literal(id));
-            return Find(By.XPath(xpath),scope);
-        }
-
-        public IEnumerable<IWebElement> Find(By by, Scope scope)
+        public IWebElement Find(By by, Scope scope, Func<IWebElement, bool> predicate = null)
         {
             var context = SeleniumScope(scope);
-            var results = context.FindElements(by).Where(e => IsDisplayed(e, scope));
+            IWebElement firstMatch = null;
+            try
+            {
+                firstMatch = context.FindElement(@by);
+            }
+            catch (WebDriverException) {}
 
-            return results;
+            if (scope.ConsiderInvisibleElements && matches(predicate, firstMatch))
+                return firstMatch;
+
+            return firstMatch != null && firstMatch.IsDisplayed() && matches(predicate, firstMatch)
+                       ? firstMatch
+                       : context.FindElements(@by).FirstOrDefault(e => IsDisplayed(e, scope) && matches(predicate, e));
+        }
+
+        private static bool matches(Func<IWebElement, bool> predicate, IWebElement firstMatch)
+        {
+            return (predicate == null || predicate(firstMatch));
+        }
+
+        public IEnumerable<IWebElement> FindAll(By by, Scope scope)
+        {
+            var context = SeleniumScope(scope);
+            return scope.ConsiderInvisibleElements 
+                ? context.FindElements(@by) 
+                : context.FindElements(@by).Where(e => IsDisplayed(e, scope));
         }
 
         public ISearchContext SeleniumScope(Scope scope)

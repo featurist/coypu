@@ -50,11 +50,11 @@ namespace Coypu.Drivers.Watin
 
         public object Native { get; private set; }
 
-        public bool Stale
+        public bool Stale(Options options)
         {
-            get { return !((Frame) Native).FrameElement.Exists; }
+            return !((Frame) Native).FrameElement.Exists;
         }
-        
+
         public string this[string attributeName]
         {
             get { return Frame.GetAttributeValue(attributeName); }

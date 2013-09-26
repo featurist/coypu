@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindButton(string locator, Scope scope)
         {
-            return elementFinder.Find(By.XPath(xPath.ButtonXPath(locator)), scope).FirstOrDefault();
+            return elementFinder.Find(By.XPath(xPath.ButtonXPath(locator)), scope);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Selenium
                                         "@id = {0}" + 
                                      ")]",locator.Trim());
            
-            return elementFinder.Find(By.XPath(xpath),scope).FirstOrDefault();
+            return elementFinder.Find(By.XPath(xpath),scope);
         }
     }
 }
