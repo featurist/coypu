@@ -494,7 +494,7 @@ If you can't get the quality of feedback from your tests you need to tell you ex
 
 The image format will be determined by the file extension.
 
-## Using a custom Selemium WebDriver profile
+## Using a custom Selenium WebDriver profile
 
 Sometimes you may want to define custom profile settings for your driver.
 
