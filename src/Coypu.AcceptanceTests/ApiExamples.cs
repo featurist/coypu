@@ -307,6 +307,19 @@ namespace Coypu.AcceptanceTests
             Assert.IsFalse(browser.HasNoContentMatch(new Regex("This is what (we are|I am) looking for")));
         }
 
+
+        [Test]
+        public void HasAllCss_example()
+        {
+            Assert.That(browser, Shows.AllCss("#inspectingContent ul li", new[] { "Some", "text","in","a","list"}));
+        }
+
+        [Test]
+        public void HasAllContent_example()
+        {
+            Assert.That(browser, Shows.AllContent(new[] { "Some", "text", "in", "a", "list" }));
+        }
+
         [Test]
         public void HasCss_example()
         {
