@@ -274,7 +274,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasContent_example()
         {
-            Assert.That(browser, Shows.Content("This is what we are looking for"));
+            Assert.That(browser, Shows.ContentContaining("This is what we are looking for"));
             Assert.That(browser.HasContent("This is not in the page"), Is.False);
         }
 
@@ -307,18 +307,27 @@ namespace Coypu.AcceptanceTests
             Assert.IsFalse(browser.HasNoContentMatch(new Regex("This is what (we are|I am) looking for")));
         }
 
-
         [Test]
-        public void HasAllCss_example()
+        public void ShowsAllCssInOrder_example()
         {
-            Assert.That(browser, Shows.AllCss("#inspectingContent ul li", new[] { "Some", "text","in","a","list"}));
+            Assert.That(browser, Shows.AllCssInOrder("#inspectingContent ul li", new[] { "Some", "text", "in", "a", "list","one","two","Me! Pick me!"}));
         }
 
+
         [Test]
-        public void HasAllContent_example()
+        public void ShowsCssContaining_example()
         {
-            Assert.That(browser, Shows.AllContent(new[] { "Some", "text", "in", "a", "list" }));
+            Assert.That(browser, Shows.CssContaining("#inspectingContent ul li", new[] { "Some", "text","in","a","list"}));
         }
+
+
+        [Test]
+        public void ShowsContentContaining_example()
+        {
+            Assert.That(browser, Shows.ContentContaining(new[] { "Some", "text", "in", "a", "list" }));
+        }
+
+
 
         [Test]
         public void HasCss_example()

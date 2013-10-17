@@ -113,6 +113,8 @@
     <Compile Include="Element.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
+    <Compile Include="Matchers\AggregateMatcher.cs" />
+    <Compile Include="Matchers\HasAllCssInOrderMatcher.cs" />
     <Compile Include="Matchers\HasContentMatcher.cs" />
     <Compile Include="Matchers\HasCssMatcher.cs" />
     <Compile Include="Matchers\HasNoContentMatcher.cs" />
