@@ -317,14 +317,14 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ShowsCssContaining_example()
         {
-            Assert.That(browser, Shows.CssContaining("#inspectingContent ul li", new[] { "Some", "text","in","a","list"}));
+            Assert.That(browser, Shows.CssContaining("#inspectingContent ul li", "Some", "text","in","a","list"));
         }
 
 
         [Test]
         public void ShowsContentContaining_example()
         {
-            Assert.That(browser, Shows.ContentContaining(new[] { "Some", "text", "in", "a", "list" }));
+            Assert.That(browser, Shows.ContentContaining("Some", "text", "in", "a", "list"));
         }
 
 

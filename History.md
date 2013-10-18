@@ -1,3 +1,11 @@
+# Version 0.19.4
+
+Release date: 2013-10-18
+
+### Added
+
+* Shows.AllCssInOrder and ContainsCss matchers for assertions against multiple css matches
+
 # Version 0.19.3
 
 Release date: 2013-09-26
