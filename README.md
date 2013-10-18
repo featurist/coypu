@@ -440,6 +440,10 @@ There are NUnit matchers for some the queries above to help with your assertions
 	Assert.That(browser, Shows.Css("ul.menu > li", text: "Home");
 	Assert.That(browser, Shows.No.Css("ul.menu > li", text: "Admin");
 
+	Assert.That(browser, Shows.ContentContaining(Some","Words","Anywhere","in","the","document"))
+	Assert.That(browser, Shows.CssContaining("ul.menu > li","match","in","any","order"))
+	Assert.That(browser, Shows.AllCssInOrder("ul.menu > li","has","exactly","these","matches"))
+
 #### Dialogs
 
 Check for the presence of a modal dialog with expected text:
