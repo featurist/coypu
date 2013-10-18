@@ -308,6 +308,28 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void ShowsAllCssInOrder_example()
+        {
+            Assert.That(browser, Shows.AllCssInOrder("#inspectingContent ul li", new[] { "Some", "text", "in", "a", "list","one","two","Me! Pick me!"}));
+        }
+
+
+        [Test]
+        public void ShowsCssContaining_example()
+        {
+            Assert.That(browser, Shows.CssContaining("#inspectingContent ul li", new[] { "Some", "text","in","a","list"}));
+        }
+
+
+        [Test]
+        public void ShowsContentContaining_example()
+        {
+            Assert.That(browser, Shows.ContentContaining(new[] { "Some", "text", "in", "a", "list" }));
+        }
+
+
+
+        [Test]
         public void HasCss_example()
         {
             Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest"));
