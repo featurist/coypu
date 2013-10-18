@@ -274,7 +274,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasContent_example()
         {
-            Assert.That(browser, Shows.ContentContaining("This is what we are looking for"));
+            Assert.That(browser, Shows.Content("This is what we are looking for"));
             Assert.That(browser.HasContent("This is not in the page"), Is.False);
         }
 

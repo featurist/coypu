@@ -10,7 +10,7 @@ namespace Coypu.Matchers {
 
 
     public static class Shows {
-        public static Constraint ContentContaining(string expectedContent, Options options = null) {
+        public static Constraint Content(string expectedContent, Options options = null) {
             return new HasContentMatcher(expectedContent, options);
         }
 
