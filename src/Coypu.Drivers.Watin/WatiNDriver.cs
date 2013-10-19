@@ -189,6 +189,11 @@ namespace Coypu.Drivers.Watin
             GetWindowScope(scope).ShowWindow(NativeMethods.WindowShowStyle.Maximize);
         }
 
+        public void Refresh(Scope scope)
+        {
+            GetWindowScope(scope).Refresh();
+        }
+
         public void ResizeTo(Size size, Scope scope)
         {
             GetWindowScope(scope).SizeWindow(size.Width, size.Height);
