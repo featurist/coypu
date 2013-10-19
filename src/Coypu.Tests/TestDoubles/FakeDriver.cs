@@ -47,6 +47,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
         public readonly IList<Scope> MaximiseWindowCalls= new List<Scope>();
+        public readonly IList<Scope> RefreshCalls = new List<Scope>();
         public readonly IList<ScopedRequest<Size>> ResizeToCalls = new List<ScopedRequest<Size>>();
         public readonly IList<ScopedRequest<string>> SaveScreenshotCalls = new List<ScopedRequest<string>>();
 
@@ -267,6 +268,11 @@ namespace Coypu.Tests.TestDoubles
         public void MaximiseWindow(Scope scope)
         {
             MaximiseWindowCalls.Add(scope);
+        }
+
+        public void Refresh(Scope scope)
+        {
+            RefreshCalls.Add(scope);
         }
 
         public void ResizeTo(Size size, Scope Scope)

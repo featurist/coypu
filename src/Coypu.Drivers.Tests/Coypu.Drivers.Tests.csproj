@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="When_inspecting_html.cs" />
+    <Compile Include="When_refreshing_windows.cs" />
     <Compile Include="When_saving_screenshots.cs" />
     <Compile Include="When_sending_keys_to_elements.cs" />
     <Compile Include="When_finding_frames.cs" />
