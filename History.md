@@ -2,6 +2,14 @@
 
 Release date: 2013-10-18
 
+### Fixed
+
+* fixes #70 Inputs with no type attribute can now be found by name/id/placeholder
+
+# Version 0.20.1
+
+Release date: 2013-10-18
+
 ### Added
 
 * Shows.AllCssInOrder and ContainsCss matchers for assertions against multiple css matches
