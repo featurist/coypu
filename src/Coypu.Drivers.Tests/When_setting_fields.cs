@@ -29,6 +29,18 @@ namespace Coypu.Drivers.Tests
             findAgain.Value.should_be("set by sendkeys");
         }
 
+        [Test]
+        public void Sets_value_of_text_input_field_with_no_type()
+        {
+            var textField = Driver.FindField("fieldWithNoType", Root);
+            Driver.Set(textField, "set by sendkeys");
+
+            textField.Value.should_be("set by sendkeys");
+
+            var findAgain = Driver.FindField("fieldWithNoType", Root);
+            findAgain.Value.should_be("set by sendkeys");
+        }
+
 
         [Test]
         public void Sets_value_of_textarea_field()

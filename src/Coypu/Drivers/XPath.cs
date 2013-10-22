@@ -135,7 +135,7 @@ namespace Coypu.Drivers
                 "           (@id = //label[normalize-space() = {0}]/@for)" +
                 "           or " +
                 "           (" +
-                "               (" + AttributeIsOneOf("type", fieldInputTypes) + " or " +
+                "               (" + AttributeIsOneOf("type", fieldInputTypes) + " or not(@type) or " +
                 TagNamedOneOf(FieldTagNames.Except(new[] { "input" }).ToArray()) + ")" +
                 "               and " +
                 "               (@id = {0} or @name = {0} or @placeholder = {0})" +
