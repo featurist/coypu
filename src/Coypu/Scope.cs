@@ -63,7 +63,7 @@ namespace Coypu
         /// <summary>
         /// Find the first form field of any type to appear within the configured timeout
         /// </summary>
-        /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the value of a radio button or checkbox, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the value of a radio button or checkbox</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -75,7 +75,7 @@ namespace Coypu
         /// <summary>
         /// Find the first matching text field to appear within the configured timeout to fill in.
         /// </summary>
-        /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="locator">The text of the associated label element, the id or name, the placeholder text</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -399,9 +399,9 @@ namespace Coypu
         ElementScope FindId(string id, Options options = null);
 
         /// <summary>
-        /// Check the first checkbox to appear within the configured timeout matching the text of the associated label element, the id, name, value or the last part of the id (for asp.net forms testing).
+        /// Check the first checkbox to appear within the configured timeout matching the text of the associated label element, the id, name or value.
         /// </summary>
-        /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="locator">The text of the associated label element, the id or name</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -411,9 +411,9 @@ namespace Coypu
         void Check(string locator, Options options = null);
 
         /// <summary>
-        /// Uncheck the first checkbox to appear within the configured timeout matching the text of the associated label element, the id, name or the last part of the id (for asp.net forms testing).
+        /// Uncheck the first checkbox to appear within the configured timeout matching the text of the associated label element, the id, name.
         /// </summary>
-        /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="locator">The text of the associated label element, the id or name</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -423,9 +423,9 @@ namespace Coypu
         void Uncheck(string locator, Options options = null);
 
         /// <summary>
-        /// Choose the first radio button to appear within the configured timeout matching the text of the associated label element, the id, the name, the value or the last part of the id (for asp.net forms testing).
+        /// Choose the first radio button to appear within the configured timeout matching the text of the associated label element, the id, the name or the value.
         /// </summary>
-        /// <param name="locator">The text of the associated label element, the id or name, the last part of the id (for asp.net forms testing)</param>
+        /// <param name="locator">The text of the associated label element, the id or name</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
