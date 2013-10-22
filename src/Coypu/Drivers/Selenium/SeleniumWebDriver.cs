@@ -237,6 +237,12 @@ namespace Coypu.Drivers.Selenium
             webDriver.Manage().Window.Maximize();
         }
 
+        public void Refresh(Scope scope)
+        {
+            elementFinder.SeleniumScope(scope);
+            webDriver.Navigate().Refresh();
+        }
+
         public void ResizeTo(Size size, Scope scope)
         {
             elementFinder.SeleniumScope(scope);

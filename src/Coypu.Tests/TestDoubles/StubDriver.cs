@@ -198,6 +198,10 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
+        public void Refresh(Scope scope)
+        {
+        }
+
         public void ResizeTo(Size size, Scope Scope)
         {
         }
