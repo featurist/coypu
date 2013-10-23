@@ -33,5 +33,13 @@ namespace Coypu.Drivers.Tests
 
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstInvisibleInputId", Root));
         }
+
+        [Test]
+        public void Does_find_invisible_elements_by_text()
+        {
+            Assert.That(Driver.FindId("invisibleSpanId", RootConsideringInvisibleElements).Text, Is.EqualTo("Can't see this"));
+
+            Assert.Throws<MissingHtmlException>(() => Driver.FindId("invisibleSpanId", Root));
+        }
     }
 }
