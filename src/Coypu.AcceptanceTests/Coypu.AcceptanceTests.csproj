@@ -88,6 +88,7 @@
     <Compile Include="WaitAndRetryExamples.cs" />
     <Compile Include="WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="InnerAndOuterHtml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -121,6 +122,9 @@
     <Content Include="..\Coypu.Drivers.Tests\html\test-card.jpg">
       <Link>html\test-card.jpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="html\table.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="html\tricky.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

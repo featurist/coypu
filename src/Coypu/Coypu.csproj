@@ -111,6 +111,7 @@
     <Compile Include="Drivers\Selenium\WindowHandle.cs" />
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="ElementExtensions.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Matchers\AggregateMatcher.cs" />
