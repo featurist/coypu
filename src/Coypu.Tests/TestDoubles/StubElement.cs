@@ -13,6 +13,10 @@ namespace Coypu.Tests.TestDoubles
 
         public string Name { get; set; }
 
+        public string InnerHTML { get; set; }
+
+        public string OuterHTML { get; set; }
+
         public string SelectedOption { get; set; }
 
         public bool Selected { get; set; }

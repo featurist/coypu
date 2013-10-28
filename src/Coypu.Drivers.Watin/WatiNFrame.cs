@@ -1,3 +1,4 @@
+using System.Linq;
 using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
@@ -25,6 +26,22 @@ namespace Coypu.Drivers.Watin
             {
                 var text = Frame.Text;
                 return text != null ? text.Trim() : null;
+            }
+        }
+
+        public string InnerHTML
+        {
+            get
+            {
+                return Frame.XPath("./*").First().InnerHtml;
+            }
+        }
+
+        public string OuterHTML
+        {
+            get
+            {
+                return Frame.XPath("./*").First().OuterHtml;
             }
         }
 

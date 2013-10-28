@@ -1,3 +1,4 @@
+using System;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -31,6 +32,35 @@ namespace Coypu.Drivers.Selenium
                 {
                     SwitchTo(currentWindowHandle);
                 }
+            }
+        }
+
+        public string InnerHTML
+        {
+            get
+            {
+                return RetaingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("innerHTML"));
+            }
+        }
+
+        public string OuterHTML
+        {
+            get
+            {
+                return RetaingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("outerHTML"));
+            }
+        }
+
+        private T RetaingCurrentWindow<T>(Func<T> function)
+        {
+            var currentWindowHandle = selenium.CurrentWindowHandle;
+            try
+            {
+                return function();
+            }
+            finally
+            {
+                SwitchTo(currentWindowHandle);
             }
         }
 

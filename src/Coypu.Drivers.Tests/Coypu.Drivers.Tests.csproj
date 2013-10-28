@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_inspecting_html.cs" />
     <Compile Include="When_saving_screenshots.cs" />
     <Compile Include="When_sending_keys_to_elements.cs" />
     <Compile Include="When_finding_frames.cs" />
@@ -170,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\IEDriverServer.exe" />
+    <Content Include="html\table.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\popUp2.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

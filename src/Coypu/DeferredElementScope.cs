@@ -33,6 +33,16 @@ namespace Coypu {
             get { return Now().Name; }
         }
 
+        public string OuterHTML
+        {
+            get { return Now().OuterHTML; }
+        }
+
+        public string InnerHTML
+        {
+            get { return Now().InnerHTML; }
+        }
+
         public string SelectedOption
         {
             get { return Now().SelectedOption; }
