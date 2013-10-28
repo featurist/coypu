@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Selenium
 
         public bool TextMatches(IWebElement e, Regex pattern)
         {
-            return pattern.IsMatch(e.Text.Trim());
+            return e.Text != null && pattern.IsMatch(e.Text.Trim());
         }
     }
 }

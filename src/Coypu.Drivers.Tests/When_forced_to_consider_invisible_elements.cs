@@ -1,4 +1,6 @@
-﻿using Coypu.Finders;
+﻿using System;
+using System.Text.RegularExpressions;
+using Coypu.Finders;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -32,6 +34,20 @@ namespace Coypu.Drivers.Tests
             Assert.That(Driver.FindButton("firstInvisibleInputId", RootConsideringInvisibleElements).Name, Is.EqualTo("firstInvisibleInputName"));
 
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstInvisibleInputId", Root));
+        }
+
+        [Test, Explicit("Only works in WatiN")]
+        public void It_can_find_invisible_elements_by_text()
+        {
+            Assert.That(Driver.FindCss("#firstInvisibleSpanId", RootConsideringInvisibleElements,new Regex("I am an invisible span")).Name,
+                Is.EqualTo("firstInvisibleSpanName"));
+        }
+
+        [Test, Explicit("Only works this way in WebDriver")]
+        public void Explains_it_cannot_find_invisible_elements_by_text()
+        {
+            Assert.Throws<NotSupportedException>(() =>
+                Driver.FindCss("#firstInvisibleSpanId", RootConsideringInvisibleElements, new Regex("I am an invisible span")));
         }
     }
 }

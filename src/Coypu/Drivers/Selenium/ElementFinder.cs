@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Selenium
             }
             catch (WebDriverException) {}
 
-            if (scope.ConsiderInvisibleElements && matches(predicate, firstMatch))
+            if (firstMatch != null && scope.ConsiderInvisibleElements && matches(predicate, firstMatch))
                 return firstMatch;
 
             return firstMatch != null && firstMatch.IsDisplayed() && matches(predicate, firstMatch)

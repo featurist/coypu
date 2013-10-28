@@ -134,7 +134,14 @@ namespace Coypu.Drivers.Selenium
                 ? (Func<IWebElement, bool>) null
                 : e => textMatcher.TextMatches(e, textPattern);
 
-            return BuildElement(Find(By.CssSelector(cssSelector), scope, textMatches), "No element found by css: " + cssSelector);
+            if (textPattern != null && scope.ConsiderInvisibleElements)
+                throw new NotSupportedException("Cannot inspect the text of invisible elements.");
+            
+            var failureMessage = "No element found by css: " + cssSelector;
+            if (textPattern != null)
+                failureMessage += " with text matching /" + textPattern + "/";
+
+            return BuildElement(Find(By.CssSelector(cssSelector), scope, textMatches), failureMessage);
         }
 
         public ElementFound FindXPath(string xpath, Scope scope)
