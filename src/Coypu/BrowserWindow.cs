@@ -102,6 +102,14 @@ namespace Coypu
             driver.ResizeTo(new Size(width: width, height: height), this);
         }
 
+        /// <summary>
+        /// Refreshes the current browser window page
+        /// </summary>
+        public void Refresh()
+        {
+            driver.Refresh(this);
+        }
+
         public void SaveScreenshot(string saveAs, ImageFormat imageFormat)
         {
             driver.SaveScreenshot(saveAs, this);

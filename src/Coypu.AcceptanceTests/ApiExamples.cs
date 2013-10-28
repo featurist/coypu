@@ -615,6 +615,21 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void RefreshingWindow()
+        {
+            var ticksBeforeRefresh = Int64.Parse(browser.ExecuteScript("return new Date().getTime();"));
+            var urlBeforeRefresh = browser.Location.AbsolutePath;
+            
+            browser.Refresh();
+            
+            var ticksAfterRefresh = Int64.Parse(browser.ExecuteScript("return new Date().getTime();"));
+            var urlAfterRefresh = browser.Location.AbsolutePath;
+
+            Assert.That(ticksAfterRefresh, Is.GreaterThan(ticksBeforeRefresh));
+            Assert.That(urlAfterRefresh, Is.EqualTo(urlBeforeRefresh));
+        }
+
+        [Test]
         public void CustomProfile()
         {
             var configuration = new SessionConfiguration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
