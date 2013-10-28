@@ -1,3 +1,20 @@
+# Version 0.21.0
+
+Release date: 2013-10-28
+
+### Added
+
+* InnerHTML and OuterHTML properties
+* NotSupportedException finding invisible elements by text in WebDriver
+
+### Updated
+
+* Selenium WebDriver 2.37.0
+
+### Fixed
+
+* Null reference exception when waiting for invisible elements to appear
+
 # Version 0.20.1
 
 Release date: 2013-10-18

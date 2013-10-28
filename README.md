@@ -444,6 +444,13 @@ There are NUnit matchers for some the queries above to help with your assertions
 	Assert.That(browser, Shows.CssContaining("ul.menu > li","match","in","any","order"))
 	Assert.That(browser, Shows.AllCssInOrder("ul.menu > li","has","exactly","these","matches"))
 
+#### Inner/OuterHTML
+
+If you just want to grab the inner or outer HTML of an element to do your own queries and assertions you can use:
+
+	var outerHTML = browser.FindCss("table#myData").OuterHTML;
+	var innerHTML = browser.FindCss("table#myData").InnerHTML; // Will exclude the surrounding <table> ... </table>
+
 #### Dialogs
 
 Check for the presence of a modal dialog with expected text:
