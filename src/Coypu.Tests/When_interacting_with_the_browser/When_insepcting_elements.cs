@@ -143,5 +143,36 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(queryResult, Is.SameAs(stubElement));
         }
+
+        [Test]
+        public void It_finds_element_robustly_and_returns_innerHTML()
+        {
+            var native = new object();
+            var stubElement = new StubElement { InnerHTML = "actual-innnerHTML" };
+            driver.StubId("some-element", stubElement, browserSession);
+
+            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
+
+            Assert.That(browserSession.FindId("some-element").InnerHTML, Is.SameAs("actual-innnerHTML"));
+
+            var queryResult = RunQueryAndCheckTiming();
+
+            Assert.That(queryResult, Is.SameAs(stubElement));
+        }
+
+        [Test]
+        public void It_finds_element_robustly_and_returns_outerHTML()
+        {
+            var stubElement = new StubElement { OuterHTML = "actual-outerHTML" };
+            driver.StubId("some-element", stubElement, browserSession);
+
+            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
+
+            Assert.That(browserSession.FindId("some-element").OuterHTML, Is.SameAs("actual-outerHTML"));
+
+            var queryResult = RunQueryAndCheckTiming();
+
+            Assert.That(queryResult, Is.SameAs(stubElement));
+        }
     }
 }

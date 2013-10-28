@@ -1,4 +1,5 @@
-﻿using WatiN.Core;
+﻿using System.Linq;
+using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
 {
@@ -39,6 +40,22 @@ namespace Coypu.Drivers.Watin
             {
                 var text = NativeWatiNElement.Text ?? NativeWatiNElement.OuterText;
                 return text != null ? text.Trim() : null;
+            }
+        }
+
+        public string InnerHTML
+        {
+            get
+            {
+                return NativeWatiNElement.InnerHtml;
+            }
+        }
+
+        public string OuterHTML
+        {
+            get
+            {
+                return NativeWatiNElement.OuterHtml;
             }
         }
 

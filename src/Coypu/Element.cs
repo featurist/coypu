@@ -38,5 +38,15 @@ namespace Coypu
         /// The attributes of the HTML element
         /// </summary>
         string this[string attributeName] { get; }
+
+        /// <summary>
+        /// The outer HTML of the element
+        /// </summary>
+        string OuterHTML { get; }
+
+        /// <summary>
+        /// The inner HTML of the element
+        /// </summary>
+        string InnerHTML { get; }
     }
 }

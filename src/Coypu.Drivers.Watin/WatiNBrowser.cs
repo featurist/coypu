@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using WatiN.Core;
 using WatiN.Core.Constraints;
 
@@ -40,6 +41,22 @@ namespace Coypu.Drivers.Watin
             get
             {
                 return browser.Text;
+            }
+        }
+
+        public string InnerHTML
+        {
+            get
+            {
+                return browser.XPath("./*").First().InnerHtml;
+            }
+        }
+
+        public string OuterHTML
+        {
+            get
+            {
+                return browser.XPath("./*").First().OuterHtml;
             }
         }
 

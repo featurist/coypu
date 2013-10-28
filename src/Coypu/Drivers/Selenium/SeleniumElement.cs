@@ -40,6 +40,16 @@ namespace Coypu.Drivers.Selenium
             get { return NativeSeleniumElement.GetAttribute("name"); }
         }
 
+        public string OuterHTML
+        {
+            get { return NativeSeleniumElement.GetAttribute("outerHTML"); }
+        }
+
+        public string InnerHTML
+        {
+            get { return NativeSeleniumElement.GetAttribute("innerHTML"); }
+        }
+
         public string SelectedOption
         {
             get
