@@ -1,3 +1,11 @@
+# Version 0.21.1
+
+### Fixed
+
+* Correct dependency on Selenium WebDriver 2.37.0
+
+Release date: 2013-10-29
+
 # Version 0.21.0
 
 Release date: 2013-10-28
