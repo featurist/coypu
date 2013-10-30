@@ -308,6 +308,22 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void HasValue_example()
+        {
+            var field = browser.FindField("find-this-field");
+            Assert.That(field, Shows.Value("This value is what we are looking for"));
+            Assert.IsFalse(field.HasValue("This is not the value"));
+        }
+
+        [Test]
+        public void HasNoValue_example()
+        {
+            var field = browser.FindField("find-this-field");
+            Assert.That(field, Shows.No.Value("This is not the value"));
+            Assert.IsFalse(field.HasNoValue("This value is what we are looking for"));
+        }
+
+        [Test]
         public void ShowsAllCssInOrder_example()
         {
             Assert.That(browser, Shows.AllCssInOrder("#inspectingContent ul li", new[] { "Some", "text", "in", "a", "list","one","two","Me! Pick me!"}));
