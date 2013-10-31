@@ -92,6 +92,11 @@ namespace Coypu.Drivers.Tests
             Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstTelInputId", Root));
         }
 
+        [Test]
+        public void Does_not_find_url_inputs()
+        {
+            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstUrlInputId", Root));
+        }
 
         [Test]
         public void Does_not_find_hidden_inputs()
