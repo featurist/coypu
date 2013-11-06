@@ -80,7 +80,7 @@ WebDriver is generally stable with the last but one release of FireFox in my exp
 
 ###### Internet Explorer
 
-You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/selenium/wiki/InternetExplorerDriver) (Know serious performance issue with IE 64 bit driver, use 32 bit version if possible.)
+You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/selenium/wiki/InternetExplorerDriver). NOTE: as of 2013-11-03, there are known serious performance issue with IE 64 bit driver against IE 10, consider using the 32 bit version where possible.
 
 Only IE9 supports CSS & XPath and certain HTML features. The WatiN driver is notably faster in IE than the WebDriver IE driver, so is recommended for testing in Internet Explorer. The WatiN driver comes in a seperate package (see below).
 
