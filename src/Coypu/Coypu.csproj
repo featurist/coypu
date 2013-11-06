@@ -124,6 +124,7 @@
     <Compile Include="Matchers\Shows.cs" />
     <Compile Include="MissingWindowException.cs" />
     <Compile Include="ElementFoundExtensions.cs" />
+    <Compile Include="Queries\ElementScopeQuery.cs" />
     <Compile Include="Queries\HasNoValueQuery.cs" />
     <Compile Include="Queries\FindAllCssWithPredicateQuery.cs" />
     <Compile Include="Queries\FindAllXPathWithPredicateQuery.cs" />
