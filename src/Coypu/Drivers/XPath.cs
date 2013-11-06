@@ -119,6 +119,7 @@ namespace Coypu.Drivers
 
         private static readonly string[] FieldTagNames = new[] { "input", "select", "textarea" };
         private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file", "email", "tel", "url" };
+        private static readonly string[] FindByNameTypes = FieldInputTypes.Except(new []{"radio"}).ToArray();
         private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
         private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
 
@@ -135,11 +136,12 @@ namespace Coypu.Drivers
                 "           (@id = //label[normalize-space() = {0}]/@for)" +
                 "           or " +
                 "           (" +
-                "               (" + AttributeIsOneOf("type", fieldInputTypes) + " or not(@type) or " +
-                TagNamedOneOf(FieldTagNames.Except(new[] { "input" }).ToArray()) + ")" +
+                "               (" + AttributeIsOneOf("type", fieldInputTypes) + " or not(@type))" +
                 "               and " +
-                "               (@id = {0} or @name = {0} or @placeholder = {0})" +
+                "               (@id = {0} or @placeholder = {0})" +
                 "           )" +
+                "           or " +
+                "           ((" + AttributeIsOneOf("type", FindByNameTypes) + " or not(@type)) and @name = {0})" +
                 "           or " +
                 "           (" + AttributeIsOneOf("type", FindByValueTypes) + " and @value = {0})" +
                 "       )" +

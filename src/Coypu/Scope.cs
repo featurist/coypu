@@ -63,7 +63,7 @@ namespace Coypu
         /// <summary>
         /// Find the first form field of any type to appear within the configured timeout
         /// </summary>
-        /// <param name="locator">The text of the associated label element, the id or name, the placeholder text, the value of a radio button or checkbox</param>
+        /// <param name="locator">The text of the associated label element, the id or name (except radio buttons), the placeholder text, the value of a radio button or checkbox</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -423,7 +423,7 @@ namespace Coypu
         void Uncheck(string locator, Options options = null);
 
         /// <summary>
-        /// Choose the first radio button to appear within the configured timeout matching the text of the associated label element, the id, the name or the value.
+        /// Choose the first radio button to appear within the configured timeout matching the text of the associated label element, the id or the value.
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name</param>
         /// <param name="options">

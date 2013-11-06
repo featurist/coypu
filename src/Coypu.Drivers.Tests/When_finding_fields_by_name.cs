@@ -31,9 +31,9 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Finds_radio_button()
+        public void Does_NOT_find_radio_button()
         {
-            Driver.FindField("containerLabeledRadioFieldName", Root).Value.should_be("radio field two val");
+            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("containerLabeledRadioFieldName", Root));
         }
 
         [Test]

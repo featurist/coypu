@@ -179,7 +179,7 @@ If you need to step away and visit a site outside of the `SessionConfiguration.A
 	
 #### Completing forms
 
-Form fields are found by label text, partial label text, id, name, placeholder or radio button value
+Form fields are found by label text, partial label text, id, name (except radio buttons), placeholder or radio button value
 	
 	// Drop downs
 	browser.Select("toyota").From("make");
