@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_url_field()
         {
-            Driver.FindField("containerLabeledTelInputFieldId", Root).Value.should_be("http://www.example.com");
+            Driver.FindField("containerLabeledUrlInputFieldId", Root).Value.should_be("http://www.example.com");
         }
 
         [Test]
