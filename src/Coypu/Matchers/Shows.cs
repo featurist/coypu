@@ -83,6 +83,11 @@ namespace Coypu.Matchers {
             return new HasAllCssInOrderMatcher(expectedCssSelector, textMatching, options);
         }
 
+        public static Constraint Value(string expectedContent, Options options = null)
+        {
+            return new HasValueMatcher(expectedContent, options);
+        }
+
         public static ShowsNo No = new ShowsNo();
 
     }
@@ -108,6 +113,11 @@ namespace Coypu.Matchers {
         public Constraint Css(string expectedCssSelector, Regex text, Options options = null)
         {
             return new HasNoCssMatcher(expectedCssSelector, text, options);
+        }
+
+        public Constraint Value(string expectedContent, Options options = null)
+        {
+            return new HasNoValueMatcher(expectedContent, options);
         }
     }
 }

@@ -111,5 +111,15 @@ namespace Coypu {
         {
             return Try(new ElementMissingQuery(this, SetOptions(options)));
         }
+
+        public bool HasValue(string text, Options options = null)
+        {
+            return Try(new HasValueQuery(this, text, SetOptions(options)));
+        }
+
+        public bool HasNoValue(string text, Options options = null)
+        {
+            return Try(new HasNoValueQuery(this, text, SetOptions(options)));
+        }
     }
 }
