@@ -118,7 +118,7 @@ namespace Coypu.Drivers
         }
 
         private static readonly string[] FieldTagNames = new[] { "input", "select", "textarea" };
-        private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file", "email", "tel" };
+        private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file", "email", "tel", "url" };
         private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
         private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
 
