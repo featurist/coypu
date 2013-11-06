@@ -13,5 +13,7 @@ namespace Coypu
         ElementScope SendKeys(string keys, Options options = null);
         ElementScope Check(Options options = null);
         ElementScope Uncheck(Options options = null);
+        bool HasValue(string text, Options options = null);
+        bool HasNoValue(string text, Options options = null);
     }
 }
