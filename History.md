@@ -1,3 +1,19 @@
+# Version 0.22.0
+
+### Added
+
+* Support for url input type (@ajh79)
+* Shows.Value; Shows.No.Value; HasValue; HasNoValue on ElementScope (@kberridge)
+* BrowserWindow.Refresh() (@stefanforsberg)
+
+### Updated
+
+* Latest NUnit
+
+
+Release date: 2013-11-06
+
+
 # Version 0.21.1
 
 ### Fixed

@@ -429,9 +429,14 @@ The negative versions will wait for the element NOT to be present:
 
 	bool hasNoElement = browser.HasNoXPath("//ul[@class = 'menu']/li");
 
+There are also queries for the value of an input
+
+	bool hasValue = browser.FindField("total").HasValue("147");
+	bool hasNoValue = browser.FindField("total").HasNoValue("0");
+
 #### Matchers
 
-There are NUnit matchers for some the queries above to help with your assertions:
+There are NUnit matchers for some of the queries above to help with your assertions:
 
 	Assert.That(browser, Shows.Content("In France, the coypu is known as a ragondin");
 	Assert.That(browser, Shows.No.Content("In France, the coypu is known as a ragondin");
@@ -443,6 +448,9 @@ There are NUnit matchers for some the queries above to help with your assertions
 	Assert.That(browser, Shows.ContentContaining(Some","Words","Anywhere","in","the","document"))
 	Assert.That(browser, Shows.CssContaining("ul.menu > li","match","in","any","order"))
 	Assert.That(browser, Shows.AllCssInOrder("ul.menu > li","has","exactly","these","matches"))
+
+	Assert.That(browser.FindField("total"), Shows.Value("147"));
+	Assert.That(browser.FindField("total"), Shows.No.Value("0"));
 
 #### Inner/OuterHTML
 
