@@ -44,7 +44,7 @@ namespace Coypu.Drivers.Watin
         public static Constraint IsField()
         {
             return OfType(typeof (TextField), typeof (SelectList), typeof (CheckBox), typeof (RadioButton), typeof (FileUpload))
-                   | new AttributeConstraint("type", "email") | new AttributeConstraint("type", "tel");
+                   | new AttributeConstraint("type", "email") | new AttributeConstraint("type", "tel") | new AttributeConstraint("type", "url");
         }
 
         private class StringEndsWithComparer : WatiN.Core.Comparers.Comparer<string>
