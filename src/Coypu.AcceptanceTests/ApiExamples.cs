@@ -617,16 +617,13 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void RefreshingWindow()
         {
-            var ticksBeforeRefresh = Int64.Parse(browser.ExecuteScript("return new Date().getTime();"));
-            var urlBeforeRefresh = browser.Location.AbsolutePath;
-            
-            browser.Refresh();
-            
-            var ticksAfterRefresh = Int64.Parse(browser.ExecuteScript("return new Date().getTime();"));
-            var urlAfterRefresh = browser.Location.AbsolutePath;
-
-            Assert.That(ticksAfterRefresh, Is.GreaterThan(ticksBeforeRefresh));
-            Assert.That(urlAfterRefresh, Is.EqualTo(urlBeforeRefresh));
+             var tickBeforeRefresh = Int64.Parse(browser.ExecuteScript("return window.SpecData.CurrentTick;"));
+ 
+             browser.Refresh();
+ 
+             var tickAfterRefresh = Int64.Parse(browser.ExecuteScript("return window.SpecData.CurrentTick;"));
+ 
+             Assert.That((tickAfterRefresh - tickBeforeRefresh), Is.GreaterThan(0));
         }
 
         [Test]
