@@ -1,4 +1,11 @@
-# Version 0.22.0
+# Version 0.22.1
+
+### Fixed
+
+* Radio buttons should NOT be found by name
+
+Release date: 2013-11-06
+
 
 ### Added
 
@@ -9,7 +16,6 @@
 ### Updated
 
 * Latest NUnit
-
 
 Release date: 2013-11-06
 
