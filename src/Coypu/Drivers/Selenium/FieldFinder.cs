@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindField(string locator, Scope scope)
         {
-            return xPath.FieldXPaths(locator, scope)
+            return xPath.FieldXPathsByPrecedence(locator, scope)
                         .Select(xpath => elementFinder.Find(By.XPath(xpath), scope))
                         .FirstOrDefault(element => element != null);
         }

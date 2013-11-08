@@ -25,7 +25,7 @@ namespace Coypu.Drivers.Selenium
             get { return NativeSeleniumElement.GetAttribute("id"); }
         }
 
-        public string Text
+        public virtual string Text
         {
             get { return NativeSeleniumElement.Text; }
         }

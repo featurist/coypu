@@ -47,7 +47,7 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindField(string locator, Scope scope)
         {
-            return xPath.FieldXPaths(locator, scope)
+            return xPath.FieldXPathsByPrecedence(locator, scope)
                     .Select(xpath => FindXPath(xpath, scope))
                     .FirstOrDefault(element => element != null);
         }

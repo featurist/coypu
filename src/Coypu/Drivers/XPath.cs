@@ -105,16 +105,26 @@ namespace Coypu.Drivers
         }
 
         private static readonly string[] InputButtonTypes = new[] { "button", "submit", "image", "reset" };
+
         public string ButtonXPath(string locator)
         {
             return Format(
-                ".//*[" +
-                "     (" + TagNamedOneOf("input") + " and " + AttributeIsOneOf("type", InputButtonTypes) + ") " +
-                "     or " + TagNamedOneOf("button") + " or @role = 'button'" +
+                ".//*[" +    IsInputButton() +
+                "     or " + TagNamedOneOf("button") +
                 "     or " + XPathNodeHasOneOfClasses("button", "btn") +
-                "]" +
-                "[@id = {0} or @name = {0} or @value = {0} or @alt = {0} or normalize-space() = {0}]",
+                "     or @role = 'button'" +
+                "][" + ButtonAttributesMatchLocator(locator.Trim()) + "]",
                 locator.Trim());
+        }
+
+        private string ButtonAttributesMatchLocator(string locator)
+        {
+            return Format("@id = {0} or @name = {0} or @value = {0} or @alt = {0} or normalize-space() = {0}", locator);
+        }
+
+        private string IsInputButton()
+        {
+            return "(" + TagNamedOneOf("input") + " and " + AttributeIsOneOf("type", InputButtonTypes) + ")";
         }
 
         private static readonly string[] FieldTagNames = new[] { "input", "select", "textarea" };
@@ -123,46 +133,74 @@ namespace Coypu.Drivers
         private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
         private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
 
-        public string[] FieldXPaths(string locator, Scope scope)
+        public string[] FieldXPathsByPrecedence(string locator, Scope scope)
         {
-            var fieldInputTypes = scope.ConsiderInvisibleElements
-                                      ? FieldInputTypeWithHidden
-                                      : FieldInputTypes;
+            locator = locator.Trim();
+            return new[]
+                {
+                    ForlabeledOrByAttribute(locator, scope),
+                    ContainerLabeled(locator),
+                    ForLabeledPartial(locator),
+                    ContainerLabeledPartial(locator)
+                };
+        }
 
-            var forLabeledOrByIdNamePlaceholderOrValue = Format(
-                ".//*[" +
-                "   (" + TagNamedOneOf(FieldTagNames) + " and " +
-                "       (" +
-                "           (@id = //label[normalize-space() = {0}]/@for)" +
-                "           or " +
-                "           (" +
-                "               (" + AttributeIsOneOf("type", fieldInputTypes) + " or not(@type))" +
-                "               and " +
-                "               (@id = {0} or @placeholder = {0})" +
-                "           )" +
-                "           or " +
-                "           ((" + AttributeIsOneOf("type", FindByNameTypes) + " or not(@type)) and @name = {0})" +
-                "           or " +
-                "           (" + AttributeIsOneOf("type", FindByValueTypes) + " and @value = {0})" +
-                "       )" +
+        private string ForlabeledOrByAttribute(string locator, Scope scope)
+        {
+            return Format(
+                ".//*[" + TagNamedOneOf(FieldTagNames) +
+                "   and " +
+                "   (" +      IsLabelledWith(locator) +
+                "      or " + HasIdOrPlaceholder(locator, scope) +
+                "      or " + HasName(locator) +
+                "      or " + HasValue(locator) +
                 "   )" +
                 "]",
-                locator.Trim());
+                locator);
+        }
 
-            var containerLabeled = Format(
-                ".//label[normalize-space() = {0}]//*[" + TagNamedOneOf(FieldTagNames) + "]",
-                locator.Trim());
+        private string ContainerLabeledPartial(string locator)
+        {
+            return Format(".//label[contains(normalize-space(),{0})]//*[" + TagNamedOneOf(FieldTagNames) + "]",locator);
+        }
 
-            var forLabeledPartial = Format(
-                ".//*[" + TagNamedOneOf(FieldTagNames) +
-                " and @id = //label[contains(normalize-space(),{0})]/@for]",
-                locator.Trim());
+        private string ForLabeledPartial(string locator)
+        {
+            return Format(".//*[" + TagNamedOneOf(FieldTagNames) + " and @id = //label[contains(normalize-space(),{0})]/@for]", locator);
+        }
 
-            var containerLabeledPartial = Format(
-                ".//label[contains(normalize-space(),{0})]//*[" + TagNamedOneOf(FieldTagNames) + "]",
-                locator.Trim());
+        private string ContainerLabeled(string locator)
+        {
+            return Format(".//label[normalize-space() = {0}]//*[" + TagNamedOneOf(FieldTagNames) + "]",locator);
+        }
 
-            return new[] { forLabeledOrByIdNamePlaceholderOrValue, containerLabeled, forLabeledPartial, containerLabeledPartial };
+        private string IsLabelledWith(string locator)
+        {
+            return Format("(@id = //label[normalize-space() = {0}]/@for)", locator);
+        }
+
+        private string HasValue(string locator)
+        {
+            return Format("(" + AttributeIsOneOf("type", FindByValueTypes) + " and @value = {0})", locator);
+        }
+
+        private string HasName(string locator)
+        {
+            return Format("((" + AttributeIsOneOf("type", FindByNameTypes) + " or not(@type)) and @name = {0})", locator);
+        }
+
+        private string HasIdOrPlaceholder(string locator, Scope scope)
+        {
+            return Format("(" + IsAFieldInputType(scope) + " and " + "(@id = {0} or @placeholder = {0}))", locator);
+        }
+
+        private string IsAFieldInputType(Scope scope)
+        {
+            var fieldInputTypes = scope.ConsiderInvisibleElements
+                            ? FieldInputTypeWithHidden
+                            : FieldInputTypes;
+
+            return "(" + AttributeIsOneOf("type", fieldInputTypes) + " or not(@type))";
         }
     }
 }

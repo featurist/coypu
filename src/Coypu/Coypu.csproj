@@ -109,6 +109,7 @@
     <Compile Include="Drivers\NoSuchBrowserException.cs" />
     <Compile Include="Drivers\Selenium\FrameFinder.cs" />
     <Compile Include="Drivers\Selenium\ImageFormatParser.cs" />
+    <Compile Include="Drivers\Selenium\SeleniumFrame.cs" />
     <Compile Include="Drivers\Selenium\SeleniumWindow.cs" />
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
