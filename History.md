@@ -1,3 +1,13 @@
+# Version 0.22.2
+
+### Fixed
+
+* Actual values in matcher feedback could be wrong
+* Fix for text of an iframe
+
+Release date: 2013-11-08
+
+
 # Version 0.22.1
 
 ### Fixed
