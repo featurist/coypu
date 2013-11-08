@@ -6,55 +6,59 @@ namespace Coypu.Drivers.Selenium
 {
     internal class SeleniumElement : ElementFound
     {
-        private readonly IWebElement native;
-        private readonly IWebDriver webDriver;
+        protected readonly IWebElement native;
+        protected readonly IWebDriver selenium;
 
-        public SeleniumElement(IWebElement seleniumElement, IWebDriver webDriver)
+        public SeleniumElement(IWebElement seleniumElement, IWebDriver selenium)
         {
             native = seleniumElement;
-            this.webDriver =  webDriver;
-        }
-
-        protected IWebElement NativeSeleniumElement
-        {
-            get { return native; }
+            this.selenium = selenium;
         }
 
         public string Id
         {
-            get { return NativeSeleniumElement.GetAttribute("id"); }
+            get { return native.GetAttribute("id"); }
         }
 
         public virtual string Text
         {
-            get { return NativeSeleniumElement.Text; }
+            get
+            {
+                return native.Text;
+            }
         }
 
         public string Value
         {
-            get { return NativeSeleniumElement.GetAttribute("value"); }
+            get { return native.GetAttribute("value"); }
         }
 
         public string Name
         {
-            get { return NativeSeleniumElement.GetAttribute("name"); }
+            get { return native.GetAttribute("name"); }
         }
 
-        public string OuterHTML
+        public virtual string OuterHTML
         {
-            get { return NativeSeleniumElement.GetAttribute("outerHTML"); }
+            get
+            {
+                return native.GetAttribute("outerHTML");
+            }
         }
 
-        public string InnerHTML
+        public virtual string InnerHTML
         {
-            get { return NativeSeleniumElement.GetAttribute("innerHTML"); }
+            get
+            {
+                return native.GetAttribute("innerHTML");
+            }
         }
 
         public string SelectedOption
         {
             get
             {
-                return NativeSeleniumElement.FindElements(By.TagName("option"))
+                return native.FindElements(By.TagName("option"))
                     .Where(e => e.Selected)
                     .Select(e => e.Text)
                     .FirstOrDefault();
@@ -63,30 +67,23 @@ namespace Coypu.Drivers.Selenium
 
         public bool Selected
         {
-            get { return NativeSeleniumElement.Selected; }
+            get { return native.Selected; }
         }
 
         public virtual object Native
         {
             get
             {
-                if (new []{"iframe","frame" }.Contains(NativeSeleniumElement.TagName.ToLower()))
-                {
-                    webDriver.SwitchTo().Frame(NativeSeleniumElement);
-                    return webDriver;
-                }
-                return NativeSeleniumElement;
+                return native;
             }
         }
-
-        
 
         public bool Stale(Options options)
         {
             try
             {
-                NativeSeleniumElement.FindElement(By.XPath("."));
-                return !options.ConsiderInvisibleElements && !NativeSeleniumElement.Displayed;
+                native.FindElement(By.XPath("."));
+                return !options.ConsiderInvisibleElements && !native.Displayed;
             }
             catch (InvalidOperationException)
             {
@@ -104,7 +101,7 @@ namespace Coypu.Drivers.Selenium
 
         public string this[string attributeName]
         {
-            get { return NativeSeleniumElement.GetAttribute(attributeName); }
+            get { return native.GetAttribute(attributeName); }
         }
     }
 }

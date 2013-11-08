@@ -401,10 +401,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoCss_with_text_negative_example()
         {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            browser.ExecuteScript("document.body.innerHTML = '<ul><li>Some</li></ul>'");
 
-            Assert.IsFalse(browser.HasNoCss("li", text: "This is not in the page"));
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", text: "This is not in the page")));
+            Assert.IsFalse(browser.HasNoCss("li", text: "Some"));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", text: "Some")));
         }
 
         [Test]
@@ -418,10 +418,10 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void HasNoCss_with_text_matching_negative_example()
         {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            browser.ExecuteScript("document.body.innerHTML = '<ul><li>Some</li></ul>'");
 
-            Assert.IsFalse(browser.HasNoCss("li", text: new Regex("not in the page$")));
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", text: "This is not in the page")));
+            Assert.IsFalse(browser.HasNoCss("li", text: new Regex("^Some$")));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", new Regex("^Some$"))));
         }
 
         [Test]

@@ -94,15 +94,9 @@ namespace Coypu.Drivers.Selenium
             return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
         }
 
-
         public ElementFound FindFrame(string locator, Scope scope)
         {
-            var element = frameFinder.FindFrame(locator, scope);
-
-            if (element == null)
-                throw new MissingHtmlException("Failed to find frame: " + locator);
-
-            return new SeleniumFrame(element, webDriver);
+            return BuildElement(frameFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }
 
         public ElementFound FindLink(string linkText, Scope scope)
@@ -179,6 +173,10 @@ namespace Coypu.Drivers.Selenium
 
         private SeleniumElement BuildElement(IWebElement element)
         {
+            if (new[] {"iframe", "frame"}.Contains(element.TagName.ToLower()))
+            {
+                return new SeleniumFrame(element, webDriver);
+            }
             return new SeleniumElement(element, webDriver);
         }
 

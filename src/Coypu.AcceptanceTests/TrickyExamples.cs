@@ -66,19 +66,26 @@ namespace Coypu.AcceptanceTests
 
             var originalLocation = browser.Location;
 
-            var iframe = browser.FindFrame("iframe1");
-            var button = iframe.FindButton("scoped button");
+            var iframe1 = browser.FindFrame("iframe1");
+            var iframe2 = browser.FindFrame("iframe2");
+            var button = iframe1.FindButton("scoped button");
 
-            Assert.That(iframe.HasContent("I am iframe one"));
+            Assert.That(button.Exists());
+
+            Assert.That(iframe1.HasContent("I am iframe one"));
 
             VisitTestPage("tricky.htm");
 
-            Assert.That(iframe.Missing());
+            Assert.That(iframe1.Missing());
             Assert.That(button.Missing());
 
             browser.ExecuteScript("window.setTimeout(function() {window.location.href = '" + originalLocation + "'},1000);");
 
-            Assert.That(iframe.HasContent("I am iframe one"));
+            Assert.That(iframe1.HasContent("I am iframe one"));
+            Assert.That(iframe2.HasContent("I am iframe two"));
+
+            Assert.That(browser.Title, Is.EqualTo("Coypu interaction tests page"));
+
             button.Click();
         }
 

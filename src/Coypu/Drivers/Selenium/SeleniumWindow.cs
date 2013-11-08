@@ -23,15 +23,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                var currentWindowHandle = selenium.CurrentWindowHandle;
-                try
-                {
-                    return ((ISearchContext)Native).FindElement(By.CssSelector("body")).Text;
-                }
-                finally
-                {
-                    SwitchTo(currentWindowHandle);
-                }
+                return RetainingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.CssSelector("body")).Text);
             }
         }
 
@@ -39,7 +31,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return RetaingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("innerHTML"));
+                return RetainingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("innerHTML"));
             }
         }
 
@@ -47,11 +39,11 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return RetaingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("outerHTML"));
+                return RetainingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("outerHTML"));
             }
         }
 
-        private T RetaingCurrentWindow<T>(Func<T> function)
+        private T RetainingCurrentWindow<T>(Func<T> function)
         {
             var currentWindowHandle = selenium.CurrentWindowHandle;
             try
