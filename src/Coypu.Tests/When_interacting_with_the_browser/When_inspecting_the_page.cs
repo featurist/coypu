@@ -83,13 +83,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private void Check_robust_content_query<T>(bool stubResult, string actualContent, Func<T, Options, bool> subject, T toLookFor)
         {
-            var window = new StubElement {Text = actualContent};
+            var window = new StubElement { Text = actualContent };
             driver.StubCurrentWindow(window);
 
             spyRobustWrapper.StubQueryResult(true, !stubResult);
 
             var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
-            var options = new SessionConfiguration {Timeout = individualTimeout};
+            var options = new SessionConfiguration { Timeout = individualTimeout };
 
             var actualImmediateResult = subject(toLookFor, options);
 
@@ -99,5 +99,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             Assert.That(queryResult, Is.EqualTo(stubResult));
         }
+
     }
 }

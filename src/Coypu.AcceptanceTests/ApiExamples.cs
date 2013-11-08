@@ -276,6 +276,8 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(browser, Shows.Content("This is what we are looking for"));
             Assert.That(browser.HasContent("This is not in the page"), Is.False);
+
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Content("This is not in the page")));
         }
 
         [Test]
@@ -287,6 +289,8 @@ namespace Coypu.AcceptanceTests
 
             ReloadTestPage();
             Assert.That(browser.HasNoContent("This is what we are looking for"), Is.False);
+
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Content("This is what we are looking for")));
         }
 
         [Test]
@@ -327,6 +331,7 @@ namespace Coypu.AcceptanceTests
         public void ShowsAllCssInOrder_example()
         {
             Assert.That(browser, Shows.AllCssInOrder("#inspectingContent ul li", new[] { "Some", "text", "in", "a", "list","one","two","Me! Pick me!"}));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.AllCssInOrder("#inspectingContent ul li", new[] { "Some", "text", "in", "a", "list","two", "one","Me! Pick me!"})));
         }
 
 
@@ -334,6 +339,7 @@ namespace Coypu.AcceptanceTests
         public void ShowsCssContaining_example()
         {
             Assert.That(browser, Shows.CssContaining("#inspectingContent ul li", "Some", "text","in","a","list"));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.CssContaining("#inspectingContent ul li", "missing","from","a","list")));
         }
 
 
@@ -341,22 +347,25 @@ namespace Coypu.AcceptanceTests
         public void ShowsContentContaining_example()
         {
             Assert.That(browser, Shows.ContentContaining("Some", "text", "in", "a", "list"));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.ContentContaining("not", "in", "a", "list")));
         }
-
-
 
         [Test]
         public void HasCss_example()
         {
             Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest"));
             Assert.IsFalse(browser.HasCss("#inspectingContent ul#nope"));
+
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Css("#inspectingContent ul#nope")));
         }
 
         [Test]
         public void HasCss_with_text_example()
-        {
+        {   
             Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: "two"));
             Assert.False(browser.HasCss("#inspectingContent ul#cssTest li", text: "fifty"));
+
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: "Not this text")));
         }
 
         [Test]
@@ -364,6 +373,8 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: new Regex("wo.*$")));
             Assert.False(browser.HasCss("#inspectingContent ul#cssTest li", text: new Regex("fifty")));
+
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: new Regex("Not this text"))));
         }
 
         [Test]
@@ -371,10 +382,12 @@ namespace Coypu.AcceptanceTests
         {
             browser.ExecuteScript(
                 "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
+            
             Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope"));
 
             ReloadTestPage();
             Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("#inspectingContent ul#cssTest")));
         }
 
         [Test]
@@ -382,12 +395,12 @@ namespace Coypu.AcceptanceTests
         {
             browser.ExecuteScript(
                 "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-            Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope", text: "This is not in the page"));
 
-            Assert.That(browser, Shows.No.Css("#inspectingContent ul#cssTest", text: "This is not the text"));
+            Assert.That(browser, Shows.No.Css("li", text: "This is not in the page"));
 
             ReloadTestPage();
-            Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
+            Assert.IsFalse(browser.HasNoCss("li", text: "This is not in the page"));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", text: "This is not in the page")));
         }
 
         [Test]
@@ -395,12 +408,11 @@ namespace Coypu.AcceptanceTests
         {
             browser.ExecuteScript(
                 "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-            Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope", text: new Regex("not in the page$")));
-
-            Assert.That(browser, Shows.No.Css("#inspectingContent ul#cssTest", text: new Regex("not the text")));
+            Assert.That(browser, Shows.No.Css("li", text: new Regex("not in the page$")));
 
             ReloadTestPage();
-            Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
+            Assert.IsFalse(browser.HasNoCss("li", text: new Regex("not in the page$")));
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", text: "This is not in the page")));
         }
 
         [Test]

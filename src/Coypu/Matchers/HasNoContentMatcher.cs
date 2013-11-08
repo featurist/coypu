@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework.Constraints;
+﻿using NUnit.Framework.Constraints;
 
 namespace Coypu.Matchers
 {
@@ -18,7 +17,11 @@ namespace Coypu.Matchers
             var scope = ((Scope)actual);
             var hasNoContent = scope.HasNoContent(_expectedContent, _options);
             if (!hasNoContent)
+            {
                 _actualContent = scope.Now().Text;
+                hasNoContent = !_actualContent.Contains(_expectedContent);
+            }
+
             return hasNoContent;
         }
 

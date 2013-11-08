@@ -21,7 +21,10 @@ namespace Coypu.Matchers
             var elementScope = ((ElementScope)actual);
             var hasValue = elementScope.HasValue(_expectedContent, _options);
             if (!hasValue)
+            {
                 _actualContent = elementScope.Value;
+                hasValue = _actualContent == _expectedContent;
+            }
             return hasValue;
         }
 

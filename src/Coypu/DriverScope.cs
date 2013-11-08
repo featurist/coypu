@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
+using Coypu.Matchers;
 using Coypu.Queries;
 using Coypu.Robustness;
+using NUnit.Framework;
 
 namespace Coypu
 {
@@ -46,6 +48,11 @@ namespace Coypu
         public virtual Uri Location
         {
             get { return driver.Location(this); }
+        }
+
+        public string Text
+        {
+            get { return Now().Text; }
         }
 
         public bool ConsiderInvisibleElements

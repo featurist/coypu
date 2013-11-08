@@ -102,7 +102,7 @@ namespace Coypu.Matchers {
 
         public Constraint Css(string expectedCssSelector, Options options = null)
         {
-            return new HasNoContentMatcher(expectedCssSelector, options);
+            return new HasNoCssMatcher(expectedCssSelector, options);
         }
 
         public Constraint Css(string expectedCssSelector, string text, Options options = null)
