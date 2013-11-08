@@ -15,8 +15,6 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<Element> CheckedElements = new List<Element>();
         public readonly IList<Element> UncheckedElements = new List<Element>();
         public readonly IList<Element> ChosenElements = new List<Element>();
-        public readonly IList<string> HasContentQueries = new List<string>();
-        public readonly IList<Regex> HasContentMatchQueries = new List<Regex>();
         public readonly IList<string> HasCssQueries = new List<string>();
         public readonly IList<string> HasXPathQueries = new List<string>();
         public readonly IList<ScopedRequest<string>> Visits = new List<ScopedRequest<string>>();
@@ -35,14 +33,13 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedSections = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedFrames = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedIDs = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedHasContentResults = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedHasContentMatchResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasCssResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedTitles = new List<ScopedStubResult>();
+        private ElementFound stubbedCurrentWindow;
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
@@ -151,16 +148,6 @@ namespace Coypu.Tests.TestDoubles
             stubbedTextFields.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
         }
 
-        public void StubHasContent(string text, bool result, Scope scope)
-        {
-            stubbedHasContentResults.Add(new ScopedStubResult { Locator = text, Scope = scope, Result = result });
-        }
-
-        public void StubHasContentMatch(Regex pattern, bool result, Scope scope)
-        {
-            stubbedHasContentMatchResults.Add(new ScopedStubResult { Locator = pattern, Scope = scope, Result = result });
-        }
-
         public void StubHasCss(string cssSelector, bool result, Scope scope)
         {
             stubbedHasCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
@@ -222,7 +209,7 @@ namespace Coypu.Tests.TestDoubles
 
         public ElementFound Window
         {
-            get { throw new NotImplementedException(); }
+            get { return stubbedCurrentWindow; }
         }
 
         public void AcceptModalDialog(Scope scope)
@@ -302,18 +289,6 @@ namespace Coypu.Tests.TestDoubles
         public object Native
         {
             get { return "Native driver on fake driver"; }
-        }
-
-        public bool HasContent(string text, Scope scope)
-        {
-            HasContentQueries.Add(text);
-            return Find<bool>(stubbedHasContentResults, text, scope);
-        }
-
-        public bool HasContentMatch(Regex pattern, Scope scope)
-        {
-            HasContentMatchQueries.Add(pattern);
-            return Find<bool>(stubbedHasContentMatchResults, pattern, scope);
         }
 
         public bool HasXPath(string xpath, Scope scope)
@@ -420,6 +395,11 @@ namespace Coypu.Tests.TestDoubles
         public void StubWindow(string locator, ElementFound window, Scope scope)
         {
             stubbedWindows.Add(new ScopedStubResult {Locator = locator, Scope = scope, Result = window});
+        }
+
+        public void StubCurrentWindow(ElementFound window)
+        {
+            stubbedCurrentWindow = window;
         }
 
         public ElementFound FindWindow(string locator, Scope scope)

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu", "Coypu\Coypu.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.AcceptanceTests", "Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj", "{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}"
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Drivers.Tests", "Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj", "{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Drivers.Watin", "Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj", "{A4ADBB2C-A3C3-4984-8991-C39E991167DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CB9AF80-1809-4ABD-B17F-BD2B89F35678}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

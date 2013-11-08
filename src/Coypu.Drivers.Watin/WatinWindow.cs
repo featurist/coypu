@@ -1,21 +1,22 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using WatiN.Core;
 using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNBrowser : ElementFound
+    internal class WatiNWindow : ElementFound
     {
         private readonly WatiN.Core.Browser browser;
         private readonly Constraint windowHandle;
 
-        public WatiNBrowser(WatiN.Core.Browser browser)
+        public WatiNWindow(WatiN.Core.Browser browser)
         {
             this.browser = browser;
         }
 
-        public WatiNBrowser (Constraint windowHandle)
+        public WatiNWindow (Constraint windowHandle)
         {
             this.windowHandle = windowHandle;
             try

@@ -77,6 +77,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             return queryResult;
         }
 
+        protected void VerifyFoundRobustly(Func<string, Options, Scope> scope, int driverCallIndex, string locator, StubElement expectedDeferredResult, StubElement expectedImmediateResult, Options options)
+        {
+            var sub = scope;
+            var scopedResult = sub(locator, options).Now();
+
+            Assert.That(scopedResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
+            Assert.That(scopedResult, Is.SameAs(expectedImmediateResult));
+
+            var elementScopeResult = RunQueryAndCheckTiming<ElementFound>(options.Timeout, driverCallIndex);
+
+            Assert.That(elementScopeResult, Is.SameAs(expectedDeferredResult));
+        }
+
     }
 
     public class StubDriverFactory : DriverFactory

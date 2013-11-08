@@ -1,6 +1,7 @@
-using System.Linq;
+using System;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
@@ -10,180 +11,87 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_finds_element_robustly_and_returns_id()
         {
-            var stubElement = new StubElement {Id = "actual-id"};
-            driver.StubId("some-element", stubElement, browserSession);
-            
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Id, Is.EqualTo("actual-id"));
-
-            var queryResult = RunQueryAndCheckTiming<ElementFound>();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-id", (element, value) => element.Id = value, (element => element.Id));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_text()
         {
-            var stubElement = new StubElement { Text = "actual-text" };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Text, Is.EqualTo("actual-text"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-text", (element, value) => element.Text = value, (element => element.Text));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_value()
         {
-            var stubElement = new StubElement { Value = "actual-value" };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Value, Is.EqualTo("actual-value"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-value", (element, value) => element.Value = value, (element => element.Value));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_attributes()
         {
-            var stubElement = new StubElement();
-            stubElement.StubAttribute("href","http://some.href");
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element")["href"], Is.EqualTo("http://some.href"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("http://some.href", (element, value) => element.StubAttribute("href",value), (element => element["href"]));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_name()
         {
-            var stubElement = new StubElement { Name = "actual-name" };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Name, Is.EqualTo("actual-name"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-name", (element, value) => element.Name = value, (element => element.Name));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_selected_option()
         {
-            var stubElement = new StubElement { SelectedOption = "actual-selected-option" };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").SelectedOption, Is.EqualTo("actual-selected-option"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-selected-option", (element, value) => element.SelectedOption = value, (element => element.SelectedOption));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_selected_positive()
         {
-            var stubElement = new StubElement { Selected = true };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Selected, Is.EqualTo(true));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value(true, (element, value) => element.Selected = value, (element => element.Selected), Is.EqualTo);
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_selected_negative()
         {
-            var stubElement = new StubElement { Selected = false };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Selected, Is.EqualTo(false));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value(false, (element, value) => element.Selected = value, (element => element.Selected), Is.EqualTo);
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_native()
         {
-            var native = new object();
-            var stubElement = new StubElement { Native = native };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").Native, Is.SameAs(native));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value(new object(), (element,value) => element.Native = value, (element => element.Native));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_innerHTML()
         {
-            var native = new object();
-            var stubElement = new StubElement { InnerHTML = "actual-innnerHTML" };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").InnerHTML, Is.SameAs("actual-innnerHTML"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-innerHTML", (element, value) => element.InnerHTML = value, (element => element.InnerHTML));
         }
 
         [Test]
         public void It_finds_element_robustly_and_returns_outerHTML()
         {
-            var stubElement = new StubElement { OuterHTML = "actual-outerHTML" };
-            driver.StubId("some-element", stubElement, browserSession);
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
-
-            Assert.That(browserSession.FindId("some-element").OuterHTML, Is.SameAs("actual-outerHTML"));
-
-            var queryResult = RunQueryAndCheckTiming();
-
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Finds_element_robustly_and_returns_property_value("actual-outerHTML", (element,value) => element.OuterHTML = value, (element => element.OuterHTML));
         }
 
-        [Test]
-        public void It_finds_element_robustly_and_returns_whether_text_()
+        private void Finds_element_robustly_and_returns_property_value<T>(T testValue, Action<StubElement, T> stubProperty, Func<ElementScope, T> getProperty, Func<object,Constraint> constraint = null)
         {
-            var stubElement = new StubElement { OuterHTML = "actual-outerHTML" };
+            constraint = constraint ?? Is.SameAs;
+            var stubElement = new StubElement();
+
+            stubProperty(stubElement, testValue);
             driver.StubId("some-element", stubElement, browserSession);
 
             spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
 
-            Assert.That(browserSession.FindId("some-element").OuterHTML, Is.SameAs("actual-outerHTML"));
+            if (typeof (T) == typeof (bool))
+            {
+                Assert.That(getProperty(browserSession.FindId("some-element")), constraint(testValue));
+            }
+            else
+            {
+                Assert.That(getProperty(browserSession.FindId("some-element")), constraint(testValue));
+            }
 
             var queryResult = RunQueryAndCheckTiming();
 

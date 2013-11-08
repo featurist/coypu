@@ -145,12 +145,6 @@
     <Compile Include="When_finding_sections.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="When_inspecting_content.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="When_inspecting_content_within_scope.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="When_inspecting_dialog_text.cs">
       <SubType>Code</SubType>
     </Compile>

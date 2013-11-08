@@ -13,7 +13,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
                 Driver.FindWindow("popUpWindowName", Root).Text.should_contain("I am a pop up window");
-                Driver.HasContent("Open pop up window", Root);
+                Driver.FindLink("Open pop up window",Root);
             }
         }
 
@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
                 Driver.FindWindow("Pop Up Window", Root).Text.should_contain("I am a pop up window");
-                Driver.HasContent("Open pop up window", Root);
+                Driver.FindLink("Open pop up window", Root);
             }
         }
 
@@ -35,7 +35,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Driver.FindLink("Open pop up window 2", Root));
                 Driver.FindWindow("Pop Up Window", Root).Text.should_contain("I am a pop up window 2");
-                Driver.HasContent("Open pop up window 2", Root);
+                Driver.FindLink("Open pop up window 2", Root);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Coypu.Drivers.Tests
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
                 Driver.Click(Driver.FindLink("Open pop up window 2", Root));
                 Driver.FindWindow("Pop Up Window", Root).Text.should_contain("I am a pop up window");
-                Driver.HasContent("Open pop up window", Root);
+                Driver.FindLink("Open pop up window", Root);
             }
         }
 
@@ -62,8 +62,8 @@ namespace Coypu.Drivers.Tests
                 var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root),
                                             Driver, null, null, null);
 
-                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
-                Assert.That(Driver.HasContent("I am a pop up window", Root), Is.False);
+                Driver.FindId("popUpButtonId", popUp);
+                Driver.FindLink("Open pop up window", Root);
             }
         }
 

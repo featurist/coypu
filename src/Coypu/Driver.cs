@@ -16,8 +16,6 @@ namespace Coypu
         void Set(Element element, string value);
         void Select(Element element, string option);
         object Native { get; }
-        bool HasContent(string text, Scope scope);
-        bool HasContentMatch(Regex pattern, Scope scope);
         bool HasXPath(string xpath, Scope scope);
         bool HasDialog(string withText, Scope scope);
         ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null);

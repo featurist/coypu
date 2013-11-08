@@ -87,7 +87,7 @@ namespace Coypu.Drivers.Watin
 
         private static ElementFound BuildElement(WatiN.Core.Browser browser)
         {
-            return new WatiNBrowser(browser);
+            return new WatiNWindow(browser);
         }
 
         private WatiN.Core.Browser GetWindowScope(Scope scope)
@@ -156,7 +156,7 @@ namespace Coypu.Drivers.Watin
 
         public ElementFound FindWindow(string locator, Scope scope)
         {
-            return new WatiNBrowser(FindWindowHandle(locator));
+            return new WatiNWindow(FindWindowHandle(locator));
         }
 
         private static Constraint FindWindowHandle(string locator)
@@ -274,21 +274,6 @@ namespace Coypu.Drivers.Watin
         public object Native
         {
             get { return Watin; }
-        }
-
-        public bool HasContent(string text, Scope scope)
-        {
-            return scope.Now().Text.Contains(text);
-        }
-
-        public bool HasContentMatch(Regex pattern, Scope scope)
-        {
-            var watiNScope = ElementFinder.WatiNScope(scope);
-            if (watiNScope == Window.Native)
-            {
-                return ((WatiN.Core.Browser)Window.Native).ContainsText(pattern);
-            }
-            return pattern.IsMatch(((WatiN.Core.Element)watiNScope).Text);
         }
 
         public void Check(Element field)

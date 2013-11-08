@@ -67,7 +67,6 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-
         [Test]
         public void Finds_scope_first_for_alerts()
         {
@@ -75,13 +74,12 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
                 var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
-                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},500);", Root);
-                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
-                
+                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
-                System.Threading.Thread.Sleep(700);
+                System.Threading.Thread.Sleep(1000);
                 Driver.AcceptModalDialog(Root);
                 Driver.HasDialog("You have triggered a alert and this is the text.", Root).should_be_false();
             }
@@ -94,10 +92,10 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
                 var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
-                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('confirmTriggerLink').click();},500);", Root);
-                Assert.That(Driver.HasContent("I am a pop up window", popUp), Is.True);
+                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
                 CloseWindow(popUp);
 
                 System.Threading.Thread.Sleep(500);

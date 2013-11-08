@@ -3,12 +3,12 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    internal class WindowHandle : ElementFound
+    internal class SeleniumWindow : ElementFound
     {
         private readonly IWebDriver selenium;
         private readonly string windowHandle;
 
-        public WindowHandle(IWebDriver selenium, string windowHandle)
+        public SeleniumWindow(IWebDriver selenium, string windowHandle)
         {
             this.selenium = selenium;
             this.windowHandle = windowHandle;

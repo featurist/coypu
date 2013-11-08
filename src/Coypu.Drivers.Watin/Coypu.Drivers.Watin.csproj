@@ -74,7 +74,7 @@
     </Compile>
     <Compile Include="Section.cs" />
     <Compile Include="SelectListExtensions.cs" />
-    <Compile Include="WatiNBrowser.cs" />
+    <Compile Include="WatinWindow.cs" />
     <Compile Include="WatiNDriver.cs" />
     <Compile Include="WatiNElement.cs" />
     <Compile Include="WatiNFrame.cs" />

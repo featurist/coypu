@@ -124,22 +124,22 @@ namespace Coypu
 
         public bool HasContent(string text, Options options = null)
         {
-            return Query(new HasContentQuery(driver, this, text, SetOptions(options)));
+            return Query(new HasContentQuery(this, text, SetOptions(options)));
         }
 
         public bool HasContentMatch(Regex pattern, Options options = null)
         {
-            return Query(new HasContentMatchQuery(driver, this, pattern, SetOptions(options)));
+            return Query(new HasContentMatchQuery(this, pattern, SetOptions(options)));
         }
 
         public bool HasNoContent(string text, Options options = null)
         {
-            return Query(new HasNoContentQuery(driver, this, text, SetOptions(options)));
+            return Query(new HasNoContentQuery(this, text, SetOptions(options)));
         }
 
         public bool HasNoContentMatch(Regex pattern, Options options = null)
         {
-            return Query(new HasNoContentMatchQuery(driver, this, pattern, SetOptions(options)));
+            return Query(new HasNoContentMatchQuery(this, pattern, SetOptions(options)));
         }
 
         public bool HasCss(string cssSelector, Options options = null)
@@ -171,7 +171,6 @@ namespace Coypu
         {
             return Query(new HasNoCssQuery(driver, this, cssSelector, text, SetOptions(options)));
         }
-
 
         public bool HasXPath(string xpath, Options options = null)
         {

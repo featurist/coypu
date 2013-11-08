@@ -65,7 +65,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return new WindowHandle(webDriver, webDriver.CurrentWindowHandle);
+                return new SeleniumWindow(webDriver, webDriver.CurrentWindowHandle);
             }
         }
 
@@ -182,16 +182,6 @@ namespace Coypu.Drivers.Selenium
             return new SeleniumElement(element, webDriver);
         }
 
-        public bool HasContent(string text, Scope scope)
-        {
-            return GetContent(scope).Contains(text);
-        }
-
-        public bool HasContentMatch(Regex pattern, Scope scope)
-        {
-            return pattern.IsMatch(GetContent(scope));
-        }
-
         private string GetContent(Scope scope)
         {
             var seleniumScope = elementFinder.SeleniumScope(scope);
@@ -272,7 +262,7 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindWindow(string titleOrName, Scope scope)
         {
-            return new WindowHandle(webDriver, windowHandleFinder.FindWindowHandle(titleOrName));
+            return new SeleniumWindow(webDriver, windowHandleFinder.FindWindowHandle(titleOrName));
         }
 
         public void Set(Element element, string value) 
