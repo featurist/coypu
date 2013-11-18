@@ -167,12 +167,17 @@ Here are some examples to get you started using Coypu
 	
 #### Navigating
 	
-	browser.Visit("/used-cars")
+	browser.Visit("/used-cars");
 	
 If you need to step away and visit a site outside of the `SessionConfiguration.AppHost` then you can use a fully qualified Uri:
 
-	browser.Visit("https://gmail.com")
-	browser.Visit("file:///C:/users/adiel/localstuff.htm")
+	browser.Visit("https://gmail.com");
+	browser.Visit("file:///C:/users/adiel/localstuff.htm");
+
+To move back or forward in the browser history:
+
+	browser.GoBack();
+	browser.GoForward();
 
 #### Getting the page title
 	browser.Title

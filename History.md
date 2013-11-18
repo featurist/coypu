@@ -1,3 +1,12 @@
+# Version 0.23.0
+
+### Added
+
+* History: BrowserWindow.GoBack() and BrowserWindow.GoForward()
+
+Release date: 2013-11-18
+
+
 # Version 0.22.2
 
 ### Fixed
