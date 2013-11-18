@@ -44,5 +44,7 @@ namespace Coypu
         void Refresh(Scope scope);
         void ResizeTo(Size size, Scope Scope);
         void SaveScreenshot(string fileName, Scope scope);
+        void GoBack(Scope scope);
+        void GoForward(Scope scope);
     }
 }

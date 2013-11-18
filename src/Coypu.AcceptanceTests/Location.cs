@@ -42,6 +42,20 @@ namespace Coypu.AcceptanceTests
             Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
         }
 
+        [Test]
+        public void Go_back_and_forward_in_history()
+        {
+            browser.Visit("/");
+            browser.Visit("/auto_login");
+            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+
+            browser.GoBack();
+            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
+
+            browser.GoForward();
+            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+        }
+
         private void ReloadTestPage()
         {
             browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));

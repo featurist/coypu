@@ -210,6 +210,14 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
+        public void GoBack(Scope scope)
+        {
+        }
+
+        public void GoForward(Scope scope)
+        {
+        }
+
         public void SetBrowserCookies(Cookie cookie)
         {
         }

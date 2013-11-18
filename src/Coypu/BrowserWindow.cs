@@ -66,6 +66,22 @@ namespace Coypu
         }
 
         /// <summary>
+        /// Navigate back to the previous location in the browser's history
+        /// </summary>
+        public void GoBack()
+        {
+            driver.GoBack(this);
+        }
+
+        /// <summary>
+        /// Navigate forward to the next location in the browser's history
+        /// </summary>
+        public void GoForward()
+        {
+            driver.GoForward(this);
+        }
+
+        /// <summary>
         /// Returns the page's title displayed in the browser
         /// </summary>
         public string Title

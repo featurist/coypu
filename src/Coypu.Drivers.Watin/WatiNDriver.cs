@@ -204,6 +204,16 @@ namespace Coypu.Drivers.Watin
             GetWindowScope(scope).CaptureWebPageToFile(fileName);
         }
 
+        public void GoBack(Scope scope)
+        {
+            GetWindowScope(scope).Back();
+        }
+
+        public void GoForward(Scope scope)
+        {
+            GetWindowScope(scope).Forward();
+        }
+
         private IEnumerable<Cookie> GetPersistentCookies(IE ieBrowser)
         {
             return ieBrowser.GetCookiesForUrl(Watin.Uri).Cast<Cookie>();

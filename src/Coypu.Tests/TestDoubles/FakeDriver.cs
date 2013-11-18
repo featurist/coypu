@@ -43,9 +43,11 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
-        public readonly IList<Scope> MaximiseWindowCalls= new List<Scope>();
+        public readonly IList<Scope> MaximiseWindowCalls = new List<Scope>();
         public readonly IList<Scope> RefreshCalls = new List<Scope>();
         public readonly IList<ScopedRequest<Size>> ResizeToCalls = new List<ScopedRequest<Size>>();
+        public readonly IList<Scope> GoBackCalls = new List<Scope>();
+        public readonly IList<Scope> GoForwardCalls = new List<Scope>();
         public readonly IList<ScopedRequest<string>> SaveScreenshotCalls = new List<ScopedRequest<string>>();
 
         private IList<Cookie> stubbedCookies;
@@ -274,6 +276,16 @@ namespace Coypu.Tests.TestDoubles
                     Request = fileName,
                     Scope = scope
                 });
+        }
+
+        public void GoBack(Scope scope)
+        {
+            GoBackCalls.Add(scope);
+        }
+
+        public void GoForward(Scope scope)
+        {
+            GoForwardCalls.Add(scope);
         }
 
         public void Set(Element element, string value)

@@ -253,6 +253,18 @@ namespace Coypu.Drivers.Selenium
             screenshot.SaveAsFile(fileName, format);
         }
 
+        public void GoBack(Scope scope)
+        {
+            elementFinder.SeleniumScope(scope);
+            webDriver.Navigate().Back();
+        }
+
+        public void GoForward(Scope scope)
+        {
+            elementFinder.SeleniumScope(scope);
+            webDriver.Navigate().Forward();
+        }
+
         public IEnumerable<Cookie> GetBrowserCookies()
         {
             return webDriver.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
