@@ -54,7 +54,7 @@ namespace Coypu.Matchers {
 
         public static Constraint CssContaining(string expectedCssSelector, Regex[] text)
         {
-            return CssContaining(expectedCssSelector, text);
+            return CssContaining(expectedCssSelector, text, null);
         }
 
         public static Constraint CssContaining(string expectedCssSelector, IEnumerable<Regex> text, Options options)
