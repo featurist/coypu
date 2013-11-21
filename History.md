@@ -1,3 +1,12 @@
+# Version 0.23.1
+
+### Fix
+
+* Stack overflow in Shows.CssContaining :o
+
+Release date: 2013-11-21
+
+
 # Version 0.23.0
 
 ### Added
