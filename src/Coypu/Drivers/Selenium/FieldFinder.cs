@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Reflection;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -17,9 +19,16 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindField(string locator, Scope scope)
         {
-            return xPath.FieldXPathsByPrecedence(locator, scope)
-                        .Select(xpath => elementFinder.Find(By.XPath(xpath), scope))
-                        .FirstOrDefault(element => element != null);
+            try
+            {
+                return xPath.FieldXPathsByPrecedence(locator, scope)
+                            .Select(xpath => elementFinder.FindAll(By.XPath(xpath), scope).SingleOrDefault())
+                            .SingleOrDefault(element => element != null);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new AmbiguousHtmlException(string.Format("More than one field found matching locator '{0}')",locator), e);
+            }
         }
 
        

@@ -621,7 +621,20 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementFound Now();
 
+        /// <summary>
+        /// The location of the current browser window
+        /// </summary>
         Uri Location { get; }
+
+        /// <summary>
+        /// <para>By default Coypu will exclude any invisible elements, this allows you to override that behaviour</para>
+        /// <para>Default: true</para>
+        /// </summary>
         bool ConsiderInvisibleElements { get; }
+
+        /// <summary>
+        /// Whether to consider a partial or exact match of the text of labels when finding a field
+        /// </summary>
+        FieldFinderPrecision FieldFinderPrecision { get; }
     }
 }

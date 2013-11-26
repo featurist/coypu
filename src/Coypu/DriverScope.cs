@@ -60,6 +60,16 @@ namespace Coypu
             get { return Default(options).ConsiderInvisibleElements; }
         }
 
+        public FieldFinderPrecision FieldFinderPrecision
+        {
+            get { return Default(options).FieldFinderPrecision; }
+        }
+
+        public Options Options
+        {
+            get { return Default(options); }
+        }
+
         protected Options SetOptions(Options options)
         {
             return this.options = Default(options);

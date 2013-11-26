@@ -55,5 +55,10 @@ namespace Coypu
         /// <para>Default: true</para>
         /// </summary>
         public bool ConsiderInvisibleElements { get; set; }
+
+        /// <summary>
+        /// Whether to consider a partial match of the text of labels when finding a field, or just an exact match.
+        /// </summary>
+        public FieldFinderPrecision FieldFinderPrecision { get; set; }
     }
 }

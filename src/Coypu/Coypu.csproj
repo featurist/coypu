@@ -103,6 +103,7 @@
     <Compile Include="Actions\SendKeys.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="ActivatorDriverFactory.cs" />
+    <Compile Include="AmbiguousHtmlException.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="DeferredElementScope.cs" />
     <Compile Include="DriverFactory.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Drivers\Selenium\SeleniumWindow.cs" />
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="FieldFinderOptions.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Matchers\AggregateMatcher.cs" />

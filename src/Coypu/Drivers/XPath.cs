@@ -139,18 +139,26 @@ namespace Coypu.Drivers
             return new[]
                 {
                     ForlabeledOrByAttribute(locator, scope),
-                    ContainerLabeled(locator),
-                    ForLabeledPartial(locator),
-                    ContainerLabeledPartial(locator)
+                    ContainerLabeled(locator, scope),
                 };
+        }
+
+        private string ContainerLabeled(string locator, Scope scope)
+        {
+            return (scope.FieldFinderPrecision == FieldFinderPrecision.ExactLabel)
+                       ? ContainerLabeledExact(locator)
+                       : ContainerLabeledPartial(locator);
         }
 
         private string ForlabeledOrByAttribute(string locator, Scope scope)
         {
+            var isLabeledWith = (scope.FieldFinderPrecision == FieldFinderPrecision.ExactLabel)
+                                    ? IsLabelledWith(locator)
+                                    : IsPartialLabelledWith(locator);
             return Format(
                 ".//*[" + TagNamedOneOf(FieldTagNames) +
                 "   and " +
-                "   (" +      IsLabelledWith(locator) +
+                "   (" + isLabeledWith +
                 "      or " + HasIdOrPlaceholder(locator, scope) +
                 "      or " + HasName(locator) +
                 "      or " + HasValue(locator) +
@@ -164,12 +172,7 @@ namespace Coypu.Drivers
             return Format(".//label[contains(normalize-space(),{0})]//*[" + TagNamedOneOf(FieldTagNames) + "]",locator);
         }
 
-        private string ForLabeledPartial(string locator)
-        {
-            return Format(".//*[" + TagNamedOneOf(FieldTagNames) + " and @id = //label[contains(normalize-space(),{0})]/@for]", locator);
-        }
-
-        private string ContainerLabeled(string locator)
+        private string ContainerLabeledExact(string locator)
         {
             return Format(".//label[normalize-space() = {0}]//*[" + TagNamedOneOf(FieldTagNames) + "]",locator);
         }
@@ -177,6 +180,11 @@ namespace Coypu.Drivers
         private string IsLabelledWith(string locator)
         {
             return Format("(@id = //label[normalize-space() = {0}]/@for)", locator);
+        }
+
+        private string IsPartialLabelledWith(string locator)
+        {
+            return Format("(@id = //label[contains(normalize-space(),{0})]/@for)", locator);
         }
 
         private string HasValue(string locator)
