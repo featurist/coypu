@@ -19,18 +19,8 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindField(string locator, Scope scope)
         {
-            try
-            {
-                return xPath.FieldXPathsByPrecedence(locator, scope)
-                            .Select(xpath => elementFinder.FindAll(By.XPath(xpath), scope).SingleOrDefault())
-                            .SingleOrDefault(element => element != null);
-            }
-            catch (InvalidOperationException e)
-            {
-                throw new AmbiguousHtmlException(string.Format("More than one field found matching locator '{0}')",locator), e);
-            }
+            var by = xPath.FieldXPathsByPrecedence(locator, scope).Select(By.XPath);
+            return elementFinder.Find(by, scope, "field: " + locator);
         }
-
-       
     }
 }

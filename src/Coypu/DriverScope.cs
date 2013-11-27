@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Finders;
@@ -57,27 +58,34 @@ namespace Coypu
 
         public bool ConsiderInvisibleElements
         {
-            get { return Default(options).ConsiderInvisibleElements; }
+            get { return Merge(options).ConsiderInvisibleElements; }
         }
 
-        public FieldFinderPrecision FieldFinderPrecision
+        public bool Exact
         {
-            get { return Default(options).FieldFinderPrecision; }
+            get { return Merge(options).Exact; }
+        }
+
+        public Match Match
+        {
+            get { return Merge(options).Match; }
         }
 
         public Options Options
         {
-            get { return Default(options); }
+            get { return Merge(options); }
         }
 
         protected Options SetOptions(Options options)
         {
-            return this.options = Default(options);
+            return this.options = Merge(options);
         }
 
-        private Options Default(Options options)
+        private Options Merge(Options options)
         {
-            return options ?? SessionConfiguration;
+            return options == null
+                       ? SessionConfiguration
+                       : options.Merge(SessionConfiguration);
         }
 
         public void ClickButton(string locator, Options options = null)
@@ -201,12 +209,14 @@ namespace Coypu
 
         public ElementScope FindCss(string cssSelector, Options options = null)
         {
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, SetOptions(options));
+            SetOptions(options);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, this.options);
         }
 
         public ElementScope FindCss(string cssSelector, string text, Options options = null)
         {
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this, text), this, SetOptions(options));
+            SetOptions(options);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, Exact, text), this, this.options);
         }
 
         public ElementScope FindCss(string cssSelector, Regex text, Options options = null)
@@ -221,9 +231,9 @@ namespace Coypu
 
         public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            options = SetOptions(options);
+            SetOptions(options);
             if (predicate != null)
-                return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, options));
+                return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, this.options));
 
             return FindAllCssNoPredicate(cssSelector);
         }
@@ -235,9 +245,9 @@ namespace Coypu
 
         public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            options = SetOptions(options);
+            SetOptions(options);
             if (predicate != null)
-                return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, options));
+                return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, this.options));
 
             return FindAllXPathNoPredicate(xpath);
         }
@@ -359,5 +369,6 @@ namespace Coypu
                 element = elementFinder.Find();
             return element;
         }
+
     }
 }

@@ -9,7 +9,31 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     public class When_finding_css_with_matching_text : BrowserInteractionTests
     {
         [Test]
-        public void FindCss_with_exact_text_should_make_robust_call_to_underlying_driver()
+        public void FindCss_with_partial_text_should_make_robust_call_to_underlying_driver()
+        {
+            var stubCssResult = new StubElement();
+            Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss,
+                                 input: "some text",
+                                 matchingPattern: new Regex("some\\ text", RegexOptions.Multiline),
+                                 expectedDeferredResult: stubCssResult,
+                                 expectedImmediateResult: new StubElement(),
+                                 stubCssResult: stubCssResult);
+        }
+
+        [Test]
+        public void FindCss_should_excape_regex_chars()
+        {
+            var stubCssResult = new StubElement();
+            Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss,
+                                 input: "some (text) *",
+                                 matchingPattern: new Regex("some\\ \\(text\\)\\ \\*", RegexOptions.Multiline),
+                                 expectedDeferredResult: stubCssResult,
+                                 expectedImmediateResult: new StubElement(),
+                                 stubCssResult: stubCssResult);
+        }
+
+        [Test]
+        public void FindCss_with_exact_text_should_use_exact_regex()
         {
             var stubCssResult = new StubElement();
             Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss,
@@ -17,19 +41,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                                  matchingPattern: new Regex("^some\\ text$", RegexOptions.Multiline),
                                  expectedDeferredResult: stubCssResult,
                                  expectedImmediateResult: new StubElement(),
-                                 stubCssResult: stubCssResult);
-        }
-
-        [Test]
-        public void FindCss_with_exact_text_should_excape_regex_chars()
-        {
-            var stubCssResult = new StubElement();
-            Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss,
-                                 input: "some (text) *",
-                                 matchingPattern: new Regex("^some\\ \\(text\\)\\ \\*$", RegexOptions.Multiline),
-                                 expectedDeferredResult: stubCssResult,
-                                 expectedImmediateResult: new StubElement(),
-                                 stubCssResult: stubCssResult);
+                                 stubCssResult: stubCssResult,
+                                 exact: true);
         }
 
         [Test]
@@ -68,7 +81,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Should_find_robustly(browserSession.HasCss, elementScope.HasCss, driver.StubCss,
                                  suppliedText: "some text",
-                                 matchingPattern: new Regex("^some\\ text$", RegexOptions.Multiline),
+                                 matchingPattern: new Regex("some\\ text", RegexOptions.Multiline),
                                  expectedDeferredResult: true,
                                  expectedImmediateResult: false,
                                  stubCssResult: new StubElement());
@@ -158,7 +171,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             Should_find_robustly(browserSession.HasNoCss, elementScope.HasNoCss, driver.StubCss,
                                  suppliedText: "some text",
-                                 matchingPattern: new Regex("^some\\ text$", RegexOptions.Multiline),
+                                 matchingPattern: new Regex("some\\ text", RegexOptions.Multiline),
                                  expectedDeferredResult: false,
                                  expectedImmediateResult: true,
                                  stubCssResult: new StubElement());
@@ -194,7 +207,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                 VerifyFoundRobustly(scope, 1, locator, expectedDeferredResult, expectedImmediateResult, options);
         }
 
-        protected void Should_find_robustly<T>(Func<string, T, Options, Scope> subject, Func<string, T, Options, Scope> scope, Action<string, Regex, ElementFound, Scope> stub, T input, Regex matchingPattern, ElementFound expectedImmediateResult, ElementFound expectedDeferredResult, ElementFound stubCssResult)
+        protected void Should_find_robustly<T>(Func<string, T, Options, Scope> subject, Func<string, T, Options, Scope> scope, Action<string, Regex, ElementFound, Scope> stub, T input, Regex matchingPattern, ElementFound expectedImmediateResult, ElementFound expectedDeferredResult, ElementFound stubCssResult, bool exact = false)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -205,7 +218,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             stub(locator, matchingPattern, stubCssResult, browserSession);
             stub(locator, matchingPattern, stubCssResult, elementScope);
 
-            var options = new Options { Timeout = individualTimeout };
+            var options = new Options { Timeout = individualTimeout, Exact = exact};
 
             VerifyFoundRobustly(subject, 0, locator, input, expectedDeferredResult, expectedImmediateResult, options);
 

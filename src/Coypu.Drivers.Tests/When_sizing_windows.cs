@@ -9,22 +9,29 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void MaximisesWindow()
         {
-            AssertMaximisesWindow(Root);
+            using (Driver)
+            {
+                AssertMaximisesWindow(Root);
+            }
         }
 
         [Test]
         public void MaximisesCorrectWindowScope()
         {
-            Driver.Click(Driver.FindLink("Open pop up window", Root));
-            var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Open pop up window", Root));
+                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root),
+                                            Driver, null, null, null);
 
-            try
-            {
-                AssertMaximisesWindow(popUp);
-            }
-            finally
-            {
-                Driver.ExecuteScript("return self.close();", popUp);
+                try
+                {
+                    AssertMaximisesWindow(popUp);
+                }
+                finally
+                {
+                    Driver.ExecuteScript("return self.close();", popUp);
+                }
             }
         }
 
@@ -45,22 +52,29 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void ResizesWindow()
         {
-            AssertResizesWindow(Root);
+            using (Driver)
+            {
+                AssertResizesWindow(Root);
+            }
         }
 
         [Test]
         public void ResizesCorrectWindowScope()
         {
-            Driver.Click(Driver.FindLink("Open pop up window", Root));
-            var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+            using (Driver)
+            {
+                Driver.Click(Driver.FindLink("Open pop up window", Root));
+                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root),
+                                            Driver, null, null, null);
 
-            try
-            {
-                AssertResizesWindow(popUp);
-            }
-            finally
-            {
-                Driver.ExecuteScript("return self.close();", popUp);
+                try
+                {
+                    AssertResizesWindow(popUp);
+                }
+                finally
+                {
+                    Driver.ExecuteScript("return self.close();", popUp);
+                }
             }
         }
 

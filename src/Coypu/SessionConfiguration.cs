@@ -23,7 +23,6 @@ namespace Coypu
             SSL = false;
             Browser = Drivers.Browser.Firefox;
             Driver = typeof (SeleniumWebDriver);
-            FieldFinderPrecision = FieldFinderPrecision.PartialLabel;
         }
 
         /// <summary>

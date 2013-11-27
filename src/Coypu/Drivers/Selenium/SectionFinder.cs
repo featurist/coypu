@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -7,7 +5,6 @@ namespace Coypu.Drivers.Selenium
     internal class SectionFinder
     {
         private readonly ElementFinder elementFinder;
-        private readonly TextMatcher textMatcher;
 
         readonly string[] sectionTags = { "section", "div"};
         readonly string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
@@ -26,7 +23,7 @@ namespace Coypu.Drivers.Selenium
                                         "@id = {0}" + 
                                      ")]",locator.Trim());
            
-            return elementFinder.Find(By.XPath(xpath),scope);
+            return elementFinder.Find(By.XPath(xpath),scope, "section: " + locator);
         }
     }
 }

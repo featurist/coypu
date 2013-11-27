@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.PageObjects;
 using Cookie = System.Net.Cookie;
 
 namespace Coypu.Drivers.Selenium
@@ -86,40 +87,44 @@ namespace Coypu.Drivers.Selenium
 
         public ElementFound FindField(string locator, Scope scope)
         {
-            return BuildElement(fieldFinder.FindField(locator,scope), "No such field: " + locator);
+            return BuildElement(fieldFinder.FindField(locator, scope));
         }
 
         public ElementFound FindButton(string locator, Scope scope)
         {
-            return BuildElement(buttonFinder.FindButton(locator, scope), "No such button: " + locator);
+            return BuildElement(buttonFinder.FindButton(locator, scope));
         }
 
         public ElementFound FindFrame(string locator, Scope scope)
         {
-            return BuildElement(frameFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
+            return BuildElement(frameFinder.FindFrame(locator, scope));
         }
 
         public ElementFound FindLink(string linkText, Scope scope)
         {
-            return BuildElement(Find(By.LinkText(linkText), scope), "No such link: " + linkText);
+            return BuildElement(Find(
+                new [] {
+                     By.LinkText(linkText),
+                     By.PartialLinkText(linkText),
+                    }, scope, "link: " + linkText));
         }
 
         public ElementFound FindId(string id,Scope scope ) 
         {
-            return BuildElement(Find(By.Id(id), scope), "Failed to find id: " + id);
+            return BuildElement(Find(By.Id(id), scope, "id: " + id));
         }
 
         public ElementFound FindFieldset(string locator, Scope scope)
         {
-            var fieldset =
-                Find(By.XPath(xPath.Format(".//fieldset[legend[text() = {0}] or @id = {0}]", locator.Trim())), scope);
+            var by = By.XPath(xPath.Format(".//fieldset[legend[text() = {0}] or @id = {0}]", locator.Trim()));
+            var fieldset = Find(by, scope, "fieldset: " + locator);
 
-            return BuildElement(fieldset, "Failed to find fieldset: " + locator);
+            return BuildElement(fieldset);
         }
 
         public ElementFound FindSection(string locator, Scope scope)
         {
-            return BuildElement(sectionFinder.FindSection(locator,scope), "Failed to find section: " + locator);
+            return BuildElement(sectionFinder.FindSection(locator,scope));
         }
 
         public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
@@ -131,16 +136,16 @@ namespace Coypu.Drivers.Selenium
             if (textPattern != null && scope.ConsiderInvisibleElements)
                 throw new NotSupportedException("Cannot inspect the text of invisible elements.");
             
-            var failureMessage = "No element found by css: " + cssSelector;
+            var queryDesciption = "css: " + cssSelector;
             if (textPattern != null)
-                failureMessage += " with text matching /" + textPattern + "/";
+                queryDesciption += " with text matching /" + textPattern + "/";
 
-            return BuildElement(Find(By.CssSelector(cssSelector), scope, textMatches), failureMessage);
+            return BuildElement(Find(By.CssSelector(cssSelector), scope, queryDesciption, textMatches));
         }
 
         public ElementFound FindXPath(string xpath, Scope scope)
         {
-            return BuildElement(Find(By.XPath(xpath),scope),"No element found by xpath: " + xpath);
+            return BuildElement(Find(By.XPath(xpath), scope, "xpath: " + xpath));
         }
 
         public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope)
@@ -153,22 +158,19 @@ namespace Coypu.Drivers.Selenium
             return FindAll(By.XPath(xpath), scope).Select(BuildElement).Cast<ElementFound>();
         }
 
-        private IWebElement Find(By by, Scope scope, Func<IWebElement, bool> predicate = null)
+        private IWebElement Find(By by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
         {
-            return elementFinder.Find(by, scope, predicate);
+            return elementFinder.Find(by, scope, queryDescription, predicate);
+        }
+
+        private IWebElement Find(IEnumerable<By> by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
+        {
+            return elementFinder.Find(by, scope, queryDescription, predicate);
         }
 
         private IEnumerable<IWebElement> FindAll(By by, Scope scope)
         {
             return elementFinder.FindAll(by, scope);
-        }
-
-        private ElementFound BuildElement(IWebElement element, string failureMessage)
-        {
-            if (element == null)
-                throw new MissingHtmlException(failureMessage);
-
-            return BuildElement(element);
         }
 
         private SeleniumElement BuildElement(IWebElement element)
@@ -196,7 +198,7 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasXPath(string xpath, Scope scope)
         {
-            return Find(By.XPath(xpath), scope) != null;
+            return FindAll(By.XPath(xpath), scope).Any();
         }
 
         public bool HasDialog(string withText, Scope scope)

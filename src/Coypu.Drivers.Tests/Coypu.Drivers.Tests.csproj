@@ -71,7 +71,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="When_finding_fields_returns_ambiguous_results.cs" />
+    <Compile Include="When_finding_fields_returns_ambiguous_results_Match.First.cs" />
+    <Compile Include="When_finding_fields_returns_ambiguous_results_Match.Single.cs" />
     <Compile Include="When_navigating.cs" />
     <Compile Include="When_inspecting_html.cs" />
     <Compile Include="When_refreshing_windows.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="When_finding_fields_id.cs" />
     <Compile Include="When_forced_to_consider_invisible_elements.cs" />
     <Compile Include="When_inspecting_location.cs" />
-    <Compile Include="sites\SinatraSite.cs" />
+    <Compile Include="obj\sites\SinatraSite.cs" />
     <Compile Include="When_getting_cookies.cs" />
     <Compile Include="When_hovering.cs" />
     <Compile Include="When_inspecting_title.cs" />

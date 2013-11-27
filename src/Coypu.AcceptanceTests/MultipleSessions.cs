@@ -17,11 +17,11 @@ namespace Coypu.AcceptanceTests
                     VisitTestPage(sessionOne);
                     VisitTestPage(sessionTwo);
 
-                    sessionOne.FindCss("input[type=text]").FillInWith("from session one");
-                    sessionTwo.FindCss("input[type=text]").FillInWith("from session two");
+                    sessionOne.FindCss("input[type=text]", new Options { Match = Match.First }).FillInWith("from session one");
+                    sessionTwo.FindCss("input[type=text]", new Options { Match = Match.First }).FillInWith("from session two");
 
-                    Assert.That(sessionOne.FindCss("input[type=text]").Value, Is.EqualTo("from session one"));
-                    Assert.That(sessionTwo.FindCss("input[type=text]").Value, Is.EqualTo("from session two"));
+                    Assert.That(sessionOne.FindCss("input[type=text]", new Options { Match = Match.First }).Value, Is.EqualTo("from session one"));
+                    Assert.That(sessionTwo.FindCss("input[type=text]", new Options { Match = Match.First }).Value, Is.EqualTo("from session two"));
                 }
             }
         }

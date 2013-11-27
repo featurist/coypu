@@ -19,23 +19,22 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindFrame(string locator, Scope scope)
         {
-            var frame = FindFrameByTag(locator, scope, "iframe") ??
-                        FindFrameByTag(locator, scope, "frame");
-            return frame;
+            var frames = AllElementsByTag(scope, "iframe").Union(AllElementsByTag(scope, "frame"));
+            
+            return scope.Options.FilterWithMatchStrategy(WebElement(locator, frames), "frame: " + locator);
         }
 
-        private IWebElement FindFrameByTag(string locator, Scope scope, string tagNameToFind)
+        private IEnumerable<IWebElement> AllElementsByTag(Scope scope, string tagNameToFind)
         {
-            return WebElement(locator, elementFinder.FindAll(By.TagName(tagNameToFind), scope));
+            return elementFinder.FindAll(By.TagName(tagNameToFind), scope);
         }
 
-        private IWebElement WebElement(string locator, IEnumerable<IWebElement> webElements)
+        private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements)
         {
-            var frame = webElements.FirstOrDefault(e => e.GetAttribute("id") == locator ||
+            return webElements.Where(e => e.GetAttribute("id") == locator ||
                                                         e.GetAttribute("name") == locator ||
                                                         e.GetAttribute("title") == locator ||
                                                         FrameContentsMatch(e, locator));
-            return frame;
         }
 
         private bool FrameContentsMatch(IWebElement e, string locator)

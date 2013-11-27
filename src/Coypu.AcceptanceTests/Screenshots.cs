@@ -26,7 +26,7 @@ namespace Coypu.AcceptanceTests
             popUp.ResizeTo(800, 600);
 
             // Do something in the main window
-            browser.FindCss("legend").Click();
+            browser.FindCss("body").Click();
 
             SavesToSpecifiedLocation(popUp);
         }

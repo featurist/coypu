@@ -37,7 +37,9 @@ namespace Coypu.Drivers.Watin
 
         public WatiN.Core.Element FindButton(string locator, Scope scope)
         {
-            return FindXPath(new XPath().ButtonXPath(locator), scope);
+            return xPath.ButtonXPathsByPrecedence(locator, scope.Options)
+                    .Select(xpath => FindXPath(xpath, scope))
+                    .FirstOrDefault(element => element != null);
         }
 
         public WatiN.Core.Element FindElement(string id, Scope scope)

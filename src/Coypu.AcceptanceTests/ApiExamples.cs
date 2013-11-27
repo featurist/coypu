@@ -125,24 +125,24 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FillInWith_example()
         {
-            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+            browser.FillIn("scope2ContainerLabeledTextInputFieldId").With("New text input value");
+            Assert.That(browser.FindField("scope2ContainerLabeledTextInputFieldId").Value,
                         Is.EqualTo("New text input value"));
         }
 
         [Test]
         public void SendKeys_example()
         {
-            browser.FindField("containerLabeledTextInputFieldName").SendKeys(" - send these keys");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+            browser.FindField("containerLabeledTextInputFieldId").SendKeys(" - send these keys");
+            Assert.That(browser.FindField("containerLabeledTextInputFieldId").Value,
                         Is.EqualTo("text input field two val - send these keys"));
         }
 
         [Test]
         public void FillInWith_element_example()
         {
-            browser.FillIn("containerLabeledTextInputFieldName").With("New text input value");
-            Assert.That(browser.FindField("containerLabeledTextInputFieldName").Value,
+            browser.FillIn("scope2ContainerLabeledTextInputFieldId").With("New text input value");
+            Assert.That(browser.FindField("scope2ContainerLabeledTextInputFieldId").Value,
                         Is.EqualTo("New text input value"));
         }
 
@@ -179,7 +179,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FindCss_example()
         {
-            var first = browser.FindCss("#inspectingContent ul#cssTest li");
+            var first = browser.FindCss("#inspectingContent ul#cssTest li", new Options{Match = Match.First});
             Assert.That(first.Text, Is.EqualTo("one"));
         }
 
@@ -200,14 +200,14 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FindXPath_example()
         {
-            var first = browser.FindXPath("//*[@id='inspectingContent']//ul[@id='cssTest']/li");
+            var first = browser.FindXPath("//*[@id='inspectingContent']//ul[@id='cssTest']/li", new Options{Match = Match.First});
             Assert.That(first.Text, Is.EqualTo("one"));
         }
 
         [Test]
         public void FindField_examples()
         {
-            Assert.That(browser.FindField("text input field linked by for").Id, Is.EqualTo("forLabeledTextInputFieldId"));
+            Assert.That(browser.FindField("text input field linked by for", new Options{Exact = true}).Id, Is.EqualTo("forLabeledTextInputFieldId"));
             Assert.That(browser.FindField("checkbox field in a label container").Id,
                         Is.EqualTo("containerLabeledCheckboxFieldId"));
             Assert.That(browser.FindField("containerLabeledSelectFieldId").Name,
@@ -606,11 +606,11 @@ namespace Coypu.AcceptanceTests
 
             var popUp = mainWindow.FindWindow("Pop Up Window");
 
-            Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
+            Assert.That(mainWindow.FindButton("scoped button", new Options { Match = Match.First }).Id, Is.EqualTo("scope1ButtonId"));
             Assert.That(popUp.FindButton("scoped button").Id, Is.EqualTo("popUpButtonId"));
 
             // And back
-            Assert.That(mainWindow.FindButton("scoped button").Id, Is.EqualTo("scope1ButtonId"));
+            Assert.That(mainWindow.FindButton("scoped button", new Options { Match = Match.First }).Id, Is.EqualTo("scope1ButtonId"));
         }
 
         [Test]

@@ -22,7 +22,7 @@ namespace Coypu.Queries
         }
 
         protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector, string text, Options options)
-            : this(driver, scope, cssSelector, CssFinder.ExactTextAsRegex(text), options)
+            : this(driver, scope, cssSelector, CssFinder.ExactTextAsRegex(text, options.Exact), options)
         {
         }
 

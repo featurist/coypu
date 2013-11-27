@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Coypu.Drivers
@@ -43,7 +44,7 @@ namespace Coypu.Drivers
         private string BuildConcatSeparatingSingleAndDoubleQuotes(string value)
         {
             var doubleQuotedParts = value.Split('\"')
-                                         .Select(e => WrapInDoubleQuotes(e))
+                                         .Select(WrapInDoubleQuotes)
                                          .ToArray();
 
             var reJoinedWithDoubleQuoteParts = String.Join(", '\"', ", doubleQuotedParts);
@@ -58,7 +59,7 @@ namespace Coypu.Drivers
 
         private string WrapInDoubleQuotes(string value)
         {
-            return String.Format("\"{0}\"",value);
+            return String.Format("\"{0}\"", value);
         }
 
         private string TrimEmptyParts(string concatArguments)
@@ -86,12 +87,12 @@ namespace Coypu.Drivers
         {
             return String.Format(" contains(@class,' {0}') " +
                                  "or contains(@class,'{0} ') " +
-                                 "or contains(@class,' {0} ') ",className);
+                                 "or contains(@class,' {0} ') ", className);
         }
 
         public string AttributeIsOneOf(string attributeName, string[] values)
         {
-            return "(" + String.Join(" or ",values.Select(t => "@" + attributeName + "='" + t + "'").ToArray()) + ")";
+            return "(" + String.Join(" or ", values.Select(t => "@" + attributeName + "='" + t + "'").ToArray()) + ")";
         }
 
         public string TagNamedOneOf(params string[] fieldTagNames)
@@ -101,25 +102,50 @@ namespace Coypu.Drivers
 
         public string CasedTagName(string tagName)
         {
-            return uppercaseTagNames ? tagName.ToUpper() : tagName;;
+            return uppercaseTagNames ? tagName.ToUpper() : tagName; ;
+        }
+
+        public string FrameXPath(string locator)
+        {
+            return Format(
+                ".//*[" + TagNamedOneOf("iframe", "frame") + "]" +
+                "[" + FrameAttributesMatch(locator) + "]",
+                locator.Trim());
+        }
+
+        private string FrameAttributesMatch(string locator)
+        {
+            return AttributesMatchLocator(locator, true, "@id", "@name", "@title");
         }
 
         private static readonly string[] InputButtonTypes = new[] { "button", "submit", "image", "reset" };
 
-        public string ButtonXPath(string locator)
+        public IEnumerable<string> ButtonXPathsByPrecedence(string locator, Options options)
+        {
+            var exact =  ButtonXPath(locator, true);
+            if (options.Exact)
+                return new[] { exact };
+
+            var partial = ButtonXPath(locator, false);
+            return new[] {exact, partial};
+        }
+
+        private string ButtonXPath(string locator, bool exact)
         {
             return Format(
-                ".//*[" +    IsInputButton() +
+                ".//*[" + IsInputButton() +
                 "     or " + TagNamedOneOf("button") +
                 "     or " + XPathNodeHasOneOfClasses("button", "btn") +
                 "     or @role = 'button'" +
-                "][" + ButtonAttributesMatchLocator(locator.Trim()) + "]",
+                "   ][" + AttributesMatchLocator(locator, true, "@id", "@name") + 
+                "     or " + AttributesMatchLocator(locator.Trim(), exact, "@value", "@alt", "normalize-space()") + 
+                "]",
                 locator.Trim());
         }
 
-        private string ButtonAttributesMatchLocator(string locator)
+        private string AttributesMatchLocator(string locator, bool exact, params string[] attributes)
         {
-            return Format("@id = {0} or @name = {0} or @value = {0} or @alt = {0} or normalize-space() = {0}", locator);
+            return string.Join(" or ", attributes.Select(a => Is(a, locator, exact)).ToArray());
         }
 
         private string IsInputButton()
@@ -129,37 +155,38 @@ namespace Coypu.Drivers
 
         private static readonly string[] FieldTagNames = new[] { "input", "select", "textarea" };
         private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file", "email", "tel", "url" };
-        private static readonly string[] FindByNameTypes = FieldInputTypes.Except(new []{"radio"}).ToArray();
+        private static readonly string[] FindByNameTypes = FieldInputTypes.Except(new[] { "radio" }).ToArray();
         private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
         private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
 
-        public string[] FieldXPathsByPrecedence(string locator, Scope scope)
+        public IEnumerable<string> FieldXPathsByPrecedence(string locator, Scope scope)
         {
             locator = locator.Trim();
+            var exact = FieldXPaths(locator,scope,true);
+
+            if (scope.Exact)
+                return exact;
+
+            var partial = FieldXPaths(locator, scope, false);
+            return exact.Concat(partial);
+        }
+
+        private IEnumerable<string> FieldXPaths(string locator, Scope scope, bool exact)
+        {
             return new[]
                 {
-                    ForlabeledOrByAttribute(locator, scope),
-                    ContainerLabeled(locator, scope),
+                    ForlabeledOrByAttribute(locator, scope, exact),
+                    ContainerLabeled(locator, exact),
                 };
         }
 
-        private string ContainerLabeled(string locator, Scope scope)
+        private string ForlabeledOrByAttribute(string locator, Scope scope, bool exact)
         {
-            return (scope.FieldFinderPrecision == FieldFinderPrecision.ExactLabel)
-                       ? ContainerLabeledExact(locator)
-                       : ContainerLabeledPartial(locator);
-        }
-
-        private string ForlabeledOrByAttribute(string locator, Scope scope)
-        {
-            var isLabeledWith = (scope.FieldFinderPrecision == FieldFinderPrecision.ExactLabel)
-                                    ? IsLabelledWith(locator)
-                                    : IsPartialLabelledWith(locator);
             return Format(
                 ".//*[" + TagNamedOneOf(FieldTagNames) +
                 "   and " +
-                "   (" + isLabeledWith +
-                "      or " + HasIdOrPlaceholder(locator, scope) +
+                "   (" + IsLabelledWith(locator, exact) +
+                "      or " + HasIdOrPlaceholder(locator, scope, exact) +
                 "      or " + HasName(locator) +
                 "      or " + HasValue(locator) +
                 "   )" +
@@ -167,24 +194,14 @@ namespace Coypu.Drivers
                 locator);
         }
 
-        private string ContainerLabeledPartial(string locator)
+        private string ContainerLabeled(string locator, bool exact)
         {
-            return Format(".//label[contains(normalize-space(),{0})]//*[" + TagNamedOneOf(FieldTagNames) + "]",locator);
+            return Format(".//label[" + IsText(locator, exact) + "]//*[" + TagNamedOneOf(FieldTagNames) + "]", locator);
         }
 
-        private string ContainerLabeledExact(string locator)
+        private string IsLabelledWith(string locator, bool exact)
         {
-            return Format(".//label[normalize-space() = {0}]//*[" + TagNamedOneOf(FieldTagNames) + "]",locator);
-        }
-
-        private string IsLabelledWith(string locator)
-        {
-            return Format("(@id = //label[normalize-space() = {0}]/@for)", locator);
-        }
-
-        private string IsPartialLabelledWith(string locator)
-        {
-            return Format("(@id = //label[contains(normalize-space(),{0})]/@for)", locator);
+            return Format("(@id = //label[" + IsText(locator, exact) + "]/@for)", locator);
         }
 
         private string HasValue(string locator)
@@ -197,9 +214,21 @@ namespace Coypu.Drivers
             return Format("((" + AttributeIsOneOf("type", FindByNameTypes) + " or not(@type)) and @name = {0})", locator);
         }
 
-        private string HasIdOrPlaceholder(string locator, Scope scope)
+        private string HasIdOrPlaceholder(string locator, Scope scope, bool exact)
         {
-            return Format("(" + IsAFieldInputType(scope) + " and " + "(@id = {0} or @placeholder = {0}))", locator);
+            return Format("(" + IsAFieldInputType(scope) + " and " + "(@id = {0} or " + Is("@placeholder", locator, exact) + "))", locator);
+        }
+
+        private string Is(string selector, string locator, bool exact)
+        {
+            return exact 
+                ? Format(selector + " = {0}", locator)
+                : Format("contains(" + selector + ",{0})", locator);
+        }
+
+        private string IsText(string locator, bool exact)
+        {
+            return Is("normalize-space()", locator,exact);
         }
 
         private string IsAFieldInputType(Scope scope)

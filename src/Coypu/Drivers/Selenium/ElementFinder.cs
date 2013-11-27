@@ -7,22 +7,19 @@ namespace Coypu.Drivers.Selenium
 {
     internal class ElementFinder
     {
-        public IWebElement Find(By by, Scope scope, Func<IWebElement, bool> predicate = null)
+        public IWebElement Find(By by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
         {
-            var context = SeleniumScope(scope);
-            IWebElement firstMatch = null;
-            try
-            {
-                firstMatch = context.FindElement(@by);
-            }
-            catch (WebDriverException) {}
+            var results = FindAll(by, scope).Where(e => matches(predicate, e));
+                
+            return scope.Options.FilterWithMatchStrategy(results, queryDescription);
+        }
 
-            if (firstMatch != null && scope.ConsiderInvisibleElements && matches(predicate, firstMatch))
-                return firstMatch;
+        public IWebElement Find(IEnumerable<By> bys, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
+        {
+            var results = bys.Select(by => FindAll(by, scope).Where(e => matches(predicate, e)))
+                             .FirstOrDefault(matches => matches.Any());
 
-            return firstMatch != null && firstMatch.IsDisplayed() && matches(predicate, firstMatch)
-                       ? firstMatch
-                       : context.FindElements(@by).FirstOrDefault(e => IsDisplayed(e, scope) && matches(predicate, e));
+            return scope.Options.FilterWithMatchStrategy(results ?? Enumerable.Empty<IWebElement>(), queryDescription);
         }
 
         private static bool matches(Func<IWebElement, bool> predicate, IWebElement firstMatch)
@@ -32,10 +29,7 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<IWebElement> FindAll(By by, Scope scope)
         {
-            var context = SeleniumScope(scope);
-            return scope.ConsiderInvisibleElements 
-                ? context.FindElements(@by) 
-                : context.FindElements(@by).Where(e => IsDisplayed(e, scope));
+            return SeleniumScope(scope).FindElements(@by).Where(e => IsDisplayed(e, scope));
         }
 
         public ISearchContext SeleniumScope(Scope scope)

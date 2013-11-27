@@ -43,8 +43,8 @@ namespace Coypu.AcceptanceTests
             var all = browser.FindAllCss("ul.snapshot-scope").ToList();
             Assert.That(all.Count(), Is.EqualTo(2));
 
-            Assert.That(all[0].FindCss("li").Text, Is.EqualTo("Some"));
-            Assert.That(all[1].FindCss("li").Text, Is.EqualTo("one"));
+            Assert.That(all[0].FindCss("li:first-child").Text, Is.EqualTo("Some"));
+            Assert.That(all[1].FindCss("li:first-child").Text, Is.EqualTo("one"));
         }
 
         [Test]
@@ -53,8 +53,8 @@ namespace Coypu.AcceptanceTests
             var all = browser.FindAllXPath("//ul[@class='snapshot-scope']").ToList();
             Assert.That(all.Count(), Is.EqualTo(2));
 
-            Assert.That(all[0].FindCss("li").Text, Is.EqualTo("Some"));
-            Assert.That(all[1].FindCss("li").Text, Is.EqualTo("one"));
+            Assert.That(all[0].FindCss("li:first-child").Text, Is.EqualTo("Some"));
+            Assert.That(all[1].FindCss("li:first-child").Text, Is.EqualTo("one"));
 
             ReloadTestPage();
 

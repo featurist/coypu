@@ -114,9 +114,9 @@
     <Compile Include="Drivers\Selenium\SeleniumWindow.cs" />
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
-    <Compile Include="FieldFinderOptions.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
+    <Compile Include="Match.cs" />
     <Compile Include="Matchers\AggregateMatcher.cs" />
     <Compile Include="Matchers\HasNoValueMatcher.cs" />
     <Compile Include="Matchers\HasAllCssInOrderMatcher.cs" />
