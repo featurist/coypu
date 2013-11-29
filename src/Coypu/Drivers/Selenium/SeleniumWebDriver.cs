@@ -18,7 +18,6 @@ namespace Coypu.Drivers.Selenium
         private readonly ElementFinder elementFinder;
         private readonly FieldFinder fieldFinder;
         private readonly FrameFinder frameFinder;
-        private readonly ButtonFinder buttonFinder;
         private readonly SectionFinder sectionFinder;
         private readonly TextMatcher textMatcher;
         private readonly Dialogs dialogs;
@@ -42,7 +41,6 @@ namespace Coypu.Drivers.Selenium
             fieldFinder = new FieldFinder(elementFinder, xPath);
             frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
-            buttonFinder = new ButtonFinder(elementFinder, xPath);
             sectionFinder = new SectionFinder(elementFinder, xPath);
             windowHandleFinder = new WindowHandleFinder(this.webDriver);
             dialogs = new Dialogs(this.webDriver);
@@ -88,11 +86,6 @@ namespace Coypu.Drivers.Selenium
         public ElementFound FindField(string locator, Scope scope)
         {
             return BuildElement(fieldFinder.FindField(locator, scope));
-        }
-
-        public ElementFound FindButton(string locator, Scope scope)
-        {
-            return BuildElement(buttonFinder.FindButton(locator, scope));
         }
 
         public ElementFound FindFrame(string locator, Scope scope)

@@ -122,15 +122,15 @@ namespace Coypu.Drivers
 
         public IEnumerable<string> ButtonXPathsByPrecedence(string locator, Options options)
         {
-            var exact =  ButtonXPath(locator, true);
+            var exact =  Button(locator, true);
             if (options.Exact)
                 return new[] { exact };
 
-            var partial = ButtonXPath(locator, false);
+            var partial = Button(locator, false);
             return new[] {exact, partial};
         }
 
-        private string ButtonXPath(string locator, bool exact)
+        public string Button(string locator, bool exact)
         {
             return Format(
                 ".//*[" + IsInputButton() +

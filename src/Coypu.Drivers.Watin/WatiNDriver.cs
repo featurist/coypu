@@ -233,11 +233,6 @@ namespace Coypu.Drivers.Watin
                    select new Cookie(name, value);
         }
 
-        public ElementFound FindButton(string locator, Scope scope)
-        {
-            return BuildElement(elementFinder.FindButton(locator, scope), "Failed to find button with text, id or name: " + locator);
-        }
-
         public ElementFound FindLink(string linkText, Scope scope)
         {
             return BuildElement(elementFinder.FindLink(linkText, scope), "Failed to find link with text: " + linkText);

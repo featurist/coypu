@@ -116,6 +116,8 @@
     <Compile Include="Element.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
+    <Compile Include="Finders\QueryFinder.cs" />
+    <Compile Include="Finders\XPathQueryFinder.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Matchers\AggregateMatcher.cs" />
     <Compile Include="Matchers\HasNoValueMatcher.cs" />
@@ -143,7 +145,6 @@
     <Compile Include="DriverScope.cs" />
     <Compile Include="Drivers\Browser.cs" />
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />
-    <Compile Include="Drivers\Selenium\ButtonFinder.cs" />
     <Compile Include="Drivers\Selenium\Dialogs.cs" />
     <Compile Include="Drivers\Selenium\MouseControl.cs" />
     <Compile Include="Drivers\Selenium\OptionSelector.cs" />

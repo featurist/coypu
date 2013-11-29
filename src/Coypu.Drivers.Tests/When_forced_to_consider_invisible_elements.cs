@@ -31,9 +31,9 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Does_find_invisible_elements()
         {
-            Assert.That(Driver.FindButton("firstInvisibleInputId", RootConsideringInvisibleElements).Name, Is.EqualTo("firstInvisibleInputName"));
+            Assert.That(new ButtonFinder(Driver,"firstInvisibleInputId", RootConsideringInvisibleElements).Find().Name, Is.EqualTo("firstInvisibleInputName"));
 
-            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("firstInvisibleInputId", Root));
+            Assert.Throws<MissingHtmlException>(() => new ButtonFinder(Driver,"firstInvisibleInputId", Root).Find());
         }
 
         [Test, Explicit("Only works in WatiN")]

@@ -1,12 +1,22 @@
+using System;
+using Coypu.Drivers;
+
 namespace Coypu.Finders
 {
-    internal class ButtonFinder : ElementFinder
+    internal class ButtonFinder : XPathQueryFinder
     {
         internal ButtonFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
 
-        internal override ElementFound Find()
+        protected override Func<string, bool, string> GetQuery(XPath xpath)
         {
-            return Driver.FindButton(Locator, Scope);
+            return xpath.Button;
         }
+
+        internal override string QueryDescription
+        {
+            get { return "button: " + Locator; }
+        }
+
+        
     }
 }

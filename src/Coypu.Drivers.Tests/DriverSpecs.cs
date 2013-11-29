@@ -4,6 +4,7 @@ using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Tests.Sites;
 using Coypu.Drivers.Watin;
 using Coypu.Finders;
+using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 [SetUpFixture]
@@ -35,8 +36,8 @@ namespace Coypu.Drivers.Tests
         private static DriverScope root;
         private static Driver driver;
 
-        private static readonly Browser browser = Browser.Chrome;
-        private static readonly Type driverType = typeof (SeleniumWebDriver);
+        private static readonly Browser browser = Browser.InternetExplorer;
+        private static readonly Type driverType = typeof (WatiNDriver);
 
         [SetUp]
         public virtual void SetUp()
@@ -62,7 +63,7 @@ namespace Coypu.Drivers.Tests
 
         protected static DriverScope Root
         {
-            get { return root ?? (root = new DriverScope(new SessionConfiguration(), new DocumentElementFinder(Driver), null, null, null, null)); }
+            get { return root ?? (root = new DriverScope(new SessionConfiguration{Browser = browser, Driver = driverType}, new DocumentElementFinder(Driver), null, new ImmediateSingleExecutionFakeRobustWrapper(), null, null)); }
         }
 
         private static void EnsureDriver()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
+using Coypu.Drivers;
 using Coypu.Finders;
 using Coypu.Matchers;
 using Coypu.Queries;
@@ -69,6 +70,16 @@ namespace Coypu
         public Match Match
         {
             get { return Merge(options).Match; }
+        }
+
+        public Browser Browser
+        {
+            get { return SessionConfiguration.Browser; }
+        }
+
+        internal ElementFound Find(QueryFinder query)
+        {
+            return Options.Find(query);
         }
 
         public Options Options

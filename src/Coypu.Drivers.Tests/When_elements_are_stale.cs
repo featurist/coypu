@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             var elementWithinScope1 = Driver.FindFieldset("Scope 1", Root);
             elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = true}).should_be_false();
 
-            Driver.Click(Driver.FindButton("empty scope1", Root));
+            Driver.Click(new ButtonFinder(Driver,"empty scope1", Root).Find());
 
             elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = true}).should_be_true();
         }
@@ -23,7 +23,7 @@ namespace Coypu.Drivers.Tests
             var elementWithinScope1 = Driver.FindFieldset("Scope 1", Root);
             elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = false }).should_be_false();
 
-            Driver.Click(Driver.FindButton("hide scope1", Root));
+            Driver.Click(new ButtonFinder(Driver,"hide scope1", Root).Find());
 
             elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = false}).should_be_true();
             elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = true }).should_be_false();
@@ -35,7 +35,7 @@ namespace Coypu.Drivers.Tests
             var frame = Driver.FindFrame("iframe1", Root);
             frame.Stale(new Options()).should_be_false();
 
-            Driver.Click(Driver.FindButton("destroy frames",Root));
+            Driver.Click(new ButtonFinder(Driver,"destroy frames",Root).Find());
 
             frame.Stale(new Options()).should_be_true();
         }
@@ -46,7 +46,7 @@ namespace Coypu.Drivers.Tests
             var frame = Driver.FindFrame("iframe1", Root);
             frame.Stale(new Options { ConsiderInvisibleElements = false }).should_be_false();
 
-            Driver.Click(Driver.FindButton("hide frames", Root));
+            Driver.Click(new ButtonFinder(Driver,"hide frames", Root).Find());
 
             frame.Stale(new Options { ConsiderInvisibleElements = false }).should_be_true();
             frame.Stale(new Options { ConsiderInvisibleElements = true }).should_be_false();
@@ -62,7 +62,7 @@ namespace Coypu.Drivers.Tests
             var popUpWindow = popUpScope.Now();
             popUpWindow.Stale(new Options()).should_be_false();
 
-            Driver.Click(Driver.FindButton("close", popUpScope));
+            Driver.Click(new ButtonFinder(Driver,"close", popUpScope).Find());
 
             popUpWindow.Stale(new Options()).should_be_true();
         }

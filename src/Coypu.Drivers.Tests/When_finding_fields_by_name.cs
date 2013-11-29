@@ -1,3 +1,4 @@
+using Coypu.Finders;
 using NSpec;
 using NUnit.Framework;
 
@@ -32,7 +33,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Does_NOT_find_radio_button()
         {
-            Assert.Throws<MissingHtmlException>(() => Driver.FindButton("containerLabeledRadioFieldName", Root));
+            Assert.Throws<MissingHtmlException>(() => new ButtonFinder(Driver,"containerLabeledRadioFieldName", Root).Find());
         }
 
         [Test]

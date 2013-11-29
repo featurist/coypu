@@ -19,22 +19,22 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_button_by_name()
         {
-            Driver.FindButton("scopedButtonName", scope1).Id.should_be("scope1ButtonId");
-            Driver.FindButton("scopedButtonName", scope2).Id.should_be("scope2ButtonId");
+            new ButtonFinder(Driver,"scopedButtonName", scope1).Find().Id.should_be("scope1ButtonId");
+            new ButtonFinder(Driver, "scopedButtonName", scope2).Find().Id.should_be("scope2ButtonId");
         }
 
         [Test]
         public void Finds_input_button_by_value()
         {
-            Driver.FindButton("scoped input button", scope1).Id.should_be("scope1InputButtonId");
-            Driver.FindButton("scoped input button", scope2).Id.should_be("scope2InputButtonId");
+            new ButtonFinder(Driver, "scoped input button", scope1).Find().Id.should_be("scope1InputButtonId");
+            new ButtonFinder(Driver, "scoped input button", scope2).Find().Id.should_be("scope2InputButtonId");
         }
 
         [Test]
         public void Finds_button_by_text()
         {
-            Driver.FindButton("scoped button", scope1).Id.should_be("scope1ButtonId");
-            Driver.FindButton("scoped button", scope2).Id.should_be("scope2ButtonId");
+            new ButtonFinder(Driver, "scoped button", scope1).Find().Id.should_be("scope1ButtonId");
+            new ButtonFinder(Driver, "scoped button", scope2).Find().Id.should_be("scope2ButtonId");
         }
     }
 }

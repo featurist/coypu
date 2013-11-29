@@ -8,7 +8,6 @@ namespace Coypu
 {
     public interface Driver : IDisposable
     {
-        ElementFound FindButton(string locator, Scope scope);
         ElementFound FindLink(string linkText, Scope scope);
         ElementFound FindField(string locator, Scope scope);
         void Click(Element element);

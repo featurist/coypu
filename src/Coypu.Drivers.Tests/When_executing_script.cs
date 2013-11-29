@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -8,11 +9,11 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Runs_the_script_in_the_browser()
         {
-            Driver.FindButton("firstButtonId", Root).Text.should_be("first button");
+            new ButtonFinder(Driver,"firstButtonId", Root).Find().Text.should_be("first button");
 
             Driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';", Root);
 
-            Driver.FindButton("firstButtonId", Root).Text.should_be("script executed");
+            new ButtonFinder(Driver,"firstButtonId", Root).Find().Text.should_be("script executed");
         }
 
 

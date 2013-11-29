@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -7,12 +8,11 @@ namespace Coypu.Drivers.Tests
     {
         [Test]
         public void Clicks_the_underlying_element()
-
         {
-            var element = Driver.FindButton("clickMeTest", Root);
-            Driver.FindButton("clickMeTest", Root).Value.should_be("Click me");
+            var element = new ButtonFinder(Driver,"clickMeTest", Root).Find();
+            new ButtonFinder(Driver, "clickMeTest", Root).Find().Value.should_be("Click me");
             Driver.Click(element);
-            Driver.FindButton("clickMeTest", Root).Value.should_be("Click me - clicked");
+            new ButtonFinder(Driver, "clickMeTest", Root).Find().Value.should_be("Click me - clicked");
         }
     }
 }

@@ -17,11 +17,6 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public ElementFound FindButton(string locator,Scope scope)
-        {
-            return null;
-        }
-
         public ElementFound FindLink(string linkText, Scope scope)
         {
             return null;

@@ -83,12 +83,6 @@ namespace Coypu.Tests.TestDoubles
 
         public Drivers.Browser Browser { get; private set; }
 
-        public ElementFound FindButton(string locator, Scope scope)
-        {
-            FindButtonRequests.Add(locator);
-            return Find<ElementFound>(stubbedButtons,locator,scope);
-        }
-
         private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope)
         {
             var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope);
