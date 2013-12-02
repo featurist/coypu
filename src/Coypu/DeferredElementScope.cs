@@ -15,54 +15,59 @@ namespace Coypu {
 
         public string Id
         {
-            get { return Now().Id; }
+            get { return Find().Id; }
         }
 
         public string Text
         {
-            get { return Now().Text; }
+            get { return Find().Text; }
         }
 
         public string Value
         {
-            get { return Now().Value; }
+            get { return Find().Value; }
         }
 
         public string Name
         {
-            get { return Now().Name; }
+            get { return Find().Name; }
         }
 
         public string OuterHTML
         {
-            get { return Now().OuterHTML; }
+            get { return Find().OuterHTML; }
         }
 
         public string InnerHTML
         {
-            get { return Now().InnerHTML; }
+            get { return Find().InnerHTML; }
+        }
+
+        public string Title
+        {
+            get { return Find().Title; }
         }
 
         public string SelectedOption
         {
-            get { return Now().SelectedOption; }
+            get { return Find().SelectedOption; }
         }
 
         public bool Selected
         {
-            get { return Now().Selected; }
+            get { return Find().Selected; }
         }
 
         public object Native
         {
-            get { return Now().Native; }
+            get { return Find().Native; }
         }
 
         public string this[string attributeName]
         {
             get {
 
-                ElementFound elementFound = Now();
+                ElementFound elementFound = Find();
                 return elementFound[attributeName];
             }
         }

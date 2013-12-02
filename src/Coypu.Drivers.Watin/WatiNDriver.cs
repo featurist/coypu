@@ -120,16 +120,6 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
-        public ElementFound FindFieldset(string locator, Scope scope)
-        {
-            return BuildElement(elementFinder.FindFieldset(locator, scope), "Failed to find fieldset: " + locator);
-        }
-
-        public ElementFound FindSection(string locator, Scope scope)
-        {
-            return BuildElement(elementFinder.FindSection(locator, scope), "Failed to find section: " + locator);
-        }
-
         public ElementFound FindId(string id, Scope scope)
         {
             return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
@@ -154,7 +144,7 @@ namespace Coypu.Drivers.Watin
             return persistentCookies.Concat(sessionCookies).ToList();
         }
 
-        public ElementFound FindWindow(string locator, Scope scope)
+        public ElementFound FindWindows(string locator, Scope scope)
         {
             return new WatiNWindow(FindWindowHandle(locator));
         }
@@ -171,7 +161,7 @@ namespace Coypu.Drivers.Watin
             return by;
         }
 
-        public ElementFound FindFrame(string locator, Scope scope)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope)
         {
             return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
         }

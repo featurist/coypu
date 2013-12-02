@@ -16,7 +16,7 @@ namespace Coypu.Queries
         {
             try
             {
-                DriverScope.FindElement();
+                DriverScope.Find();
                 return false;
             }
             catch (MissingHtmlException)

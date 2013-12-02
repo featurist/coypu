@@ -18,7 +18,7 @@ namespace Coypu
             _elementFound = elementFound;
         }
 
-        public override ElementFound Now()
+        public override ElementFound Find()
         {
             if (_elementFound.Stale(options))
                 throw new MissingHtmlException(string.Format("Snapshot element scope has become stale. {0}",_elementFound));

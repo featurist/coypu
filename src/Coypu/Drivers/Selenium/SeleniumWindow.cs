@@ -5,12 +5,12 @@ namespace Coypu.Drivers.Selenium
 {
     internal class SeleniumWindow : ElementFound
     {
-        private readonly IWebDriver selenium;
+        private readonly IWebDriver webDriver;
         private readonly string windowHandle;
 
-        public SeleniumWindow(IWebDriver selenium, string windowHandle)
+        public SeleniumWindow(IWebDriver webDriver, string windowHandle)
         {
-            this.selenium = selenium;
+            this.webDriver = webDriver;
             this.windowHandle = windowHandle;
         }
 
@@ -35,6 +35,11 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
+        public string Title
+        {
+            get { return RetainingCurrentWindow(() => webDriver.Title); }
+        }
+
         public string OuterHTML
         {
             get
@@ -45,7 +50,7 @@ namespace Coypu.Drivers.Selenium
 
         private T RetainingCurrentWindow<T>(Func<T> function)
         {
-            var currentWindowHandle = selenium.CurrentWindowHandle;
+            var currentWindowHandle = webDriver.CurrentWindowHandle;
             try
             {
                 return function();
@@ -81,18 +86,18 @@ namespace Coypu.Drivers.Selenium
             get
             {
                 SwitchTo(windowHandle);
-                return selenium;
+                return webDriver;
             }
         }
 
         private void SwitchTo(string windowName)
         {
-            selenium.SwitchTo().Window(windowName);
+            webDriver.SwitchTo().Window(windowName);
         }
 
         public bool Stale(Options options)
         {
-            return !selenium.WindowHandles.Contains(windowHandle);
+            return !webDriver.WindowHandles.Contains(windowHandle);
         }
 
         public string this[string attributeName]

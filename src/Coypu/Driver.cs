@@ -8,7 +8,7 @@ namespace Coypu
 {
     public interface Driver : IDisposable
     {
-        ElementFound FindLink(string linkText, Scope scope);
+        IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact);
         ElementFound FindField(string locator, Scope scope);
         void Click(Element element);
         void Visit(string url, Scope scope);
@@ -19,7 +19,7 @@ namespace Coypu
         bool HasDialog(string withText, Scope scope);
         ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null);
         ElementFound FindXPath(string xpath, Scope scope);
-        IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope);
+        IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern);
         IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope);
         void Check(Element field);
         void Uncheck(Element field);
@@ -31,13 +31,11 @@ namespace Coypu
         void AcceptModalDialog(Scope scope);
         void CancelModalDialog(Scope scope);
         string ExecuteScript(string javascript, Scope scope);
-        ElementFound FindFieldset(string locator, Scope scoper);
-        ElementFound FindSection(string locator, Scope scope);
         ElementFound FindId(string id, Scope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
-        ElementFound FindWindow(string locator, Scope scope);
-        ElementFound FindFrame(string locator, Scope scope);
+        IEnumerable<ElementFound> FindWindows(string locator, Scope scope, bool exact);
+        IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact);
         void SendKeys(Element element, string keys);
         void MaximiseWindow(Scope scope);
         void Refresh(Scope scope);

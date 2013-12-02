@@ -54,6 +54,11 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
+        public string Title
+        {
+            get { return native.GetAttribute("title"); }
+        }
+
         public string SelectedOption
         {
             get

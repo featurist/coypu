@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Reflection;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -19,7 +17,7 @@ namespace Coypu.Drivers.Selenium
 
         public IWebElement FindField(string locator, Scope scope)
         {
-            var by = xPath.FieldXPathsByPrecedence(locator, scope).Select(By.XPath);
+            var by = xPath.FieldXPathsByPrecedence(locator.Trim(), scope).Select(By.XPath);
             return elementFinder.Find(by, scope, "field: " + locator);
         }
     }

@@ -13,7 +13,7 @@ namespace Coypu.Queries
 
         public override ElementFound Run()
         {
-            return DriverScope.FindElement();
+            return DriverScope.Find();
         }
     }
 }

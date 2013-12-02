@@ -146,16 +146,6 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public ElementFound FindFieldset(string locator, Scope scope)
-        {
-            return null;
-        }
-
-        public ElementFound FindSection(string locator, Scope scope)
-        {
-            return null;
-        }
-
         public ElementFound FindId(string id, Scope scope)
         {
             return null;
@@ -175,12 +165,12 @@ namespace Coypu.Tests.TestDoubles
             return new List<Cookie>();
         }
 
-        public ElementFound FindWindow(string locator, Scope scope)
+        public ElementFound FindWindows(string locator, Scope scope)
         {
             return null;
         }
 
-        public ElementFound FindFrame(string locator, Scope root)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope root)
         {
             return null;
         }

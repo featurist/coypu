@@ -1,12 +1,25 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+
 namespace Coypu.Finders
 {
     internal class IdFinder : ElementFinder
     {
         internal IdFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
 
-        internal override ElementFound Find()
+        public override bool SupportsPartialTextMatching
         {
-            return Driver.FindId(Locator, Scope);
+            get { return false; }
+        }
+
+        internal override IEnumerable<ElementFound> Find(Options options)
+        {
+            return new[] { Driver.FindId(Locator, Scope) };
+        }
+
+        internal override string QueryDescription
+        {
+            get { return "id: " + Locator; }
         }
     }
 }

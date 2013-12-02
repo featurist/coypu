@@ -112,28 +112,7 @@ namespace Coypu
             return element;
         }
 
-        internal ElementFound Find(QueryFinder query)
-        {
-            var results = query.FindAll(exact: true);
-            if (Match == Match.First && results.Any())
-                return results.First();
-
-            var count = results.Count();
-
-            if (Match == Match.Single && count == 0)
-                results = query.FindAll(exact: false);
-            
-            count = results.Count();
-            if (count > 1)
-                throw new AmbiguousHtmlException(BuildAmbiguousMessage(query.QueryDescription, count));
-
-            if (count == 0)
-                throw new MissingHtmlException("Unable to find " + query.QueryDescription);
-
-            return results.First();
-        }
-
-        private string BuildAmbiguousMessage(string queryDescription, int count)
+        internal string BuildAmbiguousMessage(string queryDescription, int count)
         {
             var message = string.Format(@"Ambiguous match, found {0} elements matching {1}
 

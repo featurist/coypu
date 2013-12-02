@@ -23,7 +23,7 @@ namespace Coypu.Actions
                 if (elementScope == null)
                     return Driver.FindField(locator, scope);
 
-                return elementScope.Now();
+                return elementScope.Find();
             }
         }
 

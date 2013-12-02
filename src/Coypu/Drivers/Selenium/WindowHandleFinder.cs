@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -13,37 +14,46 @@ namespace Coypu.Drivers.Selenium
         }
 
 
-        public string FindWindowHandle(string titleOrName)
+        public IEnumerable<string> FindWindowHandles(string titleOrName, bool exact)
         {
             var currentHandle = GetCurrentWindowHandle();
-            string matchingWindowHandle = null;
-            string partiallyMatchingWindowHandle = null;
+            IList<string> matchingWindowHandles = new List<string>();
 
             try
             {
                 webDriver.SwitchTo().Window(titleOrName);
-                matchingWindowHandle = webDriver.CurrentWindowHandle;
+                matchingWindowHandles.Add(webDriver.CurrentWindowHandle);
             }
             catch (NoSuchWindowException)
             {
                 foreach (var windowHandle in webDriver.WindowHandles)
                 {
                     webDriver.SwitchTo().Window(windowHandle);
-                    if (windowHandle == titleOrName || webDriver.Title == titleOrName)
+                    if (exact)
                     {
-                        matchingWindowHandle = windowHandle;
-                        break;
+                        if (ExactMatch(titleOrName, windowHandle))
+                            matchingWindowHandles.Add(windowHandle);
                     }
-                    if (webDriver.Title.Contains(titleOrName))
-                        partiallyMatchingWindowHandle = windowHandle;
+                    else
+                    {
+                        if (PartialMatch(titleOrName))
+                            matchingWindowHandles.Add(windowHandle);
+                    }
                 }
             }
-            matchingWindowHandle = matchingWindowHandle ?? partiallyMatchingWindowHandle;
-            if (matchingWindowHandle == null)
-                throw new MissingWindowException("No such window found: " + titleOrName);
 
             webDriver.SwitchTo().Window(currentHandle);
-            return matchingWindowHandle;
+            return matchingWindowHandles;
+        }
+
+        private bool PartialMatch(string titleOrName)
+        {
+            return webDriver.Title.Contains(titleOrName);
+        }
+
+        private bool ExactMatch(string titleOrName, string windowHandle)
+        {
+            return (windowHandle == titleOrName || webDriver.Title == titleOrName);
         }
 
         public string GetCurrentWindowHandle()

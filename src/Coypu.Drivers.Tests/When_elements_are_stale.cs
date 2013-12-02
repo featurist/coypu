@@ -32,7 +32,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Stale_frame()
         {
-            var frame = Driver.FindFrame("iframe1", Root);
+            var frame = Driver.FindFrames("iframe1", Root);
             frame.Stale(new Options()).should_be_false();
 
             Driver.Click(new ButtonFinder(Driver,"destroy frames",Root).Find());
@@ -43,7 +43,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Stale_frame_becomes_invisible()
         {
-            var frame = Driver.FindFrame("iframe1", Root);
+            var frame = Driver.FindFrames("iframe1", Root);
             frame.Stale(new Options { ConsiderInvisibleElements = false }).should_be_false();
 
             Driver.Click(new ButtonFinder(Driver,"hide frames", Root).Find());
@@ -59,7 +59,7 @@ namespace Coypu.Drivers.Tests
 
             var popUpScope = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
 
-            var popUpWindow = popUpScope.Now();
+            var popUpWindow = popUpScope.Find();
             popUpWindow.Stale(new Options()).should_be_false();
 
             Driver.Click(new ButtonFinder(Driver,"close", popUpScope).Find());

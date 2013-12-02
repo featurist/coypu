@@ -19,7 +19,7 @@ namespace Coypu.Actions
 
         public override void Act()
         {
-            var element = elementFinder.Find();
+            var element = elementFinder.ResolveQuery();
             waiter.Wait(options.WaitBeforeClick);
             Driver.Click(element);
         }

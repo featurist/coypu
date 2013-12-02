@@ -34,7 +34,7 @@ namespace Coypu.AcceptanceTests
         {
             browser.ClickLink("Trigger a confirm");
             browser.CancelModalDialog();
-            browser.FindLink("Trigger a confirm - cancelled").Now();
+            browser.FindLink("Trigger a confirm - cancelled").Find();
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Coypu.AcceptanceTests
             Thread.Sleep(1000);
             browser.ClickLink("Trigger a confirm");
             browser.CancelModalDialog();
-            browser.FindLink("Trigger a confirm - cancelled").Now();
+            browser.FindLink("Trigger a confirm - cancelled").Find();
         }
 
         [Test]
@@ -588,13 +588,13 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ConsideringInvisibleElements()
         {
-            browser.FindButton("firstInvisibleInputId", new Options {ConsiderInvisibleElements = true}).Now();
+            browser.FindButton("firstInvisibleInputId", new Options {ConsiderInvisibleElements = true}).Find();
         }
 
         [Test]
         public void ConsideringOnlyVisibleElements()
         {
-            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId").Now());
+            Assert.Throws<MissingHtmlException>(() => browser.FindButton("firstInvisibleInputId").Find());
         }
 
         [Test]

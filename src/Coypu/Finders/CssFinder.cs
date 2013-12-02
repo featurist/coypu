@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Coypu.Finders
@@ -5,6 +6,7 @@ namespace Coypu.Finders
     internal class CssFinder : ElementFinder
     {
         private readonly Regex textPattern;
+        private readonly string text;
 
         internal CssFinder(Driver driver, string locator, DriverScope scope)
             : base(driver, locator, scope)
@@ -18,14 +20,39 @@ namespace Coypu.Finders
         }
 
         internal CssFinder(Driver driver, string locator, DriverScope scope, bool exact, string text)
-            : this(driver, locator, scope, ExactTextAsRegex(text, exact)) { }
-
-        internal override ElementFound Find()
+            : this(driver, locator, scope)
         {
-            return Driver.FindCss(Locator, Scope, textPattern);
+            this.text = text;
         }
 
-        public static Regex ExactTextAsRegex(string textEquals, bool exact)
+        public override bool SupportsPartialTextMatching
+        {
+            get { return true; }
+        }
+
+        internal override IEnumerable<ElementFound> Find(Options options)
+        {
+            return Driver.FindAllCss(Locator, Scope, TextPattern(options.Exact));
+        }
+
+        private Regex TextPattern(bool exact)
+        {
+            return textPattern ?? TextAsRegex(text, exact);
+        }
+
+        internal override string QueryDescription
+        {
+            get
+            {
+                var queryDesciption = "css: " + Locator;
+                if (textPattern != null)
+                    queryDesciption += " with text matching /" + text ?? textPattern + "/";
+
+                return queryDesciption;
+            }
+        }
+
+        public static Regex TextAsRegex(string textEquals, bool exact)
         {
             Regex textMatches = null;
             if (textEquals != null)

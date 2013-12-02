@@ -18,7 +18,7 @@ namespace Coypu.Drivers.Watin
 
         internal static IElementContainer WatiNScope(Scope scope)
         {
-            return (IElementContainer)scope.Now().Native;
+            return (IElementContainer)scope.Find().Native;
         }
 
         private static Document WatiNDocumentScope(Scope scope)

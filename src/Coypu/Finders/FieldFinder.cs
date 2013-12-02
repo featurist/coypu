@@ -1,12 +1,25 @@
+using System;
+using Coypu.Drivers;
+
 namespace Coypu.Finders
 {
-    internal class FieldFinder : ElementFinder
+    internal class FieldFinder : XPathQueryFinder
     {
         internal FieldFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
 
-        internal override ElementFound Find()
+        public override bool SupportsPartialTextMatching
         {
-            return Driver.FindField(Locator, Scope);
+            get { return true; }
+        }
+
+        protected override Func<string, Options, string> GetQuery(XPath xpath)
+        {
+            return xpath.Field;
+        }
+
+        internal override string QueryDescription
+        {
+            get { return "field: " + Locator; }
         }
     }
 }

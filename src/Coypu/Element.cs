@@ -29,6 +29,7 @@ namespace Coypu
         /// Whether the element is selected
         /// </summary>
         bool Selected { get; }
+
         /// <summary>
         /// The native element returned by your chosen driver
         /// </summary>
@@ -48,5 +49,10 @@ namespace Coypu
         /// The inner HTML of the element
         /// </summary>
         string InnerHTML { get; }
+
+        /// <summary>
+        /// The title of the element
+        /// </summary>
+        string Title { get; }
     }
 }

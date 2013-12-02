@@ -13,7 +13,7 @@
 
         public override bool Run()
         {
-            return ElementScope.Now().Value == text;
+            return ElementScope.Find().Value == text;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Coypu.Actions
                 if (locator != null)
                     return Driver.FindField(locator, scope);
 
-                return element.Now();
+                return element.Find();
             }
         }
     }

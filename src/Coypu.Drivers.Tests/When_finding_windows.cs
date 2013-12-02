@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Driver.FindWindow("popUpWindowName", Root).Text.should_contain("I am a pop up window");
+                Driver.FindWindows("popUpWindowName", Root).Text.should_contain("I am a pop up window");
                 Driver.FindLink("Open pop up window",Root);
             }
         }
@@ -23,7 +23,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Driver.FindWindow("Pop Up Window", Root).Text.should_contain("I am a pop up window");
+                Driver.FindWindows("Pop Up Window", Root).Text.should_contain("I am a pop up window");
                 Driver.FindLink("Open pop up window", Root);
             }
         }
@@ -34,7 +34,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Open pop up window 2", Root));
-                Driver.FindWindow("Pop Up Window", Root).Text.should_contain("I am a pop up window 2");
+                Driver.FindWindows("Pop Up Window", Root).Text.should_contain("I am a pop up window 2");
                 Driver.FindLink("Open pop up window 2", Root);
             }
         }
@@ -46,7 +46,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
                 Driver.Click(Driver.FindLink("Open pop up window 2", Root));
-                Driver.FindWindow("Pop Up Window", Root).Text.should_contain("I am a pop up window");
+                Driver.FindWindows("Pop Up Window", Root).Text.should_contain("I am a pop up window");
                 Driver.FindLink("Open pop up window", Root);
             }
         }
@@ -73,7 +73,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Assert.Throws<MissingWindowException>(() => Driver.FindWindow("Not A Window", Root));
+                Assert.Throws<MissingWindowException>(() => Driver.FindWindows("Not A Window", Root));
             }
         }
 
@@ -87,7 +87,7 @@ namespace Coypu.Drivers.Tests
                                             Driver, null, null, null);
 
                 Driver.ExecuteScript("self.close();", popUp);
-                Assert.Throws<MissingWindowException>(() => Driver.FindWindow("Open pop up window", Root));
+                Assert.Throws<MissingWindowException>(() => Driver.FindWindows("Open pop up window", Root));
             }
         }
     }

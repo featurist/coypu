@@ -1,12 +1,25 @@
+using System.Collections.Generic;
+
 namespace Coypu.Finders
 {
     internal class LinkFinder : ElementFinder
     {
         internal LinkFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
 
-        internal override ElementFound Find()
+
+        public override bool SupportsPartialTextMatching
         {
-            return Driver.FindLink(Locator, Scope);
+            get { return true; }
+        }
+
+        internal override IEnumerable<ElementFound> Find(Options options)
+        {
+            return Driver.FindLinks(Locator, Scope, options.Exact);
+        }
+
+        internal override string QueryDescription
+        {
+            get { return "link: " + Locator; }
         }
     }
 }

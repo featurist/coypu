@@ -619,7 +619,7 @@ namespace Coypu
         /// </summary>
         /// <returns></returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        ElementFound Now();
+        ElementFound Find();
 
         /// <summary>
         /// The location of the current browser window

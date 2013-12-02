@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Coypu.Finders
 {
     internal class DocumentElementFinder : ElementFinder
@@ -6,9 +8,19 @@ namespace Coypu.Finders
         {
         }
 
-        internal override ElementFound Find()
+        public override bool SupportsPartialTextMatching
         {
-            return Driver.Window;
+            get { return false; }
+        }
+
+        internal override IEnumerable<ElementFound> Find(Options options)
+        {
+            return new [] {Driver.Window};
+        }
+
+        internal override string QueryDescription
+        {
+            get { return "Document Element"; }
         }
     }
 }

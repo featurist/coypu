@@ -19,7 +19,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             driver.StubLink("some link", expectedLink, innerScope);
 
-            var actualLink = innerScope.FindLink("some link").Now();
+            var actualLink = innerScope.FindLink("some link").Find();
 
             Assert.That(actualLink, Is.SameAs(expectedLink));
 

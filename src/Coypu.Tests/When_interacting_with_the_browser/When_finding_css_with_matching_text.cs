@@ -261,7 +261,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected void VerifyFoundRobustly<T>(Func<string, T, Options, Scope> scope, int driverCallIndex, string locator, T text, ElementFound expectedDeferredResult, ElementFound expectedImmediateResult, Options options)
         {
-            var scopedResult = scope(locator, text, options).Now();
+            var scopedResult = scope(locator, text, options).Find();
 
             VerifyFoundRobustly(driverCallIndex, expectedDeferredResult, expectedImmediateResult, options, scopedResult);
         }

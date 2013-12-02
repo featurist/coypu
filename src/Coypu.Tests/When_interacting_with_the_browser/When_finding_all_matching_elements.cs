@@ -70,8 +70,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             var actualImmediateResult = subject(locator, null, sessionConfiguration).ToArray();
             Assert.That(actualImmediateResult.Count(), Is.EqualTo(2));
-            Assert.That(actualImmediateResult[0].Now(), Is.EqualTo(stubElements[0]));
-            Assert.That(actualImmediateResult[1].Now(), Is.EqualTo(stubElements[1]));
+            Assert.That(actualImmediateResult[0].Find(), Is.EqualTo(stubElements[0]));
+            Assert.That(actualImmediateResult[1].Find(), Is.EqualTo(stubElements[1]));
         }
 
         protected void Should_test_predicate_against_query_results_and_retry_on_failure(Func<string, Func<IEnumerable<SnapshotElementScope>,bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, Scope> stub)
@@ -107,10 +107,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var scopedResult = subject(locator, predicate, options);
             var elementScopeResult = RunQueryAndCheckTiming<IEnumerable<SnapshotElementScope>>(options.Timeout, driverCallIndex);
 
-            Assert.That(scopedResult.Select(e => e.Now()), Is.Not.EquivalentTo(expectedDeferredResult), "Result was not found robustly");
-            Assert.That(scopedResult.Select(e => e.Now()), Is.EquivalentTo(expectedImmediateResult));
+            Assert.That(scopedResult.Select(e => e.Find()), Is.Not.EquivalentTo(expectedDeferredResult), "Result was not found robustly");
+            Assert.That(scopedResult.Select(e => e.Find()), Is.EquivalentTo(expectedImmediateResult));
 
-            Assert.That(elementScopeResult.Select(e => e.Now()), Is.EquivalentTo(expectedDeferredResult));
+            Assert.That(elementScopeResult.Select(e => e.Find()), Is.EquivalentTo(expectedDeferredResult));
         }
     }
 }

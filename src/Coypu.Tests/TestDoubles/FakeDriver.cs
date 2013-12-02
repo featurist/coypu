@@ -223,22 +223,12 @@ namespace Coypu.Tests.TestDoubles
             return Find<string>(stubbedExecuteScriptResults, javascript, scope);
         }
 
-        public ElementFound FindFieldset(string locator, Scope scope)
-        {
-            return Find<ElementFound>(stubbedFieldsets, locator, scope);
-        }
-
-        public ElementFound FindSection(string locator, Scope scope)
-        {
-            return Find<ElementFound>(stubbedSections, locator, scope);
-        }
-
         public ElementFound FindId(string id, Scope scope)
         {
             return Find<ElementFound>(stubbedIDs, id, scope);
         }
 
-        public ElementFound FindFrame(string locator, Scope scope)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope)
         {
             return Find<ElementFound>(stubbedFrames, locator, scope);
         }
@@ -408,7 +398,7 @@ namespace Coypu.Tests.TestDoubles
             stubbedCurrentWindow = window;
         }
 
-        public ElementFound FindWindow(string locator, Scope scope)
+        public ElementFound FindWindows(string locator, Scope scope)
         {
             return Find<ElementFound>(stubbedWindows, locator, scope);
         }

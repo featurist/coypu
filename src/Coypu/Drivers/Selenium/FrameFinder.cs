@@ -17,11 +17,12 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IWebElement FindFrame(string locator, Scope scope)
+        public IEnumerable<IWebElement> FindFrame(string locator, Scope scope, bool exact)
         {
-            var frames = AllElementsByTag(scope, "iframe").Union(AllElementsByTag(scope, "frame"));
-            
-            return scope.Options.FilterWithMatchStrategy(WebElement(locator, frames), "frame: " + locator);
+            var frames = AllElementsByTag(scope, "iframe")
+                        .Union(AllElementsByTag(scope, "frame"));
+
+            return WebElement(locator, frames, exact);
         }
 
         private IEnumerable<IWebElement> AllElementsByTag(Scope scope, string tagNameToFind)
@@ -29,23 +30,23 @@ namespace Coypu.Drivers.Selenium
             return elementFinder.FindAll(By.TagName(tagNameToFind), scope);
         }
 
-        private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements)
+        private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements, bool exact)
         {
             return webElements.Where(e => e.GetAttribute("id") == locator ||
                                                         e.GetAttribute("name") == locator ||
                                                         e.GetAttribute("title") == locator ||
-                                                        FrameContentsMatch(e, locator));
+                                                        FrameContentsMatch(e, locator, exact));
         }
 
-        private bool FrameContentsMatch(IWebElement e, string locator)
+        private bool FrameContentsMatch(IWebElement e, string locator, bool exact)
         {
             var currentHandle = selenium.CurrentWindowHandle;
             try
             {
                 var frame = selenium.SwitchTo().Frame(e);
                 return
-                    frame.Title == locator ||
-                    frame.FindElements(By.XPath(xPath.Format(".//h1[text() = {0}]", locator))).Any();
+                   frame.Title == locator ||
+                   frame.FindElements(By.XPath(".//h1[" + xPath.IsText(locator,exact) + "]")).Any();
             }
             finally
             {
