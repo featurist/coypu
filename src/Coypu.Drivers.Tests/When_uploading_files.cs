@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests

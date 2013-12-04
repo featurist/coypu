@@ -5,34 +5,40 @@ namespace Coypu.Queries
 {
     internal class HasCssQuery : DriverScopeQuery<bool>
     {
+        private readonly string text;
         private readonly Regex textPattern;
-        private readonly Driver driver;
         private readonly string cssSelector;
         public override bool ExpectedResult { get { return true; } }
 
-        protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector, Options options)
+        protected internal HasCssQuery(DriverScope scope, string cssSelector, Options options)
             : base(scope, options)
         {
-            this.driver = driver;
             this.cssSelector = cssSelector;
         }
 
-        protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector, Regex textPattern, Options options)
-            : this(driver, scope, cssSelector, options)
+        protected internal HasCssQuery(DriverScope scope, string cssSelector, Regex textPattern, Options options)
+            : this(scope, cssSelector, options)
         {
             this.textPattern = textPattern;
         }
 
-        protected internal HasCssQuery(Driver driver, DriverScope scope, string cssSelector, string text, Options options)
-            : this(driver, scope, cssSelector, CssFinder.TextAsRegex(text, options.Exact), options)
+        protected internal HasCssQuery(DriverScope scope, string cssSelector, string text, Options options)
+            : this(scope, cssSelector, options)
         {
+            this.text = text;
         }
 
         public override bool Run()
         {
             try
             {
-                driver.FindCss(cssSelector, DriverScope, textPattern);
+                if (textPattern != null)
+                    DriverScope.FindCss(cssSelector, textPattern, Options);
+                else if (text != null)
+                    DriverScope.FindCss(cssSelector, text, Options);
+                else
+                    DriverScope.FindCss(cssSelector, Options);
+                
                 return true;
             }
             catch (MissingHtmlException)

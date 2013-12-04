@@ -145,7 +145,7 @@ namespace Coypu
 
         public FillInWith FillIn(string locator, Options options = null) {
             options = SetOptions(options);
-            return new FillInWith(locator, driver, robustWrapper, this, options);
+            return new FillInWith(FindField(locator,options), driver, robustWrapper, options);
         }
 
         public SelectFrom Select(string option, Options options = null)
@@ -175,32 +175,32 @@ namespace Coypu
 
         public bool HasCss(string cssSelector, Options options = null)
         {
-            return Query(new HasCssQuery(driver, this, cssSelector, SetOptions(options)));
+            return Query(new HasCssQuery(this, cssSelector, SetOptions(options)));
         }
 
         public bool HasCss(string cssSelector, string text, Options options = null)
         {
-            return Query(new HasCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+            return Query(new HasCssQuery(this, cssSelector, text, SetOptions(options)));
         }
 
         public bool HasCss(string cssSelector, Regex text, Options options = null)
         {
-            return Query(new HasCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+            return Query(new HasCssQuery(this, cssSelector, text, SetOptions(options)));
         }
 
         public bool HasNoCss(string cssSelector, Options options = null)
         {
-            return Query(new HasNoCssQuery(driver, this, cssSelector, SetOptions(options)));
+            return Query(new HasNoCssQuery(this, cssSelector, SetOptions(options)));
         }
 
         public bool HasNoCss(string cssSelector, string text, Options options = null)
         {
-            return Query(new HasNoCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+            return Query(new HasNoCssQuery(this, cssSelector, text, SetOptions(options)));
         }
 
         public bool HasNoCss(string cssSelector, Regex text, Options options = null)
         {
-            return Query(new HasNoCssQuery(driver, this, cssSelector, text, SetOptions(options)));
+            return Query(new HasNoCssQuery(this, cssSelector, text, SetOptions(options)));
         }
 
         public bool HasXPath(string xpath, Options options = null)
@@ -280,22 +280,24 @@ namespace Coypu
 
         public void Check(string locator, Options options = null)
         {
-            RetryUntilTimeout(new Check(driver, locator, this, SetOptions(options)));
+            options = SetOptions(options);
+            RetryUntilTimeout(new Check(driver, FindField(locator, options), options));
         }
 
         public void Uncheck(string locator, Options options = null)
         {
-            RetryUntilTimeout(new Uncheck(driver, this, locator, SetOptions(options)));
+            options = SetOptions(options);
+            RetryUntilTimeout(new Uncheck(driver, FindField(locator, options), options));
         }
 
         public void Uncheck(ElementScope checkbox, Options options = null)
         {
-            throw new NotImplementedException();
+            RetryUntilTimeout(new Uncheck(driver, checkbox, SetOptions(options)));
         }
 
         public void Choose(string locator, Options options = null)
         {
-            RetryUntilTimeout(new Choose(driver, this, locator, SetOptions(options)));
+            RetryUntilTimeout(new Choose(driver, FindField(locator, options), options));
         }
 
         public bool Has(ElementScope findElement)

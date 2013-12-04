@@ -85,8 +85,6 @@ namespace Coypu.Drivers.Tests
         {
             var iframeOne = new DriverScope(new SessionConfiguration(), new FrameFinder(Driver, "I am iframe one", Root), Driver, null, null, null);
             var iframeForm = new DriverScope(new SessionConfiguration(), new CssFinder(Driver, "form", iframeOne), Driver, null, null, null);
-            
-            Driver.FindField("text input in iframe", iframeForm);
         }
     }
 }

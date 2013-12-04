@@ -25,7 +25,7 @@ namespace Coypu
         /// <returns>Whether an element appears</returns>
         public bool HasDialog(string withText, Options options = null)
         {
-            return Query(new HasDialogQuery(driver, withText, this, SetOptions(options)));
+            return Query(new HasDialogQuery(driver, withText, this, MergeOptions(options)));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Coypu
         /// <returns>Whether an element does not appears</returns>
         public bool HasNoDialog(string withText, Options options = null)
         {
-            return Query(new HasNoDialogQuery(driver, withText, this, SetOptions(options)));
+            return Query(new HasNoDialogQuery(driver, withText, this, MergeOptions(options)));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog(Options options = null)
         {
-            RetryUntilTimeout(new AcceptModalDialog(this, driver, SetOptions(options)));
+            RetryUntilTimeout(new AcceptModalDialog(this, driver, MergeOptions(options)));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog(Options options = null)
         {
-            RetryUntilTimeout(new CancelModalDialog(this, driver, SetOptions(options)));
+            RetryUntilTimeout(new CancelModalDialog(this, driver, MergeOptions(options)));
         }
 
         /// <summary>

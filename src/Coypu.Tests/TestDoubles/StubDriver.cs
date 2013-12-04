@@ -22,11 +22,6 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public ElementFound FindField(string locator, Scope scope)
-        {
-            return null;
-        }
-
         public void Click(Element element)
         {
         }

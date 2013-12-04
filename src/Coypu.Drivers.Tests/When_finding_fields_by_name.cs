@@ -1,5 +1,4 @@
 using Coypu.Finders;
-using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests

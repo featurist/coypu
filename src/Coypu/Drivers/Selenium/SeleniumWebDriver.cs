@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.PageObjects;
 using Cookie = System.Net.Cookie;
 
 namespace Coypu.Drivers.Selenium
@@ -78,11 +77,6 @@ namespace Coypu.Drivers.Selenium
         public object Native
         {
             get { return webDriver; }
-        }
-
-        public ElementFound FindField(string locator, Scope scope)
-        {
-            return BuildElement(fieldFinder.FindField(locator, scope));
         }
 
         public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)

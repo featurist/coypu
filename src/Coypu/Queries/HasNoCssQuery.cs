@@ -5,25 +5,25 @@ namespace Coypu.Queries
 {
     internal class HasNoCssQuery : DriverScopeQuery<bool>
     {
-        private readonly Driver driver;
+        private readonly string text;
         private readonly string cssSelector;
-        private Regex textPattern;
+        private readonly Regex textPattern;
 
-        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector, Options options) : base(scope,options)
+        protected internal HasNoCssQuery(DriverScope scope, string cssSelector, Options options) : base(scope,options)
         {
-            this.driver = driver;
             this.cssSelector = cssSelector;
         }
 
-        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector, Regex textPattern, Options options)
-            : this(driver, scope, cssSelector, options)
+        protected internal HasNoCssQuery(DriverScope scope, string cssSelector, Regex textPattern, Options options)
+            : this(scope, cssSelector, options)
         {
             this.textPattern = textPattern;
         }
 
-        protected internal HasNoCssQuery(Driver driver, DriverScope scope, string cssSelector, string text, Options options)
-            : this(driver, scope, cssSelector, CssFinder.TextAsRegex(text, options.Exact), options)
+        protected internal HasNoCssQuery(DriverScope scope, string cssSelector, string text, Options options)
+            : this(scope, cssSelector, options)
         {
+            this.text = text;
         }
 
         public override bool ExpectedResult
@@ -35,7 +35,12 @@ namespace Coypu.Queries
         {
             try
             {
-                driver.FindCss(cssSelector, DriverScope, textPattern);
+                if (textPattern != null)
+                    DriverScope.FindCss(cssSelector, textPattern, Options);
+                else if (text != null)
+                    DriverScope.FindCss(cssSelector, text, Options);
+                else
+                    DriverScope.FindCss(cssSelector, Options);
                 return false;
             }
             catch (MissingHtmlException)

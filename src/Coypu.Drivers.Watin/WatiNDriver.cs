@@ -228,11 +228,6 @@ namespace Coypu.Drivers.Watin
             return BuildElement(elementFinder.FindLink(linkText, scope), "Failed to find link with text: " + linkText);
         }
 
-        public ElementFound FindField(string locator, Scope scope)
-        {
-            return BuildElement(elementFinder.FindField(locator, scope), "Failed to find field with label, id, name or placeholder: " + locator);
-        }
-
         public void Click(Element element)
         {
             // If we use Click, then we can get a deadlock if IE is displaying a modal dialog.

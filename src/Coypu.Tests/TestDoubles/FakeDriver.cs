@@ -100,11 +100,6 @@ namespace Coypu.Tests.TestDoubles
             return Find<ElementFound>(stubbedLinks, linkText, scope);
         }
 
-        public ElementFound FindField(string locator, Scope scope)
-        {
-            return Find<ElementFound>(stubbedTextFields, locator, scope);
-        }
-
         public void Click(Element element)
         {
             ClickedElements.Add(element);

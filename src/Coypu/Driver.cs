@@ -9,7 +9,6 @@ namespace Coypu
     public interface Driver : IDisposable
     {
         IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact);
-        ElementFound FindField(string locator, Scope scope);
         void Click(Element element);
         void Visit(string url, Scope scope);
         void Set(Element element, string value);
