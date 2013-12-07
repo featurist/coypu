@@ -63,7 +63,6 @@
     <Compile Include="TestDoubles\StubDriver.cs" />
     <Compile Include="TestDoubles\StubWebResources.cs" />
     <Compile Include="TestDoubles\StubWebResponse.cs" />
-    <Compile Include="TestDoubles\AlwaysExceptionsErrorFinder.cs" />
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
     <Compile Include="TestDoubles\ImmediateSingleExecutionFakeRobustWrapper.cs" />
     <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />

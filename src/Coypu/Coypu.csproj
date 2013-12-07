@@ -168,7 +168,6 @@
     <Compile Include="Queries\HasNoContentQuery.cs" />
     <Compile Include="Queries\HasNoCssQuery.cs" />
     <Compile Include="Queries\HasNoXPathQuery.cs" />
-    <Compile Include="Queries\HasXPathQuery.cs" />
     <Compile Include="Queries\LambdaPredicateQuery.cs" />
     <Compile Include="Queries\LambdaQuery.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />

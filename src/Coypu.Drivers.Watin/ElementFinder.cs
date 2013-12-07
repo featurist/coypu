@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WatiN.Core;
+using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
@@ -35,56 +36,28 @@ namespace Coypu.Drivers.Watin
             return documentScope;
         }
 
-        public WatiN.Core.Element FindButton(string locator, Scope scope)
+        public ElementCollection FindElements(string id, Scope scope)
         {
-            return xPath.ButtonXPathsByPrecedence(locator, scope.Options)
-                    .Select(xpath => FindXPath(xpath, scope))
-                    .FirstOrDefault(element => element != null);
+            return WatiNScope(scope).Elements.Filter(Find.ById(id) & Constraints.IsVisible(scope.ConsiderInvisibleElements));
         }
 
-        public WatiN.Core.Element FindElement(string id, Scope scope)
+        public FrameCollection FindFrames(string locator, Scope scope, bool exact)
         {
-            return WatiNScope(scope).Elements.First(Find.ById(id) & Constraints.IsVisible(scope.ConsiderInvisibleElements));
+            var byTitle = exact ? Find.ByTitle(locator) : Find.ByTitle(t => t.Contains(locator));
+            var byText = exact ? Find.ByText(locator) : Find.ByText(t => t.Contains(locator));
+
+            return WatiNDocumentScope(scope).Frames
+                    .Filter(byTitle | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", byText));
+
         }
 
-        public WatiN.Core.Element FindField(string locator, Scope scope)
+        public LinkCollection FindLinks(string linkText, Scope scope, bool exact)
         {
-            return xPath.FieldXPathsByPrecedence(locator, scope)
-                    .Select(xpath => FindXPath(xpath, scope))
-                    .FirstOrDefault(element => element != null);
-        }
-        
-        public WatiN.Core.Element FindFieldset(string locator, Scope scope)
-        {
-            var withId = Find.ById(locator);
-            var withLegend = Constraints.HasElement("legend", Find.ByText(locator));
-            var hasLocator = withId | withLegend;
+            var byLinkText = exact
+                                 ? Find.ByText(linkText)
+                                 : Find.ByText(t => t.Contains(linkText));
 
-            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
-
-            return WatiNScope(scope).Fieldsets().First(hasLocator & isVisible);
-        }
-
-        public Frame FindFrame(string locator, Scope scope)
-        {
-            return WatiNDocumentScope(scope).Frames.First(Find.ByTitle(locator) | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", Find.ByText(locator)));
-        }
-
-        public WatiN.Core.Element FindLink(string linkText, Scope scope)
-        {
-            return WatiNScope(scope).Links.First(Find.ByText(linkText) & Constraints.IsVisible(scope.ConsiderInvisibleElements));
-        }
-
-        public WatiN.Core.Element FindSection(string locator, Scope scope)
-        {
-            var isSection = Constraints.OfType(typeof(Section), typeof(Div));
-
-            var hasLocator = Find.ById(locator)
-                             | Constraints.HasElement(new[] { "h1", "h2", "h3", "h4", "h5", "h6" }, Find.ByText(locator));
-
-            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
-
-            return WatiNScope(scope).Elements.First(isSection & hasLocator & isVisible);
+            return WatiNScope(scope).Links.Filter(byLinkText & Constraints.IsVisible(scope.ConsiderInvisibleElements));
         }
 
         private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope, Regex textPattern = null)
@@ -101,20 +74,9 @@ namespace Coypu.Drivers.Watin
                    select element;
         }
 
-        public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, Scope scope)
+        public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, Scope scope, Regex text = null)
         {
-            return FindAllCssDeferred(cssSelector, scope);
-        }
-
-        public WatiN.Core.Element FindCss(string cssSelector, Scope scope, Regex textPattern = null)
-        {
-            return FindAllCssDeferred(cssSelector, scope, textPattern).FirstOrDefault();
-        }
-
-        public bool HasCss(string cssSelector, Scope scope)
-        {
-            var element = FindCss(cssSelector, scope);
-            return element != null && element.Exists;
+            return FindAllCssDeferred(cssSelector, scope, text);
         }
 
         private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, Scope scope)
@@ -128,17 +90,6 @@ namespace Coypu.Drivers.Watin
         public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, Scope scope)
         {
             return FindAllXPathDeferred(xpath, scope);
-        }
-
-        public WatiN.Core.Element FindXPath(string xpath, Scope scope)
-        {
-            return FindAllXPathDeferred(xpath, scope).FirstOrDefault();
-        }
-
-        public bool HasXPath(string xpath, Scope scope)
-        {
-            var element = FindXPath(xpath, scope);
-            return element != null && element.Exists;
         }
     }
 }

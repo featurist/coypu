@@ -14,6 +14,8 @@ namespace Coypu.Tests.TestDoubles
         public string Name { get; set; }
 
         public string InnerHTML { get; set; }
+        
+        public string Title { get; set; }
 
         public string OuterHTML { get; set; }
 

@@ -19,7 +19,7 @@ namespace Coypu.Finders
             this.textPattern = textPattern;
         }
 
-        internal CssFinder(Driver driver, string locator, DriverScope scope, bool exact, string text)
+        internal CssFinder(Driver driver, string locator, DriverScope scope, string text)
             : this(driver, locator, scope)
         {
             this.text = text;
@@ -37,7 +37,13 @@ namespace Coypu.Finders
 
         private Regex TextPattern(bool exact)
         {
-            return textPattern ?? TextAsRegex(text, exact);
+            if (text != null)
+                return TextAsRegex(text, exact);
+
+            if (textPattern != null)
+                return textPattern;
+
+            return null;
         }
 
         internal override string QueryDescription

@@ -175,42 +175,42 @@ namespace Coypu
 
         public bool HasCss(string cssSelector, Options options = null)
         {
-            return Query(new HasCssQuery(this, cssSelector, SetOptions(options)));
+            return FindCss(cssSelector, SetOptions(options)).Exists();
         }
 
         public bool HasCss(string cssSelector, string text, Options options = null)
         {
-            return Query(new HasCssQuery(this, cssSelector, text, SetOptions(options)));
+            return FindCss(cssSelector, text, SetOptions(options)).Exists();
         }
 
         public bool HasCss(string cssSelector, Regex text, Options options = null)
         {
-            return Query(new HasCssQuery(this, cssSelector, text, SetOptions(options)));
+            return FindCss(cssSelector, text, SetOptions(options)).Exists();
         }
 
         public bool HasNoCss(string cssSelector, Options options = null)
         {
-            return Query(new HasNoCssQuery(this, cssSelector, SetOptions(options)));
+            return FindCss(cssSelector, SetOptions(options)).Missing();
         }
 
         public bool HasNoCss(string cssSelector, string text, Options options = null)
         {
-            return Query(new HasNoCssQuery(this, cssSelector, text, SetOptions(options)));
+            return FindCss(cssSelector, text, SetOptions(options)).Missing();
         }
 
         public bool HasNoCss(string cssSelector, Regex text, Options options = null)
         {
-            return Query(new HasNoCssQuery(this, cssSelector, text, SetOptions(options)));
+            return FindCss(cssSelector, text, SetOptions(options)).Missing();
         }
 
         public bool HasXPath(string xpath, Options options = null)
         {
-            return Query(new HasXPathQuery(driver, this, xpath, SetOptions(options)));
+            return FindXPath(xpath, SetOptions(options)).Exists();
         }
 
         public bool HasNoXPath(string xpath, Options options = null)
         {
-            return Query(new HasNoXPathQuery(driver, this, xpath, SetOptions(options)));
+            return FindXPath(xpath, SetOptions(options)).Missing();
         }
 
         public ElementScope FindCss(string cssSelector, Options options = null)
@@ -222,7 +222,7 @@ namespace Coypu
         public ElementScope FindCss(string cssSelector, string text, Options options = null)
         {
             SetOptions(options);
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this, Exact, text), this, this.options);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, text), this, this.options);
         }
 
         public ElementScope FindCss(string cssSelector, Regex text, Options options = null)

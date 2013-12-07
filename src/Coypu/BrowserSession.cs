@@ -81,7 +81,7 @@ namespace Coypu
         /// <returns>The matching BrowserWindow scope</returns>
         public BrowserWindow FindWindow(string locator, Options options = null)
         {
-            return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, MergeOptions(options), new WindowFinder(driver, locator, this));
+            return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, locator, this));
         }
 
         /// <summary>

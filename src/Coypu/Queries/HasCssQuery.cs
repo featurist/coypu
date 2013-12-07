@@ -5,46 +5,34 @@ namespace Coypu.Queries
 {
     internal class HasCssQuery : DriverScopeQuery<bool>
     {
-        private readonly string text;
-        private readonly Regex textPattern;
-        private readonly string cssSelector;
-        public override bool ExpectedResult { get { return true; } }
+        ElementScope elementScope = null;
+
+        public override bool ExpectedResult
+        {
+            get { return true; }
+        }
 
         protected internal HasCssQuery(DriverScope scope, string cssSelector, Options options)
             : base(scope, options)
         {
-            this.cssSelector = cssSelector;
+            elementScope = DriverScope.FindCss(cssSelector, Options);
         }
 
         protected internal HasCssQuery(DriverScope scope, string cssSelector, Regex textPattern, Options options)
             : this(scope, cssSelector, options)
         {
-            this.textPattern = textPattern;
+            elementScope = DriverScope.FindCss(cssSelector, textPattern, Options);
         }
 
         protected internal HasCssQuery(DriverScope scope, string cssSelector, string text, Options options)
             : this(scope, cssSelector, options)
         {
-            this.text = text;
+            elementScope = DriverScope.FindCss(cssSelector, text, Options);
         }
 
         public override bool Run()
         {
-            try
-            {
-                if (textPattern != null)
-                    DriverScope.FindCss(cssSelector, textPattern, Options);
-                else if (text != null)
-                    DriverScope.FindCss(cssSelector, text, Options);
-                else
-                    DriverScope.FindCss(cssSelector, Options);
-                
-                return true;
-            }
-            catch (MissingHtmlException)
-            {
-                return false;
-            }
+            return elementScope.Exists();
         }
     }
 }

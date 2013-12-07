@@ -14,7 +14,6 @@ namespace Coypu.Drivers.Selenium
         public bool Disposed { get; private set; }
         private IWebDriver webDriver;
         private readonly ElementFinder elementFinder;
-        private readonly FieldFinder fieldFinder;
         private readonly FrameFinder frameFinder;
         private readonly TextMatcher textMatcher;
         private readonly Dialogs dialogs;
@@ -35,7 +34,6 @@ namespace Coypu.Drivers.Selenium
             this.browser = browser;
             xPath = new XPath(browser.UppercaseTagNames);
             elementFinder = new ElementFinder();
-            fieldFinder = new FieldFinder(elementFinder, xPath);
             frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
             windowHandleFinder = new WindowHandleFinder(this.webDriver);
@@ -81,7 +79,7 @@ namespace Coypu.Drivers.Selenium
 
         public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
         {
-            return frameFinder.FindFrame(locator, scope, exact).Select(BuildElement).Cast<ElementFound>();
+            return frameFinder.FindFrame(locator, scope, exact).Select(BuildElement);
         }
 
         public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
@@ -90,36 +88,15 @@ namespace Coypu.Drivers.Selenium
                 By.LinkText(linkText) : 
                 By.PartialLinkText(linkText);
 
-            return FindAll(by, scope).Select(BuildElement).Cast<ElementFound>();
+            return FindAll(by, scope).Select(BuildElement);
         }
 
-        public ElementFound FindId(string id,Scope scope ) 
+        public IEnumerable<ElementFound> FindId(string id, Scope scope)
         {
-            return BuildElement(Find(By.Id(id), scope, "id: " + id));
+            return FindAll(By.Id(id), scope).Select(BuildElement);
         }
 
-        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
-        {
-            var textMatches = (textPattern == null)
-                ? (Func<IWebElement, bool>) null
-                : e => textMatcher.TextMatches(e, textPattern);
-
-            if (textPattern != null && scope.ConsiderInvisibleElements)
-                throw new NotSupportedException("Cannot inspect the text of invisible elements.");
-            
-            var queryDesciption = "css: " + cssSelector;
-            if (textPattern != null)
-                queryDesciption += " with text matching /" + textPattern + "/";
-
-            return BuildElement(Find(By.CssSelector(cssSelector), scope, queryDesciption, textMatches));
-        }
-
-        public ElementFound FindXPath(string xpath, Scope scope)
-        {
-            return BuildElement(Find(By.XPath(xpath), scope, "xpath: " + xpath));
-        }
-
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
             var textMatches = (textPattern == null)
                 ? (Func<IWebElement, bool>)null
@@ -128,16 +105,12 @@ namespace Coypu.Drivers.Selenium
             if (textPattern != null && scope.ConsiderInvisibleElements)
                 throw new NotSupportedException("Cannot inspect the text of invisible elements.");
 
-            var queryDesciption = "css: " + cssSelector;
-            if (textPattern != null)
-                queryDesciption += " with text matching /" + textPattern + "/";
-
-            return FindAll(By.CssSelector(cssSelector),scope).Select(BuildElement).Cast<ElementFound>();
+            return FindAll(By.CssSelector(cssSelector), scope, textMatches).Select(BuildElement);
         }
 
         public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
         {
-            return FindAll(By.XPath(xpath), scope).Select(BuildElement).Cast<ElementFound>();
+            return FindAll(By.XPath(xpath), scope).Select(BuildElement);
         }
 
         private IWebElement Find(By by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
@@ -155,18 +128,11 @@ namespace Coypu.Drivers.Selenium
             return elementFinder.FindAll(by, scope, predicate);
         }
 
-        private SeleniumElement BuildElement(IWebElement element)
+        private ElementFound BuildElement(IWebElement element)
         {
-            if (new[] {"iframe", "frame"}.Contains(element.TagName.ToLower()))
-            {
-                return new SeleniumFrame(element, webDriver);
-            }
-            return new SeleniumElement(element, webDriver);
-        }
-
-        public bool HasXPath(string xpath, Scope scope)
-        {
-            return FindAll(By.XPath(xpath), scope).Any();
+            return new[] {"iframe", "frame"}.Contains(element.TagName.ToLower()) 
+                ? new SeleniumFrame(element, webDriver) 
+                : new SeleniumElement(element, webDriver);
         }
 
         public bool HasDialog(string withText, Scope scope)

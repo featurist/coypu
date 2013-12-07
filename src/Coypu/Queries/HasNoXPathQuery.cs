@@ -16,7 +16,15 @@ namespace Coypu.Queries
 
         public override bool Run()
         {
-            return !driver.HasXPath(xpath, DriverScope);
+            try
+            {
+                DriverScope.FindXPath(xpath, Options);
+                return true;
+            }
+            catch (MissingHtmlException)
+            {
+                return false;
+            }
         }
     }
 }

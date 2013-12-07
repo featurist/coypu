@@ -14,11 +14,8 @@ namespace Coypu
         void Set(Element element, string value);
         void Select(Element element, string option);
         object Native { get; }
-        bool HasXPath(string xpath, Scope scope);
         bool HasDialog(string withText, Scope scope);
-        ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null);
-        ElementFound FindXPath(string xpath, Scope scope);
-        IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern);
+        IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern = null);
         IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope);
         void Check(Element field);
         void Uncheck(Element field);
@@ -30,7 +27,7 @@ namespace Coypu
         void AcceptModalDialog(Scope scope);
         void CancelModalDialog(Scope scope);
         string ExecuteScript(string javascript, Scope scope);
-        ElementFound FindId(string id, Scope scope);
+        IEnumerable<ElementFound> FindId(string id, Scope scope);
         void Hover(Element element);
         IEnumerable<Cookie> GetBrowserCookies();
         IEnumerable<ElementFound> FindWindows(string locator, Scope scope, bool exact);

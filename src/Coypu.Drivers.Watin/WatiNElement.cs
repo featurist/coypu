@@ -51,6 +51,11 @@ namespace Coypu.Drivers.Watin
             }
         }
 
+        public string Title 
+        {
+            get { return this["title"]; }
+        }
+
         public string OuterHTML
         {
             get

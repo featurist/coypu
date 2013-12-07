@@ -33,9 +33,9 @@ namespace Coypu.Drivers.Selenium
         private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements, bool exact)
         {
             return webElements.Where(e => e.GetAttribute("id") == locator ||
-                                                        e.GetAttribute("name") == locator ||
-                                                        e.GetAttribute("title") == locator ||
-                                                        FrameContentsMatch(e, locator, exact));
+                                            e.GetAttribute("name") == locator ||
+                                            (exact ? e.GetAttribute("title") == locator : e.GetAttribute("title").Contains(locator)) ||
+                                            FrameContentsMatch(e, locator, exact));
         }
 
         private bool FrameContentsMatch(IWebElement e, string locator, bool exact)

@@ -14,7 +14,7 @@ namespace Coypu.Finders
 
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            return new[] { Driver.FindId(Locator, Scope) };
+            return Driver.FindId(Locator, Scope);
         }
 
         internal override string QueryDescription

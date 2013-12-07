@@ -73,6 +73,7 @@ namespace Coypu.Tests.TestDoubles
             public object Result;
             public Scope Scope;
             public Regex TextPattern;
+            public bool? Exact;
         }
 
         public class ScopedRequest<T>
@@ -83,9 +84,9 @@ namespace Coypu.Tests.TestDoubles
 
         public Drivers.Browser Browser { get; private set; }
 
-        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope)
+        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Regex textPattern = null, bool? exact = null)
         {
-            var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope);
+            var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern);
             if (scopedStubResult == null)
             {
                 throw new MissingHtmlException("Element not found: " + locator);
@@ -93,11 +94,11 @@ namespace Coypu.Tests.TestDoubles
             return (T) scopedStubResult.Result;
         }
 
-        public ElementFound FindLink(string linkText, Scope scope)
+        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
         {
             FindLinkRequests.Add(linkText);
 
-            return Find<ElementFound>(stubbedLinks, linkText, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedLinks, linkText, scope, exact: exact);
         }
 
         public void Click(Element element)
@@ -218,14 +219,14 @@ namespace Coypu.Tests.TestDoubles
             return Find<string>(stubbedExecuteScriptResults, javascript, scope);
         }
 
-        public ElementFound FindId(string id, Scope scope)
+        public IEnumerable<ElementFound> FindId(string id, Scope scope)
         {
-            return Find<ElementFound>(stubbedIDs, id, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedIDs, id, scope);
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
         {
-            return Find<ElementFound>(stubbedFrames, locator, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedFrames, locator, scope, exact: exact);
         }
 
         public void SendKeys(Element element, string keys)
@@ -282,30 +283,9 @@ namespace Coypu.Tests.TestDoubles
             get { return "Native driver on fake driver"; }
         }
 
-        public bool HasXPath(string xpath, Scope scope)
-        {
-            return Find<bool>(stubbedHasXPathResults, xpath, scope);
-        }
-
         public bool HasDialog(string withText, Scope scope)
         {
             return Find<bool>(stubbedHasDialogResults, withText, scope);
-        }
-
-        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
-        {
-            FindCssRequests.Add(new FindCssParams{CssSelector = cssSelector, TextPattern = textPattern});
-
-            var scopedStubResult = stubbedCssResults.FirstOrDefault(r => 
-                r.Locator.ToString() == cssSelector && 
-                (textPattern == null || RegexEqual(textPattern, r.TextPattern)) && 
-                r.Scope == scope);
-
-            if (scopedStubResult == null)
-            {
-                throw new MissingHtmlException(string.Format("Element not found at: {0} with text matching: {1}", cssSelector, textPattern));
-            }
-            return (ElementFound) scopedStubResult.Result;
         }
 
         private static bool RegexEqual(Regex a, Regex b)
@@ -313,14 +293,9 @@ namespace Coypu.Tests.TestDoubles
             return (a.ToString() == b.ToString() && a.Options == b.Options);
         }
 
-        public ElementFound FindXPath(string xpath, Scope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern = null)
         {
-            return Find<ElementFound>(stubbedXPathResults, xpath, scope);
-        }
-
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope)
-        {
-            return Find<IEnumerable<ElementFound>>(stubbedAllCssResults, cssSelector, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedAllCssResults, cssSelector, scope, textPattern);
         }
 
         public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
@@ -393,9 +368,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedCurrentWindow = window;
         }
 
-        public ElementFound FindWindows(string locator, Scope scope)
+        public IEnumerable<ElementFound> FindWindows(string locator, Scope scope, bool exact)
         {
-            return Find<ElementFound>(stubbedWindows, locator, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedWindows, locator, scope, exact: exact);
         }
 
     }

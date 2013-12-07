@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests

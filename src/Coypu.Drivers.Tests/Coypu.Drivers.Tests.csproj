@@ -88,7 +88,6 @@
     <Compile Include="When_finding_fields_id.cs" />
     <Compile Include="When_forced_to_consider_invisible_elements.cs" />
     <Compile Include="When_inspecting_location.cs" />
-    <Compile Include="obj\sites\SinatraSite.cs" />
     <Compile Include="When_getting_cookies.cs" />
     <Compile Include="When_hovering.cs" />
     <Compile Include="When_inspecting_title.cs" />
@@ -222,6 +221,9 @@
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
       <Name>Coypu</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />

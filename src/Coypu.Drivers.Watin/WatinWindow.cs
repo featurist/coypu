@@ -53,6 +53,11 @@ namespace Coypu.Drivers.Watin
             }
         }
 
+        public string Title
+        {
+            get { return browser.Title; }
+        }
+
         public string OuterHTML
         {
             get

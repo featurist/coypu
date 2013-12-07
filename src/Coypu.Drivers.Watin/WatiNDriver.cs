@@ -4,11 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
-
 using SHDocVw;
-
 using WatiN.Core;
-using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
 using WatiN.Core.Native.Windows;
 using mshtml;
@@ -103,10 +100,8 @@ namespace Coypu.Drivers.Watin
             return browserScope;
         }
 
-        private static ElementFound BuildElement(Frame frame, string description)
+        private static ElementFound BuildElement(Frame frame)
         {
-            if (frame == null)
-                throw new MissingHtmlException(description);
             return new WatiNFrame(frame);
         }
 
@@ -120,9 +115,9 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
-        public ElementFound FindId(string id, Scope scope)
+        public IEnumerable<ElementFound> FindId(string id, Scope scope)
         {
-            return BuildElement(elementFinder.FindElement(id, scope), "Failed to find id: " + id);
+            return elementFinder.FindElements(id, scope).Select(BuildElement);
         }
 
         public void Hover(Element element)
@@ -144,16 +139,19 @@ namespace Coypu.Drivers.Watin
             return persistentCookies.Concat(sessionCookies).ToList();
         }
 
-        public ElementFound FindWindows(string locator, Scope scope)
+        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, bool exact)
         {
-            return new WatiNWindow(FindWindowHandle(locator));
+            return new[] {new WatiNWindow(FindWindowHandle(titleOrName, exact))};
         }
 
-        private static Constraint FindWindowHandle(string locator)
+        private static Constraint FindWindowHandle(string locator, bool exact)
         {
-            var by =
-                Find.ByTitle(locator) |
-                Find.By("hwnd", locator);
+            var byTitle = exact
+                            ? Find.ByTitle(t => t.Contains(locator))
+                            : Find.ByTitle(locator);
+
+
+            var by = byTitle | Find.By("hwnd", locator);
 
             if (Uri.IsWellFormedUriString(locator, UriKind.Absolute))
                 by |= Find.ByUrl(locator);
@@ -161,9 +159,9 @@ namespace Coypu.Drivers.Watin
             return by;
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
         {
-            return BuildElement(elementFinder.FindFrame(locator, scope), "Failed to find frame: " + locator);
+            return elementFinder.FindFrames(locator, scope, exact).Select(BuildElement);
         }
 
         public void SendKeys(Element element, string keys)
@@ -223,9 +221,9 @@ namespace Coypu.Drivers.Watin
                    select new Cookie(name, value);
         }
 
-        public ElementFound FindLink(string linkText, Scope scope)
+        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
         {
-            return BuildElement(elementFinder.FindLink(linkText, scope), "Failed to find link with text: " + linkText);
+            return elementFinder.FindLinks(linkText, scope, exact).Select(BuildElement);
         }
 
         public void Click(Element element)
@@ -304,24 +302,9 @@ namespace Coypu.Drivers.Watin
             watinDialogHandler.ClickCancel();
         }
 
-        public bool HasXPath(string xpath, Scope scope)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex text = null)
         {
-            return elementFinder.HasXPath(xpath, scope);
-        }
-
-        public ElementFound FindCss(string cssSelector, Scope scope, Regex textPattern = null)
-        {
-            return BuildElement(elementFinder.FindCss(cssSelector, scope, textPattern), "No element found by css: " + cssSelector);
-        }
-
-        public ElementFound FindXPath(string xpath, Scope scope)
-        {
-            return BuildElement(elementFinder.FindXPath(xpath, scope), "No element found by xpath: " + xpath);
-        }
-
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope)
-        {
-            return from element in elementFinder.FindAllCss(cssSelector, scope)
+            return from element in elementFinder.FindAllCss(cssSelector, scope, text)
                    select BuildElement(element);
         }
 
