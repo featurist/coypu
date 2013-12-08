@@ -17,17 +17,17 @@ namespace Coypu.Drivers.Selenium
             this.xPath = xPath;
         }
 
-        public IEnumerable<IWebElement> FindFrame(string locator, Scope scope, bool exact)
+        public IEnumerable<IWebElement> FindFrame(string locator, Scope scope, Options options)
         {
-            var frames = AllElementsByTag(scope, "iframe")
-                        .Union(AllElementsByTag(scope, "frame"));
+            var frames = AllElementsByTag(scope, "iframe", options)
+                        .Union(AllElementsByTag(scope, "frame", options));
 
-            return WebElement(locator, frames, exact);
+            return WebElement(locator, frames, options.Exact);
         }
 
-        private IEnumerable<IWebElement> AllElementsByTag(Scope scope, string tagNameToFind)
+        private IEnumerable<IWebElement> AllElementsByTag(Scope scope, string tagNameToFind, Options options)
         {
-            return elementFinder.FindAll(By.TagName(tagNameToFind), scope);
+            return elementFinder.FindAll(By.TagName(tagNameToFind), scope, options);
         }
 
         private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements, bool exact)

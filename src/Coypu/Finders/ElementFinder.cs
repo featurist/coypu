@@ -6,19 +6,26 @@ namespace Coypu.Finders
     public abstract class ElementFinder
     {
         protected readonly Driver Driver;
-        private readonly string _locator;
+        private readonly string locator;
         protected readonly DriverScope Scope;
+        private readonly Options options;
 
-        protected ElementFinder(Driver driver, string locator, DriverScope scope)
+        protected ElementFinder(Driver driver, string locator, DriverScope scope, Options options)
         {
             Driver = driver;
-            _locator = locator;
+            this.locator = locator;
             Scope = scope;
+            this.options = options;
+        }
+
+        public Options Options
+        {
+            get { return options; }
         }
 
         public abstract bool SupportsPartialTextMatching { get; }
 
-        internal string Locator { get { return _locator; } }
+        internal string Locator { get { return locator; } }
 
         internal abstract IEnumerable<ElementFound> Find(Options options);
 
@@ -26,19 +33,18 @@ namespace Coypu.Finders
 
         internal ElementFound ResolveQuery()
         {
-            var options = Scope.Options;
-            var results = Find(new Options { Exact = true }.Merge(Scope.Options));
-            if (options.Match == Match.First && results.Any())
+            var results = Find(Options.Merge(new Options { Exact = true }, Options));
+            if (Options.Match == Match.First && results.Any())
                 return results.First();
 
             var count = results.Count();
 
-            if (ShouldTryPartialMatch(options, count))
-                results = Find(new Options {Exact = false}.Merge(options));
+            if (ShouldTryPartialMatch(Options, count))
+                results = Find(Options.Merge(new Options {Exact = false}, Options));
 
             count = results.Count();
             if (count > 1)
-                throw new AmbiguousHtmlException(options.BuildAmbiguousMessage(QueryDescription, count));
+                throw new AmbiguousHtmlException(Options.BuildAmbiguousMessage(QueryDescription, count));
 
             if (count == 0)
                 throw new MissingHtmlException("Unable to find " + QueryDescription);

@@ -12,7 +12,7 @@ namespace Coypu.Queries
 
         public override bool Run()
         {
-            return DriverScope.Find().Text.Contains(text);
+            return DriverScope.Now().Text.Contains(text);
         }
     }
 }

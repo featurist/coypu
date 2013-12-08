@@ -15,7 +15,7 @@ namespace Coypu
             this.options = options;
         }
 
-        public override ElementFound Find()
+        public override ElementFound Now()
         {
             return robustWrapper.Robustly(new ElementQuery(this, options));
         }

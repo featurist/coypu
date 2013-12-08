@@ -70,13 +70,6 @@ namespace Coypu.Drivers.Watin
             return element.Native as T;
         }
 
-        private ElementFound BuildElement(WatiN.Core.Element element, string description)
-        {
-            if (element == null)
-                throw new MissingHtmlException(description);
-            return BuildElement(element);
-        }
-
         private ElementFound BuildElement(WatiN.Core.Element element)
         {
             return new WatiNElement(element,Watin);
@@ -115,9 +108,9 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope)
+        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
         {
-            return elementFinder.FindElements(id, scope).Select(BuildElement);
+            return elementFinder.FindElements(id, scope, options).Select(BuildElement);
         }
 
         public void Hover(Element element)
@@ -139,9 +132,9 @@ namespace Coypu.Drivers.Watin
             return persistentCookies.Concat(sessionCookies).ToList();
         }
 
-        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, Options options)
         {
-            return new[] {new WatiNWindow(FindWindowHandle(titleOrName, exact))};
+            return new[] { new WatiNWindow(FindWindowHandle(titleOrName, options.Exact)) };
         }
 
         private static Constraint FindWindowHandle(string locator, bool exact)
@@ -159,9 +152,9 @@ namespace Coypu.Drivers.Watin
             return by;
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
         {
-            return elementFinder.FindFrames(locator, scope, exact).Select(BuildElement);
+            return elementFinder.FindFrames(locator, scope, options).Select(BuildElement);
         }
 
         public void SendKeys(Element element, string keys)
@@ -221,9 +214,9 @@ namespace Coypu.Drivers.Watin
                    select new Cookie(name, value);
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
         {
-            return elementFinder.FindLinks(linkText, scope, exact).Select(BuildElement);
+            return elementFinder.FindLinks(linkText, scope, options).Select(BuildElement);
         }
 
         public void Click(Element element)
@@ -302,15 +295,15 @@ namespace Coypu.Drivers.Watin
             watinDialogHandler.ClickCancel();
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex text = null)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex text = null)
         {
-            return from element in elementFinder.FindAllCss(cssSelector, scope, text)
+            return from element in elementFinder.FindAllCss(cssSelector, scope, options, text)
                    select BuildElement(element);
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
         {
-            return from element in elementFinder.FindAllXPath(xpath, scope)
+            return from element in elementFinder.FindAllXPath(xpath, scope, options)
                    select BuildElement(element);
         }
 

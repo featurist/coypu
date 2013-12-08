@@ -1,18 +1,19 @@
-﻿using Coypu.Finders;
+﻿using System;
+using Coypu.Finders;
 using Coypu.Robustness;
 
 namespace Coypu.Actions
 {
     internal class WaitThenClick : DriverAction
     {
-        private readonly Options options;
         private readonly Waiter waiter;
         private readonly ElementFinder elementFinder;
+        private readonly TimeSpan waitBeforeClick;
 
         internal WaitThenClick(Driver driver, Options options, Waiter waiter, ElementFinder elementFinder)
             : base(driver, options)
         {
-            this.options = options;
+            waitBeforeClick = options.WaitBeforeClick;
             this.waiter = waiter;
             this.elementFinder = elementFinder;
         }
@@ -20,7 +21,7 @@ namespace Coypu.Actions
         public override void Act()
         {
             var element = elementFinder.ResolveQuery();
-            waiter.Wait(options.WaitBeforeClick);
+            waiter.Wait(waitBeforeClick);
             Driver.Click(element);
         }
     }

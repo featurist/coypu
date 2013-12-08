@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sites\SinatraSite.cs" />
     <Compile Include="When_finding_fields_returns_ambiguous_results_Match.First.cs" />
     <Compile Include="When_finding_fields_returns_ambiguous_results_Match.Single.cs" />
     <Compile Include="When_navigating.cs" />

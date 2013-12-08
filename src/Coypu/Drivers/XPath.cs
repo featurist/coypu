@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Coypu.Drivers
@@ -154,31 +153,9 @@ namespace Coypu.Drivers
         private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
         private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
 
-        public IEnumerable<string> FieldXPathsByPrecedence(string locator, Scope scope)
-        {
-            locator = locator.Trim();
-            var exact = FieldXPaths(locator,scope,true);
-
-            if (scope.Exact)
-                return exact;
-
-            var partial = FieldXPaths(locator, scope, false);
-            return exact.Concat(partial);
-        }
-
         public string Field(string locator, Options options)
         {
-            return ForlabeledOrByAttribute(locator, options);
-        }
-
-        private IEnumerable<string> FieldXPaths(string locator, Scope scope, bool exact)
-        {
-            var options = new Options {Exact = exact, ConsiderInvisibleElements = scope.ConsiderInvisibleElements};
-            return new[]
-                {
-                    ForlabeledOrByAttribute(locator, options),
-                    ContainerLabeled(locator, exact),
-                };
+            return ForlabeledOrByAttribute(locator, options); // TODO: OR ContainerLabeled(locator, exact)
         }
 
         private string ForlabeledOrByAttribute(string locator, Options options)

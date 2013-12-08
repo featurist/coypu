@@ -8,13 +8,13 @@ namespace Coypu
     {
         private readonly Options options;
 
-        internal RobustWindowScope(Driver driver, SessionConfiguration SessionConfiguration, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder, Options options, WindowFinder windowFinder) 
-            : base(SessionConfiguration,windowFinder,driver, robustWrapper, waiter, urlBuilder)
+        internal RobustWindowScope(WindowFinder windowFinder, BrowserSession scope, Options options)
+            : base(windowFinder, scope)
         {
             this.options = options;
         }
 
-        public override ElementFound Find()
+        public override ElementFound Now()
         {
             return robustWrapper.Robustly(new ElementQuery(this, options));
         }

@@ -68,6 +68,5 @@ namespace Coypu
         /// <para>Default: false</para>
         /// </summary>
         public bool SSL { get; set; }
-
     }
 }

@@ -5,7 +5,7 @@ namespace Coypu.Finders
 {
     internal class SectionFinder : XPathQueryFinder
     {
-        internal SectionFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
+        internal SectionFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsPartialTextMatching
         {

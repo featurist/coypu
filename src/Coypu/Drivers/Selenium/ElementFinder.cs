@@ -7,39 +7,24 @@ namespace Coypu.Drivers.Selenium
 {
     internal class ElementFinder
     {
-        public IWebElement Find(By by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
+        public IEnumerable<IWebElement> FindAll(By @by, Scope scope, Options options, Func<IWebElement, bool> predicate = null)
         {
-            var results = FindAll(@by, scope, predicate).Where(e => matches(predicate, e));
-                
-            return scope.Options.FilterWithMatchStrategy(results, queryDescription);
-        }
-
-        public IWebElement Find(IEnumerable<By> bys, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
-        {
-            var results = bys.Select(by => FindAll(by, scope, predicate))
-                             .FirstOrDefault(matches => matches.Any());
-
-            return scope.Options.FilterWithMatchStrategy(results ?? Enumerable.Empty<IWebElement>(), queryDescription);
-        }
-
-        private static bool matches(Func<IWebElement, bool> predicate, IWebElement firstMatch)
-        {
-            return (predicate == null || predicate(firstMatch));
-        }
-
-        public IEnumerable<IWebElement> FindAll(By @by, Scope scope, Func<IWebElement, bool> predicate = null)
-        {
-            return SeleniumScope(scope).FindElements(@by).Where(e => predicate(e) && IsDisplayed(e, scope));
+            return SeleniumScope(scope).FindElements(@by).Where(e => matches(predicate, e) && IsDisplayed(e, options));
         }
 
         public ISearchContext SeleniumScope(Scope scope)
         {
-            return (ISearchContext) scope.Find().Native;
+            return (ISearchContext) scope.Now().Native;
         }
 
-        public bool IsDisplayed(IWebElement e, Scope scope)
+        private static bool matches(Func<IWebElement, bool> predicate, IWebElement element)
         {
-            return scope.ConsiderInvisibleElements || e.IsDisplayed();
+            return (predicate == null || predicate(element));
+        }
+
+        public bool IsDisplayed(IWebElement e, Options options)
+        {
+            return options.ConsiderInvisibleElements || e.IsDisplayed();
         }
     }
 }

@@ -77,55 +77,45 @@ namespace Coypu.Drivers.Selenium
             get { return webDriver; }
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
         {
-            return frameFinder.FindFrame(locator, scope, exact).Select(BuildElement);
+            return frameFinder.FindFrame(locator, scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
         {
-            var by = exact ? 
+            var by = options.Exact ? 
                 By.LinkText(linkText) : 
                 By.PartialLinkText(linkText);
 
-            return FindAll(by, scope).Select(BuildElement);
+            return FindAll(by, scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope)
+        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
         {
-            return FindAll(By.Id(id), scope).Select(BuildElement);
+            return FindAll(By.Id(id), scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern = null)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
             var textMatches = (textPattern == null)
                 ? (Func<IWebElement, bool>)null
                 : e => textMatcher.TextMatches(e, textPattern);
 
-            if (textPattern != null && scope.ConsiderInvisibleElements)
+            if (textPattern != null && options.ConsiderInvisibleElements)
                 throw new NotSupportedException("Cannot inspect the text of invisible elements.");
 
-            return FindAll(By.CssSelector(cssSelector), scope, textMatches).Select(BuildElement);
+            return FindAll(By.CssSelector(cssSelector), scope, options, textMatches).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
         {
-            return FindAll(By.XPath(xpath), scope).Select(BuildElement);
+            return FindAll(By.XPath(xpath), scope, options).Select(BuildElement);
         }
 
-        private IWebElement Find(By by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
+        private IEnumerable<IWebElement> FindAll(By by, Scope scope, Options options, Func<IWebElement, bool> predicate = null)
         {
-            return elementFinder.Find(by, scope, queryDescription, predicate);
-        }
-
-        private IWebElement Find(IEnumerable<By> by, Scope scope, string queryDescription, Func<IWebElement, bool> predicate = null)
-        {
-            return elementFinder.Find(by, scope, queryDescription, predicate);
-        }
-
-        private IEnumerable<IWebElement> FindAll(By by, Scope scope, Func<IWebElement, bool> predicate = null)
-        {
-            return elementFinder.FindAll(by, scope, predicate);
+            return elementFinder.FindAll(by, scope, options, predicate);
         }
 
         private ElementFound BuildElement(IWebElement element)
@@ -206,9 +196,9 @@ namespace Coypu.Drivers.Selenium
             return webDriver.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
         }
 
-        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, Options options)
         {
-            return windowHandleFinder.FindWindowHandles(titleOrName, exact)
+            return windowHandleFinder.FindWindowHandles(titleOrName, options.Exact)
                                      .Select(h => new SeleniumWindow(webDriver, h))
                                      .Cast<ElementFound>();
         }

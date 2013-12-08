@@ -8,19 +8,19 @@ namespace Coypu.Finders
         private readonly Regex textPattern;
         private readonly string text;
 
-        internal CssFinder(Driver driver, string locator, DriverScope scope)
-            : base(driver, locator, scope)
+        internal CssFinder(Driver driver, string locator, DriverScope scope, Options options)
+            : base(driver, locator, scope, options)
         {
         }
 
-        internal CssFinder(Driver driver, string locator, DriverScope scope, Regex textPattern)
-            : this(driver, locator, scope)
+        internal CssFinder(Driver driver, string locator, DriverScope scope, Options options, Regex textPattern)
+            : this(driver, locator, scope, options)
         {
             this.textPattern = textPattern;
         }
 
-        internal CssFinder(Driver driver, string locator, DriverScope scope, string text)
-            : this(driver, locator, scope)
+        internal CssFinder(Driver driver, string locator, DriverScope scope, Options options, string text)
+            : this(driver, locator, scope, options)
         {
             this.text = text;
         }
@@ -32,7 +32,7 @@ namespace Coypu.Finders
 
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            return Driver.FindAllCss(Locator, Scope, TextPattern(options.Exact));
+            return Driver.FindAllCss(Locator, Scope, options, TextPattern(options.Exact));
         }
 
         private Regex TextPattern(bool exact)

@@ -4,7 +4,7 @@ namespace Coypu.Finders
 {
     internal class LinkFinder : ElementFinder
     {
-        internal LinkFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
+        internal LinkFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
 
         public override bool SupportsPartialTextMatching
@@ -14,7 +14,7 @@ namespace Coypu.Finders
 
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            return Driver.FindLinks(Locator, Scope, options.Exact);
+            return Driver.FindLinks(Locator, Scope, options);
         }
 
         internal override string QueryDescription

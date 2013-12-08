@@ -5,7 +5,7 @@ namespace Coypu.Finders
 {
     internal class ButtonFinder : XPathQueryFinder
     {
-        internal ButtonFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
+        internal ButtonFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsPartialTextMatching
         {

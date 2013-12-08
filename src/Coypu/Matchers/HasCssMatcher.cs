@@ -43,7 +43,7 @@ namespace Coypu.Matchers
                 hasCss = scope.HasCss(_expectedCss, _options);
 
             if (!hasCss)
-                _actualContent = scope.Find().InnerHTML;
+                _actualContent = scope.Now().InnerHTML;
 
             return hasCss;
         }

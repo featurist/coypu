@@ -17,7 +17,7 @@ namespace Coypu
         private static readonly TimeSpan DEFAULT_RETRY_INTERVAL = TimeSpan.FromSeconds(0.05);
         private static readonly TimeSpan DEFAULT_WAIT_BEFORE_CLICK = TimeSpan.Zero;
 
-        private bool? considerInvisibleElements;
+        protected bool? considerInvisibleElements;
         private bool? exact;
         private Match? match;
         private TimeSpan? retryInterval;
@@ -132,24 +132,28 @@ Your options:
         }
 
         /// <summary>
-        /// Merge with another instance of Options to produce a new instance of Options. If any options on this instance are unset they will be taken from the supplied Options.
+        /// Merge any unset Options from another set of Options.
         /// </summary>
+        /// <param name="original">Any options unset will be copied from this</param>
         /// <param name="with">Any options unset will be copied from this</param>
         /// <returns>The new merged Options</returns>
-        public Options Merge(Options with)
+        internal static Options Merge(Options original, Options defaults)
         {
+            original = original ?? new Options();
+            defaults = defaults ?? new Options();
+
             return new Options
                 {
-                    considerInvisibleElements = Default(considerInvisibleElements, with.considerInvisibleElements),
-                    exact = Default(exact, with.exact),
-                    match = Default(match, with.match),
-                    retryInterval = Default(retryInterval, with.retryInterval),
-                    timeout = Default(timeout, with.timeout),
-                    waitBeforeClick = Default(waitBeforeClick, with.waitBeforeClick)
+                    considerInvisibleElements = Default(original.considerInvisibleElements, defaults.considerInvisibleElements),
+                    exact = Default(original.exact, defaults.exact),
+                    match = Default(original.match, defaults.match),
+                    retryInterval = Default(original.retryInterval, defaults.retryInterval),
+                    timeout = Default(original.timeout, defaults.timeout),
+                    waitBeforeClick = Default(original.waitBeforeClick, defaults.waitBeforeClick)
                 };
         }
 
-        private static T? Default<T>(T? value, T? defaultValue) where T : struct
+        protected static T? Default<T>(T? value, T? defaultValue) where T : struct
         {
             return value.HasValue 
                        ? value

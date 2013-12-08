@@ -18,7 +18,7 @@ namespace Coypu.Matchers
             var hasNoContent = scope.HasNoContent(_expectedContent, _options);
             if (!hasNoContent)
             {
-                _actualContent = scope.Find().Text;
+                _actualContent = scope.Now().Text;
                 hasNoContent = !_actualContent.Contains(_expectedContent);
             }
 

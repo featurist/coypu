@@ -1,13 +1,10 @@
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using Coypu.Drivers;
 
 namespace Coypu.Finders
 {
     internal class FrameFinder : ElementFinder
     {
-        internal FrameFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
+        internal FrameFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsPartialTextMatching
         {
@@ -16,7 +13,7 @@ namespace Coypu.Finders
 
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            return Driver.FindFrames(Locator, Scope, options.Exact);
+            return Driver.FindFrames(Locator, Scope, options);
         }
 
         internal override string QueryDescription

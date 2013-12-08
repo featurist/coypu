@@ -92,7 +92,6 @@
   <ItemGroup>
     <Compile Include="Actions\BrowserAction.cs" />
     <Compile Include="Actions\Check.cs" />
-    <Compile Include="Actions\CheckElement.cs" />
     <Compile Include="Actions\ClickAction.cs" />
     <Compile Include="Actions\Choose.cs" />
     <Compile Include="Actions\AcceptModalDialog.cs" />
@@ -149,7 +148,6 @@
     <Compile Include="Drivers\Selenium\OptionSelector.cs" />
     <Compile Include="Drivers\Selenium\DriverFactory.cs" />
     <Compile Include="Drivers\Selenium\ElementFinder.cs" />
-    <Compile Include="Drivers\Selenium\FieldFinder.cs" />
     <Compile Include="Drivers\Selenium\TextMatcher.cs" />
     <Compile Include="Drivers\XPath.cs" />
     <Compile Include="Actions\Hover.cs" />

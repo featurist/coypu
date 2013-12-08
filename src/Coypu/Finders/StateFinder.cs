@@ -14,7 +14,7 @@ namespace Coypu.Finders
             this.robustWrapper = robustWrapper;
         }
 
-        internal State FindState(Options options, params State[] states)
+        internal State FindState(State[] states, Scope scope, Options options)
         {
             var query = new LambdaPredicateQuery(() =>
             {

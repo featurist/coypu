@@ -6,7 +6,7 @@ namespace Coypu.Finders
 {
     internal class FieldsetFinder : XPathQueryFinder
     {
-        internal FieldsetFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
+        internal FieldsetFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsPartialTextMatching
         {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing.Imaging;
 using Coypu.Finders;
 using Coypu.Robustness;
 using Coypu.WebRequests;
@@ -81,7 +80,7 @@ namespace Coypu
         /// <returns>The matching BrowserWindow scope</returns>
         public BrowserWindow FindWindow(string locator, Options options = null)
         {
-            return new RobustWindowScope(driver, SessionConfiguration, robustWrapper, waiter, urlBuilder, SetOptions(options), new WindowFinder(driver, locator, this));
+            return new RobustWindowScope(new WindowFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
         /// <summary>

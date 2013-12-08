@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
 using Coypu.Drivers;
 using Coypu.Finders;
-using Coypu.Matchers;
 using Coypu.Queries;
 using Coypu.Robustness;
-using NUnit.Framework;
 
 namespace Coypu
 {
@@ -22,12 +19,11 @@ namespace Coypu
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
         private ElementFound element;
-        protected Options options;
 
         internal DriverScope(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
         {
             this.elementFinder = elementFinder ?? new DocumentElementFinder(driver);
-            this.options = this.SessionConfiguration = SessionConfiguration;
+            this.SessionConfiguration = SessionConfiguration;
             this.driver = driver;
             this.robustWrapper = robustWrapper;
             this.waiter = waiter;
@@ -35,16 +31,15 @@ namespace Coypu
             stateFinder = new StateFinder(robustWrapper);
         }
 
-        internal DriverScope(ElementFinder elementFinder, DriverScope outer)
+        internal DriverScope(ElementFinder elementFinder, DriverScope outerScope)
         {
             this.elementFinder = elementFinder;
-            driver = outer.driver;
-            robustWrapper = outer.robustWrapper;
-            urlBuilder = outer.urlBuilder;
-            stateFinder = outer.stateFinder;
-            waiter = outer.waiter;
-            options = outer.SessionConfiguration;
-            SessionConfiguration = outer.SessionConfiguration;
+            driver = outerScope.driver;
+            robustWrapper = outerScope.robustWrapper;
+            urlBuilder = outerScope.urlBuilder;
+            stateFinder = outerScope.stateFinder;
+            waiter = outerScope.waiter;
+            SessionConfiguration = outerScope.SessionConfiguration;
         }
 
         public virtual Uri Location
@@ -54,22 +49,7 @@ namespace Coypu
 
         public string Text
         {
-            get { return Find().Text; }
-        }
-
-        public bool ConsiderInvisibleElements
-        {
-            get { return Merge(options).ConsiderInvisibleElements; }
-        }
-
-        public bool Exact
-        {
-            get { return Merge(options).Exact; }
-        }
-
-        public Match Match
-        {
-            get { return Merge(options).Match; }
+            get { return Now().Text; }
         }
 
         public Browser Browser
@@ -77,227 +57,209 @@ namespace Coypu
             get { return SessionConfiguration.Browser; }
         }
 
-        public Options Options
+        public Options Merge(Options options)
         {
-            get { return Merge(options); }
-        }
-
-        protected Options SetOptions(Options options)
-        {
-            return this.options = Merge(options);
-        }
-
-        private Options Merge(Options options)
-        {
-            return options == null
-                       ? SessionConfiguration
-                       : options.Merge(SessionConfiguration);
+            return Options.Merge(options, SessionConfiguration);
         }
 
         public void ClickButton(string locator, Options options = null)
         {
-            RetryUntilTimeout(WaitThenClickButton(locator, SetOptions(options)));
+            RetryUntilTimeout(WaitThenClickButton(locator, Merge(options)));
         }
 
         public void ClickLink(string locator, Options options = null)
         {
-            RetryUntilTimeout(WaitThenClickLink(locator, SetOptions(options)));
+            RetryUntilTimeout(WaitThenClickLink(locator, Merge(options)));
         }
 
         private WaitThenClick WaitThenClickLink(string locator, Options options = null)
         {
-            return new WaitThenClick(driver, SetOptions(options), waiter, new LinkFinder(driver, locator, this));
+            return new WaitThenClick(driver, Merge(options), waiter, new LinkFinder(driver, locator, this, Merge(options)));
         }
 
         private WaitThenClick WaitThenClickButton(string locator, Options options = null)
         {
-            return new WaitThenClick(driver, SetOptions(options), waiter, new ButtonFinder(driver, locator, this));
+            return new WaitThenClick(driver, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)));
         }
 
         public Scope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            options = SetOptions(options);
-            TryUntil(WaitThenClickButton(locator, options), until, waitBeforeRetry, options);
+            TryUntil(WaitThenClickButton(locator, Merge(options)), until, waitBeforeRetry, Merge(options));
             return this;
         }
 
         public Scope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            options = SetOptions(options);
-            TryUntil(WaitThenClickLink(locator, options), until, waitBeforeRetry, options);
+            TryUntil(WaitThenClickLink(locator, Merge(options)), until, waitBeforeRetry, Merge(options));
             return this;
         }
 
         public ElementScope FindButton(string locator, Options options = null)
         {
-            return new RobustElementScope(new ButtonFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new ButtonFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
         public ElementScope FindLink(string locator, Options options = null)
         {
-            return new RobustElementScope(new LinkFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new LinkFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
         public ElementScope FindField(string locator, Options options = null)
         {
-            return new RobustElementScope(new FieldFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new FieldFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
-        public FillInWith FillIn(string locator, Options options = null) {
-            options = SetOptions(options);
-            return new FillInWith(FindField(locator,options), driver, robustWrapper, options);
+        public FillInWith FillIn(string locator, Options options = null) 
+        {
+            return new FillInWith(FindField(locator, Merge(options)), driver, robustWrapper, Merge(options));
         }
 
         public SelectFrom Select(string option, Options options = null)
         {
-            return new SelectFrom(option, driver, robustWrapper, this, SetOptions(options));
+            return new SelectFrom(option, driver, robustWrapper, this, Merge(options));
         }
 
         public bool HasContent(string text, Options options = null)
         {
-            return Query(new HasContentQuery(this, text, SetOptions(options)));
+            return Query(new HasContentQuery(this, text, Merge(options)));
         }
 
         public bool HasContentMatch(Regex pattern, Options options = null)
         {
-            return Query(new HasContentMatchQuery(this, pattern, SetOptions(options)));
+            return Query(new HasContentMatchQuery(this, pattern, Merge(options)));
         }
 
         public bool HasNoContent(string text, Options options = null)
         {
-            return Query(new HasNoContentQuery(this, text, SetOptions(options)));
+            return Query(new HasNoContentQuery(this, text, Merge(options)));
         }
 
         public bool HasNoContentMatch(Regex pattern, Options options = null)
         {
-            return Query(new HasNoContentMatchQuery(this, pattern, SetOptions(options)));
+            return Query(new HasNoContentMatchQuery(this, pattern, Merge(options)));
         }
 
         public bool HasCss(string cssSelector, Options options = null)
         {
-            return FindCss(cssSelector, SetOptions(options)).Exists();
+            return FindCss(cssSelector, Merge(options)).Exists();
         }
 
         public bool HasCss(string cssSelector, string text, Options options = null)
         {
-            return FindCss(cssSelector, text, SetOptions(options)).Exists();
+            return FindCss(cssSelector, text, Merge(options)).Exists();
         }
 
         public bool HasCss(string cssSelector, Regex text, Options options = null)
         {
-            return FindCss(cssSelector, text, SetOptions(options)).Exists();
+            return FindCss(cssSelector, text, Merge(options)).Exists();
         }
 
         public bool HasNoCss(string cssSelector, Options options = null)
         {
-            return FindCss(cssSelector, SetOptions(options)).Missing();
+            return FindCss(cssSelector, Merge(options)).Missing();
         }
 
         public bool HasNoCss(string cssSelector, string text, Options options = null)
         {
-            return FindCss(cssSelector, text, SetOptions(options)).Missing();
+            return FindCss(cssSelector, text, Merge(options)).Missing();
         }
 
         public bool HasNoCss(string cssSelector, Regex text, Options options = null)
         {
-            return FindCss(cssSelector, text, SetOptions(options)).Missing();
+            return FindCss(cssSelector, text, Merge(options)).Missing();
         }
 
         public bool HasXPath(string xpath, Options options = null)
         {
-            return FindXPath(xpath, SetOptions(options)).Exists();
+            return FindXPath(xpath, Merge(options)).Exists();
         }
 
         public bool HasNoXPath(string xpath, Options options = null)
         {
-            return FindXPath(xpath, SetOptions(options)).Missing();
+            return FindXPath(xpath, Merge(options)).Missing();
         }
 
         public ElementScope FindCss(string cssSelector, Options options = null)
         {
-            SetOptions(options);
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this), this, this.options);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, Merge(options)), this, Merge(options));
         }
 
         public ElementScope FindCss(string cssSelector, string text, Options options = null)
         {
-            SetOptions(options);
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this, text), this, this.options);
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, Merge(options), text), this, Merge(options));
         }
 
         public ElementScope FindCss(string cssSelector, Regex text, Options options = null)
         {
-            return new RobustElementScope(new CssFinder(driver, cssSelector, this, text), this, SetOptions(options));
+            return new RobustElementScope(new CssFinder(driver, cssSelector, this, Merge(options), text), this, Merge(options));
         }
 
         public ElementScope FindXPath(string xpath, Options options = null)
         {
-            return new RobustElementScope(new XPathFinder(driver, xpath, this), this, SetOptions(options));
+            return new RobustElementScope(new XPathFinder(driver, xpath, this, Merge(options)), this, Merge(options));
         }
 
         public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            SetOptions(options);
             if (predicate != null)
-                return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, this.options));
+                return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, Merge(options)));
 
-            return FindAllCssNoPredicate(cssSelector);
+            return FindAllCssNoPredicate(cssSelector, Merge(options));
         }
 
-        internal IEnumerable<SnapshotElementScope> FindAllCssNoPredicate(string cssSelector)
+        internal IEnumerable<SnapshotElementScope> FindAllCssNoPredicate(string cssSelector, Options options)
         {
-            return driver.FindAllCss(cssSelector, this, null).AsSnapshotElementScopes(this);
+            return driver.FindAllCss(cssSelector, this, options).AsSnapshotElementScopes(this, options);
         }
 
         public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            SetOptions(options);
             if (predicate != null)
-                return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, this.options));
+                return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, Merge(options)));
 
-            return FindAllXPathNoPredicate(xpath);
+            return FindAllXPathNoPredicate(xpath, Merge(options));
         }
 
-        internal IEnumerable<SnapshotElementScope> FindAllXPathNoPredicate(string xpath)
+        internal IEnumerable<SnapshotElementScope> FindAllXPathNoPredicate(string xpath, Options options)
         {
-            return driver.FindAllXPath(xpath, this).AsSnapshotElementScopes(this);
+            return driver.FindAllXPath(xpath, this, options).AsSnapshotElementScopes(this, options);
         }
 
         public ElementScope FindSection(string locator, Options options = null)
         {
-            return new RobustElementScope(new SectionFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new SectionFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
         public ElementScope FindFieldset(string locator, Options options = null)
         {
-            return new RobustElementScope(new FieldsetFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new FieldsetFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
         public ElementScope FindId(string id, Options options = null)
         {
-            return new RobustElementScope(new IdFinder(driver, id, this), this, SetOptions(options));
+            return new RobustElementScope(new IdFinder(driver, id, this, Merge(options)), this, Merge(options));
         }
 
         public void Check(string locator, Options options = null)
         {
-            options = SetOptions(options);
-            RetryUntilTimeout(new Check(driver, FindField(locator, options), options));
+            var mergedOptions = Merge(options);
+            RetryUntilTimeout(new Check(driver, FindField(locator, Merge(options)), Merge(options)));
         }
 
         public void Uncheck(string locator, Options options = null)
         {
-            options = SetOptions(options);
-            RetryUntilTimeout(new Uncheck(driver, FindField(locator, options), options));
+            RetryUntilTimeout(new Uncheck(driver, FindField(locator, Merge(options)), Merge(options)));
         }
 
         public void Uncheck(ElementScope checkbox, Options options = null)
         {
-            RetryUntilTimeout(new Uncheck(driver, checkbox, SetOptions(options)));
+            RetryUntilTimeout(new Uncheck(driver, checkbox, Merge(options)));
         }
 
         public void Choose(string locator, Options options = null)
         {
-            RetryUntilTimeout(new Choose(driver, FindField(locator, options), options));
+            var mergedOptions = Merge(options);
+            RetryUntilTimeout(new Choose(driver, FindField(locator, Merge(options)), Merge(options)));
         }
 
         public bool Has(ElementScope findElement)
@@ -312,12 +274,12 @@ namespace Coypu
 
         public void RetryUntilTimeout(Action action, Options options = null)
         {
-            robustWrapper.Robustly(new LambdaBrowserAction(action,SetOptions(options)));
+            robustWrapper.Robustly(new LambdaBrowserAction(action, Merge(options)));
         }
 
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function, Options options = null)
         {
-            return robustWrapper.Robustly(new LambdaQuery<TResult>(function,SetOptions(options)));
+            return robustWrapper.Robustly(new LambdaQuery<TResult>(function, Merge(options)));
         }
 
         public void RetryUntilTimeout(BrowserAction action)
@@ -327,12 +289,12 @@ namespace Coypu
 
         public ElementScope FindFrame(string locator, Options options = null)
         {
-            return new RobustElementScope(new FrameFinder(driver, locator, this), this, SetOptions(options));
+            return new RobustElementScope(new FrameFinder(driver, locator, this, Merge(options)), this, Merge(options));
         }
 
         public T Query<T>(Func<T> query, T expecting, Options options = null)
         {
-            return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting, SetOptions(options)));
+            return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting, Merge(options)));
         }
 
         public T Query<T>(Query<T> query)
@@ -342,23 +304,23 @@ namespace Coypu
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            options = SetOptions(options);
-            robustWrapper.TryUntil(new LambdaBrowserAction(tryThis, options), new LambdaPredicateQuery(until,options), options.Timeout, waitBeforeRetry);
+            var mergedOptions = Merge(options);
+            robustWrapper.TryUntil(new LambdaBrowserAction(tryThis, Merge(options)), new LambdaPredicateQuery(until, mergedOptions), mergedOptions.Timeout, waitBeforeRetry);
         }
 
         public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            robustWrapper.TryUntil(tryThis, until, SetOptions(options).Timeout, waitBeforeRetry);
+            robustWrapper.TryUntil(tryThis, until, Merge(options).Timeout, waitBeforeRetry);
         }
 
         public State FindState(State[] states, Options options = null)
         {
-            return stateFinder.FindState(SetOptions(options), states);
+            return stateFinder.FindState(states, this, Merge(options));
         }
 
         public State FindState(params State[] states)
         {
-            return stateFinder.FindState(SetOptions(SessionConfiguration), states);
+            return FindState(states, null);
         }
 
         /// <summary>
@@ -367,9 +329,14 @@ namespace Coypu
         /// <returns></returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         /// <exception cref="T:Coypu.AmbiguousHtmlException">Thrown if the there is more than one matching element and the Match.Single option is set</exception>
-        public virtual ElementFound Find()
+        public virtual ElementFound Now()
         {
-            if (element == null || element.Stale(options))
+            return FindElement();
+        }
+
+        protected internal ElementFound FindElement()
+        {
+            if (element == null || element.Stale(elementFinder.Options))
                 element = elementFinder.ResolveQuery();
             return element;
         }

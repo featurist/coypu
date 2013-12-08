@@ -59,7 +59,7 @@ namespace Coypu.Drivers.Tests
 
             var popUpScope = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
 
-            var popUpWindow = popUpScope.Find();
+            var popUpWindow = popUpScope.Now();
             popUpWindow.Stale(new Options()).should_be_false();
 
             Driver.Click(new ButtonFinder(Driver,"close", popUpScope).Find());

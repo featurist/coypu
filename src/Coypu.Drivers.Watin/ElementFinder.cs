@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WatiN.Core;
-using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
 {
     internal class ElementFinder
     {
-        private XPath xPath;
-
-        internal ElementFinder()
-        {
-            xPath = new XPath();
-        }
-
         internal static IElementContainer WatiNScope(Scope scope)
         {
-            return (IElementContainer)scope.Find().Native;
+            return (IElementContainer)scope.Now().Native;
         }
 
         private static Document WatiNDocumentScope(Scope scope)
@@ -36,34 +28,34 @@ namespace Coypu.Drivers.Watin
             return documentScope;
         }
 
-        public ElementCollection FindElements(string id, Scope scope)
+        public ElementCollection FindElements(string id, Scope scope, Options options)
         {
-            return WatiNScope(scope).Elements.Filter(Find.ById(id) & Constraints.IsVisible(scope.ConsiderInvisibleElements));
+            return WatiNScope(scope).Elements.Filter(Find.ById(id) & Constraints.IsVisible(options.ConsiderInvisibleElements));
         }
 
-        public FrameCollection FindFrames(string locator, Scope scope, bool exact)
+        public FrameCollection FindFrames(string locator, Scope scope, Options options)
         {
-            var byTitle = exact ? Find.ByTitle(locator) : Find.ByTitle(t => t.Contains(locator));
-            var byText = exact ? Find.ByText(locator) : Find.ByText(t => t.Contains(locator));
+            var byTitle = options.Exact ? Find.ByTitle(locator) : Find.ByTitle(t => t.Contains(locator));
+            var byText = options.Exact ? Find.ByText(locator) : Find.ByText(t => t.Contains(locator));
 
             return WatiNDocumentScope(scope).Frames
-                    .Filter(byTitle | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", byText));
-
+                    .Filter((byTitle | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", byText)) &
+                            Constraints.IsVisible(options.ConsiderInvisibleElements));
         }
 
-        public LinkCollection FindLinks(string linkText, Scope scope, bool exact)
+        public LinkCollection FindLinks(string linkText, Scope scope, Options options)
         {
-            var byLinkText = exact
+            var byLinkText = options.Exact
                                  ? Find.ByText(linkText)
                                  : Find.ByText(t => t.Contains(linkText));
 
-            return WatiNScope(scope).Links.Filter(byLinkText & Constraints.IsVisible(scope.ConsiderInvisibleElements));
+            return WatiNScope(scope).Links.Filter(byLinkText & Constraints.IsVisible(options.ConsiderInvisibleElements));
         }
 
-        private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope, Regex textPattern = null)
+        private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
             // TODO: This is restricting by hidden items, but there are no tests for that!
-            var whereConstraints = Constraints.IsVisible(scope.ConsiderInvisibleElements);
+            var whereConstraints = Constraints.IsVisible(options.ConsiderInvisibleElements);
             Constraint querySelectorConstraint = Find.BySelector(cssSelector);
 
             if (textPattern != null)
@@ -74,22 +66,22 @@ namespace Coypu.Drivers.Watin
                    select element;
         }
 
-        public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, Scope scope, Regex text = null)
+        public IEnumerable<WatiN.Core.Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex text = null)
         {
-            return FindAllCssDeferred(cssSelector, scope, text);
+            return FindAllCssDeferred(cssSelector, scope, options, text);
         }
 
-        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, Scope scope)
+        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, Scope scope, Options options)
         {
-            var isVisible = Constraints.IsVisible(scope.ConsiderInvisibleElements);
+            var isVisible = Constraints.IsVisible(options.ConsiderInvisibleElements);
             return from element in WatiNScope(scope).XPath(xpath)
                    where element.Matches(isVisible)
                    select element;
         }
 
-        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, Scope scope)
+        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
-            return FindAllXPathDeferred(xpath, scope);
+            return FindAllXPathDeferred(xpath, scope, options);
         }
     }
 }

@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="Screenshots.cs" />
+    <Compile Include="sites\SinatraSite.cs" />
     <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
@@ -91,6 +92,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="sites\site_with_secure_resources.rb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Coypu.Drivers.Tests\html\frame1.htm">
@@ -101,6 +105,7 @@
     </Content>
     <Content Include="..\Coypu.Drivers.Tests\html\frameset.htm">
       <Link>html\frameset.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Coypu.Drivers.Tests\html\iFrame1.htm">
       <Link>html\iFrame1.htm</Link>
@@ -114,8 +119,17 @@
       <Link>html\InteractionTestsPage.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\Coypu.Drivers.Tests\html\popUp.htm">
+      <Link>html\popUp.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Coypu.Drivers.Tests\html\popUp2.htm">
+      <Link>html\popUp2.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\Coypu.Drivers.Tests\html\table.htm">
       <Link>html\table.htm</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Coypu.Drivers.Tests\html\test-card.jpg">
       <Link>html\test-card.jpg</Link>
@@ -129,10 +143,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj">
-      <Project>{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}</Project>
-      <Name>Coypu.Drivers.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj">
       <Project>{A4ADBB2C-A3C3-4984-8991-C39E991167DA}</Project>
       <Name>Coypu.Drivers.Watin</Name>
@@ -144,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
-    <Folder Include="sites\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" />

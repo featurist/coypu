@@ -17,7 +17,7 @@ namespace Coypu.Queries
 
         public override IEnumerable<SnapshotElementScope> Run()
         {
-            var allElements = DriverScope.FindAllCssNoPredicate(locator).ToArray();
+            var allElements = DriverScope.FindAllCssNoPredicate(locator, Options).ToArray();
             if (!predicate(allElements))
                 throw new MissingHtmlException("FindAllCss did not find elements matching your predicate");
 

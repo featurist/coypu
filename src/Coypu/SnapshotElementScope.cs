@@ -11,19 +11,22 @@ namespace Coypu
     /// </summary>
     public class SnapshotElementScope : DeferredElementScope
     {
-        private readonly ElementFound _elementFound;
+        private readonly ElementFound elementFound;
+        private readonly Options options;
 
-        internal SnapshotElementScope(ElementFound elementFound, DriverScope scope) : base(null, scope)
+        internal SnapshotElementScope(ElementFound elementFound, DriverScope scope, Options options)
+            : base(null, scope)
         {
-            _elementFound = elementFound;
+            this.elementFound = elementFound;
+            this.options = options;
         }
 
-        public override ElementFound Find()
+        public override ElementFound Now()
         {
-            if (_elementFound.Stale(options))
-                throw new MissingHtmlException(string.Format("Snapshot element scope has become stale. {0}",_elementFound));
-            
-            return _elementFound;
+            if (elementFound.Stale(options))
+                throw new MissingHtmlException(string.Format("Snapshot element scope has become stale. {0}", elementFound));
+
+            return elementFound;
         }
 
         internal override void Try(DriverAction action)

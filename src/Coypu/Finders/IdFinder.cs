@@ -5,7 +5,7 @@ namespace Coypu.Finders
 {
     internal class IdFinder : ElementFinder
     {
-        internal IdFinder(Driver driver, string locator, DriverScope scope) : base(driver, locator, scope) { }
+        internal IdFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsPartialTextMatching
         {
@@ -14,7 +14,7 @@ namespace Coypu.Finders
 
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            return Driver.FindId(Locator, Scope);
+            return Driver.FindId(Locator, Scope, options);
         }
 
         internal override string QueryDescription
