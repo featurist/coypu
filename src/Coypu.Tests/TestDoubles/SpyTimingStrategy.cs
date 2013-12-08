@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Coypu.Actions;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu.Tests.TestDoubles
 {
-    public class SpyRobustWrapper : RobustWrapper
+    public class SpyTimingStrategy : TimingStrategy
     {
         internal IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
 
@@ -28,7 +28,7 @@ namespace Coypu.Tests.TestDoubles
 
         public bool NoQueriesRan { get { return !queriesRan.Any(); } }
 
-        public T Robustly<T>(Query<T> query)
+        public T Synchronise<T>(Query<T> query)
         {
             queriesRan.Add(query);
 

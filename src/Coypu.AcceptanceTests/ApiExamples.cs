@@ -255,23 +255,6 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void Has_example()
-        {
-            Assert.IsTrue(browser.Has(browser.FindSection("Inspecting Content")));
-            Assert.IsFalse(browser.Has(browser.FindCss("#no-such-element")));
-        }
-
-        [Test]
-        public void HasNo_example()
-        {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"no-such-element\">asdf</div>'");
-            Assert.IsTrue(browser.HasNo(browser.FindCss("#no-such-element")));
-
-            ReloadTestPage();
-            Assert.IsFalse(browser.HasNo(browser.FindSection("Inspecting Content")));
-        }
-
-        [Test]
         public void HasContent_example()
         {
             Assert.That(browser, Shows.Content("This is what we are looking for"));
@@ -348,100 +331,6 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(browser, Shows.ContentContaining("Some", "text", "in", "a", "list"));
             Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.ContentContaining("this is not in the page", "in", "a", "list")));
-        }
-
-        [Test]
-        public void HasCss_example()
-        {
-            Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest"));
-            Assert.IsFalse(browser.HasCss("#inspectingContent ul#nope"));
-
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Css("#inspectingContent ul#nope")));
-        }
-
-        [Test]
-        public void HasCss_with_text_example()
-        {   
-            Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: "two"));
-            Assert.False(browser.HasCss("#inspectingContent ul#cssTest li", text: "fifty"));
-
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: "Not this text")));
-        }
-
-        [Test]
-        public void HasCss_with_text_matching_example()
-        {
-            Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: new Regex("wo.*$")));
-            Assert.False(browser.HasCss("#inspectingContent ul#cssTest li", text: new Regex("fifty")));
-
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Css("#inspectingContent ul#cssTest li", text: new Regex("Not this text"))));
-        }
-
-        [Test]
-        public void HasNoCss_example()
-        {
-            browser.ExecuteScript(
-                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-            
-            Assert.That(browser, Shows.No.Css("#inspectingContent ul#nope"));
-
-            ReloadTestPage();
-            Assert.IsFalse(browser.HasNoCss("#inspectingContent ul#cssTest"));
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("#inspectingContent ul#cssTest")));
-        }
-
-        [Test]
-        public void HasNoCss_with_text_example()
-        {
-            browser.ExecuteScript("document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-
-            Assert.That(browser, Shows.No.Css("li", text: "This is not in the page"));
-        }
-
-        [Test]
-        public void HasNoCss_with_text_negative_example()
-        {
-            browser.ExecuteScript("document.body.innerHTML = '<ul><li>Some</li></ul>'");
-
-            Assert.IsFalse(browser.HasNoCss("li", text: "Some"));
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", text: "Some")));
-        }
-
-        [Test]
-        public void HasNoCss_with_text_matching_example()
-        {
-            browser.ExecuteScript(
-                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-            Assert.That(browser, Shows.No.Css("li", text: new Regex("not in the page$")));
-        }
-
-        [Test]
-        public void HasNoCss_with_text_matching_negative_example()
-        {
-            browser.ExecuteScript("document.body.innerHTML = '<ul><li>Some</li></ul>'");
-
-            Assert.IsFalse(browser.HasNoCss("li", text: new Regex("^Some$")));
-            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.No.Css("li", new Regex("^Some$"))));
-        }
-
-        [Test]
-        public void HasXPath_example()
-        {
-            Assert.IsTrue(browser.HasXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
-
-            ReloadTestPage();
-            Assert.IsFalse(browser.HasXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
-        }
-
-        [Test]
-        public void HasNoXpath_example()
-        {
-            browser.ExecuteScript(
-                "document.body.innerHTML = '<div id=\"inspectingContent\"><ul id=\"nope\"><li>This is not in the page</li></ul></div>'");
-            Assert.IsTrue(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='nope']"));
-
-            ReloadTestPage();
-            Assert.IsFalse(browser.HasNoXPath("//*[@id='inspectingContent']//ul[@id='cssTest']"));
         }
 
         [Test]

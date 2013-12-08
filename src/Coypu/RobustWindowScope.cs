@@ -1,6 +1,6 @@
 using Coypu.Finders;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu
 {
@@ -16,7 +16,7 @@ namespace Coypu
 
         public override ElementFound Now()
         {
-            return robustWrapper.Robustly(new ElementQuery(this, options));
+            return timingStrategy.Synchronise(new ElementQuery(this, options));
         }
     }
 }

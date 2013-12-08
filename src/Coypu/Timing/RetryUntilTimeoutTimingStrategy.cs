@@ -4,13 +4,13 @@ using System.Threading;
 using Coypu.Actions;
 using Coypu.Queries;
 
-namespace Coypu.Robustness
+namespace Coypu.Timing
 {
-    public class RetryUntilTimeoutRobustWrapper : RobustWrapper
+    public class RetryUntilTimeoutTimingStrategy : TimingStrategy
     {
         public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
         {
-            var outcome = Robustly(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
+            var outcome = Synchronise(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
@@ -28,7 +28,7 @@ namespace Coypu.Robustness
             overrideTimeout = null;
         }
 
-        public TResult Robustly<TResult>(Query<TResult> query)
+        public TResult Synchronise<TResult>(Query<TResult> query)
         {
             var interval = query.RetryInterval;
             var timeout = Timeout(query);

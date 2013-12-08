@@ -55,7 +55,6 @@ namespace Coypu.Finders
         private bool ShouldTryPartialMatch(Options options, int count)
         {
             return SupportsPartialTextMatching &&
-                   options.Match == Match.Single &&
                    count == 0 &&
                    !options.Exact;
         }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -7,12 +8,12 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_text_of_selected_option()
         {
-            var textField = Driver.FindField("containerLabeledSelectFieldId", Root);
+            var textField = Field("containerLabeledSelectFieldId");
             textField.SelectedOption.should_be("select two option one");
 
             Driver.Select(textField, "select2value2");
 
-            textField = Driver.FindField("containerLabeledSelectFieldId", Root);
+            textField = Field("containerLabeledSelectFieldId");
             textField.SelectedOption.should_be("select two option two");
         }
     }

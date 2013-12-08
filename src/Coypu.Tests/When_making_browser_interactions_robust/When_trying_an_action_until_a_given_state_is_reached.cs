@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Coypu.Robustness;
+using Coypu.Timing;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
@@ -8,14 +8,14 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     [TestFixture]
     public class When_trying_an_action_until_a_given_state_is_reached
     {
-        private RetryUntilTimeoutRobustWrapper retryUntilTimeoutRobustWrapper;
+        private RetryUntilTimeoutTimingStrategy _retryUntilTimeoutTimingStrategy;
         private Options options;
 
         [SetUp]
         public void SetUp()
         {
             options = new Options {Timeout = TimeSpan.FromMilliseconds(200), RetryInterval = TimeSpan.FromMilliseconds(10)};
-            retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
+            _retryUntilTimeoutTimingStrategy = new RetryUntilTimeoutTimingStrategy();
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var retryInterval1 = TimeSpan.FromMilliseconds(10);
             var until = new AlwaysSucceedsPredicateQuery(true,TimeSpan.Zero,retryInterval1);
             
-            retryUntilTimeoutRobustWrapper.TryUntil(toTry, until,TimeSpan.FromMilliseconds(20), retryInterval1);
+            _retryUntilTimeoutTimingStrategy.TryUntil(toTry, until,TimeSpan.FromMilliseconds(20), retryInterval1);
 
             Assert.That(toTry.Tries, Is.EqualTo(1));
         }
@@ -37,7 +37,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var toTry = new CountTriesAction(options);
             var until = new ThrowsThenSubsequentlySucceedsPredicateQuery(true, true, 2, TimeSpan.FromMilliseconds(1000), options.RetryInterval);
 
-            retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, TimeSpan.FromMilliseconds(100), options.RetryInterval);
+            _retryUntilTimeoutTimingStrategy.TryUntil(toTry, until, TimeSpan.FromMilliseconds(100), options.RetryInterval);
 
             Assert.That(toTry.Tries, Is.EqualTo(3));
         }
@@ -50,7 +50,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var stopwatch = Stopwatch.StartNew();
             var timeout1 = TimeSpan.FromMilliseconds(200);
-            Assert.Throws<MissingHtmlException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, timeout1, options.RetryInterval));
+            Assert.Throws<MissingHtmlException>(() => _retryUntilTimeoutTimingStrategy.TryUntil(toTry, until, timeout1, options.RetryInterval));
 
             stopwatch.Stop();
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
@@ -70,7 +70,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var retryAfter = TimeSpan.FromMilliseconds(20);
             var until = new AlwaysThrowsPredicateQuery<TestException>(options.Timeout, retryAfter);
 
-            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.TryUntil(toTry, until, options.Timeout, options.RetryInterval));
+            Assert.Throws<TestException>(() => _retryUntilTimeoutTimingStrategy.TryUntil(toTry, until, options.Timeout, options.RetryInterval));
 
             Assert.That(toTry.Tries, Is.GreaterThan(1));
             Assert.That(toTry.Tries, Is.LessThan(12));

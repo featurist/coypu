@@ -11,10 +11,38 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Driver.FindWindows("popUpWindowName", Root).Text.should_contain("I am a pop up window");
-                Driver.FindLink("Open pop up window",Root);
+                OpenPopup();
+                var window = new WindowFinder(Driver, "popUpWindowName", Root, DefaultOptions).ResolveQuery();
+
+                window.Text.should_contain("I am a pop up window");
+
+                FindPopUpLink();
             }
+        }
+
+        private static void OpenPopup()
+        {
+            Driver.Click(FindPopUpLink());
+        }
+
+        private static void OpenPopup2()
+        {
+            Driver.Click(FindPopUp2Link());
+        }
+
+        private static ElementFound FindPopUpLink()
+        {
+            return new LinkFinder(Driver, "Open pop up window", Root, DefaultOptions).ResolveQuery();
+        }
+
+        private static ElementFound FindPopUp2Link()
+        {
+            return new LinkFinder(Driver, "Open pop up window 2", Root, DefaultOptions).ResolveQuery();
+        }
+
+        private static ElementFound FindPopUp()
+        {
+            return FindWindow("Pop Up Window");
         }
 
         [Test]
@@ -22,9 +50,10 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Driver.FindWindows("Pop Up Window", Root).Text.should_contain("I am a pop up window");
-                Driver.FindLink("Open pop up window", Root);
+                OpenPopup();
+                FindPopUp().Text.should_contain("I am a pop up window");
+
+                FindPopUpLink();
             }
         }
 
@@ -33,9 +62,9 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window 2", Root));
-                Driver.FindWindows("Pop Up Window", Root).Text.should_contain("I am a pop up window 2");
-                Driver.FindLink("Open pop up window 2", Root);
+                OpenPopup2();
+                FindPopUp().Text.should_contain("I am a pop up window 2");
+                FindPopUp2Link();
             }
         }
 
@@ -44,10 +73,11 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Driver.Click(Driver.FindLink("Open pop up window 2", Root));
-                Driver.FindWindows("Pop Up Window", Root).Text.should_contain("I am a pop up window");
-                Driver.FindLink("Open pop up window", Root);
+                OpenPopup();
+                OpenPopup2();
+                FindPopUp().Text.should_contain("I am a pop up window");
+                
+                FindPopUpLink();
             }
         }
 
@@ -57,13 +87,14 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
 
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
+                OpenPopup();
 
-                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root),
+                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null);
 
-                Driver.FindId("popUpButtonId", popUp);
-                Driver.FindLink("Open pop up window", Root);
+                new IdFinder(Driver, "popUpButtonId", popUp, DefaultOptions).ResolveQuery();
+
+                FindPopUpLink();
             }
         }
 
@@ -72,9 +103,14 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                Assert.Throws<MissingWindowException>(() => Driver.FindWindows("Not A Window", Root));
+                OpenPopup();
+                Assert.Throws<MissingWindowException>(() => FindWindow("Not A Window"));
             }
+        }
+
+        private static ElementFound FindWindow(string locator)
+        {
+            return new WindowFinder(Driver, locator, Root, DefaultOptions).ResolveQuery();
         }
 
         [Test]
@@ -82,12 +118,12 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root),
+                OpenPopup();
+                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null);
 
                 Driver.ExecuteScript("self.close();", popUp);
-                Assert.Throws<MissingWindowException>(() => Driver.FindWindows("Open pop up window", Root));
+                Assert.Throws<MissingWindowException>(() => FindPopUp());
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using System.Linq;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -9,10 +10,11 @@ namespace Coypu.Drivers.Tests
         public void Mouses_over_the_underlying_element()
 
         {
-            var element = Driver.FindId("hoverOnMeTest", Root);
-            Driver.FindId("hoverOnMeTest", Root).Text.should_be("Hover on me");
+            var element = Driver.FindId("hoverOnMeTest", Root, DefaultOptions).Single();
+            element.Text.should_be("Hover on me");
             Driver.Hover(element);
-            Driver.FindId("hoverOnMeTest", Root).Text.should_be("Hover on me - hovered");
+
+            Driver.FindId("hoverOnMeTest", Root, DefaultOptions).Single().Text.should_be("Hover on me - hovered");
         }
     }
 }

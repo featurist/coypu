@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -7,36 +8,36 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_value_of_text_input_field_with_id()
         {
-            var textField = Driver.FindField("containerLabeledTextInputFieldName", Root);
+            var textField = Field("containerLabeledTextInputFieldName");  
             Driver.Set(textField, "should be much quicker since it's set by js");
 
             textField.Value.should_be("should be much quicker since it's set by js");
 
-            var findAgain = Driver.FindField("containerLabeledTextInputFieldName", Root);
+            var findAgain = Field("containerLabeledTextInputFieldName");
             findAgain.Value.should_be("should be much quicker since it's set by js");
         }
 
         [Test]
         public void Sets_value_of_text_input_field_with_no_id()
         {
-            var textField = Driver.FindField("Field with no id", Root);
+            var textField = Field("Field with no id");
             Driver.Set(textField, "set by sendkeys");
 
             textField.Value.should_be("set by sendkeys");
 
-            var findAgain = Driver.FindField("Field with no id", Root);
+            var findAgain = Field("Field with no id");
             findAgain.Value.should_be("set by sendkeys");
         }
 
         [Test]
         public void Sets_value_of_text_input_field_with_no_type()
         {
-            var textField = Driver.FindField("fieldWithNoType", Root);
+            var textField = Field("fieldWithNoType");
             Driver.Set(textField, "set by sendkeys");
 
             textField.Value.should_be("set by sendkeys");
 
-            var findAgain = Driver.FindField("fieldWithNoType", Root);
+            var findAgain = Field("fieldWithNoType");
             findAgain.Value.should_be("set by sendkeys");
         }
 
@@ -44,12 +45,12 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_value_of_textarea_field()
         {
-            var textField = Driver.FindField("containerLabeledTextareaFieldName", Root);
+            var textField = Field("containerLabeledTextareaFieldName");
             Driver.Set(textField, "New textarea value");
 
             textField.Value.should_be("New textarea value");
 
-            var findAgain = Driver.FindField("containerLabeledTextareaFieldName", Root);
+            var findAgain = Field("containerLabeledTextareaFieldName");
             findAgain.Value.should_be("New textarea value");
         }
 
@@ -57,29 +58,29 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Selects_option_by_text_or_value()
         {
-            var textField = Driver.FindField("containerLabeledSelectFieldId", Root);
+            var textField = Field("containerLabeledSelectFieldId");
             textField.Value.should_be("select2value1");
 
             Driver.Select(textField, "select two option two");
 
-            var findAgain = Driver.FindField("containerLabeledSelectFieldId", Root);
+            var findAgain = Field("containerLabeledSelectFieldId");
             findAgain.Value.should_be("select2value2");
 
             Driver.Select(textField, "select2value1");
 
-            var andAgain = Driver.FindField("containerLabeledSelectFieldId", Root);
+            var andAgain = Field("containerLabeledSelectFieldId");
             andAgain.Value.should_be("select2value1");
         }
 
         [Test]
         public void Fires_change_event_when_selecting_an_option()
         {
-            var textField = Driver.FindField("containerLabeledSelectFieldId", Root);
+            var textField = Field("containerLabeledSelectFieldId");
             textField.Name.should_be("containerLabeledSelectFieldName");
 
             Driver.Select(textField, "select two option two");
 
-            Driver.FindField("containerLabeledSelectFieldId", Root).Name.should_be("containerLabeledSelectFieldName - changed");
+            Field("containerLabeledSelectFieldId", Root).Name.should_be("containerLabeledSelectFieldName - changed");
         }
     }
 }

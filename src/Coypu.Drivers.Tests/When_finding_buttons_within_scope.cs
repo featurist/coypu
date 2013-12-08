@@ -12,29 +12,29 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public void SetUpScope()
         {
-            scope1 = new DriverScope(new SessionConfiguration(), new IdFinder(Driver, "scope1", Root), Driver,null,null,null);
-            scope2 = new DriverScope(new SessionConfiguration(), new IdFinder(Driver, "scope2", Root), Driver,null,null,null);
+            scope1 = new DriverScope(DefaultSessionConfiguration, new IdFinder(Driver, "scope1", Root, DefaultOptions), Driver,null,null,null);
+            scope2 = new DriverScope(DefaultSessionConfiguration, new IdFinder(Driver, "scope2", Root, DefaultOptions), Driver,null,null,null);
         }
 
         [Test]
         public void Finds_button_by_name()
         {
-            new ButtonFinder(Driver,"scopedButtonName", scope1).Find().Id.should_be("scope1ButtonId");
-            new ButtonFinder(Driver, "scopedButtonName", scope2).Find().Id.should_be("scope2ButtonId");
+            Button("scopedButtonName", scope1).Id.should_be("scope1ButtonId");
+            Button( "scopedButtonName", scope2).Id.should_be("scope2ButtonId");
         }
 
         [Test]
         public void Finds_input_button_by_value()
         {
-            new ButtonFinder(Driver, "scoped input button", scope1).Find().Id.should_be("scope1InputButtonId");
-            new ButtonFinder(Driver, "scoped input button", scope2).Find().Id.should_be("scope2InputButtonId");
+            Button( "scoped input button", scope1).Id.should_be("scope1InputButtonId");
+            Button( "scoped input button", scope2).Id.should_be("scope2InputButtonId");
         }
 
         [Test]
         public void Finds_button_by_text()
         {
-            new ButtonFinder(Driver, "scoped button", scope1).Find().Id.should_be("scope1ButtonId");
-            new ButtonFinder(Driver, "scoped button", scope2).Find().Id.should_be("scope2ButtonId");
+            Button( "scoped button", scope1).Id.should_be("scope1ButtonId");
+            Button( "scoped button", scope2).Id.should_be("scope2ButtonId");
         }
     }
 }

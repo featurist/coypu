@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -6,14 +7,14 @@ namespace Coypu.Drivers.Tests
     {
         [Test]
         public void Finds_radio_button_by_value() {
-            Driver.FindField("radio field one val", Root).Name.should_be("forLabeledRadioFieldName");
-            Driver.FindField("radio field two val", Root).Name.should_be("containerLabeledRadioFieldName");
+            Field("radio field one val").Name.should_be("forLabeledRadioFieldName");
+            Field("radio field two val").Name.should_be("containerLabeledRadioFieldName");
         }
 
         [Test]
         public void Finds_checkbox_by_value() {
-            Driver.FindField("checkbox one val", Root).Name.should_be("checkboxByValueOneFieldName");
-            Driver.FindField("checkbox two val", Root).Name.should_be("checkboxByValueTwoFieldName");
+            Field("checkbox one val").Name.should_be("checkboxByValueOneFieldName");
+            Field("checkbox two val").Name.should_be("checkboxByValueTwoFieldName");
         }
 
     }

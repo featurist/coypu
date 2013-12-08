@@ -27,7 +27,7 @@ namespace Coypu.Tests.When_making_direct_web_requests
 
             driver = new FakeDriver();
             SessionConfiguration = new SessionConfiguration();
-            browserSession = TestSessionBuilder.Build(SessionConfiguration, driver, new SpyRobustWrapper(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
+            browserSession = TestSessionBuilder.Build(SessionConfiguration, driver, new SpyTimingStrategy(), new FakeWaiter(), _stubRestrictedResourceDownloader, stubUrlBuilder);
         }
 
         [Test]

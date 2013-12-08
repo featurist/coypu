@@ -9,11 +9,11 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Runs_the_script_in_the_browser()
         {
-            new ButtonFinder(Driver,"firstButtonId", Root).Find().Text.should_be("first button");
+            Button("firstButtonId").Text.should_be("first button");
 
             Driver.ExecuteScript("document.getElementById('firstButtonId').innerHTML = 'script executed';", Root);
 
-            new ButtonFinder(Driver,"firstButtonId", Root).Find().Text.should_be("script executed");
+            Button("firstButtonId").Text.should_be("script executed");
         }
 
 

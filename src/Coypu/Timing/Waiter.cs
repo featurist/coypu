@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Coypu.Robustness
+namespace Coypu.Timing
 {
     public interface Waiter
     {

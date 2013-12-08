@@ -2,11 +2,11 @@
 using Coypu.Actions;
 using Coypu.Queries;
 
-namespace Coypu.Robustness
+namespace Coypu.Timing
 {
-    public interface RobustWrapper
+    public interface TimingStrategy
     {
-        T Robustly<T>(Query<T> query);
+        T Synchronise<T>(Query<T> query);
         void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry);
         bool ZeroTimeout { get; set; }
         void SetOverrideTimeout(TimeSpan timeout);

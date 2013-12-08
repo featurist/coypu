@@ -18,7 +18,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected void Queries_robustly<T>(bool stubResult, Func<T, Options, bool> subject, Action<T, bool, DriverScope> stub, T locator)
         {
             stub(locator, stubResult, browserSession);
-            spyRobustWrapper.StubQueryResult(true, !stubResult);
+            SpyTimingStrategy.StubQueryResult(true, !stubResult);
 
             var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
 
@@ -36,7 +36,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected void Queries_robustly_reversing_result<T>(bool stubResult, Func<T, Options, bool> subject, Action<T, bool, DriverScope> stub, T locator)
         {
             stub(locator, stubResult, browserSession);
-            spyRobustWrapper.StubQueryResult(true, !stubResult);
+            SpyTimingStrategy.StubQueryResult(true, !stubResult);
 
             var actualImmediateResult = subject(locator,sessionConfiguration);
 

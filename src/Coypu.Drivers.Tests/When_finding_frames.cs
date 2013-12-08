@@ -13,22 +13,22 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_by_header_text()
         {
-            Driver.FindFrames("I am frame one", Root).Name.should_be("frame1");
-            Driver.FindFrames("I am frame two", Root).Name.should_be("frame2");
+            Frame("I am frame one").Name.should_be("frame1");
+            Frame("I am frame two").Name.should_be("frame2");
         }
 
         [Test]
         public void Finds_by_name()
         {
-            Driver.FindFrames("frame1", Root).Name.should_be("frame1");
-            Driver.FindFrames("frame2", Root).Name.should_be("frame2");
+            Frame("frame1").Name.should_be("frame1");
+            Frame("frame2").Name.should_be("frame2");
         }
 
         [Test]
         public void Finds_by_id()
         {
-            Driver.FindFrames("frame1id", Root).Name.should_be("frame1");
-            Driver.FindFrames("frame2id", Root).Name.should_be("frame2");
+            Frame("frame1id").Name.should_be("frame1");
+            Frame("frame2id").Name.should_be("frame2");
         }
     }
 }

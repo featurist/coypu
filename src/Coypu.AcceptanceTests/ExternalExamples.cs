@@ -80,8 +80,8 @@ namespace Coypu.AcceptanceTests
         {
             browser.Visit("http://carbuzz.heroku.com/car_search");
 
-            Console.WriteLine(browser.Has(browser.FindSection("Make")));
-            Console.WriteLine(browser.HasNo(browser.FindSection("Bake")));
+            Console.WriteLine(browser.FindSection("Make").Exists());
+            Console.WriteLine(browser.FindSection("Bake").Exists());
 
             browser.Check("Audi");
             browser.Check("BMW");

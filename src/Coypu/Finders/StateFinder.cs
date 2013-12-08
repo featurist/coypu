@@ -1,36 +1,36 @@
 ﻿using System;
 using System.Linq;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu.Finders
 {
     internal class StateFinder
     {
-        private readonly RobustWrapper robustWrapper;
+        private readonly TimingStrategy timingStrategy;
 
-        public StateFinder(RobustWrapper robustWrapper)
+        public StateFinder(TimingStrategy timingStrategy)
         {
-            this.robustWrapper = robustWrapper;
+            this.timingStrategy = timingStrategy;
         }
 
         internal State FindState(State[] states, Scope scope, Options options)
         {
             var query = new LambdaPredicateQuery(() =>
             {
-                var was = robustWrapper.ZeroTimeout;
-                robustWrapper.ZeroTimeout = true;
+                var was = timingStrategy.ZeroTimeout;
+                timingStrategy.ZeroTimeout = true;
                 try
                 {
                     return ((Func<bool>)(() => states.Any(s => s.CheckCondition())))();
                 }
                 finally
                 {
-                    robustWrapper.ZeroTimeout = was;
+                    timingStrategy.ZeroTimeout = was;
                 }
             }, options);
 
-            var foundState = robustWrapper.Robustly(query);
+            var foundState = timingStrategy.Synchronise(query);
 
             if (!foundState)
                 throw new MissingHtmlException("None of the given states was reached within the configured timeout.");

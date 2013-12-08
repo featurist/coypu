@@ -151,9 +151,6 @@
     <Compile Include="When_inspecting_dialog_text.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="When_inspecting_xpath.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="When_interacting_with_dialogs.cs">
       <SubType>Code</SubType>
     </Compile>

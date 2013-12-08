@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -7,7 +8,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_value_of_text_input_field_with_id()
         {
-            var textField = Driver.FindField("containerLabeledTextInputFieldName", Root);
+            var textField = Field("containerLabeledTextInputFieldName");
             textField.Value.should_be("text input field two val");
 
             Driver.SendKeys(textField, " - send keys without any click, clear first, etc");

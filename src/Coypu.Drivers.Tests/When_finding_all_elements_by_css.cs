@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
  
             {
                 const string shouldNotFind = "#inspectingContent p.css-missing-test";
-                Assert.That(Driver.FindAllCss(shouldNotFind,Root), Is.Empty);
+                Assert.That(Driver.FindAllCss(shouldNotFind,Root,DefaultOptions), Is.Empty);
             }
 
             
@@ -21,7 +21,7 @@ namespace Coypu.Drivers.Tests
   
             {
                 const string shouldFind = "#inspectingContent ul#cssTest li";
-                var all = Driver.FindAllCss(shouldFind,Root);
+                var all = Driver.FindAllCss(shouldFind,Root,DefaultOptions);
                 all.Count().should_be(3);
                 all.ElementAt(1).Text.should_be("two");
                 all.ElementAt(2).Text.should_be("Me! Pick me!");

@@ -1,6 +1,6 @@
 ﻿using System;
 using Coypu.Finders;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu.Actions
 {

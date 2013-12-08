@@ -1,5 +1,5 @@
 ﻿using System;
-using Coypu.Robustness;
+using Coypu.Timing;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust
@@ -7,14 +7,14 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     [TestFixture]
     public class When_querying_for_an_expected_result
     {
-        private RetryUntilTimeoutRobustWrapper retryUntilTimeoutRobustWrapper;
+        private RetryUntilTimeoutTimingStrategy _retryUntilTimeoutTimingStrategy;
         private TimeSpan retryInterval;
 
         [SetUp]
         public void SetUp()
         {
             retryInterval = TimeSpan.FromMilliseconds(10);
-            retryUntilTimeoutRobustWrapper = new RetryUntilTimeoutRobustWrapper();
+            _retryUntilTimeoutTimingStrategy = new RetryUntilTimeoutTimingStrategy();
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             var expectedResult = new object();
 
-            var actualResult = retryUntilTimeoutRobustWrapper.Robustly(new AlwaysSucceedsQuery<object>(expectedResult, expectedResult, TimeSpan.FromMilliseconds(200), retryInterval));
+            var actualResult = _retryUntilTimeoutTimingStrategy.Synchronise(new AlwaysSucceedsQuery<object>(expectedResult, expectedResult, TimeSpan.FromMilliseconds(200), retryInterval));
 
             Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
@@ -39,7 +39,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var query = new AlwaysSucceedsQuery<object>(unexpectedResult, expectedResult, expectedTimeout, TimeSpan.FromMilliseconds(retryIntervalMS));
             
-            var actualResult = retryUntilTimeoutRobustWrapper.Robustly(query);
+            var actualResult = _retryUntilTimeoutTimingStrategy.Synchronise(query);
 
             Assert.That(actualResult, Is.EqualTo(unexpectedResult));
             Assert.That((int) query.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryIntervalMS,
@@ -49,7 +49,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_exceptions_are_always_thrown_It_rethrows_eventually()
         {
-            Assert.Throws<TestException>(() => retryUntilTimeoutRobustWrapper.Robustly(new AlwaysThrowsQuery<object, TestException>(TimeSpan.FromMilliseconds(200),retryInterval)));
+            Assert.Throws<TestException>(() => _retryUntilTimeoutTimingStrategy.Synchronise(new AlwaysThrowsQuery<object, TestException>(TimeSpan.FromMilliseconds(200),retryInterval)));
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes, TimeSpan.FromMilliseconds(100),retryInterval);
 
-            Assert.That(retryUntilTimeoutRobustWrapper.Robustly(query), Is.EqualTo(expectedResult));
+            Assert.That(_retryUntilTimeoutTimingStrategy.Synchronise(query), Is.EqualTo(expectedResult));
             Assert.That(query.Tries, Is.EqualTo(throwsHowManyTimes + 1));
         }
 
@@ -68,7 +68,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             var throwsNotSupported = new AlwaysThrowsQuery<object, NotSupportedException>(TimeSpan.FromMilliseconds(200),retryInterval);
 
-            Assert.Throws<NotSupportedException>(() => retryUntilTimeoutRobustWrapper.Robustly(throwsNotSupported));
+            Assert.Throws<NotSupportedException>(() => _retryUntilTimeoutTimingStrategy.Synchronise(throwsNotSupported));
             Assert.That(throwsNotSupported.Tries, Is.EqualTo(1));
         }
 
@@ -84,7 +84,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2, expectedTimeout,retryInterval);
 
-            Assert.That(retryUntilTimeoutRobustWrapper.Robustly(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
+            Assert.That(_retryUntilTimeoutTimingStrategy.Synchronise(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
             Assert.That(throwsTwiceTimesThenReturnOppositeResult.Tries, Is.GreaterThanOrEqualTo(3));
             Assert.That((int) throwsTwiceTimesThenReturnOppositeResult.LastCall, Is.InRange(expectedTimeout.Milliseconds - retryIntervalMS,
                                                                                       expectedTimeout.Milliseconds + retryIntervalMS));

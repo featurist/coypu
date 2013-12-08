@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -8,7 +9,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Exposes_element_attributes()
         {
-            var formWithAttributesToTest = Driver.FindId("attributeTestForm", Root);
+            var formWithAttributesToTest = new IdFinder(Driver,"attributeTestForm", Root, DefaultOptions).ResolveQuery();
             formWithAttributesToTest["id"].should_be("attributeTestForm");
             formWithAttributesToTest["method"].should_be("post");
             formWithAttributesToTest["action"].should_be("http://somesite.com/action.htm");

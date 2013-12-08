@@ -17,7 +17,7 @@ namespace Coypu
 
         public override ElementFound Now()
         {
-            return robustWrapper.Robustly(new ElementQuery(this, options));
+            return timingStrategy.Synchronise(new ElementQuery(this, options));
         }
 
         internal override void Try(DriverAction action)

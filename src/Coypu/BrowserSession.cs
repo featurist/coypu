@@ -1,6 +1,6 @@
 ﻿using System;
 using Coypu.Finders;
-using Coypu.Robustness;
+using Coypu.Timing;
 using Coypu.WebRequests;
 
 namespace Coypu
@@ -30,15 +30,15 @@ namespace Coypu
         public BrowserSession(SessionConfiguration SessionConfiguration)
             : this(new ActivatorDriverFactory(),
                    SessionConfiguration,
-                   new RetryUntilTimeoutRobustWrapper(),
+                   new RetryUntilTimeoutTimingStrategy(),
                    new StopwatchWaiter(),
                    new WebClientWithCookies(),
                    new FullyQualifiedUrlBuilder())
         {
         }
 
-        internal BrowserSession(DriverFactory driver, SessionConfiguration SessionConfiguration, RobustWrapper robustWrapper, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
-            : base(SessionConfiguration, null, driver.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), robustWrapper, waiter, urlBuilder)
+        internal BrowserSession(DriverFactory driver, SessionConfiguration SessionConfiguration, TimingStrategy timingStrategy, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
+            : base(SessionConfiguration, null, driver.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), timingStrategy, waiter, urlBuilder)
         {
             this.restrictedResourceDownloader = restrictedResourceDownloader;
         }

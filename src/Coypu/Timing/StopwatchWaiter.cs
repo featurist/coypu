@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Coypu.Robustness
+namespace Coypu.Timing
 {
     internal class StopwatchWaiter : Waiter
     {

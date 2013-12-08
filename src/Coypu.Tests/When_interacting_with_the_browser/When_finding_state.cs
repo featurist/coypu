@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using Coypu.Tests.When_making_browser_interactions_robust;
@@ -13,10 +13,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     public class When_finding_state
     {
 
-        internal BrowserSession BuildSession(RobustWrapper robustWrapper)
+        internal BrowserSession BuildSession(TimingStrategy timingStrategy)
         {
             SessionConfiguration = new SessionConfiguration();
-            return TestSessionBuilder.Build(SessionConfiguration,new FakeDriver(), robustWrapper, new FakeWaiter(), null, null);
+            return TestSessionBuilder.Build(SessionConfiguration,new FakeDriver(), timingStrategy, new FakeWaiter(), null, null);
         }
 
         private SessionConfiguration SessionConfiguration;
@@ -39,7 +39,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state3 = new State(new LambdaQuery<bool>(() => true));
             state3.CheckCondition();
 
-            var robustWrapper = new SpyRobustWrapper();
+            var robustWrapper = new SpyTimingStrategy();
             robustWrapper.StubQueryResult(true, true);
 
             var session = BuildSession(robustWrapper);
@@ -64,7 +64,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
             var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
             
-            var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
+            var session = BuildSession(new ImmediateSingleExecutionFakeTimingStrategy());
             var foundState = session.FindState(state1, state2, state3);
 
             Assert.That(foundState, Is.SameAs(state1));
@@ -77,7 +77,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
             var state3 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
-            var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
+            var session = BuildSession(new ImmediateSingleExecutionFakeTimingStrategy());
             var foundState = session.FindState(state1, state2, state3);
 
             Assert.That(foundState, Is.SameAs(state2));
@@ -90,7 +90,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
             var state3 = new State(new AlwaysSucceedsQuery<bool>(true, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
-            var session = BuildSession(new ImmediateSingleExecutionFakeRobustWrapper());
+            var session = BuildSession(new ImmediateSingleExecutionFakeTimingStrategy());
             var foundState = session.FindState(state1, state2, state3);
 
             Assert.That(foundState, Is.SameAs(state3));
@@ -99,7 +99,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_uses_a_zero_timeout_when_evaluating_the_conditions()
         {
-            var robustWrapper = new ImmediateSingleExecutionFakeRobustWrapper();
+            var robustWrapper = new ImmediateSingleExecutionFakeTimingStrategy();
             var zeroTimeout1 = false;
             var zeroTimeout2 = false;
             var state1 = new State(new LambdaQuery<bool>(() =>
@@ -129,7 +129,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var state1 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
             var state2 = new State(new AlwaysSucceedsQuery<bool>(false, true, TimeSpan.Zero, SessionConfiguration.RetryInterval));
 
-            var robustWrapper = new SpyRobustWrapper();
+            var robustWrapper = new SpyTimingStrategy();
             robustWrapper.StubQueryResult(true, false);
             
             var session = BuildSession(robustWrapper);

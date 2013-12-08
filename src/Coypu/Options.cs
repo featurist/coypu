@@ -41,6 +41,38 @@ namespace Coypu
         };
 
         /// <summary>
+        /// Ensure only one match exists
+        /// </summary>
+        public static Options Single = new Options
+        {
+            Match = Match.Single
+        };
+
+        /// <summary>
+        /// Pick the first matching element, prefering exact to partial matches
+        /// </summary>
+        public static Options First = new Options
+        {
+            Match = Match.First
+        };
+
+        /// <summary>
+        /// Match by exact text
+        /// </summary>
+        public static Options ExactTrue = new Options
+        {
+            Exact = true
+        };
+
+        /// <summary>
+        /// Match by partial text
+        /// </summary>
+        public static Options ExactFalse = new Options
+        {
+            Exact = false
+        };
+
+        /// <summary>
         /// <para>When retrying, how long to wait for elements to appear or actions to complete without error.</para>
         /// <para>Default: 1sec</para>
         /// </summary>

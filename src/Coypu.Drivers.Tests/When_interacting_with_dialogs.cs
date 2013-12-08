@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Trigger an alert", Root));
+                Driver.Click(Link("Trigger an alert"));
                 Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_true();
                 Driver.AcceptModalDialog(Root);
                 Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_false();
@@ -25,7 +25,7 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.Click(Link("Trigger a confirm"));
                 Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
                 Driver.AcceptModalDialog(Root);
                 Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
@@ -37,9 +37,9 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.Click(Link("Trigger a confirm"));
                 Driver.AcceptModalDialog(Root);
-                Driver.FindLink("Trigger a confirm - accepted", Root).should_not_be_null();
+                Link("Trigger a confirm - accepted", Root).should_not_be_null();
             }
         }
 
@@ -49,7 +49,7 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.Click(Link("Trigger a confirm"));
                 Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
                 Driver.CancelModalDialog(Root);
                 Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
@@ -61,9 +61,10 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Trigger a confirm", Root));
+                Driver.Click(Link("Trigger a confirm"));
                 Driver.CancelModalDialog(Root);
-                Driver.FindLink("Trigger a confirm - cancelled", Root).should_not_be_null();
+
+                Link("Trigger a confirm - cancelled");
             }
         }
 
@@ -72,8 +73,8 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+                Driver.Click(Link("Open pop up window"));
+                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null);
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},500);", Root);
@@ -90,8 +91,8 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
-                Driver.Click(Driver.FindLink("Open pop up window", Root));
-                var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+                Driver.Click(Link("Open pop up window"));
+                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null);
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('confirmTriggerLink').click();},500);", Root);

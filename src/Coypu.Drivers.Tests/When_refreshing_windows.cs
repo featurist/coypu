@@ -15,8 +15,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void RefreshesCorrectWindowScope()
         {
-            Driver.Click(Driver.FindLink("Open pop up window", Root));
-            var popUp = new DriverScope(new SessionConfiguration(), new WindowFinder(Driver, "Pop Up Window", Root), Driver, null, null, null);
+            Driver.Click(Link("Open pop up window"));
+            var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver,"Pop Up Window",Root,DefaultOptions), Driver, null, null, null);
 
             try
             {

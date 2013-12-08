@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Coypu.Robustness;
+using Coypu.Timing;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_making_browser_interactions_robust

@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu
 {
@@ -13,8 +13,8 @@ namespace Coypu
     /// </summary>
     public class BrowserWindow : DriverScope
     {
-        internal BrowserWindow(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder) 
-            : base(SessionConfiguration, elementFinder, driver, robustWrapper, waiter, urlBuilder)
+        internal BrowserWindow(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder) 
+            : base(SessionConfiguration, elementFinder, driver, timingStrategy, waiter, urlBuilder)
         {
         }
 

@@ -5,7 +5,7 @@ using Coypu.Actions;
 using Coypu.Drivers;
 using Coypu.Finders;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu
 {
@@ -15,28 +15,28 @@ namespace Coypu
         internal readonly ElementFinder elementFinder;
 
         protected Driver driver;
-        protected RobustWrapper robustWrapper;
+        protected TimingStrategy timingStrategy;
         protected readonly Waiter waiter;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
         private ElementFound element;
 
-        internal DriverScope(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, RobustWrapper robustWrapper, Waiter waiter, UrlBuilder urlBuilder)
+        internal DriverScope(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder)
         {
             this.elementFinder = elementFinder ?? new DocumentElementFinder(driver);
             this.SessionConfiguration = SessionConfiguration;
             this.driver = driver;
-            this.robustWrapper = robustWrapper;
+            this.timingStrategy = timingStrategy;
             this.waiter = waiter;
             this.urlBuilder = urlBuilder;
-            stateFinder = new StateFinder(robustWrapper);
+            stateFinder = new StateFinder(timingStrategy);
         }
 
         internal DriverScope(ElementFinder elementFinder, DriverScope outerScope)
         {
             this.elementFinder = elementFinder;
             driver = outerScope.driver;
-            robustWrapper = outerScope.robustWrapper;
+            timingStrategy = outerScope.timingStrategy;
             urlBuilder = outerScope.urlBuilder;
             stateFinder = outerScope.stateFinder;
             waiter = outerScope.waiter;
@@ -122,12 +122,12 @@ namespace Coypu
 
         public FillInWith FillIn(string locator, Options options = null) 
         {
-            return new FillInWith(FindField(locator, MergeWithSession(options)), driver, robustWrapper, MergeWithSession(options));
+            return new FillInWith(FindField(locator, MergeWithSession(options)), driver, timingStrategy, MergeWithSession(options));
         }
 
         public SelectFrom Select(string option, Options options = null)
         {
-            return new SelectFrom(option, driver, robustWrapper, this, MergeWithSession(options));
+            return new SelectFrom(option, driver, timingStrategy, this, MergeWithSession(options));
         }
 
         public bool HasContent(string text, Options options = null)
@@ -240,12 +240,12 @@ namespace Coypu
 
         public void RetryUntilTimeout(Action action, Options options = null)
         {
-            robustWrapper.Robustly(new LambdaBrowserAction(action, MergeWithSession(options)));
+            timingStrategy.Synchronise(new LambdaBrowserAction(action, MergeWithSession(options)));
         }
 
         public TResult RetryUntilTimeout<TResult>(Func<TResult> function, Options options = null)
         {
-            return robustWrapper.Robustly(new LambdaQuery<TResult>(function, MergeWithSession(options)));
+            return timingStrategy.Synchronise(new LambdaQuery<TResult>(function, MergeWithSession(options)));
         }
 
         public void RetryUntilTimeout(BrowserAction action)
@@ -260,23 +260,23 @@ namespace Coypu
 
         public T Query<T>(Func<T> query, T expecting, Options options = null)
         {
-            return robustWrapper.Robustly(new LambdaQuery<T>(query, expecting, MergeWithSession(options)));
+            return timingStrategy.Synchronise(new LambdaQuery<T>(query, expecting, MergeWithSession(options)));
         }
 
         public T Query<T>(Query<T> query)
         {
-            return robustWrapper.Robustly(query);
+            return timingStrategy.Synchronise(query);
         }
 
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null)
         {
             var mergedOptions = MergeWithSession(options);
-            robustWrapper.TryUntil(new LambdaBrowserAction(tryThis, MergeWithSession(options)), new LambdaPredicateQuery(until, mergedOptions), mergedOptions.Timeout, waitBeforeRetry);
+            timingStrategy.TryUntil(new LambdaBrowserAction(tryThis, MergeWithSession(options)), new LambdaPredicateQuery(until, mergedOptions), mergedOptions.Timeout, waitBeforeRetry);
         }
 
         public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
         {
-            robustWrapper.TryUntil(tryThis, until, MergeWithSession(options).Timeout, waitBeforeRetry);
+            timingStrategy.TryUntil(tryThis, until, MergeWithSession(options).Timeout, waitBeforeRetry);
         }
 
         public State FindState(State[] states, Options options = null)

@@ -99,9 +99,9 @@ namespace Coypu.AcceptanceTests
             var timeToClickManuallyInIE = new Options {Timeout = TimeSpan.FromSeconds(10)};
 
             var popUp = browser.FindWindow("Pop Up Window");
-            var button = popUp.FindButton("scoped button");
+            var button = popUp.FindButton("scoped button", timeToClickManuallyInIE);
 
-            Assert.That(button.Exists(timeToClickManuallyInIE));
+            Assert.That(button.Exists());
             Assert.That(popUp.HasContent("I am a pop up window"));
 
             CloseWindow(popUp);

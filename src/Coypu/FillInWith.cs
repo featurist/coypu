@@ -1,21 +1,21 @@
 ﻿using Coypu.Actions;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu
 {
     public class FillInWith
     {
         private readonly Driver driver;
-        private readonly RobustWrapper robustWrapper;
+        private readonly TimingStrategy timingStrategy;
         private readonly Options options;
         private readonly ElementScope element;
 
 
-        internal FillInWith(ElementScope element, Driver driver, RobustWrapper robustWrapper, Options options)
+        internal FillInWith(ElementScope element, Driver driver, TimingStrategy timingStrategy, Options options)
         {
             this.element = element;
             this.driver = driver;
-            this.robustWrapper = robustWrapper;
+            this.timingStrategy = timingStrategy;
             this.options = options;
         }
 
@@ -26,7 +26,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void With(string value)
         {
-            robustWrapper.Robustly(new FillIn(driver, element, value, options));
+            timingStrategy.Synchronise(new FillIn(driver, element, value, options));
         }
     }
 }

@@ -64,7 +64,7 @@
     <Compile Include="TestDoubles\StubWebResources.cs" />
     <Compile Include="TestDoubles\StubWebResponse.cs" />
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
-    <Compile Include="TestDoubles\ImmediateSingleExecutionFakeRobustWrapper.cs" />
+    <Compile Include="TestDoubles\ImmediateSingleExecutionFakeTimingStrategy.cs" />
     <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
@@ -91,7 +91,7 @@
     </Compile>
     <Compile Include="When_starting_and_ending_sessions.cs" />
     <Compile Include="When_interacting_with_the_browser\When_visiting.cs" />
-    <Compile Include="TestDoubles\SpyRobustWrapper.cs" />
+    <Compile Include="TestDoubles\SpyTimingStrategy.cs" />
     <Compile Include="TestDoubles\FakeDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDoubles\StubElement.cs" />

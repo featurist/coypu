@@ -62,7 +62,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var window = new StubElement { Text = actualContent };
             driver.StubCurrentWindow(window);
 
-            spyRobustWrapper.StubQueryResult(true, !stubResult);
+            SpyTimingStrategy.StubQueryResult(true, !stubResult);
 
             var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
             var options = new SessionConfiguration { Timeout = individualTimeout };

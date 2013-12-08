@@ -42,7 +42,14 @@ namespace Coypu.Drivers.Selenium
                 }
             }
 
-            webDriver.SwitchTo().Window(currentHandle);
+            try
+            {
+                webDriver.SwitchTo().Window(currentHandle);
+            }
+            catch (NoSuchWindowException ex)
+            {
+                throw new MissingWindowException("The active window was closed. Coypu should prevent this by ensuring fresh scope higher up.", ex);
+            }
             return matchingWindowHandles;
         }
 

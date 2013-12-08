@@ -1,6 +1,6 @@
 using System;
 using Coypu.Actions;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu.Queries
 {
@@ -9,17 +9,17 @@ namespace Coypu.Queries
         private readonly BrowserAction tryThis;
         private readonly PredicateQuery until;
         private readonly TimeSpan waitBeforeRetry;
-        private readonly RobustWrapper robustWrapper;
+        private readonly TimingStrategy timingStrategy;
         public TimeSpan RetryInterval { get; private set; }
 
         public TimeSpan Timeout { get; private set; }
 
-        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, RobustWrapper robustWrapper)
+        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, TimingStrategy timingStrategy)
         {
             this.tryThis = tryThis;
             this.until = until;
             this.waitBeforeRetry = waitBeforeRetry;
-            this.robustWrapper = robustWrapper;
+            this.timingStrategy = timingStrategy;
             RetryInterval = retryInterval;
             Timeout = overallTimeout;
         }
@@ -30,12 +30,12 @@ namespace Coypu.Queries
 
             try
             {
-                robustWrapper.SetOverrideTimeout(waitBeforeRetry);
+                timingStrategy.SetOverrideTimeout(waitBeforeRetry);
                 return until.Predicate();
             }
             finally
             {
-                robustWrapper.ClearOverrideTimeout();
+                timingStrategy.ClearOverrideTimeout();
             }
         }
 

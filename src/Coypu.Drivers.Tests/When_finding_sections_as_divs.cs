@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSpec;
+using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
 {
@@ -7,45 +8,45 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_by_h1_text()
         {
-            Driver.FindSection("Div Section One h1", Root).Id.should_be("divSectionOne");
-            Driver.FindSection("Div Section Two h1", Root).Id.should_be("divSectionTwo");
+            Section("Div Section One h1").Id.should_be("divSectionOne");
+            Section("Div Section Two h1").Id.should_be("divSectionTwo");
         }
 
         [Test]
         public void Finds_by_h2_text()
         {
-            Driver.FindSection("Div Section One h2", Root).Id.should_be("divSectionOne");
-            Driver.FindSection("Div Section Two h2", Root).Id.should_be("divSectionTwo");
+            Section("Div Section One h2").Id.should_be("divSectionOne");
+            Section("Div Section Two h2").Id.should_be("divSectionTwo");
         }
 
         [Test]
         public void Finds_by_h3_text()
         {
-            Driver.FindSection("Div Section One h3", Root).Id.should_be("divSectionOne");
-            Driver.FindSection("Div Section Two h3", Root).Id.should_be("divSectionTwo");
+            Section("Div Section One h3").Id.should_be("divSectionOne");
+            Section("Div Section Two h3").Id.should_be("divSectionTwo");
         }
 
         [Test]
         public void Finds_by_h6_text()
         {
-            Driver.FindSection("Div Section One h6", Root).Id.should_be("divSectionOne");
-            Driver.FindSection("Div Section Two h6", Root).Id.should_be("divSectionTwo");
+            Section("Div Section One h6").Id.should_be("divSectionOne");
+            Section("Div Section Two h6").Id.should_be("divSectionTwo");
         }
 
 
         [Test]
         public void Finds_by_h2_text_within_child_link()
         {
-            Driver.FindSection("Div Section One h2 with link", Root).Id.should_be("divSectionOneWithLink");
-            Driver.FindSection("Div Section Two h2 with link", Root).Id.should_be("divSectionTwoWithLink");
+            Section("Div Section One h2 with link").Id.should_be("divSectionOneWithLink");
+            Section("Div Section Two h2 with link").Id.should_be("divSectionTwoWithLink");
         }
 
 
         [Test]
         public void Finds_by_div_by_id()
         {
-            Driver.FindSection("divSectionOne", Root).Native.should_be(Driver.FindSection("Div Section One h1", Root).Native);
-            Driver.FindSection("divSectionTwo", Root).Native.should_be(Driver.FindSection("Div Section Two h1", Root).Native);
+            Section("divSectionOne").Native.should_be(Section("Div Section One h1").Native);
+            Section("divSectionTwo").Native.should_be(Section("Div Section Two h1").Native);
         }
     }
 }

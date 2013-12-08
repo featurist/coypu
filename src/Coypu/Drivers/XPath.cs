@@ -155,29 +155,23 @@ namespace Coypu.Drivers
 
         public string Field(string locator, Options options)
         {
-            return ForlabeledOrByAttribute(locator, options); // TODO: OR ContainerLabeled(locator, exact)
+            return ".//*[(" + TagNamedOneOf(FieldTagNames) +
+                   "   and " +
+                   "   ("      + IsForLabeled(locator, options.Exact) + 
+                   "      or " + IsContainerLabeled(locator, options.Exact) + 
+                   "      or " + HasIdOrPlaceholder(locator, options) +
+                   "      or " + HasName(locator) +
+                   "      or " + HasValue(locator) +
+                   "   )" +
+                   ")]";
         }
 
-        private string ForlabeledOrByAttribute(string locator, Options options)
+        private string IsContainerLabeled(string locator, bool exact)
         {
-            return Format(
-                ".//*[" + TagNamedOneOf(FieldTagNames) +
-                "   and " +
-                "   (" + IsLabelledWith(locator, options.Exact) +
-                "      or " + HasIdOrPlaceholder(locator, options) +
-                "      or " + HasName(locator) +
-                "      or " + HasValue(locator) +
-                "   )" +
-                "]",
-                locator);
+            return Format("ancestor::label[" + IsText(locator, exact) + "]", locator);
         }
 
-        private string ContainerLabeled(string locator, bool exact)
-        {
-            return Format(".//label[" + IsText(locator, exact) + "]//*[" + TagNamedOneOf(FieldTagNames) + "]", locator);
-        }
-
-        private string IsLabelledWith(string locator, bool exact)
+        private string IsForLabeled(string locator, bool exact)
         {
             return Format("(@id = //label[" + IsText(locator, exact) + "]/@for)", locator);
         }

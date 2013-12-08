@@ -17,7 +17,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             {
                 calledOnWrapper = true;
             });
-            spyRobustWrapper.QueriesRan<object>().First().Run();
+            SpyTimingStrategy.QueriesRan<object>().First().Run();
             Assert.That(calledOnWrapper, Is.True);
         }
 
@@ -26,11 +26,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             Func<string> function = () => "The expected result";
 
-            spyRobustWrapper.StubQueryResult(SpyRobustWrapper.NO_EXPECTED_RESULT, "immediate result");
+            SpyTimingStrategy.StubQueryResult(SpyTimingStrategy.NO_EXPECTED_RESULT, "immediate result");
 
             Assert.That(browserSession.RetryUntilTimeout(function), Is.EqualTo("immediate result"));
 
-            var query = spyRobustWrapper.QueriesRan<string>().First();
+            var query = SpyTimingStrategy.QueriesRan<string>().First();
             var queryResult = query.Run();
 
             Assert.That(queryResult, Is.EqualTo("The expected result"));
@@ -48,7 +48,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var options = new Options { Timeout = overallTimeout };
             browserSession.TryUntil(tryThis, until,TimeSpan.Zero,options);
 
-            var tryUntil = spyRobustWrapper.DeferredTryUntils[0];
+            var tryUntil = SpyTimingStrategy.DeferredTryUntils[0];
 
             Assert.That(tried, Is.False);
             tryUntil.TryThisBrowserAction.Act();
@@ -66,11 +66,11 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             Func<string> query = () => "query result";
 
-            spyRobustWrapper.StubQueryResult("expected query result", "immediate query result");
+            SpyTimingStrategy.StubQueryResult("expected query result", "immediate query result");
 
             Assert.That(browserSession.Query(query, "expected query result"), Is.EqualTo("immediate query result"));
 
-            var robustQuery = spyRobustWrapper.QueriesRan<string>().First();
+            var robustQuery = SpyTimingStrategy.QueriesRan<string>().First();
             var queryResult = robustQuery.Run();
 
             Assert.That(queryResult, Is.EqualTo("query result"));

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
@@ -14,7 +14,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected FakeDriver driver;
         protected FakeWaiter fakeWaiter;
         protected BrowserSession browserSession;
-        protected SpyRobustWrapper spyRobustWrapper;
+        protected SpyTimingStrategy SpyTimingStrategy;
         protected StubUrlBuilder stubUrlBuilder;
         protected SessionConfiguration sessionConfiguration;
         protected ElementScope elementScope;
@@ -24,11 +24,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void SetUp()
         {
             driver = new FakeDriver();
-            spyRobustWrapper = new SpyRobustWrapper();
+            SpyTimingStrategy = new SpyTimingStrategy();
             fakeWaiter = new FakeWaiter();
             stubUrlBuilder = new StubUrlBuilder();
             sessionConfiguration = new SessionConfiguration();
-            browserSession = TestSessionBuilder.Build(sessionConfiguration, driver, spyRobustWrapper, fakeWaiter, new SpyRestrictedResourceDownloader(),
+            browserSession = TestSessionBuilder.Build(sessionConfiguration, driver, SpyTimingStrategy, fakeWaiter, new SpyRestrictedResourceDownloader(),
                                                       stubUrlBuilder);
 
             elementScope = browserSession.FindXPath(".");
@@ -52,13 +52,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout)
         {
-            var query = spyRobustWrapper.QueriesRan<T>().Single();
+            var query = SpyTimingStrategy.QueriesRan<T>().Single();
             return RunQueryAndCheckTiming(query, timeout);
         }
 
         protected T RunQueryAndCheckTiming<T>(TimeSpan timeout, int index)
         {
-            var query = spyRobustWrapper.QueriesRan<T>().ElementAt(index);
+            var query = SpyTimingStrategy.QueriesRan<T>().ElementAt(index);
             return RunQueryAndCheckTiming(query, timeout);
         }
 

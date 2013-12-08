@@ -1,13 +1,13 @@
 using System;
 using Coypu.Actions;
 using Coypu.Queries;
-using Coypu.Robustness;
+using Coypu.Timing;
 
 namespace Coypu.Tests.TestDoubles
 {
-    public class ImmediateSingleExecutionFakeRobustWrapper : RobustWrapper
+    public class ImmediateSingleExecutionFakeTimingStrategy : TimingStrategy
     {
-        public T Robustly<T>(Query<T> query)
+        public T Synchronise<T>(Query<T> query)
         {
             return query.Run();
         }

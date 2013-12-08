@@ -16,7 +16,7 @@ namespace Coypu.Drivers.Tests
         {
             VisitTestPage();
 
-            var outerHTML = Normalise(Driver.FindCss("table",Root).OuterHTML);
+            var outerHTML = Normalise(Css("table").OuterHTML);
             Assert.That(outerHTML, Is.EqualTo("<table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table>"));
         }
 
@@ -25,7 +25,7 @@ namespace Coypu.Drivers.Tests
         {
             VisitTestPage();
 
-            var innerHTML = Normalise(Driver.FindCss("table", Root).InnerHTML);
+            var innerHTML = Normalise(Css("table").InnerHTML);
             Assert.That(innerHTML, Is.EqualTo("<tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody>"));
         }
 
