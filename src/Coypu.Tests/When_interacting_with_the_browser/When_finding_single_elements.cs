@@ -58,7 +58,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindFrame_should_make_robust_call_to_underlying_driver()
         {
-            Should_find_robustly(browserSession.FindFrame, null, driver.StubFrame);
+            Should_find_robustly(browserSession.FindFrame, null, driver.StubFrames);
         }
 
         [Test]

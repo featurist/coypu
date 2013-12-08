@@ -128,6 +128,7 @@
     <Compile Include="Matchers\Shows.cs" />
     <Compile Include="MissingWindowException.cs" />
     <Compile Include="ElementFoundExtensions.cs" />
+    <Compile Include="Queries\ElementExistsQuery.cs" />
     <Compile Include="Queries\ElementScopeQuery.cs" />
     <Compile Include="Queries\HasNoValueQuery.cs" />
     <Compile Include="Queries\FindAllCssWithPredicateQuery.cs" />
@@ -160,15 +161,11 @@
     <Compile Include="Queries\ElementQuery.cs" />
     <Compile Include="Queries\HasContentMatchQuery.cs" />
     <Compile Include="Queries\HasContentQuery.cs" />
-    <Compile Include="Queries\HasCssQuery.cs" />
     <Compile Include="Queries\HasDialogQuery.cs" />
     <Compile Include="Queries\HasNoContentMatchQuery.cs" />
     <Compile Include="Queries\HasNoContentQuery.cs" />
-    <Compile Include="Queries\HasNoCssQuery.cs" />
-    <Compile Include="Queries\HasNoXPathQuery.cs" />
     <Compile Include="Queries\LambdaPredicateQuery.cs" />
     <Compile Include="Queries\LambdaQuery.cs" />
-    <Compile Include="Queries\ElementExistsQuery.cs" />
     <Compile Include="Finders\ElementFinder.cs" />
     <Compile Include="ElementScope.cs" />
     <Compile Include="Finders\LinkFinder.cs" />

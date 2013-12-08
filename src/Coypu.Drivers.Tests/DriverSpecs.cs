@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
-using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Tests.Sites;
 using Coypu.Drivers.Watin;
 using Coypu.Finders;
-using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 [SetUpFixture]

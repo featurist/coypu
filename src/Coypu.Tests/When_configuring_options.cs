@@ -57,14 +57,14 @@ namespace Coypu.Tests
                     WaitBeforeClick = TimeSpan.FromSeconds(789)
                 };
 
-            var merged = defaultOptions.Merge(mergeWithOptions);
+            var merged = Options.Merge(defaultOptions,mergeWithOptions);
 
             AssertOptionsEqual(merged, mergeWithOptions);
 
             Assert.That(merged, Is.Not.SameAs(mergeWithOptions));
             Assert.That(merged, Is.Not.SameAs(defaultOptions));
 
-            var otherWayMerge = mergeWithOptions.Merge(defaultOptions);
+            var otherWayMerge = Options.Merge(mergeWithOptions,defaultOptions);
             AssertOptionsEqual(otherWayMerge, mergeWithOptions);
         }
 

@@ -17,7 +17,7 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
         {
             return Enumerable.Empty<ElementFound>();
         }
@@ -58,13 +58,13 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern = null)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
             return Enumerable.Empty<ElementFound>();
         }
 
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
         {
             return Enumerable.Empty<ElementFound>();
         }
@@ -127,7 +127,7 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope)
+        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
         {
             return null;
         }
@@ -146,12 +146,12 @@ namespace Coypu.Tests.TestDoubles
             return new List<Cookie>();
         }
 
-        public IEnumerable<ElementFound> FindWindows(string locator, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindWindows(string locator, Scope scope, Options options)
         {
             return Enumerable.Empty<ElementFound>();
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
         {
             return Enumerable.Empty<ElementFound>();
         }

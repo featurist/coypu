@@ -2,14 +2,14 @@ namespace Coypu.Queries
 {
     internal class ElementMissingQuery : DriverScopeQuery<bool>
     {
+        protected internal ElementMissingQuery(DriverScope driverScope)
+            : base(driverScope, driverScope.ElementFinder.Options)
+        {
+        }
+
         public override bool ExpectedResult
         {
             get { return true; }
-        }
-
-        protected internal ElementMissingQuery(DriverScope driverScope, Options options)
-            : base(driverScope, options)
-        {
         }
 
         public override bool Run()

@@ -147,82 +147,6 @@ namespace Coypu
         bool HasNoContentMatch(Regex pattern, Options options = null);
 
         /// <summary>
-        /// Query whether an element matching a CSS selector appears on the page within the configured timeout
-        /// </summary>
-        /// <param name="cssSelector">CSS selector</param>
-        /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
-        /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>Whether an element appears</returns>
-        bool HasCss(string cssSelector, Options options = null);
-
-        /// <summary>
-        /// Query whether an element matching a CSS selector appears on the page within the configured timeout
-        /// </summary>
-        /// <param name="cssSelector">CSS selector</param>
-        /// <param name="text">The text of the element must exactly match this text</param>
-        /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
-        /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>Whether an element appears</returns>
-        bool HasCss(string cssSelector, string text, Options options = null);
-
-        /// <summary>
-        /// Query whether an element matching a CSS selector appears on the page within the configured timeout
-        /// </summary>
-        /// <param name="cssSelector">CSS selector</param>
-        /// <param name="text">The text of the element must match this pattern</param>
-        /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
-        /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>Whether an element appears</returns>
-        bool HasCss(string cssSelector, Regex text, Options options = null);
-
-        /// <summary>
-        /// Query whether an element matching a CSS selector does not appear on the page. Returns as soon as the element does not appear, or when the <see cref="SessionConfiguration.Timeout"/> is reached.
-        /// </summary>
-        /// <param name="cssSelector">CSS selector</param>
-        /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
-        /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>Whether an element does not appear</returns>
-        bool HasNoCss(string cssSelector, Options options = null);
-        bool HasNoCss(string cssSelector, Regex trext, Options options = null);
-        bool HasNoCss(string cssSelector, string text, Options options = null);
-
-        /// <summary>
-        /// Query whether an element matching an XPath query appears on the page within the configured timeout
-        /// </summary>
-        /// <param name="xpath">XPath query</param>
-        /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
-        /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>Whether an element appears</returns>
-        bool HasXPath(string xpath, Options options = null);
-
-        /// <summary>
-        /// Query whether an element matching an XPath query appears on the page. Returns as soon as the element appears, or when the <see cref="SessionConfiguration.Timeout"/> is reached.
-        /// </summary>
-        /// <param name="xpath">XPath query</param>
-        /// <param name="options">
-        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
-        /// <para>E.g. A longer wait:</para>
-        /// 
-        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
-        /// <returns>Whether an element appears</returns>
-        bool HasNoXPath(string xpath, Options options = null);
-
-        /// <summary>
         /// Find an element matching a CSS selector
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
@@ -435,12 +359,6 @@ namespace Coypu
         void Choose(string locator, Options options = null);
 
         /// <summary>
-        /// Query whether an element appears within the configured timeout
-        /// </summary>
-        /// <param name="findElement">A function to find an element</param>
-        bool Has(ElementScope findElement);
-
-        /// <summary>
         /// Query whether an element does not appear. Returns as soon as the element does not appear or after the <see cref="SessionConfiguration.Timeout"/>
         /// </summary>
         /// <param name="findElement">A function to find an element</param>
@@ -617,7 +535,7 @@ namespace Coypu
         /// <summary>
         /// Try and find this scope now
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The element found</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         ElementFound Now();
 

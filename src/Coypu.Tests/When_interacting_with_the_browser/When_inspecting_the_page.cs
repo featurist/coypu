@@ -57,30 +57,6 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
 
-        [Test]
-        public void HasXPath_queries_robustly_Positive_example()
-        {
-            Queries_robustly(true, browserSession.HasXPath, driver.StubHasXPath);
-        }
-
-        [Test]
-        public void HasXPath_queries_robustly_Negative_example()
-        {
-            Queries_robustly(false, browserSession.HasXPath, driver.StubHasXPath);
-        }
-
-        [Test]
-        public void HasNoXPath_queries_robustly_Positive_example()
-        {
-            Queries_robustly_reversing_result(true, browserSession.HasNoXPath, driver.StubHasXPath);
-        }
-
-        [Test]
-        public void HasNoXPath_queries_robustly_Negative_example()
-        {
-            Queries_robustly_reversing_result(false, browserSession.HasNoXPath, driver.StubHasXPath);
-        }
-
         private void Check_robust_content_query<T>(bool stubResult, string actualContent, Func<T, Options, bool> subject, T toLookFor)
         {
             var window = new StubElement { Text = actualContent };

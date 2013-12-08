@@ -2,23 +2,27 @@ namespace Coypu.Queries
 {
     internal class ElementExistsQuery : DriverScopeQuery<bool>
     {
+        protected internal ElementExistsQuery(DriverScope driverScope) : base(driverScope, driverScope.ElementFinder.Options)
+        {
+        }
+
         public override bool ExpectedResult
         {
             get { return true; }
-        }
-
-        protected internal ElementExistsQuery(DriverScope driverScope, Options options) : base(driverScope,options)
-        {
         }
 
         public override bool Run()
         {
             try
             {
-                DriverScope.Now();
+                DriverScope.FindElement();
                 return true;
             }
             catch (MissingHtmlException)
+            {
+                return false;
+            }
+            catch (MissingWindowException)
             {
                 return false;
             }

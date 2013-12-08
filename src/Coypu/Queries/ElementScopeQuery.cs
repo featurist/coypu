@@ -5,14 +5,14 @@ namespace Coypu.Queries
     internal abstract class ElementScopeQuery<T> : Query<T>
     {
         protected readonly Options Options;
-        protected ElementScope ElementScope { get; private set; }
+        protected DriverScope Scope { get; private set; }
         public TimeSpan Timeout { get; private set; }
         public TimeSpan RetryInterval { get; private set; }
 
-        internal ElementScopeQuery(ElementScope driverScope, Options options)
+        internal ElementScopeQuery(DriverScope scope, Options options)
         {
             Options = options;
-            ElementScope = driverScope;
+            Scope = scope;
             Timeout = options.Timeout;
             RetryInterval = options.RetryInterval;
         }

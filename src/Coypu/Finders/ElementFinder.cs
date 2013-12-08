@@ -33,14 +33,14 @@ namespace Coypu.Finders
 
         internal ElementFound ResolveQuery()
         {
-            var results = Find(Options.Merge(new Options { Exact = true }, Options));
-            if (Options.Match == Match.First && results.Any())
+            var results = Find(Options.Merge(new Options { Exact = true }, options));
+            if (options.Match == Match.First && results.Any())
                 return results.First();
 
             var count = results.Count();
 
-            if (ShouldTryPartialMatch(Options, count))
-                results = Find(Options.Merge(new Options {Exact = false}, Options));
+            if (ShouldTryPartialMatch(options, count))
+                results = Find(Options.Merge(new Options {Exact = false}, options));
 
             count = results.Count();
             if (count > 1)

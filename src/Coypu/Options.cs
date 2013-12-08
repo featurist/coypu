@@ -25,6 +25,22 @@ namespace Coypu
         private TimeSpan? waitBeforeClick;
 
         /// <summary>
+        /// Will not wait for asynchronous updates to the page
+        /// </summary>
+        public static Options NoWait = new Options
+        {
+            Timeout = TimeSpan.Zero
+        };
+
+        /// <summary>
+        /// Include invisible elements when finding
+        /// </summary>
+        public static Options Invisible = new Options
+        {
+            ConsiderInvisibleElements = true
+        };
+
+        /// <summary>
         /// <para>When retrying, how long to wait for elements to appear or actions to complete without error.</para>
         /// <para>Default: 1sec</para>
         /// </summary>

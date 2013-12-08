@@ -74,57 +74,57 @@ namespace Coypu {
 
         public ElementScope Click(Options options = null) 
         {
-            Try(new ClickAction(this, driver, Merge(options)));
+            Try(new ClickAction(this, driver, MergeWithSession(options)));
             return this;
         }
 
         public ElementScope FillInWith(string value, Options options = null) 
         {
-            Try(new FillIn(driver, this, value, Merge(options)));
+            Try(new FillIn(driver, this, value, MergeWithSession(options)));
             return this;
         }
 
         public ElementScope Hover(Options options = null)
         {
-            Try(new Hover(this, driver, Merge(options)));
+            Try(new Hover(this, driver, MergeWithSession(options)));
             return this;
         }
 
         public ElementScope SendKeys(string keys, Options options = null)
         {
-            Try(new SendKeys(keys, this, driver, Merge(options)));
+            Try(new SendKeys(keys, this, driver, MergeWithSession(options)));
             return this;
         }
 
         public ElementScope Check(Options options = null)
         {
-            Try(new Check(driver, this, Merge(options)));
+            Try(new Check(driver, this, MergeWithSession(options)));
             return this;
         }
 
         public ElementScope Uncheck(Options options = null) {
-            Try(new Uncheck(driver, this, Merge(options)));
+            Try(new Uncheck(driver, this, MergeWithSession(options)));
             return this;
         }
 
-        public bool Exists(Options options = null)
+        public bool Exists()
         {
-            return Try(new ElementExistsQuery(this, Merge(options)));
+            return Try(new ElementExistsQuery(this));
         }
 
-        public bool Missing(Options options = null)
+        public bool Missing()
         {
-            return Try(new ElementMissingQuery(this, Merge(options)));
+            return Try(new ElementMissingQuery(this));
         }
 
         public bool HasValue(string text, Options options = null)
         {
-            return Try(new HasValueQuery(this, text, Merge(options)));
+            return Try(new HasValueQuery(this, text, MergeWithFinder(options)));
         }
 
         public bool HasNoValue(string text, Options options = null)
         {
-            return Try(new HasNoValueQuery(this, text, Merge(options)));
+            return Try(new HasNoValueQuery(this, text, MergeWithFinder(options)));
         }
     }
 }

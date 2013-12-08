@@ -5,8 +5,8 @@ namespace Coypu
     /// </summary>
     public interface ElementScope : Scope, Element
     {
-        bool Exists(Options options = null);
-        bool Missing(Options options = null);
+        bool Exists();
+        bool Missing();
         ElementScope Click(Options options = null);
         ElementScope FillInWith(string value, Options options = null);
         ElementScope Hover(Options options = null);

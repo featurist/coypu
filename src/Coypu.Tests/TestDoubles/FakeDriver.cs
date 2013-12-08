@@ -15,32 +15,21 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<Element> CheckedElements = new List<Element>();
         public readonly IList<Element> UncheckedElements = new List<Element>();
         public readonly IList<Element> ChosenElements = new List<Element>();
-        public readonly IList<string> HasCssQueries = new List<string>();
-        public readonly IList<string> HasXPathQueries = new List<string>();
         public readonly IList<ScopedRequest<string>> Visits = new List<ScopedRequest<string>>();
         public readonly IDictionary<Element, SetFieldParams> SetFields = new Dictionary<Element, SetFieldParams>();
         public readonly IDictionary<Element, string> SentKeys = new Dictionary<Element, string>();
         public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
-        private readonly IList<ScopedStubResult> stubbedButtons = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedLinks = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedTextFields = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedCssResults = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedAllCssResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedAllXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedExecuteScriptResults = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedFieldsets = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedSections = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedFrames = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedIDs = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedHasCssResults = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedHasXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedTitles = new List<ScopedStubResult>();
         private ElementFound stubbedCurrentWindow;
-        public readonly IList<string> FindButtonRequests = new List<string>();
         public readonly IList<string> FindLinkRequests = new List<string>();
         public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
         public readonly IList<Scope> MaximiseWindowCalls = new List<Scope>();
@@ -73,7 +62,7 @@ namespace Coypu.Tests.TestDoubles
             public object Result;
             public Scope Scope;
             public Regex TextPattern;
-            public bool? Exact;
+            public Options Options;
         }
 
         public class ScopedRequest<T>
@@ -84,9 +73,9 @@ namespace Coypu.Tests.TestDoubles
 
         public Drivers.Browser Browser { get; private set; }
 
-        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Regex textPattern = null, bool? exact = null)
+        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Options options = null, Regex textPattern = null)
         {
-            var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern);
+            var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
             if (scopedStubResult == null)
             {
                 throw new MissingHtmlException("Element not found: " + locator);
@@ -94,11 +83,11 @@ namespace Coypu.Tests.TestDoubles
             return (T) scopedStubResult.Result;
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
         {
             FindLinkRequests.Add(linkText);
 
-            return Find<IEnumerable<ElementFound>>(stubbedLinks, linkText, scope, exact: exact);
+            return Find<IEnumerable<ElementFound>>(stubbedLinks, linkText, scope, options);
         }
 
         public void Click(Element element)
@@ -125,61 +114,24 @@ namespace Coypu.Tests.TestDoubles
             Visits.Add(new ScopedRequest<string>{Request = url, Scope = scope});
         }
 
-        public void StubButton(string locator, ElementFound element, Scope scope)
+        public void StubLink(string locator, ElementFound element, Scope scope, Options options)
         {
-            stubbedButtons.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
-        }
-
-        public void StubLink(string locator, ElementFound element, Scope scope)
-        {
-            stubbedLinks.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
-        }
-
-        public void StubField(string locator, ElementFound element, Scope scope)
-        {
-            stubbedTextFields.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element});
-        }
-
-        public void StubHasCss(string cssSelector, bool result, Scope scope)
-        {
-            stubbedHasCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
-        }
-
-        public void StubHasXPath(string xpath, bool result, Scope scope)
-        {
-            stubbedHasXPathResults.Add(new ScopedStubResult { Locator = xpath, Scope = scope, Result = result });
+            stubbedLinks.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element, Options = options});
         }
 
         public void StubDialog(string text, bool result, Scope scope)
         {
-            stubbedHasDialogResults.Add(new ScopedStubResult { Locator = text, Scope = scope, Result = result });
+            stubbedHasDialogResults.Add(new ScopedStubResult { Locator = text, Scope = scope, Result = result});
         }
 
-        public void StubCss(string cssSelector, ElementFound result, Scope scope)
+        public void StubAllCss(string cssSelector, IEnumerable<ElementFound> result, Scope scope, Options options)
         {
-            if (result != null) 
-                stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
+            stubbedAllCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result, Options = options });
         }
 
-        public void StubCss(string cssSelector, Regex textPattern, ElementFound result, Scope scope)
+        public void StubAllXPath(string xpath, IEnumerable<ElementFound> result, Scope scope, Options options)
         {
-            if (result != null)
-                stubbedCssResults.Add(new ScopedStubResult { Locator = cssSelector, TextPattern = textPattern, Scope = scope, Result = result });
-        }
-
-        public void StubXPath(string cssSelector, ElementFound result, Scope scope)
-        {
-            stubbedXPathResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
-        }
-
-        public void StubAllCss(string cssSelector, IEnumerable<ElementFound> result, Scope scope)
-        {
-            stubbedAllCssResults.Add(new ScopedStubResult { Locator = cssSelector, Scope = scope, Result = result });
-        }
-
-        public void StubAllXPath(string xpath, IEnumerable<ElementFound> result, Scope scope)
-        {
-            stubbedAllXPathResults.Add(new ScopedStubResult { Locator = xpath, Scope = scope, Result = result });
+            stubbedAllXPathResults.Add(new ScopedStubResult { Locator = xpath, Scope = scope, Result = result, Options = options });
         }
 
         public void Dispose()
@@ -219,14 +171,14 @@ namespace Coypu.Tests.TestDoubles
             return Find<string>(stubbedExecuteScriptResults, javascript, scope);
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope)
+        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
         {
-            return Find<IEnumerable<ElementFound>>(stubbedIDs, id, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedIDs, id, scope, options);
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
         {
-            return Find<IEnumerable<ElementFound>>(stubbedFrames, locator, scope, exact: exact);
+            return Find<IEnumerable<ElementFound>>(stubbedFrames, locator, scope, options);
         }
 
         public void SendKeys(Element element, string keys)
@@ -293,14 +245,14 @@ namespace Coypu.Tests.TestDoubles
             return (a.ToString() == b.ToString() && a.Options == b.Options);
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Regex textPattern = null)
+        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
-            return Find<IEnumerable<ElementFound>>(stubbedAllCssResults, cssSelector, scope, textPattern);
+            return Find<IEnumerable<ElementFound>>(stubbedAllCssResults, cssSelector, scope, options, textPattern);
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope)
+        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
         {
-            return Find<IEnumerable<ElementFound>>(stubbedAllXPathResults, xpath, scope);
+            return Find<IEnumerable<ElementFound>>(stubbedAllXPathResults, xpath, scope, options);
         }
 
         public void Check(Element field)
@@ -323,24 +275,14 @@ namespace Coypu.Tests.TestDoubles
             stubbedExecuteScriptResults.Add(new ScopedStubResult{Locator = script, Scope =  scope, Result = scriptReturnValue});
         }
 
-        public void StubFieldset(string locator, ElementFound fieldset, Scope scope)
+        public void StubFrames(string locator, ElementFound frame, Scope scope, Options options)
         {
-            stubbedFieldsets.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = fieldset});
+            stubbedFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = frame, Options = options });
         }
 
-        public void StubSection(string locator, ElementFound section, Scope scope)
+        public void StubId(string id, ElementFound element, Scope scope, Options options)
         {
-            stubbedSections.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = section});
-        }
-
-        public void StubFrame(string locator, ElementFound frame, Scope scope)
-        {
-            stubbedFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = frame });
-        }
-
-        public void StubId(string id, ElementFound element, Scope scope)
-        {
-            stubbedIDs.Add(new ScopedStubResult { Locator = id, Scope = scope, Result = element });
+            stubbedIDs.Add(new ScopedStubResult { Locator = id, Scope = scope, Result = element , Options = options});
         }
 
         public void StubCookies(List<Cookie> cookies)
@@ -358,9 +300,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedTitles.Add(new ScopedStubResult { Result = title, Scope = scope });
         }
 
-        public void StubWindow(string locator, ElementFound window, Scope scope)
+        public void StubWindow(string locator, ElementFound window, Scope scope, Options options)
         {
-            stubbedWindows.Add(new ScopedStubResult {Locator = locator, Scope = scope, Result = window});
+            stubbedWindows.Add(new ScopedStubResult {Locator = locator, Scope = scope, Result = window, Options = options});
         }
 
         public void StubCurrentWindow(ElementFound window)
@@ -368,9 +310,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedCurrentWindow = window;
         }
 
-        public IEnumerable<ElementFound> FindWindows(string locator, Scope scope, bool exact)
+        public IEnumerable<ElementFound> FindWindows(string locator, Scope scope, Options options)
         {
-            return Find<IEnumerable<ElementFound>>(stubbedWindows, locator, scope, exact: exact);
+            return Find<IEnumerable<ElementFound>>(stubbedWindows, locator, scope, options);
         }
 
     }

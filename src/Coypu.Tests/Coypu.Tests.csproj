@@ -66,27 +66,15 @@
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
     <Compile Include="TestDoubles\ImmediateSingleExecutionFakeRobustWrapper.cs" />
     <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_css_with_matching_text.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_considering_invisible_elements.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_checking_an_element.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_filling_in_any_field.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_unchecking_an_element.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_insepcting_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
     <Compile Include="When_interacting_with_the_browser\When_constructing_xpath.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_state.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_title.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_querying_with_any_finder.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_clicking_any_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_executing_script.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_clicking_links.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_scoping_interactions.cs" />
     <Compile Include="When_interacting_with_the_browser\When_interacting_with_modal_dialogs.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_modal_dialogs.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_all_matching_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_the_page.cs" />
     <Compile Include="TestException.cs" />
     <Compile Include="TestBuilders\TestSessionBuilder.cs" />
@@ -103,9 +91,6 @@
     </Compile>
     <Compile Include="When_starting_and_ending_sessions.cs" />
     <Compile Include="When_interacting_with_the_browser\When_visiting.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_completing_forms.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_clicking_buttons.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_single_elements.cs" />
     <Compile Include="TestDoubles\SpyRobustWrapper.cs" />
     <Compile Include="TestDoubles\FakeDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

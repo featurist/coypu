@@ -215,7 +215,7 @@
       <Name>Coypu.Drivers.Watin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Coypu.Tests\Coypu.Tests.csproj">
-      <Project>{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}</Project>
+      <Project>{3acf8a72-2eab-42e7-b60e-bb781d3b0db2}</Project>
       <Name>Coypu.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Coypu\Coypu.csproj">

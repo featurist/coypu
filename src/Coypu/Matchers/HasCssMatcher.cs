@@ -36,11 +36,11 @@ namespace Coypu.Matchers
 
             bool hasCss;
             if (exactText != null)
-                hasCss = scope.HasCss(_expectedCss, exactText, _options);
+                hasCss = scope.FindCss(_expectedCss, exactText, _options).Exists();
             else if (textPattern != null)
-                hasCss = scope.HasCss(_expectedCss, textPattern, _options);
+                hasCss = scope.FindCss(_expectedCss, textPattern, _options).Exists();
             else
-                hasCss = scope.HasCss(_expectedCss, _options);
+                hasCss = scope.FindCss(_expectedCss, _options).Exists();
 
             if (!hasCss)
                 _actualContent = scope.Now().InnerHTML;
