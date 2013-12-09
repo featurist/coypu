@@ -33,9 +33,15 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void When_set_to_exact_and_first_And_more_than_one_for_labeled_partial_match_It_finds_the_exact_match()
+        public void When_set_to_exact_and_first_And_more_one_exact_and_one_partial_for_labeled_partial_match_It_finds_the_exact_match()
         {
             Assert.That(Field("Some for labeled radio option", options: new Options { Exact = true, Match = Match.First }).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
+        }
+
+        [Test]
+        public void When_set_to_partial_and_first_And_more_than_one_for_labeled_partial_match_It_finds_the_first_match()
+        {
+            Assert.That(Field("Some for labeled radio", options: new Options { Exact = false, Match = Match.First }).Id, Is.EqualTo("forLabeledRadioFieldPartialMatchId"));
         }
 
         [Test]

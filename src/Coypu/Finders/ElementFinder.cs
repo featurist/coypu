@@ -33,15 +33,36 @@ namespace Coypu.Finders
 
         internal ElementFound ResolveQuery()
         {
-            var results = Find(Options.Merge(new Options { Exact = true }, options));
-            if (options.Match == Match.First && results.Any())
-                return results.First();
+            var exactQuery = Find(Options.Merge(new Options {Exact = true}, options));
+            var results = new ElementFound[]{};
+            if (options.Match == Match.First)
+            {
+                var first = exactQuery.FirstOrDefault();
+                if (first != null)
+                    return first;
+            }
+            else
+            {
+                results = exactQuery.ToArray();
+            }
 
             var count = results.Count();
 
             if (ShouldTryPartialMatch(options, count))
-                results = Find(Options.Merge(new Options {Exact = false}, options));
-
+            {
+                var partialQuery = Find(Options.Merge(new Options { Exact = false }, options));
+                if (options.Match == Match.First)
+                {
+                    var first = partialQuery.FirstOrDefault();
+                    if (first != null)
+                        return first;
+                }
+                else
+                {
+                    results = partialQuery.ToArray();
+                }
+            }
+                
             count = results.Count();
             if (count > 1)
                 throw new AmbiguousHtmlException(Options.BuildAmbiguousMessage(QueryDescription, count));
