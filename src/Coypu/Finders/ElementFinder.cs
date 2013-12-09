@@ -33,37 +33,12 @@ namespace Coypu.Finders
 
         internal ElementFound ResolveQuery()
         {
-            var exactQuery = Find(Options.Merge(new Options {Exact = true}, options));
-            var results = new ElementFound[]{};
-            if (options.Match == Match.First)
-            {
-                var first = exactQuery.FirstOrDefault();
-                if (first != null)
-                    return first;
-            }
-            else
-            {
-                results = exactQuery.ToArray();
-            }
+            var results = GetResults(Find(Options.Merge(new Options {Exact = true}, options)));
 
-            var count = results.Count();
+            if (ShouldTryPartialMatch(options, results.Count()))
+                results = GetResults(Find(Options.Merge(new Options {Exact = false}, options)));
 
-            if (ShouldTryPartialMatch(options, count))
-            {
-                var partialQuery = Find(Options.Merge(new Options { Exact = false }, options));
-                if (options.Match == Match.First)
-                {
-                    var first = partialQuery.FirstOrDefault();
-                    if (first != null)
-                        return first;
-                }
-                else
-                {
-                    results = partialQuery.ToArray();
-                }
-            }
-                
-            count = results.Count();
+            var count = results.Length;
             if (count > 1)
                 throw new AmbiguousHtmlException(Options.BuildAmbiguousMessage(QueryDescription, count));
 
@@ -71,6 +46,19 @@ namespace Coypu.Finders
                 throw new MissingHtmlException("Unable to find " + QueryDescription);
 
             return results.First();
+        }
+
+        private ElementFound[] GetResults(IEnumerable<ElementFound> query)
+        {
+            if (options.Match == Match.First)
+            {
+                var first = query.FirstOrDefault();
+                return first != null 
+                    ? new[] {first} 
+                    : new ElementFound[]{};
+            }
+            
+            return query.ToArray();
         }
 
         private bool ShouldTryPartialMatch(Options options, int count)
