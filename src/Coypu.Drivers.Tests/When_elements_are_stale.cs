@@ -22,12 +22,12 @@ namespace Coypu.Drivers.Tests
         public void Stale_element_became_invisible()
         {
             var elementWithinScope1 = new FieldsetFinder(Driver, "Scope 1", Root, DefaultOptions).ResolveQuery();
-            elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = false }).should_be_false();
+            Assert.That(elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = false }), Is.False, "visible scope was stale");
 
-            Driver.Click(new ButtonFinder(Driver, "hide scope1", Root, DefaultOptions).ResolveQuery());
+            Driver.Click(Button("hide scope1"));
 
-            elementWithinScope1.Stale(new Options{ConsiderInvisibleElements = false}).should_be_true();
-            elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = true }).should_be_false();
+            Assert.That(elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = false }), Is.True, "invisible scope was NOT stale");
+            Assert.That(elementWithinScope1.Stale(new Options { ConsiderInvisibleElements = true }), Is.False, "visible scope was stale");
         }
 
         [Test]

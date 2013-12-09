@@ -108,6 +108,7 @@ namespace Coypu.Drivers.Watin
 
         public bool Stale(Options options)
         {
+            NativeWatiNElement.Refresh();
             return !NativeWatiNElement.Exists ||
                    (!options.ConsiderInvisibleElements &&
                    !(NativeWatiNElement.Style.Display == "none" ||

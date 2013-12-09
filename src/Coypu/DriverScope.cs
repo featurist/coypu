@@ -229,7 +229,6 @@ namespace Coypu
 
         public void Choose(string locator, Options options = null)
         {
-            var mergedOptions = MergeWithSession(options);
             RetryUntilTimeout(new Choose(driver, FindField(locator, MergeWithSession(options)), MergeWithSession(options)));
         }
 

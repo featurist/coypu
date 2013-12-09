@@ -39,8 +39,8 @@ namespace Coypu.Drivers.Watin
             var byText = options.Exact ? Find.ByText(locator) : Find.ByText(t => t.Contains(locator));
 
             return WatiNDocumentScope(scope).Frames
-                    .Filter((byTitle | Find.ByName(locator) | Find.ById(locator) | Constraints.HasElement("h1", byText)) &
-                            Constraints.IsVisible(options.ConsiderInvisibleElements));
+                                            .Filter((byTitle | Find.ByName(locator) | Find.ById(locator) |
+                                                     Constraints.HasElement("h1", byText)));
         }
 
         public LinkCollection FindLinks(string linkText, Scope scope, Options options)

@@ -139,10 +139,9 @@ namespace Coypu.Drivers.Watin
 
         private static Constraint FindWindowHandle(string locator, bool exact)
         {
-            var byTitle = exact
-                            ? Find.ByTitle(t => t.Contains(locator))
-                            : Find.ByTitle(locator);
-
+            Constraint byTitle = Find.ByTitle(locator);
+            if (exact)
+                byTitle = byTitle | Find.ByTitle(t => t.Contains(locator));
 
             var by = byTitle | Find.By("hwnd", locator);
 
