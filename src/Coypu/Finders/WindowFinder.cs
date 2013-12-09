@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Coypu.Finders
@@ -19,6 +20,11 @@ namespace Coypu.Finders
         internal override string QueryDescription
         {
             get { return "window: " + Locator; }
+        }
+
+        protected override Exception GetMissingException()
+        {
+            return new MissingWindowException("Unable to find " + QueryDescription);
         }
     }
 }

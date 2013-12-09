@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,9 +44,14 @@ namespace Coypu.Finders
                 throw new AmbiguousHtmlException(Options.BuildAmbiguousMessage(QueryDescription, count));
 
             if (count == 0)
-                throw new MissingHtmlException("Unable to find " + QueryDescription);
+                throw GetMissingException();
 
             return results.First();
+        }
+
+        protected virtual Exception GetMissingException()
+        {
+            return new MissingHtmlException("Unable to find " + QueryDescription);
         }
 
         private ElementFound[] GetResults(IEnumerable<ElementFound> query)

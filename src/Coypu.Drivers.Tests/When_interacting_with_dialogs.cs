@@ -77,7 +77,7 @@ namespace Coypu.Drivers.Tests
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null);
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
-                Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},500);", Root);
+                Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},200);", Root);
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 System.Threading.Thread.Sleep(1000);
