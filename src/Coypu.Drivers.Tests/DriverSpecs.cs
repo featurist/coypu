@@ -63,7 +63,7 @@ namespace Coypu.Drivers.Tests
 
         protected static DriverScope Root
         {
-            get { return root ?? (root = new DriverScope(DefaultSessionConfiguration, new DocumentElementFinder(Driver), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null)); }
+            get { return root ?? (root = new DriverScope(DefaultSessionConfiguration, new DocumentElementFinder(Driver, DefaultSessionConfiguration), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null)); }
         }
 
         protected readonly static Options DefaultOptions = new Options{};

@@ -47,26 +47,26 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                                                                              driver.StubAllXPath);
         }
 
-        protected void Should_make_direct_call_when_no_predicate_supplied(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, DriverScope> stub)
+        protected void Should_make_direct_call_when_no_predicate_supplied(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, DriverScope, Options> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
             var stubElements = new[] { new StubElement() };
 
-            stub(locator, stubElements, browserSession);
+            stub(locator, stubElements, browserSession, new Options());
 
             subject(locator, null, sessionConfiguration);
 
-            Assert.That(spyRobustWrapper.NoQueriesRan, Is.True, "Expected no robust queries run");
+            Assert.That(SpyTimingStrategy.NoQueriesRan, Is.True, "Expected no robust queries run");
         }
 
-        private void Should_wrap_elements_in_snapshot_scope(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, DriverScope> stub)
+        private void Should_wrap_elements_in_snapshot_scope(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, DriverScope, Options> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
             var stubElements = new[] {new StubElement(), new StubElement()};
 
-            stub(locator, stubElements, browserSession);
+            stub(locator, stubElements, browserSession, new Options());
 
             var actualImmediateResult = subject(locator, null, sessionConfiguration).ToArray();
             Assert.That(actualImmediateResult.Count(), Is.EqualTo(2));
@@ -74,7 +74,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(actualImmediateResult[1].Now(), Is.EqualTo(stubElements[1]));
         }
 
-        protected void Should_test_predicate_against_query_results_and_retry_on_failure(Func<string, Func<IEnumerable<SnapshotElementScope>,bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, Scope> stub)
+        protected void Should_test_predicate_against_query_results_and_retry_on_failure(Func<string, Func<IEnumerable<SnapshotElementScope>,bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, Scope, Options> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -83,11 +83,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var expectedImmediateResult = new[] { new StubElement(), new StubElement() };
             var expectedDeferredResult = new[] { new StubElement(), new StubElement() };
 
-            spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult.Select(e => new SnapshotElementScope(e, browserSession)));
-
-            stub(locator, expectedDeferredResult, browserSession);
-
             var options = new Options{Timeout = individualTimeout};
+            SpyTimingStrategy.AlwaysReturnFromRobustly(expectedImmediateResult.Select(e => new SnapshotElementScope(e, browserSession, options)));
+
+            stub(locator, expectedDeferredResult, browserSession, options);
 
             VerifyFoundRobustly(subject, 0, locator, (elements) => true, expectedDeferredResult, expectedImmediateResult, options);
             VerifyFoundRobustlyAndThrows<MissingHtmlException>(subject, 1, locator, (elements) => false, null, expectedImmediateResult, options);

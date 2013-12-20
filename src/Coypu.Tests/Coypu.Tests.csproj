@@ -66,6 +66,11 @@
     <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
     <Compile Include="TestDoubles\ImmediateSingleExecutionFakeTimingStrategy.cs" />
     <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_all_matching_elements.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_single_elements.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_then_filling_in_any_field.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_insepcting_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
     <Compile Include="When_interacting_with_the_browser\When_constructing_xpath.cs" />

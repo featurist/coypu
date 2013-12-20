@@ -4,7 +4,7 @@ namespace Coypu.Finders
 {
     internal class DocumentElementFinder : ElementFinder
     {
-        public DocumentElementFinder(Driver driver) : base(driver, "Window", null, new Options{Match = Match.First})
+        public DocumentElementFinder(Driver driver, Options options) : base(driver, "Window", null, options)
         {
         }
 

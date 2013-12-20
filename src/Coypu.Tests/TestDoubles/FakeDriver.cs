@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -75,19 +76,31 @@ namespace Coypu.Tests.TestDoubles
 
         private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Options options = null, Regex textPattern = null)
         {
-            var scopedStubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
-            if (scopedStubResult == null)
-            {
-                throw new MissingHtmlException("Element not found: " + locator);
-            }
-            return (T) scopedStubResult.Result;
+            var stubResult = stubbed
+                .FirstOrDefault(
+                    r =>
+                    r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
+
+            if (stubResult == null)
+                throw new MissingHtmlException("No stubbed result found for: " + locator);
+
+            return (T) stubResult.Result;
+        }
+
+        private IEnumerable<T> FindAll<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Options options = null, Regex textPattern = null)
+        {
+            var stubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
+            if (stubResult == null)
+                return Enumerable.Empty<T>();
+
+            return (IEnumerable<T>) stubResult.Result;
         }
 
         public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
         {
             FindLinkRequests.Add(linkText);
 
-            return Find<IEnumerable<ElementFound>>(stubbedLinks, linkText, scope, options);
+            return FindAll<ElementFound>(stubbedLinks, linkText, scope, options);
         }
 
         public void Click(Element element)
@@ -282,7 +295,7 @@ namespace Coypu.Tests.TestDoubles
 
         public void StubId(string id, ElementFound element, Scope scope, Options options)
         {
-            stubbedIDs.Add(new ScopedStubResult { Locator = id, Scope = scope, Result = element , Options = options});
+            stubbedIDs.Add(new ScopedStubResult { Locator = id, Scope = scope, Result = new []{element}, Options = options});
         }
 
         public void StubCookies(List<Cookie> cookies)

@@ -10,10 +10,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser {
         public void It_makes_robust_call_to_find_then_clicks_element_on_underlying_driver()
         {
             var element = new StubElement();
-            driver.StubCss("something.to fill in", element, browserSession);
-            spyRobustWrapper.AlwaysReturnFromRobustly(element);
+            driver.StubId("something_to_fill_in", element, browserSession, Options.ExactTrue);
+            SpyTimingStrategy.AlwaysReturnFromRobustly(element);
 
-            var elementScope = browserSession.FindCss("something.to fill in");
+            var elementScope = browserSession.FindId("something_to_fill_in");
 
             Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
 
@@ -23,8 +23,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser {
 
             Assert.That(driver.FindCssRequests.Any(), Is.False, "Scope finder was not deferred");
 
-            Assert.That(driver.SetFields.Keys, Has.Member(element));
-            Assert.That(driver.SetFields[element].Value, Is.EqualTo("some filled in stuff"));
+            Assert.That(driver.SetFields.Keys, Has.Member(elementScope));
+            Assert.That(driver.SetFields[elementScope].Value, Is.EqualTo("some filled in stuff"));
         }
     }
 }

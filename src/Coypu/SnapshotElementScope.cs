@@ -9,7 +9,7 @@ namespace Coypu
     /// If this element becomes stale then using this scope will not try to refind the element but 
     /// will raise a MissingHtmlException immediately.
     /// </summary>
-    public class SnapshotElementScope : DeferredElementScope
+    public class SnapshotElementScope : ElementScope
     {
         private readonly ElementFound elementFound;
         private readonly Options options;

@@ -167,7 +167,6 @@
     <Compile Include="Queries\LambdaPredicateQuery.cs" />
     <Compile Include="Queries\LambdaQuery.cs" />
     <Compile Include="Finders\ElementFinder.cs" />
-    <Compile Include="ElementScope.cs" />
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\PredicateQuery.cs" />
     <Compile Include="Queries\Query.cs" />

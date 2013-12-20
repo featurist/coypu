@@ -40,7 +40,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var options = new Options {Timeout = overallTimeout};
             browserSession.ClickButton("Some button locator", new LambdaPredicateQuery(() => stubUntil), waitBetweenRetries, options);
 
-            var tryUntilArgs = spyRobustWrapper.DeferredTryUntils.Single();
+            var tryUntilArgs = SpyTimingStrategy.DeferredTryUntils.Single();
 
             AssertButtonNotClickedYet(buttonToBeClicked);
             tryUntilArgs.TryThisBrowserAction.Act();
@@ -71,7 +71,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                 waiterCalled = true;
             });
             browserSession.ClickButton("Some button locator");
-            spyRobustWrapper.QueriesRan<object>().Last().Run();
+            SpyTimingStrategy.QueriesRan<object>().Last().Run();
 
             Assert.That(waiterCalled, "The waiter was not called");
             AssertClicked(stubButtonToBeClicked);

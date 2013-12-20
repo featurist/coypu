@@ -5,7 +5,7 @@ using Coypu.Queries;
 
 namespace Coypu
 {
-    public class RobustElementScope : DeferredElementScope
+    public class RobustElementScope : ElementScope 
     {
         private readonly Options options;
 

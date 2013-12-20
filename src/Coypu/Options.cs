@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Coypu.Finders;
+using System.Reflection;
 
 namespace Coypu
 {
@@ -10,6 +10,8 @@ namespace Coypu
     /// </summary>
     public class Options
     {
+        
+
         private const bool DEFAULT_CONSIDER_INVISIBLE_ELEMENTS = false;
         private const bool DEFAULT_EXACT = false;
         private const Match DEFAULT_MATCH = Match.Single;
@@ -23,6 +25,15 @@ namespace Coypu
         private TimeSpan? retryInterval;
         private TimeSpan? timeout;
         private TimeSpan? waitBeforeClick;
+
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Options) obj);
+        }
 
         /// <summary>
         /// Will not wait for asynchronous updates to the page
@@ -207,5 +218,40 @@ Your options:
                        ? value
                        : defaultValue;
         }
+
+        public override string ToString()
+        {
+            return string.Join(Environment.NewLine, GetType().GetProperties().Select(p => p.Name + ": " + p.GetValue(this, null)).ToArray());
+        }
+
+        protected bool Equals(Options other)
+        {
+            return considerInvisibleElements.Equals(other.considerInvisibleElements) && exact.Equals(other.exact) && match == other.match && retryInterval.Equals(other.retryInterval) && timeout.Equals(other.timeout) && waitBeforeClick.Equals(other.waitBeforeClick);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = considerInvisibleElements.GetHashCode();
+                hashCode = (hashCode * 397) ^ exact.GetHashCode();
+                hashCode = (hashCode * 397) ^ match.GetHashCode();
+                hashCode = (hashCode * 397) ^ retryInterval.GetHashCode();
+                hashCode = (hashCode * 397) ^ timeout.GetHashCode();
+                hashCode = (hashCode * 397) ^ waitBeforeClick.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(Options left, Options right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Options left, Options right)
+        {
+            return !Equals(left, right);
+        }
+
     }
 }

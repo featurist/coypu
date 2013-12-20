@@ -3,9 +3,9 @@ using Coypu.Finders;
 using Coypu.Queries;
 
 namespace Coypu {
-    public abstract class DeferredElementScope : DriverScope, ElementScope
+    public abstract class ElementScope : DriverScope, Element
     {
-        internal DeferredElementScope(ElementFinder elementFinder, DriverScope outerScope)
+        internal ElementScope(ElementFinder elementFinder, DriverScope outerScope)
             : base(elementFinder, outerScope)
         {
         }
@@ -74,36 +74,36 @@ namespace Coypu {
 
         public ElementScope Click(Options options = null) 
         {
-            Try(new ClickAction(this, driver, MergeWithSession(options)));
+            Try(new ClickAction(this, driver, Merge(options)));
             return this;
         }
 
         public ElementScope FillInWith(string value, Options options = null) 
         {
-            Try(new FillIn(driver, this, value, MergeWithSession(options)));
+            Try(new FillIn(driver, this, value, Merge(options)));
             return this;
         }
 
         public ElementScope Hover(Options options = null)
         {
-            Try(new Hover(this, driver, MergeWithSession(options)));
+            Try(new Hover(this, driver, Merge(options)));
             return this;
         }
 
         public ElementScope SendKeys(string keys, Options options = null)
         {
-            Try(new SendKeys(keys, this, driver, MergeWithSession(options)));
+            Try(new SendKeys(keys, this, driver, Merge(options)));
             return this;
         }
 
         public ElementScope Check(Options options = null)
         {
-            Try(new Check(driver, this, MergeWithSession(options)));
+            Try(new Check(driver, this, Merge(options)));
             return this;
         }
 
         public ElementScope Uncheck(Options options = null) {
-            Try(new Uncheck(driver, this, MergeWithSession(options)));
+            Try(new Uncheck(driver, this, Merge(options)));
             return this;
         }
 
@@ -119,12 +119,12 @@ namespace Coypu {
 
         public bool HasValue(string text, Options options = null)
         {
-            return Try(new HasValueQuery(this, text, MergeWithFinder(options)));
+            return Try(new HasValueQuery(this, text, Merge(options)));
         }
 
         public bool HasNoValue(string text, Options options = null)
         {
-            return Try(new HasNoValueQuery(this, text, MergeWithFinder(options)));
+            return Try(new HasNoValueQuery(this, text, Merge(options)));
         }
     }
 }

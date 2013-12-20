@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Tests
 
         private static DriverScope GetScope(SessionConfiguration configuration)
         {
-            return new DriverScope(configuration, new DocumentElementFinder(Driver), null, null, null, null);
+            return new DriverScope(configuration, new DocumentElementFinder(Driver, configuration), null, null, null, null);
         }
 
         [Test]

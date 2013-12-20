@@ -1,92 +1,102 @@
 ﻿using System;
+using Coypu.Finders;
+using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
     [TestFixture]
-    public class When_finding_single_elements : BrowserInteractionTests
+    public class When_finding_single_elements
     {
-        [Test]
-        public void FindButton_should_make_robust_call_to_underlying_driver()
+        protected Driver driver;
+        protected BrowserSession browserSession;
+        protected SessionConfiguration sessionConfiguration;
+
+        [SetUp]
+        public void SetUp()
         {
-            Should_find_robustly(browserSession.FindButton, elementScope.FindButton, driver.StubButton);
+            driver = new StubDriver();
+            sessionConfiguration = new SessionConfiguration{ConsiderInvisibleElements = true, RetryInterval = TimeSpan.FromMilliseconds(123)};
+            browserSession = TestSessionBuilder.Build(sessionConfiguration, driver, null, null,null, null);
+        }
+        
+        [Test]
+        public void FindButton_Should_find_robust_scope()
+        {
+            Should_find_robust_scope<ButtonFinder, ElementScope, RobustElementScope>(browserSession.FindButton);
+        }
+        
+        [Test]
+        public void FindLink_Should_find_robust_scope()
+        {
+            Should_find_robust_scope<LinkFinder, ElementScope, RobustElementScope>(browserSession.FindLink);
         }
 
         [Test]
-        public void FindLink_should_make_robust_call_to_underlying_driver()
+        public void FindField_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindLink, elementScope.FindLink, driver.StubLink);
+            Should_find_robust_scope<FieldFinder, ElementScope, RobustElementScope>(browserSession.FindField);
         }
 
         [Test]
-        public void FindField_should_make_robust_call_to_underlying_driver()
+        public void FindCss_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindField, elementScope.FindField, driver.StubField);
+            Should_find_robust_scope<CssFinder, ElementScope, RobustElementScope>(browserSession.FindCss);
         }
 
         [Test]
-        public void FindCss_should_make_robust_call_to_underlying_driver()
+        public void FindId_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindCss, elementScope.FindCss, driver.StubCss);
+            Should_find_robust_scope<IdFinder, ElementScope, RobustElementScope>(browserSession.FindId);
         }
 
         [Test]
-        public void FindId_should_make_robust_call_to_underlying_driver() 
+        public void FindSection_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindId, elementScope.FindId, driver.StubId);
+            Should_find_robust_scope<SectionFinder, ElementScope, RobustElementScope>(browserSession.FindSection);
         }
 
         [Test]
-        public void FindSection_should_make_robust_call_to_underlying_driver() 
+        public void FindFieldset_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindSection, elementScope.FindSection, driver.StubSection);
+            Should_find_robust_scope<FieldsetFinder, ElementScope, RobustElementScope>(browserSession.FindFieldset);
         }
 
         [Test]
-        public void FindFieldset_should_make_robust_call_to_underlying_driver() 
+        public void FindWindow_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindFieldset, elementScope.FindFieldset, driver.StubFieldset);
+            Should_find_robust_scope<WindowFinder, BrowserWindow, RobustWindowScope>(browserSession.FindWindow);
         }
 
         [Test]
-        public void FindWindow_should_make_robust_call_to_underlying_driver()
+        public void FindFrame_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindWindow, null, driver.StubWindow);
+            Should_find_robust_scope<FrameFinder, ElementScope, RobustElementScope>(browserSession.FindFrame);
         }
 
         [Test]
-        public void FindFrame_should_make_robust_call_to_underlying_driver()
+        public void FindXPath_Should_find_robust_scope()
         {
-            Should_find_robustly(browserSession.FindFrame, null, driver.StubFrames);
+            Should_find_robust_scope<XPathFinder,ElementScope,RobustElementScope>(browserSession.FindXPath);
         }
 
-        [Test]
-        public void FindXPath_should_make_robust_call_to_underlying_driver() 
+        private void Should_find_robust_scope<T,TScope,TReturn>(Func<string, Options, TScope> findButton) where TScope : DriverScope
         {
-            Should_find_robustly(browserSession.FindXPath,elementScope.FindXPath, driver.StubXPath);
+            var options = new Options { Exact = true, Timeout = TimeSpan.FromMilliseconds(999) };
+            var scope = findButton("Some locator", options);
+            Assert.That(scope, Is.TypeOf<TReturn>());
+
+            GetValue<T>(scope, options);
         }
 
-        protected void Should_find_robustly(Func<string, Options, Scope> subject, Func<string, Options, Scope> scope, Action<string, ElementFound, Scope> stub)
+        private void GetValue<T>(DriverScope scope, Options options)
         {
-            var locator = "Find me " + DateTime.Now.Ticks;
-
-            var individualTimeout = TimeSpan.FromMilliseconds(DateTime.UtcNow.Millisecond);
-
-            var expectedImmediateResult = new StubElement();
-            var expectedDeferredResult = new StubElement();
-
-            spyRobustWrapper.AlwaysReturnFromRobustly(expectedImmediateResult);
-
-            stub(locator, expectedDeferredResult,browserSession);
-            stub(locator, expectedDeferredResult,elementScope);
-
-            var options = new Options{Timeout = individualTimeout};
-
-            VerifyFoundRobustly(subject, 0, locator, expectedDeferredResult, expectedImmediateResult, options);
-
-            if (scope != null)
-                VerifyFoundRobustly(scope, 1, locator, expectedDeferredResult, expectedImmediateResult, options);
+            Assert.That(scope.OuterScope, Is.SameAs(browserSession));
+            Assert.That(scope.ElementFinder, Is.TypeOf<T>());
+            Assert.That(scope.ElementFinder.Driver, Is.EqualTo(driver));
+            Assert.That(scope.ElementFinder.Locator, Is.EqualTo("Some locator"));
+            Assert.That(scope.ElementFinder.Options, Is.EqualTo(Options.Merge(options, sessionConfiguration)));
         }
     }
 }

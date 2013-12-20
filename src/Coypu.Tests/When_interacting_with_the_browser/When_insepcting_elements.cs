@@ -80,9 +80,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var stubElement = new StubElement();
 
             stubProperty(stubElement, testValue);
-            driver.StubId("some-element", stubElement, browserSession);
 
-            spyRobustWrapper.AlwaysReturnFromRobustly(stubElement);
+            driver.StubId("some-element", stubElement, browserSession, Options.ExactTrue);
+
+            SpyTimingStrategy.AlwaysReturnFromRobustly(stubElement);
 
             if (typeof (T) == typeof (bool))
             {

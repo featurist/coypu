@@ -11,10 +11,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_makes_robust_call_to_find_then_hover_element_on_underlying_driver()
         {
             var element = new StubElement();
-            driver.StubCss("something.to hover", element, browserSession);
-            spyRobustWrapper.AlwaysReturnFromRobustly(element);
+            driver.StubId("something_to_hover", element, browserSession, Options.ExactTrue);
+            SpyTimingStrategy.AlwaysReturnFromRobustly(element);
 
-            browserSession.FindCss("something.to hover").Hover();
+            browserSession.FindId("something_to_hover").Hover();
 
             RunQueryAndCheckTiming();
 

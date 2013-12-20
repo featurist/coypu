@@ -6,7 +6,7 @@ namespace Coypu.Finders
 {
     public abstract class ElementFinder
     {
-        protected readonly Driver Driver;
+        protected internal readonly Driver Driver;
         private readonly string locator;
         protected readonly DriverScope Scope;
         private readonly Options options;
@@ -72,6 +72,11 @@ namespace Coypu.Finders
             return SupportsPartialTextMatching &&
                    count == 0 &&
                    !options.Exact;
+        }
+
+        internal ElementScope AsScope()
+        {
+            return new RobustElementScope(this, Scope, options);
         }
     }
 }
