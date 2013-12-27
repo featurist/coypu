@@ -129,7 +129,7 @@ namespace Coypu.Tests.TestDoubles
 
         public void StubLink(string locator, ElementFound element, Scope scope, Options options)
         {
-            stubbedLinks.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = element, Options = options});
+            stubbedLinks.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = new []{element}, Options = options});
         }
 
         public void StubDialog(string text, bool result, Scope scope)

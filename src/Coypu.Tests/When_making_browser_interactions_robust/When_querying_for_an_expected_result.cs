@@ -49,7 +49,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_exceptions_are_always_thrown_It_rethrows_eventually()
         {
-            Assert.Throws<TestException>(() => _retryUntilTimeoutTimingStrategy.Synchronise(new AlwaysThrowsQuery<object, TestException>(TimeSpan.FromMilliseconds(200),retryInterval)));
+            Assert.Throws<TestException>(() => _retryUntilTimeoutTimingStrategy.Synchronise(new AlwaysThrowsQuery<object, TestException>(new Options { Timeout = TimeSpan.FromMilliseconds(200), RetryInterval = retryInterval })));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         {
             const int throwsHowManyTimes = 2;
             var expectedResult = new object();
-            var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes, TimeSpan.FromMilliseconds(100),retryInterval);
+            var query = new ThrowsThenSubsequentlySucceedsQuery<object>(expectedResult, expectedResult, throwsHowManyTimes, new Options { Timeout = TimeSpan.FromMilliseconds(100), RetryInterval = retryInterval });
 
             Assert.That(_retryUntilTimeoutTimingStrategy.Synchronise(query), Is.EqualTo(expectedResult));
             Assert.That(query.Tries, Is.EqualTo(throwsHowManyTimes + 1));
@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Test]
         public void When_a_not_supported_exception_is_thrown_It_does_not_retry()
         {
-            var throwsNotSupported = new AlwaysThrowsQuery<object, NotSupportedException>(TimeSpan.FromMilliseconds(200),retryInterval);
+            var throwsNotSupported = new AlwaysThrowsQuery<object, NotSupportedException>(new Options{Timeout = TimeSpan.FromMilliseconds(200), RetryInterval = retryInterval});
 
             Assert.Throws<NotSupportedException>(() => _retryUntilTimeoutTimingStrategy.Synchronise(throwsNotSupported));
             Assert.That(throwsNotSupported.Tries, Is.EqualTo(1));
@@ -82,7 +82,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var expectedResult = new object();
             var unexpectedResult = new object();
 
-            var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2, expectedTimeout,retryInterval);
+            var throwsTwiceTimesThenReturnOppositeResult = new ThrowsThenSubsequentlySucceedsQuery<object>(unexpectedResult, expectedResult, 2, new Options{Timeout = expectedTimeout, RetryInterval = retryInterval});
 
             Assert.That(_retryUntilTimeoutTimingStrategy.Synchronise(throwsTwiceTimesThenReturnOppositeResult), Is.EqualTo(unexpectedResult));
             Assert.That(throwsTwiceTimesThenReturnOppositeResult.Tries, Is.GreaterThanOrEqualTo(3));

@@ -72,7 +72,8 @@ namespace Coypu
 
         internal Options Merge(Options options)
         {
-            return Options.Merge(options, ElementFinder.Options);
+            var mergeWith = ElementFinder != null ? ElementFinder.Options : SessionConfiguration;
+            return Options.Merge(options, mergeWith);
         }
 
         public void ClickButton(string locator, Options options = null)
@@ -95,15 +96,15 @@ namespace Coypu
             return new WaitThenClick(driver, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)));
         }
 
-        public Scope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
+        public Scope ClickButton(string locator, PredicateQuery until, Options options = null)
         {
-            TryUntil(WaitThenClickButton(locator, Merge(options)), until, waitBeforeRetry, Merge(options));
+            TryUntil(WaitThenClickButton(locator, Merge(options)), until, Merge(options));
             return this;
         }
 
-        public Scope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
+        public Scope ClickLink(string locator, PredicateQuery until, Options options = null)
         {
-            TryUntil(WaitThenClickLink(locator, Merge(options)), until, waitBeforeRetry, Merge(options));
+            TryUntil(WaitThenClickLink(locator, Merge(options)), until, Merge(options));
             return this;
         }
 
@@ -215,7 +216,7 @@ namespace Coypu
 
         public void Check(string locator, Options options = null)
         {
-            RetryUntilTimeout(new Check(driver, FindField(locator, options), Merge(options)));
+            RetryUntilTimeout(new CheckAction(driver, FindField(locator, options), Merge(options)));
         }
 
         public void Uncheck(string locator, Options options = null)
@@ -271,12 +272,14 @@ namespace Coypu
         public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null)
         {
             var mergedOptions = Merge(options);
-            timingStrategy.TryUntil(new LambdaBrowserAction(tryThis, Merge(options)), new LambdaPredicateQuery(until, mergedOptions), mergedOptions.Timeout, waitBeforeRetry);
+            var predicateOptions = Options.Merge(new Options {Timeout = waitBeforeRetry}, mergedOptions);
+            timingStrategy.TryUntil(new LambdaBrowserAction(tryThis, mergedOptions),
+                                    new LambdaPredicateQuery(until, predicateOptions), mergedOptions);
         }
 
-        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, Options options = null)
         {
-            timingStrategy.TryUntil(tryThis, until, Merge(options).Timeout, waitBeforeRetry);
+            timingStrategy.TryUntil(tryThis, until, Merge(options));
         }
 
         public State FindState(State[] states, Options options = null)

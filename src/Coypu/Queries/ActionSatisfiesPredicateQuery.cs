@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Coypu.Actions;
 using Coypu.Timing;
 
@@ -8,35 +9,22 @@ namespace Coypu.Queries
     {
         private readonly BrowserAction tryThis;
         private readonly PredicateQuery until;
-        private readonly TimeSpan waitBeforeRetry;
         private readonly TimingStrategy timingStrategy;
-        public TimeSpan RetryInterval { get; private set; }
 
-        public TimeSpan Timeout { get; private set; }
+        public Options Options { get; private set; }
 
-        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan retryInterval, TimeSpan waitBeforeRetry, TimingStrategy timingStrategy)
+        internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, Options options, TimingStrategy timingStrategy)
         {
             this.tryThis = tryThis;
             this.until = until;
-            this.waitBeforeRetry = waitBeforeRetry;
             this.timingStrategy = timingStrategy;
-            RetryInterval = retryInterval;
-            Timeout = overallTimeout;
+            Options = options;
         }
 
         public bool Run()
         {
             tryThis.Act();
-
-            try
-            {
-                timingStrategy.SetOverrideTimeout(waitBeforeRetry);
-                return until.Predicate();
-            }
-            finally
-            {
-                timingStrategy.ClearOverrideTimeout();
-            }
+            return timingStrategy.Synchronise(until);
         }
 
         public bool ExpectedResult

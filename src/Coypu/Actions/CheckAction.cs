@@ -1,10 +1,10 @@
 namespace Coypu.Actions
 {
-    internal class Check : DriverAction
+    internal class CheckAction : DriverAction
     {
         private readonly ElementScope element;
 
-        internal Check(Driver driver, ElementScope element, Options options)
+        internal CheckAction(Driver driver, ElementScope element, Options options)
             : base(driver, options)
         {
             this.element = element;

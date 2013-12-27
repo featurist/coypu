@@ -4,15 +4,11 @@ namespace Coypu.Queries
 {
     public abstract class PredicateQuery : Query<bool>
     {
-
-        protected PredicateQuery()
-        {
-        }
+        public Options Options { get; private set; }
 
         protected PredicateQuery(Options options)
         {
-            Timeout = options.Timeout;
-            RetryInterval = options.RetryInterval;
+            Options = options;
         }
 
         public abstract bool Predicate();
@@ -22,13 +18,9 @@ namespace Coypu.Queries
             return Predicate();
         }
 
-        public bool ExpectedResult 
+        public bool ExpectedResult
         {
             get { return true; }
         }
-
-        public TimeSpan Timeout { get; private set; }
-
-        public TimeSpan RetryInterval { get; private set; }
     }
 }

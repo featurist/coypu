@@ -71,8 +71,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var queryResult = query.Run();
 
-            Assert.That(query.Timeout, Is.EqualTo(timeout));
-            Assert.That(query.RetryInterval, Is.EqualTo(sessionConfiguration.RetryInterval));
+            Assert.That(query.Options.Timeout, Is.EqualTo(timeout));
+            Assert.That(query.Options.RetryInterval, Is.EqualTo(sessionConfiguration.RetryInterval));
 
             return queryResult;
         }

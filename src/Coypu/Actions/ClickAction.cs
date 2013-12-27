@@ -12,8 +12,7 @@ namespace Coypu.Actions
 
         public override void Act()
         {
-            var element = elementScope.Now();
-            Driver.Click(element);
+            Driver.Click(elementScope);
         }
     }
 }

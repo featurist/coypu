@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\BrowserAction.cs" />
-    <Compile Include="Actions\Check.cs" />
+    <Compile Include="Actions\CheckAction.cs" />
     <Compile Include="Actions\ClickAction.cs" />
     <Compile Include="Actions\Choose.cs" />
     <Compile Include="Actions\AcceptModalDialog.cs" />

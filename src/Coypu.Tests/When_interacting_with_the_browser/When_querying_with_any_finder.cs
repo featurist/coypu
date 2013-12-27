@@ -11,8 +11,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_findable_element_exists()
         {
-            browserSession = TestSessionBuilder.Build(new SessionConfiguration(),driver,new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(),driver,new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
+            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
 
             Assert.That(browserSession.FindLink("Sign out").Exists());
         }
@@ -20,8 +20,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_missing_element_does_not_exist()
         {
-            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
+            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
 
             Assert.That(browserSession.FindLink("Sign in").Exists(), Is.EqualTo(false));
         }
@@ -29,8 +29,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_missing_element_is_missing()
         {
-            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
+            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
 
             Assert.That(browserSession.FindLink("Sign in").Missing());
         }
@@ -38,8 +38,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_findable_element_is_not_missing()
         {
-            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeRobustWrapper(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
+            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
 
             Assert.That(browserSession.FindLink("Sign out").Missing(), Is.EqualTo(false));
         }
@@ -47,14 +47,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_checks_for_existing_elements_with_a_RobustQuery()
         {
-            spyRobustWrapper.StubQueryResult(true,false);
+            SpyTimingStrategy.StubQueryResult(true,false);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession);
+            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
             browserSession.FindLink("Sign in").Exists();
             browserSession.FindLink("Sign out").Exists();
 
-            var firstQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
-            var secondQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
+            var firstQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(0);
+            var secondQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(1);
 
             var firstQueryResult = RunQueryAndCheckTiming(firstQuery);
             Assert.That(firstQueryResult, Is.False);
@@ -66,14 +66,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_checks_for_missing_elements_with_a_RobustQuery()
         {
-            spyRobustWrapper.StubQueryResult(true, false);
+            SpyTimingStrategy.StubQueryResult(true, false);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession);
+            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
             browserSession.FindLink("Sign in").Missing();
             browserSession.FindLink("Sign out").Missing();
 
-            var firstQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(0);
-            var secondQuery = spyRobustWrapper.QueriesRan<bool>().ElementAt(1);
+            var firstQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(0);
+            var secondQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(1);
 
             var firstQueryResult = RunQueryAndCheckTiming(firstQuery);
             Assert.That(firstQueryResult, Is.True);

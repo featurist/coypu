@@ -1,13 +1,7 @@
-using Coypu.Finders;
 using NSpec;
 using NUnit.Framework;
 namespace Coypu.Drivers.Tests
 {
-    // TODO: These now all call through Options.Find(query) to Driver.FindXPath
-    // TODO: Move them to text XPath.Button directly against an XML DOM
-    // TODO: Unit tests for ClickButton should then test interactino with Options.Find not the Driver
-    // TODO: Options.Find will then be tested against the Driver for correct Match Strategy implementation
-    // TODO: But all finders through Options.Find(query) except for Windows/Frames using XPath or css where appropriate
     public class When_finding_buttons : DriverSpecs
     {
         [Test]

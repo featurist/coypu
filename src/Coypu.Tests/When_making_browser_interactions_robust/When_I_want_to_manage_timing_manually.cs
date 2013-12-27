@@ -7,10 +7,10 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_making_browser_interactions_robust
 {
     [TestFixture]
-    public class When_I_want_to_make_direct_calls_to_the_robust_wrapper : BrowserInteractionTests
+    public class When_I_want_to_manage_timing_manually : BrowserInteractionTests
     {
         [Test]
-        public void RobustAction_is_exposed_on_the_session()
+        public void RetryUntilTimeout_is_exposed_on_the_session()
         {
             var calledOnWrapper = false;
             browserSession.RetryUntilTimeout(() =>
@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         }
 
         [Test]
-        public void RobustFunction_is_exposed_on_the_session()
+        public void Return_from_RetryUntilTimeout_is_exposed_on_the_session()
         {
             Func<string> function = () => "The expected result";
 
@@ -46,7 +46,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var overallTimeout = TimeSpan.FromMilliseconds(1234);
 
             var options = new Options { Timeout = overallTimeout };
-            browserSession.TryUntil(tryThis, until,TimeSpan.Zero,options);
+            browserSession.TryUntil(tryThis, until, TimeSpan.Zero, options);
 
             var tryUntil = SpyTimingStrategy.DeferredTryUntils[0];
 

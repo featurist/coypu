@@ -6,12 +6,7 @@ namespace Coypu.Queries
     {
         private readonly Func<bool> query;
 
-        public LambdaPredicateQuery(Func<bool> query)
-        {
-            this.query = query;
-        }
-
-        public LambdaPredicateQuery(Func<bool> query, Options options) : base(options)
+        public LambdaPredicateQuery(Func<bool> query, Options options = null) : base(options)
         {
             this.query = query;
         }

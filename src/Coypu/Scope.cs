@@ -453,7 +453,7 @@ namespace Coypu
         /// 
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the until condition is never met</exception>
-        void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+        void TryUntil(BrowserAction tryThis, PredicateQuery until, Options options = null);
 
         /// <summary>
         /// <para>Find the first from a list of possible states that your page may arrive at.</para>
@@ -506,7 +506,6 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text/value, name or id of the button</param>
         /// <param name="until">The condition to be satisfied</param>
-        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>   
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -514,7 +513,7 @@ namespace Coypu
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Scope ClickButton(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+        Scope ClickButton(string locator, PredicateQuery until, Options options = null);
 
         /// <summary>
         /// <para>Click a link and wait for a condition to be satisfied for a specified time otherwise click and wait again.</para> 
@@ -522,7 +521,6 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the link</param>
         /// <param name="until">The condition to be satisfied</param>
-        /// <param name="waitBeforeRetry">How long to wait for the condition to be met before retrying</param>   
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -530,7 +528,7 @@ namespace Coypu
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matching button</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        Scope ClickLink(string locator, PredicateQuery until, TimeSpan waitBeforeRetry, Options options = null);
+        Scope ClickLink(string locator, PredicateQuery until, Options options = null);
 
         /// <summary>
         /// Try and find this scope now

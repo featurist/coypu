@@ -8,9 +8,9 @@ namespace Coypu.Timing
 {
     public class RetryUntilTimeoutTimingStrategy : TimingStrategy
     {
-        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overrallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, Options options)
         {
-            var outcome = Synchronise(new ActionSatisfiesPredicateQuery(tryThis, until, overrallTimeout, until.RetryInterval, waitBeforeRetry, this));
+            var outcome = Synchronise(new ActionSatisfiesPredicateQuery(tryThis, until, options, this));
             if (!outcome)
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
@@ -30,15 +30,15 @@ namespace Coypu.Timing
 
         public TResult Synchronise<TResult>(Query<TResult> query)
         {
-            var interval = query.RetryInterval;
-            var timeout = Timeout(query);
+            var interval = query.Options.RetryInterval;
             var stopWatch = Stopwatch.StartNew();
             while (true)
             {
+
                 try
                 {
                     var result = query.Run();
-                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, timeout, interval))
+                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, Timeout(query), interval))
                     {
                         WaitForInterval(interval);
                         continue;
@@ -46,9 +46,9 @@ namespace Coypu.Timing
                     return result;
                 }
                 catch (NotSupportedException) { throw; }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    if (TimeoutReached(stopWatch, timeout, interval))
+                    if (TimeoutReached(stopWatch, Timeout(query), interval))
                     {
                         throw;
                     }
@@ -70,7 +70,7 @@ namespace Coypu.Timing
             }
             else
             {
-                timeout = query.Timeout;
+                timeout = query.Options.Timeout;
             }
             return timeout;
         }
@@ -89,7 +89,6 @@ namespace Coypu.Timing
         {
             var elapsedTimeToNextCall = TimeSpan.FromMilliseconds(stopWatch.ElapsedMilliseconds) + interval;
             var timeoutReached = elapsedTimeToNextCall >= timeout;
-
             return timeoutReached;
         }
     }

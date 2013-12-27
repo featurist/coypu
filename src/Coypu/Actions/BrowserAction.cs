@@ -5,13 +5,11 @@ namespace Coypu.Actions
 {
     public abstract class BrowserAction : Query<object>
     {
-        public TimeSpan Timeout { get; private set; }
-        public TimeSpan RetryInterval { get; private set; }
+        public Options Options { get; private set; }
 
         protected BrowserAction(Options options)
         {
-            Timeout = options.Timeout;
-            RetryInterval = options.RetryInterval;
+            Options = options;
         }
 
         public abstract void Act();

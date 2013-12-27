@@ -12,7 +12,7 @@ namespace Coypu.Tests.TestDoubles
             return query.Run();
         }
 
-        public void TryUntil(BrowserAction tryThis, PredicateQuery until, TimeSpan overallTimeout, TimeSpan waitBeforeRetry)
+        public void TryUntil(BrowserAction tryThis, PredicateQuery until, Options options)
         {
             tryThis.Act();
         }

@@ -68,8 +68,11 @@
     <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_all_matching_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_single_elements.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_then_checking_an_element.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_then_unchecking_any_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_filling_in_any_field.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_finding_then_clicking_an_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_insepcting_elements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
     <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
@@ -83,10 +86,12 @@
     <Compile Include="When_interacting_with_the_browser\When_inspecting_the_page.cs" />
     <Compile Include="TestException.cs" />
     <Compile Include="TestBuilders\TestSessionBuilder.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_querying_with_any_finder.cs" />
     <Compile Include="When_interacting_with_the_browser\When_saving_screenshots.cs" />
+    <Compile Include="When_interacting_with_the_browser\When_scoping_interactions.cs" />
     <Compile Include="When_making_browser_interactions_robust\TestActions.cs" />
     <Compile Include="When_making_browser_interactions_robust\TestQueries.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_I_want_to_make_direct_calls_to_the_robust_wrapper.cs" />
+    <Compile Include="When_making_browser_interactions_robust\When_I_want_to_manage_timing_manually.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_querying_for_an_expected_result.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_retrying_until_a_timeout.cs" />
     <Compile Include="When_making_browser_interactions_robust\When_trying_an_action_until_a_given_state_is_reached.cs" />

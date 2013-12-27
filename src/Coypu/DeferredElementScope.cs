@@ -98,7 +98,7 @@ namespace Coypu {
 
         public ElementScope Check(Options options = null)
         {
-            Try(new Check(driver, this, Merge(options)));
+            Try(new CheckAction(driver, this, Merge(options)));
             return this;
         }
 
