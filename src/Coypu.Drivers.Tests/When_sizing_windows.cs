@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
-                                            Driver, null, null, null);
+                                            Driver, null, null, null, DisambiguationStrategy);
 
                 try
                 {
@@ -65,7 +65,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
-                                            Driver, null, null, null);
+                                            Driver, null, null, null, DisambiguationStrategy);
 
                 try
                 {

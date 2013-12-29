@@ -88,6 +88,12 @@
     <Compile Include="WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InnerAndOuterHtml.cs" />
+    <Compile Include="AmbiguousResultsWithMatch.First.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AmbiguousResultsWithMatch.Single.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

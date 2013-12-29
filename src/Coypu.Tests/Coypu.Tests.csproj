@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestBuilders\FindsFirstWitNoDisambiguationStrategy.cs" />
     <Compile Include="When_configuring_options.cs" />
     <Compile Include="TestDoubles\SpyRestrictedResourceDownloader.cs" />
     <Compile Include="TestDoubles\StubDriver.cs" />

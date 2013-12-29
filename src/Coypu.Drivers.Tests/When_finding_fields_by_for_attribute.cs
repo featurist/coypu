@@ -1,4 +1,6 @@
-﻿using NSpec;
+﻿using System.Linq;
+using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -8,7 +10,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_text_input()
         {
-            Field("text input field linked by for").Id.should_be("forLabeledTextInputFieldId");
+            Field("text input field linked by for", options: Options.ExactTrue).Id.should_be("forLabeledTextInputFieldId");
         }
 
         [Test]
@@ -45,6 +47,27 @@ namespace Coypu.Drivers.Tests
         public void Finds_file_input()
         {
             Field("file field linked by for").Id.should_be("forLabeledFileFieldId");
+        }
+
+        [Test]
+        public void Finds_by_partial_text()
+        {
+            var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.ExactFalse);
+            Assert.That(fields.Select(e => e.Id).OrderBy(id => id), Is.EquivalentTo(new[]
+                {
+                    "forLabeledRadioFieldExactMatchId",
+                    "forLabeledRadioFieldPartialMatchId"
+                }));
+        }
+
+        [Test]
+        public void Finds_by_exact_text()
+        {
+            var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.ExactTrue);
+            Assert.That(fields.Select(e => e.Id).OrderBy(id => id), Is.EquivalentTo(new[]
+                {
+                    "forLabeledRadioFieldExactMatchId"
+                }));
         }
     }
 }

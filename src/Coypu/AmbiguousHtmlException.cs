@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace Coypu
 {
-    internal class AmbiguousHtmlException : Exception
+    public class AmbiguousHtmlException : Exception
     {
         public AmbiguousHtmlException(string message)
             : base(message)

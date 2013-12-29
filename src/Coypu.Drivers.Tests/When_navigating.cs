@@ -31,7 +31,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
-                                            Driver, null, null, null);
+                                            Driver, null, null, null, DisambiguationStrategy);
 
                 Driver.Visit("http://localhost:4567/auto_login", Root);
                 Driver.Visit("http://localhost:4567", popUp);

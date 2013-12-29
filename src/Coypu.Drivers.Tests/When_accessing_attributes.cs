@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Exposes_element_attributes()
         {
-            var formWithAttributesToTest = new IdFinder(Driver,"attributeTestForm", Root, DefaultOptions).ResolveQuery();
+            var formWithAttributesToTest = Id("attributeTestForm", Root, DefaultOptions);
             formWithAttributesToTest["id"].should_be("attributeTestForm");
             formWithAttributesToTest["method"].should_be("post");
             formWithAttributesToTest["action"].should_be("http://somesite.com/action.htm");

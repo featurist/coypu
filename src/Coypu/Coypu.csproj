@@ -115,6 +115,8 @@
     <Compile Include="Element.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
+    <Compile Include="Finders\DisambiguationStrategy.cs" />
+    <Compile Include="Finders\PreferExactMatchDisambiguationStrategy.cs" />
     <Compile Include="Finders\XPathQueryFinder.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Matchers\AggregateMatcher.cs" />

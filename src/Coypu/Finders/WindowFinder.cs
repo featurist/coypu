@@ -22,7 +22,7 @@ namespace Coypu.Finders
             get { return "window: " + Locator; }
         }
 
-        protected override Exception GetMissingException()
+        protected internal override Exception GetMissingException()
         {
             return new MissingWindowException("Unable to find " + QueryDescription);
         }

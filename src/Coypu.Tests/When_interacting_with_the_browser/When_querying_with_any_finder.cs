@@ -12,7 +12,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_reports_that_a_findable_element_exists()
         {
             browserSession = TestSessionBuilder.Build(new SessionConfiguration(),driver,new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
+
+            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
 
             Assert.That(browserSession.FindLink("Sign out").Exists());
         }
@@ -20,8 +21,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_missing_element_does_not_exist()
         {
-            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null,
+                new ThrowsWhenMissingButNoDisambiguationStrategy());
+            
+            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
 
             Assert.That(browserSession.FindLink("Sign in").Exists(), Is.EqualTo(false));
         }
@@ -29,9 +32,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void It_reports_that_a_missing_element_is_missing()
         {
-            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null, 
+                new ThrowsWhenMissingButNoDisambiguationStrategy());
+            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
 
+           
             Assert.That(browserSession.FindLink("Sign in").Missing());
         }
 
@@ -39,17 +44,20 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         public void It_reports_that_a_findable_element_is_not_missing()
         {
             browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
+            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
 
             Assert.That(browserSession.FindLink("Sign out").Missing(), Is.EqualTo(false));
         }
 
         [Test]
-        public void It_checks_for_existing_elements_with_a_RobustQuery()
+        public void It_checks_for_existing_elements_with_synchronise()
         {
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, SpyTimingStrategy, null, null, null,
+                new ThrowsWhenMissingButNoDisambiguationStrategy());
+
             SpyTimingStrategy.StubQueryResult(true,false);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
+            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
             browserSession.FindLink("Sign in").Exists();
             browserSession.FindLink("Sign out").Exists();
 
@@ -64,11 +72,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void It_checks_for_missing_elements_with_a_RobustQuery()
+        public void It_checks_for_missing_elements_with_synchronise()
         {
+            browserSession = TestSessionBuilder.Build(new SessionConfiguration(),driver, SpyTimingStrategy, null, null, null,
+                new ThrowsWhenMissingButNoDisambiguationStrategy());
+
             SpyTimingStrategy.StubQueryResult(true, false);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession, Options.ExactTrue);
+            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
             browserSession.FindLink("Sign in").Missing();
             browserSession.FindLink("Sign out").Missing();
 

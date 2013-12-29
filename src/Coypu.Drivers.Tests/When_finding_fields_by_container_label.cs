@@ -1,4 +1,6 @@
-﻿using NSpec;
+﻿using System.Linq;
+using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -8,7 +10,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_text_input()
         {
-            Field("text input field in a label container").Id.should_be("containerLabeledTextInputFieldId");
+            Field("text input field in a label container", options: Options.ExactTrue).Id.should_be("containerLabeledTextInputFieldId");
         }
 
         [Test]
@@ -44,7 +46,28 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_file_field()
         {
-            Field("file field in a label container").Id.should_be("containerLabeledFileFieldId");
+            Field("file field in a label container", options: Options.ExactTrue).Id.should_be("containerLabeledFileFieldId");
+        }
+
+        [Test]
+        public void Finds_by_partial_text()
+        {
+            var fields = new FieldFinder(Driver, "Some container labeled radio option", Root, DefaultOptions).Find(Options.ExactFalse);
+            Assert.That(fields.Select(e => e.Id).OrderBy(id => id), Is.EquivalentTo(new[]
+                {
+                    "containerLabeledRadioFieldExactMatchId",
+                    "containerLabeledRadioFieldPartialMatchId"
+                }));
+        }
+
+        [Test]
+        public void Finds_by_exact_text()
+        {
+            var fields = new FieldFinder(Driver, "Some container labeled radio option", Root, DefaultOptions).Find(Options.ExactTrue);
+            Assert.That(fields.Select(e => e.Id).OrderBy(id => id), Is.EquivalentTo(new[]
+                {
+                    "containerLabeledRadioFieldExactMatchId"
+                }));
         }
     }
 }

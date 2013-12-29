@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Drivers.Tests.Sites;
 using Coypu.Drivers.Watin;
 using Coypu.Finders;
+using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 
@@ -63,7 +65,7 @@ namespace Coypu.Drivers.Tests
 
         protected static DriverScope Root
         {
-            get { return root ?? (root = new DriverScope(DefaultSessionConfiguration, new DocumentElementFinder(Driver, DefaultSessionConfiguration), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null)); }
+            get { return root ?? (root = new DriverScope(DefaultSessionConfiguration, new DocumentElementFinder(Driver, DefaultSessionConfiguration), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, new ThrowsWhenMissingButNoDisambiguationStrategy() )); }
         }
 
         protected readonly static Options DefaultOptions = new Options{};
@@ -107,59 +109,70 @@ namespace Coypu.Drivers.Tests
             }
         }
 
+        protected static readonly DisambiguationStrategy DisambiguationStrategy = new ThrowsWhenMissingButNoDisambiguationStrategy();
+        protected static ElementFound FindSingle(ElementFinder finder)
+        {
+            return DisambiguationStrategy.ResolveQuery(finder);
+        }
+
         protected static ElementFound Frame(string locator, DriverScope scope = null, Options options = null)
         {
-            return new FrameFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new FrameFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Button(string locator, DriverScope scope = null, Options options = null)
         {
-            return new ButtonFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new ButtonFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Link(string locator, DriverScope scope = null, Options options = null)
         {
-            return new LinkFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new LinkFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Id(string locator, DriverScope scope = null, Options options = null)
         {
-            return new IdFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new IdFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Field(string locator, DriverScope scope = null, Options options = null)
         {
-            return new FieldFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new FieldFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound XPath(string locator, DriverScope scope = null, Options options = null)
         {
-            return new XPathFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new XPathFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Css(string locator, DriverScope scope = null, Options options = null)
         {
-            return new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Css(string locator, Regex text, DriverScope scope = null, Options options = null)
         {
-            return new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text).ResolveQuery();
+            return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text));
         }
 
         protected static ElementFound Css(string locator, string text, DriverScope scope = null, Options options = null)
         {
-            return new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text).ResolveQuery();
+            return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text));
         }
 
         protected static ElementFound Section(string locator, DriverScope scope = null, Options options = null)
         {
-            return new SectionFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new SectionFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
         protected static ElementFound Fieldset(string locator, DriverScope scope = null, Options options = null)
         {
-            return new FieldsetFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions).ResolveQuery();
+            return FindSingle(new FieldsetFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
+        }
+
+        protected static ElementFound Window(string locator, DriverScope scope = null, Options options = null)
+        {
+            return FindSingle(new WindowFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Coypu.Drivers.Tests
         public void Gets_location_for_correct_window_scope()
         {
             Driver.Click(Link("Open pop up window"));
-            var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null);
+            var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
 
             Assert.That(Driver.Location(popUp).AbsoluteUri, Is.StringEnding("src/Coypu.Drivers.Tests/html/popup.htm"));
         }

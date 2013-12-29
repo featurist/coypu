@@ -13,8 +13,8 @@ namespace Coypu
     /// </summary>
     public class BrowserWindow : DriverScope
     {
-        internal BrowserWindow(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder) 
-            : base(SessionConfiguration, elementFinder, driver, timingStrategy, waiter, urlBuilder)
+        internal BrowserWindow(SessionConfiguration SessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy) 
+            : base(SessionConfiguration, elementFinder, driver, timingStrategy, waiter, urlBuilder, disambiguationStrategy)
         {
         }
 

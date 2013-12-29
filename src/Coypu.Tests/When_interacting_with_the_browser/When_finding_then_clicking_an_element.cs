@@ -10,7 +10,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser {
         public void It_finds_then_synchronises_click_element_on_underlying_driver()
         {
             var element = new StubElement();
-            driver.StubId("something_to_click", element, browserSession, Options.ExactTrue);
+            driver.StubId("something_to_click", element, browserSession, sessionConfiguration);
             SpyTimingStrategy.AlwaysReturnFromRobustly(element);
 
             var elementScope = browserSession.FindId("something_to_click");

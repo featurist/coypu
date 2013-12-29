@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs + 1000);
 
             var options = new Options {Timeout = overallTimeout};
-            browserSession.ClickButton("Some button locator", new LambdaPredicateQuery(() => stubUntil), waitBetweenRetries, options);
+            browserSession.ClickButton("Some button locator", new LambdaPredicateQuery(() => stubUntil, new Options{Timeout = waitBetweenRetries}) , options);
 
             var tryUntilArgs = SpyTimingStrategy.DeferredTryUntils.Single();
 
@@ -77,7 +77,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             AssertClicked(stubButtonToBeClicked);
         }
 
-        private void AssertButtonFound()
+        private void AssertButtonFound
         {
             Assert.That(driver.FindButtonRequests.Contains("Some button locator"), "Wait called before find");
         }

@@ -33,12 +33,13 @@ namespace Coypu
                    new RetryUntilTimeoutTimingStrategy(),
                    new StopwatchWaiter(),
                    new WebClientWithCookies(),
-                   new FullyQualifiedUrlBuilder())
+                   new FullyQualifiedUrlBuilder(),
+                   new PreferExactMatchDisambiguationStrategy())
         {
         }
 
-        internal BrowserSession(DriverFactory driver, SessionConfiguration SessionConfiguration, TimingStrategy timingStrategy, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder)
-            : base(SessionConfiguration, null, driver.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), timingStrategy, waiter, urlBuilder)
+        internal BrowserSession(DriverFactory driver, SessionConfiguration SessionConfiguration, TimingStrategy timingStrategy, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
+            : base(SessionConfiguration, null, driver.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), timingStrategy, waiter, urlBuilder, disambiguationStrategy)
         {
             this.restrictedResourceDownloader = restrictedResourceDownloader;
         }

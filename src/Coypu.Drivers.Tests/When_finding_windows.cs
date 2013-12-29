@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup();
-                var window = new WindowFinder(Driver, "popUpWindowName", Root, DefaultOptions).ResolveQuery();
+                var window = Window("popUpWindowName", Root, DefaultOptions);
 
                 window.Text.should_contain("I am a pop up window");
 
@@ -32,12 +32,12 @@ namespace Coypu.Drivers.Tests
 
         private static ElementFound FindPopUpLink()
         {
-            return new LinkFinder(Driver, "Open pop up window", Root, DefaultOptions).ResolveQuery();
+            return Link("Open pop up window", Root, DefaultOptions);
         }
 
         private static ElementFound FindPopUp2Link()
         {
-            return new LinkFinder(Driver, "Open pop up window 2", Root, DefaultOptions).ResolveQuery();
+            return Link("Open pop up window 2", Root, DefaultOptions);
         }
 
         private static ElementFound FindPopUp()
@@ -90,9 +90,9 @@ namespace Coypu.Drivers.Tests
                 OpenPopup();
 
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
-                                            Driver, null, null, null);
+                                            Driver, null, null, null, null);
 
-                new IdFinder(Driver, "popUpButtonId", popUp, DefaultOptions).ResolveQuery();
+                new IdFinder(Driver, "popUpButtonId", popUp, DefaultOptions);
 
                 FindPopUpLink();
             }
@@ -110,7 +110,7 @@ namespace Coypu.Drivers.Tests
 
         private static ElementFound FindWindow(string locator)
         {
-            return new WindowFinder(Driver, locator, Root, DefaultOptions).ResolveQuery();
+            return Window(locator, Root, DefaultOptions);
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace Coypu.Drivers.Tests
             {
                 OpenPopup();
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
-                                            Driver, null, null, null);
+                                            Driver, null, null, null, DisambiguationStrategy);
 
                 Driver.ExecuteScript("self.close();", popUp);
                 Assert.Throws<MissingWindowException>(() => FindPopUp());

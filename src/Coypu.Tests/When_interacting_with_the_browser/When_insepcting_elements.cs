@@ -81,7 +81,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             stubProperty(stubElement, testValue);
 
-            driver.StubId("some-element", stubElement, browserSession, Options.ExactTrue);
+            driver.StubId("some-element", stubElement, browserSession, sessionConfiguration);
 
             SpyTimingStrategy.AlwaysReturnFromRobustly(stubElement);
 
