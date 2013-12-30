@@ -30,7 +30,6 @@ namespace Coypu.Timing
 
         public TResult Synchronise<TResult>(Query<TResult> query)
         {
-            Console.WriteLine("Start query: " + query);
             var interval = query.Options.RetryInterval;
             var stopWatch = Stopwatch.StartNew();
             while (true)
@@ -41,7 +40,6 @@ namespace Coypu.Timing
                     var result = query.Run();
                     if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, Timeout(query), interval))
                     {
-                        Console.WriteLine("Waiting: " + interval);
                         WaitForInterval(interval);
                         continue;
                     }
@@ -52,7 +50,6 @@ namespace Coypu.Timing
                 {
                     if (TimeoutReached(stopWatch, Timeout(query), interval))
                     {
-                        Console.WriteLine(ex.Message);
                         throw;
                     }
                     WaitForInterval(interval);

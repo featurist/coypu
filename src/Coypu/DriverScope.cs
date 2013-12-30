@@ -276,8 +276,27 @@ namespace Coypu
         {
             var mergedOptions = Merge(options);
             var predicateOptions = Options.Merge(new Options {Timeout = waitBeforeRetry}, mergedOptions);
+
             timingStrategy.TryUntil(new LambdaBrowserAction(tryThis, mergedOptions),
-                                    new LambdaPredicateQuery(until, predicateOptions), mergedOptions);
+                                    new LambdaPredicateQuery(WithZeroTimeout(until), predicateOptions), mergedOptions);
+        }
+
+        private Func<bool> WithZeroTimeout(Func<bool> query)
+        {
+            var zeroTimeoutUntil = new Func<bool>(() =>
+                {
+                    var was = timingStrategy.ZeroTimeout;
+                    timingStrategy.ZeroTimeout = true;
+                    try
+                    {
+                        return query();
+                    }
+                    finally
+                    {
+                        timingStrategy.ZeroTimeout = was;
+                    }
+                });
+            return zeroTimeoutUntil;
         }
 
         public void TryUntil(BrowserAction tryThis, PredicateQuery until, Options options = null)
