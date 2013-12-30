@@ -16,9 +16,10 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             browserSession.FindId("something_to_hover").Hover();
 
+            Assert.That(driver.HoveredElements, Has.No.Member(element));
+            
             RunQueryAndCheckTiming();
 
-            Assert.That(driver.FindCssRequests, Is.Empty, "Finder call not deferred");
             Assert.That(driver.HoveredElements, Has.Member(element));
         }
     }

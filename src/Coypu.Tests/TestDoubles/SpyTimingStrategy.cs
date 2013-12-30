@@ -15,6 +15,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
         private readonly IList<object> queriesRan = new List<object>();
         public static readonly object NO_EXPECTED_RESULT = new object();
+        public bool ExecuteImmediately { get; set; }
 
         public IEnumerable<Query<T>> QueriesRan<T>()
         {
@@ -30,6 +31,9 @@ namespace Coypu.Tests.TestDoubles
 
         public T Synchronise<T>(Query<T> query)
         {
+            if (ExecuteImmediately)
+                return query.Run();
+
             queriesRan.Add(query);
 
             if (alwaysReturn != null)
@@ -71,7 +75,6 @@ namespace Coypu.Tests.TestDoubles
         public class TryUntilArgs
         {
             public TimeSpan OverallTimeout { get { return Options.Timeout; } }
-            public TimeSpan WaitBeforeRetry { get; private set; }
             public BrowserAction TryThisBrowserAction { get; private set; }
             public Query<bool> Until { get; private set; }
             public Options Options { get; private set; }

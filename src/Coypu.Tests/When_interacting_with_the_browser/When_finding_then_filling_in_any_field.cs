@@ -15,13 +15,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser {
 
             var elementScope = browserSession.FindId("something_to_fill_in");
 
-            Assert.That(driver.FindCssRequests, Is.Empty, "Finder not called robustly");
-
             elementScope.FillInWith("some filled in stuff");
 
-            RunQueryAndCheckTiming();
+            Assert.That(driver.SetFields.Keys, Has.No.Member(elementScope));
 
-            Assert.That(driver.FindCssRequests.Any(), Is.False, "Scope finder was not deferred");
+            RunQueryAndCheckTiming();
 
             Assert.That(driver.SetFields.Keys, Has.Member(elementScope));
             Assert.That(driver.SetFields[elementScope].Value, Is.EqualTo("some filled in stuff"));

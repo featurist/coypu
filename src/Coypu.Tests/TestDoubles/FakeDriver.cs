@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -20,7 +19,6 @@ namespace Coypu.Tests.TestDoubles
         public readonly IDictionary<Element, SetFieldParams> SetFields = new Dictionary<Element, SetFieldParams>();
         public readonly IDictionary<Element, string> SentKeys = new Dictionary<Element, string>();
         public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
-        private readonly IList<ScopedStubResult> stubbedLinks = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedAllCssResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedAllXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedExecuteScriptResults = new List<ScopedStubResult>();
@@ -31,8 +29,7 @@ namespace Coypu.Tests.TestDoubles
         private readonly IList<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedTitles = new List<ScopedStubResult>();
         private ElementFound stubbedCurrentWindow;
-        public readonly IList<string> FindLinkRequests = new List<string>();
-        public readonly IList<FindCssParams> FindCssRequests = new List<FindCssParams>();
+        public readonly IList<FindXPathParams> FindXPathRequests = new List<FindXPathParams>();
         public readonly IList<Scope> MaximiseWindowCalls = new List<Scope>();
         public readonly IList<Scope> RefreshCalls = new List<Scope>();
         public readonly IList<ScopedRequest<Size>> ResizeToCalls = new List<ScopedRequest<Size>>();
@@ -59,7 +56,7 @@ namespace Coypu.Tests.TestDoubles
 
         class ScopedStubResult
         {
-            public object Locator;
+            public string Locator;
             public object Result;
             public Scope Scope;
             public Regex TextPattern;
@@ -74,7 +71,7 @@ namespace Coypu.Tests.TestDoubles
 
         public Drivers.Browser Browser { get; private set; }
 
-        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Options options = null, Regex textPattern = null)
+        private T Find<T>(IEnumerable<ScopedStubResult> stubbed, string locator, Scope scope, Options options = null, Regex textPattern = null)
         {
             var stubResult = stubbed
                 .FirstOrDefault(
@@ -94,13 +91,6 @@ namespace Coypu.Tests.TestDoubles
                 return Enumerable.Empty<T>();
 
             return (IEnumerable<T>) stubResult.Result;
-        }
-
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
-        {
-            FindLinkRequests.Add(linkText);
-
-            return FindAll<ElementFound>(stubbedLinks, linkText, scope, options);
         }
 
         public void Click(Element element)
@@ -125,11 +115,6 @@ namespace Coypu.Tests.TestDoubles
         public void Visit(string url, Scope scope)
         {
             Visits.Add(new ScopedRequest<string>{Request = url, Scope = scope});
-        }
-
-        public void StubLink(string locator, ElementFound element, Scope scope, Options options)
-        {
-            stubbedLinks.Add(new ScopedStubResult{Locator = locator, Scope =  scope, Result = new []{element}, Options = options});
         }
 
         public void StubDialog(string text, bool result, Scope scope)
@@ -265,6 +250,7 @@ namespace Coypu.Tests.TestDoubles
 
         public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
         {
+            FindXPathRequests.Add(new FindXPathParams{XPath = xpath, Scope = scope, Options = options});
             return Find<IEnumerable<ElementFound>>(stubbedAllXPathResults, xpath, scope, options);
         }
 
@@ -335,9 +321,11 @@ namespace Coypu.Tests.TestDoubles
         public string Value { get; set; }
     }
 
-    public class FindCssParams
+    public class FindXPathParams
     {
-        public string CssSelector { get; set; }
+        public string XPath { get; set; }
         public Regex TextPattern { get; set; }
+        public Options Options { get; set; }
+        public Scope Scope { get; set; }
     }
 }

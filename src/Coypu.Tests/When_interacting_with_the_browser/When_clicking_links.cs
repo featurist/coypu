@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coypu.Drivers;
 using Coypu.Queries;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
@@ -33,12 +34,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [TestCase(false, 321)]
         public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int waitBeforeRetrySecs)
         {
-            var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
-            var overallTimeout = TimeSpan.FromSeconds(waitBeforeRetrySecs + 1000);
-            var linkToBeClicked = StubLinkToBeClicked("Some link locator");
-
+            var overallTimeout = TimeSpan.FromSeconds(waitBeforeRetrySecs * 1000);
             var options = new Options{Timeout = overallTimeout};
-            browserSession.ClickLink("Some link locator", new LambdaPredicateQuery(() => stubUntil), waitBetweenRetries,options);
+            var waitBetweenRetries = TimeSpan.FromSeconds(waitBeforeRetrySecs);
+            var linkToBeClicked = StubLinkToBeClicked("Some link locator", options);
+
+            browserSession.ClickLink("Some link locator", new LambdaPredicateQuery(() => stubUntil, new Options{Timeout = waitBetweenRetries}), options);
 
             var tryUntilArgs = GetTryUntilArgs();
 
@@ -48,7 +49,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             var queryResult = tryUntilArgs.Until.Run();
             Assert.That(queryResult, Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.WaitBeforeRetry, Is.EqualTo(waitBetweenRetries));
+            Assert.That(tryUntilArgs.Until.Options.Timeout, Is.EqualTo(waitBetweenRetries));
             Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
         }
 
@@ -65,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                                     {
                                         Assert.That(milliseconds, Is.EqualTo(expectedWait));
 
-                                        AssertButtonFound();
+                                        AssertLinkFound();
                                         AssertButtonNotClickedYet(stubLinkToBeClicked);
 
                                         waiterCalled = true;
@@ -77,9 +78,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             AssertClicked(stubLinkToBeClicked);
         }
 
-        private void AssertButtonFound()
+        private void AssertLinkFound()
         {
-            Assert.That(driver.FindLinkRequests.Contains("Some link locator"), "Wait called before find");
+            Assert.That(driver.FindXPathRequests.Any(), "Wait called before find");
         }
 
         private void AssertButtonNotClickedYet(StubElement linkToBeClicked)
@@ -87,20 +88,21 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(driver.ClickedElements, Has.No.Member(linkToBeClicked), "Expected link not to have been clicked yet, but it has been");
         }
 
-        private SpyRobustWrapper.TryUntilArgs GetTryUntilArgs()
+        private SpyTimingStrategy.TryUntilArgs GetTryUntilArgs()
         {
-            return spyRobustWrapper.DeferredTryUntils.Single();
+            return SpyTimingStrategy.DeferredTryUntils.Single();
         }
 
         private void ExecuteLastDeferedRobustAction()
         {
-            spyRobustWrapper.QueriesRan<object>().Last().Run();
+            SpyTimingStrategy.QueriesRan<object>().Last().Run();
         }
 
-        private StubElement StubLinkToBeClicked(string someLinkLocator)
+        private StubElement StubLinkToBeClicked(string locator, Options options = null)
         {
             var linkToBeClicked = new StubElement { Id = Guid.NewGuid().ToString() };
-            driver.StubLink(someLinkLocator, linkToBeClicked, browserSession);
+            var linkXPath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Link(locator, options ?? sessionConfiguration);
+            driver.StubAllXPath(linkXPath, new[]{linkToBeClicked}, browserSession, options ?? sessionConfiguration);
             return linkToBeClicked;
         }
     }

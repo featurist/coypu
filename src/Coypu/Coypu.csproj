@@ -106,6 +106,7 @@
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="DeferredElementScope.cs" />
     <Compile Include="DriverFactory.cs" />
+    <Compile Include="Drivers\Html.cs" />
     <Compile Include="Drivers\NoSuchBrowserException.cs" />
     <Compile Include="Drivers\Selenium\FrameFinder.cs" />
     <Compile Include="Drivers\Selenium\ImageFormatParser.cs" />
@@ -172,7 +173,7 @@
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\PredicateQuery.cs" />
     <Compile Include="Queries\Query.cs" />
-    <Compile Include="RobustElementScope.cs" />
+    <Compile Include="SynchronisedElementScope.cs" />
     <Compile Include="Actions\DriverAction.cs" />
     <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
     <Compile Include="RobustWindowScope.cs" />

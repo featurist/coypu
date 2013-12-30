@@ -213,11 +213,6 @@ namespace Coypu.Drivers.Watin
                    select new Cookie(name, value);
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
-        {
-            return elementFinder.FindLinks(linkText, scope, options).Select(BuildElement);
-        }
-
         public void Click(Element element)
         {
             // If we use Click, then we can get a deadlock if IE is displaying a modal dialog.

@@ -1,15 +1,14 @@
-using System;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
 
 namespace Coypu
 {
-    public class RobustElementScope : ElementScope 
+    public class SynchronisedElementScope : ElementScope 
     {
         private readonly Options options;
 
-        internal RobustElementScope(ElementFinder elementFinder, DriverScope outerScope, Options options)
+        internal SynchronisedElementScope(ElementFinder elementFinder, DriverScope outerScope, Options options)
             : base(elementFinder, outerScope)
         {
             this.options = options;

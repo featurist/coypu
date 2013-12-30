@@ -10,7 +10,6 @@ namespace Coypu
     {
         object Native { get; }
         bool Disposed { get; }
-        IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options);
         IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null);
         IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options);
         IEnumerable<ElementFound> FindId(string id, Scope scope, Options options);

@@ -10,11 +10,11 @@ namespace Coypu.Finders
         
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            var xpath = new XPath(Scope.Browser.UppercaseTagNames);
-            return Driver.FindAllXPath(GetQuery(xpath)(Locator, options), Scope, options);
+            var html = new Html(Scope.Browser.UppercaseTagNames);
+            return Driver.FindAllXPath(GetQuery(html)(Locator, options), Scope, options);
         }
 
-        protected abstract Func<string, Options, string> GetQuery(XPath xpath);
+        protected abstract Func<string, Options, string> GetQuery(Html html);
 
     }
 }

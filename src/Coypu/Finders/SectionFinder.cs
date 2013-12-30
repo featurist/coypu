@@ -17,9 +17,9 @@ namespace Coypu.Finders
             get { return "section: " + Locator; }
         }
 
-        protected override Func<string, Options, string> GetQuery(XPath xpath)
+        protected override Func<string, Options, string> GetQuery(Html html)
         {
-            return xpath.Section;
+            return html.Section;
         }
     }
 }

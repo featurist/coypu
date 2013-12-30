@@ -17,11 +17,6 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
-        {
-            return Enumerable.Empty<ElementFound>();
-        }
-
         public void Click(Element element)
         {
         }

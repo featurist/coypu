@@ -82,15 +82,6 @@ namespace Coypu.Drivers.Selenium
             return frameFinder.FindFrame(locator, scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindLinks(string linkText, Scope scope, Options options)
-        {
-            var by = options.Exact ? 
-                By.LinkText(linkText) : 
-                By.PartialLinkText(linkText);
-
-            return FindAll(by, scope, options).Select(BuildElement);
-        }
-
         public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
         {
             return FindAll(By.Id(id), scope, options).Select(BuildElement);

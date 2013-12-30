@@ -61,6 +61,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var query = SpyTimingStrategy.QueriesRan<T>().ElementAt(index);
             return RunQueryAndCheckTiming(query, timeout);
         }
+        
+        protected object RunQueryAndCheckTiming(int index)
+        {
+            var query = SpyTimingStrategy.QueriesRan<Object>().ElementAt(index);
+            return RunQueryAndCheckTiming(query);
+        }
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query)
         {
@@ -69,6 +75,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         protected T RunQueryAndCheckTiming<T>(Query<T> query, TimeSpan timeout)
         {
+            SpyTimingStrategy.ExecuteImmediately = true;
             var queryResult = query.Run();
 
             Assert.That(query.Options.Timeout, Is.EqualTo(timeout));

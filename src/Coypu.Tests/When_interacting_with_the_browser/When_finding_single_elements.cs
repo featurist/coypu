@@ -24,43 +24,43 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindButton_Should_find_robust_scope()
         {
-            Should_find_robust_scope<ButtonFinder, ElementScope, RobustElementScope>(browserSession.FindButton);
+            Should_find_robust_scope<ButtonFinder, ElementScope, SynchronisedElementScope>(browserSession.FindButton);
         }
         
         [Test]
         public void FindLink_Should_find_robust_scope()
         {
-            Should_find_robust_scope<LinkFinder, ElementScope, RobustElementScope>(browserSession.FindLink);
+            Should_find_robust_scope<LinkFinder, ElementScope, SynchronisedElementScope>(browserSession.FindLink);
         }
 
         [Test]
         public void FindField_Should_find_robust_scope()
         {
-            Should_find_robust_scope<FieldFinder, ElementScope, RobustElementScope>(browserSession.FindField);
+            Should_find_robust_scope<FieldFinder, ElementScope, SynchronisedElementScope>(browserSession.FindField);
         }
 
         [Test]
         public void FindCss_Should_find_robust_scope()
         {
-            Should_find_robust_scope<CssFinder, ElementScope, RobustElementScope>(browserSession.FindCss);
+            Should_find_robust_scope<CssFinder, ElementScope, SynchronisedElementScope>(browserSession.FindCss);
         }
 
         [Test]
         public void FindId_Should_find_robust_scope()
         {
-            Should_find_robust_scope<IdFinder, ElementScope, RobustElementScope>(browserSession.FindId);
+            Should_find_robust_scope<IdFinder, ElementScope, SynchronisedElementScope>(browserSession.FindId);
         }
 
         [Test]
         public void FindSection_Should_find_robust_scope()
         {
-            Should_find_robust_scope<SectionFinder, ElementScope, RobustElementScope>(browserSession.FindSection);
+            Should_find_robust_scope<SectionFinder, ElementScope, SynchronisedElementScope>(browserSession.FindSection);
         }
 
         [Test]
         public void FindFieldset_Should_find_robust_scope()
         {
-            Should_find_robust_scope<FieldsetFinder, ElementScope, RobustElementScope>(browserSession.FindFieldset);
+            Should_find_robust_scope<FieldsetFinder, ElementScope, SynchronisedElementScope>(browserSession.FindFieldset);
         }
 
         [Test]
@@ -72,13 +72,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindFrame_Should_find_robust_scope()
         {
-            Should_find_robust_scope<FrameFinder, ElementScope, RobustElementScope>(browserSession.FindFrame);
+            Should_find_robust_scope<FrameFinder, ElementScope, SynchronisedElementScope>(browserSession.FindFrame);
         }
 
         [Test]
         public void FindXPath_Should_find_robust_scope()
         {
-            Should_find_robust_scope<XPathFinder,ElementScope,RobustElementScope>(browserSession.FindXPath);
+            Should_find_robust_scope<XPathFinder,ElementScope,SynchronisedElementScope>(browserSession.FindXPath);
         }
 
         private void Should_find_robust_scope<T,TScope,TReturn>(Func<string, Options, TScope> findButton) where TScope : DriverScope

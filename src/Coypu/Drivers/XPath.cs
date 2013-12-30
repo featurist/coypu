@@ -29,6 +29,19 @@ namespace Coypu.Drivers
             return String.Format(value, args.Select(a => Literal(a.ToString())).ToArray());
         }
 
+        public const string and = " and ";
+        public const string or = " or ";
+
+        public string Group(string expression)
+        {
+            return "(" + expression + ")";
+        }
+
+        public string And(string expression)
+        {
+            return and + Group(expression);
+        }
+
         internal string Literal(string value)
         {
             if (HasNoDoubleQuotes(value))
@@ -77,26 +90,37 @@ namespace Coypu.Drivers
             return !value.Contains("\"");
         }
 
-        public static string XPathNodeHasOneOfClasses(params string[] classNames)
+        public string HasOneOfClasses(params string[] classNames)
         {
-            return String.Join(" or ", classNames.Select(XPathNodeHasClass).ToArray());
+            return Group(String.Join(" or ", classNames.Select(XPathNodeHasClass).ToArray()));
         }
 
-        public static string XPathNodeHasClass(string className)
+        public string XPathNodeHasClass(string className)
         {
-            return String.Format(" contains(@class,' {0}') " +
+            return String.Format("contains(@class,' {0}') " +
                                  "or contains(@class,'{0} ') " +
-                                 "or contains(@class,' {0} ') ", className);
+                                 "or contains(@class,' {0} ')", className);
+        }
+
+
+        public string AttributeIsOneOfOrMissing(string attributeName, string[] values)
+        {
+            return Group(AttributeIsOneOf(attributeName, values) + or + "not(@" + attributeName + ")");
         }
 
         public string AttributeIsOneOf(string attributeName, string[] values)
         {
-            return "(" + String.Join(" or ", values.Select(t => "@" + attributeName + "='" + t + "'").ToArray()) + ")";
+            return Group(String.Join(" or ", values.Select(t => Format("@" + attributeName + " = {0}",t)).ToArray()));
+        }
+
+        public string Attr(string name, string value)
+        {
+            return Format("@" + name + " = {0}", value).Trim();
         }
 
         public string TagNamedOneOf(params string[] fieldTagNames)
         {
-            return "(" + string.Join(" or ", fieldTagNames.Select(t => "name()='" + CasedTagName(t) + "'").ToArray()) + ")";
+            return Group(string.Join(" or ", fieldTagNames.Select(t => Format("name() = {0}", CasedTagName(t))).ToArray()));
         }
 
         public string CasedTagName(string tagName)
@@ -104,97 +128,25 @@ namespace Coypu.Drivers
             return uppercaseTagNames ? tagName.ToUpper() : tagName; ;
         }
 
-        public string FrameXPath(string locator)
+        public string AttributesMatchLocator(string locator, bool exact, params string[] attributes)
         {
-            return Format(
-                ".//*[" + TagNamedOneOf("iframe", "frame") + "]" +
-                "[" + FrameAttributesMatch(locator) + "]",
-                locator.Trim());
+            return Group(string.Join(" or ", attributes.Select(a => Is(a, locator, exact)).ToArray()));
         }
 
-        private string FrameAttributesMatch(string locator)
-        {
-            return AttributesMatchLocator(locator, true, "@id", "@name", "@title");
-        }
-
-        private static readonly string[] InputButtonTypes = new[] { "button", "submit", "image", "reset" };
-
-        public string Button(string locator, Options options)
-        {
-            return Format(
-                ".//*[" + IsInputButton() +
-                "     or " + TagNamedOneOf("button") +
-                "     or " + XPathNodeHasOneOfClasses("button", "btn") +
-                "     or @role = 'button'" +
-                "   ][" + AttributesMatchLocator(locator, true, "@id", "@name") + 
-                "     or " + AttributesMatchLocator(locator.Trim(), options.Exact, "@value", "@alt", "normalize-space()") + 
-                "]",
-                locator.Trim());
-        }
-
-        private string AttributesMatchLocator(string locator, bool exact, params string[] attributes)
-        {
-            return string.Join(" or ", attributes.Select(a => Is(a, locator, exact)).ToArray());
-        }
-
-        private string IsInputButton()
-        {
-            return "(" + TagNamedOneOf("input") + " and " + AttributeIsOneOf("type", InputButtonTypes) + ")";
-        }
-
-        public string Fieldset(string locator, Options options)
-        {
-            return Format(".//fieldset[legend[" + IsText(locator, options.Exact) + "] or @id = {0}]", locator);
-        }
-
-        private static readonly string[] FieldTagNames = new[] { "input", "select", "textarea" };
-        private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file", "email", "tel", "url" };
-        private static readonly string[] FindByNameTypes = FieldInputTypes.Except(new[] { "radio" }).ToArray();
-        private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
-        private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
-
-        public string Field(string locator, Options options)
-        {
-            return ".//*[(" + TagNamedOneOf(FieldTagNames) +
-                   "   and " +
-                   "   ("      + IsForLabeled(locator, options.Exact) + 
-                   "      or " + IsContainerLabeled(locator, options.Exact) + 
-                   "      or " + HasIdOrPlaceholder(locator, options) +
-                   "      or " + HasName(locator) +
-                   "      or " + HasValue(locator) +
-                   "   )" +
-                   ")]";
-        }
-
-        private string IsContainerLabeled(string locator, bool exact)
+        public string IsContainerLabeled(string locator, bool exact)
         {
             return Format("ancestor::label[" + IsText(locator, exact) + "]", locator);
         }
 
-        private string IsForLabeled(string locator, bool exact)
+        public string IsForLabeled(string locator, bool exact)
         {
-            return Format("(@id = //label[" + IsText(locator, exact) + "]/@for)", locator);
-        }
-
-        private string HasValue(string locator)
-        {
-            return Format("(" + AttributeIsOneOf("type", FindByValueTypes) + " and @value = {0})", locator);
-        }
-
-        private string HasName(string locator)
-        {
-            return Format("((" + AttributeIsOneOf("type", FindByNameTypes) + " or not(@type)) and @name = {0})", locator);
-        }
-
-        private string HasIdOrPlaceholder(string locator, Options options)
-        {
-            return Format("(" + IsAFieldInputType(options) + " and " + "(@id = {0} or " + Is("@placeholder", locator, options.Exact) + "))", locator);
+            return Format(" (@id = //label[" + IsText(locator, exact) + "]/@for) ", locator);
         }
 
         public string Is(string selector, string locator, bool exact)
         {
             return exact 
-                ? Format(selector + " = {0}", locator)
+                ? Format(selector + " = {0} ", locator)
                 : Format("contains(" + selector + ",{0})", locator);
         }
 
@@ -203,26 +155,19 @@ namespace Coypu.Drivers
             return Is("normalize-space()", locator,exact);
         }
 
-        private string IsAFieldInputType(Options options)
+        protected string Descendent(string tagName = "*")
         {
-            var fieldInputTypes = options.ConsiderInvisibleElements
-                            ? FieldInputTypeWithHidden
-                            : FieldInputTypes;
-
-            return "(" + AttributeIsOneOf("type", fieldInputTypes) + " or not(@type))";
+            return ".//" + tagName;
         }
 
-        readonly string[] sectionTags = { "section", "div" };
-        readonly string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
-
-        public string Section(string locator, Options options)
+        protected string Child(string tagName = "*")
         {
-            return Format(".//*[" + TagNamedOneOf(sectionTags) +
-                          " and (" +
-                          "      ./*[" + TagNamedOneOf(headerTags) + " and " + IsText(locator, options.Exact) + " ]" +
-                          "      or @id = {0}" +
-                          "     )" +
-                          "]", locator.Trim());
+            return "./" + tagName;
+        }
+
+        protected static string Where(string predicate)
+        {
+            return "[" + predicate + "]";
         }
     }
 }

@@ -13,9 +13,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             browserSession = TestSessionBuilder.Build(new SessionConfiguration(),driver,new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
+            driver.StubId("Signout", new StubElement(), browserSession, sessionConfiguration);
 
-            Assert.That(browserSession.FindLink("Sign out").Exists());
+            Assert.That(browserSession.FindId("Signout").Exists());
         }
 
         [Test]
@@ -24,9 +24,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null,
                 new ThrowsWhenMissingButNoDisambiguationStrategy());
             
-            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
+            driver.StubId("Signout", new StubElement(), browserSession, sessionConfiguration);
 
-            Assert.That(browserSession.FindLink("Sign in").Exists(), Is.EqualTo(false));
+            Assert.That(browserSession.FindId("Signin").Exists(), Is.EqualTo(false));
         }
 
         [Test]
@@ -34,19 +34,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null, 
                 new ThrowsWhenMissingButNoDisambiguationStrategy());
-            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
+            driver.StubId("Signout", new StubElement(), browserSession, sessionConfiguration);
 
            
-            Assert.That(browserSession.FindLink("Sign in").Missing());
+            Assert.That(browserSession.FindId("Signin").Missing());
         }
 
         [Test]
         public void It_reports_that_a_findable_element_is_not_missing()
         {
             browserSession = TestSessionBuilder.Build(new SessionConfiguration(), driver, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, null);
-            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
+            driver.StubId("Signout", new StubElement(), browserSession, sessionConfiguration);
 
-            Assert.That(browserSession.FindLink("Sign out").Missing(), Is.EqualTo(false));
+            Assert.That(browserSession.FindId("Signout").Missing(), Is.EqualTo(false));
         }
 
         [Test]
@@ -57,9 +57,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             SpyTimingStrategy.StubQueryResult(true,false);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
-            browserSession.FindLink("Sign in").Exists();
-            browserSession.FindLink("Sign out").Exists();
+            driver.StubId("Signout", new StubElement(), browserSession, sessionConfiguration);
+            browserSession.FindId("Signin").Exists();
+            browserSession.FindId("Signout").Exists();
 
             var firstQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(0);
             var secondQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(1);
@@ -79,9 +79,9 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             SpyTimingStrategy.StubQueryResult(true, false);
 
-            driver.StubLink("Sign out", new StubElement(), browserSession, sessionConfiguration);
-            browserSession.FindLink("Sign in").Missing();
-            browserSession.FindLink("Sign out").Missing();
+            driver.StubId("Signout", new StubElement(), browserSession, sessionConfiguration);
+            browserSession.FindId("Signin").Missing();
+            browserSession.FindId("Signout").Missing();
 
             var firstQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(0);
             var secondQuery = SpyTimingStrategy.QueriesRan<bool>().ElementAt(1);

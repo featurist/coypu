@@ -18,9 +18,9 @@ namespace Coypu.Finders
             get { return "fieldset: " + Locator; }
         }
 
-        protected override Func<string, Options, string> GetQuery(XPath xpath)
+        protected override Func<string, Options, string> GetQuery(Html html)
         {
-            return xpath.Fieldset;
+            return html.Fieldset;
         }
     }
 }

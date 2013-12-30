@@ -39,7 +39,7 @@ namespace Coypu.Finders
 
         internal ElementScope AsScope()
         {
-            return new RobustElementScope(this, Scope, options);
+            return new SynchronisedElementScope(this, Scope, options);
         }
     }
 

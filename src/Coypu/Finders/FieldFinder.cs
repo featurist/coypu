@@ -12,9 +12,9 @@ namespace Coypu.Finders
             get { return true; }
         }
 
-        protected override Func<string, Options, string> GetQuery(XPath xpath)
+        protected override Func<string, Options, string> GetQuery(Html html)
         {
-            return xpath.Field;
+            return html.Field;
         }
 
         internal override string QueryDescription
