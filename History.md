@@ -1,3 +1,12 @@
+# Version 1.0.0
+
+### Updated
+
+* Selenium WebDriver 2.39.0
+
+Release date: 2013-12-20
+
+
 # Version 0.23.1
 
 ### Fix
