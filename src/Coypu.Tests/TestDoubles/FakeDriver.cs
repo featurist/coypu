@@ -218,11 +218,6 @@ namespace Coypu.Tests.TestDoubles
             SetFields.Add(element, new SetFieldParams{Value = value});
         }
 
-        public void Select(Element element, string option)
-        {
-            SelectedOptions.Add(element, option);
-        }
-
         public object Native
         {
             get { return "Native driver on fake driver"; }

@@ -61,12 +61,8 @@ namespace Coypu.Drivers.Tests
             var textField = Field("containerLabeledSelectFieldId");
             textField.Value.should_be("select2value1");
 
-            Driver.Select(textField, "select two option two");
-
             var findAgain = Field("containerLabeledSelectFieldId");
             findAgain.Value.should_be("select2value2");
-
-            Driver.Select(textField, "select2value1");
 
             var andAgain = Field("containerLabeledSelectFieldId");
             andAgain.Value.should_be("select2value1");
@@ -77,8 +73,6 @@ namespace Coypu.Drivers.Tests
         {
             var textField = Field("containerLabeledSelectFieldId");
             textField.Name.should_be("containerLabeledSelectFieldName");
-
-            Driver.Select(textField, "select two option two");
 
             Field("containerLabeledSelectFieldId", Root).Name.should_be("containerLabeledSelectFieldName - changed");
         }

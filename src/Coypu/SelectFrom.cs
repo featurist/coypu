@@ -10,14 +10,16 @@ namespace Coypu
         private readonly TimingStrategy timingStrategy;
         private readonly DriverScope scope;
         private readonly Options options;
+        private readonly DisambiguationStrategy disambiguationStrategy;
 
-        internal SelectFrom(string option, Driver driver, TimingStrategy timingStrategy, DriverScope scope, Options options)
+        internal SelectFrom(string option, Driver driver, TimingStrategy timingStrategy, DriverScope scope, Options options, DisambiguationStrategy disambiguationStrategy)
         {
             this.option = option;
             this.driver = driver;
             this.timingStrategy = timingStrategy;
             this.scope = scope;
             this.options = options;
+            this.disambiguationStrategy = disambiguationStrategy;
         }
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void From(string locator)
         {
-            timingStrategy.Synchronise(new Select(driver, scope, locator, option, options));
+            timingStrategy.Synchronise(new Select(driver, scope, locator, option, options, disambiguationStrategy));
         }
 
     }

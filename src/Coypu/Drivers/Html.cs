@@ -96,6 +96,13 @@ namespace Coypu.Drivers
                         or + Attr("id", locator, exact: true)));
         }
 
+        public string Option(string locator, Options options)
+        {
+            return
+                Child("option") +
+                Where(IsText(locator, options.Exact) + or + Is("@value", locator, options.Exact));
+        }
+
         private string HasValue(string locator)
         {
             return Group(AttributeIsOneOf("type", FindByValueTypes) + and + Attr("value", locator, exact: true));

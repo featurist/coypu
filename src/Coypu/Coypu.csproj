@@ -102,7 +102,7 @@
     <Compile Include="Actions\SendKeys.cs" />
     <Compile Include="Actions\Uncheck.cs" />
     <Compile Include="ActivatorDriverFactory.cs" />
-    <Compile Include="AmbiguousHtmlException.cs" />
+    <Compile Include="AmbiguousException.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="DeferredElementScope.cs" />
     <Compile Include="DriverFactory.cs" />
@@ -149,7 +149,6 @@
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />
     <Compile Include="Drivers\Selenium\Dialogs.cs" />
     <Compile Include="Drivers\Selenium\MouseControl.cs" />
-    <Compile Include="Drivers\Selenium\OptionSelector.cs" />
     <Compile Include="Drivers\Selenium\DriverFactory.cs" />
     <Compile Include="Drivers\Selenium\ElementFinder.cs" />
     <Compile Include="Drivers\Selenium\TextMatcher.cs" />

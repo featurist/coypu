@@ -133,7 +133,7 @@ namespace Coypu
 
         public SelectFrom Select(string option, Options options = null)
         {
-            return new SelectFrom(option, driver, timingStrategy, this, Merge(options));
+            return new SelectFrom(option, driver, timingStrategy, this, Merge(options), disambiguationStrategy);
         }
 
         public bool HasContent(string text, Options options = null)

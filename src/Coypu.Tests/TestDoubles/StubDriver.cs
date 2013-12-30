@@ -29,10 +29,6 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public void Select(Element element, string option)
-        {
-        }
-
         public object Native
         {
             get { return "Native driver on stub driver"; }

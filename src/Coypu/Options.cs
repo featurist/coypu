@@ -162,7 +162,7 @@ namespace Coypu
 
             if (Match == Match.Single && count > 1)
             {
-                throw new AmbiguousHtmlException(BuildAmbiguousMessage(queryDescription, count));
+                throw new AmbiguousException(BuildAmbiguousMessage(queryDescription, count));
             }
 
             if (count == 0)
@@ -193,22 +193,22 @@ Your options:
         /// <summary>
         /// Merge any unset Options from another set of Options.
         /// </summary>
-        /// <param name="original">Any options unset will be copied from this</param>
-        /// <param name="with">Any options unset will be copied from this</param>
+        /// <param name="preferredOptions">The preferred set of options</param>
+        /// <param name="defaultOptions">Any unset preferred options will be copied from this</param>
         /// <returns>The new merged Options</returns>
-        internal static Options Merge(Options original, Options defaults)
+        public static Options Merge(Options preferredOptions, Options defaultOptions)
         {
-            original = original ?? new Options();
-            defaults = defaults ?? new Options();
+            preferredOptions = preferredOptions ?? new Options();
+            defaultOptions = defaultOptions ?? new Options();
 
             return new Options
                 {
-                    considerInvisibleElements = Default(original.considerInvisibleElements, defaults.considerInvisibleElements),
-                    exact = Default(original.exact, defaults.exact),
-                    match = Default(original.match, defaults.match),
-                    retryInterval = Default(original.retryInterval, defaults.retryInterval),
-                    timeout = Default(original.timeout, defaults.timeout),
-                    waitBeforeClick = Default(original.waitBeforeClick, defaults.waitBeforeClick)
+                    considerInvisibleElements = Default(preferredOptions.considerInvisibleElements, defaultOptions.considerInvisibleElements),
+                    exact = Default(preferredOptions.exact, defaultOptions.exact),
+                    match = Default(preferredOptions.match, defaultOptions.match),
+                    retryInterval = Default(preferredOptions.retryInterval, defaultOptions.retryInterval),
+                    timeout = Default(preferredOptions.timeout, defaultOptions.timeout),
+                    waitBeforeClick = Default(preferredOptions.waitBeforeClick, defaultOptions.waitBeforeClick)
                 };
         }
 

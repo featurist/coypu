@@ -18,7 +18,6 @@ namespace Coypu.Drivers.Selenium
         private readonly TextMatcher textMatcher;
         private readonly Dialogs dialogs;
         private readonly MouseControl mouseControl;
-        private readonly OptionSelector optionSelector;
         private readonly XPath xPath;
         private readonly Browser browser;
         private readonly WindowHandleFinder windowHandleFinder;
@@ -39,7 +38,6 @@ namespace Coypu.Drivers.Selenium
             windowHandleFinder = new WindowHandleFinder(this.webDriver);
             dialogs = new Dialogs(this.webDriver);
             mouseControl = new MouseControl(this.webDriver);
-            optionSelector = new OptionSelector();
         }
 
         public Uri Location(Scope scope)
@@ -199,11 +197,6 @@ namespace Coypu.Drivers.Selenium
             catch (InvalidElementStateException) { }// Non user-editable elements (file inputs) - chrome/IE
             catch (InvalidOperationException) {} // Non user-editable elements (file inputs) - firefox
             SendKeys(element, value);
-        }
-
-        public void Select(Element element, string option)
-        {
-            optionSelector.Select(element, option);
         }
 
         public void AcceptModalDialog(Scope scope)

@@ -27,7 +27,6 @@ namespace Coypu
         void Check(Element field);
         void Uncheck(Element field);
         void Set(Element element, string value);
-        void Select(Element element, string option);
         void Visit(string url, Scope scope);
         void GoBack(Scope scope);
         void GoForward(Scope scope);

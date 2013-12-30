@@ -14,7 +14,7 @@ namespace Coypu.Finders
 
             var count = results.Length;
             if (count > 1)
-                throw new AmbiguousHtmlException(elementFinder.Options.BuildAmbiguousMessage(elementFinder.QueryDescription, count));
+                throw new AmbiguousException(elementFinder.Options.BuildAmbiguousMessage(elementFinder.QueryDescription, count));
 
             if (count == 0)
                 throw elementFinder.GetMissingException();

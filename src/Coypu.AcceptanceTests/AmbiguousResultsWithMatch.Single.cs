@@ -17,13 +17,13 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void When_not_exact_and_more_than_one_for_labeled_partial_match_It_throws_ambiguous_exception()
         {
-            Assert.Throws<AmbiguousHtmlException>(() => browser.FindField("Some for labeled radio", options: SinglePartial).Now());
+            Assert.Throws<AmbiguousException>(() => browser.FindField("Some for labeled radio", options: SinglePartial).Now());
         }
 
         [Test]
         public void When_not_exact_and_more_than_one_container_labeled_partial_match_It_throws_ambiguous_exception()
         {
-            Assert.Throws<AmbiguousHtmlException>(() => browser.FindField("Some container labeled radio", options: SinglePartial).Now());
+            Assert.Throws<AmbiguousException>(() => browser.FindField("Some container labeled radio", options: SinglePartial).Now());
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void When_more_than_field_with_the_same_name_It_throws_ambiguous_exception()
         {
-            Assert.Throws<AmbiguousHtmlException>(() => browser.FindField("someFieldNameThatAppearsTwice", options: SinglePartial).Now());
+            Assert.Throws<AmbiguousException>(() => browser.FindField("someFieldNameThatAppearsTwice", options: SinglePartial).Now());
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void When_set_to_exact_And_more_than_one_field_with_the_same_name_It_throws_ambiguous_exception()
         {
-            Assert.Throws<AmbiguousHtmlException>(() => browser.FindField("someFieldNameThatAppearsTwice", options: SingleExact).Now());
+            Assert.Throws<AmbiguousException>(() => browser.FindField("someFieldNameThatAppearsTwice", options: SingleExact).Now());
         }
 
         [Test]

@@ -236,11 +236,6 @@ namespace Coypu.Drivers.Watin
                 fileUpload.Set(value);
         }
 
-        public void Select(Element element, string option)
-        {
-            WatiNElement<SelectList>(element).SelectByTextOrValue(option);
-        }
-
         public object Native
         {
             get { return Watin; }
