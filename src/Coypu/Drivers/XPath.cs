@@ -113,9 +113,9 @@ namespace Coypu.Drivers
             return Group(String.Join(" or ", values.Select(t => Format("@" + attributeName + " = {0}",t)).ToArray()));
         }
 
-        public string Attr(string name, string value)
+        public string Attr(string name, string value, bool exact)
         {
-            return Format("@" + name + " = {0}", value).Trim();
+            return Is("@" + name, value, exact);
         }
 
         public string TagNamedOneOf(params string[] fieldTagNames)

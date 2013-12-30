@@ -122,11 +122,6 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
-        {
-            return null;
-        }
-
         public ElementFound FindIFrame(string locator, Scope scope)
         {
             return null;

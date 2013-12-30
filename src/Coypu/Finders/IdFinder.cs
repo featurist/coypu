@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Coypu.Drivers;
 
 namespace Coypu.Finders
 {
-    internal class IdFinder : ElementFinder
+    internal class IdFinder : XPathQueryFinder
     {
         internal IdFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
@@ -12,9 +14,9 @@ namespace Coypu.Finders
             get { return false; }
         }
 
-        internal override IEnumerable<ElementFound> Find(Options options)
+        protected override Func<string, Options, string> GetQuery(Html html)
         {
-            return Driver.FindId(Locator, Scope, options);
+            return html.Id;
         }
 
         internal override string QueryDescription

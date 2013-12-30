@@ -20,6 +20,13 @@ namespace Coypu.Drivers
         {
         }
 
+        public string Id(string locator, Options options)
+        {
+            return
+                Descendent() +
+                Where(Attr("id", locator, true));
+        }
+
         public string Link(string locator, Options options)
         {
             return 
@@ -60,7 +67,7 @@ namespace Coypu.Drivers
                         IsInputButton() +
                         or + TagNamedOneOf("button") +
                         or + HasOneOfClasses("button", "btn") +
-                        or + Attr("role", "button")) +
+                        or + Attr("role", "button", exact: true)) +
                     And(
                         AttributesMatchLocator(locator, true, "@id", "@name") +
                         or + AttributesMatchLocator(locator.Trim(), options.Exact, "@value", "@alt", "normalize-space()")));
@@ -73,7 +80,7 @@ namespace Coypu.Drivers
                 Where(
                     Child("legend") +
                     Where(IsText(locator, options.Exact)) +
-                    or + Attr("id", locator));
+                    or + Attr("id", locator, exact: true));
 
         }
 
@@ -86,17 +93,17 @@ namespace Coypu.Drivers
                     And(
                         Child() +
                         Where(TagNamedOneOf(headerTags) + and + IsText(locator, options.Exact)) +
-                        or + Attr("id", locator)));
+                        or + Attr("id", locator, exact: true)));
         }
 
-        public string HasValue(string locator)
+        private string HasValue(string locator)
         {
-            return Group(AttributeIsOneOf("type", FindByValueTypes) + and + Attr("value", locator));
+            return Group(AttributeIsOneOf("type", FindByValueTypes) + and + Attr("value", locator, exact: true));
         }
 
-        public string HasName(string locator)
+        private string HasName(string locator)
         {
-            return Group(AttributeIsOneOfOrMissing("type", FindByNameTypes) + and + Attr("name", locator));
+            return Group(AttributeIsOneOfOrMissing("type", FindByNameTypes) + and + Attr("name", locator, exact: true));
         }
 
         private string FrameAttributesMatch(string locator)
@@ -117,11 +124,11 @@ namespace Coypu.Drivers
 
             return AttributeIsOneOfOrMissing("type", fieldInputTypes);
         }
-        
-        public string HasIdOrPlaceholder(string locator, Options options)
+
+        private string HasIdOrPlaceholder(string locator, Options options)
         {
             return Group(IsAFieldInputType(options)
-                         + And(Attr("id", locator) + or + Is("@placeholder", locator, options.Exact)));
+                         + And(Attr("id", locator, exact: true) + or + Is("@placeholder", locator, options.Exact)));
 
         }
     }

@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="When_finding_ids.cs" />
     <Compile Include="Sites\SinatraSite.cs" />
     <Compile Include="When_navigating.cs" />
     <Compile Include="When_inspecting_html.cs" />

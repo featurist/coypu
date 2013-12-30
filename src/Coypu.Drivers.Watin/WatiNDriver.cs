@@ -108,11 +108,6 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
-        {
-            return elementFinder.FindElements(id, scope, options).Select(BuildElement);
-        }
-
         public void Hover(Element element)
         {
             WatiNElement(element).FireEvent("onmouseover");

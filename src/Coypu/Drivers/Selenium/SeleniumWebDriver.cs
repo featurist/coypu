@@ -82,11 +82,6 @@ namespace Coypu.Drivers.Selenium
             return frameFinder.FindFrame(locator, scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
-        {
-            return FindAll(By.Id(id), scope, options).Select(BuildElement);
-        }
-
         public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
             var textMatches = (textPattern == null)

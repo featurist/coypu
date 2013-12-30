@@ -169,11 +169,6 @@ namespace Coypu.Tests.TestDoubles
             return Find<string>(stubbedExecuteScriptResults, javascript, scope);
         }
 
-        public IEnumerable<ElementFound> FindId(string id, Scope scope, Options options)
-        {
-            return Find<IEnumerable<ElementFound>>(stubbedIDs, id, scope, options);
-        }
-
         public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
         {
             return Find<IEnumerable<ElementFound>>(stubbedFrames, locator, scope, options);
