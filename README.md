@@ -139,7 +139,15 @@ Setup timeout/retry like so:
 	
 These settings are the default configuration.
 
-All methods in the DSL take an optional final parameter of a `Coypu.Options`. By passing this in you can override these timing settings for just that call.
+All methods in the DSL take an optional final parameter of a `Coypu.Options`. By passing this in you can override any of these timing settings for just that call:
+
+So when you need an unusually long (or short) timeout for a particular interaction you can override the timeout just for this call by passing in a `Coypu.Options` like this:
+
+	browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
+	browser.ClickButton("Upload");
+	browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } );
+
+The options you specify are merged with your SessionConfiguration, so you only need specify those options you wish to override.
 
 ### Visible elements
 
@@ -152,6 +160,43 @@ What we are really trying to do here is interact with the browser in the way tha
 #### However...
 
 If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `sessionConfiguration/options.ConsideringInvisibleElements = true` which overrides this restriction.
+
+### Exactness (>= 2.0)
+
+Where matching text you can specify whether Coypu should allow substrings or not with the `Exact` option. This can be set globally:
+
+	sessionConfiguration.Exact = true;
+
+and you can also be override on each and every call as with all options:
+
+For example:
+
+`ClickLink("Account", new Options{Exact = false})` will allow you to specify a substring so would match a ‘My Account’ link.
+
+`ClickLink("Account", new Options{Exact = true})` will need to match the entire link text exactly so would not match the ‘My Account’ link.
+
+This will be respected everywhere that Coypu matches visible text, but not anywhere else, for example when considering ids or names of fields.
+
+The default is `Exact = false` so by default, matches are not exact, and substrings are allowed.
+
+For example:
+
+`ClickLink("Account", new Options{Exact = false})` will allow you to specify a substring so would match a ‘My Account’ link.
+`ClickLink("Account", new Options{Exact = true})` will need to match the entire link text exactly so would not match the ‘My Account’ link.
+
+This will be respected everywhere that Coypu matches visible text, but not anywhere else, for example when considering ids or names of fields.
+
+The default is `Exact = false` so **by default, matches are not exact, and substrings are allowed**.
+
+### Match Strategy (>= 2.0)
+
+Using the Match option, you can control how Coypu behaves when multiple elements all match a query. There are currently
+two different strategies:
+
+1. **Match.Single:** If `Exact` is `true`, raises an error if more than one element matches. If `Exact` is `false`, it will first try to find an exact match. An error is raised if more than one element is found. If no element is found, a new search is performed which allows partial matches. If that search returns multiple matches, an error is raised.
+2. **Match.First:** If multiple matches are found, some of which are exact, and some of which are not, then the first exactly matching element is returned.
+
+The default for `Match` is `Match.Single`.
 
 ### Missing features
 
@@ -477,14 +522,6 @@ Interact with the current dialog like so:
 
 	browser.AcceptDialog();
 	browser.CancelDialog();
-  
-#### Varying the timeout
-
-When you need an unusually long (or short) timeout for a particular interaction you can override the timeout just for this call by passing in a `Coypu.Options` like this:
-
-	browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
-	browser.ClickButton("Upload");
-	browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } );
 	
 #### Finding states (nondeterministic testing)
 

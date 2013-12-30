@@ -1,3 +1,21 @@
+# Version 2.0.0
+
+### Added
+
+* New Exact and Match options (http://www.featurist.co.uk/blog/2014/01/01/coypu-2-0/)
+
+### Changed
+
+* Exact = false by default - all finders match partial text by default
+* Match.Single by default - more than one matching element throws AmbiguousException
+
+### Fixed
+
+* On individual calls, only specified options override session configuration
+ 
+
+Release date: 2014-01-02
+
 # Version 1.0.0
 
 ### Updated
