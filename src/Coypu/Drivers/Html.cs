@@ -16,7 +16,7 @@ namespace Coypu.Drivers
         private readonly string[] sectionTags = {"section", "div", "li"};
         private readonly string[] headerTags = {"h1", "h2", "h3", "h4", "h5", "h6"};
 
-        public Html(bool uppercaseTagNames) : base(uppercaseTagNames)
+        public Html(bool uppercaseTagNames = false) : base(uppercaseTagNames)
         {
         }
 
@@ -24,14 +24,14 @@ namespace Coypu.Drivers
         {
             return
                 Descendent() +
-                Where(Attr("id", locator, true));
+                Where(HasId(locator));
         }
 
         public string Link(string locator, Options options)
         {
             return 
                 Descendent("a") + 
-                Where(IsText(locator, options.Exact));
+                Where(IsText(locator, options));
         }
 
         public string Field(string locator, Options options)
@@ -41,11 +41,22 @@ namespace Coypu.Drivers
                 Where(
                     TagNamedOneOf(FieldTagNames) +
                     And(
-                        IsForLabeled(locator, options.Exact) +
-                        or + IsContainerLabeled(locator, options.Exact) +
+                        IsForLabeled(locator, options) +
+                        or + IsContainerLabeled(locator, options) +
                         or + HasIdOrPlaceholder(locator, options) +
                         or + HasName(locator) +
                         or + HasValue(locator)));
+        }
+
+        public string Select(string locator, Options options)
+        {
+            return
+                Descendent("select") +
+                Where(
+                    IsForLabeled(locator, options) +
+                    or + IsContainerLabeled(locator, options) +
+                    or + HasId(locator) +
+                    or + HasName(locator));
         }
 
         public string FrameXPath(string locator)
@@ -67,10 +78,10 @@ namespace Coypu.Drivers
                         IsInputButton() +
                         or + TagNamedOneOf("button") +
                         or + HasOneOfClasses("button", "btn") +
-                        or + Attr("role", "button", exact: true)) +
+                        or + Attr("role", "button", Options.Exact)) +
                     And(
-                        AttributesMatchLocator(locator, true, "@id", "@name") +
-                        or + AttributesMatchLocator(locator.Trim(), options.Exact, "@value", "@alt", "normalize-space()")));
+                        AttributesMatchLocator(locator, Options.Exact, "@id", "@name") +
+                        or + AttributesMatchLocator(locator.Trim(), options, "@value", "@alt", "normalize-space()")));
         }
 
         public string Fieldset(string locator, Options options)
@@ -79,8 +90,8 @@ namespace Coypu.Drivers
                 Descendent("fieldset") +
                 Where(
                     Child("legend") +
-                    Where(IsText(locator, options.Exact)) +
-                    or + Attr("id", locator, exact: true));
+                    Where(IsText(locator, options)) +
+                    or + HasId(locator));
 
         }
 
@@ -92,30 +103,35 @@ namespace Coypu.Drivers
                     TagNamedOneOf(sectionTags) +
                     And(
                         Child() +
-                        Where(TagNamedOneOf(headerTags) + and + IsText(locator, options.Exact)) +
-                        or + Attr("id", locator, exact: true)));
+                        Where(TagNamedOneOf(headerTags) + and + IsText(locator, options)) +
+                        or + HasId(locator)));
         }
 
-        public string Option(string locator, Options options)
+        public string SelectOption(string fieldLocator, string optionLocator, Options options)
+        {
+            return Select(fieldLocator, options) + "/" + Option(optionLocator, options);
+        }
+
+        private string Option(string locator, Options options)
         {
             return
                 Child("option") +
-                Where(IsText(locator, options.Exact) + or + Is("@value", locator, options.Exact));
+                Where(IsText(locator, options) + or + Is("@value", locator, options));
         }
 
         private string HasValue(string locator)
         {
-            return Group(AttributeIsOneOf("type", FindByValueTypes) + and + Attr("value", locator, exact: true));
+            return Group(AttributeIsOneOf("type", FindByValueTypes) + and + Attr("value", locator, Options.Exact));
         }
 
         private string HasName(string locator)
         {
-            return Group(AttributeIsOneOfOrMissing("type", FindByNameTypes) + and + Attr("name", locator, exact: true));
+            return Group(AttributeIsOneOfOrMissing("type", FindByNameTypes) + and + Attr("name", locator, Options.Exact));
         }
 
         private string FrameAttributesMatch(string locator)
         {
-            return AttributesMatchLocator(locator.Trim(), true, "@id", "@name", "@title");
+            return AttributesMatchLocator(locator.Trim(), Options.Exact, "@id", "@name", "@title");
         }
 
         private string IsInputButton()
@@ -135,8 +151,13 @@ namespace Coypu.Drivers
         private string HasIdOrPlaceholder(string locator, Options options)
         {
             return Group(IsAFieldInputType(options)
-                         + And(Attr("id", locator, exact: true) + or + Is("@placeholder", locator, options.Exact)));
+                         + And(HasId(locator) + or + Is("@placeholder", locator, options)));
 
+        }
+
+        private string HasId(string locator)
+        {
+            return Attr("id", locator, Options.Exact);
         }
     }
 }

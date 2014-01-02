@@ -1,4 +1,5 @@
-﻿using NSpec;
+﻿using Coypu.Finders;
+using NSpec;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -61,8 +62,12 @@ namespace Coypu.Drivers.Tests
             var textField = Field("containerLabeledSelectFieldId");
             textField.Value.should_be("select2value1");
 
+            Driver.Click(FindSingle(new OptionFinder(Driver, "containerLabeledSelectFieldId", "select two option two",Root,DefaultOptions)));
+
             var findAgain = Field("containerLabeledSelectFieldId");
             findAgain.Value.should_be("select2value2");
+
+            Driver.Click(FindSingle(new OptionFinder(Driver, "containerLabeledSelectFieldId", "select two option one", Root, DefaultOptions)));
 
             var andAgain = Field("containerLabeledSelectFieldId");
             andAgain.Value.should_be("select2value1");
@@ -73,6 +78,8 @@ namespace Coypu.Drivers.Tests
         {
             var textField = Field("containerLabeledSelectFieldId");
             textField.Name.should_be("containerLabeledSelectFieldName");
+
+            Driver.Click(FindSingle(new OptionFinder(Driver, "containerLabeledSelectFieldId",  "select two option two", Root, DefaultOptions)));
 
             Field("containerLabeledSelectFieldId", Root).Name.should_be("containerLabeledSelectFieldName - changed");
         }

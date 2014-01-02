@@ -22,8 +22,7 @@ namespace Coypu.Actions
 
         public override void Act()
         {
-            var select = scope.FindField(locator, options);
-            var option = disambiguationStrategy.ResolveQuery(new OptionFinder(Driver,optionToSelect, select, options));
+            var option = disambiguationStrategy.ResolveQuery(new OptionFinder(Driver, locator, optionToSelect, scope, options));
             Driver.Click(option);
         }
     }

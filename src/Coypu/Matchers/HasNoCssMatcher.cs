@@ -40,7 +40,7 @@ namespace Coypu.Matchers
             else if (textPattern != null)
                 hasNoCss = scope.FindCss(_expectedCss, textPattern, _options).Missing();
             else
-                hasNoCss = scope.FindCss(_expectedCss, _options).Exists();
+                hasNoCss = scope.FindCss(_expectedCss, _options).Missing();
 
             if (!hasNoCss)
                 _actualContent = scope.Now().InnerHTML;

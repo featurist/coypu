@@ -34,7 +34,7 @@ namespace Coypu
                    new StopwatchWaiter(),
                    new WebClientWithCookies(),
                    new FullyQualifiedUrlBuilder(),
-                   new PreferExactMatchDisambiguationStrategy())
+                   new FinderOptionsDisambiguationStrategy())
         {
         }
 

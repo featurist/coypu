@@ -14,7 +14,7 @@ namespace Coypu.Drivers.Selenium
         }
 
 
-        public IEnumerable<string> FindWindowHandles(string titleOrName, bool exact)
+        public IEnumerable<string> FindWindowHandles(string titleOrName, Options options)
         {
             var currentHandle = GetCurrentWindowHandle();
             IList<string> matchingWindowHandles = new List<string>();
@@ -29,14 +29,14 @@ namespace Coypu.Drivers.Selenium
                 foreach (var windowHandle in webDriver.WindowHandles)
                 {
                     webDriver.SwitchTo().Window(windowHandle);
-                    if (exact)
+                    if (options.TextPrecisionExact)
                     {
                         if (ExactMatch(titleOrName, windowHandle))
                             matchingWindowHandles.Add(windowHandle);
                     }
                     else
                     {
-                        if (PartialMatch(titleOrName))
+                        if (SubstringMatch(titleOrName))
                             matchingWindowHandles.Add(windowHandle);
                     }
                 }
@@ -53,7 +53,7 @@ namespace Coypu.Drivers.Selenium
             return matchingWindowHandles;
         }
 
-        private bool PartialMatch(string titleOrName)
+        private bool SubstringMatch(string titleOrName)
         {
             return webDriver.Title.Contains(titleOrName);
         }

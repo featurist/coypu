@@ -55,7 +55,7 @@ namespace Coypu.Drivers.Tests
             var iframeOne = new DriverScope(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver,null,null,null,DisambiguationStrategy);
             Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
 
-            Button("scoped button", Root, Options.First).Id.should_be("scope1ButtonId");
+            Button("scoped button", Root, Options.PreferExact).Id.should_be("scope1ButtonId");
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Coypu.Drivers.Tests
 
             Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
 
-            Button("scoped button", body, Options.First).Id.should_be("scope1ButtonId");
+            Button("scoped button", body, Options.PreferExact).Id.should_be("scope1ButtonId");
         }
 
         [Test]

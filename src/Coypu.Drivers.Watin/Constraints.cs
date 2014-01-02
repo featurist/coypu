@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using WatiN.Core;
 using WatiN.Core.Comparers;
 using WatiN.Core.Constraints;
@@ -10,11 +9,6 @@ namespace Coypu.Drivers.Watin
 {
     internal static class Constraints
     {
-        public static Constraint WithPartialId(string id)
-        {
-            return Find.ById(new StringEndsWithComparer(id));
-        }
-
         public static Constraint IsVisible(bool considerInvisibleElements)
         {
             return considerInvisibleElements ? (Constraint) Find.Any : new ElementConstraint(new IsVisibleComparer());

@@ -58,7 +58,7 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Finds_by_partial_title()
+        public void Finds_by_substring_title()
         {
             using (Driver)
             {
@@ -69,7 +69,7 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Finds_by_exact_title_over_partial_title()
+        public void Finds_by_exact_title_over_substring()
         {
             using (Driver)
             {
@@ -90,9 +90,9 @@ namespace Coypu.Drivers.Tests
                 OpenPopup();
 
                 var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
-                                            Driver, null, null, null, null);
+                                            Driver, null, null, null, DisambiguationStrategy);
 
-                new IdFinder(Driver, "popUpButtonId", popUp, DefaultOptions);
+                Id("popUpButtonId", popUp);
 
                 FindPopUpLink();
             }

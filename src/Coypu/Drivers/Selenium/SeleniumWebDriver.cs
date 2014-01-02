@@ -183,7 +183,7 @@ namespace Coypu.Drivers.Selenium
         public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, Options options)
         {
             elementFinder.SeleniumScope(scope);
-            return windowHandleFinder.FindWindowHandles(titleOrName, options.Exact)
+            return windowHandleFinder.FindWindowHandles(titleOrName, options)
                                      .Select(h => new SeleniumWindow(webDriver, h))
                                      .Cast<ElementFound>();
         }

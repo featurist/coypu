@@ -24,11 +24,11 @@ namespace Coypu.Finders
             get { return options; }
         }
 
-        public abstract bool SupportsPartialTextMatching { get; }
+        public abstract bool SupportsSubstringTextMatching { get; }
 
         internal string Locator { get { return locator; } }
 
-        internal abstract IEnumerable<ElementFound> Find(Options options = null);
+        internal abstract IEnumerable<ElementFound> Find(Options options);
 
         internal abstract string QueryDescription { get; }
 

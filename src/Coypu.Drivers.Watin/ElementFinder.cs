@@ -35,21 +35,13 @@ namespace Coypu.Drivers.Watin
 
         public FrameCollection FindFrames(string locator, Scope scope, Options options)
         {
-            var byTitle = options.Exact ? Find.ByTitle(locator) : Find.ByTitle(t => t.Contains(locator));
-            var byText = options.Exact ? Find.ByText(locator) : Find.ByText(t => t.Contains(locator));
+            var exact = options.TextPrecision == TextPrecision.Exact;
+            var byTitle = exact ? Find.ByTitle(locator) : Find.ByTitle(t => t.Contains(locator));
+            var byText = exact ? Find.ByText(locator) : Find.ByText(t => t.Contains(locator));
 
             return WatiNDocumentScope(scope).Frames
                                             .Filter((byTitle | Find.ByName(locator) | Find.ById(locator) |
                                                      Constraints.HasElement("h1", byText)));
-        }
-
-        public LinkCollection FindLinks(string linkText, Scope scope, Options options)
-        {
-            var byLinkText = options.Exact
-                                 ? Find.ByText(linkText)
-                                 : Find.ByText(t => t.Contains(linkText));
-
-            return WatiNScope(scope).Links.Filter(byLinkText & Constraints.IsVisible(options.ConsiderInvisibleElements));
         }
 
         private IEnumerable<WatiN.Core.Element> FindAllCssDeferred(string cssSelector, Scope scope, Options options, Regex textPattern = null)

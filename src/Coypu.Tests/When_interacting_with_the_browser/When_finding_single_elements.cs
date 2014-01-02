@@ -83,7 +83,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private void Should_find_robust_scope<T,TScope,TReturn>(Func<string, Options, TScope> findButton) where TScope : DriverScope
         {
-            var options = new Options { Exact = true, Timeout = TimeSpan.FromMilliseconds(999) };
+            var options = new Options { TextPrecision = TextPrecision.Exact, Timeout = TimeSpan.FromMilliseconds(999) };
             var scope = findButton("Some locator", options);
             Assert.That(scope, Is.TypeOf<TReturn>());
 

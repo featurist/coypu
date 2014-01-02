@@ -8,7 +8,7 @@ namespace Coypu.Finders
         {
         }
 
-        public override bool SupportsPartialTextMatching
+        public override bool SupportsSubstringTextMatching
         {
             get { return false; }
         }

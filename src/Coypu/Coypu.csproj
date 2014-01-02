@@ -68,6 +68,7 @@
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -117,7 +118,8 @@
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Finders\DisambiguationStrategy.cs" />
-    <Compile Include="Finders\PreferExactMatchDisambiguationStrategy.cs" />
+    <Compile Include="Finders\FinderOptionsDisambiguationStrategy.cs" />
+    <Compile Include="Finders\OptionFinder.cs" />
     <Compile Include="Finders\XPathQueryFinder.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Matchers\AggregateMatcher.cs" />

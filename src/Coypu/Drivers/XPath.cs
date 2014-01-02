@@ -113,9 +113,9 @@ namespace Coypu.Drivers
             return Group(String.Join(" or ", values.Select(t => Format("@" + attributeName + " = {0}",t)).ToArray()));
         }
 
-        public string Attr(string name, string value, bool exact)
+        public string Attr(string name, string value, Options options)
         {
-            return Is("@" + name, value, exact);
+            return Is("@" + name, value, options);
         }
 
         public string TagNamedOneOf(params string[] fieldTagNames)
@@ -128,31 +128,31 @@ namespace Coypu.Drivers
             return uppercaseTagNames ? tagName.ToUpper() : tagName; ;
         }
 
-        public string AttributesMatchLocator(string locator, bool exact, params string[] attributes)
+        public string AttributesMatchLocator(string locator, Options options, params string[] attributes)
         {
-            return Group(string.Join(" or ", attributes.Select(a => Is(a, locator, exact)).ToArray()));
+            return Group(string.Join(" or ", attributes.Select(a => Is(a, locator, options)).ToArray()));
         }
 
-        public string IsContainerLabeled(string locator, bool exact)
+        public string IsContainerLabeled(string locator, Options options)
         {
-            return Format("ancestor::label[" + IsText(locator, exact) + "]", locator);
+            return Format("ancestor::label[" + IsText(locator, options) + "]", locator);
         }
 
-        public string IsForLabeled(string locator, bool exact)
+        public string IsForLabeled(string locator, Options options)
         {
-            return Format(" (@id = //label[" + IsText(locator, exact) + "]/@for) ", locator);
+            return Format(" (@id = //label[" + IsText(locator, options) + "]/@for) ", locator);
         }
 
-        public string Is(string selector, string locator, bool exact)
+        public string Is(string selector, string locator, Options options)
         {
-            return exact 
+            return options.TextPrecisionExact
                 ? Format(selector + " = {0} ", locator)
                 : Format("contains(" + selector + ",{0})", locator);
         }
 
-        public string IsText(string locator, bool exact)
+        public string IsText(string locator, Options options)
         {
-            return Is("normalize-space()", locator,exact);
+            return Is("normalize-space()", locator,options);
         }
 
         protected string Descendent(string tagName = "*")

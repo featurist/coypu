@@ -27,8 +27,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Ignores_exact_option()
         {
-            Assert.Throws<MissingHtmlException>(() => Id("firstLink", options: PartialOptions));
-            Assert.Throws<MissingHtmlException>(() => Id("firstLink", options: ExactOptions));
+            Assert.Throws<MissingHtmlException>(() => Id("firstLink", options: Options.Substring));
+            Assert.Throws<MissingHtmlException>(() => Id("firstLink", options: Options.Exact));
         }
     }
 }

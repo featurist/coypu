@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
@@ -18,12 +19,10 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<ScopedRequest<string>> Visits = new List<ScopedRequest<string>>();
         public readonly IDictionary<Element, SetFieldParams> SetFields = new Dictionary<Element, SetFieldParams>();
         public readonly IDictionary<Element, string> SentKeys = new Dictionary<Element, string>();
-        public readonly IDictionary<Element, string> SelectedOptions = new Dictionary<Element, string>();
         private readonly IList<ScopedStubResult> stubbedAllCssResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedAllXPathResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedExecuteScriptResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedFrames = new List<ScopedStubResult>();
-        private readonly IList<ScopedStubResult> stubbedIDs = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedHasDialogResults = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedWindows = new List<ScopedStubResult>();
         private readonly IList<ScopedStubResult> stubbedLocations = new List<ScopedStubResult>();
@@ -269,9 +268,9 @@ namespace Coypu.Tests.TestDoubles
             stubbedFrames.Add(new ScopedStubResult { Locator = locator, Scope = scope, Result = frame, Options = options });
         }
 
-        public void StubId(string id, ElementFound element, Scope scope, Options options)
+        public void StubId(string id, ElementFound element, Scope scope, SessionConfiguration options)
         {
-            stubbedIDs.Add(new ScopedStubResult { Locator = id, Scope = scope, Result = new []{element}, Options = options});
+            StubAllXPath(new Html(options.Browser.UppercaseTagNames).Id(id, options), new[] { element }, scope, options);
         }
 
         public void StubCookies(List<Cookie> cookies)

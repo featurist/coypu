@@ -25,14 +25,14 @@ namespace Coypu.Finders
             this.text = text;
         }
 
-        public override bool SupportsPartialTextMatching
+        public override bool SupportsSubstringTextMatching
         {
             get { return true; }
         }
 
         internal override IEnumerable<ElementFound> Find(Options options)
         {
-            return Driver.FindAllCss(Locator, Scope, options, TextPattern(options.Exact));
+            return Driver.FindAllCss(Locator, Scope, options, TextPattern(options.TextPrecision == TextPrecision.Exact));
         }
 
         private Regex TextPattern(bool exact)

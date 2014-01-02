@@ -129,13 +129,13 @@ namespace Coypu.Drivers.Watin
 
         public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, Options options)
         {
-            return new[] { new WatiNWindow(FindWindowHandle(titleOrName, options.Exact)) };
+            return new[] { new WatiNWindow(FindWindowHandle(titleOrName, options)) };
         }
 
-        private static Constraint FindWindowHandle(string locator, bool exact)
+        private static Constraint FindWindowHandle(string locator, Options exact)
         {
             Constraint byTitle = Find.ByTitle(locator);
-            if (exact)
+            if (exact.TextPrecision == TextPrecision.Exact)
                 byTitle = byTitle | Find.ByTitle(t => t.Contains(locator));
 
             var by = byTitle | Find.By("hwnd", locator);

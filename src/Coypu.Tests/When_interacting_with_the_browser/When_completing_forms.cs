@@ -18,6 +18,15 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             return stubField;
         }
+
+        private StubElement StubOption(string fieldLocator, string optionLocator, Options options = null)
+        {
+            var stubField = new StubElement { Id = Guid.NewGuid().ToString() };
+            var fieldXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).SelectOption(fieldLocator, optionLocator, options ?? sessionConfiguration);
+            driver.StubAllXPath(fieldXpath, new[] { stubField }, browserSession, options ?? sessionConfiguration);
+
+            return stubField;
+        }
         
         [Test]
         public void When_filling_in_a_text_field_It_finds_field_and_sets_value_robustly()
@@ -62,19 +71,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void When_selecting_an_option_It_finds_field_and_selects_option_robustly()
+        public void When_selecting_an_option_It_finds_field_and_clicks_the_option_synchronised()
         {
-            var element = StubField("Some select field locator");
+            var stubbedOption = StubOption("Some select field locator", "Some option to select");
 
-            browserSession.Select("some option to select").From("Some select field locator");
+            browserSession.Select("Some option to select").From("Some select field locator");
 
-            Assert.That(driver.SelectedOptions, Has.No.Member(element));
+            Assert.That(driver.ClickedElements, Has.No.Member(stubbedOption));
 
             RunQueryAndCheckTiming();
 
-            var setField = driver.SelectedOptions.Keys.Cast<SynchronisedElementScope>().Single().Now();
-            Assert.That(setField, Is.SameAs(element));
-            Assert.That(driver.SelectedOptions.Values.Single(), Is.EqualTo("some option to select"));
+            var selectedOption = driver.ClickedElements.Single();
+            Assert.That(selectedOption, Is.SameAs(stubbedOption));
         }
 
         [Test]

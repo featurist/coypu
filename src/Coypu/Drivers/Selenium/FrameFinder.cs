@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Selenium
             var frames = AllElementsByTag(scope, "iframe", options)
                         .Union(AllElementsByTag(scope, "frame", options));
 
-            return WebElement(locator, frames, options.Exact);
+            return WebElement(locator, frames, options);
         }
 
         private IEnumerable<IWebElement> AllElementsByTag(Scope scope, string tagNameToFind, Options options)
@@ -30,15 +30,15 @@ namespace Coypu.Drivers.Selenium
             return elementFinder.FindAll(By.TagName(tagNameToFind), scope, options);
         }
 
-        private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements, bool exact)
+        private IEnumerable<IWebElement> WebElement(string locator, IEnumerable<IWebElement> webElements, Options options)
         {
             return webElements.Where(e => e.GetAttribute("id") == locator ||
                                             e.GetAttribute("name") == locator ||
-                                            (exact ? e.GetAttribute("title") == locator : e.GetAttribute("title").Contains(locator)) ||
-                                            FrameContentsMatch(e, locator, exact));
+                                            (options.TextPrecisionExact ? e.GetAttribute("title") == locator : e.GetAttribute("title").Contains(locator)) ||
+                                            FrameContentsMatch(e, locator, options));
         }
 
-        private bool FrameContentsMatch(IWebElement e, string locator, bool exact)
+        private bool FrameContentsMatch(IWebElement e, string locator, Options options)
         {
             var currentHandle = selenium.CurrentWindowHandle;
             try
@@ -46,7 +46,7 @@ namespace Coypu.Drivers.Selenium
                 var frame = selenium.SwitchTo().Frame(e);
                 return
                    frame.Title == locator ||
-                   frame.FindElements(By.XPath(".//h1[" + xPath.IsText(locator,exact) + "]")).Any();
+                   frame.FindElements(By.XPath(".//h1[" + xPath.IsText(locator, options) + "]")).Any();
             }
             finally
             {

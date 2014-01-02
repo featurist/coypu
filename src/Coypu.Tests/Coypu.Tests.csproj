@@ -59,6 +59,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestBuilders\FindsFirstWitNoDisambiguationStrategy.cs" />
+    <Compile Include="When_applying_match_strategy\When_using_single_substring.cs" />
+    <Compile Include="When_applying_match_strategy\When_using_first_substring.cs" />
+    <Compile Include="When_applying_match_strategy\StubElementFinder.cs" />
+    <Compile Include="When_applying_match_strategy\Any_match_strategy.cs" />
+    <Compile Include="When_applying_match_strategy\When_using_first_prefer_exact.cs" />
+    <Compile Include="When_applying_match_strategy\When_using_first_exact.cs" />
+    <Compile Include="When_applying_match_strategy\When_using_single_exact.cs" />
+    <Compile Include="When_applying_match_strategy\When_using_single_prefer_exact.cs" />
     <Compile Include="When_configuring_options.cs" />
     <Compile Include="TestDoubles\SpyRestrictedResourceDownloader.cs" />
     <Compile Include="TestDoubles\StubDriver.cs" />

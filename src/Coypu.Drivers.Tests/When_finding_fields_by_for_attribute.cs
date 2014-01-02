@@ -10,7 +10,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_text_input()
         {
-            Field("text input field linked by for", options: Options.ExactTrue).Id.should_be("forLabeledTextInputFieldId");
+            Field("text input field linked by for", options: Options.Exact).Id.should_be("forLabeledTextInputFieldId");
         }
 
         [Test]
@@ -50,9 +50,9 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Finds_by_partial_text()
+        public void Finds_by_substring_text()
         {
-            var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.ExactFalse);
+            var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.Substring);
             Assert.That(fields.Select(e => e.Id).OrderBy(id => id), Is.EquivalentTo(new[]
                 {
                     "forLabeledRadioFieldExactMatchId",
@@ -63,7 +63,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_by_exact_text()
         {
-            var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.ExactTrue);
+            var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.Exact);
             Assert.That(fields.Select(e => e.Id).OrderBy(id => id), Is.EquivalentTo(new[]
                 {
                     "forLabeledRadioFieldExactMatchId"

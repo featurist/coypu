@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -10,17 +9,15 @@ namespace Coypu
     /// </summary>
     public class Options
     {
-        
-
         private const bool DEFAULT_CONSIDER_INVISIBLE_ELEMENTS = false;
-        private const bool DEFAULT_EXACT = false;
+        private const TextPrecision DEFAULT_PRECISION = TextPrecision.PreferExact;
         private const Match DEFAULT_MATCH = Match.Single;
         private static readonly TimeSpan DEFAULT_TIMEOUT = TimeSpan.FromSeconds(1);
         private static readonly TimeSpan DEFAULT_RETRY_INTERVAL = TimeSpan.FromSeconds(0.05);
         private static readonly TimeSpan DEFAULT_WAIT_BEFORE_CLICK = TimeSpan.Zero;
 
         protected bool? considerInvisibleElements;
-        private bool? exact;
+        private TextPrecision? textPrecision;
         private Match? match;
         private TimeSpan? retryInterval;
         private TimeSpan? timeout;
@@ -52,36 +49,75 @@ namespace Coypu
         };
 
         /// <summary>
-        /// Ensure only one match exists
+        /// Just picks the first element that matches
         /// </summary>
-        public static Options Single = new Options
+        public static Options First
         {
-            Match = Match.Single
-        };
+            get { return new Options {Match = Match.First}; }
+        }
 
         /// <summary>
-        /// Pick the first matching element, prefering exact to partial matches
+        /// Raises an error if more than one element match
         /// </summary>
-        public static Options First = new Options
+        public static Options Single
         {
-            Match = Match.First
-        };
+            get { return new Options { Match = Match.Single }; }
+        }
+
 
         /// <summary>
-        /// Match by exact text
+        /// Match by exact visible text
         /// </summary>
-        public static Options ExactTrue = new Options
+        public static Options Exact
         {
-            Exact = true
-        };
+            get { return new Options { TextPrecision = TextPrecision.Exact }; }
+        }
 
         /// <summary>
-        /// Match by partial text
+        /// Match by substring in visible text
         /// </summary>
-        public static Options ExactFalse = new Options
+        public static Options Substring
         {
-            Exact = false
-        };
+            get { return new Options { TextPrecision = TextPrecision.Substring }; }
+        }
+
+        /// <summary>
+        /// If multiple matches are found, some of which are exact, and some of which are not, then the first exactly matching element is returned
+        /// </summary>
+        public static Options PreferExact
+        {
+            get { return new Options { TextPrecision = TextPrecision.PreferExact }; }
+        }
+
+        /// <summary>
+        /// Match exact visible text; Just picks the first element that matches
+        /// </summary>
+        public static Options FirstExact = Merge(First, Exact);
+
+        /// <summary>
+        /// Match substring in visible text; Just picks the first element that matches
+        /// </summary>
+        public static Options FirstSubstring = Merge(First, Substring);
+
+        /// <summary>
+        /// Prefer exact text matches to substring matches; Just picks the first element that matches
+        /// </summary>
+        public static Options FirstPreferExact = Merge(First, PreferExact);
+
+        /// <summary>
+        /// Match exact visible text; Raises an error if more than one element match
+        /// </summary>
+        public static Options SingleExact = Merge(Single, Substring);
+
+        /// <summary>
+        /// Match by substring in visible text; Raises an error if more than one element match
+        /// </summary>
+        public static Options SingleSubstring = Merge(Single, Substring);
+
+        /// <summary>
+        /// Prefer exact text matches to substring matches; Raises an error if more than one element match
+        /// </summary>
+        public static Options SinglePreferExact = Merge(Single, PreferExact);
 
         /// <summary>
         /// <para>When retrying, how long to wait for elements to appear or actions to complete without error.</para>
@@ -124,27 +160,21 @@ namespace Coypu
         }
 
         /// <summary>
-        /// <para>Whether to consider a partial match when finding elements by text, or just an exact match.</para>
-        /// <para>The following elements currently support partial matching:</para>
-        /// <para>FillIn (label text)</para>
-        /// <para>FindField (label text)</para>
-        /// <para></para>
-        /// <para>ClickLink (link text)</para>
-        /// <para>FindLink (link text)</para>
-        /// <para></para>
-        /// <para>ClickButton (link text)</para>
-        /// <para>FindButton (link text)</para>
+        /// <para>Whether to consider substrings when finding elements by text, or just an exact match.</para>
         /// </summary>
-        public bool Exact
+        public TextPrecision TextPrecision
         {
-            get { return exact ?? DEFAULT_EXACT; }
-            set { exact = value; }
+            get { return textPrecision ?? DEFAULT_PRECISION; }
+            set { textPrecision = value; }
+        }
+
+        internal bool TextPrecisionExact
+        {
+            get { return textPrecision == TextPrecision.Exact; }
         }
 
         /// <summary>
-        /// <para>With Match you can control how Coypu behaves when multiple elements all match a query. There are currently two different strategies:</para>
-        /// <para>Match.First: The default strategy. If multiple matches are found, some of which are exact, and some of which are not, then the first exactly matching element is returned.</para>
-        /// <para>Match.Single: If the Exact option is true, raises an error if more than one element matches, just like one. If Exact is false, it will first try to find an exact match. An error is raised if more than one element is found. If no element is found, a new search is performed which allows partial matches. If that search returns multiple matches, an error is raised.</para>
+        /// <para>With PreventAmbiguousMatches you can control whether Coypu should throw an exception when multiple elements match a query.</para>
         /// </summary>
         public Match Match
         {
@@ -152,41 +182,22 @@ namespace Coypu
             set { match = value; }
         }
 
-        public T FilterWithMatchStrategy<T>(IEnumerable<T> elements, string queryDescription)
-        {
-            var element = elements.FirstOrDefault();
-            if (Match == Match.First && element != null)
-                return element;
-
-            var count = elements.Count();
-
-            if (Match == Match.Single && count > 1)
-            {
-                throw new AmbiguousException(BuildAmbiguousMessage(queryDescription, count));
-            }
-
-            if (count == 0)
-                throw new MissingHtmlException("Unable to find " + queryDescription);
-
-            return element;
-        }
-
         internal string BuildAmbiguousMessage(string queryDescription, int count)
         {
             var message = string.Format(@"Ambiguous match, found {0} elements matching {1}
 
-Coypu does this by default from v1.0
+Coypu does this by default from v2.0. Your options:
 
-Your options:
  * Look for something more specific",
                     count, queryDescription);
 
-            if (Match == Match.Single)
-                message += Environment.NewLine + " * Set the Options.Match option to Match.First (Coypu 0.* behaviour) to get the first matching element (prefers exact matches to partial on text comparisons)";
 
-            if (!Exact)
-                message += Environment.NewLine + " * Set the Options.Exact option to True to exclude partial text matches";
-            
+            if (TextPrecision != TextPrecision.Exact)
+                message += Environment.NewLine + " * Set the Options.TextPrecision option to Exact to exclude substring text matches";
+
+            if (Match != Match.First)
+                message += Environment.NewLine + " * Set the Options.Match option to Match.First to just take the first matching element";
+
             return message;
         }
 
@@ -204,13 +215,15 @@ Your options:
             return new Options
                 {
                     considerInvisibleElements = Default(preferredOptions.considerInvisibleElements, defaultOptions.considerInvisibleElements),
-                    exact = Default(preferredOptions.exact, defaultOptions.exact),
+                    textPrecision = Default(preferredOptions.textPrecision, defaultOptions.textPrecision),
                     match = Default(preferredOptions.match, defaultOptions.match),
                     retryInterval = Default(preferredOptions.retryInterval, defaultOptions.retryInterval),
                     timeout = Default(preferredOptions.timeout, defaultOptions.timeout),
                     waitBeforeClick = Default(preferredOptions.waitBeforeClick, defaultOptions.waitBeforeClick)
                 };
         }
+
+     
 
         protected static T? Default<T>(T? value, T? defaultValue) where T : struct
         {
@@ -226,7 +239,7 @@ Your options:
 
         protected bool Equals(Options other)
         {
-            return considerInvisibleElements.Equals(other.considerInvisibleElements) && exact.Equals(other.exact) && match == other.match && retryInterval.Equals(other.retryInterval) && timeout.Equals(other.timeout) && waitBeforeClick.Equals(other.waitBeforeClick);
+            return considerInvisibleElements.Equals(other.considerInvisibleElements) && textPrecision.Equals(other.textPrecision) && match == other.match && retryInterval.Equals(other.retryInterval) && timeout.Equals(other.timeout) && waitBeforeClick.Equals(other.waitBeforeClick);
         }
 
         public override int GetHashCode()
@@ -234,7 +247,7 @@ Your options:
             unchecked
             {
                 var hashCode = considerInvisibleElements.GetHashCode();
-                hashCode = (hashCode * 397) ^ exact.GetHashCode();
+                hashCode = (hashCode * 397) ^ textPrecision.GetHashCode();
                 hashCode = (hashCode * 397) ^ match.GetHashCode();
                 hashCode = (hashCode * 397) ^ retryInterval.GetHashCode();
                 hashCode = (hashCode * 397) ^ timeout.GetHashCode();
@@ -252,6 +265,5 @@ Your options:
         {
             return !Equals(left, right);
         }
-
     }
 }

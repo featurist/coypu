@@ -21,7 +21,7 @@ namespace Coypu
         internal StateFinder stateFinder;
         private ElementFound element;
         private readonly DriverScope outerScope;
-        private readonly DisambiguationStrategy disambiguationStrategy = new PreferExactMatchDisambiguationStrategy();
+        private readonly DisambiguationStrategy disambiguationStrategy = new FinderOptionsDisambiguationStrategy();
 
         internal DriverScope(SessionConfiguration sessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
         {

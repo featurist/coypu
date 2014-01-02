@@ -9,31 +9,22 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_text_of_selected_option()
         {
-            GetFieldScope().Now().SelectedOption.should_be("select two option one");
+            Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option one");
 
-            Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetFieldScope(), DefaultOptions)));
+            Driver.Click(FindSingle(new OptionFinder(Driver, "containerLabeledSelectFieldId", "select two option two", Root, DefaultOptions)));
 
-            GetFieldScope().Now().SelectedOption.should_be("select two option two");
+            Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option two");
         }
 
         [Test]
         public void Selected_option_respects_exact()
         {
             Assert.That(
-                FindSingle(new OptionFinder(Driver, "select two option t", GetFieldScope(), PartialOptions)).Text,
+                FindSingle(new OptionFinder(Driver, "containerLabeledSelectFieldId", "select two option t", Root, Options.Substring)).Text,
                 Is.EqualTo("select two option two"));
 
             Assert.Throws<MissingHtmlException>(
-                () => FindSingle(new OptionFinder(Driver, "select two option t", GetFieldScope(), ExactOptions)));
-        }
-
-        private static DriverScope GetFieldScope()
-        {
-            var fieldScope = new DriverScope(DefaultSessionConfiguration,
-                                             new FieldFinder(Driver, "containerLabeledSelectFieldId", Root, DefaultOptions),
-                                             Driver, null, null,
-                                             null, DisambiguationStrategy);
-            return fieldScope;
+                () => FindSingle(new OptionFinder(Driver, "containerLabeledSelectFieldId", "select two option t", Root, Options.Exact)));
         }
     }
     

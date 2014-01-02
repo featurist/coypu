@@ -68,9 +68,7 @@ namespace Coypu.Drivers.Tests
             get { return root ?? (root = new DriverScope(DefaultSessionConfiguration, new DocumentElementFinder(Driver, DefaultSessionConfiguration), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, new ThrowsWhenMissingButNoDisambiguationStrategy() )); }
         }
 
-        protected readonly static Options DefaultOptions = new Options{};
-        protected readonly static Options ExactOptions = new Options{Exact = true};
-        protected readonly static Options PartialOptions = new Options{Exact = false};
+        protected readonly static Options DefaultOptions = new Options();
 
         protected static readonly SessionConfiguration DefaultSessionConfiguration = new SessionConfiguration
             {

@@ -14,9 +14,9 @@ namespace Coypu.Tests
         }
 
         [Test]
-        public void Exact_defaults_to_false()
+        public void Text_precision_defaults_to_prefer_exact()
         {
-            Assert.That(new Options().Exact, Is.EqualTo(false));
+            Assert.That(new Options().TextPrecision, Is.EqualTo(TextPrecision.PreferExact));
         }
         
         [Test]
@@ -50,7 +50,7 @@ namespace Coypu.Tests
             var mergeWithOptions = new Options
                 {
                     ConsiderInvisibleElements = true,
-                    Exact = true,
+                    TextPrecision = TextPrecision.Substring,
                     Match = Match.First,
                     RetryInterval = TimeSpan.FromSeconds(123),
                     Timeout = TimeSpan.FromSeconds(456),
@@ -71,7 +71,7 @@ namespace Coypu.Tests
         private static void AssertOptionsEqual(Options merged, Options mergeWithOptions)
         {
             Assert.That(merged.ConsiderInvisibleElements, Is.EqualTo(mergeWithOptions.ConsiderInvisibleElements));
-            Assert.That(merged.Exact, Is.EqualTo(mergeWithOptions.Exact));
+            Assert.That(merged.TextPrecision, Is.EqualTo(mergeWithOptions.TextPrecision));
             Assert.That(merged.Match, Is.EqualTo(mergeWithOptions.Match));
             Assert.That(merged.RetryInterval, Is.EqualTo(mergeWithOptions.RetryInterval));
             Assert.That(merged.Timeout, Is.EqualTo(mergeWithOptions.Timeout));
