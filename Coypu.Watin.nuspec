@@ -11,7 +11,7 @@
     <description>WatiN driver for Coypu</description>
     <tags></tags>
     <dependencies>
-      <dependency id="Coypu" version="[1.0.0,]" />
+      <dependency id="Coypu" version="[1.0.0,2.0.0)" />
       <dependency id="WatiN" version="[2.1.0]" />
     </dependencies>
   </metadata>
