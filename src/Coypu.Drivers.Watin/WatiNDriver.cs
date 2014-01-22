@@ -100,8 +100,6 @@ namespace Coypu.Drivers.Watin
 
         public string ExecuteScript(string javascript, Scope scope)
         {
-            // TODO: scope is the current window in which to accept a dialog
-            
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
             var retval = GetWindowScope(scope).Eval(stripReturn);
             Watin.WaitForComplete();

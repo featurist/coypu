@@ -145,7 +145,7 @@ So when you need an unusually long (or short) timeout for a particular interacti
 
 	browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
 	browser.ClickButton("Upload");
-	browser.HasContent("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } );
+	Assert.That(browser, Shows.Content("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } ));
 
 The options you specify are merged with your SessionConfiguration, so you only need specify those options you wish to override.
 
@@ -379,8 +379,8 @@ When you want perform operations only within a particular part of the page, find
 
     advancedSearch.Click("Find");
 
-    Assert.That(searchResults.HasContent("1 friend found"));
-    Assert.That(searchResults.HasContent("Philip J Fry"));
+    Assert.That(searchResults, Shows.Content("1 friend found"));
+    Assert.That(searchResults, Shows.Content("Philip J Fry"));
 
 The actual finding of the scope is deferred until the driver needs to interact with or find any element inside the Scope. If the scope becomes stale at any time it will be re-found.
 
@@ -394,7 +394,7 @@ To restrict the scope to a frame or iframe, locate the frame by its name,id, tit
 
 	var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
 
-	Assert.That(twitterFrame.HasContent("Coypu 0.8.0 released"));	
+	Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
 
 
 #### Scoping within windows
@@ -420,7 +420,7 @@ Switching between frames and windows is a particular pain in WebDriver as you ma
     var button = popUp.FindButton("button in popup");
 
     Assert.That(button.Exists());
-    Assert.That(popUp.HasContent("I am a pop up window"));
+    Assert.That(popUp, Shows.Content("I am a pop up window"));
 
     popUp.ExecuteScript("self.close()");
 
@@ -428,7 +428,7 @@ Switching between frames and windows is a particular pain in WebDriver as you ma
 
     browser.ClickLink("Open pop up window");
 
-    Assert.That(popUp.HasContent("I am a pop up window"));
+    Assert.That(popUp, Shows.Content("I am a pop up window"));
     Assert.That(button.Exists());
     
     button.Click();
@@ -459,14 +459,13 @@ Anything is returned from the javascript will be returned from `browser.ExecuteS
 Look for text anywhere in the page:
 
 	bool hasContent = browser.HasContent("In France, the coypu is known as a ragondin");
-	bool hasContent = browser.HasContentMatch("In [Ss]pain, the coypu is known as a (\w*)");
 	
 Check for the presence of an element:
 
-	bool hasElement = browser.HasCss("ul.menu > li");
-	bool hasElement = browser.HasCss("ul.menu > li", text: "Home");
+	bool hasElement = browser.FindCss("ul.menu > li").Exists();
+	bool hasElement = browser.FindCss("ul.menu > li", text: "Home").Missing();
 
-	bool hasElement = browser.HasXPath("//ul[@class = 'menu']/li");
+	bool hasElement = browser.FindXPath("//ul[@class = 'menu']/li").Exists();
 	
 The positive queries above will wait up to the configured timeout for a matching element to appear and return as soon as it does.
 
@@ -474,10 +473,10 @@ The negative versions will wait for the element NOT to be present:
 
 	bool hasNoContent = browser.HasNoContent("In France, the coypu is known as a ragondin");
 
-	bool hasNoElement = browser.HasNoCss("ul.menu > li");
-	bool hasNoElement = browser.HasNoCss("ul.menu > li", text: "Admin");
+	bool hasNoElement = browser.FindCss("ul.menu > li").Missing();
+	bool hasNoElement = browser.FindCss("ul.menu > li", text: "Admin").Missing();
 
-	bool hasNoElement = browser.HasNoXPath("//ul[@class = 'menu']/li");
+	bool hasNoElement = browser.FindXPath("//ul[@class = 'menu']/li").Missing();
 
 There are also queries for the value of an input
 

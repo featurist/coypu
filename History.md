@@ -8,11 +8,15 @@
 
 * Exact = false by default - all finders match partial text by default
 * Match.Single by default - more than one matching element throws AmbiguousException
+* Depend on same major version of dependencies
 
 ### Fixed
 
 * On individual calls, only specified options override session configuration
  
+### Removed
+
+* HasCss, HasXPath etc - Just use .Exists()/.Missing() on any scope or Assert.That(scope, Shows.Css(".summat"))
 
 Release date: 2014-01-02
 
