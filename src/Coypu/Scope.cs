@@ -359,12 +359,6 @@ namespace Coypu
         void Choose(string locator, Options options = null);
 
         /// <summary>
-        /// Query whether an element does not appear. Returns as soon as the element does not appear or after the <see cref="SessionConfiguration.Timeout"/>
-        /// </summary>
-        /// <param name="findElement">A function to find an element</param>
-        bool HasNo(ElementScope findElement);
-
-        /// <summary>
         /// <para>Retry an action on any exception until it succeeds. Once the <see cref="SessionConfiguration.Timeout"/> is passed any exception will be rethrown.</para>
         /// <para>Waits for the <see cref="SessionConfiguration.RetryInterval"/> between retries</para>
         /// </summary>
@@ -541,5 +535,13 @@ namespace Coypu
         /// The location of the current browser window
         /// </summary>
         Uri Location { get; }
+        
+        bool HasCss(string cssSelector, string text, Options options = null);
+        bool HasCss(string cssSelector, Regex text, Options options = null);
+        bool HasXPath(string xpath, Options options = null);
+
+        bool HasNoCss(string cssSelector, string text, Options options = null);
+        bool HasNoCss(string cssSelector, Regex text, Options options = null);
+        bool HasNoXPath(string xpath, Options options = null);
     }
 }
