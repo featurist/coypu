@@ -1,8 +1,8 @@
-# Version 2.0.0
+# Version 2.0.1
 
 ### Added
 
-* New Exact and Match options (http://www.featurist.co.uk/blog/2014/01/01/coypu-2-0/)
+* New Exact and Match options (http://www.featurist.co.uk/blog/2014/01/22/coypu-2-0/)
 
 ### Changed
 
