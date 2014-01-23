@@ -31,7 +31,7 @@ Coypu has previously been rather inconsistent about matching text, sometimes all
 
 `TextPrecision.Substring` will allow you to specify a substring to find an element.
 
-`TextPrecision.PreferExact` which will prefer an exact text match to a substring match. **This is the default TextPrecision**
+`TextPrecision.PreferExact` which will prefer an exact text match to a substring match. **This is the default for TextPrecision**
 
 #### Usage
 
@@ -58,9 +58,8 @@ In some cases we tried to find an element that matched exactly first. Now that i
 
 `Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown.
 
-`Match.First` just returns the first matching element.
+`Match.First` just returns the first matching element. **This is the default for Match**
 
-**`Match.Single` is the default.**
 
 #### Usage
 
@@ -92,7 +91,7 @@ then as we vary the values of text and the options these would be the results:
 |---------------|--------|---------------|--------------------------------------------|
 | "things"      | Single | Exact         | Clicks the link to 'z'                     |
 | "things"      | Single | Substring     | Throws AmbiguousException                 |
-| "things"      | Single | PreferExact   | Clicks the link to 'z' ** DEFAULT **       |
+| "things"      | Single | PreferExact   | Clicks the link to 'z'   - (**DEFAULT**)   |
 | | | | |
 | "things"      | First  | Exact         | Clicks the link to 'z'                     |
 | "things"      | First  | Substring     | Clicks the link to 'x'                     |
@@ -100,7 +99,7 @@ then as we vary the values of text and the options these would be the results:
 | | | | |
 | "good things" | Single | Exact         | Throws AmbiguousException                 |
 | "good things" | Single | Substring     | Throws AmbiguousException                 |
-| "good things" | Single | PreferExact   | Throws AmbiguousException  ** DEFAULT **  |
+| "good things" | Single | PreferExact   | Throws AmbiguousException  - (**DEFAULT**)  |
 | | | | |
 | "good things" | First  | Exact         | Clicks the link to 'x'                     |
 | "good things" | First  | Substring     | Clicks the link to 'x'                     |
