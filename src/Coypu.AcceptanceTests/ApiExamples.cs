@@ -411,7 +411,7 @@ namespace Coypu.AcceptanceTests
             const string selectorThatAppearsInMultipleScopes = "scoped button";
 
             var expectingScope1 = browser.FindFrame("iframe1").FindButton(selectorThatAppearsInMultipleScopes);
-            var expectingScope2 = browser.FindFrame("iframe2").FindButton(selectorThatAppearsInMultipleScopes);
+            var expectingScope2 = browser.FindCss("#iframe2").FindButton(selectorThatAppearsInMultipleScopes);
 
             Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
