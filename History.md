@@ -1,3 +1,12 @@
+# Version 2.1.0
+
+### Changed
+
+* NUnit matchers split out into seperate package Coypu.NUnit and Coypu.NUnit262 for those that really need NUnit 2.6.2
+
+Release date: 2014-01-30
+
+
 # Version 2.0.1
 
 ### Added

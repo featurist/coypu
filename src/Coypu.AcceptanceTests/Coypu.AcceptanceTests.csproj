@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Coypu.AcceptanceTests</RootNamespace>
     <AssemblyName>Coypu.AcceptanceTests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -151,6 +153,10 @@
     <ProjectReference Include="..\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj">
       <Project>{A4ADBB2C-A3C3-4984-8991-C39E991167DA}</Project>
       <Name>Coypu.Drivers.Watin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj">
+      <Project>{14fb5a97-d3a7-4759-bb6a-03cafc9b8fab}</Project>
+      <Name>Coypu.NUnit</Name>
     </ProjectReference>
     <ProjectReference Include="..\Coypu\Coypu.csproj">
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>

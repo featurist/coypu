@@ -6,6 +6,14 @@ Coypu is on Nuget:
 
     PM> Install-Package Coypu
 
+NUnit matchers (e.g. `Assert.That(browserSession, Shows.Content("Hello world"));`) are in a sperate package:
+
+    PM> Install-Package Coypu.NUnit
+
+or
+
+    PM> Install-Package Coypu.NUnit262 (If you really need NUnit 2.6.2)
+
 Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
 
 ## Coypu is

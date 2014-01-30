@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Coypu.Drivers.Selenium;
-using Coypu.Matchers;
+using Coypu.NUnit.Matchers;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;

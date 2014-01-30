@@ -59,6 +59,8 @@ task :package => [:release_configuration,:compile] do
   package_file = Dir.glob('Coypu*.nupkg').each {|f| FileUtils.rm(f)}
   sh 'nuget Pack Coypu.nuspec'
   sh 'nuget Pack Coypu.Watin.nuspec'
+  sh 'nuget Pack Coypu.NUnit.nuspec'
+  sh 'nuget Pack Coypu.NUnit262.nuspec'
   #sh 'o build-wrap -quiet'
 end
 
@@ -72,6 +74,20 @@ end
 desc 'publish Coypu-WatiN'
 task :publish_watin => :package do
   package_file = Dir.glob('Coypu.Watin.*.nupkg').first
+  sh "nuget Push #{package_file}"
+  FileUtils.rm(package_file)
+end
+
+desc 'publish Coypu-NUnit'
+task :publish_nunit => [:package, :publish_nunit_262] do
+  package_file = Dir.glob('Coypu.NUnit.*.nupkg').first
+  sh "nuget Push #{package_file}"
+  FileUtils.rm(package_file)
+end
+
+desc 'publish Coypu-NUnit262'
+task :publish_nunit_262 => :package do
+  package_file = Dir.glob('Coypu.NUnit262.*.nupkg').first
   sh "nuget Push #{package_file}"
   FileUtils.rm(package_file)
 end

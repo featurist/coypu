@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework.Constraints;
 
-namespace Coypu.Matchers
+namespace Coypu.NUnit.Matchers
 {
     public class HasNoContentMatcher : Constraint {
         private readonly string _expectedContent;

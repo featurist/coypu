@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using NUnit.Framework.Constraints;
 
-namespace Coypu.Matchers
+namespace Coypu.NUnit.Matchers
 {
     public class HasCssMatcher : Constraint
     {

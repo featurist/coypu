@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework.Constraints;
 
-namespace Coypu.Matchers
+namespace Coypu.NUnit.Matchers
 {
     public class AggregateMatcher<T> : Constraint where T:Constraint
     {
