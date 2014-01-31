@@ -135,7 +135,7 @@ namespace Coypu.Drivers
 
         public string IsContainerLabeled(string locator, Options options)
         {
-            return Format("ancestor::label[" + IsText(locator, options) + "]", locator);
+            return Format("ancestor::label[" + IsTextShallow(locator, options) + "]", locator);
         }
 
         public string IsForLabeled(string locator, Options options)
@@ -153,6 +153,11 @@ namespace Coypu.Drivers
         public string IsText(string locator, Options options)
         {
             return Is("normalize-space()", locator,options);
+        }
+
+        public string IsTextShallow(string locator, Options options)
+        {
+            return Is("normalize-space(text())", locator, options);
         }
 
         protected string Descendent(string tagName = "*")

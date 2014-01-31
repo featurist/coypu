@@ -38,7 +38,7 @@ namespace Coypu.Drivers.Tests
         private static DriverScope root;
         private static Driver driver;
 
-        private static readonly Browser browser = Browser.Chrome;
+        private static readonly Browser browser = Browser.Firefox;
         private static readonly Type driverType = typeof (Selenium.SeleniumWebDriver);
 
         [SetUp]
@@ -73,7 +73,8 @@ namespace Coypu.Drivers.Tests
         protected static readonly SessionConfiguration DefaultSessionConfiguration = new SessionConfiguration
             {
                 Browser = browser,
-                Driver = driverType
+                Driver = driverType,
+                TextPrecision = TextPrecision.Exact
             };
 
         private static void EnsureDriver()

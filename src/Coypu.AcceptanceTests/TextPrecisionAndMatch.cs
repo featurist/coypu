@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Coypu.NUnit.Matchers;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -39,7 +40,7 @@ namespace Coypu.AcceptanceTests
             Assert.That(browser.FindField("Some for labeled", Options.FirstSubstring).Id, Is.EqualTo("forLabeledRadioFieldPartialMatchId"));
         }
 
-        // There is a race condition where this test can fail occasionally
+        // There is a race condition where these tests can fail occasionally
         //
         // If you have TextPrecision.PreferExact and the expected content appears after some async delay then the
         // disambiguation strategy may have just failed to find an exact match when the content appears and so the first
@@ -61,6 +62,11 @@ namespace Coypu.AcceptanceTests
             Assert.That(browser.FindField("Some for labeled radio option", Options.SinglePreferExact).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
         }
 
-
+        [Test]
+        public void PreferExact_finds_exact_match_select_option_before_substring_match()
+        {
+            browser.Select("one",Options.PreferExact).From("Ambiguous select options");
+            Assert.That(browser.FindField("Ambiguous select options").SelectedOption, Is.EqualTo("one"));
+        }
     }
 }

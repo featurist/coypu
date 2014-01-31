@@ -1,3 +1,12 @@
+# Version 2.1.1
+
+### Fixed
+
+* Exact text not matching options within selects found by container labels
+
+Release date: 2014-01-31
+
+
 # Version 2.1.0
 
 ### Changed
