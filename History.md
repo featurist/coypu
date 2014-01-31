@@ -1,3 +1,11 @@
+# Version 2.1.2
+
+### Fixed
+
+* Find select and options seperately to allow differing TextPrecisions when PreferExact
+
+Release date: 2014-01-31
+
 # Version 2.1.1
 
 ### Fixed
