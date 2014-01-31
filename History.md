@@ -2,7 +2,7 @@
 
 ### Fixed
 
-* Exact text not matching options within selects found by container labels
+* Exact text not matching selects found by container labels
 
 Release date: 2014-01-31
 
