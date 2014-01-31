@@ -75,7 +75,7 @@ namespace Coypu.Tests.TestDoubles
             var stubResult = stubbed
                 .FirstOrDefault(
                     r =>
-                    r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
+                    r.Locator == locator && (r.Scope == scope || scope.Now() == r.Scope.Now()) && r.TextPattern == textPattern && options == r.Options);
 
             if (stubResult == null)
                 throw new MissingHtmlException("No stubbed result found for: " + locator);

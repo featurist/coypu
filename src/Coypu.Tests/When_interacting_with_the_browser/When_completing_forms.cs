@@ -21,11 +21,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private StubElement StubOption(string fieldLocator, string optionLocator, Options options = null)
         {
-            var stubField = new StubElement { Id = Guid.NewGuid().ToString() };
-            var fieldXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).SelectOption(fieldLocator, optionLocator, options ?? sessionConfiguration);
-            driver.StubAllXPath(fieldXpath, new[] { stubField }, browserSession, options ?? sessionConfiguration);
+            var stubSelect = new StubElement { Id = Guid.NewGuid().ToString() };
+            var stubOption = new StubElement { Id = Guid.NewGuid().ToString() };
+            var selectXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Select(fieldLocator, options ?? sessionConfiguration);
+            var optionXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Option(optionLocator, options ?? sessionConfiguration);
+            driver.StubAllXPath(selectXpath, new[] { stubSelect }, browserSession, options ?? sessionConfiguration);
+            driver.StubAllXPath(optionXpath, new[] { stubOption }, new SnapshotElementScope(stubSelect, browserSession, options), options ?? sessionConfiguration);
 
-            return stubField;
+            return stubOption;
         }
         
         [Test]

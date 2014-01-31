@@ -107,12 +107,7 @@ namespace Coypu.Drivers
                         or + HasId(locator)));
         }
 
-        public string SelectOption(string fieldLocator, string optionLocator, Options options)
-        {
-            return Select(fieldLocator, options) + "/" + Option(optionLocator, options);
-        }
-
-        private string Option(string locator, Options options)
+        public string Option(string locator, Options options)
         {
             return
                 Child("option") +

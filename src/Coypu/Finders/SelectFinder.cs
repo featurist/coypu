@@ -3,9 +3,9 @@ using Coypu.Drivers;
 
 namespace Coypu.Finders
 {
-    internal class OptionFinder : XPathQueryFinder
+    internal class SelectFinder : XPathQueryFinder
     {
-        internal OptionFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
+        internal SelectFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsSubstringTextMatching
         {
@@ -14,12 +14,12 @@ namespace Coypu.Finders
 
         protected override Func<string, Options, string> GetQuery(Html html)
         {
-            return html.Option;
+            return html.Select;
         }
 
         internal override string QueryDescription
         {
-            get { return "option: " + Locator; }
+            get { return "select: " + Locator; }
         }
     }
 }

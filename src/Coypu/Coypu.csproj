@@ -116,6 +116,7 @@
     <Compile Include="Finders\DisambiguationStrategy.cs" />
     <Compile Include="Finders\FinderOptionsDisambiguationStrategy.cs" />
     <Compile Include="Finders\OptionFinder.cs" />
+    <Compile Include="Finders\SelectFinder.cs" />
     <Compile Include="Finders\XPathQueryFinder.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Matchers\Shows.cs" />
