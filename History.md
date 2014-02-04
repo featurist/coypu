@@ -1,3 +1,12 @@
+# Version 2.1.3
+
+### Fixed
+
+* Fix null reference in queries with snapshot scopes (FindALL) fixes #84
+
+Release date: 2014-02-04
+
+
 # Version 2.1.2
 
 ### Fixed
@@ -5,6 +14,7 @@
 * Find select and options seperately to allow differing TextPrecisions when PreferExact
 
 Release date: 2014-01-31
+
 
 # Version 2.1.1
 
