@@ -351,7 +351,7 @@ namespace Coypu
             return FindElement();
         }
 
-        protected internal ElementFound FindElement()
+        protected internal virtual ElementFound FindElement()
         {
             if (element == null || element.Stale(ElementFinder.Options))
                 element = disambiguationStrategy.ResolveQuery(ElementFinder);

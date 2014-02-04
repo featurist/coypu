@@ -72,5 +72,16 @@ namespace Coypu.AcceptanceTests
             Assert.That(all[0].FindCss("li").Missing(), Is.True);
             Assert.Throws<MissingHtmlException>(() => { var text = all[0].FindCss("li").Text; });
         }
+
+        [Test]
+        public void SnapshotScopes_work_with_hasContent_queries()
+        {
+            var all = browser.FindAllCss("ul.snapshot-scope li:first-child").ToList();
+            Assert.That(all[0].HasContent("Some"), Is.True);
+
+            ReloadTestPage();
+
+            Assert.Throws<MissingHtmlException>(() => Assert.That(all[0].HasContent("Some"), Is.True));
+        }
     }
 }
