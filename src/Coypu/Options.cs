@@ -234,7 +234,7 @@ Coypu does this by default from v2.0. Your options:
 
         public override string ToString()
         {
-            return string.Join(Environment.NewLine, GetType().GetProperties().Select(p => p.Name + ": " + p.GetValue(this, null)).ToArray());
+			return string.Join(Environment.NewLine, GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public).Select(p => p.Name + ": " + p.GetValue(this, null)).ToArray());
         }
 
         protected bool Equals(Options other)
