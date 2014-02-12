@@ -77,5 +77,11 @@ namespace Coypu.Tests
             Assert.That(merged.Timeout, Is.EqualTo(mergeWithOptions.Timeout));
             Assert.That(merged.WaitBeforeClick, Is.EqualTo(mergeWithOptions.WaitBeforeClick));
         }
+
+        [Test]
+        public void ToString_shows_all_public_instance_properties()
+        {
+            Assert.That(new Options().ToString(), Is.EqualTo("Timeout: 00:00:01\r\nRetryInterval: 00:00:00.0500000\r\nWaitBeforeClick: 00:00:00\r\nConsiderInvisibleElements: False\r\nTextPrecision: PreferExact\r\nMatch: Single"));
+        }
     }
 }
