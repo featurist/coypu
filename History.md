@@ -1,3 +1,12 @@
+# Version 2.1.4
+
+### Fixed
+
+* Fixed issue where Options.ToString() was causing a stack overflow fixes #85 (@adexios)
+
+Release date: 2014-02-12
+
+
 # Version 2.1.3
 
 ### Fixed
