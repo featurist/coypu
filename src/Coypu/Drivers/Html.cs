@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿    using System.Linq;
 
 namespace Coypu.Drivers
 {
@@ -24,7 +24,7 @@ namespace Coypu.Drivers
         {
             return
                 Descendent() +
-                Where(HasId(locator));
+                Where(HasId(locator, options));
         }
 
         public string Link(string locator, Options options)
@@ -55,7 +55,7 @@ namespace Coypu.Drivers
                 Where(
                     IsForLabeled(locator, options) +
                     or + IsContainerLabeled(locator, options) +
-                    or + HasId(locator) +
+                    or + HasId(locator, options) +
                     or + HasName(locator));
         }
 
@@ -91,7 +91,7 @@ namespace Coypu.Drivers
                 Where(
                     Child("legend") +
                     Where(IsText(locator, options)) +
-                    or + HasId(locator));
+                    or + HasId(locator, options));
 
         }
 
@@ -104,7 +104,7 @@ namespace Coypu.Drivers
                     And(
                         Child() +
                         Where(TagNamedOneOf(headerTags) + and + IsText(locator, options)) +
-                        or + HasId(locator)));
+                        or + HasId(locator, options)));
         }
 
         public string Option(string locator, Options options)
@@ -146,13 +146,13 @@ namespace Coypu.Drivers
         private string HasIdOrPlaceholder(string locator, Options options)
         {
             return Group(IsAFieldInputType(options)
-                         + And(HasId(locator) + or + Is("@placeholder", locator, options)));
+                         + And(HasId(locator, options) + or + Is("@placeholder", locator, options)));
 
         }
 
-        private string HasId(string locator)
+        private string HasId(string locator, Options options)
         {
-            return Attr("id", locator, Options.Exact);
+            return Attr("id", locator, options);
         }
     }
 }
