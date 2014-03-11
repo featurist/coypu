@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace Coypu.NUnit.Matchers {
 
-
-
     public static class Shows {
         public static Constraint Content(string expectedContent, Options options = null) {
             return new HasContentMatcher(expectedContent, options);
+        }
+
+        public static IResolveConstraint Content(Regex expectedContent, Options options = null) {
+            return new HasContentMatchMatcher(expectedContent, options);
         }
 
         public static Constraint Css(string expectedCssSelector, Options options = null)
@@ -89,7 +89,6 @@ namespace Coypu.NUnit.Matchers {
         }
 
         public static ShowsNo No = new ShowsNo();
-
     }
 
     

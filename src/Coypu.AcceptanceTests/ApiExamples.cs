@@ -264,6 +264,15 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void HasContentMatching_example()
+        {
+            Assert.That(browser, Shows.Content(new Regex(@"This.is.what.we.are.looking.for")));
+            Assert.That(browser.HasContentMatch(new Regex(@"This.is.not.in.the.page")), Is.False);
+
+            Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.Content(new Regex(@"This.is.not.in.the.page"))));
+        }
+
+        [Test]
         public void HasNoContent_example()
         {
             browser.ExecuteScript(
