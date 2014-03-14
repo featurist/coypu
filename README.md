@@ -237,7 +237,7 @@ To move back or forward in the browser history:
 	
 #### Completing forms
 
-Form fields are found by label text, label text, id, name (except radio buttons), placeholder or radio button value
+Form fields are found by label text, id, name (except radio buttons), placeholder or radio button value
 	
 	// Drop downs
 	browser.Select("toyota").From("make");
