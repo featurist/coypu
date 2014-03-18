@@ -101,7 +101,7 @@
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="AmbiguousException.cs" />
     <Compile Include="BrowserWindow.cs" />
-    <Compile Include="DeferredElementScope.cs" />
+    <Compile Include="ElementScope.cs" />
     <Compile Include="DriverFactory.cs" />
     <Compile Include="Drivers\Html.cs" />
     <Compile Include="Drivers\NoSuchBrowserException.cs" />

@@ -21,7 +21,7 @@ namespace Coypu
         internal StateFinder stateFinder;
         private ElementFound element;
         private readonly DriverScope outerScope;
-        private readonly DisambiguationStrategy disambiguationStrategy = new FinderOptionsDisambiguationStrategy();
+        protected readonly DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
 
         internal DriverScope(SessionConfiguration sessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
         {
@@ -31,7 +31,7 @@ namespace Coypu
             this.timingStrategy = timingStrategy;
             this.waiter = waiter;
             this.urlBuilder = urlBuilder;
-            this.disambiguationStrategy = disambiguationStrategy;
+            this.DisambiguationStrategy = disambiguationStrategy;
             stateFinder = new StateFinder(timingStrategy);
         }
 
@@ -42,7 +42,7 @@ namespace Coypu
             driver = outerScope.driver;
             timingStrategy = outerScope.timingStrategy;
             urlBuilder = outerScope.urlBuilder;
-            disambiguationStrategy = outerScope.disambiguationStrategy;
+            DisambiguationStrategy = outerScope.DisambiguationStrategy;
             stateFinder = outerScope.stateFinder;
             waiter = outerScope.waiter;
             SessionConfiguration = outerScope.SessionConfiguration;
@@ -91,12 +91,12 @@ namespace Coypu
 
         private WaitThenClick WaitThenClickLink(string locator, Options options = null)
         {
-            return new WaitThenClick(driver, Merge(options), waiter, new LinkFinder(driver, locator, this, Merge(options)), disambiguationStrategy);
+            return new WaitThenClick(driver, Merge(options), waiter, new LinkFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
         }
 
         private WaitThenClick WaitThenClickButton(string locator, Options options = null)
         {
-            return new WaitThenClick(driver, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)), disambiguationStrategy);
+            return new WaitThenClick(driver, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
         }
 
         public Scope ClickButton(string locator, PredicateQuery until, Options options = null)
@@ -133,7 +133,7 @@ namespace Coypu
 
         public SelectFrom Select(string option, Options options = null)
         {
-            return new SelectFrom(option, driver, timingStrategy, this, Merge(options), disambiguationStrategy);
+            return new SelectFrom(option, driver, timingStrategy, this, Merge(options), DisambiguationStrategy);
         }
 
         public bool HasContent(string text, Options options = null)
@@ -253,6 +253,11 @@ namespace Coypu
             return new IdFinder(driver, id, this, Merge(options)).AsScope();
         }
 
+        public ElementScope FindIdEndingWith(string endsWith, Options options = null)
+        {
+            return FindCss(string.Format(@"*[id$=""{0}""]", endsWith), options);
+        }
+
         public void Check(string locator, Options options = null)
         {
             RetryUntilTimeout(new CheckAction(driver, FindField(locator, options), Merge(options)));
@@ -354,8 +359,9 @@ namespace Coypu
         protected internal virtual ElementFound FindElement()
         {
             if (element == null || element.Stale(ElementFinder.Options))
-                element = disambiguationStrategy.ResolveQuery(ElementFinder);
+                element = DisambiguationStrategy.ResolveQuery(ElementFinder);
             return element;
         }
+
     }
 }

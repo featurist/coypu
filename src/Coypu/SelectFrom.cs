@@ -29,7 +29,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         public void From(string locator)
         {
-            timingStrategy.Synchronise(new Select(driver, scope, locator, option, options, disambiguationStrategy));
+            timingStrategy.Synchronise(new Select(driver, scope, locator, option, disambiguationStrategy, options));
         }
 
     }

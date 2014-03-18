@@ -322,6 +322,17 @@ namespace Coypu
         /// <returns>An element</returns>
         ElementScope FindId(string id, Options options = null);
 
+        /// ** For Asp.Net Web Forms ** Find the first matching element with id ending with the specified stringto appear within the configured timeout
+        /// </summary>
+        /// <param name="endsWith">Element id</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>An element</returns>
+        ElementScope FindIdEndingWith(string endsWith, Options options = null);
+
         /// <summary>
         /// Check the first checkbox to appear within the configured timeout matching the text of the associated label element, the id, name or value.
         /// </summary>

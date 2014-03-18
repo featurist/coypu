@@ -78,9 +78,31 @@ namespace Coypu {
             return this;
         }
 
+        /// <summary>
+        /// Treat this scope as an input field and fill in with the specified value
+        /// </summary>
+        /// <param name="value">The value to fill in with</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// <returns>The current scope</returns>
         public ElementScope FillInWith(string value, Options options = null) 
         {
             Try(new FillIn(driver, this, value, Merge(options)));
+            return this;
+        }
+
+        /// <summary>
+        /// Treat this scope as a select element and choose the specified option
+        /// </summary>
+        /// <param name="value">The text or value of the option</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait</para>
+        /// <returns>The current scope</returns>
+        public ElementScope SelectOption(string value, Options options = null)
+        {
+            Try(new Select(driver, this, value, DisambiguationStrategy, Merge(options)));
             return this;
         }
 

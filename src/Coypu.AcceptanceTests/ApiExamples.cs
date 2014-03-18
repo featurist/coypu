@@ -141,9 +141,21 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void FillInWith_element_example()
         {
-            browser.FillIn("scope2ContainerLabeledTextInputFieldId").With("New text input value");
+            browser.FindField("scope2ContainerLabeledTextInputFieldId").FillInWith("New text input value");
             Assert.That(browser.FindField("scope2ContainerLabeledTextInputFieldId").Value,
                         Is.EqualTo("New text input value"));
+        }
+
+        [Test]
+        public void SelectFrom_element_example()
+        {
+            var field = browser.FindField("containerLabeledSelectFieldId");
+            Assert.That(field.SelectedOption, Is.EqualTo("select two option one"));
+
+            field.SelectOption("select two option two");
+
+            field = browser.FindField("containerLabeledSelectFieldId");
+            Assert.That(field.SelectedOption, Is.EqualTo("select two option two"));
         }
 
         [Test]
@@ -227,6 +239,13 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(browser.FindId("containerLabeledSelectFieldId").Name,
                         Is.EqualTo("containerLabeledSelectFieldName"));
+        }
+
+        [Test]
+        public void FindIdEndingWith_example()
+        {
+            Assert.That(browser.FindIdEndingWith("aspWebFormsContainerLabeledFileFieldId").Id,
+                            Is.EqualTo("_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldId"));
         }
 
         [Test]
