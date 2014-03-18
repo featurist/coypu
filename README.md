@@ -309,6 +309,12 @@ Find methods return a `Coypu.ElementScope` that is scoped to the first matching 
 	var element = browser.FindLink("Home");
 	var element = browser.FindCss("table#menu");
 	var element = browser.FindXPath("Username");
+	var element = browser.FindId("myElementId");
+
+**N.B. For Asp.Net Web Forms testing you may need this method:**
+
+	var element = browser.FindIdEndingWith("SubmitButton");
+	// Matches <button id="ctl00_MainContent_SubmitButton"/>
 	
 You can read attributes of these elements like so:
 

@@ -1,3 +1,13 @@
+# Version 2.2.0
+
+### Added
+
+* Scope.FindIdEndingWith() for Asp.Net Web Forms
+* ElementScope.SelectOption() for finding a select then picking an option later
+
+Release date: 2014-03-18
+
+
 # Version 2.1.4
 
 ### Fixed
