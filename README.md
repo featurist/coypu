@@ -112,11 +112,6 @@ You can run the headless HtmlUnit driver for Selenium on windows too, you just n
 
 And off you go.
 
-###### Android
-Selenium WebDriver also supports Android so long as you have the Android remote driver running (Selenium defaults to port 8080).
-
-Check the driver_test_results.txt file for the latest report on driver/browser support.
-
 ##### WatiN
 
 There is a seperate package called Coypu.WatiN containing a driver for WatiN which is now almost fully featured (thanks to citizenmatt) and runs considerably faster than the WebDriver IE driver.

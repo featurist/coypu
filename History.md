@@ -1,3 +1,12 @@
+# Version 2.3.0
+
+### Added
+
+* Upgrade to WebDriver 2.41
+* Android driver removed from WebDriver 2.41
+
+Release date: 2014-04-01
+
 # Version 2.2.0
 
 ### Added
