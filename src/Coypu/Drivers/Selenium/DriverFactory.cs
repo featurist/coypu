@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Android;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 
@@ -25,8 +24,6 @@ namespace Coypu.Drivers.Selenium
             }
             if (browser == Browser.Chrome)
                 return new ChromeDriver();
-            if (browser == Browser.Android)
-                return new AndroidDriver();
             if (browser == Browser.HtmlUnit)
                 return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
             if (browser == Browser.HtmlUnitWithJavaScript) {

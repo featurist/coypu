@@ -44,12 +44,12 @@ namespace Coypu.Drivers.Tests
             VisitTestPage();
 
             var innerHTML = Normalise(Driver.Window.InnerHTML);
-            Assert.That(innerHTML, Is.EqualTo("<head><title>table</title></head><body><table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table></body>"));
+            Assert.That(innerHTML, Is.EqualTo("<head webdriver=\"true\"><title>table</title></head><body><table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table></body>"));
         }
 
         private static string Normalise(string innerHtml)
         {
-            return new Regex(@"\s+", RegexOptions.Multiline).Replace(innerHtml, "").ToLower();
+            return new Regex(@"\s+", RegexOptions.Multiline).Replace(innerHtml, " ").ToLower();
         }
     }
 }
