@@ -164,44 +164,7 @@ What we are really trying to do here is interact with the browser in the way tha
 
 If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `sessionConfiguration/options.ConsideringInvisibleElements = true` which overrides this restriction.
 
-### Exactness (>= 2.0)
-
-Where matching text you can specify whether Coypu should allow substrings or not with the `Exact` option. This can be set globally:
-
-	sessionConfiguration.Exact = true;
-
-and you can also be override on each and every call as with all options:
-
-For example:
-
-`ClickLink("Account", new Options{Exact = false})` will allow you to specify a substring so would match a ‘My Account’ link.
-
-`ClickLink("Account", new Options{Exact = true})` will need to match the entire link text exactly so would not match the ‘My Account’ link.
-
-This will be respected everywhere that Coypu matches visible text, but not anywhere else, for example when considering ids or names of fields.
-
-The default is `Exact = false` so by default, matches are not exact, and substrings are allowed.
-
-For example:
-
-`ClickLink("Account", new Options{Exact = false})` will allow you to specify a substring so would match a ‘My Account’ link.
-`ClickLink("Account", new Options{Exact = true})` will need to match the entire link text exactly so would not match the ‘My Account’ link.
-
-This will be respected everywhere that Coypu matches visible text, but not anywhere else, for example when considering ids or names of fields.
-
-The default is `Exact = false` so **by default, matches are not exact, and substrings are allowed**.
-
-### Match Strategy (>= 2.0)
-
-Using the Match option, you can control how Coypu behaves when multiple elements all match a query. There are currently
-two different strategies:
-
-1. **Match.Single:** If `Exact` is `true`, raises an error if more than one element matches. If `Exact` is `false`, it will first try to find an exact match. An error is raised if more than one element is found. If no element is found, a new search is performed which allows partial matches. If that search returns multiple matches, an error is raised.
-2. **Match.First:** If multiple matches are found, some of which are exact, and some of which are not, then the first exactly matching element is returned.
-
-The default for `Match` is `Match.Single`.
-
-### Missing features
+### Can't find what you need?
 
 If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
@@ -335,6 +298,79 @@ If you are expecting a particular state to be reached then you can describe this
 		var attributeValue = a["href"];
 		...
 	}
+
+#### Matching exactly or allowing substrings
+
+When finding elements by their text, the `TextPrecision` option allows you to specify whether to match exact text or allow a substring match. This can be set globally and also overridden on each and every call. `TextPrecision` has three options: `Exact`, `Substring` and `PreferExact`. The default is `PreferExact`.
+
+`TextPrecision.Exact` will only match the entire text of an element exactly.
+
+`TextPrecision.Substring` will allow you to specify a substring to find an element.
+
+`TextPrecision.PreferExact` which will prefer an exact text match to a substring match. **This is the default for TextPrecision**
+
+##### Usage
+
+```c#
+browserSession.FillIn("Password", new Options{TextPrecision = TextPrecision.Exact}).With("123456");
+// or
+browserSession.FillIn("Password", Options.Exact).With("123456");
+```
+
+This will be respected everywhere that Coypu matches visible text, including buttons, select options, placeholder text and so on, but not anywhere else, for example when considering ids or names of fields.
+
+#### Behaviour when multiple elements match a query
+
+When using methods such as `ClickLink()`, and `FillIn()`, what happens when more than one element matches? With the `Match` option you have control over what happens by choosing one of the two `Match` strategies:
+
+`Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown.
+
+`Match.First` just returns the first matching element. **This is the default for Match**
+
+
+##### Usage
+
+```c#
+browserSession.ClickButton("Close", new Options{Match = Match.First});
+// or
+browserSession.ClickButton("Close", Options.First);
+```
+
+#### Some more examples of using TextPrecision and Match
+
+Say we had the HTML:
+
+```html
+Some <a href="x">good things</a> or even
+awfully <a href="y">good things<a> are harder to explain than
+less good <a href="z">things<a>.
+```
+
+and the code:
+
+```c#
+browserSession.ClickLink(text, options);
+```
+
+then as we vary the values of text and the options these would be the results:
+
+| text          | Match  | TextPrecision | Result |
+|---------------|--------|---------------|--------------------------------------------|
+| "things"      | Single | Exact         | Clicks the link to 'z'                     |
+| "things"      | Single | Substring     | Throws AmbiguousException                 |
+| "things"      | Single | PreferExact   | Clicks the link to 'z'   - (**DEFAULT**)   |
+| | | | |
+| "things"      | First  | Exact         | Clicks the link to 'z'                     |
+| "things"      | First  | Substring     | Clicks the link to 'x'                     |
+| "things"      | First  | PreferExact   | Clicks the link to 'z'                     |
+| | | | |
+| "good things" | Single | Exact         | Throws AmbiguousException                 |
+| "good things" | Single | Substring     | Throws AmbiguousException                 |
+| "good things" | Single | PreferExact   | Throws AmbiguousException  - (**DEFAULT**)  |
+| | | | |
+| "good things" | First  | Exact         | Clicks the link to 'x'                     |
+| "good things" | First  | Substring     | Clicks the link to 'x'                     |
+| "good things" | First  | PreferExact   | Clicks the link to 'x'                     |
 
 #### Hover
 
