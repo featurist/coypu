@@ -433,6 +433,27 @@ The actual finding of the scope is deferred until the driver needs to interact w
 
 This means you have tests much more loosely coupled to the implementation of your website. Consider the search example above and the possible permutations of HTML and JS that would satisfy that test.
 
+#### Beware the XPath // trap
+
+In XPath the expression // means something very specific, and it might not be what
+you think. Contrary to common belief, // means "anywhere in the document" not "anywhere
+in the current context". As an example:
+
+```c#
+browser.FindXPath("//body").FindAllXPath("//script");
+```
+
+You might expect this to find all script tags in the body, but actually, it finds all
+script tags in the entire document, not only those in the body! What you're looking
+for is the .// expression which means "any descendant of the current node":
+
+```c#
+browser.FindXPath("//body").FindAllXPath(".//script");
+```
+
+(from https://github.com/jnicklas/capybara#beware-the-xpath--trap)
+
+
 #### Scoping within frames / iframes
 
 To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
