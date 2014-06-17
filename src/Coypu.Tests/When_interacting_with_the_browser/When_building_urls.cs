@@ -104,6 +104,28 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void It_encodes_the_fully_qualified_url_when_supplied_an_unencoded_relative_url()
+        {
+            SessionConfiguration.AppHost = "im.theho.st";
+            SessionConfiguration.Port = 321;
+            SessionConfiguration.SSL = true;
+
+            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/over.here?c=p|pe", SessionConfiguration),
+                        Is.EqualTo("https://im.theho.st:321/over.here?c=p%7Cpe"));
+        }
+
+        [Test]
+        public void It_encodes_the_fully_qualified_url_when_supplied_an_unencoded_fully_qualified_url()
+        {
+            SessionConfiguration.AppHost = "im.theho.st";
+            SessionConfiguration.Port = 321;
+            SessionConfiguration.SSL = true;
+
+            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here?c=p|pe", SessionConfiguration),
+                        Is.EqualTo("http://www.someother.site/over.here?c=p%7Cpe"));
+        }
+
+        [Test]
         public void It_supports_SSL()
         {
             SessionConfiguration.AppHost = "im.theho.st";
