@@ -118,7 +118,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     {
         private readonly Dictionary<string, string> urls = new Dictionary<string, string>();
 
-        public string GetFullyQualifiedUrl(string virtualPath, SessionConfiguration SessionConfiguration)
+        public string GetFullyQualifiedUrl(string virtualPath, SessionConfiguration sessionConfiguration)
         {
             return urls[virtualPath];
         }
