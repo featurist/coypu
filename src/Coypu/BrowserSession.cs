@@ -38,8 +38,8 @@ namespace Coypu
         {
         }
 
-        internal BrowserSession(DriverFactory driver, SessionConfiguration SessionConfiguration, TimingStrategy timingStrategy, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
-            : base(SessionConfiguration, null, driver.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), timingStrategy, waiter, urlBuilder, disambiguationStrategy)
+        internal BrowserSession(DriverFactory driverFactory, SessionConfiguration SessionConfiguration, TimingStrategy timingStrategy, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
+            : base(SessionConfiguration, null, driverFactory.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), timingStrategy, waiter, urlBuilder, disambiguationStrategy)
         {
             this.restrictedResourceDownloader = restrictedResourceDownloader;
         }

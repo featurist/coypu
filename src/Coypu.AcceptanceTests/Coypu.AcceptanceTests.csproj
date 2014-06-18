@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="SelfishHttp">
+      <HintPath>..\packages\SelfishHttp.0.2.0\lib\net40\SelfishHttp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,7 +75,7 @@
     </Compile>
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="Screenshots.cs" />
-    <Compile Include="sites\SinatraSite.cs" />
+    <Compile Include="sites\SelfishSite.cs" />
     <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
@@ -99,9 +102,6 @@
     <None Include="App.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="sites\site_with_secure_resources.rb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

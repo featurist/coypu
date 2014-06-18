@@ -9,11 +9,11 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public void SetUpCookies()
         {
-            Driver.Visit("http://localhost:4567/resource/cookie_test", Root);
+            Driver.Visit(TestSiteUrl("/resource/cookie_test"), Root);
             Driver.ExecuteScript("document.cookie = 'cookie1=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '", Root);
             Driver.ExecuteScript("document.cookie = 'cookie1=; expires=Fri, 27 Jul 2001 02:47:11 UTC;  path=/resource'", Root);
             Driver.ExecuteScript("document.cookie = 'cookie2=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '", Root);
-            Driver.Visit("http://localhost:4567/resource/cookie_test", Root);
+            Driver.Visit(TestSiteUrl("/resource/cookie_test"), Root);
         }
         
         [Test]

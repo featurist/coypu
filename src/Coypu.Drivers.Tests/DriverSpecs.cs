@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Drivers.Tests.Sites;
-using Coypu.Drivers.Watin;
 using Coypu.Finders;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
@@ -12,18 +10,18 @@ using NUnit.Framework;
 [SetUpFixture]
 public class AssemblyTearDown
 {
-    private SinatraSite sinatraSite;
+    public static SelfishSite TestSite;
 
     [SetUp]
-    public void StartSinatra()
+    public void StartTestSite()
     {
-        sinatraSite = new SinatraSite(@"..\..\..\Coypu.AcceptanceTests\sites\site_with_secure_resources.rb");
+        TestSite = new SelfishSite();
     }
 
     [TearDown]
     public void TearDown()
     {
-        sinatraSite.Dispose();
+        TestSite.Dispose();
 
         Coypu.Drivers.Tests.DriverSpecs.DisposeDriver();
     }
@@ -34,6 +32,11 @@ namespace Coypu.Drivers.Tests
 {
     public class DriverSpecs
     {
+        protected string TestSiteUrl(string path)
+        {
+            return new Uri(AssemblyTearDown.TestSite.BaseUri, path).AbsoluteUri;
+        }
+
         private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
         private static DriverScope root;
         private static Driver driver;

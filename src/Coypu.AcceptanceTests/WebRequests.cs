@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Coypu.Drivers.Tests.Sites;
+using Coypu.AcceptanceTests.Sites;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -9,18 +9,18 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class WebRequests
     {
-        private SinatraSite sinatraSite;
+        private SelfishSite site;
         private BrowserSession browser;
 
         [SetUp]
         public void SetUp()
         {
-            sinatraSite = new SinatraSite(string.Format(@"sites\{0}.rb", "site_with_secure_resources"));
+            site = new SelfishSite();
 
             var configuration = new SessionConfiguration();
 
             configuration.Timeout = TimeSpan.FromMilliseconds(1000);
-            configuration.Port = 4567;
+            configuration.Port = site.BaseUri.Port;
 
             browser = new BrowserSession(configuration);
             browser.Visit("/");
@@ -30,7 +30,7 @@ namespace Coypu.AcceptanceTests
         public void TearDown()
         {
             browser.Dispose();
-            sinatraSite.Dispose();
+            site.Dispose();
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Coypu.AcceptanceTests
         public void It_saves_a_restricted_file_from_a_site_you_are_logged_into()
         {
             var saveAs = TempFileName();
-            var expectedResource = Encoding.Default.GetBytes("bdd");
+            var expectedResource = "bdd";
             
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
             Assert.That(File.ReadAllBytes(saveAs), Is.Not.EqualTo(expectedResource));
@@ -56,7 +56,7 @@ namespace Coypu.AcceptanceTests
             browser.Visit("/auto_login");
 
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
-            Assert.That(File.ReadAllBytes(saveAs), Is.EqualTo(expectedResource));
+            Assert.That(File.ReadAllText(saveAs), Is.EqualTo(expectedResource));
         }
 
         private string TempFileName()
