@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Coypu.Drivers.Tests.Sites;
+using Coypu.AcceptanceTests.Sites;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -8,19 +8,18 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class Location
     {
-        private SinatraSite sinatraSite;
         private BrowserSession browser;
-
-
+        private SelfishSite site;
+        
         [SetUp]
         public void SetUp()
         {
-            sinatraSite = new SinatraSite(string.Format(@"sites\{0}.rb", "site_with_secure_resources"));
-
-            SessionConfiguration SessionConfiguration = new SessionConfiguration();
-            SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
-            SessionConfiguration.Port = 4567;
-            browser = new BrowserSession(SessionConfiguration);
+            site = new SelfishSite();
+            
+            var sessionConfiguration = new SessionConfiguration();
+            sessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
+            sessionConfiguration.Port = site.BaseUri.Port;
+            browser = new BrowserSession(sessionConfiguration);
 
             browser.Visit("/");
         }
@@ -29,17 +28,17 @@ namespace Coypu.AcceptanceTests
         public void TearDown()
         {
             browser.Dispose();
-            sinatraSite.Dispose();
+            site.Dispose();
         }
 
         [Test]
         public void It_exposes_the_current_page_location()
         {
             browser.Visit("/");
-            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
+            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/")));
 
             browser.Visit("/auto_login");
-            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/auto_login")));
         }
 
         [Test]
@@ -47,13 +46,13 @@ namespace Coypu.AcceptanceTests
         {
             browser.Visit("/");
             browser.Visit("/auto_login");
-            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/auto_login")));
 
             browser.GoBack();
-            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/")));
+            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/")));
 
             browser.GoForward();
-            Assert.That(browser.Location, Is.EqualTo(new Uri("http://localhost:4567/auto_login")));
+            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/auto_login")));
         }
 
         private void ReloadTestPage()
