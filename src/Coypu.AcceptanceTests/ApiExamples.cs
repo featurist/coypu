@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using Coypu.NUnit.Matchers;
 using NUnit.Framework;
@@ -603,6 +604,39 @@ namespace Coypu.AcceptanceTests
             {
                 var yourCustomProfile = new FirefoxProfile();
                 return new FirefoxDriver(yourCustomProfile);
+            }
+        }
+
+        [TestCase("Windows 7", "firefox", "25")]
+        [TestCase("Windows XP", "internet explorer", "6")]
+        public void CustomBrowserSession(string platform, string browserName, string version)
+        {
+            SessionConfiguration configuration = new SessionConfiguration { Driver = typeof(CustomDriver) };
+
+            DesiredCapabilities desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
+            desiredCapabilites.SetCapability("platform", platform);
+            desiredCapabilites.SetCapability("username", "appiumci");
+            desiredCapabilites.SetCapability("accessKey", "af4fbd21-6aee-4a01-857f-c7ffba2f0a50");
+            desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
+
+            Driver driver = new CustomDriver(configuration.Browser, desiredCapabilites);
+
+            using (BrowserSession custom = new BrowserSession(configuration, driver))
+            {
+                custom.Visit("https://saucelabs.com/test/guinea-pig");
+                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
+            }
+        }
+
+        public class CustomDriver : SeleniumWebDriver
+        {
+            public CustomDriver(Browser browser, ICapabilities capabilities)
+                : base(CustomWebDriver(capabilities), browser) { }
+
+            private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
+            {
+                Uri remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
+                return new RemoteWebDriver(remoteAppHost, capabilities);
             }
         }
     }

@@ -18,32 +18,95 @@ namespace Coypu
         /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
         /// </summary>
         /// <returns>The new session with default configuration </returns>
-        public BrowserSession() : this(new SessionConfiguration())
+        public BrowserSession()
+            : this(new SessionConfiguration())
         {
         }
 
         /// <summary>
         /// A new browser session. Control the lifecycle of this session with using{} / session.Dispose()
         /// </summary>
-        /// <param name="SessionConfigurationconfiguration for this session</param>
+        /// <param name="sessionConfiguration">configuration for this session</param>
         /// <returns>The new session</returns>
-        public BrowserSession(SessionConfiguration SessionConfiguration)
-            : this(new ActivatorDriverFactory(),
-                   SessionConfiguration,
-                   new RetryUntilTimeoutTimingStrategy(),
-                   new StopwatchWaiter(),
-                   new WebClientWithCookies(),
-                   new FullyQualifiedUrlBuilder(),
-                   new FinderOptionsDisambiguationStrategy())
+        public BrowserSession(SessionConfiguration sessionConfiguration)
+            : this(
+                sessionConfiguration,
+                new ActivatorDriverFactory(),
+                new RetryUntilTimeoutTimingStrategy(),
+                new StopwatchWaiter(),
+                new FullyQualifiedUrlBuilder(),
+                new FinderOptionsDisambiguationStrategy(),
+                new WebClientWithCookies()
+            )
         {
         }
 
-        internal BrowserSession(DriverFactory driverFactory, SessionConfiguration SessionConfiguration, TimingStrategy timingStrategy, Waiter waiter, RestrictedResourceDownloader restrictedResourceDownloader, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
-            : base(SessionConfiguration, null, driverFactory.NewWebDriver(SessionConfiguration.Driver, SessionConfiguration.Browser), timingStrategy, waiter, urlBuilder, disambiguationStrategy)
+        /// <summary>
+        /// A new browser session with defined driver.  
+        /// Replaces sessionConfiguration driver.
+        /// </summary>
+        /// <param name="sessionConfiguration"></param>
+        /// <param name="driver"></param>
+        public BrowserSession(SessionConfiguration sessionConfiguration, Driver driver)
+            : this(
+                sessionConfiguration,
+                driver,
+                new RetryUntilTimeoutTimingStrategy(),
+                new StopwatchWaiter(),
+                new FullyQualifiedUrlBuilder(),
+                new FinderOptionsDisambiguationStrategy(),
+                new WebClientWithCookies()
+                )
+        {
+        }
+
+        internal BrowserSession(
+            SessionConfiguration sessionConfiguration,
+            DriverFactory driverFactory,
+            TimingStrategy timingStrategy,
+            Waiter waiter,
+            UrlBuilder urlBuilder,
+            DisambiguationStrategy disambiguationStrategy,
+            RestrictedResourceDownloader restrictedResourceDownloader
+            )
+            : base(
+               sessionConfiguration,
+               null,
+               driverFactory.NewWebDriver(sessionConfiguration.Driver, sessionConfiguration.Browser),
+               timingStrategy,
+               waiter,
+               urlBuilder,
+               disambiguationStrategy
+                )
         {
             this.restrictedResourceDownloader = restrictedResourceDownloader;
         }
 
+        internal BrowserSession(
+            SessionConfiguration sessionConfiguration,
+            Driver driver,
+            TimingStrategy timingStrategy,
+            Waiter waiter,
+            UrlBuilder urlBuilder,
+            DisambiguationStrategy disambiguationStrategy,
+            RestrictedResourceDownloader restrictedResourceDownloader
+            )
+            : base(
+              sessionConfiguration,
+              null,
+              driver,
+              timingStrategy,
+              waiter,
+              urlBuilder,
+              disambiguationStrategy
+                )
+        {
+            this.restrictedResourceDownloader = restrictedResourceDownloader;
+        }
+
+        /// <summary>
+        /// Access to grand-parent DriverScope's driver.
+        /// </summary>
         public Driver Driver
         {
             get { return driver; }
