@@ -1,11 +1,21 @@
+# Version 2.4.0
+
+### Added
+
+*  Parameterized BrowserSession to take in a Driver (@Br3ttl3y)
+
+Release date: 2014-07-25
+
+
 # Version 2.3.0
 
 ### Added
 
 * Upgrade to WebDriver 2.41
-* Android driver removed from WebDriver 2.41
+* Android dri	ver removed from WebDriver 2.41
 
 Release date: 2014-04-01
+
 
 # Version 2.2.0
 

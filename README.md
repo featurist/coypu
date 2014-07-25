@@ -30,35 +30,45 @@ Check out a [demo of Coypu](http://skillsmatter.com/podcast/open-source-dot-net/
 
 Open a browser session like so:
 
-	var browser = new BrowserSession();
+```c#
+var browser = new BrowserSession();
+```
 	
 When you are done with the browser session:
 
-	browser.Dispose();
+```c#
+browser.Dispose();
+```
 
 or:
 
-	using (var browser = new BrowserSession()) 
-	{
-		...
-	}
+```c#
+using (var browser = new BrowserSession()) 
+{
+	...
+}
+```
 	
 ### Configuration
 
 To configure Coypu pass an instance of `Coypu.SessionConfiguration` to the constructor of BrowserSession:
 
-    var browserSession = new BrowserSession(new SessionConfiguration{...});
+```c#
+var browserSession = new BrowserSession(new SessionConfiguration{...});
+```
 
 #### Website under test
 
 Configure the website you are testing as follows
 
-	var sessionConfiguration = new SessionConfiguration 
-	{
-	  AppHost = "autotrader.co.uk",
-	  Port = 5555,
-	  SSL = true|false
-	};
+```c#
+var sessionConfiguration = new SessionConfiguration 
+{
+  AppHost = "autotrader.co.uk",
+  Port = 5555,
+  SSL = true|false
+};
+```
 
 If you don't specify any of these, Coypu will default to http, localhost and port 80.
 
@@ -68,15 +78,19 @@ Coypu drivers implement the `Coypu.Driver` interface and read the `SessionConfig
 
 Choose your driver/browser combination like so:
 
-	sessionConfiguration.Driver = typeof (SeleniumWebDriver);
-	sessionConfiguration.Browser = Drivers.Browser.Firefox;
+```c#
+sessionConfiguration.Driver = typeof (SeleniumWebDriver);
+sessionConfiguration.Browser = Drivers.Browser.Firefox;
+```
  
 These settings are the default configuration.
 
 If you want to configure these at runtime you could replace the following strings with strings read from your environment / configuration:
 
-	sessionConfiguration.Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu");
-	sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
+```c#
+sessionConfiguration.Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu");
+sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
+```
 
 ##### Selenium WebDriver
 `Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Firefox, IE (slowest) and Chrome (Fastest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
@@ -120,8 +134,10 @@ This driver only supports Internet Explorer as the browser.
 
 You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu like so:
 
+```c#
 	sessionConfiguration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
 	sessionConfiguration.Browser = Drivers.Browser.InternetExplorer;
+```
 
 ### SpecFlow scenarios
 
@@ -135,10 +151,12 @@ This is a rather blunt approach that goes well beyond WebDriver's ImplicitWait, 
 
 All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately unless you supply a predicate to describe the expected state.
 
-Setup timeout/retry like so:
+Configure timeout/retry like so:
 
-	sessionConfiguration.Timeout = TimeSpan.FromSeconds(1);
-	sessionConfiguration.RetryInterval = TimeSpan.FromSeconds(0.1);
+```c#
+sessionConfiguration.Timeout = TimeSpan.FromSeconds(1);
+sessionConfiguration.RetryInterval = TimeSpan.FromSeconds(0.1);
+```
 	
 These settings are the default configuration.
 
@@ -146,9 +164,11 @@ All methods in the DSL take an optional final parameter of a `Coypu.Options`. By
 
 So when you need an unusually long (or short) timeout for a particular interaction you can override the timeout just for this call by passing in a `Coypu.Options` like this:
 
-	browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
-	browser.ClickButton("Upload");
-	Assert.That(browser, Shows.Content("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } ));
+```c#
+browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
+browser.ClickButton("Upload");
+Assert.That(browser, Shows.Content("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } ));
+```
 
 The options you specify are merged with your SessionConfiguration, so you only need specify those options you wish to override.
 
@@ -168,7 +188,9 @@ If you really need this for some intractable problem where you cannot control th
 
 If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
-	var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) browserSession.Native);
+```c#
+var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) browserSession.Native);
+```
 	
 But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
 
@@ -177,74 +199,95 @@ But if you need to do this, please consider forking Coypu, adding what you need 
 Here are some examples to get you started using Coypu
 	
 #### Navigating
-	
-	browser.Visit("/used-cars");
+
+```c#	
+browser.Visit("/used-cars");
+```
 	
 If you need to step away and visit a site outside of the `SessionConfiguration.AppHost` then you can use a fully qualified Uri:
 
-	browser.Visit("https://gmail.com");
-	browser.Visit("file:///C:/users/adiel/localstuff.htm");
+```c#
+browser.Visit("https://gmail.com");
+browser.Visit("file:///C:/users/adiel/localstuff.htm");
+```
 
 To move back or forward in the browser history:
 
-	browser.GoBack();
-	browser.GoForward();
+```c#
+browser.GoBack();
+browser.GoForward();
+```
 
 #### Getting the page title
-	browser.Title
+```c#
+browser.Title
+```
 	
 #### Completing forms
 
 Form fields are found by label text, id, name (except radio buttons), placeholder or radio button value
 	
-	// Drop downs
-	browser.Select("toyota").From("make");
-	
-	// Text inputs
-	browser.FillIn("keywords").With("hybrid");
-	
-	// File inputs
-	browser.FillIn("Avatar").With(@"c:\users\adiel\photos\avatar.jpg");
-	
-	// Radio button lists
-	browser.Choose("Trade");
-	browser.Choose("Private");
-	
-	// Checkboxes
-	browser.Check("Additional ads")
-	browser.Uncheck("Additional ads")	
+```c#
+// Drop downs
+browser.Select("toyota").From("make");
+
+// Text inputs
+browser.FillIn("keywords").With("hybrid");
+
+// File inputs
+browser.FillIn("Avatar").With(@"c:\users\adiel\photos\avatar.jpg");
+
+// Radio button lists
+browser.Choose("Trade");
+browser.Choose("Private");
+
+// Checkboxes
+browser.Check("Additional ads")
+browser.Uncheck("Additional ads")	
+```
 
 If you need to fall back to CSS or XPath you can do:
 
-	// Text/File inputs
-    browser.FindCss("input[type=text].keywords").FillInWith("hybrid")
+```c#
+// Text/File inputs
+browser.FindCss("input[type=text].keywords").FillInWith("hybrid")
 
-    // Checkboxes
-    browser.FindCss("input[type=checkbox].additional-ads").Check();
-    browser.FindCss("input[type=checkbox].additional-ads").Uncheck();
+// Checkboxes
+browser.FindCss("input[type=checkbox].additional-ads").Check();
+browser.FindCss("input[type=checkbox].additional-ads").Uncheck();
+```
 
 To restrict `FindCss()` to only elements matching some expected text you can do
 
-	browser.FindCss("ul.model li", text: "Citroen");
-
+```c#
+browser.FindCss("ul.model li", text: "Citroen");
+```
 or
 
-	browser.FindCss("ul.model li", text: new Regex("Citroen C\d"));
-	
+```c#
+browser.FindCss("ul.model li", text: new Regex("Citroen C\d"));
+```
+
 #### Clicking
 
 Buttons are found by value/text, id or name. 
 
-	browser.ClickButton("Search");
-	browser.ClickButton("search-used-vehicles");
-	
+```c#
+browser.ClickButton("Search");
+browser.ClickButton("search-used-vehicles");
+```
+
 Links are found by the text of the link
 
-	browser.ClickLink("Reset search");
+```c#
+browser.ClickLink("Reset search");
+```
 
 Click any other element by calling the Click method on the returned `ElementScope`:
-	
-	browser.FindCss("span#i-should-be-a-link", text: "Log in").Click();
+
+```c#	
+browser.FindCss("span#i-should-be-a-link", text: "Log in").Click();
+```
 
 In this example, due to the way Coypu defers execution of finders, the FindCss will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
 
@@ -252,44 +295,53 @@ This introduces the idea of `Scope`. The browser.Find methods return a Scope on 
 	
 The last way to click is to pass an element you have already found directly to `Click()`:
 
-	var allToClick = browser.FindAllCss("span.clickable")
-	foreach(var element in allToClick)
-	{
-		browser.Click(element);
-	}
-	
+```c#
+var allToClick = browser.FindAllCss("span.clickable")
+foreach(var element in allToClick)
+{
+	browser.Click(element);
+}
+```
+
 #### Finding single elements
 
 Find methods return a `Coypu.ElementScope` that is scoped to the first matching element. The locator arguments are case sensitive.
 
-	var element = browser.FindField("Username");
-	var element = browser.FindButton("GO");
-	var element = browser.FindLink("Home");
-	var element = browser.FindCss("table#menu");
-	var element = browser.FindXPath("Username");
-	var element = browser.FindId("myElementId");
+```c#
+var element = browser.FindField("Username");
+var element = browser.FindButton("GO");
+var element = browser.FindLink("Home");
+var element = browser.FindCss("table#menu");
+var element = browser.FindXPath("Username");
+var element = browser.FindId("myElementId");
+```
 
 **N.B. For Asp.Net Web Forms testing you may need this method:**
 
-	var element = browser.FindIdEndingWith("SubmitButton");
-	// Matches <button id="ctl00_MainContent_SubmitButton"/>
-	
+```c#
+var element = browser.FindIdEndingWith("SubmitButton");
+// Matches <button id="ctl00_MainContent_SubmitButton"/>
+```
 You can read attributes of these elements like so:
 
+```c#
     browser.FindLink("Home").Id
     browser.FindLink("Home").Text
     browser.FindLink("Home")["href"]
     browser.FindLink("Home")["rel"]
+```
 
 #### Finding multiple elements	
 	
 FindAll methods return all matching elements immediately with no retry:
 
+```c#
 	foreach(var link in browser.FindAllCss("a")) 
 	{
 		var attributeValue = a["href"];
 		...
 	}
+```
 
 If you are expecting a particular state to be reached then you can describe this in a predicate and Coypu will retry until it matches.
 
@@ -415,6 +467,7 @@ use this:
 
 When you want perform operations only within a particular part of the page, find the scope you want then use this as the scope for further finds and interactions as in the previous fieldset/section example.
 
+```c#
     var advancedSearch = browser.FindFieldset("Advanced search");
     var searchResults = browser.FindSection("Search results");
 
@@ -426,6 +479,7 @@ When you want perform operations only within a particular part of the page, find
 
     Assert.That(searchResults, Shows.Content("1 friend found"));
     Assert.That(searchResults, Shows.Content("Philip J Fry"));
+```
 
 The actual finding of the scope is deferred until the driver needs to interact with or find any element inside the Scope. If the scope becomes stale at any time it will be re-found.
 
@@ -458,156 +512,189 @@ browser.FindXPath("//body").FindAllXPath(".//script");
 
 To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
 
-	var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
+```c#
+var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
 
-	Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
-
+Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
+```
 
 #### Scoping within windows
 
 To restrict the scope to a browser window (or tab), locate the window by its title or name:
 
-	var surveyPopup = browser.FindWindow("Customer Survey");
+```c#
+var surveyPopup = browser.FindWindow("Customer Survey");
 
-	surveyPopup.Select("Not Satisfied").From("How did we handle your enquiry?");	
-	surveyPopup.ClickButton("Submit");
-	
-	browser.ClickLink("Logout"); // Using the original window scope again - there is no need to switch back, just use the correct scope
+surveyPopup.Select("Not Satisfied").From("How did we handle your enquiry?");	
+surveyPopup.ClickButton("Submit");
+
+browser.ClickLink("Logout"); // Using the original window scope again - there is no need to switch back, just use the correct scope
+```
 
 If no exact match is found Coypu will consider windows were the title contains the supplied value
 	
 Switching between frames and windows is a particular pain in WebDriver as you may well know. Check out this example of how Coypu handles windows from a Coypu acceptance test:
 
-    browser.Visit("InteractionTestsPage.htm");
+```c#
+browser.Visit("InteractionTestsPage.htm");
 
-    browser.ClickLink("Open pop up window");
+browser.ClickLink("Open pop up window");
 
-    var popUp = browser.FindWindow("Pop Up Window");
-    var button = popUp.FindButton("button in popup");
+var popUp = browser.FindWindow("Pop Up Window");
+var button = popUp.FindButton("button in popup");
 
-    Assert.That(button.Exists());
-    Assert.That(popUp, Shows.Content("I am a pop up window"));
+Assert.That(button.Exists());
+Assert.That(popUp, Shows.Content("I am a pop up window"));
 
-    popUp.ExecuteScript("self.close()");
+popUp.ExecuteScript("self.close()");
 
-    Assert.That(button.Missing());
+Assert.That(button.Missing());
 
-    browser.ClickLink("Open pop up window");
+browser.ClickLink("Open pop up window");
 
-    Assert.That(popUp, Shows.Content("I am a pop up window"));
-    Assert.That(button.Exists());
-    
-    button.Click();
+Assert.That(popUp, Shows.Content("I am a pop up window"));
+Assert.That(button.Exists());
+
+button.Click();
+```
 
 #### Window size
 
 Sometimes you need to maximise the window, or to set a particular width, perhaps for testing your responsive layout:
 
-	browser.MaximiseWindow();
-	browser.ResizeTo(768,1000);	
+```c#
+browser.MaximiseWindow();
+browser.ResizeTo(768,1000);
+```
 
 If you are dealing with multiple windows, just call these on the correct scope:
 
-    browser.FindWindow("Pop Up Window").MaximiseWindow();
+```c#
+browser.FindWindow("Pop Up Window").MaximiseWindow();
+```
 
 #### Executing javascript in the browser
 
 You can execute javascript like so:
 
-	browser.ExecuteScript("document.getElementById('SomeContainer').innerHTML = '<h2>Hello</h2>';");
+```c#
+browser.ExecuteScript("document.getElementById('SomeContainer').innerHTML = '<h2>Hello</h2>';");
+```
 	
 Anything is returned from the javascript will be returned from `browser.ExecuteScript`
 
-	var innerHtml = browser.ExecuteScript("return document.getElementById('SomeContainer').innerHTML;");
+```c#
+var innerHtml = browser.ExecuteScript("return document.getElementById('SomeContainer').innerHTML;");
+```
 	
 #### Querying
 
 Look for text anywhere in the page:
 
-	bool hasContent = browser.HasContent("In France, the coypu is known as a ragondin");
+```c#
+bool hasContent = browser.HasContent("In France, the coypu is known as a ragondin");
+```
 	
 Check for the presence of an element:
 
-	bool hasElement = browser.FindCss("ul.menu > li").Exists();
-	bool hasElement = browser.FindCss("ul.menu > li", text: "Home").Missing();
+```c#
+bool hasElement = browser.FindCss("ul.menu > li").Exists();
+bool hasElement = browser.FindCss("ul.menu > li", text: "Home").Missing();
 
-	bool hasElement = browser.FindXPath("//ul[@class = 'menu']/li").Exists();
+bool hasElement = browser.FindXPath("//ul[@class = 'menu']/li").Exists();
+```
 	
 The positive queries above will wait up to the configured timeout for a matching element to appear and return as soon as it does.
 
 The negative versions will wait for the element NOT to be present:
 
-	bool hasNoContent = browser.HasNoContent("In France, the coypu is known as a ragondin");
+```c#
+bool hasNoContent = browser.HasNoContent("In France, the coypu is known as a ragondin");
 
-	bool hasNoElement = browser.FindCss("ul.menu > li").Missing();
-	bool hasNoElement = browser.FindCss("ul.menu > li", text: "Admin").Missing();
+bool hasNoElement = browser.FindCss("ul.menu > li").Missing();
+bool hasNoElement = browser.FindCss("ul.menu > li", text: "Admin").Missing();
 
-	bool hasNoElement = browser.FindXPath("//ul[@class = 'menu']/li").Missing();
+bool hasNoElement = browser.FindXPath("//ul[@class = 'menu']/li").Missing();
+```
 
 There are also queries for the value of an input
 
-	bool hasValue = browser.FindField("total").HasValue("147");
-	bool hasNoValue = browser.FindField("total").HasNoValue("0");
+```c#
+bool hasValue = browser.FindField("total").HasValue("147");
+bool hasNoValue = browser.FindField("total").HasNoValue("0");
+```
 
 #### Matchers
 
 There are NUnit matchers for some of the queries above to help with your assertions:
 
-	Assert.That(browser, Shows.Content("In France, the coypu is known as a ragondin");
-	Assert.That(browser, Shows.No.Content("In France, the coypu is known as a ragondin");
+```c#
+Assert.That(browser, Shows.Content("In France, the coypu is known as a ragondin");
+Assert.That(browser, Shows.No.Content("In France, the coypu is known as a ragondin");
 
-	Assert.That(browser, Shows.Css("ul.menu > li");
-	Assert.That(browser, Shows.Css("ul.menu > li", text: "Home");
-	Assert.That(browser, Shows.No.Css("ul.menu > li", text: "Admin");
+Assert.That(browser, Shows.Css("ul.menu > li");
+Assert.That(browser, Shows.Css("ul.menu > li", text: "Home");
+Assert.That(browser, Shows.No.Css("ul.menu > li", text: "Admin");
 
-	Assert.That(browser, Shows.ContentContaining(Some","Words","Anywhere","in","the","document"))
-	Assert.That(browser, Shows.CssContaining("ul.menu > li","match","in","any","order"))
-	Assert.That(browser, Shows.AllCssInOrder("ul.menu > li","has","exactly","these","matches"))
+Assert.That(browser, Shows.ContentContaining(Some","Words","Anywhere","in","the","document"))
+Assert.That(browser, Shows.CssContaining("ul.menu > li","match","in","any","order"))
+Assert.That(browser, Shows.AllCssInOrder("ul.menu > li","has","exactly","these","matches"))
 
-	Assert.That(browser.FindField("total"), Shows.Value("147"));
-	Assert.That(browser.FindField("total"), Shows.No.Value("0"));
+Assert.That(browser.FindField("total"), Shows.Value("147"));
+Assert.That(browser.FindField("total"), Shows.No.Value("0"));
+```
 
 #### Inner/OuterHTML
 
 If you just want to grab the inner or outer HTML of an element to do your own queries and assertions you can use:
 
-	var outerHTML = browser.FindCss("table#myData").OuterHTML;
-	var innerHTML = browser.FindCss("table#myData").InnerHTML; // Will exclude the surrounding <table> ... </table>
+```c#
+var outerHTML = browser.FindCss("table#myData").OuterHTML;
+var innerHTML = browser.FindCss("table#myData").InnerHTML; // Will exclude the surrounding <table> ... </table>
+```
 
 #### Dialogs
 
 Check for the presence of a modal dialog with expected text:
 
-	bool hasDialog = browser.HasDialog("Are you sure you want to cancel your account?");
-	bool hasNoDialog = browser.HasDialog("Are you sure you want to cancel your account?");
+```c#
+bool hasDialog = browser.HasDialog("Are you sure you want to cancel your account?");
+bool hasNoDialog = browser.HasDialog("Are you sure you want to cancel your account?");
+```
 	
 Waits are as for the other Has/HasNo methods.
 
 Interact with the current dialog like so:
 
-	browser.AcceptDialog();
-	browser.CancelDialog();
+```c#
+browser.AcceptDialog();
+browser.CancelDialog();
+```
 	
 #### Finding states (nondeterministic testing)
 
 Sometimes you just can't predict what state the browser will be in. Not ideal for a reliable test, but if it's unavoidable then you can use the `Session.FindState` like this:
 
-	var signedIn = new State(() => browser.HasContent("Signed in in as:"));
-	var signedOut = new State(() => browser.HasContent("Please sign in"));
-	
-	if (browser.FindState(signedIn,signedOut) == signedIn) 
-	{
-	  browser.ClickLink("Sign out");
-	}
+```c#
+var signedIn = new State(() => browser.HasContent("Signed in in as:"));
+var signedOut = new State(() => browser.HasContent("Please sign in"));
+
+if (browser.FindState(signedIn,signedOut) == signedIn) 
+{
+  browser.ClickLink("Sign out");
+}
+```
 
 It will return as soon as the first from your list of states is found, and throw if none of the states are found within the `SessionConfiguration.Timeout`
 
 Avoid this:
   
-	if (browser.HasContent("Signed in in as:")) 
-	{
-	  ...
-	}
+```c#
+if (browser.HasContent("Signed in in as:")) 
+{
+  ...
+}
+```
   
 otherwise you will have to wait for the full `SessionConfiguration.Timeout` in the negitive case.
 
@@ -615,8 +702,10 @@ otherwise you will have to wait for the full `SessionConfiguration.Timeout` in t
 
 If you can't get the quality of feedback from your tests you need to tell you exactly why they are failing you might need to take a screenshot:
 
-    browser.SaveScreenshot(@"c:\screenshots\my_feature\my_scenario_2013-06-18_16_53.jpg");
-    browser.FindWindow("Your Popup window").SaveScreenshot(etc.);
+```c#
+browser.SaveScreenshot(@"c:\screenshots\my_feature\my_scenario_2013-06-18_16_53.jpg");
+browser.FindWindow("Your Popup window").SaveScreenshot(etc.);
+```
 
 The image format will be determined by the file extension.
 
@@ -626,32 +715,83 @@ Sometimes you may want to define custom profile settings for your driver.
 
 You can do this by creating your own driver that derives from `Coypu.Drivers.Selenium.SeleniumWebDriver` using something like this:
 
-    public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+```c#
+public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+{
+    public CustomFirefoxProfileSeleniumWebDriver(yourCustomProfile)
+        : base(CustomProfileDriver(yourCustomProfile), Browser.Firefox)
     {
-        public CustomFirefoxProfileSeleniumWebDriver(Drivers.Browser browser)
-            : base(CustomProfileDriver(), browser)
-        {
-        }
-
-        private static RemoteWebDriver CustomProfileDriver()
-        {
-            var yourCustomProfile = new FirefoxProfile();
-            return new FirefoxDriver(yourCustomProfile);
-        }
     }
 
-and using it like this:
-
-    [Test]
-    public void CustomProfile()
+    private static RemoteWebDriver CustomProfileDriver(FirefoxProfile yourCustomProfile)
     {
-        var configuration = new SessionConfiguration {Driver = typeof (CustomFirefoxProfileSeleniumWebDriver)};
-        using (var custom = new BrowserSession(configuration))
-        {
-            custom.Visit("http://www.featurist.co.uk/");
-            // etc.
-        }
+        return new FirefoxDriver(yourCustomProfile);
     }
+}
+```
+
+and either setting the Driver type on your SessionConfiguration and letting Coypu construct it like this:
+
+
+or constructing the Driver yourself and passing in your own Driver instance:
+
+```c#
+[Test]
+public void CustomProfile()
+{
+    var customProfile = new FirefoxProfile(); // Configure as you wish
+    var customDriver = new CustomFirefoxProfileSeleniumWebDriver(customProfile);
+    using (var custom = new BrowserSession(customDriver))
+    {
+        custom.Visit("http://www.featurist.co.uk/");
+        // etc.
+    }
+
+    // Or if you need to 
+}
+```
+
+**When you pass a custom driver, the Driver and Browser settings in ConfigurationSettings are ignored**
+
+## Sauce Labs
+
+Here is an example of using a custom driver to run tests in Sauce Labs (thanks to @Br3ttl3y for this):
+
+```c#
+[TestCase("Windows 7", "firefox", "25")]
+[TestCase("Windows XP", "internet explorer", "6")]
+public void CustomBrowserSession(string platform, string browserName, string version)
+{
+    var configuration = new SessionConfiguration { Driver = typeof(CustomDriver) };
+
+    var desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
+    desiredCapabilites.SetCapability("platform", platform);
+    desiredCapabilites.SetCapability("username", "...");
+    desiredCapabilites.SetCapability("accessKey", "...");
+    desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
+
+    Driver driver = new CustomDriver(Browser.Parse(browserName), desiredCapabilites);
+
+    using (var custom = new BrowserSession(configuration, driver))
+    {
+        custom.Visit("https://saucelabs.com/test/guinea-pig");
+        Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
+    }
+}
+
+public class SauceLabsDriver : SeleniumWebDriver
+{
+    public SauceLabsDriver(Browser browser, ICapabilities capabilities)
+        : base(CustomWebDriver(capabilities), browser)
+    {
+    }
+
+    private static		 RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
+    {
+        var remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
+        return new RemoteWebDriver(remoteAppHost, capabilities);
+    }
+}
 
 ## More tricks/tips
 
@@ -661,20 +801,26 @@ If the driver reports it had found and clicked your element successfully but not
 
 #### Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
-	var until = () => browser.FindCss("#SearchResults").Exists();
-	var waitBetweenRetries = TimeSpan.Seconds(2);
+```c#
+var until = () => browser.FindCss("#SearchResults").Exists();
+var waitBetweenRetries = TimeSpan.Seconds(2);
 
-	browser.ClickButton("Search", until, waitBetweenRetries);
+browser.ClickButton("Search", until, waitBetweenRetries);
+```
 
 This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a separate step, but as a last resort we have found this useful.
 
 #### Tell Coypu to wait a short time between first finding links/buttons and clicking them:
 
-	sessionConfiguration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
+```c#
+sessionConfiguration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
+```
 		
 WARNING: Setting this in your session configuration means adding time to *every* click in that session. You might be better off doing this just when you need it:
 
-    browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
+```c#
+browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
+```
 
 ## License
 

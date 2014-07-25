@@ -13,8 +13,6 @@ namespace Coypu.Drivers
         private Browser(){}
 
         public bool Javascript { get; private set; }
-        public bool ModalDialogs { get; private set; }
-        public bool IFrames { get; private set; }
         public bool UppercaseTagNames { get; private set; }
 
         public static Browser Firefox                = new Browser { Javascript = true, UppercaseTagNames = true };
@@ -27,7 +25,7 @@ namespace Coypu.Drivers
 
         public static Browser Parse(string browserName)
         {
-            var fieldInfo = BrowserFields().FirstOrDefault(f => f.Name.Equals(browserName, StringComparison.InvariantCultureIgnoreCase));
+            var fieldInfo = BrowserFields().FirstOrDefault(f => f.Name.Equals(browserName.Replace(" ",""), StringComparison.InvariantCultureIgnoreCase));
             if (fieldInfo == null)
                 throw new NoSuchBrowserException(browserName);
 

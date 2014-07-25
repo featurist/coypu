@@ -45,6 +45,24 @@ namespace Coypu
         /// A new browser session with defined driver.  
         /// Replaces sessionConfiguration driver.
         /// </summary>
+        /// <param name="driver"></param>
+        public BrowserSession(Driver driver)
+            : this(
+                new SessionConfiguration(),
+                driver,
+                new RetryUntilTimeoutTimingStrategy(),
+                new StopwatchWaiter(),
+                new FullyQualifiedUrlBuilder(),
+                new FinderOptionsDisambiguationStrategy(),
+                new WebClientWithCookies()
+                )
+        {
+        }
+
+        /// <summary>
+        /// A new browser session with defined driver.  
+        /// Replaces sessionConfiguration driver.
+        /// </summary>
         /// <param name="sessionConfiguration"></param>
         /// <param name="driver"></param>
         public BrowserSession(SessionConfiguration sessionConfiguration, Driver driver)

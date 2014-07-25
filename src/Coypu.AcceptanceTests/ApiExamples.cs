@@ -611,17 +611,16 @@ namespace Coypu.AcceptanceTests
         [TestCase("Windows XP", "internet explorer", "6")]
         public void CustomBrowserSession(string platform, string browserName, string version)
         {
-            SessionConfiguration configuration = new SessionConfiguration { Driver = typeof(CustomDriver) };
 
-            DesiredCapabilities desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
+            var desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
             desiredCapabilites.SetCapability("platform", platform);
             desiredCapabilites.SetCapability("username", "appiumci");
             desiredCapabilites.SetCapability("accessKey", "af4fbd21-6aee-4a01-857f-c7ffba2f0a50");
             desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
 
-            Driver driver = new CustomDriver(configuration.Browser, desiredCapabilites);
+            Driver driver = new CustomDriver(Browser.Parse(browserName), desiredCapabilites);
 
-            using (BrowserSession custom = new BrowserSession(configuration, driver))
+            using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");
                 Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
@@ -635,7 +634,7 @@ namespace Coypu.AcceptanceTests
 
             private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
             {
-                Uri remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
+                var remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
                 return new RemoteWebDriver(remoteAppHost, capabilities);
             }
         }
