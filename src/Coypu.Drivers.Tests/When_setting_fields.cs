@@ -40,6 +40,18 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
+        public void Sets_value_of_number_input_field()
+        {
+            var numberField = Field("containerLabeledNumberInputFieldId");
+            Driver.Set(numberField, "5150");
+
+            numberField.Value.should_be("5150");
+
+            var findAgain = Field("containerLabeledNumberInputFieldId");
+            findAgain.Value.should_be("5150");
+        }
+
+        [Test]
         public void Sets_value_of_text_input_field_with_no_type()
         {
             var textField = Field("fieldWithNoType");

@@ -24,9 +24,38 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
+        public void Finds_number_field()
+        {
+            Field("containerLabeledNumberInputFieldId").Value.should_be("42");
+        }
+
+        [Test]
+        public void Finds_datetime_field()
+        {
+            Field("containerLabeledDatetimeInputFieldId").Value.should_be("02/01/2012 03:04:05");
+        }
+
+        [Test]
+        public void Finds_datetime_local_field()
+        {
+            Field("containerLabeledDatetimeLocalInputFieldId").Value.should_be("02/01/2012 03:04:05");
+        }
+
+        [Test]
+        public void Finds_date_field()
+        {
+            Field("containerLabeledDateInputFieldId").Value.should_be("2012-01-02");
+        }
+
+        [Test]
         public void Finds_url_field()
         {
             Field("containerLabeledUrlInputFieldId").Value.should_be("http://www.example.com");
+        }
+        [Test]
+        public void Finds_color_field()
+        {
+            Field("containerLabeledColorInputFieldId").Value.should_be("#ff0000");
         }
 
         [Test]
