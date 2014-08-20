@@ -1,3 +1,12 @@
+# Version 2.4.1
+
+### Fixed
+
+* Only switch to window scope when necessary
+
+Release date: 2014-07-25
+
+
 # Version 2.4.0
 
 ### Added
