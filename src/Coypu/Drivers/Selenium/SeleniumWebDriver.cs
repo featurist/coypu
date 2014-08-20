@@ -21,6 +21,7 @@ namespace Coypu.Drivers.Selenium
         private readonly XPath xPath;
         private readonly Browser browser;
         private readonly WindowHandleFinder windowHandleFinder;
+        private SeleniumWindowManager seleniumWindowManager;
 
         public SeleniumWebDriver(Browser browser)
             : this(new DriverFactory().NewWebDriver(browser),  browser)
@@ -33,11 +34,12 @@ namespace Coypu.Drivers.Selenium
             this.browser = browser;
             xPath = new XPath(browser.UppercaseTagNames);
             elementFinder = new ElementFinder();
-            frameFinder = new FrameFinder(this.webDriver, elementFinder,xPath);
             textMatcher = new TextMatcher();
-            windowHandleFinder = new WindowHandleFinder(this.webDriver);
             dialogs = new Dialogs(this.webDriver);
             mouseControl = new MouseControl(this.webDriver);
+            seleniumWindowManager = new SeleniumWindowManager(this.webDriver);
+            frameFinder = new FrameFinder(this.webDriver, elementFinder, xPath, seleniumWindowManager);
+            windowHandleFinder = new WindowHandleFinder(this.webDriver, seleniumWindowManager);
         }
 
         public Uri Location(Scope scope)
@@ -56,7 +58,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return new SeleniumWindow(webDriver, webDriver.CurrentWindowHandle);
+                return new SeleniumWindow(webDriver, webDriver.CurrentWindowHandle, seleniumWindowManager);
             }
         }
 
@@ -105,7 +107,7 @@ namespace Coypu.Drivers.Selenium
         private ElementFound BuildElement(IWebElement element)
         {
             return new[] {"iframe", "frame"}.Contains(element.TagName.ToLower()) 
-                ? new SeleniumFrame(element, webDriver) 
+                ? new SeleniumFrame(element, webDriver, seleniumWindowManager) 
                 : new SeleniumElement(element, webDriver);
         }
 
@@ -184,7 +186,7 @@ namespace Coypu.Drivers.Selenium
         {
             elementFinder.SeleniumScope(scope);
             return windowHandleFinder.FindWindowHandles(titleOrName, options)
-                                     .Select(h => new SeleniumWindow(webDriver, h))
+                                     .Select(h => new SeleniumWindow(webDriver, h, seleniumWindowManager))
                                      .Cast<ElementFound>();
         }
 
@@ -276,11 +278,15 @@ namespace Coypu.Drivers.Selenium
         {
             try
             {
+                seleniumWindowManager.SwitchToWindow(webDriver.WindowHandles[0]);
                 webDriver.SwitchTo().Alert().Accept();
             }
             catch (WebDriverException){}
             catch (KeyNotFoundException){} // Chrome
             catch (InvalidOperationException){}
+            catch (IndexOutOfRangeException){} // No window handles
         }
+
+
     }
 }

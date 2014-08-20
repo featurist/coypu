@@ -101,6 +101,7 @@
     <Compile Include="ActivatorDriverFactory.cs" />
     <Compile Include="AmbiguousException.cs" />
     <Compile Include="BrowserWindow.cs" />
+    <Compile Include="Drivers\Selenium\SeleniumWindowManager.cs" />
     <Compile Include="ElementScope.cs" />
     <Compile Include="DriverFactory.cs" />
     <Compile Include="Drivers\Html.cs" />

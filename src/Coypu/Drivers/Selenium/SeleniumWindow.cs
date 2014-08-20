@@ -7,11 +7,13 @@ namespace Coypu.Drivers.Selenium
     {
         private readonly IWebDriver webDriver;
         private readonly string windowHandle;
+        private readonly SeleniumWindowManager seleniumWindowManager;
 
-        public SeleniumWindow(IWebDriver webDriver, string windowHandle)
+        public SeleniumWindow(IWebDriver webDriver, string windowHandle, SeleniumWindowManager seleniumWindowManager)
         {
             this.webDriver = webDriver;
             this.windowHandle = windowHandle;
+            this.seleniumWindowManager = seleniumWindowManager;
         }
 
         public string Id
@@ -23,7 +25,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return RetainingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.CssSelector("body")).Text);
+                return ((ISearchContext)Native).FindElement(By.CssSelector("body")).Text;
             }
         }
 
@@ -31,33 +33,20 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                return RetainingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("innerHTML"));
+                return ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("innerHTML");
             }
         }
 
         public string Title
         {
-            get { return RetainingCurrentWindow(() => webDriver.Title); }
+            get { return webDriver.Title; }
         }
 
         public string OuterHTML
         {
             get
             {
-                return RetainingCurrentWindow(() => ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("outerHTML"));
-            }
-        }
-
-        private T RetainingCurrentWindow<T>(Func<T> function)
-        {
-            var currentWindowHandle = webDriver.CurrentWindowHandle;
-            try
-            {
-                return function();
-            }
-            finally
-            {
-                SwitchTo(currentWindowHandle);
+                return ((ISearchContext)Native).FindElement(By.XPath("./*")).GetAttribute("outerHTML");
             }
         }
 
@@ -92,7 +81,7 @@ namespace Coypu.Drivers.Selenium
 
         private void SwitchTo(string windowName)
         {
-            webDriver.SwitchTo().Window(windowName);
+            seleniumWindowManager.SwitchToWindow(windowName);
         }
 
         public bool Stale(Options options)

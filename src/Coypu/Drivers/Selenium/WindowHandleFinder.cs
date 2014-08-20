@@ -7,12 +7,13 @@ namespace Coypu.Drivers.Selenium
     internal class WindowHandleFinder
     {
         private readonly IWebDriver webDriver;
+        private readonly SeleniumWindowManager seleniumWindowManager;
 
-        public WindowHandleFinder(IWebDriver webDriver)
+        public WindowHandleFinder(IWebDriver webDriver, SeleniumWindowManager seleniumWindowManager)
         {
             this.webDriver = webDriver;
+            this.seleniumWindowManager = seleniumWindowManager;
         }
-
 
         public IEnumerable<string> FindWindowHandles(string titleOrName, Options options)
         {
@@ -21,14 +22,14 @@ namespace Coypu.Drivers.Selenium
 
             try
             {
-                webDriver.SwitchTo().Window(titleOrName);
+                seleniumWindowManager.SwitchToWindow(titleOrName);
                 matchingWindowHandles.Add(webDriver.CurrentWindowHandle);
             }
             catch (NoSuchWindowException)
             {
                 foreach (var windowHandle in webDriver.WindowHandles)
                 {
-                    webDriver.SwitchTo().Window(windowHandle);
+                    seleniumWindowManager.SwitchToWindow(windowHandle);
                     if (options.TextPrecisionExact)
                     {
                         if (ExactMatch(titleOrName, windowHandle))
@@ -44,7 +45,7 @@ namespace Coypu.Drivers.Selenium
 
             try
             {
-                webDriver.SwitchTo().Window(currentHandle);
+                seleniumWindowManager.SwitchToWindow(currentHandle);
             }
             catch (NoSuchWindowException ex)
             {

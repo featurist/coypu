@@ -9,12 +9,14 @@ namespace Coypu.Drivers.Selenium
         private readonly IWebDriver selenium;
         private readonly ElementFinder elementFinder;
         private readonly XPath xPath;
+        private readonly SeleniumWindowManager seleniumWindowManager;
 
-        public FrameFinder(IWebDriver selenium, ElementFinder elementFinder, XPath xPath)
+        public FrameFinder(IWebDriver selenium, ElementFinder elementFinder, XPath xPath, SeleniumWindowManager seleniumWindowManager)
         {
             this.selenium = selenium;
             this.elementFinder = elementFinder;
             this.xPath = xPath;
+            this.seleniumWindowManager = seleniumWindowManager;
         }
 
         public IEnumerable<IWebElement> FindFrame(string locator, Scope scope, Options options)
@@ -43,7 +45,8 @@ namespace Coypu.Drivers.Selenium
             var currentHandle = selenium.CurrentWindowHandle;
             try
             {
-                var frame = selenium.SwitchTo().Frame(e);
+
+                var frame = seleniumWindowManager.SwitchToFrame(e);
                 return
                    frame.Title == locator ||
                    frame.FindElements(By.XPath(".//h1[" + xPath.IsText(locator, options) + "]")).Any();

@@ -4,16 +4,24 @@ namespace Coypu.Drivers.Selenium
 {
     internal class SeleniumFrame : SeleniumElement
     {
-        public SeleniumFrame(IWebElement seleniumElement, IWebDriver selenium) : base(seleniumElement, selenium)
+        private readonly SeleniumWindowManager seleniumWindowManager;
+
+        public SeleniumFrame(IWebElement seleniumElement, IWebDriver selenium, SeleniumWindowManager seleniumWindowManager)
+            : base(seleniumElement, selenium)
         {
+            this.seleniumWindowManager = seleniumWindowManager;
+        }
+
+        private IWebElement FindBody()
+        {
+            return ((IWebDriver)Native).FindElement(By.CssSelector("body"));
         }
 
         public override string Text
         {
             get
             {
-                selenium.SwitchTo().Frame(native);
-                return selenium.FindElement(By.CssSelector("body")).Text;
+                return FindBody().Text;
             }
         }
 
@@ -21,8 +29,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                selenium.SwitchTo().Frame(native);
-                return selenium.FindElement(By.CssSelector("body")).GetAttribute("outerHTML");
+                return FindBody().GetAttribute("outerHTML");
             }
         }
 
@@ -30,8 +37,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                selenium.SwitchTo().Frame(native);
-                return selenium.FindElement(By.CssSelector("body")).GetAttribute("innerHTML");
+                return FindBody().GetAttribute("innerHTML");
             }
         }
 
@@ -39,7 +45,7 @@ namespace Coypu.Drivers.Selenium
         {
             get
             {
-                selenium.SwitchTo().Frame(native);
+                seleniumWindowManager.SwitchToFrame(native);
                 return selenium;
             }
         }
