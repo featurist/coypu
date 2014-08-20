@@ -3,6 +3,7 @@
 ### Fixed
 
 * Only switch to window scope when necessary
+* Support more html5 input types, fixes #104
 
 Release date: 2014-07-25
 
