@@ -1,5 +1,9 @@
 # Coypu
 
+> ####"haha, coypu must have reduced teh amount of shit code by 90%"
+> &mdash; <cite>Anonymous</cite>
+
+
 Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with FireBug then Coypu might help.
 
 Coypu is on Nuget:
