@@ -27,9 +27,14 @@ namespace Coypu
         /// </summary>
         /// <param name="locator">The text of the associated label element, the id or name</param>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        public void From(string locator)
+        public void From(string locator, Options localOptions = null)
         {
-            timingStrategy.Synchronise(new Select(driver, scope, locator, option, disambiguationStrategy, options));
+            if (localOptions == null)
+            {
+                localOptions = options;
+            }
+
+            timingStrategy.Synchronise(new Select(driver, scope, locator, option, disambiguationStrategy, localOptions));
         }
 
     }
