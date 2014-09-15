@@ -244,6 +244,19 @@ namespace Coypu.Drivers.Selenium
             return result == null ? null : result.ToString();
         }
 
+        public T ExecuteScript<T> (string javascript, Scope scope) where T : class
+        {
+          if (NoJavascript)
+                throw new NotSupportedException("Javascript is not supported by " + browser);
+
+          elementFinder.SeleniumScope(scope);
+          var result = JavaScriptExecutor.ExecuteScript(javascript);
+          if (result == null)
+            return null;
+
+          return (T) result;
+        }
+
         private string NormalizeCRLFBetweenBrowserImplementations(string text)
         {
             if (webDriver is ChromeDriver) // Which adds extra whitespace around CRLF

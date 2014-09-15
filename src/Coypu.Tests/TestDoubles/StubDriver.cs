@@ -118,6 +118,11 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
+        public T ExecuteScript<T> (string javascript, Scope scope) where T : class
+        {
+          return null;
+        }
+
         public ElementFound FindIFrame(string locator, Scope scope)
         {
             return null;
