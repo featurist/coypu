@@ -534,7 +534,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void MaximiseWindow()
         {
-            var availWidth = float.Parse(browser.ExecuteScript("return window.screen.availWidth;"));
+            var availWidth = browser.ExecuteScript("return window.screen.availWidth;");
             var initalWidth = GetOuterWidth();
 
             Assert.That(initalWidth, Is.LessThan(availWidth));
@@ -559,24 +559,24 @@ namespace Coypu.AcceptanceTests
             Assert.That(GetOuterHeight(), Is.EqualTo(600));
         }
 
-        private float GetOuterHeight()
+        private object GetOuterHeight()
         {
-            return float.Parse(browser.ExecuteScript("return window.outerHeight;"));
+            return browser.ExecuteScript("return window.outerHeight;");
         }
 
-        private float GetOuterWidth()
+        private object GetOuterWidth()
         {
-            return float.Parse(browser.ExecuteScript("return window.outerWidth;"));
+            return browser.ExecuteScript("return window.outerWidth;");
         }
 
         [Test]
         public void RefreshingWindow()
         {
-             var tickBeforeRefresh = Int64.Parse(browser.ExecuteScript("return window.SpecData.CurrentTick;"));
+             var tickBeforeRefresh = (Int64) browser.ExecuteScript("return window.SpecData.CurrentTick;");
  
              browser.Refresh();
  
-             var tickAfterRefresh = Int64.Parse(browser.ExecuteScript("return window.SpecData.CurrentTick;"));
+             var tickAfterRefresh = (Int64) browser.ExecuteScript("return window.SpecData.CurrentTick;");
  
              Assert.That((tickAfterRefresh - tickBeforeRefresh), Is.GreaterThan(0));
         }
@@ -589,7 +589,7 @@ namespace Coypu.AcceptanceTests
             using (var custom = new BrowserSession(configuration))
             {
                 custom.Visit("https://www.relishapp.com/");
-                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
+                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo(0));
             }
         }
 
@@ -623,7 +623,7 @@ namespace Coypu.AcceptanceTests
             using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");
-                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
+                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo(0));
             }
         }
 

@@ -234,14 +234,14 @@ namespace Coypu.Drivers.Selenium
             SeleniumElement(field).Click();
         }
 
-        public string ExecuteScript(string javascript, Scope scope)
+        public object ExecuteScript(string javascript, Scope scope)
         {
             if (NoJavascript)
                 throw new NotSupportedException("Javascript is not supported by " + browser);
 
             elementFinder.SeleniumScope(scope);
             var result = JavaScriptExecutor.ExecuteScript(javascript);
-            return result == null ? null : result.ToString();
+            return result == null ? null : result;
         }
 
         private string NormalizeCRLFBetweenBrowserImplementations(string text)

@@ -37,14 +37,14 @@ namespace Coypu.Drivers.Tests
 
         private static void AssertMaximisesWindow(DriverScope driverScope)
         {
-            var availWidth = float.Parse(Driver.ExecuteScript("return window.screen.availWidth;", driverScope));
-            var initalWidth = float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope));
+            var availWidth = Driver.ExecuteScript("return window.screen.availWidth;", driverScope);
+            var initalWidth =  Driver.ExecuteScript("return window.outerWidth;", driverScope);
 
             Assert.That(initalWidth, Is.LessThan(availWidth));
 
             Driver.MaximiseWindow(driverScope);
 
-            Assert.That(float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope)), Is.GreaterThanOrEqualTo(availWidth));
+            Assert.That( Driver.ExecuteScript("return window.outerWidth;", driverScope), Is.GreaterThanOrEqualTo(availWidth));
         }
 
 
@@ -80,15 +80,15 @@ namespace Coypu.Drivers.Tests
 
         private static void AssertResizesWindow(DriverScope driverScope)
         {
-            var availWidth = float.Parse(Driver.ExecuteScript("return window.screen.availWidth;", driverScope));
-            var initalWidth = float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope));
+            var availWidth = Driver.ExecuteScript("return window.screen.availWidth;", driverScope);
+            var initalWidth = Driver.ExecuteScript("return window.outerWidth;", driverScope);
 
             Assert.That(initalWidth, Is.LessThan(availWidth));
 
             Driver.ResizeTo(new Size(768, 500), driverScope);
 
-            Assert.That(float.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope)), Is.EqualTo(768));
-            Assert.That(float.Parse(Driver.ExecuteScript("return window.outerHeight;", driverScope)), Is.EqualTo(500));
+            Assert.That(Driver.ExecuteScript("return window.outerWidth;", driverScope), Is.EqualTo(768));
+            Assert.That(Driver.ExecuteScript("return window.outerHeight;", driverScope), Is.EqualTo(500));
         }
     }
 }

@@ -98,7 +98,7 @@ namespace Coypu.Drivers.Watin
             return new WatiNFrame(frame);
         }
 
-        public string ExecuteScript(string javascript, Scope scope)
+        public object ExecuteScript(string javascript, Scope scope)
         {
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
             var retval = GetWindowScope(scope).Eval(stripReturn);
