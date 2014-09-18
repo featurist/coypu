@@ -32,13 +32,13 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_datetime_field()
         {
-            Field("containerLabeledDatetimeInputFieldId").Value.should_be("02/01/2012 03:04:05");
+            Field("containerLabeledDatetimeInputFieldId").Value.should_be("2012-01-02T03:04:05Z");
         }
 
         [Test]
         public void Finds_datetime_local_field()
         {
-            Field("containerLabeledDatetimeLocalInputFieldId").Value.should_be("02/01/2012 03:04:05");
+            Field("containerLabeledDatetimeLocalInputFieldId").Value.should_be("2012-01-02T03:04:05");
         }
 
         [Test]

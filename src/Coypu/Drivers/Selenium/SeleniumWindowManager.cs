@@ -6,10 +6,16 @@ namespace Coypu.Drivers.Selenium
     {
         private readonly IWebDriver webDriver;
         private bool switchedToFrame;
+        private string lastKnownWindowHandle;
 
         public bool SwitchedToFrame
         {
             get { return switchedToFrame; }
+        }
+
+        public string LastKnownWindowHandle
+        {
+           get { return lastKnownWindowHandle; } 
         }
 
         public SeleniumWindowManager(IWebDriver webDriver)
@@ -26,23 +32,13 @@ namespace Coypu.Drivers.Selenium
 
         public void SwitchToWindow(string windowName)
         {
-            if (GetCurrentWindowHandle() != windowName || switchedToFrame)
+            if (lastKnownWindowHandle != windowName || switchedToFrame)
+            {
                 webDriver.SwitchTo().Window(windowName);
+                lastKnownWindowHandle = windowName;
+            }
             
             switchedToFrame = false;
         }
-
-        private string GetCurrentWindowHandle()
-        {
-            try
-            {
-                return webDriver.CurrentWindowHandle;
-            }
-            catch (NoSuchWindowException)
-            {
-                return string.Empty;
-            }
-        }
-
     }
 }
