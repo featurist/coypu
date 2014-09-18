@@ -562,6 +562,8 @@ Assert.That(button.Exists());
 button.Click();
 ```
 
+**N.B.** If you drop down into the native Selenium driver and use SwitchTo() (highly unrecommended), bypassing Coypu's FindWindow(), Coypu will lose track of the current window, so make sure to switch back to the previous window before dropping back to Coypu.
+
 #### Window size
 
 Sometimes you need to maximise the window, or to set a particular width, perhaps for testing your responsive layout:

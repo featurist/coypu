@@ -1,3 +1,19 @@
+# Version 2.5.0
+
+### Added
+
+* Added CLSCompliant(true) to all production assemblies. (@drauch)
+
+### Fixed
+
+* Firefox webdriver 2.43.0 has started closing alerts when asked for currentWindowHandle
+
+### Changed
+
+* Thanks to fix for Firefox Webdriver, if you switch window via the native selenium driver
+coypu will no longer be able to switch back to the correct window if you use a pre-existing scope
+so use the native SwitchTo with caution. 
+
 # Version 2.4.1
 
 ### Fixed
