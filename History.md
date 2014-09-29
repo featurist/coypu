@@ -1,3 +1,9 @@
+# Version 2.5.1
+
+### Fixed
+
+* Fix AppHost to accept basic auth userinfo
+
 # Version 2.5.0
 
 ### Added
