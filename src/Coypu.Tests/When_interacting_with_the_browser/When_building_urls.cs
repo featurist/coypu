@@ -49,6 +49,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void It_handles_basic_auth_provided_in_the_host()
+        {
+            SessionConfiguration.AppHost = "http://someone:example@im.theho.st";
+            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
+                        Is.EqualTo("http://someone:example@im.theho.st/visit/me"));
+        }
+
+        [Test]
         public void It_handles_protocol_provided_in_the_host()
         {
             SessionConfiguration.AppHost = "http://im.theho.st";

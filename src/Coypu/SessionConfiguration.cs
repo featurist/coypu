@@ -51,11 +51,14 @@ namespace Coypu
                 {
                     var uri = new Uri(value);
                     SSL = uri.Scheme == "https";
+                    UserInfo = uri.UserInfo;
                     value = uri.Host;
                 }
                 appHost = value == null ? null : value.TrimEnd('/');
             }
         }
+
+        internal string UserInfo { get; set; }
 
         /// <summary>
         /// <para>The port of the website you are testing</para>
