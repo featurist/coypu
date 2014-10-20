@@ -13,11 +13,11 @@ namespace Coypu.Drivers
 
         public bool     Javascript          { get; private set; }
         public bool     UppercaseTagNames   { get; private set; }
-        public string   Name                { private get; private set; }
+        private string   _name;
 
         public static Browser Parse(string browserName)
         {
-            var match = Browsers().FirstOrDefault(b => b.Name.Equals(browserName.Replace(" ", String.Empty), StringComparison.InvariantCultureIgnoreCase));
+            var match = Browsers().FirstOrDefault(b => b._name.Equals(browserName.Replace(" ", String.Empty), StringComparison.InvariantCultureIgnoreCase));
             if (match == null)
                 throw new NoSuchBrowserException(browserName);            
                 
@@ -26,13 +26,13 @@ namespace Coypu.Drivers
 
         private static IEnumerable<Browser> Browsers()
         {   
-            yield return new Browser { Name = "Firefox",                 Javascript = true, UppercaseTagNames = true };
-            yield return new Browser { Name = "InternetExplorer",        Javascript = true };
-            yield return new Browser { Name = "Chrome",                  Javascript = true };
-            yield return new Browser { Name = "Safari",                  Javascript = true };
-            yield return new Browser { Name = "HtmlUnit",                Javascript = false };
-            yield return new Browser { Name = "HtmlUnitWithJavaScript",  Javascript = true };
-            yield return new Browser { Name = "PhantomJS",               Javascript = true };            
+            yield return new Browser { _name = "Firefox",                 Javascript = true, UppercaseTagNames = true };
+            yield return new Browser { _name = "InternetExplorer",        Javascript = true };
+            yield return new Browser { _name = "Chrome",                  Javascript = true };
+            yield return new Browser { _name = "Safari",                  Javascript = true };
+            yield return new Browser { _name = "HtmlUnit",                Javascript = false };
+            yield return new Browser { _name = "HtmlUnitWithJavaScript",  Javascript = true };
+            yield return new Browser { _name = "PhantomJS",               Javascript = true };            
         }
     }
 }
