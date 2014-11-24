@@ -98,10 +98,20 @@ namespace Coypu
         /// Executes custom javascript in the browser
         /// </summary>
         /// <param name="javascript">JavaScript to execute</param>
-        /// <returns>Anything returned from the script</returns>
+        /// <returns>string returned from the script</returns>
         public string ExecuteScript(string javascript) 
         {
             return driver.ExecuteScript(javascript, this);
+        }
+
+        /// <summary>
+        /// Executes custom javascript in the browser
+        /// </summary>
+        /// <param name="javascript">JavaScript to execute</param>
+        /// <returns>Anything returned from the script</returns>
+        public T ExecuteScript<T>(string javascript) where T : class
+        {
+            return driver.ExecuteScript<T>(javascript, this);
         }
 
         /// <summary>

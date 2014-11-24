@@ -106,6 +106,11 @@ namespace Coypu.Drivers.Watin
             return retval;
         }
 
+        public T ExecuteScript<T> (string javascript, Scope scope) where T : class
+        {
+            throw new NotSupportedException ("WatiN supports string return objects from JavaScript scripts only.");
+        }
+
         public void Hover(Element element)
         {
             WatiNElement(element).FireEvent("onmouseover");
