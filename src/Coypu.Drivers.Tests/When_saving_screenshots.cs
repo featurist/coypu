@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using Coypu.Finders;
 using NUnit.Framework;
@@ -21,8 +22,8 @@ namespace Coypu.Drivers.Tests
                 Assert.That(File.Exists(saveAs), "Expected screenshot saved to " + new FileInfo(saveAs).FullName);
                 using (var saved = Image.FromFile(saveAs))
                 {
-                    var docWidth = float.Parse(Driver.ExecuteScript("return window.document.body.clientWidth;", driverScope));
-                    var docHeight = float.Parse(Driver.ExecuteScript("return window.document.body.clientHeight;", driverScope));
+                    var docWidth = (Int64) Driver.ExecuteScript("return window.document.body.clientWidth;", driverScope);
+                    var docHeight = (Int64) Driver.ExecuteScript("return window.document.body.clientHeight;", driverScope);
                     Assert.That(saved.PhysicalDimension.Width, Is.InRange(docWidth - 10, docWidth));
                     Assert.That(saved.PhysicalDimension.Height, Is.InRange(docHeight - 75, docHeight));
                 }

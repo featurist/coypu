@@ -42,8 +42,8 @@ namespace Coypu.AcceptanceTests
                 Assert.That(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
                 using (var saved = Image.FromFile("screenshot-test-card.jpg"))
                 {
-                    var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;"));
-                    var docHeight = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientHeight;"));
+                    var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;").ToString());
+                    var docHeight = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientHeight;").ToString());
                     Assert.That(saved.PhysicalDimension, Is.EqualTo(new SizeF(docWidth, docHeight)));
                 }
             }

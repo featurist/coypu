@@ -17,7 +17,7 @@ namespace Coypu
         ElementFound Window { get; }
         Uri Location(Scope scope);
         String Title(Scope scope);
-        string ExecuteScript(string javascript, Scope scope);
+        object ExecuteScript(string javascript, Scope scope);
         IEnumerable<Cookie> GetBrowserCookies();
         void Click(Element element);
         void AcceptModalDialog(Scope scope);
