@@ -1,3 +1,4 @@
+using System;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -57,5 +58,11 @@ namespace Coypu
         {
             return Query(query);
         }
+
+        internal override T Try<T>(Func<T> getAttribute)
+        {
+            return Query(new LambdaQuery<T>(getAttribute, null, this, options));
+        }
     }
+
 }

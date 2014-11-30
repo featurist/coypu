@@ -25,7 +25,7 @@ namespace Coypu.Queries
             return allElements;
         }
 
-        public override IEnumerable<SnapshotElementScope> ExpectedResult
+        public override object ExpectedResult
         {
             get { return null; }
         }

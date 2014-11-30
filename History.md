@@ -5,6 +5,7 @@
 * Handle stale elements/windows by exceptions rather than explicit stale checks - fixes #112 AcceptModalDialog() fails in IE11
 * Override timeout in Exists() and Missing()
 * NoAlertPresentException when Disposing Chrome Browser
+* ElementScope's properties (HTML attribute access) race condition - fixes #117
 
 Release date: 2014-11-30
 

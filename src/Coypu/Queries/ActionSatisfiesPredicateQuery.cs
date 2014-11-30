@@ -29,7 +29,7 @@ namespace Coypu.Queries
             return timingStrategy.Synchronise(until);
         }
 
-        public bool ExpectedResult
+        public object ExpectedResult
         {
             get { return true; }
         }

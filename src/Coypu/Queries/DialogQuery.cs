@@ -4,7 +4,7 @@ namespace Coypu.Queries
     {
         private readonly Driver driver;
         private readonly string text;
-        public override bool ExpectedResult { get { return true; } }
+        public override object ExpectedResult { get { return true; } }
 
         protected internal HasNoDialogQuery(Driver driver, string text, DriverScope driverScope, Options options) : base(driverScope,options)
         {

@@ -1,3 +1,4 @@
+using System;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -12,64 +13,61 @@ namespace Coypu {
 
         internal abstract void Try(DriverAction action);
         internal abstract bool Try(Query<bool> query);
+        internal abstract T Try<T>(Func<T> getAttribute);
 
         public string Id
         {
-            get { return Now().Id; }
+            get { return  Try(() => Now().Id); }
         }
 
         public string Text
         {
-            get { return Now().Text; }
+            get { return Try(() => Now().Text); }
         }
 
         public string Value
         {
-            get { return Now().Value; }
+            get { return Try(() => Now().Value); }
         }
 
         public string Name
         {
-            get { return Now().Name; }
+            get { return Try(() => Now().Name); }
         }
 
         public string OuterHTML
         {
-            get { return Now().OuterHTML; }
+            get { return Try(() => Now().OuterHTML); }
         }
 
         public string InnerHTML
         {
-            get { return Now().InnerHTML; }
+            get { return Try(() => Now().InnerHTML); }
         }
 
         public string Title
         {
-            get { return Now().Title; }
+            get { return Try(() => Now().Title); }
         }
 
         public string SelectedOption
         {
-            get { return Now().SelectedOption; }
+            get { return Try(() => Now().SelectedOption); }
         }
 
         public bool Selected
         {
-            get { return Now().Selected; }
+            get { return Try(() => Now().Selected); }
         }
 
         public object Native
         {
-            get { return Now().Native; }
+            get { return Try(() => Now().Native); }
         }
 
         public string this[string attributeName]
         {
-            get {
-
-                Element element = Now();
-                return element[attributeName];
-            }
+            get { return Try(() => Now()[attributeName]); }
         }
 
         public ElementScope Click(Options options = null) 

@@ -3,7 +3,7 @@ namespace Coypu.Queries
     internal class HasNoContentQuery : DriverScopeQuery<bool>
     {
         private readonly string text;
-        public override bool ExpectedResult { get { return true; } }
+        public override object ExpectedResult { get { return true; } }
 
         protected internal HasNoContentQuery(DriverScope scope, string text, Options options) : base(scope,options)
         {

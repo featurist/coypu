@@ -43,6 +43,11 @@ namespace Coypu
             return query.Run();
         }
 
+        internal override T Try<T>(Func<T> getAttribute)
+        {
+            return getAttribute();
+        }
+
         public override bool Exists(Options options = null)
         {
             return FindXPath(".", options).Exists();

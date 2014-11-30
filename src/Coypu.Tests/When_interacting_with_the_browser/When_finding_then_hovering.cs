@@ -12,7 +12,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var element = new StubElement();
             driver.StubId("something_to_hover", element, browserSession, sessionConfiguration);
-            SpyTimingStrategy.AlwaysReturnFromRobustly(element);
+            SpyTimingStrategy.AlwaysReturnFromSynchronise(element);
 
             browserSession.FindId("something_to_hover").Hover();
 

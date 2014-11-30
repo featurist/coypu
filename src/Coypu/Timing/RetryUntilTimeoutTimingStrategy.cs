@@ -52,12 +52,18 @@ namespace Coypu.Timing
                 }
                 catch (FinderException ex)
                 {
-                    WaitAndRetryOrThrow(query, stopWatch, interval, ex);
+                    if (TimeoutReached(stopWatch, Timeout(query), interval))
+                        throw ex;
+            
+                    WaitForInterval(interval);
                 }
                 catch (Exception ex)
                 {
                     MarkAsStale(query);
-                    WaitAndRetryOrThrow(query, stopWatch, interval, ex);
+                    if (TimeoutReached(stopWatch, Timeout(query), interval))
+                        throw ex;
+            
+                    WaitForInterval(interval);
                 }
             }
         }
@@ -71,16 +77,6 @@ namespace Coypu.Timing
                 query.Scope.OuterScope.Stale = true;
             else
                 query.Scope.Stale = true;
-        }
-
-        private void WaitAndRetryOrThrow<TResult>(Query<TResult> query, Stopwatch stopWatch, TimeSpan interval, Exception ex)
-        {
-            if (TimeoutReached(stopWatch, Timeout(query), interval))
-            {
-                throw ex;
-            }
-            
-            WaitForInterval(interval);
         }
 
         private TimeSpan Timeout<TResult>(Query<TResult> query)

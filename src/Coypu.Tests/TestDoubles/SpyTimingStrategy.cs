@@ -12,6 +12,8 @@ namespace Coypu.Tests.TestDoubles
         internal IList<TryUntilArgs> DeferredTryUntils = new List<TryUntilArgs>();
 
         private object alwaysReturn;
+        private object executeImmediatelyOnceThenReturn;
+        private bool executedImmediatelyOnce;
         private readonly IDictionary<object, object> stubbedQueryResult = new Dictionary<object, object>();
         private readonly IList<object> queriesRan = new List<object>();
         public static readonly object NO_EXPECTED_RESULT = new object();
@@ -31,13 +33,19 @@ namespace Coypu.Tests.TestDoubles
 
         public T Synchronise<T>(Query<T> query)
         {
-            if (ExecuteImmediately)
+            if (ExecuteImmediately || (executeImmediatelyOnceThenReturn != null && !executedImmediatelyOnce))
+            {
+                executedImmediatelyOnce = true;
                 return query.Run();
+            }
 
             queriesRan.Add(query);
 
             if (alwaysReturn != null)
-                return (T) alwaysReturn;
+                return (T)alwaysReturn;
+
+            if (executeImmediatelyOnceThenReturn != null && executedImmediatelyOnce)
+                return (T) executeImmediatelyOnceThenReturn;
 
             Object key = query.ExpectedResult;
             if (key == null) key = NO_EXPECTED_RESULT;
@@ -62,9 +70,14 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public void AlwaysReturnFromRobustly(object result)
+        public void AlwaysReturnFromSynchronise(object result)
         {
             alwaysReturn = result;
+        }
+
+        public void ReturnOnceThenExecuteImmediately(StubElement stubElement)
+        {
+            executeImmediatelyOnceThenReturn = stubElement;
         }
 
         public void StubQueryResult<T>(T expectedResult, T result)

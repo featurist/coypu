@@ -4,14 +4,14 @@ namespace Coypu.Queries
 {
     public class LambdaQuery<T> : Query<T>
     {
-        private readonly Func<T> _query;
+        private readonly Func<T> query;
         public Options Options { get; private set; }
         public DriverScope Scope { get; private set; }
-        public T ExpectedResult { get; set; }
+        public object ExpectedResult { get; set; }
 
         public LambdaQuery(Func<T> query)
         {
-            _query = query;
+            this.query = query;
         }
 
         public LambdaQuery(Func<T> query, Options options) : this(query)
@@ -19,14 +19,20 @@ namespace Coypu.Queries
             Options = options;
         }
 
-        public LambdaQuery(Func<T> query, T expectedResult, Options options) : this(query, options)
+        public LambdaQuery(Func<T> query, object expectedResult, Options options) : this(query, options)
         {
             ExpectedResult = expectedResult;
         }
 
+        public LambdaQuery(Func<T> query, object expectedResult, DriverScope scope, Options options)
+            : this(query, expectedResult, options)
+        {
+            Scope = scope;
+        }
+
         public T Run()
         {
-            return _query();
+            return query();
         }
 
     }

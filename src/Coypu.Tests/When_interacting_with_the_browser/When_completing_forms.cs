@@ -140,7 +140,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             var element = new StubElement();
             driver.StubId("something", element, browserSession, sessionConfiguration);
-            SpyTimingStrategy.AlwaysReturnFromRobustly(element);
+            SpyTimingStrategy.AlwaysReturnFromSynchronise(element);
 
             browserSession.FindId("something")
                           .SendKeys("some keys to press");

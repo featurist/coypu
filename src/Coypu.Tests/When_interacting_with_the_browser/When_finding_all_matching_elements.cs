@@ -84,7 +84,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var expectedDeferredResult = new[] { new StubElement(), new StubElement() };
 
             var options = new Options{Timeout = individualTimeout};
-            SpyTimingStrategy.AlwaysReturnFromRobustly(expectedImmediateResult.Select(e => new SnapshotElementScope(e, browserSession, options)));
+            SpyTimingStrategy.AlwaysReturnFromSynchronise(expectedImmediateResult.Select(e => new SnapshotElementScope(e, browserSession, options)));
 
             stub(locator, expectedDeferredResult, browserSession, options);
 

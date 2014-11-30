@@ -13,6 +13,6 @@ namespace Coypu.Queries
         }
 
         public abstract T Run();
-        public abstract T ExpectedResult { get; }
+        public abstract object ExpectedResult { get; }
     }
 }

@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             return actualResult;
         }
 
-        public T ExpectedResult
+        public object ExpectedResult
         {
             get { return expecting; }
         }
@@ -95,7 +95,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             return result;
         }
 
-        public T ExpectedResult
+        public object ExpectedResult
         {
             get { return default(T); }
         }
@@ -128,7 +128,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             throw (TException)Activator.CreateInstance(typeof(TException), "Test Exception");
         }
 
-        public TResult ExpectedResult
+        public object ExpectedResult
         {
             get { return default(TResult); }
         }
@@ -201,7 +201,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             return actualResult;
         }
 
-        public T ExpectedResult
+        public object ExpectedResult
         {
             get { return expectedResult; }
         }

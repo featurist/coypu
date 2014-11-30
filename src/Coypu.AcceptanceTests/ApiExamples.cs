@@ -333,6 +333,21 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void Attributes_on_stale_scope_example()
+        {
+            var field = browser.FindField("find-this-field");
+            
+            Assert.That(field.Value, Is.EqualTo("This value is what we are looking for"));
+            
+            ReloadTestPage();
+
+            Assert.That(field.Value, Is.EqualTo("This value is what we are looking for"));
+            Assert.That(field.Id, Is.EqualTo("find-this-field"));
+            Assert.That(field["id"], Is.EqualTo("find-this-field"));
+
+        }
+
+        [Test]
         public void HasNoValue_example()
         {
             var field = browser.FindField("find-this-field");

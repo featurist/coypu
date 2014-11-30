@@ -11,7 +11,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser {
         {
             var element = new StubElement();
             driver.StubId("something_to_fill_in", element, browserSession, sessionConfiguration);
-            SpyTimingStrategy.AlwaysReturnFromRobustly(element);
+            SpyTimingStrategy.AlwaysReturnFromSynchronise(element);
 
             var elementScope = browserSession.FindId("something_to_fill_in");
 
