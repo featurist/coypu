@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    internal class SeleniumElement : ElementFound
+    internal class SeleniumElement : Element
     {
         protected readonly IWebElement native;
         protected readonly IWebDriver selenium;
@@ -80,27 +79,6 @@ namespace Coypu.Drivers.Selenium
             get
             {
                 return native;
-            }
-        }
-
-        public bool Stale(Options options)
-        {
-            try
-            {
-                native.FindElement(By.XPath("."));
-                return !options.ConsiderInvisibleElements && !native.Displayed;
-            }
-            catch (InvalidOperationException)
-            {
-                return true;
-            }
-            catch (NoSuchWindowException)
-            {
-                return true;
-            }
-            catch (StaleElementReferenceException)
-            {
-                return true;
             }
         }
 

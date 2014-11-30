@@ -1,19 +1,19 @@
 namespace Coypu.Queries
 {
-    internal class ElementQuery : DriverScopeQuery<ElementFound>
+    internal class ElementQuery : DriverScopeQuery<Element>
     {
         public ElementQuery(DriverScope driverScope, Options options) : base(driverScope, options)
         {
         }
 
-        public override ElementFound ExpectedResult
+        public override Element ExpectedResult
         {
             get { return null; }
         }
 
-        public override ElementFound Run()
+        public override Element Run()
         {
-            return DriverScope.FindElement();
+            return Scope.FindElement();
         }
     }
 }

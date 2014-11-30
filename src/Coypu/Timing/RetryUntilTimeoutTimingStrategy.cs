@@ -38,23 +38,49 @@ namespace Coypu.Timing
                 try
                 {
                     var result = query.Run();
-                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, Timeout(query), interval))
+                    if (ExpectedResultNotFoundWithinTimeout(query.ExpectedResult, result, stopWatch, Timeout(query),
+                                                            interval))
                     {
                         WaitForInterval(interval);
                         continue;
                     }
                     return result;
                 }
-                catch (NotSupportedException) { throw; }
+                catch (NotSupportedException)
+                {
+                    throw;
+                }
+                catch (FinderException ex)
+                {
+                    WaitAndRetryOrThrow(query, stopWatch, interval, ex);
+                }
                 catch (Exception ex)
                 {
-                    if (TimeoutReached(stopWatch, Timeout(query), interval))
-                    {
-                        throw;
-                    }
-                    WaitForInterval(interval);
+                    MarkAsStale(query);
+                    WaitAndRetryOrThrow(query, stopWatch, interval, ex);
                 }
             }
+        }
+
+        private static void MarkAsStale<TResult>(Query<TResult> query)
+        {
+            if (query.Scope == null)
+                return;
+
+            if (query.Scope.Stale && query.Scope.OuterScope != null)
+                query.Scope.OuterScope.Stale = true;
+            else
+                query.Scope.Stale = true;
+        }
+
+        private void WaitAndRetryOrThrow<TResult>(Query<TResult> query, Stopwatch stopWatch, TimeSpan interval, Exception ex)
+        {
+            if (TimeoutReached(stopWatch, Timeout(query), interval))
+            {
+                throw ex;
+            }
+            
+            WaitForInterval(interval);
         }
 
         private TimeSpan Timeout<TResult>(Query<TResult> query)

@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
     {
         private static DriverScope GetSelectScope(string locator)
         {
-            var select = new DriverScope(DefaultSessionConfiguration,
+            var select = new BrowserWindow(DefaultSessionConfiguration,
                                          new SelectFinder(Driver, locator, Root, DefaultOptions), Driver,
                                          null, null, null, DisambiguationStrategy);
             return @select;

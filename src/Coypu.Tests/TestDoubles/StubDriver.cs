@@ -49,15 +49,15 @@ namespace Coypu.Tests.TestDoubles
             return false;
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
+        public IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
-            return Enumerable.Empty<ElementFound>();
+            return Enumerable.Empty<Element>();
         }
 
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
-            return Enumerable.Empty<ElementFound>();
+            return Enumerable.Empty<Element>();
         }
 
         public void Check(Element field)
@@ -90,7 +90,7 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public ElementFound Window
+        public Element Window
         {
             get { return null; }
         }
@@ -103,7 +103,7 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
-        public void SetScope(ElementFound findScope)
+        public void SetScope(Element findScope)
         {
             
         }
@@ -118,7 +118,7 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
-        public ElementFound FindIFrame(string locator, Scope scope)
+        public Element FindIFrame(string locator, Scope scope)
         {
             return null;
         }
@@ -132,14 +132,14 @@ namespace Coypu.Tests.TestDoubles
             return new List<Cookie>();
         }
 
-        public IEnumerable<ElementFound> FindWindows(string locator, Scope scope, Options options)
+        public IEnumerable<Element> FindWindows(string locator, Scope scope, Options options)
         {
-            return Enumerable.Empty<ElementFound>();
+            return Enumerable.Empty<Element>();
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
+        public IEnumerable<Element> FindFrames(string locator, Scope scope, Options options)
         {
-            return Enumerable.Empty<ElementFound>();
+            return Enumerable.Empty<Element>();
         }
 
         public void SendKeys(Element element, string keys)

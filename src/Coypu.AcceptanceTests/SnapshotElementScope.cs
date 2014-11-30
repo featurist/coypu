@@ -58,8 +58,7 @@ namespace Coypu.AcceptanceTests
 
             ReloadTestPage();
 
-            Assert.That(all[0].FindCss("li").Missing(), Is.True);
-            Assert.Throws<MissingHtmlException>(() => { var text = all[0].FindCss("li").Text; });
+            Assert.That(all[0].Missing(), Is.True);
         }
 
         [Test]
@@ -70,7 +69,7 @@ namespace Coypu.AcceptanceTests
             ReloadTestPage();
 
             Assert.That(all[0].FindCss("li").Missing(), Is.True);
-            Assert.Throws<MissingHtmlException>(() => { var text = all[0].FindCss("li").Text; });
+            Assert.Throws<StaleElementException>(() => { var text = all[0].FindCss("li").Text; });
         }
 
         [Test]
@@ -78,10 +77,6 @@ namespace Coypu.AcceptanceTests
         {
             var all = browser.FindAllCss("ul.snapshot-scope li:first-child").ToList();
             Assert.That(all[0].HasContent("Some"), Is.True);
-
-            ReloadTestPage();
-
-            Assert.Throws<MissingHtmlException>(() => Assert.That(all[0].HasContent("Some"), Is.True));
         }
     }
 }

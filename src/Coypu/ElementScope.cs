@@ -67,8 +67,8 @@ namespace Coypu {
         {
             get {
 
-                ElementFound elementFound = Now();
-                return elementFound[attributeName];
+                Element element = Now();
+                return element[attributeName];
             }
         }
 
@@ -129,15 +129,9 @@ namespace Coypu {
             return this;
         }
 
-        public bool Exists()
-        {
-            return Try(new ElementExistsQuery(this));
-        }
+        public abstract bool Exists(Options options = null);
 
-        public bool Missing()
-        {
-            return Try(new ElementMissingQuery(this));
-        }
+        public abstract bool Missing(Options options = null);
 
         public bool HasValue(string text, Options options = null)
         {

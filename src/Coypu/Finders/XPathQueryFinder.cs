@@ -8,10 +8,10 @@ namespace Coypu.Finders
     {
         protected XPathQueryFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
         
-        internal override IEnumerable<ElementFound> Find(Options options)
+        internal override IEnumerable<Element> Find(Options options)
         {
             var html = new Html(Scope.Browser.UppercaseTagNames);
-            return Driver.FindAllXPath(GetQuery(html)(Locator, options), Scope, options);
+               return Driver.FindAllXPath(GetQuery(html)(Locator, options), Scope, options);
         }
 
         protected abstract Func<string, Options, string> GetQuery(Html html);

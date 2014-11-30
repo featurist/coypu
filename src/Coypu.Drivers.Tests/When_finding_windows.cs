@@ -30,17 +30,17 @@ namespace Coypu.Drivers.Tests
             Driver.Click(FindPopUp2Link());
         }
 
-        private static ElementFound FindPopUpLink()
+        private static Element FindPopUpLink()
         {
             return Link("Open pop up window", Root, DefaultOptions);
         }
 
-        private static ElementFound FindPopUp2Link()
+        private static Element FindPopUp2Link()
         {
             return Link("Open pop up window 2", Root, DefaultOptions);
         }
 
-        private static ElementFound FindPopUp()
+        private static Element FindPopUp()
         {
             return FindWindow("Pop Up Window");
         }
@@ -89,7 +89,7 @@ namespace Coypu.Drivers.Tests
 
                 OpenPopup();
 
-                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
+                var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
 
                 Id("popUpButtonId", popUp);
@@ -108,7 +108,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        private static ElementFound FindWindow(string locator)
+        private static Element FindWindow(string locator)
         {
             return Window(locator, Root, DefaultOptions);
         }
@@ -119,7 +119,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup();
-                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
+                var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
 
                 Driver.ExecuteScript("self.close();", popUp);

@@ -7,7 +7,7 @@ namespace Coypu.Actions
         private readonly Action action;
 
         public LambdaBrowserAction(Action action, Options options)
-            : base(options)
+            : base(null, options)
         {
             this.action = action;
         }

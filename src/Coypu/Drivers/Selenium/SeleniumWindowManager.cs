@@ -5,12 +5,13 @@ namespace Coypu.Drivers.Selenium
     internal class SeleniumWindowManager
     {
         private readonly IWebDriver webDriver;
-        private bool switchedToFrame;
+        private IWebElement switchedToFrameElement;
+        private IWebDriver switchedToFrame;
         private string lastKnownWindowHandle;
 
-        public bool SwitchedToFrame
+        public bool SwitchedToAFrame
         {
-            get { return switchedToFrame; }
+            get { return switchedToFrame != null; }
         }
 
         public string LastKnownWindowHandle
@@ -25,20 +26,27 @@ namespace Coypu.Drivers.Selenium
 
         public IWebDriver SwitchToFrame(IWebElement webElement)
         {
+            if (Equals(switchedToFrameElement, webElement))
+                return switchedToFrame;
+
             var frame = webDriver.SwitchTo().Frame(webElement);
-            switchedToFrame = true;
+
+            switchedToFrameElement = webElement;
+            switchedToFrame = frame;
+
             return frame;
         }
 
         public void SwitchToWindow(string windowName)
         {
-            if (lastKnownWindowHandle != windowName || switchedToFrame)
+            if (lastKnownWindowHandle != windowName || SwitchedToAFrame)
             {
                 webDriver.SwitchTo().Window(windowName);
                 lastKnownWindowHandle = windowName;
             }
-            
-            switchedToFrame = false;
+
+            switchedToFrame = null;
+            switchedToFrameElement = null;
         }
     }
 }

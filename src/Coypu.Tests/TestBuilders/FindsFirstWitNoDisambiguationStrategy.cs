@@ -5,7 +5,7 @@ namespace Coypu.Tests.TestBuilders
 {
     public class FirstOrDefaultNoDisambiguationStrategy : DisambiguationStrategy
     {
-        public ElementFound ResolveQuery(ElementFinder elementFinder)
+        public Element ResolveQuery(ElementFinder elementFinder)
         {
             return elementFinder.Find(elementFinder.Options).FirstOrDefault();
         }
@@ -13,7 +13,7 @@ namespace Coypu.Tests.TestBuilders
 
     public class ThrowsWhenMissingButNoDisambiguationStrategy : DisambiguationStrategy
     {
-        public ElementFound ResolveQuery(ElementFinder elementFinder)
+        public Element ResolveQuery(ElementFinder elementFinder)
         {
             var all = elementFinder.Find(elementFinder.Options).ToArray();
             if (!all.Any())

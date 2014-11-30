@@ -74,7 +74,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Link("Open pop up window"));
-                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
+                var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},200);", Root);
@@ -92,7 +92,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Link("Open pop up window"));
-                var popUp = new DriverScope(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
+                var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('confirmTriggerLink').click();},500);", Root);

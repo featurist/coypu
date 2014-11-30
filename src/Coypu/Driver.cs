@@ -10,11 +10,11 @@ namespace Coypu
     {
         object Native { get; }
         bool Disposed { get; }
-        IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null);
-        IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options);
-        IEnumerable<ElementFound> FindWindows(string locator, Scope scope, Options options);
-        IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options);
-        ElementFound Window { get; }
+        IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null);
+        IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options);
+        IEnumerable<Element> FindWindows(string locator, Scope scope, Options options);
+        IEnumerable<Element> FindFrames(string locator, Scope scope, Options options);
+        Element Window { get; }
         Uri Location(Scope scope);
         String Title(Scope scope);
         object ExecuteScript(string javascript, Scope scope);

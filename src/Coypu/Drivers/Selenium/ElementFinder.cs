@@ -9,7 +9,14 @@ namespace Coypu.Drivers.Selenium
     {
         public IEnumerable<IWebElement> FindAll(By @by, Scope scope, Options options, Func<IWebElement, bool> predicate = null)
         {
-            return SeleniumScope(scope).FindElements(@by).Where(e => matches(predicate, e) && IsDisplayed(e, options));
+            try
+            {
+                return SeleniumScope(scope).FindElements(@by).Where(e => matches(predicate, e) && IsDisplayed(e, options));
+            }
+            catch (StaleElementReferenceException e)
+            {
+                throw new StaleElementException(e);
+            }
         }
 
         public ISearchContext SeleniumScope(Scope scope)

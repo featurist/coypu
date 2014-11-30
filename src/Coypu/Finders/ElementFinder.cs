@@ -28,7 +28,7 @@ namespace Coypu.Finders
 
         internal string Locator { get { return locator; } }
 
-        internal abstract IEnumerable<ElementFound> Find(Options options);
+        internal abstract IEnumerable<Element> Find(Options options);
 
         internal abstract string QueryDescription { get; }
 

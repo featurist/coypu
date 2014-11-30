@@ -15,7 +15,7 @@ namespace Coypu.AcceptanceTests
             var configuration = new SessionConfiguration
                 {
                     Timeout = TimeSpan.FromMilliseconds(2000),
-                    Browser = Drivers.Browser.Firefox
+                    Browser = Drivers.Browser.InternetExplorer
                 };
             browser = new BrowserSession(configuration);
 

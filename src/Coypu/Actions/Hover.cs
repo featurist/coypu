@@ -5,7 +5,7 @@ namespace Coypu.Actions
         private readonly DriverScope driverScope;
 
         internal Hover(DriverScope driverScope, Driver driver, Options options)
-            : base(driver, options)
+            : base(driver, driverScope, options)
         {
             this.driverScope = driverScope;
         }

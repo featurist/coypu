@@ -11,7 +11,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Modal_dialog()
         {
-            using (var session = new BrowserSession(new SessionConfiguration{Browser = Browser.Firefox}))
+            using (var session = new BrowserSession(new SessionConfiguration{Browser = Browser.InternetExplorer}))
             {
                 VisitTestPage(session);
 

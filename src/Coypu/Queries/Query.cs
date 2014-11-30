@@ -5,5 +5,6 @@ namespace Coypu.Queries
         TReturn Run();
         TReturn ExpectedResult { get; }
         Options Options { get; }
+        DriverScope Scope { get; }    
     }
 }

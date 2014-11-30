@@ -1,3 +1,13 @@
+# Version 2.6.0
+
+### Fixed
+
+* Handle stale elements/windows by exceptions rather than explicit stale checks - fixes #112 AcceptModalDialog() fails in IE11
+* Override timeout in Exists() and Missing()
+* NoAlertPresentException when Disposing Chrome Browser
+
+Release date: 2014-11-30
+
 # Version 2.5.1
 
 ### Fixed

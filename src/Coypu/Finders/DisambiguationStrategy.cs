@@ -3,5 +3,5 @@ using Coypu.Finders;
 
 public interface DisambiguationStrategy
 {
-    ElementFound ResolveQuery(ElementFinder elementFinder);
+    Element ResolveQuery(ElementFinder elementFinder);
 }

@@ -18,7 +18,7 @@ namespace Coypu.Queries
 
         public override IEnumerable<SnapshotElementScope> Run()
         {
-            var allElements = DriverScope.FindAllXPathNoPredicate(locator, Options).ToArray();
+            var allElements = Scope.FindAllXPathNoPredicate(locator, Options).ToArray();
             if (!predicate(allElements))
                 throw new MissingHtmlException("FindAllXPath did not find elements matching your predicate");
 

@@ -5,6 +5,7 @@ namespace Coypu.Queries
     public abstract class PredicateQuery : Query<bool>
     {
         public Options Options { get; private set; }
+        public DriverScope Scope { get; private set; }
 
         protected PredicateQuery(Options options)
         {

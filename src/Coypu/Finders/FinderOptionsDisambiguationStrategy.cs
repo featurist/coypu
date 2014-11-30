@@ -4,9 +4,9 @@ namespace Coypu.Finders
 {
     internal class FinderOptionsDisambiguationStrategy : DisambiguationStrategy
     {
-        public ElementFound ResolveQuery(ElementFinder elementFinder)
+        public Element ResolveQuery(ElementFinder elementFinder)
         {
-            ElementFound[] results;
+            Element[] results;
 
             if (elementFinder.Options.TextPrecision == TextPrecision.PreferExact)
                 results = PreferExect(elementFinder);
@@ -22,7 +22,7 @@ namespace Coypu.Finders
             return results.First();
         }
 
-        private static ElementFound[] PreferExect(ElementFinder elementFinder)
+        private static Element[] PreferExect(ElementFinder elementFinder)
         {
             var results = Find(elementFinder, Options.Exact);
             if (results.Any() || !elementFinder.SupportsSubstringTextMatching)
@@ -31,7 +31,7 @@ namespace Coypu.Finders
             return Find(elementFinder, Options.Substring);
         }
 
-        private static ElementFound[] Find(ElementFinder elementFinder, Options preferredOptions = null)
+        private static Element[] Find(ElementFinder elementFinder, Options preferredOptions = null)
         {
             return elementFinder.Find((Options.Merge(preferredOptions, elementFinder.Options))).ToArray();
         }

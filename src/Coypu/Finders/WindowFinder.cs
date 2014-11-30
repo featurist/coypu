@@ -12,7 +12,7 @@ namespace Coypu.Finders
             get { return true; }
         }
 
-        internal override IEnumerable<ElementFound> Find(Options options)
+        internal override IEnumerable<Element> Find(Options options)
         {
             return Driver.FindWindows(Locator, Scope, options);
         }

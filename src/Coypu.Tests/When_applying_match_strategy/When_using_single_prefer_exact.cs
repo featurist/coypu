@@ -24,7 +24,7 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions);
 
-            var exactResults = new List<ElementFound> { new StubElement() };
+            var exactResults = new List<Element> { new StubElement() };
             StubExactResults(finder, finderOptions, exactResults);
 
             var results = ResolveQuery(finder);
@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions);
 
-            var exactResults = new List<ElementFound> { new StubElement(), new StubElement() };
+            var exactResults = new List<Element> { new StubElement(), new StubElement() };
             StubExactResults(finder, finderOptions, exactResults);
 
             Assert.Throws<AmbiguousException>(() => ResolveQuery(finder));
@@ -50,8 +50,8 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions, queryDescription: "something from StubElementFinder");
 
-            StubExactResults(finder, finderOptions, new List<ElementFound>());
-            StubSubstringResults(finder, finderOptions, new List<ElementFound>());
+            StubExactResults(finder, finderOptions, new List<Element>());
+            StubSubstringResults(finder, finderOptions, new List<Element>());
 
             try
             {
@@ -70,8 +70,8 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions);
 
-            var exactResults = new List<ElementFound> ();
-            var substringResults = new List<ElementFound> { new StubElement() };
+            var exactResults = new List<Element> ();
+            var substringResults = new List<Element> { new StubElement() };
 
             StubExactResults(finder, finderOptions, exactResults);
             StubSubstringResults(finder, finderOptions, substringResults);
@@ -87,8 +87,8 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions);
 
-            var exactResults = new List<ElementFound> ();
-            var substringResults = new List<ElementFound> { new StubElement(), new StubElement() };
+            var exactResults = new List<Element> ();
+            var substringResults = new List<Element> { new StubElement(), new StubElement() };
             StubExactResults(finder, finderOptions, exactResults);
             StubSubstringResults(finder, finderOptions, substringResults);
 
@@ -102,7 +102,7 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finder = new StubElementFinder(finderOptions, queryDescription: "something from StubElementFinder",
                 supportsSubstringTextMatching: false);
 
-            StubExactResults(finder, finderOptions, new List<ElementFound>());
+            StubExactResults(finder, finderOptions, new List<Element>());
 
             try
             {

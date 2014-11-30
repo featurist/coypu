@@ -41,7 +41,7 @@ namespace Coypu.Drivers.Tests
         private static DriverScope root;
         private static Driver driver;
 
-        private static readonly Browser browser = Browser.Firefox;
+        private static readonly Browser browser = Browser.Chrome;
         private static readonly Type driverType = typeof (Selenium.SeleniumWebDriver);
 
         [SetUp]
@@ -68,7 +68,7 @@ namespace Coypu.Drivers.Tests
 
         protected static DriverScope Root
         {
-            get { return root ?? (root = new DriverScope(DefaultSessionConfiguration, new DocumentElementFinder(Driver, DefaultSessionConfiguration), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, new ThrowsWhenMissingButNoDisambiguationStrategy() )); }
+            get { return root ?? (root = new BrowserWindow(DefaultSessionConfiguration, new DocumentElementFinder(Driver, DefaultSessionConfiguration), null, new ImmediateSingleExecutionFakeTimingStrategy(), null, null, new ThrowsWhenMissingButNoDisambiguationStrategy() )); }
         }
 
         protected readonly static Options DefaultOptions = new Options();
@@ -112,67 +112,67 @@ namespace Coypu.Drivers.Tests
         }
 
         protected static readonly DisambiguationStrategy DisambiguationStrategy = new ThrowsWhenMissingButNoDisambiguationStrategy();
-        protected static ElementFound FindSingle(ElementFinder finder)
+        protected static Element FindSingle(ElementFinder finder)
         {
             return DisambiguationStrategy.ResolveQuery(finder);
         }
 
-        protected static ElementFound Frame(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Frame(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new FrameFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Button(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Button(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new ButtonFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Link(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Link(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new LinkFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Id(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Id(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new IdFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Field(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Field(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new FieldFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound XPath(string locator, DriverScope scope = null, Options options = null)
+        protected static Element XPath(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new XPathFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Css(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Css(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Css(string locator, Regex text, DriverScope scope = null, Options options = null)
+        protected static Element Css(string locator, Regex text, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text));
         }
 
-        protected static ElementFound Css(string locator, string text, DriverScope scope = null, Options options = null)
+        protected static Element Css(string locator, string text, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text));
         }
 
-        protected static ElementFound Section(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Section(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new SectionFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Fieldset(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Fieldset(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new FieldsetFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
-        protected static ElementFound Window(string locator, DriverScope scope = null, Options options = null)
+        protected static Element Window(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new WindowFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }

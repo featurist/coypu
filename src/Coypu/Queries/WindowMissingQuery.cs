@@ -1,8 +1,8 @@
 namespace Coypu.Queries
 {
-    internal class ElementMissingQuery : DriverScopeQuery<bool>
+    internal class WindowMissingQuery : DriverScopeQuery<bool>
     {
-        protected internal ElementMissingQuery(DriverScope driverScope, Options options)
+        protected internal WindowMissingQuery(DriverScope driverScope, Options options)
             : base(driverScope, options)
         {
         }
@@ -11,7 +11,7 @@ namespace Coypu.Queries
         {
             get { return true; }
         }
-
+        
         public override bool Run()
         {
             try
@@ -20,15 +20,7 @@ namespace Coypu.Queries
                 Scope.FindElement();
                 return false;
             }
-            catch (MissingHtmlException)
-            {
-                return true;
-            }
             catch (MissingWindowException)
-            {
-                return true;
-            }
-            catch (StaleElementException)
             {
                 return true;
             }

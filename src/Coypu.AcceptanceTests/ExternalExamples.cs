@@ -60,7 +60,7 @@ namespace Coypu.AcceptanceTests
             browser.Select("diesel").From("fuel-type");
             browser.Select("up_to_7_years_old").From("maximum-age");
             browser.Select("up_to_60000_miles").From("maximum-mileage");
-
+            
             browser.FillIn("Add keyword").With("vtr");
         }
 

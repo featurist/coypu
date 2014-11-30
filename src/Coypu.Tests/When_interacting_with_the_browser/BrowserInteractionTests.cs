@@ -92,7 +92,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(scopedResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
             Assert.That(scopedResult, Is.SameAs(expectedImmediateResult));
 
-            var elementScopeResult = RunQueryAndCheckTiming<ElementFound>(options.Timeout, driverCallIndex);
+            var elementScopeResult = RunQueryAndCheckTiming<Element>(options.Timeout, driverCallIndex);
 
             Assert.That(elementScopeResult, Is.SameAs(expectedDeferredResult));
         }

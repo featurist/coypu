@@ -4,6 +4,8 @@ namespace Coypu.Finders
 {
     internal class DocumentElementFinder : ElementFinder
     {
+        private Element window;
+
         public DocumentElementFinder(Driver driver, Options options) : base(driver, "Window", null, options)
         {
         }
@@ -13,9 +15,9 @@ namespace Coypu.Finders
             get { return false; }
         }
 
-        internal override IEnumerable<ElementFound> Find(Options options)
+        internal override IEnumerable<Element> Find(Options options)
         {
-            return new [] {Driver.Window};
+            return new[] { window = (window ?? Driver.Window) };
         }
 
         internal override string QueryDescription

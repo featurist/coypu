@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coypu.Actions;
+using Coypu.Drivers;
 using Coypu.Queries;
 
 namespace Coypu
@@ -540,13 +541,16 @@ namespace Coypu
         /// </summary>
         /// <returns>The element found</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        ElementFound Now();
+        Element Now();
 
         /// <summary>
         /// The location of the current browser window
         /// </summary>
         Uri Location { get; }
-        
+
+        Browser Browser { get; }
+        DriverScope OuterScope { get; }
+
         bool HasCss(string cssSelector, string text, Options options = null);
         bool HasCss(string cssSelector, Regex text, Options options = null);
         bool HasXPath(string xpath, Options options = null);

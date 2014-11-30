@@ -54,7 +54,7 @@ namespace Coypu.Drivers.Selenium
             return webDriver.Title;
         }
 
-        public ElementFound Window
+        public Element Window
         {
             get
             {
@@ -77,12 +77,12 @@ namespace Coypu.Drivers.Selenium
             get { return webDriver; }
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
+        public IEnumerable<Element> FindFrames(string locator, Scope scope, Options options)
         {
             return frameFinder.FindFrame(locator, scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
+        public IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
             var textMatches = (textPattern == null)
                 ? (Func<IWebElement, bool>)null
@@ -94,7 +94,7 @@ namespace Coypu.Drivers.Selenium
             return FindAll(By.CssSelector(cssSelector), scope, options, textMatches).Select(BuildElement);
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
             return FindAll(By.XPath(xpath), scope, options).Select(BuildElement);
         }
@@ -104,7 +104,7 @@ namespace Coypu.Drivers.Selenium
             return elementFinder.FindAll(by, scope, options, predicate);
         }
 
-        private ElementFound BuildElement(IWebElement element)
+        private Element BuildElement(IWebElement element)
         {
             return new[] {"iframe", "frame"}.Contains(element.TagName.ToLower()) 
                 ? new SeleniumFrame(element, webDriver, seleniumWindowManager) 
@@ -182,12 +182,12 @@ namespace Coypu.Drivers.Selenium
             return webDriver.Manage().Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Path, c.Domain));
         }
 
-        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, Options options)
+        public IEnumerable<Element> FindWindows(string titleOrName, Scope scope, Options options)
         {
             elementFinder.SeleniumScope(scope);
             return windowHandleFinder.FindWindowHandles(titleOrName, options)
                                      .Select(h => new SeleniumWindow(webDriver, h, seleniumWindowManager))
-                                     .Cast<ElementFound>();
+                                     .Cast<Element>();
         }
 
         public void Set(Element element, string value) 
@@ -279,7 +279,8 @@ namespace Coypu.Drivers.Selenium
             try
             {
                 seleniumWindowManager.SwitchToWindow(webDriver.WindowHandles[0]);
-                webDriver.SwitchTo().Alert().Accept();
+                if (dialogs.HasAnyDialog())
+                    webDriver.SwitchTo().Alert().Accept();
             }
             catch (WebDriverException){}
             catch (KeyNotFoundException){} // Chrome

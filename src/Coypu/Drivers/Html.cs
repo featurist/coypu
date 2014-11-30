@@ -34,6 +34,11 @@ namespace Coypu.Drivers
                 Where(IsText(locator, options));
         }
 
+        public string LinkOrButton(string locator, Options options)
+        {
+            return Link(locator, options) + or + Button(locator, options);
+        }
+
         public string Field(string locator, Options options)
         {
             return

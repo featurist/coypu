@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
-    internal class SeleniumWindow : ElementFound
+    internal class SeleniumWindow : Element
     {
         private readonly IWebDriver webDriver;
         private readonly string windowHandle;
@@ -82,11 +82,6 @@ namespace Coypu.Drivers.Selenium
         private void SwitchTo(string windowName)
         {
             seleniumWindowManager.SwitchToWindow(windowName);
-        }
-
-        public bool Stale(Options options)
-        {
-            return !webDriver.WindowHandles.Contains(windowHandle);
         }
 
         public string this[string attributeName]

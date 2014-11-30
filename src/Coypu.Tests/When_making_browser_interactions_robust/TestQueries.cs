@@ -37,6 +37,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     public class AlwaysSucceedsQuery<T> : Query<T>
     {
         public Options Options { get; set; }
+        public DriverScope Scope { get; private set; }
         private readonly Stopwatch stopWatch = new Stopwatch();
         private readonly T actualResult;
         private readonly T expecting;
@@ -74,6 +75,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     public class ThrowsSecondTimeQuery<T> : Query<T>
     {
         public Options Options { get; set; }
+        public DriverScope Scope { get; private set; }
         private readonly T result;
         private readonly TimeSpan _retryInterval;
         public TimeSpan Timeout { get; set; }
@@ -109,6 +111,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     public class AlwaysThrowsQuery<TResult, TException> : Query<TResult> where TException : Exception
     {
         public Options Options { get; set; }
+        public DriverScope Scope { get; private set; }
         private readonly TimeSpan _retryInterval;
         private readonly Stopwatch stopWatch = new Stopwatch();
 
@@ -170,6 +173,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     public class ThrowsThenSubsequentlySucceedsQuery<T> : Query<T>
     {
         public Options Options { get; set; }
+        public DriverScope Scope { get; private set; }
         private readonly Stopwatch stopWatch = new Stopwatch();
         private readonly T actualResult;
         private readonly T expectedResult;

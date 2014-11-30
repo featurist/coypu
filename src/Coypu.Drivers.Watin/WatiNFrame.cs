@@ -3,7 +3,7 @@ using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNFrame : ElementFound
+    internal class WatiNFrame : Element
     {
         public WatiNFrame(Frame frame)
         {

@@ -4,7 +4,7 @@ namespace Coypu.Actions
     {
         private readonly DriverScope driverScope;
 
-        internal CancelModalDialog(DriverScope driverScope, Driver driver, Options options) : base(driver, options)
+        internal CancelModalDialog(DriverScope driverScope, Driver driver, Options options) : base(driver, driverScope, options)
         {
             this.driverScope = driverScope;
         }

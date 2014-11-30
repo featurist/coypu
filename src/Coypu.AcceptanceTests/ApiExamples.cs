@@ -42,8 +42,9 @@ namespace Coypu.AcceptanceTests
         public void ModalDialog_while_multiple_windows_are_open()
         {
             browser.ClickLink("Open pop up window");
-            Thread.Sleep(1000);
             browser.ClickLink("Trigger a confirm");
+            // browser.ClickLink("Trigger a confirm"); IE driver needs to click twice here - no idea why yet
+
             browser.CancelModalDialog();
             browser.FindLink("Trigger a confirm - cancelled").Now();
         }
@@ -431,7 +432,7 @@ namespace Coypu.AcceptanceTests
             browser.TryUntil(() => tryThisButton.Click(),
                              () => browser.HasContent("try until 5"),
                              TimeSpan.FromMilliseconds(50),
-                             new Options {Timeout = TimeSpan.FromMilliseconds(5000)});
+                             new Options {Timeout = TimeSpan.FromMilliseconds(10000)});
         }
 
         [Test]

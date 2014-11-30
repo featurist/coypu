@@ -9,7 +9,7 @@ using Coypu.Timing;
 
 namespace Coypu
 {
-    public class DriverScope : Scope
+    public abstract class DriverScope : Scope
     {
         protected readonly SessionConfiguration SessionConfiguration;
         internal readonly ElementFinder elementFinder;
@@ -19,7 +19,7 @@ namespace Coypu
         protected readonly Waiter waiter;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
-        private ElementFound element;
+        private Element element;
         private readonly DriverScope outerScope;
         protected readonly DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
 
@@ -48,7 +48,7 @@ namespace Coypu
             SessionConfiguration = outerScope.SessionConfiguration;
         }
 
-        internal DriverScope OuterScope
+        public DriverScope OuterScope
         {
             get { return outerScope; }
         }
@@ -79,6 +79,8 @@ namespace Coypu
             return Options.Merge(options, mergeWith);
         }
 
+        internal abstract bool Stale { get; set; }
+
         public void ClickButton(string locator, Options options = null)
         {
             RetryUntilTimeout(WaitThenClickButton(locator, Merge(options)));
@@ -91,12 +93,12 @@ namespace Coypu
 
         private WaitThenClick WaitThenClickLink(string locator, Options options = null)
         {
-            return new WaitThenClick(driver, Merge(options), waiter, new LinkFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
+            return new WaitThenClick(driver, this, Merge(options), waiter, new LinkFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
         }
 
         private WaitThenClick WaitThenClickButton(string locator, Options options = null)
         {
-            return new WaitThenClick(driver, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
+            return new WaitThenClick(driver, this, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
         }
 
         public Scope ClickButton(string locator, PredicateQuery until, Options options = null)
@@ -351,17 +353,16 @@ namespace Coypu
         /// <returns></returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         /// <exception cref="T:Coypu.AmbiguousHtmlException">Thrown if the there is more than one matching element and the Match.Single option is set</exception>
-        public virtual ElementFound Now()
+        public virtual Element Now()
         {
             return FindElement();
         }
 
-        protected internal virtual ElementFound FindElement()
+        protected internal virtual Element FindElement()
         {
-            if (element == null || element.Stale(ElementFinder.Options))
+            if (element == null || Stale)
                 element = DisambiguationStrategy.ResolveQuery(ElementFinder);
             return element;
         }
-
     }
 }

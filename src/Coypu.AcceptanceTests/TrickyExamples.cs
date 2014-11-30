@@ -21,7 +21,7 @@ namespace Coypu.AcceptanceTests
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
                                         Driver = typeof(SeleniumWebDriver),
-                                        Browser = Browser.Firefox
+                                        Browser = Browser.InternetExplorer
                                     };
             browser = new BrowserSession(configuration);
 
@@ -55,7 +55,7 @@ namespace Coypu.AcceptanceTests
 
             browser.ExecuteScript("window.setTimeout(function() {window.location.href = '" + originalLocation + "'},1000);");
 
-            Assert.That(section1.FindLink("the link").Exists());
+            section1.ClickLink("the link");
         }
 
         [Test]
@@ -104,8 +104,8 @@ namespace Coypu.AcceptanceTests
             Assert.That(popUp.HasContent("I am a pop up window"));
 
             CloseWindow(popUp);
-
-            Assert.That(button.Missing());
+            Assert.That(popUp.Missing(), "Expected popUp window to be missing");
+            Assert.That(button.Missing(), "Expected button in popup to be missing");
 
             browser.ClickLink("Open pop up window");
 

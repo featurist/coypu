@@ -6,7 +6,7 @@ namespace Coypu
     /// <summary>
     /// Thrown whenever an expected browser window cannot be found
     /// </summary>
-    public class MissingWindowException : Exception
+    public class MissingWindowException : FinderException
     {
         public MissingWindowException(string message)
             : base(message)

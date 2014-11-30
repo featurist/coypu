@@ -4,8 +4,8 @@ namespace Coypu.Actions
     {
         private readonly ElementScope element;
 
-        internal Uncheck(Driver driver, ElementScope element, Options options) 
-            : base(driver, options)
+        internal Uncheck(Driver driver, ElementScope element, Options options)
+            : base(driver, element, options)
         {
             this.element = element;
         }

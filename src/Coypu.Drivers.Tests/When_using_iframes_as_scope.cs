@@ -42,8 +42,8 @@ namespace Coypu.Drivers.Tests
 
         private static void Finds_elements_among_multiple_scopes(ElementFinder elementFinder1, ElementFinder elementFinder2)
         {
-            var iframeOne = new DriverScope(DefaultSessionConfiguration, elementFinder1, Driver, null, null, null, DisambiguationStrategy);
-            var iframeTwo = new DriverScope(DefaultSessionConfiguration, elementFinder2, Driver, null, null, null, DisambiguationStrategy);
+            var iframeOne = new BrowserWindow(DefaultSessionConfiguration, elementFinder1, Driver, null, null, null, DisambiguationStrategy);
+            var iframeTwo = new BrowserWindow(DefaultSessionConfiguration, elementFinder2, Driver, null, null, null, DisambiguationStrategy);
 
             Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
             Button("scoped button", iframeTwo, DefaultOptions).Id.should_be("iframe2ButtonId");
@@ -52,7 +52,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_clear_scope_back_to_the_whole_window()
         {
-            var iframeOne = new DriverScope(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver,null,null,null,DisambiguationStrategy);
+            var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver,null,null,null,DisambiguationStrategy);
             Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
 
             Button("scoped button", Root, Options.PreferExact).Id.should_be("scope1ButtonId");
@@ -61,13 +61,13 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Can_fill_in_a_text_input_within_an_iframe()
         {
-            var iframeOne = new DriverScope(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
+            var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
             Driver.Set(FindField("text input in iframe", iframeOne), "filled in");
             
             Assert.That(FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));
         }
 
-        private static ElementFound FindField(string locator, DriverScope scope)
+        private static Element FindField(string locator, DriverScope scope)
         {
             return Field(locator, scope, DefaultOptions);
         }
@@ -75,20 +75,18 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Can_scope_around_an_iframe()
         {
-            var body = new DriverScope(DefaultSessionConfiguration, new CssFinder(Driver, "body", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-
-            var iframeOne = new DriverScope(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", body,DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-
+            var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root,DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
             Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
 
+            var body = new BrowserWindow(DefaultSessionConfiguration, new CssFinder(Driver, "body", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
             Button("scoped button", body, Options.PreferExact).Id.should_be("scope1ButtonId");
         }
 
         [Test]
         public void Can_scope_inside_an_iframe()
         {
-            var iframeOne = new DriverScope(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, null);
-            var iframeForm = new DriverScope(DefaultSessionConfiguration, new CssFinder(Driver, "form", iframeOne, DefaultOptions), Driver, null, null, null, null);
+            var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, null);
+            var iframeForm = new BrowserWindow(DefaultSessionConfiguration, new CssFinder(Driver, "form", iframeOne, DefaultOptions), Driver, null, null, null, null);
         }
     }
 }

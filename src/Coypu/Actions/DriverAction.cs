@@ -4,7 +4,8 @@ namespace Coypu.Actions
     {
         protected readonly Driver Driver;
 
-        protected DriverAction(Driver driver, Options options) : base(options)
+        protected DriverAction(Driver driver, DriverScope scope, Options options)
+            : base(scope, options)
         {
             Driver = driver;
         }

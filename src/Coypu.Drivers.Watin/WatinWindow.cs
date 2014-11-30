@@ -6,7 +6,7 @@ using WatiN.Core.Constraints;
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNWindow : ElementFound
+    internal class WatiNWindow : Element
     {
         private readonly WatiN.Core.Browser browser;
         private readonly Constraint windowHandle;

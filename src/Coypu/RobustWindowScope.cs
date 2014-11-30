@@ -14,7 +14,7 @@ namespace Coypu
             this.options = options;
         }
 
-        public override ElementFound Now()
+        public override Element Now()
         {
             return timingStrategy.Synchronise(new ElementQuery(this, options));
         }

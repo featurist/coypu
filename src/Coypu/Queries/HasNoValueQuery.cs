@@ -13,7 +13,7 @@
 
         public override bool Run()
         {
-            return Scope.FindElement().Value != text;
+            return DriverScope.FindElement().Value != text;
         }
     }
 }

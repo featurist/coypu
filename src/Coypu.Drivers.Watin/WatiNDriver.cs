@@ -70,12 +70,12 @@ namespace Coypu.Drivers.Watin
             return element.Native as T;
         }
 
-        private ElementFound BuildElement(WatiN.Core.Element element)
+        private Element BuildElement(WatiN.Core.Element element)
         {
             return new WatiNElement(element,Watin);
         }
 
-        private static ElementFound BuildElement(WatiN.Core.Browser browser)
+        private static Element BuildElement(WatiN.Core.Browser browser)
         {
             return new WatiNWindow(browser);
         }
@@ -93,7 +93,7 @@ namespace Coypu.Drivers.Watin
             return browserScope;
         }
 
-        private static ElementFound BuildElement(Frame frame)
+        private static Element BuildElement(Frame frame)
         {
             return new WatiNFrame(frame);
         }
@@ -125,7 +125,7 @@ namespace Coypu.Drivers.Watin
             return persistentCookies.Concat(sessionCookies).ToList();
         }
 
-        public IEnumerable<ElementFound> FindWindows(string titleOrName, Scope scope, Options options)
+        public IEnumerable<Element> FindWindows(string titleOrName, Scope scope, Options options)
         {
             return new[] { new WatiNWindow(FindWindowHandle(titleOrName, options)) };
         }
@@ -144,7 +144,7 @@ namespace Coypu.Drivers.Watin
             return by;
         }
 
-        public IEnumerable<ElementFound> FindFrames(string locator, Scope scope, Options options)
+        public IEnumerable<Element> FindFrames(string locator, Scope scope, Options options)
         {
             return elementFinder.FindFrames(locator, scope, options).Select(BuildElement);
         }
@@ -260,7 +260,7 @@ namespace Coypu.Drivers.Watin
             return watinDialogHandler.Exists() && watinDialogHandler.Message == withText;
         }
 
-        public ElementFound Window
+        public Element Window
         {
             get { return BuildElement(Watin); }
         }
@@ -277,13 +277,13 @@ namespace Coypu.Drivers.Watin
             watinDialogHandler.ClickCancel();
         }
 
-        public IEnumerable<ElementFound> FindAllCss(string cssSelector, Scope scope, Options options, Regex text = null)
+        public IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex text = null)
         {
             return from element in elementFinder.FindAllCss(cssSelector, scope, options, text)
                    select BuildElement(element);
         }
 
-        public IEnumerable<ElementFound> FindAllXPath(string xpath, Scope scope, Options options)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
             return from element in elementFinder.FindAllXPath(xpath, scope, options)
                    select BuildElement(element);

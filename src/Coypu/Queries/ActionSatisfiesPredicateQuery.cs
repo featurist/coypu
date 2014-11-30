@@ -12,6 +12,7 @@ namespace Coypu.Queries
         private readonly TimingStrategy timingStrategy;
 
         public Options Options { get; private set; }
+        public DriverScope Scope { get; private set; }
 
         internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, Options options, TimingStrategy timingStrategy)
         {
@@ -19,6 +20,7 @@ namespace Coypu.Queries
             this.until = until;
             this.timingStrategy = timingStrategy;
             Options = options;
+            Scope = tryThis.Scope;
         }
 
         public bool Run()

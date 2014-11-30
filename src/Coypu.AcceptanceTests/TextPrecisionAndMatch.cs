@@ -1,13 +1,49 @@
 ﻿using System;
 using System.IO;
-using Coypu.NUnit.Matchers;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
 {
     [TestFixture]
-    public class TextPrecisionAndMatch : WaitAndRetryExamples
+    public class TextPrecisionAndMatch
     {
+
+        protected BrowserSession browser;
+
+        [TestFixtureSetUp]
+        public void SetUpFixture()
+        {
+            var configuration = new SessionConfiguration
+            {
+                Timeout = TimeSpan.FromMilliseconds(2000),
+                Browser = Drivers.Browser.InternetExplorer
+            };
+            browser = new BrowserSession(configuration);
+
+        }
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            browser.Dispose();
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            ReloadTestPage();
+        }
+
+        protected void ReloadTestPage()
+        {
+            browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
+        }
+
+        protected static string TestPageLocation(string page)
+        {
+            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            return testPageLocation;
+        }
+
         [Test]
         public void First_allows_ambiguous_results()
         {

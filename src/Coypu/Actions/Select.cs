@@ -4,7 +4,6 @@ namespace Coypu.Actions
 {
     internal class Select : DriverAction
     {
-        private readonly DriverScope scope;
         private readonly string locator;
         private readonly string optionToSelect;
         private readonly Options options;
@@ -12,9 +11,8 @@ namespace Coypu.Actions
         private ElementScope selectElement;
 
         internal Select(Driver driver, DriverScope scope, string locator, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
-            : base(driver, options)
+            : base(driver, scope, options)
         {
-            this.scope = scope;
             this.locator = locator;
             this.optionToSelect = optionToSelect;
             this.options = options;
@@ -22,7 +20,7 @@ namespace Coypu.Actions
         }
 
         internal Select(Driver driver, ElementScope selectElement, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
-            : base(driver, options)
+            : base(driver, selectElement, options)
         {
             this.selectElement = selectElement;
             this.optionToSelect = optionToSelect;
@@ -38,8 +36,8 @@ namespace Coypu.Actions
 
         private SnapshotElementScope FindSelectElement()
         {
-            var selectElementFound = disambiguationStrategy.ResolveQuery(new SelectFinder(Driver, locator, scope, options));
-            return new SnapshotElementScope(selectElementFound, scope, options);
+            var selectElementFound = disambiguationStrategy.ResolveQuery(new SelectFinder(Driver, locator, Scope, options));
+            return new SnapshotElementScope(selectElementFound, Scope, options);
         }
 
         void SelectOption(ElementScope selectElementScope)

@@ -3,7 +3,7 @@ using WatiN.Core;
 
 namespace Coypu.Drivers.Watin
 {
-    internal class WatiNElement : ElementFound
+    internal class WatiNElement : Element
     {
         private readonly WatiN.Core.Browser browser;
 

@@ -112,6 +112,7 @@
     <Compile Include="Drivers\Selenium\SeleniumWindow.cs" />
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="FinderException.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
     <Compile Include="Finders\DisambiguationStrategy.cs" />
@@ -129,6 +130,8 @@
     <Compile Include="Queries\FindAllCssWithPredicateQuery.cs" />
     <Compile Include="Queries\FindAllXPathWithPredicateQuery.cs" />
     <Compile Include="Queries\HasValueQuery.cs" />
+    <Compile Include="Queries\WindowExistsQuery.cs" />
+    <Compile Include="Queries\WindowMissingQuery.cs" />
     <Compile Include="SessionConfiguration.cs" />
     <Compile Include="Finders\CssFinder.cs" />
     <Compile Include="Finders\WindowFinder.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="Finders\LinkFinder.cs" />
     <Compile Include="Queries\PredicateQuery.cs" />
     <Compile Include="Queries\Query.cs" />
+    <Compile Include="StaleElementException.cs" />
     <Compile Include="SynchronisedElementScope.cs" />
     <Compile Include="Actions\DriverAction.cs" />
     <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
@@ -181,7 +185,6 @@
     <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
     <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
     <Compile Include="Drivers\Selenium\SeleniumWebDriver.cs" />
-    <Compile Include="ElementFound.cs" />
     <Compile Include="Timing\TimingStrategy.cs" />
     <Compile Include="Timing\StopwatchWaiter.cs" />
     <Compile Include="Timing\Waiter.cs" />

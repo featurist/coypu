@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_applying_match_strategy
         {
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions);
-            var exactResults = new List<ElementFound> { new StubElement(), new StubElement() };
+            var exactResults = new List<Element> { new StubElement(), new StubElement() };
 
             StubExactResults(finder, finderOptions, exactResults);
 
@@ -38,7 +38,7 @@ namespace Coypu.Tests.When_applying_match_strategy
             var finderOptions = FinderOptions();
             var finder = new StubElementFinder(finderOptions, queryDescription: "something from StubElementFinder");
 
-            StubExactResults(finder, finderOptions, new List<ElementFound>());
+            StubExactResults(finder, finderOptions, new List<Element>());
 
             try
             {

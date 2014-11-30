@@ -1,3 +1,4 @@
+using System;
 using Coypu.Actions;
 using Coypu.Queries;
 
@@ -11,27 +12,25 @@ namespace Coypu
     /// </summary>
     public class SnapshotElementScope : ElementScope
     {
-        private readonly ElementFound elementFound;
+        private readonly Element element;
         private readonly Options options;
 
-        internal SnapshotElementScope(ElementFound elementFound, DriverScope scope, Options options)
+        internal SnapshotElementScope(Element element, DriverScope scope, Options options)
             : base(null, scope)
         {
-            this.elementFound = elementFound;
+            this.element = element;
             this.options = options;
         }
 
-        public override ElementFound Now()
+        internal override bool Stale
         {
-            return FindElement();
+            get { return true; }
+            set {}
         }
 
-        protected internal override ElementFound FindElement()
+        protected internal override Element FindElement()
         {
-            if (elementFound.Stale(options))
-                throw new MissingHtmlException(string.Format("Snapshot element scope has become stale. {0}", elementFound));
-
-            return elementFound;
+            return element;
         }
 
         internal override void Try(DriverAction action)
@@ -42,6 +41,16 @@ namespace Coypu
         internal override bool Try(Query<bool> query)
         {
             return query.Run();
+        }
+
+        public override bool Exists(Options options = null)
+        {
+            return FindXPath(".", options).Exists();
+        }
+
+        public override bool Missing(Options options = null)
+        {
+            return FindXPath(".", options).Missing();
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                                                                              driver.StubAllXPath);
         }
 
-        protected void Should_make_direct_call_when_no_predicate_supplied(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, DriverScope, Options> stub)
+        protected void Should_make_direct_call_when_no_predicate_supplied(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<Element>, DriverScope, Options> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -60,7 +60,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(SpyTimingStrategy.NoQueriesRan, Is.True, "Expected no robust queries run");
         }
 
-        private void Should_wrap_elements_in_snapshot_scope(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, DriverScope, Options> stub)
+        private void Should_wrap_elements_in_snapshot_scope(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<Element>, DriverScope, Options> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -74,7 +74,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(actualImmediateResult[1].Now(), Is.EqualTo(stubElements[1]));
         }
 
-        protected void Should_test_predicate_against_query_results_and_retry_on_failure(Func<string, Func<IEnumerable<SnapshotElementScope>,bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<ElementFound>, Scope, Options> stub)
+        protected void Should_test_predicate_against_query_results_and_retry_on_failure(Func<string, Func<IEnumerable<SnapshotElementScope>,bool>, Options, IEnumerable<SnapshotElementScope>> subject, Action<string, IEnumerable<Element>, Scope, Options> stub)
         {
             var locator = "Find me " + DateTime.Now.Ticks;
 
@@ -93,7 +93,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             VerifyFoundRobustlyAndThrows<TestException>(subject, 2, locator, (elements) => { throw new TestException("Thrown in FindAll predicate"); }, null, expectedImmediateResult, options);
         }
 
-        private void VerifyFoundRobustlyAndThrows<T>(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, int driverCallIndex, string locator, Func<IEnumerable<SnapshotElementScope>, bool> predicate, IEnumerable<ElementFound> expectedDeferredResult, IEnumerable<ElementFound> expectedImmediateResult, Options options) 
+        private void VerifyFoundRobustlyAndThrows<T>(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, int driverCallIndex, string locator, Func<IEnumerable<SnapshotElementScope>, bool> predicate, IEnumerable<Element> expectedDeferredResult, IEnumerable<Element> expectedImmediateResult, Options options) 
             where T: Exception
         {
             Assert.Throws<T>(
@@ -101,7 +101,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
                                           expectedImmediateResult, options));
         }
 
-        protected void VerifyFoundRobustly(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, int driverCallIndex, string locator, Func<IEnumerable<SnapshotElementScope>, bool> predicate, IEnumerable<ElementFound> expectedDeferredResult, IEnumerable<ElementFound> expectedImmediateResult, Options options)
+        protected void VerifyFoundRobustly(Func<string, Func<IEnumerable<SnapshotElementScope>, bool>, Options, IEnumerable<SnapshotElementScope>> subject, int driverCallIndex, string locator, Func<IEnumerable<SnapshotElementScope>, bool> predicate, IEnumerable<Element> expectedDeferredResult, IEnumerable<Element> expectedImmediateResult, Options options)
         {
             var scopedResult = subject(locator, predicate, options);
             var elementScopeResult = RunQueryAndCheckTiming<IEnumerable<SnapshotElementScope>>(options.Timeout, driverCallIndex);

@@ -14,7 +14,7 @@ namespace Coypu.Queries
 
         public override bool Run()
         {
-            return text.IsMatch(DriverScope.FindElement().Text);
+            return text.IsMatch(Scope.FindElement().Text);
         }
     }
 }

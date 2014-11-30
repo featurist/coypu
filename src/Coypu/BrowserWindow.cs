@@ -134,5 +134,33 @@ namespace Coypu
         {
             driver.SaveScreenshot(saveAs, this);
         }
+
+        internal override bool Stale { get; set; }
+
+        /// <summary>
+        /// <para>Check if this window exists within the <see cref="SessionConfiguration.Timeout"/></para>
+        /// </summary>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        public bool Exists(Options options = null)
+        {
+            return Query(new WindowExistsQuery(this, Merge(options)));
+        }
+
+        /// <summary>
+        /// <para>Check if this window becomes missing within the <see cref="SessionConfiguration.Timeout"/></para>
+        /// </summary>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        public bool Missing(Options options = null)
+        {
+            return Query(new WindowMissingQuery(this, Merge(options)));
+        }
     }
 }
