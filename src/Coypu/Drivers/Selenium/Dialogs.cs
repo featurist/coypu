@@ -1,6 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
+﻿using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -34,12 +32,26 @@ namespace Coypu.Drivers.Selenium
 
         public void AcceptModalDialog()
         {
-            selenium.SwitchTo().Alert().Accept();
+            try
+            {
+                selenium.SwitchTo().Alert().Accept();
+            }
+            catch (NoAlertPresentException ex)
+            {
+                throw new MissingDialogException("No dialog was present to accept", ex);
+            }
         }
 
         public void CancelModalDialog()
         {
-            selenium.SwitchTo().Alert().Dismiss();
+            try
+            {
+                selenium.SwitchTo().Alert().Dismiss();
+            }
+            catch (NoAlertPresentException ex)
+            {
+                throw new MissingDialogException("No dialog was present to accept", ex);
+            }
         }
     }
 }

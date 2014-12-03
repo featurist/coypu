@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using Coypu.Actions;
 using Coypu.Queries;
+using OpenQA.Selenium;
 
 namespace Coypu.Timing
 {
@@ -48,6 +49,11 @@ namespace Coypu.Timing
                 }
                 catch (NotSupportedException)
                 {
+                    throw;
+                }
+                catch (UnhandledAlertException)
+                {
+                    // Could come from anywhere. Throw straight up rather than retrying as requires user interaction.
                     throw;
                 }
                 catch (FinderException ex)

@@ -90,7 +90,7 @@
     <Compile Include="States.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TrickyExamples.cs" />
+    <Compile Include="StaleScopeExamples.cs" />
     <Compile Include="WaitAndRetryExamples.cs" />
     <Compile Include="WebRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

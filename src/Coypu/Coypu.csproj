@@ -122,6 +122,7 @@
     <Compile Include="Finders\XPathQueryFinder.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Matchers\Shows.cs" />
+    <Compile Include="MissingDialogException.cs" />
     <Compile Include="MissingWindowException.cs" />
     <Compile Include="ElementFoundExtensions.cs" />
     <Compile Include="Queries\ElementExistsQuery.cs" />

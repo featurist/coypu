@@ -33,6 +33,16 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
+        public void Missing_dialog_throws_coypu_exception()
+        {
+            using (Driver)
+            {
+                Assert.Throws<MissingDialogException>(() => Driver.AcceptModalDialog(Root));
+                Assert.Throws<MissingDialogException>(() => Driver.CancelModalDialog(Root));
+            }
+        }
+
+        [Test]
         public void Returns_true()
         {
             using (Driver)
@@ -68,6 +78,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
+        // IE can't do this
         [Test]
         public void Finds_scope_first_for_alerts()
         {
@@ -86,6 +97,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
+        // IE can't do this
         [Test]
         public void Finds_scope_first_for_confirms()
         {

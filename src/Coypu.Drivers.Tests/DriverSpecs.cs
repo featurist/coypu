@@ -44,6 +44,9 @@ namespace Coypu.Drivers.Tests
         private static readonly Browser browser = Browser.Chrome;
         private static readonly Type driverType = typeof (Selenium.SeleniumWebDriver);
 
+//        private static readonly Browser browser = Browser.InternetExplorer;
+//        private static readonly Type driverType = typeof (Watin.WatiNDriver);
+
         [SetUp]
         public virtual void SetUp()
         {

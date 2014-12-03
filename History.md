@@ -1,3 +1,12 @@
+# Version 2.6.1
+
+### Fixed
+
+* Fixes #121 - stale element ref exception calling FindAllCss/XPath on stale outer scope
+
+Release date: 2014-12-03
+
+
 # Version 2.6.0
 
 ### Fixed

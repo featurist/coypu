@@ -8,15 +8,18 @@ namespace Coypu
     /// </summary>
     public class MissingHtmlException : FinderException
     {
-        public MissingHtmlException(string message) : base(message)
+        public MissingHtmlException(string message)
+            : base(message)
         {
         }
 
-        public MissingHtmlException(string message, Exception innerException) : base(message, innerException)
-        {                         
+        public MissingHtmlException(string message, Exception innerException)
+            : base(message, innerException)
+        {
         }
 
-        public MissingHtmlException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public MissingHtmlException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
