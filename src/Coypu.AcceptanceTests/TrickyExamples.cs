@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
@@ -21,7 +22,7 @@ namespace Coypu.AcceptanceTests
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
                                         Driver = typeof(SeleniumWebDriver),
-                                        Browser = Browser.InternetExplorer
+                                        Browser = Browser.Chrome
                                     };
             browser = new BrowserSession(configuration);
 
@@ -57,6 +58,33 @@ namespace Coypu.AcceptanceTests
 
             section1.ClickLink("the link");
         }
+
+
+        [Test]
+        public void Scope_becomes_stale_looking_for_all_xpath()
+        {
+            VisitTestPage("tricky.htm");
+
+            var section1 = browser.FindSection("section 1");
+            Assert.That(section1.FindLink("the link").Exists());
+
+            VisitTestPage("iFrame1.htm");
+            VisitTestPage("tricky.htm");
+            Assert.That(section1.FindAllXPath("*").Count(), Is.GreaterThan(0));
+        }
+        [Test]
+        public void Scope_becomes_stale_looking_for_all_css()
+        {
+            VisitTestPage("tricky.htm");
+
+            var section1 = browser.FindSection("section 1");
+            Assert.That(section1.FindLink("the link").Exists());
+
+            VisitTestPage("iFrame1.htm");
+            VisitTestPage("tricky.htm");
+            Assert.That(section1.FindAllCss("*").Count(), Is.GreaterThan(0));
+        }
+
 
         [Test]
         public void Scope_becomes_stale_iframe()

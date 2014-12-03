@@ -11,8 +11,12 @@ namespace Coypu.Queries
 
         public FindAllCssWithPredicateQuery(string locator, Func<IEnumerable<SnapshotElementScope>,bool> predicate, DriverScope driverScope, Options options) : base(driverScope, options)
         {
-            this.locator = locator;
+            if (predicate == null)
+                predicate = e => true;
+
             this.predicate = predicate;
+            this.locator = locator;
+
         }
 
         public override IEnumerable<SnapshotElementScope> Run()

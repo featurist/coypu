@@ -7,13 +7,16 @@ namespace Coypu.Queries
     internal class FindAllXPathWithPredicateQuery : DriverScopeQuery<IEnumerable<SnapshotElementScope>>
     {
         private readonly string locator;
-        private readonly Func<IEnumerable<SnapshotElementScope>, bool> predicate;
+        private  Func<IEnumerable<SnapshotElementScope>, bool> predicate;
 
         public FindAllXPathWithPredicateQuery(string locator, Func<IEnumerable<SnapshotElementScope>, bool> predicate, DriverScope driverScope, Options options)
             : base(driverScope, options)
         {
-            this.locator = locator;
+            if (predicate == null)
+                predicate = e => true;
+
             this.predicate = predicate;
+            this.locator = locator;
         }
 
         public override IEnumerable<SnapshotElementScope> Run()

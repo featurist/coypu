@@ -216,10 +216,7 @@ namespace Coypu
 
         public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            if (predicate != null)
-                return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, Merge(options)));
-
-            return FindAllCssNoPredicate(cssSelector, Merge(options));
+            return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, Merge(options)));
         }
 
         internal IEnumerable<SnapshotElementScope> FindAllCssNoPredicate(string cssSelector, Options options)
@@ -229,10 +226,7 @@ namespace Coypu
 
         public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
         {
-            if (predicate != null)
-                return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, Merge(options)));
-
-            return FindAllXPathNoPredicate(xpath, Merge(options));
+            return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, Merge(options)));
         }
 
         internal IEnumerable<SnapshotElementScope> FindAllXPathNoPredicate(string xpath, Options options)
