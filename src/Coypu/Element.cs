@@ -54,5 +54,10 @@ namespace Coypu
         /// The title of the element
         /// </summary>
         string Title { get; }
+
+        /// <summary>
+        /// Whether the element is disabled
+        /// </summary>
+        bool Disabled { get; }
     }
 }

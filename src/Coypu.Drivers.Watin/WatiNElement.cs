@@ -56,6 +56,11 @@ namespace Coypu.Drivers.Watin
             get { return this["title"]; }
         }
 
+        public bool Disabled
+        {
+            get { return !NativeWatiNElement.Enabled; }
+        }
+
         public string OuterHTML
         {
             get

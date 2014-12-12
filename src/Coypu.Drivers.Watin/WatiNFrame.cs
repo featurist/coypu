@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using WatiN.Core;
 
@@ -40,6 +41,11 @@ namespace Coypu.Drivers.Watin
         public string Title
         {
             get { return Frame.Title; }
+        }
+
+        public bool Disabled
+        {
+            get { throw new NotSupportedException(); }
         }
 
         public string OuterHTML

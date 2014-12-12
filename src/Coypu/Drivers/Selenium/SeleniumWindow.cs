@@ -18,7 +18,7 @@ namespace Coypu.Drivers.Selenium
 
         public string Id
         {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public string Text
@@ -42,6 +42,11 @@ namespace Coypu.Drivers.Selenium
             get { return webDriver.Title; }
         }
 
+        public bool Disabled
+        {
+            get { throw new NotSupportedException(); }
+        }
+
         public string OuterHTML
         {
             get
@@ -52,22 +57,22 @@ namespace Coypu.Drivers.Selenium
 
         public string Value
         {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public string Name
         {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public string SelectedOption
         {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public bool Selected
         {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public object Native
@@ -86,7 +91,7 @@ namespace Coypu.Drivers.Selenium
 
         public string this[string attributeName]
         {
-            get { throw new System.NotImplementedException(); }
+            get { throw new NotSupportedException(); }
         }
     }
 }

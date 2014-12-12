@@ -65,6 +65,14 @@ namespace Coypu {
             get { return Try(() => Now().Native); }
         }
 
+        public bool Disabled
+        {
+            get
+            {
+                return Try(() => Now().Disabled);
+            }
+        }
+
         public string this[string attributeName]
         {
             get { return Try(() => Now()[attributeName]); }

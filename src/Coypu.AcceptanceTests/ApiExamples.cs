@@ -191,6 +191,13 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void DisabledButton_example()
+        {
+            Assert.That(browser.FindButton("Disabled button").Disabled, Is.True, "Expected button to be disabled");
+            Assert.That(browser.FindButton("Click me").Disabled, Is.False, "Expected button to be enabled");
+        }
+
+        [Test]
         public void FindCss_example()
         {
             var first = browser.FindCss("#inspectingContent ul#cssTest li", Options.First);

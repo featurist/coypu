@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
@@ -56,6 +57,14 @@ namespace Coypu.Drivers.Selenium
         public string Title
         {
             get { return native.GetAttribute("title"); }
+        }
+
+        public bool Disabled
+        {
+            get
+            {
+                return !native.Enabled;
+            }
         }
 
         public string SelectedOption

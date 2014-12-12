@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Coypu.Drivers.Selenium;
 using Coypu.Drivers.Watin;
 using NUnit.Framework;
 
@@ -15,8 +16,8 @@ namespace Coypu.AcceptanceTests
             var configuration = new SessionConfiguration
                 {
                     Timeout = TimeSpan.FromMilliseconds(2000),
-                    Browser = Drivers.Browser.InternetExplorer,
-                    Driver = typeof(WatiNDriver)
+                    Browser = Drivers.Browser.Chrome,
+                    Driver = typeof(SeleniumWebDriver)
                 };
             browser = new BrowserSession(configuration);
 

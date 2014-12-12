@@ -58,6 +58,11 @@ namespace Coypu.Drivers.Watin
             get { return browser.Title; }
         }
 
+        public bool Disabled
+        {
+            get { throw new NotSupportedException(); }
+        }
+
         public string OuterHTML
         {
             get
@@ -68,22 +73,22 @@ namespace Coypu.Drivers.Watin
 
         public string Value
         {
-            get { throw new NotImplementedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public string Name
         {
-            get { throw new NotImplementedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public string SelectedOption
         {
-            get { throw new NotImplementedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public bool Selected
         {
-            get { throw new NotImplementedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         public object Native
@@ -108,7 +113,7 @@ namespace Coypu.Drivers.Watin
 
         public string this[string attributeName]
         {
-            get { throw new NotImplementedException(); }
+            get { throw new NotSupportedException(); }
         }
     }
 }

@@ -17,6 +17,8 @@ namespace Coypu.Tests.TestDoubles
         
         public string Title { get; set; }
 
+        public bool Disabled { get; set; }
+
         public string OuterHTML { get; set; }
 
         public string SelectedOption { get; set; }

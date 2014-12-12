@@ -51,11 +51,22 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
+        public void It_synchronises_both_find_element_and_attribute_getter_for_disabled_negative()
+        {
+            Synchronises_FindElement_and_returns_property_value(false, (element, value) => element.Disabled = value, (element => element.Disabled), Is.EqualTo);
+        }
+
+        [Test]
+        public void It_synchronises_both_find_element_and_attribute_getter_for_disabled_positive()
+        {
+            Synchronises_FindElement_and_returns_property_value(true, (element, value) => element.Disabled = value, (element => element.Disabled), Is.EqualTo);
+        }
+
+        [Test]
         public void It_synchronises_both_find_element_and_attribute_getter_for_selected_negative()
         {
             Synchronises_FindElement_and_returns_property_value(false, (element, value) => element.Selected = value, (element => element.Selected), Is.EqualTo);
         }
-
         [Test]
         public void It_synchronises_both_find_element_and_attribute_getter_for_native()
         {
