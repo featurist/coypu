@@ -1,4 +1,13 @@
-# Version 2.6.1
+# Version 2.7.0
+
+### Added (incl Coypu.WatiN 2.2.0)
+
+* ElementScope gets Disabled property - Closes #123
+
+Release date: 2014-12-12
+
+
+# Version 2.6.1	
 
 ### Fixed
 
@@ -33,7 +42,7 @@ Release date: 2014-11-30
 ### Fixed
 
 * Firefox webdriver 2.43.0 has started closing alerts when asked for currentWindowHandle
-
+			
 ### Changed
 
 * Thanks to fix for Firefox Webdriver, if you switch window via the native selenium driver
