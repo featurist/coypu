@@ -803,6 +803,7 @@ public class SauceLabsDriver : SeleniumWebDriver
         return new RemoteWebDriver(remoteAppHost, capabilities);
     }
 }
+```
 
 ## More tricks/tips
 
