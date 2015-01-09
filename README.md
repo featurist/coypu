@@ -797,7 +797,7 @@ public class SauceLabsDriver : SeleniumWebDriver
     {
     }
 
-    private static		 RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
+    private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
     {
         var remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
         return new RemoteWebDriver(remoteAppHost, capabilities);
