@@ -125,6 +125,14 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void ExecuteScriptWithArgs_example()
+        {
+            ReloadTestPage();
+            Assert.That(browser.ExecuteScript("return arguments[0].innerHTML;", browser.FindId("firstButtonId")),
+                        Is.EqualTo("first button"));
+        }
+
+        [Test]
         public void FillInWith_example()
         {
             browser.FillIn("scope2ContainerLabeledTextInputFieldId").With("New text input value");
