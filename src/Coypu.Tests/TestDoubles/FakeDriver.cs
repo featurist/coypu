@@ -163,7 +163,7 @@ namespace Coypu.Tests.TestDoubles
             ModalDialogsCancelled.Add(scope);
         }
 
-        public object ExecuteScript(string javascript, Scope scope)
+        public object ExecuteScript(string javascript, Scope scope, params object[] args)
         {
             return Find<string>(stubbedExecuteScriptResults, javascript, scope);
         }
