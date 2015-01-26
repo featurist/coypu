@@ -113,7 +113,7 @@ namespace Coypu.Tests.TestDoubles
             
         }
 
-        public object ExecuteScript(string javascript, Scope scope)
+        public object ExecuteScript(string javascript, Scope scope, params object[] args)
         {
             return null;
         }

@@ -98,8 +98,11 @@ namespace Coypu.Drivers.Watin
             return new WatiNFrame(frame);
         }
 
-        public object ExecuteScript(string javascript, Scope scope)
+        public object ExecuteScript(string javascript, Scope scope, params object[] args)
         {
+            if (args.Length > 0)
+                throw new NotSupportedException ("WatiN does not support the passing of arguments to JavaScript.");
+
             var stripReturn = Regex.Replace(javascript, @"^\s*return ", "");
             var retval = GetWindowScope(scope).Eval(stripReturn);
             Watin.WaitForComplete();

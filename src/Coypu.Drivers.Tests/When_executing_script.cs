@@ -16,7 +16,16 @@ namespace Coypu.Drivers.Tests
             Button("firstButtonId").Text.should_be("script executed");
         }
 
+        [Test]
+        public void Passes_the_arguments_to_the_browser()
+        {
+            Button("firstButtonId").Text.should_be("first button");
 
+            Driver.ExecuteScript ("arguments[0].innerHTML = 'script executed ' + arguments[1];", Root, Button("firstButtonId"), 5);
+
+            Button("firstButtonId").Text.should_be("script executed 5");
+        }
+      
         [Test]
         public void Returns_the_result()
 
