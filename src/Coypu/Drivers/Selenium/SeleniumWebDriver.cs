@@ -240,8 +240,7 @@ namespace Coypu.Drivers.Selenium
                 throw new NotSupportedException("Javascript is not supported by " + browser);
 
             elementFinder.SeleniumScope(scope);
-            var result = JavaScriptExecutor.ExecuteScript(javascript, ConvertScriptArgs(args));
-            return result == null ? null : result;
+            return JavaScriptExecutor.ExecuteScript(javascript, ConvertScriptArgs(args));
         }
 
         private object[] ConvertScriptArgs (object[] args)
