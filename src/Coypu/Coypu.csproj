@@ -172,7 +172,6 @@
     <Compile Include="SynchronisedElementScope.cs" />
     <Compile Include="Actions\DriverAction.cs" />
     <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
-    <Compile Include="RobustWindowScope.cs" />
     <Compile Include="Scope.cs" />
     <Compile Include="Finders\SectionFinder.cs" />
     <Compile Include="SnapshotElementScope.cs" />

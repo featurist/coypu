@@ -542,12 +542,11 @@ namespace Coypu.AcceptanceTests
         public void WindowScoping_example()
         {
             var mainWindow = browser;
-
-            mainWindow.ClickLink("Open pop up window");
+            Assert.That(mainWindow.FindButton("scoped button", Options.First).Id, Is.EqualTo("scope1ButtonId"));
+            
+            mainWindow.ExecuteScript("setTimeout(function() {document.getElementById(\"openPopupLink\").click();}), 3000");
 
             var popUp = mainWindow.FindWindow("Pop Up Window");
-
-            Assert.That(mainWindow.FindButton("scoped button", Options.First).Id, Is.EqualTo("scope1ButtonId"));
             Assert.That(popUp.FindButton("scoped button").Id, Is.EqualTo("popUpButtonId"));
 
             // And back

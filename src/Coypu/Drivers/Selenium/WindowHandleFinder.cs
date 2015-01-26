@@ -16,7 +16,7 @@ namespace Coypu.Drivers.Selenium
         }
 
         public IEnumerable<string> FindWindowHandles(string titleOrName, Options options)
-        {
+        {   
             var currentHandle = GetCurrentWindowHandle();
             IList<string> matchingWindowHandles = new List<string>();
 

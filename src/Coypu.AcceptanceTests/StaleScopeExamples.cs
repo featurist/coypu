@@ -141,6 +141,25 @@ namespace Coypu.AcceptanceTests
             button.Click();
         }
 
+        [Test]
+        public void Window_is_not_refound_unless_stale()
+        {
+            VisitTestPage("InteractionTestsPage.htm");
+            browser.ClickLink("Open pop up window");
+
+            var popUp = browser.FindWindow("Pop Up Window");
+            var popUpBody = popUp.FindCss("body");
+
+            popUp.ExecuteScript("document.title = 'Changed title';");
+            Assert.That(browser.FindLink("Open pop up window").Exists());
+
+            Assert.That(popUp.HasContent("I am a pop up window"));
+
+            var findPopUpAgain = browser.FindWindow("Pop Up Window");
+            Assert.That(findPopUpAgain.Missing(), "Expected pop-up not to be found now title has changed");
+        }
+
+
         private static void CloseWindow(BrowserWindow popUp)
         {
             try

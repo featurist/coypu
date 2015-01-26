@@ -66,7 +66,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Test]
         public void FindWindow_Should_find_robust_scope()
         {
-            Should_find_robust_scope<WindowFinder, BrowserWindow, RobustWindowScope>(browserSession.FindWindow);
+            Should_find_robust_scope<WindowFinder, BrowserWindow, BrowserWindow>(browserSession.FindWindow);
         }
 
         [Test]
