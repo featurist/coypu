@@ -1,3 +1,12 @@
+# Version 2.8.0
+
+### Added
+
+*Added possibility to pass arguments to executeScript #128 (@drauch)
+
+Release date: 2015-01-26
+
+
 # Version 2.7.0
 
 ### Added (incl Coypu.WatiN 2.2.0)
