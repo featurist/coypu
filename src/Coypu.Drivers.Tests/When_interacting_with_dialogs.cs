@@ -123,7 +123,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.ExecuteScript("self.close();", popUp);
             }
-            catch (Exception InvalidCastException)
+            catch
             {
                 // IE permissions
             }

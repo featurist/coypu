@@ -86,7 +86,7 @@ namespace Coypu.Drivers.Tests
         public void Can_scope_inside_an_iframe()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, null);
-            var iframeForm = new BrowserWindow(DefaultSessionConfiguration, new CssFinder(Driver, "form", iframeOne, DefaultOptions), Driver, null, null, null, null);
+            new BrowserWindow(DefaultSessionConfiguration, new CssFinder(Driver, "form", iframeOne, DefaultOptions), Driver, null, null, null, null);
         }
     }
 }
