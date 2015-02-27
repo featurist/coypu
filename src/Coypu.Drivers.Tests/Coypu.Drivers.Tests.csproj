@@ -152,7 +152,7 @@
     <Content Include="html\table.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\popUp2.htm">
+    <Content Include="html\popup2.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="html\frameset.htm">
@@ -164,7 +164,7 @@
     <Content Include="html\frame2.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="html\popUp.htm">
+    <Content Include="html\popup.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="html\iFrame1.htm">
