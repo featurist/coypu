@@ -31,3 +31,4 @@ Coypu*.nupkg
 chromedriver.log
 Coypu-*.wrap
 src/packages
+packages

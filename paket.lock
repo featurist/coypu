@@ -1,0 +1,10 @@
+NUGET
+  remote: http://nuget.org/api/v2
+  specs:
+    nspec (0.9.58)
+    NUnit (2.6.3)
+    Selenium.Support (2.43.0)
+      Selenium.WebDriver (>= 2.43.0)
+    Selenium.WebDriver (2.43.0)
+    SelfishHttp (0.2.0)
+    WatiN (2.1.0)

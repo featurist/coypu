@@ -1,6 +1,12 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{06A94C06-3DE2-407D-8C85-4ADF26DC8BFE}"
+ ProjectSection(SolutionItems) = preProject
+		..\..\coypu/paket.dependencies = ..\..\coypu/paket.dependencies
+		..\..\coypu/paket.lock = ..\..\coypu/paket.lock
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu", "Coypu\Coypu.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.AcceptanceTests", "Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj", "{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}"
