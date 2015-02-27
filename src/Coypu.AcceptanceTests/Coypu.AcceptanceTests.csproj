@@ -114,12 +114,12 @@
       <Link>html\InteractionTestsPage.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\popUp.htm">
-      <Link>html\popUp.htm</Link>
+    <Content Include="..\Coypu.Drivers.Tests\html\popup.htm">
+      <Link>html\popup.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\popUp2.htm">
-      <Link>html\popUp2.htm</Link>
+    <Content Include="..\Coypu.Drivers.Tests\html\popup2.htm">
+      <Link>html\popup2.htm</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\Coypu.Drivers.Tests\html\table.htm">
