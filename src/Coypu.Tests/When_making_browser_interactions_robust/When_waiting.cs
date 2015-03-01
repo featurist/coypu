@@ -8,7 +8,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     [TestFixture]
     public class When_waiting 
     {
-        public const int AccuracyMilliseconds = 30;
+        public const int AccuracyMilliseconds = 50;
 
         [Test]
         public void It_sleeps_for_the_expected_time_Case_1()

@@ -81,7 +81,16 @@ namespace Coypu.Tests
         [Test]
         public void ToString_shows_all_public_instance_properties()
         {
-            Assert.That(new Options().ToString(), Is.EqualTo("Timeout: 00:00:01\r\nRetryInterval: 00:00:00.0500000\r\nWaitBeforeClick: 00:00:00\r\nConsiderInvisibleElements: False\r\nTextPrecision: PreferExact\r\nMatch: Single"));
+            var message = new []
+            {
+                "Timeout: 00:00:01",
+                "RetryInterval: 00:00:00.0500000",
+                "WaitBeforeClick: 00:00:00",
+                "ConsiderInvisibleElements: False",
+                "TextPrecision: PreferExact",
+                "Match: Single"
+            };
+            Assert.That(new Options().ToString(), Is.EqualTo(String.Join(Environment.NewLine, message)));
         }
     }
 }

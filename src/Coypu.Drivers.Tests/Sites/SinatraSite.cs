@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Tests.Sites
 
         public Uri BaseUri
         {
-            get { return new Uri(_server.BaseUri); }
+            get { return new Uri(_server.BaseUri, UriKind.Absolute); }
         }
 
         public void Dispose()

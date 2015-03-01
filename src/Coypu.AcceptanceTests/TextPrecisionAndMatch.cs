@@ -40,7 +40,13 @@ namespace Coypu.AcceptanceTests
 
         protected static string TestPageLocation(string page)
         {
-            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            var fileLocation = new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            if (fileLocation.StartsWith("/"))
+            {
+                fileLocation = fileLocation.Substring(1);
+            }
+
+            var testPageLocation = String.Format("file:///{0}", fileLocation);
             return testPageLocation;
         }
 

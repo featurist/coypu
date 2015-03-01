@@ -1,8 +1,10 @@
 NUGET
   remote: http://nuget.org/api/v2
   specs:
+    FAKE.Core (3.17.0)
     nspec (0.9.58)
-    NUnit (2.6.3)
+    NUnit (2.6.4)
+    NUnit.Runners (2.6.4)
     Selenium.Support (2.43.0)
       Selenium.WebDriver (>= 2.43.0)
     Selenium.WebDriver (2.43.0)

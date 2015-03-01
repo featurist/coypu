@@ -57,7 +57,13 @@ namespace Coypu.AcceptanceTests
 
         private void ReloadTestPage()
         {
-            browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+            string fileLocation = new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/");
+            if (fileLocation.StartsWith("/"))
+            {
+                fileLocation = fileLocation.Substring(1);
+            }
+
+            browser.Visit(String.Format("file:///{0}", fileLocation));
         }
 
         [Test]

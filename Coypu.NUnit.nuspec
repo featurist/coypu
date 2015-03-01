@@ -15,7 +15,5 @@
       <dependency id="NUnit" version="[2.6.3]" />
     </dependencies>
   </metadata>
-    <files>
-      <file src="src\Coypu.NUnit\bin\Release\Coypu.NUnit.dll" target="lib\net40" />
-    </files>
+  @files@
 </package>

@@ -1,5 +1,6 @@
 using System.IO;
 using NUnit.Framework;
+using System;
 
 namespace Coypu.AcceptanceTests
 {
@@ -28,7 +29,13 @@ namespace Coypu.AcceptanceTests
 
         private void VisitTestPage(BrowserSession browserSession)
         {
-            browserSession.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+            string fileLocation = new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/");
+            if (fileLocation.StartsWith("/"))
+            {
+                fileLocation = fileLocation.Substring(1);
+            }
+
+            browserSession.Visit(String.Format("file:///{0}", fileLocation));
         }
     }
 }

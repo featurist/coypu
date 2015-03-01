@@ -111,7 +111,7 @@ namespace Coypu.Drivers.Tests
                 Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
                 CloseWindow(popUp);
 
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(1000);
                 Driver.CancelModalDialog(Root);
                 Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
             }

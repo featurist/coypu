@@ -17,7 +17,13 @@ namespace Coypu.AcceptanceTests
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
             browser = new BrowserSession(SessionConfiguration);
-            browser.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"));
+            string fileLocation = new FileInfo(@"html\table.htm").FullName.Replace("\\", "/");
+            if (fileLocation.StartsWith("/"))
+            {
+                fileLocation = fileLocation.Substring(1);
+            }
+
+            browser.Visit(String.Format("file:///{0}", fileLocation));
         }
 
         [TestFixtureTearDown]

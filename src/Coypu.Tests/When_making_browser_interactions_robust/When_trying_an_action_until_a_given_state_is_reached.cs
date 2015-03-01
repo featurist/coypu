@@ -49,11 +49,15 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             var toTry = new CountTriesAction(options);
             var until = new AlwaysSucceedsPredicateQuery(false, TimeSpan.Zero,  options.RetryInterval);
 
-            var stopwatch = Stopwatch.StartNew();
+            var stopwatch = new Stopwatch();
             var timeout1 = TimeSpan.FromMilliseconds(200);
-            Assert.Throws<MissingHtmlException>(() => _retryUntilTimeoutTimingStrategy.TryUntil(toTry, until, new Options{Timeout = timeout1}));
 
-            stopwatch.Stop();
+            Assert.Throws<MissingHtmlException>(() => {
+                stopwatch.Start();
+                _retryUntilTimeoutTimingStrategy.TryUntil(toTry, until, new Options{Timeout = timeout1});
+                stopwatch.Stop();
+            });
+
             var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
 
             Assert.That(elapsedMilliseconds,

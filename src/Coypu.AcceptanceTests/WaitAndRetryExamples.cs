@@ -38,8 +38,8 @@ namespace Coypu.AcceptanceTests
         protected void ApplyAsyncDelay()
         {
             // Hide the HTML then bring back after a short delay to test robustness
-            browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
             browser.ExecuteScript("window.document.body.innerHTML = '';");
+            browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
             browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
         }
 
@@ -50,7 +50,13 @@ namespace Coypu.AcceptanceTests
 
         protected static string TestPageLocation(string page)
         {
-            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            var fileLocation = new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            if (fileLocation.StartsWith("/"))
+            {
+                fileLocation = fileLocation.Substring(1);
+            }
+
+            var testPageLocation = String.Format("file:///{0}", fileLocation);
             return testPageLocation;
         }
 

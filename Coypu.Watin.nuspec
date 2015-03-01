@@ -15,7 +15,5 @@
       <dependency id="WatiN" version="[2.1.0]" />
     </dependencies>
   </metadata>
-    <files>
-      <file src="src\Coypu.Drivers.Watin\bin\Release\Coypu.Drivers.Watin.dll" target="lib\net40" />
-    </files>
+  @files@
 </package>

@@ -1,8 +1,10 @@
 source http://nuget.org/api/v2
 
 nuget nspec 0.9.58
-nuget NUnit 2.6.3
+nuget NUnit ~> 2.0
 nuget Selenium.Support 2.43.0
 nuget Selenium.WebDriver 2.43.0
 nuget SelfishHttp 0.2.0
 nuget WatiN 2.1.0
+nuget FAKE.Core 3.17.0
+nuget NUnit.Runners ~> 2.0
