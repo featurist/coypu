@@ -38,8 +38,8 @@ namespace Coypu.AcceptanceTests
         protected void ApplyAsyncDelay()
         {
             // Hide the HTML then bring back after a short delay to test robustness
-            browser.ExecuteScript("window.document.body.innerHTML = '';");
             browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
+            browser.ExecuteScript("window.document.body.innerHTML = '';");
             browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
         }
 
