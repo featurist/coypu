@@ -17,7 +17,6 @@ end
   'testdrivers',
   'testacceptance',
   'testunit',
-  'testall',
   'package',
   'publish',
   'publishnunit',

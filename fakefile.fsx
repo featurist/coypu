@@ -119,8 +119,6 @@ Target "TestAcceptance" (fun _ ->
   |> NUnit (fun _ -> NUnitDefaults)
 )
 
-Target "TestAll" DoNothing
-
 Target "Package" (fun _ ->
   !! "Coypu*.nupkg"
   |> DeleteFiles
@@ -159,12 +157,6 @@ Target "PublishWatin" (fun _ ->
 "Compile" ==> "TestDrivers"
 "Compile" ==> "TestUnit"
 "Compile" ==> "TestAcceptance"
-
-"Compile"
-  ==> "TestUnit"
-  ==> "TestDrivers"
-  ==> "TestAcceptance"
-  ==> "TestAll"
 
 "Compile" ==> "Package"
 "Package" ==> "Publish"
