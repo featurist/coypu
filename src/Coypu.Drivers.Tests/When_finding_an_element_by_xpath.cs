@@ -17,16 +17,6 @@ namespace Coypu.Drivers.Tests
         }
 
         [Test]
-        public void Finds_present_examples_by_text()
-        {
-            var shouldFind = "//*[@id = 'inspectingContent']//p[@class='css-test']/span";
-            XPath(shouldFind, new Regex("^This$")).Text.should_be("This");
-
-            shouldFind = "//ul[@id='cssTest']/li[3]";
-            XPath(shouldFind, new Regex("Pick me")).Text.should_be("Me! Pick me!");
-        }
-
-        [Test]
         public void Does_not_find_missing_examples()
         {
             const string shouldNotFind = "//*[@id = 'inspectingContent']//p[@class='css-missing-test']";

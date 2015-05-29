@@ -1,3 +1,12 @@
+# Version 2.9.1
+
+### Added
+
+* Fix FindXPath with text to use xpath builder rather than slow post filter
+
+Release date: 2015-05-29
+
+
 # Version 2.9.0
 
 ### Added

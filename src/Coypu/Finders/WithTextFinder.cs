@@ -4,8 +4,8 @@ namespace Coypu.Finders
 {
     internal abstract class WithTextFinder : ElementFinder
     {
-        private readonly Regex textPattern;
-        private readonly string text;
+        protected readonly Regex textPattern;
+        protected readonly string text;
 
         internal WithTextFinder(Driver driver, string locator, DriverScope scope, Options options)
             : base(driver, locator, scope, options)
@@ -24,24 +24,13 @@ namespace Coypu.Finders
             this.text = text;
         }
 
-        public Regex TextPattern(bool exact)
-        {
-            if (text != null)
-                return TextAsRegex(text, exact);
-
-            if (textPattern != null)
-                return textPattern;
-
-            return null;
-        }
-
         internal override string QueryDescription
         {
             get
             {
                 var queryDesciption = SelectorType + ": " + Locator;
                 if (textPattern != null)
-                    queryDesciption += " with text matching /" + text ?? textPattern + "/";
+                    queryDesciption += " with text matching /" + (text ?? textPattern.ToString()) + "/";
 
                 return queryDesciption;
             }

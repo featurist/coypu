@@ -11,7 +11,7 @@ namespace Coypu
         object Native { get; }
         bool Disposed { get; }
         IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null);
-        IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options, Regex textPattern = null);
+        IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options);
         IEnumerable<Element> FindWindows(string locator, Scope scope, Options options);
         IEnumerable<Element> FindFrames(string locator, Scope scope, Options options);
         Element Window { get; }

@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Coypu.Drivers;
 
 namespace Coypu.Finders
 {
-    internal class XPathFinder : WithTextFinder
+    internal class XPathFinder : XPathQueryFinder
     {
-        protected override string SelectorType
+        private readonly string text;
+        private readonly Regex textPattern;
+
+        protected string SelectorType
         {
             get { return "xpath"; }
         }
@@ -16,13 +21,15 @@ namespace Coypu.Finders
         }
 
         public XPathFinder(Driver driver, string locator, DriverScope scope, Options options, Regex textPattern)
-            : base(driver, locator, scope, options, textPattern)
+            : base(driver, locator, scope, options)
         {
+            this.textPattern = textPattern;
         }
 
         public XPathFinder(Driver driver, string locator, DriverScope scope, Options options, string text)
-            : base(driver, locator, scope, options, text)
+            : base(driver, locator, scope, options)
         {
+            this.text = text;
         }
 
         public override bool SupportsSubstringTextMatching
@@ -30,9 +37,33 @@ namespace Coypu.Finders
             get { return true; }
         }
 
-        internal override IEnumerable<Element> Find(Options options)
+        internal override string QueryDescription
         {
-            return Driver.FindAllXPath(Locator, Scope, options, TextPattern(options.TextPrecision == TextPrecision.Exact));
+            get
+            {
+                var queryDesciption = SelectorType + ": " + Locator;
+                if (text != null)
+                    queryDesciption += " with text " + text;
+                if (textPattern != null)
+                    queryDesciption += " with text matching /" + (text ?? textPattern.ToString()) + "/";
+
+                return queryDesciption;
+            }
+        }
+
+        protected override Func<string, Options, string> GetQuery(Html html)
+        {
+            return ((locator, options) =>
+                {
+                    if (string.IsNullOrEmpty(text))
+                    {
+                        return Locator;
+                    }
+                    else
+                    {
+                        return Locator + XPath.Where(html.IsText(text, options));
+                    }
+                }); 
         }
     }
 }

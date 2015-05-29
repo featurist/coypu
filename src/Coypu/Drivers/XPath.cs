@@ -160,17 +160,17 @@ namespace Coypu.Drivers
             return Is("normalize-space(text())", locator, options);
         }
 
-        protected string Descendent(string tagName = "*")
+        public string Descendent(string tagName = "*")
         {
             return ".//" + tagName;
         }
 
-        protected string Child(string tagName = "*")
+        public string Child(string tagName = "*")
         {
             return "./" + tagName;
         }
 
-        protected static string Where(string predicate)
+        public static string Where(string predicate)
         {
             return "[" + predicate + "]";
         }

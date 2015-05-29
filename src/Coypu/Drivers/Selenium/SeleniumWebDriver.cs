@@ -98,9 +98,9 @@ namespace Coypu.Drivers.Selenium
             return FindAll(By.CssSelector(cssSelector), scope, options, ValidateTextPattern(options, textPattern)).Select(BuildElement);
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options, Regex textPattern = null)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
-            return FindAll(By.XPath(xpath), scope, options, ValidateTextPattern(options, textPattern)).Select(BuildElement);
+            return FindAll(By.XPath(xpath), scope, options).Select(BuildElement);
         }
 
         private IEnumerable<IWebElement> FindAll(By by, Scope scope, Options options, Func<IWebElement, bool> predicate = null)

@@ -237,10 +237,10 @@ namespace Coypu.Tests.TestDoubles
             return Find<IEnumerable<Element>>(stubbedAllCssResults, cssSelector, scope, options, textPattern);
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options, Regex textPattern = null)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
             FindXPathRequests.Add(new FindXPathParams{XPath = xpath, Scope = scope, Options = options});
-            return Find<IEnumerable<Element>>(stubbedAllXPathResults, xpath, scope, options, textPattern);
+            return Find<IEnumerable<Element>>(stubbedAllXPathResults, xpath, scope, options);
         }
 
         public void Check(Element field)

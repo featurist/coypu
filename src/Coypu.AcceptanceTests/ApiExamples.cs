@@ -241,14 +241,6 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
-        public void FindXPath_with_text_matching()
-        {
-            var two = browser.FindXPath("//*[@id='inspectingContent']//ul[@id='cssTest']/li", text: new Regex("wo"));
-            Assert.That(two.Text, Is.EqualTo("two"));
-        }
-
-
-        [Test]
         public void FindField_examples()
         {
             Assert.That(browser.FindField("text input field linked by for", Options.Exact).Id, Is.EqualTo("forLabeledTextInputFieldId"));

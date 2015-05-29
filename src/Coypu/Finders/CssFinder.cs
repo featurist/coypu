@@ -34,5 +34,16 @@ namespace Coypu.Finders
         {
             return Driver.FindAllCss(Locator, Scope, options, TextPattern(options.TextPrecision == TextPrecision.Exact));
         }
+
+        public Regex TextPattern(bool exact)
+        {
+            if (text != null)
+                return TextAsRegex(text, exact);
+
+            if (textPattern != null)
+                return textPattern;
+
+            return null;
+        }
     }
 }

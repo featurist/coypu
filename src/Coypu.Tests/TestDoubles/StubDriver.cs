@@ -55,7 +55,7 @@ namespace Coypu.Tests.TestDoubles
         }
 
 
-        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options, Regex textPattern = null)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
         {
             return Enumerable.Empty<Element>();
         }
