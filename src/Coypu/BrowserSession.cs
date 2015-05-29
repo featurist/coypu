@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Coypu.Finders;
 using Coypu.Timing;
 using Coypu.WebRequests;

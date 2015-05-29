@@ -63,17 +63,21 @@ namespace Coypu.Drivers.Watin
             return FindAllCssDeferred(cssSelector, scope, options, text);
         }
 
-        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, Scope scope, Options options)
+        private IEnumerable<WatiN.Core.Element> FindAllXPathDeferred(string xpath, Scope scope, Options options, Regex textPattern = null)
         {
-            var isVisible = Constraints.IsVisible(options.ConsiderInvisibleElements);
+            var whereConstraints = Constraints.IsVisible(options.ConsiderInvisibleElements);
+
+            if (textPattern != null)
+                whereConstraints = whereConstraints & Find.ByText(textPattern);
+
             return from element in WatiNScope(scope).XPath(xpath)
-                   where element.Matches(isVisible)
+                   where element.Matches(whereConstraints)
                    select element;
         }
 
-        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, Scope scope, Options options)
+        public IEnumerable<WatiN.Core.Element> FindAllXPath(string xpath, Scope scope, Options options, Regex text = null)
         {
-            return FindAllXPathDeferred(xpath, scope, options);
+            return FindAllXPathDeferred(xpath, scope, options, text);
         }
     }
 }

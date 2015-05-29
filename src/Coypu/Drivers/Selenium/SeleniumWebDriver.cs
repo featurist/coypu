@@ -82,21 +82,25 @@ namespace Coypu.Drivers.Selenium
             return frameFinder.FindFrame(locator, scope, options).Select(BuildElement);
         }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
+        private Func<IWebElement, bool> ValidateTextPattern(Options options, Regex textPattern)
         {
             var textMatches = (textPattern == null)
-                ? (Func<IWebElement, bool>)null
-                : e => textMatcher.TextMatches(e, textPattern);
+                                  ? (Func<IWebElement, bool>) null
+                                  : e => textMatcher.TextMatches(e, textPattern);
 
             if (textPattern != null && options.ConsiderInvisibleElements)
                 throw new NotSupportedException("Cannot inspect the text of invisible elements.");
-
-            return FindAll(By.CssSelector(cssSelector), scope, options, textMatches).Select(BuildElement);
+            return textMatches;
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
+        public IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null)
         {
-            return FindAll(By.XPath(xpath), scope, options).Select(BuildElement);
+            return FindAll(By.CssSelector(cssSelector), scope, options, ValidateTextPattern(options, textPattern)).Select(BuildElement);
+        }
+
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options, Regex textPattern = null)
+        {
+            return FindAll(By.XPath(xpath), scope, options, ValidateTextPattern(options, textPattern)).Select(BuildElement);
         }
 
         private IEnumerable<IWebElement> FindAll(By by, Scope scope, Options options, Func<IWebElement, bool> predicate = null)

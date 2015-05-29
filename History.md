@@ -1,3 +1,12 @@
+# Version 2.9.0
+
+### Added
+
+* FindXPath takes a text parameter like FindCss
+
+Release date: 2015-05-29
+
+
 # Version 2.8.0
 
 ### Added

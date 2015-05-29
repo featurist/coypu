@@ -150,6 +150,16 @@ namespace Coypu.Drivers.Tests
             return FindSingle(new XPathFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));
         }
 
+        protected static Element XPath(string locator, Regex text, DriverScope scope = null, Options options = null)
+        {
+            return FindSingle(new XPathFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text));
+        }
+
+        protected static Element XPath(string locator, string text, DriverScope scope = null, Options options = null)
+        {
+            return FindSingle(new XPathFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions, text));
+        }
+
         protected static Element Css(string locator, DriverScope scope = null, Options options = null)
         {
             return FindSingle(new CssFinder(Driver, locator, scope ?? Root, options ?? DefaultOptions));

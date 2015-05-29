@@ -286,9 +286,9 @@ namespace Coypu.Drivers.Watin
                    select BuildElement(element);
         }
 
-        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options)
+        public IEnumerable<Element> FindAllXPath(string xpath, Scope scope, Options options, Regex text = null)
         {
-            return from element in elementFinder.FindAllXPath(xpath, scope, options)
+            return from element in elementFinder.FindAllXPath(xpath, scope, options, text)
                    select BuildElement(element);
         }
 

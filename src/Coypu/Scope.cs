@@ -163,7 +163,7 @@ namespace Coypu
         /// Find an element matching a CSS selector
         /// </summary>
         /// <param name="cssSelector">CSS selector</param>
-        /// <param name="text">The text of the element must exactly match this text</param>
+        /// <param name="text">The text of the element you are looking for</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -189,6 +189,7 @@ namespace Coypu
         /// Find an element matching an XPath query
         /// </summary>
         /// <param name="xpath">XPath query</param>
+        /// <param name="text">The text of the element you are looking for</param>
         /// <param name="options">
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
@@ -196,6 +197,31 @@ namespace Coypu
         /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
         /// <returns>The first matching element</returns>
         ElementScope FindXPath(string xpath, Options options = null);
+
+        /// <summary>
+        /// Find an element matching an XPath query
+        /// </summary>
+        /// <param name="xpath">XPath query</param>
+        /// <param name="text">The text of the element must match this pattern</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>The first matching element</returns>
+        ElementScope FindXPath(string idInspectingcontentUlIdCsstestLi, string text, Options options = null);
+
+        /// <summary>
+        /// Find an element matching an XPath query
+        /// </summary>
+        /// <param name="xpath">XPath query</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait:</para>
+        /// 
+        /// <code>new Options{Timeout = TimeSpan.FromSeconds(60)}</code></param>
+        /// <returns>The first matching element</returns>
+        ElementScope FindXPath(string idInspectingcontentUlIdCsstestLi, Regex text, Options options = null);
 
         /// <summary>
         /// Find all elements matching a CSS selector. If a predicate is supplied this will wait until the predicate matches, otherwise this will return immediately.
