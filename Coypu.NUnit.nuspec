@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Coypu.NUnit</id>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <authors>AdrianLongley</authors>
     <owners>AdrianLongley</owners>
     <projectUrl>https://github.com/featurist/coypu</projectUrl>
@@ -12,7 +12,7 @@
     <tags></tags>
     <dependencies>
       <dependency id="Coypu" version="[2.7.0,3.0.0)" />
-      <dependency id="NUnit" version="[2.6.3]" />
+      <dependency id="NUnit" version="[2.6.3,3.0.0)" />
     </dependencies>
   </metadata>
     <files>
