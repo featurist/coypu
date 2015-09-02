@@ -151,6 +151,10 @@ You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu li
 ### SpecFlow scenarios
 
 If you are using SpecFlow for your acceptance tests then you will probably want to configure it to provide a single Browser Session scoped to each scenario. SpecFlow supports some basic dependency injection which you can use to achieve this as shown in [this gist](https://gist.github.com/2301407).
+
+### Machine.Specifications specs
+
+If you are using Machine.Specifications for your acceptance tests then you can use the `Coypu.Should` extension methods to verify the test cases. Examples can be found in the file [ShouldExamples.cs](https://github.com/hlaueriksson/coypu/blob/should/src/Coypu.AcceptanceTests/ShouldExamples.cs).
   
 ### Waits, retries and timeout
 
