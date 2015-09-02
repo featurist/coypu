@@ -41,6 +41,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Machine.Specifications, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Machine.Specifications.0.9.3\lib\net45\Machine.Specifications.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Machine.Specifications.Clr4, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Machine.Specifications.0.9.3\lib\net45\Machine.Specifications.Clr4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -76,6 +84,7 @@
     </Compile>
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="Screenshots.cs" />
+    <Compile Include="ShouldExamples.cs" />
     <Compile Include="sites\SelfishSite.cs" />
     <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="ShowModalDialog.cs" />
@@ -161,6 +170,10 @@
     <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj">
       <Project>{14fb5a97-d3a7-4759-bb6a-03cafc9b8fab}</Project>
       <Name>Coypu.NUnit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Coypu.Should\Coypu.Should.csproj">
+      <Project>{0e606073-7983-429f-98f3-2c1d7337711d}</Project>
+      <Name>Coypu.Should</Name>
     </ProjectReference>
     <ProjectReference Include="..\Coypu\Coypu.csproj">
       <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
