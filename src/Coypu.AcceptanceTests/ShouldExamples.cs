@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Coypu.Drivers.Selenium;
 using Coypu.Should;
@@ -61,6 +62,18 @@ namespace Coypu.AcceptanceTests
         };
 
         It should_not_have_value = () => browser.FindField("find-this-field").ShouldNotHaveValue("This is not the value");
+
+        // Machine.Specifications.Should
+
+        It should_work_with_classic_should_extension_metods = () =>
+        {
+            browser.FindCss(".css-test").Exists().ShouldBeTrue();
+            browser.FindCss(".this-css-selector-does-not-exist").Missing().ShouldBeTrue();
+            browser.HasContent("This is what we are looking for").ShouldBeTrue();
+            browser.FindAllCss("form").Count().ShouldEqual(2);
+            browser.Location.ToString().ShouldEndWith("InteractionTestsPage.htm");
+            browser.Title.ShouldEqual("Coypu interaction tests page");
+        };
     }
 
     public class ShouldExamples
