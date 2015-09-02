@@ -94,27 +94,27 @@ namespace Coypu.Should
 
         public static void ShouldNotHaveContent(this Scope scope, string expectedContent, Options options = null)
         {
-            scope.ShouldNotHave(_.Content(expectedContent, options));
+            scope.ShouldHave(_.No.Content(expectedContent, options));
         }
 
         public static void ShouldNotHaveCss(this Scope scope, string expectedCssSelector, Options options = null)
         {
-            scope.ShouldNotHave(_.Css(expectedCssSelector, options));
+            scope.ShouldHave(_.No.Css(expectedCssSelector, options));
         }
 
         public static void ShouldNotHaveCss(this Scope scope, string expectedCssSelector, string text, Options options = null)
         {
-            scope.ShouldNotHave(_.Css(expectedCssSelector, text, options));
+            scope.ShouldHave(_.No.Css(expectedCssSelector, text, options));
         }
 
         public static void ShouldNotHaveCss(this Scope scope, string expectedCssSelector, Regex text, Options options = null)
         {
-            scope.ShouldNotHave(_.Css(expectedCssSelector, text, options));
+            scope.ShouldHave(_.No.Css(expectedCssSelector, text, options));
         }
 
         public static void ShouldNotHaveValue(this Scope scope, string expectedContent, Options options = null)
         {
-            scope.ShouldNotHave(_.Value(expectedContent, options));
+            scope.ShouldHave(_.No.Value(expectedContent, options));
         }
 
         // Assert
@@ -127,13 +127,6 @@ namespace Coypu.Should
         private static void ShouldHave(this Scope scope, Constraint constraint)
         {
             if (constraint.Matches(scope)) return;
-
-            Throw(constraint);
-        }
-
-        private static void ShouldNotHave(this Scope scope, Constraint constraint)
-        {
-            if (!constraint.Matches(scope)) return;
 
             Throw(constraint);
         }
