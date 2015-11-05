@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Selenium
         {
         }
 
-        protected SeleniumWebDriver(IWebDriver webDriver, Browser browser)
+        public SeleniumWebDriver(IWebDriver webDriver, Browser browser)
         {
             this.webDriver = webDriver;
             this.browser = browser;
