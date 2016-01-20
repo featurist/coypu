@@ -384,9 +384,9 @@ This will be respected everywhere that Coypu matches visible text, including but
 
 When using methods such as `ClickLink()`, and `FillIn()`, what happens when more than one element matches? With the `Match` option you have control over what happens by choosing one of the two `Match` strategies:
 
-`Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown.
+`Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown. **This is the default for Match**
 
-`Match.First` just returns the first matching element. **This is the default for Match**
+`Match.First` just returns the first matching element.
 
 
 ##### Usage
