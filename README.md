@@ -522,7 +522,7 @@ browser.FindXPath("//body").FindAllXPath(".//script");
 To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
 
 ```c#
-var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
+var twitterFrame = browser.FindFrame("@coypu_news on Twitter");
 
 Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
 ```
