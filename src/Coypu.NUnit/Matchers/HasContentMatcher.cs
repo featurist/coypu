@@ -24,6 +24,8 @@ namespace Coypu.NUnit.Matchers
             }
             return new ConstraintResult(this, actual, hasContent);
         }
+
+        public override string Description => $"Expected to find content: {_expectedContent}\nin:\n{_actualContent}";
     }
 
     public class HasContentMatchMatcher : Constraint
@@ -49,5 +51,7 @@ namespace Coypu.NUnit.Matchers
             }
             return new ConstraintResult(this, actual, hasContent);
         }
+
+        public override string Description => $"Expected to find content: {_expectedContent}\nin:\n{_actualContent}";
     }
 }

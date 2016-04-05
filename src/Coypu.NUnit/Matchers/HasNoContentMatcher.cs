@@ -24,5 +24,7 @@ namespace Coypu.NUnit.Matchers
 
             return new ConstraintResult(this, actual, hasNoContent);
         }
+
+        public override string Description => $"Expected NOT to find content: {_expectedContent}\nin:\n{_actualContent}";
     }
 }
