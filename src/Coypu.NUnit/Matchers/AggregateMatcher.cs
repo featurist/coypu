@@ -23,7 +23,7 @@ namespace Coypu.NUnit.Matchers
                 var result = innerConstraint.ApplyTo(actual);
 
                 if (!result.IsSuccess)
-                    return new ConstraintResult(innerConstraint, result.ActualValue, false);
+                    return new ConstraintResult(innerConstraint, actual, false);
             }
 
             return new ConstraintResult(this, actual, true);
