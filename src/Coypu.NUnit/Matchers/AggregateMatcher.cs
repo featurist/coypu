@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace Coypu.NUnit.Matchers
@@ -15,16 +16,17 @@ namespace Coypu.NUnit.Matchers
 
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            return _innerConstraints.All(c => c.Matches(actual));
-        }
+            foreach (var innerConstraint in _innerConstraints)
+            {
+                var result = innerConstraint.ApplyTo(actual);
 
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            foreach (var constraint in _innerConstraints)
-                constraint.WriteDescriptionTo(writer);
-        }
+                if (!result.IsSuccess)
+                    return new ConstraintResult(innerConstraint, result.ActualValue, false);
+            }
 
+            return new ConstraintResult(this, actual, true);
+        }
     }
 }

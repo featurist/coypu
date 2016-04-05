@@ -45,13 +45,7 @@ namespace Coypu.AcceptanceTests
 
         protected void ReloadTestPage()
         {
-            browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
-        }
-
-        protected static string TestPageLocation(string page)
-        {
-            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
-            return testPageLocation;
+            browser.Visit(Helper.GetProjectFile("html\\InteractionTestsPage.htm"));
         }
 
         protected void ReloadTestPageWithDelay()

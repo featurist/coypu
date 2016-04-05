@@ -45,31 +45,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Coypu.NUnit\Matchers\AggregateMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\AggregateMatcher.cs">
       <Link>AggregateMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasAllCssInOrderMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasAllCssInOrderMatcher.cs">
       <Link>HasAllCssInOrderMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasContentMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasContentMatcher.cs">
       <Link>HasContentMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasCssMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasCssMatcher.cs">
       <Link>HasCssMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasNoContentMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasNoContentMatcher.cs">
       <Link>HasNoContentMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasNoCssMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasNoCssMatcher.cs">
       <Link>HasNoCssMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasNoValueMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasNoValueMatcher.cs">
       <Link>HasNoValueMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\HasValueMatcher.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\HasValueMatcher.cs">
       <Link>HasValueMatcher.cs</Link>
     </Compile>
-    <Compile Include="..\Coypu.NUnit\Matchers\Shows.cs">
+    <Compile Include="..\Coypu.NUnit263\Matchers\Shows.cs">
       <Link>Shows.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

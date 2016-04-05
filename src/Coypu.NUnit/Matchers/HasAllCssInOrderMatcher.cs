@@ -31,23 +31,22 @@ namespace Coypu.NUnit.Matchers
             this.exactText = exactText.ToArray();
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            this.actual = actual;
-            var scope = ((Scope)actual);
+            var scope = (Scope)actual;
 
-            _actualContent = string.Format("[{0}]", string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray()));
+            _actualContent = $"[{string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray())}]";
 
             var hasCss = true;
             if (exactText != null)
                 try
                 {
                     scope.FindAllCss(_expectedCss, e =>
-                        {
-                            var textInScope = e.Select(t => t.Text).ToArray();
-                            return textInScope.Where((t, i) => t == exactText[i]).Count() == exactText.Count();
+                    {
+                        var textInScope = e.Select(t => t.Text).ToArray();
+                        return textInScope.Where((t, i) => t == exactText[i]).Count() == exactText.Count();
 
-                        }, _options);
+                    }, _options);
                 }
                 catch (MissingHtmlException)
                 {
@@ -57,11 +56,11 @@ namespace Coypu.NUnit.Matchers
                 try
                 {
                     scope.FindAllCss(_expectedCss, e =>
-                        {
-                            var textInScope = e.Select(t => t.Text).ToArray();
-                            return textInScope.Where((t, i) => textPattern[i].IsMatch(t)).Count() == textPattern.Count();
+                    {
+                        var textInScope = e.Select(t => t.Text).ToArray();
+                        return textInScope.Where((t, i) => textPattern[i].IsMatch(t)).Count() == textPattern.Count();
 
-                        }, _options);
+                    }, _options);
                 }
                 catch (MissingHtmlException)
                 {
@@ -70,24 +69,9 @@ namespace Coypu.NUnit.Matchers
 
 
             if (!hasCss)
-                _actualContent = string.Format("[{0}]", string.Join(",",scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray()));
+                _actualContent = $"[{string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray())}]";
 
-            return hasCss;
+            return new ConstraintResult(this, actual, hasCss);
         }
-        public override void WriteActualValueTo(MessageWriter writer)
-        {
-            writer.WriteMessageLine(string.Format("\r\n{0}", _actualContent));
-        }
-
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            writer.WriteMessageLine("Expected to find elements from css selector: {0}\r\nContaining only:\r\n", _expectedCss);
-            if (exactText != null)
-                writer.WriteMessageLine(string.Format("[{0}]", string.Join(",", exactText)));
-            if (textPattern != null)
-                writer.WriteMessageLine(string.Format("[{0}]", string.Join(",", textPattern.Select(p => p.ToString()).ToArray())));
-            
-        }
-
     }
 }
