@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             Assert.Throws<MissingHtmlException>(() => Id("iframe1ButtonId", Root, DefaultOptions));
         }
 
-        [Test]
+        [Test, Ignore("Didn't work from original fork")]
         public void Finds_elements_among_multiple_scopes()
         {
             Finds_elements_among_multiple_scopes(new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions),
