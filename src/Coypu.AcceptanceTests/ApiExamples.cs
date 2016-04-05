@@ -499,7 +499,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void WithinFrame_example()
         {
-            browser.Visit(TestPageLocation("frameset.htm"));
+            browser.Visit(Helper.GetProjectFile("html\\frameset.htm"));
 
             const string selectorThatAppearsInMultipleScopes = "scoped button";
 

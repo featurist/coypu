@@ -11,7 +11,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void SavesToSpecifiedLocation()
         {
-            browser.Visit(TestPageLocation("test-card.jpg"));
+            browser.Visit(Helper.GetProjectFile("html\\test-card.jpg"));
             browser.ResizeTo(800, 600);
 
             SavesToSpecifiedLocation(browser);
@@ -22,7 +22,7 @@ namespace Coypu.AcceptanceTests
         {
             browser.ClickLink("Open pop up window");
             var popUp = browser.FindWindow("Pop Up Window");
-            popUp.Visit(TestPageLocation("test-card.jpg"));
+            popUp.Visit(Helper.GetProjectFile("html\\test-card.jpg"));
             popUp.ResizeTo(800, 600);
 
             // Do something in the main window

@@ -37,7 +37,7 @@ namespace Coypu.AcceptanceTests
         
         private void VisitTestPage(string page)
         {
-            browser.Visit("file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/"));
+            browser.Visit(Helper.GetProjectFile($"html\\{page}"));
         }
 
         [Test]

@@ -29,8 +29,9 @@ namespace Coypu.NUnit.Matchers
             this.exactText = exactText;
         }
 
-        public override ConstraintResult ApplyTo<TActual>(TActual actual)
+        public override bool Matches(object actual)
         {
+            this.actual = actual;
             var scope = ((Scope)actual);
 
             bool hasCss;
@@ -44,7 +45,18 @@ namespace Coypu.NUnit.Matchers
             if (!hasCss)
                 _actualContent = scope.Now().InnerHTML;
 
-            return new ConstraintResult(this, actual, hasCss);
+            return hasCss;
+        }
+
+        public override void WriteDescriptionTo(MessageWriter writer)
+        {
+            writer.WriteMessageLine("Expected to find element with css selector: {0}\n", _expectedCss);
+            if (exactText != null)
+                writer.WriteMessageLine("With text: \"" + exactText + "\"");
+            if (textPattern != null)
+                writer.WriteMessageLine("With text matching: \"" + textPattern + "\"");
+
+            writer.WriteLine("in:\n{0}",_actualContent);
         }
     }
 }

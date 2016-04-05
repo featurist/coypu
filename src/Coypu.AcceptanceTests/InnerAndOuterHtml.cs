@@ -17,7 +17,7 @@ namespace Coypu.AcceptanceTests
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
             browser = new BrowserSession(SessionConfiguration);
-            browser.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"));
+            browser.Visit(Helper.GetProjectFile(@"html\table.htm"));
         }
 
         [TestFixtureTearDown]

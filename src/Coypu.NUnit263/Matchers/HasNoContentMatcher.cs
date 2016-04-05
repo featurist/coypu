@@ -12,9 +12,9 @@ namespace Coypu.NUnit.Matchers
             _options = options;
         }
 
-        public override ConstraintResult ApplyTo<TActual>(TActual actual)
-        {
-            var scope = (Scope)actual;
+        public override bool Matches(object actual) {
+            this.actual = actual;
+            var scope = ((Scope)actual);
             var hasNoContent = scope.HasNoContent(_expectedContent, _options);
             if (!hasNoContent)
             {
@@ -22,7 +22,11 @@ namespace Coypu.NUnit.Matchers
                 hasNoContent = !_actualContent.Contains(_expectedContent);
             }
 
-            return new ConstraintResult(this, actual, hasNoContent);
+            return hasNoContent;
+        }
+
+        public override void WriteDescriptionTo(MessageWriter writer) {
+            writer.WriteMessageLine("Expected NOT to find content: {0}\nin:\n{1}", _expectedContent, _actualContent);
         }
     }
 }

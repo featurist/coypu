@@ -16,16 +16,20 @@ namespace Coypu.NUnit.Matchers
             _options = options;
         }
 
-        public override ConstraintResult ApplyTo<TActual>(TActual actual)
-        {
-            var elementScope = actual as ElementScope;
+        public override bool Matches(object actual) {
+            this.actual = actual;
+            var elementScope = ((ElementScope)actual);
             var hasValue = elementScope.HasValue(_expectedContent, _options);
             if (!hasValue)
             {
                 _actualContent = elementScope.Value;
                 hasValue = _actualContent == _expectedContent;
             }
-            return new ConstraintResult(this, actual, hasValue);
+            return hasValue;
+        }
+
+        public override void WriteDescriptionTo(MessageWriter writer) {
+            writer.WriteMessageLine("Expected to find value: {0}\nin:\n{1}", _expectedContent, _actualContent);
         }
     }
 }
