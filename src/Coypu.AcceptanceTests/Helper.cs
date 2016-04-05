@@ -6,7 +6,9 @@ namespace Coypu.AcceptanceTests
 {
     public static class Helper
     {
-        public static string GetProjectFile(string relativePath)
+        private static readonly string WorkingDirectory;
+
+        static Helper()
         {
             var currentDir = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
             var index = currentDir.LastIndexOf("\\bin\\");
@@ -16,7 +18,12 @@ namespace Coypu.AcceptanceTests
 #if (!DEBUG)
             mode = "Release";
 #endif
-            return $"file:///{new DirectoryInfo($@"{projectDir}\bin\{mode}\{relativePath}")}";
+            WorkingDirectory = $"file:///{new DirectoryInfo($@"{projectDir}\bin\{mode}")}";
+        }
+
+        public static string GetProjectFile(string relativePath)
+        {
+            return $@"{WorkingDirectory}\{relativePath}";
         }
     }
 }
