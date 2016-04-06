@@ -41,7 +41,7 @@ namespace Coypu.AcceptanceTests
 
         private void ReloadTestPage()
         {
-            browser.Visit("file:///" + new FileInfo(@"html\states.htm").FullName.Replace("\\", "/"));
+            browser.Visit(Helper.GetProjectFile(@"html\states.htm"));
         }
 
         [Test]

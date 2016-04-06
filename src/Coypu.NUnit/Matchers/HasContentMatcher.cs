@@ -13,21 +13,19 @@ namespace Coypu.NUnit.Matchers
             _options = options;
         }
 
-        public override bool Matches(object actual) {
-            this.actual = actual;
-            var scope = ((DriverScope)actual);
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
+        {
+            var scope = actual as DriverScope;
             var hasContent = scope.HasContent(_expectedContent, _options);
             if (!hasContent)
             {
                 _actualContent = scope.Text;
                 hasContent = _actualContent.Contains(_expectedContent);
             }
-            return hasContent;
+            return new ConstraintResult(this, actual, hasContent);
         }
 
-        public override void WriteDescriptionTo(MessageWriter writer) {
-            writer.WriteMessageLine("Expected to find content: {0}\nin:\n{1}", _expectedContent, _actualContent);
-        }
+        public override string Description => $"Expected to find content: {_expectedContent}\nin:\n{_actualContent}";
     }
 
     public class HasContentMatchMatcher : Constraint
@@ -42,22 +40,18 @@ namespace Coypu.NUnit.Matchers
             _options = options;
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            this.actual = actual;
-            var scope = ((DriverScope)actual);
+            var scope = actual as DriverScope;
             var hasContent = scope.HasContentMatch(_expectedContent, _options);
             if (!hasContent)
             {
                 _actualContent = scope.Text;
                 hasContent = _expectedContent.IsMatch(_actualContent);
             }
-            return hasContent;
+            return new ConstraintResult(this, actual, hasContent);
         }
 
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            writer.WriteMessageLine("Expected to find content: {0}\nin:\n{1}", _expectedContent, _actualContent);
-        }
+        public override string Description => $"Expected to find content: {_expectedContent}\nin:\n{_actualContent}";
     }
 }

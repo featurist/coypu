@@ -1,4 +1,8 @@
 ﻿using NUnit.Framework.Constraints;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Coypu.NUnit.Matchers
 {
@@ -12,15 +16,17 @@ namespace Coypu.NUnit.Matchers
             _options = options;
         }
 
-        public override ConstraintResult ApplyTo<TActual>(TActual actual)
-        {
-            var elementScope = actual as ElementScope;
+        public override bool Matches(object actual) {
+            this.actual = actual;
+            var elementScope = ((ElementScope)actual);
             var hasNoValue = elementScope.HasNoValue(_expectedContent, _options);
             if (!hasNoValue)
                 _actualContent = elementScope.Value;
-            return new ConstraintResult(this, actual, hasNoValue);
+            return hasNoValue;
         }
 
-        public override string Description => $"Expected NOT to find value: {_expectedContent}\nin:\n{_actualContent}";
+        public override void WriteDescriptionTo(MessageWriter writer) {
+            writer.WriteMessageLine("Expected NOT to find value: {0}\nin:\n{1}", _expectedContent, _actualContent);
+        }
     }
 }
