@@ -384,9 +384,9 @@ This will be respected everywhere that Coypu matches visible text, including but
 
 When using methods such as `ClickLink()`, and `FillIn()`, what happens when more than one element matches? With the `Match` option you have control over what happens by choosing one of the two `Match` strategies:
 
-`Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown.
+`Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown. **This is the default for Match**
 
-`Match.First` just returns the first matching element. **This is the default for Match**
+`Match.First` just returns the first matching element.
 
 
 ##### Usage
@@ -522,7 +522,7 @@ browser.FindXPath("//body").FindAllXPath(".//script");
 To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
 
 ```c#
-var twitterFrame = browser.FindIFrame("@coypu_news on Twitter");
+var twitterFrame = browser.FindFrame("@coypu_news on Twitter");
 
 Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
 ```
