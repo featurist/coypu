@@ -10,7 +10,7 @@ namespace Coypu.AcceptanceTests
     {
         protected BrowserSession browser;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             var configuration = new SessionConfiguration
@@ -23,7 +23,7 @@ namespace Coypu.AcceptanceTests
 
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             browser.Dispose();

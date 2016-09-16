@@ -11,7 +11,7 @@ namespace Coypu.AcceptanceTests
         private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             SessionConfiguration = new SessionConfiguration();
@@ -20,7 +20,7 @@ namespace Coypu.AcceptanceTests
             browser.Visit(Helper.GetProjectFile(@"html\table.htm"));
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDownFixture()
         {
             browser.Dispose();

@@ -15,7 +15,7 @@ namespace Coypu.AcceptanceTests
     {
         private BrowserSession browser;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             var configuration = new SessionConfiguration
@@ -28,7 +28,7 @@ namespace Coypu.AcceptanceTests
 
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             browser.Dispose();
