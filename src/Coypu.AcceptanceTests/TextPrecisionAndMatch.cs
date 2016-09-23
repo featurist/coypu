@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -7,7 +6,6 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class TextPrecisionAndMatch
     {
-
         protected BrowserSession browser;
 
         [OneTimeSetUp]
@@ -21,6 +19,7 @@ namespace Coypu.AcceptanceTests
             browser = new BrowserSession(configuration);
 
         }
+
         [OneTimeTearDown]
         public void TearDown()
         {
@@ -28,12 +27,7 @@ namespace Coypu.AcceptanceTests
         }
 
         [SetUp]
-        public void SetUp()
-        {
-            ReloadTestPage();
-        }
-
-        protected void ReloadTestPage()
+        public void ReloadTestPage()
         {
             browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
         }

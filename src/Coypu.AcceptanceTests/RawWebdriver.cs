@@ -25,16 +25,7 @@ namespace Coypu.AcceptanceTests
 
 	        browser.FindElementByName("keywords").SendKeys("vtr");
         }
-
-
-
-
-
-
-
-
-
-
+        
 	    [Test]
 		public void Visibility_NewTwitter()
 		{
@@ -43,20 +34,8 @@ namespace Coypu.AcceptanceTests
 
             browser.FindElementByName("session[username_or_email]").SendKeys("theuser");
             browser.FindElementByName("session[password]").SendKeys("thepass");
-            
 		}
-
-
-
-
-
-
-
-
-
-
-
-
+        
 	    [Test]
 	    public void FindingStuff_CarBuzz()
         {
