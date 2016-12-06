@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Coypu.Drivers
 {
@@ -12,29 +11,28 @@ namespace Coypu.Drivers
     {
         private Browser(){}
 
-        public bool Javascript { get; private set; }
-        public bool UppercaseTagNames { get; private set; }
-
-        public static Browser Firefox                = new Browser { Javascript = true, UppercaseTagNames = true };
-        public static Browser InternetExplorer       = new Browser { Javascript = true };
-        public static Browser Chrome                 = new Browser { Javascript = true };
-        public static Browser Safari                 = new Browser { Javascript = true };
-        public static Browser HtmlUnit               = new Browser { Javascript = false };
-        public static Browser HtmlUnitWithJavaScript = new Browser { Javascript = true };
-        public static Browser PhantomJS              = new Browser { Javascript = true };
+        public bool     Javascript          { get; private set; }
+        public bool     UppercaseTagNames   { get; private set; }
+        private string   _name;
 
         public static Browser Parse(string browserName)
         {
-            var fieldInfo = BrowserFields().FirstOrDefault(f => f.Name.Equals(browserName.Replace(" ",""), StringComparison.InvariantCultureIgnoreCase));
-            if (fieldInfo == null)
-                throw new NoSuchBrowserException(browserName);
-
-            return (Browser) fieldInfo.GetValue(null);
+            var match = Browsers().FirstOrDefault(b => b._name.Equals(browserName.Replace(" ", String.Empty), StringComparison.InvariantCultureIgnoreCase));
+            if (match == null)
+                throw new NoSuchBrowserException(browserName);            
+                
+            return match;
         }
 
-        private static IEnumerable<FieldInfo> BrowserFields()
-        {
-            return typeof(Browser).GetFields(BindingFlags.Public | BindingFlags.Static);
+        private static IEnumerable<Browser> Browsers()
+        {   
+            yield return new Browser { _name = "Firefox",                 Javascript = true, UppercaseTagNames = true };
+            yield return new Browser { _name = "InternetExplorer",        Javascript = true };
+            yield return new Browser { _name = "Chrome",                  Javascript = true };
+            yield return new Browser { _name = "Safari",                  Javascript = true };
+            yield return new Browser { _name = "HtmlUnit",                Javascript = false };
+            yield return new Browser { _name = "HtmlUnitWithJavaScript",  Javascript = true };
+            yield return new Browser { _name = "PhantomJS",               Javascript = true };            
         }
     }
 }
