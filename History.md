@@ -1,3 +1,12 @@
+# Version 2.11.0
+
+### Updated
+
+* Update min Selenium dependency to 3.0.1
+
+Release date: 2016-12-06
+
+
 # Version 2.10.0
 
 ### Updated
