@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Coypu
 {
@@ -18,11 +17,6 @@ namespace Coypu
 
         public StaleElementException(Exception innerException)
             : base(Message, innerException)
-        {
-        }
-
-        public StaleElementException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
     }

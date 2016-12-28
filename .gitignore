@@ -4,14 +4,11 @@ deploy
 deploy/*
 temp/
 _ReSharper.*
-<<<<<<< HEAD
 *.ReSharper.user
 *.csproj.user
 *.sln.*.user
 *.resharper.user
-=======
 *.user
->>>>>>> citizenmatt-watin
 *.resharper
 *.suo
 *.cache
@@ -31,3 +28,4 @@ Coypu*.nupkg
 chromedriver.log
 Coypu-*.wrap
 src/packages
+.build

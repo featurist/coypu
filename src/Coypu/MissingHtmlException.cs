@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Coypu
 {
@@ -15,11 +14,6 @@ namespace Coypu
 
         public MissingHtmlException(string message, Exception innerException)
             : base(message, innerException)
-        {
-        }
-
-        public MissingHtmlException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
     }

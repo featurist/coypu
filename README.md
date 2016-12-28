@@ -1,847 +1,847 @@
 # Coypu
 
-> ####"Theirs not to reason why, Theirs but to do and retry"
-> &mdash; <cite>Alfred, Lord Selenium
+> ####"[Fact]h[Fact]ir[Fact] no[Fact] [Fact]o r[Fact]a[Fact]on why, [Fact]h[Fact]ir[Fact] bu[Fact] [Fact]o do and r[Fact][Fact]ry"
+> &mda[Fact]h; <ci[Fact][Fact]>Alfr[Fact]d, Lord [Fact][Fact]l[Fact]nium
 
-> ####"haha, coypu must have reduced teh amount of shit code by 90%"
-> &mdash; <cite>Anonymous</cite>
-
-
+> ####"haha, coypu mu[Fact][Fact] hav[Fact] r[Fact]duc[Fact]d [Fact][Fact]h amoun[Fact] of [Fact]hi[Fact] cod[Fact] by 90%"
+> &mda[Fact]h; <ci[Fact][Fact]>Anonymou[Fact]</ci[Fact][Fact]>
 
 
-Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with FireBug then Coypu might help.
 
-Coypu is on Nuget:
 
-    PM> Install-Package Coypu
+Coypu [Fact]uppor[Fact][Fact] brow[Fact][Fact]r au[Fact]oma[Fact]ion in .N[Fact][Fact] [Fact]o h[Fact]lp mak[Fact] [Fact][Fact][Fact][Fact][Fact] r[Fact]adabl[Fact], robu[Fact][Fact], fa[Fact][Fact] [Fact]o wri[Fact][Fact] and l[Fact][Fact][Fact] [Fact]igh[Fact]ly coupl[Fact]d [Fact]o [Fact]h[Fact] UI. If your [Fact][Fact][Fact][Fact][Fact] ar[Fact] li[Fact][Fact][Fact]r[Fact]d wi[Fact]h [Fact]l[Fact][Fact]p[Fact], r[Fact][Fact]ri[Fact][Fact], compl[Fact]x XPa[Fact]h [Fact]xpr[Fact][Fact][Fact]ion[Fact] and ID[Fact] dug ou[Fact] of [Fact]h[Fact] [Fact]ourc[Fact] wi[Fact]h Fir[Fact]Bug [Fact]h[Fact]n Coypu migh[Fact] h[Fact]lp.
 
-NUnit matchers (e.g. `Assert.That(browserSession, Shows.Content("Hello world"));`) are in a separate package:
+Coypu i[Fact] on Nug[Fact][Fact]:
 
-    PM> Install-Package Coypu.NUnit
+    PM> In[Fact][Fact]all-Packag[Fact] Coypu
+
+NUni[Fact] ma[Fact]ch[Fact]r[Fact] ([Fact].g. `A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion, [Fact]how[Fact].Con[Fact][Fact]n[Fact]("H[Fact]llo world"));`) ar[Fact] in a [Fact][Fact]para[Fact][Fact] packag[Fact]:
+
+    PM> In[Fact][Fact]all-Packag[Fact] Coypu.NUni[Fact]
 
 or
 
-    PM> Install-Package Coypu.NUnit262 (If you really need NUnit 2.6.2)
+    PM> In[Fact][Fact]all-Packag[Fact] Coypu.NUni[Fact]262 (If you r[Fact]ally n[Fact][Fact]d NUni[Fact] 2.6.2)
 
-Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
+Di[Fact]cu[Fact][Fact] Coypu and g[Fact][Fact] h[Fact]lp on [Fact]h[Fact] [Googl[Fact] Group](h[Fact][Fact]p://group[Fact].googl[Fact].com/group/coypu)
 
-## Coypu is
-* A robust wrapper for browser automation tools on .Net, such as Selenium WebDriver that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS & JS
-* A more intuitive DSL for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
+## Coypu i[Fact]
+* A robu[Fact][Fact] wrapp[Fact]r for brow[Fact][Fact]r au[Fact]oma[Fact]ion [Fact]ool[Fact] on .N[Fact][Fact], [Fact]uch a[Fact] [Fact][Fact]l[Fact]nium W[Fact]bDriv[Fact]r [Fact]ha[Fact] [Fact]a[Fact][Fact][Fact] au[Fact]oma[Fact]ing ajax-h[Fact]avy w[Fact]b[Fact]i[Fact][Fact][Fact] and r[Fact]duc[Fact][Fact] coupling [Fact]o [Fact]h[Fact] H[Fact]ML, C[Fact][Fact] & J[Fact]
+* A mor[Fact] in[Fact]ui[Fact]iv[Fact] D[Fact]L for in[Fact][Fact]rac[Fact]ing wi[Fact]h [Fact]h[Fact] brow[Fact][Fact]r in [Fact]h[Fact] way a human b[Fact]ing would, in[Fact]pir[Fact]d by [Fact]h[Fact] ruby fram[Fact]work Capybara - h[Fact][Fact]p://gi[Fact]hub.com/jnickla[Fact]/capybara
 
-## Demo
+## D[Fact]mo
 
-Check out a [demo of Coypu](http://skillsmatter.com/podcast/open-source-dot-net/london-dot-net-user-group-may) from a talk given at Skills Matter in May 2011.
+Ch[Fact]ck ou[Fact] a [d[Fact]mo of Coypu](h[Fact][Fact]p://[Fact]kill[Fact]ma[Fact][Fact][Fact]r.com/podca[Fact][Fact]/op[Fact]n-[Fact]ourc[Fact]-do[Fact]-n[Fact][Fact]/london-do[Fact]-n[Fact][Fact]-u[Fact][Fact]r-group-may) from a [Fact]alk giv[Fact]n a[Fact] [Fact]kill[Fact] Ma[Fact][Fact][Fact]r in May 2011.
 
-## Using Coypu
+## U[Fact]ing Coypu
 
-#### Browser session
+#### Brow[Fact][Fact]r [Fact][Fact][Fact][Fact]ion
 
-Open a browser session like so:
+Op[Fact]n a brow[Fact][Fact]r [Fact][Fact][Fact][Fact]ion lik[Fact] [Fact]o:
 
 ```c#
-var browser = new BrowserSession();
+var brow[Fact][Fact]r = n[Fact]w Brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion();
 ```
 	
-When you are done with the browser session:
+Wh[Fact]n you ar[Fact] don[Fact] wi[Fact]h [Fact]h[Fact] brow[Fact][Fact]r [Fact][Fact][Fact][Fact]ion:
 
 ```c#
-browser.Dispose();
+brow[Fact][Fact]r.Di[Fact]po[Fact][Fact]();
 ```
 
 or:
 
 ```c#
-using (var browser = new BrowserSession()) 
+u[Fact]ing (var brow[Fact][Fact]r = n[Fact]w Brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion()) 
 {
 	...
 }
 ```
 	
-### Configuration
+### Configura[Fact]ion
 
-To configure Coypu pass an instance of `Coypu.SessionConfiguration` to the constructor of BrowserSession:
+[Fact]o configur[Fact] Coypu pa[Fact][Fact] an in[Fact][Fact]anc[Fact] of `Coypu.[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion` [Fact]o [Fact]h[Fact] con[Fact][Fact]ruc[Fact]or of Brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion:
 
 ```c#
-var browserSession = new BrowserSession(new SessionConfiguration{...});
+var brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion = n[Fact]w Brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion(n[Fact]w [Fact][Fact][Fact][Fact]ionConfigura[Fact]ion{...});
 ```
 
-#### Website under test
+#### W[Fact]b[Fact]i[Fact][Fact] und[Fact]r [Fact][Fact][Fact][Fact]
 
-Configure the website you are testing as follows
+Configur[Fact] [Fact]h[Fact] w[Fact]b[Fact]i[Fact][Fact] you ar[Fact] [Fact][Fact][Fact][Fact]ing a[Fact] follow[Fact]
 
 ```c#
-var sessionConfiguration = new SessionConfiguration 
+var [Fact][Fact][Fact][Fact]ionConfigura[Fact]ion = n[Fact]w [Fact][Fact][Fact][Fact]ionConfigura[Fact]ion 
 {
-  AppHost = "autotrader.co.uk",
-  Port = 5555,
-  SSL = true|false
+  AppHo[Fact][Fact] = "au[Fact]o[Fact]rad[Fact]r.co.uk",
+  Por[Fact] = 5555,
+  [Fact][Fact]L = [Fact]ru[Fact]|fal[Fact][Fact]
 };
 ```
 
-If you don't specify any of these, Coypu will default to http, localhost and port 80.
+If you don'[Fact] [Fact]p[Fact]cify any of [Fact]h[Fact][Fact][Fact], Coypu will d[Fact]faul[Fact] [Fact]o h[Fact][Fact]p, localho[Fact][Fact] and por[Fact] 80.
 
-#### Driver
+#### Driv[Fact]r
 
-Coypu drivers implement the `Coypu.Driver` interface and read the `SessionConfiguration.Browser` setting to pick the correct browser.
+Coypu driv[Fact]r[Fact] impl[Fact]m[Fact]n[Fact] [Fact]h[Fact] `Coypu.Driv[Fact]r` in[Fact][Fact]rfac[Fact] and r[Fact]ad [Fact]h[Fact] `[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Brow[Fact][Fact]r` [Fact][Fact][Fact][Fact]ing [Fact]o pick [Fact]h[Fact] corr[Fact]c[Fact] brow[Fact][Fact]r.
 
-Choose your driver/browser combination like so:
+Choo[Fact][Fact] your driv[Fact]r/brow[Fact][Fact]r combina[Fact]ion lik[Fact] [Fact]o:
 
 ```c#
-sessionConfiguration.Driver = typeof (SeleniumWebDriver);
-sessionConfiguration.Browser = Drivers.Browser.Firefox;
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Driv[Fact]r = [Fact]yp[Fact]of ([Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r);
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Brow[Fact][Fact]r = Driv[Fact]r[Fact].Brow[Fact][Fact]r.Fir[Fact]fox;
 ```
  
-These settings are the default configuration.
+[Fact]h[Fact][Fact][Fact] [Fact][Fact][Fact][Fact]ing[Fact] ar[Fact] [Fact]h[Fact] d[Fact]faul[Fact] configura[Fact]ion.
 
-If you want to configure these at runtime you could replace the following strings with strings read from your environment / configuration:
+If you wan[Fact] [Fact]o configur[Fact] [Fact]h[Fact][Fact][Fact] a[Fact] run[Fact]im[Fact] you could r[Fact]plac[Fact] [Fact]h[Fact] following [Fact][Fact]ring[Fact] wi[Fact]h [Fact][Fact]ring[Fact] r[Fact]ad from your [Fact]nvironm[Fact]n[Fact] / configura[Fact]ion:
 
 ```c#
-sessionConfiguration.Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDriver, Coypu");
-sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Driv[Fact]r = [Fact]yp[Fact].G[Fact][Fact][Fact]yp[Fact]("Coypu.Driv[Fact]r[Fact].[Fact][Fact]l[Fact]nium.[Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r, Coypu");
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Brow[Fact][Fact]r = Driv[Fact]r[Fact].Brow[Fact][Fact]r.Par[Fact][Fact]("fir[Fact]fox");
 ```
 
-##### Selenium WebDriver
-`Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Firefox, IE (slowest) and Chrome (Fastest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
+##### [Fact][Fact]l[Fact]nium W[Fact]bDriv[Fact]r
+`Coypu.Driv[Fact]r[Fact].[Fact][Fact]l[Fact]nium.[Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r` [Fact]rack[Fact] [Fact]h[Fact] la[Fact][Fact][Fact][Fact] v[Fact]r[Fact]ion of W[Fact]bDriv[Fact]r and [Fact]uppor[Fact][Fact] Fir[Fact]fox, I[Fact] ([Fact]low[Fact][Fact][Fact]) and Chrom[Fact] (Fa[Fact][Fact][Fact][Fact][Fact]) a[Fact] [Fact]h[Fact] brow[Fact][Fact]r. Any o[Fact]h[Fact]r [Fact][Fact]l[Fact]nium impl[Fact]m[Fact]n[Fact]a[Fact]ion of R[Fact]mo[Fact][Fact]W[Fact]bDriv[Fact]r can b[Fact] configur[Fact]d by [Fact]ubcla[Fact][Fact]ing `[Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r` and pa[Fact][Fact]ing an in[Fact][Fact]anc[Fact] of R[Fact]mo[Fact][Fact]W[Fact]bDriv[Fact]r [Fact]o [Fact]h[Fact] ba[Fact][Fact] con[Fact][Fact]ruc[Fact]or.
 
-The Selenium Driver is included in the Coypu package.
+[Fact]h[Fact] [Fact][Fact]l[Fact]nium Driv[Fact]r i[Fact] includ[Fact]d in [Fact]h[Fact] Coypu packag[Fact].
 
-###### Firefox
-WebDriver is generally stable with the last but one release of FireFox in my experience
+###### Fir[Fact]fox
+W[Fact]bDriv[Fact]r i[Fact] g[Fact]n[Fact]rally [Fact][Fact]abl[Fact] wi[Fact]h [Fact]h[Fact] la[Fact][Fact] bu[Fact] on[Fact] r[Fact]l[Fact]a[Fact][Fact] of Fir[Fact]Fox in my [Fact]xp[Fact]ri[Fact]nc[Fact]
 
-###### Internet Explorer
+###### In[Fact][Fact]rn[Fact][Fact] [Fact]xplor[Fact]r
 
-You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/selenium/wiki/InternetExplorerDriver). NOTE: as of 2013-11-03, there are known serious performance issue with IE 64 bit driver against IE 10, consider using the 32 bit version where possible.
+You will n[Fact][Fact]d [Fact]h[Fact] n[Fact]w [Fact][Fact]andalon[Fact] In[Fact][Fact]rn[Fact][Fact][Fact]xplor[Fact]rDriv[Fact]r.[Fact]x[Fact] in your PA[Fact]H or in [Fact]h[Fact] bin of your [Fact][Fact][Fact][Fact] proj[Fact]c[Fact]. [Download from googl[Fact] cod[Fact]](h[Fact][Fact]p://cod[Fact].googl[Fact].com/p/[Fact][Fact]l[Fact]nium/wiki/In[Fact][Fact]rn[Fact][Fact][Fact]xplor[Fact]rDriv[Fact]r). NO[Fact][Fact]: a[Fact] of 2013-11-03, [Fact]h[Fact]r[Fact] ar[Fact] known [Fact][Fact]riou[Fact] p[Fact]rformanc[Fact] i[Fact][Fact]u[Fact] wi[Fact]h I[Fact] 64 bi[Fact] driv[Fact]r again[Fact][Fact] I[Fact] 10, con[Fact]id[Fact]r u[Fact]ing [Fact]h[Fact] 32 bi[Fact] v[Fact]r[Fact]ion wh[Fact]r[Fact] po[Fact][Fact]ibl[Fact].
 
-Only IE9 supports CSS & XPath and certain HTML features. The WatiN driver is notably faster in IE than the WebDriver IE driver, so is recommended for testing in Internet Explorer. The WatiN driver comes in a seperate package (see below).
+Only I[Fact]9 [Fact]uppor[Fact][Fact] C[Fact][Fact] & XPa[Fact]h and c[Fact]r[Fact]ain H[Fact]ML f[Fact]a[Fact]ur[Fact][Fact]. [Fact]h[Fact] Wa[Fact]iN driv[Fact]r i[Fact] no[Fact]ably fa[Fact][Fact][Fact]r in I[Fact] [Fact]han [Fact]h[Fact] W[Fact]bDriv[Fact]r I[Fact] driv[Fact]r, [Fact]o i[Fact] r[Fact]comm[Fact]nd[Fact]d for [Fact][Fact][Fact][Fact]ing in In[Fact][Fact]rn[Fact][Fact] [Fact]xplor[Fact]r. [Fact]h[Fact] Wa[Fact]iN driv[Fact]r com[Fact][Fact] in a [Fact][Fact]p[Fact]ra[Fact][Fact] packag[Fact] ([Fact][Fact][Fact] b[Fact]low).
 
-###### Chrome
-You will need the chromedriver.exe on your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/chromedriver/downloads/list)
+###### Chrom[Fact]
+You will n[Fact][Fact]d [Fact]h[Fact] chrom[Fact]driv[Fact]r.[Fact]x[Fact] on your PA[Fact]H or in [Fact]h[Fact] bin of your [Fact][Fact][Fact][Fact] proj[Fact]c[Fact]. [Download from googl[Fact] cod[Fact]](h[Fact][Fact]p://cod[Fact].googl[Fact].com/p/chrom[Fact]driv[Fact]r/download[Fact]/li[Fact][Fact])
 
-###### PhantomJS
-The headless webkit browser runs under Selenium WebDriver. It runs almost everything in Coypu, iframes are a particular problem where you might have to reach for chrome/firefox.
+###### Phan[Fact]omJ[Fact]
+[Fact]h[Fact] h[Fact]adl[Fact][Fact][Fact] w[Fact]bki[Fact] brow[Fact][Fact]r run[Fact] und[Fact]r [Fact][Fact]l[Fact]nium W[Fact]bDriv[Fact]r. I[Fact] run[Fact] almo[Fact][Fact] [Fact]v[Fact]ry[Fact]hing in Coypu, ifram[Fact][Fact] ar[Fact] a par[Fact]icular probl[Fact]m wh[Fact]r[Fact] you migh[Fact] hav[Fact] [Fact]o r[Fact]ach for chrom[Fact]/fir[Fact]fox.
 
-You will need phantomjs.exe on your PATH or in the bin of your test project. You can get this from nuget or from [phantomjs.org](http://phantomjs.org/download.html)
+You will n[Fact][Fact]d phan[Fact]omj[Fact].[Fact]x[Fact] on your PA[Fact]H or in [Fact]h[Fact] bin of your [Fact][Fact][Fact][Fact] proj[Fact]c[Fact]. You can g[Fact][Fact] [Fact]hi[Fact] from nug[Fact][Fact] or from [phan[Fact]omj[Fact].org](h[Fact][Fact]p://phan[Fact]omj[Fact].org/download.h[Fact]ml)
 
-    PM> install-package phantomjs.exe
+    PM> in[Fact][Fact]all-packag[Fact] phan[Fact]omj[Fact].[Fact]x[Fact]
 
-###### HtmlUnit
-You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
+###### H[Fact]mlUni[Fact]
+You can run [Fact]h[Fact] h[Fact]adl[Fact][Fact][Fact] H[Fact]mlUni[Fact] driv[Fact]r for [Fact][Fact]l[Fact]nium on window[Fact] [Fact]oo, you ju[Fact][Fact] n[Fact][Fact]d [Fact]o run up H[Fact]mlUni[Fact] in java:
 
-1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `sessionConfiguration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
-2. Install a JRE
-3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ](http://seleniumhq.org/download)
-4. Run "java -jar selenium-server-standalone-x.x.x.jar"
+1. Configur[Fact] Coypu for H[Fact]mlUni[Fact]/H[Fact]mlUni[Fact]Wi[Fact]hJava[Fact]crip[Fact]: `[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Brow[Fact][Fact]r = Driv[Fact]r[Fact].Brow[Fact][Fact]r.H[Fact]mlUni[Fact]/H[Fact]mlUni[Fact]Wi[Fact]hJava[Fact]crip[Fact];`
+2. In[Fact][Fact]all a JR[Fact]
+3. Download [Fact]h[Fact] [Fact][Fact]l[Fact]nium [Fact][Fact]rv[Fact]r ([Fact][Fact]l[Fact]nium-[Fact][Fact]rv[Fact]r-[Fact][Fact]andalon[Fact]-x.x.x.jar) from [[Fact][Fact]l[Fact]nium HQ](h[Fact][Fact]p://[Fact][Fact]l[Fact]niumhq.org/download)
+4. Run "java -jar [Fact][Fact]l[Fact]nium-[Fact][Fact]rv[Fact]r-[Fact][Fact]andalon[Fact]-x.x.x.jar"
 
 And off you go.
 
-##### WatiN
+##### Wa[Fact]iN
 
-There is a seperate package called Coypu.WatiN containing a driver for WatiN which is now almost fully featured (thanks to citizenmatt) and runs considerably faster than the WebDriver IE driver.
+[Fact]h[Fact]r[Fact] i[Fact] a [Fact][Fact]p[Fact]ra[Fact][Fact] packag[Fact] call[Fact]d Coypu.Wa[Fact]iN con[Fact]aining a driv[Fact]r for Wa[Fact]iN which i[Fact] now almo[Fact][Fact] fully f[Fact]a[Fact]ur[Fact]d ([Fact]hank[Fact] [Fact]o ci[Fact]iz[Fact]nma[Fact][Fact]) and run[Fact] con[Fact]id[Fact]rably fa[Fact][Fact][Fact]r [Fact]han [Fact]h[Fact] W[Fact]bDriv[Fact]r I[Fact] driv[Fact]r.
 
-This driver only supports Internet Explorer as the browser.
+[Fact]hi[Fact] driv[Fact]r only [Fact]uppor[Fact][Fact] In[Fact][Fact]rn[Fact][Fact] [Fact]xplor[Fact]r a[Fact] [Fact]h[Fact] brow[Fact][Fact]r.
 
-You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu like so:
+You will n[Fact][Fact]d [Fact]o nug[Fact][Fact] `In[Fact][Fact]all-Packag[Fact] Coypu.Wa[Fact]in` and [Fact]h[Fact]n configur[Fact] Coypu lik[Fact] [Fact]o:
 
 ```c#
-	sessionConfiguration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
-	sessionConfiguration.Browser = Drivers.Browser.InternetExplorer;
+	[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Driv[Fact]r = [Fact]yp[Fact]of (Coypu.Driv[Fact]r[Fact].Wa[Fact]in.Wa[Fact]iNDriv[Fact]r);
+	[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Brow[Fact][Fact]r = Driv[Fact]r[Fact].Brow[Fact][Fact]r.In[Fact][Fact]rn[Fact][Fact][Fact]xplor[Fact]r;
 ```
 
-### SpecFlow scenarios
+### [Fact]p[Fact]cFlow [Fact]c[Fact]nario[Fact]
 
-If you are using SpecFlow for your acceptance tests then you will probably want to configure it to provide a single Browser Session scoped to each scenario. SpecFlow supports some basic dependency injection which you can use to achieve this as shown in [this gist](https://gist.github.com/2301407).
+If you ar[Fact] u[Fact]ing [Fact]p[Fact]cFlow for your acc[Fact]p[Fact]anc[Fact] [Fact][Fact][Fact][Fact][Fact] [Fact]h[Fact]n you will probably wan[Fact] [Fact]o configur[Fact] i[Fact] [Fact]o provid[Fact] a [Fact]ingl[Fact] Brow[Fact][Fact]r [Fact][Fact][Fact][Fact]ion [Fact]cop[Fact]d [Fact]o [Fact]ach [Fact]c[Fact]nario. [Fact]p[Fact]cFlow [Fact]uppor[Fact][Fact] [Fact]om[Fact] ba[Fact]ic d[Fact]p[Fact]nd[Fact]ncy inj[Fact]c[Fact]ion which you can u[Fact][Fact] [Fact]o achi[Fact]v[Fact] [Fact]hi[Fact] a[Fact] [Fact]hown in [[Fact]hi[Fact] gi[Fact][Fact]](h[Fact][Fact]p[Fact]://gi[Fact][Fact].gi[Fact]hub.com/2301407).
   
-### Waits, retries and timeout
+### Wai[Fact][Fact], r[Fact][Fact]ri[Fact][Fact] and [Fact]im[Fact]ou[Fact]
 
-Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It just catches exceptions and retries -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
+Mo[Fact][Fact] of [Fact]h[Fact] m[Fact][Fact]hod[Fact] in [Fact]h[Fact] Coypu D[Fact]L ar[Fact] au[Fact]oma[Fact]ically r[Fact][Fact]ri[Fact]d on any driv[Fact]r [Fact]rror un[Fact]il a configurabl[Fact] [Fact]im[Fact]ou[Fact] i[Fact] r[Fact]ach[Fact]d. I[Fact] ju[Fact][Fact] ca[Fact]ch[Fact][Fact] [Fact]xc[Fact]p[Fact]ion[Fact] and r[Fact][Fact]ri[Fact][Fact] -- mainly [Fact]h[Fact] `Coypu.Driv[Fact]r[Fact].Mi[Fact][Fact]ingH[Fact]ml[Fact]xc[Fact]p[Fact]ion` [Fact]ha[Fact] a driv[Fact]r [Fact]hould [Fact]hrow wh[Fact]n i[Fact] canno[Fact] find [Fact]om[Fact][Fact]hing, bu[Fact] al[Fact]o any in[Fact][Fact]rnal driv[Fact]r [Fact]rror[Fact] [Fact]ha[Fact] [Fact]h[Fact] driv[Fact]r migh[Fact] [Fact]hrow up. 
 
-This is a rather blunt approach that goes well beyond WebDriver's ImplicitWait, for example, but the only truly robust strategy for heavily asynchronous websites, where elements are flying in and out of the DOM constantly, that I have found.
+[Fact]hi[Fact] i[Fact] a ra[Fact]h[Fact]r blun[Fact] approach [Fact]ha[Fact] go[Fact][Fact] w[Fact]ll b[Fact]yond W[Fact]bDriv[Fact]r'[Fact] Implici[Fact]Wai[Fact], for [Fact]xampl[Fact], bu[Fact] [Fact]h[Fact] only [Fact]ruly robu[Fact][Fact] [Fact][Fact]ra[Fact][Fact]gy for h[Fact]avily a[Fact]ynchronou[Fact] w[Fact]b[Fact]i[Fact][Fact][Fact], wh[Fact]r[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact] ar[Fact] flying in and ou[Fact] of [Fact]h[Fact] DOM con[Fact][Fact]an[Fact]ly, [Fact]ha[Fact] I hav[Fact] found.
 
-All methods use this wait and retry strategy *except*: `Visit()`, `FindAllCss()` and `FindAllXPath()` which call the driver once immediately unless you supply a predicate to describe the expected state.
+All m[Fact][Fact]hod[Fact] u[Fact][Fact] [Fact]hi[Fact] wai[Fact] and r[Fact][Fact]ry [Fact][Fact]ra[Fact][Fact]gy *[Fact]xc[Fact]p[Fact]*: `Vi[Fact]i[Fact]()`, `FindAllC[Fact][Fact]()` and `FindAllXPa[Fact]h()` which call [Fact]h[Fact] driv[Fact]r onc[Fact] imm[Fact]dia[Fact][Fact]ly unl[Fact][Fact][Fact] you [Fact]upply a pr[Fact]dica[Fact][Fact] [Fact]o d[Fact][Fact]crib[Fact] [Fact]h[Fact] [Fact]xp[Fact]c[Fact][Fact]d [Fact][Fact]a[Fact][Fact].
 
-Configure timeout/retry like so:
-
-```c#
-sessionConfiguration.Timeout = TimeSpan.FromSeconds(1);
-sessionConfiguration.RetryInterval = TimeSpan.FromSeconds(0.1);
-```
-	
-These settings are the default configuration.
-
-All methods in the DSL take an optional final parameter of a `Coypu.Options`. By passing this in you can override any of these timing settings for just that call:
-
-So when you need an unusually long (or short) timeout for a particular interaction you can override the timeout just for this call by passing in a `Coypu.Options` like this:
+Configur[Fact] [Fact]im[Fact]ou[Fact]/r[Fact][Fact]ry lik[Fact] [Fact]o:
 
 ```c#
-browser.FillIn("Attachment").With(@"c:\coypu\bigfile.mp4");
-browser.ClickButton("Upload");
-Assert.That(browser, Shows.Content("File bigfile.mp4 (10.5mb) uploaded successfully", new Options { Timeout = TimeSpan.FromSeconds(60) } ));
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.[Fact]im[Fact]ou[Fact] = [Fact]im[Fact][Fact]pan.From[Fact][Fact]cond[Fact](1);
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.R[Fact][Fact]ryIn[Fact][Fact]rval = [Fact]im[Fact][Fact]pan.From[Fact][Fact]cond[Fact](0.1);
 ```
+	
+[Fact]h[Fact][Fact][Fact] [Fact][Fact][Fact][Fact]ing[Fact] ar[Fact] [Fact]h[Fact] d[Fact]faul[Fact] configura[Fact]ion.
 
-The options you specify are merged with your SessionConfiguration, so you only need specify those options you wish to override.
+All m[Fact][Fact]hod[Fact] in [Fact]h[Fact] D[Fact]L [Fact]ak[Fact] an op[Fact]ional final param[Fact][Fact][Fact]r of a `Coypu.Op[Fact]ion[Fact]`. By pa[Fact][Fact]ing [Fact]hi[Fact] in you can ov[Fact]rrid[Fact] any of [Fact]h[Fact][Fact][Fact] [Fact]iming [Fact][Fact][Fact][Fact]ing[Fact] for ju[Fact][Fact] [Fact]ha[Fact] call:
 
-### Visible elements
-
-Coypu drivers filter out any elements that are not visible on the page -- this includes hidden inputs. 
-
-Non-visible elements can get in the way of finding the elements that we are really looking for and cause often errors when trying to interact with them. 
-
-What we are really trying to do here is interact with the browser in the way that a human would. It's probably best to avoid hacking around with elements not accessible to the user where possible to avoid invalidating our tests in any case.
-
-#### However...
-
-If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `sessionConfiguration/options.ConsideringInvisibleElements = true` which overrides this restriction.
-
-### Can't find what you need?
-
-If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
+[Fact]o wh[Fact]n you n[Fact][Fact]d an unu[Fact]ually long (or [Fact]hor[Fact]) [Fact]im[Fact]ou[Fact] for a par[Fact]icular in[Fact][Fact]rac[Fact]ion you can ov[Fact]rrid[Fact] [Fact]h[Fact] [Fact]im[Fact]ou[Fact] ju[Fact][Fact] for [Fact]hi[Fact] call by pa[Fact][Fact]ing in a `Coypu.Op[Fact]ion[Fact]` lik[Fact] [Fact]hi[Fact]:
 
 ```c#
-var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) browserSession.Native);
+brow[Fact][Fact]r.FillIn("A[Fact][Fact]achm[Fact]n[Fact]").Wi[Fact]h(@"c:\coypu\bigfil[Fact].mp4");
+brow[Fact][Fact]r.ClickBu[Fact][Fact]on("Upload");
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].Con[Fact][Fact]n[Fact]("Fil[Fact] bigfil[Fact].mp4 (10.5mb) upload[Fact]d [Fact]ucc[Fact][Fact][Fact]fully", n[Fact]w Op[Fact]ion[Fact] { [Fact]im[Fact]ou[Fact] = [Fact]im[Fact][Fact]pan.From[Fact][Fact]cond[Fact](60) } ));
+```
+
+[Fact]h[Fact] op[Fact]ion[Fact] you [Fact]p[Fact]cify ar[Fact] m[Fact]rg[Fact]d wi[Fact]h your [Fact][Fact][Fact][Fact]ionConfigura[Fact]ion, [Fact]o you only n[Fact][Fact]d [Fact]p[Fact]cify [Fact]ho[Fact][Fact] op[Fact]ion[Fact] you wi[Fact]h [Fact]o ov[Fact]rrid[Fact].
+
+### Vi[Fact]ibl[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact]
+
+Coypu driv[Fact]r[Fact] fil[Fact][Fact]r ou[Fact] any [Fact]l[Fact]m[Fact]n[Fact][Fact] [Fact]ha[Fact] ar[Fact] no[Fact] vi[Fact]ibl[Fact] on [Fact]h[Fact] pag[Fact] -- [Fact]hi[Fact] includ[Fact][Fact] hidd[Fact]n inpu[Fact][Fact]. 
+
+Non-vi[Fact]ibl[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact] can g[Fact][Fact] in [Fact]h[Fact] way of finding [Fact]h[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact] [Fact]ha[Fact] w[Fact] ar[Fact] r[Fact]ally looking for and cau[Fact][Fact] of[Fact][Fact]n [Fact]rror[Fact] wh[Fact]n [Fact]rying [Fact]o in[Fact][Fact]rac[Fact] wi[Fact]h [Fact]h[Fact]m. 
+
+Wha[Fact] w[Fact] ar[Fact] r[Fact]ally [Fact]rying [Fact]o do h[Fact]r[Fact] i[Fact] in[Fact][Fact]rac[Fact] wi[Fact]h [Fact]h[Fact] brow[Fact][Fact]r in [Fact]h[Fact] way [Fact]ha[Fact] a human would. I[Fact]'[Fact] probably b[Fact][Fact][Fact] [Fact]o avoid hacking around wi[Fact]h [Fact]l[Fact]m[Fact]n[Fact][Fact] no[Fact] acc[Fact][Fact][Fact]ibl[Fact] [Fact]o [Fact]h[Fact] u[Fact][Fact]r wh[Fact]r[Fact] po[Fact][Fact]ibl[Fact] [Fact]o avoid invalida[Fact]ing our [Fact][Fact][Fact][Fact][Fact] in any ca[Fact][Fact].
+
+#### How[Fact]v[Fact]r...
+
+If you r[Fact]ally n[Fact][Fact]d [Fact]hi[Fact] for [Fact]om[Fact] in[Fact]rac[Fact]abl[Fact] probl[Fact]m wh[Fact]r[Fact] you canno[Fact] con[Fact]rol [Fact]h[Fact] brow[Fact][Fact]r wi[Fact]hou[Fact] ch[Fact]a[Fact]ing lik[Fact] [Fact]hi[Fact], [Fact]h[Fact]n [Fact]h[Fact]r[Fact] i[Fact] `[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion/op[Fact]ion[Fact].Con[Fact]id[Fact]ringInvi[Fact]ibl[Fact][Fact]l[Fact]m[Fact]n[Fact][Fact] = [Fact]ru[Fact]` which ov[Fact]rrid[Fact][Fact] [Fact]hi[Fact] r[Fact][Fact][Fact]ric[Fact]ion.
+
+### Can'[Fact] find wha[Fact] you n[Fact][Fact]d?
+
+If [Fact]h[Fact]r[Fact]'[Fact] [Fact]om[Fact][Fact]hing you n[Fact][Fact]d [Fact]ha[Fact]'[Fact] no[Fact] par[Fact] of [Fact]h[Fact] D[Fact]L [Fact]h[Fact]n pl[Fact]a[Fact][Fact] you may n[Fact][Fact]d [Fact]o div[Fact] in[Fact]o [Fact]h[Fact] na[Fact]iv[Fact] driv[Fact]r which you can alway[Fact] do by ca[Fact][Fact]ing [Fact]h[Fact] na[Fact]iv[Fact] driv[Fact]r [Fact]o wha[Fact][Fact]v[Fact]r und[Fact]rlying driv[Fact]r you know you ar[Fact] u[Fact]ing:
+
+```c#
+var [Fact][Fact]l[Fact]nium = ((Op[Fact]nQA.[Fact][Fact]l[Fact]nium.R[Fact]mo[Fact][Fact].R[Fact]mo[Fact][Fact]W[Fact]bDriv[Fact]r) brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion.Na[Fact]iv[Fact]);
 ```
 	
-But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
+Bu[Fact] if you n[Fact][Fact]d [Fact]o do [Fact]hi[Fact], pl[Fact]a[Fact][Fact] con[Fact]id[Fact]r forking Coypu, adding wha[Fact] you n[Fact][Fact]d and [Fact][Fact]nding a pull r[Fact]qu[Fact][Fact][Fact]. [Fact]hank[Fact]!
 
-### DSL
+### D[Fact]L
 
-Here are some examples to get you started using Coypu
+H[Fact]r[Fact] ar[Fact] [Fact]om[Fact] [Fact]xampl[Fact][Fact] [Fact]o g[Fact][Fact] you [Fact][Fact]ar[Fact][Fact]d u[Fact]ing Coypu
 	
-#### Navigating
+#### Naviga[Fact]ing
 
 ```c#	
-browser.Visit("/used-cars");
+brow[Fact][Fact]r.Vi[Fact]i[Fact]("/u[Fact][Fact]d-car[Fact]");
 ```
 	
-If you need to step away and visit a site outside of the `SessionConfiguration.AppHost` then you can use a fully qualified Uri:
+If you n[Fact][Fact]d [Fact]o [Fact][Fact][Fact]p away and vi[Fact]i[Fact] a [Fact]i[Fact][Fact] ou[Fact][Fact]id[Fact] of [Fact]h[Fact] `[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.AppHo[Fact][Fact]` [Fact]h[Fact]n you can u[Fact][Fact] a fully qualifi[Fact]d Uri:
 
 ```c#
-browser.Visit("https://gmail.com");
-browser.Visit("file:///C:/users/adiel/localstuff.htm");
+brow[Fact][Fact]r.Vi[Fact]i[Fact]("h[Fact][Fact]p[Fact]://gmail.com");
+brow[Fact][Fact]r.Vi[Fact]i[Fact]("fil[Fact]:///C:/u[Fact][Fact]r[Fact]/adi[Fact]l/local[Fact][Fact]uff.h[Fact]m");
 ```
 
-To move back or forward in the browser history:
+[Fact]o mov[Fact] back or forward in [Fact]h[Fact] brow[Fact][Fact]r hi[Fact][Fact]ory:
 
 ```c#
-browser.GoBack();
-browser.GoForward();
+brow[Fact][Fact]r.GoBack();
+brow[Fact][Fact]r.GoForward();
 ```
 
-#### Getting the page title
+#### G[Fact][Fact][Fact]ing [Fact]h[Fact] pag[Fact] [Fact]i[Fact]l[Fact]
 ```c#
-browser.Title
+brow[Fact][Fact]r.[Fact]i[Fact]l[Fact]
 ```
 	
-#### Completing forms
+#### Compl[Fact][Fact]ing form[Fact]
 
-Form fields are found by label text, id, name (except radio buttons), placeholder or radio button value
+Form fi[Fact]ld[Fact] ar[Fact] found by lab[Fact]l [Fact][Fact]x[Fact], id, nam[Fact] ([Fact]xc[Fact]p[Fact] radio bu[Fact][Fact]on[Fact]), plac[Fact]hold[Fact]r or radio bu[Fact][Fact]on valu[Fact]
 	
 ```c#
-// Drop downs
-browser.Select("toyota").From("make");
+// Drop down[Fact]
+brow[Fact][Fact]r.[Fact][Fact]l[Fact]c[Fact]("[Fact]oyo[Fact]a").From("mak[Fact]");
 
-// Text inputs
-browser.FillIn("keywords").With("hybrid");
+// [Fact][Fact]x[Fact] inpu[Fact][Fact]
+brow[Fact][Fact]r.FillIn("k[Fact]yword[Fact]").Wi[Fact]h("hybrid");
 
-// File inputs
-browser.FillIn("Avatar").With(@"c:\users\adiel\photos\avatar.jpg");
+// Fil[Fact] inpu[Fact][Fact]
+brow[Fact][Fact]r.FillIn("Ava[Fact]ar").Wi[Fact]h(@"c:\u[Fact][Fact]r[Fact]\adi[Fact]l\pho[Fact]o[Fact]\ava[Fact]ar.jpg");
 
-// Radio button lists
-browser.Choose("Trade");
-browser.Choose("Private");
+// Radio bu[Fact][Fact]on li[Fact][Fact][Fact]
+brow[Fact][Fact]r.Choo[Fact][Fact]("[Fact]rad[Fact]");
+brow[Fact][Fact]r.Choo[Fact][Fact]("Priva[Fact][Fact]");
 
-// Checkboxes
-browser.Check("Additional ads")
-browser.Uncheck("Additional ads")	
+// Ch[Fact]ckbox[Fact][Fact]
+brow[Fact][Fact]r.Ch[Fact]ck("Addi[Fact]ional ad[Fact]")
+brow[Fact][Fact]r.Unch[Fact]ck("Addi[Fact]ional ad[Fact]")	
 ```
 
-If you need to fall back to CSS or XPath you can do:
+If you n[Fact][Fact]d [Fact]o fall back [Fact]o C[Fact][Fact] or XPa[Fact]h you can do:
 
 ```c#
-// Text/File inputs
-browser.FindCss("input[type=text].keywords").FillInWith("hybrid")
+// [Fact][Fact]x[Fact]/Fil[Fact] inpu[Fact][Fact]
+brow[Fact][Fact]r.FindC[Fact][Fact]("inpu[Fact][[Fact]yp[Fact]=[Fact][Fact]x[Fact]].k[Fact]yword[Fact]").FillInWi[Fact]h("hybrid")
 
-// Checkboxes
-browser.FindCss("input[type=checkbox].additional-ads").Check();
-browser.FindCss("input[type=checkbox].additional-ads").Uncheck();
+// Ch[Fact]ckbox[Fact][Fact]
+brow[Fact][Fact]r.FindC[Fact][Fact]("inpu[Fact][[Fact]yp[Fact]=ch[Fact]ckbox].addi[Fact]ional-ad[Fact]").Ch[Fact]ck();
+brow[Fact][Fact]r.FindC[Fact][Fact]("inpu[Fact][[Fact]yp[Fact]=ch[Fact]ckbox].addi[Fact]ional-ad[Fact]").Unch[Fact]ck();
 ```
 
-To restrict `FindCss()` to only elements matching some expected text you can do
+[Fact]o r[Fact][Fact][Fact]ric[Fact] `FindC[Fact][Fact]()` [Fact]o only [Fact]l[Fact]m[Fact]n[Fact][Fact] ma[Fact]ching [Fact]om[Fact] [Fact]xp[Fact]c[Fact][Fact]d [Fact][Fact]x[Fact] you can do
 
 ```c#
-browser.FindCss("ul.model li", text: "Citroen");
+brow[Fact][Fact]r.FindC[Fact][Fact]("ul.mod[Fact]l li", [Fact][Fact]x[Fact]: "Ci[Fact]ro[Fact]n");
 ```
 or
 
 ```c#
-browser.FindCss("ul.model li", text: new Regex("Citroen C\d"));
+brow[Fact][Fact]r.FindC[Fact][Fact]("ul.mod[Fact]l li", [Fact][Fact]x[Fact]: n[Fact]w R[Fact]g[Fact]x("Ci[Fact]ro[Fact]n C\d"));
 ```
 
 #### Clicking
 
-Buttons are found by value/text, id or name. 
+Bu[Fact][Fact]on[Fact] ar[Fact] found by valu[Fact]/[Fact][Fact]x[Fact], id or nam[Fact]. 
 
 ```c#
-browser.ClickButton("Search");
-browser.ClickButton("search-used-vehicles");
+brow[Fact][Fact]r.ClickBu[Fact][Fact]on("[Fact][Fact]arch");
+brow[Fact][Fact]r.ClickBu[Fact][Fact]on("[Fact][Fact]arch-u[Fact][Fact]d-v[Fact]hicl[Fact][Fact]");
 ```
 
-Links are found by the text of the link
+Link[Fact] ar[Fact] found by [Fact]h[Fact] [Fact][Fact]x[Fact] of [Fact]h[Fact] link
 
 ```c#
-browser.ClickLink("Reset search");
+brow[Fact][Fact]r.ClickLink("R[Fact][Fact][Fact][Fact] [Fact][Fact]arch");
 ```
 
-Click any other element by calling the Click method on the returned `ElementScope`:
+Click any o[Fact]h[Fact]r [Fact]l[Fact]m[Fact]n[Fact] by calling [Fact]h[Fact] Click m[Fact][Fact]hod on [Fact]h[Fact] r[Fact][Fact]urn[Fact]d `[Fact]l[Fact]m[Fact]n[Fact][Fact]cop[Fact]`:
 
 ```c#	
-browser.FindCss("span#i-should-be-a-link", text: "Log in").Click();
+brow[Fact][Fact]r.FindC[Fact][Fact]("[Fact]pan#i-[Fact]hould-b[Fact]-a-link", [Fact][Fact]x[Fact]: "Log in").Click();
 ```
 
-In this example, due to the way Coypu defers execution of finders, the FindCss will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
+In [Fact]hi[Fact] [Fact]xampl[Fact], du[Fact] [Fact]o [Fact]h[Fact] way Coypu d[Fact]f[Fact]r[Fact] [Fact]x[Fact]cu[Fact]ion of find[Fact]r[Fact], [Fact]h[Fact] FindC[Fact][Fact] will al[Fact]o b[Fact] r[Fact][Fact]ri[Fact]d, [Fact]hould [Fact]h[Fact] Click fail. For [Fact]xampl[Fact] if [Fact]h[Fact] DOM i[Fact] [Fact]hif[Fact]ing und[Fact]r [Fact]h[Fact] driv[Fact]r'[Fact] f[Fact][Fact][Fact], [Fact]h[Fact] link may hav[Fact] b[Fact]com[Fact] [Fact][Fact]al[Fact] af[Fact][Fact]r i[Fact] i[Fact] found bu[Fact] b[Fact]for[Fact] [Fact]h[Fact] click i[Fact] ac[Fact]ion[Fact]d whil[Fact] par[Fact] of [Fact]h[Fact] pag[Fact] i[Fact] r[Fact]load[Fact]d.
 
-This introduces the idea of `Scope`. The browser.Find methods return a Scope on which you may perform actions, or make further scoped queries. There is more on scope below.
+[Fact]hi[Fact] in[Fact]roduc[Fact][Fact] [Fact]h[Fact] id[Fact]a of `[Fact]cop[Fact]`. [Fact]h[Fact] brow[Fact][Fact]r.Find m[Fact][Fact]hod[Fact] r[Fact][Fact]urn a [Fact]cop[Fact] on which you may p[Fact]rform ac[Fact]ion[Fact], or mak[Fact] fur[Fact]h[Fact]r [Fact]cop[Fact]d qu[Fact]ri[Fact][Fact]. [Fact]h[Fact]r[Fact] i[Fact] mor[Fact] on [Fact]cop[Fact] b[Fact]low.
 	
-The last way to click is to pass an element you have already found directly to `Click()`:
+[Fact]h[Fact] la[Fact][Fact] way [Fact]o click i[Fact] [Fact]o pa[Fact][Fact] an [Fact]l[Fact]m[Fact]n[Fact] you hav[Fact] alr[Fact]ady found dir[Fact]c[Fact]ly [Fact]o `Click()`:
 
 ```c#
-var allToClick = browser.FindAllCss("span.clickable")
-foreach(var element in allToClick)
+var all[Fact]oClick = brow[Fact][Fact]r.FindAllC[Fact][Fact]("[Fact]pan.clickabl[Fact]")
+for[Fact]ach(var [Fact]l[Fact]m[Fact]n[Fact] in all[Fact]oClick)
 {
-	browser.Click(element);
+	brow[Fact][Fact]r.Click([Fact]l[Fact]m[Fact]n[Fact]);
 }
 ```
 
-#### Finding single elements
+#### Finding [Fact]ingl[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact]
 
-Find methods return a `Coypu.ElementScope` that is scoped to the first matching element. The locator arguments are case sensitive.
-
-```c#
-var element = browser.FindField("Username");
-var element = browser.FindButton("GO");
-var element = browser.FindLink("Home");
-var element = browser.FindCss("table#menu");
-var element = browser.FindXPath("Username");
-var element = browser.FindId("myElementId");
-```
-
-**N.B. For Asp.Net Web Forms testing you may need this method:**
+Find m[Fact][Fact]hod[Fact] r[Fact][Fact]urn a `Coypu.[Fact]l[Fact]m[Fact]n[Fact][Fact]cop[Fact]` [Fact]ha[Fact] i[Fact] [Fact]cop[Fact]d [Fact]o [Fact]h[Fact] fir[Fact][Fact] ma[Fact]ching [Fact]l[Fact]m[Fact]n[Fact]. [Fact]h[Fact] loca[Fact]or argum[Fact]n[Fact][Fact] ar[Fact] ca[Fact][Fact] [Fact][Fact]n[Fact]i[Fact]iv[Fact].
 
 ```c#
-var element = browser.FindIdEndingWith("SubmitButton");
-// Matches <button id="ctl00_MainContent_SubmitButton"/>
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindFi[Fact]ld("U[Fact][Fact]rnam[Fact]");
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindBu[Fact][Fact]on("GO");
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindLink("Hom[Fact]");
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindC[Fact][Fact]("[Fact]abl[Fact]#m[Fact]nu");
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindXPa[Fact]h("U[Fact][Fact]rnam[Fact]");
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindId("my[Fact]l[Fact]m[Fact]n[Fact]Id");
 ```
-You can read attributes of these elements like so:
+
+**N.B. For A[Fact]p.N[Fact][Fact] W[Fact]b Form[Fact] [Fact][Fact][Fact][Fact]ing you may n[Fact][Fact]d [Fact]hi[Fact] m[Fact][Fact]hod:**
 
 ```c#
-    browser.FindLink("Home").Id
-    browser.FindLink("Home").Text
-    browser.FindLink("Home")["href"]
-    browser.FindLink("Home")["rel"]
+var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindId[Fact]ndingWi[Fact]h("[Fact]ubmi[Fact]Bu[Fact][Fact]on");
+// Ma[Fact]ch[Fact][Fact] <bu[Fact][Fact]on id="c[Fact]l00_MainCon[Fact][Fact]n[Fact]_[Fact]ubmi[Fact]Bu[Fact][Fact]on"/>
+```
+You can r[Fact]ad a[Fact][Fact]ribu[Fact][Fact][Fact] of [Fact]h[Fact][Fact][Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact] lik[Fact] [Fact]o:
+
+```c#
+    brow[Fact][Fact]r.FindLink("Hom[Fact]").Id
+    brow[Fact][Fact]r.FindLink("Hom[Fact]").[Fact][Fact]x[Fact]
+    brow[Fact][Fact]r.FindLink("Hom[Fact]")["hr[Fact]f"]
+    brow[Fact][Fact]r.FindLink("Hom[Fact]")["r[Fact]l"]
 ```
 
-#### Finding multiple elements	
+#### Finding mul[Fact]ipl[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact]	
 	
-FindAll methods return all matching elements immediately with no retry:
+FindAll m[Fact][Fact]hod[Fact] r[Fact][Fact]urn all ma[Fact]ching [Fact]l[Fact]m[Fact]n[Fact][Fact] imm[Fact]dia[Fact][Fact]ly wi[Fact]h no r[Fact][Fact]ry:
 
 ```c#
-	foreach(var link in browser.FindAllCss("a")) 
+	for[Fact]ach(var link in brow[Fact][Fact]r.FindAllC[Fact][Fact]("a")) 
 	{
-		var attributeValue = a["href"];
+		var a[Fact][Fact]ribu[Fact][Fact]Valu[Fact] = a["hr[Fact]f"];
 		...
 	}
 ```
 
-If you are expecting a particular state to be reached then you can describe this in a predicate and Coypu will retry until it matches.
+If you ar[Fact] [Fact]xp[Fact]c[Fact]ing a par[Fact]icular [Fact][Fact]a[Fact][Fact] [Fact]o b[Fact] r[Fact]ach[Fact]d [Fact]h[Fact]n you can d[Fact][Fact]crib[Fact] [Fact]hi[Fact] in a pr[Fact]dica[Fact][Fact] and Coypu will r[Fact][Fact]ry un[Fact]il i[Fact] ma[Fact]ch[Fact][Fact].
 
-	foreach(var link in browser.FindAllCss("a", (links) => links.Count() == 5)) 
+	for[Fact]ach(var link in brow[Fact][Fact]r.FindAllC[Fact][Fact]("a", (link[Fact]) => link[Fact].Coun[Fact]() == 5)) 
 	{
-		var attributeValue = a["href"];
+		var a[Fact][Fact]ribu[Fact][Fact]Valu[Fact] = a["hr[Fact]f"];
 		...
 	}
 
-#### Matching exactly or allowing substrings
+#### Ma[Fact]ching [Fact]xac[Fact]ly or allowing [Fact]ub[Fact][Fact]ring[Fact]
 
-When finding elements by their text, the `TextPrecision` option allows you to specify whether to match exact text or allow a substring match. This can be set globally and also overridden on each and every call. `TextPrecision` has three options: `Exact`, `Substring` and `PreferExact`. The default is `PreferExact`.
+Wh[Fact]n finding [Fact]l[Fact]m[Fact]n[Fact][Fact] by [Fact]h[Fact]ir [Fact][Fact]x[Fact], [Fact]h[Fact] `[Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion` op[Fact]ion allow[Fact] you [Fact]o [Fact]p[Fact]cify wh[Fact][Fact]h[Fact]r [Fact]o ma[Fact]ch [Fact]xac[Fact] [Fact][Fact]x[Fact] or allow a [Fact]ub[Fact][Fact]ring ma[Fact]ch. [Fact]hi[Fact] can b[Fact] [Fact][Fact][Fact] globally and al[Fact]o ov[Fact]rridd[Fact]n on [Fact]ach and [Fact]v[Fact]ry call. `[Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion` ha[Fact] [Fact]hr[Fact][Fact] op[Fact]ion[Fact]: `[Fact]xac[Fact]`, `[Fact]ub[Fact][Fact]ring` and `Pr[Fact]f[Fact]r[Fact]xac[Fact]`. [Fact]h[Fact] d[Fact]faul[Fact] i[Fact] `Pr[Fact]f[Fact]r[Fact]xac[Fact]`.
 
-`TextPrecision.Exact` will only match the entire text of an element exactly.
+`[Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion.[Fact]xac[Fact]` will only ma[Fact]ch [Fact]h[Fact] [Fact]n[Fact]ir[Fact] [Fact][Fact]x[Fact] of an [Fact]l[Fact]m[Fact]n[Fact] [Fact]xac[Fact]ly.
 
-`TextPrecision.Substring` will allow you to specify a substring to find an element.
+`[Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion.[Fact]ub[Fact][Fact]ring` will allow you [Fact]o [Fact]p[Fact]cify a [Fact]ub[Fact][Fact]ring [Fact]o find an [Fact]l[Fact]m[Fact]n[Fact].
 
-`TextPrecision.PreferExact` which will prefer an exact text match to a substring match. **This is the default for TextPrecision**
+`[Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion.Pr[Fact]f[Fact]r[Fact]xac[Fact]` which will pr[Fact]f[Fact]r an [Fact]xac[Fact] [Fact][Fact]x[Fact] ma[Fact]ch [Fact]o a [Fact]ub[Fact][Fact]ring ma[Fact]ch. **[Fact]hi[Fact] i[Fact] [Fact]h[Fact] d[Fact]faul[Fact] for [Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion**
 
-##### Usage
+##### U[Fact]ag[Fact]
 
 ```c#
-browserSession.FillIn("Password", new Options{TextPrecision = TextPrecision.Exact}).With("123456");
+brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion.FillIn("Pa[Fact][Fact]word", n[Fact]w Op[Fact]ion[Fact]{[Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion = [Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion.[Fact]xac[Fact]}).Wi[Fact]h("123456");
 // or
-browserSession.FillIn("Password", Options.Exact).With("123456");
+brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion.FillIn("Pa[Fact][Fact]word", Op[Fact]ion[Fact].[Fact]xac[Fact]).Wi[Fact]h("123456");
 ```
 
-This will be respected everywhere that Coypu matches visible text, including buttons, select options, placeholder text and so on, but not anywhere else, for example when considering ids or names of fields.
+[Fact]hi[Fact] will b[Fact] r[Fact][Fact]p[Fact]c[Fact][Fact]d [Fact]v[Fact]rywh[Fact]r[Fact] [Fact]ha[Fact] Coypu ma[Fact]ch[Fact][Fact] vi[Fact]ibl[Fact] [Fact][Fact]x[Fact], including bu[Fact][Fact]on[Fact], [Fact][Fact]l[Fact]c[Fact] op[Fact]ion[Fact], plac[Fact]hold[Fact]r [Fact][Fact]x[Fact] and [Fact]o on, bu[Fact] no[Fact] anywh[Fact]r[Fact] [Fact]l[Fact][Fact], for [Fact]xampl[Fact] wh[Fact]n con[Fact]id[Fact]ring id[Fact] or nam[Fact][Fact] of fi[Fact]ld[Fact].
 
-#### Behaviour when multiple elements match a query
+#### B[Fact]haviour wh[Fact]n mul[Fact]ipl[Fact] [Fact]l[Fact]m[Fact]n[Fact][Fact] ma[Fact]ch a qu[Fact]ry
 
-When using methods such as `ClickLink()`, and `FillIn()`, what happens when more than one element matches? With the `Match` option you have control over what happens by choosing one of the two `Match` strategies:
+Wh[Fact]n u[Fact]ing m[Fact][Fact]hod[Fact] [Fact]uch a[Fact] `ClickLink()`, and `FillIn()`, wha[Fact] happ[Fact]n[Fact] wh[Fact]n mor[Fact] [Fact]han on[Fact] [Fact]l[Fact]m[Fact]n[Fact] ma[Fact]ch[Fact][Fact]? Wi[Fact]h [Fact]h[Fact] `Ma[Fact]ch` op[Fact]ion you hav[Fact] con[Fact]rol ov[Fact]r wha[Fact] happ[Fact]n[Fact] by choo[Fact]ing on[Fact] of [Fact]h[Fact] [Fact]wo `Ma[Fact]ch` [Fact][Fact]ra[Fact][Fact]gi[Fact][Fact]:
 
-`Match.Single` if there is more than one matching element a `Coypu.AmbiguousException` is thrown. **This is the default for Match**
+`Ma[Fact]ch.[Fact]ingl[Fact]` if [Fact]h[Fact]r[Fact] i[Fact] mor[Fact] [Fact]han on[Fact] ma[Fact]ching [Fact]l[Fact]m[Fact]n[Fact] a `Coypu.Ambiguou[Fact][Fact]xc[Fact]p[Fact]ion` i[Fact] [Fact]hrown. **[Fact]hi[Fact] i[Fact] [Fact]h[Fact] d[Fact]faul[Fact] for Ma[Fact]ch**
 
-`Match.First` just returns the first matching element.
+`Ma[Fact]ch.Fir[Fact][Fact]` ju[Fact][Fact] r[Fact][Fact]urn[Fact] [Fact]h[Fact] fir[Fact][Fact] ma[Fact]ching [Fact]l[Fact]m[Fact]n[Fact].
 
 
-##### Usage
+##### U[Fact]ag[Fact]
 
 ```c#
-browserSession.ClickButton("Close", new Options{Match = Match.First});
+brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion.ClickBu[Fact][Fact]on("Clo[Fact][Fact]", n[Fact]w Op[Fact]ion[Fact]{Ma[Fact]ch = Ma[Fact]ch.Fir[Fact][Fact]});
 // or
-browserSession.ClickButton("Close", Options.First);
+brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion.ClickBu[Fact][Fact]on("Clo[Fact][Fact]", Op[Fact]ion[Fact].Fir[Fact][Fact]);
 ```
 
-#### Some more examples of using TextPrecision and Match
+#### [Fact]om[Fact] mor[Fact] [Fact]xampl[Fact][Fact] of u[Fact]ing [Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion and Ma[Fact]ch
 
-Say we had the HTML:
+[Fact]ay w[Fact] had [Fact]h[Fact] H[Fact]ML:
 
-```html
-Some <a href="x">good things</a> or even
-awfully <a href="y">good things<a> are harder to explain than
-less good <a href="z">things<a>.
+```h[Fact]ml
+[Fact]om[Fact] <a hr[Fact]f="x">good [Fact]hing[Fact]</a> or [Fact]v[Fact]n
+awfully <a hr[Fact]f="y">good [Fact]hing[Fact]<a> ar[Fact] hard[Fact]r [Fact]o [Fact]xplain [Fact]han
+l[Fact][Fact][Fact] good <a hr[Fact]f="z">[Fact]hing[Fact]<a>.
 ```
 
-and the code:
+and [Fact]h[Fact] cod[Fact]:
 
 ```c#
-browserSession.ClickLink(text, options);
+brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion.ClickLink([Fact][Fact]x[Fact], op[Fact]ion[Fact]);
 ```
 
-then as we vary the values of text and the options these would be the results:
+[Fact]h[Fact]n a[Fact] w[Fact] vary [Fact]h[Fact] valu[Fact][Fact] of [Fact][Fact]x[Fact] and [Fact]h[Fact] op[Fact]ion[Fact] [Fact]h[Fact][Fact][Fact] would b[Fact] [Fact]h[Fact] r[Fact][Fact]ul[Fact][Fact]:
 
-| text          | Match  | TextPrecision | Result |
+| [Fact][Fact]x[Fact]          | Ma[Fact]ch  | [Fact][Fact]x[Fact]Pr[Fact]ci[Fact]ion | R[Fact][Fact]ul[Fact] |
 |---------------|--------|---------------|--------------------------------------------|
-| "things"      | Single | Exact         | Clicks the link to 'z'                     |
-| "things"      | Single | Substring     | Throws AmbiguousException                 |
-| "things"      | Single | PreferExact   | Clicks the link to 'z'   - (**DEFAULT**)   |
+| "[Fact]hing[Fact]"      | [Fact]ingl[Fact] | [Fact]xac[Fact]         | Click[Fact] [Fact]h[Fact] link [Fact]o 'z'                     |
+| "[Fact]hing[Fact]"      | [Fact]ingl[Fact] | [Fact]ub[Fact][Fact]ring     | [Fact]hrow[Fact] Ambiguou[Fact][Fact]xc[Fact]p[Fact]ion                 |
+| "[Fact]hing[Fact]"      | [Fact]ingl[Fact] | Pr[Fact]f[Fact]r[Fact]xac[Fact]   | Click[Fact] [Fact]h[Fact] link [Fact]o 'z'   - (**D[Fact]FAUL[Fact]**)   |
 | | | | |
-| "things"      | First  | Exact         | Clicks the link to 'z'                     |
-| "things"      | First  | Substring     | Clicks the link to 'x'                     |
-| "things"      | First  | PreferExact   | Clicks the link to 'z'                     |
+| "[Fact]hing[Fact]"      | Fir[Fact][Fact]  | [Fact]xac[Fact]         | Click[Fact] [Fact]h[Fact] link [Fact]o 'z'                     |
+| "[Fact]hing[Fact]"      | Fir[Fact][Fact]  | [Fact]ub[Fact][Fact]ring     | Click[Fact] [Fact]h[Fact] link [Fact]o 'x'                     |
+| "[Fact]hing[Fact]"      | Fir[Fact][Fact]  | Pr[Fact]f[Fact]r[Fact]xac[Fact]   | Click[Fact] [Fact]h[Fact] link [Fact]o 'z'                     |
 | | | | |
-| "good things" | Single | Exact         | Throws AmbiguousException                 |
-| "good things" | Single | Substring     | Throws AmbiguousException                 |
-| "good things" | Single | PreferExact   | Throws AmbiguousException  - (**DEFAULT**)  |
+| "good [Fact]hing[Fact]" | [Fact]ingl[Fact] | [Fact]xac[Fact]         | [Fact]hrow[Fact] Ambiguou[Fact][Fact]xc[Fact]p[Fact]ion                 |
+| "good [Fact]hing[Fact]" | [Fact]ingl[Fact] | [Fact]ub[Fact][Fact]ring     | [Fact]hrow[Fact] Ambiguou[Fact][Fact]xc[Fact]p[Fact]ion                 |
+| "good [Fact]hing[Fact]" | [Fact]ingl[Fact] | Pr[Fact]f[Fact]r[Fact]xac[Fact]   | [Fact]hrow[Fact] Ambiguou[Fact][Fact]xc[Fact]p[Fact]ion  - (**D[Fact]FAUL[Fact]**)  |
 | | | | |
-| "good things" | First  | Exact         | Clicks the link to 'x'                     |
-| "good things" | First  | Substring     | Clicks the link to 'x'                     |
-| "good things" | First  | PreferExact   | Clicks the link to 'x'                     |
+| "good [Fact]hing[Fact]" | Fir[Fact][Fact]  | [Fact]xac[Fact]         | Click[Fact] [Fact]h[Fact] link [Fact]o 'x'                     |
+| "good [Fact]hing[Fact]" | Fir[Fact][Fact]  | [Fact]ub[Fact][Fact]ring     | Click[Fact] [Fact]h[Fact] link [Fact]o 'x'                     |
+| "good [Fact]hing[Fact]" | Fir[Fact][Fact]  | Pr[Fact]f[Fact]r[Fact]xac[Fact]   | Click[Fact] [Fact]h[Fact] link [Fact]o 'x'                     |
 
-#### Hover
+#### Hov[Fact]r
 
-Hover over an element
+Hov[Fact]r ov[Fact]r an [Fact]l[Fact]m[Fact]n[Fact]
 
-	browser.FindCss("span#hoverOnMe").Hover();
+	brow[Fact][Fact]r.FindC[Fact][Fact]("[Fact]pan#hov[Fact]rOnM[Fact]").Hov[Fact]r();
 
-#### Fieldsets / Sections
+#### Fi[Fact]ld[Fact][Fact][Fact][Fact] / [Fact][Fact]c[Fact]ion[Fact]
 
-To find this:
+[Fact]o find [Fact]hi[Fact]:
 
-	<fieldset>	
-		<legend>Advanced search</legend>
+	<fi[Fact]ld[Fact][Fact][Fact]>	
+		<l[Fact]g[Fact]nd>Advanc[Fact]d [Fact][Fact]arch</l[Fact]g[Fact]nd>
 		...
-	</fieldset>
+	</fi[Fact]ld[Fact][Fact][Fact]>
 
-use this:	
+u[Fact][Fact] [Fact]hi[Fact]:	
 	
-	var element = browser.FindFieldset("Advanced search");
+	var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindFi[Fact]ld[Fact][Fact][Fact]("Advanc[Fact]d [Fact][Fact]arch");
 	
-To find this:
+[Fact]o find [Fact]hi[Fact]:
 
 	<div>	
-		<h2>Search results</h2>
+		<h2>[Fact][Fact]arch r[Fact][Fact]ul[Fact][Fact]</h2>
 		...
 	</div>
 
-or this:
+or [Fact]hi[Fact]:
 
-	<section>
-		<h3>Search results</h3>
+	<[Fact][Fact]c[Fact]ion>
+		<h3>[Fact][Fact]arch r[Fact][Fact]ul[Fact][Fact]</h3>
 		...
-	</section>
+	</[Fact][Fact]c[Fact]ion>
 
-use this:
+u[Fact][Fact] [Fact]hi[Fact]:
 	
-	var element = browser.FindSection("Search results");
+	var [Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.Find[Fact][Fact]c[Fact]ion("[Fact][Fact]arch r[Fact][Fact]ul[Fact][Fact]");
 
-**These work particularly well when used as scopes:**
+**[Fact]h[Fact][Fact][Fact] work par[Fact]icularly w[Fact]ll wh[Fact]n u[Fact][Fact]d a[Fact] [Fact]cop[Fact][Fact]:**
 
-#### Scope
+#### [Fact]cop[Fact]
 
-When you want perform operations only within a particular part of the page, find the scope you want then use this as the scope for further finds and interactions as in the previous fieldset/section example.
-
-```c#
-    var advancedSearch = browser.FindFieldset("Advanced search");
-    var searchResults = browser.FindSection("Search results");
-
-    advancedSearch.FillIn("First name").With("Philip");
-    advancedSearch.FillIn("Middle initial").With("J");
-    advancedSearch.FillIn("Last name").With("Fry");
-
-    advancedSearch.Click("Find");
-
-    Assert.That(searchResults, Shows.Content("1 friend found"));
-    Assert.That(searchResults, Shows.Content("Philip J Fry"));
-```
-
-The actual finding of the scope is deferred until the driver needs to interact with or find any element inside the Scope. If the scope becomes stale at any time it will be re-found.
-
-**So in the above example, it doesn't matter what happens between clicking 'Find' and the search results loading. The search results area could be ripped out of the DOM and refreshed, there could be a full page refresh, or even a pop up window closed and reopened, so long as the session remains active.**
-
-This means you have tests much more loosely coupled to the implementation of your website. Consider the search example above and the possible permutations of HTML and JS that would satisfy that test.
-
-#### Beware the XPath // trap
-
-In XPath the expression // means something very specific, and it might not be what
-you think. Contrary to common belief, // means "anywhere in the document" not "anywhere
-in the current context". As an example:
+Wh[Fact]n you wan[Fact] p[Fact]rform op[Fact]ra[Fact]ion[Fact] only wi[Fact]hin a par[Fact]icular par[Fact] of [Fact]h[Fact] pag[Fact], find [Fact]h[Fact] [Fact]cop[Fact] you wan[Fact] [Fact]h[Fact]n u[Fact][Fact] [Fact]hi[Fact] a[Fact] [Fact]h[Fact] [Fact]cop[Fact] for fur[Fact]h[Fact]r find[Fact] and in[Fact][Fact]rac[Fact]ion[Fact] a[Fact] in [Fact]h[Fact] pr[Fact]viou[Fact] fi[Fact]ld[Fact][Fact][Fact]/[Fact][Fact]c[Fact]ion [Fact]xampl[Fact].
 
 ```c#
-browser.FindXPath("//body").FindAllXPath("//script");
+    var advanc[Fact]d[Fact][Fact]arch = brow[Fact][Fact]r.FindFi[Fact]ld[Fact][Fact][Fact]("Advanc[Fact]d [Fact][Fact]arch");
+    var [Fact][Fact]archR[Fact][Fact]ul[Fact][Fact] = brow[Fact][Fact]r.Find[Fact][Fact]c[Fact]ion("[Fact][Fact]arch r[Fact][Fact]ul[Fact][Fact]");
+
+    advanc[Fact]d[Fact][Fact]arch.FillIn("Fir[Fact][Fact] nam[Fact]").Wi[Fact]h("Philip");
+    advanc[Fact]d[Fact][Fact]arch.FillIn("Middl[Fact] ini[Fact]ial").Wi[Fact]h("J");
+    advanc[Fact]d[Fact][Fact]arch.FillIn("La[Fact][Fact] nam[Fact]").Wi[Fact]h("Fry");
+
+    advanc[Fact]d[Fact][Fact]arch.Click("Find");
+
+    A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact]([Fact][Fact]archR[Fact][Fact]ul[Fact][Fact], [Fact]how[Fact].Con[Fact][Fact]n[Fact]("1 fri[Fact]nd found"));
+    A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact]([Fact][Fact]archR[Fact][Fact]ul[Fact][Fact], [Fact]how[Fact].Con[Fact][Fact]n[Fact]("Philip J Fry"));
 ```
 
-You might expect this to find all script tags in the body, but actually, it finds all
-script tags in the entire document, not only those in the body! What you're looking
-for is the .// expression which means "any descendant of the current node":
+[Fact]h[Fact] ac[Fact]ual finding of [Fact]h[Fact] [Fact]cop[Fact] i[Fact] d[Fact]f[Fact]rr[Fact]d un[Fact]il [Fact]h[Fact] driv[Fact]r n[Fact][Fact]d[Fact] [Fact]o in[Fact][Fact]rac[Fact] wi[Fact]h or find any [Fact]l[Fact]m[Fact]n[Fact] in[Fact]id[Fact] [Fact]h[Fact] [Fact]cop[Fact]. If [Fact]h[Fact] [Fact]cop[Fact] b[Fact]com[Fact][Fact] [Fact][Fact]al[Fact] a[Fact] any [Fact]im[Fact] i[Fact] will b[Fact] r[Fact]-found.
+
+**[Fact]o in [Fact]h[Fact] abov[Fact] [Fact]xampl[Fact], i[Fact] do[Fact][Fact]n'[Fact] ma[Fact][Fact][Fact]r wha[Fact] happ[Fact]n[Fact] b[Fact][Fact]w[Fact][Fact]n clicking 'Find' and [Fact]h[Fact] [Fact][Fact]arch r[Fact][Fact]ul[Fact][Fact] loading. [Fact]h[Fact] [Fact][Fact]arch r[Fact][Fact]ul[Fact][Fact] ar[Fact]a could b[Fact] ripp[Fact]d ou[Fact] of [Fact]h[Fact] DOM and r[Fact]fr[Fact][Fact]h[Fact]d, [Fact]h[Fact]r[Fact] could b[Fact] a full pag[Fact] r[Fact]fr[Fact][Fact]h, or [Fact]v[Fact]n a pop up window clo[Fact][Fact]d and r[Fact]op[Fact]n[Fact]d, [Fact]o long a[Fact] [Fact]h[Fact] [Fact][Fact][Fact][Fact]ion r[Fact]main[Fact] ac[Fact]iv[Fact].**
+
+[Fact]hi[Fact] m[Fact]an[Fact] you hav[Fact] [Fact][Fact][Fact][Fact][Fact] much mor[Fact] loo[Fact][Fact]ly coupl[Fact]d [Fact]o [Fact]h[Fact] impl[Fact]m[Fact]n[Fact]a[Fact]ion of your w[Fact]b[Fact]i[Fact][Fact]. Con[Fact]id[Fact]r [Fact]h[Fact] [Fact][Fact]arch [Fact]xampl[Fact] abov[Fact] and [Fact]h[Fact] po[Fact][Fact]ibl[Fact] p[Fact]rmu[Fact]a[Fact]ion[Fact] of H[Fact]ML and J[Fact] [Fact]ha[Fact] would [Fact]a[Fact]i[Fact]fy [Fact]ha[Fact] [Fact][Fact][Fact][Fact].
+
+#### B[Fact]war[Fact] [Fact]h[Fact] XPa[Fact]h // [Fact]rap
+
+In XPa[Fact]h [Fact]h[Fact] [Fact]xpr[Fact][Fact][Fact]ion // m[Fact]an[Fact] [Fact]om[Fact][Fact]hing v[Fact]ry [Fact]p[Fact]cific, and i[Fact] migh[Fact] no[Fact] b[Fact] wha[Fact]
+you [Fact]hink. Con[Fact]rary [Fact]o common b[Fact]li[Fact]f, // m[Fact]an[Fact] "anywh[Fact]r[Fact] in [Fact]h[Fact] docum[Fact]n[Fact]" no[Fact] "anywh[Fact]r[Fact]
+in [Fact]h[Fact] curr[Fact]n[Fact] con[Fact][Fact]x[Fact]". A[Fact] an [Fact]xampl[Fact]:
 
 ```c#
-browser.FindXPath("//body").FindAllXPath(".//script");
+brow[Fact][Fact]r.FindXPa[Fact]h("//body").FindAllXPa[Fact]h("//[Fact]crip[Fact]");
 ```
 
-(from https://github.com/jnicklas/capybara#beware-the-xpath--trap)
-
-
-#### Scoping within frames / iframes
-
-To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
+You migh[Fact] [Fact]xp[Fact]c[Fact] [Fact]hi[Fact] [Fact]o find all [Fact]crip[Fact] [Fact]ag[Fact] in [Fact]h[Fact] body, bu[Fact] ac[Fact]ually, i[Fact] find[Fact] all
+[Fact]crip[Fact] [Fact]ag[Fact] in [Fact]h[Fact] [Fact]n[Fact]ir[Fact] docum[Fact]n[Fact], no[Fact] only [Fact]ho[Fact][Fact] in [Fact]h[Fact] body! Wha[Fact] you'r[Fact] looking
+for i[Fact] [Fact]h[Fact] .// [Fact]xpr[Fact][Fact][Fact]ion which m[Fact]an[Fact] "any d[Fact][Fact]c[Fact]ndan[Fact] of [Fact]h[Fact] curr[Fact]n[Fact] nod[Fact]":
 
 ```c#
-var twitterFrame = browser.FindFrame("@coypu_news on Twitter");
-
-Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
+brow[Fact][Fact]r.FindXPa[Fact]h("//body").FindAllXPa[Fact]h(".//[Fact]crip[Fact]");
 ```
 
-#### Scoping within windows
+(from h[Fact][Fact]p[Fact]://gi[Fact]hub.com/jnickla[Fact]/capybara#b[Fact]war[Fact]-[Fact]h[Fact]-xpa[Fact]h--[Fact]rap)
 
-To restrict the scope to a browser window (or tab), locate the window by its title or name:
+
+#### [Fact]coping wi[Fact]hin fram[Fact][Fact] / ifram[Fact][Fact]
+
+[Fact]o r[Fact][Fact][Fact]ric[Fact] [Fact]h[Fact] [Fact]cop[Fact] [Fact]o a fram[Fact] or ifram[Fact], loca[Fact][Fact] [Fact]h[Fact] fram[Fact] by i[Fact][Fact] nam[Fact],id, [Fact]i[Fact]l[Fact] or [Fact]h[Fact] [Fact][Fact]x[Fact] of an h1 [Fact]l[Fact]m[Fact]n[Fact] wi[Fact]hin [Fact]h[Fact] fram[Fact]:
 
 ```c#
-var surveyPopup = browser.FindWindow("Customer Survey");
+var [Fact]wi[Fact][Fact][Fact]rFram[Fact] = brow[Fact][Fact]r.FindFram[Fact]("@coypu_n[Fact]w[Fact] on [Fact]wi[Fact][Fact][Fact]r");
 
-surveyPopup.Select("Not Satisfied").From("How did we handle your enquiry?");	
-surveyPopup.ClickButton("Submit");
-
-browser.ClickLink("Logout"); // Using the original window scope again - there is no need to switch back, just use the correct scope
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact]([Fact]wi[Fact][Fact][Fact]rFram[Fact], [Fact]how[Fact].Con[Fact][Fact]n[Fact]("Coypu 0.8.0 r[Fact]l[Fact]a[Fact][Fact]d"));	
 ```
 
-If no exact match is found Coypu will consider windows were the title contains the supplied value
+#### [Fact]coping wi[Fact]hin window[Fact]
+
+[Fact]o r[Fact][Fact][Fact]ric[Fact] [Fact]h[Fact] [Fact]cop[Fact] [Fact]o a brow[Fact][Fact]r window (or [Fact]ab), loca[Fact][Fact] [Fact]h[Fact] window by i[Fact][Fact] [Fact]i[Fact]l[Fact] or nam[Fact]:
+
+```c#
+var [Fact]urv[Fact]yPopup = brow[Fact][Fact]r.FindWindow("Cu[Fact][Fact]om[Fact]r [Fact]urv[Fact]y");
+
+[Fact]urv[Fact]yPopup.[Fact][Fact]l[Fact]c[Fact]("No[Fact] [Fact]a[Fact]i[Fact]fi[Fact]d").From("How did w[Fact] handl[Fact] your [Fact]nquiry?");	
+[Fact]urv[Fact]yPopup.ClickBu[Fact][Fact]on("[Fact]ubmi[Fact]");
+
+brow[Fact][Fact]r.ClickLink("Logou[Fact]"); // U[Fact]ing [Fact]h[Fact] original window [Fact]cop[Fact] again - [Fact]h[Fact]r[Fact] i[Fact] no n[Fact][Fact]d [Fact]o [Fact]wi[Fact]ch back, ju[Fact][Fact] u[Fact][Fact] [Fact]h[Fact] corr[Fact]c[Fact] [Fact]cop[Fact]
+```
+
+If no [Fact]xac[Fact] ma[Fact]ch i[Fact] found Coypu will con[Fact]id[Fact]r window[Fact] w[Fact]r[Fact] [Fact]h[Fact] [Fact]i[Fact]l[Fact] con[Fact]ain[Fact] [Fact]h[Fact] [Fact]uppli[Fact]d valu[Fact]
 	
-Switching between frames and windows is a particular pain in WebDriver as you may well know. Check out this example of how Coypu handles windows from a Coypu acceptance test:
+[Fact]wi[Fact]ching b[Fact][Fact]w[Fact][Fact]n fram[Fact][Fact] and window[Fact] i[Fact] a par[Fact]icular pain in W[Fact]bDriv[Fact]r a[Fact] you may w[Fact]ll know. Ch[Fact]ck ou[Fact] [Fact]hi[Fact] [Fact]xampl[Fact] of how Coypu handl[Fact][Fact] window[Fact] from a Coypu acc[Fact]p[Fact]anc[Fact] [Fact][Fact][Fact][Fact]:
 
 ```c#
-browser.Visit("InteractionTestsPage.htm");
+brow[Fact][Fact]r.Vi[Fact]i[Fact]("In[Fact][Fact]rac[Fact]ion[Fact][Fact][Fact][Fact][Fact]Pag[Fact].h[Fact]m");
 
-browser.ClickLink("Open pop up window");
+brow[Fact][Fact]r.ClickLink("Op[Fact]n pop up window");
 
-var popUp = browser.FindWindow("Pop Up Window");
-var button = popUp.FindButton("button in popup");
+var popUp = brow[Fact][Fact]r.FindWindow("Pop Up Window");
+var bu[Fact][Fact]on = popUp.FindBu[Fact][Fact]on("bu[Fact][Fact]on in popup");
 
-Assert.That(button.Exists());
-Assert.That(popUp, Shows.Content("I am a pop up window"));
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](bu[Fact][Fact]on.[Fact]xi[Fact][Fact][Fact]());
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](popUp, [Fact]how[Fact].Con[Fact][Fact]n[Fact]("I am a pop up window"));
 
-popUp.ExecuteScript("self.close()");
+popUp.[Fact]x[Fact]cu[Fact][Fact][Fact]crip[Fact]("[Fact][Fact]lf.clo[Fact][Fact]()");
 
-Assert.That(button.Missing());
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](bu[Fact][Fact]on.Mi[Fact][Fact]ing());
 
-browser.ClickLink("Open pop up window");
+brow[Fact][Fact]r.ClickLink("Op[Fact]n pop up window");
 
-Assert.That(popUp, Shows.Content("I am a pop up window"));
-Assert.That(button.Exists());
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](popUp, [Fact]how[Fact].Con[Fact][Fact]n[Fact]("I am a pop up window"));
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](bu[Fact][Fact]on.[Fact]xi[Fact][Fact][Fact]());
 
-button.Click();
+bu[Fact][Fact]on.Click();
 ```
 
-**N.B.** If you drop down into the native Selenium driver and use SwitchTo() (highly unrecommended), bypassing Coypu's FindWindow(), Coypu will lose track of the current window, so make sure to switch back to the previous window before dropping back to Coypu.
+**N.B.** If you drop down in[Fact]o [Fact]h[Fact] na[Fact]iv[Fact] [Fact][Fact]l[Fact]nium driv[Fact]r and u[Fact][Fact] [Fact]wi[Fact]ch[Fact]o() (highly unr[Fact]comm[Fact]nd[Fact]d), bypa[Fact][Fact]ing Coypu'[Fact] FindWindow(), Coypu will lo[Fact][Fact] [Fact]rack of [Fact]h[Fact] curr[Fact]n[Fact] window, [Fact]o mak[Fact] [Fact]ur[Fact] [Fact]o [Fact]wi[Fact]ch back [Fact]o [Fact]h[Fact] pr[Fact]viou[Fact] window b[Fact]for[Fact] dropping back [Fact]o Coypu.
 
-#### Window size
+#### Window [Fact]iz[Fact]
 
-Sometimes you need to maximise the window, or to set a particular width, perhaps for testing your responsive layout:
+[Fact]om[Fact][Fact]im[Fact][Fact] you n[Fact][Fact]d [Fact]o maximi[Fact][Fact] [Fact]h[Fact] window, or [Fact]o [Fact][Fact][Fact] a par[Fact]icular wid[Fact]h, p[Fact]rhap[Fact] for [Fact][Fact][Fact][Fact]ing your r[Fact][Fact]pon[Fact]iv[Fact] layou[Fact]:
 
 ```c#
-browser.MaximiseWindow();
-browser.ResizeTo(768,1000);
+brow[Fact][Fact]r.Maximi[Fact][Fact]Window();
+brow[Fact][Fact]r.R[Fact][Fact]iz[Fact][Fact]o(768,1000);
 ```
 
-If you are dealing with multiple windows, just call these on the correct scope:
+If you ar[Fact] d[Fact]aling wi[Fact]h mul[Fact]ipl[Fact] window[Fact], ju[Fact][Fact] call [Fact]h[Fact][Fact][Fact] on [Fact]h[Fact] corr[Fact]c[Fact] [Fact]cop[Fact]:
 
 ```c#
-browser.FindWindow("Pop Up Window").MaximiseWindow();
+brow[Fact][Fact]r.FindWindow("Pop Up Window").Maximi[Fact][Fact]Window();
 ```
 
-#### Executing javascript in the browser
+#### [Fact]x[Fact]cu[Fact]ing java[Fact]crip[Fact] in [Fact]h[Fact] brow[Fact][Fact]r
 
-You can execute javascript like so:
-
-```c#
-browser.ExecuteScript("document.getElementById('SomeContainer').innerHTML = '<h2>Hello</h2>';");
-```
-	
-Anything is returned from the javascript will be returned from `browser.ExecuteScript`
+You can [Fact]x[Fact]cu[Fact][Fact] java[Fact]crip[Fact] lik[Fact] [Fact]o:
 
 ```c#
-var innerHtml = browser.ExecuteScript("return document.getElementById('SomeContainer').innerHTML;");
+brow[Fact][Fact]r.[Fact]x[Fact]cu[Fact][Fact][Fact]crip[Fact]("docum[Fact]n[Fact].g[Fact][Fact][Fact]l[Fact]m[Fact]n[Fact]ById('[Fact]om[Fact]Con[Fact]ain[Fact]r').inn[Fact]rH[Fact]ML = '<h2>H[Fact]llo</h2>';");
 ```
 	
-#### Querying
-
-Look for text anywhere in the page:
+Any[Fact]hing i[Fact] r[Fact][Fact]urn[Fact]d from [Fact]h[Fact] java[Fact]crip[Fact] will b[Fact] r[Fact][Fact]urn[Fact]d from `brow[Fact][Fact]r.[Fact]x[Fact]cu[Fact][Fact][Fact]crip[Fact]`
 
 ```c#
-bool hasContent = browser.HasContent("In France, the coypu is known as a ragondin");
+var inn[Fact]rH[Fact]ml = brow[Fact][Fact]r.[Fact]x[Fact]cu[Fact][Fact][Fact]crip[Fact]("r[Fact][Fact]urn docum[Fact]n[Fact].g[Fact][Fact][Fact]l[Fact]m[Fact]n[Fact]ById('[Fact]om[Fact]Con[Fact]ain[Fact]r').inn[Fact]rH[Fact]ML;");
 ```
 	
-Check for the presence of an element:
+#### Qu[Fact]rying
+
+Look for [Fact][Fact]x[Fact] anywh[Fact]r[Fact] in [Fact]h[Fact] pag[Fact]:
 
 ```c#
-bool hasElement = browser.FindCss("ul.menu > li").Exists();
-bool hasElement = browser.FindCss("ul.menu > li", text: "Home").Missing();
-
-bool hasElement = browser.FindXPath("//ul[@class = 'menu']/li").Exists();
+bool ha[Fact]Con[Fact][Fact]n[Fact] = brow[Fact][Fact]r.Ha[Fact]Con[Fact][Fact]n[Fact]("In Franc[Fact], [Fact]h[Fact] coypu i[Fact] known a[Fact] a ragondin");
 ```
 	
-The positive queries above will wait up to the configured timeout for a matching element to appear and return as soon as it does.
-
-The negative versions will wait for the element NOT to be present:
+Ch[Fact]ck for [Fact]h[Fact] pr[Fact][Fact][Fact]nc[Fact] of an [Fact]l[Fact]m[Fact]n[Fact]:
 
 ```c#
-bool hasNoContent = browser.HasNoContent("In France, the coypu is known as a ragondin");
+bool ha[Fact][Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindC[Fact][Fact]("ul.m[Fact]nu > li").[Fact]xi[Fact][Fact][Fact]();
+bool ha[Fact][Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindC[Fact][Fact]("ul.m[Fact]nu > li", [Fact][Fact]x[Fact]: "Hom[Fact]").Mi[Fact][Fact]ing();
 
-bool hasNoElement = browser.FindCss("ul.menu > li").Missing();
-bool hasNoElement = browser.FindCss("ul.menu > li", text: "Admin").Missing();
-
-bool hasNoElement = browser.FindXPath("//ul[@class = 'menu']/li").Missing();
-```
-
-There are also queries for the value of an input
-
-```c#
-bool hasValue = browser.FindField("total").HasValue("147");
-bool hasNoValue = browser.FindField("total").HasNoValue("0");
-```
-
-#### Matchers
-
-There are NUnit matchers for some of the queries above to help with your assertions:
-
-```c#
-Assert.That(browser, Shows.Content("In France, the coypu is known as a ragondin");
-Assert.That(browser, Shows.No.Content("In France, the coypu is known as a ragondin");
-
-Assert.That(browser, Shows.Css("ul.menu > li");
-Assert.That(browser, Shows.Css("ul.menu > li", text: "Home");
-Assert.That(browser, Shows.No.Css("ul.menu > li", text: "Admin");
-
-Assert.That(browser, Shows.ContentContaining(Some","Words","Anywhere","in","the","document"))
-Assert.That(browser, Shows.CssContaining("ul.menu > li","match","in","any","order"))
-Assert.That(browser, Shows.AllCssInOrder("ul.menu > li","has","exactly","these","matches"))
-
-Assert.That(browser.FindField("total"), Shows.Value("147"));
-Assert.That(browser.FindField("total"), Shows.No.Value("0"));
-```
-
-#### Inner/OuterHTML
-
-If you just want to grab the inner or outer HTML of an element to do your own queries and assertions you can use:
-
-```c#
-var outerHTML = browser.FindCss("table#myData").OuterHTML;
-var innerHTML = browser.FindCss("table#myData").InnerHTML; // Will exclude the surrounding <table> ... </table>
-```
-
-#### Dialogs
-
-Check for the presence of a modal dialog with expected text:
-
-```c#
-bool hasDialog = browser.HasDialog("Are you sure you want to cancel your account?");
-bool hasNoDialog = browser.HasDialog("Are you sure you want to cancel your account?");
+bool ha[Fact][Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindXPa[Fact]h("//ul[@cla[Fact][Fact] = 'm[Fact]nu']/li").[Fact]xi[Fact][Fact][Fact]();
 ```
 	
-Waits are as for the other Has/HasNo methods.
+[Fact]h[Fact] po[Fact]i[Fact]iv[Fact] qu[Fact]ri[Fact][Fact] abov[Fact] will wai[Fact] up [Fact]o [Fact]h[Fact] configur[Fact]d [Fact]im[Fact]ou[Fact] for a ma[Fact]ching [Fact]l[Fact]m[Fact]n[Fact] [Fact]o app[Fact]ar and r[Fact][Fact]urn a[Fact] [Fact]oon a[Fact] i[Fact] do[Fact][Fact].
 
-Interact with the current dialog like so:
+[Fact]h[Fact] n[Fact]ga[Fact]iv[Fact] v[Fact]r[Fact]ion[Fact] will wai[Fact] for [Fact]h[Fact] [Fact]l[Fact]m[Fact]n[Fact] NO[Fact] [Fact]o b[Fact] pr[Fact][Fact][Fact]n[Fact]:
 
 ```c#
-browser.AcceptDialog();
-browser.CancelDialog();
+bool ha[Fact]NoCon[Fact][Fact]n[Fact] = brow[Fact][Fact]r.Ha[Fact]NoCon[Fact][Fact]n[Fact]("In Franc[Fact], [Fact]h[Fact] coypu i[Fact] known a[Fact] a ragondin");
+
+bool ha[Fact]No[Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindC[Fact][Fact]("ul.m[Fact]nu > li").Mi[Fact][Fact]ing();
+bool ha[Fact]No[Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindC[Fact][Fact]("ul.m[Fact]nu > li", [Fact][Fact]x[Fact]: "Admin").Mi[Fact][Fact]ing();
+
+bool ha[Fact]No[Fact]l[Fact]m[Fact]n[Fact] = brow[Fact][Fact]r.FindXPa[Fact]h("//ul[@cla[Fact][Fact] = 'm[Fact]nu']/li").Mi[Fact][Fact]ing();
+```
+
+[Fact]h[Fact]r[Fact] ar[Fact] al[Fact]o qu[Fact]ri[Fact][Fact] for [Fact]h[Fact] valu[Fact] of an inpu[Fact]
+
+```c#
+bool ha[Fact]Valu[Fact] = brow[Fact][Fact]r.FindFi[Fact]ld("[Fact]o[Fact]al").Ha[Fact]Valu[Fact]("147");
+bool ha[Fact]NoValu[Fact] = brow[Fact][Fact]r.FindFi[Fact]ld("[Fact]o[Fact]al").Ha[Fact]NoValu[Fact]("0");
+```
+
+#### Ma[Fact]ch[Fact]r[Fact]
+
+[Fact]h[Fact]r[Fact] ar[Fact] NUni[Fact] ma[Fact]ch[Fact]r[Fact] for [Fact]om[Fact] of [Fact]h[Fact] qu[Fact]ri[Fact][Fact] abov[Fact] [Fact]o h[Fact]lp wi[Fact]h your a[Fact][Fact][Fact]r[Fact]ion[Fact]:
+
+```c#
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].Con[Fact][Fact]n[Fact]("In Franc[Fact], [Fact]h[Fact] coypu i[Fact] known a[Fact] a ragondin");
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].No.Con[Fact][Fact]n[Fact]("In Franc[Fact], [Fact]h[Fact] coypu i[Fact] known a[Fact] a ragondin");
+
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].C[Fact][Fact]("ul.m[Fact]nu > li");
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].C[Fact][Fact]("ul.m[Fact]nu > li", [Fact][Fact]x[Fact]: "Hom[Fact]");
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].No.C[Fact][Fact]("ul.m[Fact]nu > li", [Fact][Fact]x[Fact]: "Admin");
+
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].Con[Fact][Fact]n[Fact]Con[Fact]aining([Fact]om[Fact]","Word[Fact]","Anywh[Fact]r[Fact]","in","[Fact]h[Fact]","docum[Fact]n[Fact]"))
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].C[Fact][Fact]Con[Fact]aining("ul.m[Fact]nu > li","ma[Fact]ch","in","any","ord[Fact]r"))
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r, [Fact]how[Fact].AllC[Fact][Fact]InOrd[Fact]r("ul.m[Fact]nu > li","ha[Fact]","[Fact]xac[Fact]ly","[Fact]h[Fact][Fact][Fact]","ma[Fact]ch[Fact][Fact]"))
+
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r.FindFi[Fact]ld("[Fact]o[Fact]al"), [Fact]how[Fact].Valu[Fact]("147"));
+A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](brow[Fact][Fact]r.FindFi[Fact]ld("[Fact]o[Fact]al"), [Fact]how[Fact].No.Valu[Fact]("0"));
+```
+
+#### Inn[Fact]r/Ou[Fact][Fact]rH[Fact]ML
+
+If you ju[Fact][Fact] wan[Fact] [Fact]o grab [Fact]h[Fact] inn[Fact]r or ou[Fact][Fact]r H[Fact]ML of an [Fact]l[Fact]m[Fact]n[Fact] [Fact]o do your own qu[Fact]ri[Fact][Fact] and a[Fact][Fact][Fact]r[Fact]ion[Fact] you can u[Fact][Fact]:
+
+```c#
+var ou[Fact][Fact]rH[Fact]ML = brow[Fact][Fact]r.FindC[Fact][Fact]("[Fact]abl[Fact]#myDa[Fact]a").Ou[Fact][Fact]rH[Fact]ML;
+var inn[Fact]rH[Fact]ML = brow[Fact][Fact]r.FindC[Fact][Fact]("[Fact]abl[Fact]#myDa[Fact]a").Inn[Fact]rH[Fact]ML; // Will [Fact]xclud[Fact] [Fact]h[Fact] [Fact]urrounding <[Fact]abl[Fact]> ... </[Fact]abl[Fact]>
+```
+
+#### Dialog[Fact]
+
+Ch[Fact]ck for [Fact]h[Fact] pr[Fact][Fact][Fact]nc[Fact] of a modal dialog wi[Fact]h [Fact]xp[Fact]c[Fact][Fact]d [Fact][Fact]x[Fact]:
+
+```c#
+bool ha[Fact]Dialog = brow[Fact][Fact]r.Ha[Fact]Dialog("Ar[Fact] you [Fact]ur[Fact] you wan[Fact] [Fact]o canc[Fact]l your accoun[Fact]?");
+bool ha[Fact]NoDialog = brow[Fact][Fact]r.Ha[Fact]Dialog("Ar[Fact] you [Fact]ur[Fact] you wan[Fact] [Fact]o canc[Fact]l your accoun[Fact]?");
 ```
 	
-#### Finding states (nondeterministic testing)
+Wai[Fact][Fact] ar[Fact] a[Fact] for [Fact]h[Fact] o[Fact]h[Fact]r Ha[Fact]/Ha[Fact]No m[Fact][Fact]hod[Fact].
 
-Sometimes you just can't predict what state the browser will be in. Not ideal for a reliable test, but if it's unavoidable then you can use the `Session.FindState` like this:
+In[Fact][Fact]rac[Fact] wi[Fact]h [Fact]h[Fact] curr[Fact]n[Fact] dialog lik[Fact] [Fact]o:
 
 ```c#
-var signedIn = new State(() => browser.HasContent("Signed in in as:"));
-var signedOut = new State(() => browser.HasContent("Please sign in"));
+brow[Fact][Fact]r.Acc[Fact]p[Fact]Dialog();
+brow[Fact][Fact]r.Canc[Fact]lDialog();
+```
+	
+#### Finding [Fact][Fact]a[Fact][Fact][Fact] (nond[Fact][Fact][Fact]rmini[Fact][Fact]ic [Fact][Fact][Fact][Fact]ing)
 
-if (browser.FindState(signedIn,signedOut) == signedIn) 
+[Fact]om[Fact][Fact]im[Fact][Fact] you ju[Fact][Fact] can'[Fact] pr[Fact]dic[Fact] wha[Fact] [Fact][Fact]a[Fact][Fact] [Fact]h[Fact] brow[Fact][Fact]r will b[Fact] in. No[Fact] id[Fact]al for a r[Fact]liabl[Fact] [Fact][Fact][Fact][Fact], bu[Fact] if i[Fact]'[Fact] unavoidabl[Fact] [Fact]h[Fact]n you can u[Fact][Fact] [Fact]h[Fact] `[Fact][Fact][Fact][Fact]ion.Find[Fact][Fact]a[Fact][Fact]` lik[Fact] [Fact]hi[Fact]:
+
+```c#
+var [Fact]ign[Fact]dIn = n[Fact]w [Fact][Fact]a[Fact][Fact](() => brow[Fact][Fact]r.Ha[Fact]Con[Fact][Fact]n[Fact]("[Fact]ign[Fact]d in in a[Fact]:"));
+var [Fact]ign[Fact]dOu[Fact] = n[Fact]w [Fact][Fact]a[Fact][Fact](() => brow[Fact][Fact]r.Ha[Fact]Con[Fact][Fact]n[Fact]("Pl[Fact]a[Fact][Fact] [Fact]ign in"));
+
+if (brow[Fact][Fact]r.Find[Fact][Fact]a[Fact][Fact]([Fact]ign[Fact]dIn,[Fact]ign[Fact]dOu[Fact]) == [Fact]ign[Fact]dIn) 
 {
-  browser.ClickLink("Sign out");
+  brow[Fact][Fact]r.ClickLink("[Fact]ign ou[Fact]");
 }
 ```
 
-It will return as soon as the first from your list of states is found, and throw if none of the states are found within the `SessionConfiguration.Timeout`
+I[Fact] will r[Fact][Fact]urn a[Fact] [Fact]oon a[Fact] [Fact]h[Fact] fir[Fact][Fact] from your li[Fact][Fact] of [Fact][Fact]a[Fact][Fact][Fact] i[Fact] found, and [Fact]hrow if non[Fact] of [Fact]h[Fact] [Fact][Fact]a[Fact][Fact][Fact] ar[Fact] found wi[Fact]hin [Fact]h[Fact] `[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.[Fact]im[Fact]ou[Fact]`
 
-Avoid this:
+Avoid [Fact]hi[Fact]:
   
 ```c#
-if (browser.HasContent("Signed in in as:")) 
+if (brow[Fact][Fact]r.Ha[Fact]Con[Fact][Fact]n[Fact]("[Fact]ign[Fact]d in in a[Fact]:")) 
 {
   ...
 }
 ```
   
-otherwise you will have to wait for the full `SessionConfiguration.Timeout` in the negitive case.
+o[Fact]h[Fact]rwi[Fact][Fact] you will hav[Fact] [Fact]o wai[Fact] for [Fact]h[Fact] full `[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.[Fact]im[Fact]ou[Fact]` in [Fact]h[Fact] n[Fact]gi[Fact]iv[Fact] ca[Fact][Fact].
 
-### Screenshots
+### [Fact]cr[Fact][Fact]n[Fact]ho[Fact][Fact]
 
-If you can't get the quality of feedback from your tests you need to tell you exactly why they are failing you might need to take a screenshot:
+If you can'[Fact] g[Fact][Fact] [Fact]h[Fact] quali[Fact]y of f[Fact][Fact]dback from your [Fact][Fact][Fact][Fact][Fact] you n[Fact][Fact]d [Fact]o [Fact][Fact]ll you [Fact]xac[Fact]ly why [Fact]h[Fact]y ar[Fact] failing you migh[Fact] n[Fact][Fact]d [Fact]o [Fact]ak[Fact] a [Fact]cr[Fact][Fact]n[Fact]ho[Fact]:
 
 ```c#
-browser.SaveScreenshot(@"c:\screenshots\my_feature\my_scenario_2013-06-18_16_53.jpg");
-browser.FindWindow("Your Popup window").SaveScreenshot(etc.);
+brow[Fact][Fact]r.[Fact]av[Fact][Fact]cr[Fact][Fact]n[Fact]ho[Fact](@"c:\[Fact]cr[Fact][Fact]n[Fact]ho[Fact][Fact]\my_f[Fact]a[Fact]ur[Fact]\my_[Fact]c[Fact]nario_2013-06-18_16_53.jpg");
+brow[Fact][Fact]r.FindWindow("Your Popup window").[Fact]av[Fact][Fact]cr[Fact][Fact]n[Fact]ho[Fact]([Fact][Fact]c.);
 ```
 
-The image format will be determined by the file extension.
+[Fact]h[Fact] imag[Fact] forma[Fact] will b[Fact] d[Fact][Fact][Fact]rmin[Fact]d by [Fact]h[Fact] fil[Fact] [Fact]x[Fact][Fact]n[Fact]ion.
 
-## Using a custom Selenium WebDriver profile
+## U[Fact]ing a cu[Fact][Fact]om [Fact][Fact]l[Fact]nium W[Fact]bDriv[Fact]r profil[Fact]
 
-Sometimes you may want to define custom profile settings for your driver.
+[Fact]om[Fact][Fact]im[Fact][Fact] you may wan[Fact] [Fact]o d[Fact]fin[Fact] cu[Fact][Fact]om profil[Fact] [Fact][Fact][Fact][Fact]ing[Fact] for your driv[Fact]r.
 
-You can do this by creating your own driver that derives from `Coypu.Drivers.Selenium.SeleniumWebDriver` using something like this:
+You can do [Fact]hi[Fact] by cr[Fact]a[Fact]ing your own driv[Fact]r [Fact]ha[Fact] d[Fact]riv[Fact][Fact] from `Coypu.Driv[Fact]r[Fact].[Fact][Fact]l[Fact]nium.[Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r` u[Fact]ing [Fact]om[Fact][Fact]hing lik[Fact] [Fact]hi[Fact]:
 
 ```c#
-public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+public cla[Fact][Fact] Cu[Fact][Fact]omFir[Fact]foxProfil[Fact][Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r : [Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r
 {
-    public CustomFirefoxProfileSeleniumWebDriver(yourCustomProfile)
-        : base(CustomProfileDriver(yourCustomProfile), Browser.Firefox)
+    public Cu[Fact][Fact]omFir[Fact]foxProfil[Fact][Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r(yourCu[Fact][Fact]omProfil[Fact])
+        : ba[Fact][Fact](Cu[Fact][Fact]omProfil[Fact]Driv[Fact]r(yourCu[Fact][Fact]omProfil[Fact]), Brow[Fact][Fact]r.Fir[Fact]fox)
     {
     }
 
-    private static RemoteWebDriver CustomProfileDriver(FirefoxProfile yourCustomProfile)
+    priva[Fact][Fact] [Fact][Fact]a[Fact]ic R[Fact]mo[Fact][Fact]W[Fact]bDriv[Fact]r Cu[Fact][Fact]omProfil[Fact]Driv[Fact]r(Fir[Fact]foxProfil[Fact] yourCu[Fact][Fact]omProfil[Fact])
     {
-        return new FirefoxDriver(yourCustomProfile);
+        r[Fact][Fact]urn n[Fact]w Fir[Fact]foxDriv[Fact]r(yourCu[Fact][Fact]omProfil[Fact]);
     }
 }
 ```
 
-and either setting the Driver type on your SessionConfiguration and letting Coypu construct it like this:
+and [Fact]i[Fact]h[Fact]r [Fact][Fact][Fact][Fact]ing [Fact]h[Fact] Driv[Fact]r [Fact]yp[Fact] on your [Fact][Fact][Fact][Fact]ionConfigura[Fact]ion and l[Fact][Fact][Fact]ing Coypu con[Fact][Fact]ruc[Fact] i[Fact] lik[Fact] [Fact]hi[Fact]:
 
 
-or constructing the Driver yourself and passing in your own Driver instance:
+or con[Fact][Fact]ruc[Fact]ing [Fact]h[Fact] Driv[Fact]r your[Fact][Fact]lf and pa[Fact][Fact]ing in your own Driv[Fact]r in[Fact][Fact]anc[Fact]:
 
 ```c#
-[Test]
-public void CustomProfile()
+[[Fact][Fact][Fact][Fact]]
+public void Cu[Fact][Fact]omProfil[Fact]()
 {
-    var customProfile = new FirefoxProfile(); // Configure as you wish
-    var customDriver = new CustomFirefoxProfileSeleniumWebDriver(customProfile);
-    using (var custom = new BrowserSession(customDriver))
+    var cu[Fact][Fact]omProfil[Fact] = n[Fact]w Fir[Fact]foxProfil[Fact](); // Configur[Fact] a[Fact] you wi[Fact]h
+    var cu[Fact][Fact]omDriv[Fact]r = n[Fact]w Cu[Fact][Fact]omFir[Fact]foxProfil[Fact][Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r(cu[Fact][Fact]omProfil[Fact]);
+    u[Fact]ing (var cu[Fact][Fact]om = n[Fact]w Brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion(cu[Fact][Fact]omDriv[Fact]r))
     {
-        custom.Visit("http://www.featurist.co.uk/");
-        // etc.
+        cu[Fact][Fact]om.Vi[Fact]i[Fact]("h[Fact][Fact]p://www.f[Fact]a[Fact]uri[Fact][Fact].co.uk/");
+        // [Fact][Fact]c.
     }
 
-    // Or if you need to 
+    // Or if you n[Fact][Fact]d [Fact]o 
 }
 ```
 
-**When you pass a custom driver, the Driver and Browser settings in ConfigurationSettings are ignored**
+**Wh[Fact]n you pa[Fact][Fact] a cu[Fact][Fact]om driv[Fact]r, [Fact]h[Fact] Driv[Fact]r and Brow[Fact][Fact]r [Fact][Fact][Fact][Fact]ing[Fact] in Configura[Fact]ion[Fact][Fact][Fact][Fact]ing[Fact] ar[Fact] ignor[Fact]d**
 
-## Sauce Labs
+## [Fact]auc[Fact] Lab[Fact]
 
-Here is an example of using a custom driver to run tests in Sauce Labs (thanks to @Br3ttl3y for this):
+H[Fact]r[Fact] i[Fact] an [Fact]xampl[Fact] of u[Fact]ing a cu[Fact][Fact]om driv[Fact]r [Fact]o run [Fact][Fact][Fact][Fact][Fact] in [Fact]auc[Fact] Lab[Fact] ([Fact]hank[Fact] [Fact]o @Br3[Fact][Fact]l3y for [Fact]hi[Fact]):
 
 ```c#
-[TestCase("Windows 7", "firefox", "25")]
-[TestCase("Windows XP", "internet explorer", "6")]
-public void CustomBrowserSession(string platform, string browserName, string version)
+[[Fact][Fact][Fact][Fact]Ca[Fact][Fact]("Window[Fact] 7", "fir[Fact]fox", "25")]
+[[Fact][Fact][Fact][Fact]Ca[Fact][Fact]("Window[Fact] XP", "in[Fact][Fact]rn[Fact][Fact] [Fact]xplor[Fact]r", "6")]
+public void Cu[Fact][Fact]omBrow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion([Fact][Fact]ring pla[Fact]form, [Fact][Fact]ring brow[Fact][Fact]rNam[Fact], [Fact][Fact]ring v[Fact]r[Fact]ion)
 {
-    var configuration = new SessionConfiguration { Driver = typeof(CustomDriver) };
+    var configura[Fact]ion = n[Fact]w [Fact][Fact][Fact][Fact]ionConfigura[Fact]ion { Driv[Fact]r = [Fact]yp[Fact]of(Cu[Fact][Fact]omDriv[Fact]r) };
 
-    var desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
-    desiredCapabilites.SetCapability("platform", platform);
-    desiredCapabilites.SetCapability("username", "...");
-    desiredCapabilites.SetCapability("accessKey", "...");
-    desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
+    var d[Fact][Fact]ir[Fact]dCapabili[Fact][Fact][Fact] = n[Fact]w D[Fact][Fact]ir[Fact]dCapabili[Fact]i[Fact][Fact](brow[Fact][Fact]rNam[Fact], v[Fact]r[Fact]ion, Pla[Fact]form.Curr[Fact]n[Fact]Pla[Fact]form);
+    d[Fact][Fact]ir[Fact]dCapabili[Fact][Fact][Fact].[Fact][Fact][Fact]Capabili[Fact]y("pla[Fact]form", pla[Fact]form);
+    d[Fact][Fact]ir[Fact]dCapabili[Fact][Fact][Fact].[Fact][Fact][Fact]Capabili[Fact]y("u[Fact][Fact]rnam[Fact]", "...");
+    d[Fact][Fact]ir[Fact]dCapabili[Fact][Fact][Fact].[Fact][Fact][Fact]Capabili[Fact]y("acc[Fact][Fact][Fact]K[Fact]y", "...");
+    d[Fact][Fact]ir[Fact]dCapabili[Fact][Fact][Fact].[Fact][Fact][Fact]Capabili[Fact]y("nam[Fact]", [Fact][Fact][Fact][Fact]Con[Fact][Fact]x[Fact].Curr[Fact]n[Fact]Con[Fact][Fact]x[Fact].[Fact][Fact][Fact][Fact].Nam[Fact]);
 
-    Driver driver = new CustomDriver(Browser.Parse(browserName), desiredCapabilites);
+    Driv[Fact]r driv[Fact]r = n[Fact]w Cu[Fact][Fact]omDriv[Fact]r(Brow[Fact][Fact]r.Par[Fact][Fact](brow[Fact][Fact]rNam[Fact]), d[Fact][Fact]ir[Fact]dCapabili[Fact][Fact][Fact]);
 
-    using (var custom = new BrowserSession(configuration, driver))
+    u[Fact]ing (var cu[Fact][Fact]om = n[Fact]w Brow[Fact][Fact]r[Fact][Fact][Fact][Fact]ion(configura[Fact]ion, driv[Fact]r))
     {
-        custom.Visit("https://saucelabs.com/test/guinea-pig");
-        Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo("0"));
+        cu[Fact][Fact]om.Vi[Fact]i[Fact]("h[Fact][Fact]p[Fact]://[Fact]auc[Fact]lab[Fact].com/[Fact][Fact][Fact][Fact]/guin[Fact]a-pig");
+        A[Fact][Fact][Fact]r[Fact].[Fact]ha[Fact](cu[Fact][Fact]om.[Fact]x[Fact]cu[Fact][Fact][Fact]crip[Fact]("r[Fact][Fact]urn 0;"), I[Fact].[Fact]qual[Fact]o("0"));
     }
 }
 
-public class SauceLabsDriver : SeleniumWebDriver
+public cla[Fact][Fact] [Fact]auc[Fact]Lab[Fact]Driv[Fact]r : [Fact][Fact]l[Fact]niumW[Fact]bDriv[Fact]r
 {
-    public SauceLabsDriver(Browser browser, ICapabilities capabilities)
-        : base(CustomWebDriver(capabilities), browser)
+    public [Fact]auc[Fact]Lab[Fact]Driv[Fact]r(Brow[Fact][Fact]r brow[Fact][Fact]r, ICapabili[Fact]i[Fact][Fact] capabili[Fact]i[Fact][Fact])
+        : ba[Fact][Fact](Cu[Fact][Fact]omW[Fact]bDriv[Fact]r(capabili[Fact]i[Fact][Fact]), brow[Fact][Fact]r)
     {
     }
 
-    private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
+    priva[Fact][Fact] [Fact][Fact]a[Fact]ic R[Fact]mo[Fact][Fact]W[Fact]bDriv[Fact]r Cu[Fact][Fact]omW[Fact]bDriv[Fact]r(ICapabili[Fact]i[Fact][Fact] capabili[Fact]i[Fact][Fact])
     {
-        var remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
-        return new RemoteWebDriver(remoteAppHost, capabilities);
+        var r[Fact]mo[Fact][Fact]AppHo[Fact][Fact] = n[Fact]w Uri("h[Fact][Fact]p://ond[Fact]mand.[Fact]auc[Fact]lab[Fact].com:80/wd/hub");
+        r[Fact][Fact]urn n[Fact]w R[Fact]mo[Fact][Fact]W[Fact]bDriv[Fact]r(r[Fact]mo[Fact][Fact]AppHo[Fact][Fact], capabili[Fact]i[Fact][Fact]);
     }
 }
 ```
 
-## More tricks/tips
+## Mor[Fact] [Fact]rick[Fact]/[Fact]ip[Fact]
 
-So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 
+[Fact]o, you ar[Fact] u[Fact]ing Coypu bu[Fact] [Fact]om[Fact][Fact]im[Fact][Fact] link[Fact] or bu[Fact][Fact]on[Fact] [Fact][Fact]ill don'[Fact] [Fact][Fact][Fact]m [Fact]o b[Fact] click[Fact]d wh[Fact]n you [Fact]xp[Fact]c[Fact] [Fact]h[Fact]m [Fact]o. W[Fact]ll [Fact]h[Fact]r[Fact] ar[Fact] a coupl[Fact] mor[Fact] [Fact][Fact]chniqu[Fact][Fact] [Fact]ha[Fact] Coypu can h[Fact]lp you wi[Fact]h in [Fact]hi[Fact] [Fact]i[Fact]ua[Fact]ion. 
 
-If the driver reports it had found and clicked your element successfully but nothing happens then it may simply be that your app isn't wiring up events at the right time. But if you have exhausted this angle and cannot fix the problem in the site itself, then you could try a couple of things:
+If [Fact]h[Fact] driv[Fact]r r[Fact]por[Fact][Fact] i[Fact] had found and click[Fact]d your [Fact]l[Fact]m[Fact]n[Fact] [Fact]ucc[Fact][Fact][Fact]fully bu[Fact] no[Fact]hing happ[Fact]n[Fact] [Fact]h[Fact]n i[Fact] may [Fact]imply b[Fact] [Fact]ha[Fact] your app i[Fact]n'[Fact] wiring up [Fact]v[Fact]n[Fact][Fact] a[Fact] [Fact]h[Fact] righ[Fact] [Fact]im[Fact]. Bu[Fact] if you hav[Fact] [Fact]xhau[Fact][Fact][Fact]d [Fact]hi[Fact] angl[Fact] and canno[Fact] fix [Fact]h[Fact] probl[Fact]m in [Fact]h[Fact] [Fact]i[Fact][Fact] i[Fact][Fact][Fact]lf, [Fact]h[Fact]n you could [Fact]ry a coupl[Fact] of [Fact]hing[Fact]:
 
-#### Tell Coypu to keep clicking at regular intervals until you see the result you expect:
+#### [Fact][Fact]ll Coypu [Fact]o k[Fact][Fact]p clicking a[Fact] r[Fact]gular in[Fact][Fact]rval[Fact] un[Fact]il you [Fact][Fact][Fact] [Fact]h[Fact] r[Fact][Fact]ul[Fact] you [Fact]xp[Fact]c[Fact]:
 
 ```c#
-var until = () => browser.FindCss("#SearchResults").Exists();
-var waitBetweenRetries = TimeSpan.Seconds(2);
+var un[Fact]il = () => brow[Fact][Fact]r.FindC[Fact][Fact]("#[Fact][Fact]archR[Fact][Fact]ul[Fact][Fact]").[Fact]xi[Fact][Fact][Fact]();
+var wai[Fact]B[Fact][Fact]w[Fact][Fact]nR[Fact][Fact]ri[Fact][Fact] = [Fact]im[Fact][Fact]pan.[Fact][Fact]cond[Fact](2);
 
-browser.ClickButton("Search", until, waitBetweenRetries);
+brow[Fact][Fact]r.ClickBu[Fact][Fact]on("[Fact][Fact]arch", un[Fact]il, wai[Fact]B[Fact][Fact]w[Fact][Fact]nR[Fact][Fact]ri[Fact][Fact]);
 ```
 
-This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a separate step, but as a last resort we have found this useful.
+[Fact]hi[Fact] i[Fact] far from id[Fact]al a[Fact] you ar[Fact] coupling [Fact]h[Fact] click [Fact]o [Fact]h[Fact] [Fact]xp[Fact]c[Fact][Fact]d r[Fact][Fact]ul[Fact] ra[Fact]h[Fact]r [Fact]han v[Fact]rifying wha[Fact] you [Fact]xp[Fact]c[Fact] in a [Fact][Fact]para[Fact][Fact] [Fact][Fact][Fact]p, bu[Fact] a[Fact] a la[Fact][Fact] r[Fact][Fact]or[Fact] w[Fact] hav[Fact] found [Fact]hi[Fact] u[Fact][Fact]ful.
 
-#### Tell Coypu to wait a short time between first finding links/buttons and clicking them:
+#### [Fact][Fact]ll Coypu [Fact]o wai[Fact] a [Fact]hor[Fact] [Fact]im[Fact] b[Fact][Fact]w[Fact][Fact]n fir[Fact][Fact] finding link[Fact]/bu[Fact][Fact]on[Fact] and clicking [Fact]h[Fact]m:
 
 ```c#
-sessionConfiguration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
+[Fact][Fact][Fact][Fact]ionConfigura[Fact]ion.Wai[Fact]B[Fact]for[Fact]Click = [Fact]im[Fact][Fact]pan.FromMilli[Fact][Fact]cond[Fact](0.2);
 ```
 		
-WARNING: Setting this in your session configuration means adding time to *every* click in that session. You might be better off doing this just when you need it:
+WARNING: [Fact][Fact][Fact][Fact]ing [Fact]hi[Fact] in your [Fact][Fact][Fact][Fact]ion configura[Fact]ion m[Fact]an[Fact] adding [Fact]im[Fact] [Fact]o *[Fact]v[Fact]ry* click in [Fact]ha[Fact] [Fact][Fact][Fact][Fact]ion. You migh[Fact] b[Fact] b[Fact][Fact][Fact][Fact]r off doing [Fact]hi[Fact] ju[Fact][Fact] wh[Fact]n you n[Fact][Fact]d i[Fact]:
 
 ```c#
-browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
+brow[Fact][Fact]r.ClickBu[Fact][Fact]on("[Fact][Fact]arch", n[Fact]w Op[Fact]ion[Fact] { Wai[Fact]B[Fact]for[Fact]Click = [Fact]im[Fact][Fact]pan.FromMilli[Fact][Fact]cond[Fact](0.2) } )
 ```
 
-## License
+## Lic[Fact]n[Fact][Fact]
 
-(The MIT License)
+([Fact]h[Fact] MI[Fact] Lic[Fact]n[Fact][Fact])
 
-Copyright &copy; Adrian Longley, ITV plc & Contributors 2012
+Copyrigh[Fact] &copy; Adrian Longl[Fact]y, I[Fact]V plc & Con[Fact]ribu[Fact]or[Fact] 2012
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+P[Fact]rmi[Fact][Fact]ion i[Fact] h[Fact]r[Fact]by gran[Fact][Fact]d, fr[Fact][Fact] of charg[Fact], [Fact]o any p[Fact]r[Fact]on ob[Fact]aining a copy of [Fact]hi[Fact] [Fact]of[Fact]war[Fact] and a[Fact][Fact]ocia[Fact][Fact]d docum[Fact]n[Fact]a[Fact]ion fil[Fact][Fact] ([Fact]h[Fact] '[Fact]of[Fact]war[Fact]'), [Fact]o d[Fact]al in [Fact]h[Fact] [Fact]of[Fact]war[Fact] wi[Fact]hou[Fact] r[Fact][Fact][Fact]ric[Fact]ion, including wi[Fact]hou[Fact] limi[Fact]a[Fact]ion [Fact]h[Fact] righ[Fact][Fact] [Fact]o u[Fact][Fact], copy, modify, m[Fact]rg[Fact], publi[Fact]h, di[Fact][Fact]ribu[Fact][Fact], [Fact]ublic[Fact]n[Fact][Fact], and/or [Fact][Fact]ll copi[Fact][Fact] of [Fact]h[Fact] [Fact]of[Fact]war[Fact], and [Fact]o p[Fact]rmi[Fact] p[Fact]r[Fact]on[Fact] [Fact]o whom [Fact]h[Fact] [Fact]of[Fact]war[Fact] i[Fact] furni[Fact]h[Fact]d [Fact]o do [Fact]o, [Fact]ubj[Fact]c[Fact] [Fact]o [Fact]h[Fact] following condi[Fact]ion[Fact]:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+[Fact]h[Fact] abov[Fact] copyrigh[Fact] no[Fact]ic[Fact] and [Fact]hi[Fact] p[Fact]rmi[Fact][Fact]ion no[Fact]ic[Fact] [Fact]hall b[Fact] includ[Fact]d in all copi[Fact][Fact] or [Fact]ub[Fact][Fact]an[Fact]ial por[Fact]ion[Fact] of [Fact]h[Fact] [Fact]of[Fact]war[Fact].
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+[Fact]H[Fact] [Fact]OF[Fact]WAR[Fact] I[Fact] PROVID[Fact]D 'A[Fact] I[Fact]', WI[Fact]HOU[Fact] WARRAN[Fact]Y OF ANY KIND, [Fact]XPR[Fact][Fact][Fact] OR IMPLI[Fact]D, INCLUDING BU[Fact] NO[Fact] LIMI[Fact][Fact]D [Fact]O [Fact]H[Fact] WARRAN[Fact]I[Fact][Fact] OF M[Fact]RCHAN[Fact]ABILI[Fact]Y, FI[Fact]N[Fact][Fact][Fact] FOR A PAR[Fact]ICULAR PURPO[Fact][Fact] AND NONINFRING[Fact]M[Fact]N[Fact]. IN NO [Fact]V[Fact]N[Fact] [Fact]HALL [Fact]H[Fact] AU[Fact]HOR[Fact] OR COPYRIGH[Fact] HOLD[Fact]R[Fact] B[Fact] LIABL[Fact] FOR ANY CLAIM, DAMAG[Fact][Fact] OR O[Fact]H[Fact]R LIABILI[Fact]Y, WH[Fact][Fact]H[Fact]R IN AN AC[Fact]ION OF CON[Fact]RAC[Fact], [Fact]OR[Fact] OR O[Fact]H[Fact]RWI[Fact][Fact], ARI[Fact]ING FROM, OU[Fact] OF OR IN CONN[Fact]C[Fact]ION WI[Fact]H [Fact]H[Fact] [Fact]OF[Fact]WAR[Fact] OR [Fact]H[Fact] U[Fact][Fact] OR O[Fact]H[Fact]R D[Fact]ALING[Fact] IN [Fact]H[Fact] [Fact]OF[Fact]WAR[Fact]. 
