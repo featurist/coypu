@@ -103,7 +103,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             new RetryUntilTimeoutTimingStrategy().Synchronise(query);
 
-            Assert.Equal(1, query.Tries);
+            Assert.Equal(2, query.Tries);
         }
 
         [Fact]
@@ -156,7 +156,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             var query = new AlwaysThrowsQuery<object, NotSupportedException>(new Options { Timeout = TimeSpan.FromMilliseconds(100), RetryInterval = retryInterval });
             Assert.Throws<NotSupportedException>(() => robustness.Synchronise(query));
-            Assert.Equal(2, query.Tries);
+            Assert.Equal(1, query.Tries);
         }
     }
 }
