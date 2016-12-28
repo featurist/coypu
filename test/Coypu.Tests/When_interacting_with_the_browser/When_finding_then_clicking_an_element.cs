@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using Coypu.Tests.TestDoubles;
+﻿using Coypu.Tests.TestDoubles;
 using Xunit;
 
 namespace Coypu.Tests.When_interacting_with_the_browser {
-    [TestFixture]
     public class When_finding_then_clicking_an_element_ : BrowserInteractionTests
     {
         [Fact]
@@ -16,11 +14,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser {
             var elementScope = browserSession.FindId("something_to_click");
             elementScope.Click();
 
-            Assert.That(driver.ClickedElements, Has.No.Member(elementScope), "Click was not synchronised");
+            Assert.DoesNotContain(elementScope, driver.ClickedElements);
 
             RunQueryAndCheckTiming();
 
-            Assert.That(driver.ClickedElements, Has.Member(elementScope));
+            Assert.Contains(elementScope, driver.ClickedElements);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Coypu.Drivers
 
         public static Browser Parse(string browserName)
         {
-            var fieldInfo = BrowserFields().FirstOrDefault(f => f.Name.Equals(browserName.Replace(" ",""), StringComparison.InvariantCultureIgnoreCase));
+            var fieldInfo = BrowserFields().FirstOrDefault(f => f.Name.Equals(browserName.Replace(" ",""), StringComparison.OrdinalIgnoreCase));
             if (fieldInfo == null)
                 throw new NoSuchBrowserException(browserName);
 

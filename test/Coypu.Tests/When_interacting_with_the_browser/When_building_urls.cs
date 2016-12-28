@@ -2,33 +2,29 @@
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-    [TestFixture]
     public class When_building_urls
     {
-        [SetUp]
-        public void SetUp()
+        private SessionConfiguration SessionConfiguration;
+        private FullyQualifiedUrlBuilder fullyQualifiedUrlBuilder;
+
+        public When_building_urls()
         {
             SessionConfiguration = new SessionConfiguration();
             fullyQualifiedUrlBuilder = new FullyQualifiedUrlBuilder();
         }
 
-        private SessionConfiguration SessionConfiguration;
-        private FullyQualifiedUrlBuilder fullyQualifiedUrlBuilder;
-
         [Fact]
         public void It_defaults_to_localhost()
         {
             SessionConfiguration.Port = 81;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me",SessionConfiguration),
-                        Is.EqualTo("http://localhost:81/visit/me"));
+            Assert.Equal("http://localhost:81/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me",SessionConfiguration));
         }
 
         [Fact]
         public void It_defaults_to_port_80()
         {
             SessionConfiguration.AppHost = "im.theho.st";
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me",SessionConfiguration),
-                        Is.EqualTo("http://im.theho.st/visit/me"));
+            Assert.Equal("http://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration));
         }
 
         [Fact]
@@ -36,40 +32,35 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             SessionConfiguration.AppHost = "im.theho.st";
             SessionConfiguration.Port = 81;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration),
-                        Is.EqualTo("http://im.theho.st:81/visit/me"));
+            Assert.Equal("http://im.theho.st:81/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration));
         }
 
         [Fact]
         public void It_handles_missing_leading_slashes_in_virtual_path()
         {
             SessionConfiguration.AppHost = "im.theho.st";
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
-                        Is.EqualTo("http://im.theho.st/visit/me"));
+            Assert.Equal("http://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration));
         }
 
         [Fact]
         public void It_handles_basic_auth_provided_in_the_host()
         {
             SessionConfiguration.AppHost = "http://someone:example@im.theho.st";
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
-                        Is.EqualTo("http://someone:example@im.theho.st/visit/me"));
+            Assert.Equal("http://someone:example@im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration));
         }
 
         [Fact]
         public void It_handles_protocol_provided_in_the_host()
         {
             SessionConfiguration.AppHost = "http://im.theho.st";
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
-                        Is.EqualTo("http://im.theho.st/visit/me"));
+            Assert.Equal("http://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration));
         }
 
         [Fact]
         public void It_handles_ssl_protocol_provided_in_the_host()
         {
             SessionConfiguration.AppHost = "https://im.theho.st";
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
-                        Is.EqualTo("https://im.theho.st/visit/me"));
+            Assert.Equal("https://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration));
         }
 
         [Fact]
@@ -77,8 +68,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             SessionConfiguration.AppHost = "http://im.theho.st";
             SessionConfiguration.SSL = true;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
-                        Is.EqualTo("https://im.theho.st/visit/me"));
+            Assert.Equal("https://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration));
         }
 
         [Fact]
@@ -86,16 +76,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             SessionConfiguration.AppHost = "im.theho.st/";
             SessionConfiguration.Port = 123;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration),
-                        Is.EqualTo("http://im.theho.st:123/visit/me"));
+            Assert.Equal("http://im.theho.st:123/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("visit/me", SessionConfiguration));
         }
 
         [Fact]
         public void It_handles_trailing_slashes_in_host()
         {
             SessionConfiguration.AppHost = "im.theho.st/";
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration),
-                        Is.EqualTo("http://im.theho.st/visit/me"));
+            Assert.Equal("http://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration));
         }
 
         [Fact]
@@ -105,10 +93,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             SessionConfiguration.Port = 321;
             SessionConfiguration.SSL = true;
 
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here", SessionConfiguration),
-                        Is.EqualTo("http://www.someother.site/over.here"));
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here", SessionConfiguration),
-                        Is.EqualTo("file:///C:/local/file.here"));
+            Assert.Equal("http://www.someother.site/over.here", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here", SessionConfiguration));
+            Assert.Equal("file:///C:/local/file.here", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here", SessionConfiguration));
         }
 
         [Fact]
@@ -118,8 +104,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             SessionConfiguration.Port = 321;
             SessionConfiguration.SSL = true;
 
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/over.here?c=p|pe", SessionConfiguration),
-                        Is.EqualTo("https://im.theho.st:321/over.here?c=p%7Cpe"));
+            Assert.Equal("https://im.theho.st:321/over.here?c=p%7Cpe", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/over.here?c=p|pe", SessionConfiguration));
         }
 
         [Fact]
@@ -129,8 +114,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             SessionConfiguration.Port = 321;
             SessionConfiguration.SSL = true;
 
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here?c=p|pe", SessionConfiguration),
-                        Is.EqualTo("http://www.someother.site/over.here?c=p%7Cpe"));
+            Assert.Equal("http://www.someother.site/over.here?c=p%7Cpe", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here?c=p|pe", SessionConfiguration));
         }
 
         [Fact]
@@ -138,8 +122,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         {
             SessionConfiguration.AppHost = "im.theho.st";
             SessionConfiguration.SSL = true;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration),
-                        Is.EqualTo("https://im.theho.st/visit/me"));
+            Assert.Equal("https://im.theho.st/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration));
         }
         
         [Fact]
@@ -148,7 +131,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             SessionConfiguration.AppHost = "im.theho.st";
             SessionConfiguration.Port = 321;
             SessionConfiguration.SSL = true;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration), Is.EqualTo("https://im.theho.st:321/visit/me"));
+            Assert.Equal("https://im.theho.st:321/visit/me", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("/visit/me", SessionConfiguration));
         }
 
         [Fact]
@@ -156,16 +139,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             SessionConfiguration.AppHost = "im.theho.st";
             SessionConfiguration.Port = 321;
             SessionConfiguration.SSL = true;
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here", SessionConfiguration), Is.EqualTo("http://www.someother.site/over.here"));
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here", SessionConfiguration), Is.EqualTo("file:///C:/local/file.here"));
+            Assert.Equal("http://www.someother.site/over.here", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here", SessionConfiguration));
+            Assert.Equal("file:///C:/local/file.here", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here", SessionConfiguration));
         }
 
         [Fact]
         public void It_ignores_port_when_supplied_a_fully_qualified_url() {
             SessionConfiguration.Port = 321;
 
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here", SessionConfiguration), Is.EqualTo("http://www.someother.site/over.here"));
-            Assert.That(fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here", SessionConfiguration), Is.EqualTo("file:///C:/local/file.here"));
+            Assert.Equal("http://www.someother.site/over.here", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("http://www.someother.site/over.here", SessionConfiguration));
+            Assert.Equal("file:///C:/local/file.here", fullyQualifiedUrlBuilder.GetFullyQualifiedUrl("file:///C:/local/file.here", SessionConfiguration));
         }
     }
 }

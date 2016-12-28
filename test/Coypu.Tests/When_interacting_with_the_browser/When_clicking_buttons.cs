@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
-    [TestFixture]
     public class When_clicking_buttons : BrowserInteractionTests
     {
         [Fact]
@@ -26,12 +25,13 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private void AssertClicked(StubElement buttonToBeClicked)
         {
-            Assert.That(driver.ClickedElements, Has.Member(buttonToBeClicked));
+            Assert.Contains(buttonToBeClicked, driver.ClickedElements);
         }
 
-        [TestCase(true, 1)]
-        [TestCase(false, 1)]
-        [TestCase(false, 321)]
+        [Theory]
+        [InlineData(true, 1)]
+        [InlineData(false, 1)]
+        [InlineData(false, 123)]
         public void It_tries_clicking_robustly_until_expected_conditions_met(bool stubUntil, int waitBeforeRetrySecs)
         {
             var overallTimeout  = TimeSpan.FromMilliseconds(waitBeforeRetrySecs * 1000);
@@ -48,13 +48,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             AssertClicked(buttonToBeClicked);
 
             var queryResult = tryUntilArgs.Until.Run();
-            Assert.That(queryResult, Is.EqualTo(stubUntil));
-            Assert.That(tryUntilArgs.Until.Options.Timeout, Is.EqualTo(waitBetweenRetries));
-            Assert.That(tryUntilArgs.OverallTimeout, Is.EqualTo(overallTimeout));
+            Assert.Equal(stubUntil, queryResult);
+            Assert.Equal(waitBetweenRetries, tryUntilArgs.Until.Options.Timeout);
+            Assert.Equal(overallTimeout, tryUntilArgs.OverallTimeout);
         }
 
-        [TestCase(200)]
-        [TestCase(300)]
+        [Theory]
+        [InlineData(200)]
+        [InlineData(300)]
         public void It_waits_between_find_and_click_as_configured(int waitMs)
         {
             var stubButtonToBeClicked = StubButtonToBeClicked("Some button locator");
@@ -64,7 +65,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var waiterCalled = false;
             fakeWaiter.DoOnWait(milliseconds =>
             {
-                Assert.That(milliseconds, Is.EqualTo(expectedWait));
+                Assert.Equal(expectedWait, milliseconds);
 
                 AssertButtonFound();
                 AssertButtonNotClickedYet(stubButtonToBeClicked);
@@ -74,18 +75,18 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             browserSession.ClickButton("Some button locator");
             SpyTimingStrategy.QueriesRan<object>().Last().Run();
 
-            Assert.That(waiterCalled, "The waiter was not called");
+            Assert.True(waiterCalled, "The waiter was not called");
             AssertClicked(stubButtonToBeClicked);
         }
 
         private void AssertButtonFound()
         {
-            Assert.That(driver.FindXPathRequests.Any(), "Wait called before find");
+            Assert.True(driver.FindXPathRequests.Any(), "Wait called before find");
         }
 
         private void AssertButtonNotClickedYet(StubElement buttonToBeClicked)
         {
-            Assert.That(driver.ClickedElements, Has.No.Member(buttonToBeClicked));
+            Assert.DoesNotContain(buttonToBeClicked, driver.ClickedElements);
         }
 
         private StubElement StubButtonToBeClicked(string locator, Options options = null)

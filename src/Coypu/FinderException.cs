@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Coypu
 {
@@ -11,11 +10,6 @@ namespace Coypu
 
         public FinderException(string message, Exception innerException) : base(message, innerException)
         {                         
-        }
-
-        public FinderException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
         }
     }
 }

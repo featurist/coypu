@@ -20,8 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         protected ElementScope elementScope;
         protected BrowserWindow popupScope;
 
-        [SetUp]
-        public void SetUp()
+        public BrowserInteractionTests()
         {
             driver = new FakeDriver();
             SpyTimingStrategy = new SpyTimingStrategy();
@@ -78,8 +77,8 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             SpyTimingStrategy.ExecuteImmediately = true;
             var queryResult = query.Run();
 
-            Assert.That(query.Options.Timeout, Is.EqualTo(timeout));
-            Assert.That(query.Options.RetryInterval, Is.EqualTo(sessionConfiguration.RetryInterval));
+            Assert.Equal(timeout, query.Options.Timeout);
+            Assert.Equal(sessionConfiguration.RetryInterval, query.Options.RetryInterval);
 
             return queryResult;
         }
@@ -89,12 +88,12 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var sub = scope;
             var scopedResult = sub(locator, options).Now();
 
-            Assert.That(scopedResult, Is.Not.SameAs(expectedDeferredResult), "Result was not found robustly");
-            Assert.That(scopedResult, Is.SameAs(expectedImmediateResult));
+            Assert.NotSame(expectedDeferredResult, scopedResult);
+            Assert.Same(expectedImmediateResult, scopedResult);
 
             var elementScopeResult = RunQueryAndCheckTiming<Element>(options.Timeout, driverCallIndex);
 
-            Assert.That(elementScopeResult, Is.SameAs(expectedDeferredResult));
+            Assert.Same(expectedDeferredResult, elementScopeResult);
         }
 
     }

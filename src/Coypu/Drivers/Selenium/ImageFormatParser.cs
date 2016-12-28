@@ -29,7 +29,7 @@ namespace Coypu.Drivers.Selenium
 
         private static bool AreEqual(string extension, ImageFormat imageFormat)
         {
-            return extension.Equals(imageFormat.ToString(), StringComparison.InvariantCultureIgnoreCase);
+            return extension.Equals(imageFormat.ToString(), StringComparison.OrdinalIgnoreCase);
         }
     }
 }

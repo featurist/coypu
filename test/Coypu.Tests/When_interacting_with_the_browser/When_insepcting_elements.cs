@@ -9,83 +9,82 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_id()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-id", (element, value) => element.Id = value, (element => element.Id));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-id", (element, value) => element.Id = value, (element => element.Id));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_text()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-text", (element, value) => element.Text = value, (element => element.Text));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-text", (element, value) => element.Text = value, (element => element.Text));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_value()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-value", (element, value) => element.Value = value, (element => element.Value));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-value", (element, value) => element.Value = value, (element => element.Value));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_attributes()
         {
-            Synchronises_FindElement_and_returns_property_value("http://some.href", (element, value) => element.StubAttribute("href",value), (element => element["href"]));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("http://some.href", (element, value) => element.StubAttribute("href",value), (element => element["href"]));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_name()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-name", (element, value) => element.Name = value, (element => element.Name));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-name", (element, value) => element.Name = value, (element => element.Name));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_selected_option()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-selected-option", (element, value) => element.SelectedOption = value, (element => element.SelectedOption));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-selected-option", (element, value) => element.SelectedOption = value, (element => element.SelectedOption));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_selected_positive()
         {
-            Synchronises_FindElement_and_returns_property_value(true, (element, value) => element.Selected = value, (element => element.Selected), Is.EqualTo);
+            Is_Equal_Synchronises_FindElement_and_returns_property_value(true, (element, value) => element.Selected = value, (element => element.Selected));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_disabled_negative()
         {
-            Synchronises_FindElement_and_returns_property_value(false, (element, value) => element.Disabled = value, (element => element.Disabled), Is.EqualTo);
+            Is_Equal_Synchronises_FindElement_and_returns_property_value(false, (element, value) => element.Disabled = value, (element => element.Disabled));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_disabled_positive()
         {
-            Synchronises_FindElement_and_returns_property_value(true, (element, value) => element.Disabled = value, (element => element.Disabled), Is.EqualTo);
+            Is_Equal_Synchronises_FindElement_and_returns_property_value(true, (element, value) => element.Disabled = value, (element => element.Disabled));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_selected_negative()
         {
-            Synchronises_FindElement_and_returns_property_value(false, (element, value) => element.Selected = value, (element => element.Selected), Is.EqualTo);
+            Is_Equal_Synchronises_FindElement_and_returns_property_value(false, (element, value) => element.Selected = value, (element => element.Selected));
         }
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_native()
         {
-            Synchronises_FindElement_and_returns_property_value(new object(), (element,value) => element.Native = value, (element => element.Native));
+            Is_Same_Synchronises_FindElement_and_returns_property_value(new object(), (element,value) => element.Native = value, (element => element.Native));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_innerHTML()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-innerHTML", (element, value) => element.InnerHTML = value, (element => element.InnerHTML));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-innerHTML", (element, value) => element.InnerHTML = value, (element => element.InnerHTML));
         }
 
         [Fact]
         public void It_synchronises_both_find_element_and_attribute_getter_for_outerHTML()
         {
-            Synchronises_FindElement_and_returns_property_value("actual-outerHTML", (element,value) => element.OuterHTML = value, (element => element.OuterHTML));
+            Is_Same_Synchronises_FindElement_and_returns_property_value("actual-outerHTML", (element,value) => element.OuterHTML = value, (element => element.OuterHTML));
         }
 
-        private void Synchronises_FindElement_and_returns_property_value<T>(T testValue, Action<StubElement, T> stubProperty, Func<ElementScope, T> getProperty, Func<object,Constraint> constraint = null)
+        private void Is_Equal_Synchronises_FindElement_and_returns_property_value<T>(T testValue, Action<StubElement, T> stubProperty, Func<ElementScope, T> getProperty)
         {
-            constraint = constraint ?? Is.SameAs;
             var stubElement = new StubElement();
 
             stubProperty(stubElement, testValue);
@@ -94,18 +93,41 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             SpyTimingStrategy.ReturnOnceThenExecuteImmediately(stubElement);
 
-            if (typeof (T) == typeof (bool))
+            if (typeof(T) == typeof(bool))
             {
-                Assert.That(getProperty(browserSession.FindId("some-element")), constraint(testValue));
+                Assert.Equal(testValue, getProperty(browserSession.FindId("some-element")));
             }
             else
             {
-                Assert.That(getProperty(browserSession.FindId("some-element")), constraint(testValue));
+                Assert.Equal(testValue, getProperty(browserSession.FindId("some-element")));
             }
 
             var queryResult = RunQueryAndCheckTiming();
 
-            Assert.That(queryResult, Is.SameAs(stubElement));
+            Assert.Same(stubElement, queryResult);
+        }
+        private void Is_Same_Synchronises_FindElement_and_returns_property_value<T>(T testValue, Action<StubElement, T> stubProperty, Func<ElementScope, T> getProperty)
+        {
+            var stubElement = new StubElement();
+
+            stubProperty(stubElement, testValue);
+
+            driver.StubId("some-element", stubElement, browserSession, sessionConfiguration);
+
+            SpyTimingStrategy.ReturnOnceThenExecuteImmediately(stubElement);
+
+            if (typeof(T) == typeof(bool))
+            {
+                Assert.Same(testValue, getProperty(browserSession.FindId("some-element")));
+            }
+            else
+            {
+                Assert.Same(testValue, getProperty(browserSession.FindId("some-element")));
+            }
+
+            var queryResult = RunQueryAndCheckTiming();
+
+            Assert.Same(stubElement, queryResult);
         }
     }
 }
