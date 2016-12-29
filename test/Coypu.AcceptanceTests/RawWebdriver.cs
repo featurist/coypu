@@ -1,14 +1,13 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
 namespace Coypu.AcceptanceTests
 {
-	[TestFixture,Explicit]
 	public class RawWebDriver
 	{
-	    [Test]
+	    [Fact]
 		public void Retries_Autotrader()
         {
             var browser = new FirefoxDriver();
@@ -26,16 +25,7 @@ namespace Coypu.AcceptanceTests
 	        browser.FindElementByName("keywords").SendKeys("vtr");
         }
 
-
-
-
-
-
-
-
-
-
-	    [Test]
+	    [Fact]
 		public void Visibility_NewTwitter()
 		{
             var browser = new FirefoxDriver();
@@ -57,7 +47,7 @@ namespace Coypu.AcceptanceTests
 
 
 
-	    [Test]
+	    [Fact]
 	    public void FindingStuff_CarBuzz()
         {
             var browser = new FirefoxDriver();
@@ -67,11 +57,11 @@ namespace Coypu.AcceptanceTests
 	        browser.FindElementByName("make_14").Click();
 	        browser.FindElementByName("make_11").Click();
 
-	        Assert.That(browser.PageSource.Contains(" 5 car reviews found"));
+	        Assert.True(browser.PageSource.Contains(" 5 car reviews found"));
 
 	        browser.FindElementByXPath("//ul[@class='seats']/li/button[@value='4']").Click();
 
-	        Assert.That(browser.PageSource.Contains(" 1 car reviews found"));
+	        Assert.True(browser.PageSource.Contains(" 1 car reviews found"));
 	    }
 	}
 }

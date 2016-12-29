@@ -1,12 +1,12 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_finding_windows : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Finds_by_name()
         {
             using (Driver)
@@ -45,7 +45,7 @@ namespace Coypu.Drivers.Tests
             return FindWindow("Pop Up Window");
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_title()
         {
             using (Driver)
@@ -57,7 +57,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_substring_title()
         {
             using (Driver)
@@ -68,7 +68,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_exact_title_over_substring()
         {
             using (Driver)
@@ -81,7 +81,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Finds_scoped_by_window()
         {
             using (Driver)
@@ -98,7 +98,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Errors_on_no_such_window()
         {
             using (Driver)
@@ -113,7 +113,7 @@ namespace Coypu.Drivers.Tests
             return Window(locator, Root, DefaultOptions);
         }
 
-        [Test]
+        [Fact]
         public void Errors_on_window_closed()
         {
             using (Driver)

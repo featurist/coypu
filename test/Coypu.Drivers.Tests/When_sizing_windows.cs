@@ -1,12 +1,12 @@
 ﻿using System.Drawing;
 using Coypu.Finders;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_sizing_windows : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void MaximisesWindow()
         {
             using (Driver)
@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void MaximisesCorrectWindowScope()
         {
             using (Driver)
@@ -49,7 +49,7 @@ namespace Coypu.Drivers.Tests
 
 
 
-        [Test]
+        [Fact]
         public void ResizesWindow()
         {
             using (Driver)
@@ -58,7 +58,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void ResizesCorrectWindowScope()
         {
             using (Driver)

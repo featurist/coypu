@@ -1,20 +1,20 @@
 ﻿using System.Linq;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_finding_all_elements_by_css : DriverSpecs
     {
 
-        [Test]
+        [Fact]
         public void Returns_empty_if_no_matches()
         {
             const string shouldNotFind = "#inspectingContent p.css-missing-test";
-            Assert.That(Driver.FindAllCss(shouldNotFind, Root, DefaultOptions), Is.Empty);
+            Assert.Empty(Driver.FindAllCss(shouldNotFind, Root, DefaultOptions));
         }
 
-        [Test]
+        [Fact]
         public void Returns_all_matches_by_css()
         {
             const string shouldFind = "#inspectingContent ul#cssTest li";

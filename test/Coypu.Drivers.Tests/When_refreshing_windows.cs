@@ -1,18 +1,18 @@
 ﻿using System;
 using Coypu.Finders;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_refreshing_windows : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void RefreshCausesPageToReload()
         {
             RefreshCausesScopeToReload(Root);
         }
 
-        [Test]
+        [Fact]
         public void RefreshesCorrectWindowScope()
         {
             Driver.Click(Link("Open pop up window"));

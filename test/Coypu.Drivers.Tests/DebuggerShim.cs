@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using NSpec.Domain;
 using System.Reflection;
 using NSpec;
@@ -9,7 +9,7 @@ using System.Linq;
 //[TestFixture]
 public class DebuggerShim
 {
-    //[Test]
+    //[Fact]
     public void debug()
     {
         var tagOrClassName = "class_or_tag_you_want_to_debug";

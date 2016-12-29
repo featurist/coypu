@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_clicking : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Clicks_the_underlying_element()
         {
             var element = Button("clickMeTest");

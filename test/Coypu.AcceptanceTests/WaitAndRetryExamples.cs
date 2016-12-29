@@ -1,37 +1,17 @@
 ﻿using System;
 using System.IO;
 using Coypu.Drivers.Selenium;
-using Coypu.Drivers.Watin;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    public class WaitAndRetryExamples
+    public class WaitAndRetryExamples : IClassFixture<WaitAndRetryExamplesFixture>
     {
         protected BrowserSession browser;
 
-        [TestFixtureSetUp]
-        public void SetUpFixture()
+        public WaitAndRetryExamples(WaitAndRetryExamplesFixture fixture)
         {
-            var configuration = new SessionConfiguration
-                {
-                    Timeout = TimeSpan.FromMilliseconds(2000),
-                    Browser = Drivers.Browser.Firefox,
-                    Driver = typeof(SeleniumWebDriver)
-                };
-            browser = new BrowserSession(configuration);
-
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            browser.Dispose();
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
+            browser = fixture.BrowserSession;
             ReloadTestPageWithDelay();
         }
 
@@ -59,5 +39,26 @@ namespace Coypu.AcceptanceTests
             ReloadTestPage();
             ApplyAsyncDelay();
         }   
+    }
+
+    public class WaitAndRetryExamplesFixture : IDisposable
+    {
+        public BrowserSession BrowserSession;
+
+        public WaitAndRetryExamplesFixture()
+        {
+            var configuration = new SessionConfiguration
+            {
+                Timeout = TimeSpan.FromMilliseconds(2000),
+                Browser = Drivers.Browser.Firefox,
+                Driver = typeof(SeleniumWebDriver)
+            };
+            BrowserSession = new BrowserSession(configuration);
+        }
+
+        public void Dispose()
+        {
+            BrowserSession.Dispose();
+        }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using Coypu.Finders;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_forced_to_find_invisible_elements : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Does_find_hidden_inputs()
         {
             Assert.That(Field("firstHiddenInputId", options : Options.Invisible).Value, Is.EqualTo("first hidden input"));
@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Tests
             Assert.Throws<MissingHtmlException>(() => Field("firstHiddenInputId"));
         }
 
-        [Test]
+        [Fact]
         public void Does_find_invisible_elements()
         {
             Assert.That(Button("firstInvisibleInputId", options: Options.Invisible).Name, Is.EqualTo("firstInvisibleInputName"));

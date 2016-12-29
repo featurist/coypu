@@ -5,7 +5,7 @@ using Coypu.Drivers.Tests.Sites;
 using Coypu.Finders;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
-using NUnit.Framework;
+using Xunit;
 
 [SetUpFixture]
 public class AssemblyTearDown

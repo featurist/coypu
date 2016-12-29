@@ -1,13 +1,13 @@
 ﻿using System;
 using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_interacting_with_dialogs : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Accepts_alerts()
         {
             using (Driver)
@@ -20,7 +20,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Clears_dialog()
         {
             using (Driver)
@@ -32,7 +32,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Missing_dialog_throws_coypu_exception()
         {
             using (Driver)
@@ -42,7 +42,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Returns_true()
         {
             using (Driver)
@@ -54,7 +54,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Cancel_Clears_dialog()
         {
             using (Driver)
@@ -66,7 +66,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Cancel_Returns_false()
         {
             using (Driver)
@@ -79,7 +79,7 @@ namespace Coypu.Drivers.Tests
         }
 
         // IE can't do this
-        [Test]
+        [Fact]
         public void Finds_scope_first_for_alerts()
         {
             using (Driver)
@@ -98,7 +98,7 @@ namespace Coypu.Drivers.Tests
         }
 
         // IE can't do this
-        [Test]
+        [Fact]
         public void Finds_scope_first_for_confirms()
         {
             using (Driver)

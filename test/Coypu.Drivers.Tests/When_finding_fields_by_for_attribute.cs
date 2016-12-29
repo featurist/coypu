@@ -1,55 +1,55 @@
 ﻿using System.Linq;
 using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_finding_fields_by_for_attribute : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Finds_text_input()
         {
             Field("text input field linked by for", options: Options.Exact).Id.should_be("forLabeledTextInputFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_password_field()
         {
             Field("password field linked by for").Id.should_be("forLabeledPasswordFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_select_field()
         {
             Field("select field linked by for").Id.should_be("forLabeledSelectFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_checkbox()
         {
             Field("checkbox field linked by for").Id.should_be("forLabeledCheckboxFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_radio_button()
         {
             Field("radio field linked by for").Id.should_be("forLabeledRadioFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_textarea()
         {
             Field("textarea field linked by for").Id.should_be("forLabeledTextareaFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_file_input()
         {
             Field("file field linked by for").Id.should_be("forLabeledFileFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_substring_text()
         {
             var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.Substring);
@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Tests
                 }));
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_exact_text()
         {
             var fields = new FieldFinder(Driver, "Some for labeled radio option", Root, DefaultOptions).Find(Options.Exact);

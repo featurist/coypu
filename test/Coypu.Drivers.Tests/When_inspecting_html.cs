@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
@@ -11,7 +11,7 @@ namespace Coypu.Drivers.Tests
             Driver.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"), Root);
         }
 
-        [Test]
+        [Fact]
         public void FindsElementOuterHTML()
         {
             VisitTestPage();
@@ -20,7 +20,7 @@ namespace Coypu.Drivers.Tests
             Assert.That(outerHTML, Is.EqualTo("<table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table>"));
         }
 
-        [Test]
+        [Fact]
         public void FindsElementInnerHTML()
         {
             VisitTestPage();
@@ -29,7 +29,7 @@ namespace Coypu.Drivers.Tests
             Assert.That(innerHTML, Is.EqualTo("<tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody>"));
         }
 
-        [Test]
+        [Fact]
         public void FindsWindowOuterHTML()
         {
             VisitTestPage();
@@ -38,7 +38,7 @@ namespace Coypu.Drivers.Tests
             Assert.That(outerHTML, Is.EqualTo("<html><head><title>table</title></head><body><table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table></body></html>"));
         }
 
-        [Test]
+        [Fact]
         public void FindsWindowInnerHTML()
         {
             VisitTestPage();

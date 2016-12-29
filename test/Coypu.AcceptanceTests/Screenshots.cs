@@ -1,14 +1,17 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
     public class Screenshots : WaitAndRetryExamples
     {
-        [Test]
+        public Screenshots(WaitAndRetryExamplesFixture fixture) : base(fixture)
+        {
+        }
+
+        [Fact]
         public void SavesToSpecifiedLocation()
         {
             browser.Visit(TestPageLocation("test-card.jpg"));
@@ -17,7 +20,7 @@ namespace Coypu.AcceptanceTests
             SavesToSpecifiedLocation(browser);
         }
 
-        [Test]
+        [Fact]
         public void CapturesCorrectWindow()
         {
             browser.ClickLink("Open pop up window");
@@ -39,12 +42,12 @@ namespace Coypu.AcceptanceTests
             {
                 browserWindow.SaveScreenshot(fileName, ImageFormat.Jpeg);
 
-                Assert.That(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
+                Assert.True(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
                 using (var saved = Image.FromFile("screenshot-test-card.jpg"))
                 {
                     var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;").ToString());
                     var docHeight = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientHeight;").ToString());
-                    Assert.That(saved.PhysicalDimension, Is.EqualTo(new SizeF(docWidth, docHeight)));
+                    Assert.Equal(new SizeF(docWidth, docHeight), saved.PhysicalDimension);
                 }
             }
             finally

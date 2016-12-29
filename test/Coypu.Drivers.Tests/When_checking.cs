@@ -1,11 +1,11 @@
 ﻿using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_checking : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Checks_an_unchecked_checkbox()
         {
             var checkbox = Field("uncheckedBox"); 
@@ -18,7 +18,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Leaves_a_checked_checkbox_checked()
         {
             var checkbox = Field("checkedBox");
@@ -31,7 +31,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Unchecks_a_checked_checkbox()
         {
             var checkbox = Field("checkedBox");
@@ -44,7 +44,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Leaves_an_unchecked_checkbox_unchecked()
         {
             var checkbox = Field("uncheckedBox");
@@ -57,7 +57,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Fires_onclick_event_on_check()
         {
             var checkbox = Field("uncheckedBox");
@@ -69,7 +69,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Fires_onclick_event_on_uncheck()
         {
             var checkbox = Field("checkedBox");

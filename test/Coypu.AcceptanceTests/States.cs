@@ -1,34 +1,17 @@
 ﻿using System;
 using System.IO;
-using NUnit.Framework;
+using Xunit;
 using Coypu.Queries;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
-    public class States
+    public class States : IClassFixture<StatesFixture>
     {
-        private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
-
-        [TestFixtureSetUp]
-        public void SetUpFixture()
+        
+        public States(StatesFixture statesFixture)
         {
-            SessionConfiguration = new SessionConfiguration();
-            SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
-            browser = new BrowserSession(SessionConfiguration);
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            browser.Dispose();
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
-            
+            browser = statesFixture.BrowserSession;
             ReloadTestPage();
         }
 
@@ -44,7 +27,7 @@ namespace Coypu.AcceptanceTests
             browser.Visit("file:///" + new FileInfo(@"html\states.htm").FullName.Replace("\\", "/"));
         }
 
-        [Test]
+        [Fact]
         public void Page_reaches_first_of_three_possible_states()
         {
             ShowStateAsync("state1", 500);
@@ -55,10 +38,10 @@ namespace Coypu.AcceptanceTests
 
             State foundState = browser.FindState(state1, state2, state3);
 
-            Assert.That(foundState, Is.SameAs(state1));
+            Assert.Same(state1, foundState);
         }
 
-        [Test]
+        [Fact]
         public void Page_reaches_second_of_three_possible_states()
         {
             ShowStateAsync("state2", 500);
@@ -69,11 +52,11 @@ namespace Coypu.AcceptanceTests
 
             State foundState = browser.FindState(state1, state2, state3);
 
-            Assert.That(foundState, Is.SameAs(state2));
+            Assert.Same(state2, foundState);
         }
 
 
-        [Test]
+        [Fact]
         public void Page_reaches_third_of_three_possible_states()
         {
             ShowStateAsync("state3", 500);
@@ -84,10 +67,10 @@ namespace Coypu.AcceptanceTests
 
             State foundState = browser.FindState(state1, state2, state3);
 
-            Assert.That(foundState, Is.SameAs(state3));
+            Assert.Same(state3, foundState);
         }
 
-        [Test]
+        [Fact]
         public void Page_reaches_none_of_three_possible_states()
         {
             var state1 = new State(new LambdaQuery<bool>(() => browser.HasContent("State one reached")));
@@ -95,6 +78,25 @@ namespace Coypu.AcceptanceTests
             var state3 = new State(new LambdaQuery<bool>(() => browser.HasContent("State three reached")));
 
             Assert.Throws<MissingHtmlException>(() => browser.FindState(state1, state2, state3));
+        }
+    }
+
+    public class StatesFixture : IDisposable
+    {
+        public BrowserSession BrowserSession;
+
+        public StatesFixture()
+        {
+            var configuration = new SessionConfiguration
+            {
+                Timeout = TimeSpan.FromMilliseconds(1000),
+            };
+            BrowserSession = new BrowserSession(configuration);
+        }
+
+        public void Dispose()
+        {
+            BrowserSession.Dispose();
         }
     }
 }

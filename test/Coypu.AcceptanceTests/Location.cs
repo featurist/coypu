@@ -1,18 +1,16 @@
 ﻿using System;
 using System.IO;
 using Coypu.AcceptanceTests.Sites;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
-    public class Location
+    public class Location : IDisposable
     {
         private BrowserSession browser;
         private SelfishSite site;
         
-        [SetUp]
-        public void SetUp()
+        public Location()
         {
             site = new SelfishSite();
             
@@ -24,35 +22,34 @@ namespace Coypu.AcceptanceTests
             browser.Visit("/");
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             browser.Dispose();
             site.Dispose();
         }
 
-        [Test]
+        [Fact]
         public void It_exposes_the_current_page_location()
         {
             browser.Visit("/");
-            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/")));
+            Assert.Equal(new Uri(site.BaseUri, "/"), browser.Location);
 
             browser.Visit("/auto_login");
-            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/auto_login")));
+            Assert.Equal(new Uri(site.BaseUri, "/auto_login"), browser.Location);
         }
 
-        [Test]
+        [Fact]
         public void Go_back_and_forward_in_history()
         {
             browser.Visit("/");
             browser.Visit("/auto_login");
-            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/auto_login")));
+            Assert.Equal(new Uri(site.BaseUri, "/auto_login"), browser.Location);
 
             browser.GoBack();
-            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/")));
+            Assert.Equal(new Uri(site.BaseUri, "/"), browser.Location);
 
             browser.GoForward();
-            Assert.That(browser.Location, Is.EqualTo(new Uri(site.BaseUri, "/auto_login")));
+            Assert.Equal(new Uri(site.BaseUri, "/auto_login"), browser.Location);
         }
 
         private void ReloadTestPage()
@@ -60,11 +57,11 @@ namespace Coypu.AcceptanceTests
             browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
         }
 
-        [Test]
+        [Fact]
         public void It_exposes_the_location_of_an_iframe_scope()
         {
             ReloadTestPage();
-            Assert.That(browser.FindFrame("iframe1").Location.AbsolutePath, Is.StringContaining("iFrame1.htm"));
+            Assert.Contains("iFrame1.htm", browser.FindFrame("iframe1").Location.AbsolutePath);
         }
     }
 }

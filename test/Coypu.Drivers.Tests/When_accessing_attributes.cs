@@ -1,12 +1,12 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_accessing_attributes : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Exposes_element_attributes()
         {
             var formWithAttributesToTest = Id("attributeTestForm", Root, DefaultOptions);

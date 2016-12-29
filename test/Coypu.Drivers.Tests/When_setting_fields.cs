@@ -1,6 +1,6 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Tests
             return @select;
         }
 
-        [Test]
+        [Fact]
         public void Sets_value_of_text_input_field_with_id()
         {
             var textField = Field("containerLabeledTextInputFieldName");  
@@ -27,7 +27,7 @@ namespace Coypu.Drivers.Tests
             findAgain.Value.should_be("should be much quicker since it's set by js");
         }
 
-        [Test]
+        [Fact]
         public void Sets_value_of_text_input_field_with_no_id()
         {
             var textField = Field("Field with no id");
@@ -39,7 +39,7 @@ namespace Coypu.Drivers.Tests
             findAgain.Value.should_be("set by sendkeys");
         }
 
-        [Test]
+        [Fact]
         public void Sets_value_of_number_input_field()
         {
             var numberField = Field("containerLabeledNumberInputFieldId");
@@ -51,7 +51,7 @@ namespace Coypu.Drivers.Tests
             findAgain.Value.should_be("5150");
         }
 
-        [Test]
+        [Fact]
         public void Sets_value_of_text_input_field_with_no_type()
         {
             var textField = Field("fieldWithNoType");
@@ -64,7 +64,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Sets_value_of_textarea_field()
         {
             var textField = Field("containerLabeledTextareaFieldName");
@@ -77,7 +77,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Selects_option_by_text_or_value()
         {
             var textField = Field("containerLabeledSelectFieldId");
@@ -94,7 +94,7 @@ namespace Coypu.Drivers.Tests
             andAgain.Value.should_be("select2value1");
         }
 
-        [Test]
+        [Fact]
         public void Fires_change_event_when_selecting_an_option()
         {
             var textField = Field("containerLabeledSelectFieldId");

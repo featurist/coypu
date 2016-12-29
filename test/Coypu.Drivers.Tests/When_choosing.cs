@@ -1,11 +1,11 @@
 ﻿using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_choosing : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Chooses_radio_button_from_list()
         {
             var radioButton1 = Field("chooseRadio1");
@@ -30,7 +30,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Fires_onclick_event()
         {
             var radio = Field("chooseRadio2");

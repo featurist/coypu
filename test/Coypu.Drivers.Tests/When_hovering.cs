@@ -1,11 +1,11 @@
 ﻿using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     public class When_hovering : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Mouses_over_the_underlying_element()
 
         {

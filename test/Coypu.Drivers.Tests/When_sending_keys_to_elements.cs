@@ -1,11 +1,11 @@
 ﻿using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_sending_keys_to_elements : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Sets_value_of_text_input_field_with_id()
         {
             var textField = Field("containerLabeledTextInputFieldName");

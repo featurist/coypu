@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_uploading_files : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Sets_the_path_to_be_uploaded()
         {
             const string someLocalFile = @"local.file";

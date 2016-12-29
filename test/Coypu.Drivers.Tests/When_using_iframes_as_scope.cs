@@ -1,12 +1,12 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_using_iframes_as_scope : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Does_not_find_something_in_an_iframe()
         {
             Assert.Throws<MissingHtmlException>(() => Id("iframe1ButtonId", Root, DefaultOptions));
@@ -19,21 +19,21 @@ namespace Coypu.Drivers.Tests
                                                  new FrameFinder(Driver, "I am iframe two", Root, DefaultOptions));
         }
 
-        [Test]
+        [Fact]
         public void Finds_elements_among_multiple_scopes_when_finding_by_css()
         {
             Finds_elements_among_multiple_scopes(new CssFinder(Driver, "iframe#iframe1", Root, DefaultOptions),
                                                  new CssFinder(Driver, "iframe#iframe2", Root, DefaultOptions));
         }
 
-        [Test]
+        [Fact]
         public void Finds_elements_among_multiple_scopes_when_finding_by_xpath()
         {
             Finds_elements_among_multiple_scopes(new XPathFinder(Driver, "//iframe[@id='iframe1']", Root, DefaultOptions),
                                                  new XPathFinder(Driver, "//iframe[@id='iframe2']", Root, DefaultOptions));
         }
 
-        [Test]
+        [Fact]
         public void Finds_elements_among_multiple_scopes_when_finding_by_id()
         {
             Finds_elements_among_multiple_scopes(new IdFinder(Driver, "iframe1", Root, DefaultOptions),
@@ -49,7 +49,7 @@ namespace Coypu.Drivers.Tests
             Button("scoped button", iframeTwo, DefaultOptions).Id.should_be("iframe2ButtonId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_clear_scope_back_to_the_whole_window()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver,null,null,null,DisambiguationStrategy);
@@ -58,7 +58,7 @@ namespace Coypu.Drivers.Tests
             Button("scoped button", Root, Options.PreferExact).Id.should_be("scope1ButtonId");
         }
 
-        [Test]
+        [Fact]
         public void Can_fill_in_a_text_input_within_an_iframe()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
@@ -72,7 +72,7 @@ namespace Coypu.Drivers.Tests
             return Field(locator, scope, DefaultOptions);
         }
 
-        [Test]
+        [Fact]
         public void Can_scope_around_an_iframe()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root,DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
@@ -82,7 +82,7 @@ namespace Coypu.Drivers.Tests
             Button("scoped button", body, Options.PreferExact).Id.should_be("scope1ButtonId");
         }
 
-        [Test]
+        [Fact]
         public void Can_scope_inside_an_iframe()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, null);

@@ -1,35 +1,17 @@
 ﻿using System;
 using System.IO;
-using NUnit.Framework;
+using Coypu.Drivers;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
-    public class TextPrecisionAndMatch
+    public class TextPrecisionAndMatch : IClassFixture<TextPrecisionAndMatchFixture>
     {
+        private BrowserSession browser;
 
-        protected BrowserSession browser;
-
-        [TestFixtureSetUp]
-        public void SetUpFixture()
+        public TextPrecisionAndMatch(TextPrecisionAndMatchFixture fixture)
         {
-            var configuration = new SessionConfiguration
-            {
-                Timeout = TimeSpan.FromMilliseconds(2000),
-                Browser = Drivers.Browser.InternetExplorer
-            };
-            browser = new BrowserSession(configuration);
-
-        }
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            browser.Dispose();
-        }
-
-        [SetUp]
-        public void SetUp()
-        {
+            browser = fixture.BrowserSession;
             ReloadTestPage();
         }
 
@@ -44,16 +26,16 @@ namespace Coypu.AcceptanceTests
             return testPageLocation;
         }
 
-        [Test]
+        [Fact]
         public void First_allows_ambiguous_results()
         {
-            Assert.That(browser.FindField("Some for labeled", Options.FirstSubstring).Id, Is.EqualTo("forLabeledRadioFieldPartialMatchId"));
-            Assert.That(browser.FindField("someFieldNameThatAppearsTwice", Options.FirstExact).Id, Is.EqualTo("someFieldNameThatAppearsTwice_1"));
-            Assert.That(browser.FindField("someFieldNameThatAppearsTwice", Options.FirstPreferExact).Id, Is.EqualTo("someFieldNameThatAppearsTwice_1"));
-            Assert.That(browser.FindField("Some for labeled radio option", Options.FirstPreferExact).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
+            Assert.Equal("forLabeledRadioFieldPartialMatchId", browser.FindField("Some for labeled", Options.FirstSubstring).Id);
+            Assert.Equal("someFieldNameThatAppearsTwice_1", browser.FindField("someFieldNameThatAppearsTwice", Options.FirstExact).Id);
+            Assert.Equal("someFieldNameThatAppearsTwice_1", browser.FindField("someFieldNameThatAppearsTwice", Options.FirstPreferExact).Id);
+            Assert.Equal("forLabeledRadioFieldExactMatchId", browser.FindField("Some for labeled radio option", Options.FirstPreferExact).Id);
         }
 
-        [Test]
+        [Fact]
         public void Single_does_not_allow_ambiguous_results()
         {
             Assert.Throws<AmbiguousException>(() => browser.FindField("Some for labeled", Options.SingleSubstring).Now());
@@ -62,18 +44,18 @@ namespace Coypu.AcceptanceTests
             Assert.Throws<AmbiguousException>(() => browser.FindField("Some for labeled", Options.SinglePreferExact).Now());
         }
 
-        [Test]
+        [Fact]
         public void Exact_finds_only_exact_text_matches()
         {
-            Assert.That(browser.FindField("Some for labeled radio option", Options.FirstExact).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
+            Assert.Equal("forLabeledRadioFieldExactMatchId", browser.FindField("Some for labeled radio option", Options.FirstExact).Id);
             Assert.Throws<MissingHtmlException>(() => browser.FindField("Some for labeled radio", Options.FirstExact).Now());
         }
         
-        [Test]
+        [Fact]
         public void Substring_finds_substring_text_matches()
         {
-            Assert.That(browser.FindField("Some for labeled radio option", Options.FirstSubstring).Id, Is.EqualTo("forLabeledRadioFieldPartialMatchId"));
-            Assert.That(browser.FindField("Some for labeled", Options.FirstSubstring).Id, Is.EqualTo("forLabeledRadioFieldPartialMatchId"));
+            Assert.Equal("forLabeledRadioFieldPartialMatchId", browser.FindField("Some for labeled radio option", Options.FirstSubstring).Id);
+            Assert.Equal("forLabeledRadioFieldPartialMatchId", browser.FindField("Some for labeled", Options.FirstSubstring).Id);
         }
 
         // There is a race condition where these tests can fail occasionally
@@ -91,18 +73,38 @@ namespace Coypu.AcceptanceTests
         // but this would be a performance hit all over the place. 
         //
         // Probably best just to encourage switching to TextPrecision.Exact where you hit this situation.
-        [Test]
+        [Fact]
         public void PreferExact_finds_exact_matches_before_substring_matches()
         {
-            Assert.That(browser.FindField("Some for labeled radio option", Options.FirstPreferExact).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
-            Assert.That(browser.FindField("Some for labeled radio option", Options.SinglePreferExact).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
+            Assert.Equal("forLabeledRadioFieldExactMatchId", browser.FindField("Some for labeled radio option", Options.FirstPreferExact).Id);
+            Assert.Equal("forLabeledRadioFieldExactMatchId", browser.FindField("Some for labeled radio option", Options.SinglePreferExact).Id);
         }
 
-        [Test]
+        [Fact]
         public void PreferExact_finds_exact_match_select_option_before_substring_match()
         {
             browser.Select("one",Options.PreferExact).From("Ambiguous select options");
-            Assert.That(browser.FindField("Ambiguous select options").SelectedOption, Is.EqualTo("one"));
+            Assert.Equal("one", browser.FindField("Ambiguous select options").SelectedOption);
+        }
+    }
+
+    public class TextPrecisionAndMatchFixture : IDisposable
+    {
+        public BrowserSession BrowserSession;
+
+        public TextPrecisionAndMatchFixture()
+        {
+            var configuration = new SessionConfiguration
+            {
+                Timeout = TimeSpan.FromMilliseconds(2000),
+                Browser = Browser.InternetExplorer
+            };
+            BrowserSession = new BrowserSession(configuration);
+        }
+
+        public void Dispose()
+        {
+            BrowserSession.Dispose();
         }
     }
 }

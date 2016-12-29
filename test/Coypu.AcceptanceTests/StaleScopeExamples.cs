@@ -3,56 +3,40 @@ using System.IO;
 using System.Linq;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
     /// <summary>
     /// Simple examples for each API method - to show usage and check everything is wired up properly
     /// </summary>
-    [TestFixture]
-    public class StaleScopeExamples
+    public class StaleScopeExamples : IClassFixture<StaleScopeBrowserSessionFixture>
     {
         private BrowserSession browser;
 
-        [TestFixtureSetUp]
-        public void SetUpFixture()
+        public StaleScopeExamples(StaleScopeBrowserSessionFixture fixture)
         {
-            var configuration = new SessionConfiguration
-                                    {
-                                        Timeout = TimeSpan.FromMilliseconds(2000),
-                                        Driver = typeof(SeleniumWebDriver),
-                                        Browser = Browser.Chrome
-                                    };
-            browser = new BrowserSession(configuration);
-
+            browser = fixture.BrowserSession;
         }
 
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            browser.Dispose();
-        }
-
-        
         private void VisitTestPage(string page)
         {
             browser.Visit("file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/"));
         }
 
-        [Test]
+        [Fact]
         public void Scope_becomes_stale()
         {
             VisitTestPage("tricky.htm");
 
             var section1 = browser.FindSection("section 1");
-            Assert.That(section1.FindLink("the link").Exists());
+            Assert.True(section1.FindLink("the link").Exists());
 
             var originalLocation = browser.Location;
 
             VisitTestPage("iFrame1.htm");
 
-            Assert.That(section1.FindLink("the link").Missing());
+            Assert.True(section1.FindLink("the link").Missing());
 
             browser.ExecuteScript("window.setTimeout(function() {window.location.href = '" + originalLocation + "'},1000);");
 
@@ -60,33 +44,33 @@ namespace Coypu.AcceptanceTests
         }
 
 
-        [Test]
+        [Fact]
         public void Scope_becomes_stale_looking_for_all_xpath()
         {
             VisitTestPage("tricky.htm");
 
             var section1 = browser.FindSection("section 1");
-            Assert.That(section1.FindLink("the link").Exists());
+            Assert.True(section1.FindLink("the link").Exists());
 
             VisitTestPage("iFrame1.htm");
             VisitTestPage("tricky.htm");
-            Assert.That(section1.FindAllXPath("*").Count(), Is.GreaterThan(0));
+            Assert.True(section1.FindAllXPath("*").Count() > 0);
         }
-        [Test]
+        [Fact]
         public void Scope_becomes_stale_looking_for_all_css()
         {
             VisitTestPage("tricky.htm");
 
             var section1 = browser.FindSection("section 1");
-            Assert.That(section1.FindLink("the link").Exists());
+            Assert.True(section1.FindLink("the link").Exists());
 
             VisitTestPage("iFrame1.htm");
             VisitTestPage("tricky.htm");
-            Assert.That(section1.FindAllCss("*").Count(), Is.GreaterThan(0));
+            Assert.True(section1.FindAllCss("*").Count() > 0);
         }
 
 
-        [Test]
+        [Fact]
         public void Scope_becomes_stale_iframe()
         {
             VisitTestPage("InteractionTestsPage.htm");
@@ -97,26 +81,26 @@ namespace Coypu.AcceptanceTests
             var iframe2 = browser.FindFrame("iframe2");
             var button = iframe1.FindButton("scoped button");
 
-            Assert.That(button.Exists());
+            Assert.True(button.Exists());
 
-            Assert.That(iframe1.HasContent("I am iframe one"));
+            Assert.True(iframe1.HasContent("I am iframe one"));
 
             VisitTestPage("tricky.htm");
 
-            Assert.That(iframe1.Missing());
-            Assert.That(button.Missing());
+            Assert.True(iframe1.Missing());
+            Assert.True(button.Missing());
 
             browser.ExecuteScript("window.setTimeout(function() {window.location.href = '" + originalLocation + "'},1000);");
 
-            Assert.That(iframe1.HasContent("I am iframe one"));
-            Assert.That(iframe2.HasContent("I am iframe two"));
+            Assert.True(iframe1.HasContent("I am iframe one"));
+            Assert.True(iframe2.HasContent("I am iframe two"));
 
-            Assert.That(browser.Title, Is.EqualTo("Coypu interaction tests page"));
+            Assert.Equal("Coypu interaction tests page", browser.Title);
 
             button.Click();
         }
 
-        [Test]
+        [Fact]
         public void Scope_becomes_stale_window()
         {
             VisitTestPage("InteractionTestsPage.htm");
@@ -128,20 +112,20 @@ namespace Coypu.AcceptanceTests
             var popUp = browser.FindWindow("Pop Up Window");
             var button = popUp.FindButton("scoped button", timeToClickManuallyInIE);
 
-            Assert.That(button.Exists());
-            Assert.That(popUp.HasContent("I am a pop up window"));
+            Assert.True(button.Exists());
+            Assert.True(popUp.HasContent("I am a pop up window"));
 
             CloseWindow(popUp);
-            Assert.That(popUp.Missing(), "Expected popUp window to be missing");
-            Assert.That(button.Missing(), "Expected button in popup to be missing");
+            Assert.True(popUp.Missing(), "Expected popUp window to be missing");
+            Assert.True(button.Missing(), "Expected button in popup to be missing");
 
             browser.ClickLink("Open pop up window");
 
-            Assert.That(popUp.HasContent("I am a pop up window", timeToClickManuallyInIE));
+            Assert.True(popUp.HasContent("I am a pop up window", timeToClickManuallyInIE));
             button.Click();
         }
 
-        [Test]
+        [Fact]
         public void Window_is_not_refound_unless_stale()
         {
             VisitTestPage("InteractionTestsPage.htm");
@@ -151,12 +135,12 @@ namespace Coypu.AcceptanceTests
             var popUpBody = popUp.FindCss("body");
 
             popUp.ExecuteScript("document.title = 'Changed title';");
-            Assert.That(browser.FindLink("Open pop up window").Exists());
+            Assert.True(browser.FindLink("Open pop up window").Exists());
 
-            Assert.That(popUp.HasContent("I am a pop up window"));
+            Assert.True(popUp.HasContent("I am a pop up window"));
 
             var findPopUpAgain = browser.FindWindow("Pop Up Window");
-            Assert.That(findPopUpAgain.Missing(), "Expected pop-up not to be found now title has changed");
+            Assert.True(findPopUpAgain.Missing(), "Expected pop-up not to be found now title has changed");
         }
 
 
@@ -170,6 +154,27 @@ namespace Coypu.AcceptanceTests
             {
                 // IE permissions
             }
+        }
+    }
+
+    public class StaleScopeBrowserSessionFixture : IDisposable
+    {
+        public BrowserSession BrowserSession;
+
+        public StaleScopeBrowserSessionFixture()
+        {
+            var configuration = new SessionConfiguration
+            {
+                Timeout = TimeSpan.FromMilliseconds(2000),
+                Driver = typeof(SeleniumWebDriver),
+                Browser = Browser.Chrome
+            };
+            BrowserSession = new BrowserSession(configuration);
+        }
+
+        public void Dispose()
+        {
+            BrowserSession.Dispose();
         }
     }
 }

@@ -2,18 +2,16 @@
 using System.IO;
 using System.Text;
 using Coypu.AcceptanceTests.Sites;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
-    public class WebRequests
+    public class WebRequests : IDisposable
     {
         private SelfishSite site;
         private BrowserSession browser;
 
-        [SetUp]
-        public void SetUp()
+        public WebRequests()
         {
             site = new SelfishSite();
 
@@ -26,37 +24,36 @@ namespace Coypu.AcceptanceTests
             browser.Visit("/");
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             browser.Dispose();
             site.Dispose();
         }
 
-        [Test]
+        [Fact]
         public void It_saves_a_resource_from_the_web()
         {
             var saveAs = TempFileName();
-            var expectedResource = Encoding.Default.GetBytes("bdd");
+            var expectedResource = Encoding.UTF8.GetBytes("bdd");
 
             browser.SaveWebResource("/resource/bdd", saveAs);
 
-            Assert.That(File.ReadAllBytes(saveAs), Is.EqualTo(expectedResource));
+            Assert.Equal(expectedResource, File.ReadAllBytes(saveAs));
         }
 
-        [Test]
+        [Fact]
         public void It_saves_a_restricted_file_from_a_site_you_are_logged_into()
         {
             var saveAs = TempFileName();
             var expectedResource = "bdd";
             
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
-            Assert.That(File.ReadAllBytes(saveAs), Is.Not.EqualTo(expectedResource));
+            Assert.NotEqual(expectedResource, File.ReadAllText(saveAs));
 
             browser.Visit("/auto_login");
 
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
-            Assert.That(File.ReadAllText(saveAs), Is.EqualTo(expectedResource));
+            Assert.Equal(expectedResource, File.ReadAllText(saveAs));
         }
 
         private string TempFileName()

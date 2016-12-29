@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -20,10 +21,10 @@ namespace Coypu.Drivers.Selenium
                         IntroduceInstabilityByIgnoringProtectedModeSettings = true,
                         EnableNativeEvents = true
                     };
-                return new InternetExplorerDriver(options);
+                return new InternetExplorerDriver(Directory.GetCurrentDirectory(), options);
             }
             if (browser == Browser.Chrome)
-                return new ChromeDriver();
+                return new ChromeDriver(Directory.GetCurrentDirectory());
             if (browser == Browser.HtmlUnit)
                 return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
             if (browser == Browser.HtmlUnitWithJavaScript) {

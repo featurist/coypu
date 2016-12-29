@@ -1,8 +1,8 @@
 ﻿{
-  "version": "2.0.0-*",
+  "version": "3.0.0-*",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "CoreCompat.Selenium.WebDriver": "2.54.0-*"
   },
 

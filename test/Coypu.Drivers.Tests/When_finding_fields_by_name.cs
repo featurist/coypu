@@ -1,48 +1,48 @@
 using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_finding_fields_by_name : DriverSpecs {
 
-        [Test]
+        [Fact]
         public void Finds_text_input()
         {
             Field("containerLabeledTextInputFieldName").Value.should_be("text input field two val");
         }
 
-        [Test]
+        [Fact]
         public void Finds_textarea()
         {
             Field("containerLabeledTextareaFieldName").Value.should_be("textarea field two val");
         }
 
-        [Test]
+        [Fact]
         public void Finds_select()
         {
             Field("containerLabeledSelectFieldName").Id.should_be("containerLabeledSelectFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_checkbox()
         {
             Field("containerLabeledCheckboxFieldName").Value.should_be("checkbox field two val");
         }
 
-        [Test]
+        [Fact]
         public void Does_NOT_find_radio_button()
         {
             Assert.Throws<MissingHtmlException>(() => Button("containerLabeledRadioFieldName"));
         }
 
-        [Test]
+        [Fact]
         public void Finds_password_input()
         {
             Field("containerLabeledPasswordFieldName").Id.should_be("containerLabeledPasswordFieldId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_file_input()
         {
             Field("containerLabeledFileFieldName").Id.should_be("containerLabeledFileFieldId");

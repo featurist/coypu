@@ -1,12 +1,12 @@
 ﻿using System;
 using Coypu.Finders;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_inspecting_location : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Go_back_and_forward_in_history()
         {
             using (Driver)
@@ -23,7 +23,7 @@ namespace Coypu.Drivers.Tests
             }
         }
 
-        [Test]
+        [Fact]
         public void Go_back_and_forward_in_correct_window_scope()
         {
             using (Driver)

@@ -2,19 +2,17 @@
 using System.Text.RegularExpressions;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
-using NUnit.Framework;
+using Xunit;
 using OpenQA.Selenium;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
-    public class ExternalExamples
+    public class ExternalExamples : IDisposable
     {
         private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
 
-        [SetUp]
-        public void SetUp()
+        public ExternalExamples()
         {
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.AppHost = "www.google.com";
@@ -24,13 +22,13 @@ namespace Coypu.AcceptanceTests
 
             browser = new BrowserSession(SessionConfiguration);
         }
-        [TearDown]
-        public void TearDown()
+
+        public void Dispose()
         {
             browser.Dispose();
         }
 
-        [Test]
+        [Fact]
         public void AppHostContainsScheme()
         {
             SessionConfiguration = new SessionConfiguration();
@@ -40,11 +38,11 @@ namespace Coypu.AcceptanceTests
             browser = new BrowserSession(SessionConfiguration);
 
             browser.Visit("/");
-            Assert.That(browser.Location.ToString(), Is.EqualTo("https://www.google.co.uk/"));
+            Assert.Equal("https://www.google.co.uk/", browser.Location.ToString());
 
         }
 
-        [Test, Explicit]
+        [Fact]
         public void Retries_Autotrader()
         {
             browser.Visit("http://www.autotrader.co.uk/used-cars");
@@ -65,7 +63,7 @@ namespace Coypu.AcceptanceTests
         }
 
 
-        [Test, Explicit]
+        [Fact]
         public void Visibility_NewTwitterLogin()
         {
             browser.Visit("http://www.twitter.com");
@@ -74,8 +72,7 @@ namespace Coypu.AcceptanceTests
             browser.FillIn("session[password]").With("Nappybara");
         }
 
-        [Test,
-         Ignore("Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
+        [Fact(Skip = "Make checkboxes on carbuzz are jumping around after you click each one. Re-enable when that is fixed")]
         public void FindingStuff_CarBuzz()
         {
             browser.Visit("http://carbuzz.heroku.com/car_search");
@@ -87,15 +84,15 @@ namespace Coypu.AcceptanceTests
             browser.Check("BMW");
             browser.Check("Mercedes");
 
-            Assert.That(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
+            Assert.True(browser.HasContentMatch(new Regex(@"\b83 car reviews found")));
 
             browser.FindSection("Seats").Click();
             browser.ClickButton("4");
 
-            Assert.That(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));
+            Assert.True(browser.HasContentMatch(new Regex(@"\b28 car reviews found")));
         }
 
-        [Test]
+        [Fact]
         public void HtmlUnitDriver()
         {
             SessionConfiguration.AppHost = "www.google.com";
@@ -107,11 +104,11 @@ namespace Coypu.AcceptanceTests
                 {
                     htmlUnit.Visit("/");
                 }
-                Assert.Fail("Expected an exception attempting to connect to HtmlUnit driver");
+                Assert.True(false, "Expected an exception attempting to connect to HtmlUnit driver");
             }
             catch (WebDriverException e)
             {
-                Assert.That(e.Message, Is.StringContaining("No connection could be made because the target machine actively refused it 127.0.0.1:4444"));
+                Assert.Contains("No connection could be made because the target machine actively refused it 127.0.0.1:4444", e.Message);
             }
         }
     }

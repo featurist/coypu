@@ -1,12 +1,12 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_executing_script : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Runs_the_script_in_the_browser()
         {
             Button("firstButtonId").Text.should_be("first button");
@@ -16,7 +16,7 @@ namespace Coypu.Drivers.Tests
             Button("firstButtonId").Text.should_be("script executed");
         }
 
-        [Test]
+        [Fact]
         public void Passes_the_arguments_to_the_browser()
         {
             Button("firstButtonId").Text.should_be("first button");
@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Tests
             Button("firstButtonId").Text.should_be("script executed 5");
         }
       
-        [Test]
+        [Fact]
         public void Returns_the_result()
 
         {

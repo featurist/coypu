@@ -1,18 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
-    public class InnerAndOuterHtml
+    public class InnerAndOuterHtml : IDisposable
     {
         private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
 
-        [TestFixtureSetUp]
-        public void SetUpFixture()
+        public InnerAndOuterHtml()
         {
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
@@ -20,24 +18,23 @@ namespace Coypu.AcceptanceTests
             browser.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"));
         }
 
-        [TestFixtureTearDown]
-        public void TearDownFixture()
+        public void Dispose()
         {
             browser.Dispose();
         }
 
-        [Test]
+        [Fact]
         public void GrabsTheOuterHTMLFromAnElement()
         {
             var outerHTML = Normalise(browser.FindCss("table").OuterHTML);
-            Assert.That(outerHTML, Is.EqualTo("<table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table>"));
+            Assert.Equal("<table><tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody></table>", outerHTML);
         }
 
-        [Test]
+        [Fact]
         public void GrabsTheInnerHTMLFromAnElement()
         {
             var innerHTML = Normalise(browser.FindCss("table").InnerHTML);
-            Assert.That(innerHTML, Is.EqualTo("<tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody>"));
+            Assert.Equal("<tbody><tr><th>name</th><th>age</th></tr><tr><td>bob</td><td>12</td></tr><tr><td>jane</td><td>79</td></tr></tbody>", innerHTML);
         }
 
         private static string Normalise(string innerHtml)

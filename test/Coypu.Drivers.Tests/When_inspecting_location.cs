@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading;
 using Coypu.Finders;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_navigating : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void Gets_the_current_browser_location()
         {
             Driver.Visit(TestSiteUrl("/"), Root);
@@ -18,7 +18,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Gets_location_for_correct_window_scope()
         {
             Driver.Click(Link("Open pop up window"));
@@ -28,7 +28,7 @@ namespace Coypu.Drivers.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void Not_just_when_set_by_visit()
         {
             Driver.Visit(TestSiteUrl("/auto_login"), Root);

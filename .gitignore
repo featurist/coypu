@@ -29,3 +29,6 @@ chromedriver.log
 Coypu-*.wrap
 src/packages
 .build
+.lock.json
+.tmp
+.vs

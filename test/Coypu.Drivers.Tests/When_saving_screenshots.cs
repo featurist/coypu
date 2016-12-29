@@ -2,13 +2,13 @@
 using System.Drawing;
 using System.IO;
 using Coypu.Finders;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
     internal class When_saving_screenshots : DriverSpecs
     {
-        [Test]
+        [Fact]
         public void SavesAScreenshot()
         {
             Scope driverScope = Root;

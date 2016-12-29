@@ -1,6 +1,6 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
@@ -14,7 +14,7 @@ namespace Coypu.Drivers.Tests
             return @select;
         }
 
-        [Test]
+        [Fact]
         public void Sets_text_of_selected_option()
         {
             Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option one");
@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Tests
             Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option two");
         }
 
-        [Test]
+        [Fact]
         public void Selected_option_respects_TextPrecision()
         {
             Assert.That(
@@ -39,13 +39,13 @@ namespace Coypu.Drivers.Tests
                 () => FindSingle(new OptionFinder(Driver, "select two option t", GetSelectScope("containerLabeledSelectFieldId"), Options.Exact)));
         }
 
-        [Test]
+        [Fact]
         public void Selected_option_finds_exact_by_container_label()
         {
             Assert.That(FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Exact)).Text, Is.EqualTo("one"));
         }
 
-        [Test]
+        [Fact]
         public void Selected_option_finds_substring_by_container_label()
         {
             Assert.That(FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Substring)).Text, Is.EqualTo("one"));

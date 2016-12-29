@@ -1,6 +1,6 @@
 ﻿using Coypu.Finders;
 using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
@@ -16,21 +16,21 @@ namespace Coypu.Drivers.Tests
             scope2 = new BrowserWindow(DefaultSessionConfiguration, new IdFinder(Driver, "scope2", Root, DefaultOptions), Driver,null,null,null,DisambiguationStrategy);
         }
 
-        [Test]
+        [Fact]
         public void Finds_button_by_name()
         {
             Button("scopedButtonName", scope1).Id.should_be("scope1ButtonId");
             Button( "scopedButtonName", scope2).Id.should_be("scope2ButtonId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_input_button_by_value()
         {
             Button( "scoped input button", scope1).Id.should_be("scope1InputButtonId");
             Button( "scoped input button", scope2).Id.should_be("scope2InputButtonId");
         }
 
-        [Test]
+        [Fact]
         public void Finds_button_by_text()
         {
             Button( "scoped button", scope1).Id.should_be("scope1ButtonId");

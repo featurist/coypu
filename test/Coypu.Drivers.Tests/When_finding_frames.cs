@@ -1,5 +1,5 @@
 ﻿using NSpec;
-using NUnit.Framework;
+using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
@@ -10,21 +10,21 @@ namespace Coypu.Drivers.Tests
             get { return @"html\frameset.htm"; }
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_header_text()
         {
             Frame("I am frame one").Name.should_be("frame1");
             Frame("I am frame two").Name.should_be("frame2");
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_name()
         {
             Frame("frame1").Name.should_be("frame1");
             Frame("frame2").Name.should_be("frame2");
         }
 
-        [Test]
+        [Fact]
         public void Finds_by_id()
         {
             Frame("frame1id").Name.should_be("frame1");
