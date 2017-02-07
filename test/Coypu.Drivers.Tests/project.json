@@ -5,7 +5,7 @@
     "NETStandard.Library": "1.6.0",
     "Coypu": "3.0.0-*",
     "xunit": "2.2.0-*",
-    "nspec": "1.0.13"
+    "Coypu.Tests": "2.0.0-*"
   },
 
   "testRunner": "xunit",

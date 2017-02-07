@@ -7,19 +7,16 @@ using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using Xunit;
 
-[SetUpFixture]
-public class AssemblyTearDown
+public class AssemblyTearDown : IDisposable
 {
     public static SelfishSite TestSite;
 
-    [SetUp]
-    public void StartTestSite()
+    public AssemblyTearDown()
     {
         TestSite = new SelfishSite();
     }
 
-    [TearDown]
-    public void TearDown()
+    public void Dispose()
     {
         TestSite.Dispose();
 
@@ -63,7 +60,7 @@ namespace Coypu.Drivers.Tests
             var file = new FileInfo(Path.Combine(@"..\..\", testPage)).FullName;
             return "file:///" + file.Replace('\\', '/');
         }
-
+        
         protected virtual string TestPage
         {
             get { return INTERACTION_TESTS_PAGE; }

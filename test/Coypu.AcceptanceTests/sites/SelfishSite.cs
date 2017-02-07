@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,14 +16,28 @@ namespace Coypu.AcceptanceTests.Sites
         {
             get
             {
-                return rb => rb.MapGet("",
-                    (req, resp, routeData) =>
-                        resp.WriteAsync("<html><head><title>Selfish has taken the stage</title></head><body>Howdy</body></html>") 
-                    );
-                    
-                    //resp.WriteAsync($"Hello! {routeData.Values["name"]}")),
-                    //    new HttpRequestMessage(HttpMethod.Get, "greeting/James"),
-                    //    "Hello! James"
+                return rb => rb
+                    .MapGet("", (req, resp, routeData) =>
+                        resp.WriteAsync("<html><head><title>Selfish has taken the stage</title></head><body>Howdy</body></html>"))
+                    .MapGet("resource/bdd", (req, resp, routeData) => resp.WriteAsync("bdd"))
+                    .MapGet("auto_login", (req, resp, routeData) => {
+                            resp
+                                .Headers
+                                .Add("Set-Cookie", new Microsoft.Extensions.Primitives.StringValues("username=bob"));
+
+                            return Task.CompletedTask;
+                        })
+                    .MapGet("restricted_resource/bdd", (req, resp, routeData) => {
+                            if (resp.Headers["Set-Cookie"] == "username=bob")
+                            {
+                                return resp.WriteAsync("bdd");
+                            }
+                            return Task.CompletedTask;
+                        });
+
+                //resp.WriteAsync($"Hello! {routeData.Values["name"]}")),
+                //    new HttpRequestMessage(HttpMethod.Get, "greeting/James"),
+                //    "Hello! James"
             }
         }
 
@@ -44,22 +59,6 @@ namespace Coypu.AcceptanceTests.Sites
             _server = new TestServer(webhostbuilder);
             Client = _server.CreateClient();
             Client.BaseAddress = new Uri("http://localhost");
-
-
-
-            //_server = new Server();
-            //_server.OnGet("/").RespondWith("<html><head><title>Selfish has taken the stage</title></head><body>Howdy</body></html>");
-            //_server.OnGet("/resource/bdd").RespondWith("bdd");
-            //_server.OnGet("/auto_login").Respond((req, res) =>
-            //{
-            //    res.Headers["Set-Cookie"] = "username=bob";
-            //});
-            //_server.OnGet("/restricted_resource/bdd").Respond((req, res) =>
-            //{
-            //    if (req.Headers["Cookie"] == "username=bob")
-            //        res.Body = "bdd";
-
-            //});
         }
 
         public Uri BaseUri

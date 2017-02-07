@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
-using Xunit;
 using OpenQA.Selenium;
+using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
