@@ -117,6 +117,13 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void ClickLinkWithTitle_example()
+        {
+            browser.ClickLink("Link with title");
+            browser.CancelModalDialog();
+        }
+
+        [Test]
         public void ExecuteScript_example()
         {
             ReloadTestPage();
