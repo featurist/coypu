@@ -646,7 +646,8 @@ namespace Coypu.AcceptanceTests
 
         [TestCase("Windows 7", "firefox", "25")]
         [TestCase("Windows XP", "internet explorer", "6")]
-        public void CustomBrowserSession(string platform, string browserName, string version)
+        [TestCase("Windows 10", "MicrosoftEdge", "14")]
+        public void CustomBrowserSessionWithCustomRemoteDriver(string platform, string browserName, string version)
         {
 
             var desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
@@ -655,7 +656,7 @@ namespace Coypu.AcceptanceTests
             desiredCapabilites.SetCapability("accessKey", "af4fbd21-6aee-4a01-857f-c7ffba2f0a50");
             desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
 
-            Driver driver = new CustomDriver(Browser.Parse(browserName), desiredCapabilites);
+            Driver driver = new CustomRemoteDriver(Browser.Parse(browserName), desiredCapabilites);
 
             using (var custom = new BrowserSession(driver))
             {
@@ -664,9 +665,22 @@ namespace Coypu.AcceptanceTests
             }
         }
 
-        public class CustomDriver : SeleniumWebDriver
+        [TestCase("chrome")]
+        [TestCase("internet explorer")]
+        [TestCase("MicrosoftEdge")]
+        public void CustomBrowserSession(string browserName)
         {
-            public CustomDriver(Browser browser, ICapabilities capabilities)
+            var driver = new SeleniumWebDriver(Browser.Parse(browserName));
+            using (var custom = new BrowserSession(driver))
+            {
+                custom.Visit("https://saucelabs.com/test/guinea-pig");
+                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo(0));
+            }
+        }
+
+        public class CustomRemoteDriver : SeleniumWebDriver
+        {
+            public CustomRemoteDriver(Browser browser, ICapabilities capabilities)
                 : base(CustomWebDriver(capabilities), browser) { }
 
             private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)

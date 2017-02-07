@@ -22,6 +22,7 @@ namespace Coypu.Drivers
         public static Browser HtmlUnit               = new Browser { Javascript = false };
         public static Browser HtmlUnitWithJavaScript = new Browser { Javascript = true };
         public static Browser PhantomJS              = new Browser { Javascript = true };
+        public static Browser MicrosoftEdge          = new Browser { Javascript = true };
 
         public static Browser Parse(string browserName)
         {
