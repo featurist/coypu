@@ -31,7 +31,12 @@ namespace Coypu.Drivers
         {
             return 
                 Descendent("a") + 
-                Where(IsText(locator, options));
+                Where(IsText(locator, options)  + or + HasTitle(locator, options));
+        }
+
+        public string HasTitle(string title, Options options)
+        {
+            return Attr("title", title, options);
         }
 
         public string LinkOrButton(string locator, Options options)
