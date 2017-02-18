@@ -10,7 +10,7 @@ namespace Coypu.AcceptanceTests
     {
         protected BrowserSession browser;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             var configuration = new SessionConfiguration
@@ -23,7 +23,7 @@ namespace Coypu.AcceptanceTests
 
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             browser.Dispose();
@@ -50,7 +50,7 @@ namespace Coypu.AcceptanceTests
 
         protected static string TestPageLocation(string page)
         {
-            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
+            var testPageLocation = "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\" + page).Replace("\\", "/");
             return testPageLocation;
         }
 

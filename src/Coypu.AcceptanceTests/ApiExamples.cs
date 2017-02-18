@@ -540,7 +540,7 @@ namespace Coypu.AcceptanceTests
                 browser.FillIn("forLabeledFileFieldId").With(fullPath);
 
                 var findAgain = browser.FindField("forLabeledFileFieldId");
-                Assert.That(findAgain.Value, Is.StringEnding(someLocalFile));
+                Assert.That(findAgain.Value, Does.EndWith(someLocalFile));
             }
             finally
             {

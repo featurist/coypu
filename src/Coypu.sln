@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu", "Coypu\Coypu.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.AcceptanceTests", "Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj", "{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}"
@@ -17,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.NUnit", "Coypu.NUnit\Coypu.NUnit.csproj", "{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.NUnit262", "Coypu.NUnit262\Coypu.NUnit262.csproj", "{ABBD8B9F-E939-4079-839A-246ABCF9F8A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +50,6 @@ Global
 		{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABBD8B9F-E939-4079-839A-246ABCF9F8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABBD8B9F-E939-4079-839A-246ABCF9F8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABBD8B9F-E939-4079-839A-246ABCF9F8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABBD8B9F-E939-4079-839A-246ABCF9F8A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

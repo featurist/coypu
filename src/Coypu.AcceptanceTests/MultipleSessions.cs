@@ -28,7 +28,7 @@ namespace Coypu.AcceptanceTests
 
         private void VisitTestPage(BrowserSession browserSession)
         {
-            browserSession.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+            browserSession.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, "html\\InteractionTestsPage.htm").Replace("\\", "/"));
         }
     }
 }

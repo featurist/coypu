@@ -57,14 +57,14 @@ namespace Coypu.AcceptanceTests
 
         private void ReloadTestPage()
         {
-            browser.Visit("file:///" + new FileInfo(@"html\InteractionTestsPage.htm").FullName.Replace("\\", "/"));
+            browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, "html\\InteractionTestsPage.htm").Replace("\\", "/"));
         }
 
         [Test]
         public void It_exposes_the_location_of_an_iframe_scope()
         {
             ReloadTestPage();
-            Assert.That(browser.FindFrame("iframe1").Location.AbsolutePath, Is.StringContaining("iFrame1.htm"));
+            Assert.That(browser.FindFrame("iframe1").Location.AbsolutePath, Does.Contain("iFrame1.htm"));
         }
     }
 }

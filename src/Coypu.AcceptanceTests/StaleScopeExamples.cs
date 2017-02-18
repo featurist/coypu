@@ -15,7 +15,7 @@ namespace Coypu.AcceptanceTests
     {
         private BrowserSession browser;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             var configuration = new SessionConfiguration
@@ -28,7 +28,7 @@ namespace Coypu.AcceptanceTests
 
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             browser.Dispose();
@@ -37,7 +37,7 @@ namespace Coypu.AcceptanceTests
         
         private void VisitTestPage(string page)
         {
-            browser.Visit("file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/"));
+            browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\" + page).Replace("\\", "/"));
         }
 
         [Test]
