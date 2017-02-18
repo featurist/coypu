@@ -185,10 +185,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\WebDriver.GeckoDriver.0.13.0\content\geckodriver.exe">
-      <Link>geckodriver.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="bin\Debug\IEDriverServer.exe" />
     <Content Include="html\table.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -220,7 +216,6 @@
     <Content Include="html\test-card.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Readme.txt" />
     <Content Include="results\driver_test_results.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -256,7 +251,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.27.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.27.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.GeckoDriver.Win64.0.14.0\build\Selenium.WebDriver.GeckoDriver.Win64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.GeckoDriver.Win64.0.14.0\build\Selenium.WebDriver.GeckoDriver.Win64.targets'))" />
   </Target>
+  <Import Project="..\packages\Selenium.WebDriver.GeckoDriver.Win64.0.14.0\build\Selenium.WebDriver.GeckoDriver.Win64.targets" Condition="Exists('..\packages\Selenium.WebDriver.GeckoDriver.Win64.0.14.0\build\Selenium.WebDriver.GeckoDriver.Win64.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
