@@ -188,6 +188,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="bin\Debug\IEDriverServer.exe" />
+    <Content Include="geckodriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="html\table.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
