@@ -111,7 +111,7 @@ namespace Coypu.AcceptanceTests
             }
             catch (WebDriverException e)
             {
-                Assert.That(e.Message, Is.StringContaining("No connection could be made because the target machine actively refused it 127.0.0.1:4444"));
+                Assert.That(e.Message, Does.Contain("No connection could be made because the target machine actively refused it 127.0.0.1:4444"));
             }
         }
     }

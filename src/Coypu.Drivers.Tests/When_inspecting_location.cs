@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Tests
             Driver.Click(Link("Open pop up window"));
             var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
 
-            Assert.That(Driver.Location(popUp).AbsoluteUri, Is.StringEnding("src/Coypu.Drivers.Tests/html/popup.htm"));
+            Assert.That(Driver.Location(popUp).AbsoluteUri, Does.EndWith("src/Coypu.Drivers.Tests/html/popup.htm"));
         }
 
 
