@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using Coypu.NUnit.Matchers;
@@ -407,7 +405,8 @@ namespace Coypu.AcceptanceTests
             Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.ContentContaining("this is not in the page", "in", "a", "list")));
         }
 
-        [Test]
+		//bug https://github.com/mozilla/geckodriver/issues/159
+		[Test, Ignore("Known issue of geckodriver in github issue #159. Re-enable when this is fixed")]
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
