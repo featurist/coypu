@@ -17,9 +17,10 @@ namespace Coypu.Drivers.Selenium
             if (browser == Browser.InternetExplorer)
             {
                 var options = new InternetExplorerOptions
-                    {
+                {
                         IntroduceInstabilityByIgnoringProtectedModeSettings = true,
-                        EnableNativeEvents = true
+                        EnableNativeEvents = true,
+                        IgnoreZoomLevel = true
                     };
                 return new InternetExplorerDriver(options);
             }
