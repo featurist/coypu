@@ -163,7 +163,6 @@
     <Content Include="html\states.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj">
@@ -202,4 +201,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
 </Project>

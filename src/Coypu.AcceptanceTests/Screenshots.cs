@@ -5,7 +5,8 @@ using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
 {
-    [TestFixture]
+	//bug https://github.com/mozilla/geckodriver/issues/469 => https://bugzilla.mozilla.org/show_bug.cgi?id=1332122
+	[TestFixture, Ignore("Navigating to file:.// hangs Marionette. Re-enable when that is fixed")]
     public class Screenshots : WaitAndRetryExamples
     {
         [Test]
