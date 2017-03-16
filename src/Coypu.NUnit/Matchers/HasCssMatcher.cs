@@ -51,14 +51,14 @@ namespace Coypu.NUnit.Matchers
         {
             get
             {
-                var description = $"Expected to find element with css selector: {_expectedCss}\n";
+                var description = "Expected to find element with css selector: " + _expectedCss + "\n";
 
                 if (_exactText != null)
                     description += "With text: \"" + _exactText + "\"\r\n";
                 if (_textPattern != null)
                     description += "With text matching: \"" + _textPattern + "\"\r\n";
 
-                description += $"in:\n{_actualContent}\r\n";
+                description += "in:\n"+_actualContent+"\r\n";
 
                 return description;
             }

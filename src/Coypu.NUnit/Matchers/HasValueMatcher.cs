@@ -26,6 +26,12 @@ namespace Coypu.NUnit.Matchers
             return new ConstraintResult(this, actual, hasValue);
         }
 
-        public override string Description => $"Expected to find value: {_expectedContent}\nin:\n{_actualContent}";
+        public override string Description
+        {
+            get
+            {
+                return "Expected to find value: " + _expectedContent + "\nin:\n" + _actualContent;
+            }
+        }
     }
 }

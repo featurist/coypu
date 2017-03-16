@@ -34,7 +34,7 @@ namespace Coypu.NUnit.Matchers
         {
             var scope = (Scope)actual;
 
-            var actualContent = $"[{string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray())}]";
+            var actualContent = "[" + string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray()) + "]";
 
             var hasCss = true;
             if (_exactText != null)
@@ -68,7 +68,7 @@ namespace Coypu.NUnit.Matchers
 
 
             if (!hasCss)
-                actualContent = $"[{string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray())}]";
+                actualContent = "[" + string.Join(",", scope.FindAllCss(_expectedCss).Select(t => t.Text).ToArray()) + "]";
 
             return new ConstraintResult(this, actualContent, hasCss);
         }
@@ -77,12 +77,12 @@ namespace Coypu.NUnit.Matchers
         {
             get
             {
-                var description = $"Expected to find elements from css selector: {_expectedCss}\r\nContaining only:\r\n";
+                var description = "Expected to find elements from css selector: " + _expectedCss + "\r\nContaining only:\r\n";
 
                 if (_exactText != null)
-                    description += $"[{string.Join(",", _exactText)}]\r\n";
+                    description += "[" + string.Join(",", _exactText) + "]\r\n";
                 if (_textPattern != null)
-                    description += $"[{string.Join(",", _textPattern.Select(p => p.ToString()).ToArray())}]\r\n";
+                    description += "[" + string.Join(",", _textPattern.Select(p => p.ToString()).ToArray()) + "]\r\n";
 
                 return description;
             }
