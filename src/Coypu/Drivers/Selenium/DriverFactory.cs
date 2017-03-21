@@ -6,6 +6,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Opera;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -37,6 +38,9 @@ namespace Coypu.Drivers.Selenium
                 return new PhantomJSDriver();
             if (browser == Browser.MicrosoftEdge)
                 return new EdgeDriver();
+            if (browser == Browser.Opera)
+                return new OperaDriver();
+
             return browserNotSupported(browser,null);
         }
 
