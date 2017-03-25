@@ -11,6 +11,12 @@ namespace Coypu.Drivers.Tests
             Link("first link").Id.should_be("firstLinkId");
             Link("second link").Id.should_be("secondLinkId");
         }
+        [Test]
+        public void Finds_link_by_href()
+        {
+            Link("#link1href").Id.should_be("firstLinkId");
+            Link("#link2href").Id.should_be("secondLinkId");
+        }
 
         [Test]
         public void Does_not_find_display_none()

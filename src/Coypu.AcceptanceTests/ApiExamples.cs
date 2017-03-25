@@ -284,6 +284,13 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void Finds_link_by_href()
+        {
+            Assert.That(browser.FindLink("#link1href").Id, Is.EqualTo("firstLinkId"));
+            Assert.That(browser.FindLink("#link2href").Id, Is.EqualTo("secondLinkId"));
+        }
+
+        [Test]
         public void FindSection_example()
         {
             Assert.That(browser.FindSection("Inspecting Content").Id, Is.EqualTo("inspectingContent"));
