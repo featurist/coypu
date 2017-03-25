@@ -1,6 +1,6 @@
 # Coypu
 
-> ####"Theirs not to reason why, Theirs but to do and retry"
+> ####"There's not to reason why, There is but to do and retry"
 > &mdash; <cite>Alfred, Lord Selenium
 
 > ####"haha, coypu must have reduced teh amount of shit code by 90%"
