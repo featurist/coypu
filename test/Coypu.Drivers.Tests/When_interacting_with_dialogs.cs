@@ -1,6 +1,6 @@
-﻿using System;
-using Coypu.Finders;
-using NSpec;
+﻿using Coypu.Finders;
+using Shouldly;
+using System;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -13,9 +13,9 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Link("Trigger an alert"));
-                Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_true();
+                Driver.HasDialog("You have triggered an alert and this is the text.", Root).ShouldBeTrue();
                 Driver.AcceptModalDialog(Root);
-                Driver.HasDialog("You have triggered an alert and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered an alert and this is the text.", Root).ShouldBeFalse();
             }
         }
 
@@ -26,9 +26,9 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Link("Trigger a confirm"));
-                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).ShouldBeTrue();
                 Driver.AcceptModalDialog(Root);
-                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).ShouldBeFalse();
             }
         }
 
@@ -49,7 +49,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Link("Trigger a confirm"));
                 Driver.AcceptModalDialog(Root);
-                Link("Trigger a confirm - accepted", Root).should_not_be_null();
+                Link("Trigger a confirm - accepted", Root).ShouldNotBeNull();
             }
         }
 
@@ -60,9 +60,9 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 Driver.Click(Link("Trigger a confirm"));
-                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_true();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).ShouldBeTrue();
                 Driver.CancelModalDialog(Root);
-                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).ShouldBeFalse();
             }
         }
 
@@ -86,14 +86,14 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
+                Assert.Equal("Pop Up Window", Driver.Title(popUp));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('alertTriggerLink').click();},200);", Root);
-                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
+                Assert.Equal("Pop Up Window", Driver.Title(popUp));
 
                 System.Threading.Thread.Sleep(1000);
                 Driver.AcceptModalDialog(Root);
-                Driver.HasDialog("You have triggered a alert and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered a alert and this is the text.", Root).ShouldBeFalse();
             }
         }
 
@@ -105,15 +105,15 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
+                Assert.Equal("Pop Up Window", Driver.Title(popUp));
 
                 Driver.ExecuteScript("window.setTimeout(function() {document.getElementById('confirmTriggerLink').click();},500);", Root);
-                Assert.That(Driver.Title(popUp), Is.EqualTo("Pop Up Window"));
+                Assert.Equal("Pop Up Window", Driver.Title(popUp));
                 CloseWindow(popUp);
 
                 System.Threading.Thread.Sleep(500);
                 Driver.CancelModalDialog(Root);
-                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).should_be_false();
+                Driver.HasDialog("You have triggered a confirm and this is the text.", Root).ShouldBeFalse();
             }
         }
 
@@ -123,7 +123,7 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.ExecuteScript("self.close();", popUp);
             }
-            catch (Exception InvalidCastException)
+            catch (Exception)
             {
                 // IE permissions
             }

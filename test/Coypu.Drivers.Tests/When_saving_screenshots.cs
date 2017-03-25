@@ -19,13 +19,13 @@ namespace Coypu.Drivers.Tests
             try
             {
                 Driver.SaveScreenshot(saveAs, driverScope);
-                Assert.That(File.Exists(saveAs), "Expected screenshot saved to " + new FileInfo(saveAs).FullName);
+                Assert.True(File.Exists(saveAs), "Expected screenshot saved to " + new FileInfo(saveAs).FullName);
                 using (var saved = Image.FromFile(saveAs))
                 {
                     var docWidth = (Int64) Driver.ExecuteScript("return window.document.body.clientWidth;", driverScope);
                     var docHeight = (Int64) Driver.ExecuteScript("return window.document.body.clientHeight;", driverScope);
-                    Assert.That(saved.PhysicalDimension.Width, Is.InRange(docWidth - 10, docWidth));
-                    Assert.That(saved.PhysicalDimension.Height, Is.InRange(docHeight - 75, docHeight));
+                    Assert.InRange(saved.PhysicalDimension.Width, docWidth - 10, docWidth);
+                    Assert.InRange(saved.PhysicalDimension.Height, docHeight - 75, docHeight);
                 }
             }
             finally

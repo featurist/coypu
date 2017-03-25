@@ -1,5 +1,5 @@
 ﻿using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -21,10 +21,10 @@ namespace Coypu.Drivers.Tests
             var textField = Field("containerLabeledTextInputFieldName");  
             Driver.Set(textField, "should be much quicker since it's set by js");
 
-            textField.Value.should_be("should be much quicker since it's set by js");
+            textField.Value.ShouldBe("should be much quicker since it's set by js");
 
             var findAgain = Field("containerLabeledTextInputFieldName");
-            findAgain.Value.should_be("should be much quicker since it's set by js");
+            findAgain.Value.ShouldBe("should be much quicker since it's set by js");
         }
 
         [Fact]
@@ -33,10 +33,10 @@ namespace Coypu.Drivers.Tests
             var textField = Field("Field with no id");
             Driver.Set(textField, "set by sendkeys");
 
-            textField.Value.should_be("set by sendkeys");
+            textField.Value.ShouldBe("set by sendkeys");
 
             var findAgain = Field("Field with no id");
-            findAgain.Value.should_be("set by sendkeys");
+            findAgain.Value.ShouldBe("set by sendkeys");
         }
 
         [Fact]
@@ -45,10 +45,10 @@ namespace Coypu.Drivers.Tests
             var numberField = Field("containerLabeledNumberInputFieldId");
             Driver.Set(numberField, "5150");
 
-            numberField.Value.should_be("5150");
+            numberField.Value.ShouldBe("5150");
 
             var findAgain = Field("containerLabeledNumberInputFieldId");
-            findAgain.Value.should_be("5150");
+            findAgain.Value.ShouldBe("5150");
         }
 
         [Fact]
@@ -57,10 +57,10 @@ namespace Coypu.Drivers.Tests
             var textField = Field("fieldWithNoType");
             Driver.Set(textField, "set by sendkeys");
 
-            textField.Value.should_be("set by sendkeys");
+            textField.Value.ShouldBe("set by sendkeys");
 
             var findAgain = Field("fieldWithNoType");
-            findAgain.Value.should_be("set by sendkeys");
+            findAgain.Value.ShouldBe("set by sendkeys");
         }
 
 
@@ -70,10 +70,10 @@ namespace Coypu.Drivers.Tests
             var textField = Field("containerLabeledTextareaFieldName");
             Driver.Set(textField, "New textarea value");
 
-            textField.Value.should_be("New textarea value");
+            textField.Value.ShouldBe("New textarea value");
 
             var findAgain = Field("containerLabeledTextareaFieldName");
-            findAgain.Value.should_be("New textarea value");
+            findAgain.Value.ShouldBe("New textarea value");
         }
 
 
@@ -81,28 +81,28 @@ namespace Coypu.Drivers.Tests
         public void Selects_option_by_text_or_value()
         {
             var textField = Field("containerLabeledSelectFieldId");
-            textField.Value.should_be("select2value1");
+            textField.Value.ShouldBe("select2value1");
 
             Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
 
             var findAgain = Field("containerLabeledSelectFieldId");
-            findAgain.Value.should_be("select2value2");
+            findAgain.Value.ShouldBe("select2value2");
 
             Driver.Click(FindSingle(new OptionFinder(Driver, "select two option one", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
 
             var andAgain = Field("containerLabeledSelectFieldId");
-            andAgain.Value.should_be("select2value1");
+            andAgain.Value.ShouldBe("select2value1");
         }
 
         [Fact]
         public void Fires_change_event_when_selecting_an_option()
         {
             var textField = Field("containerLabeledSelectFieldId");
-            textField.Name.should_be("containerLabeledSelectFieldName");
+            textField.Name.ShouldBe("containerLabeledSelectFieldName");
 
             Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
 
-            Field("containerLabeledSelectFieldId", Root).Name.should_be("containerLabeledSelectFieldName - changed");
+            Field("containerLabeledSelectFieldId", Root).Name.ShouldBe("containerLabeledSelectFieldName - changed");
         }
     }
 }

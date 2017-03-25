@@ -1,5 +1,6 @@
-using NSpec;
+using Shouldly;
 using Xunit;
+
 namespace Coypu.Drivers.Tests
 {
     public class When_finding_buttons : DriverSpecs
@@ -7,71 +8,71 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_a_particular_button_by_its_text()
         {
-            Button("first button").Id.should_be("firstButtonId");
-            Button("second button").Id.should_be("secondButtonId");
+            Button("first button").Id.ShouldBe("firstButtonId");
+            Button("second button").Id.ShouldBe("secondButtonId");
         }
 
         [Fact]
         public void Finds_a_particular_button_by_its_id()
         {
-            Button("firstButtonId").Text.should_be("first button");
-            Button("thirdButtonId").Text.should_be("third button");
+            Button("firstButtonId").Text.ShouldBe("first button");
+            Button("thirdButtonId").Text.ShouldBe("third button");
         }
 
         [Fact]
         public void Finds_a_particular_button_by_its_name()
         {
-            Button("secondButtonName").Text.should_be("second button");
-            Button("thirdButtonName").Text.should_be("third button");
+            Button("secondButtonName").Text.ShouldBe("second button");
+            Button("thirdButtonName").Text.ShouldBe("third button");
         }
 
         [Fact]
         public void Finds_a_particular_input_button_by_its_value()
         {
-            Button("first input button").Id.should_be("firstInputButtonId");
-            Button("second input button").Id.should_be("secondInputButtonId");
+            Button("first input button").Id.ShouldBe("firstInputButtonId");
+            Button("second input button").Id.ShouldBe("secondInputButtonId");
         }
 
         [Fact]
         public void Finds_a_particular_input_button_by_its_id()
         {
-            Button("firstInputButtonId").Value.should_be("first input button");
-            Button("thirdInputButtonId").Value.should_be("third input button");
+            Button("firstInputButtonId").Value.ShouldBe("first input button");
+            Button("thirdInputButtonId").Value.ShouldBe("third input button");
         }
 
         [Fact]
         public void Finds_a_particular_input_button_by_its_name()
         {
-            Button("secondInputButtonId").Value.should_be("second input button");
-            Button("thirdInputButtonName").Value.should_be("third input button");
+            Button("secondInputButtonId").Value.ShouldBe("second input button");
+            Button("thirdInputButtonName").Value.ShouldBe("third input button");
         }
 
         [Fact]
         public void Finds_a_particular_submit_button_by_its_value()
         {
-            Button("first submit button").Id.should_be("firstSubmitButtonId");
-            Button("second submit button").Id.should_be("secondSubmitButtonId");
+            Button("first submit button").Id.ShouldBe("firstSubmitButtonId");
+            Button("second submit button").Id.ShouldBe("secondSubmitButtonId");
         }
 
         [Fact]
         public void Finds_a_particular_submit_button_by_its_id()
         {
-            Button("firstSubmitButtonId").Value.should_be("first submit button");
-            Button("thirdSubmitButtonId").Value.should_be("third submit button");
+            Button("firstSubmitButtonId").Value.ShouldBe("first submit button");
+            Button("thirdSubmitButtonId").Value.ShouldBe("third submit button");
         }
 
         [Fact]
         public void Finds_a_particular_submit_button_by_its_name()
         {
-            Button("secondSubmitButtonName").Value.should_be("second submit button");
-            Button("thirdSubmitButtonName").Value.should_be("third submit button");
+            Button("secondSubmitButtonName").Value.ShouldBe("second submit button");
+            Button("thirdSubmitButtonName").Value.ShouldBe("third submit button");
         }
 
         [Fact]
         public void Finds_image_buttons()
         {
-            Button("firstImageButtonId").Value.should_be("first image button");
-            Button("secondImageButtonId").Value.should_be("second image button");
+            Button("firstImageButtonId").Value.ShouldBe("first image button");
+            Button("secondImageButtonId").Value.ShouldBe("second image button");
         }
 
         [Fact]
@@ -113,32 +114,32 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_img_elements_with_role_button_by_alt_text()
         {
-            Assert.That(Button("I'm an image with the role of button").Id, Is.EqualTo("roleImageButtonId"));
+            Assert.Equal("roleImageButtonId", Button("I'm an image with the role of button").Id);
         }
 
         [Fact]
         public void Finds_any_elements_with_role_button_by_text()
         {
-            Assert.That(Button("I'm a span with the role of button").Id, Is.EqualTo("roleSpanButtonId"));
+            Assert.Equal("roleSpanButtonId", Button("I'm a span with the role of button").Id);
         }
 
         [Fact]
         public void Finds_any_elements_with_class_button_by_text()
         {
-            Assert.That(Button("I'm a span with the class of button").Id, Is.EqualTo("classButtonSpanButtonId"));
+            Assert.Equal("classButtonSpanButtonId", Button("I'm a span with the class of button").Id);
         }
 
         [Fact]
         public void Finds_any_elements_with_class_btn_by_text()
         {
-            Assert.That(Button("I'm a span with the class of btn").Id, Is.EqualTo("classBtnSpanButtonId"));
+            Assert.Equal("classBtnSpanButtonId", Button("I'm a span with the class of btn").Id);
         }
 
         [Fact]
         public void Finds_an_image_button_with_both_types_of_quote_in_my_value()
         {
             var button = Button("I'm an image button with \"both\" types of quote in my value");
-            Assert.That(button.Id, Is.EqualTo("buttonWithBothQuotesId"));
+            Assert.Equal("buttonWithBothQuotesId", button.Id);
         }
     }
 }

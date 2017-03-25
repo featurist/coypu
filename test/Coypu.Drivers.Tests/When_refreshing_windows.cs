@@ -36,7 +36,7 @@ namespace Coypu.Drivers.Tests
 
             var tickAfterRefresh = (Int64) Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope);
 
-            Assert.That(tickAfterRefresh, Is.GreaterThan(tickBeforeRefresh));
+            Assert.True(tickAfterRefresh > tickBeforeRefresh);
         }
     }
 }

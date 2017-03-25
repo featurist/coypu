@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -7,14 +7,14 @@ namespace Coypu.Drivers.Tests
     {
         [Fact]
         public void Finds_radio_button_by_value() {
-            Field("radio field one val").Name.should_be("forLabeledRadioFieldName");
-            Field("radio field two val").Name.should_be("containerLabeledRadioFieldName");
+            Field("radio field one val").Name.ShouldBe("forLabeledRadioFieldName");
+            Field("radio field two val").Name.ShouldBe("containerLabeledRadioFieldName");
         }
 
         [Fact]
         public void Finds_checkbox_by_value() {
-            Field("checkbox one val").Name.should_be("checkboxByValueOneFieldName");
-            Field("checkbox two val").Name.should_be("checkboxByValueTwoFieldName");
+            Field("checkbox one val").Name.ShouldBe("checkboxByValueOneFieldName");
+            Field("checkbox two val").Name.ShouldBe("checkboxByValueTwoFieldName");
         }
 
     }

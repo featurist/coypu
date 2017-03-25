@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -8,36 +8,36 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_by_h1_text()
         {
-            Section("Section One h1").Id.should_be("sectionOne");
-            Section("Section Two h1").Id.should_be("sectionTwo");
+            Section("Section One h1").Id.ShouldBe("sectionOne");
+            Section("Section Two h1").Id.ShouldBe("sectionTwo");
         }
 
         [Fact]
         public void Finds_by_h2_text()
         {
-            Section("Section One h2").Id.should_be("sectionOne");
-            Section("Section Two h2").Id.should_be("sectionTwo");
+            Section("Section One h2").Id.ShouldBe("sectionOne");
+            Section("Section Two h2").Id.ShouldBe("sectionTwo");
         }
 
         [Fact]
         public void Finds_by_h3_text()
         {
-            Section("Section One h3").Id.should_be("sectionOne");
-            Section("Section Two h3").Id.should_be("sectionTwo");
+            Section("Section One h3").Id.ShouldBe("sectionOne");
+            Section("Section Two h3").Id.ShouldBe("sectionTwo");
         }
 
         [Fact]
         public void Finds_by_h6_text()
         {
-            Section("Section One h6").Id.should_be("sectionOne");
-            Section("Section Two h6").Id.should_be("sectionTwo");
+            Section("Section One h6").Id.ShouldBe("sectionOne");
+            Section("Section Two h6").Id.ShouldBe("sectionTwo");
         }
 
         [Fact]
         public void Finds_section_by_id()
         {
-            Section("sectionOne").Id.should_be("sectionOne");
-            Section("sectionTwo").Id.should_be("sectionTwo");
+            Section("sectionOne").Id.ShouldBe("sectionOne");
+            Section("sectionTwo").Id.ShouldBe("sectionTwo");
         }
 
 

@@ -12,17 +12,17 @@ namespace Coypu.Finders
             get { return true; }
         }
 
-        internal override IEnumerable<Element> Find(Options options)
+        public override IEnumerable<Element> Find(Options options)
         {
             return Driver.FindWindows(Locator, Scope, options);
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "window: " + Locator; }
         }
 
-        protected internal override Exception GetMissingException()
+        public override Exception GetMissingException()
         {
             return new MissingWindowException("Unable to find " + QueryDescription);
         }

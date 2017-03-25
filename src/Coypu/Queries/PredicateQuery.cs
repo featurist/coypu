@@ -19,7 +19,7 @@ namespace Coypu.Queries
             return Predicate();
         }
 
-        public object ExpectedResult
+        public virtual object ExpectedResult
         {
             get { return true; }
         }

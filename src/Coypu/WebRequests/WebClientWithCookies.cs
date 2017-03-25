@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 
 namespace Coypu.WebRequests
 {
     internal class WebClientWithCookies : RestrictedResourceDownloader
     {
-        private IEnumerable<Cookie> requestCookies;
-
         public WebClientWithCookies()
         {
         }

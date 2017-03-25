@@ -58,7 +58,7 @@ namespace Coypu
             get { return driver.Location(this); }
         }
 
-        public string Text
+        public virtual string Text
         {
             get { return Now().Text; }
         }

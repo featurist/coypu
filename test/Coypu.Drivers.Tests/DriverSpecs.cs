@@ -44,8 +44,7 @@ namespace Coypu.Drivers.Tests
 //        private static readonly Browser browser = Browser.InternetExplorer;
 //        private static readonly Type driverType = typeof (Watin.WatiNDriver);
 
-        [SetUp]
-        public virtual void SetUp()
+        public DriverSpecs()
         {
             Driver.Visit(GetTestHTMLPathLocation(),Root);
         }

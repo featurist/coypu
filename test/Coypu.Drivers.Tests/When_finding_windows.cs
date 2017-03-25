@@ -1,5 +1,5 @@
 ﻿using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -14,7 +14,7 @@ namespace Coypu.Drivers.Tests
                 OpenPopup();
                 var window = Window("popUpWindowName", Root, DefaultOptions);
 
-                window.Text.should_contain("I am a pop up window");
+                window.Text.ShouldContain("I am a pop up window");
 
                 FindPopUpLink();
             }
@@ -51,7 +51,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup();
-                FindPopUp().Text.should_contain("I am a pop up window");
+                FindPopUp().Text.ShouldContain("I am a pop up window");
 
                 FindPopUpLink();
             }
@@ -63,7 +63,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup2();
-                FindPopUp().Text.should_contain("I am a pop up window 2");
+                FindPopUp().Text.ShouldContain("I am a pop up window 2");
                 FindPopUp2Link();
             }
         }
@@ -75,7 +75,7 @@ namespace Coypu.Drivers.Tests
             {
                 OpenPopup();
                 OpenPopup2();
-                FindPopUp().Text.should_contain("I am a pop up window");
+                FindPopUp().Text.ShouldContain("I am a pop up window");
                 
                 FindPopUpLink();
             }

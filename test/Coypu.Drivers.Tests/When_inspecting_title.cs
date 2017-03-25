@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Gets_the_current_page_title()
         {
-            Driver.Title(Root).should_be("Coypu interaction tests page");
+            Driver.Title(Root).ShouldBe("Coypu interaction tests page");
         }
     }
 }

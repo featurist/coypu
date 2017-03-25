@@ -15,12 +15,12 @@ namespace Coypu.Finders
             get { return false; }
         }
 
-        internal override IEnumerable<Element> Find(Options options)
+        public override IEnumerable<Element> Find(Options options)
         {
             return new[] { window = (window ?? Driver.Window) };
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "Document Element"; }
         }

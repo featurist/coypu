@@ -16,7 +16,7 @@ namespace Coypu.Tests.TestBuilders
         public Element ResolveQuery(ElementFinder elementFinder)
         {
             var all = elementFinder.Find(elementFinder.Options).ToArray();
-            if (!all.Any())
+            if (!(all.Length > 0))
                 throw elementFinder.GetMissingException();
             
             return all.First();

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -11,11 +11,11 @@ namespace Coypu.Drivers.Tests
         public void Clicks_the_underlying_element()
         {
             var element = Button("clickMeTest");
-            element.Value.should_be("Click me");
+            element.Value.ShouldBe("Click me");
 
             Driver.Click(element);
 
-            Button("clickMeTest").Value.should_be("Click me - clicked");
+            Button("clickMeTest").Value.ShouldBe("Click me - clicked");
         }
     }
 }

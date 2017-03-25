@@ -20,7 +20,7 @@ namespace Coypu {
             get { return  Try(() => Now().Id); }
         }
 
-        public string Text
+        public override string Text
         {
             get { return Try(() => Now().Text); }
         }

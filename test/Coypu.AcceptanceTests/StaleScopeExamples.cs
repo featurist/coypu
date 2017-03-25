@@ -150,7 +150,7 @@ namespace Coypu.AcceptanceTests
             {
                 popUp.ExecuteScript("self.close();");
             }
-            catch (Exception InvalidCastException)
+            catch (Exception)
             {
                 // IE permissions
             }

@@ -1,5 +1,5 @@
 using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -9,25 +9,25 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_text_input()
         {
-            Field("containerLabeledTextInputFieldName").Value.should_be("text input field two val");
+            Field("containerLabeledTextInputFieldName").Value.ShouldBe("text input field two val");
         }
 
         [Fact]
         public void Finds_textarea()
         {
-            Field("containerLabeledTextareaFieldName").Value.should_be("textarea field two val");
+            Field("containerLabeledTextareaFieldName").Value.ShouldBe("textarea field two val");
         }
 
         [Fact]
         public void Finds_select()
         {
-            Field("containerLabeledSelectFieldName").Id.should_be("containerLabeledSelectFieldId");
+            Field("containerLabeledSelectFieldName").Id.ShouldBe("containerLabeledSelectFieldId");
         }
 
         [Fact]
         public void Finds_checkbox()
         {
-            Field("containerLabeledCheckboxFieldName").Value.should_be("checkbox field two val");
+            Field("containerLabeledCheckboxFieldName").Value.ShouldBe("checkbox field two val");
         }
 
         [Fact]
@@ -39,13 +39,13 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_password_input()
         {
-            Field("containerLabeledPasswordFieldName").Id.should_be("containerLabeledPasswordFieldId");
+            Field("containerLabeledPasswordFieldName").Id.ShouldBe("containerLabeledPasswordFieldId");
         }
 
         [Fact]
         public void Finds_file_input()
         {
-            Field("containerLabeledFileFieldName").Id.should_be("containerLabeledFileFieldId");
+            Field("containerLabeledFileFieldName").Id.ShouldBe("containerLabeledFileFieldId");
         }
 
     }

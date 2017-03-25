@@ -19,7 +19,7 @@ namespace Coypu.Finders
             return html.Id;
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "id: " + Locator; }
         }

@@ -40,11 +40,11 @@ namespace Coypu.Drivers.Tests
             var availWidth = Driver.ExecuteScript("return window.screen.availWidth;", driverScope);
             var initalWidth =  Driver.ExecuteScript("return window.outerWidth;", driverScope);
 
-            Assert.That(initalWidth, Is.LessThan(availWidth));
+            Assert.True(int.Parse(initalWidth.ToString()) < int.Parse(availWidth.ToString()));
 
             Driver.MaximiseWindow(driverScope);
 
-            Assert.That( Driver.ExecuteScript("return window.outerWidth;", driverScope), Is.GreaterThanOrEqualTo(availWidth));
+            Assert.True(int.Parse(Driver.ExecuteScript("return window.outerWidth;", driverScope).ToString()) >= int.Parse(availWidth.ToString()));
         }
 
 
@@ -83,12 +83,12 @@ namespace Coypu.Drivers.Tests
             var availWidth = Driver.ExecuteScript("return window.screen.availWidth;", driverScope);
             var initalWidth = Driver.ExecuteScript("return window.outerWidth;", driverScope);
 
-            Assert.That(initalWidth, Is.LessThan(availWidth));
+            Assert.True(int.Parse(initalWidth.ToString()) < int.Parse(availWidth.ToString()));
 
             Driver.ResizeTo(new Size(768, 500), driverScope);
 
-            Assert.That(Driver.ExecuteScript("return window.outerWidth;", driverScope), Is.EqualTo(768));
-            Assert.That(Driver.ExecuteScript("return window.outerHeight;", driverScope), Is.EqualTo(500));
+            Assert.Equal(768, Driver.ExecuteScript("return window.outerWidth;", driverScope));
+            Assert.Equal(500, Driver.ExecuteScript("return window.outerHeight;", driverScope));
         }
     }
 }

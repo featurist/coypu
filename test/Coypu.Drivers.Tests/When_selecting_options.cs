@@ -1,5 +1,5 @@
 ﻿using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -17,23 +17,21 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Sets_text_of_selected_option()
         {
-            Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option one");
+            Field("containerLabeledSelectFieldId").SelectedOption.ShouldBe("select two option one");
 
             Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
 
-            Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option two");
+            Field("containerLabeledSelectFieldId").SelectedOption.ShouldBe("select two option two");
         }
 
         [Fact]
         public void Selected_option_respects_TextPrecision()
         {
-            Assert.That(
-                FindSingle(new OptionFinder(Driver, "select two option t", GetSelectScope("containerLabeledSelectFieldId"), Options.Substring)).Text,
-                Is.EqualTo("select two option two"));
+            Assert.Equal("select two option two", 
+                FindSingle(new OptionFinder(Driver, "select two option t", GetSelectScope("containerLabeledSelectFieldId"), Options.Substring)).Text);
 
-            Assert.That(
-                FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), Options.Exact)).Text,
-                Is.EqualTo("select two option two"));
+            Assert.Equal("select two option two", 
+                FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), Options.Exact)).Text);
 
             Assert.Throws<MissingHtmlException>(
                 () => FindSingle(new OptionFinder(Driver, "select two option t", GetSelectScope("containerLabeledSelectFieldId"), Options.Exact)));
@@ -42,13 +40,13 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Selected_option_finds_exact_by_container_label()
         {
-            Assert.That(FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Exact)).Text, Is.EqualTo("one"));
+            Assert.Equal("one", FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Exact)).Text);
         }
 
         [Fact]
         public void Selected_option_finds_substring_by_container_label()
         {
-            Assert.That(FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Substring)).Text, Is.EqualTo("one"));
+            Assert.Equal("one", FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Substring)).Text);
         }
     }
     

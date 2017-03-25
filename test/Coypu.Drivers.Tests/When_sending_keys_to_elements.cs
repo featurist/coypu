@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -9,11 +9,11 @@ namespace Coypu.Drivers.Tests
         public void Sets_value_of_text_input_field_with_id()
         {
             var textField = Field("containerLabeledTextInputFieldName");
-            textField.Value.should_be("text input field two val");
+            textField.Value.ShouldBe("text input field two val");
 
             Driver.SendKeys(textField, " - send keys without any click, clear first, etc");
 
-            textField.Value.should_be("text input field two val - send keys without any click, clear first, etc");
+            textField.Value.ShouldBe("text input field two val - send keys without any click, clear first, etc");
         }
     }
 }

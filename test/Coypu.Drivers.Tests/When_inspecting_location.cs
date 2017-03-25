@@ -11,10 +11,10 @@ namespace Coypu.Drivers.Tests
         public void Gets_the_current_browser_location()
         {
             Driver.Visit(TestSiteUrl("/"), Root);
-            Assert.That(Driver.Location(Root), Is.EqualTo(new Uri(TestSiteUrl("/"))));
+            Assert.Equal(new Uri(TestSiteUrl("/")), Driver.Location(Root));
 
             Driver.Visit(TestSiteUrl("/auto_login"), Root);
-            Assert.That(Driver.Location(Root), Is.EqualTo(new Uri(TestSiteUrl("/auto_login"))));
+            Assert.Equal(new Uri(TestSiteUrl("/auto_login")), Driver.Location(Root));
         }
 
 
@@ -24,7 +24,7 @@ namespace Coypu.Drivers.Tests
             Driver.Click(Link("Open pop up window"));
             var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
 
-            Assert.That(Driver.Location(popUp).AbsoluteUri, Is.StringEnding("src/Coypu.Drivers.Tests/html/popup.htm"));
+            Assert.EndsWith("src/Coypu.Drivers.Tests/html/popup.htm", Driver.Location(popUp).AbsoluteUri);
         }
 
 
@@ -37,7 +37,7 @@ namespace Coypu.Drivers.Tests
             // Seems like WebDriver is not waiting on JS, has exec been made asnyc?
             Thread.Sleep(500);
 
-            Assert.That(Driver.Location(Root), Is.EqualTo(new Uri(TestSiteUrl("/resource/bdd"))));
+            Assert.Equal(new Uri(TestSiteUrl("/resource/bdd")), Driver.Location(Root));
         }
     }
 }

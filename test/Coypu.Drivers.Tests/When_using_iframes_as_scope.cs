@@ -1,5 +1,5 @@
 ﻿using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             Assert.Throws<MissingHtmlException>(() => Id("iframe1ButtonId", Root, DefaultOptions));
         }
 
-        [Test, Ignore("Tried everything to work out why Selenium 3 is failing this test, something to do with how it switches between iframes. Have to do without this, it's pretty obscure anyway.")]
+        [Fact(Skip = "Tried everything to work out why Selenium 3 is failing this test, something to do with how it switches between iframes. Have to do without this, it's pretty obscure anyway.")]
         public void Finds_elements_among_multiple_scopes()
         {
             Finds_elements_among_multiple_scopes(new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions),
@@ -45,17 +45,17 @@ namespace Coypu.Drivers.Tests
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, elementFinder1, Driver, null, null, null, DisambiguationStrategy);
             var iframeTwo = new BrowserWindow(DefaultSessionConfiguration, elementFinder2, Driver, null, null, null, DisambiguationStrategy);
 
-            Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
-            Button("scoped button", iframeTwo, DefaultOptions).Id.should_be("iframe2ButtonId");
+            Button("scoped button", iframeOne, DefaultOptions).Id.ShouldBe("iframe1ButtonId");
+            Button("scoped button", iframeTwo, DefaultOptions).Id.ShouldBe("iframe2ButtonId");
         }
 
         [Fact]
         public void Finds_clear_scope_back_to_the_whole_window()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver,null,null,null,DisambiguationStrategy);
-            Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
+            Button("scoped button", iframeOne, DefaultOptions).Id.ShouldBe("iframe1ButtonId");
 
-            Button("scoped button", Root, Options.PreferExact).Id.should_be("scope1ButtonId");
+            Button("scoped button", Root, Options.PreferExact).Id.ShouldBe("scope1ButtonId");
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Coypu.Drivers.Tests
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
             Driver.Set(FindField("text input in iframe", iframeOne), "filled in");
             
-            Assert.That(FindField("text input in iframe", iframeOne).Value, Is.EqualTo("filled in"));
+            Assert.Equal("filled in", FindField("text input in iframe", iframeOne).Value);
         }
 
         private static Element FindField(string locator, DriverScope scope)
@@ -76,10 +76,10 @@ namespace Coypu.Drivers.Tests
         public void Can_scope_around_an_iframe()
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, new FrameFinder(Driver, "I am iframe one", Root,DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-            Button("scoped button", iframeOne, DefaultOptions).Id.should_be("iframe1ButtonId");
+            Button("scoped button", iframeOne, DefaultOptions).Id.ShouldBe("iframe1ButtonId");
 
             var body = new BrowserWindow(DefaultSessionConfiguration, new CssFinder(Driver, "body", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-            Button("scoped button", body, Options.PreferExact).Id.should_be("scope1ButtonId");
+            Button("scoped button", body, Options.PreferExact).Id.ShouldBe("scope1ButtonId");
         }
 
         [Fact]

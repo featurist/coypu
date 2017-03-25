@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -8,8 +8,8 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_link_by_text()
         {
-            Link("first link").Id.should_be("firstLinkId");
-            Link("second link").Id.should_be("secondLinkId");
+            Link("first link").Id.ShouldBe("firstLinkId");
+            Link("second link").Id.ShouldBe("secondLinkId");
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_a_link_with_both_types_of_quote_in_its_text()
         {
-            Assert.That(Link("I'm a link with \"both\" types of quote in my text").Id, Is.EqualTo("linkWithBothQuotesId"));
+            Assert.Equal("linkWithBothQuotesId", Link("I'm a link with \"both\" types of quote in my text").Id);
         }
     }
 }

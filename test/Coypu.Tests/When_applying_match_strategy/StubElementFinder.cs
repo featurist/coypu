@@ -21,12 +21,12 @@ namespace Coypu.Tests.When_applying_match_strategy
             get { return _supportsSubstringTextMatching; }
         }
 
-        internal override IEnumerable<Element> Find(Options options)
+        public override IEnumerable<Element> Find(Options options)
         {
             return StubbedFindResults[options];
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return _queryDescription; }
         }

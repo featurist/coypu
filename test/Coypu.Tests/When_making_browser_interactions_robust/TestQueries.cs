@@ -8,7 +8,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     {
         private readonly Stopwatch stopWatch = new Stopwatch();
         private readonly bool actualResult;
-        private readonly bool expecting;
 
         public int Tries { get; set; }
         public long LastCall { get; set; }
@@ -28,9 +27,9 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             return actualResult;
         }
 
-        public bool ExpectedResult
+        public override object ExpectedResult
         {
-            get { return expecting; }
+            get { return false; }
         }
     }
 
@@ -77,7 +76,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         public Options Options { get; set; }
         public DriverScope Scope { get; private set; }
         private readonly T result;
-        private readonly TimeSpan _retryInterval;
         public TimeSpan Timeout { get; set; }
 
         public ThrowsSecondTimeQuery(T result, Options options)
@@ -104,7 +102,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public TimeSpan RetryInterval
         {
-            get { return _retryInterval; }
+            get { return default(TimeSpan); }
         }
     }
 
@@ -112,7 +110,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
     {
         public Options Options { get; set; }
         public DriverScope Scope { get; private set; }
-        private readonly TimeSpan _retryInterval;
         private readonly Stopwatch stopWatch = new Stopwatch();
 
         public AlwaysThrowsQuery(Options options)
@@ -140,7 +137,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public TimeSpan RetryInterval
         {
-            get { return _retryInterval; }
+            get { return default(TimeSpan); }
         }
     }
 
@@ -160,7 +157,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             throw (TException)Activator.CreateInstance(typeof(TException), "Test Exception");
         }
 
-        public bool ExpectedResult
+        public override object ExpectedResult
         {
             get { return false; }
         }
@@ -178,8 +175,6 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         private readonly T actualResult;
         private readonly T expectedResult;
         private readonly int throwsHowManyTimes;
-        private readonly TimeSpan _timeout;
-        private readonly TimeSpan _retryInterval;
 
         public ThrowsThenSubsequentlySucceedsQuery(T actualResult, T expectedResult, int throwsHowManyTimes, Options options)
         {
@@ -212,12 +207,12 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
         public TimeSpan Timeout
         {
-            get { return _timeout; }
+            get { return default(TimeSpan); }
         }
 
         public TimeSpan RetryInterval
         {
-            get { return _retryInterval; }
+            get { return default(TimeSpan); }
         }
     }
 
@@ -252,7 +247,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             return actualResult;
         }
 
-        public bool ExpectedResult
+        public override object ExpectedResult
         {
             get { return expectedResult; }
         }

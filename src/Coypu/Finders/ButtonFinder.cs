@@ -17,7 +17,7 @@ namespace Coypu.Finders
             return html.Button;
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "button: " + Locator; }
         }

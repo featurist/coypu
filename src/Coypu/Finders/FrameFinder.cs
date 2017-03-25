@@ -11,12 +11,12 @@ namespace Coypu.Finders
             get { return true; }
         }
 
-        internal override IEnumerable<Element> Find(Options options)
+        public override IEnumerable<Element> Find(Options options)
         {
             return Driver.FindFrames(Locator, Scope, options);
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "frame: " + Locator; }
         }

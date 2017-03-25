@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -8,15 +8,15 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_by_legend_text()
         {
-            Fieldset("Scope 1").Id.should_be("fieldsetScope1");
-            Fieldset("Scope 2").Id.should_be("fieldsetScope2");
+            Fieldset("Scope 1").Id.ShouldBe("fieldsetScope1");
+            Fieldset("Scope 2").Id.ShouldBe("fieldsetScope2");
         }
 
         [Fact]
         public void Finds_by_id()
         {
-            Fieldset("fieldsetScope1").Native.should_be(Fieldset("Scope 1").Native);
-            Fieldset("fieldsetScope2").Native.should_be(Fieldset("Scope 2").Native);
+            Fieldset("fieldsetScope1").Native.ShouldBe(Fieldset("Scope 1").Native);
+            Fieldset("fieldsetScope2").Native.ShouldBe(Fieldset("Scope 2").Native);
         }
 
         [Fact]

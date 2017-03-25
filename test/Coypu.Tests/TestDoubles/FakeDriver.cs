@@ -58,7 +58,7 @@ namespace Coypu.Tests.TestDoubles
             public string Locator;
             public object Result;
             public Scope Scope;
-            public Regex TextPattern;
+            public Regex TextPattern = null;
             public Options Options;
         }
 
@@ -85,7 +85,7 @@ namespace Coypu.Tests.TestDoubles
 
         private IEnumerable<T> FindAll<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Options options = null, Regex textPattern = null)
         {
-            var stubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
+            var stubResult = stubbed.FirstOrDefault(r => r.Locator == locator.ToString() && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
             if (stubResult == null)
                 return Enumerable.Empty<T>();
 

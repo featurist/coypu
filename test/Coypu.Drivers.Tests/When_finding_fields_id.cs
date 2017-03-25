@@ -1,4 +1,4 @@
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -8,90 +8,90 @@ namespace Coypu.Drivers.Tests
         [Fact]
         public void Finds_field()
         {
-            Field("containerLabeledTextInputFieldId").Value.should_be("text input field two val");
+            Field("containerLabeledTextInputFieldId").Value.ShouldBe("text input field two val");
         }
 
         [Fact]
         public void Finds_email_field()
         {
-            Field("containerLabeledEmailInputFieldId").Value.should_be("email input field two val");
+            Field("containerLabeledEmailInputFieldId").Value.ShouldBe("email input field two val");
         }
 
         [Fact]
         public void Finds_tel_field()
         {
-            Field("containerLabeledTelInputFieldId").Value.should_be("0123456789");
+            Field("containerLabeledTelInputFieldId").Value.ShouldBe("0123456789");
         }
 
         [Fact]
         public void Finds_number_field()
         {
-            Field("containerLabeledNumberInputFieldId").Value.should_be("42");
+            Field("containerLabeledNumberInputFieldId").Value.ShouldBe("42");
         }
 
         [Fact]
         public void Finds_datetime_field()
         {
-            Field("containerLabeledDatetimeInputFieldId").Value.should_be("2012-01-02T03:04:05Z");
+            Field("containerLabeledDatetimeInputFieldId").Value.ShouldBe("2012-01-02T03:04:05Z");
         }
 
         [Fact]
         public void Finds_datetime_local_field()
         {
-            Field("containerLabeledDatetimeLocalInputFieldId").Value.should_be("2012-01-02T03:04:05");
+            Field("containerLabeledDatetimeLocalInputFieldId").Value.ShouldBe("2012-01-02T03:04:05");
         }
 
         [Fact]
         public void Finds_date_field()
         {
-            Field("containerLabeledDateInputFieldId").Value.should_be("2012-01-02");
+            Field("containerLabeledDateInputFieldId").Value.ShouldBe("2012-01-02");
         }
 
         [Fact]
         public void Finds_url_field()
         {
-            Field("containerLabeledUrlInputFieldId").Value.should_be("http://www.example.com");
+            Field("containerLabeledUrlInputFieldId").Value.ShouldBe("http://www.example.com");
         }
         [Fact]
         public void Finds_color_field()
         {
-            Field("containerLabeledColorInputFieldId").Value.should_be("#ff0000");
+            Field("containerLabeledColorInputFieldId").Value.ShouldBe("#ff0000");
         }
 
         [Fact]
         public void Finds_textarea()
         {
-            Field("containerLabeledTextareaFieldId").Value.should_be("textarea field two val");
+            Field("containerLabeledTextareaFieldId").Value.ShouldBe("textarea field two val");
         }
 
         [Fact]
         public void Finds_select()
         {
-            Field("containerLabeledSelectFieldId").Name.should_be("containerLabeledSelectFieldName");
+            Field("containerLabeledSelectFieldId").Name.ShouldBe("containerLabeledSelectFieldName");
         }
 
         [Fact]
         public void Finds_checkbox()
         {
-            Field("containerLabeledCheckboxFieldId").Value.should_be("checkbox field two val");
+            Field("containerLabeledCheckboxFieldId").Value.ShouldBe("checkbox field two val");
         }
 
         [Fact]
         public void Finds_radio()
         {
-            Field("containerLabeledRadioFieldId").Value.should_be("radio field two val");
+            Field("containerLabeledRadioFieldId").Value.ShouldBe("radio field two val");
         }
 
         [Fact]
         public void Finds_password()
         {
-            Field("containerLabeledPasswordFieldId").Name.should_be("containerLabeledPasswordFieldName");
+            Field("containerLabeledPasswordFieldId").Name.ShouldBe("containerLabeledPasswordFieldName");
         }
 
         [Fact]
         public void Finds_file()
         {
-            Field("containerLabeledFileFieldId").Name.should_be("containerLabeledFileFieldName");
+            Field("containerLabeledFileFieldId").Name.ShouldBe("containerLabeledFileFieldName");
         }
     }
 }

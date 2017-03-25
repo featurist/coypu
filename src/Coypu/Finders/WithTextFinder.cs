@@ -24,7 +24,7 @@ namespace Coypu.Finders
             this.text = text;
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get
             {

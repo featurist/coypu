@@ -17,7 +17,7 @@ namespace Coypu.Finders
             return html.Option;
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "option: " + Locator; }
         }

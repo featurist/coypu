@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using NSpec;
+using Shouldly;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Tests
                 Driver.Set(textField, fullPath);
 
                 var findAgain = Field("forLabeledFileFieldId");
-                findAgain.Value.should_end_with(someLocalFile);
+                findAgain.Value.ShouldEndWith(someLocalFile);
             }
             finally
             {

@@ -12,7 +12,7 @@ namespace Coypu.Finders
             get { return true; }
         }
 
-        internal override string QueryDescription
+        public override string QueryDescription
         {
             get { return "section: " + Locator; }
         }

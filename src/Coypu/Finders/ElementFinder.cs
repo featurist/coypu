@@ -28,11 +28,11 @@ namespace Coypu.Finders
 
         internal string Locator { get { return locator; } }
 
-        internal abstract IEnumerable<Element> Find(Options options);
+        public abstract IEnumerable<Element> Find(Options options);
 
-        internal abstract string QueryDescription { get; }
+        public abstract string QueryDescription { get; }
 
-        protected internal virtual Exception GetMissingException()
+        public virtual Exception GetMissingException()
         {
             return new MissingHtmlException("Unable to find " + QueryDescription);
         }
