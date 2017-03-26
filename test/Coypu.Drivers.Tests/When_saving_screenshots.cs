@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using Coypu.Finders;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
