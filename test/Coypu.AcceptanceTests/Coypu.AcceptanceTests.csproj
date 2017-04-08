@@ -15,15 +15,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="1.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta1-build1309" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.0" />
-    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
     <PackageReference Include="Selenium.Mozilla.Firefox.Webdriver" Version="0.6.0.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.28.0.2-beta" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.29.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.15.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.3.0" />
-    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.14393.0" />
-    <PackageReference Include="WebDriver.GeckoDriver" Version="0.13.0" />
+    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.14393.1" />
+    <PackageReference Include="WebDriver.GeckoDriver" Version="0.15.0" />
   </ItemGroup>
   
     <ItemGroup>
