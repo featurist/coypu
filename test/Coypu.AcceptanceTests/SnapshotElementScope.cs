@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    public class SnapshotElementScope : IClassFixture<SnapshotElementScopeFixture>
+    public class SnapshotElementScope : IClassFixture<SnapshotElementScopeFixture>, IDisposable
     {
         private BrowserSession browser;
 
@@ -13,6 +13,11 @@ namespace Coypu.AcceptanceTests
         {
             browser = fixture.BrowserSession;
             ReloadTestPage();
+        }
+
+        public void Dispose()
+        {
+            browser.Dispose();
         }
 
         private void ReloadTestPage()

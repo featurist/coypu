@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Coypu.AcceptanceTests
 {
-    public class WaitAndRetryExamples : IClassFixture<WaitAndRetryExamplesFixture>
+    public class WaitAndRetryExamples : IClassFixture<WaitAndRetryExamplesFixture>, IDisposable
     {
         protected BrowserSession browser;
 
@@ -13,6 +13,11 @@ namespace Coypu.AcceptanceTests
         {
             browser = fixture.BrowserSession;
             ReloadTestPageWithDelay();
+        }
+
+        public void Dispose()
+        {
+            browser.Dispose();
         }
 
         protected void ApplyAsyncDelay()
@@ -30,15 +35,14 @@ namespace Coypu.AcceptanceTests
 
         protected static string TestPageLocation(string page)
         {
-            var testPageLocation = "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
-            return testPageLocation;
+            return "file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/");
         }
 
         protected void ReloadTestPageWithDelay()
         {
             ReloadTestPage();
             ApplyAsyncDelay();
-        }   
+        }
     }
 
     public class WaitAndRetryExamplesFixture : IDisposable

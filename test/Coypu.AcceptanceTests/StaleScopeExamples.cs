@@ -10,7 +10,7 @@ namespace Coypu.AcceptanceTests
     /// <summary>
     /// Simple examples for each API method - to show usage and check everything is wired up properly
     /// </summary>
-    public class StaleScopeExamples : IClassFixture<StaleScopeBrowserSessionFixture>
+    public class StaleScopeExamples : IClassFixture<StaleScopeBrowserSessionFixture>, IDisposable
     {
         private BrowserSession browser;
 
@@ -22,6 +22,11 @@ namespace Coypu.AcceptanceTests
         private void VisitTestPage(string page)
         {
             browser.Visit("file:///" + new FileInfo(@"html\" + page).FullName.Replace("\\", "/"));
+        }
+
+        public void Dispose()
+        {
+            browser.Dispose();
         }
 
         [Fact]

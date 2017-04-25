@@ -5,7 +5,7 @@ using Coypu.Queries;
 
 namespace Coypu.AcceptanceTests
 {
-    public class States : IClassFixture<StatesFixture>
+    public class States : IClassFixture<StatesFixture>, IDisposable
     {
         private BrowserSession browser;
         
@@ -13,6 +13,11 @@ namespace Coypu.AcceptanceTests
         {
             browser = statesFixture.BrowserSession;
             ReloadTestPage();
+        }
+
+        public void Dispose()
+        {
+            browser.Dispose();
         }
 
         private void ShowStateAsync(string id, int delayMilliseconds)
