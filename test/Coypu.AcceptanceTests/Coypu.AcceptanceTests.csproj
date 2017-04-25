@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <AssemblyName>Coypu.AcceptanceTests</AssemblyName>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-	<RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+	  <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
   </PropertyGroup>
   
     <ItemGroup>
@@ -20,10 +20,10 @@
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
     <PackageReference Include="Selenium.Mozilla.Firefox.Webdriver" Version="0.6.0.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.29.0" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.15.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.3.0" />
-    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.14393.1" />
-    <PackageReference Include="WebDriver.GeckoDriver" Version="0.15.0" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.16.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.4.0" />
+    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.15063" />
+    <PackageReference Include="WebDriver.GeckoDriver" Version="0.16.0" />
   </ItemGroup>
   
     <ItemGroup>

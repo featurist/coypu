@@ -13,18 +13,19 @@ namespace Coypu.Drivers.Selenium
     {
         public IWebDriver NewWebDriver(Browser browser)  {
             if (browser == Browser.Firefox)
-                return new FirefoxDriver();
+                return new FirefoxDriver(FirefoxDriverService.CreateDefaultService(Directory.GetCurrentDirectory()));
             if (browser == Browser.InternetExplorer)
             {
                 var options = new InternetExplorerOptions
-                    {
-                        IntroduceInstabilityByIgnoringProtectedModeSettings = true,
-                        EnableNativeEvents = true
-                    };
-                return new InternetExplorerDriver(Directory.GetCurrentDirectory(), options);
+                {
+                    IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                    EnableNativeEvents = true,
+                    IgnoreZoomLevel = true
+                };
+                return new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(Directory.GetCurrentDirectory()), options);
             }
             if (browser == Browser.Chrome)
-                return new ChromeDriver(Directory.GetCurrentDirectory());
+                return new ChromeDriver(ChromeDriverService.CreateDefaultService(Directory.GetCurrentDirectory()));
             if (browser == Browser.HtmlUnit)
                 return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
             if (browser == Browser.HtmlUnitWithJavaScript) {
