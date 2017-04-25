@@ -23,7 +23,6 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.16.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.4.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.15063" />
-    <PackageReference Include="WebDriver.GeckoDriver" Version="0.16.0" />
   </ItemGroup>
   
     <ItemGroup>
