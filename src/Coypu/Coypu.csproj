@@ -7,6 +7,14 @@
     <AssemblyName>Coypu</AssemblyName>
     <PackageId>Coypu</PackageId>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <Version>3.0.0-prerelease</Version>
+    <Authors>AdrianLongley</Authors>
+    <Company>Featurist</Company>
+    <Description>Intuitive, robust browser automation for .Net</Description>
+    <PackageProjectUrl>https://github.com/featurist/coypu</PackageProjectUrl>
+    <PackageLicenseUrl>http://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/featurist/coypu</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
