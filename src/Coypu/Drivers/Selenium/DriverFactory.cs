@@ -28,11 +28,6 @@ namespace Coypu.Drivers.Selenium
                 return new ChromeDriver(ChromeDriverService.CreateDefaultService(Directory.GetCurrentDirectory()));
             if (browser == Browser.HtmlUnit)
                 return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
-            if (browser == Browser.HtmlUnitWithJavaScript) {
-                DesiredCapabilities desiredCapabilities = DesiredCapabilities.HtmlUnit();
-                desiredCapabilities.IsJavaScriptEnabled = true;
-                return new RemoteWebDriver(desiredCapabilities);
-            }
             if (browser == Browser.PhantomJS)
                 return new PhantomJSDriver();
             return browserNotSupported(browser,null);

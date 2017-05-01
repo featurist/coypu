@@ -20,7 +20,7 @@
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
     <PackageReference Include="Selenium.Mozilla.Firefox.Webdriver" Version="0.6.0.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.29.0" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.16.0" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.16.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.4.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.15063" />
   </ItemGroup>

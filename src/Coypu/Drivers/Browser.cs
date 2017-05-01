@@ -20,7 +20,6 @@ namespace Coypu.Drivers
         public static Browser Chrome                 = new Browser { Javascript = true };
         public static Browser Safari                 = new Browser { Javascript = true };
         public static Browser HtmlUnit               = new Browser { Javascript = false };
-        public static Browser HtmlUnitWithJavaScript = new Browser { Javascript = true };
         public static Browser PhantomJS              = new Browser { Javascript = true };
 
         public static Browser Parse(string browserName)
