@@ -19,6 +19,7 @@ namespace Coypu
         String Title(Scope scope);
         object ExecuteScript(string javascript, Scope scope, params object[] args);
         IEnumerable<Cookie> GetBrowserCookies();
+        void ClearBrowserCookies();
         void Click(Element element);
         void AcceptModalDialog(Scope scope);
         void CancelModalDialog(Scope scope);
