@@ -92,6 +92,11 @@ namespace Coypu.Tests.TestDoubles
             return (IEnumerable<T>) stubResult.Result;
         }
 
+        public void ClearBrowserCookies()
+        {
+            stubbedCookies.Clear();
+        }
+
         public void Click(Element element)
         {
             ClickedElements.Add(element);

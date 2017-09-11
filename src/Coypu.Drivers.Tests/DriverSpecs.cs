@@ -12,13 +12,13 @@ public class AssemblyTearDown
 {
     public static SelfishSite TestSite;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void StartTestSite()
     {
         TestSite = new SelfishSite();
     }
 
-    [TearDown]
+    [OneTimeTearDown]
     public void TearDown()
     {
         TestSite.Dispose();
