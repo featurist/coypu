@@ -31,7 +31,7 @@ namespace Coypu.Drivers.Selenium
                 return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
             if (browser == Browser.HtmlUnitWithJavaScript) {
                 DesiredCapabilities desiredCapabilities = DesiredCapabilities.HtmlUnit();
-                desiredCapabilities.IsJavaScriptEnabled = true;
+                desiredCapabilities.SetCapability(CapabilityType.IsJavaScriptEnabled, true);
                 return new RemoteWebDriver(desiredCapabilities);
             }
             if (browser == Browser.PhantomJS)
@@ -41,10 +41,10 @@ namespace Coypu.Drivers.Selenium
             if (browser == Browser.Opera)
                 return new OperaDriver();
 
-            return browserNotSupported(browser,null);
+            return BrowserNotSupported(browser,null);
         }
 
-        private IWebDriver browserNotSupported(Browser browser, Exception inner) {
+        private IWebDriver BrowserNotSupported(Browser browser, Exception inner) {
             throw new BrowserNotSupportedException(browser, GetType(), inner);
         }
     }
