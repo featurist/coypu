@@ -412,8 +412,7 @@ namespace Coypu.AcceptanceTests
             Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.ContentContaining("this is not in the page", "in", "a", "list")));
         }
 
-		//bug https://github.com/mozilla/geckodriver/issues/159
-		[Test, Ignore("Known issue of geckodriver in github issue #159. Re-enable when this is fixed")]
+		[Test]
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));

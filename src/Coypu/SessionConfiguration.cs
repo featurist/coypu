@@ -54,7 +54,7 @@ namespace Coypu
                     UserInfo = uri.UserInfo;
                     value = uri.Host;
                 }
-                appHost = value == null ? null : value.TrimEnd('/');
+                appHost = value?.TrimEnd('/');
             }
         }
 

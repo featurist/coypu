@@ -1,4 +1,4 @@
-using NSpec;
+using Shouldly;
 using NUnit.Framework;
 namespace Coypu.Drivers.Tests
 {
@@ -7,71 +7,71 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_a_particular_button_by_its_text()
         {
-            Button("first button").Id.should_be("firstButtonId");
-            Button("second button").Id.should_be("secondButtonId");
+            Button("first button").Id.ShouldBe("firstButtonId");
+            Button("second button").Id.ShouldBe("secondButtonId");
         }
 
         [Test]
         public void Finds_a_particular_button_by_its_id()
         {
-            Button("firstButtonId").Text.should_be("first button");
-            Button("thirdButtonId").Text.should_be("third button");
+            Button("firstButtonId").Text.ShouldBe("first button");
+            Button("thirdButtonId").Text.ShouldBe("third button");
         }
 
         [Test]
         public void Finds_a_particular_button_by_its_name()
         {
-            Button("secondButtonName").Text.should_be("second button");
-            Button("thirdButtonName").Text.should_be("third button");
+            Button("secondButtonName").Text.ShouldBe("second button");
+            Button("thirdButtonName").Text.ShouldBe("third button");
         }
 
         [Test]
         public void Finds_a_particular_input_button_by_its_value()
         {
-            Button("first input button").Id.should_be("firstInputButtonId");
-            Button("second input button").Id.should_be("secondInputButtonId");
+            Button("first input button").Id.ShouldBe("firstInputButtonId");
+            Button("second input button").Id.ShouldBe("secondInputButtonId");
         }
 
         [Test]
         public void Finds_a_particular_input_button_by_its_id()
         {
-            Button("firstInputButtonId").Value.should_be("first input button");
-            Button("thirdInputButtonId").Value.should_be("third input button");
+            Button("firstInputButtonId").Value.ShouldBe("first input button");
+            Button("thirdInputButtonId").Value.ShouldBe("third input button");
         }
 
         [Test]
         public void Finds_a_particular_input_button_by_its_name()
         {
-            Button("secondInputButtonId").Value.should_be("second input button");
-            Button("thirdInputButtonName").Value.should_be("third input button");
+            Button("secondInputButtonId").Value.ShouldBe("second input button");
+            Button("thirdInputButtonName").Value.ShouldBe("third input button");
         }
 
         [Test]
         public void Finds_a_particular_submit_button_by_its_value()
         {
-            Button("first submit button").Id.should_be("firstSubmitButtonId");
-            Button("second submit button").Id.should_be("secondSubmitButtonId");
+            Button("first submit button").Id.ShouldBe("firstSubmitButtonId");
+            Button("second submit button").Id.ShouldBe("secondSubmitButtonId");
         }
 
         [Test]
         public void Finds_a_particular_submit_button_by_its_id()
         {
-            Button("firstSubmitButtonId").Value.should_be("first submit button");
-            Button("thirdSubmitButtonId").Value.should_be("third submit button");
+            Button("firstSubmitButtonId").Value.ShouldBe("first submit button");
+            Button("thirdSubmitButtonId").Value.ShouldBe("third submit button");
         }
 
         [Test]
         public void Finds_a_particular_submit_button_by_its_name()
         {
-            Button("secondSubmitButtonName").Value.should_be("second submit button");
-            Button("thirdSubmitButtonName").Value.should_be("third submit button");
+            Button("secondSubmitButtonName").Value.ShouldBe("second submit button");
+            Button("thirdSubmitButtonName").Value.ShouldBe("third submit button");
         }
 
         [Test]
         public void Finds_image_buttons()
         {
-            Button("firstImageButtonId").Value.should_be("first image button");
-            Button("secondImageButtonId").Value.should_be("second image button");
+            Button("firstImageButtonId").Value.ShouldBe("first image button");
+            Button("secondImageButtonId").Value.ShouldBe("second image button");
         }
 
         [Test]

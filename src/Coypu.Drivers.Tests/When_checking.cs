@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -9,12 +9,12 @@ namespace Coypu.Drivers.Tests
         public void Checks_an_unchecked_checkbox()
         {
             var checkbox = Field("uncheckedBox"); 
-            checkbox.Selected.should_be_false();
+            checkbox.Selected.ShouldBeFalse();
 
             Driver.Check(checkbox);
 
             var findAgain = Field("uncheckedBox");
-            findAgain.Selected.should_be_true();
+            findAgain.Selected.ShouldBeTrue();
         }
 
 
@@ -22,12 +22,12 @@ namespace Coypu.Drivers.Tests
         public void Leaves_a_checked_checkbox_checked()
         {
             var checkbox = Field("checkedBox");
-            checkbox.Selected.should_be_true();
+            checkbox.Selected.ShouldBeTrue();
 
             Driver.Check(checkbox);
 
             var findAgain = Field("checkedBox");
-            findAgain.Selected.should_be_true();
+            findAgain.Selected.ShouldBeTrue();
         }
 
 
@@ -35,12 +35,12 @@ namespace Coypu.Drivers.Tests
         public void Unchecks_a_checked_checkbox()
         {
             var checkbox = Field("checkedBox");
-            checkbox.Selected.should_be_true();
+            checkbox.Selected.ShouldBeTrue();
 
             Driver.Uncheck(checkbox);
 
             var findAgain = Field("checkedBox");
-            findAgain.Selected.should_be_false();
+            findAgain.Selected.ShouldBeFalse();
         }
 
 
@@ -48,12 +48,12 @@ namespace Coypu.Drivers.Tests
         public void Leaves_an_unchecked_checkbox_unchecked()
         {
             var checkbox = Field("uncheckedBox");
-            checkbox.Selected.should_be_false();
+            checkbox.Selected.ShouldBeFalse();
 
             Driver.Uncheck(checkbox);
 
             var findAgain = Field("uncheckedBox");
-            findAgain.Selected.should_be_false();
+            findAgain.Selected.ShouldBeFalse();
         }
 
 
@@ -61,11 +61,11 @@ namespace Coypu.Drivers.Tests
         public void Fires_onclick_event_on_check()
         {
             var checkbox = Field("uncheckedBox");
-            checkbox.Value.should_be("unchecked");
+            checkbox.Value.ShouldBe("unchecked");
 
             Driver.Check(checkbox);
 
-            Field("uncheckedBox", Root).Value.should_be("unchecked - clicked");
+            Field("uncheckedBox", Root).Value.ShouldBe("unchecked - clicked");
         }
 
 
@@ -73,11 +73,11 @@ namespace Coypu.Drivers.Tests
         public void Fires_onclick_event_on_uncheck()
         {
             var checkbox = Field("checkedBox");
-            checkbox.Value.should_be("checked");
+            checkbox.Value.ShouldBe("checked");
 
             Driver.Uncheck(checkbox);
 
-            Field("checkedBox", Root).Value.should_be("checked - clicked");
+            Field("checkedBox", Root).Value.ShouldBe("checked - clicked");
         }
     }
 }
