@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_frames : DriverSpecs
+    public class When_finding_frames : DriverSpecs
     {
         protected override string TestPage
         {

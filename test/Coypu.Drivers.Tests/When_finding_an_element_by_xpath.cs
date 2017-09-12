@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_an_element_by_xpath : DriverSpecs
+    public class When_finding_an_element_by_xpath : DriverSpecs
     {
         [Fact]
         public void Finds_present_examples()

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_inspecting_title : DriverSpecs
+    public class When_inspecting_title : DriverSpecs
     {
         [Fact]
         public void Gets_the_current_page_title()

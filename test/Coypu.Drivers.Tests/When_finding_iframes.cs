@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_iframes : DriverSpecs
+    public class When_finding_iframes : DriverSpecs
     {
         [Fact]
         public void Finds_by_header_text()

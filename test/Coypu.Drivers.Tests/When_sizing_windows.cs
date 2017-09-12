@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_sizing_windows : DriverSpecs
+    public class When_sizing_windows : DriverSpecs
     {
         [Fact]
         public void MaximisesWindow()

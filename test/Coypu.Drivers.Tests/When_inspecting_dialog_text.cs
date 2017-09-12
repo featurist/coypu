@@ -2,7 +2,7 @@
 using Xunit;
 namespace Coypu.Drivers.Tests
 {
-    internal class When_inspecting_dialog_text : DriverSpecs
+    public class When_inspecting_dialog_text : DriverSpecs
     {
         [Fact]
         public void Finds_exact_text_in_alert()

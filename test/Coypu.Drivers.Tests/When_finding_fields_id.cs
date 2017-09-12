@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_fields_id : DriverSpecs
+    public class When_finding_fields_id : DriverSpecs
     {
         [Fact]
         public void Finds_field()

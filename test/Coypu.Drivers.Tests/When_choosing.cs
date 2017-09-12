@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_choosing : DriverSpecs
+    public class When_choosing : DriverSpecs
     {
         [Fact]
         public void Chooses_radio_button_from_list()

@@ -57,11 +57,11 @@ namespace Coypu.AcceptanceTests
 	        browser.FindElementByName("make_14").Click();
 	        browser.FindElementByName("make_11").Click();
 
-	        Assert.True(browser.PageSource.Contains(" 5 car reviews found"));
+            Assert.Contains(" 5 car reviews found", browser.PageSource);
 
-	        browser.FindElementByXPath("//ul[@class='seats']/li/button[@value='4']").Click();
+            browser.FindElementByXPath("//ul[@class='seats']/li/button[@value='4']").Click();
 
-	        Assert.True(browser.PageSource.Contains(" 1 car reviews found"));
+	        Assert.Contains(" 1 car reviews found", browser.PageSource);
 	    }
 	}
 }

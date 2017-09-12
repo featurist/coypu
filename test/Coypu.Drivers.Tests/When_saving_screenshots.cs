@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_saving_screenshots : DriverSpecs
+    public class When_saving_screenshots : DriverSpecs
     {
         [Fact]
         public void SavesAScreenshot()

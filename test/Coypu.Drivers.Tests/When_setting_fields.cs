@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_setting_fields : DriverSpecs
+    public class When_setting_fields : DriverSpecs
     {
 
         private static DriverScope GetSelectScope(string locator)

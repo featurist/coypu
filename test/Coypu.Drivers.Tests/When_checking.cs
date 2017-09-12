@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_checking : DriverSpecs
+    public class When_checking : DriverSpecs
     {
         [Fact]
         public void Checks_an_unchecked_checkbox()

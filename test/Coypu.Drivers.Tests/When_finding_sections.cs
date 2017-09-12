@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_sections : DriverSpecs
+    public class When_finding_sections : DriverSpecs
     {
         [Fact]
         public void Finds_by_h1_text()

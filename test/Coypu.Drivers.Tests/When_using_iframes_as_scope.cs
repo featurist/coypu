@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_using_iframes_as_scope : DriverSpecs
+    public class When_using_iframes_as_scope : DriverSpecs
     {
         [Fact]
         public void Does_not_find_something_in_an_iframe()
@@ -15,32 +15,32 @@ namespace Coypu.Drivers.Tests
         [Fact(Skip = "Tried everything to work out why Selenium 3 is failing this test, something to do with how it switches between iframes. Have to do without this, it's pretty obscure anyway.")]
         public void Finds_elements_among_multiple_scopes()
         {
-            Finds_elements_among_multiple_scopes(new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions),
+            Finds_elements_among_multiple_scopes_theory(new FrameFinder(Driver, "I am iframe one", Root, DefaultOptions),
                                                  new FrameFinder(Driver, "I am iframe two", Root, DefaultOptions));
         }
 
         [Fact]
         public void Finds_elements_among_multiple_scopes_when_finding_by_css()
         {
-            Finds_elements_among_multiple_scopes(new CssFinder(Driver, "iframe#iframe1", Root, DefaultOptions),
+            Finds_elements_among_multiple_scopes_theory(new CssFinder(Driver, "iframe#iframe1", Root, DefaultOptions),
                                                  new CssFinder(Driver, "iframe#iframe2", Root, DefaultOptions));
         }
 
         [Fact]
         public void Finds_elements_among_multiple_scopes_when_finding_by_xpath()
         {
-            Finds_elements_among_multiple_scopes(new XPathFinder(Driver, "//iframe[@id='iframe1']", Root, DefaultOptions),
+            Finds_elements_among_multiple_scopes_theory(new XPathFinder(Driver, "//iframe[@id='iframe1']", Root, DefaultOptions),
                                                  new XPathFinder(Driver, "//iframe[@id='iframe2']", Root, DefaultOptions));
         }
 
         [Fact]
         public void Finds_elements_among_multiple_scopes_when_finding_by_id()
         {
-            Finds_elements_among_multiple_scopes(new IdFinder(Driver, "iframe1", Root, DefaultOptions),
+            Finds_elements_among_multiple_scopes_theory(new IdFinder(Driver, "iframe1", Root, DefaultOptions),
                                                  new IdFinder(Driver, "iframe2", Root, DefaultOptions));
         }
 
-        private static void Finds_elements_among_multiple_scopes(ElementFinder elementFinder1, ElementFinder elementFinder2)
+        private static void Finds_elements_among_multiple_scopes_theory(ElementFinder elementFinder1, ElementFinder elementFinder2)
         {
             var iframeOne = new BrowserWindow(DefaultSessionConfiguration, elementFinder1, Driver, null, null, null, DisambiguationStrategy);
             var iframeTwo = new BrowserWindow(DefaultSessionConfiguration, elementFinder2, Driver, null, null, null, DisambiguationStrategy);

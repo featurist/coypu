@@ -4,9 +4,9 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_inspecting_html : DriverSpecs
+    public class When_inspecting_html : DriverSpecs
     {
-        public void VisitTestPage()
+        private void VisitTestPage()
         {
             Driver.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"), Root);
         }

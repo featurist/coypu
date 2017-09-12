@@ -17,7 +17,7 @@ namespace Coypu.AcceptanceTests
             browser.Visit(TestPageLocation("test-card.jpg"));
             browser.ResizeTo(800, 600);
 
-            SavesToSpecifiedLocation(browser);
+            SavesToSpecifiedLocationTheory(browser);
         }
 
         [Fact]
@@ -31,10 +31,10 @@ namespace Coypu.AcceptanceTests
             // Do something in the main window
             browser.FindCss("body").Click();
 
-            SavesToSpecifiedLocation(popUp);
+            SavesToSpecifiedLocationTheory(popUp);
         }
 
-        private static void SavesToSpecifiedLocation(BrowserWindow browserWindow)
+        private static void SavesToSpecifiedLocationTheory(BrowserWindow browserWindow)
         {
             
             const string fileName = "screenshot-test-card.jpg";

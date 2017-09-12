@@ -118,11 +118,11 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
             if (typeof(T) == typeof(bool))
             {
-                Assert.Same(testValue, getProperty(browserSession.FindId("some-element")));
+                Assert.Equal(testValue, getProperty(browserSession.FindId("some-element")));
             }
             else
             {
-                Assert.Same(testValue, getProperty(browserSession.FindId("some-element")));
+                Assert.Equal(testValue, getProperty(browserSession.FindId("some-element")));
             }
 
             var queryResult = RunQueryAndCheckTiming();

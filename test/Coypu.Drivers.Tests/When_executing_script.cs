@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_executing_script : DriverSpecs
+    public class When_executing_script : DriverSpecs
     {
         [Fact]
         public void Runs_the_script_in_the_browser()

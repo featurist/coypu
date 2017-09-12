@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_interacting_with_dialogs : DriverSpecs
+    public class When_interacting_with_dialogs : DriverSpecs
     {
         [Fact]
         public void Accepts_alerts()

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_fields_by_name : DriverSpecs {
+    public class When_finding_fields_by_name : DriverSpecs {
 
         [Fact]
         public void Finds_text_input()

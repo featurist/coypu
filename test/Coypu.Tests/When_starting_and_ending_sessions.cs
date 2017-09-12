@@ -28,13 +28,13 @@ namespace Coypu.Tests
             SessionConfiguration.Driver = typeof (FakeDriver);
             using (var browserSession = new BrowserSession(SessionConfiguration))
             {
-                Assert.IsType(typeof(FakeDriver), browserSession.Driver);
+                Assert.IsType<FakeDriver>(browserSession.Driver);
             }
 
             SessionConfiguration.Driver = typeof(StubDriver);
             using (var browserSession = new BrowserSession(SessionConfiguration))
             {
-                Assert.IsType(typeof(StubDriver), browserSession.Driver);
+                Assert.IsType<StubDriver>(browserSession.Driver);
             }
         }
 

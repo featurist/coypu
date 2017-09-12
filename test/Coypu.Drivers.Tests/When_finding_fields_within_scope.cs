@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_fields_within_scope : DriverSpecs
+    public class When_finding_fields_within_scope : DriverSpecs
     {
         private DriverScope scope1;
         private DriverScope scope2;

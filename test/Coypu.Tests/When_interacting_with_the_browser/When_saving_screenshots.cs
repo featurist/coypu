@@ -9,16 +9,16 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         [Fact]
         public void TakeScreenshot_acts_immediately_on_driver()
         {
-            TakeScreenshot_acts_immediately_on_driver(popupScope);
+            TakeScreenshot_acts_immediately_on_driver_theory(popupScope);
         }
 
         [Fact]
         public void TakeScreenshot_uses_current_window_scope()
         {
-            TakeScreenshot_acts_immediately_on_driver(popupScope);
+            TakeScreenshot_acts_immediately_on_driver_theory(popupScope);
         }
 
-        private void TakeScreenshot_acts_immediately_on_driver(BrowserWindow mainWindow)
+        private void TakeScreenshot_acts_immediately_on_driver_theory(BrowserWindow mainWindow)
         {
             mainWindow.SaveScreenshot("save-me-here.png", ImageFormat.Png);
 

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_inspecting_location : DriverSpecs
+    public class When_inspecting_location : DriverSpecs
     {
         [Fact]
         public void Go_back_and_forward_in_history()

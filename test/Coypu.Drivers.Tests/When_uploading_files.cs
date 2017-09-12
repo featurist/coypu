@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_uploading_files : DriverSpecs
+    public class When_uploading_files : DriverSpecs
     {
         [Fact]
         public void Sets_the_path_to_be_uploaded()

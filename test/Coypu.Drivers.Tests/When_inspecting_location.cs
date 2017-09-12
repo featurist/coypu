@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_navigating : DriverSpecs
+    public class When_navigating : DriverSpecs
     {
         [Fact]
         public void Gets_the_current_browser_location()

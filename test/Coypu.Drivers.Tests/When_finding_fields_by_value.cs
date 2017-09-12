@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_fields_by_value : DriverSpecs
+    public class When_finding_fields_by_value : DriverSpecs
     {
         [Fact]
         public void Finds_radio_button_by_value() {

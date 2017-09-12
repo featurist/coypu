@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_getting_cookies : DriverSpecs
+    public class When_getting_cookies : DriverSpecs
     {
         public When_getting_cookies()
         {

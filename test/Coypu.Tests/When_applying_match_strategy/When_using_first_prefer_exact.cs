@@ -68,6 +68,7 @@ namespace Coypu.Tests.When_applying_match_strategy
             Assert.Same(substringResults.First(), results); 
         }
 
+        [Fact]
         public void When_there_are_no_exact_matches_But_the_finder_does_not_support_substring_text_matching_It_doesnt_bother_trying_substrings()
         {
             var finderOptions = FinderOptions();

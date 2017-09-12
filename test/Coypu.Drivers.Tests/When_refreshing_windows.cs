@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_refreshing_windows : DriverSpecs
+    public class When_refreshing_windows : DriverSpecs
     {
         [Fact]
         public void RefreshCausesPageToReload()

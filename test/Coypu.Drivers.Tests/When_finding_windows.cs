@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_windows : DriverSpecs
+    public class When_finding_windows : DriverSpecs
     {
         [Fact]
         public void Finds_by_name()

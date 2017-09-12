@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_accessing_attributes : DriverSpecs
+    public class When_accessing_attributes : DriverSpecs
     {
         [Fact]
         public void Exposes_element_attributes()

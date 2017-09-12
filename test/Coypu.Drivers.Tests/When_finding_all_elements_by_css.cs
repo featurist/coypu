@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Coypu.Drivers.Tests
 {
-    internal class When_finding_all_elements_by_css : DriverSpecs
+    public class When_finding_all_elements_by_css : DriverSpecs
     {
 
         [Fact]

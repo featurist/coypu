@@ -12,16 +12,16 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
         [Fact]
         public void It_sleeps_for_the_expected_time_Case_1()
         {
-            It_sleeps_for_the_expected_time(100);
+            It_sleeps_for_the_expected_time_theory(100);
         }
 
         [Fact]
         public void It_sleeps_for_the_expected_time_Case_2()
         {
-            It_sleeps_for_the_expected_time(200);
+            It_sleeps_for_the_expected_time_theory(200);
         }
 
-        public void It_sleeps_for_the_expected_time(int expectedDurationMilliseconds) 
+        private void It_sleeps_for_the_expected_time_theory(int expectedDurationMilliseconds) 
         {
             var waiter = new StopwatchWaiter();
             var stopWatch = Stopwatch.StartNew();
