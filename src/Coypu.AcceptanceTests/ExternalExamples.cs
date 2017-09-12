@@ -51,15 +51,12 @@ namespace Coypu.AcceptanceTests
 
             browser.FillIn("postcode").With("N1 1AA");
             
-            browser.FindField("make").Click();
-            
-            browser.Select("citroen").From("make");
-            browser.Select("c4_grand_picasso").From("model");
+            browser.Select("TESLA").From("make");
+            browser.Select("MODEL S").From("model");
 
             browser.Select("National").From("radius");
-            browser.Select("diesel").From("fuel-type");
-            browser.Select("up_to_7_years_old").From("maximum-age");
-            browser.Select("up_to_60000_miles").From("maximum-mileage");
+            browser.Select("2017").From("year-from");
+            browser.Select("4").From("quantity-of-doors");
             
             browser.FillIn("Add keyword").With("vtr");
         }
@@ -70,6 +67,7 @@ namespace Coypu.AcceptanceTests
         {
             browser.Visit("http://www.twitter.com");
 
+            browser.ClickLink("Log in");
             browser.FillIn("session[username_or_email]").With("coyputester2");
             browser.FillIn("session[password]").With("Nappybara");
         }

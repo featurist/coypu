@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             const string someLocalFile = @"local.file";
             try
             {
-                var directoryInfo = new DirectoryInfo(".");
+                var directoryInfo = new DirectoryInfo(Path.GetTempPath());
                 var fullPath = Path.Combine(directoryInfo.FullName, someLocalFile);
                 using (File.Create(fullPath))
                 {

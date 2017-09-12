@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 
 namespace Coypu.AcceptanceTests
@@ -16,24 +17,14 @@ namespace Coypu.AcceptanceTests
 
 	        browser.FindElementByName("postcode").SendKeys("N1 1AA");
 
-	        browser.FindElementByName("make").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "citroen").Click();
-            browser.FindElementByName("model").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "c4_grand_picasso").Click();
+	        browser.FindElementByName("make").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "TESLA").Click();
+            browser.FindElementByName("model").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "MODEL S").Click();
             browser.FindElementByName("radius").FindElements(By.TagName("option")).First(e => e.Text == "National").Click();
-            browser.FindElementByName("fuel-type").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "diesel").Click();
-            browser.FindElementByName("maximum-age").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "up_to_7_years_old").Click();
-            browser.FindElementByName("maximum-mileage").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "up_to_60000_miles").Click();
+            browser.FindElementByName("year-from").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "2017").Click();
+            browser.FindElementByName("maximum-mileage").FindElements(By.TagName("option")).First(e => e.GetAttribute("value") == "5000").Click();
 
 	        browser.FindElementByName("keywords").SendKeys("vtr");
         }
-
-
-
-
-
-
-
-
-
 
 	    [Test]
 		public void Visibility_NewTwitter()
@@ -41,6 +32,7 @@ namespace Coypu.AcceptanceTests
             var browser = new FirefoxDriver();
             browser.Navigate().GoToUrl("http://www.twitter.com");
 
+            browser.FindElementByLinkText("Log in").Click();
             browser.FindElementByName("session[username_or_email]").SendKeys("theuser");
             browser.FindElementByName("session[password]").SendKeys("thepass");
             
