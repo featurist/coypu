@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -50,7 +49,6 @@ namespace Coypu.Tests.TestDoubles
         public class SaveScreenshotParams
         {
             public string SaveAs;
-            public ImageFormat ImageFormat;
         }
 
         class ScopedStubResult

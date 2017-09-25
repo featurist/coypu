@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.5</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <AssemblyName>Coypu</AssemblyName>
-    <PackageId>Coypu</PackageId>
     <Version>3.0.0-prerelease-1</Version>
-    <Authors>AdrianLongley</Authors>
+    <Authors>Adrian Longley,Nicholas Mayne</Authors>
     <Company>Featurist</Company>
     <Description>Intuitive, robust browser automation for .Net</Description>
     <PackageProjectUrl>https://github.com/featurist/coypu</PackageProjectUrl>
@@ -16,6 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoreCompat.Selenium.WebDriver" Version="3.4.0-beta001" />
+    <PackageReference Include="Selenium.Support" Version="3.6.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.6.0" />
+    <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
   </ItemGroup>
 </Project>

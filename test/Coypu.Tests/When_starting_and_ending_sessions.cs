@@ -9,8 +9,10 @@ namespace Coypu.Tests
 
         public When_starting_and_ending_sessions()
         {
-            SessionConfiguration = new SessionConfiguration();
-            SessionConfiguration.Driver = typeof (FakeDriver);
+            SessionConfiguration = new SessionConfiguration
+            {
+                Driver = typeof(FakeDriver)
+            };
         }
 
         [Fact]

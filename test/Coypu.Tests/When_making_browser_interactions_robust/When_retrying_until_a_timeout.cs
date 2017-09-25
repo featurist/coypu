@@ -38,14 +38,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.True(query.Tries > 2);
         }
 
-        [Fact]
-        public void When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached()
-        {
-            When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached_theory(1500, 100);
-            When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached_theory(300, 70);
-        }
-
-        private void When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached_theory(int timeoutMilliseconds, int intervalMilliseconds)
+        [Theory]
+        [InlineData(1500, 100)]
+        [InlineData(300, 70)]
+        public void When_a_query_always_throws_an_exception_It_retries_until_the_timeout_is_reached(int timeoutMilliseconds, int intervalMilliseconds)
         {
             var expectedTimeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
             var retryInterval = TimeSpan.FromMilliseconds(intervalMilliseconds);
@@ -115,14 +111,10 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             Assert.True(query.Tries > 2);
         }
 
-        [Fact]
-        public void When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached()
-        {
-            When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached_theory(1500, 100);
-            When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached_theory(300, 70);
-        }
-
-        private void When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached_theory(int timeoutMilliseconds, int intervalMilliseconds)
+        [Theory]
+        [InlineData(1500, 100)]
+        [InlineData(300, 70)]
+        public void When_an_action_always_throws_an_exception_It_retries_until_the_timeout_is_reached(int timeoutMilliseconds, int intervalMilliseconds)
         {
             var expectedTimeout = TimeSpan.FromMilliseconds(timeoutMilliseconds);
             var retryInterval = TimeSpan.FromMilliseconds(intervalMilliseconds);

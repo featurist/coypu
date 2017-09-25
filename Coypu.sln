@@ -1,12 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CB9AF80-1809-4ABD-B17F-BD2B89F35678}"
 	ProjectSection(SolutionItems) = preProject
 		NuGet.config = NuGet.config
-		Performance1.psess = Performance1.psess
 		README.md = README.md
 	EndProjectSection
 	ProjectSection(FolderGlobals) = preProject
@@ -56,5 +55,8 @@ Global
 		{2E728244-54C5-4F95-A410-B812B8CD95DC} = {667DFA5F-8C4D-49A1-B9FD-806AC64791DD}
 		{A8F5205D-84D7-4328-891A-A8C12DE0E451} = {667DFA5F-8C4D-49A1-B9FD-806AC64791DD}
 		{F7871551-AEB4-4DE2-8D71-FB52D6A9CD0A} = {667DFA5F-8C4D-49A1-B9FD-806AC64791DD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E483E16E-3A7C-460B-AB13-6B886A2E573A}
 	EndGlobalSection
 EndGlobal
