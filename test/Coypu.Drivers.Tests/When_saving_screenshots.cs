@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using SixLabors.ImageSharp;
 using Xunit;
 
 namespace Coypu.Drivers.Tests
@@ -19,12 +20,12 @@ namespace Coypu.Drivers.Tests
             {
                 Driver.SaveScreenshot(saveAs, driverScope);
                 Assert.True(File.Exists(saveAs), "Expected screenshot saved to " + new FileInfo(saveAs).FullName);
-                using (var saved = Image.FromFile(saveAs))
+                using (var saved = Image.Load(saveAs))
                 {
                     var docWidth = (Int64) Driver.ExecuteScript("return window.document.body.clientWidth;", driverScope);
                     var docHeight = (Int64) Driver.ExecuteScript("return window.document.body.clientHeight;", driverScope);
-                    Assert.InRange(saved.PhysicalDimension.Width, docWidth - 10, docWidth);
-                    Assert.InRange(saved.PhysicalDimension.Height, docHeight - 75, docHeight);
+                    Assert.InRange(saved.Width, docWidth - 10, docWidth);
+                    Assert.InRange(saved.Height, docHeight - 75, docHeight);
                 }
             }
             finally

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.IO;
+using SixLabors.ImageSharp;
 using Xunit;
 
 namespace Coypu.AcceptanceTests
@@ -42,11 +43,11 @@ namespace Coypu.AcceptanceTests
                 browserWindow.SaveScreenshot(fileName);
 
                 Assert.True(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
-                using (var saved = Image.FromFile("screenshot-test-card.jpg"))
+                using (var saved = Image.Load("screenshot-test-card.jpg"))
                 {
                     var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;").ToString());
                     var docHeight = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientHeight;").ToString());
-                    Assert.Equal(new SizeF(docWidth, docHeight), saved.PhysicalDimension);
+                    Assert.Equal(new SizeF(docWidth, docHeight), new SizeF(saved.Width, saved.Height));
                 }
             }
             finally
