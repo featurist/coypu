@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -8,8 +8,14 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_link_by_text()
         {
-            Link("first link").Id.should_be("firstLinkId");
-            Link("second link").Id.should_be("secondLinkId");
+            Link("first link").Id.ShouldBe("firstLinkId");
+            Link("second link").Id.ShouldBe("secondLinkId");
+        }
+        [Test]
+        public void Finds_link_by_href()
+        {
+            Link("#link1href").Id.ShouldBe("firstLinkId");
+            Link("#link2href").Id.ShouldBe("secondLinkId");
         }
 
         [Test]

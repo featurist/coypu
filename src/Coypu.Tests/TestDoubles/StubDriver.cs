@@ -17,6 +17,10 @@ namespace Coypu.Tests.TestDoubles
         {
         }
 
+        public void ClearBrowserCookies()
+        {
+        }
+
         public void Click(Element element)
         {
         }

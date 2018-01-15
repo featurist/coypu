@@ -12,13 +12,13 @@ public class AssemblyTearDown
 {
     public static SelfishSite TestSite;
 
-    [SetUp]
+    [OneTimeSetUp]
     public void StartTestSite()
     {
         TestSite = new SelfishSite();
     }
 
-    [TearDown]
+    [OneTimeTearDown]
     public void TearDown()
     {
         TestSite.Dispose();
@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Tests
 
         protected static string TestHtmlPathLocation(string testPage)
         {
-            var file = new FileInfo(Path.Combine(@"..\..\", testPage)).FullName;
+            var file = Path.Combine(TestContext.CurrentContext.TestDirectory, Path.Combine(@"..\..\", testPage));
             return "file:///" + file.Replace('\\', '/');
         }
 

@@ -8,42 +8,16 @@ task :default => :compile
 task :compile => :compile_net40
 
 [:net35,:net40].each do |version|
-  msbuild "compile_#{version.to_s}".to_sym do |msbuild|
-    msbuild.solution = 'src/Coypu.sln'
-    msbuild.use version
-    msbuild.properties :configuration => BUILD_CONFIGURATION
+  build  "compile_#{version.to_s}".to_sym do |b|
+    b.file = Paths.join 'src', 'Coypu.sln'
+	b.target = ['Clean', 'Rebuild']
+	b.prop 'Configuration', 'Release' 
   end
 end
 
 desc 'Build in Release configuration'
 task :release_configuration do
   ENV['BUILD_CONFIGURATION'] = 'Release'
-end
-
-namespace :test do
-
-  desc 'driver tests only'
-  nunit :drivers => [:compile] do |nunit|
-    nunit.command = 'lib\nspec\NSpecRunnerSTA.exe'
-    nunit.assemblies = ["src\\Coypu.Drivers.Tests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.Drivers.Tests.dll"]
-  end
-
-  desc 'unit tests only'
-  nunit :unit => [:compile] do |nunit|
-    nunit.command = 'lib\NUnit\nunit-console.exe'
-    nunit.assemblies = ["src\\Coypu.Tests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.Tests.dll"]
-  end
-
-  desc 'acceptance tests only'
-  nunit :acceptance => [:compile] do |nunit|
-    nunit.command = 'lib\NUnit\nunit-console.exe'
-    nunit.assemblies = ["src\\Coypu.AcceptanceTests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.AcceptanceTests.dll"]
-  end
-  
-  nunit :all => [:compile] do |nunit|
-    nunit.command = 'lib\NUnit\nunit-console.exe'
-    nunit.assemblies = ["src\\Coypu.Tests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.Tests.dll","src\\Coypu.AcceptanceTests\\bin\\#{BUILD_CONFIGURATION}\\Coypu.AcceptanceTests.dll"]
-  end
 end
 
 
@@ -60,7 +34,6 @@ task :package => [:release_configuration,:compile] do
   sh 'nuget Pack Coypu.nuspec'
   sh 'nuget Pack Coypu.Watin.nuspec'
   sh 'nuget Pack Coypu.NUnit.nuspec'
-  sh 'nuget Pack Coypu.NUnit262.nuspec'
   #sh 'o build-wrap -quiet'
 end
 
@@ -81,13 +54,6 @@ end
 desc 'publish Coypu-NUnit'
 task :publish_nunit => [:package, :publish_nunit_262] do
   package_file = Dir.glob('Coypu.NUnit.*.nupkg').first
-  sh "nuget Push #{package_file}"
-  FileUtils.rm(package_file)
-end
-
-desc 'publish Coypu-NUnit262'
-task :publish_nunit_262 => :package do
-  package_file = Dir.glob('Coypu.NUnit262.*.nupkg').first
   sh "nuget Push #{package_file}"
   FileUtils.rm(package_file)
 end

@@ -1,4 +1,4 @@
-﻿using NSpec;
+﻿using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -10,10 +10,10 @@ namespace Coypu.Drivers.Tests
 
         {
             var element = Id("hoverOnMeTest");
-            element.Text.should_be("Hover on me");
+            element.Text.ShouldBe("Hover on me");
             Driver.Hover(element);
 
-            Id("hoverOnMeTest").Text.should_be("Hover on me - hovered");
+            Id("hoverOnMeTest").Text.ShouldBe("Hover on me - hovered");
         }
     }
 }

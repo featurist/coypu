@@ -128,6 +128,15 @@ namespace Coypu.Drivers.Watin
             return persistentCookies.Concat(sessionCookies).ToList();
         }
 
+        public void ClearBrowserCookies()
+        {
+            var ieBrowser = Watin as IE;
+            if (ieBrowser == null)
+                throw new NotSupportedException("Only supported for Internet Explorer");
+
+            ieBrowser.ClearCookies();
+        }
+
         public IEnumerable<Element> FindWindows(string titleOrName, Scope scope, Options options)
         {
             return new[] { new WatiNWindow(FindWindowHandle(titleOrName, options)) };

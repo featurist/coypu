@@ -11,16 +11,16 @@ namespace Coypu.AcceptanceTests
         private SessionConfiguration SessionConfiguration;
         private BrowserSession browser;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
             browser = new BrowserSession(SessionConfiguration);
-            browser.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"));
+            browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\table.htm").Replace("\\", "/"));
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDownFixture()
         {
             browser.Dispose();

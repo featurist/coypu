@@ -8,7 +8,7 @@ namespace Coypu.Drivers.Tests
     {
         public void VisitTestPage()
         {
-            Driver.Visit("file:///" + new FileInfo(@"html\table.htm").FullName.Replace("\\", "/"), Root);
+            Driver.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\table.htm").Replace("\\", "/"), Root);
         }
 
         [Test]

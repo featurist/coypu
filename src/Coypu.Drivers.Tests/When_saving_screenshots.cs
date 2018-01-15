@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Tests
             Driver.Visit(TestHtmlPathLocation("html\\test-card.jpg"), driverScope);
             Driver.ResizeTo(new Size(800, 600), driverScope);
 
-            const string saveAs = "expect-saved-here.jpg";
+            string saveAs = Path.Combine(Path.GetTempPath(), "expect-saved-here.jpg");
             try
             {
                 Driver.SaveScreenshot(saveAs, driverScope);

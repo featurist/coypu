@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -19,9 +19,9 @@ namespace Coypu.Drivers.Tests
         {
             const string shouldFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
             var all = Driver.FindAllXPath(shouldFind, Root, DefaultOptions);
-            all.Count().should_be(3);
-            all.ElementAt(1).Text.should_be("two");
-            all.ElementAt(2).Text.should_be("Me! Pick me!");
+            all.Count().ShouldBe(3);
+            all.ElementAt(1).Text.ShouldBe("two");
+            all.ElementAt(2).Text.ShouldBe("Me! Pick me!");
         }
     }
 }

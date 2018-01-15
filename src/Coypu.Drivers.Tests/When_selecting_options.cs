@@ -1,5 +1,5 @@
 ﻿using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -17,11 +17,11 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_text_of_selected_option()
         {
-            Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option one");
+            Field("containerLabeledSelectFieldId").SelectedOption.ShouldBe("select two option one");
 
             Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
 
-            Field("containerLabeledSelectFieldId").SelectedOption.should_be("select two option two");
+            Field("containerLabeledSelectFieldId").SelectedOption.ShouldBe("select two option two");
         }
 
         [Test]

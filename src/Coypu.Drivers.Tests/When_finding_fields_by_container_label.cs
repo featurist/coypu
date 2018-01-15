@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Coypu.Finders;
-using NSpec;
+using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -10,43 +10,43 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_text_input()
         {
-            Field("text input field in a label container", options: Options.Exact).Id.should_be("containerLabeledTextInputFieldId");
+            Field("text input field in a label container", options: Options.Exact).Id.ShouldBe("containerLabeledTextInputFieldId");
         }
 
         [Test]
         public void Finds_password()
         {
-            Field("password field in a label container").Id.should_be("containerLabeledPasswordFieldId");
+            Field("password field in a label container").Id.ShouldBe("containerLabeledPasswordFieldId");
         }
 
         [Test]
         public void Finds_checkbox()
         {
-            Field("checkbox field in a label container").Id.should_be("containerLabeledCheckboxFieldId");
+            Field("checkbox field in a label container").Id.ShouldBe("containerLabeledCheckboxFieldId");
         }
 
         [Test]
         public void Finds_radio()
         {
-            Field("radio field in a label container").Id.should_be("containerLabeledRadioFieldId");
+            Field("radio field in a label container").Id.ShouldBe("containerLabeledRadioFieldId");
         }
 
         [Test]
         public void Finds_select()
         {
-            Field("select field in a label container").Id.should_be("containerLabeledSelectFieldId");
+            Field("select field in a label container").Id.ShouldBe("containerLabeledSelectFieldId");
         }
 
         [Test]
         public void Finds_textarea()
         {
-            Field("textarea field in a label container").Id.should_be("containerLabeledTextareaFieldId");
+            Field("textarea field in a label container").Id.ShouldBe("containerLabeledTextareaFieldId");
         }
 
         [Test]
         public void Finds_file_field()
         {
-            Field("file field in a label container", options: Options.Exact).Id.should_be("containerLabeledFileFieldId");
+            Field("file field in a label container", options: Options.Exact).Id.ShouldBe("containerLabeledFileFieldId");
         }
 
         [Test]

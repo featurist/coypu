@@ -3,30 +3,34 @@ using NUnit.Framework.Constraints;
 
 namespace Coypu.NUnit.Matchers
 {
-    public class HasContentMatcher : Constraint {
+    public class HasContentMatcher : Constraint
+    {
         private readonly string _expectedContent;
         private readonly Options _options;
         private string _actualContent;
 
-        public HasContentMatcher(string expectedContent, Options options) {
+        public HasContentMatcher(string expectedContent, Options options)
+        {
             _expectedContent = expectedContent;
             _options = options;
         }
 
-        public override bool Matches(object actual) {
-            this.actual = actual;
-            var scope = ((DriverScope)actual);
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
+        {
+            var scope = actual as DriverScope;
             var hasContent = scope.HasContent(_expectedContent, _options);
             if (!hasContent)
             {
                 _actualContent = scope.Text;
                 hasContent = _actualContent.Contains(_expectedContent);
             }
-            return hasContent;
+            return new ConstraintResult(this, actual, hasContent);
         }
 
-        public override void WriteDescriptionTo(MessageWriter writer) {
-            writer.WriteMessageLine("Expected to find content: {0}\nin:\n{1}", _expectedContent, _actualContent);
+        public override string Description {
+            get {
+                return "Expected to find content: " + _expectedContent + "\nin:\n" + _actualContent;
+            }
         }
     }
 
@@ -42,22 +46,24 @@ namespace Coypu.NUnit.Matchers
             _options = options;
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            this.actual = actual;
-            var scope = ((DriverScope)actual);
+            var scope = actual as DriverScope;
             var hasContent = scope.HasContentMatch(_expectedContent, _options);
             if (!hasContent)
             {
                 _actualContent = scope.Text;
                 hasContent = _expectedContent.IsMatch(_actualContent);
             }
-            return hasContent;
+            return new ConstraintResult(this, actual, hasContent);
         }
 
-        public override void WriteDescriptionTo(MessageWriter writer)
+        public override string Description
         {
-            writer.WriteMessageLine("Expected to find content: {0}\nin:\n{1}", _expectedContent, _actualContent);
+            get
+            {
+                return "Expected to find content: " + _expectedContent + "\nin:\n" + _actualContent;
+            }
         }
     }
 }

@@ -2,19 +2,21 @@
 
 namespace Coypu.NUnit.Matchers
 {
-    public class HasNoContentMatcher : Constraint {
+    public class HasNoContentMatcher : Constraint
+    {
         private readonly string _expectedContent;
         private readonly Options _options;
         private string _actualContent;
 
-        public HasNoContentMatcher(string expectedContent, Options options) {
+        public HasNoContentMatcher(string expectedContent, Options options)
+        {
             _expectedContent = expectedContent;
             _options = options;
         }
 
-        public override bool Matches(object actual) {
-            this.actual = actual;
-            var scope = ((Scope)actual);
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
+        {
+            var scope = (Scope)actual;
             var hasNoContent = scope.HasNoContent(_expectedContent, _options);
             if (!hasNoContent)
             {
@@ -22,11 +24,15 @@ namespace Coypu.NUnit.Matchers
                 hasNoContent = !_actualContent.Contains(_expectedContent);
             }
 
-            return hasNoContent;
+            return new ConstraintResult(this, actual, hasNoContent);
         }
 
-        public override void WriteDescriptionTo(MessageWriter writer) {
-            writer.WriteMessageLine("Expected NOT to find content: {0}\nin:\n{1}", _expectedContent, _actualContent);
+        public override string Description
+        {
+            get
+            {
+                return "Expected NOT to find content: " + _expectedContent + "\nin:\n" + _actualContent;
+            }
         }
     }
 }

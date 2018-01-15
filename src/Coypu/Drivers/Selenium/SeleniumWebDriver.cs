@@ -127,6 +127,11 @@ namespace Coypu.Drivers.Selenium
             webDriver.Navigate().GoToUrl(url);
         }
 
+        public void ClearBrowserCookies()
+        {
+            webDriver.Manage().Cookies.DeleteAllCookies();
+        }
+
         public void Click(Element element) 
         {
             SeleniumElement(element).Click();

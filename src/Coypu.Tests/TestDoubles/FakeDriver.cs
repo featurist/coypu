@@ -85,11 +85,16 @@ namespace Coypu.Tests.TestDoubles
 
         private IEnumerable<T> FindAll<T>(IEnumerable<ScopedStubResult> stubbed, object locator, Scope scope, Options options = null, Regex textPattern = null)
         {
-            var stubResult = stubbed.FirstOrDefault(r => r.Locator == locator && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
+            var stubResult = stubbed.FirstOrDefault(r => r.Locator == locator.ToString() && r.Scope == scope && r.TextPattern == textPattern && options == r.Options);
             if (stubResult == null)
                 return Enumerable.Empty<T>();
 
             return (IEnumerable<T>) stubResult.Result;
+        }
+
+        public void ClearBrowserCookies()
+        {
+            stubbedCookies.Clear();
         }
 
         public void Click(Element element)

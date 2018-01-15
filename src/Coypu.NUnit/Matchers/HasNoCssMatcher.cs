@@ -8,8 +8,8 @@ namespace Coypu.NUnit.Matchers
         private readonly string _expectedCss;
         private readonly Options _options;
         private string _actualContent;
-        private Regex textPattern;
-        private string exactText;
+        private readonly Regex _textPattern;
+        private readonly string _exactText;
 
         public HasNoCssMatcher(string expectedCss, Options options)
         {
@@ -20,41 +20,46 @@ namespace Coypu.NUnit.Matchers
         public HasNoCssMatcher(string expectedCss, Regex textPattern, Options options)
             : this(expectedCss, options)
         {
-            this.textPattern = textPattern;
+            _textPattern = textPattern;
         }
 
         public HasNoCssMatcher(string expectedCss, string exactText, Options options)
             : this(expectedCss, options)
         {
-            this.exactText = exactText;
+            _exactText = exactText;
         }
 
-        public override bool Matches(object actual)
+        public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            this.actual = actual;
             var scope = ((Scope)actual);
 
             bool hasNoCss;
-            if (exactText != null)
-                hasNoCss = scope.FindCss(_expectedCss, exactText, _options).Missing();
-            else if (textPattern != null)
-                hasNoCss = scope.FindCss(_expectedCss, textPattern, _options).Missing();
+            if (_exactText != null)
+                hasNoCss = scope.FindCss(_expectedCss, _exactText, _options).Missing();
+            else if (_textPattern != null)
+                hasNoCss = scope.FindCss(_expectedCss, _textPattern, _options).Missing();
             else
                 hasNoCss = scope.FindCss(_expectedCss, _options).Missing();
 
             if (!hasNoCss)
                 _actualContent = scope.Now().InnerHTML;
 
-            return hasNoCss;
+            return new ConstraintResult(this, _actualContent, hasNoCss);
         }
 
-        public override void WriteDescriptionTo(MessageWriter writer)
+        public override string Description
         {
-            writer.WriteMessageLine("Expected NOT to find element with css selector: {0}\nin:\n{1} ", _expectedCss, _actualContent);
-            if (exactText != null)
-                writer.WriteMessageLine("With text: \"" + exactText + "\"");
-            if (textPattern != null)
-                writer.WriteMessageLine("With text matching: \"" + textPattern + "\"");
+            get
+            {
+                var description = "Expected NOT to find element with css selector: " + _expectedCss + "\nin:\n" + _actualContent + "\r\n";
+
+                if (_exactText != null)
+                    description += "With text: \"" + _exactText + "\"\r\n";
+                if (_textPattern != null)
+                    description += "With text matching: \"" + _textPattern + "\"\r\n";
+
+                return description;
+            }
         }
     }
 }

@@ -284,6 +284,13 @@ namespace Coypu.AcceptanceTests
         }
 
         [Test]
+        public void Finds_link_by_href()
+        {
+            Assert.That(browser.FindLink("#link1href").Id, Is.EqualTo("firstLinkId"));
+            Assert.That(browser.FindLink("#link2href").Id, Is.EqualTo("secondLinkId"));
+        }
+
+        [Test]
         public void FindSection_example()
         {
             Assert.That(browser.FindSection("Inspecting Content").Id, Is.EqualTo("inspectingContent"));
@@ -405,8 +412,7 @@ namespace Coypu.AcceptanceTests
             Assert.Throws<AssertionException>(() => Assert.That(browser, Shows.ContentContaining("this is not in the page", "in", "a", "list")));
         }
 
-		//bug https://github.com/mozilla/geckodriver/issues/159
-		[Test, Ignore("Known issue of geckodriver in github issue #159. Re-enable when this is fixed")]
+		[Test]
         public void Hover_example()
         {
             Assert.That(browser.FindId("hoverOnMeTest").Text, Is.EqualTo("Hover on me"));
@@ -530,7 +536,7 @@ namespace Coypu.AcceptanceTests
             const string someLocalFile = @"local.file";
             try
             {
-                var directoryInfo = new DirectoryInfo(".");
+                var directoryInfo = new DirectoryInfo(Path.GetTempPath());
                 var fullPath = Path.Combine(directoryInfo.FullName, someLocalFile);
                 using (File.Create(fullPath))
                 {
@@ -539,7 +545,7 @@ namespace Coypu.AcceptanceTests
                 browser.FillIn("forLabeledFileFieldId").With(fullPath);
 
                 var findAgain = browser.FindField("forLabeledFileFieldId");
-                Assert.That(findAgain.Value, Is.StringEnding(someLocalFile));
+                Assert.That(findAgain.Value, Does.EndWith(someLocalFile));
             }
             finally
             {

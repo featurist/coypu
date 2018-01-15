@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using NSpec;
+using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
             const string someLocalFile = @"local.file";
             try
             {
-                var directoryInfo = new DirectoryInfo(".");
+                var directoryInfo = new DirectoryInfo(Path.GetTempPath());
                 var fullPath = Path.Combine(directoryInfo.FullName, someLocalFile);
                 using (File.Create(fullPath))
                 {
@@ -22,7 +22,7 @@ namespace Coypu.Drivers.Tests
                 Driver.Set(textField, fullPath);
 
                 var findAgain = Field("forLabeledFileFieldId");
-                findAgain.Value.should_end_with(someLocalFile);
+                findAgain.Value.ShouldEndWith(someLocalFile);
             }
             finally
             {

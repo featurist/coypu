@@ -37,14 +37,14 @@ namespace Coypu.Drivers.Tests
 
                 Driver.GoBack(popUp);
                 Assert.That(Driver.Location(popUp).AbsoluteUri,
-                            Is.StringEnding("src/Coypu.Drivers.Tests/html/popup.htm"));
+                            Does.EndWith("src/Coypu.Drivers.Tests/html/popup.htm"));
                 Assert.That(Driver.Location(Root).AbsoluteUri, Is.EqualTo(TestSiteUrl("/auto_login")));
 
                 Driver.GoForward(popUp);
                 Assert.That(Driver.Location(popUp).AbsoluteUri, Is.EqualTo(TestSiteUrl("/")));
 
                 Driver.GoBack(Root);
-                Assert.That(Driver.Location(Root).AbsoluteUri, Is.StringEnding("/html/InteractionTestsPage.htm"));
+                Assert.That(Driver.Location(Root).AbsoluteUri, Does.EndWith("/html/InteractionTestsPage.htm"));
                 Assert.That(Driver.Location(popUp).AbsoluteUri, Is.EqualTo(TestSiteUrl("/")));
             }
         }
