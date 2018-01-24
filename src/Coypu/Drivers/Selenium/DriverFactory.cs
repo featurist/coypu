@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -13,7 +14,10 @@ namespace Coypu.Drivers.Selenium
     {
         public IWebDriver NewWebDriver(Browser browser)  {
             if (browser == Browser.Firefox)
-                return new FirefoxDriver(FirefoxDriverService.CreateDefaultService(Directory.GetCurrentDirectory()));
+            {
+                var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                return new FirefoxDriver(FirefoxDriverService.CreateDefaultService(path));
+            }
             if (browser == Browser.InternetExplorer)
             {
                 var options = new InternetExplorerOptions
