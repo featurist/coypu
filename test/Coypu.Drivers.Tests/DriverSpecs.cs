@@ -56,8 +56,10 @@ namespace Coypu.Drivers.Tests
 
         protected static string TestHtmlPathLocation(string testPage)
         {
-            var file = new FileInfo(Path.Combine(@"..\..\", testPage)).FullName;
-            return "file:///" + file.Replace('\\', '/');
+            var path = Path.Combine(
+                Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), 
+                testPage);
+            return "file:///" + path.Replace('\\', '/');
         }
         
         protected virtual string TestPage
