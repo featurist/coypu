@@ -199,9 +199,7 @@
     <Compile Include="WebRequests\WebRequestCookieInjector.cs" />
     <Compile Include="Finders\XPathFinder.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Matchers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
