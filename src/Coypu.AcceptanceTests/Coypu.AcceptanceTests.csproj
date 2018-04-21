@@ -162,10 +162,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj">
-      <Project>{A4ADBB2C-A3C3-4984-8991-C39E991167DA}</Project>
-      <Name>Coypu.Drivers.Watin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj">
       <Project>{14fb5a97-d3a7-4759-bb6a-03cafc9b8fab}</Project>
       <Name>Coypu.NUnit</Name>
