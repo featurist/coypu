@@ -4,6 +4,6 @@ namespace Coypu
 {
     public interface DriverFactory
     {
-        Driver NewWebDriver(Type driverType, Drivers.Browser browser);
+        IDriver NewWebDriver(Type driverType, Drivers.Browser browser);
     }
 }

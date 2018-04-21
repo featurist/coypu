@@ -4,7 +4,7 @@ namespace Coypu.Actions
     {
         private readonly ElementScope elementScope;
 
-        internal Choose(Driver driver, ElementScope elementScope, Options options)
+        internal Choose(IDriver driver, ElementScope elementScope, Options options)
             : base(driver, elementScope, options)
         {
             this.elementScope = elementScope;

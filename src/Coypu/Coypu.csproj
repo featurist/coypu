@@ -137,7 +137,7 @@
     <Compile Include="Finders\FieldFinder.cs" />
     <Compile Include="Finders\FieldsetFinder.cs" />
     <Compile Include="Finders\DocumentElementFinder.cs" />
-    <Compile Include="Driver.cs" />
+    <Compile Include="IDriver.cs" />
     <Compile Include="DriverScope.cs" />
     <Compile Include="Drivers\Browser.cs" />
     <Compile Include="Drivers\BrowserNotSupportedException.cs" />

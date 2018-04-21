@@ -7,18 +7,18 @@ namespace Coypu.Finders
         protected readonly Regex textPattern;
         protected readonly string text;
 
-        internal WithTextFinder(Driver driver, string locator, DriverScope scope, Options options)
+        internal WithTextFinder(IDriver driver, string locator, DriverScope scope, Options options)
             : base(driver, locator, scope, options)
         {
         }
 
-        internal WithTextFinder(Driver driver, string locator, DriverScope scope, Options options, Regex textPattern)
+        internal WithTextFinder(IDriver driver, string locator, DriverScope scope, Options options, Regex textPattern)
             : this(driver, locator, scope, options)
         {
             this.textPattern = textPattern;
         }
 
-        internal WithTextFinder(Driver driver, string locator, DriverScope scope, Options options, string text)
+        internal WithTextFinder(IDriver driver, string locator, DriverScope scope, Options options, string text)
             : this(driver, locator, scope, options)
         {
             this.text = text;

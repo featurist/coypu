@@ -6,12 +6,12 @@ namespace Coypu.Finders
 {
     public abstract class ElementFinder
     {
-        protected internal readonly Driver Driver;
+        protected internal readonly IDriver Driver;
         private readonly string locator;
         protected readonly DriverScope Scope;
         protected readonly Options options;
 
-        protected ElementFinder(Driver driver, string locator, DriverScope scope, Options options)
+        protected ElementFinder(IDriver driver, string locator, DriverScope scope, Options options)
         {
             Driver = driver;
             this.locator = locator;

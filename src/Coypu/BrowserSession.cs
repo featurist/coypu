@@ -47,7 +47,7 @@ namespace Coypu
         /// Replaces sessionConfiguration driver.
         /// </summary>
         /// <param name="driver"></param>
-        public BrowserSession(Driver driver)
+        public BrowserSession(IDriver driver)
             : this(
                 new SessionConfiguration(),
                 driver,
@@ -66,7 +66,7 @@ namespace Coypu
         /// </summary>
         /// <param name="sessionConfiguration"></param>
         /// <param name="driver"></param>
-        public BrowserSession(SessionConfiguration sessionConfiguration, Driver driver)
+        public BrowserSession(SessionConfiguration sessionConfiguration, IDriver driver)
             : this(
                 sessionConfiguration,
                 driver,
@@ -103,7 +103,7 @@ namespace Coypu
 
         internal BrowserSession(
             SessionConfiguration sessionConfiguration,
-            Driver driver,
+            IDriver driver,
             TimingStrategy timingStrategy,
             Waiter waiter,
             UrlBuilder urlBuilder,
@@ -126,7 +126,7 @@ namespace Coypu
         /// <summary>
         /// Access to grand-parent DriverScope's driver.
         /// </summary>
-        public Driver Driver
+        public IDriver Driver
         {
             get { return driver; }
         }

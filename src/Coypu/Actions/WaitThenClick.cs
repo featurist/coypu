@@ -11,7 +11,7 @@ namespace Coypu.Actions
         private readonly DisambiguationStrategy disambiguationStrategy;
         private readonly TimeSpan waitBeforeClick;
 
-        internal WaitThenClick(Driver driver, DriverScope scope, Options options, Waiter waiter, ElementFinder elementFinder, DisambiguationStrategy disambiguationStrategy)
+        internal WaitThenClick(IDriver driver, DriverScope scope, Options options, Waiter waiter, ElementFinder elementFinder, DisambiguationStrategy disambiguationStrategy)
             : base(driver, scope, options)
         {
             waitBeforeClick = options.WaitBeforeClick;

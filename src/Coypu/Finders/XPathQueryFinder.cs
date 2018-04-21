@@ -6,7 +6,7 @@ namespace Coypu.Finders
 {
     internal abstract class XPathQueryFinder : ElementFinder
     {
-        protected XPathQueryFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
+        protected XPathQueryFinder(IDriver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
         
         internal override IEnumerable<Element> Find(Options options)
         {

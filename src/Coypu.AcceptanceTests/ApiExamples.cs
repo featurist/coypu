@@ -670,7 +670,7 @@ namespace Coypu.AcceptanceTests
             desiredCapabilites.SetCapability("accessKey", "af4fbd21-6aee-4a01-857f-c7ffba2f0a50");
             desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
 
-            Driver driver = new CustomRemoteDriver(Browser.Parse(browserName), desiredCapabilites);
+            IDriver driver = new CustomRemoteDriver(Browser.Parse(browserName), desiredCapabilites);
 
             using (var custom = new BrowserSession(driver))
             {

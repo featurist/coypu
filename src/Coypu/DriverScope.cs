@@ -14,7 +14,7 @@ namespace Coypu
         protected readonly SessionConfiguration SessionConfiguration;
         internal readonly ElementFinder elementFinder;
 
-        protected Driver driver;
+        protected IDriver driver;
         protected TimingStrategy timingStrategy;
         protected readonly Waiter waiter;
         internal UrlBuilder urlBuilder;
@@ -23,7 +23,7 @@ namespace Coypu
         private readonly DriverScope outerScope;
         protected readonly DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
 
-        internal DriverScope(SessionConfiguration sessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
+        internal DriverScope(SessionConfiguration sessionConfiguration, ElementFinder elementFinder, IDriver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
         {
             this.elementFinder = elementFinder ?? new DocumentElementFinder(driver, sessionConfiguration);
             this.SessionConfiguration = sessionConfiguration;

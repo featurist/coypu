@@ -5,7 +5,7 @@ namespace Coypu.Finders
 {
     internal class OptionFinder : XPathQueryFinder
     {
-        internal OptionFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
+        internal OptionFinder(IDriver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsSubstringTextMatching
         {

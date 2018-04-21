@@ -9,7 +9,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     [TestFixture]
     public class When_finding_single_elements
     {
-        protected Driver driver;
+        protected IDriver driver;
         protected BrowserSession browserSession;
         protected SessionConfiguration sessionConfiguration;
 

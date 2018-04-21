@@ -4,7 +4,7 @@ namespace Coypu.Actions
     {
         private readonly ElementScope elementScope;
 
-        internal ClickAction(ElementScope elementScope, Driver driver, Options options)
+        internal ClickAction(ElementScope elementScope, IDriver driver, Options options)
             : base(driver, elementScope, options)
         {
             this.elementScope = elementScope;

@@ -10,17 +10,17 @@ namespace Coypu.Finders
             get { return "css"; }
         }
 
-        public CssFinder(Driver driver, string locator, DriverScope scope, Options options) 
+        public CssFinder(IDriver driver, string locator, DriverScope scope, Options options) 
             : base(driver, locator, scope, options)
         {
         }
 
-        public CssFinder(Driver driver, string locator, DriverScope scope, Options options, Regex textPattern) 
+        public CssFinder(IDriver driver, string locator, DriverScope scope, Options options, Regex textPattern) 
             : base(driver, locator, scope, options, textPattern)
         {
         }
 
-        public CssFinder(Driver driver, string locator, DriverScope scope, Options options, string text) 
+        public CssFinder(IDriver driver, string locator, DriverScope scope, Options options, string text) 
             : base(driver, locator, scope, options, text)
         {
         }

@@ -4,7 +4,7 @@ namespace Coypu.Actions
     {
         private readonly ElementScope element;
 
-        internal CheckAction(Driver driver, ElementScope element, Options options)
+        internal CheckAction(IDriver driver, ElementScope element, Options options)
             : base(driver, element, options)
         {
             this.element = element;

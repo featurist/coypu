@@ -6,7 +6,7 @@ namespace Coypu.Finders
     {
         private Element window;
 
-        public DocumentElementFinder(Driver driver, Options options) : base(driver, "Window", null, options)
+        public DocumentElementFinder(IDriver driver, Options options) : base(driver, "Window", null, options)
         {
         }
 

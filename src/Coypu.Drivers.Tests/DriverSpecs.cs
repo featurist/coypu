@@ -39,7 +39,7 @@ namespace Coypu.Drivers.Tests
 
         private const string INTERACTION_TESTS_PAGE = @"html\InteractionTestsPage.htm";
         private static DriverScope root;
-        private static Driver driver;
+        private static IDriver driver;
 
         private static readonly Browser browser = Browser.Chrome;
         private static readonly Type driverType = typeof (Selenium.SeleniumWebDriver);
@@ -93,11 +93,11 @@ namespace Coypu.Drivers.Tests
                 driver.Dispose();
             }
 
-            driver = (Driver)Activator.CreateInstance(driverType,browser);
+            driver = (IDriver)Activator.CreateInstance(driverType,browser);
             root = null;
         }
 
-        public static Driver Driver
+        public static IDriver Driver
         {
             get
             {

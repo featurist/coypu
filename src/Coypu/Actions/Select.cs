@@ -10,7 +10,7 @@ namespace Coypu.Actions
         private readonly DisambiguationStrategy disambiguationStrategy;
         private ElementScope selectElement;
 
-        internal Select(Driver driver, DriverScope scope, string locator, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
+        internal Select(IDriver driver, DriverScope scope, string locator, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
             : base(driver, scope, options)
         {
             this.locator = locator;
@@ -19,7 +19,7 @@ namespace Coypu.Actions
             this.disambiguationStrategy = disambiguationStrategy;
         }
 
-        internal Select(Driver driver, ElementScope selectElement, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
+        internal Select(IDriver driver, ElementScope selectElement, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
             : base(driver, selectElement, options)
         {
             this.selectElement = selectElement;

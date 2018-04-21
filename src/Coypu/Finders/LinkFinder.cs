@@ -6,7 +6,7 @@ namespace Coypu.Finders
 {
     internal class LinkFinder : XPathQueryFinder
     {
-        internal LinkFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
+        internal LinkFinder(IDriver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
 
         public override bool SupportsSubstringTextMatching

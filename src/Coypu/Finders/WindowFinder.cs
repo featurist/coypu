@@ -5,7 +5,7 @@ namespace Coypu.Finders
 {
     internal class WindowFinder : ElementFinder
     {
-        internal WindowFinder(Driver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
+        internal WindowFinder(IDriver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
         public override bool SupportsSubstringTextMatching
         {

@@ -9,7 +9,7 @@ using Coypu.Drivers;
 
 namespace Coypu.Tests.TestDoubles
 {
-    public class FakeDriver : Driver
+    public class FakeDriver : IDriver
     {
         public readonly IList<Element> ClickedElements = new List<Element>();
         public readonly IList<Element> HoveredElements = new List<Element>();

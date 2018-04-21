@@ -7,7 +7,7 @@ namespace Coypu.Tests.TestBuilders
     internal class TestSessionBuilder
     {
         internal static BrowserSession Build(SessionConfiguration sessionConfiguration, 
-                                                Driver driver, 
+                                                IDriver driver, 
                                                 TimingStrategy timingStrategy, 
                                                 Waiter waiter,
                                                 RestrictedResourceDownloader restrictedResourceDownloader, 

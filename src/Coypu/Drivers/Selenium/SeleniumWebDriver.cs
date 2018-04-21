@@ -9,7 +9,7 @@ using Cookie = System.Net.Cookie;
 
 namespace Coypu.Drivers.Selenium
 {
-    public class SeleniumWebDriver : Driver
+    public class SeleniumWebDriver : IDriver
     {
         public bool Disposed { get; private set; }
         private IWebDriver webDriver;
