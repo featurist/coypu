@@ -120,7 +120,6 @@
     <Compile Include="Finders\WithTextFinder.cs" />
     <Compile Include="Finders\XPathQueryFinder.cs" />
     <Compile Include="Match.cs" />
-    <Compile Include="Matchers\Shows.cs" />
     <Compile Include="MissingDialogException.cs" />
     <Compile Include="MissingWindowException.cs" />
     <Compile Include="ElementFoundExtensions.cs" />
@@ -200,7 +199,9 @@
     <Compile Include="WebRequests\WebRequestCookieInjector.cs" />
     <Compile Include="Finders\XPathFinder.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Matchers\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
