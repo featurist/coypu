@@ -31,3 +31,4 @@ Coypu*.nupkg
 chromedriver.log
 Coypu-*.wrap
 src/packages
+/src/.vs/Coypu/v15/Server/sqlite3
