@@ -80,7 +80,7 @@
     <Compile Include="When_interacting_with_the_browser\When_completing_forms.cs" />
     <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_all_matching_elements.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_single_elements.cs" />
+    <Compile Include="When_interacting_with_the_browser\WhenFindingSingleElements.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_checking_an_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_unchecking_any_element.cs" />
     <Compile Include="When_interacting_with_the_browser\When_finding_then_filling_in_any_field.cs" />
