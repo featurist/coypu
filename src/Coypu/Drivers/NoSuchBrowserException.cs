@@ -7,7 +7,7 @@ namespace Coypu.Drivers
     /// </summary>
     public class NoSuchBrowserException : Exception
     {
-        internal NoSuchBrowserException(string browserName) : base("No such browser: " + browserName)
+        internal NoSuchBrowserException(string browserName) : base($"No such browser: {browserName}")
         {
         }
     }
