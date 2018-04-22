@@ -4,16 +4,16 @@ namespace Coypu.Drivers.Selenium
 {
     internal class MouseControl
     {
-        private readonly IWebDriver selenium;
+        private readonly IWebDriver _selenium;
 
         public MouseControl(IWebDriver selenium)
         {
-            this.selenium = selenium;
+            _selenium = selenium;
         }
 
         public void Hover(Element element)
         {
-            var sequenceBuilder = new OpenQA.Selenium.Interactions.Actions(selenium);
+            var sequenceBuilder = new OpenQA.Selenium.Interactions.Actions(_selenium);
             var actionSequenceBuilder = sequenceBuilder.MoveToElement((IWebElement) element.Native);
             var action = actionSequenceBuilder.Build();
             action.Perform();

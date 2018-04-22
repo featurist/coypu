@@ -4,37 +4,41 @@ namespace Coypu.Drivers.Selenium
 {
     internal class Dialogs
     {
-        private readonly IWebDriver selenium;
+        private readonly IWebDriver _selenium;
 
         public Dialogs(IWebDriver selenium)
         {
-            this.selenium = selenium;
+            _selenium = selenium;
         }
 
         public bool HasDialog(string withText)
         {
-            return HasAnyDialog() && selenium.SwitchTo().Alert().Text == withText;
+            return HasAnyDialog() && _selenium.SwitchTo()
+                                              .Alert()
+                                              .Text == withText;
         }
 
         public bool HasAnyDialog()
         {
             try
             {
-                return selenium.SwitchTo() != null &&
-                       selenium.SwitchTo().Alert() != null;
+                return _selenium.SwitchTo() != null &&
+                       _selenium.SwitchTo()
+                                .Alert() != null;
             }
             catch (NoAlertPresentException)
             {
                 return false;
             }
-            
         }
 
         public void AcceptModalDialog()
         {
             try
             {
-                selenium.SwitchTo().Alert().Accept();
+                _selenium.SwitchTo()
+                         .Alert()
+                         .Accept();
             }
             catch (NoAlertPresentException ex)
             {
@@ -46,7 +50,9 @@ namespace Coypu.Drivers.Selenium
         {
             try
             {
-                selenium.SwitchTo().Alert().Dismiss();
+                _selenium.SwitchTo()
+                         .Alert()
+                         .Dismiss();
             }
             catch (NoAlertPresentException ex)
             {

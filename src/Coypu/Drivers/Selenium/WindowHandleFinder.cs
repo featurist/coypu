@@ -6,30 +6,32 @@ namespace Coypu.Drivers.Selenium
 {
     internal class WindowHandleFinder
     {
-        private readonly IWebDriver webDriver;
-        private readonly SeleniumWindowManager seleniumWindowManager;
+        private readonly SeleniumWindowManager _seleniumWindowManager;
+        private readonly IWebDriver _webDriver;
 
-        public WindowHandleFinder(IWebDriver webDriver, SeleniumWindowManager seleniumWindowManager)
+        public WindowHandleFinder(IWebDriver webDriver,
+                                  SeleniumWindowManager seleniumWindowManager)
         {
-            this.webDriver = webDriver;
-            this.seleniumWindowManager = seleniumWindowManager;
+            _webDriver = webDriver;
+            _seleniumWindowManager = seleniumWindowManager;
         }
 
-        public IEnumerable<string> FindWindowHandles(string titleOrName, Options options)
-        {   
+        public IEnumerable<string> FindWindowHandles(string titleOrName,
+                                                     Options options)
+        {
             var currentHandle = GetCurrentWindowHandle();
             IList<string> matchingWindowHandles = new List<string>();
 
             try
             {
-                seleniumWindowManager.SwitchToWindow(titleOrName);
-                matchingWindowHandles.Add(webDriver.CurrentWindowHandle);
+                _seleniumWindowManager.SwitchToWindow(titleOrName);
+                matchingWindowHandles.Add(_webDriver.CurrentWindowHandle);
             }
             catch (NoSuchWindowException)
             {
-                foreach (var windowHandle in webDriver.WindowHandles)
+                foreach (var windowHandle in _webDriver.WindowHandles)
                 {
-                    seleniumWindowManager.SwitchToWindow(windowHandle);
+                    _seleniumWindowManager.SwitchToWindow(windowHandle);
                     if (options.TextPrecisionExact)
                     {
                         if (ExactMatch(titleOrName, windowHandle))
@@ -45,33 +47,36 @@ namespace Coypu.Drivers.Selenium
 
             try
             {
-                seleniumWindowManager.SwitchToWindow(currentHandle);
+                _seleniumWindowManager.SwitchToWindow(currentHandle);
             }
             catch (NoSuchWindowException ex)
             {
                 throw new MissingWindowException("The active window was closed. Coypu should prevent this by ensuring fresh scope higher up.", ex);
             }
+
             return matchingWindowHandles;
         }
 
         private bool SubstringMatch(string titleOrName)
         {
-            return webDriver.Title.Contains(titleOrName);
+            return _webDriver.Title.Contains(titleOrName);
         }
 
-        private bool ExactMatch(string titleOrName, string windowHandle)
+        private bool ExactMatch(string titleOrName,
+                                string windowHandle)
         {
-            return (windowHandle == titleOrName || webDriver.Title == titleOrName);
+            return windowHandle == titleOrName || _webDriver.Title == titleOrName;
         }
 
         public string GetCurrentWindowHandle()
         {
             try
             {
-                return webDriver.CurrentWindowHandle;
+                return _webDriver.CurrentWindowHandle;
             }
-            catch (NoSuchWindowException) {}
-            catch (InvalidOperationException) {}
+            catch (NoSuchWindowException) { }
+            catch (InvalidOperationException) { }
+
             return null;
         }
     }

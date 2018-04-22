@@ -4,50 +4,37 @@ namespace Coypu.Drivers.Selenium
 {
     internal class SeleniumFrame : SeleniumElement
     {
-        private readonly SeleniumWindowManager seleniumWindowManager;
+        private readonly SeleniumWindowManager _seleniumWindowManager;
 
-        public SeleniumFrame(IWebElement seleniumElement, IWebDriver selenium, SeleniumWindowManager seleniumWindowManager)
+        public SeleniumFrame(IWebElement seleniumElement,
+                             IWebDriver selenium,
+                             SeleniumWindowManager seleniumWindowManager)
             : base(seleniumElement, selenium)
         {
-            this.seleniumWindowManager = seleniumWindowManager;
+            _seleniumWindowManager = seleniumWindowManager;
         }
 
-        private IWebElement FindBody()
-        {
-            return ((IWebDriver)Native).FindElement(By.CssSelector("body"));
-        }
+        public override string Text => FindBody()
+            .Text;
 
-        public override string Text
-        {
-            get
-            {
-                return FindBody().Text;
-            }
-        }
+        public override string OuterHTML => FindBody()
+            .GetAttribute("outerHTML");
 
-        public override string OuterHTML
-        {
-            get
-            {
-                return FindBody().GetAttribute("outerHTML");
-            }
-        }
-
-        public override string InnerHTML
-        {
-            get
-            {
-                return FindBody().GetAttribute("innerHTML");
-            }
-        }
+        public override string InnerHTML => FindBody()
+            .GetAttribute("innerHTML");
 
         public override object Native
         {
             get
             {
-                seleniumWindowManager.SwitchToFrame(native);
-                return selenium;
+                _seleniumWindowManager.SwitchToFrame(_native);
+                return Selenium;
             }
+        }
+
+        private IWebElement FindBody()
+        {
+            return ((IWebDriver) Native).FindElement(By.CssSelector("body"));
         }
     }
 }

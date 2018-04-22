@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing.Imaging;
 using System.IO;
 using OpenQA.Selenium;
 
@@ -9,10 +8,11 @@ namespace Coypu.Drivers.Selenium
     {
         internal static ScreenshotImageFormat GetImageFormat(string fileName)
         {
-            var extension = new FileInfo(fileName).Extension.ToLower().Replace("jpg", "jpeg");
+            var extension = new FileInfo(fileName).Extension.ToLower()
+                                                  .Replace("jpg", "jpeg");
 
             ScreenshotImageFormat format;
-            if  (AreEqual(extension, ScreenshotImageFormat.Bmp))
+            if (AreEqual(extension, ScreenshotImageFormat.Bmp))
                 format = ScreenshotImageFormat.Bmp;
             else if (AreEqual(extension, ScreenshotImageFormat.Gif))
                 format = ScreenshotImageFormat.Gif;
@@ -28,7 +28,8 @@ namespace Coypu.Drivers.Selenium
             return format;
         }
 
-        private static bool AreEqual(string extension, ScreenshotImageFormat imageFormat)
+        private static bool AreEqual(string extension,
+                                     ScreenshotImageFormat imageFormat)
         {
             return extension.Equals(imageFormat.ToString(), StringComparison.InvariantCultureIgnoreCase);
         }

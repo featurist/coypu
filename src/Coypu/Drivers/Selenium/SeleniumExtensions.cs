@@ -22,12 +22,14 @@ namespace Coypu.Drivers.Selenium
             return elements.Any(IsDisplayed);
         }
 
-        internal static bool AnyDisplayed(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
+        internal static bool AnyDisplayed(this IEnumerable<IWebElement> elements,
+                                          Func<IWebElement, bool> predicate)
         {
             return elements.Any(e => predicate(e) && IsDisplayed(e));
         }
 
-        internal static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements, Func<IWebElement, bool> predicate)
+        internal static IWebElement FirstDisplayedOrDefault(this IEnumerable<IWebElement> elements,
+                                                            Func<IWebElement, bool> predicate)
         {
             return elements.FirstOrDefault(e => predicate(e) && IsDisplayed(e));
         }
