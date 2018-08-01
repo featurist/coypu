@@ -6,10 +6,15 @@ namespace Coypu.Finders
 {
     public abstract class ElementFinder
     {
-        protected internal readonly Driver Driver;
+        protected internal Driver Driver;
         private readonly string locator;
-        protected readonly DriverScope Scope;
+        protected DriverScope Scope;
         protected readonly Options options;
+
+        public void ChangeScope(DriverScope scope)
+        {
+            Scope = scope;
+        }
 
         protected ElementFinder(Driver driver, string locator, DriverScope scope, Options options)
         {
@@ -40,6 +45,11 @@ namespace Coypu.Finders
         internal ElementScope AsScope()
         {
             return new SynchronisedElementScope(this, Scope, options);
+        }
+
+        public void SetDriver(Driver d)
+        {
+            Driver = d;
         }
     }
 

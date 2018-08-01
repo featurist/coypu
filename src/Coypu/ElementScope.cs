@@ -9,8 +9,9 @@ namespace Coypu {
         internal ElementScope(ElementFinder elementFinder, DriverScope outerScope)
             : base(elementFinder, outerScope)
         {
+            
         }
-
+        
         internal abstract void Try(DriverAction action);
         internal abstract bool Try(Query<bool> query);
         internal abstract T Try<T>(Func<T> getAttribute);

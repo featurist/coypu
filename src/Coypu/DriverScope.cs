@@ -11,17 +11,17 @@ namespace Coypu
 {
     public abstract class DriverScope : Scope
     {
-        protected readonly SessionConfiguration SessionConfiguration;
-        internal readonly ElementFinder elementFinder;
+        protected SessionConfiguration SessionConfiguration;
+        internal ElementFinder elementFinder;
 
         protected Driver driver;
         protected TimingStrategy timingStrategy;
-        protected readonly Waiter waiter;
+        protected Waiter waiter;
         internal UrlBuilder urlBuilder;
         internal StateFinder stateFinder;
         private Element element;
-        private readonly DriverScope outerScope;
-        protected readonly DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
+        protected DriverScope outerScope;
+        protected DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
 
         internal DriverScope(SessionConfiguration sessionConfiguration, ElementFinder elementFinder, Driver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
         {
@@ -37,8 +37,15 @@ namespace Coypu
 
         internal DriverScope(ElementFinder elementFinder, DriverScope outerScope)
         {
-            this.elementFinder = elementFinder;
-            this.outerScope = outerScope;
+            if (outerScope != null)
+                SetScope(outerScope);
+            if (elementFinder != null)
+                SetFinder(elementFinder);
+        }
+
+        public virtual void SetScope(DriverScope scope)
+        {
+            outerScope = scope;
             driver = outerScope.driver;
             timingStrategy = outerScope.timingStrategy;
             urlBuilder = outerScope.urlBuilder;
@@ -46,6 +53,18 @@ namespace Coypu
             stateFinder = outerScope.stateFinder;
             waiter = outerScope.waiter;
             SessionConfiguration = outerScope.SessionConfiguration;
+            outerScope = scope;
+
+            if (elementFinder != null)
+            {
+                elementFinder.SetDriver(driver);
+                elementFinder.ChangeScope(scope);
+            }
+        }
+
+        protected void SetFinder(ElementFinder elementFinder)
+        {
+            this.elementFinder = elementFinder;
         }
 
         public DriverScope OuterScope
@@ -126,6 +145,11 @@ namespace Coypu
         public ElementScope FindField(string locator, Options options = null)
         {
             return new FieldFinder(driver, locator, this, Merge(options)).AsScope();
+        }
+
+        public ElementScope FindSelect(string locator, Options options = null)
+        {
+            return new SelectFinder(driver, locator, this, Merge(options)).AsScope();
         }
 
         public FillInWith FillIn(string locator, Options options = null) 

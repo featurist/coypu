@@ -110,6 +110,7 @@
     <Compile Include="Drivers\Selenium\SeleniumWindow.cs" />
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="EM\ContainerScope.cs" />
     <Compile Include="FinderException.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
     <Compile Include="Actions\WaitThenClick.cs" />
