@@ -111,6 +111,7 @@
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="EM\ContainerScope.cs" />
+    <Compile Include="EM\NullScope.cs" />
     <Compile Include="EM\Table.cs" />
     <Compile Include="FinderException.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />
