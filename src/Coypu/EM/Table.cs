@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace Coypu
 {
-    public class Table<T> where T : TableRecord
+    public class Table<T> : HasSession where T : TableRecord
     {
         public List<ElementScope> Header;
         public List<string> HeaderCaptions;
@@ -16,6 +16,9 @@ namespace Coypu
         {
             get
             {
+                if (scope == null)
+                    throw new Exception("Table scope was not initialized. Use SetScope() before calling Data.");
+
                 InitMultiple();
 
                 foreach (var row in RowsOfElements)
@@ -58,14 +61,24 @@ namespace Coypu
 
         }
 
-        public Table(DriverScope scope, params string[] locators)
+        public void SetScope(BrowserSession s)
         {
-            this.scope = scope;
+            scope = s;
+        }
+
+        public Table(BrowserSession b, params string[] locators)
+        {
+            SetScope(b);
+            this.locators = locators;
+        }
+
+        public Table(params string[] locators)
+        {
             this.locators = locators;
         }
 
         string[] locators;
-        DriverScope scope;
+        BrowserSession scope;
         public void InitMultiple()
         {
             Init();
