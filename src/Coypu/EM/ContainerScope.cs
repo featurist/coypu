@@ -122,32 +122,33 @@ namespace Coypu
 
         public static ElementScope Link(string locator, Options options = null)
         {
-            return scope.FindLink(locator, Merge(options));
+            return new LinkFinder(null, locator, null, Merge(options)).AsScope();
         }
 
         public static ElementScope Field(string locator, Options options = null)
         {
-            return scope.FindField(locator, Merge(options));
+            return new FieldFinder(null, locator, null, Merge(options)).AsScope();
         }
 
         public static ElementScope Select(string locator, Options options = null)
         {
-            return scope.FindSelect(locator, Merge(options));
+            return new SelectFinder(null, locator, null, Merge(options)).AsScope();
         }
 
         public static ElementScope Text(string text, Options options = null)
         {
-            return scope.FindXPath($"//*[text()='{text}' or contains(text(),'{text}')]", Merge(options));
+            string locator = $"//*[text()='{text}' or contains(text(),'{text}')]";
+            return new XPathFinder(null, locator, null, Merge(options)).AsScope();
         }
 
         public static ElementScope Button(string locator, Options options = null)
         {
-            return scope.FindButton(locator, Merge(options));
+            return new ButtonFinder(null, locator, null, Merge(options)).AsScope();
         }
 
         public static ElementScope XPath(string locator, Options options = null)
         {
-            return scope.FindXPath(locator, Merge(options));
+            return new XPathFinder(null, locator, null, Merge(options)).AsScope();
         }
 
         public static Options Merge(Options options)
