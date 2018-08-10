@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Coypu
 {
-    public interface HasSession
+    public interface IHaveScope
     {
-        void SetScope(BrowserSession s);
+        void SetScope(DriverScope s);
     }
 }

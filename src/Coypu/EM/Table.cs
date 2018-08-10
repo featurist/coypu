@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace Coypu
 {
-    public class Table<T> : HasSession where T : TableRecord
+    public class Table<T> : IHaveScope where T : TableRecord
     {
         public List<ElementScope> Header;
         public List<string> HeaderCaptions;
@@ -61,12 +61,12 @@ namespace Coypu
 
         }
 
-        public void SetScope(BrowserSession s)
+        public void SetScope(DriverScope s)
         {
             scope = s;
         }
 
-        public Table(BrowserSession b, params string[] locators)
+        public Table(DriverScope b, params string[] locators)
         {
             SetScope(b);
             this.locators = locators;
@@ -78,7 +78,8 @@ namespace Coypu
         }
 
         string[] locators;
-        BrowserSession scope;
+        DriverScope scope;
+
         public void InitMultiple()
         {
             Init();

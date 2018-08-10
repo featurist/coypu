@@ -9,7 +9,7 @@ using Coypu.Timing;
 
 namespace Coypu
 {
-    public abstract class DriverScope : Scope
+    public abstract class DriverScope : Scope, IHaveScope
     {
         protected SessionConfiguration SessionConfiguration;
         internal ElementFinder elementFinder;
@@ -41,6 +41,11 @@ namespace Coypu
                 SetScope(outerScope);
             if (elementFinder != null)
                 SetFinder(elementFinder);
+        }
+
+        protected internal DriverScope()
+        {
+
         }
 
         public virtual void SetScope(DriverScope scope)
