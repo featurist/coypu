@@ -6,6 +6,11 @@ using Coypu.Queries;
 namespace Coypu {
     public abstract class ElementScope : DriverScope, Element
     {
+        protected internal ElementScope() : base()
+        {
+
+        }
+
         internal ElementScope(ElementFinder elementFinder, DriverScope outerScope)
             : base(elementFinder, outerScope)
         {
@@ -93,7 +98,7 @@ namespace Coypu {
         /// <para>Override the way Coypu is configured to find elements for this call only.</para>
         /// <para>E.g. A longer wait:</para>
         /// <returns>The current scope</returns>
-        public ElementScope FillInWith(string value, Options options = null) 
+        public virtual ElementScope FillInWith(string value, Options options = null) 
         {
             Try(new FillIn(driver, this, value, Merge(options)));
             return this;

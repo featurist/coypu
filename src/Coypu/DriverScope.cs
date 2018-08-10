@@ -288,6 +288,11 @@ namespace Coypu
             return new IdFinder(driver, id, this, Merge(options)).AsScope();
         }
 
+        public FieldAutocomplete FindFieldAutocomplete(string fieldXPath, string listXPath, string elementsXPath, Options options = null)
+        {
+            return new FieldAutocomplete(fieldXPath, listXPath, elementsXPath, Merge(options)).Init(this);
+        }
+
         public ElementScope FindIdEndingWith(string endsWith, Options options = null)
         {
             return FindCss(string.Format(@"*[id$=""{0}""]", endsWith), options);
