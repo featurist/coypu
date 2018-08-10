@@ -7,7 +7,12 @@ namespace Coypu
 {
     public class SynchronisedElementScope : ElementScope 
     {
-        private readonly Options options;
+        protected Options options;
+
+        protected internal SynchronisedElementScope() : base()
+        {
+
+        }
 
         internal SynchronisedElementScope(ElementFinder elementFinder, DriverScope outerScope, Options options)
             : base(elementFinder, outerScope)

@@ -28,7 +28,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Debug\Coypu.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -111,6 +111,7 @@
     <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="EM\ContainerScope.cs" />
+    <Compile Include="EM\FieldAutocomplete.cs" />
     <Compile Include="EM\HasSession.cs" />
     <Compile Include="EM\NullScope.cs" />
     <Compile Include="EM\Table.cs" />

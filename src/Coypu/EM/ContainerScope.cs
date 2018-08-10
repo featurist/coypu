@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -10,15 +11,25 @@ namespace Coypu
         protected string defaultLocator = null;
         protected Options options;
         bool init = false;
+        SnapshotElementScope _element;
 
-        public ContainerScope() : base (null, null)
+        public ContainerScope() : base()
         {
 
         }
 
+        // Init() methods only exist so that we don't have to define constructors in all child classes - ??
         public void Init(DriverScope outerScope, Options options)
         {
             Init(defaultLocator, outerScope, options);
+        }
+        
+        public void Init(SnapshotElementScope self, Options options = null)
+        {
+            init = true;
+            this.options = Merge(options);
+            _element = self;
+            UpdateChildrenScope(_element);
         }
 
         public void Init(string xpath, DriverScope outerScope, Options options)
@@ -28,31 +39,21 @@ namespace Coypu
             SetScope(outerScope);
             SetFinder(new XPathFinder(driver, xpath, outerScope, this.options));
 
-            UpdateChildren(this);
+            UpdateChildrenScope(this);
         }
 
-        protected void UpdateChildren(DriverScope s)
+        protected void UpdateChildrenScope(DriverScope scope)
         {
-            foreach (var f in GetType().GetFields())
+            var fields = GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var f in fields)
             {
-                if (f.FieldType == typeof(ElementScope))
+                if (typeof(IHaveScope).IsAssignableFrom(f.FieldType))
                 {
-                    var e = (ElementScope)f.GetValue(this);
+                    var e = (IHaveScope)f.GetValue(this);
                     if (e != null)
-                    {
-                        e.SetScope(s);
-                    }
+                        e.SetScope(scope);
                 }
             }
-        }
-
-        SnapshotElementScope _element;
-        public void Init(SnapshotElementScope self, Options options = null)
-        {
-            init = true;
-            this.options = Merge(options);
-            _element = self;
-            UpdateChildren(_element);
         }
 
         internal override bool Stale { get; set; }
