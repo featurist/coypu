@@ -849,7 +849,7 @@ public class FundRecord : TableRecord
 ```
 Each table attribute is a column name. If it is not initialized with Find(), Coypu will try to match the attribute name itself (by removing spaces between words in column names and converting everything to caps). Find() allows to specify column name explicitly (no manipulation will be done on provided string).
 
-In the example above, we expect a column "Fund Name" (but "FUNDNAME", "f und n AME" and other will be found too), and "Fund/Manager".
+In the example above, we expect a column "Fund Name" (but "FUNDNAME", "f und n AME" and other will be found too), and a column "Fund/Manager". If a column doesn't exist in the table, an exception will be only thrown when you try to access it.
 
 Define a table itself like this:
 ```c#
@@ -893,7 +893,7 @@ public class PageHeader : ContainerScope
 }
 ...
 
-PageHeader p = FindContainer();
+PageHeader p = FindContainer<PageHeader>();
 ```
 
 To convert an already found SnapshotElementScope to a container:
