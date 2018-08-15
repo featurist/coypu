@@ -905,7 +905,7 @@ foreach (var e in FindAllXPath("//div[@class='article']"))
 ### Page Object
 
 Inherit from Page, define elements and set Url in constructor:
-```с#
+```c#
 class SignIn : Page
 {
     ElementScope
