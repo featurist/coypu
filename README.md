@@ -834,6 +834,50 @@ WARNING: Setting this in your session configuration means adding time to *every*
 browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
 ```
 
+## Additions
+
+### Tables
+
+Define a table record like this:
+```c#
+public class FundRecord : TableRecord
+{
+	public TableAttribute
+		fundName,
+		fundManager = Find("Fund/Manager");
+}
+```
+Each table attribute is a column name. If it is not initialized with Find(), Coypu will try to match the attribute name itself (by removing spaces between words in column names and converting everything to caps). Find() allows to specify column name explicitly (no manipulation will be done on provided string).
+
+Then define a table itself like this:
+```c#
+public Table<FundRecord> FundData =
+	new Table<FundRecord>(driverScope, "//div[@class='gtLeadWrapper']//table");
+```
+Coypu will look for the first <table> tag inside the element found by provided XPath locator. You can merge several tables by providing several Xpath locators into the constructor.
+
+To access data:
+```c#
+foreach (var x in FundData.Data)
+	Console.WriteLine(x.fundName.Text);
+```
+
+### Containers
+
+TODO
+
+### Page Object
+
+TODO
+
+### FieldAutocomplete
+
+TODO
+
+### Other
+
+ElementScope.ClickWait() - click on an element and wait until next page is loaded (i.e. until old <html> is stale). Selenium only.
+
 ## License
 
 (The MIT License)
