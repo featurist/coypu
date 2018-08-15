@@ -180,5 +180,30 @@ namespace Coypu
 
             WasDisposed = true;
         }
+
+        public void LoadCookies(string filepath)
+        {
+            using (var file = new System.IO.StreamReader(filepath))
+            {
+                var cookies = ((OpenQA.Selenium.Remote.RemoteWebDriver)Native).Manage().Cookies;
+                string s;
+                while ((s = file.ReadLine()) != null)
+                {
+                    var data = s.Split(';');
+                    var cookie = new OpenQA.Selenium.Cookie(data[0], data[1], data[2], data[3], null);
+                    cookies.AddCookie(cookie);
+                }
+            }
+        }
+
+        public void SaveCookies(string filepath)
+        {
+            using (var file = new System.IO.StreamWriter(filepath))
+            {
+                var cookies = ((OpenQA.Selenium.Remote.RemoteWebDriver)Native).Manage().Cookies;
+                foreach (var ck in cookies.AllCookies)
+                    file.WriteLine((ck.Name + ";" + ck.Value + ";" + ck.Domain + ";" + ck.Path + ";" + ck.Expiry + ";" + ck.Secure));
+            }
+        }
     }
 }
