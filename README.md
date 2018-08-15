@@ -842,9 +842,9 @@ Define a table record like this:
 ```c#
 public class FundRecord : TableRecord
 {
-	public TableAttribute
-		fundName,
-		fundManager = Find("Fund/Manager");
+    public TableAttribute
+        fundName,
+        fundManager = Find("Fund/Manager");
 }
 ```
 Each table attribute is a column name. If it is not initialized with Find(), Coypu will try to match the attribute name itself (by removing spaces between words in column names and converting everything to caps). Find() allows to specify column name explicitly (no manipulation will be done on provided string).
@@ -854,14 +854,14 @@ In the example above, we expect a column "Fund Name" (but "FUNDNAME", "f und n A
 Define a table itself like this:
 ```c#
 public Table<FundRecord> FundData =
-	new Table<FundRecord>(driverScope, "//div[@class='gtLeadWrapper']//table");
+    new Table<FundRecord>(driverScope, "//div[@class='gtLeadWrapper']//table");
 ```
 Coypu will treat element found by provided XPath locator as a table (and will look for td/tr inside of it). You can merge several tables by providing several XPath locators into the constructor. First row (whether it's thead or not) will be treated as the header with column names.
 
 To access data:
 ```c#
 foreach (var x in FundData.Data)
-	Console.WriteLine(x.fundName.Text);
+    Console.WriteLine(x.fundName.Text);
 ```
 
 ### Containers
@@ -870,10 +870,10 @@ Define a container type like this:
 ```c#
 public class ArticlePreview : ContainerScope
 {
-	public ElementScope
-		Title = Css("h2"),
-		Extract = XPath("//div[@id='extract']"),
-		Open = Link("Open");
+    public ElementScope
+        Title = Css("h2"),
+        Extract = XPath("//div[@id='extract']"),
+        Open = Link("Open");
 }
 ```
 
@@ -886,10 +886,10 @@ If you reuse the same container in a lot of places, it makes sense to only defin
 ```c#
 public class PageHeader : ContainerScope
 {
-	public PageHeader()
-	{
-		defaultLocator = "//div[@id='header']";
-	}
+    public PageHeader()
+    {
+        defaultLocator = "//div[@id='header']";
+    }
 }
 ...
 
@@ -899,7 +899,7 @@ PageHeader p = FindContainer();
 To convert an already found SnapshotElementScope to a container:
 ```c#
 foreach (var e in FindAllXPath("//div[@class='article']"))
-	yield return e.AsContainer<ArticlePreview>();
+    yield return e.AsContainer<ArticlePreview>();
 ```
 
 ### Page Object
@@ -908,19 +908,19 @@ Inherit from Page, define elements and set Url in constructor:
 ```с#
 class SignIn : Page
 {
-	ElementScope
-		Email = Field("Email Address"),
-		Password = Field("Password"),
-		SignInBtn = Button("Sign In");
-	PageHeader
-		header = Container<HeaderContainer>();
-	PageFooter
-		footer = Container<FooterContainer>("//span[@id='footer']");
-		
-	public SignIn()
-	{
-		Url = Url + "/sign-in";
-	}
+    ElementScope
+        Email = Field("Email Address"),
+        Password = Field("Password"),
+        SignInBtn = Button("Sign In");
+    PageHeader
+        header = Container<HeaderContainer>();
+    PageFooter
+        footer = Container<FooterContainer>("//span[@id='footer']");
+        
+    public SignIn()
+    {
+        Url = Url + "/sign-in";
+    }
 }
 ```
 
@@ -928,7 +928,7 @@ Then use it like this:
 ```c#
 using (var p = new Coypu.Pages.SignIn().Visit(session))
 {
-	p.DoSomething();
+    p.DoSomething();
 }
 ```
 
