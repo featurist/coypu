@@ -124,29 +124,12 @@ namespace Coypu
 
         public static T Container<T>(string locator, Options options = null) where T : ContainerScope, new()
         {
-            if (options == null)
-                options = new Options { Match = Match.First };
-            var x = new T();
-            x.Init(locator, dummy, options);
-            return x;
-        }
-
-        public static T Container<T>(SnapshotElementScope e, Options options = null) where T : ContainerScope, new()
-        {
-            if (options == null)
-                options = new Options { Match = Match.First };
-            var x = new T();
-            x.Init(e, options);
-            return x;
+            return dummy.FindContainer<T>(locator, options);
         }
 
         public static T Container<T>(Options options = null) where T : ContainerScope, new()
         {
-            if (options == null)
-                options = new Options { Match = Match.First };
-            var x = new T();
-            x.Init(dummy, options);
-            return x;
+            return dummy.FindContainer<T>(null, options);
         }
     }
 }

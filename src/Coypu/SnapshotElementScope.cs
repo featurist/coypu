@@ -44,6 +44,16 @@ namespace Coypu
             }
         }
 
+        public T AsContainer<T>(Options options = null) where T : ContainerScope, new()
+        {
+            if (options == null)
+                options = new Options { Match = Match.First };
+            var x = new T();
+            x.Init(this, options);
+
+            return x;
+        }
+
         protected internal override Element FindElement()
         {
             return element;

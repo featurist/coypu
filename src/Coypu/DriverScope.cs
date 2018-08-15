@@ -217,6 +217,16 @@ namespace Coypu
             return new XPathFinder(driver, xpath, this, Merge(options), text).AsScope();
         }
 
+        public virtual T FindContainer<T>(string xpath, Options options = null) where T: ContainerScope, new()
+        {
+            if (options == null)
+                options = new Options { Match = Match.First };
+            var x = new T();
+
+            x.Init(xpath, this, Merge(options));
+            return x;
+        }
+
         [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasCss you can use FindCss(...).Exists();")]
         public bool HasCss(string cssSelector, string text, Options options = null)
         {

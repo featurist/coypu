@@ -19,11 +19,6 @@ namespace Coypu
         }
 
         // Init() methods only exist so that we don't have to define constructors in all child classes - ??
-        public void Init(DriverScope outerScope, Options options)
-        {
-            Init(defaultLocator, outerScope, options);
-        }
-        
         public void Init(SnapshotElementScope self, Options options = null)
         {
             init = true;
@@ -34,6 +29,9 @@ namespace Coypu
 
         public void Init(string xpath, DriverScope outerScope, Options options)
         {
+            if (xpath == null)
+                xpath = defaultLocator;
+
             init = true;
             this.options = Merge(options);
             SetScope(outerScope);
