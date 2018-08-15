@@ -849,12 +849,14 @@ public class FundRecord : TableRecord
 ```
 Each table attribute is a column name. If it is not initialized with Find(), Coypu will try to match the attribute name itself (by removing spaces between words in column names and converting everything to caps). Find() allows to specify column name explicitly (no manipulation will be done on provided string).
 
-Then define a table itself like this:
+In the example above, we expect a column "Fund Name" (but "FUNDNAME", "f und n AME" and other will be found too), and "Fund/Manager".
+
+Define a table itself like this:
 ```c#
 public Table<FundRecord> FundData =
 	new Table<FundRecord>(driverScope, "//div[@class='gtLeadWrapper']//table");
 ```
-Coypu will look for the first <table> tag inside the element found by provided XPath locator. You can merge several tables by providing several Xpath locators into the constructor.
+Coypu will treat element found by provided XPath locator as a table (and will look for td/tr inside of it). You can merge several tables by providing several XPath locators into the constructor. First row (whether it's thead or not) will be treated as the header with column names.
 
 To access data:
 ```c#
@@ -864,11 +866,73 @@ foreach (var x in FundData.Data)
 
 ### Containers
 
-TODO
+Define a container type like this:
+```c#
+public class ArticlePreview : ContainerScope
+{
+	public ElementScope
+		Title = Css("h2"),
+		Extract = XPath("//div[@id='extract']"),
+		Open = Link("Open");
+}
+```
+
+To find a container by XPath:
+```c#
+FindContainer<ArticlePreview>("//div[@class='article']");
+```
+
+If you reuse the same container in a lot of places, it makes sense to only define it's locator once; then you can omit it:
+```c#
+public class PageHeader : ContainerScope
+{
+	public PageHeader()
+	{
+		defaultLocator = "//div[@id='header']";
+	}
+}
+...
+
+PageHeader p = FindContainer();
+```
+
+To convert an already found SnapshotElementScope to a container:
+```c#
+foreach (var e in FindAllXPath("//div[@class='article']"))
+	yield return e.AsContainer<ArticlePreview>();
+```
 
 ### Page Object
 
-TODO
+Inherit from Page, define elements and set Url in constructor:
+```с#
+class SignIn : Page
+{
+	ElementScope
+		Email = Field("Email Address"),
+		Password = Field("Password"),
+		SignInBtn = Button("Sign In");
+	PageHeader
+		header = Container<HeaderContainer>();
+	PageFooter
+		footer = Container<FooterContainer>("//span[@id='footer']");
+		
+	public SignIn()
+	{
+		Url = Url + "/sign-in";
+	}
+}
+```
+
+Then use it like this:
+```c#
+using (var p = new Coypu.Pages.SignIn().Visit(session))
+{
+	p.DoSomething();
+}
+```
+
+Every field that implements IHaveScope (that includes ElementScope and ContainerScope) will be using the BrowserSession that you provided in Visit().
 
 ### FieldAutocomplete
 
