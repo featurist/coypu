@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -88,6 +89,22 @@ namespace Coypu {
         {
             Try(new ClickAction(this, driver, Merge(options)));
             return this;
+        }
+
+        public void ClickWait(Options options = null)
+        {
+            if (options == null)
+                options = new Options() { Timeout = TimeSpan.FromSeconds(60) };
+            var opts = Merge(options);
+
+            var html = FindAllXPath("//html").First();
+            Click(opts);
+            
+            var stopWatch = System.Diagnostics.Stopwatch.StartNew();
+            while (stopWatch.Elapsed < opts.Timeout && !html.StaleSelenium)
+            {
+                System.Threading.Thread.Sleep(opts.RetryInterval);
+            }
         }
 
         /// <summary>
