@@ -28,6 +28,22 @@ namespace Coypu
             set {}
         }
 
+        public bool StaleSelenium
+        {
+            get
+            {
+                var e = (OpenQA.Selenium.IWebElement) element.Native;
+                try
+                {
+                    return e == null || !e.Enabled;     // Calling any method forces a staleness check
+                }
+                catch (OpenQA.Selenium.StaleElementReferenceException)
+                {
+                    return true;
+                }
+            }
+        }
+
         protected internal override Element FindElement()
         {
             return element;
