@@ -112,7 +112,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="EM\ContainerScope.cs" />
     <Compile Include="EM\FieldAutocomplete.cs" />
-    <Compile Include="EM\HasSession.cs" />
+    <Compile Include="EM\IHaveScope.cs" />
     <Compile Include="EM\NullScope.cs" />
     <Compile Include="EM\Table.cs" />
     <Compile Include="FinderException.cs" />
