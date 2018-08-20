@@ -115,6 +115,7 @@
     <Compile Include="EM\IHaveScope.cs" />
     <Compile Include="EM\NullScope.cs" />
     <Compile Include="EM\Page.cs" />
+    <Compile Include="EM\PageExtensions.cs" />
     <Compile Include="EM\Table.cs" />
     <Compile Include="FinderException.cs" />
     <Compile Include="Finders\ButtonFinder.cs" />

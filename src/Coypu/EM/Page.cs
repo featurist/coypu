@@ -22,6 +22,7 @@ namespace Coypu
         {
             session = b;
 
+            // Init scope of all page elements to page browser session
             var fields = GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             foreach (var f in fields)
             {
@@ -130,6 +131,13 @@ namespace Coypu
         public static T Container<T>(Options options = null) where T : ContainerScope, new()
         {
             return dummy.FindContainer<T>(null, options);
+        }
+
+        public static T Visit<T>(T page, BrowserSession session) where T : Page
+        {
+            page.Init(session);
+            session.Visit(page.Url);
+            return page;
         }
     }
 }
