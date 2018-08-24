@@ -882,7 +882,7 @@ To find a container by XPath:
 FindContainer<ArticlePreview>("//div[@class='article']");
 ```
 
-If you reuse the same container in a lot of places, it makes sense to only define it's locator once; then you can omit it:
+If you reuse the same container in a lot of places, it makes sense to only define its locator once; then you can omit it:
 ```c#
 public class PageHeader : ContainerScope
 {
