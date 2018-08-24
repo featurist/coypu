@@ -58,6 +58,7 @@ namespace Coypu.Drivers
                     And(
                         IsForLabeled(locator, options) +
                         or + IsContainerLabeled(locator, options) +
+                        or + HasSiblingLabel(locator, options) +
                         or + HasIdOrPlaceholder(locator, options) +
                         or + HasName(locator) +
                         or + HasValue(locator)));
@@ -70,8 +71,10 @@ namespace Coypu.Drivers
                 Where(
                     IsForLabeled(locator, options) +
                     or + IsContainerLabeled(locator, options) +
+                    or + HasSiblingLabel(locator, options) +
                     or + HasId(locator) +
                     or + HasName(locator));
+            ;
         }
 
         public string FrameXPath(string locator)

@@ -138,6 +138,11 @@ namespace Coypu.Drivers
             return Format("ancestor::label[" + IsTextShallow(locator, options) + "]", locator);
         }
 
+        public string HasSiblingLabel(string locator, Options options)
+        {
+            return Format("preceding-sibling::label[" + IsTextShallow(locator, options) + "]", locator);
+        }
+
         public string IsForLabeled(string locator, Options options)
         {
             return Format(" (@id = //label[" + IsText(locator, options) + "]/@for) ", locator);
