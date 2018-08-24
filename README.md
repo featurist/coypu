@@ -853,7 +853,7 @@ In the example above, we expect a column "Fund Name" (but "FUNDNAME", "f und n A
 
 Define a table itself like this:
 ```c#
-var Funds = driverScope.FindTable<FundRecord>("//div[@class='gtLeadWrapper']//table");
+var Funds = browser.FindTable<FundRecord>("//div[@class='gtLeadWrapper']//table");
 ```
 Coypu will treat element found by provided XPath locator as a table (and will look for td/tr inside of it). You can merge several tables by providing several XPath locators into the constructor. First row (whether it's thead or not) will be treated as the header with column names.
 
@@ -878,7 +878,7 @@ public class ArticlePreview : ContainerScope
 
 To find a container by XPath:
 ```c#
-FindContainer<ArticlePreview>("//div[@class='article']");
+browser.FindContainer<ArticlePreview>("//div[@class='article']");
 ```
 
 If you reuse the same container in a lot of places, it makes sense to only define its locator once; then you can omit it:
@@ -911,8 +911,8 @@ class SignIn : Page
         Email = Field("Email Address"),
         Password = Field("Password"),
         SignInBtn = Button("Sign In");
-	TableScope<TransactionRecord> 
-		Transactions = Table<TransactionRecord>("//div[@class='gtLeadWrapper']/table");
+    TableScope<TransactionRecord>
+        Transactions = Table<TransactionRecord>("//div[@class='gtLeadWrapper']/table");
     PageHeader
         header = Container<HeaderContainer>();
     PageFooter
