@@ -135,6 +135,22 @@ namespace Coypu {
             return this;
         }
 
+        /// <summary>
+        /// Treat this scope as a select element and choose the specified options
+        /// </summary>
+        /// <param name="value">List of texts or values of the option</param>
+        /// <param name="options">
+        /// <para>Override the way Coypu is configured to find elements for this call only.</para>
+        /// <para>E.g. A longer wait</para>
+        /// <returns>The current scope</returns>
+        public ElementScope SelectOption(string[] values, Options options = null)
+        {
+            if (values != null)
+                foreach (var value in values)
+                    Try(new Select(driver, this, value, DisambiguationStrategy, Merge(options)));
+            return this;
+        }
+
         public ElementScope Hover(Options options = null)
         {
             Try(new Hover(this, driver, Merge(options)));
