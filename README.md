@@ -853,14 +853,13 @@ In the example above, we expect a column "Fund Name" (but "FUNDNAME", "f und n A
 
 Define a table itself like this:
 ```c#
-public Table<FundRecord> FundData =
-    new Table<FundRecord>(driverScope, "//div[@class='gtLeadWrapper']//table");
+var Funds = driverScope.FindTable<FundRecord>("//div[@class='gtLeadWrapper']//table");
 ```
 Coypu will treat element found by provided XPath locator as a table (and will look for td/tr inside of it). You can merge several tables by providing several XPath locators into the constructor. First row (whether it's thead or not) will be treated as the header with column names.
 
 To access data:
 ```c#
-foreach (var x in FundData.Data)
+foreach (var x in Funds.Data)
     Console.WriteLine(x.fundName.Text);
 ```
 
@@ -912,6 +911,8 @@ class SignIn : Page
         Email = Field("Email Address"),
         Password = Field("Password"),
         SignInBtn = Button("Sign In");
+	TableScope<TransactionRecord> 
+		Transactions = Table<TransactionRecord>("//div[@class='gtLeadWrapper']/table");
     PageHeader
         header = Container<HeaderContainer>();
     PageFooter

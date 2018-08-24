@@ -217,6 +217,11 @@ namespace Coypu
             return new XPathFinder(driver, xpath, this, Merge(options), text).AsScope();
         }
 
+        public TableScope<T> FindTable<T>(params string[] locators) where T: TableRecord
+        {
+            return new TableScope<T>(this, locators);
+        }
+
         public virtual T FindContainer<T>(string xpath, Options options = null) where T: ContainerScope, new()
         {
             if (options == null)

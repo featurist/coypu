@@ -123,6 +123,11 @@ namespace Coypu
             return dummy.FindXPath(locator, Merge(options));
         }
 
+        public static TableScope<T> Table<T>(params string[] locators) where T : TableRecord
+        {
+            return dummy.FindTable<T>(locators);
+        }
+
         public static T Container<T>(string locator, Options options = null) where T : ContainerScope, new()
         {
             return dummy.FindContainer<T>(locator, options);

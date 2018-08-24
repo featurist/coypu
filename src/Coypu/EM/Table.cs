@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace Coypu
 {
-    public class Table<T> : IHaveScope where T : TableRecord
+    public class TableScope<T> : IHaveScope where T : TableRecord
     {
         public List<ElementScope> Header;
         public List<string> HeaderCaptions;
@@ -56,7 +56,7 @@ namespace Coypu
             }
         }
 
-        protected Table()
+        protected TableScope()
         {
 
         }
@@ -66,13 +66,13 @@ namespace Coypu
             scope = s;
         }
 
-        public Table(DriverScope b, params string[] locators)
+        public TableScope(DriverScope b, params string[] locators)
         {
             SetScope(b);
             this.locators = locators;
         }
 
-        public Table(params string[] locators)
+        public TableScope(params string[] locators)
         {
             this.locators = locators;
         }
@@ -86,7 +86,7 @@ namespace Coypu
 
             for (int i = 1; i < locators.Length; i++)
             {
-                var right = new Table<T>(scope, locators[i]);
+                var right = new TableScope<T>(scope, locators[i]);
                 right.Init();
                 Merge(right);
             }
@@ -141,12 +141,12 @@ namespace Coypu
             }
         }
 
-        public void Merge(Table<T> right)
+        public void Merge(TableScope<T> right)
         {
             if (this.RowsOfElements.Count != right.RowsOfElements.Count)
                 throw new Exception("Row count is different in the tables being merged.");
 
-            var result = new Table<T>
+            var result = new TableScope<T>
             {
                 RowsOfElements = new List<List<ElementScope>>(),
                 Header = new List<ElementScope>(),
@@ -208,6 +208,27 @@ namespace Coypu
         public static TableAttribute Find(string locator = null)
         {
             return new TableAttribute(locator);
+        }
+
+        public override string ToString()
+        {
+            var s = new System.Text.StringBuilder();
+
+            foreach (var field in GetType().GetFields())
+            {
+                // element in row
+                if (field.GetValue(this) is TableAttribute td)
+                {
+                    try
+                    {
+                        s.Append(td.Text != "" ? td.Text : "<empty>");
+                    }
+                    catch   // don't throw anything if attribute element not found
+                    { }
+                }
+            }
+
+            return s.ToString();
         }
     }
 
