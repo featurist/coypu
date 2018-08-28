@@ -14,7 +14,10 @@ namespace Coypu.Finders
 
         protected override Func<string, Options, string> GetQuery(Html html)
         {
-            return html.Select;
+            if (options.UseExtendedTextLocators)
+                return html.SelectExtended;
+            else
+                return html.Select;
         }
 
         internal override string QueryDescription

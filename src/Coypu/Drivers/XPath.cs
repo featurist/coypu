@@ -138,9 +138,19 @@ namespace Coypu.Drivers
             return Format("ancestor::label[" + IsTextShallow(locator, options) + "]", locator);
         }
 
-        public string HasSiblingLabel(string locator, Options options)
+        public string HasPrecedingLabel(string locator, Options options)
         {
-            return Format("preceding-sibling::label[" + IsTextShallow(locator, options) + "]", locator);
+            return Format("preceding::label[" + IsTextShallow(locator, options) + "]", locator);
+        }
+
+        public string HasPrecedingStrong(string locator, Options options)
+        {
+            return Format("preceding::strong[" + IsTextShallow(locator, options) + "]", locator);
+        }
+
+        public string HasPrecedingAny(string locator, Options options)
+        {
+            return Format("preceding::*[" + IsTextShallow(locator, options) + "]", locator);
         }
 
         public string IsForLabeled(string locator, Options options)

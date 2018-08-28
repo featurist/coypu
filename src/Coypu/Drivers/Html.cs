@@ -58,8 +58,24 @@ namespace Coypu.Drivers
                     And(
                         IsForLabeled(locator, options) +
                         or + IsContainerLabeled(locator, options) +
-                        or + HasSiblingLabel(locator, options) +
                         or + HasIdOrPlaceholder(locator, options) +
+                        or + HasName(locator) +
+                        or + HasValue(locator)));
+        }
+
+        public string FieldExtended(string locator, Options options)
+        {
+            return
+                Descendent() +
+                Where(
+                    TagNamedOneOf(FieldTagNames) +
+                    And(
+                        IsForLabeled(locator, options) +
+                        or + IsContainerLabeled(locator, options) +
+                        or + HasPrecedingAny(locator, options) +
+                        or + HasIdOrPlaceholder(locator, options) +
+                        //or + HasPrecedingLabel(locator, options) +
+                        //or + HasPrecedingStrong(locator, options) +
                         or + HasName(locator) +
                         or + HasValue(locator)));
         }
@@ -71,7 +87,21 @@ namespace Coypu.Drivers
                 Where(
                     IsForLabeled(locator, options) +
                     or + IsContainerLabeled(locator, options) +
-                    or + HasSiblingLabel(locator, options) +
+                    or + HasId(locator) +
+                    or + HasName(locator));
+            ;
+        }
+
+        public string SelectExtended(string locator, Options options)
+        {
+            return
+                Descendent("select") +
+                Where(
+                    IsForLabeled(locator, options) +
+                    or + IsContainerLabeled(locator, options) +
+                    //or + HasPrecedingLabel(locator, options) +
+                    or + HasPrecedingAny(locator, options) +
+                    //or + HasPrecedingStrong(locator, options) +
                     or + HasId(locator) +
                     or + HasName(locator));
             ;

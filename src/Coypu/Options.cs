@@ -9,6 +9,7 @@ namespace Coypu
     /// </summary>
     public class Options
     {
+        private const bool DEFAULT_USE_EXTENDED_TEXT_LOCATORS = true;
         private const bool DEFAULT_CONSIDER_INVISIBLE_ELEMENTS = false;
         private const TextPrecision DEFAULT_PRECISION = TextPrecision.PreferExact;
         private const Match DEFAULT_MATCH = Match.Single;
@@ -16,6 +17,7 @@ namespace Coypu
         private static readonly TimeSpan DEFAULT_RETRY_INTERVAL = TimeSpan.FromSeconds(0.05);
         private static readonly TimeSpan DEFAULT_WAIT_BEFORE_CLICK = TimeSpan.Zero;
 
+        protected bool? useExtendedTextLocators;
         protected bool? considerInvisibleElements;
         private TextPrecision? textPrecision;
         private Match? match;
@@ -150,6 +152,16 @@ namespace Coypu
         }
 
         /// <summary>
+        /// <para>By default Coypu will use consider different preceding text elements instead of only label/@for, this allows you to override that behaviour</para>
+        /// <para>Default: true</para>
+        /// </summary>
+        public bool UseExtendedTextLocators
+        {
+            get { return useExtendedTextLocators ?? DEFAULT_USE_EXTENDED_TEXT_LOCATORS; }
+            set { useExtendedTextLocators = value; }
+        }
+
+        /// <summary>
         /// <para>By default Coypu will exclude any invisible elements, this allows you to override that behaviour</para>
         /// <para>Default: true</para>
         /// </summary>
@@ -214,6 +226,7 @@ Coypu does this by default from v2.0. Your options:
 
             return new Options
                 {
+                    useExtendedTextLocators = Default(preferredOptions.useExtendedTextLocators, defaultOptions.useExtendedTextLocators),
                     considerInvisibleElements = Default(preferredOptions.considerInvisibleElements, defaultOptions.considerInvisibleElements),
                     textPrecision = Default(preferredOptions.textPrecision, defaultOptions.textPrecision),
                     match = Default(preferredOptions.match, defaultOptions.match),
