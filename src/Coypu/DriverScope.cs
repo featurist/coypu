@@ -303,9 +303,15 @@ namespace Coypu
             return new IdFinder(driver, id, this, Merge(options)).AsScope();
         }
 
-        public FieldAutocomplete FindFieldAutocomplete(string fieldXPath, string listXPath, string elementsXPath, Options options = null)
+        public FieldAutocomplete FindFieldAutocomplete(string locator, string listXPath, string elementsXPath, Options options = null)
         {
-            return new FieldAutocomplete(fieldXPath, listXPath, elementsXPath, Merge(options)).Init(this);
+            return new FieldAutocomplete(new FieldFinder(driver, locator, this, Merge(options)).AsScope(),
+                listXPath, elementsXPath, Merge(options));
+        }
+
+        public FieldAutocomplete FindFieldAutocomplete(ElementScope field, string listXPath, string elementsXPath, Options options = null)
+        {
+            return new FieldAutocomplete(field, listXPath, elementsXPath, Merge(options));
         }
 
         public ElementScope FindIdEndingWith(string endsWith, Options options = null)
