@@ -63,9 +63,14 @@ namespace Coypu
             return session.FindField(locator, Merge(options));
         }
 
-        public FieldAutocomplete FindFieldAutocomplete(string fieldXPath, string listXPath, string elementsXPath, Options options = null)
+        public FieldAutocomplete FindFieldAutocomplete(ElementScope field, string listXPath, string elementsXPath, Options options = null)
         {
-            return session.FindFieldAutocomplete(fieldXPath, listXPath, elementsXPath, Merge(options));
+            return session.FindFieldAutocomplete(field, listXPath, elementsXPath, Merge(options));
+        }
+
+        public FieldAutocomplete FindFieldAutocomplete(string locator, string listXPath, string elementsXPath, Options options = null)
+        {
+            return session.FindFieldAutocomplete(session.FindField(locator), listXPath, elementsXPath, Merge(options));
         }
 
         public ElementScope FindSelect(string locator, Options options = null)
