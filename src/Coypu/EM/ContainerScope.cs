@@ -112,8 +112,6 @@ namespace Coypu
             return Query(new LambdaQuery<T>(getAttribute, null, this, options));
         }
 
-        static protected BrowserSession scope;
-
         public static ElementScope Css(string locator, Options options = null)
         {
             return new CssFinder(null, locator, null, Merge(options)).AsScope();
