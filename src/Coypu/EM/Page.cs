@@ -35,6 +35,27 @@ namespace Coypu
             }
         }
 
+        public static T Open<T>(BrowserSession session) where T : Page, new()
+        {
+            var page = new T();
+            page.Init(session);
+            return page;
+        }
+
+        public static T Visit<T>(BrowserSession session) where T : Page, new()
+        {
+            var page = new T();
+            page.Init(session);
+            session.Visit(page.Url);
+            page.OnVisit();
+            return page;
+        }
+
+        public virtual void OnVisit()
+        {
+
+        }
+
         public void Dispose()
         {
 
@@ -141,13 +162,6 @@ namespace Coypu
         public static T Container<T>(Options options = null) where T : ContainerScope, new()
         {
             return dummy.FindContainer<T>(null, options);
-        }
-
-        public static T Visit<T>(T page, BrowserSession session) where T : Page
-        {
-            page.Init(session);
-            session.Visit(page.Url);
-            return page;
         }
     }
 }
