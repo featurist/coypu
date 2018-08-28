@@ -131,7 +131,14 @@ namespace Coypu {
         /// <returns>The current scope</returns>
         public ElementScope SelectOption(string value, Options options = null)
         {
-            Try(new Select(driver, this, value, DisambiguationStrategy, Merge(options)));
+            if (value == null)
+                return this;
+            options = Merge(options);
+
+            if (options.SplitSelectValue)
+                return SelectOption(value.Split(';'), options);
+            else
+                Try(new Select(driver, this, value, DisambiguationStrategy, options));
             return this;
         }
 
@@ -145,9 +152,12 @@ namespace Coypu {
         /// <returns>The current scope</returns>
         public ElementScope SelectOption(string[] values, Options options = null)
         {
-            if (values != null)
-                foreach (var value in values)
-                    Try(new Select(driver, this, value, DisambiguationStrategy, Merge(options)));
+            if (values == null)
+                return this;
+
+            foreach (var value in values)
+                Try(new Select(driver, this, value, DisambiguationStrategy, Merge(options)));
+
             return this;
         }
 
