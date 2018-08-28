@@ -12,7 +12,7 @@ namespace Coypu
         private const bool DEFAULT_USE_EXTENDED_TEXT_LOCATORS = true;
         private const bool DEFAULT_CONSIDER_INVISIBLE_ELEMENTS = false;
         private const TextPrecision DEFAULT_PRECISION = TextPrecision.PreferExact;
-        private const Match DEFAULT_MATCH = Match.Single;
+        private const Match DEFAULT_MATCH = Match.First;
         private static readonly TimeSpan DEFAULT_TIMEOUT = TimeSpan.FromSeconds(1);
         private static readonly TimeSpan DEFAULT_RETRY_INTERVAL = TimeSpan.FromSeconds(0.05);
         private static readonly TimeSpan DEFAULT_WAIT_BEFORE_CLICK = TimeSpan.Zero;
