@@ -18,6 +18,8 @@ namespace Coypu.Actions
 
         internal void Set()
         {
+            if (value == null)
+                return;
             Driver.Set(element, value);
         }
 
