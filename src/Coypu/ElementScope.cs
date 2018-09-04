@@ -87,6 +87,7 @@ namespace Coypu {
 
         public ElementScope Click(Options options = null) 
         {
+            //Try(new WaitThenClick(driver, this, Merge(options), waiter, elementFinder, DisambiguationStrategy));
             Try(new ClickAction(this, driver, Merge(options)));
             return this;
         }
