@@ -531,8 +531,7 @@ namespace Coypu.AcceptanceTests
         public void Multiple_interactions_within_iframe_example()
         {
             Browser.MaximiseWindow();
-            Browser.ExecuteScript("document.getElementById('iframe1').scrollIntoView()");
-            var iframe = Browser.FindFrame("iframe one title");
+            var iframe = Browser.FindFrame("I am iframe one");
             iframe.FillIn("text input in iframe")
                   .With("filled in");
             Assert.That(iframe.FindField("text input in iframe")
@@ -719,9 +718,7 @@ namespace Coypu.AcceptanceTests
         public void WithinFrame_example()
         {
             Browser.Visit(TestPageLocation("frameset.htm"));
-
             const string selectorThatAppearsInMultipleScopes = "scoped button";
-
             var expectingScope1 = Browser.FindFrame("frame1")
                                          .FindButton(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindFrame("frame2")
