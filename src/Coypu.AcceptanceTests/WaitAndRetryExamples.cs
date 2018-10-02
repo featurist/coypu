@@ -7,25 +7,24 @@ namespace Coypu.AcceptanceTests
 {
     public class WaitAndRetryExamples
     {
-        protected BrowserSession browser;
+        protected BrowserSession Browser;
 
         [OneTimeSetUp]
         public void SetUpFixture()
         {
             var configuration = new SessionConfiguration
-                {
-                    Timeout = TimeSpan.FromMilliseconds(2000),
-                    Browser = Drivers.Browser.Firefox,
-                    Driver = typeof(SeleniumWebDriver)
-                };
-            browser = new BrowserSession(configuration);
-
+                                {
+                                    Timeout = TimeSpan.FromMilliseconds(5000),
+                                    Browser = Drivers.Browser.Firefox,
+                                    Driver = typeof(SeleniumWebDriver)
+                                };
+            Browser = new BrowserSession(configuration);
         }
 
         [OneTimeTearDown]
         public void TearDown()
         {
-            browser.Dispose();
+            Browser.Dispose();
         }
 
         [SetUp]
@@ -37,19 +36,20 @@ namespace Coypu.AcceptanceTests
         protected void ApplyAsyncDelay()
         {
             // Hide the HTML then bring back after a short delay to test robustness
-            browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
-            browser.ExecuteScript("window.document.body.innerHTML = '';");
-            browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
+            Browser.ExecuteScript("window.holdIt = window.document.body.innerHTML;");
+            Browser.ExecuteScript("window.document.body.innerHTML = '';");
+            Browser.ExecuteScript("setTimeout(function() {document.body.innerHTML = window.holdIt},250)");
         }
 
         protected void ReloadTestPage()
         {
-            browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
+            Browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
         }
 
         protected static string TestPageLocation(string page)
         {
-            var testPageLocation = "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\" + page).Replace("\\", "/");
+            var testPageLocation = "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\" + page)
+                                                    .Replace("\\", "/");
             return testPageLocation;
         }
 
@@ -57,6 +57,6 @@ namespace Coypu.AcceptanceTests
         {
             ReloadTestPage();
             ApplyAsyncDelay();
-        }   
+        }
     }
 }
