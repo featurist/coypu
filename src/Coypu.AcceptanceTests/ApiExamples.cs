@@ -41,7 +41,6 @@ namespace Coypu.AcceptanceTests
         }
 
         [TestCase("Windows 7", "firefox", "25")]
-        [TestCase("Windows XP", "internet explorer", "6")]
         [TestCase("Windows 10", "MicrosoftEdge", "14")]
         public void CustomBrowserSessionWithCustomRemoteDriver(string platform,
                                                                string browserName,
