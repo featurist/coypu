@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
 using Coypu.NUnit.Matchers;
@@ -127,7 +126,8 @@ namespace Coypu.AcceptanceTests
             var checkbox = Browser.FindCss("#checkedBox");
             checkbox.Uncheck();
             Assert.IsFalse(Browser.Query(() => Browser.FindField("checkedBox")
-                                                      .Selected, false));
+                                                      .Selected,
+                                         false));
         }
 
         [Test]
@@ -168,11 +168,13 @@ namespace Coypu.AcceptanceTests
         {
             var element = Browser.FindButton("clickMeTest");
             Assert.That(Browser.FindButton("clickMeTest")
-                               .Value, Is.EqualTo("Click me"));
+                               .Value,
+                        Is.EqualTo("Click me"));
 
             element.Click();
             Assert.That(Browser.FindButton("clickMeTest")
-                               .Value, Is.EqualTo("Click me - clicked"));
+                               .Value,
+                        Is.EqualTo("Click me - clicked"));
         }
 
         [Test]
@@ -180,7 +182,8 @@ namespace Coypu.AcceptanceTests
         {
             Browser.ClickButton("clickMeTest");
             Assert.That(Browser.FindButton("clickMeTest")
-                               .Value, Is.EqualTo("Click me - clicked"));
+                               .Value,
+                        Is.EqualTo("Click me - clicked"));
         }
 
         [Test]
@@ -227,9 +230,13 @@ namespace Coypu.AcceptanceTests
         public void DisabledButton_example()
         {
             Assert.That(Browser.FindButton("Disabled button")
-                               .Disabled, Is.True, "Expected button to be disabled");
+                               .Disabled,
+                        Is.True,
+                        "Expected button to be disabled");
             Assert.That(Browser.FindButton("Click me")
-                               .Disabled, Is.False, "Expected button to be enabled");
+                               .Disabled,
+                        Is.False,
+                        "Expected button to be enabled");
         }
 
         [Test]
@@ -300,9 +307,11 @@ namespace Coypu.AcceptanceTests
                              .ToList();
             Assert.That(all.Count(), Is.EqualTo(3));
             Assert.That(all.ElementAt(1)
-                           .Text, Is.EqualTo("two"));
+                           .Text,
+                        Is.EqualTo("two"));
             Assert.That(all.ElementAt(2)
-                           .Text, Is.EqualTo("Me! Pick me!"));
+                           .Text,
+                        Is.EqualTo("Me! Pick me!"));
         }
 
         [Test]
@@ -315,16 +324,19 @@ namespace Coypu.AcceptanceTests
                              .ToArray();
             Assert.That(all.Count(), Is.EqualTo(3));
             Assert.That(all.ElementAt(1)
-                           .Text, Is.EqualTo("two"));
+                           .Text,
+                        Is.EqualTo("two"));
             Assert.That(all.ElementAt(2)
-                           .Text, Is.EqualTo("Me! Pick me!"));
+                           .Text,
+                        Is.EqualTo("Me! Pick me!"));
         }
 
         [Test]
         public void FindButton_example()
         {
             Assert.That(Browser.FindButton("Click me")
-                               .Id, Is.EqualTo("clickMeTest"));
+                               .Id,
+                        Is.EqualTo("clickMeTest"));
         }
 
         [Test]
@@ -352,7 +364,8 @@ namespace Coypu.AcceptanceTests
         public void FindField_examples()
         {
             Assert.That(Browser.FindField("text input field linked by for", Options.Exact)
-                               .Id, Is.EqualTo("forLabeledTextInputFieldId"));
+                               .Id,
+                        Is.EqualTo("forLabeledTextInputFieldId"));
             Assert.That(Browser.FindField("checkbox field in a label container")
                                .Id,
                         Is.EqualTo("containerLabeledCheckboxFieldId"));
@@ -368,7 +381,8 @@ namespace Coypu.AcceptanceTests
         public void FindFieldset_example()
         {
             Assert.That(Browser.FindFieldset("Scope 1")
-                               .Id, Is.EqualTo("fieldsetScope1"));
+                               .Id,
+                        Is.EqualTo("fieldsetScope1"));
         }
 
         [Test]
@@ -391,25 +405,30 @@ namespace Coypu.AcceptanceTests
         public void FindLink_example()
         {
             Assert.That(Browser.FindLink("Trigger an alert")
-                               .Id, Is.EqualTo("alertTriggerLink"));
+                               .Id,
+                        Is.EqualTo("alertTriggerLink"));
         }
 
         [Test]
         public void Finds_link_by_href()
         {
             Assert.That(Browser.FindLink("#link1href")
-                               .Id, Is.EqualTo("firstLinkId"));
+                               .Id,
+                        Is.EqualTo("firstLinkId"));
             Assert.That(Browser.FindLink("#link2href")
-                               .Id, Is.EqualTo("secondLinkId"));
+                               .Id,
+                        Is.EqualTo("secondLinkId"));
         }
 
         [Test]
         public void FindSection_example()
         {
             Assert.That(Browser.FindSection("Inspecting Content")
-                               .Id, Is.EqualTo("inspectingContent"));
+                               .Id,
+                        Is.EqualTo("inspectingContent"));
             Assert.That(Browser.FindSection("Div Section Two h2 with link")
-                               .Id, Is.EqualTo("divSectionTwoWithLink"));
+                               .Id,
+                        Is.EqualTo("divSectionTwoWithLink"));
         }
 
         [Test]
@@ -456,7 +475,7 @@ namespace Coypu.AcceptanceTests
         public void HasNoContent_example()
         {
             Browser.ExecuteScript(
-                                  "document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
+                "document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
             Assert.That(Browser, Shows.No.Content("This is not in the page"));
 
             ReloadTestPage();
@@ -470,7 +489,7 @@ namespace Coypu.AcceptanceTests
         public void HasNoContentMatch_example()
         {
             Browser.ExecuteScript(
-                                  "document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
+                "document.body.innerHTML = '<div id=\"no-such-element\">This is not in the page</div>'");
             Assert.IsTrue(Browser.HasNoContentMatch(new Regex("This is ?n[o|']t in the page")));
 
             ReloadTestPage();
@@ -497,11 +516,13 @@ namespace Coypu.AcceptanceTests
         public void Hover_example()
         {
             Assert.That(Browser.FindId("hoverOnMeTest")
-                               .Text, Is.EqualTo("Hover on me"));
+                               .Text,
+                        Is.EqualTo("Hover on me"));
             Browser.FindId("hoverOnMeTest")
                    .Hover();
             Assert.That(Browser.FindId("hoverOnMeTest")
-                               .Text, Is.EqualTo("Hover on me - hovered"));
+                               .Text,
+                        Is.EqualTo("Hover on me - hovered"));
         }
 
         [Test]
@@ -530,12 +551,12 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Multiple_interactions_within_iframe_example()
         {
-            Browser.MaximiseWindow();
             var iframe = Browser.FindFrame("I am iframe one");
             iframe.FillIn("text input in iframe")
                   .With("filled in");
             Assert.That(iframe.FindField("text input in iframe")
-                              .Value, Is.EqualTo("filled in"));
+                              .Value,
+                        Is.EqualTo("filled in"));
         }
 
         [Test]
@@ -545,16 +566,15 @@ namespace Coypu.AcceptanceTests
                                               .Native;
             button.Click();
             Assert.That(Browser.FindButton("clickMeTest")
-                               .Value, Is.EqualTo("Click me - clicked"));
+                               .Value,
+                        Is.EqualTo("Click me - clicked"));
         }
 
         [Test]
         public void RefreshingWindow()
         {
             var tickBeforeRefresh = (long) Browser.ExecuteScript("return window.SpecData.CurrentTick;");
-
             Browser.Refresh();
-
             var tickAfterRefresh = (long) Browser.ExecuteScript("return window.SpecData.CurrentTick;");
 
             Assert.That(tickAfterRefresh - tickBeforeRefresh, Is.GreaterThan(0));
@@ -614,12 +634,25 @@ namespace Coypu.AcceptanceTests
         public void ShowsAllCssInOrder_example()
         {
             Assert.That(Browser,
-                        Shows.AllCssInOrder("#inspectingContent ul li", "Some", "text", "in", "a", "list", "one", "two",
+                        Shows.AllCssInOrder("#inspectingContent ul li",
+                                            "Some",
+                                            "text",
+                                            "in",
+                                            "a",
+                                            "list",
+                                            "one",
+                                            "two",
                                             "Me! Pick me!"));
             Assert.Throws<AssertionException>(() => Assert.That(Browser,
-                                                                Shows.AllCssInOrder("#inspectingContent ul li", "Some",
-                                                                                    "text", "in", "a", "list", "two",
-                                                                                    "one", "Me! Pick me!")));
+                                                                Shows.AllCssInOrder("#inspectingContent ul li",
+                                                                                    "Some",
+                                                                                    "text",
+                                                                                    "in",
+                                                                                    "a",
+                                                                                    "list",
+                                                                                    "two",
+                                                                                    "one",
+                                                                                    "Me! Pick me!")));
         }
 
 
@@ -628,8 +661,10 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(Browser, Shows.ContentContaining("Some", "text", "in", "a", "list"));
             Assert.Throws<AssertionException>(() => Assert.That(Browser,
-                                                                Shows.ContentContaining("this is not in the page", "in",
-                                                                                        "a", "list")));
+                                                                Shows.ContentContaining("this is not in the page",
+                                                                                        "in",
+                                                                                        "a",
+                                                                                        "list")));
         }
 
 
@@ -639,7 +674,10 @@ namespace Coypu.AcceptanceTests
             Assert.That(Browser, Shows.CssContaining("#inspectingContent ul li", "Some", "text", "in", "a", "list"));
             Assert.Throws<AssertionException>(() => Assert.That(Browser,
                                                                 Shows.CssContaining("#inspectingContent ul li",
-                                                                                    "missing", "from", "a", "list")));
+                                                                                    "missing",
+                                                                                    "from",
+                                                                                    "a",
+                                                                                    "list")));
         }
 
         [Test]
@@ -664,7 +702,8 @@ namespace Coypu.AcceptanceTests
         {
             Browser.Uncheck("checkedBox");
             Assert.IsFalse(Browser.Query(() => Browser.FindField("checkedBox")
-                                                      .Selected, false));
+                                                      .Selected,
+                                         false));
         }
 
         [Test]
@@ -672,24 +711,24 @@ namespace Coypu.AcceptanceTests
         {
             var mainWindow = Browser;
             Assert.That(mainWindow.FindButton("scoped button", Options.First)
-                                  .Id, Is.EqualTo("scope1ButtonId"));
-
+                                  .Id,
+                        Is.EqualTo("scope1ButtonId"));
             mainWindow.ExecuteScript("setTimeout(function() {document.getElementById(\"openPopupLink\").click();}), 3000");
-
             var popUp = mainWindow.FindWindow("Pop Up Window");
             Assert.That(popUp.FindButton("scoped button")
-                             .Id, Is.EqualTo("popUpButtonId"));
+                             .Id,
+                        Is.EqualTo("popUpButtonId"));
 
             // And back
             Assert.That(mainWindow.FindButton("scoped button", Options.First)
-                                  .Id, Is.EqualTo("scope1ButtonId"));
+                                  .Id,
+                        Is.EqualTo("scope1ButtonId"));
         }
 
         [Test]
         public void Within_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
-
             var expectingScope1 = Browser.FindId("scope1")
                                          .FindField(locatorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindId("scope2")
@@ -703,10 +742,8 @@ namespace Coypu.AcceptanceTests
         public void WithinFieldset_example()
         {
             const string locatorThatAppearsInMultipleScopes = "scoped text input field linked by for";
-
             var expectingScope1 = Browser.FindFieldset("Scope 1")
                                          .FindField(locatorThatAppearsInMultipleScopes);
-
             var expectingScope2 = Browser.FindFieldset("Scope 2")
                                          .FindField(locatorThatAppearsInMultipleScopes);
 
@@ -732,7 +769,6 @@ namespace Coypu.AcceptanceTests
         public void WithinIFrame_example()
         {
             const string selectorThatAppearsInMultipleScopes = "scoped button";
-
             var expectingScope1 = Browser.FindFrame("iframe1")
                                          .FindButton(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindCss("#iframe2")
@@ -746,7 +782,6 @@ namespace Coypu.AcceptanceTests
         public void WithinIFrame_FoundByCss_example()
         {
             const string selectorThatAppearsInMultipleScopes = "scoped button";
-
             var expectingScope1 = Browser.FindCss("iframe#iframe1")
                                          .FindButton(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindCss("iframe#iframe2")
@@ -760,7 +795,6 @@ namespace Coypu.AcceptanceTests
         public void WithinSection_example()
         {
             const string selectorThatAppearsInMultipleScopes = "h2";
-
             var expectingScope1 = Browser.FindSection("Section One h1")
                                          .FindCss(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindSection("Div Section Two h1")
