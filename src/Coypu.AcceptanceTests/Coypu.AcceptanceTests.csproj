@@ -75,6 +75,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
+    <Compile Include="Properties\ParallelizableAssemblyInfo.cs" />
     <Compile Include="Screenshots.cs" />
     <Compile Include="sites\SelfishSite.cs" />
     <Compile Include="SnapshotElementScope.cs" />
