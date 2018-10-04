@@ -79,7 +79,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\ParallelizableAssemblyInfo.cs" />
     <Compile Include="When_finding_ids.cs" />
     <Compile Include="Sites\SinatraSite.cs" />
     <Compile Include="When_clearing_cookies.cs" />
