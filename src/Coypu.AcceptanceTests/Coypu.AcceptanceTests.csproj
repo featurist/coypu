@@ -81,9 +81,6 @@
     <Compile Include="SnapshotElementScope.cs" />
     <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="ExternalExamples.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="MultipleSessions.cs" />
     <Compile Include="States.cs">
       <SubType>Code</SubType>
