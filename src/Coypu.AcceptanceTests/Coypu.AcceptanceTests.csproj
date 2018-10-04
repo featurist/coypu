@@ -85,9 +85,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MultipleSessions.cs" />
-    <Compile Include="RawWebdriver.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="States.cs">
       <SubType>Code</SubType>
     </Compile>
