@@ -31,12 +31,11 @@ namespace Coypu.AcceptanceTests
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
             public CustomFirefoxProfileSeleniumWebDriver(Browser browser)
-                : base(CustomProfile(), browser) { }
+                : base(CustomOptions(), browser) { }
 
-            private static RemoteWebDriver CustomProfile()
+            private static RemoteWebDriver CustomOptions()
             {
-                var yourCustomProfile = new FirefoxProfile();
-                return new FirefoxDriver(yourCustomProfile);
+                return new FirefoxDriver(new FirefoxOptions());
             }
         }
 
