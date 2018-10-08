@@ -2,6 +2,7 @@
 using System.IO;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 
 namespace Coypu.AcceptanceTests
 {
@@ -31,6 +32,14 @@ namespace Coypu.AcceptanceTests
         public void SetUp()
         {
             ReloadTestPageWithDelay();
+        }
+
+        [TearDown]
+        public void TearDownOnFail()
+        {
+            if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed) return;
+            TearDown();
+            SetUpFixture();
         }
 
         protected void ApplyAsyncDelay()
