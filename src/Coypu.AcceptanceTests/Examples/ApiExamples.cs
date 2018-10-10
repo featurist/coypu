@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 
-namespace Coypu.AcceptanceTests
+namespace Coypu.AcceptanceTests.Examples
 {
     /// <summary>
     ///     Simple examples for each API method - to show usage and check everything is wired up properly
@@ -30,59 +30,11 @@ namespace Coypu.AcceptanceTests
 
         public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver(Browser browser)
-                : base(CustomOptions(), browser) { }
+            public CustomFirefoxProfileSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
 
             private static RemoteWebDriver CustomOptions()
             {
                 return new FirefoxDriver(new FirefoxOptions());
-            }
-        }
-
-        [TestCase("Windows 7", "firefox", "25")]
-        [TestCase("Windows 10", "MicrosoftEdge", "14")]
-        public void CustomBrowserSessionWithCustomRemoteDriver(string platform,
-                                                               string browserName,
-                                                               string version)
-        {
-            var desiredCapabilites = new DesiredCapabilities(browserName, version, Platform.CurrentPlatform);
-            desiredCapabilites.SetCapability("platform", platform);
-            desiredCapabilites.SetCapability("username", "appiumci");
-            desiredCapabilites.SetCapability("accessKey", "af4fbd21-6aee-4a01-857f-c7ffba2f0a50");
-            desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name);
-
-            IDriver driver = new CustomRemoteDriver(Drivers.Browser.Parse(browserName), desiredCapabilites);
-
-            using (var custom = new BrowserSession(driver))
-            {
-                custom.Visit("https://saucelabs.com/test/guinea-pig");
-                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo(0));
-            }
-        }
-
-        [TestCase("chrome")]
-        [TestCase("internet explorer")]
-        [TestCase("MicrosoftEdge")]
-        public void CustomBrowserSession(string browserName)
-        {
-            var driver = new SeleniumWebDriver(Drivers.Browser.Parse(browserName));
-            using (var custom = new BrowserSession(driver))
-            {
-                custom.Visit("https://saucelabs.com/test/guinea-pig");
-                Assert.That(custom.ExecuteScript("return 0;"), Is.EqualTo(0));
-            }
-        }
-
-        public class CustomRemoteDriver : SeleniumWebDriver
-        {
-            public CustomRemoteDriver(Browser browser,
-                                      ICapabilities capabilities)
-                : base(CustomWebDriver(capabilities), browser) { }
-
-            private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
-            {
-                var remoteAppHost = new Uri("http://ondemand.saucelabs.com:80/wd/hub");
-                return new RemoteWebDriver(remoteAppHost, capabilities);
             }
         }
 
@@ -100,11 +52,9 @@ namespace Coypu.AcceptanceTests
         public void Attributes_on_stale_scope_example()
         {
             var field = Browser.FindField("find-this-field");
-
             Assert.That(field.Value, Is.EqualTo("This value is what we are looking for"));
 
             ReloadTestPage();
-
             Assert.That(field.Value, Is.EqualTo("This value is what we are looking for"));
             Assert.That(field.Id, Is.EqualTo("find-this-field"));
             Assert.That(field["id"], Is.EqualTo("find-this-field"));
@@ -150,12 +100,10 @@ namespace Coypu.AcceptanceTests
         public void Choose_example()
         {
             Browser.Choose("chooseRadio1");
-
             Assert.IsTrue(Browser.FindField("chooseRadio1")
                                  .Selected);
 
             Browser.Choose("chooseRadio2");
-
             Assert.IsTrue(Browser.FindField("chooseRadio2")
                                  .Selected);
             Assert.IsFalse(Browser.FindField("chooseRadio1")
@@ -202,7 +150,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void ConsideringInvisibleElements()
         {
-            Browser.FindButton("firstInvisibleInputId", new Options {ConsiderInvisibleElements = true})
+            Browser.FindButton("firstInvisibleInputId", new Options { ConsiderInvisibleElements = true })
                    .Now();
         }
 
@@ -216,8 +164,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void CustomProfile()
         {
-            var configuration = new SessionConfiguration {Driver = typeof(CustomFirefoxProfileSeleniumWebDriver)};
-
+            var configuration = new SessionConfiguration { Driver = typeof(CustomFirefoxProfileSeleniumWebDriver) };
             using (var custom = new BrowserSession(configuration))
             {
                 custom.Visit("https://www.relishapp.com/");
@@ -266,7 +213,6 @@ namespace Coypu.AcceptanceTests
 
                 Browser.FillIn("forLabeledFileFieldId")
                        .With(fullPath);
-
                 var findAgain = Browser.FindField("forLabeledFileFieldId");
                 Assert.That(findAgain.Value, Does.EndWith(someLocalFile));
             }
@@ -300,7 +246,6 @@ namespace Coypu.AcceptanceTests
         public void FindAllCss_example()
         {
             ReloadTestPage();
-
             const string shouldFind = "#inspectingContent ul#cssTest li";
             var all = Browser.FindAllCss(shouldFind)
                              .ToList();
@@ -317,7 +262,6 @@ namespace Coypu.AcceptanceTests
         public void FindAllXPath_example()
         {
             ReloadTestPage();
-
             const string shouldFind = "//*[@id='inspectingContent']//ul[@id='cssTest']/li";
             var all = Browser.FindAllXPath(shouldFind)
                              .ToArray();
@@ -449,7 +393,6 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(Browser, Shows.Content("This is what we are looking for"));
             Assert.That(Browser.HasContent("This is not in the page"), Is.False);
-
             Assert.Throws<AssertionException>(() => Assert.That(Browser, Shows.Content("This is not in the page")));
         }
 
@@ -465,7 +408,6 @@ namespace Coypu.AcceptanceTests
         {
             Assert.That(Browser, Shows.Content(new Regex(@"This.is.what.we.are.looking.for")));
             Assert.That(Browser.HasContentMatch(new Regex(@"This.is.not.in.the.page")), Is.False);
-
             Assert.Throws<AssertionException>(() => Assert.That(Browser,
                                                                 Shows.Content(new Regex(@"This.is.not.in.the.page"))));
         }
@@ -479,7 +421,6 @@ namespace Coypu.AcceptanceTests
 
             ReloadTestPage();
             Assert.That(Browser.HasNoContent("This is what we are looking for"), Is.False);
-
             Assert.Throws<AssertionException>(() => Assert.That(Browser,
                                                                 Shows.No.Content("This is what we are looking for")));
         }
@@ -529,11 +470,9 @@ namespace Coypu.AcceptanceTests
         {
             var availWidth = Browser.ExecuteScript("return window.screen.availWidth;");
             var initalWidth = GetOuterWidth();
-
             Assert.That(initalWidth, Is.LessThan(availWidth));
 
             Browser.MaximiseWindow();
-
             Assert.That(GetOuterWidth(), Is.GreaterThanOrEqualTo(availWidth));
         }
 
@@ -561,7 +500,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void Native_example()
         {
-            var button = (IWebElement) Browser.FindButton("clickMeTest")
+            var button = (IWebElement)Browser.FindButton("clickMeTest")
                                               .Native;
             button.Click();
             Assert.That(Browser.FindButton("clickMeTest")
@@ -572,10 +511,9 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void RefreshingWindow()
         {
-            var tickBeforeRefresh = (long) Browser.ExecuteScript("return window.SpecData.CurrentTick;");
+            var tickBeforeRefresh = (long)Browser.ExecuteScript("return window.SpecData.CurrentTick;");
             Browser.Refresh();
-            var tickAfterRefresh = (long) Browser.ExecuteScript("return window.SpecData.CurrentTick;");
-
+            var tickAfterRefresh = (long)Browser.ExecuteScript("return window.SpecData.CurrentTick;");
             Assert.That(tickAfterRefresh - tickBeforeRefresh, Is.GreaterThan(0));
         }
 
@@ -584,12 +522,10 @@ namespace Coypu.AcceptanceTests
         {
             var initalWidth = GetOuterWidth();
             var initialHeight = GetOuterHeight();
-
             Assert.That(initalWidth, Is.Not.EqualTo(500));
             Assert.That(initialHeight, Is.Not.EqualTo(600));
 
             Browser.ResizeTo(500, 600);
-
             Assert.That(GetOuterWidth(), Is.EqualTo(500));
             Assert.That(GetOuterHeight(), Is.EqualTo(600));
         }
@@ -601,7 +537,6 @@ namespace Coypu.AcceptanceTests
             Assert.That(field.SelectedOption, Is.EqualTo("select two option one"));
 
             field.SelectOption("select two option two");
-
             field = Browser.FindField("containerLabeledSelectFieldId");
             Assert.That(field.SelectedOption, Is.EqualTo("select two option two"));
         }
@@ -614,7 +549,6 @@ namespace Coypu.AcceptanceTests
 
             Browser.Select("select2value2")
                    .From("containerLabeledSelectFieldId");
-
             textField = Browser.FindField("containerLabeledSelectFieldId");
             Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
         }
@@ -693,7 +627,7 @@ namespace Coypu.AcceptanceTests
             Browser.TryUntil(() => tryThisButton.Click(),
                              () => Browser.HasContent("try until 5"),
                              TimeSpan.FromMilliseconds(50),
-                             new Options {Timeout = TimeSpan.FromMilliseconds(10000)});
+                             new Options { Timeout = TimeSpan.FromMilliseconds(10000) });
         }
 
         [Test]
@@ -717,7 +651,6 @@ namespace Coypu.AcceptanceTests
             Assert.That(popUp.FindButton("scoped button")
                              .Id,
                         Is.EqualTo("popUpButtonId"));
-
             // And back
             Assert.That(mainWindow.FindButton("scoped button", Options.First)
                                   .Id,
@@ -732,7 +665,6 @@ namespace Coypu.AcceptanceTests
                                          .FindField(locatorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindId("scope2")
                                          .FindField(locatorThatAppearsInMultipleScopes);
-
             Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
         }
@@ -745,7 +677,6 @@ namespace Coypu.AcceptanceTests
                                          .FindField(locatorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindFieldset("Scope 2")
                                          .FindField(locatorThatAppearsInMultipleScopes);
-
             Assert.That(expectingScope1.Id, Is.EqualTo("scope1TextInputFieldId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("scope2TextInputFieldId"));
         }
@@ -759,7 +690,6 @@ namespace Coypu.AcceptanceTests
                                          .FindButton(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindFrame("frame2")
                                          .FindButton(selectorThatAppearsInMultipleScopes);
-
             Assert.That(expectingScope1.Id, Is.EqualTo("frame1ButtonId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("frame2ButtonId"));
         }
@@ -772,7 +702,6 @@ namespace Coypu.AcceptanceTests
                                          .FindButton(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindCss("#iframe2")
                                          .FindButton(selectorThatAppearsInMultipleScopes);
-
             Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
         }
@@ -785,7 +714,6 @@ namespace Coypu.AcceptanceTests
                                          .FindButton(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindCss("iframe#iframe2")
                                          .FindButton(selectorThatAppearsInMultipleScopes);
-
             Assert.That(expectingScope1.Id, Is.EqualTo("iframe1ButtonId"));
             Assert.That(expectingScope2.Id, Is.EqualTo("iframe2ButtonId"));
         }
@@ -798,7 +726,6 @@ namespace Coypu.AcceptanceTests
                                          .FindCss(selectorThatAppearsInMultipleScopes);
             var expectingScope2 = Browser.FindSection("Div Section Two h1")
                                          .FindCss(selectorThatAppearsInMultipleScopes);
-
             Assert.That(expectingScope1.Text, Is.EqualTo("Section One h2"));
             Assert.That(expectingScope2.Text, Is.EqualTo("Div Section Two h2"));
         }

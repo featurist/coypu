@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Examples\ApiExamples.cs" />
+    <Compile Include="Examples\CustomBrowserSession.cs" />
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="Properties\ParallelizableAssemblyInfo.cs" />
     <Compile Include="Screenshots.cs" />
