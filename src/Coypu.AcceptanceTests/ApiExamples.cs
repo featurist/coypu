@@ -16,7 +16,7 @@ namespace Coypu.AcceptanceTests
     ///     Simple examples for each API method - to show usage and check everything is wired up properly
     /// </summary>
     [TestFixture]
-    public class Examples : WaitAndRetryExamples
+    public class ApiExamples : WaitAndRetryExamples
     {
         private object GetOuterHeight()
         {
