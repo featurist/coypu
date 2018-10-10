@@ -36,3 +36,4 @@ src/packages
 /src/.vs/Coypu/v15/Server/sqlite3*
 /src/.vs/Coypu/v15/Server/*
 *.ide
+/.vs/slnx.sqlite
