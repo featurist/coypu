@@ -75,6 +75,7 @@
     <Compile Include="Examples\ApiExamples.cs" />
     <Compile Include="Examples\CustomBrowserSession.cs" />
     <Compile Include="Examples\FindExamples.cs" />
+    <Compile Include="Examples\HasExamples.cs" />
     <Compile Include="Examples\WithinExamples.cs" />
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="Properties\ParallelizableAssemblyInfo.cs" />
