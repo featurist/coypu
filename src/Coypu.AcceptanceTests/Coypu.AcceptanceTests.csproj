@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Examples\ApiExamples.cs" />
+    <Compile Include="Examples\CheckboxExamples.cs" />
     <Compile Include="Examples\ClickExamples.cs" />
     <Compile Include="Examples\CustomBrowserSession.cs" />
     <Compile Include="Examples\EnterTextExamples.cs" />

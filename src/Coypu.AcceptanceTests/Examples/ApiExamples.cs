@@ -58,39 +58,12 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void Can_find_checkbox_and_check_it()
-        {
-            var checkbox = Browser.FindCss("#uncheckedBox");
-            checkbox.Check();
-            Assert.IsTrue(Browser.FindField("uncheckedBox")
-                                 .Selected);
-        }
-
-        [Test]
-        public void Can_find_checkbox_and_uncheck_it()
-        {
-            var checkbox = Browser.FindCss("#checkedBox");
-            checkbox.Uncheck();
-            Assert.IsFalse(Browser.Query(() => Browser.FindField("checkedBox")
-                                                      .Selected,
-                                         false));
-        }
-
-        [Test]
         public void CancelModalDialog_example()
         {
             Browser.ClickLink("Trigger a confirm");
             Browser.CancelModalDialog();
             Browser.FindLink("Trigger a confirm - cancelled")
                    .Now();
-        }
-
-        [Test]
-        public void Check_example()
-        {
-            Browser.Check("uncheckedBox");
-            Assert.IsTrue(Browser.FindField("uncheckedBox")
-                                 .Selected);
         }
 
         [Test]
@@ -325,15 +298,6 @@ namespace Coypu.AcceptanceTests.Examples
                              () => Browser.HasContent("try until 5"),
                              TimeSpan.FromMilliseconds(50),
                              new Options {Timeout = TimeSpan.FromMilliseconds(10000)});
-        }
-
-        [Test]
-        public void Uncheck_example()
-        {
-            Browser.Uncheck("checkedBox");
-            Assert.IsFalse(Browser.Query(() => Browser.FindField("checkedBox")
-                                                      .Selected,
-                                         false));
         }
 
         [Test]
