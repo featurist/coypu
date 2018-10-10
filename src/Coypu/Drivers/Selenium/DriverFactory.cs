@@ -5,7 +5,6 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Opera;
-using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 
 namespace Coypu.Drivers.Selenium
@@ -38,8 +37,6 @@ namespace Coypu.Drivers.Selenium
                 return new RemoteWebDriver(desiredCapabilities);
             }
 
-            if (browser == Browser.PhantomJs)
-                return new PhantomJSDriver();
             if (browser == Browser.MicrosoftEdge)
                 return new EdgeDriver();
             return browser == Browser.Opera
