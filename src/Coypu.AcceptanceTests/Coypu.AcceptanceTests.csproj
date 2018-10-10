@@ -72,9 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiExamples.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Examples\ApiExamples.cs" />
     <Compile Include="FindAllWithPredicateAndRetries.cs" />
     <Compile Include="Properties\ParallelizableAssemblyInfo.cs" />
     <Compile Include="Screenshots.cs" />
@@ -159,9 +157,7 @@
       <Name>Coypu</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Examples\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
