@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 #pragma warning disable 1591
 
 namespace Coypu.Drivers
@@ -19,8 +20,6 @@ namespace Coypu.Drivers
 
         public static Browser InternetExplorer = new Browser {Javascript = true};
         public static Browser Chrome = new Browser {Javascript = true};
-        public static Browser HtmlUnit = new Browser {Javascript = false};
-        public static Browser HtmlUnitWithJavaScript = new Browser {Javascript = true};
         public static Browser MicrosoftEdge = new Browser {Javascript = true};
         public static Browser Opera = new Browser {Javascript = true};
         private Browser() { }

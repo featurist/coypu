@@ -6,6 +6,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Html5;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -28,15 +29,6 @@ namespace Coypu.Drivers.Selenium
 
             if (browser == Browser.Chrome)
                 return new ChromeDriver();
-            if (browser == Browser.HtmlUnit)
-                return new RemoteWebDriver(DesiredCapabilities.HtmlUnit());
-            if (browser == Browser.HtmlUnitWithJavaScript)
-            {
-                var desiredCapabilities = DesiredCapabilities.HtmlUnit();
-                desiredCapabilities.SetCapability(CapabilityType.IsJavaScriptEnabled, true);
-                return new RemoteWebDriver(desiredCapabilities);
-            }
-
             if (browser == Browser.MicrosoftEdge)
                 return new EdgeDriver();
             return browser == Browser.Opera
