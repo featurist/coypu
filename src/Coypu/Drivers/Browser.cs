@@ -20,8 +20,9 @@ namespace Coypu.Drivers
 
         public static Browser InternetExplorer = new Browser {Javascript = true};
         public static Browser Chrome = new Browser {Javascript = true};
-        public static Browser MicrosoftEdge = new Browser {Javascript = true};
+        public static Browser Edge = new Browser {Javascript = true};
         public static Browser Opera = new Browser {Javascript = true};
+        public static Browser Safari = new Browser {Javascript = true};
         private Browser() { }
 
         public bool Javascript { get; private set; }
@@ -34,7 +35,6 @@ namespace Coypu.Drivers
                                                    StringComparison.InvariantCultureIgnoreCase));
             if (fieldInfo == null)
                 throw new NoSuchBrowserException(browserName);
-
             return (Browser) fieldInfo.GetValue(null);
         }
 
