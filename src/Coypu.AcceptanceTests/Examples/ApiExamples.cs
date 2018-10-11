@@ -26,16 +26,6 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void AcceptModalDialog_example()
-        {
-            Browser.ClickLink("Trigger an alert");
-            Assert.IsTrue(Browser.HasDialog("You have triggered an alert and this is the text."));
-
-            Browser.AcceptModalDialog();
-            Assert.IsTrue(Browser.HasNoDialog("You have triggered an alert and this is the text."));
-        }
-
-        [Test]
         public void Attributes_on_stale_scope_example()
         {
             var field = Browser.FindField("find-this-field");
@@ -45,15 +35,6 @@ namespace Coypu.AcceptanceTests.Examples
             Assert.That(field.Value, Is.EqualTo("This value is what we are looking for"));
             Assert.That(field.Id, Is.EqualTo("find-this-field"));
             Assert.That(field["id"], Is.EqualTo("find-this-field"));
-        }
-
-        [Test]
-        public void CancelModalDialog_example()
-        {
-            Browser.ClickLink("Trigger a confirm");
-            Browser.CancelModalDialog();
-            Browser.FindLink("Trigger a confirm - cancelled")
-                   .Now();
         }
 
         [Test]
@@ -135,16 +116,6 @@ namespace Coypu.AcceptanceTests.Examples
             Assert.That(Browser.FindId("hoverOnMeTest")
                                .Text,
                         Is.EqualTo("Hover on me - hovered"));
-        }
-        
-        [Test]
-        public void ModalDialog_while_multiple_windows_are_open()
-        {
-            Browser.ClickLink("Open pop up window");
-            Browser.ClickLink("Trigger a confirm");
-            Browser.CancelModalDialog();
-            Browser.FindLink("Trigger a confirm - cancelled")
-                   .Now();
         }
 
         [Test]
