@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 
@@ -19,24 +20,7 @@ namespace Coypu.AcceptanceTests.Examples
                                                         string browserName,
                                                         string browserVersion)
         {
-            DriverOptions options;
-            switch (browserName)
-            {
-                case "edge":
-                    options = new EdgeOptions();
-                    break;
-                case "safari":
-                    options = new SafariOptions();
-                    break;
-                default:
-                    options = new ChromeOptions();
-                    break;
-            }
-
-            options.PlatformName = platformName;
-            options.BrowserVersion = browserVersion;
-
-            IDriver driver = new CustomRemoteDriver(Browser.Parse(browserName), options.ToCapabilities());
+            IDriver driver = new CustomRemoteDriver(Browser.Parse(browserName), ReturnBrowserOptions(platformName, browserName, browserVersion));
             using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");
@@ -46,7 +30,7 @@ namespace Coypu.AcceptanceTests.Examples
 
         [TestCase("chrome")]
         [TestCase("internet explorer")]
-        [TestCase("edge")]
+        [TestCase("firefox")]
         public void CustomBrowser(string browserName)
         {
             var driver = new SeleniumWebDriver(Browser.Parse(browserName));
@@ -57,11 +41,38 @@ namespace Coypu.AcceptanceTests.Examples
             }
         }
 
+        private static ICapabilities ReturnBrowserOptions(string platformName,
+                                                   string browserName,
+                                                   string browserVersion)
+        {
+            DriverOptions browserOptions;
+            switch (browserName)
+            {
+                case "chrome":
+                    browserOptions = new ChromeOptions();
+                    break;
+                case "edge":
+                    browserOptions = new EdgeOptions();
+                    break;
+                case "firefox":
+                    browserOptions = new FirefoxOptions();
+                    break;
+                case "safari":
+                    browserOptions = new SafariOptions();
+                    break;
+                default:
+                    throw new Exception($"Browser {browserName} not supported!");
+            }
+
+            browserOptions.PlatformName = platformName;
+            browserOptions.BrowserVersion = browserVersion;
+            return browserOptions.ToCapabilities();
+        }
+
         public class CustomRemoteDriver : SeleniumWebDriver
         {
             public CustomRemoteDriver(Browser browser,
-                                      ICapabilities capabilities)
-                : base(CustomWebDriver(capabilities), browser) { }
+                                      ICapabilities capabilities) : base(CustomWebDriver(capabilities), browser) { }
 
             private static RemoteWebDriver CustomWebDriver(ICapabilities capabilities)
             {
