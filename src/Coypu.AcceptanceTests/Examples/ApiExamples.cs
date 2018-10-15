@@ -14,9 +14,9 @@ namespace Coypu.AcceptanceTests.Examples
     [TestFixture]
     public class ApiExamples : WaitAndRetryExamples
     {
-        public class CustomFirefoxProfileSeleniumWebDriver : SeleniumWebDriver
+        public class CustomFirefoxOptionsSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxProfileSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
+            public CustomFirefoxOptionsSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
 
             private static RemoteWebDriver CustomOptions()
             {
@@ -65,9 +65,9 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void CustomProfile()
+        public void CustomOptions()
         {
-            var configuration = new SessionConfiguration {Driver = typeof(CustomFirefoxProfileSeleniumWebDriver)};
+            var configuration = new SessionConfiguration {Driver = typeof(CustomFirefoxOptionsSeleniumWebDriver)};
             using (var custom = new BrowserSession(configuration))
             {
                 custom.Visit("https://www.relishapp.com/");
