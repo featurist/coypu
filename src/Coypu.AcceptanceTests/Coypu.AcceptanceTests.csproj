@@ -89,7 +89,6 @@
     <Compile Include="Screenshots.cs" />
     <Compile Include="sites\SelfishSite.cs" />
     <Compile Include="SnapshotElementScope.cs" />
-    <Compile Include="ShowModalDialog.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MultipleSessions.cs" />
     <Compile Include="States.cs">
