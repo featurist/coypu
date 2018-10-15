@@ -3,6 +3,7 @@ using System.IO;
 using Coypu.AcceptanceTests.Sites;
 using Coypu.Drivers;
 using NUnit.Framework;
+using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests
 {
@@ -67,8 +68,7 @@ namespace Coypu.AcceptanceTests
         public void It_exposes_the_location_of_an_iframe_scope()
         {
             ReloadTestPage();
-            Assert.That(_browser.FindFrame("iframe1")
-                               .Location.AbsolutePath,
+            Assert.That(_browser.FindFrame("iframe1")["src"],
                         Does.Contain("iFrame1.htm"));
         }
     }
