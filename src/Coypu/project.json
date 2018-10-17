@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "Selenium.Support": "3.14.0",
+    "Selenium.WebDriver": "3.14.0"
+  },
+  "frameworks": {
+    "net471": {}
+  },
+  "runtimes": {
+    "win-anycpu": {},
+    "win": {}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "NUnit": "3.11.0"
+  },
+  "frameworks": {
+    "net471": {}
+  },
+  "runtimes": {
+    "win-anycpu": {},
+    "win": {}
+  }
+}
