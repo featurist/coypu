@@ -37,3 +37,12 @@ src/packages
 /src/.vs/Coypu/v15/Server/*
 *.ide
 /.vs/slnx.sqlite
+/src/Coypu.Tests/Coypu.Tests.nuget.props
+/src/Coypu.Tests
+/src/Coypu.NUnit/Coypu.NUnit.nuget.props
+/src/Coypu.NUnit
+/src/Coypu.Drivers.Tests/Coypu.Drivers.Tests.nuget.targets
+/src/Coypu.Drivers.Tests/Coypu.Drivers.Tests.nuget.props
+/src/Coypu.Drivers.Tests
+/src/Coypu.AcceptanceTests/Coypu.AcceptanceTests.nuget.targets
+/src/Coypu.AcceptanceTests/Coypu.AcceptanceTests.nuget.props
