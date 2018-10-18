@@ -1,213 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Coypu</RootNamespace>
-    <AssemblyName>Coypu</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
+    <TargetFramework>net471</TargetFramework>
+    <FileUpgradeFlags />
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
-    <RestorePackages>true</RestorePackages>
+    <AssemblyTitle>Coypu</AssemblyTitle>
+    <Product>Coypu</Product>
+    <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
+    <AssemblyVersion>3.14.0.0</AssemblyVersion>
+    <FileVersion>3.14.0.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Coypu.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Coypu.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x86|AnyCPU' ">
-    <OutputPath>bin\x86\</OutputPath>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'x86|x86' ">
-    <OutputPath>bin\x86\x86\</OutputPath>
-    <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DocumentationFile>bin\$(Configuration)\Coypu.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\BrowserAction.cs" />
-    <Compile Include="Actions\CheckAction.cs" />
-    <Compile Include="Actions\ClickAction.cs" />
-    <Compile Include="Actions\Choose.cs" />
-    <Compile Include="Actions\AcceptModalDialog.cs" />
-    <Compile Include="Actions\CancelModalDialog.cs" />
-    <Compile Include="Actions\FillIn.cs" />
-    <Compile Include="Actions\LambdaDriverAction.cs" />
-    <Compile Include="Actions\Select.cs" />
-    <Compile Include="Actions\SendKeys.cs" />
-    <Compile Include="Actions\Uncheck.cs" />
-    <Compile Include="ActivatorDriverFactory.cs" />
-    <Compile Include="AmbiguousException.cs" />
-    <Compile Include="BrowserWindow.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumWindowManager.cs" />
-    <Compile Include="ElementScope.cs" />
-    <Compile Include="DriverFactory.cs" />
-    <Compile Include="Drivers\Html.cs" />
-    <Compile Include="Drivers\NoSuchBrowserException.cs" />
-    <Compile Include="Drivers\Selenium\FrameFinder.cs" />
-    <Compile Include="Drivers\Selenium\ImageFormatParser.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumFrame.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumWindow.cs" />
-    <Compile Include="Drivers\Selenium\WindowHandleFinder.cs" />
-    <Compile Include="Element.cs" />
-    <Compile Include="FinderException.cs" />
-    <Compile Include="Finders\ButtonFinder.cs" />
-    <Compile Include="Actions\WaitThenClick.cs" />
-    <Compile Include="Finders\DisambiguationStrategy.cs" />
-    <Compile Include="Finders\FinderOptionsDisambiguationStrategy.cs" />
-    <Compile Include="Finders\OptionFinder.cs" />
-    <Compile Include="Finders\SelectFinder.cs" />
-    <Compile Include="Finders\WithTextFinder.cs" />
-    <Compile Include="Finders\XPathQueryFinder.cs" />
-    <Compile Include="Match.cs" />
-    <Compile Include="MissingDialogException.cs" />
-    <Compile Include="MissingWindowException.cs" />
-    <Compile Include="ElementFoundExtensions.cs" />
-    <Compile Include="Queries\ElementExistsQuery.cs" />
-    <Compile Include="Queries\ElementScopeQuery.cs" />
-    <Compile Include="Queries\HasNoValueQuery.cs" />
-    <Compile Include="Queries\FindAllCssWithPredicateQuery.cs" />
-    <Compile Include="Queries\FindAllXPathWithPredicateQuery.cs" />
-    <Compile Include="Queries\HasValueQuery.cs" />
-    <Compile Include="Queries\WindowExistsQuery.cs" />
-    <Compile Include="Queries\WindowMissingQuery.cs" />
-    <Compile Include="SessionConfiguration.cs" />
-    <Compile Include="Finders\CssFinder.cs" />
-    <Compile Include="Finders\WindowFinder.cs" />
-    <Compile Include="Finders\FieldFinder.cs" />
-    <Compile Include="Finders\FieldsetFinder.cs" />
-    <Compile Include="Finders\DocumentElementFinder.cs" />
-    <Compile Include="IDriver.cs" />
-    <Compile Include="DriverScope.cs" />
-    <Compile Include="Drivers\Browser.cs" />
-    <Compile Include="Drivers\BrowserNotSupportedException.cs" />
-    <Compile Include="Drivers\Selenium\Dialogs.cs" />
-    <Compile Include="Drivers\Selenium\MouseControl.cs" />
-    <Compile Include="Drivers\Selenium\DriverFactory.cs" />
-    <Compile Include="Drivers\Selenium\ElementFinder.cs" />
-    <Compile Include="Drivers\Selenium\TextMatcher.cs" />
-    <Compile Include="Drivers\XPath.cs" />
-    <Compile Include="Actions\Hover.cs" />
-    <Compile Include="Finders\IdFinder.cs" />
-    <Compile Include="Finders\FrameFinder.cs" />
-    <Compile Include="Options.cs" />
-    <Compile Include="Queries\DialogQuery.cs" />
-    <Compile Include="Queries\DriverScopeQuery.cs" />
-    <Compile Include="Queries\ElementMissingQuery.cs" />
-    <Compile Include="Queries\ElementQuery.cs" />
-    <Compile Include="Queries\HasContentMatchQuery.cs" />
-    <Compile Include="Queries\HasContentQuery.cs" />
-    <Compile Include="Queries\HasDialogQuery.cs" />
-    <Compile Include="Queries\HasNoContentMatchQuery.cs" />
-    <Compile Include="Queries\HasNoContentQuery.cs" />
-    <Compile Include="Queries\LambdaPredicateQuery.cs" />
-    <Compile Include="Queries\LambdaQuery.cs" />
-    <Compile Include="Finders\ElementFinder.cs" />
-    <Compile Include="Finders\LinkFinder.cs" />
-    <Compile Include="Queries\PredicateQuery.cs" />
-    <Compile Include="Queries\Query.cs" />
-    <Compile Include="StaleElementException.cs" />
-    <Compile Include="SynchronisedElementScope.cs" />
-    <Compile Include="Actions\DriverAction.cs" />
-    <Compile Include="Queries\ActionSatisfiesPredicateQuery.cs" />
-    <Compile Include="Scope.cs" />
-    <Compile Include="Finders\SectionFinder.cs" />
-    <Compile Include="SnapshotElementScope.cs" />
-    <Compile Include="WebRequests\RequestCookieInjector.cs" />
-    <Compile Include="WebRequests\RestrictedResourceDownloader.cs" />
-    <Compile Include="FillInWith.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UrlBuilder.cs" />
-    <Compile Include="MissingHtmlException.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumExtensions.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumElement.cs" />
-    <Compile Include="Drivers\Selenium\SeleniumWebDriver.cs" />
-    <Compile Include="Timing\TimingStrategy.cs" />
-    <Compile Include="Timing\StopwatchWaiter.cs" />
-    <Compile Include="Timing\Waiter.cs" />
-    <Compile Include="SelectFrom.cs" />
-    <Compile Include="BrowserSession.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Timing\RetryUntilTimeoutTimingStrategy.cs" />
-    <Compile Include="State.cs" />
-    <Compile Include="Finders\StateFinder.cs" />
-    <Compile Include="FullyQualifiedUrlBuilder.cs" />
-    <Compile Include="WebRequests\WebClientWithCookies.cs">
+    <Compile Update="WebRequests\WebClientWithCookies.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WebRequests\WebRequestCookieInjector.cs" />
-    <Compile Include="Finders\XPathFinder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="project.json" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
