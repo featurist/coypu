@@ -3,9 +3,6 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <ProjectGuid>{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}</ProjectGuid>
     <TargetFramework>net471</TargetFramework>
-    <FileUpgradeFlags />
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -18,10 +15,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj" />
-    <ProjectReference Include="..\Coypu\Coypu.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.43.0" />
@@ -29,6 +22,10 @@
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.14.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
     <PackageReference Include="SelfishHttp" Version="0.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj" />
+    <ProjectReference Include="..\Coypu\Coypu.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

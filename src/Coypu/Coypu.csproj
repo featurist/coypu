@@ -3,9 +3,6 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <ProjectGuid>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</ProjectGuid>
     <TargetFramework>net471</TargetFramework>
-    <FileUpgradeFlags />
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu</AssemblyTitle>
@@ -22,11 +19,6 @@
   <ItemGroup>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="WebRequests\WebClientWithCookies.cs">
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
