@@ -2,7 +2,7 @@
   "dependencies": {
     "NUnit": "3.11.0",
     "Selenium.WebDriver": "3.14.0",
-    "Selenium.WebDriver.ChromeDriver": "2.42.0.1",
+    "Selenium.WebDriver.ChromeDriver": "2.43.0",
     "SelfishHttp": "0.3.0",
     "Shouldly": "3.0.1"
   },

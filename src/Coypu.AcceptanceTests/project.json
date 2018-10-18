@@ -2,7 +2,7 @@
   "dependencies": {
     "NUnit": "3.11.0",
     "Selenium.WebDriver": "3.14.0",
-    "Selenium.WebDriver.ChromeDriver": "2.42.0.1",
+    "Selenium.WebDriver.ChromeDriver": "2.43.0",
     "Selenium.WebDriver.GeckoDriver.Win64": "0.23.0",
     "Selenium.WebDriver.IEDriver": "3.14.0",
     "Selenium.WebDriver.MicrosoftWebDriver": "10.0.17134",

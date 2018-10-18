@@ -26,7 +26,7 @@
           "lib/net45/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/2.42.0.1": {
+      "Selenium.WebDriver.ChromeDriver/2.43.0": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -95,7 +95,7 @@
           "lib/net45/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/2.42.0.1": {
+      "Selenium.WebDriver.ChromeDriver/2.43.0": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -164,7 +164,7 @@
           "lib/net45/WebDriver.dll": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/2.42.0.1": {
+      "Selenium.WebDriver.ChromeDriver/2.43.0": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -260,17 +260,17 @@
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/2.42.0.1": {
-      "sha512": "KK5nDRq26O7v4otCA5wfQWp93ajMPoyoPwEa8fk/6p4Klr9F6TA5moRqIN969QtPoWav84kEfHaOQpZgIaFiEQ==",
+    "Selenium.WebDriver.ChromeDriver/2.43.0": {
+      "sha512": "n2QkR1+CC7FJ60LzUx4m9O2hlM3EydgYGHVZsSYo9oGnepeFR843Uo7VV3oGAG/y5DxgzTy/ROodHhkf8RJ+eA==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/2.42.0.1",
+      "path": "selenium.webdriver.chromedriver/2.43.0",
       "files": [
         ".signature.p7s",
         "build/Selenium.WebDriver.ChromeDriver.targets",
         "driver/linux64/chromedriver",
         "driver/mac64/chromedriver",
         "driver/win32/chromedriver.exe",
-        "selenium.webdriver.chromedriver.2.42.0.1.nupkg.sha512",
+        "selenium.webdriver.chromedriver.2.43.0.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
@@ -313,7 +313,7 @@
     "": [
       "NUnit >= 3.11.0",
       "Selenium.WebDriver >= 3.14.0",
-      "Selenium.WebDriver.ChromeDriver >= 2.42.0.1",
+      "Selenium.WebDriver.ChromeDriver >= 2.43.0",
       "SelfishHttp >= 0.3.0",
       "Shouldly >= 3.0.1"
     ],
@@ -356,7 +356,7 @@
     "dependencies": {
       "NUnit": "[3.11.0, )",
       "Selenium.WebDriver": "[3.14.0, )",
-      "Selenium.WebDriver.ChromeDriver": "[2.42.0.1, )",
+      "Selenium.WebDriver.ChromeDriver": "[2.43.0, )",
       "SelfishHttp": "[0.3.0, )",
       "Shouldly": "[3.0.1, )"
     },
