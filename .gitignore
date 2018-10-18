@@ -46,3 +46,5 @@ src/packages
 /src/Coypu.Drivers.Tests
 /src/Coypu.AcceptanceTests/Coypu.AcceptanceTests.nuget.targets
 /src/Coypu.AcceptanceTests/Coypu.AcceptanceTests.nuget.props
+/src/Coypu.AcceptanceTests/project.lock.json
+/src/Coypu/project.lock.json
