@@ -31,51 +31,12 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Coypu.Drivers.Tests\html\frame1.htm">
-      <Link>html\frame1.htm</Link>
+    <Content Include="..\Coypu.Drivers.Tests\html\*.*">
+      <Link>html\%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\frame2.htm">
-      <Link>html\frame2.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\frameset.htm">
-      <Link>html\frameset.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\iFrame1.htm">
-      <Link>html\iFrame1.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\iFrame2.htm">
-      <Link>html\iFrame2.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\InteractionTestsPage.htm">
-      <Link>html\InteractionTestsPage.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\popUp.htm">
-      <Link>html\popUp.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\popUp2.htm">
-      <Link>html\popUp2.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\table.htm">
-      <Link>html\table.htm</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Coypu.Drivers.Tests\html\test-card.jpg">
-      <Link>html\test-card.jpg</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\tricky.htm">
+    <Content Include="html\*.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="html\states.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 </Project>

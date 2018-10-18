@@ -37,7 +37,7 @@ namespace Coypu.Drivers.Tests
 
                 Driver.GoBack(popUp);
                 Assert.That(Driver.Location(popUp).AbsoluteUri,
-                            Does.EndWith("src/Coypu.Drivers.Tests/html/popup.htm"));
+                            Does.EndWith("src/Coypu.Drivers.Tests/bin/Debug/net471/html/popup.htm"));
                 Assert.That(Driver.Location(Root).AbsoluteUri, Is.EqualTo(TestSiteUrl("/auto_login")));
 
                 Driver.GoForward(popUp);
