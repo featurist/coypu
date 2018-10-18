@@ -7,7 +7,7 @@ namespace Coypu.Drivers.Tests
     {
         protected override string TestPage
         {
-            get { return @"html\frameset.htm"; }
+            get { return @"frameset.htm"; }
         }
 
         [Test]

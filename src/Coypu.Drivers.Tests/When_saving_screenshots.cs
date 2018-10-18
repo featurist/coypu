@@ -12,7 +12,7 @@ namespace Coypu.Drivers.Tests
         public void SavesAScreenshot()
         {
             Scope driverScope = Root;
-            Driver.Visit(TestHtmlPathLocation("html\\test-card.jpg"), driverScope);
+            Driver.Visit(TestPageLocation("html\\test-card.jpg"), driverScope);
             Driver.ResizeTo(new Size(800, 600), driverScope);
 
             string saveAs = Path.Combine(Path.GetTempPath(), "expect-saved-here.jpg");

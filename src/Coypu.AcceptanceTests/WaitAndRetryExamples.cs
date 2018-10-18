@@ -57,9 +57,8 @@ namespace Coypu.AcceptanceTests
 
         protected static string TestPageLocation(string page)
         {
-            var testPageLocation = "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\" + page)
-                                                    .Replace("\\", "/");
-            return testPageLocation;
+            return "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, $@"html\{page}")
+                                    .Replace("\\", "/");
         }
 
         protected void ReloadTestPageWithDelay()

@@ -26,7 +26,6 @@ public class AssemblyTearDown
     public void TearDown()
     {
         TestSite.Dispose();
-
         DriverSpecs.DisposeDriver();
     }
 }
@@ -35,14 +34,12 @@ namespace Coypu.Drivers.Tests
 {
     public class DriverSpecs
     {
-        private const string InteractionTestsPage = @"html\InteractionTestsPage.htm";
-        private static DriverScope _root;
         private static IDriver _driver;
-
+        private static DriverScope _root;
         private static readonly Browser Browser = Browser.Chrome;
-        private static readonly Type DriverType = typeof(SeleniumWebDriver);
-
         protected static readonly Options DefaultOptions = new Options();
+
+        private static readonly Type DriverType = typeof(SeleniumWebDriver);
 
         protected static readonly SessionConfiguration DefaultSessionConfiguration = new SessionConfiguration
                                                                                      {
@@ -53,13 +50,6 @@ namespace Coypu.Drivers.Tests
 
         protected static readonly DisambiguationStrategy DisambiguationStrategy = new ThrowsWhenMissingButNoDisambiguationStrategy();
 
-        protected virtual string TestPage => InteractionTestsPage;
-
-        protected static DriverScope Root => _root ?? (_root = new BrowserWindow(DefaultSessionConfiguration,
-                                                                                 new DocumentElementFinder(Driver, DefaultSessionConfiguration), null,
-                                                                                 new ImmediateSingleExecutionFakeTimingStrategy(), null, null,
-                                                                                 new ThrowsWhenMissingButNoDisambiguationStrategy()));
-
         public static IDriver Driver
         {
             get
@@ -69,6 +59,16 @@ namespace Coypu.Drivers.Tests
             }
         }
 
+        protected static DriverScope Root => _root ?? (_root = new BrowserWindow(DefaultSessionConfiguration,
+                                                                                 new DocumentElementFinder(Driver, DefaultSessionConfiguration),
+                                                                                 null,
+                                                                                 new ImmediateSingleExecutionFakeTimingStrategy(),
+                                                                                 null,
+                                                                                 null,
+                                                                                 new ThrowsWhenMissingButNoDisambiguationStrategy()));
+
+        protected virtual string TestPage => @"InteractionTestsPage.htm";
+
         protected string TestSiteUrl(string path)
         {
             return new Uri(AssemblyTearDown.TestSite.BaseUri, path).AbsoluteUri;
@@ -77,18 +77,13 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public virtual void SetUp()
         {
-            Driver.Visit(GetTestHtmlPathLocation(), Root);
+            Driver.Visit(TestPageLocation(TestPage), Root);
         }
 
-        protected string GetTestHtmlPathLocation()
+        protected static string TestPageLocation(string page)
         {
-            return TestHtmlPathLocation(TestPage);
-        }
-
-        protected static string TestHtmlPathLocation(string testPage)
-        {
-            var file = Path.Combine(TestContext.CurrentContext.TestDirectory, Path.Combine(@"..\..\", testPage));
-            return $"file:///{file.Replace('\\', '/')}";
+            return "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, $@"html\{page}")
+                                    .Replace("\\", "/");
         }
 
         private static void EnsureDriver()
