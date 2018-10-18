@@ -2,21 +2,6 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.7.1": {
-      "Selenium.Support/3.14.0": {
-        "type": "package",
-        "dependencies": {
-          "Selenium.WebDriver": "3.14.0"
-        },
-        "frameworkAssemblies": [
-          "System.Drawing"
-        ],
-        "compile": {
-          "lib/net45/WebDriver.Support.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WebDriver.Support.dll": {}
-        }
-      },
       "Selenium.WebDriver/3.14.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -31,21 +16,6 @@
       }
     },
     ".NETFramework,Version=v4.7.1/win": {
-      "Selenium.Support/3.14.0": {
-        "type": "package",
-        "dependencies": {
-          "Selenium.WebDriver": "3.14.0"
-        },
-        "frameworkAssemblies": [
-          "System.Drawing"
-        ],
-        "compile": {
-          "lib/net45/WebDriver.Support.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WebDriver.Support.dll": {}
-        }
-      },
       "Selenium.WebDriver/3.14.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -60,21 +30,6 @@
       }
     },
     ".NETFramework,Version=v4.7.1/win-anycpu": {
-      "Selenium.Support/3.14.0": {
-        "type": "package",
-        "dependencies": {
-          "Selenium.WebDriver": "3.14.0"
-        },
-        "frameworkAssemblies": [
-          "System.Drawing"
-        ],
-        "compile": {
-          "lib/net45/WebDriver.Support.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WebDriver.Support.dll": {}
-        }
-      },
       "Selenium.WebDriver/3.14.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -90,23 +45,6 @@
     }
   },
   "libraries": {
-    "Selenium.Support/3.14.0": {
-      "sha512": "FhZzfKr1M9zcWWPaiWRTRB+7IC+m8oAUelI5tKn71LIO5aNWdYBv+oDnoyqYefvt5f+sj+jLE7EupOw9oy0rMQ==",
-      "type": "package",
-      "path": "selenium.support/3.14.0",
-      "files": [
-        "lib/net35/WebDriver.Support.dll",
-        "lib/net35/WebDriver.Support.xml",
-        "lib/net40/WebDriver.Support.dll",
-        "lib/net40/WebDriver.Support.xml",
-        "lib/net45/WebDriver.Support.dll",
-        "lib/net45/WebDriver.Support.xml",
-        "lib/netstandard2.0/WebDriver.Support.dll",
-        "lib/netstandard2.0/WebDriver.Support.xml",
-        "selenium.support.3.14.0.nupkg.sha512",
-        "selenium.support.nuspec"
-      ]
-    },
     "Selenium.WebDriver/3.14.0": {
       "sha512": "hkNeyxU8S/cojFQfHg1R234R0GtYxJG1iJ403sRKiGSE/6mW3vHCvG3uUDwFqzoTfMNSChHymuSwsFbT1EAd6w==",
       "type": "package",
@@ -127,7 +65,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Selenium.Support >= 3.14.0",
       "Selenium.WebDriver >= 3.14.0"
     ],
     ".NETFramework,Version=v4.7.1": []
@@ -136,6 +73,7 @@
     "C:\\Users\\jakub.obstarczyk\\.nuget\\packages\\": {}
   },
   "project": {
+    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Source\\github\\Coypu\\src\\Coypu\\Coypu.csproj",
       "projectName": "Coypu",
@@ -154,7 +92,6 @@
       }
     },
     "dependencies": {
-      "Selenium.Support": "[3.14.0, )",
       "Selenium.WebDriver": "[3.14.0, )"
     },
     "frameworks": {

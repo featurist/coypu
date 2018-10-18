@@ -14,21 +14,6 @@
           "build/NUnit.props": {}
         }
       },
-      "Selenium.Support/3.14.0": {
-        "type": "package",
-        "dependencies": {
-          "Selenium.WebDriver": "3.14.0"
-        },
-        "frameworkAssemblies": [
-          "System.Drawing"
-        ],
-        "compile": {
-          "lib/net45/WebDriver.Support.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WebDriver.Support.dll": {}
-        }
-      },
       "Selenium.WebDriver/3.14.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -73,7 +58,6 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.1",
         "dependencies": {
-          "Selenium.Support": "3.14.0",
           "Selenium.WebDriver": "3.14.0"
         }
       },
@@ -99,21 +83,6 @@
           "build/NUnit.props": {}
         }
       },
-      "Selenium.Support/3.14.0": {
-        "type": "package",
-        "dependencies": {
-          "Selenium.WebDriver": "3.14.0"
-        },
-        "frameworkAssemblies": [
-          "System.Drawing"
-        ],
-        "compile": {
-          "lib/net45/WebDriver.Support.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WebDriver.Support.dll": {}
-        }
-      },
       "Selenium.WebDriver/3.14.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -158,7 +127,6 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.1",
         "dependencies": {
-          "Selenium.Support": "3.14.0",
           "Selenium.WebDriver": "3.14.0"
         }
       },
@@ -184,21 +152,6 @@
           "build/NUnit.props": {}
         }
       },
-      "Selenium.Support/3.14.0": {
-        "type": "package",
-        "dependencies": {
-          "Selenium.WebDriver": "3.14.0"
-        },
-        "frameworkAssemblies": [
-          "System.Drawing"
-        ],
-        "compile": {
-          "lib/net45/WebDriver.Support.dll": {}
-        },
-        "runtime": {
-          "lib/net45/WebDriver.Support.dll": {}
-        }
-      },
       "Selenium.WebDriver/3.14.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -243,7 +196,6 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.7.1",
         "dependencies": {
-          "Selenium.Support": "3.14.0",
           "Selenium.WebDriver": "3.14.0"
         }
       },
@@ -289,23 +241,6 @@
         "lib/netstandard2.0/nunit.framework.xml",
         "nunit.3.11.0.nupkg.sha512",
         "nunit.nuspec"
-      ]
-    },
-    "Selenium.Support/3.14.0": {
-      "sha512": "FhZzfKr1M9zcWWPaiWRTRB+7IC+m8oAUelI5tKn71LIO5aNWdYBv+oDnoyqYefvt5f+sj+jLE7EupOw9oy0rMQ==",
-      "type": "package",
-      "path": "selenium.support/3.14.0",
-      "files": [
-        "lib/net35/WebDriver.Support.dll",
-        "lib/net35/WebDriver.Support.xml",
-        "lib/net40/WebDriver.Support.dll",
-        "lib/net40/WebDriver.Support.xml",
-        "lib/net45/WebDriver.Support.dll",
-        "lib/net45/WebDriver.Support.xml",
-        "lib/netstandard2.0/WebDriver.Support.dll",
-        "lib/netstandard2.0/WebDriver.Support.xml",
-        "selenium.support.3.14.0.nupkg.sha512",
-        "selenium.support.nuspec"
       ]
     },
     "Selenium.WebDriver/3.14.0": {
@@ -377,7 +312,6 @@
   "projectFileDependencyGroups": {
     "": [
       "NUnit >= 3.11.0",
-      "Selenium.Support >= 3.14.0",
       "Selenium.WebDriver >= 3.14.0",
       "Selenium.WebDriver.ChromeDriver >= 2.42.0.1",
       "SelfishHttp >= 0.3.0",
@@ -389,6 +323,7 @@
     "C:\\Users\\jakub.obstarczyk\\.nuget\\packages\\": {}
   },
   "project": {
+    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Source\\github\\Coypu\\src\\Coypu.Drivers.Tests\\Coypu.Drivers.Tests.csproj",
       "projectName": "Coypu.Drivers.Tests",
@@ -420,7 +355,6 @@
     },
     "dependencies": {
       "NUnit": "[3.11.0, )",
-      "Selenium.Support": "[3.14.0, )",
       "Selenium.WebDriver": "[3.14.0, )",
       "Selenium.WebDriver.ChromeDriver": "[2.42.0.1, )",
       "SelfishHttp": "[0.3.0, )",
