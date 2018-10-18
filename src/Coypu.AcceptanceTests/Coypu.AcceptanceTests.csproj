@@ -1,98 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Coypu.AcceptanceTests</RootNamespace>
-    <AssemblyName>Coypu.AcceptanceTests</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
+    <TargetFramework>net471</TargetFramework>
+    <FileUpgradeFlags />
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
-    <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Examples\ApiExamples.cs" />
-    <Compile Include="Examples\CheckboxExamples.cs" />
-    <Compile Include="Examples\ClickExamples.cs" />
-    <Compile Include="Examples\CustomBrowserSession.cs" />
-    <Compile Include="Examples\EnterTextExamples.cs" />
-    <Compile Include="Examples\FindExamples.cs" />
-    <Compile Include="Examples\HasExamples.cs" />
-    <Compile Include="Examples\ModalDialogExamples.cs" />
-    <Compile Include="Examples\SelectFromExamples.cs" />
-    <Compile Include="Examples\ShowsExamples.cs" />
-    <Compile Include="Examples\WindowExamples.cs" />
-    <Compile Include="Examples\WithinExamples.cs" />
-    <Compile Include="FindAllWithPredicateAndRetries.cs" />
-    <Compile Include="Properties\ParallelizableAssemblyInfo.cs" />
-    <Compile Include="Screenshots.cs" />
-    <Compile Include="sites\SelfishSite.cs" />
-    <Compile Include="SnapshotElementScope.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="MultipleSessions.cs" />
-    <Compile Include="States.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="StaleScopeExamples.cs" />
-    <Compile Include="WaitAndRetryExamples.cs" />
-    <Compile Include="WebRequests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InnerAndOuterHtml.cs" />
-    <Compile Include="TextPrecisionAndMatch.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj" />
+    <ProjectReference Include="..\Coypu\Coypu.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="project.json" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.43.0" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.23.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.14.0" />
+    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
+    <PackageReference Include="SelfishHttp" Version="0.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\Coypu.Drivers.Tests\html\frame1.htm">
@@ -142,26 +81,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj">
-      <Project>{14fb5a97-d3a7-4759-bb6a-03cafc9b8fab}</Project>
-      <Name>Coypu.NUnit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Coypu\Coypu.csproj">
-      <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
-      <Name>Coypu</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
