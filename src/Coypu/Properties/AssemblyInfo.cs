@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Coypu")]
-[assembly: AssemblyCopyright("Copyright © Adrian Longley and contributors 2011-2013")]
+[assembly: AssemblyCopyright("Copyright © Adrian Longley and contributors 2011-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
@@ -38,7 +38,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("2.10.0.0")]
-[assembly: AssemblyFileVersion("2.10.0.0")]
+[assembly: AssemblyVersion("3.14.0.0")]
+[assembly: AssemblyFileVersion("3.14.0.0")]
 [assembly: InternalsVisibleTo("Coypu.Tests")]
 [assembly: InternalsVisibleTo("Coypu.Drivers.Tests")]

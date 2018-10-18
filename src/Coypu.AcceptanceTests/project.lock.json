@@ -360,7 +360,6 @@
     "C:\\Users\\jakub.obstarczyk\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Source\\github\\Coypu\\src\\Coypu.AcceptanceTests\\Coypu.AcceptanceTests.csproj",
       "projectName": "Coypu.AcceptanceTests",
