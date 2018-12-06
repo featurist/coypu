@@ -80,7 +80,7 @@ namespace Coypu {
 
         public ElementScope Click(Options options = null) 
         {
-            Try(new ClickAction(this, driver, Merge(options)));
+            Try(new ClickAction(this, driver, Merge(options), waiter));
             return this;
         }
 
