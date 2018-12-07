@@ -1,132 +1,111 @@
 ﻿using System.Linq;
 
+// ReSharper disable InheritdocConsiderUsage
+#pragma warning disable 1591
+
 namespace Coypu.Drivers
 {
     /// <summary>
-    /// Construct XPath queries to find different types of HTML element
+    ///     Construct XPath queries to find different types of HTML element
     /// </summary>
     public class Html : XPath
     {
-        private static readonly string[] InputButtonTypes = new[] { "button", "submit", "image", "reset" };
-        private static readonly string[] FieldTagNames = new[] { "input", "select", "textarea" };
-        private static readonly string[] FieldInputTypes = new[] { "text", "password", "radio", "checkbox", "file", "email", "tel", "url", "number", "datetime", "datetime-local", "date", "month", "week", "time", "color", "search" };
-        private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] { "hidden" }).ToArray();
-        private static readonly string[] FindByNameTypes = FieldInputTypes.Except(new[] { "radio" }).ToArray();
-        private static readonly string[] FindByValueTypes = new[] { "checkbox", "radio" };
-        private readonly string[] sectionTags = { "section", "div", "li" };
-        private readonly string[] headerTags = { "h1", "h2", "h3", "h4", "h5", "h6" };
+        private static readonly string[] InputButtonTypes = {"button", "submit", "image", "reset"};
+        private static readonly string[] FieldTagNames = {"input", "select", "textarea"};
+        private static readonly string[] FieldInputTypes =
+            {"text", "password", "radio", "checkbox", "file", "email", "tel", "url", "number", "datetime", "datetime-local", "date", "month", "week", "time", "color", "search"};
+        private static readonly string[] FieldInputTypeWithHidden = FieldInputTypes.Union(new[] {"hidden"})
+                                                                                   .ToArray();
+        private static readonly string[] FindByNameTypes = FieldInputTypes.Except(new[] {"radio"})
+                                                                          .ToArray();
+        private static readonly string[] FindByValueTypes = {"checkbox", "radio"};
+        private readonly string[] _headerTags = {"h1", "h2", "h3", "h4", "h5", "h6"};
+        private readonly string[] _sectionTags = {"section", "div", "li"};
 
-        public Html(bool uppercaseTagNames = false) : base(uppercaseTagNames)
+        public Html(bool uppercaseTagNames = false) : base(uppercaseTagNames) { }
+
+        public string Id(string locator,
+                         Options options)
         {
+            return Descendent() + Where(HasId(locator));
         }
 
-        public string Id(string locator, Options options)
+        public string Link(string locator,
+                           Options options)
         {
-            return
-                Descendent() +
-                Where(HasId(locator));
+            return Descendent("a") + Where(IsText(locator, options) + Or + HasTitle(locator, options) + Or + HasHref(locator, options));
         }
 
-        public string Link(string locator, Options options)
-        {
-            return
-                Descendent("a") +
-                Where(IsText(locator, options) + or + HasTitle(locator, options) + or + HasHref(locator, options));
-        }
-
-        public string HasTitle(string title, Options options)
+        public string HasTitle(string title,
+                               Options options)
         {
             return Attr("title", title, options);
         }
 
-        public string HasHref(string href, Options options)
+        public string HasHref(string href,
+                              Options options)
         {
             return Attr("href", href, options);
         }
 
-        public string LinkOrButton(string locator, Options options)
+        public string LinkOrButton(string locator,
+                                   Options options)
         {
-            return Link(locator, options) + or + Button(locator, options);
+            return Link(locator, options) + Or + Button(locator, options);
         }
 
-        public string Field(string locator, Options options)
+        public string Field(string locator,
+                            Options options)
         {
-            return
-                Descendent() +
-                Where(
-                    TagNamedOneOf(FieldTagNames) +
-                    And(
-                        IsForLabeled(locator, options) +
-                        or + IsContainerLabeled(locator, options) +
-                        or + HasIdOrPlaceholder(locator, options) +
-                        or + HasName(locator) +
-                        or + HasValue(locator)));
+            return Descendent() + Where(TagNamedOneOf(FieldTagNames) + And(IsForLabeled(locator, options) +
+                                                                           Or + IsContainerLabeled(locator, options) +
+                                                                           Or + HasIdOrPlaceholder(locator, options) +
+                                                                           Or + HasName(locator) +
+                                                                           Or + HasValue(locator)));
         }
 
-        public string Select(string locator, Options options)
+        public string Select(string locator,
+                             Options options)
         {
-            return
-                Descendent("select") +
-                Where(
-                    IsForLabeled(locator, options) +
-                    or + IsContainerLabeled(locator, options) +
-                    or + HasId(locator) +
-                    or + HasName(locator));
+            return Descendent("select") + Where(IsForLabeled(locator, options) +
+                                                Or + IsContainerLabeled(locator, options) +
+                                                Or + HasId(locator) +
+                                                Or + HasName(locator));
         }
 
         public string FrameXPath(string locator)
         {
-            return
-                Descendent() +
-                Where(
-                    TagNamedOneOf("iframe", "frame")) +
-                    or + FrameAttributesMatch(locator);
-
+            return Descendent() + Where(TagNamedOneOf("iframe", "frame")) + Or + FrameAttributesMatch(locator);
         }
 
-        public string Button(string locator, Options options)
+        public string Button(string locator,
+                             Options options)
         {
-            return
-                Descendent() +
-                Where(
-                    Group(
-                        IsInputButton() +
-                        or + TagNamedOneOf("button") +
-                        or + HasOneOfClasses("button", "btn") +
-                        or + Attr("role", "button", Options.Exact)) +
-                    And(
-                        AttributesMatchLocator(locator, Options.Exact, "@id", "@name") +
-                        or + AttributesMatchLocator(locator.Trim(), options, "@value", "@alt", "normalize-space()")));
+            return Descendent() + Where(Group(IsInputButton() +
+                                              Or + TagNamedOneOf("button") +
+                                              Or + HasOneOfClasses("button", "btn") +
+                                              Or + Attr("role", "button", Options.Exact)) +
+                                        And(AttributesMatchLocator(locator, Options.Exact, "@id", "@name") +
+                                            Or + AttributesMatchLocator(locator.Trim(), options, "@value", "@alt", "normalize-space()")));
         }
 
-        public string Fieldset(string locator, Options options)
+        public string Fieldset(string locator,
+                               Options options)
         {
-            return
-                Descendent("fieldset") +
-                Where(
-                    Child("legend") +
-                    Where(IsText(locator, options)) +
-                    or + HasId(locator));
-
+            return Descendent("fieldset") + Where(Child("legend") + Where(IsText(locator, options)) + Or + HasId(locator));
         }
 
-        public string Section(string locator, Options options)
+        public string Section(string locator,
+                              Options options)
         {
-            return
-                Descendent() +
-                Where(
-                    TagNamedOneOf(sectionTags) +
-                    And(
-                        Child() +
-                        Where(TagNamedOneOf(headerTags) + and + IsText(locator, options)) +
-                        or + HasId(locator)));
+            return Descendent() + Where(TagNamedOneOf(_sectionTags) + And(Child() +
+                                                                          Where(TagNamedOneOf(_headerTags) + and + IsText(locator, options)) + Or + HasId(locator)));
         }
 
-        public string Option(string locator, Options options)
+        public string Option(string locator,
+                             Options options)
         {
-            return
-                Child("option") +
-                Where(IsText(locator, options) + or + Is("@value", locator, options));
+            return Child("option") + Where(IsText(locator, options) + Or + Is("@value", locator, options));
         }
 
         private string HasValue(string locator)
@@ -152,17 +131,17 @@ namespace Coypu.Drivers
         private string IsAFieldInputType(Options options)
         {
             var fieldInputTypes = options.ConsiderInvisibleElements
-                            ? FieldInputTypeWithHidden
-                            : FieldInputTypes;
+                                      ? FieldInputTypeWithHidden
+                                      : FieldInputTypes;
 
             return AttributeIsOneOfOrMissing("type", fieldInputTypes);
         }
 
-        private string HasIdOrPlaceholder(string locator, Options options)
+        private string HasIdOrPlaceholder(string locator,
+                                          Options options)
         {
             return Group(IsAFieldInputType(options)
-                         + And(HasId(locator) + or + Is("@placeholder", locator, options)));
-
+                         + And(HasId(locator) + Or + Is("@placeholder", locator, options)));
         }
 
         private string HasId(string locator)

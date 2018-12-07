@@ -1,99 +1,52 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using OpenQA.Selenium;
 
 namespace Coypu.Drivers.Selenium
 {
     internal class SeleniumElement : Element
     {
-        protected readonly IWebElement native;
-        protected readonly IWebDriver selenium;
+        // ReSharper disable once InconsistentNaming
+        protected readonly IWebElement _native;
+        protected readonly IWebDriver Selenium;
 
-        public SeleniumElement(IWebElement seleniumElement, IWebDriver selenium)
+        public SeleniumElement(IWebElement seleniumElement,
+                               IWebDriver selenium)
         {
-            native = seleniumElement;
-            this.selenium = selenium;
+            _native = seleniumElement;
+            Selenium = selenium;
         }
 
-        public string Id
-        {
-            get { return native.GetAttribute("id"); }
-        }
+        public string Id => _native.GetAttribute("id");
 
-        public virtual string Text
-        {
-            get
-            {
-                return native.Text;
-            }
-        }
+        public virtual string Text => _native.Text;
 
-        public string Value
-        {
-            get { return native.GetAttribute("value"); }
-        }
+        public string Value => _native.GetAttribute("value");
 
-        public string Name
-        {
-            get { return native.GetAttribute("name"); }
-        }
+        public string Name => _native.GetAttribute("name");
 
-        public virtual string OuterHTML
-        {
-            get
-            {
-                return native.GetAttribute("outerHTML");
-            }
-        }
+        public virtual string OuterHTML => _native.GetAttribute("outerHTML");
 
-        public virtual string InnerHTML
-        {
-            get
-            {
-                return native.GetAttribute("innerHTML");
-            }
-        }
+        public virtual string InnerHTML => _native.GetAttribute("innerHTML");
 
-        public string Title
-        {
-            get { return native.GetAttribute("title"); }
-        }
+        public string Title => _native.GetAttribute("title");
 
-        public bool Disabled
-        {
-            get
-            {
-                return !native.Enabled;
-            }
-        }
+        public bool Disabled => !_native.Enabled;
 
         public string SelectedOption
         {
             get
             {
-                return native.FindElements(By.TagName("option"))
-                    .Where(e => e.Selected)
-                    .Select(e => e.Text)
-                    .FirstOrDefault();
+                return _native.FindElements(By.TagName("option"))
+                             .Where(e => e.Selected)
+                             .Select(e => e.Text)
+                             .FirstOrDefault();
             }
         }
 
-        public bool Selected
-        {
-            get { return native.Selected; }
-        }
+        public bool Selected => _native.Selected;
 
-        public virtual object Native
-        {
-            get
-            {
-                return native;
-            }
-        }
+        public virtual object Native => _native;
 
-        public string this[string attributeName]
-        {
-            get { return native.GetAttribute(attributeName); }
-        }
+        public string this[string attributeName] => _native.GetAttribute(attributeName);
     }
 }

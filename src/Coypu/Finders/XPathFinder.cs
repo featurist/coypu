@@ -15,18 +15,18 @@ namespace Coypu.Finders
             get { return "xpath"; }
         }
 
-        public XPathFinder(Driver driver, string locator, DriverScope scope, Options options)
+        public XPathFinder(IDriver driver, string locator, DriverScope scope, Options options)
             : base(driver, locator, scope, options)
         {
         }
 
-        public XPathFinder(Driver driver, string locator, DriverScope scope, Options options, Regex textPattern)
+        public XPathFinder(IDriver driver, string locator, DriverScope scope, Options options, Regex textPattern)
             : base(driver, locator, scope, options)
         {
             this.textPattern = textPattern;
         }
 
-        public XPathFinder(Driver driver, string locator, DriverScope scope, Options options, string text)
+        public XPathFinder(IDriver driver, string locator, DriverScope scope, Options options, string text)
             : base(driver, locator, scope, options)
         {
             this.text = text;

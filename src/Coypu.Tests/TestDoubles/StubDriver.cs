@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Coypu.Tests.TestDoubles
 {
-    public class StubDriver : Driver
+    public class StubDriver : IDriver
     {
         public StubDriver() {}
 
@@ -84,7 +84,7 @@ namespace Coypu.Tests.TestDoubles
             get { return false; }
         }
 
-        Uri Driver.Location(Scope scope)
+        Uri IDriver.Location(Scope scope)
         {
             return null;
         }

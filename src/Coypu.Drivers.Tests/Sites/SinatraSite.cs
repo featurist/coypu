@@ -10,24 +10,26 @@ namespace Coypu.Drivers.Tests.Sites
         public SelfishSite()
         {
             _server = new Server();
-            _server.OnGet("/").RespondWith("<html><head><title>Selfish has taken the stage</title></head><body>Howdy</body></html>");
-            _server.OnGet("/resource/bdd").RespondWith("bdd");
-            _server.OnGet("/auto_login").Respond((req, res) =>
-            {
-                res.Headers["Set-Cookie"] = "username=bob";
-            });
-            _server.OnGet("/restricted_resource/bdd").Respond((req, res) =>
-            {
-                if (req.Headers["Cookie"] == "username=bob")
-                    res.Body = "bdd";
-
-            });
+            _server.OnGet("/")
+                   .RespondWith("<html><head><title>Selfish has taken the stage</title></head><body>Howdy</body></html>");
+            _server.OnGet("/resource/bdd")
+                   .RespondWith("bdd");
+            _server.OnGet("/auto_login")
+                   .Respond((req,
+                             res) =>
+                   {
+                       res.Headers["Set-Cookie"] = "username=bob";
+                   });
+            _server.OnGet("/restricted_resource/bdd")
+                   .Respond((req,
+                             res) =>
+                   {
+                       if (req.Headers["Cookie"] == "username=bob")
+                           res.Body = "bdd";
+                   });
         }
 
-        public Uri BaseUri
-        {
-            get { return new Uri(_server.BaseUri); }
-        }
+        public Uri BaseUri => new Uri(_server.BaseUri.Replace("localhost", "127.0.0.1"));
 
         public void Dispose()
         {

@@ -101,14 +101,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
     public class StubDriverFactory : DriverFactory
     {
-        private readonly Driver driver;
+        private readonly IDriver driver;
 
-        public StubDriverFactory(Driver driver)
+        public StubDriverFactory(IDriver driver)
         {
             this.driver = driver;
         }
 
-        public Driver NewWebDriver(Type driverType, Drivers.Browser browser)
+        public IDriver NewWebDriver(Type driverType, Drivers.Browser browser)
         {
             return driver;
         }

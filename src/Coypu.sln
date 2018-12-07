@@ -1,24 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu", "Coypu\Coypu.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu", "Coypu\Coypu.csproj", "{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.AcceptanceTests", "Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj", "{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu.AcceptanceTests", "Coypu.AcceptanceTests\Coypu.AcceptanceTests.csproj", "{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Tests", "Coypu.Tests\Coypu.Tests.csproj", "{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu.Tests", "Coypu.Tests\Coypu.Tests.csproj", "{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Drivers.Tests", "Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj", "{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu.Drivers.Tests", "Coypu.Drivers.Tests\Coypu.Drivers.Tests.csproj", "{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.Drivers.Watin", "Coypu.Drivers.Watin\Coypu.Drivers.Watin.csproj", "{A4ADBB2C-A3C3-4984-8991-C39E991167DA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CB9AF80-1809-4ABD-B17F-BD2B89F35678}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coypu.NUnit", "Coypu.NUnit\Coypu.NUnit.csproj", "{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu.NUnit", "Coypu.NUnit\Coypu.NUnit.csproj", "{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +35,6 @@ Global
 		{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4ADBB2C-A3C3-4984-8991-C39E991167DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,5 +42,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BCB8641-AA82-4109-8049-5701C8FE0571}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

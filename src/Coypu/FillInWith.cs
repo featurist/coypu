@@ -5,13 +5,13 @@ namespace Coypu
 {
     public class FillInWith
     {
-        private readonly Driver driver;
+        private readonly IDriver driver;
         private readonly TimingStrategy timingStrategy;
         private readonly Options options;
         private readonly ElementScope element;
 
 
-        internal FillInWith(ElementScope element, Driver driver, TimingStrategy timingStrategy, Options options)
+        internal FillInWith(ElementScope element, IDriver driver, TimingStrategy timingStrategy, Options options)
         {
             this.element = element;
             this.driver = driver;

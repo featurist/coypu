@@ -5,7 +5,7 @@ namespace Coypu.Actions
         private readonly string value;
         private readonly ElementScope element;
 
-        internal FillIn(Driver driver, ElementScope element, string value, Options options) : base(driver, element, options)
+        internal FillIn(IDriver driver, ElementScope element, string value, Options options) : base(driver, element, options)
         {
             this.element = element;
             this.value = value;

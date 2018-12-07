@@ -1,140 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Coypu.Tests</RootNamespace>
-    <AssemblyName>Coypu.Tests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
+    <TargetFramework>net471</TargetFramework>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
-    <RestorePackages>true</RestorePackages>
+    <AssemblyTitle>Coypu.Tests</AssemblyTitle>
+    <Product>Coypu.Tests</Product>
+    <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
+    <AssemblyVersion>3.14.0.0</AssemblyVersion>
+    <FileVersion>3.14.0.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.8.1\lib\net35\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestBuilders\FindsFirstWitNoDisambiguationStrategy.cs" />
-    <Compile Include="When_applying_match_strategy\When_using_single_substring.cs" />
-    <Compile Include="When_applying_match_strategy\When_using_first_substring.cs" />
-    <Compile Include="When_applying_match_strategy\StubElementFinder.cs" />
-    <Compile Include="When_applying_match_strategy\Any_match_strategy.cs" />
-    <Compile Include="When_applying_match_strategy\When_using_first_prefer_exact.cs" />
-    <Compile Include="When_applying_match_strategy\When_using_first_exact.cs" />
-    <Compile Include="When_applying_match_strategy\When_using_single_exact.cs" />
-    <Compile Include="When_applying_match_strategy\When_using_single_prefer_exact.cs" />
-    <Compile Include="When_configuring_options.cs" />
-    <Compile Include="TestDoubles\SpyRestrictedResourceDownloader.cs" />
-    <Compile Include="TestDoubles\StubDriver.cs" />
-    <Compile Include="TestDoubles\StubWebResources.cs" />
-    <Compile Include="TestDoubles\StubWebResponse.cs" />
-    <Compile Include="When_interacting_with_the_browser\BrowserInteractionTests.cs" />
-    <Compile Include="TestDoubles\ImmediateSingleExecutionFakeTimingStrategy.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_clicking_buttons.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="When_interacting_with_the_browser\When_clicking_links.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_completing_forms.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_controlling_the_window.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_all_matching_elements.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_single_elements.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_checking_an_element.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_unchecking_any_element.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_filling_in_any_field.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_hovering.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_then_clicking_an_element.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_insepcting_elements.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_inspecting_location.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_building_urls.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_constructing_xpath.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_finding_state.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_inspecting_title.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_executing_script.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_interacting_with_modal_dialogs.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_inspecting.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_inspecting_modal_dialogs.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_inspecting_the_page.cs" />
-    <Compile Include="TestException.cs" />
-    <Compile Include="TestBuilders\TestSessionBuilder.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_querying_with_any_finder.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_saving_screenshots.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_scoping_interactions.cs" />
-    <Compile Include="When_making_browser_interactions_robust\TestActions.cs" />
-    <Compile Include="When_making_browser_interactions_robust\TestQueries.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_I_want_to_manage_timing_manually.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_querying_for_an_expected_result.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_retrying_until_a_timeout.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_trying_an_action_until_a_given_state_is_reached.cs" />
-    <Compile Include="When_making_browser_interactions_robust\When_waiting.cs" />
-    <Compile Include="When_making_direct_web_requests\When_saving_a_resource_from_the_web.cs" />
-    <Compile Include="When_starting_and_ending_sessions.cs" />
-    <Compile Include="When_interacting_with_the_browser\When_visiting.cs" />
-    <Compile Include="TestDoubles\SpyTimingStrategy.cs" />
-    <Compile Include="TestDoubles\FakeDriver.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestDoubles\StubElement.cs" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Coypu\Coypu.csproj">
-      <Project>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</Project>
-      <Name>Coypu</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Coypu\Coypu.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

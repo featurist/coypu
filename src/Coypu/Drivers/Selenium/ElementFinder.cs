@@ -7,11 +7,16 @@ namespace Coypu.Drivers.Selenium
 {
     internal class ElementFinder
     {
-        public IEnumerable<IWebElement> FindAll(By @by, Scope scope, Options options, Func<IWebElement, bool> predicate = null)
+        public IEnumerable<IWebElement> FindAll(By by,
+                                                Scope scope,
+                                                Options options,
+                                                Func<IWebElement, bool> predicate = null)
         {
             try
             {
-                return SeleniumScope(scope).FindElements(@by).Where(e => matches(predicate, e) && IsDisplayed(e, options));
+                return SeleniumScope(scope)
+                       .FindElements(by)
+                       .Where(e => Matches(predicate, e) && IsDisplayed(e, options));
             }
             catch (StaleElementReferenceException e)
             {
@@ -21,15 +26,18 @@ namespace Coypu.Drivers.Selenium
 
         public ISearchContext SeleniumScope(Scope scope)
         {
-            return (ISearchContext) scope.Now().Native;
+            return (ISearchContext) scope.Now()
+                                         .Native;
         }
 
-        private static bool matches(Func<IWebElement, bool> predicate, IWebElement element)
+        private static bool Matches(Func<IWebElement, bool> predicate,
+                                    IWebElement element)
         {
-            return (predicate == null || predicate(element));
+            return predicate == null || predicate(element);
         }
 
-        public bool IsDisplayed(IWebElement e, Options options)
+        public bool IsDisplayed(IWebElement e,
+                                Options options)
         {
             return options.ConsiderInvisibleElements || e.IsDisplayed();
         }

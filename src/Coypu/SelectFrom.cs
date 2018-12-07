@@ -6,13 +6,13 @@ namespace Coypu
     public class SelectFrom
     {
         private readonly string option;
-        private readonly Driver driver;
+        private readonly IDriver driver;
         private readonly TimingStrategy timingStrategy;
         private readonly DriverScope scope;
         private readonly Options options;
         private readonly DisambiguationStrategy disambiguationStrategy;
 
-        internal SelectFrom(string option, Driver driver, TimingStrategy timingStrategy, DriverScope scope, Options options, DisambiguationStrategy disambiguationStrategy)
+        internal SelectFrom(string option, IDriver driver, TimingStrategy timingStrategy, DriverScope scope, Options options, DisambiguationStrategy disambiguationStrategy)
         {
             this.option = option;
             this.driver = driver;
