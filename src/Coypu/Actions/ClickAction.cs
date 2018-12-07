@@ -12,8 +12,7 @@ namespace Coypu.Actions
         internal ClickAction(ElementScope elementScope,
                              IDriver driver,
                              Options options,
-                             Waiter waiter)
-            : base(driver, elementScope, options)
+                             Waiter waiter) : base(driver, elementScope, options)
         {
             _waitBeforeClick = options.WaitBeforeClick;
             _elementScope = elementScope;

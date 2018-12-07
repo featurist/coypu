@@ -6,6 +6,10 @@ namespace Coypu.AcceptanceTests.Examples
 {
     public class ClickExamples : WaitAndRetryExamples
     {
+        private static readonly TimeSpan WaitBeforeClickInSec = TimeSpan.FromSeconds(1);
+
+        private readonly Options _optionsWaitBeforeClick = new Options {WaitBeforeClick = WaitBeforeClickInSec};
+
         [Test]
         public void Click()
         {
@@ -33,10 +37,12 @@ namespace Coypu.AcceptanceTests.Examples
         public void ClickButtonWaitBeforeClick()
         {
             var stopWatch = Stopwatch.StartNew();
-            Browser.ClickButton("clickMeTest", new Options {WaitBeforeClick = TimeSpan.FromMilliseconds(2000)});
+
+            Browser.ClickButton("clickMeTest", _optionsWaitBeforeClick);
             var actualWait = stopWatch.ElapsedMilliseconds;
-            Console.WriteLine($"Actual wait before click {actualWait} milliseconds");
-            Assert.That(actualWait > 2000, "\tDidn't wait enough!");
+            Console.WriteLine($"\t-> Actual wait before click {actualWait} milliseconds");
+
+            Assert.That(actualWait > WaitBeforeClickInSec.TotalMilliseconds, "\tDidn't wait enough!");
         }
 
         [Test]
@@ -44,6 +50,19 @@ namespace Coypu.AcceptanceTests.Examples
         {
             Browser.ClickLink("Trigger a confirm");
             Browser.CancelModalDialog();
+        }
+
+        [Test]
+        public void ClickLinkWaitBeforeClick()
+        {
+            var stopWatch = Stopwatch.StartNew();
+
+            Browser.ClickLink("Trigger a confirm", _optionsWaitBeforeClick);
+            var actualWait = stopWatch.ElapsedMilliseconds;
+            Console.WriteLine($"\t-> Actual wait before click {actualWait} milliseconds");
+            Browser.CancelModalDialog();
+
+            Assert.That(actualWait > WaitBeforeClickInSec.TotalMilliseconds, "\tDidn't wait enough!");
         }
 
         [Test]
@@ -57,25 +76,12 @@ namespace Coypu.AcceptanceTests.Examples
         public void ClickWaitBeforeClick()
         {
             var stopWatch = Stopwatch.StartNew();
-            var element = Browser.FindButton("clickMeTest");
-            element.Click(new Options {WaitBeforeClick = TimeSpan.FromMilliseconds(2000)});
+
+            Browser.FindButton("clickMeTest").Click(_optionsWaitBeforeClick);
             var actualWait = stopWatch.ElapsedMilliseconds;
-            Console.WriteLine($"Actual wait before click {actualWait} milliseconds");
-            Assert.That(actualWait > 2000, "\tDidn't wait enough!");
+            Console.WriteLine($"\t-> Actual wait before click {actualWait} milliseconds");
 
-
-            //var waiter = new StopwatchWaiter();
-            //var stopWatch = Stopwatch.StartNew();
-            //var expectedDuration = TimeSpan.FromMilliseconds(expectedDurationMilliseconds);
-
-            //waiter.Wait(expectedDuration);
-
-            //var actualWait = stopWatch.ElapsedMilliseconds;
-
-            //const int toleranceMilliseconds = AccuracyMilliseconds;
-
-            //Assert.That((int)actualWait, Is.InRange(expectedDurationMilliseconds - toleranceMilliseconds,
-            //                                        expectedDurationMilliseconds + toleranceMilliseconds));
+            Assert.That(actualWait > WaitBeforeClickInSec.TotalMilliseconds, "\tDidn't wait enough!");
         }
     }
 }
