@@ -23,12 +23,6 @@ namespace Coypu.NUnit.Matchers
             return new ConstraintResult(this, actual, hasNoValue);
         }
 
-        public override string Description
-        {
-            get
-            {
-                return "Expected NOT to find value: " + _expectedContent + "\nin:\n" + _actualContent;
-            }
-        }
+        public override string Description => "Expected NOT to find value: " + _expectedContent + "\nin:\n" + _actualContent;
     }
 }

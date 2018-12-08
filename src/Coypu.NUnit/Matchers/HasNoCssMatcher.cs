@@ -31,7 +31,7 @@ namespace Coypu.NUnit.Matchers
 
         public override ConstraintResult ApplyTo<TActual>(TActual actual)
         {
-            var scope = ((Scope)actual);
+            var scope = (Scope)actual;
 
             bool hasNoCss;
             if (_exactText != null)
