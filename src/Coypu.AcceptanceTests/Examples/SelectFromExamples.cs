@@ -5,7 +5,7 @@ namespace Coypu.AcceptanceTests.Examples
     public class SelectFromExamples : WaitAndRetryExamples
     {
         [Test]
-        public void SelectFrom_element_example()
+        public void SelectFrom_element()
         {
             var field = Browser.FindField("containerLabeledSelectFieldId");
             Assert.That(field.SelectedOption, Is.EqualTo("select two option one"));
@@ -16,7 +16,7 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void SelectFrom_example()
+        public void SelectFrom()
         {
             var textField = Browser.FindField("containerLabeledSelectFieldId");
             Assert.That(textField.SelectedOption, Is.EqualTo("select two option one"));
@@ -25,6 +25,29 @@ namespace Coypu.AcceptanceTests.Examples
                    .From("containerLabeledSelectFieldId");
             textField = Browser.FindField("containerLabeledSelectFieldId");
             Assert.That(textField.SelectedOption, Is.EqualTo("select two option two"));
+        }
+
+        [Test]
+        public void SelectFromWithOptions()
+        {
+            var textField = Browser.FindField("selectField", Options.First);
+            Assert.That(textField.SelectedOption, Is.EqualTo("option"));
+
+            Browser.Select("value3")
+                   .From("selectField", Options.First);
+            textField = Browser.FindField("selectField", Options.First);
+            Assert.That(textField.SelectedOption, Is.EqualTo("option option"));
+        }
+        [Test]
+        public void SelectWithOptionsFromWithOptions()
+        {
+            var textField = Browser.FindField("selectField", Options.First);
+            Assert.That(textField.SelectedOption, Is.EqualTo("option"));
+
+            Browser.Select("four", Options.Single)
+                   .From("selectField", Options.First);
+            textField = Browser.FindField("selectField", Options.First);
+            Assert.That(textField.Value, Is.EqualTo("value4"));
         }
     }
 }

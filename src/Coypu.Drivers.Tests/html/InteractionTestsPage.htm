@@ -210,8 +210,20 @@
           <input type="radio" name="chooseRadio" id="chooseRadio1" value="Radio buttons - 1st value" />
           <input type="radio" name="chooseRadio" id="chooseRadio2" value="Radio buttons - 2nd value" onclick="this.value += ' - clicked';" />
           <input type="radio" name="chooseRadio" id="chooseRadio3" value="Radio buttons - 3rd value" />
-        
-          
+        <br/>
+            select field 1:
+            <select id="selectField" name="selectField" onchange="this.name += ' - changed'">
+			    <option value="value1">option</option>
+                <option value="value2">option</option>
+				<option value="value3">option option</option>
+                <option value="value4">four</option>
+            </select>
+		<br/>
+            select field 2:
+			<select id="selectField" name="selectField" onchange="this.name += ' - changed'">
+                <option value="value1">test</option>
+                <option value="value2">test</option>
+            </select>
       </fieldset>
       
       <fieldset>
