@@ -4,45 +4,65 @@ namespace Coypu.Actions
 {
     internal class Select : DriverAction
     {
-        private readonly string locator;
-        private readonly string optionToSelect;
-        private readonly Options options;
-        private readonly DisambiguationStrategy disambiguationStrategy;
-        private ElementScope selectElement;
+        private readonly DisambiguationStrategy _disambiguationStrategy;
+        private Options _fromOptions;
+        private readonly string _locator;
+        private readonly Options _options;
+        private readonly string _optionToSelect;
+        private ElementScope _selectElement;
 
-        internal Select(IDriver driver, DriverScope scope, string locator, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
-            : base(driver, scope, options)
+        internal Select(IDriver driver,
+                        DriverScope scope,
+                        string locator,
+                        string optionToSelect,
+                        DisambiguationStrategy disambiguationStrategy,
+                        Options options) : base(driver, scope, options)
         {
-            this.locator = locator;
-            this.optionToSelect = optionToSelect;
-            this.options = options;
-            this.disambiguationStrategy = disambiguationStrategy;
+            _locator = locator;
+            _optionToSelect = optionToSelect;
+            _options = options;
+            _disambiguationStrategy = disambiguationStrategy;
         }
 
-        internal Select(IDriver driver, ElementScope selectElement, string optionToSelect, DisambiguationStrategy disambiguationStrategy, Options options)
-            : base(driver, selectElement, options)
+        internal Select(IDriver driver,
+                        DriverScope scope,
+                        string locator,
+                        string optionToSelect,
+                        DisambiguationStrategy disambiguationStrategy,
+                        Options options,
+                        Options fromOptions) : this(driver, scope, locator, optionToSelect, disambiguationStrategy, options)
         {
-            this.selectElement = selectElement;
-            this.optionToSelect = optionToSelect;
-            this.options = options;
-            this.disambiguationStrategy = disambiguationStrategy;
+            _fromOptions = fromOptions;
+        }
+
+        internal Select(IDriver driver,
+                        ElementScope selectElement,
+                        string optionToSelect,
+                        DisambiguationStrategy disambiguationStrategy,
+                        Options options) : base(driver, selectElement, options)
+        {
+            _selectElement = selectElement;
+            _optionToSelect = optionToSelect;
+            _options = options;
+            _disambiguationStrategy = disambiguationStrategy;
         }
 
         public override void Act()
         {
-            selectElement = selectElement ?? FindSelectElement();
-            SelectOption(selectElement);
+            _selectElement = _selectElement ?? FindSelectElement();
+            SelectOption(_selectElement);
         }
 
         private SnapshotElementScope FindSelectElement()
         {
-            var selectElementFound = disambiguationStrategy.ResolveQuery(new SelectFinder(Driver, locator, Scope, options));
-            return new SnapshotElementScope(selectElementFound, Scope, options);
+            if (_fromOptions == null) _fromOptions = _options;
+            var selectElementFound = _disambiguationStrategy.ResolveQuery(new SelectFinder(Driver, _locator, Scope, _fromOptions));
+            return new SnapshotElementScope(selectElementFound, Scope, _fromOptions);
         }
 
-        void SelectOption(ElementScope selectElementScope)
+        private void SelectOption(ElementScope selectElementScope)
         {
-            var option = disambiguationStrategy.ResolveQuery(new OptionFinder(Driver, optionToSelect, selectElementScope, options));
+            var option = _disambiguationStrategy.ResolveQuery(new OptionFinder(Driver, _optionToSelect, selectElementScope, _options));
             Driver.Click(option);
         }
     }
