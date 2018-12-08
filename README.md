@@ -1,14 +1,4 @@
-# Coypu [![Nuget](https://img.shields.io/nuget/v/Coypu.svg)](https://www.nuget.org/packages/Coypu/) [![Nuget](https://img.shields.io/nuget/dt/Coypu.svg)](https://www.nuget.org/packages/Coypu/)
-
-
-> #### "Theirs not to reason why, Theirs but to do and retry"
-> &mdash; <cite>Alfred, Lord Selenium
-
-> #### "haha, coypu must have reduced teh amount of shit code by 90%"
-> &mdash; <cite>Anonymous</cite>
-
-
-
+# Coypu [![Nuget](https://img.shields.io/nuget/v/Coypu.svg)](https://www.nuget.org/packages/Coypu/) [![Nuget](https://img.shields.io/nuget/dt/Coypu.svg)](https://www.nuget.org/packages/Coypu/) ![](https://img.shields.io/badge/compatibility-.NET%20Framework%204.5%2B%20%7C%20.NET%20Standard%202.0-blue.svg)
 
 Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with FireBug then Coypu might help.
 
@@ -103,15 +93,18 @@ sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
 
 The Selenium Driver is included in the Coypu package.
 
+###### Chrome
+You will need the chromedriver.exe on your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.ChromeDriver` to your project.
+
 ###### Firefox
 You will need GeckoDriver. We recommend adding the nuget package `Selenium.WebDriver.GeckoDriver.Win64` to your project.
 
-###### Internet Explorer 11
+##### Edge
+You will need Microsoft's WebDriver. How you install this depends on your version of Windows 10. Please see [here](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/) for more information.
+
+###### Internet Explorer 
 
 You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.IEDriver` package to your project. Please see [Configuration Requirements](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver#required-configuration) for information on how to use it.
-
-###### Chrome
-You will need the chromedriver.exe on your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.ChromeDriver` to your project.
 
 ###### HtmlUnit
 You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
