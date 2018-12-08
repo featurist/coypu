@@ -89,7 +89,7 @@ sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
 ```
 
 ##### Selenium WebDriver
-`Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Firefox, IE (slowest) and Chrome (Fastest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
+`Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Chrome (fastest), Firefox, Edge and IE (slowest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
 The Selenium Driver is included in the Coypu package.
 
@@ -99,7 +99,7 @@ You will need the chromedriver.exe on your PATH or in the bin of your test proje
 ###### Firefox
 You will need GeckoDriver. We recommend adding the nuget package `Selenium.WebDriver.GeckoDriver.Win64` to your project.
 
-##### Edge
+###### Edge
 You will need Microsoft's WebDriver. How you install this depends on your version of Windows 10. Please see [here](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/) for more information.
 
 ###### Internet Explorer 
