@@ -1,4 +1,5 @@
-# Coypu
+# Coypu [![Nuget](https://img.shields.io/nuget/v/Coypu.svg)](https://www.nuget.org/packages/Coypu/) [![Nuget](https://img.shields.io/nuget/dt/Coypu.svg)](https://www.nuget.org/packages/Coypu/)
+
 
 > #### "Theirs not to reason why, Theirs but to do and retry"
 > &mdash; <cite>Alfred, Lord Selenium
@@ -18,10 +19,6 @@ Coypu is on Nuget:
 NUnit matchers (e.g. `Assert.That(browserSession, Shows.Content("Hello world"));`) are in a separate package:
 
     PM> Install-Package Coypu.NUnit
-
-or
-
-    PM> Install-Package Coypu.NUnit262 (If you really need NUnit 2.6.2)
 
 Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
 
@@ -107,23 +104,14 @@ sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
 The Selenium Driver is included in the Coypu package.
 
 ###### Firefox
-WebDriver is generally stable with the last but one release of FireFox in my experience
+You will need GeckoDriver. We recommend adding the nuget package `Selenium.WebDriver.GeckoDriver.Win64` to your project.
 
-###### Internet Explorer
+###### Internet Explorer 11
 
-You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/selenium/wiki/InternetExplorerDriver). NOTE: as of 2013-11-03, there are known serious performance issue with IE 64 bit driver against IE 10, consider using the 32 bit version where possible.
-
-Only IE9 supports CSS & XPath and certain HTML features. The WatiN driver is notably faster in IE than the WebDriver IE driver, so is recommended for testing in Internet Explorer. The WatiN driver comes in a seperate package (see below).
+You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.IEDriver` package to your project. Please see [Configuration Requirements](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver#required-configuration) for information on how to use it.
 
 ###### Chrome
-You will need the chromedriver.exe on your PATH or in the bin of your test project. [Download from google code](http://code.google.com/p/chromedriver/downloads/list)
-
-###### PhantomJS
-The headless webkit browser runs under Selenium WebDriver. It runs almost everything in Coypu, iframes are a particular problem where you might have to reach for chrome/firefox.
-
-You will need phantomjs.exe on your PATH or in the bin of your test project. You can get this from nuget or from [phantomjs.org](http://phantomjs.org/download.html)
-
-    PM> install-package phantomjs.exe
+You will need the chromedriver.exe on your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.ChromeDriver` to your project.
 
 ###### HtmlUnit
 You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
@@ -134,19 +122,6 @@ You can run the headless HtmlUnit driver for Selenium on windows too, you just n
 4. Run "java -jar selenium-server-standalone-x.x.x.jar"
 
 And off you go.
-
-##### WatiN
-
-There is a seperate package called Coypu.WatiN containing a driver for WatiN which is now almost fully featured (thanks to citizenmatt) and runs considerably faster than the WebDriver IE driver.
-
-This driver only supports Internet Explorer as the browser.
-
-You will need to nuget `Install-Package Coypu.Watin` and then configure Coypu like so:
-
-```c#
-	sessionConfiguration.Driver = typeof (Coypu.Drivers.Watin.WatiNDriver);
-	sessionConfiguration.Browser = Drivers.Browser.InternetExplorer;
-```
 
 ### SpecFlow scenarios
 
