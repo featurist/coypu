@@ -9,8 +9,8 @@ namespace Coypu.WebRequests
         {
             WebRequest request = webRequest;
 
-            return request is HttpWebRequest
-                       ? AddCookiesToCookieContainer((HttpWebRequest) request, cookies)
+            return request is HttpWebRequest httpRequest
+                       ? AddCookiesToCookieContainer(httpRequest, cookies)
                        : request;
         }
 

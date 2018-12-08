@@ -20,13 +20,13 @@ namespace Coypu.NUnit.Matchers
         public HasCssMatcher(string expectedCss, Regex textPattern, Options options)
             : this(expectedCss, options)
         {
-            this._textPattern = textPattern;
+            _textPattern = textPattern;
         }
 
         public HasCssMatcher(string expectedCss, string exactText, Options options)
             : this(expectedCss, options)
         {
-            this._exactText = exactText;
+            _exactText = exactText;
         }
 
         public override ConstraintResult ApplyTo<TActual>(TActual actual)

@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProductVersion>9.0.30729</ProductVersion>
     <ProjectGuid>{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}</ProjectGuid>
     <TargetFramework>net471</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -12,15 +10,11 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.43.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.44.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.23.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.14.0" />
-    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.0" />
     <PackageReference Include="SelfishHttp" Version="0.3.0" />
   </ItemGroup>
   <ItemGroup>

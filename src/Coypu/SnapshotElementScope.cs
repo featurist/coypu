@@ -24,7 +24,7 @@ namespace Coypu
 
         internal override bool Stale
         {
-            get { return true; }
+            get => true;
             set {}
         }
 

@@ -7,26 +7,21 @@ namespace Coypu.Finders
     public abstract class ElementFinder
     {
         protected internal readonly IDriver Driver;
-        private readonly string locator;
         protected readonly DriverScope Scope;
-        protected readonly Options options;
 
         protected ElementFinder(IDriver driver, string locator, DriverScope scope, Options options)
         {
             Driver = driver;
-            this.locator = locator;
+            Locator = locator;
             Scope = scope;
-            this.options = options;
+            Options = options;
         }
 
-        public Options Options
-        {
-            get { return options; }
-        }
+        public Options Options { get; }
 
         public abstract bool SupportsSubstringTextMatching { get; }
 
-        internal string Locator { get { return locator; } }
+        internal string Locator { get; }
 
         internal abstract IEnumerable<Element> Find(Options options);
 
@@ -39,7 +34,7 @@ namespace Coypu.Finders
 
         internal ElementScope AsScope()
         {
-            return new SynchronisedElementScope(this, Scope, options);
+            return new SynchronisedElementScope(this, Scope, Options);
         }
     }
 

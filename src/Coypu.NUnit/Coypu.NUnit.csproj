@@ -1,14 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}</ProjectGuid>
-    <TargetFramework>net471</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu.NUnit</AssemblyTitle>
-    <Product>Coypu.NUnit</Product>
     <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
-    <AssemblyVersion>3.11.0.0</AssemblyVersion>
-    <FileVersion>3.11.0.0</FileVersion>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <PackageId>Coypu.NUnit</PackageId>
+    <Version>3.0.0</Version>
+    <Description>NUnit matchers for Coypu</Description>
+    <PackageLicenseUrl>https://github.com/featurist/coypu/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/featurist/coypu/</PackageProjectUrl>
+    <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
+    <PackageTags>browser,automation,selenium,testing</PackageTags>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -16,10 +22,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>

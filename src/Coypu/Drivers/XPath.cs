@@ -134,7 +134,6 @@ namespace Coypu.Drivers
             return _uppercaseTagNames
                        ? tagName.ToUpper()
                        : tagName;
-            ;
         }
 
         public string AttributesMatchLocator(string locator,

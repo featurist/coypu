@@ -1,15 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProductVersion>9.0.30729</ProductVersion>
     <ProjectGuid>{310D5EB9-2B2A-406E-8B8E-FBC85D882F54}</ProjectGuid>
     <TargetFramework>net471</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <BuildPackage>true</BuildPackage>
-    <AssemblyTitle>Coypu.Drivers.Tests</AssemblyTitle>
-    <Product>Coypu.Drivers.Tests</Product>
-    <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
-    <AssemblyVersion>3.14.0.0</AssemblyVersion>
-    <FileVersion>3.14.0.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -17,16 +9,11 @@
   </PropertyGroup>
   <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
-    <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.43.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.44.0" />
     <PackageReference Include="SelfishHttp" Version="0.3.0" />
-    <PackageReference Include="Shouldly" Version="3.0.1" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu.Tests\Coypu.Tests.csproj" />

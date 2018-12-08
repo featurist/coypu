@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using NUnit.Framework;
 
@@ -13,7 +12,7 @@ namespace Coypu.AcceptanceTests
             const string fileName = "screenshot-test-card.jpg";
             try
             {
-                browserWindow.SaveScreenshot(fileName, ImageFormat.Jpeg);
+                browserWindow.SaveScreenshot(fileName);
                 Assert.That(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
                 using (var saved = Image.FromFile("screenshot-test-card.jpg"))
                 {

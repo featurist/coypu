@@ -1,5 +1,4 @@
-﻿using System.Drawing.Imaging;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
@@ -21,7 +20,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
 
         private void TakeScreenshot_acts_immediately_on_driver(BrowserWindow mainWindow)
         {
-            mainWindow.SaveScreenshot("save-me-here.png", ImageFormat.Png);
+            mainWindow.SaveScreenshot("save-me-here.png");
 
             var saveScreenshotCall = driver.SaveScreenshotCalls.Single();
 
