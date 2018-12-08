@@ -31,6 +31,7 @@ namespace Coypu.AcceptanceTests.Examples
         [TestCase("chrome")]
         [TestCase("internet explorer")]
         [TestCase("firefox")]
+        [TestCase("edge")]
         public void CustomBrowser(string browserName)
         {
             var driver = new SeleniumWebDriver(Browser.Parse(browserName));
