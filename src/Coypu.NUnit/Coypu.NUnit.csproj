@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}</ProjectGuid>
-    <TargetFramework>net471</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <AssemblyTitle>Coypu.NUnit</AssemblyTitle>
     <Product>Coypu.NUnit</Product>
     <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
@@ -16,10 +15,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>

@@ -1,23 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProductVersion>9.0.30729</ProductVersion>
     <ProjectGuid>{3ACF8A72-2EAB-42E7-B60E-BB781D3B0DB2}</ProjectGuid>
-    <TargetFramework>net471</TargetFramework>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <BuildPackage>true</BuildPackage>
-    <AssemblyTitle>Coypu.Tests</AssemblyTitle>
-    <Product>Coypu.Tests</Product>
-    <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
-    <AssemblyVersion>3.14.0.0</AssemblyVersion>
-    <FileVersion>3.14.0.0</FileVersion>
+    <TargetFramework>net471</TargetFramework>  
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.11.0" />
   </ItemGroup>

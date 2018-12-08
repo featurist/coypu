@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProductVersion>9.0.30729</ProductVersion>
     <ProjectGuid>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</ProjectGuid>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu</AssemblyTitle>
@@ -10,6 +9,7 @@
     <Copyright>Copyright © Adrian Longley and contributors 2011-2018</Copyright>
     <AssemblyVersion>3.14.0.0</AssemblyVersion>
     <FileVersion>3.14.0.0</FileVersion>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -17,10 +17,6 @@
     <DocumentationFile>bin\$(Configuration)\Coypu.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
   </ItemGroup>
 </Project>

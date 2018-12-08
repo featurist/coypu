@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Drawing.Imaging;
 using Coypu.Actions;
 using Coypu.Finders;
 using Coypu.Queries;
@@ -152,8 +151,7 @@ namespace Coypu
             driver.Refresh(this);
         }
 
-        public void SaveScreenshot(string saveAs,
-                                   ImageFormat imageFormat)
+        public void SaveScreenshot(string saveAs)
         {
             driver.SaveScreenshot(saveAs, this);
         }
