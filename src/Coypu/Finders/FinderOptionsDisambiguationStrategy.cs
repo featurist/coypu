@@ -9,7 +9,7 @@ namespace Coypu.Finders
             Element[] results;
 
             if (elementFinder.Options.TextPrecision == TextPrecision.PreferExact)
-                results = PreferExect(elementFinder);
+                results = PreferExact(elementFinder);
             else
                 results = Find(elementFinder);
 
@@ -22,7 +22,7 @@ namespace Coypu.Finders
             return results.First();
         }
 
-        private static Element[] PreferExect(ElementFinder elementFinder)
+        private static Element[] PreferExact(ElementFinder elementFinder)
         {
             var results = Find(elementFinder, Options.Exact);
             if (results.Any() || !elementFinder.SupportsSubstringTextMatching)

@@ -7,11 +7,8 @@ namespace Coypu.Queries
         {
         }
 
-        public override object ExpectedResult
-        {
-            get { return true; }
-        }
-        
+        public override object ExpectedResult => true;
+
         public override bool Run()
         {
             try

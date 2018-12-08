@@ -5,8 +5,8 @@ namespace Coypu.Queries
     public class LambdaQuery<T> : Query<T>
     {
         private readonly Func<T> query;
-        public Options Options { get; private set; }
-        public DriverScope Scope { get; private set; }
+        public Options Options { get; }
+        public DriverScope Scope { get; }
         public object ExpectedResult { get; set; }
 
         public LambdaQuery(Func<T> query)

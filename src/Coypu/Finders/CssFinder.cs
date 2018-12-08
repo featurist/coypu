@@ -5,10 +5,7 @@ namespace Coypu.Finders
 {
     internal class CssFinder : WithTextFinder
     {
-        protected override string SelectorType
-        {
-            get { return "css"; }
-        }
+        protected override string SelectorType => "css";
 
         public CssFinder(IDriver driver, string locator, DriverScope scope, Options options) 
             : base(driver, locator, scope, options)
@@ -25,10 +22,7 @@ namespace Coypu.Finders
         {
         }
 
-        public override bool SupportsSubstringTextMatching
-        {
-            get { return true; }
-        }
+        public override bool SupportsSubstringTextMatching => true;
 
         internal override IEnumerable<Element> Find(Options options)
         {
@@ -37,13 +31,7 @@ namespace Coypu.Finders
 
         public Regex TextPattern(bool exact)
         {
-            if (text != null)
-                return TextAsRegex(text, exact);
-
-            if (textPattern != null)
-                return textPattern;
-
-            return null;
+            return text != null ? TextAsRegex(text, exact) : textPattern;
         }
     }
 }

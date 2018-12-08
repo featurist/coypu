@@ -2,8 +2,8 @@ namespace Coypu.Queries
 {
     internal abstract class DriverScopeQuery<T> : Query<T>
     {
-        public DriverScope Scope { get; private set; }
-        public Options Options { get; private set; }
+        public DriverScope Scope { get; }
+        public Options Options { get; }
 
         internal DriverScopeQuery(DriverScope driverScope, Options options)
         {

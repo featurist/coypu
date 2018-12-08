@@ -4,7 +4,7 @@ namespace Coypu.Queries
 {
     public abstract class PredicateQuery : Query<bool>
     {
-        public Options Options { get; private set; }
+        public Options Options { get; }
         public DriverScope Scope { get; private set; }
 
         protected PredicateQuery(Options options)
@@ -19,9 +19,6 @@ namespace Coypu.Queries
             return Predicate();
         }
 
-        public object ExpectedResult
-        {
-            get { return true; }
-        }
+        public object ExpectedResult => true;
     }
 }

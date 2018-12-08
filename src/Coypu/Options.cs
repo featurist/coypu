@@ -51,43 +51,28 @@ namespace Coypu
         /// <summary>
         /// Just picks the first element that matches
         /// </summary>
-        public static Options First
-        {
-            get { return new Options {Match = Match.First}; }
-        }
+        public static Options First => new Options {Match = Match.First};
 
         /// <summary>
         /// Raises an error if more than one element match
         /// </summary>
-        public static Options Single
-        {
-            get { return new Options { Match = Match.Single }; }
-        }
+        public static Options Single => new Options { Match = Match.Single };
 
 
         /// <summary>
         /// Match by exact visible text
         /// </summary>
-        public static Options Exact
-        {
-            get { return new Options { TextPrecision = TextPrecision.Exact }; }
-        }
+        public static Options Exact => new Options { TextPrecision = TextPrecision.Exact };
 
         /// <summary>
         /// Match by substring in visible text
         /// </summary>
-        public static Options Substring
-        {
-            get { return new Options { TextPrecision = TextPrecision.Substring }; }
-        }
+        public static Options Substring => new Options { TextPrecision = TextPrecision.Substring };
 
         /// <summary>
         /// If multiple matches are found, some of which are exact, and some of which are not, then the first exactly matching element is returned
         /// </summary>
-        public static Options PreferExact
-        {
-            get { return new Options { TextPrecision = TextPrecision.PreferExact }; }
-        }
+        public static Options PreferExact => new Options { TextPrecision = TextPrecision.PreferExact };
 
         /// <summary>
         /// Match exact visible text; Just picks the first element that matches
@@ -125,8 +110,8 @@ namespace Coypu
         /// </summary>
         public TimeSpan Timeout
         {
-            get { return timeout ?? DEFAULT_TIMEOUT; }
-            set { timeout = value; }
+            get => timeout ?? DEFAULT_TIMEOUT;
+            set => timeout = value;
         }
 
         /// <summary>
@@ -135,8 +120,8 @@ namespace Coypu
         /// </summary>
         public TimeSpan RetryInterval
         {
-            get { return retryInterval ?? DEFAULT_RETRY_INTERVAL; }
-            set { retryInterval = value; }
+            get => retryInterval ?? DEFAULT_RETRY_INTERVAL;
+            set => retryInterval = value;
         }
 
         /// <summary>
@@ -145,8 +130,8 @@ namespace Coypu
         /// </summary>
         public TimeSpan WaitBeforeClick
         {
-            get { return waitBeforeClick ?? DEFAULT_WAIT_BEFORE_CLICK; }
-            set { waitBeforeClick = value; }
+            get => waitBeforeClick ?? DEFAULT_WAIT_BEFORE_CLICK;
+            set => waitBeforeClick = value;
         }
 
         /// <summary>
@@ -155,8 +140,8 @@ namespace Coypu
         /// </summary>
         public bool ConsiderInvisibleElements
         {
-            get { return considerInvisibleElements ?? DEFAULT_CONSIDER_INVISIBLE_ELEMENTS; }
-            set { considerInvisibleElements = value; }
+            get => considerInvisibleElements ?? DEFAULT_CONSIDER_INVISIBLE_ELEMENTS;
+            set => considerInvisibleElements = value;
         }
 
         /// <summary>
@@ -164,32 +149,28 @@ namespace Coypu
         /// </summary>
         public TextPrecision TextPrecision
         {
-            get { return textPrecision ?? DEFAULT_PRECISION; }
-            set { textPrecision = value; }
+            get => textPrecision ?? DEFAULT_PRECISION;
+            set => textPrecision = value;
         }
 
-        internal bool TextPrecisionExact
-        {
-            get { return textPrecision == TextPrecision.Exact; }
-        }
+        internal bool TextPrecisionExact => textPrecision == TextPrecision.Exact;
 
         /// <summary>
         /// <para>With PreventAmbiguousMatches you can control whether Coypu should throw an exception when multiple elements match a query.</para>
         /// </summary>
         public Match Match
         {
-            get { return match ?? DEFAULT_MATCH; }
-            set { match = value; }
+            get => match ?? DEFAULT_MATCH;
+            set => match = value;
         }
 
         internal string BuildAmbiguousMessage(string queryDescription, int count)
         {
-            var message = string.Format(@"Ambiguous match, found {0} elements matching {1}
+            var message = $@"Ambiguous match, found {count} elements matching {queryDescription}
 
 Coypu does this by default from v2.0. Your options:
 
- * Look for something more specific",
-                    count, queryDescription);
+ * Look for something more specific";
 
 
             if (TextPrecision != TextPrecision.Exact)
@@ -227,9 +208,7 @@ Coypu does this by default from v2.0. Your options:
 
         protected static T? Default<T>(T? value, T? defaultValue) where T : struct
         {
-            return value.HasValue 
-                       ? value
-                       : defaultValue;
+            return value ?? defaultValue;
         }
 
         public override string ToString()

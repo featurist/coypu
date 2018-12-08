@@ -6,10 +6,7 @@ namespace Coypu.Queries
         {
         }
 
-        public override object ExpectedResult
-        {
-            get { return null; }
-        }
+        public override object ExpectedResult => null;
 
         public override Element Run()
         {

@@ -5,8 +5,8 @@ namespace Coypu.Actions
 {
     public abstract class BrowserAction : Query<object>
     {
-        public Options Options { get; private set; }
-        public DriverScope Scope { get; private set; }
+        public Options Options { get; }
+        public DriverScope Scope { get; }
 
         protected BrowserAction(DriverScope scope, Options options)
         {
@@ -22,9 +22,6 @@ namespace Coypu.Actions
             return null;
         }
 
-        public object ExpectedResult
-        {
-            get { return null; }
-        }
+        public object ExpectedResult => null;
     }
 }

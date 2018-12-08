@@ -11,8 +11,8 @@ namespace Coypu.Queries
         private readonly PredicateQuery until;
         private readonly TimingStrategy timingStrategy;
 
-        public Options Options { get; private set; }
-        public DriverScope Scope { get; private set; }
+        public Options Options { get; }
+        public DriverScope Scope { get; }
 
         internal ActionSatisfiesPredicateQuery(BrowserAction tryThis, PredicateQuery until, Options options, TimingStrategy timingStrategy)
         {
@@ -29,9 +29,6 @@ namespace Coypu.Queries
             return timingStrategy.Synchronise(until);
         }
 
-        public object ExpectedResult
-        {
-            get { return true; }
-        }
+        public object ExpectedResult => true;
     }
 }

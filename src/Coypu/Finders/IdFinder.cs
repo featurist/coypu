@@ -9,19 +9,13 @@ namespace Coypu.Finders
     {
         internal IdFinder(IDriver driver, string locator, DriverScope scope, Options options) : base(driver, locator, scope, options) { }
 
-        public override bool SupportsSubstringTextMatching
-        {
-            get { return false; }
-        }
+        public override bool SupportsSubstringTextMatching => false;
 
         protected override Func<string, Options, string> GetQuery(Html html)
         {
             return html.Id;
         }
 
-        internal override string QueryDescription
-        {
-            get { return "id: " + Locator; }
-        }
+        internal override string QueryDescription => "id: " + Locator;
     }
 }

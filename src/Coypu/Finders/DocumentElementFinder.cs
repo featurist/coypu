@@ -10,19 +10,13 @@ namespace Coypu.Finders
         {
         }
 
-        public override bool SupportsSubstringTextMatching
-        {
-            get { return false; }
-        }
+        public override bool SupportsSubstringTextMatching => false;
 
         internal override IEnumerable<Element> Find(Options options)
         {
             return new[] { window = (window ?? Driver.Window) };
         }
 
-        internal override string QueryDescription
-        {
-            get { return "Document Element"; }
-        }
+        internal override string QueryDescription => "Document Element";
     }
 }

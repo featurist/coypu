@@ -48,30 +48,15 @@ namespace Coypu
             SessionConfiguration = outerScope.SessionConfiguration;
         }
 
-        public DriverScope OuterScope
-        {
-            get { return outerScope; }
-        }
+        public DriverScope OuterScope => outerScope;
 
-        public virtual Uri Location
-        {
-            get { return driver.Location(this); }
-        }
+        public virtual Uri Location => driver.Location(this);
 
-        public string Text
-        {
-            get { return Now().Text; }
-        }
+        public string Text => Now().Text;
 
-        public Browser Browser
-        {
-            get { return SessionConfiguration.Browser; }
-        }
+        public Browser Browser => SessionConfiguration.Browser;
 
-        public ElementFinder ElementFinder
-        {
-            get { return elementFinder; }
-        }
+        public ElementFinder ElementFinder => elementFinder;
 
         internal Options Merge(Options options)
         {

@@ -10,10 +10,7 @@ namespace Coypu.Finders
         private readonly string text;
         private readonly Regex textPattern;
 
-        protected string SelectorType
-        {
-            get { return "xpath"; }
-        }
+        protected string SelectorType => "xpath";
 
         public XPathFinder(IDriver driver, string locator, DriverScope scope, Options options)
             : base(driver, locator, scope, options)
@@ -32,10 +29,7 @@ namespace Coypu.Finders
             this.text = text;
         }
 
-        public override bool SupportsSubstringTextMatching
-        {
-            get { return true; }
-        }
+        public override bool SupportsSubstringTextMatching => true;
 
         internal override string QueryDescription
         {
