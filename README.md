@@ -1,6 +1,6 @@
 # Coypu [![Nuget](https://img.shields.io/nuget/v/Coypu.svg)](https://www.nuget.org/packages/Coypu/) [![Nuget](https://img.shields.io/nuget/dt/Coypu.svg)](https://www.nuget.org/packages/Coypu/) ![](https://img.shields.io/badge/compatibility-.NET%20Framework%204.5%2B%20%7C%20.NET%20Standard%202.0-blue.svg)
 
-Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with FireBug then Coypu might help.
+Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with browser developer tools then Coypu might help.
 
 Coypu is on Nuget:
 
@@ -13,7 +13,7 @@ NUnit matchers (e.g. `Assert.That(browserSession, Shows.Content("Hello world"));
 Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
 
 ## Coypu is
-* A robust wrapper for browser automation tools on .Net, such as Selenium WebDriver that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS & JS
+* A robust wrapper for browser automation on .net platform for Selenium WebDriver that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS & JS
 * A more intuitive DSL for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
 
 ## Demo
@@ -105,16 +105,6 @@ You will need Microsoft's WebDriver. How you install this depends on your versio
 ###### Internet Explorer 
 
 You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.IEDriver` package to your project. Please see [Configuration Requirements](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver#required-configuration) for information on how to use it.
-
-###### HtmlUnit
-You can run the headless HtmlUnit driver for Selenium on windows too, you just need to run up HtmlUnit in java:
-
-1. Configure Coypu for HtmlUnit/HtmlUnitWithJavascript: `sessionConfiguration.Browser = Drivers.Browser.HtmlUnit/HtmlUnitWithJavascript;`
-2. Install a JRE
-3. Download the Selenium Server (selenium-server-standalone-x.x.x.jar) from [Selenium HQ](http://seleniumhq.org/download)
-4. Run "java -jar selenium-server-standalone-x.x.x.jar"
-
-And off you go.
 
 ### SpecFlow scenarios
 
@@ -801,15 +791,3 @@ WARNING: Setting this in your session configuration means adding time to *every*
 ```c#
 browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
 ```
-
-## License
-
-(The MIT License)
-
-Copyright &copy; Adrian Longley, ITV plc & Contributors 2012
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
