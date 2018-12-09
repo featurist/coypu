@@ -220,10 +220,18 @@
             </select>
 		<br/>
             select field 2:
-			<select id="selectField" name="selectField" onchange="this.name += ' - changed'">
-                <option value="value1">test</option>
-                <option value="value2">test</option>
-            </select>
+		<select id="selectField" name="selectFieldWithOptionGroups" onchange="this.name += ' - changed'">
+			<optgroup label="Female" id="Female">
+				<option value="value1">Barbie</option>
+				<option value="value2">Jessica</option>
+				<option value="value3">Amanda</option>
+			</optgroup>
+			<optgroup label="Male" id="Male">
+				<option value="value1">Ken</option>
+				<option value="value2">Brendon</option>
+				<option value="value3">Jason</option>
+			</optgroup>
+		</select>
       </fieldset>
       
       <fieldset>

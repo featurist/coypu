@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests.Examples
 {
@@ -38,6 +39,7 @@ namespace Coypu.AcceptanceTests.Examples
             textField = Browser.FindField("selectField", Options.First);
             Assert.That(textField.SelectedOption, Is.EqualTo("option option"));
         }
+
         [Test]
         public void SelectWithOptionsFromWithOptions()
         {
@@ -48,6 +50,19 @@ namespace Coypu.AcceptanceTests.Examples
                    .From("selectField", Options.First);
             textField = Browser.FindField("selectField", Options.First);
             Assert.That(textField.Value, Is.EqualTo("value4"));
+        }
+
+        [Test]
+        public void SelectFromOptionGroupWorkaround()
+        {
+            var textField = Browser.FindField("selectFieldWithOptionGroups");
+            Assert.That(textField.SelectedOption, Is.EqualTo("Barbie"));
+
+            var elem = Browser.FindId("Male");
+            elem.SelectOption("value2");
+
+            textField = Browser.FindField("selectFieldWithOptionGroups - changed");
+            Assert.That(textField.SelectedOption, Is.EqualTo("Brendon"));
         }
     }
 }
