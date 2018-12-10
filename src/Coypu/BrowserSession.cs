@@ -78,7 +78,7 @@ namespace Coypu
                    urlBuilder,
                    disambiguationStrategy)
         {
-            this._restrictedResourceDownloader = restrictedResourceDownloader;
+            _restrictedResourceDownloader = restrictedResourceDownloader;
         }
 
         internal BrowserSession(SessionConfiguration sessionConfiguration,
@@ -96,7 +96,7 @@ namespace Coypu
                    urlBuilder,
                    disambiguationStrategy)
         {
-            this._restrictedResourceDownloader = restrictedResourceDownloader;
+            _restrictedResourceDownloader = restrictedResourceDownloader;
         }
 
         /// <summary>
