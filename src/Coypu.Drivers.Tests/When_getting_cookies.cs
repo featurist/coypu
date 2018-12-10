@@ -53,6 +53,18 @@ namespace Coypu.Drivers.Tests
                         Is.EqualTo("value22"));
         }
 
+        [Test]
+        public void Gets_the_cookie_by_name()
+
+        {
+            Driver.ExecuteScript("document.cookie = 'cookie1=value1; '", Root);
+            Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
+
+            var cookies = Driver.Cookies.GetCookieNamed("cookie1");
+
+            Assert.That(cookies.Value == "value1");
+        }
+
         // Internet Explorer fails this test - cookie information with path isn't available,
         // unless it's a persistent cookie that's been retrieved from the cache (and even then
         // the path value seems to be wrong?)
