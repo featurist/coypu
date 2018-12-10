@@ -667,27 +667,5 @@ namespace Coypu
         /// <returns>The element found</returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
         Element Now();
-
-        bool HasCss(string cssSelector,
-                    string text,
-                    Options options = null);
-
-        bool HasCss(string cssSelector,
-                    Regex text,
-                    Options options = null);
-
-        bool HasXPath(string xpath,
-                      Options options = null);
-
-        bool HasNoCss(string cssSelector,
-                      string text,
-                      Options options = null);
-
-        bool HasNoCss(string cssSelector,
-                      Regex text,
-                      Options options = null);
-
-        bool HasNoXPath(string xpath,
-                        Options options = null);
     }
 }

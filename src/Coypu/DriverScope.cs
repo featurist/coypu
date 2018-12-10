@@ -189,58 +189,6 @@ namespace Coypu
             return new XPathFinder(_driver, xpath, this, Merge(options), text).AsScope();
         }
 
-        [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasCss you can use FindCss(...).Exists();")]
-        public bool HasCss(string cssSelector,
-                           string text,
-                           Options options = null)
-        {
-            return FindCss(cssSelector, text, options)
-                .Exists();
-        }
-
-        [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasCss you can use FindCss(...).Exists();")]
-        public bool HasCss(string cssSelector,
-                           Regex text,
-                           Options options = null)
-        {
-            return FindCss(cssSelector, text, options)
-                .Exists();
-        }
-
-        [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasXPath you can use FindXPath(...).Exists();")]
-        public bool HasXPath(string xpath,
-                             Options options = null)
-        {
-            return FindXPath(xpath, options)
-                .Exists();
-        }
-
-        [Obsolete("For assertions please use Assert.That(scope, Shows.No.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasNoCss you can use FindCss(...).Missing();")]
-        public bool HasNoCss(string cssSelector,
-                             string text,
-                             Options options = null)
-        {
-            return FindCss(cssSelector, text, options)
-                .Missing();
-        }
-
-        [Obsolete("For assertions please use Assert.That(scope, Shows.No.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasNOCss you can use FindCss(...).Missing();")]
-        public bool HasNoCss(string cssSelector,
-                             Regex text,
-                             Options options = null)
-        {
-            return FindCss(cssSelector, text, options)
-                .Missing();
-        }
-
-        [Obsolete("For assertions please use Assert.That(scope, Shows.No.XPath(\"/your/xpath\",etc); instead for decent feedback. For the old behaviour of HasNoXPath you can use FindXPath(...).Missing();")]
-        public bool HasNoXPath(string xpath,
-                               Options options = null)
-        {
-            return FindXPath(xpath, options)
-                .Missing();
-        }
-
         public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector,
                                                             Func<IEnumerable<SnapshotElementScope>, bool> predicate = null,
                                                             Options options = null)
