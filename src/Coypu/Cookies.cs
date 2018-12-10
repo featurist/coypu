@@ -29,7 +29,7 @@ namespace Coypu
             }
             catch (Exception e)
             {
-                Console.WriteLine($"\t-> Could not attach the cookie to the browser session. {e.Message}");
+                Console.WriteLine($"\t-> Could not attach the cookie {cookie.Name} to the browser session. {e.Message}");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Coypu
             }
             catch (Exception e)
             {
-                Console.WriteLine($"\t-> Could not delete the cookie '{cookie.Name}' from the browser session. {e.Message}");
+                Console.WriteLine($"\t-> Could not delete the cookie name '{cookie.Name}' from the browser session. {e.Message}");
             }
         }
 
@@ -74,7 +74,7 @@ namespace Coypu
             }
             catch (Exception e)
             {
-                Console.WriteLine($"\t->Could not delete the cookie '{cookieName}' from the browser session. {e.Message}");
+                Console.WriteLine($"\t-> Could not delete the cookie by name '{cookieName}' from the browser session. {e.Message}");
             }
         }
 
@@ -84,19 +84,12 @@ namespace Coypu
                                 .Cookies.AllCookies.Select(c => new Cookie(c.Name, c.Value, c.Domain, c.Path, DateTime.MaxValue));
         }
 
-        public void GetCookieNamed(string cookieName)
+        public Cookie GetCookieNamed(string cookieName)
         {
-            try
-            {
-                _nativeDriver.Manage()
-                             .Cookies.GetCookieNamed(cookieName);
-                _nativeDriver.Navigate()
-                             .Refresh();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"\t->Could not get cookie '{cookieName}' from the browser session. {e.Message}");
-            }
+            var cookie = _nativeDriver.Manage()
+                                      .Cookies.GetCookieNamed(cookieName);
+            if (cookie == null) Console.WriteLine($"\t-> Could not get cookie by name '{cookieName}' from the browser session.");
+            return cookie;
         }
 
         public void WaitUntilCookieExists(Cookie cookie,
@@ -111,7 +104,7 @@ namespace Coypu
                 {
                     if (allCookies.Any(x => x.Name.Trim() == cookie.Name))
                     {
-                        Console.WriteLine($"\t-> Cookie '{cookie.Name}' exists.");
+                        Console.WriteLine($"\t-> Cookie name '{cookie.Name}' exists.");
                         break;
                     }
 
@@ -124,7 +117,7 @@ namespace Coypu
             }
             catch (Exception e)
             {
-                Console.WriteLine($"\t-> Cookie '{cookie.Name}' does NOT exist. After {stopWatch.Elapsed.TotalSeconds} seconds. {e.Message}");
+                Console.WriteLine($"\t-> Cookie name '{cookie.Name}' does NOT exist. After {stopWatch.Elapsed.TotalSeconds} seconds. {e.Message}");
             }
         }
     }
