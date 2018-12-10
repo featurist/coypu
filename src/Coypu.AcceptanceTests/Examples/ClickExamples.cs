@@ -34,7 +34,7 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void ClickButtonWaitBeforeClick()
+        public void ClickButton_WaitBeforeClick()
         {
             var stopWatch = Stopwatch.StartNew();
 
@@ -53,7 +53,7 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void ClickLinkWaitBeforeClick()
+        public void ClickLink_WaitBeforeClick()
         {
             var stopWatch = Stopwatch.StartNew();
 
@@ -66,18 +66,19 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
-        public void ClickLinkWithTitle()
+        public void ClickLink_WithTitle()
         {
             Browser.ClickLink("Link with title");
             Browser.CancelModalDialog();
         }
 
         [Test]
-        public void ClickWaitBeforeClick()
+        public void Click_WaitBeforeClick()
         {
             var stopWatch = Stopwatch.StartNew();
 
-            Browser.FindButton("clickMeTest").Click(_optionsWaitBeforeClick);
+            Browser.FindButton("clickMeTest")
+                   .Click(_optionsWaitBeforeClick);
             var actualWait = stopWatch.ElapsedMilliseconds;
             Console.WriteLine($"\t-> Actual wait before click {actualWait} milliseconds");
 

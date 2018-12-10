@@ -28,7 +28,7 @@ namespace Coypu
         /// <summary>
         ///     Returns the page's title displayed in the browser
         /// </summary>
-        public string Title => driver.Title(this);
+        public string Title => _driver.Title(this);
 
         internal override bool Stale { get; set; }
 
@@ -43,7 +43,7 @@ namespace Coypu
         public bool HasDialog(string withText,
                               Options options = null)
         {
-            return Query(new HasDialogQuery(driver, withText, this, Merge(options)));
+            return Query(new HasDialogQuery(_driver, withText, this, Merge(options)));
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Coypu
         public bool HasNoDialog(string withText,
                                 Options options = null)
         {
-            return Query(new HasNoDialogQuery(driver, withText, this, Merge(options)));
+            return Query(new HasNoDialogQuery(_driver, withText, this, Merge(options)));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void AcceptModalDialog(Options options = null)
         {
-            RetryUntilTimeout(new AcceptModalDialog(this, driver, Merge(options)));
+            RetryUntilTimeout(new AcceptModalDialog(this, _driver, Merge(options)));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Coypu
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the dialog cannot be found</exception>
         public void CancelModalDialog(Options options = null)
         {
-            RetryUntilTimeout(new CancelModalDialog(this, driver, Merge(options)));
+            RetryUntilTimeout(new CancelModalDialog(this, _driver, Merge(options)));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Coypu
         /// </param>
         public void Visit(string virtualPath)
         {
-            driver.Visit(urlBuilder.GetFullyQualifiedUrl(virtualPath, SessionConfiguration), this);
+            _driver.Visit(UrlBuilder.GetFullyQualifiedUrl(virtualPath, SessionConfiguration), this);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Coypu
         /// </summary>
         public void GoBack()
         {
-            driver.GoBack(this);
+            _driver.GoBack(this);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Coypu
         /// </summary>
         public void GoForward()
         {
-            driver.GoForward(this);
+            _driver.GoForward(this);
         }
         
         /// <summary>
@@ -121,7 +121,7 @@ namespace Coypu
         public object ExecuteScript(string javascript,
                                     params object[] args)
         {
-            return driver.ExecuteScript(javascript, this, args);
+            return _driver.ExecuteScript(javascript, this, args);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Coypu
         /// </summary>
         public void MaximiseWindow()
         {
-            driver.MaximiseWindow(this);
+            _driver.MaximiseWindow(this);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Coypu
         public void ResizeTo(int width,
                              int height)
         {
-            driver.ResizeTo(new Size(width, height), this);
+            _driver.ResizeTo(new Size(width, height), this);
         }
 
         /// <summary>
@@ -148,12 +148,12 @@ namespace Coypu
         /// </summary>
         public void Refresh()
         {
-            driver.Refresh(this);
+            _driver.Refresh(this);
         }
 
         public void SaveScreenshot(string saveAs)
         {
-            driver.SaveScreenshot(saveAs, this);
+            _driver.SaveScreenshot(saveAs, this);
         }
 
         /// <summary>

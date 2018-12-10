@@ -19,8 +19,8 @@ namespace Coypu.Drivers.Selenium
         private readonly MouseControl _mouseControl;
         private readonly SeleniumWindowManager _seleniumWindowManager;
         private readonly TextMatcher _textMatcher;
-        private readonly WindowHandleFinder _windowHandleFinder;
         private IWebDriver _webDriver;
+        private readonly WindowHandleFinder _windowHandleFinder;
 
         public SeleniumWebDriver(Browser browser)
             : this(new DriverFactory().NewWebDriver(browser), browser) { }
@@ -30,19 +30,19 @@ namespace Coypu.Drivers.Selenium
         {
             _webDriver = webDriver;
             _browser = browser;
-            var xPath = new XPath(browser.UppercaseTagNames);
             _elementFinder = new ElementFinder();
             _textMatcher = new TextMatcher();
             _dialogs = new Dialogs(_webDriver);
             _mouseControl = new MouseControl(_webDriver);
             _seleniumWindowManager = new SeleniumWindowManager(_webDriver);
-            _frameFinder = new FrameFinder(_webDriver, _elementFinder, xPath, _seleniumWindowManager);
+            _frameFinder = new FrameFinder(_webDriver, _elementFinder, new XPath(browser.UppercaseTagNames), _seleniumWindowManager);
             _windowHandleFinder = new WindowHandleFinder(_webDriver, _seleniumWindowManager);
+            Cookies = new Cookies(_webDriver);
         }
 
-        protected bool NoJavascript => !_browser.Javascript;
-
         private IJavaScriptExecutor JavaScriptExecutor => _webDriver as IJavaScriptExecutor;
+
+        protected bool NoJavascript => !_browser.Javascript;
 
         public bool Disposed { get; private set; }
 
@@ -60,6 +60,7 @@ namespace Coypu.Drivers.Selenium
 
         public Element Window => new SeleniumWindow(_webDriver, _webDriver.CurrentWindowHandle, _seleniumWindowManager);
 
+        public Cookies Cookies { get; set; }
         public object Native => _webDriver;
 
         public IEnumerable<Element> FindFrames(string locator,
@@ -104,8 +105,7 @@ namespace Coypu.Drivers.Selenium
 
         public void ClearBrowserCookies()
         {
-            _webDriver.Manage()
-                      .Cookies.DeleteAllCookies();
+            Cookies.DeleteAll();
         }
 
         public void Click(Element element)
@@ -184,8 +184,7 @@ namespace Coypu.Drivers.Selenium
         {
             _elementFinder.SeleniumScope(scope);
             return _windowHandleFinder.FindWindowHandles(titleOrName, options)
-                                      .Select(h => new SeleniumWindow(_webDriver, h, _seleniumWindowManager))
-                                      .Cast<Element>();
+                                      .Select(h => new SeleniumWindow(_webDriver, h, _seleniumWindowManager));
         }
 
         public void Set(Element element,
