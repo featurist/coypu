@@ -7,271 +7,306 @@ using Coypu.Finders;
 using Coypu.Queries;
 using Coypu.Timing;
 
+// ReSharper disable InconsistentNaming
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Coypu
 {
     public abstract class DriverScope : Scope
     {
+        protected readonly DisambiguationStrategy DisambiguationStrategy;
         protected readonly SessionConfiguration SessionConfiguration;
-        internal readonly ElementFinder elementFinder;
+        protected TimingStrategy TimingStrategy;
+        protected readonly Waiter Waiter;
+        internal IDriver _driver;
+        internal readonly ElementFinder _elementFinder;
+        internal StateFinder StateFinder;
+        internal UrlBuilder UrlBuilder;
+        private Element _element;
 
-        protected IDriver driver;
-        protected TimingStrategy timingStrategy;
-        protected readonly Waiter waiter;
-        internal UrlBuilder urlBuilder;
-        internal StateFinder stateFinder;
-        private Element element;
-        private readonly DriverScope outerScope;
-        protected readonly DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
-
-        internal DriverScope(SessionConfiguration sessionConfiguration, ElementFinder elementFinder, IDriver driver, TimingStrategy timingStrategy, Waiter waiter, UrlBuilder urlBuilder, DisambiguationStrategy disambiguationStrategy)
+        internal DriverScope(SessionConfiguration sessionConfiguration,
+                             ElementFinder elementFinder,
+                             IDriver driver,
+                             TimingStrategy timingStrategy,
+                             Waiter waiter,
+                             UrlBuilder urlBuilder,
+                             DisambiguationStrategy disambiguationStrategy)
         {
-            this.elementFinder = elementFinder ?? new DocumentElementFinder(driver, sessionConfiguration);
-            this.SessionConfiguration = sessionConfiguration;
-            this.driver = driver;
-            this.timingStrategy = timingStrategy;
-            this.waiter = waiter;
-            this.urlBuilder = urlBuilder;
-            this.DisambiguationStrategy = disambiguationStrategy;
-            stateFinder = new StateFinder(timingStrategy);
+            _driver = driver;
+            _elementFinder = elementFinder ?? new DocumentElementFinder(driver, sessionConfiguration);
+            DisambiguationStrategy = disambiguationStrategy;
+            SessionConfiguration = sessionConfiguration;
+            StateFinder = new StateFinder(timingStrategy);
+            TimingStrategy = timingStrategy;
+            UrlBuilder = urlBuilder;
+            Waiter = waiter;
         }
 
-        internal DriverScope(ElementFinder elementFinder, DriverScope outerScope)
+        internal DriverScope(ElementFinder elementFinder,
+                             DriverScope outerScope)
         {
-            this.elementFinder = elementFinder;
-            this.outerScope = outerScope;
-            driver = outerScope.driver;
-            timingStrategy = outerScope.timingStrategy;
-            urlBuilder = outerScope.urlBuilder;
+            _driver = outerScope._driver;
+            _elementFinder = elementFinder;
             DisambiguationStrategy = outerScope.DisambiguationStrategy;
-            stateFinder = outerScope.stateFinder;
-            waiter = outerScope.waiter;
+            OuterScope = outerScope;
             SessionConfiguration = outerScope.SessionConfiguration;
+            StateFinder = outerScope.StateFinder;
+            TimingStrategy = outerScope.TimingStrategy;
+            UrlBuilder = outerScope.UrlBuilder;
+            Waiter = outerScope.Waiter;
         }
 
-        public DriverScope OuterScope => outerScope;
-
-        public virtual Uri Location => driver.Location(this);
-
-        public string Text => Now().Text;
-
-        public Browser Browser => SessionConfiguration.Browser;
-
-        public ElementFinder ElementFinder => elementFinder;
-
-        internal Options Merge(Options options)
-        {
-            var mergeWith = ElementFinder != null ? ElementFinder.Options : SessionConfiguration;
-            return Options.Merge(options, mergeWith);
-        }
+        public ElementFinder ElementFinder => _elementFinder;
 
         internal abstract bool Stale { get; set; }
 
-        public void ClickButton(string locator, Options options = null)
+        public string Text => Now().Text;
+
+        public DriverScope OuterScope { get; }
+
+        public virtual Uri Location => _driver.Location(this);
+
+        public Browser Browser => SessionConfiguration.Browser;
+
+        public void ClickButton(string locator,
+                                Options options = null)
         {
             RetryUntilTimeout(WaitThenClickButton(locator, Merge(options)));
         }
 
-        public void ClickLink(string locator, Options options = null)
+        public void ClickLink(string locator,
+                              Options options = null)
         {
             RetryUntilTimeout(WaitThenClickLink(locator, Merge(options)));
         }
 
-        private WaitThenClick WaitThenClickLink(string locator, Options options = null)
-        {
-            return new WaitThenClick(driver, this, Merge(options), waiter, new LinkFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
-        }
-
-        private WaitThenClick WaitThenClickButton(string locator, Options options = null)
-        {
-            return new WaitThenClick(driver, this, Merge(options), waiter, new ButtonFinder(driver, locator, this, Merge(options)), DisambiguationStrategy);
-        }
-
-        public Scope ClickButton(string locator, PredicateQuery until, Options options = null)
+        public Scope ClickButton(string locator,
+                                 PredicateQuery until,
+                                 Options options = null)
         {
             TryUntil(WaitThenClickButton(locator, Merge(options)), until, Merge(options));
             return this;
         }
 
-        public Scope ClickLink(string locator, PredicateQuery until, Options options = null)
+        public Scope ClickLink(string locator,
+                               PredicateQuery until,
+                               Options options = null)
         {
             TryUntil(WaitThenClickLink(locator, Merge(options)), until, Merge(options));
             return this;
         }
 
-        public ElementScope FindButton(string locator, Options options = null)
+        public ElementScope FindButton(string locator,
+                                       Options options = null)
         {
-            return new ButtonFinder(driver, locator, this, Merge(options)).AsScope();
+            return new ButtonFinder(_driver, locator, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindLink(string locator, Options options = null)
+        public ElementScope FindLink(string locator,
+                                     Options options = null)
         {
-            return new LinkFinder(driver, locator, this, Merge(options)).AsScope();
+            return new LinkFinder(_driver, locator, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindField(string locator, Options options = null)
+        public ElementScope FindField(string locator,
+                                      Options options = null)
         {
-            return new FieldFinder(driver, locator, this, Merge(options)).AsScope();
+            return new FieldFinder(_driver, locator, this, Merge(options)).AsScope();
         }
 
-        public FillInWith FillIn(string locator, Options options = null) 
+        public FillInWith FillIn(string locator,
+                                 Options options = null)
         {
-            return new FillInWith(FindField(locator, options), driver, timingStrategy, Merge(options));
+            return new FillInWith(FindField(locator, options), _driver, TimingStrategy, Merge(options));
         }
 
-        public SelectFrom Select(string option, Options options = null)
+        public SelectFrom Select(string option,
+                                 Options options = null)
         {
-            return new SelectFrom(option, driver, timingStrategy, this, Merge(options), DisambiguationStrategy);
+            return new SelectFrom(option, _driver, TimingStrategy, this, Merge(options), DisambiguationStrategy);
         }
 
-        public bool HasContent(string text, Options options = null)
+        public bool HasContent(string text,
+                               Options options = null)
         {
             return Query(new HasContentQuery(this, text, Merge(options)));
         }
 
-        public bool HasContentMatch(Regex pattern, Options options = null)
+        public bool HasContentMatch(Regex pattern,
+                                    Options options = null)
         {
             return Query(new HasContentMatchQuery(this, pattern, Merge(options)));
         }
 
-        public bool HasNoContent(string text, Options options = null)
+        public bool HasNoContent(string text,
+                                 Options options = null)
         {
             return Query(new HasNoContentQuery(this, text, Merge(options)));
         }
 
-        public bool HasNoContentMatch(Regex pattern, Options options = null)
+        public bool HasNoContentMatch(Regex pattern,
+                                      Options options = null)
         {
             return Query(new HasNoContentMatchQuery(this, pattern, Merge(options)));
         }
 
-        public ElementScope FindCss(string cssSelector, Options options = null)
+        public ElementScope FindCss(string cssSelector,
+                                    Options options = null)
         {
-            return new CssFinder(driver, cssSelector, this, Merge(options)).AsScope();
+            return new CssFinder(_driver, cssSelector, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindCss(string cssSelector, string text, Options options = null)
+        public ElementScope FindCss(string cssSelector,
+                                    string text,
+                                    Options options = null)
         {
-            return new CssFinder(driver, cssSelector, this, Merge(options), text).AsScope();
+            return new CssFinder(_driver, cssSelector, this, Merge(options), text).AsScope();
         }
 
-        public ElementScope FindCss(string cssSelector, Regex text, Options options = null)
+        public ElementScope FindCss(string cssSelector,
+                                    Regex text,
+                                    Options options = null)
         {
-            return new CssFinder(driver, cssSelector, this, Merge(options), text).AsScope();
+            return new CssFinder(_driver, cssSelector, this, Merge(options), text).AsScope();
         }
 
-        public ElementScope FindXPath(string xpath, Options options = null)
+        public ElementScope FindXPath(string xpath,
+                                      Options options = null)
         {
-            return new XPathFinder(driver, xpath, this, Merge(options)).AsScope();
+            return new XPathFinder(_driver, xpath, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindXPath(string xpath, string text, Options options = null)
+        public ElementScope FindXPath(string xpath,
+                                      string text,
+                                      Options options = null)
         {
-            return new XPathFinder(driver, xpath, this, Merge(options), text).AsScope();
+            return new XPathFinder(_driver, xpath, this, Merge(options), text).AsScope();
         }
 
-        public ElementScope FindXPath(string xpath, Regex text, Options options = null)
+        public ElementScope FindXPath(string xpath,
+                                      Regex text,
+                                      Options options = null)
         {
-            return new XPathFinder(driver, xpath, this, Merge(options), text).AsScope();
+            return new XPathFinder(_driver, xpath, this, Merge(options), text).AsScope();
         }
 
         [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasCss you can use FindCss(...).Exists();")]
-        public bool HasCss(string cssSelector, string text, Options options = null)
+        public bool HasCss(string cssSelector,
+                           string text,
+                           Options options = null)
         {
-            return FindCss(cssSelector, text, options).Exists();
+            return FindCss(cssSelector, text, options)
+                .Exists();
         }
 
         [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasCss you can use FindCss(...).Exists();")]
-        public bool HasCss(string cssSelector, Regex text, Options options = null)
+        public bool HasCss(string cssSelector,
+                           Regex text,
+                           Options options = null)
         {
-            return FindCss(cssSelector, text, options).Exists();
+            return FindCss(cssSelector, text, options)
+                .Exists();
         }
 
         [Obsolete("For assertions please use Assert.That(scope, Shows.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasXPath you can use FindXPath(...).Exists();")]
-        public bool HasXPath(string xpath, Options options = null)
+        public bool HasXPath(string xpath,
+                             Options options = null)
         {
-            return FindXPath(xpath,options).Exists();
+            return FindXPath(xpath, options)
+                .Exists();
         }
 
         [Obsolete("For assertions please use Assert.That(scope, Shows.No.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasNoCss you can use FindCss(...).Missing();")]
-        public bool HasNoCss(string cssSelector, string text, Options options = null)
+        public bool HasNoCss(string cssSelector,
+                             string text,
+                             Options options = null)
         {
-            return FindCss(cssSelector, text, options).Missing();
+            return FindCss(cssSelector, text, options)
+                .Missing();
         }
 
         [Obsolete("For assertions please use Assert.That(scope, Shows.No.Css(\".your-selector\",etc); instead for decent feedback. For the old behaviour of HasNOCss you can use FindCss(...).Missing();")]
-        public bool HasNoCss(string cssSelector, Regex text, Options options = null)
+        public bool HasNoCss(string cssSelector,
+                             Regex text,
+                             Options options = null)
         {
-            return FindCss(cssSelector, text, options).Missing();
+            return FindCss(cssSelector, text, options)
+                .Missing();
         }
 
         [Obsolete("For assertions please use Assert.That(scope, Shows.No.XPath(\"/your/xpath\",etc); instead for decent feedback. For the old behaviour of HasNoXPath you can use FindXPath(...).Missing();")]
-        public bool HasNoXPath(string xpath, Options options = null)
+        public bool HasNoXPath(string xpath,
+                               Options options = null)
         {
-            return FindXPath(xpath, options).Missing();
+            return FindXPath(xpath, options)
+                .Missing();
         }
 
-        public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
+        public IEnumerable<SnapshotElementScope> FindAllCss(string cssSelector,
+                                                            Func<IEnumerable<SnapshotElementScope>, bool> predicate = null,
+                                                            Options options = null)
         {
             return Query(new FindAllCssWithPredicateQuery(cssSelector, predicate, this, Merge(options)));
         }
 
-        internal IEnumerable<SnapshotElementScope> FindAllCssNoPredicate(string cssSelector, Options options)
-        {
-            return driver.FindAllCss(cssSelector, this, options).AsSnapshotElementScopes(this, options);
-        }
-
-        public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath, Func<IEnumerable<SnapshotElementScope>, bool> predicate = null, Options options = null)
+        public IEnumerable<SnapshotElementScope> FindAllXPath(string xpath,
+                                                              Func<IEnumerable<SnapshotElementScope>, bool> predicate = null,
+                                                              Options options = null)
         {
             return Query(new FindAllXPathWithPredicateQuery(xpath, predicate, this, Merge(options)));
         }
 
-        internal IEnumerable<SnapshotElementScope> FindAllXPathNoPredicate(string xpath, Options options)
+        public ElementScope FindSection(string locator,
+                                        Options options = null)
         {
-            return driver.FindAllXPath(xpath, this, options).AsSnapshotElementScopes(this, options);
+            return new SectionFinder(_driver, locator, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindSection(string locator, Options options = null)
+        public ElementScope FindFieldset(string locator,
+                                         Options options = null)
         {
-            return new SectionFinder(driver, locator, this, Merge(options)).AsScope();
+            return new FieldsetFinder(_driver, locator, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindFieldset(string locator, Options options = null)
+        public ElementScope FindId(string id,
+                                   Options options = null)
         {
-            return new FieldsetFinder(driver, locator, this, Merge(options)).AsScope();
+            return new IdFinder(_driver, id, this, Merge(options)).AsScope();
         }
 
-        public ElementScope FindId(string id, Options options = null)
-        {
-            return new IdFinder(driver, id, this, Merge(options)).AsScope();
-        }
-
-        public ElementScope FindIdEndingWith(string endsWith, Options options = null)
+        public ElementScope FindIdEndingWith(string endsWith,
+                                             Options options = null)
         {
             return FindCss(string.Format(@"*[id$=""{0}""]", endsWith), options);
         }
 
-        public void Check(string locator, Options options = null)
+        public void Check(string locator,
+                          Options options = null)
         {
-            RetryUntilTimeout(new CheckAction(driver, FindField(locator, options), Merge(options)));
+            RetryUntilTimeout(new CheckAction(_driver, FindField(locator, options), Merge(options)));
         }
 
-        public void Uncheck(string locator, Options options = null)
+        public void Uncheck(string locator,
+                            Options options = null)
         {
-            RetryUntilTimeout(new Uncheck(driver, FindField(locator, options), Merge(options)));
+            RetryUntilTimeout(new Uncheck(_driver, FindField(locator, options), Merge(options)));
         }
 
-        public void Choose(string locator, Options options = null)
+        public void Choose(string locator,
+                           Options options = null)
         {
-            RetryUntilTimeout(new Choose(driver, FindField(locator, options), Merge(options)));
+            RetryUntilTimeout(new Choose(_driver, FindField(locator, options), Merge(options)));
         }
 
-        public void RetryUntilTimeout(Action action, Options options = null)
+        public void RetryUntilTimeout(Action action,
+                                      Options options = null)
         {
-            timingStrategy.Synchronise(new LambdaBrowserAction(action, Merge(options)));
+            TimingStrategy.Synchronise(new LambdaBrowserAction(action, Merge(options)));
         }
 
-        public TResult RetryUntilTimeout<TResult>(Func<TResult> function, Options options = null)
+        public TResult RetryUntilTimeout<TResult>(Func<TResult> function,
+                                                  Options options = null)
         {
-            return timingStrategy.Synchronise(new LambdaQuery<TResult>(function, Merge(options)));
+            return TimingStrategy.Synchronise(new LambdaQuery<TResult>(function, Merge(options)));
         }
 
         public void RetryUntilTimeout(BrowserAction action)
@@ -279,56 +314,48 @@ namespace Coypu
             Query(action);
         }
 
-        public ElementScope FindFrame(string locator, Options options = null)
+        public ElementScope FindFrame(string locator,
+                                      Options options = null)
         {
-            return new FrameFinder(driver, locator, this, Merge(options)).AsScope();
+            return new FrameFinder(_driver, locator, this, Merge(options)).AsScope();
         }
 
-        public T Query<T>(Func<T> query, T expecting, Options options = null)
+        public T Query<T>(Func<T> query,
+                          T expecting,
+                          Options options = null)
         {
-            return timingStrategy.Synchronise(new LambdaQuery<T>(query, expecting, Merge(options)));
+            return TimingStrategy.Synchronise(new LambdaQuery<T>(query, expecting, Merge(options)));
         }
 
         public T Query<T>(Query<T> query)
         {
-            return timingStrategy.Synchronise(query);
+            return TimingStrategy.Synchronise(query);
         }
 
-        public void TryUntil(Action tryThis, Func<bool> until, TimeSpan waitBeforeRetry, Options options = null)
+        public void TryUntil(Action tryThis,
+                             Func<bool> until,
+                             TimeSpan waitBeforeRetry,
+                             Options options = null)
         {
             var mergedOptions = Merge(options);
             var predicateOptions = Options.Merge(new Options {Timeout = waitBeforeRetry}, mergedOptions);
 
-            timingStrategy.TryUntil(new LambdaBrowserAction(tryThis, mergedOptions),
-                                    new LambdaPredicateQuery(WithZeroTimeout(until), predicateOptions), mergedOptions);
+            TimingStrategy.TryUntil(new LambdaBrowserAction(tryThis, mergedOptions),
+                                    new LambdaPredicateQuery(WithZeroTimeout(until), predicateOptions),
+                                    mergedOptions);
         }
 
-        private Func<bool> WithZeroTimeout(Func<bool> query)
+        public void TryUntil(BrowserAction tryThis,
+                             PredicateQuery until,
+                             Options options = null)
         {
-            var zeroTimeoutUntil = new Func<bool>(() =>
-                {
-                    var was = timingStrategy.ZeroTimeout;
-                    timingStrategy.ZeroTimeout = true;
-                    try
-                    {
-                        return query();
-                    }
-                    finally
-                    {
-                        timingStrategy.ZeroTimeout = was;
-                    }
-                });
-            return zeroTimeoutUntil;
+            TimingStrategy.TryUntil(tryThis, until, Merge(options));
         }
 
-        public void TryUntil(BrowserAction tryThis, PredicateQuery until, Options options = null)
+        public State FindState(State[] states,
+                               Options options)
         {
-            timingStrategy.TryUntil(tryThis, until, Merge(options));
-        }
-
-        public State FindState(State[] states, Options options = null)
-        {
-            return stateFinder.FindState(states, this, Merge(options));
+            return StateFinder.FindState(states, this, Merge(options));
         }
 
         public State FindState(params State[] states)
@@ -337,11 +364,14 @@ namespace Coypu
         }
 
         /// <summary>
-        /// Try and find this scope now
+        ///     Try and find this scope now
         /// </summary>
         /// <returns></returns>
         /// <exception cref="T:Coypu.MissingHtmlException">Thrown if the element cannot be found</exception>
-        /// <exception cref="T:Coypu.AmbiguousHtmlException">Thrown if the there is more than one matching element and the Match.Single option is set</exception>
+        /// <exception cref="T:Coypu.AmbiguousHtmlException">
+        ///     Thrown if the there is more than one matching element and the
+        ///     Match.Single option is set
+        /// </exception>
         public virtual Element Now()
         {
             return FindElement();
@@ -349,9 +379,61 @@ namespace Coypu
 
         protected internal virtual Element FindElement()
         {
-            if (element == null || Stale)
-                element = DisambiguationStrategy.ResolveQuery(ElementFinder);
-            return element;
+            if (_element == null || Stale)
+                _element = DisambiguationStrategy.ResolveQuery(ElementFinder);
+            return _element;
+        }
+
+        internal Options Merge(Options options)
+        {
+            var mergeWith = ElementFinder != null
+                                ? ElementFinder.Options
+                                : SessionConfiguration;
+            return Options.Merge(options, mergeWith);
+        }
+
+        internal IEnumerable<SnapshotElementScope> FindAllCssNoPredicate(string cssSelector,
+                                                                         Options options)
+        {
+            return _driver.FindAllCss(cssSelector, this, options)
+                          .AsSnapshotElementScopes(this, options);
+        }
+
+        internal IEnumerable<SnapshotElementScope> FindAllXPathNoPredicate(string xpath,
+                                                                           Options options)
+        {
+            return _driver.FindAllXPath(xpath, this, options)
+                          .AsSnapshotElementScopes(this, options);
+        }
+
+        private WaitThenClick WaitThenClickLink(string locator,
+                                                Options options = null)
+        {
+            return new WaitThenClick(_driver, this, Merge(options), Waiter, new LinkFinder(_driver, locator, this, Merge(options)), DisambiguationStrategy);
+        }
+
+        private WaitThenClick WaitThenClickButton(string locator,
+                                                  Options options = null)
+        {
+            return new WaitThenClick(_driver, this, Merge(options), Waiter, new ButtonFinder(_driver, locator, this, Merge(options)), DisambiguationStrategy);
+        }
+
+        private Func<bool> WithZeroTimeout(Func<bool> query)
+        {
+            var zeroTimeoutUntil = new Func<bool>(() =>
+            {
+                var was = TimingStrategy.ZeroTimeout;
+                TimingStrategy.ZeroTimeout = true;
+                try
+                {
+                    return query();
+                }
+                finally
+                {
+                    TimingStrategy.ZeroTimeout = was;
+                }
+            });
+            return zeroTimeoutUntil;
         }
     }
 }
