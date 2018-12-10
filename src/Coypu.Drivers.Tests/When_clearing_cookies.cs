@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using NUnit.Framework;
 
@@ -15,21 +14,28 @@ namespace Coypu.Drivers.Tests
             Driver.ExecuteScript("document.cookie = 'cookie2=; expires=Fri, 27 Jul 2001 02:47:11 UTC; '", Root);
             Driver.Visit(TestSiteUrl("/resource/cookie_test"), Root);
         }
-        
+
         [Test]
         public void Clear_all_the_session_cookies()
         {
             Driver.ExecuteScript("document.cookie = 'cookie1=value1; '", Root);
             Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
 
-            var cookies = Driver.GetBrowserCookies().ToArray();
+            var cookies = Driver.Cookies.GetAll()
+                                .ToArray();
 
-            Assert.That(cookies.First(c => c.Name == "cookie1").Value, Is.EqualTo("value1"));
-            Assert.That(cookies.First(c => c.Name == "cookie2").Value, Is.EqualTo("value2"));
+            Assert.That(cookies.First(c => c.Name == "cookie1")
+                               .Value,
+                        Is.EqualTo("value1"));
+            Assert.That(cookies.First(c => c.Name == "cookie2")
+                               .Value,
+                        Is.EqualTo("value2"));
 
-            Driver.ClearBrowserCookies();
-            
-            Assert.AreEqual(0, Driver.GetBrowserCookies().Count());
+            Driver.Cookies.DeleteAll();
+
+            Assert.AreEqual(0,
+                            Driver.Cookies.GetAll()
+                                  .Count());
         }
     }
 }

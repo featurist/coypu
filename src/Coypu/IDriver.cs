@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Net;
 using System.Text.RegularExpressions;
+using OpenQA.Selenium;
+using Cookie = System.Net.Cookie;
+
 #pragma warning disable 1591
 
 namespace Coypu
 {
     public interface IDriver : IDisposable
     {
+        Cookies Cookies { get; set; }
         object Native { get; }
         bool Disposed { get; }
         IEnumerable<Element> FindAllCss(string cssSelector, Scope scope, Options options, Regex textPattern = null);
@@ -19,8 +22,13 @@ namespace Coypu
         Uri Location(Scope scope);
         String Title(Scope scope);
         object ExecuteScript(string javascript, Scope scope, params object[] args);
+
+        [Obsolete("Please use instead: _browserSession.Driver.Cookies.GetAll()")]
         IEnumerable<Cookie> GetBrowserCookies();
+
+        [Obsolete("Please use instead: _browserSession.Driver.Cookies.DeleteAll()")]
         void ClearBrowserCookies();
+
         void Click(Element element);
         void AcceptModalDialog(Scope scope);
         void CancelModalDialog(Scope scope);
