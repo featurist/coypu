@@ -25,6 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu.NUnit", "Coypu.NUnit\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{E852276D-F514-4F82-B1C7-50E01D258519}"
 	ProjectSection(SolutionItems) = preProject
+		..\nuget\Coypu.NUnit.nuspec = ..\nuget\Coypu.NUnit.nuspec
 		..\nuget\Coypu.nuspec = ..\nuget\Coypu.nuspec
 	EndProjectSection
 EndProject
