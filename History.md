@@ -1,3 +1,41 @@
+# Coypu 3.0.0 - 11.12.2018
+### Breaking changes
+* support for .NET Framework 4.5+
+* support for .NET Standard 2.0+
+* [#144](https://github.com/featurist/coypu/issues/144) support for .NET Core 2.0+
+* updated Selenium WebDriver to 3.141.0
+* removed all projects and dependencies related to WatiN
+* removed methods from DriverScope and IScope which has been marked as obsolete since 2014:
+	- HasCss()
+	- HasNoCss()
+	- HasXPath()
+	- HasNoXPath()
+### Fixes
+* [#92](https://github.com/featurist/coypu/issues/92) Added the ability to pass in separate options to the `Select("value", selectOptions).From("selectId", fromOptions)` methods
+* [#189](https://github.com/featurist/coypu/issues/189) fixed by update of selenium webdriver to v3.141.0
+* [#146](https://github.com/featurist/coypu/issues/146) and [#164](https://github.com/featurist/coypu/issues/164) fix for WaitBeforeClick for general Click(), previously option WaitBeforeClick worked only for ClickButton() and ClickLink() methods
+* various fixes for failing unit, driver and acceptance tests
+### Changes
+* added new Cookies class with methods which are available from `_browserSession.Driver.Cookies`:
+	- AddCookie(cookie)
+	- DeleteAll()
+	- DeleteCookie(cookie)
+	- DeleteCookieNamed(cookieName)
+	- GetCookieNamed(cookieName)
+	- WaitUntilCookieExists(cookie, options)
+* methods marked as obsolete:
+	- GetBrowserCookies() -> use instead `_browserSession.Driver.Cookies.GetAll()`
+	- ClearBrowserCookies() -> use instead `_browserSession.Driver.Cookies.DeleteAll()`
+* migrate solution projects to new VS2017 format
+* updated browser drivers to newest versions (geckodriver, chromedriver, iedriver)
+
+## Coypu.NUnit 3.0.0 - 11.12.2018
+### Breaking changes
+* support for .NET Framework 4.5+
+* support for .NET Standard 2.0+
+* [#144](https://github.com/featurist/coypu/issues/144) support for .NET Core 2.0+
+* updated Coypu to v3.0.0
+
 # Version 2.11.0
 
 ### Updated
