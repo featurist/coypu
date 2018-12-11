@@ -29,7 +29,7 @@ Supported platforms:
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>bin\$(Configuration)\Coypu.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Coypu.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
