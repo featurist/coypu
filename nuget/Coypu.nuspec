@@ -4,36 +4,37 @@
     <id>Coypu</id>
     <version>3.0.0</version>
     <title>Coypu</title>
-	<description>
-    Intuitive, robust browser automation framework for .Net platform.
-    This package includes the Coypu 3 framework assembly, which is referenced by your tests.
+    <authors>Adrian Longley, Jakub Obstarczyk</authors>
+    <owners>Adrian Longley</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/featurist/coypu</projectUrl>
+	  <description>
+      Intuitive, robust browser automation framework for .Net platform.
+      This package includes the Coypu 3 framework assembly, which is referenced by your tests.
 
-    Supported platforms:
-    - .NET Framework 4.5+
-    - .NET Standard 2.0+
-    - .NET Core 2.0+
-  </description>
-	<authors>Adrian Longley, Jakub Obstarczyk</authors>
-  <owners>Adrian Longley</owners>
-	<copyright>Copyright (c) 2018 Adrian Longley and Contributors</copyright>
-	<projectUrl>https://github.com/featurist/coypu</projectUrl>
-  <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
-	<repository type="git" url="https://github.com/featurist/coypu" />
+      Supported platforms:
+      - .NET Framework 4.5+
+      - .NET Standard 2.0+
+      - .NET Core 2.0+
+    </description>
     <releaseNotes>
       This package includes breaking changes as:
       - support for net45+, netstandard2.0+ and netcore2.0 frameworks
       - updated selenium webdriver to v3.141.0
       - removed all projects and dependencies related to WatiN
     </releaseNotes>
-	<dependencies>
-	 <group targetFramework=".NETFramework4.5">
+    <copyright>Copyright (c) 2018 Adrian Longley and Contributors</copyright>
+    <repository type="git" url="https://github.com/featurist/coypu" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
         <dependency id="Selenium.WebDriver" version="[3.141.0,4)" exclude="Build,Analyzers" />
       </group>
       <group targetFramework=".NETStandard2.0">
         <dependency id="Selenium.WebDriver" version="[3.141.0,4)" exclude="Build,Analyzers" />
         <dependency id="NETStandard.Library" version="[2.0.3,3)" />
       </group>
-	</dependencies>
+	  </dependencies>
   </metadata>
 	<files>
     <file src="..\LICENSE.txt" />

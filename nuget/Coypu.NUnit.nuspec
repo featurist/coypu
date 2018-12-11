@@ -4,25 +4,25 @@
     <id>Coypu.NUnit</id>
     <version>3.0.0</version>
     <title>Coypu.NUnit</title>
-	<description>
-	  NUnit matchers for Coypu.
-    This package includes the Coypu.NUnit 3 framework assembly, which is referenced by your tests.
+	  <authors>Adrian Longley, Jakub Obstarczyk</authors>
+	  <owners>Adrian Longley</owners>
+	  <license type="expression">MIT</license>
+	  <projectUrl>https://github.com/featurist/coypu</projectUrl>
+	  <description>
+	    NUnit matchers for Coypu.
+      This package includes the Coypu.NUnit 3 framework assembly, which is referenced by your tests.
 
-    Supported platforms:
-    - .NET Framework 4.5+
-    - .NET Standard 2.0+
-    - .NET Core 2.0+
-  </description>
-	<authors>Adrian Longley, Jakub Obstarczyk</authors>
-	<owners>Adrian Longley</owners>
-	<copyright>Copyright (c) 2018 Adrian Longley and Contributors</copyright>
-	<projectUrl>https://github.com/featurist/coypu</projectUrl>
-  <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
-	<repository type="git" url="https://github.com/featurist/coypu" />
-    <releaseNotes>
-      This package includes breaking changes as:
-      - support for net45+, netstandard2.0+ and netcore2.0 frameworks
-    </releaseNotes>
+      Supported platforms:
+      - .NET Framework 4.5+
+      - .NET Standard 2.0+
+      - .NET Core 2.0+
+    </description>
+	  <releaseNotes>
+	    This package includes breaking changes as:
+	    - support for net45+, netstandard2.0+ and netcore2.0 frameworks
+	  </releaseNotes>
+	  <copyright>Copyright (c) 2018 Adrian Longley and Contributors</copyright>
+	  <repository type="git" url="https://github.com/featurist/coypu" />
 		<dependencies>
 			<group targetFramework=".NETFramework4.5">
 				<dependency id="Coypu" version="[3.0.0,4)" />
