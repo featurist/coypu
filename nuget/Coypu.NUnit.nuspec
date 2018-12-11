@@ -40,10 +40,10 @@
 		<file src="..\README.md" />
 		<file src="..\History.md" />
 		<file src="..\src\Coypu.NUnit\bin\Debug\net45\Coypu.NUnit.dll" target="lib\net45" />
-		<file src="..\src\Coypu.NUnitbin\Debug\net45\Coypu.NUnit.pdb" target="lib\net45" />
-		<file src="..\src\Coypu.NUnitbin\Debug\net45\Coypu.NUnit.xml" target="lib\net45" />
-		<file src="..\src\Coypu.NUnitbin\Debug\netstandard2.0\Coypu.NUnit.dll" target="lib\netstandard2.0" />
-		<file src="..\src\Coypu.NUnitbin\Debug\netstandard2.0\Coypu.NUnit.pdb" target="lib\netstandard2.0" />
-		<file src="..\src\Coypu.NUnitbin\Debug\netstandard2.0\Coypu.NUnit.xml" target="lib\netstandard2.0" />
+		<file src="..\src\Coypu.NUnit\bin\Debug\net45\Coypu.NUnit.pdb" target="lib\net45" />
+		<file src="..\src\Coypu.NUnit\bin\Debug\net45\Coypu.NUnit.xml" target="lib\net45" />
+		<file src="..\src\Coypu.NUnit\bin\Debug\netstandard2.0\Coypu.NUnit.dll" target="lib\netstandard2.0" />
+		<file src="..\src\Coypu.NUnit\bin\Debug\netstandard2.0\Coypu.NUnit.pdb" target="lib\netstandard2.0" />
+		<file src="..\src\Coypu.NUnit\bin\Debug\netstandard2.0\Coypu.NUnit.xml" target="lib\netstandard2.0" />
 	</files>
 </package>
