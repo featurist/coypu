@@ -5,6 +5,11 @@
 * [#144](https://github.com/featurist/coypu/issues/144) support for .NET Core 2.0+
 * updated Selenium WebDriver to 3.141.0
 * removed all projects and dependencies related to WatiN
+* removed methods from DriverScope and IScope which has been marked as obsolete since 2014:
+	- HasCss()
+	- HasNoCss()
+	- HasXPath()
+	- HasNoXPath()
 ### Fixes
 * [#92](https://github.com/featurist/coypu/issues/92) Added the ability to pass in separate options to the `Select("value", selectOptions).From("selectId", fromOptions)` methods
 * [#189](https://github.com/featurist/coypu/issues/189) fixed by update of selenium webdriver to v3.141.0
@@ -21,11 +26,6 @@
 * methods marked as obsolete:
 	- GetBrowserCookies() -> use instead `_browserSession.Driver.Cookies.GetAll()`
 	- ClearBrowserCookies() -> use instead `_browserSession.Driver.Cookies.DeleteAll()`
-* removed methods from DriverScope and IScope which has been marked as obsolete since 2014:
-	- HasCss()
-	- HasNoCss()
-	- HasXPath()
-	- HasNoXPath()
 * migrate solution projects to new VS2017 format
 * updated browser drivers to newest versions (geckodriver, chromedriver, iedriver)
 
