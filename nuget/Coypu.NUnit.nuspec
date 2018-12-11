@@ -7,7 +7,6 @@
 	  <authors>Adrian Longley, Jakub Obstarczyk</authors>
 	  <owners>Adrian Longley</owners>
 	  <license type="expression">MIT</license>
-	  <licenseUrl>https://github.com/featurist/coypu/blob/master/LICENSE.txt</licenseUrl>
 	  <projectUrl>https://github.com/featurist/coypu</projectUrl>
 	  <description>
 	    NUnit matchers for Coypu.

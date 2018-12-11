@@ -8,7 +8,6 @@
     <owners>Adrian Longley</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <licenseUrl>https://github.com/featurist/coypu/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/featurist/coypu</projectUrl>
 	  <description>
       Intuitive, robust browser automation framework for .Net platform.
