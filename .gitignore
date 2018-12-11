@@ -19,10 +19,6 @@ _ReSharper.*
 .DS_Store
 ._*
 examples/self_test
-!gem/bin/*
-gem/pkg/*
-gem/dotnet/Cuke4NukeLog.txt*
-*.gem
 TestResult.xml
 .idea
 *.swp
