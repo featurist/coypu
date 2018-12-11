@@ -1,1 +1,3 @@
-when changing version in properties of Coypu and Coypu.NUnit projects DO NOT iterate 'Assembly version' unless its a major version change (breaking change). Change only 'Assembly file version' e.g. when updating selenium webdriver dependency
+when changing version in properties of Coypu and Coypu.NUnit projects DO NOT iterate 'Assembly version' unless its a major version change (breaking change). 
+Change only 'Assembly file version' e.g. when updating selenium webdriver dependency.
+https://blogs.msdn.microsoft.com/jjameson/2009/04/03/best-practices-for-net-assembly-versioning/
