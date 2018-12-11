@@ -29,6 +29,13 @@
 * migrate solution projects to new VS2017 format
 * updated browser drivers to newest versions (geckodriver, chromedriver, iedriver)
 
+## Coypu.NUnit 3.0.0 - 11.12.2018
+### Breaking changes
+* support for .NET Framework 4.5+
+* support for .NET Standard 2.0+
+* [#144](https://github.com/featurist/coypu/issues/144) support for .NET Core 2.0+
+* updated Coypu to v3.0.0
+
 # Version 2.11.0
 
 ### Updated

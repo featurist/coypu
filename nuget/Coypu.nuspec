@@ -27,18 +27,23 @@
     </releaseNotes>
 	<dependencies>
 	 <group targetFramework=".NETFramework4.5">
-        <dependency id="Selenium.WebDriver" version="[3.141.0, 4)" exclude="Build,Analyzers" />
+        <dependency id="Selenium.WebDriver" version="[3.141.0,4)" exclude="Build,Analyzers" />
       </group>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="Selenium.WebDriver" version="[3.141.0, 4)" exclude="Build,Analyzers" />
-        <dependency id="NETStandard.Library" version="[2.0.0, 3)" />
+        <dependency id="Selenium.WebDriver" version="[3.141.0,4)" exclude="Build,Analyzers" />
+        <dependency id="NETStandard.Library" version="[2.0.3,3)" />
       </group>
 	</dependencies>
   </metadata>
-    <!--
 	<files>
-      <file src="bin\Debug\net45\Coypu.dll" target="lib\net45" />
-	  <file src="bin\Debug\netstandard2.0\" target="lib\netstandard2.0" />
-    </files> 
-	-->
+    <file src="LICENSE.txt" />
+    <file src="README.md" />
+    <file src="History.md" />
+    <file src="bin\Debug\net45\Coypu.dll" target="lib\net45" />
+    <file src="bin\Debug\net45\Coypu.pdb" target="lib\net45" />
+    <file src="bin\Debug\net45\Coypu.xml" target="lib\net45" />
+    <file src="bin\Debug\netstandard2.0\Coypu.dll" target="lib\netstandard2.0" />
+    <file src="bin\Debug\netstandard2.0\Coypu.pdb" target="lib\netstandard2.0" />
+    <file src="bin\Debug\netstandard2.0\Coypu.xml" target="lib\netstandard2.0" />
+  </files>
 </package>
