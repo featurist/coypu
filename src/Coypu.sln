@@ -15,19 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 		..\History.md = ..\History.md
+		IMPORTANT.txt = IMPORTANT.txt
 		..\LICENSE.txt = ..\LICENSE.txt
 		NuGet.config = NuGet.config
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coypu.NUnit", "Coypu.NUnit\Coypu.NUnit.csproj", "{14FB5A97-D3A7-4759-BB6A-03CAFC9B8FAB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{E852276D-F514-4F82-B1C7-50E01D258519}"
-	ProjectSection(SolutionItems) = preProject
-		..\nuget\Coypu.NUnit.nuspec = ..\nuget\Coypu.NUnit.nuspec
-		..\nuget\Coypu.nuspec = ..\nuget\Coypu.nuspec
-		..\nuget\IMPORTANT.txt = ..\nuget\IMPORTANT.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,9 +52,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{E852276D-F514-4F82-B1C7-50E01D258519} = {5CB9AF80-1809-4ABD-B17F-BD2B89F35678}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BCB8641-AA82-4109-8049-5701C8FE0571}
