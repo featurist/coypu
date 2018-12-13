@@ -1,9 +1,11 @@
 # Coypu 3.0.1 - 13.12.2018
-## Coypu.NUnit 3.0.1 - 13.12.2018
 * [#199](https://github.com/featurist/coypu/issues/199) removing nuspec related files to allign with new approach of creating nuget packages from csproj files
-Can be also downloaded as nuget packages from:
-	- https://www.nuget.org/packages/Coypu/
-	- https://www.nuget.org/packages/Coypu.NUnit/
+
+Can be also downloaded as nuget packages from https://www.nuget.org/packages/Coypu/
+## Coypu.NUnit 3.0.1 - 13.12.2018
+* nuspec still used to generate nuget package
+
+Can be also downloaded as nuget package from https://www.nuget.org/packages/Coypu.NUnit/
 
 # Coypu 3.0.0-rc - 11.12.2018
 Can be also downloaded as nuget package from: https://www.nuget.org/packages/Coypu/
