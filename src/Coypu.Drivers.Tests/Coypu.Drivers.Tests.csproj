@@ -14,6 +14,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
     <PackageReference Include="SelfishHttp" Version="0.3.0" />
     <PackageReference Include="Shouldly" Version="3.0.2" />
   </ItemGroup>
