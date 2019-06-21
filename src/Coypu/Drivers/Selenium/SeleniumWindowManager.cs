@@ -26,13 +26,6 @@ namespace Coypu.Drivers.Selenium
             var frame = _webDriver.SwitchTo()
                                   .Frame(webElement);
 
-            // Fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1305822 
-            if (_webDriver is FirefoxDriver)
-            {
-                _webDriver.SwitchTo()
-                    .DefaultContent();
-            }
-
             _switchedToFrameElement = webElement;
             _switchedToFrame = frame;
 
@@ -41,10 +34,14 @@ namespace Coypu.Drivers.Selenium
 
         public void SwitchToWindow(string windowName)
         {
-            if (LastKnownWindowHandle != windowName || SwitchedToAFrame)
+            if (SwitchedToAFrame)
             {
-                _webDriver.SwitchTo()
-                          .Window(windowName);
+                _webDriver.SwitchTo().DefaultContent();
+            }
+
+            if (LastKnownWindowHandle != windowName)
+            {
+                _webDriver.SwitchTo().Window(windowName);
                 LastKnownWindowHandle = windowName;
             }
 
