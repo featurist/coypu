@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -24,6 +25,13 @@ namespace Coypu.Drivers.Selenium
 
             var frame = _webDriver.SwitchTo()
                                   .Frame(webElement);
+
+            // Fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1305822 
+            if (_webDriver is FirefoxDriver)
+            {
+                _webDriver.SwitchTo()
+                    .DefaultContent();
+            }
 
             _switchedToFrameElement = webElement;
             _switchedToFrame = frame;
