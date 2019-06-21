@@ -282,6 +282,10 @@ namespace Coypu
         ///     otherwise this will return immediately.
         /// </summary>
         /// <param name="xpath">XPath query</param>
+        /// <param name="predicate">
+        ///     A predicate to test the entire collection against. It will wait for this predicate before
+        ///     returning a list of matching elements.
+        /// </param>
         /// <param name="options">
         ///     <para>Override the way Coypu is configured to find elements for this call only.</para>
         ///     <para>E.g. A longer wait:</para>
@@ -396,7 +400,7 @@ namespace Coypu
         /// <returns>An element</returns>
         ElementScope FindId(string id,
                             Options options = null);
-
+        /// <summary>
         /// ** For Asp.Net Web Forms ** Find the first matching element with id ending with the specified stringto appear within the configured timeout
         /// </summary>
         /// <param name="endsWith">Element id</param>
