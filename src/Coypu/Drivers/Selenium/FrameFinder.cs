@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -69,6 +70,13 @@ namespace Coypu.Drivers.Selenium
             {
                 _selenium.SwitchTo()
                          .Window(currentHandle);
+
+                // Fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1305822 
+                if (_selenium is FirefoxDriver)
+                {
+                    _selenium.SwitchTo()
+                        .DefaultContent();
+                }
             }
         }
     }
