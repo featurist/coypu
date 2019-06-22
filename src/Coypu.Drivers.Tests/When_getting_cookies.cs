@@ -73,7 +73,7 @@ namespace Coypu.Drivers.Tests
             var cookies = Driver.Cookies.GetAll()
                 .ToArray();
 
-            StringAssert.StartsWith(cookies.First(c => c.Name == "cookie1").Path, "/resource");
+            StringAssert.StartsWith("/resource", cookies.First(c => c.Name == "cookie1").Path);
         }
     }
 }

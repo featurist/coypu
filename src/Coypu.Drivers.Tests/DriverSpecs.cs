@@ -48,7 +48,7 @@ namespace Coypu.Drivers.Tests
                                                                                          TextPrecision = TextPrecision.Exact
                                                                                      };
 
-        protected static readonly DisambiguationStrategy DisambiguationStrategy = new FinderOptionsDisambiguationStrategy();
+        protected static readonly DisambiguationStrategy DisambiguationStrategy = new ThrowsWhenMissingButNoDisambiguationStrategy();
 
         public static IDriver Driver
         {
