@@ -5,24 +5,17 @@
     <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu.NUnit</AssemblyTitle>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.1.0</FileVersion>
+    <FileVersion>3.1.0.0</FileVersion>
     <PackageId>Coypu.NUnit</PackageId>
-    <Version>3.0.1</Version>
-    <Description>NUnit matchers for Coypu.
-
-Supported platforms:
-- .NET Framework 4.5+
-- .NET Standard 2.0+
-- .NET Core 2.0</Description>
-    <PackageLicenseUrl>https://github.com/featurist/coypu/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <Version>3.1.0-rc</Version>
+    <Description>NUnit matchers for Coypu.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/featurist/coypu/</PackageProjectUrl>
     <Copyright>Copyright © 2018 Adrian Longley and Contributors</Copyright>
     <PackageTags>browser, automation, selenium, testing, nunit</PackageTags>
     <LangVersion>7.3</LangVersion>
     <Authors>Adrian Longley, Jakub Obstarczyk</Authors>
     <Company>Coypu</Company>
-    <Product />
-    <PackageReleaseNotes>nuget package build from csproj</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/featurist/coypu</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
@@ -41,6 +34,6 @@ Supported platforms:
     <PackageReference Include="NUnit" Version="3.12.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Coypu\Coypu.csproj" Version="[3.0.0,4)" />
+    <ProjectReference Include="..\Coypu\Coypu.csproj" />
   </ItemGroup>
 </Project>

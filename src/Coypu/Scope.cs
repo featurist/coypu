@@ -149,7 +149,7 @@ namespace Coypu
 
         /// <summary>
         ///     Query whether text does not appear on the page. Returns as soon as the text does not appear, or when the
-        ///     <see cref="SessionConfiguration.Timeout" /> is reached.
+        ///     <see cref="Options.Timeout" /> is reached.
         /// </summary>
         /// <param name="text">The exact text expected not to be found</param>
         /// <param name="options">

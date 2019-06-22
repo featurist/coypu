@@ -25,7 +25,7 @@ namespace Coypu
         }
 
         /// <summary>
-        ///     <para>Check if this element exists within the <see cref="SessionConfiguration.Timeout" /></para>
+        ///     <para>Check if this element exists within the <see cref="Options.Timeout" /></para>
         /// </summary>
         /// <param name="options">
         ///     <para>Override the way Coypu is configured to find elements for this call only.</para>
@@ -38,7 +38,7 @@ namespace Coypu
         }
 
         /// <summary>
-        ///     <para>Check if this element becomes missing within the <see cref="SessionConfiguration.Timeout" /></para>
+        ///     <para>Check if this element becomes missing within the <see cref="Options.Timeout" /></para>
         /// </summary>
         /// <param name="options">
         ///     <para>Override the way Coypu is configured to find elements for this call only.</para>
