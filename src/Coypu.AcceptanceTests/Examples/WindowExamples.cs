@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests.Examples
 {
@@ -42,8 +43,8 @@ namespace Coypu.AcceptanceTests.Examples
             Assert.That(initalWidth, Is.Not.EqualTo(500));
             Assert.That(initialHeight, Is.Not.EqualTo(600));
 
-            Browser.ResizeTo(500, 600);
-            Assert.That(GetOuterWidth(), Is.EqualTo(500));
+            Browser.ResizeTo(520, 600);
+            Assert.That(GetOuterWidth(), Is.EqualTo(520));
             Assert.That(GetOuterHeight(), Is.EqualTo(600));
         }
 
