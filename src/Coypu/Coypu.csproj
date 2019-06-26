@@ -5,17 +5,17 @@
     <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu</AssemblyTitle>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.1.0</FileVersion>
+    <FileVersion>3.1.0.0</FileVersion>
     <PackageId>Coypu</PackageId>
-    <Version>3.0.1</Version>
-    <Description>Intuitive, robust browser automation for .Net platform.
-This package includes the Coypu 3 framework assembly, which is referenced by your tests.
+    <Version>3.1.0-rc</Version>
+    <Description>Intuitive, robust browser automation for the .NET platform.
+This package includes the Coypu 3 framework assembly, which should be referenced by your tests.
 
 Supported platforms:
 - .NET Framework 4.5+
 - .NET Standard 2.0+
-- .NET Core 2.0</Description>
-    <PackageLicenseUrl>https://github.com/featurist/coypu/blob/master/LICENSE.txt</PackageLicenseUrl>
+- .NET Core 2.0+</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/featurist/coypu/</PackageProjectUrl>
     <Copyright>Copyright © 2018 Adrian Longley and Contributors</Copyright>
     <PackageTags>browser, automation, selenium, testing, framework</PackageTags>
@@ -23,8 +23,6 @@ Supported platforms:
     <Authors>Adrian Longley, Jakub Obstarczyk</Authors>
     <RepositoryUrl>https://github.com/featurist/coypu</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Product />
-    <PackageReleaseNotes>nuget package build from csproj</PackageReleaseNotes>
     <Company>Coypu</Company>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>

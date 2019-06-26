@@ -130,6 +130,7 @@ namespace Coypu
         ///     <para>Override the way Coypu is configured to find elements for this call only.</para>
         ///     <para>E.g. A longer wait:</para>
         ///     <returns>The current scope</returns>
+        /// </param>
         public ElementScope FillInWith(string value,
                                        Options options = null)
         {
@@ -145,6 +146,7 @@ namespace Coypu
         ///     <para>Override the way Coypu is configured to find elements for this call only.</para>
         ///     <para>E.g. A longer wait</para>
         ///     <returns>The current scope</returns>
+        /// </param>
         public ElementScope SelectOption(string value,
                                          Options options = null)
         {

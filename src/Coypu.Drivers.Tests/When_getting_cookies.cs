@@ -19,14 +19,14 @@ namespace Coypu.Drivers.Tests
             Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
 
             var cookies = Driver.Cookies.GetAll()
-                                .ToArray();
+                .ToArray();
 
             Assert.That(cookies.First(c => c.Name == "cookie1")
-                               .Value,
-                        Is.EqualTo("value1"));
+                    .Value,
+                Is.EqualTo("value1"));
             Assert.That(cookies.First(c => c.Name == "cookie2")
-                               .Value,
-                        Is.EqualTo("value2"));
+                    .Value,
+                Is.EqualTo("value2"));
         }
 
         [Test]
@@ -39,14 +39,14 @@ namespace Coypu.Drivers.Tests
 
 
             var cookies = Driver.Cookies.GetAll()
-                                .ToArray();
+                .ToArray();
 
             Assert.That(cookies.First(c => c.Name == "cookie1")
-                               .Value,
-                        Is.EqualTo("value11"));
+                    .Value,
+                Is.EqualTo("value11"));
             Assert.That(cookies.First(c => c.Name == "cookie2")
-                               .Value,
-                        Is.EqualTo("value22"));
+                    .Value,
+                Is.EqualTo("value22"));
         }
 
         [Test]
@@ -71,11 +71,9 @@ namespace Coypu.Drivers.Tests
             Driver.ExecuteScript("document.cookie = 'cookie1=value1; path=/resource'", Root);
 
             var cookies = Driver.Cookies.GetAll()
-                                .ToArray();
+                .ToArray();
 
-            Assert.That(cookies.First(c => c.Name == "cookie1")
-                               .Path,
-                        Is.EqualTo("/resource"));
+            StringAssert.StartsWith("/resource", cookies.First(c => c.Name == "cookie1").Path);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
 namespace Coypu.Drivers.Selenium
 {
@@ -33,11 +34,18 @@ namespace Coypu.Drivers.Selenium
 
         public void SwitchToWindow(string windowName)
         {
-            if (LastKnownWindowHandle != windowName || SwitchedToAFrame)
+            // Fix for https://bugzilla.mozilla.org/show_bug.cgi?id=1305822 
+            var isFirefox = _webDriver is FirefoxDriver;
+
+            if (LastKnownWindowHandle != windowName || !isFirefox && SwitchedToAFrame)
             {
-                _webDriver.SwitchTo()
-                          .Window(windowName);
+                _webDriver.SwitchTo().Window(windowName);
                 LastKnownWindowHandle = windowName;
+            }
+
+            if (isFirefox && SwitchedToAFrame)
+            {
+                _webDriver.SwitchTo().DefaultContent();
             }
 
             _switchedToFrame = null;
