@@ -1,7 +1,14 @@
+# Coypu 3.1.0 - 17.07.2019
+* [#205](https://github.com/featurist/coypu/issues/205) Firefox fails to switch out of iframe
+* plus small changes in tests
+
+Can be also downloaded as nuget packages from https://www.nuget.org/packages/Coypu/
+
 # Coypu 3.0.1 - 13.12.2018
 * [#199](https://github.com/featurist/coypu/issues/199) removing nuspec related files to allign with new approach of creating nuget packages from csproj files
 
 Can be also downloaded as nuget packages from https://www.nuget.org/packages/Coypu/
+
 ## Coypu.NUnit 3.0.1 - 13.12.2018
 * nuspec still used to generate nuget package
 
