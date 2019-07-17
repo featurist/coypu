@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using NUnit.Framework;
 
@@ -8,19 +7,13 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class Screenshots : WaitAndRetryExamples
     {
-        protected static ImageFormat DefaultFormat = ImageFormat.Jpeg;
-
-        private static void SavesToSpecifiedLocation(BrowserWindow browserWindow, string fileName="screenshot-test-card.jpg", ImageFormat format=null)
+        private static void SavesToSpecifiedLocation(BrowserWindow browserWindow, string fileName)
         {
-            if (format == null)
-            {
-                format = DefaultFormat;
-            }
             try
             {
                 browserWindow.SaveScreenshot(fileName);
                 Assert.That(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
-                using (var saved = Image.FromFile(fileName))
+                using (var saved = Image.FromFile(new FileInfo(fileName).FullName))
                 {
                     var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;")
                                                             .ToString());
@@ -46,25 +39,25 @@ namespace Coypu.AcceptanceTests
             Browser.FindCss("body")
                    .Click();
 
-            SavesToSpecifiedLocation(popUp);
+            SavesToSpecifiedLocation(popUp, "screenshot-test-card.jpg");
         }
 
         [Test]
-        public void SavesToSpecifiedLocation()
+        public void SavesJpgToSpecifiedLocation()
         {
             Browser.Visit(TestPageLocation("test-card.jpg"));
             Browser.ResizeTo(800, 600);
 
-            SavesToSpecifiedLocation(Browser);
+            SavesToSpecifiedLocation(Browser, "screenshot-test-card.jpg");
         }
 
         [Test]
-        public void SavesToSpecifiedLocationPng()
+        public void SavesPngToSpecifiedLocation()
         {
             Browser.Visit(TestPageLocation("test-card.png"));
             Browser.ResizeTo(800, 600);
 
-            SavesToSpecifiedLocation(Browser, "screenshot-test-card.png", ImageFormat.Png);
+            SavesToSpecifiedLocation(Browser,"screenshot-test-card.png");
         }
     }
 }
