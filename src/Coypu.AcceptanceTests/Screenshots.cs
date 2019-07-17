@@ -7,14 +7,13 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class Screenshots : WaitAndRetryExamples
     {
-        private static void SavesToSpecifiedLocation(BrowserWindow browserWindow)
+        private static void SavesToSpecifiedLocation(BrowserWindow browserWindow, string fileName)
         {
-            const string fileName = "screenshot-test-card.jpg";
             try
             {
                 browserWindow.SaveScreenshot(fileName);
                 Assert.That(File.Exists(fileName), "Expected screenshot saved to " + new FileInfo(fileName).FullName);
-                using (var saved = Image.FromFile("screenshot-test-card.jpg"))
+                using (var saved = Image.FromFile(new FileInfo(fileName).FullName))
                 {
                     var docWidth = float.Parse(browserWindow.ExecuteScript("return window.document.body.clientWidth;")
                                                             .ToString());
@@ -40,16 +39,25 @@ namespace Coypu.AcceptanceTests
             Browser.FindCss("body")
                    .Click();
 
-            SavesToSpecifiedLocation(popUp);
+            SavesToSpecifiedLocation(popUp, "screenshot-test-card.jpg");
         }
 
         [Test]
-        public void SavesToSpecifiedLocation()
+        public void SavesJpgToSpecifiedLocation()
         {
             Browser.Visit(TestPageLocation("test-card.jpg"));
             Browser.ResizeTo(800, 600);
 
-            SavesToSpecifiedLocation(Browser);
+            SavesToSpecifiedLocation(Browser, "screenshot-test-card.jpg");
+        }
+
+        [Test]
+        public void SavesPngToSpecifiedLocation()
+        {
+            Browser.Visit(TestPageLocation("test-card.png"));
+            Browser.ResizeTo(800, 600);
+
+            SavesToSpecifiedLocation(Browser,"screenshot-test-card.png");
         }
     }
 }
