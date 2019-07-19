@@ -1,5 +1,10 @@
+# Coypu 3.1.1 - 19.07.2019
+* [#203](https://github.com/featurist/coypu/issues/203) fix for saving file as png saves the contents as jpg for .Net Core - Thanks to @basimc4 for PR
+
+Can be also downloaded as nuget packages from https://www.nuget.org/packages/Coypu/
+
 # Coypu 3.1.0 - 17.07.2019
-* [#205](https://github.com/featurist/coypu/issues/205) Firefox fails to switch out of iframe
+* [#205](https://github.com/featurist/coypu/issues/205) Firefox fails to switch out of iframe - Thanks to @Hawxy for PR
 * plus small changes in tests
 
 Can be also downloaded as nuget packages from https://www.nuget.org/packages/Coypu/
