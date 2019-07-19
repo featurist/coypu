@@ -11,6 +11,8 @@ namespace Coypu.Drivers.Selenium
             var extension = new FileInfo(fileName).Extension.ToLower()
                                                   .Replace("jpg", "jpeg");
 
+            extension = extension.Replace(".", "");
+
             ScreenshotImageFormat format;
             if (AreEqual(extension, ScreenshotImageFormat.Bmp))
                 format = ScreenshotImageFormat.Bmp;
