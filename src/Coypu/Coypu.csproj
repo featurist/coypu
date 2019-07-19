@@ -7,7 +7,7 @@
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <FileVersion>3.1.1.0</FileVersion>
     <PackageId>Coypu</PackageId>
-    <Version>3.1.0</Version>
+    <Version>3.1.1</Version>
     <Description>Intuitive, robust browser automation for the .NET platform.
 This package includes the Coypu 3 framework assembly, which should be referenced by your tests.
 
