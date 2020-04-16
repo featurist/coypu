@@ -36,6 +36,11 @@ namespace Coypu.Finders
         {
             return new SynchronisedElementScope(this, Scope, Options);
         }
+
+        public override string ToString()
+        {
+            return QueryDescription;
+        }
     }
 
 }

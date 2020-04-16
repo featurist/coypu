@@ -47,6 +47,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             Assert.That(scope.ElementFinder.Driver, Is.EqualTo(Driver));
             Assert.That(scope.ElementFinder.Locator, Is.EqualTo("Some locator"));
             Assert.That(scope.ElementFinder.Options, Is.EqualTo(Options.Merge(options, SessionConfiguration)));
+            Assert.That(scope.ElementFinder.ToString(), Is.EqualTo(scope.ElementFinder.QueryDescription));
         }
 
         [Test]
