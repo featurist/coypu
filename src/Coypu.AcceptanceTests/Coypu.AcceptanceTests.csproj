@@ -12,11 +12,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
     <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="75.0.3770.90" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.59" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="81.0.4044.6900" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.26.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1" />
     <PackageReference Include="SelfishHttp" Version="0.3.0" />
   </ItemGroup>
   <ItemGroup>
