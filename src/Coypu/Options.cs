@@ -91,7 +91,7 @@ namespace Coypu
         /// <summary>
         /// Match exact visible text; Raises an error if more than one element match
         /// </summary>
-        public static Options SingleExact = Merge(Single, Substring);
+        public static Options SingleExact = Merge(Single, Exact);
 
         /// <summary>
         /// Match by substring in visible text; Raises an error if more than one element match
