@@ -13,9 +13,9 @@ namespace Coypu.AcceptanceTests.Examples
 {
     internal class CustomBrowserSession
     {
-        [TestCase("OS X 10.11", "safari", "11")]
+        [TestCase("OS X 10.15", "safari", "13")]
         [TestCase("Windows 10", "edge", "17")]
-        [TestCase("Windows 7", "chrome", "69")]
+        [TestCase("Windows 7", "chrome", "89")]
         public void CustomBrowserWithCustomRemoteDriver(string platformName,
                                                         string browserName,
                                                         string browserVersion)
