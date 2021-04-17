@@ -19,7 +19,7 @@
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="90.0.4430.2400" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.29.1" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
     <PackageReference Include="SelfishHttp" Version="0.3.0" />
   </ItemGroup>
   <ItemGroup>
