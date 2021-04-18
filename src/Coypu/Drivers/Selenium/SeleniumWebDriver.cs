@@ -248,13 +248,20 @@ namespace Coypu.Drivers.Selenium
 
         public void Dispose()
         {
-            if (_webDriver == null)
-                return;
+            Dispose(true);
+        }
 
-            AcceptAnyAlert();
+        protected virtual void Dispose(bool disposing)
+        {
+            if (Disposed) return;
+            if (disposing)
+            {
+                AcceptAnyAlert();
 
-            _webDriver.Quit();
-            _webDriver = null;
+                _webDriver.Quit();
+                _webDriver = null;
+            }
+
             Disposed = true;
         }
 

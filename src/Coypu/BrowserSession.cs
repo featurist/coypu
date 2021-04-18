@@ -117,9 +117,22 @@ namespace Coypu
         /// </summary>
         public void Dispose()
         {
+            Dispose(true);
+        }
+
+        /// <summary>
+        ///     Disposes the current session, closing any open browser.
+        ///     Can be overriden with custom implementation.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
             if (WasDisposed) return;
-            _driver.Dispose();
-            ActivatorDriverFactory.OpenDrivers--;
+            if (disposing)
+            {
+                _driver.Dispose();
+                ActivatorDriverFactory.OpenDrivers--;
+            }
+
             WasDisposed = true;
         }
 
