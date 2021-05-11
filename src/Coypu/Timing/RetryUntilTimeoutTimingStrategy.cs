@@ -56,18 +56,18 @@ namespace Coypu.Timing
                     // Could come from anywhere. Throw straight up rather than retrying as requires user interaction.
                     throw;
                 }
-                catch (FinderException ex)
+                catch (FinderException)
                 {
                     if (TimeoutReached(stopWatch, Timeout(query), interval))
-                        throw ex;
+                        throw;
             
                     WaitForInterval(interval);
                 }
-                catch (Exception ex)
+                catch
                 {
                     MarkAsStale(query);
                     if (TimeoutReached(stopWatch, Timeout(query), interval))
-                        throw ex;
+                        throw;
             
                     WaitForInterval(interval);
                 }
