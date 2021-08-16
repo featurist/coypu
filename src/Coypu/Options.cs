@@ -135,7 +135,7 @@ namespace Coypu
 
         /// <summary>
         /// <para>By default Coypu will exclude any invisible elements, this allows you to override that behaviour</para>
-        /// <para>Default: true</para>
+        /// <para>Default: false</para>
         /// </summary>
         public bool ConsiderInvisibleElements
         {
