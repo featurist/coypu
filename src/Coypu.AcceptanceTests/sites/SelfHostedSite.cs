@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Mime;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace Coypu.AcceptanceTests.Sites
@@ -13,7 +15,10 @@ namespace Coypu.AcceptanceTests.Sites
         
         public SelfHostedSite()
         {
-            _app = WebApplication.Create();
+            var builder = WebApplication.CreateBuilder();
+            builder.WebHost.UseUrls($"https://{IPAddress.Loopback}:0");
+            _app = builder.Build();
+            
             _app.MapGet("/",
                 () =>
                     Results.Content(
