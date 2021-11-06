@@ -17,7 +17,16 @@ namespace Coypu.AcceptanceTests
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
             browser = new BrowserSession(SessionConfiguration);
-            browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\table.htm").Replace("\\", "/"));
+            
+            var schema = "file:///";
+            if (TestContext.CurrentContext.TestDirectory.Length > 0 &&
+                TestContext.CurrentContext.TestDirectory[0] == '/')
+            {
+                schema = "file://";
+            }
+            var path = schema + Path.Combine(TestContext.CurrentContext.TestDirectory, "html", "table.htm")
+                .Replace("\\", "/");
+            browser.Visit(path);
         }
 
         [OneTimeTearDown]

@@ -9,13 +9,13 @@ namespace Coypu.AcceptanceTests
     [TestFixture]
     public class WebRequests
     {
-        private SelfishSite site;
+        private SelfHostedSite site;
         private BrowserSession browser;
 
         [SetUp]
         public void SetUp()
         {
-            site = new SelfishSite();
+            site = new SelfHostedSite();
 
             var configuration = new SessionConfiguration();
 

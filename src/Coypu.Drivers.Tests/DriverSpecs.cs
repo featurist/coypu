@@ -8,18 +8,19 @@ using Coypu.Finders;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
 using ElementFinder = Coypu.Finders.ElementFinder;
 using FrameFinder = Coypu.Finders.FrameFinder;
 
 [SetUpFixture]
 public class AssemblyTearDown
 {
-    public static SelfishSite TestSite;
+    public static SelfHostedSite TestSite;
 
     [OneTimeSetUp]
     public void StartTestSite()
     {
-        TestSite = new SelfishSite();
+        TestSite = new SelfHostedSite();
     }
 
     [OneTimeTearDown]
@@ -77,13 +78,7 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public virtual void SetUp()
         {
-            Driver.Visit(TestPageLocation(TestPage), Root);
-        }
-
-        protected static string TestPageLocation(string page)
-        {
-            return "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, $@"html\{page}")
-                                    .Replace("\\", "/");
+            Driver.Visit(PathHelper.GetPageHtmlPath(TestPage), Root);
         }
 
         private static void EnsureDriver()
@@ -97,6 +92,7 @@ namespace Coypu.Drivers.Tests
             }
 
             _driver = (IDriver) Activator.CreateInstance(DriverType, Browser);
+            
             _root = null;
         }
 

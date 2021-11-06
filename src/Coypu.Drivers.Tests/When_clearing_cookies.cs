@@ -9,7 +9,7 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public void SetUpCookies()
         {
-            Driver.Visit(TestSiteUrl("/resource/cookie_test"), Root);
+            Driver.Visit(TestSiteUrl("/"), Root);
         }
 
         [Test]

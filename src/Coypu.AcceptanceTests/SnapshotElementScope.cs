@@ -34,14 +34,14 @@ namespace Coypu.AcceptanceTests
 
         private void ReloadTestPage()
         {
-            browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, "html\\InteractionTestsPage.htm").Replace("\\", "/"));
+            browser.Visit(PathHelper.GetPageHtmlPath("InteractionTestsPage.htm"));
         }
 
         [Test]
         public void FindAllCss_returns_scopes()
         {
             var all = browser.FindAllCss("ul.snapshot-scope").ToList();
-            Assert.That(all.Count(), Is.EqualTo(2));
+            Assert.That(all.Count, Is.EqualTo(2));
 
             Assert.That(all[0].FindCss("li:first-child").Text, Is.EqualTo("Some"));
             Assert.That(all[1].FindCss("li:first-child").Text, Is.EqualTo("one"));
@@ -51,7 +51,7 @@ namespace Coypu.AcceptanceTests
         public void FindAllXPath_returns_scopes()
         {
             var all = browser.FindAllXPath("//ul[@class='snapshot-scope']").ToList();
-            Assert.That(all.Count(), Is.EqualTo(2));
+            Assert.That(all.Count, Is.EqualTo(2));
 
             Assert.That(all[0].FindCss("li:first-child").Text, Is.EqualTo("Some"));
             Assert.That(all[1].FindCss("li:first-child").Text, Is.EqualTo("one"));

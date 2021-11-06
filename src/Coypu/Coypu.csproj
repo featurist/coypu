@@ -40,6 +40,6 @@ Supported platforms:
     <DocumentationFile>bin\Debug\Coypu.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="[3.141.0,4)" />
+    <PackageReference Include="Selenium.WebDriver" Version="[4.0.1,5)" />
   </ItemGroup>
 </Project>

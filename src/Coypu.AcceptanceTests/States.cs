@@ -41,7 +41,7 @@ namespace Coypu.AcceptanceTests
 
         private void ReloadTestPage()
         {
-            browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\states.htm").Replace("\\", "/"));
+            browser.Visit(PathHelper.GetPageHtmlPath("states.htm"));
         }
 
         [Test]

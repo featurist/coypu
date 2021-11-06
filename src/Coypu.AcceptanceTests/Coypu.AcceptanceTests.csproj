@@ -1,26 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{6E5D29AC-14C4-4BBE-826D-F8EEA1B40900}</ProjectGuid>
-    <TargetFramework>net471</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <BuildPackage>true</BuildPackage>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
-    <PackageReference Include="NUnit" Version="3.13.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="90.0.4430.2400" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.29.1" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.0.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="95.0.4638.5401" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.30.0.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
-    <PackageReference Include="SelfishHttp" Version="0.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coypu.NUnit\Coypu.NUnit.csproj" />

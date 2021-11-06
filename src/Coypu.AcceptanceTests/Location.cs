@@ -13,11 +13,12 @@ namespace Coypu.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            _site = new SelfishSite();
+            _site = new SelfHostedSite();
             var sessionConfiguration = new SessionConfiguration
                                        {
                                            Browser = Browser.Chrome,
                                            Timeout = TimeSpan.FromMilliseconds(1000),
+                                           AppHost = "127.0.0.1",
                                            Port = _site.BaseUri.Port
                                        };
             _browser = new BrowserSession(sessionConfiguration);
@@ -32,12 +33,11 @@ namespace Coypu.AcceptanceTests
         }
 
         private BrowserSession _browser;
-        private SelfishSite _site;
+        private SelfHostedSite _site;
 
         private void ReloadTestPage()
         {
-            _browser.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, "html\\InteractionTestsPage.htm")
-                                           .Replace("\\", "/"));
+            _browser.Visit(PathHelper.GetPageHtmlPath("InteractionTestsPage.htm"));
         }
 
         [Test]
