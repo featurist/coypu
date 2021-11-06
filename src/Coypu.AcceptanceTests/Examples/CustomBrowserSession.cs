@@ -37,7 +37,7 @@ namespace Coypu.AcceptanceTests.Examples
             var browser = Browser.Parse(browserName);
             if (browser == Browser.InternetExplorer)
             {
-                Assert.Inconclusive();
+                Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
             }
             var driver = new SeleniumWebDriver(browser);
             using (var custom = new BrowserSession(driver))

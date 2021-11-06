@@ -14,7 +14,7 @@ namespace Coypu.AcceptanceTests
         {
             if (!OperatingSystem.IsWindows())
             {
-                Assert.Inconclusive();
+                Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
             }
             
             var configuration = new SessionConfiguration
