@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -17,16 +16,8 @@ namespace Coypu.AcceptanceTests
             SessionConfiguration = new SessionConfiguration();
             SessionConfiguration.Timeout = TimeSpan.FromMilliseconds(1000);
             browser = new BrowserSession(SessionConfiguration);
-            
-            var schema = "file:///";
-            if (TestContext.CurrentContext.TestDirectory.Length > 0 &&
-                TestContext.CurrentContext.TestDirectory[0] == '/')
-            {
-                schema = "file://";
-            }
-            var path = schema + Path.Combine(TestContext.CurrentContext.TestDirectory, "html", "table.htm")
-                .Replace("\\", "/");
-            browser.Visit(path);
+
+            browser.Visit(PathHelper.GetPageHtmlPath("table.htm"));
         }
 
         [OneTimeTearDown]
