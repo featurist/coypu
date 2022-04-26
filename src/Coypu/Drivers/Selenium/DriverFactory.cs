@@ -15,7 +15,7 @@ namespace Coypu.Drivers.Selenium
         {
             if (browser == Browser.Firefox) return new FirefoxDriver();
             if (browser == Browser.Chrome) return new ChromeDriver();
-            if (browser == Browser.Edge) return new EdgeDriver();
+            if (browser == Browser.MicrosoftEdge) return new EdgeDriver();
             if (browser == Browser.Opera) return new OperaDriver();
             if (browser == Browser.Safari) return new SafariDriver();
             return browser == Browser.InternetExplorer

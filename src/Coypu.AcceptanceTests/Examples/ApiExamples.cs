@@ -18,7 +18,7 @@ namespace Coypu.AcceptanceTests.Examples
         {
             public CustomFirefoxOptionsSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
 
-            private static RemoteWebDriver CustomOptions()
+            private static IWebDriver CustomOptions()
             {
                 return new FirefoxDriver(new FirefoxOptions());
             }

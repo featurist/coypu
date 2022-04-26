@@ -7,7 +7,7 @@
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <FileVersion>3.1.1.0</FileVersion>
     <PackageId>Coypu</PackageId>
-    <Version>3.1.1</Version>
+    <Version>3.1.4</Version>
     <Description>Intuitive, robust browser automation for the .NET platform.
 This package includes the Coypu 3 framework assembly, which should be referenced by your tests.
 
@@ -20,7 +20,7 @@ Supported platforms:
     <Copyright>Copyright © 2018 Adrian Longley and Contributors</Copyright>
     <PackageTags>browser, automation, selenium, testing, framework</PackageTags>
     <LangVersion>7.3</LangVersion>
-    <Authors>Adrian Longley, Jakub Obstarczyk</Authors>
+    <Authors>Adrian Longley, Jakub Obstarczyk, Alex Lazarciuc</Authors>
     <RepositoryUrl>https://github.com/featurist/coypu</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Company>Coypu</Company>
@@ -40,6 +40,9 @@ Supported platforms:
     <DocumentationFile>bin\Debug\Coypu.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="[3.141.0,4)" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="97.0.4692.7100" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.30.0.1" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="97.0.1072.55" />
   </ItemGroup>
 </Project>

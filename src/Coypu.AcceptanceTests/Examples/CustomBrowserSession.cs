@@ -31,10 +31,11 @@ namespace Coypu.AcceptanceTests.Examples
         [TestCase("chrome")]
         [TestCase("internet explorer")]
         [TestCase("firefox")]
-        [TestCase("edge")]
+        [TestCase("microsoftedge")]
         public void CustomBrowser(string browserName)
         {
-            var driver = new SeleniumWebDriver(Browser.Parse(browserName));
+            var browser = Browser.Parse(browserName);
+            var driver = new SeleniumWebDriver(browser);
             using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");
