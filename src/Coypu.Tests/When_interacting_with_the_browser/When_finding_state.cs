@@ -12,10 +12,14 @@ namespace Coypu.Tests.When_interacting_with_the_browser
     [TestFixture]
     public class When_finding_state
     {
+        [SetUp]
+        public void SetUp()
+        {
+            SessionConfiguration = new SessionConfiguration();
+        }
 
         internal BrowserSession BuildSession(TimingStrategy timingStrategy)
         {
-            SessionConfiguration = new SessionConfiguration();
             return TestSessionBuilder.Build(SessionConfiguration,new FakeDriver(), timingStrategy, new FakeWaiter(), null, null);
         }
 
