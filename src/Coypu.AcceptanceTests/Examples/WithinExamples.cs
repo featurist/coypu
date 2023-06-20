@@ -31,7 +31,7 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void WithinFrame_example()
         {
-            Browser.Visit(TestPageLocation("frameset.htm"));
+            Browser.Visit(PathHelper.GetPageHtmlPath("frameset.htm"));
             const string selectorThatAppearsInMultipleScopes = "scoped button";
             var expectingScope1 = Browser.FindFrame("frame1")
                                          .FindButton(selectorThatAppearsInMultipleScopes);

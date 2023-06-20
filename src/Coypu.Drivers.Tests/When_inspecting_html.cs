@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using Coypu.AcceptanceTests;
 
 namespace Coypu.Drivers.Tests
 {
@@ -8,7 +9,7 @@ namespace Coypu.Drivers.Tests
     {
         public void VisitTestPage()
         {
-            Driver.Visit("file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\table.htm").Replace("\\", "/"), Root);
+            Driver.Visit(PathHelper.GetPageHtmlPath("table.htm"), Root);
         }
 
         [Test]

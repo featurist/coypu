@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 using NUnit.Framework;
+using Coypu.AcceptanceTests;
 
 namespace Coypu.Drivers.Tests
 {
@@ -10,7 +11,7 @@ namespace Coypu.Drivers.Tests
         public void SavesAScreenshot()
         {
             Scope driverScope = Root;
-            Driver.Visit(TestPageLocation("test-card.jpg"), driverScope);
+            Driver.Visit(PathHelper.GetPageHtmlPath("test-card.jpg"), driverScope);
             Driver.ResizeTo(new Size(800, 600), driverScope);
 
             string saveAs = Path.Combine(Path.GetTempPath(), "expect-saved-here.jpg");

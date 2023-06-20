@@ -25,7 +25,7 @@ namespace Coypu.AcceptanceTests
         {
             Browser.ClickLink("Open pop up window");
             var popUp = Browser.FindWindow("Pop Up Window");
-            popUp.Visit(TestPageLocation("test-card.jpg"));
+            popUp.Visit(PathHelper.GetPageHtmlPath("test-card.jpg"));
             popUp.ResizeTo(800, 600);
             Browser.FindCss("body").Click();
 
@@ -35,7 +35,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void SavesJpgToSpecifiedLocation()
         {
-            Browser.Visit(TestPageLocation("test-card.jpg"));
+            Browser.Visit(PathHelper.GetPageHtmlPath("test-card.jpg"));
             Browser.ResizeTo(800, 600);
 
             SaveFileToAssertItExists(Browser, "screenshot-test-card.jpg");
@@ -44,7 +44,7 @@ namespace Coypu.AcceptanceTests
         [Test]
         public void SavesPngToSpecifiedLocation()
         {
-            Browser.Visit(TestPageLocation("test-card.png"));
+            Browser.Visit(PathHelper.GetPageHtmlPath("test-card.png"));
             Browser.ResizeTo(800, 600);
 
             SaveFileToAssertItExists(Browser,"screenshot-test-card.png");

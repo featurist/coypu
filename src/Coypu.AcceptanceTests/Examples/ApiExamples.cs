@@ -4,7 +4,6 @@ using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Remote;
 
 namespace Coypu.AcceptanceTests.Examples
 {
@@ -18,7 +17,7 @@ namespace Coypu.AcceptanceTests.Examples
         {
             public CustomFirefoxOptionsSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
 
-            private static RemoteWebDriver CustomOptions()
+            private static IWebDriver CustomOptions()
             {
                 return new FirefoxDriver(new FirefoxOptions());
             }

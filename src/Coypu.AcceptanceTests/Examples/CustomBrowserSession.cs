@@ -34,7 +34,12 @@ namespace Coypu.AcceptanceTests.Examples
         [TestCase("edge")]
         public void CustomBrowser(string browserName)
         {
-            var driver = new SeleniumWebDriver(Browser.Parse(browserName));
+            var browser = Browser.Parse(browserName);
+            if (browser == Browser.InternetExplorer)
+            {
+                Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
+            }
+            var driver = new SeleniumWebDriver(browser);
             using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");

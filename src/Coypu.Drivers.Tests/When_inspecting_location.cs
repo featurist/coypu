@@ -25,7 +25,7 @@ namespace Coypu.Drivers.Tests
 
             Assert.That(Driver.Location(popUp)
                               .AbsoluteUri,
-                        Does.EndWith("src/Coypu.Drivers.Tests/bin/Debug/net471/html/popup.htm"));
+                        Does.EndWith("src/Coypu.Drivers.Tests/bin/Debug/net6.0/html/popup.htm"));
         }
 
         [Test]
