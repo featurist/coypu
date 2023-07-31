@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{0495F7A7-A1A9-422C-BE9D-6D9F9BD4E97C}</ProjectGuid>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu</AssemblyTitle>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
@@ -19,7 +19,7 @@ Supported platforms:
     <PackageProjectUrl>https://github.com/featurist/coypu/</PackageProjectUrl>
     <Copyright>Copyright © 2018 Adrian Longley and Contributors</Copyright>
     <PackageTags>browser, automation, selenium, testing, framework</PackageTags>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <Authors>Adrian Longley, Jakub Obstarczyk</Authors>
     <RepositoryUrl>https://github.com/featurist/coypu</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -29,17 +29,13 @@ Supported platforms:
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DocumentationFile>bin\Debug\Coypu.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="[3.141.0,4)" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Selenium.WebDriver" Version="[4.0.1,5)" />
   </ItemGroup>
 </Project>

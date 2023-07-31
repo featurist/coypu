@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -13,6 +12,11 @@ namespace Coypu.AcceptanceTests
         [OneTimeSetUp]
         public void SetUpFixture()
         {
+            if (!OperatingSystem.IsWindows())
+            {
+                Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
+            }
+            
             var configuration = new SessionConfiguration
             {
                 Timeout = TimeSpan.FromMilliseconds(2000),
@@ -24,7 +28,7 @@ namespace Coypu.AcceptanceTests
         [OneTimeTearDown]
         public void TearDown()
         {
-            browser.Dispose();
+            browser?.Dispose();
         }
 
         [SetUp]
@@ -35,13 +39,8 @@ namespace Coypu.AcceptanceTests
 
         protected void ReloadTestPage()
         {
-            browser.Visit(TestPageLocation("InteractionTestsPage.htm"));
-        }
-
-        protected static string TestPageLocation(string page)
-        {
-            var testPageLocation = "file:///" + Path.Combine(TestContext.CurrentContext.TestDirectory, @"html\" + page).Replace("\\", "/");
-            return testPageLocation;
+            var testPageLocation = PathHelper.GetPageHtmlPath("InteractionTestsPage.htm");
+            browser.Visit(testPageLocation);
         }
 
         [Test]

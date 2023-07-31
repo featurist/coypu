@@ -203,7 +203,7 @@ Coypu does this by default from v2.0. Your options:
                 };
         }
 
-     
+
 
         protected static T? Default<T>(T? value, T? defaultValue) where T : struct
         {

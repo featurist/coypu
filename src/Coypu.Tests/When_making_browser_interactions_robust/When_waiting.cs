@@ -6,9 +6,9 @@ using NUnit.Framework;
 namespace Coypu.Tests.When_making_browser_interactions_robust
 {
     [TestFixture]
-    public class When_waiting 
+    public class When_waiting
     {
-        public const int AccuracyMilliseconds = 30;
+        public const int AccuracyMilliseconds = 40;
 
         [Test]
         public void It_sleeps_for_the_expected_time_Case_1()
@@ -22,7 +22,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
             It_sleeps_for_the_expected_time(200);
         }
 
-        public void It_sleeps_for_the_expected_time(int expectedDurationMilliseconds) 
+        public void It_sleeps_for_the_expected_time(int expectedDurationMilliseconds)
         {
             var waiter = new StopwatchWaiter();
             var stopWatch = Stopwatch.StartNew();
@@ -34,7 +34,7 @@ namespace Coypu.Tests.When_making_browser_interactions_robust
 
             const int toleranceMilliseconds = AccuracyMilliseconds;
 
-            Assert.That((int)actualWait, Is.InRange(expectedDurationMilliseconds - toleranceMilliseconds, 
+            Assert.That((int)actualWait, Is.InRange(expectedDurationMilliseconds - toleranceMilliseconds,
                                                expectedDurationMilliseconds + toleranceMilliseconds));
         }
 

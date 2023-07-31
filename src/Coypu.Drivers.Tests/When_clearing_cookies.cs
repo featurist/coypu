@@ -9,14 +9,14 @@ namespace Coypu.Drivers.Tests
         [SetUp]
         public void SetUpCookies()
         {
-            Driver.Visit(TestSiteUrl("/resource/cookie_test"), Root);
+            Driver.Visit(TestSiteUrl("/"), Root);
         }
 
         [Test]
         public void Delete_all_the_session_cookies()
         {
-            Driver.ExecuteScript("document.cookie = 'cookie1=value1; '", Root);
-            Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
+            Driver.Cookies.AddCookie(new Cookie("cookie1", "value1"));
+            Driver.Cookies.AddCookie(new Cookie("cookie2", "value2"));
 
             var cookies = Driver.Cookies.GetAll()
                                 .ToArray();
@@ -40,7 +40,7 @@ namespace Coypu.Drivers.Tests
         {
             var specialCookie = new Cookie("specialCookie", "specialValue");
             Driver.Cookies.AddCookie(specialCookie);
-            Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
+            Driver.Cookies.AddCookie(new Cookie("cookie2", "value2"));
 
             var cookieCount = Driver.Cookies.GetAll()
                                     .Count();
@@ -62,8 +62,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Delete_cookie_by_name()
         {
-            Driver.ExecuteScript("document.cookie = 'cookie1=value1; '", Root);
-            Driver.ExecuteScript("document.cookie = 'cookie2=value2; '", Root);
+            Driver.Cookies.AddCookie(new Cookie("cookie1", "value1"));
+            Driver.Cookies.AddCookie(new Cookie("cookie2", "value2"));
             var cookieCount = Driver.Cookies.GetAll()
                                     .Count();
             var expectedCookieCount = cookieCount - 1;
