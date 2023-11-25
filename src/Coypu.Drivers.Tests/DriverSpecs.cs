@@ -41,7 +41,7 @@ namespace Coypu.Drivers.Tests
         private static readonly Browser Browser = Browser.Chrome;
         protected static readonly Options DefaultOptions = new Options();
 
-        private static readonly Type DriverType = typeof(SeleniumWebDriver);
+        private static readonly Type DriverType = typeof(PlaywrightDriver);
 
         protected static readonly SessionConfiguration DefaultSessionConfiguration = new SessionConfiguration
                                                                                      {
