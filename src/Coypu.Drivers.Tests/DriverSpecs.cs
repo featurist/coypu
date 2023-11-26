@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Coypu.Drivers.Selenium;
+using Coypu.Drivers.MicrosoftPlaywright;
 using Coypu.Drivers.Tests;
 using Coypu.AcceptanceTests;
 using Coypu.AcceptanceTests.Sites;
@@ -9,7 +9,6 @@ using Coypu.Finders;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 using ElementFinder = Coypu.Finders.ElementFinder;
 using FrameFinder = Coypu.Finders.FrameFinder;
 

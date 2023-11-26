@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
+using System.Text.Json;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
 using System.Threading.Tasks;
 
 #pragma warning disable 1591
 
-namespace Coypu.Drivers.Selenium
+namespace Coypu.Drivers.MicrosoftPlaywright
 {
     public class PlaywrightDriver : IDriver
     {
         private readonly Browser _browser;
         private readonly IPlaywright _playwright;
         private readonly IBrowser _playwrightBrowser;
-        private readonly IPage _playwrightPage;
+        private readonly IPage _page;
 
         public PlaywrightDriver(Browser browser)
         {
@@ -37,7 +37,7 @@ namespace Coypu.Drivers.Selenium
 
             Task<IPage> pageTask = Task.Run(() => _playwrightBrowser.NewPageAsync());
             pageTask.Wait();
-            _playwrightPage = pageTask.Result;
+            _page = pageTask.Result;
         }
         protected bool NoJavascript => !_browser.Javascript;
 
@@ -81,7 +81,22 @@ namespace Coypu.Drivers.Selenium
                                                  Scope scope,
                                                  Options options)
         {
-            throw new NotImplementedException();
+            Task<IReadOnlyList<IElementHandle>> task = Task.Run(() => _page.QuerySelectorAllAsync($"xpath={xpath}"));
+            task.Wait();
+            return task.Result.Select(BuildElement);
+        }
+
+        private Element BuildElement(IElementHandle element)
+        {
+            Task<JsonElement?> tagNameTask = Task.Run(() => element.EvaluateAsync("e => e.tagName"));
+            tagNameTask.Wait();
+            var tagName = tagNameTask.Result?.GetString();
+
+            throw new Exception(tagName);
+
+            // return new[] {"iframe", "frame"}.Contains(tagName.ToLower())
+            //            ? new SeleniumFrame(element, _webDriver, _seleniumWindowManager)
+            //            : new SeleniumElement(element, _webDriver);
         }
 
         public bool HasDialog(string withText,
@@ -93,7 +108,7 @@ namespace Coypu.Drivers.Selenium
         public void Visit(string url,
                           Scope scope)
         {
-          Task<IResponse> responseTask = Task.Run(() => _playwrightPage.GotoAsync(url));
+          Task<IResponse> responseTask = Task.Run(() => _page.GotoAsync(url));
           responseTask.Wait();
           IResponse response = responseTask.Result;
           if (response.Status != 200)
