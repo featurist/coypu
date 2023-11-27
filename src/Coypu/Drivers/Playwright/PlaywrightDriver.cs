@@ -7,10 +7,14 @@ using System.Text.Json;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.Reflection.Metadata;
+using System.Data.Common;
+using OpenQA.Selenium.DevTools.V85.Network;
 
 #pragma warning disable 1591
 
-namespace Coypu.Drivers.MicrosoftPlaywright
+namespace Coypu.Drivers.Playwright
 {
     public class PlaywrightDriver : IDriver
     {
@@ -22,22 +26,14 @@ namespace Coypu.Drivers.MicrosoftPlaywright
         public PlaywrightDriver(Browser browser)
         {
             _browser = browser;
-
-            Task<IPlaywright> createPlaywrightTask = Task.Run(() => Playwright.CreateAsync());
-            createPlaywrightTask.Wait();
-            _playwright = createPlaywrightTask.Result;
+            _playwright = Async.WaitForResult(Microsoft.Playwright.Playwright.CreateAsync());
 
             var browserType = _playwright.Chromium; // TODO: map browser to playwright browser type
 
-            Task<IBrowser> browserTask = Task.Run(() => browserType.LaunchAsync(
-              new BrowserTypeLaunchOptions{Headless = false, }
+            _playwrightBrowser = Async.WaitForResult(browserType.LaunchAsync(
+              new BrowserTypeLaunchOptions{Headless = false}
             ));
-            browserTask.Wait();
-            _playwrightBrowser = browserTask.Result;
-
-            Task<IPage> pageTask = Task.Run(() => _playwrightBrowser.NewPageAsync());
-            pageTask.Wait();
-            _page = pageTask.Result;
+            _page = Async.WaitForResult(_playwrightBrowser.NewPageAsync());
         }
         protected bool NoJavascript => !_browser.Javascript;
 
@@ -60,11 +56,11 @@ namespace Coypu.Drivers.MicrosoftPlaywright
         public Cookies Cookies { get; set; }
         public object Native => _playwright;
 
-    public Element Window => throw new NotImplementedException();
+      public Element Window => new PlaywrightWindow(_playwrightBrowser, _page);
 
-    public IEnumerable<Element> FindFrames(string locator,
-                                               Scope scope,
-                                               Options options)
+      public IEnumerable<Element> FindFrames(string locator,
+                                             Scope scope,
+                                             Options options)
         {
             throw new NotImplementedException();
         }
@@ -74,29 +70,25 @@ namespace Coypu.Drivers.MicrosoftPlaywright
                                                Options options,
                                                Regex textPattern = null)
         {
-            throw new NotImplementedException();
+            return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"css={cssSelector}"))
+                        .Select(BuildElement);
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath,
                                                  Scope scope,
                                                  Options options)
         {
-            Task<IReadOnlyList<IElementHandle>> task = Task.Run(() => _page.QuerySelectorAllAsync($"xpath={xpath}"));
-            task.Wait();
-            return task.Result.Select(BuildElement);
+            return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"xpath={xpath}"))
+                        .Select(BuildElement);
         }
 
         private Element BuildElement(IElementHandle element)
         {
-            Task<JsonElement?> tagNameTask = Task.Run(() => element.EvaluateAsync("e => e.tagName"));
-            tagNameTask.Wait();
-            var tagName = tagNameTask.Result?.GetString();
+            var tagName = Async.WaitForResult(element.EvaluateAsync("e => e.tagName"))?.GetString();
 
-            throw new Exception(tagName);
-
-            // return new[] {"iframe", "frame"}.Contains(tagName.ToLower())
-            //            ? new SeleniumFrame(element, _webDriver, _seleniumWindowManager)
-            //            : new SeleniumElement(element, _webDriver);
+            return new[] {"iframe", "frame"}.Contains(tagName.ToLower())
+                     ? null  // TODO:  .new SeleniumFrame(element, _playwright, _seleniumWindowManager)
+                     : new PlaywrightElement(element, _playwright);
         }
 
         public bool HasDialog(string withText,
@@ -108,13 +100,11 @@ namespace Coypu.Drivers.MicrosoftPlaywright
         public void Visit(string url,
                           Scope scope)
         {
-          Task<IResponse> responseTask = Task.Run(() => _page.GotoAsync(url));
-          responseTask.Wait();
-          IResponse response = responseTask.Result;
-          if (response.Status != 200)
-          {
-            throw new Exception("Failed to load page");
-          }
+            IResponse response = Async.WaitForResult(_page.GotoAsync(url));
+            if (response.Status != 200)
+            {
+              throw new Exception("Failed to load page");
+            }
         }
 
         public void ClearBrowserCookies()
@@ -124,7 +114,7 @@ namespace Coypu.Drivers.MicrosoftPlaywright
 
         public void Click(Element element)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(PlaywrightElement(element).ClickAsync());
         }
 
         public void Hover(Element element)
@@ -200,17 +190,19 @@ namespace Coypu.Drivers.MicrosoftPlaywright
 
         public void Check(Element field)
         {
-            throw new NotImplementedException();
+            if (!field.Selected)
+                Async.WaitForResult(PlaywrightElement(field).CheckAsync());
         }
 
         public void Uncheck(Element field)
         {
-            throw new NotImplementedException();
+            if (field.Selected)
+                Async.WaitForResult(PlaywrightElement(field).UncheckAsync());
         }
 
         public void Choose(Element field)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(PlaywrightElement(field).CheckAsync());
         }
 
         public object ExecuteScript(string javascript,
@@ -218,6 +210,18 @@ namespace Coypu.Drivers.MicrosoftPlaywright
                                     params object[] args)
         {
             throw new NotImplementedException();
+        }
+        private IElementHandle PlaywrightElement(Element element)
+        {
+            return (IElementHandle) element.Native;
+        }
+
+        private IElementHandle Element(Scope scope)
+        {
+            var scopeElement = scope.Now();
+            return scopeElement.Native is IPage
+              ? Async.WaitForResult(((IPage) scopeElement.Native).QuerySelectorAsync("html"))
+              : (IElementHandle) scopeElement.Native;
         }
 
         public void Dispose()

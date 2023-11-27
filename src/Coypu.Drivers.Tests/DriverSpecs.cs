@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Coypu.Drivers.MicrosoftPlaywright;
+using Coypu.Drivers.Playwright;
 using Coypu.Drivers.Tests;
 using Coypu.AcceptanceTests;
 using Coypu.AcceptanceTests.Sites;

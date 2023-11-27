@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
-namespace Coypu.Drivers.MicrosoftPlaywright
+namespace Coypu.Drivers.Playwright
 {
     internal class PlaywrightElement : Element
     {
@@ -11,7 +11,7 @@ namespace Coypu.Drivers.MicrosoftPlaywright
         protected readonly IPlaywright _playwright;
 
         public PlaywrightElement(IElementHandle PlaywrightElement,
-                               IPlaywright Playwright)
+                                 IPlaywright Playwright)
         {
             _native = PlaywrightElement;
             _playwright = Playwright;
@@ -19,44 +19,43 @@ namespace Coypu.Drivers.MicrosoftPlaywright
 
         private string GetAttribute(string attributeName)
         {
-            Task<string> task =  _native.GetAttributeAsync(attributeName);
-            task.Wait();
-            return task.Result;
+            return Async.WaitForResult(_native.GetAttributeAsync(attributeName));
         }
 
         public string Id => GetAttribute("id");
 
-        public virtual string Text()
-        {
-          Task<string> task = _native.InnerTextAsync();
-          task.Wait();
-          return task.Result;
-        }
+        public virtual string Text => Async.WaitForResult(_native.InnerTextAsync());
 
-        public string Value => GetAttribute("value");
+        public string Value => Async.WaitForResult(_native.InputValueAsync());
 
         public string Name => GetAttribute("name");
 
-        public virtual string OuterHTML => GetAttribute("outerHTML");
+        public virtual string OuterHTML => Async.WaitForResult(_native.EvaluateAsync("el => el.outerHTML")).ToString();
 
-        public virtual string InnerHTML => GetAttribute("innerHTML");
+        public virtual string InnerHTML => Async.WaitForResult(_native.InnerHTMLAsync());
 
         public string Title => GetAttribute("title");
 
-        public bool Disabled => !_native.Enabled;
+        public bool Disabled => !Async.WaitForResult<bool>(_native.IsEnabledAsync());
 
         public string SelectedOption
         {
             get
             {
-                return _native.FindElements(By.TagName("option"))
-                             .Where(e => e.Selected)
-                             .Select(e => e.Text)
-                             .FirstOrDefault();
+                return Async.WaitForResult(_native.EvalOnSelectorAsync("option", "sel => sel.options[sel.options.selectedIndex].innerText")).ToString();
             }
         }
 
-        public bool Selected => _native.Selected;
+        public bool Selected {
+          get {
+            var tagName = Async.WaitForResult(_native.EvaluateAsync("e => e.tagName")).ToString();
+            if (tagName.ToLower() == "select") {
+              return Async.WaitForResult(_native.InputValueAsync()) == SelectedOption;
+            } else {
+              return Async.WaitForResult(_native.IsCheckedAsync());
+            }
+          }
+        }
 
         public virtual object Native => _native;
 
