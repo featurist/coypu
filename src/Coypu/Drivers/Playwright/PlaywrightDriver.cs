@@ -31,9 +31,12 @@ namespace Coypu.Drivers.Playwright
             var browserType = _playwright.Chromium; // TODO: map browser to playwright browser type
 
             _playwrightBrowser = Async.WaitForResult(browserType.LaunchAsync(
-              new BrowserTypeLaunchOptions{Headless = false}
+              new BrowserTypeLaunchOptions{
+                  Headless = false,
+                }
             ));
             _page = Async.WaitForResult(_playwrightBrowser.NewPageAsync());
+            _page.Context.SetDefaultTimeout(1000); // TODO: Work out how to set actionTimeout only and remove this
         }
         protected bool NoJavascript => !_browser.Javascript;
 
@@ -41,16 +44,12 @@ namespace Coypu.Drivers.Playwright
 
         public Uri Location(Scope scope)
         {
-          throw new Exception("Not implemented");
-          // _elementFinder.SeleniumScope(scope);
-          // return new Uri(_page.Url);
+          return new Uri(_page.Url);
         }
 
         public string Title(Scope scope)
         {
-          throw new Exception("Not implemented");
-          // _elementFinder.SeleniumScope(scope);
-          // return _page.Title;
+          return Async.WaitForResult(_page.TitleAsync());
         }
 
         public Cookies Cookies { get; set; }
@@ -70,8 +69,33 @@ namespace Coypu.Drivers.Playwright
                                                Options options,
                                                Regex textPattern = null)
         {
-            return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"css={cssSelector}"))
-                        .Select(BuildElement);
+            var results = Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"css={cssSelector}"))
+                          .Where(ValidateTextPattern(options, textPattern))
+                          .Where(e => IsDisplayed(e, options))
+                          .Select(BuildElement);
+            return results;
+        }
+
+        private Func<IElementHandle, bool> ValidateTextPattern(Options options, Regex textPattern)
+        {
+          if (options == null) throw new ArgumentNullException(nameof(options));
+          Func<IElementHandle, bool> textMatches = e =>
+            {
+              if (textPattern == null) return true;
+
+              var text = Async.WaitForResult(e.InnerTextAsync());
+              return text != null && textPattern.IsMatch(text.Trim());
+            };
+
+          if (textPattern != null && options.ConsiderInvisibleElements)
+            throw new NotSupportedException("Cannot inspect the text of invisible elements.");
+          return textMatches;
+        }
+
+        private bool IsDisplayed(IElementHandle e,
+                                Options options)
+        {
+            return options.ConsiderInvisibleElements || Async.WaitForResult(e.IsVisibleAsync());
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath,
@@ -79,6 +103,7 @@ namespace Coypu.Drivers.Playwright
                                                  Options options)
         {
             return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"xpath={xpath}"))
+                        .Where(e => IsDisplayed(e, options))
                         .Select(BuildElement);
         }
 
@@ -205,12 +230,18 @@ namespace Coypu.Drivers.Playwright
             Async.WaitForResult(PlaywrightElement(field).CheckAsync());
         }
 
+        public void SelectOption(Element select, Element option, string optionToSelect)
+        {
+            Async.WaitForResult(PlaywrightElement(select).SelectOptionAsync(optionToSelect));
+        }
+
         public object ExecuteScript(string javascript,
                                     Scope scope,
                                     params object[] args)
         {
             throw new NotImplementedException();
         }
+
         private IElementHandle PlaywrightElement(Element element)
         {
             return (IElementHandle) element.Native;

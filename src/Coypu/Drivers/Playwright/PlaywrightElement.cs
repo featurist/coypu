@@ -42,18 +42,13 @@ namespace Coypu.Drivers.Playwright
         {
             get
             {
-                return Async.WaitForResult(_native.EvalOnSelectorAsync("option", "sel => sel.options[sel.options.selectedIndex].innerText")).ToString();
+                return Async.WaitForResult(_native.EvaluateAsync("sel => sel.options[sel.options.selectedIndex].innerText")).ToString();
             }
         }
 
         public bool Selected {
           get {
-            var tagName = Async.WaitForResult(_native.EvaluateAsync("e => e.tagName")).ToString();
-            if (tagName.ToLower() == "select") {
-              return Async.WaitForResult(_native.InputValueAsync()) == SelectedOption;
-            } else {
-              return Async.WaitForResult(_native.IsCheckedAsync());
-            }
+            return Async.WaitForResult(_native.IsCheckedAsync());
           }
         }
 

@@ -14,6 +14,7 @@ namespace Coypu.Tests.TestDoubles
     {
         public readonly IList<Element> CheckedElements = new List<Element>();
         public readonly IList<Element> ChosenElements = new List<Element>();
+        public readonly List<SelectOptionParams> SelectedOptions = new List<SelectOptionParams>();
         public readonly IList<Element> ClickedElements = new List<Element>();
         public readonly IList<FindXPathParams> FindXPathRequests = new List<FindXPathParams>();
         public readonly IList<Scope> GoBackCalls = new List<Scope>();
@@ -211,6 +212,11 @@ namespace Coypu.Tests.TestDoubles
             ChosenElements.Add(field);
         }
 
+        public void SelectOption(Element select, Element option, string optionToSelect)
+        {
+            SelectedOptions.Add(new SelectOptionParams {Select = select, Option = option, OptionToSelect = optionToSelect});
+        }
+
         public IEnumerable<Element> FindWindows(string locator,
                                                 Scope scope,
                                                 Options options)
@@ -358,7 +364,14 @@ namespace Coypu.Tests.TestDoubles
             public T Request;
             public Scope Scope;
         }
+
+    public class SelectOptionParams
+    {
+      public Element Select;
+      public Element Option;
+      public string OptionToSelect;
     }
+  }
 
     public class SetFieldParams
     {

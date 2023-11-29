@@ -16,7 +16,7 @@ namespace Coypu
     /// <returns>The result of the asynchronous task.</returns>
     public static T WaitForResult<T>(Task<T> task)
     {
-      task.Wait();
+        task.Wait();
       return task.Result;
     }
 

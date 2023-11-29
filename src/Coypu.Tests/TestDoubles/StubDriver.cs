@@ -63,6 +63,8 @@ namespace Coypu.Tests.TestDoubles
 
         public void Choose(Element field) { }
 
+        public void SelectOption(Element select, Element option, string optionToSelect) { }
+
         public bool Disposed => false;
 
         Uri IDriver.Location(Scope scope)

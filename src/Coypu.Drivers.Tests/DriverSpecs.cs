@@ -46,7 +46,7 @@ namespace Coypu.Drivers.Tests
                                                                                      {
                                                                                          Browser = Browser,
                                                                                          Driver = DriverType,
-                                                                                         TextPrecision = TextPrecision.Exact
+                                                                                         TextPrecision = TextPrecision.Exact,
                                                                                      };
 
         protected static readonly DisambiguationStrategy DisambiguationStrategy = new ThrowsWhenMissingButNoDisambiguationStrategy();

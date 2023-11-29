@@ -19,7 +19,8 @@ namespace Coypu.Drivers.Tests
         {
             Field("containerLabeledSelectFieldId").SelectedOption.ShouldBe("select two option one");
 
-            Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
+            var option = FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions));
+            Driver.SelectOption(GetSelectScope("containerLabeledSelectFieldId").Now(), option, "select two option two");
 
             Field("containerLabeledSelectFieldId").SelectedOption.ShouldBe("select two option two");
         }
@@ -51,5 +52,5 @@ namespace Coypu.Drivers.Tests
             Assert.That(FindSingle(new OptionFinder(Driver, "one", GetSelectScope("Ambiguous select options"), Options.Substring)).Text, Is.EqualTo("one"));
         }
     }
-    
+
 }

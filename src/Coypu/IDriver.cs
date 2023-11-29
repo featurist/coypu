@@ -46,5 +46,6 @@ namespace Coypu
         void ResizeTo(Size size, Scope Scope);
         void SaveScreenshot(string fileName, Scope scope);
         void SendKeys(Element element, string keys);
-    }
+        void SelectOption(Element select, Element option, string optionToSelect);
+  }
 }

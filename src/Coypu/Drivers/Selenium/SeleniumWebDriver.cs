@@ -235,6 +235,10 @@ namespace Coypu.Drivers.Selenium
                 .Click();
         }
 
+        public void SelectOption(Element select, Element option, string optionToSelect)
+        {
+            Click(option);
+        }
         public object ExecuteScript(string javascript,
                                     Scope scope,
                                     params object[] args)

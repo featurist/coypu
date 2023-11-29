@@ -21,15 +21,13 @@ namespace Coypu.Drivers.Playwright
         public string Text => ((ISearchContext) Native).FindElement(By.CssSelector("body"))
                                                        .Text;
 
-        public string InnerHTML => ((ISearchContext) Native).FindElement(By.XPath("./*"))
-                                                            .GetAttribute("innerHTML");
+        public string InnerHTML => Async.WaitForResult(((IPage) Native).InnerHTMLAsync("xpath=./*")).ToString();
 
         public string Title => Async.WaitForResult(_page.TitleAsync());
 
         public bool Disabled => throw new NotSupportedException();
 
-        public string OuterHTML => ((ISearchContext) Native).FindElement(By.XPath("./*"))
-                                                            .GetAttribute("outerHTML");
+        public string OuterHTML => Async.WaitForResult(((IPage) Native).EvalOnSelectorAsync("html", "h => h.outerHTML")).ToString();
 
         public string Value => throw new NotSupportedException();
 
