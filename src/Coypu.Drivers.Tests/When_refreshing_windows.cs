@@ -30,11 +30,11 @@ namespace Coypu.Drivers.Tests
 
         private static void RefreshCausesScopeToReload(DriverScope driverScope)
         {
-            var tickBeforeRefresh = (Int64) Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope);
+            var tickBeforeRefresh = long.Parse(Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope).ToString());
 
             Driver.Refresh(driverScope);
 
-            var tickAfterRefresh = (Int64) Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope);
+            var tickAfterRefresh = long.Parse(Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope).ToString());
 
             Assert.That(tickAfterRefresh, Is.GreaterThan(tickBeforeRefresh));
         }

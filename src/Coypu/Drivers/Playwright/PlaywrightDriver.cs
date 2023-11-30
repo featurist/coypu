@@ -150,7 +150,10 @@ namespace Coypu.Drivers.Playwright
         public void SendKeys(Element element,
                              string keys)
         {
-            throw new NotImplementedException();
+            var playwrightElement = PlaywrightElement(element);
+            Async.WaitForResult(playwrightElement.FocusAsync());
+            Async.WaitForResult(playwrightElement.EvaluateAsync("e => e.setSelectionRange(-1, -1)"));
+            keys.ToList().ForEach(key => Async.WaitForResult(playwrightElement.PressAsync(key.ToString())));
         }
 
         public void MaximiseWindow(Scope scope)
@@ -160,19 +163,22 @@ namespace Coypu.Drivers.Playwright
 
         public void Refresh(Scope scope)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(_page.ReloadAsync());
         }
 
         public void ResizeTo(Size size,
                              Scope scope)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(_page.SetViewportSizeAsync(size.Width, size.Height));
         }
 
         public void SaveScreenshot(string fileName,
                                    Scope scope)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(_page.ScreenshotAsync(new PageScreenshotOptions
+            {
+                Path = fileName
+            }));
         }
 
         public void GoBack(Scope scope)
