@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 
@@ -26,9 +27,19 @@ namespace Coypu.Drivers.Playwright
 
         public virtual string Text => Async.WaitForResult(_native.InnerTextAsync());
 
-        public string Value => Async.WaitForResult(_native.InputValueAsync());
+        public string Value {
+            get {
+                var inputTags = new[] { "input", "textarea", "select" };
+                if (inputTags.Contains(TagName.ToLower()))
+                  return Async.WaitForResult(_native.InputValueAsync());
+
+                return this["value"];
+            }
+        }
 
         public string Name => GetAttribute("name");
+
+        public string TagName => Async.WaitForResult(_native.EvaluateAsync("e => e.tagName"))?.GetString();
 
         public virtual string OuterHTML => Async.WaitForResult(_native.EvaluateAsync("el => el.outerHTML")).ToString();
 

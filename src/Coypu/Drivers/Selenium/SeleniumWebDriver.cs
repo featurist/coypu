@@ -297,7 +297,7 @@ namespace Coypu.Drivers.Selenium
                        : new SeleniumElement(element, _webDriver);
         }
 
-        private object[] ConvertScriptArgs(object[] args)
+        private static object[] ConvertScriptArgs(object[] args)
         {
             for (var i = 0; i < args.Length; ++i)
                 if (args[i] is Element argAsElement)

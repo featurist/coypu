@@ -17,7 +17,7 @@ namespace Coypu
     public static T WaitForResult<T>(Task<T> task)
     {
         task.Wait();
-      return task.Result;
+        return task.Result;
     }
 
     /// <summary>

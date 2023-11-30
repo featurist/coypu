@@ -177,12 +177,12 @@ namespace Coypu.Drivers.Playwright
 
         public void GoBack(Scope scope)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(_page.GoBackAsync());
         }
 
         public void GoForward(Scope scope)
         {
-            throw new NotImplementedException();
+            Async.WaitForResult(_page.GoForwardAsync());
         }
 
         public IEnumerable<Cookie> GetBrowserCookies()
@@ -200,7 +200,11 @@ namespace Coypu.Drivers.Playwright
         public void Set(Element element,
                         string value)
         {
-            throw new NotImplementedException();
+            var input = PlaywrightElement(element);
+            if (element["type"] == "file")
+                Async.WaitForResult(input.SetInputFilesAsync(value));
+            else
+                Async.WaitForResult(input.FillAsync(value));
         }
 
         public void AcceptModalDialog(Scope scope)
@@ -239,7 +243,21 @@ namespace Coypu.Drivers.Playwright
                                     Scope scope,
                                     params object[] args)
         {
-            throw new NotImplementedException();
+            var func = $"(arguments) => {Regex.Replace(javascript, "^return ", string.Empty)}";
+            return Async.WaitForResult(
+              ((IPage) scope.Now().Native)
+                .EvaluateAsync(func, ConvertScriptArgs(args)))
+                .ToString();
+        }
+
+        // TODO: extract duplication between Drivers
+        private static object[] ConvertScriptArgs(object[] args)
+        {
+            for (var i = 0; i < args.Length; ++i)
+                if (args[i] is Element argAsElement)
+                    args[i] = argAsElement.Native;
+
+            return args;
         }
 
         private IElementHandle PlaywrightElement(Element element)

@@ -111,7 +111,7 @@ namespace Coypu
         {
             _driver.GoForward(this);
         }
-        
+
         /// <summary>
         ///     Executes custom javascript in the browser
         /// </summary>
