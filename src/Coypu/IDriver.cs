@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
 using Cookie = System.Net.Cookie;
 
 #pragma warning disable 1591

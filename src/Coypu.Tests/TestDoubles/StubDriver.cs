@@ -11,14 +11,11 @@ namespace Coypu.Tests.TestDoubles
 {
     public class StubDriver : IDriver
     {
-        public StubDriver() { }
-
-        public StubDriver(Browser browser) { }
-
-        public StubDriver(IWebDriver driver)
-        {
-            Cookies = new Cookies(driver);
+        public StubDriver() {
+          Cookies = new StubCookies();
         }
+
+        public StubDriver(Browser browser) : this() { }
 
         public void Dispose() { }
 
@@ -151,5 +148,32 @@ namespace Coypu.Tests.TestDoubles
         }
 
         public void SetBrowserCookies(Cookie cookie) { }
+    }
+
+    // Implementation of Cookies interface that has no behaviour
+    public class StubCookies : Cookies
+    {
+        public void AddCookie(Cookie cookie,
+                              Options options = null) { }
+
+        public void DeleteAll() { }
+
+        public void DeleteCookie(Cookie cookie) { }
+
+        public void DeleteCookieNamed(string cookieName) { }
+
+        public IEnumerable<Cookie> GetAll()
+        {
+            return new List<Cookie>();
+        }
+
+        public Cookie GetCookieNamed(string cookieName)
+        {
+            return null;
+        }
+
+        public void WaitUntilCookieExists(Cookie cookie,
+                                          Options options) {
+        }
     }
 }

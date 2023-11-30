@@ -165,5 +165,10 @@ namespace Coypu
         {
             return new BrowserWindow(new WindowFinder(_driver, locator, this, Merge(options)), this);
         }
+
+        /// <summary>
+        ///     Manage cookies associated with the current browser session.
+        /// </summary>
+        public Cookies Cookies => _driver.Cookies;
     }
 }

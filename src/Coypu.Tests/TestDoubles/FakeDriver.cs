@@ -49,7 +49,7 @@ namespace Coypu.Tests.TestDoubles
 
         public FakeDriver(IWebDriver driver)
         {
-            Cookies = new Cookies(driver);
+            Cookies = new FakeCookies();
         }
 
         public Browser Browser { get; }
@@ -384,5 +384,45 @@ namespace Coypu.Tests.TestDoubles
         public Scope Scope { get; set; }
         public Regex TextPattern { get; set; }
         public string XPath { get; set; }
+    }
+
+    // Implementation of Cookies interface with in memory stores for cookies that behaves like a real browser might
+    public class FakeCookies : Cookies {
+        private readonly List<Cookie> _cookies = new List<Cookie>();
+
+        public void AddCookie(Cookie cookie, Options options = null)
+        {
+            _cookies.Add(cookie);
+        }
+
+        public void DeleteAll()
+        {
+            _cookies.Clear();
+        }
+
+        public void DeleteCookie(Cookie cookie)
+        {
+            _cookies.Remove(cookie);
+        }
+
+        public void DeleteCookieNamed(string cookieName)
+        {
+            _cookies.RemoveAll(c => c.Name == cookieName);
+        }
+
+        public IEnumerable<Cookie> GetAll()
+        {
+            return _cookies;
+        }
+
+        public Cookie GetCookieNamed(string cookieName)
+        {
+            return _cookies.FirstOrDefault(c => c.Name == cookieName);
+        }
+
+        public void WaitUntilCookieExists(Cookie cookie, Options options)
+        {
+            System.Threading.Thread.Sleep(1);
+        }
     }
 }

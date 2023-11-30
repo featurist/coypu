@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Text.Json;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.Reflection.Metadata;
-using System.Data.Common;
-using OpenQA.Selenium.DevTools.V85.Network;
 
 #pragma warning disable 1591
 
@@ -37,6 +31,8 @@ namespace Coypu.Drivers.Playwright
             ));
             _page = Async.WaitForResult(_playwrightBrowser.NewPageAsync());
             _page.Context.SetDefaultTimeout(1000); // TODO: Work out how to set actionTimeout only and remove this
+
+            Cookies = new Cookies(_page);
         }
         protected bool NoJavascript => !_browser.Javascript;
 
@@ -52,7 +48,7 @@ namespace Coypu.Drivers.Playwright
           return Async.WaitForResult(_page.TitleAsync());
         }
 
-        public Cookies Cookies { get; set; }
+        public Coypu.Cookies Cookies { get; set; }
         public object Native => _playwright;
 
       public Element Window => new PlaywrightWindow(_playwrightBrowser, _page);

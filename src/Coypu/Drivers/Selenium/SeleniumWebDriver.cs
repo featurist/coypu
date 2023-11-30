@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Selenium
 
         public Element Window => new SeleniumWindow(_webDriver, _webDriver.CurrentWindowHandle, _seleniumWindowManager);
 
-        public Cookies Cookies { get; set; }
+        public Coypu.Cookies Cookies { get; set; }
         public object Native => _webDriver;
 
         public IEnumerable<Element> FindFrames(string locator,
