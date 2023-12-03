@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Coypu.Finders;
 
 namespace Coypu.Tests.TestBuilders
@@ -15,11 +18,23 @@ namespace Coypu.Tests.TestBuilders
     {
         public Element ResolveQuery(ElementFinder elementFinder)
         {
-            var all = elementFinder.Find(elementFinder.Options).ToArray();
-            if (!all.Any())
+          var all = elementFinder.Find(elementFinder.Options);
+          var array = AsArray(all, elementFinder);
+          if (!array.Any())
+            throw elementFinder.GetMissingException();
+
+          return all.First();
+        }
+
+        private static Element[] AsArray(IEnumerable<Element> all, ElementFinder elementFinder)
+        {
+            try {
+                 return all.ToArray();
+            }
+            catch(Exception) {
+                // Elements have changed due to async page behaviour
                 throw elementFinder.GetMissingException();
-            
-            return all.First();
+            }
         }
     }
 }

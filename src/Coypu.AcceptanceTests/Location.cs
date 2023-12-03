@@ -2,6 +2,8 @@
 using System.IO;
 using Coypu.AcceptanceTests.Sites;
 using Coypu.Drivers;
+using Coypu.Drivers.Playwright;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using OpenQA.Selenium.Remote;
 
@@ -16,6 +18,7 @@ namespace Coypu.AcceptanceTests
             _site = new SelfHostedSite();
             var sessionConfiguration = new SessionConfiguration
                                        {
+                                           Driver = typeof(PlaywrightDriver),
                                            Browser = Browser.Chrome,
                                            Timeout = TimeSpan.FromMilliseconds(1000),
                                            AppHost = "127.0.0.1",

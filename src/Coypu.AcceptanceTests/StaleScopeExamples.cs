@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Coypu.Drivers;
+using Coypu.Drivers.Playwright;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 
@@ -21,7 +22,7 @@ namespace Coypu.AcceptanceTests
             var configuration = new SessionConfiguration
                                     {
                                         Timeout = TimeSpan.FromMilliseconds(2000),
-                                        Driver = typeof(SeleniumWebDriver),
+                                        Driver = typeof(PlaywrightDriver),
                                         Browser = Browser.Chrome
                                     };
             browser = new BrowserSession(configuration);
@@ -34,7 +35,7 @@ namespace Coypu.AcceptanceTests
             browser.Dispose();
         }
 
-        
+
         private void VisitTestPage(string page)
         {
             browser.Visit(PathHelper.GetPageHtmlPath(page));

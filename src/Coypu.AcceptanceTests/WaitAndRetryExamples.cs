@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Coypu.Drivers.Playwright;
 using Coypu.Drivers.Selenium;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -15,9 +16,8 @@ namespace Coypu.AcceptanceTests
         {
             var configuration = new SessionConfiguration
                                 {
-                                    Timeout = TimeSpan.FromMilliseconds(5000),
                                     Browser = Drivers.Browser.Chrome,
-                                    Driver = typeof(SeleniumWebDriver)
+                                    Driver = typeof(PlaywrightDriver)
                                 };
             Browser = new BrowserSession(configuration);
         }

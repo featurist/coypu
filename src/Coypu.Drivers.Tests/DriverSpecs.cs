@@ -11,6 +11,7 @@ using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 using ElementFinder = Coypu.Finders.ElementFinder;
 using FrameFinder = Coypu.Finders.FrameFinder;
+using Coypu.Drivers.Selenium;
 
 [SetUpFixture]
 public class AssemblyTearDown

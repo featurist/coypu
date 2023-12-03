@@ -1,6 +1,7 @@
 using System;
 using OpenQA.Selenium;
 using Microsoft.Playwright;
+using System.Linq;
 
 namespace Coypu.Drivers.Playwright
 {
@@ -18,8 +19,7 @@ namespace Coypu.Drivers.Playwright
 
         public string Id => throw new NotSupportedException();
 
-        public string Text => ((ISearchContext) Native).FindElement(By.CssSelector("body"))
-                                                       .Text;
+        public string Text => Async.WaitForResult(((IPage) Native).InnerTextAsync("xpath=/html/body"));
 
         public string InnerHTML => Async.WaitForResult(((IPage) Native).InnerHTMLAsync("xpath=./*")).ToString();
 

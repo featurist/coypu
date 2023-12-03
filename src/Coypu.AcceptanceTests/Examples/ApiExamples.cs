@@ -1,6 +1,7 @@
 ﻿using System;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -130,9 +131,9 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void Native_example()
         {
-            var button = (IWebElement) Browser.FindButton("clickMeTest")
+            var button = (IElementHandle) Browser.FindButton("clickMeTest")
                                               .Native;
-            button.Click();
+            Async.WaitForResult(button.ClickAsync());
             Assert.That(Browser.FindButton("clickMeTest")
                                .Value,
                         Is.EqualTo("Click me - clicked"));
