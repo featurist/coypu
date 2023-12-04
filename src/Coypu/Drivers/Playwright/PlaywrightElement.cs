@@ -9,13 +9,10 @@ namespace Coypu.Drivers.Playwright
     {
         // ReSharper disable once InconsistentNaming
         protected readonly IElementHandle _native;
-        protected readonly IPlaywright _playwright;
 
-        public PlaywrightElement(IElementHandle PlaywrightElement,
-                                 IPlaywright Playwright)
+        public PlaywrightElement(IElementHandle PlaywrightElement)
         {
             _native = PlaywrightElement;
-            _playwright = Playwright;
         }
 
         private string GetAttribute(string attributeName)

@@ -7,13 +7,11 @@ namespace Coypu.Drivers.Playwright
 {
     internal class PlaywrightWindow : Element
     {
-        private readonly IBrowser _playwrightBrowser;
         private readonly IPage _page;
 
         public PlaywrightWindow(IBrowser playwrightBrowser,
                                 IPage page)
         {
-            _playwrightBrowser = playwrightBrowser;
             _page = page;
         }
 

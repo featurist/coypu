@@ -17,7 +17,7 @@ namespace Coypu.Drivers.Tests
             {
                 if (Driver is PlaywrightDriver)
                 {
-                    Assert.Inconclusive("Playwright does not seem to support window names");
+                    Assert.Ignore("Playwright does not seem to support window names");
                 }
                 OpenPopup();
                 var window = Window("popUpWindowName", Root, DefaultOptions);

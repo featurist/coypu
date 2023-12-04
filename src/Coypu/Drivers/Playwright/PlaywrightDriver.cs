@@ -51,7 +51,7 @@ namespace Coypu.Drivers.Playwright
 
         public Uri Location(Scope scope)
         {
-          return new Uri((PlaywrightPage(scope)).Url);
+          return new Uri(PlaywrightPage(scope).Url);
         }
 
         public string Title(Scope scope)
@@ -62,13 +62,22 @@ namespace Coypu.Drivers.Playwright
         public Coypu.Cookies Cookies { get; set; }
         public object Native => _playwright;
 
-      public Element Window => new PlaywrightWindow(_playwrightBrowser, _context.Pages.First());
+        public Element Window => new PlaywrightWindow(_playwrightBrowser, _context.Pages.First());
 
       public IEnumerable<Element> FindFrames(string locator,
-                                             Scope scope,
-                                             Options options)
+                                               Scope scope,
+                                               Options options)
         {
-            throw new NotImplementedException();
+            var nativeScope = scope.Now().Native;
+            var page = nativeScope as IPage ??
+                       Async.WaitForResult(
+                          ((IElementHandle) nativeScope).OwnerFrameAsync()
+                        ).Page;
+            return new FrameFinder(page).FindFrame(
+                locator,
+                Async.WaitForResult(page.QuerySelectorAllAsync("iframe,frame")),
+                options
+            );
         }
 
         public IEnumerable<Element> FindAllCss(string cssSelector,
@@ -118,9 +127,10 @@ namespace Coypu.Drivers.Playwright
         {
             var tagName = Async.WaitForResult(element.EvaluateAsync("e => e.tagName"))?.GetString();
 
-            return new[] {"iframe", "frame"}.Contains(tagName.ToLower())
-                     ? null  // TODO:  .new SeleniumFrame(element, _playwright, _seleniumWindowManager)
-                     : new PlaywrightElement(element, _playwright);
+            Element coypuElement = new[] {"iframe", "frame"}.Contains(tagName.ToLower())
+                     ? (Element) new PlaywrightFrame(element) : new PlaywrightElement(element);
+
+            return coypuElement;
         }
 
         public bool HasDialog(string withText,
@@ -300,9 +310,15 @@ namespace Coypu.Drivers.Playwright
         private IElementHandle Element(Scope scope)
         {
             var scopeElement = scope.Now();
-            return scopeElement.Native is IPage
-              ? Async.WaitForResult(((IPage) scopeElement.Native).QuerySelectorAsync("html"))
-              : (IElementHandle) scopeElement.Native;
+            var frame = scopeElement.Native as IFrame;
+            if (frame != null) {
+                return Async.WaitForResult(frame.QuerySelectorAsync("html"));
+            }
+            var page = scopeElement.Native as IPage;
+            if (page != null) {
+                return Async.WaitForResult(page.QuerySelectorAsync("html"));
+            }
+            return (IElementHandle) scopeElement.Native;
         }
 
         public void Dispose()

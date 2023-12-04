@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Coypu.Actions;
+using Coypu.Drivers.Playwright;
 using Coypu.Finders;
 using Coypu.Timing;
 using NUnit.Framework;
@@ -40,6 +41,10 @@ namespace Coypu.Drivers.Tests
 
         private static void AssertMaximisesWindow(DriverScope driverScope)
         {
+            if (Driver is PlaywrightDriver)
+            {
+                Assert.Ignore("Playwright does not support window maximisation");
+            }
             Driver.ResizeTo(new Size(768, 400), driverScope);
             Driver.MaximiseWindow(driverScope);
 

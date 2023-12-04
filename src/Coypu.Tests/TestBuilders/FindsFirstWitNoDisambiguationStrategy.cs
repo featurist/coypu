@@ -31,7 +31,7 @@ namespace Coypu.Tests.TestBuilders
             try {
                  return all.ToArray();
             }
-            catch(Exception) {
+            catch(InvalidOperationException) {
                 // Elements have changed due to async page behaviour
                 throw elementFinder.GetMissingException();
             }
