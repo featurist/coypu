@@ -57,13 +57,14 @@ namespace Coypu.Drivers.Playwright
 
       public IEnumerable<System.Net.Cookie> GetAll()
       {
-          return Async.WaitForResult(_context.CookiesAsync()).Select(
+          var cookies = Async.WaitForResult(_context.CookiesAsync());
+          return cookies.Select(
               c => new System.Net.Cookie{
                   Name = c.Name,
                   Value = c.Value,
                   Domain = c.Domain,
                   Path = c.Path,
-                  Expires = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(c.Expires)).DateTime,
+                  Expires = c.Expires == -1 ? DateTime.MinValue : DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(c.Expires)).DateTime,
                   HttpOnly = c.HttpOnly,
                   Secure = c.Secure
               }

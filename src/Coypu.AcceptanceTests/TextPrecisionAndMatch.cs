@@ -14,14 +14,9 @@ namespace Coypu.AcceptanceTests
         [OneTimeSetUp]
         public void SetUpFixture()
         {
-            if (!OperatingSystem.IsWindows())
-            {
-                Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
-            }
-
             var configuration = new SessionConfiguration
             {
-                Timeout = TimeSpan.FromMilliseconds(2000),
+                Timeout = TimeSpan.FromMilliseconds(0),
                 Browser = Drivers.Browser.Chrome,
                 Driver = typeof(PlaywrightDriver)
             };

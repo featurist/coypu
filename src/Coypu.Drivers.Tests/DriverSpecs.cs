@@ -12,6 +12,7 @@ using NUnit.Framework;
 using ElementFinder = Coypu.Finders.ElementFinder;
 using FrameFinder = Coypu.Finders.FrameFinder;
 using Coypu.Drivers.Selenium;
+using OpenQA.Selenium.Chrome;
 
 [SetUpFixture]
 public class AssemblyTearDown
@@ -38,6 +39,7 @@ namespace Coypu.Drivers.Tests
     {
         private static IDriver _driver;
         private static DriverScope _root;
+        private static readonly bool Headless = true;
         private static readonly Browser Browser = Browser.Chrome;
         protected static readonly Options DefaultOptions = new Options();
 
@@ -92,7 +94,7 @@ namespace Coypu.Drivers.Tests
                 _driver.Dispose();
             }
 
-            _driver = (IDriver) Activator.CreateInstance(DriverType, Browser);
+            _driver = (IDriver) Activator.CreateInstance(DriverType, Browser, Headless);
 
             _root = null;
         }

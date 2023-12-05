@@ -11,6 +11,12 @@ using OpenQA.Selenium.Safari;
 
 namespace Coypu.AcceptanceTests.Examples
 {
+    /// <summary>
+    /// This example shows how to use a custom Selenium WebDriver with Coypu.
+    /// There is no equivalent provided for Playwright as:
+    ///   1. A remote driver can be configured with an environment variable: https://playwright.dev/docs/selenium-grid
+    ///   2. Coypu.Browser.Native returns a Playwright BrowserContext which offers access to
+    ///      whatever you might need to configure Playwright differently from the Coypu default
     internal class CustomBrowserSession
     {
         [TestCase("OS X 10.15", "safari", "13")]
@@ -39,7 +45,7 @@ namespace Coypu.AcceptanceTests.Examples
             {
                 Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
             }
-            var driver = new SeleniumWebDriver(browser);
+            var driver = new SeleniumWebDriver(browser, false);
             using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");

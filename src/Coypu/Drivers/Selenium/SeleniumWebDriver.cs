@@ -22,8 +22,8 @@ namespace Coypu.Drivers.Selenium
         private IWebDriver _webDriver;
         private readonly WindowHandleFinder _windowHandleFinder;
 
-        public SeleniumWebDriver(Browser browser)
-            : this(new DriverFactory().NewWebDriver(browser), browser) { }
+        public SeleniumWebDriver(Browser browser, bool headless)
+            : this(new DriverFactory().NewWebDriver(browser, headless), browser) { }
 
         protected SeleniumWebDriver(IWebDriver webDriver,
                                     Browser browser)

@@ -145,7 +145,8 @@ namespace Coypu
         public void SaveWebResource(string resource,
                                     string saveAs)
         {
-            _restrictedResourceDownloader.SetCookies(_driver.GetBrowserCookies());
+            var cookies = _driver.GetBrowserCookies();
+            _restrictedResourceDownloader.SetCookies(cookies);
             _restrictedResourceDownloader.DownloadFile(UrlBuilder.GetFullyQualifiedUrl(resource, SessionConfiguration), saveAs);
         }
 

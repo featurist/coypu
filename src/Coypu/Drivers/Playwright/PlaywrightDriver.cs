@@ -13,27 +13,27 @@ namespace Coypu.Drivers.Playwright
     public class PlaywrightDriver : IDriver
     {
         private readonly Browser _browser;
-        private readonly IPlaywright _playwright;
         private readonly IBrowser _playwrightBrowser;
         private readonly IBrowserContext _context;
 
-        public PlaywrightDriver(Browser browser)
+        public PlaywrightDriver(Browser browser, bool headless)
         {
+            var playwright = Async.WaitForResult(Microsoft.Playwright.Playwright.CreateAsync());
             _browser = browser;
-            _playwright = Async.WaitForResult(Microsoft.Playwright.Playwright.CreateAsync());
-
-            var browserType = _playwright.Chromium; // TODO: map browser to playwright browser type
+            var browserType = playwright.Chromium; // TODO: map browser to playwright browser type
 
             _playwrightBrowser = Async.WaitForResult(browserType.LaunchAsync(
               new BrowserTypeLaunchOptions{
-                  Headless = false,
+                  Headless = headless,
+                  Channel = "chrome"
                 }
             ));
             var page = Async.WaitForResult(_playwrightBrowser.NewPageAsync());
             _context = page.Context;
-            _context.SetDefaultTimeout(1000); // TODO: Work out how to set actionTimeout only and remove this
 
             Cookies = new Cookies(_context);
+
+            _context.SetDefaultTimeout(1000);
 
             // page.Dialog += async (_, dialog) =>
             // {
@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Playwright
         }
 
         public Coypu.Cookies Cookies { get; set; }
-        public object Native => _playwright;
+        public object Native => _context;
 
         public Element Window => new PlaywrightWindow(_playwrightBrowser, _context.Pages.First());
 
@@ -85,11 +85,17 @@ namespace Coypu.Drivers.Playwright
                                                Options options,
                                                Regex textPattern = null)
         {
-            var results = Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"css={cssSelector}"))
-                          .Where(ValidateTextPattern(options, textPattern))
-                          .Where(e => IsDisplayed(e, options))
-                          .Select(BuildElement);
-            return results;
+            try {
+              var results = Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"css={cssSelector}"))
+                              .Where(ValidateTextPattern(options, textPattern))
+                              .Where(e => IsDisplayed(e, options))
+                              .Select(BuildElement);
+                return results;
+            }
+            catch (AggregateException e)
+            {
+                throw new StaleElementException(e);
+            }
         }
 
         private Func<IElementHandle, bool> ValidateTextPattern(Options options, Regex textPattern)
@@ -118,9 +124,20 @@ namespace Coypu.Drivers.Playwright
                                                  Scope scope,
                                                  Options options)
         {
-            return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"xpath={xpath}"))
+            try {
+              //_context.SetDefaultTimeout(1);
+
+              return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"xpath={xpath}"))
                         .Where(e => IsDisplayed(e, options))
                         .Select(BuildElement);
+            }
+            catch (AggregateException e)
+            {
+                throw new StaleElementException(e);
+            }
+            finally {
+              //_context.SetDefaultTimeout(30000);
+            }
         }
 
         private Element BuildElement(IElementHandle element)

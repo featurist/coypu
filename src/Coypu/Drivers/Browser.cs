@@ -20,9 +20,11 @@ namespace Coypu.Drivers
 
         public static Browser InternetExplorer = new Browser {Javascript = true};
         public static Browser Chrome = new Browser {Javascript = true};
+        public static Browser Chromium = new Browser {Javascript = true};
         public static Browser Edge = new Browser {Javascript = true};
         public static Browser Opera = new Browser {Javascript = true};
         public static Browser Safari = new Browser {Javascript = true};
+        public static Browser Webkit = new Browser {Javascript = true};
         private Browser() { }
 
         public bool Javascript { get; private set; }

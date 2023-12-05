@@ -57,7 +57,7 @@ namespace Coypu.Finders
                     {
                         return Locator + XPath.Where(html.IsText(text, options));
                     }
-                }); 
+                });
         }
     }
 }

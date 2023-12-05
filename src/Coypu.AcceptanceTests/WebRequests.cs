@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using Coypu.AcceptanceTests.Sites;
 using NUnit.Framework;
 
@@ -49,12 +50,11 @@ namespace Coypu.AcceptanceTests
         {
             var saveAs = TempFileName();
             var expectedResource = "bdd";
-            
+
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
             Assert.That(File.ReadAllBytes(saveAs), Is.Not.EqualTo(expectedResource));
 
             browser.Visit("/auto_login");
-
             browser.SaveWebResource("/restricted_resource/bdd", saveAs);
             Assert.That(File.ReadAllText(saveAs), Is.EqualTo(expectedResource));
         }
