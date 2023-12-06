@@ -17,15 +17,15 @@ namespace Coypu.Drivers.Playwright
 
         public string Id => throw new NotSupportedException();
 
-        public string Text => Async.WaitForResult(((IPage) Native).InnerTextAsync("xpath=/html/body"));
+        public string Text => ((IPage) Native).InnerTextAsync("xpath=/html/body").Sync();
 
-        public string InnerHTML => Async.WaitForResult(((IPage) Native).InnerHTMLAsync("xpath=./*")).ToString();
+        public string InnerHTML => ((IPage) Native).InnerHTMLAsync("xpath=./*").Sync().ToString();
 
-        public string Title => Async.WaitForResult(_page.TitleAsync());
+        public string Title => _page.TitleAsync().Sync();
 
         public bool Disabled => throw new NotSupportedException();
 
-        public string OuterHTML => Async.WaitForResult(((IPage) Native).EvalOnSelectorAsync("html", "h => h.outerHTML")).ToString();
+        public string OuterHTML => ((IPage) Native).EvalOnSelectorAsync("html", "h => h.outerHTML").Sync().ToString();
 
         public string Value => throw new NotSupportedException();
 

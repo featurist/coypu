@@ -12,14 +12,14 @@ namespace Coypu.Drivers.Playwright
         public PlaywrightFrame(IElementHandle frameElement)
         {
             _frameElement = frameElement;
-            _frame = Async.WaitForResult(frameElement.ContentFrameAsync());
+            _frame = frameElement.ContentFrameAsync().Sync();
         }
 
         public string this[string attributeName] => GetAttribute(attributeName);
 
         private string GetAttribute(string attributeName)
         {
-            return Async.WaitForResult(_frameElement.GetAttributeAsync(attributeName));
+            return _frameElement.GetAttributeAsync(attributeName).Sync();
         }
 
         public string Text => FindBody().Text;
@@ -50,13 +50,13 @@ namespace Coypu.Drivers.Playwright
 
     public bool Selected => throw new System.NotImplementedException();
 
-    public string Title => Async.WaitForResult(_frame.TitleAsync());
+    public string Title => _frame.TitleAsync().Sync();
 
     public bool Disabled => throw new System.NotImplementedException();
 
     private PlaywrightElement FindBody()
         {
-            return new PlaywrightElement(Async.WaitForResult(_frame.QuerySelectorAsync("body")));
+            return new PlaywrightElement(_frame.QuerySelectorAsync("body").Sync());
         }
     }
 }

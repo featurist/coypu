@@ -51,7 +51,7 @@ namespace Coypu.Drivers.Selenium
             }
             catch (NoSuchWindowException ex)
             {
-                throw new MissingWindowException("The active window was closed. Coypu should prevent this by ensuring fresh scope higher up.", ex);
+                throw new MissingWindowException("The active window was closed.", ex);
             }
 
             return matchingWindowHandles;

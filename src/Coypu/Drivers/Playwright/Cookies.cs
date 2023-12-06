@@ -20,12 +20,12 @@ namespace Coypu.Drivers.Playwright
       public void AddCookie(System.Net.Cookie cookie, Options options = null)
       {
           var expires = ((DateTimeOffset)cookie.Expires).ToUnixTimeMilliseconds();
-          Async.WaitForResult(_context.AddCookiesAsync(new[] {PlaywrightCookie(cookie)}));
+          _context.AddCookiesAsync(new[] {PlaywrightCookie(cookie)}).Sync();
       }
 
       public async void DeleteAll()
       {
-          Async.WaitForResult(_context.ClearCookiesAsync());
+          _context.ClearCookiesAsync().Sync();
       }
 
       public void DeleteCookie(System.Net.Cookie cookie)
@@ -57,7 +57,7 @@ namespace Coypu.Drivers.Playwright
 
       public IEnumerable<System.Net.Cookie> GetAll()
       {
-          var cookies = Async.WaitForResult(_context.CookiesAsync());
+          var cookies = _context.CookiesAsync().Sync();
           return cookies.Select(
               c => new System.Net.Cookie{
                   Name = c.Name,

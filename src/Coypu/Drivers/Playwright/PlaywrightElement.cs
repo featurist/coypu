@@ -17,18 +17,18 @@ namespace Coypu.Drivers.Playwright
 
         private string GetAttribute(string attributeName)
         {
-            return Async.WaitForResult(_native.GetAttributeAsync(attributeName));
+            return _native.GetAttributeAsync(attributeName).Sync();
         }
 
         public string Id => GetAttribute("id");
 
-        public virtual string Text => Async.WaitForResult(_native.InnerTextAsync());
+        public virtual string Text => _native.InnerTextAsync().Sync();
 
         public string Value {
             get {
                 var inputTags = new[] { "input", "textarea", "select" };
                 if (inputTags.Contains(TagName.ToLower()))
-                  return Async.WaitForResult(_native.InputValueAsync());
+                  return _native.InputValueAsync().Sync();
 
                 return this["value"];
             }
@@ -36,27 +36,27 @@ namespace Coypu.Drivers.Playwright
 
         public string Name => GetAttribute("name");
 
-        public string TagName => Async.WaitForResult(_native.EvaluateAsync("e => e.tagName"))?.GetString();
+        public string TagName => _native.EvaluateAsync("e => e.tagName").Sync()?.GetString();
 
-        public virtual string OuterHTML => Async.WaitForResult(_native.EvaluateAsync("el => el.outerHTML")).ToString();
+        public virtual string OuterHTML => _native.EvaluateAsync("el => el.outerHTML").Sync().ToString();
 
-        public virtual string InnerHTML => Async.WaitForResult(_native.InnerHTMLAsync());
+        public virtual string InnerHTML => _native.InnerHTMLAsync().Sync();
 
         public string Title => GetAttribute("title");
 
-        public bool Disabled => !Async.WaitForResult<bool>(_native.IsEnabledAsync());
+        public bool Disabled => !_native.IsEnabledAsync().Sync();
 
         public string SelectedOption
         {
             get
             {
-                return Async.WaitForResult(_native.EvaluateAsync("sel => sel.options[sel.options.selectedIndex].innerText")).ToString();
+                return _native.EvaluateAsync("sel => sel.options[sel.options.selectedIndex].innerText").Sync().ToString();
             }
         }
 
         public bool Selected {
           get {
-            return Async.WaitForResult(_native.IsCheckedAsync());
+            return _native.IsCheckedAsync().Sync();
           }
         }
 

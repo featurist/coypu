@@ -133,7 +133,7 @@ namespace Coypu.AcceptanceTests.Examples
         {
             var button = (IElementHandle) Browser.FindButton("clickMeTest")
                                               .Native;
-            Async.WaitForResult(button.ClickAsync());
+            button.ClickAsync().Sync();
             Assert.That(Browser.FindButton("clickMeTest")
                                .Value,
                         Is.EqualTo("Click me - clicked"));

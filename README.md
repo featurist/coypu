@@ -839,7 +839,7 @@ WARNING: Setting this in your session configuration means adding time to *every*
 browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
 ```
 ## A note on Playwright
-* Clearly Playwright's API, internals and approach are heavily influence by Capybara/Coypu which is awesome! There's a lot less reason to start a new project with Coypu over Playwright than in the days when Selenium was the only option. However here's a few to consider:
+* Clearly Playwright's API, internals and approach are heavily influence by Capybara/Coypu which is awesome! There's a lot less reason to start a new project with Coypu over Playwright than in the days when Selenium was the only option. However here's a few things to consider:
 
 1. The Capybara/Copyu DSL is well established and has been pretty stable in the Rails world for a long time. The finders in Coypu remain more semantic and direct than Playwrights Locator pattern, and are designed to read like the way a human interacts with a web page without specifying `ByLabel`/`ByPlaceholder` etc e.g.:
 
@@ -855,9 +855,9 @@ window.Check("Terms & Conditions");
 window.FillIn("User Name").With("John");
 ```
 
-2. As a wrapper that decouples finding elements, interacting with the browser and waits and retries from the actual browser automation you may feel prefer to write against the Coypu API to decouple your tests from your choice of automation framework. After all, all the test suites written using the Coypu Selenium Driver can now be run with the new Playwright driver with the exact same semantics.
+You may prefer your tests to read like this.
 
-3. Waits and retries
+2. Waits and retries
 Playwright will auto wait for elements to become actionable in the page for you, but where your page elements change dynamically without a full page reload like any Single Page App, then you will still need to write an `Expect` assertion whenever the next element you want to interact with before interacting with it or your test may flake out.
 
 e.g. To Click through multiple pages loaded with async
@@ -872,6 +872,8 @@ await Expect(Page
 // Ready
 await Page.GetByRole(AriaRole.Link, new() { Name = "Next page" }).ClickAsync();
 ```
+
+3. As a wrapper that decouples finding elements, interacting with the browser and waits and retries from the actual browser automation you may feel prefer to write against the Coypu API to decouple your tests from your choice of automation framework. After all, all the test suites written using the Coypu Selenium Driver can now be run with the new Playwright driver with the exact same semantics.
 
 ### Coypu
 ```

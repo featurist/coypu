@@ -44,11 +44,10 @@ namespace Coypu.Drivers.Playwright
                                         Options options)
         {
             return frame.Title == locator ||
-                    Async.WaitForResult(
+
                         ((IFrame) frame.Native).QuerySelectorAllAsync(
                             $"xpath=.//h1[{_xPath.IsText(locator, options)}]"
-                        )
-                    ).Any();
+                        ).Sync().Any();
         }
     }
 }

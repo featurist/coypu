@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
+using Coypu;
 
 #pragma warning disable 1591
 
@@ -18,17 +19,17 @@ namespace Coypu.Drivers.Playwright
 
         public PlaywrightDriver(Browser browser, bool headless)
         {
-            var playwright = Async.WaitForResult(Microsoft.Playwright.Playwright.CreateAsync());
+            var playwright = Microsoft.Playwright.Playwright.CreateAsync().Sync();
             _browser = browser;
             var browserType = playwright.Chromium; // TODO: map browser to playwright browser type
 
-            _playwrightBrowser = Async.WaitForResult(browserType.LaunchAsync(
+            _playwrightBrowser = browserType.LaunchAsync(
               new BrowserTypeLaunchOptions{
                   Headless = headless,
                   Channel = "chrome"
                 }
-            ));
-            var page = Async.WaitForResult(_playwrightBrowser.NewPageAsync());
+            ).Sync();
+            var page = _playwrightBrowser.NewPageAsync().Sync();
             _context = page.Context;
 
             Cookies = new Cookies(_context);
@@ -56,7 +57,7 @@ namespace Coypu.Drivers.Playwright
 
         public string Title(Scope scope)
         {
-          return Async.WaitForResult((PlaywrightPage(scope)).TitleAsync());
+          return (PlaywrightPage(scope)).TitleAsync().Sync();
         }
 
         public Coypu.Cookies Cookies { get; set; }
@@ -70,12 +71,10 @@ namespace Coypu.Drivers.Playwright
         {
             var nativeScope = scope.Now().Native;
             var page = nativeScope as IPage ??
-                       Async.WaitForResult(
-                          ((IElementHandle) nativeScope).OwnerFrameAsync()
-                        ).Page;
+                          ((IElementHandle) nativeScope).OwnerFrameAsync().Sync().Page;
             return new FrameFinder(page).FindFrame(
                 locator,
-                Async.WaitForResult(page.QuerySelectorAllAsync("iframe,frame")),
+                page.QuerySelectorAllAsync("iframe,frame").Sync(),
                 options
             );
         }
@@ -86,7 +85,7 @@ namespace Coypu.Drivers.Playwright
                                                Regex textPattern = null)
         {
             try {
-              var results = Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"css={cssSelector}"))
+              var results = Element(scope).QuerySelectorAllAsync($"css={cssSelector}").Sync()
                               .Where(ValidateTextPattern(options, textPattern))
                               .Where(e => IsDisplayed(e, options))
                               .Select(BuildElement);
@@ -105,7 +104,7 @@ namespace Coypu.Drivers.Playwright
             {
               if (textPattern == null) return true;
 
-              var text = Async.WaitForResult(e.InnerTextAsync());
+              var text = e.InnerTextAsync().Sync();
               return text != null && textPattern.IsMatch(text.Trim());
             };
 
@@ -117,7 +116,7 @@ namespace Coypu.Drivers.Playwright
         private bool IsDisplayed(IElementHandle e,
                                 Options options)
         {
-            return options.ConsiderInvisibleElements || Async.WaitForResult(e.IsVisibleAsync());
+            return options.ConsiderInvisibleElements || e.IsVisibleAsync().Sync();
         }
 
         public IEnumerable<Element> FindAllXPath(string xpath,
@@ -127,7 +126,7 @@ namespace Coypu.Drivers.Playwright
             try {
               //_context.SetDefaultTimeout(1);
 
-              return Async.WaitForResult(Element(scope).QuerySelectorAllAsync($"xpath={xpath}"))
+              return Element(scope).QuerySelectorAllAsync($"xpath={xpath}").Sync()
                         .Where(e => IsDisplayed(e, options))
                         .Select(BuildElement);
             }
@@ -142,7 +141,7 @@ namespace Coypu.Drivers.Playwright
 
         private Element BuildElement(IElementHandle element)
         {
-            var tagName = Async.WaitForResult(element.EvaluateAsync("e => e.tagName"))?.GetString();
+            var tagName = element.EvaluateAsync("e => e.tagName").Sync()?.GetString();
 
             Element coypuElement = new[] {"iframe", "frame"}.Contains(tagName.ToLower())
                      ? (Element) new PlaywrightFrame(element) : new PlaywrightElement(element);
@@ -159,7 +158,7 @@ namespace Coypu.Drivers.Playwright
         public void Visit(string url,
                           Scope scope)
         {
-            IResponse response = Async.WaitForResult(PlaywrightPage(scope).GotoAsync(url));
+            IResponse response = PlaywrightPage(scope).GotoAsync(url).Sync();
             if (response != null && response.Status != 200)
             {
               throw new Exception("Failed to load page");
@@ -173,21 +172,21 @@ namespace Coypu.Drivers.Playwright
 
         public void Click(Element element)
         {
-            Async.WaitForResult(PlaywrightElement(element).ClickAsync());
+            PlaywrightElement(element).ClickAsync().Sync();
         }
 
         public void Hover(Element element)
         {
-            Async.WaitForResult(PlaywrightElement(element).HoverAsync());
+            PlaywrightElement(element).HoverAsync().Sync();
         }
 
         public void SendKeys(Element element,
                              string keys)
         {
             var playwrightElement = PlaywrightElement(element);
-            Async.WaitForResult(playwrightElement.FocusAsync());
-            Async.WaitForResult(playwrightElement.EvaluateAsync("e => e.setSelectionRange(-1, -1)"));
-            keys.ToList().ForEach(key => Async.WaitForResult(playwrightElement.PressAsync(key.ToString())));
+            playwrightElement.FocusAsync().Sync();
+            playwrightElement.EvaluateAsync("e => e.setSelectionRange(-1, -1)").Sync();
+            keys.ToList().ForEach(key => playwrightElement.PressAsync(key.ToString()).Sync());
         }
 
         public void MaximiseWindow(Scope scope)
@@ -197,7 +196,7 @@ namespace Coypu.Drivers.Playwright
 
         public void Refresh(Scope scope)
         {
-            Async.WaitForResult(((IPage )scope.Now().Native).ReloadAsync());
+            ((IPage )scope.Now().Native).ReloadAsync().Sync();
         }
 
         public void ResizeTo(Size size,
@@ -206,26 +205,26 @@ namespace Coypu.Drivers.Playwright
             if (_browser == Browser.Chrome) {
                 size = new Size(size.Width - 2, size.Height - 80);
             }
-            Async.WaitForResult(PlaywrightPage(scope).SetViewportSizeAsync(size.Width, size.Height));
+            PlaywrightPage(scope).SetViewportSizeAsync(size.Width, size.Height).Sync();
         }
 
         public void SaveScreenshot(string fileName,
                                    Scope scope)
         {
-            Async.WaitForResult(PlaywrightPage(scope).ScreenshotAsync(new PageScreenshotOptions
+            PlaywrightPage(scope).ScreenshotAsync(new PageScreenshotOptions
             {
                 Path = fileName
-            }));
+            }).Sync();
         }
 
         public void GoBack(Scope scope)
         {
-            Async.WaitForResult(PlaywrightPage(scope).GoBackAsync());
+            PlaywrightPage(scope).GoBackAsync().Sync();
         }
 
         public void GoForward(Scope scope)
         {
-            Async.WaitForResult(PlaywrightPage(scope).GoForwardAsync());
+            PlaywrightPage(scope).GoForwardAsync().Sync();
         }
 
         public IEnumerable<Cookie> GetBrowserCookies()
@@ -237,18 +236,25 @@ namespace Coypu.Drivers.Playwright
                                                 Scope scope,
                                                 Options options)
         {
-            return _context.Pages
-                   .Select(p => new PlaywrightWindow(_playwrightBrowser, p))
-                   .Where(window => {
-                      return
-                        options.TextPrecisionExact && (
-                          window.Title == titleOrName
-                        ) ||
-                        !options.TextPrecisionExact && (
-                          window.Title.Contains(titleOrName)
-                        );
-                      }
-                   );
+          try
+          {
+              return _context.Pages
+                  .Select(p => new PlaywrightWindow(_playwrightBrowser, p))
+                  .Where(window => {
+                    return
+                      options.TextPrecisionExact && (
+                        window.Title == titleOrName
+                      ) ||
+                      !options.TextPrecisionExact && (
+                        window.Title.Contains(titleOrName)
+                      );
+                  });
+            }
+            catch (PlaywrightException ex)
+            {
+                throw new MissingWindowException("The active window was closed.", ex);
+            }
+
         }
 
         public void Set(Element element,
@@ -256,9 +262,9 @@ namespace Coypu.Drivers.Playwright
         {
             var input = PlaywrightElement(element);
             if (element["type"] == "file")
-                Async.WaitForResult(input.SetInputFilesAsync(value));
+                input.SetInputFilesAsync(value).Sync();
             else
-                Async.WaitForResult(input.FillAsync(value));
+                input.FillAsync(value).Sync();
         }
 
         public void AcceptModalDialog(Scope scope)
@@ -274,23 +280,23 @@ namespace Coypu.Drivers.Playwright
         public void Check(Element field)
         {
             if (!field.Selected)
-                Async.WaitForResult(PlaywrightElement(field).CheckAsync());
+                PlaywrightElement(field).CheckAsync().Sync();
         }
 
         public void Uncheck(Element field)
         {
             if (field.Selected)
-                Async.WaitForResult(PlaywrightElement(field).UncheckAsync());
+                PlaywrightElement(field).UncheckAsync().Sync();
         }
 
         public void Choose(Element field)
         {
-            Async.WaitForResult(PlaywrightElement(field).CheckAsync());
+            PlaywrightElement(field).CheckAsync().Sync();
         }
 
         public void SelectOption(Element select, Element option, string optionToSelect)
         {
-            Async.WaitForResult(PlaywrightElement(select).SelectOptionAsync(optionToSelect));
+            PlaywrightElement(select).SelectOptionAsync(optionToSelect).Sync();
         }
 
         public object ExecuteScript(string javascript,
@@ -298,9 +304,9 @@ namespace Coypu.Drivers.Playwright
                                     params object[] args)
         {
             var func = $"(arguments) => {Regex.Replace(javascript, "^return ", string.Empty)}";
-            return Async.WaitForResult(
+            return
               (PlaywrightPage(scope))
-                .EvaluateAsync(func, ConvertScriptArgs(args)))
+                .EvaluateAsync(func, ConvertScriptArgs(args)).Sync()
                 .ToString();
         }
 
@@ -329,11 +335,11 @@ namespace Coypu.Drivers.Playwright
             var scopeElement = scope.Now();
             var frame = scopeElement.Native as IFrame;
             if (frame != null) {
-                return Async.WaitForResult(frame.QuerySelectorAsync("html"));
+                return frame.QuerySelectorAsync("html").Sync();
             }
             var page = scopeElement.Native as IPage;
             if (page != null) {
-                return Async.WaitForResult(page.QuerySelectorAsync("html"));
+                return page.QuerySelectorAsync("html").Sync();
             }
             return (IElementHandle) scopeElement.Native;
         }
