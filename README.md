@@ -96,7 +96,13 @@ sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
 
 ### Headless mode
 
-The Playwright driver in headless mode passes all the Coypu specs so is enabled by default. Headless was never enabled by default on the Selenium driver as it did not behave exactly as the headed mode.
+**The Playwright driver in headless mode passes all the Coypu specs and is enabled by default. These tests run over 4 times faster in headless Playwright than headed Selenium.**
+
+Headless was never enabled by default on the Selenium driver as it had various shortcomings in the past, in Coypu v5 it is enabled by default, but has issues accessing cookies and IFrames. You may need to run test that rely on getting or setting cookies and accessing IFrames in headed mode when using the Selenium driver.
+
+Selenium only supports headless for Chrome, Edge and Firefox. IE, Safari and Opera are not supported.
+
+```c#
 
 Playwright is now the default and recommended driver in Coypu v5 and runs headless by default.
 

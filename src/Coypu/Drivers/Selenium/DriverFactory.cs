@@ -28,6 +28,9 @@ namespace Coypu.Drivers.Selenium
               if (browser == Browser.Safari) {
                 throw new NotSupportedException("Opera does not support headless mode");
               }
+              if (browser == Browser.InternetExplorer) {
+                throw new NotSupportedException("Internet Explorer does not support headless mode");
+              }
             }
             if (browser == Browser.Firefox) return new FirefoxDriver(firefoxOptions);
             if (browser == Browser.Chrome) return new ChromeDriver(chromeOptions);
