@@ -11,6 +11,7 @@ using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
 using ElementFinder = Coypu.Finders.ElementFinder;
 using FrameFinder = Coypu.Finders.FrameFinder;
+using Coypu.Drivers.Selenium;
 
 [SetUpFixture]
 public class AssemblyTearDown
@@ -40,9 +41,7 @@ namespace Coypu.Drivers.Tests
         private static readonly bool Headless = true;
         private static readonly Browser Browser = Browser.Chrome;
         protected static readonly Options DefaultOptions = new Options();
-
         private static readonly Type DriverType = typeof(PlaywrightDriver);
-
         protected static readonly SessionConfiguration DefaultSessionConfiguration = new SessionConfiguration
                                                                                      {
                                                                                          Browser = Browser,

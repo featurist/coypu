@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
-using Coypu;
 
 #pragma warning disable 1591
 
@@ -14,38 +13,60 @@ namespace Coypu.Drivers.Playwright
     public class PlaywrightDriver : IDriver
     {
         private readonly Browser _browser;
+        private readonly bool _headless;
+    private readonly Dialogs _dialogs;
+    private readonly IPlaywright _playwright;
         private readonly IBrowser _playwrightBrowser;
         private readonly IBrowserContext _context;
 
         public PlaywrightDriver(Browser browser, bool headless)
         {
-            var playwright = Microsoft.Playwright.Playwright.CreateAsync().Sync();
+            _dialogs = new Dialogs();
+            _playwright = Microsoft.Playwright.Playwright.CreateAsync().Sync();
             _browser = browser;
-            var browserType = playwright.Chromium; // TODO: map browser to playwright browser type
+            _headless = headless;
+            var browserType = PlaywrightBrowserType(browser, _playwright); // TODO: map browser to playwright browser type
 
             _playwrightBrowser = browserType.LaunchAsync(
-              new BrowserTypeLaunchOptions{
-                  Headless = headless,
-                  Channel = "chrome"
+                new BrowserTypeLaunchOptions
+                {
+                Headless = headless,
+                Channel = PlaywrightBrowserChannel(browser)
                 }
             ).Sync();
             var page = _playwrightBrowser.NewPageAsync().Sync();
             _context = page.Context;
 
             Cookies = new Cookies(_context);
+            _context.SetDefaultTimeout(10000);
+    }
 
-            _context.SetDefaultTimeout(1000);
+    private string PlaywrightBrowserChannel(Browser browser)
+        {
+            if (browser == Browser.Chrome)
+                return "chrome";
+            if (browser == Browser.Edge)
+                return "msedge";
 
-            // page.Dialog += async (_, dialog) =>
-            // {
-            //     // TODO: wait here async for something to happen
-            //     // Record open dialog for HasDialog
-            //     // When user calls AcceptDialog or CancelDialog
-            //     //   set something so we know to DismissAsync or AcceptAsync
-            //     // NB Need to do this for every page that is opened somehow
-            //     await dialog.DismissAsync();
-            // };
+            return null;
         }
+
+        private IBrowserType PlaywrightBrowserType(Browser browser, IPlaywright playwright)
+        {
+            if (browser == Browser.Chrome)
+                return playwright.Chromium;
+            if (browser == Browser.Edge)
+                return playwright.Chromium;
+            if (browser == Browser.Chromium)
+                return playwright.Chromium;
+            if (browser == Browser.Firefox)
+                return playwright.Firefox;
+            if (browser == Browser.Webkit)
+                return playwright.Webkit;
+
+            throw new NotSupportedException($"Browser {browser} is not supported by Playwright");
+        }
+
         protected bool NoJavascript => !_browser.Javascript;
 
         public bool Disposed { get; private set; }
@@ -57,29 +78,35 @@ namespace Coypu.Drivers.Playwright
 
         public string Title(Scope scope)
         {
-          return (PlaywrightPage(scope)).TitleAsync().Sync();
+          return PlaywrightPage(scope).TitleAsync().Sync();
         }
 
         public Coypu.Cookies Cookies { get; set; }
         public object Native => _context;
 
-        public Element Window => new PlaywrightWindow(_playwrightBrowser, _context.Pages.First());
+        public Element Window => new PlaywrightWindow(_context.Pages.First());
 
       public IEnumerable<Element> FindFrames(string locator,
                                                Scope scope,
                                                Options options)
-        {
-            var nativeScope = scope.Now().Native;
-            var page = nativeScope as IPage ??
-                          ((IElementHandle) nativeScope).OwnerFrameAsync().Sync().Page;
-            return new FrameFinder(page).FindFrame(
-                locator,
-                page.QuerySelectorAllAsync("iframe,frame").Sync(),
-                options
-            );
-        }
+    {
+      IPage page = Page(scope);
+      return new FrameFinder(page).FindFrame(
+          locator,
+          page.QuerySelectorAllAsync("iframe,frame").Sync(),
+          options
+      );
+    }
 
-        public IEnumerable<Element> FindAllCss(string cssSelector,
+    private static IPage Page(Scope scope)
+    {
+      var nativeScope = scope.Now().Native;
+      var page = nativeScope as IPage ??
+                    ((IElementHandle)nativeScope).OwnerFrameAsync().Sync().Page;
+      return page;
+    }
+
+    public IEnumerable<Element> FindAllCss(string cssSelector,
                                                Scope scope,
                                                Options options,
                                                Regex textPattern = null)
@@ -124,8 +151,6 @@ namespace Coypu.Drivers.Playwright
                                                  Options options)
         {
             try {
-              //_context.SetDefaultTimeout(1);
-
               return Element(scope).QuerySelectorAllAsync($"xpath={xpath}").Sync()
                         .Where(e => IsDisplayed(e, options))
                         .Select(BuildElement);
@@ -133,9 +158,6 @@ namespace Coypu.Drivers.Playwright
             catch (AggregateException e)
             {
                 throw new StaleElementException(e);
-            }
-            finally {
-              //_context.SetDefaultTimeout(30000);
             }
         }
 
@@ -149,10 +171,29 @@ namespace Coypu.Drivers.Playwright
             return coypuElement;
         }
 
-        public bool HasDialog(string withText,
-                              Scope scope)
+        public void AcceptAlert(string text, DriverScope scope, Action trigger)
         {
-            throw new NotImplementedException();
+            _dialogs.ActOnDialog(text, Page(scope), trigger, DialogType.Alert, dialog => dialog.AcceptAsync());
+        }
+
+        public void AcceptConfirm(string text, DriverScope scope, Action trigger)
+        {
+            _dialogs.ActOnDialog(text, Page(scope), trigger, DialogType.Confirm, dialog => dialog.AcceptAsync());
+        }
+
+        public void CancelConfirm(string text, DriverScope scope, Action trigger)
+        {
+            _dialogs.ActOnDialog(text, Page(scope), trigger, DialogType.Confirm, dialog => dialog.DismissAsync());
+        }
+
+        public void AcceptPrompt(string text, string promptTalue, DriverScope scope, Action trigger)
+        {
+            _dialogs.ActOnDialog(text, Page(scope), trigger, DialogType.Prompt, dialog => dialog.AcceptAsync(promptTalue));
+        }
+
+        public void CancelPrompt(string text, DriverScope scope, Action trigger)
+        {
+            _dialogs.ActOnDialog(text, Page(scope), trigger, DialogType.Prompt, dialog => dialog.DismissAsync());
         }
 
         public void Visit(string url,
@@ -202,7 +243,7 @@ namespace Coypu.Drivers.Playwright
         public void ResizeTo(Size size,
                              Scope scope)
         {
-            if (_browser == Browser.Chrome) {
+            if (_playwrightBrowser.BrowserType == _playwright.Chromium && !_headless) {
                 size = new Size(size.Width - 2, size.Height - 80);
             }
             PlaywrightPage(scope).SetViewportSizeAsync(size.Width, size.Height).Sync();
@@ -239,7 +280,7 @@ namespace Coypu.Drivers.Playwright
           try
           {
               return _context.Pages
-                  .Select(p => new PlaywrightWindow(_playwrightBrowser, p))
+                  .Select(p => new PlaywrightWindow(p))
                   .Where(window => {
                     return
                       options.TextPrecisionExact && (
@@ -269,12 +310,18 @@ namespace Coypu.Drivers.Playwright
 
         public void AcceptModalDialog(Scope scope)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("AcceptModalDialog is not supported by Playwright. Please wrap your action that will trigger the modal dialog within `Browser.AcceptAlert/AcceptConfirm/AcceptPrompt(...)`");
         }
 
         public void CancelModalDialog(Scope scope)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("AcceptModalDialog is not supported by Playwright. Please wrap your action that will trigger the modal dialog within `Browser.CancelConfirm/CancelPrompt(...)`");
+        }
+
+        public bool HasDialog(string withText,
+                              Scope scope)
+        {
+            throw new NotImplementedException("HasModalDialog is not supported by Playwright. Please wrap your action that will trigger the modal dialog within `Browser.[Accepts/Cancels][Alert/Confirm/Prompt](...");
         }
 
         public void Check(Element field)
@@ -305,7 +352,7 @@ namespace Coypu.Drivers.Playwright
         {
             var func = $"(arguments) => {Regex.Replace(javascript, "^return ", string.Empty)}";
             return
-              (PlaywrightPage(scope))
+              PlaywrightPage(scope)
                 .EvaluateAsync(func, ConvertScriptArgs(args)).Sync()
                 .ToString();
         }
@@ -352,11 +399,8 @@ namespace Coypu.Drivers.Playwright
         protected virtual void Dispose(bool disposing)
         {
             if (Disposed) return;
-            if (disposing)
-            {
-                // AcceptAnyAlert(); ??
-            }
 
+            _playwright.Dispose();
             Disposed = true;
         }
     }

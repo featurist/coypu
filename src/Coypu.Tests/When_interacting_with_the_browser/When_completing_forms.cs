@@ -4,11 +4,12 @@ using System.Linq;
 using Coypu.Drivers;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
+using OpenQA.Selenium.DevTools.V85.Network;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
     [TestFixture]
-    public class When_completing_forms : BrowserInteractionTests 
+    public class When_completing_forms : BrowserInteractionTests
     {
         private StubElement StubField(string locator, Options options = null)
         {
@@ -19,18 +20,19 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             return stubField;
         }
 
-        private StubElement StubOption(string fieldLocator, string optionLocator, Options options = null)
+        private FakeDriver.SelectOptionParams StubOption(string fieldLocator, string optionLocator, Options options = null)
         {
+            var mergedOptions = Options.Merge(options, sessionConfiguration);
             var stubSelect = new StubElement { Id = Guid.NewGuid().ToString() };
             var stubOption = new StubElement { Id = Guid.NewGuid().ToString() };
-            var selectXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Select(fieldLocator, options ?? sessionConfiguration);
-            var optionXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Option(optionLocator, options ?? sessionConfiguration);
-            driver.StubAllXPath(selectXpath, new[] { stubSelect }, browserSession, options ?? sessionConfiguration);
-            driver.StubAllXPath(optionXpath, new[] { stubOption }, new SnapshotElementScope(stubSelect, browserSession, options), options ?? sessionConfiguration);
+            var selectXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Select(fieldLocator, mergedOptions);
+            var optionXpath = new Html(sessionConfiguration.Browser.UppercaseTagNames).Option(optionLocator, Options.Merge(mergedOptions, Options.Invisible));
+            driver.StubAllXPath(selectXpath, new[] { stubSelect }, browserSession, mergedOptions);
+            driver.StubAllXPath(optionXpath, new[] { stubOption }, new SnapshotElementScope(stubSelect, browserSession, options), Options.Merge(mergedOptions, Options.Invisible));
 
-            return stubOption;
+            return new FakeDriver.SelectOptionParams{Select = stubSelect, Option = stubOption, OptionToSelect = optionLocator};
         }
-        
+
         [Test]
         public void When_filling_in_a_text_field_It_finds_field_and_sets_value_robustly()
         {
@@ -74,18 +76,20 @@ namespace Coypu.Tests.When_interacting_with_the_browser
         }
 
         [Test]
-        public void When_selecting_an_option_It_finds_field_and_clicks_the_option_synchronised()
+        public void When_selecting_an_option_It_finds_invisible_field_and_clicks_the_option_synchronised()
         {
             var stubbedOption = StubOption("Some select field locator", "Some option to select");
 
             browserSession.Select("Some option to select").From("Some select field locator");
 
-            Assert.That(driver.ClickedElements, Has.No.Member(stubbedOption));
+            Assert.That(driver.SelectedOptions, Is.Empty);
 
             RunQueryAndCheckTiming();
 
-            var selectedOption = driver.ClickedElements.Single();
-            Assert.That(selectedOption, Is.SameAs(stubbedOption));
+            var selectedOption = driver.SelectedOptions.Single();
+            Assert.That(selectedOption.Option, Is.SameAs(stubbedOption.Option));
+            Assert.That(((SnapshotElementScope)selectedOption.Select).FindElement(), Is.SameAs(stubbedOption.Select));
+            Assert.That(selectedOption.OptionToSelect, Is.SameAs(stubbedOption.OptionToSelect));
         }
 
         [Test]

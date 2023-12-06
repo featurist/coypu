@@ -72,7 +72,7 @@ namespace Coypu
                                 RestrictedResourceDownloader restrictedResourceDownloader)
             : base(sessionConfiguration,
                    null,
-                   driverFactory.NewWebDriver(sessionConfiguration.Driver, sessionConfiguration.Browser),
+                   driverFactory.NewWebDriver(sessionConfiguration.Driver, sessionConfiguration.Browser, sessionConfiguration.Headless),
                    timingStrategy,
                    waiter,
                    urlBuilder,

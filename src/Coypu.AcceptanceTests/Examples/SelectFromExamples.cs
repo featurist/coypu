@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks.Dataflow;
+using Coypu.Drivers.Playwright;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests.Examples
@@ -55,6 +56,9 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void SelectFrom_OptionGroup_Workaround()
         {
+            if (Browser.Driver is PlaywrightDriver) {
+                Assert.Ignore("Playwright cannot interact with optgroup like this :(");
+            }
             var select = Browser.FindField("selectFieldWithOptionGroups");
             Assert.That(select.SelectedOption, Is.EqualTo("Barbie"));
 

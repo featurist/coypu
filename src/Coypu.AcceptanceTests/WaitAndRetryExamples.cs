@@ -17,7 +17,8 @@ namespace Coypu.AcceptanceTests
             var configuration = new SessionConfiguration
                                 {
                                     Browser = Drivers.Browser.Chrome,
-                                    Driver = typeof(PlaywrightDriver)
+                                    Driver = typeof(PlaywrightDriver),
+                                    Headless = false
                                 };
             Browser = new BrowserSession(configuration);
         }

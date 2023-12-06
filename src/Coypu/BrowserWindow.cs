@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using Coypu.Actions;
 using Coypu.Finders;
@@ -82,6 +83,51 @@ namespace Coypu
         public void CancelModalDialog(Options options = null)
         {
             RetryUntilTimeout(new CancelModalDialog(this, _driver, Merge(options)));
+        }
+
+        public void AcceptAlert(Action trigger)
+        {
+            AcceptAlert(null, trigger);
+        }
+
+        public void AcceptAlert(string text, Action trigger)
+        {
+            _driver.AcceptAlert(text, this, trigger);
+        }
+
+        public void AcceptConfirm(Action trigger)
+        {
+            AcceptConfirm(null, trigger);
+        }
+
+        public void AcceptConfirm(string text, Action trigger)
+        {
+            _driver.AcceptConfirm(text, this, trigger);
+        }
+
+        public void CancelConfirm(Action trigger)
+        {
+            CancelConfirm(null, trigger);
+        }
+
+        public void CancelConfirm(string text, Action trigger)
+        {
+            _driver.CancelConfirm(text, this, trigger);
+        }
+
+        public void AcceptPrompt(string promptValue, Action trigger)
+        {
+            AcceptPrompt(null, promptValue, trigger);
+        }
+
+        public void AcceptPrompt(string text, string promptValue, Action trigger)
+        {
+            _driver.AcceptPrompt(text, promptValue, this, trigger);
+        }
+
+        public void CancelPrompt(string text, DriverScope root, Action trigger)
+        {
+            _driver.CancelPrompt(text, this, trigger);
         }
 
         /// <summary>

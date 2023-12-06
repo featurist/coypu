@@ -9,8 +9,7 @@ namespace Coypu.Drivers.Playwright
     {
         private readonly IPage _page;
 
-        public PlaywrightWindow(IBrowser playwrightBrowser,
-                                IPage page)
+        public PlaywrightWindow(IPage page)
         {
             _page = page;
         }

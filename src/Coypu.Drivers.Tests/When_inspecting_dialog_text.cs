@@ -1,5 +1,6 @@
 ﻿using Shouldly;
 using NUnit.Framework;
+using Coypu.Drivers.Playwright;
 namespace Coypu.Drivers.Tests
 {
     internal class When_inspecting_dialog_text : DriverSpecs
@@ -7,6 +8,10 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_exact_text_in_alert()
         {
+            if (Driver is PlaywrightDriver)
+            {
+                Assert.Ignore("Playwright does not support the obsolete HasDialog API");
+            }
             using (Driver)
             {
                 Driver.Click(Link("Trigger an alert"));
@@ -17,6 +22,10 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_exact_text_in_confirm()
         {
+            if (Driver is PlaywrightDriver)
+            {
+                Assert.Ignore("Playwright does not support the obsolete HasDialog API");
+            }
             using (Driver)
             {
                 Driver.Click(Link("Trigger a confirm"));

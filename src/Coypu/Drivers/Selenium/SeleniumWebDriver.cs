@@ -326,5 +326,53 @@ namespace Coypu.Drivers.Selenium
             catch (InvalidOperationException) { }
             catch (IndexOutOfRangeException) { } // No window handles
         }
+
+    public void AcceptAlert(string text, DriverScope scope, Action trigger)
+    {
+        trigger.Invoke();
+        _elementFinder.SeleniumScope(scope);
+        if (text != null && _dialogs.HasAnyDialog() && !_dialogs.HasDialog(text)) {
+            throw new MissingDialogException("A dialog was present but didn't match the expected text.");
+        }
+        _dialogs.AcceptModalDialog();
     }
+
+    public void CancelAlert(string text, DriverScope scope, Action trigger)
+    {
+        trigger.Invoke();
+        _elementFinder.SeleniumScope(scope);
+        if (text != null && _dialogs.HasAnyDialog() && !_dialogs.HasDialog(text)) {
+            throw new MissingDialogException("A dialog was present but didn't match the expected text.");
+        }
+        _dialogs.CancelModalDialog();
+    }
+
+    public void AcceptConfirm(string text, DriverScope scope, Action trigger)
+    {
+        // Webdriver cannot distinguish between confirm and alert
+        AcceptAlert(text, scope, trigger);
+    }
+
+    public void CancelConfirm(string text, DriverScope scope, Action trigger)
+    {
+        // Webdriver cannot distinguish between confirm and alert
+        CancelAlert(text, scope, trigger);
+    }
+
+    public void AcceptPrompt(string text, string promptValue, DriverScope scope, Action trigger)
+    {
+        trigger.Invoke();
+        _elementFinder.SeleniumScope(scope);
+        if (text != null && _dialogs.HasAnyDialog() && !_dialogs.HasDialog(text)) {
+            throw new MissingDialogException("A dialog was present but didn't match the expected text.");
+        }
+        _dialogs.AcceptModalDialog(promptValue);
+    }
+
+    public void CancelPrompt(string text, DriverScope scope, Action trigger)
+    {
+        // Webdriver cannot distinguish between prompt and alert
+        CancelAlert(text, scope, trigger);
+    }
+  }
 }

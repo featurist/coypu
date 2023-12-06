@@ -27,11 +27,18 @@ namespace Coypu
 
         [Obsolete("Please use instead: _browserSession.Driver.Cookies.DeleteAll()")]
         void ClearBrowserCookies();
-
         void Click(Element element);
+        [Obsolete("Please use instead: AcceptAlert/AcceptConfirm/AcceptPrompt")]
         void AcceptModalDialog(Scope scope);
+        [Obsolete("Please use instead: CancelAlert/CancelConfirm/CancelPrompt")]
         void CancelModalDialog(Scope scope);
+        [Obsolete("Please use instead: [Accepts/Cancels][Alert/Confirm/Prompt]")]
         bool HasDialog(string withText, Scope scope);
+        void AcceptAlert(string text, DriverScope root, Action trigger);
+        void AcceptConfirm(string text, DriverScope root, Action trigger);
+        void CancelConfirm(string text, DriverScope root, Action trigger);
+        void AcceptPrompt(string text, string value, DriverScope root, Action trigger);
+        void CancelPrompt(string text, DriverScope root, Action trigger);
         void Choose(Element field);
         void Check(Element field);
         void Uncheck(Element field);

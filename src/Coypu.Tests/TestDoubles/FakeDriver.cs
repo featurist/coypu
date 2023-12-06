@@ -42,12 +42,12 @@ namespace Coypu.Tests.TestDoubles
 
         public FakeDriver() { }
 
-        public FakeDriver(Browser browser)
+        public FakeDriver(Browser browser, bool headless)
         {
             Browser = browser;
         }
 
-        public FakeDriver(IWebDriver driver)
+        public FakeDriver(IWebDriver driver, bool headless)
         {
             Cookies = new FakeCookies();
         }
@@ -338,7 +338,32 @@ namespace Coypu.Tests.TestDoubles
             return a.ToString() == b.ToString() && a.Options == b.Options;
         }
 
-        public class SaveScreenshotParams
+    public void AcceptAlert(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void AcceptConfirm(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void CancelConfirm(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void AcceptPrompt(string text, string promptValue, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void CancelPrompt(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public class SaveScreenshotParams
         {
             public ImageFormat ImageFormat;
             public string SaveAs;

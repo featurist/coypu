@@ -16,7 +16,7 @@ namespace Coypu.AcceptanceTests.Examples
     {
         public class CustomFirefoxOptionsSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxOptionsSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
+            public CustomFirefoxOptionsSeleniumWebDriver(Browser browser, bool headless) : base(CustomOptions(), browser) { }
 
             private static IWebDriver CustomOptions()
             {

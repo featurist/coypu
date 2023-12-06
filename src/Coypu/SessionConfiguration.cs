@@ -23,8 +23,8 @@ namespace Coypu
             AppHost = DEFAULT_APP_HOST;
             Port = DEFAULT_PORT;
             SSL = false;
-            Browser = Drivers.Browser.Chrome;
-            Driver = typeof (PlaywrightDriver);
+            Browser = Drivers.Browser.Firefox;
+            Driver = typeof (SeleniumWebDriver);
             Headless = true;
         }
 

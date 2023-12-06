@@ -15,7 +15,7 @@ namespace Coypu.Tests.TestDoubles
           Cookies = new StubCookies();
         }
 
-        public StubDriver(Browser browser) : this() { }
+        public StubDriver(Browser browser, bool headless) : this() { }
 
         public void Dispose() { }
 
@@ -148,7 +148,32 @@ namespace Coypu.Tests.TestDoubles
         }
 
         public void SetBrowserCookies(Cookie cookie) { }
+
+    public void AcceptAlert(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
     }
+
+    public void AcceptConfirm(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void CancelConfirm(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void AcceptPrompt(string text, string promptValue, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void CancelPrompt(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+  }
 
     // Implementation of Cookies interface that has no behaviour
     public class StubCookies : Cookies

@@ -5,6 +5,7 @@ using Coypu.Drivers.Playwright;
 using Coypu.Timing;
 using Coypu.Actions;
 using System;
+using System.Threading;
 
 namespace Coypu.Drivers.Tests
 {
@@ -131,6 +132,7 @@ namespace Coypu.Drivers.Tests
                 Retry(popUp);
                 // Playwright errors before returning from ExecuteScript if the window is closed synchronously
                 Driver.ExecuteScript("window.setTimeout(() => self.close(), 1);", popUp);
+                Thread.Sleep(10);
                 Assert.Throws<MissingWindowException>(() => FindPopUp());
             }
         }

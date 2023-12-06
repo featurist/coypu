@@ -61,7 +61,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             var query = SpyTimingStrategy.QueriesRan<T>().ElementAt(index);
             return RunQueryAndCheckTiming(query, timeout);
         }
-        
+
         protected object RunQueryAndCheckTiming(int index)
         {
             var query = SpyTimingStrategy.QueriesRan<Object>().ElementAt(index);
@@ -108,7 +108,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             this.driver = driver;
         }
 
-        public IDriver NewWebDriver(Type driverType, Drivers.Browser browser)
+        public IDriver NewWebDriver(Type driverType, Drivers.Browser browser, bool Headless)
         {
             return driver;
         }
