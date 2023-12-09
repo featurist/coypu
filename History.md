@@ -1,6 +1,5 @@
-# Coypu 3.1.1 - 09.12.2023
-* [#___](https://github.com/featurist/coypu/issues/)___ Playwright driver
-
+# Coypu 4.1.0 - 09.12.2023
+* [#231](https://github.com/featurist/coypu/pull/231) Playwright driver
 
 # Coypu 3.1.2 - 4.0.0
 * History not recorded
