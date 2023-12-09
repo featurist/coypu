@@ -1,3 +1,10 @@
+# Coypu 3.1.1 - 09.12.2023
+* [#___](https://github.com/featurist/coypu/issues/)___ Playwright driver
+
+
+# Coypu 3.1.2 - 4.0.0
+* History not recorded
+
 # Coypu 3.1.1 - 19.07.2019
 * [#203](https://github.com/featurist/coypu/issues/203) fix for saving file as png saves the contents as jpg for .Net Core - Thanks to @basimc4 for PR
 
@@ -112,7 +119,7 @@ Release date: 2015-01-26
 Release date: 2014-12-12
 
 
-# Version 2.6.1	
+# Version 2.6.1
 
 ### Fixed
 
@@ -147,12 +154,12 @@ Release date: 2014-11-30
 ### Fixed
 
 * Firefox webdriver 2.43.0 has started closing alerts when asked for currentWindowHandle
-			
+
 ### Changed
 
 * Thanks to fix for Firefox Webdriver, if you switch window via the native selenium driver
 coypu will no longer be able to switch back to the correct window if you use a pre-existing scope
-so use the native SwitchTo with caution. 
+so use the native SwitchTo with caution.
 
 # Version 2.4.1
 
@@ -253,7 +260,7 @@ Release date: 2014-01-30
 ### Fixed
 
 * On individual calls, only specified options override session configuration
- 
+
 ### Removed
 
 * HasCss, HasXPath etc - Just use .Exists()/.Missing() on any scope or Assert.That(scope, Shows.Css(".summat"))
@@ -419,7 +426,7 @@ Release date: 2013-06-17
 
 ### Added
 
-* MaximiseWindow 
+* MaximiseWindow
 
 #### Fixed
 
@@ -537,7 +544,7 @@ Release date: 2013-03-06
 
 # Version 0.12.6
 
-Release date: 2013-03-04	
+Release date: 2013-03-04
 
 ### Updated
 
@@ -637,10 +644,10 @@ Release date: 2012-06-20
 ### Updated
 
 * WebDriver 2.23
-* Elements are only found by partial ID if there is a leading underscore 
+* Elements are only found by partial ID if there is a leading underscore
   - This was only intended for asp.net webforms testing and was causing too many collisions
 * Removed all Obsolete methods left over from < 0.8.0
-  
+
 # Version 0.8.10
 
 Release date: 2012-05-01
@@ -699,7 +706,7 @@ Release date: 2012-04-12
 
 ### Fixed
 
-* Finds fields with type=email 
+* Finds fields with type=email
 
 # Version 0.8.3
 
@@ -856,7 +863,7 @@ Release date: 2011-08-02
 * FindSection not working across all versions of Firefox
 
 ### Changed
-* Will bump the minor version for any API/behaviour changes from now on as I should have been doing - bump to 0.3.0 to break with 0.2.x 
+* Will bump the minor version for any API/behaviour changes from now on as I should have been doing - bump to 0.3.0 to break with 0.2.x
 
 # Version 0.2.10
 
@@ -881,7 +888,7 @@ Release date: 2011-07-18
 
 ### Added
 * SaveWebResource saves a resource from the web directly using the current browser session's cookies
-* Find buttons by role='button' attr 
+* Find buttons by role='button' attr
 
 ### Fixed
 * Escaping both types of quotes in xpath literals
@@ -893,7 +900,7 @@ Release date: 2011-07-12
 ### Added
 * FindState - finds the first to be reached from a list of possible states the page may be in
 
-### Fixed 
+### Fixed
 * Don't click in file fields, was bringing up the browse dialog in some browsers
 
 # Version 0.2.6
@@ -936,7 +943,7 @@ Release date: 2011-06-27
 Release date: 2011-06-27
 
 ### Added
-* Rounded out the session API with FindSection, FindFieldset and FindId and make the Session.Driver internal. 
+* Rounded out the session API with FindSection, FindFieldset and FindId and make the Session.Driver internal.
 * Has(Func<Element>) and HasNot(Func<Element>) for custom queries.
 * Robustly, Query & TryUntil are now callable directly on session.
 
@@ -976,13 +983,13 @@ Release date: 2011-05-27
 * WithinFieldset and WithinSection
 * Configurable wait between find & click
 * Much more support for WatiN driver (see driver_test_results.txt)
-* MIT Licence 
+* MIT Licence
 * Nuget
 
 ### Changed
-* Section headers may contain other markup, e.g. links 
+* Section headers may contain other markup, e.g. links
 * Reuse scope within individual driver methods
-* Close any alerts on disposing SeleniumWebDriver 
+* Close any alerts on disposing SeleniumWebDriver
 
 # Version 0.1.2
 
@@ -999,6 +1006,4 @@ Release date: 2011-05-12
 ### Changed
 
 * Visit now takes a virtual path
-* Renamed WaitAndRetryRobustWrapper to RetryUntilTimeoutRobustWrapper 
-
-
+* Renamed WaitAndRetryRobustWrapper to RetryUntilTimeoutRobustWrapper

@@ -16,6 +16,18 @@ namespace Coypu.Timing
                 throw new MissingHtmlException("Timeout from TryUntil: the page never reached the required state.");
         }
 
+        /// <summary>
+        /// Retries the specified pop-up action until it succeeds or times out.
+        /// </summary>
+        /// <param name="popUpAction">The pop-up action to retry.</param>
+        /// <param name="options">The options for the retry.</param>
+        public static void Retry(Action popUpAction, Options options = null)
+        {
+          new RetryUntilTimeoutTimingStrategy().Synchronise(
+            new LambdaBrowserAction(popUpAction, options ?? new Options())
+          );
+        }
+
         public bool ZeroTimeout { get; set; }
         private TimeSpan? overrideTimeout;
 

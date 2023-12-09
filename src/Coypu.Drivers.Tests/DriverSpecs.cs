@@ -38,7 +38,7 @@ namespace Coypu.Drivers.Tests
     {
         private static IDriver _driver;
         private static DriverScope _root;
-        private static readonly bool Headless = true;
+        private static readonly bool Headless = false;
         private static readonly Browser Browser = Browser.Chrome;
         protected static readonly Options DefaultOptions = new Options();
         private static readonly Type DriverType = typeof(PlaywrightDriver);

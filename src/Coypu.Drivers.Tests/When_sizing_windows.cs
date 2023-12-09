@@ -27,7 +27,7 @@ namespace Coypu.Drivers.Tests
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
-                Retry(() => popUp.Now());
+                RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
                 try
                 {
                     AssertMaximisesWindow(popUp);
@@ -69,7 +69,7 @@ namespace Coypu.Drivers.Tests
                 Driver.Click(Link("Open pop up window"));
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                               Driver, null, null, null, DisambiguationStrategy);
-                Retry(() => popUp.Now());
+                RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
                 try
                 {
                     AssertResizesWindow(popUp);
@@ -93,18 +93,6 @@ namespace Coypu.Drivers.Tests
 
             Assert.That(Driver.ExecuteScript("return window.outerWidth;", driverScope).ToString(), Is.EqualTo("768"));
             Assert.That(Driver.ExecuteScript("return window.outerHeight;", driverScope).ToString(), Is.EqualTo("400"));
-        }
-
-        private void Retry(Scope popUp)
-        {
-            Retry(() => popUp.Now());
-        }
-
-        private void Retry(Action popUpAction)
-        {
-            new RetryUntilTimeoutTimingStrategy().Synchronise(
-                new LambdaBrowserAction(popUpAction, DefaultOptions)
-            );
         }
     }
 }

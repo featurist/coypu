@@ -1,5 +1,6 @@
 ﻿using System;
 using Coypu.Finders;
+using Coypu.Timing;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -17,15 +18,8 @@ namespace Coypu.Drivers.Tests
         {
             Driver.Click(Link("Open pop up window"));
             var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver,"Pop Up Window",Root,DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-
-            try
-            {
-                RefreshCausesScopeToReload(popUp);
-            }
-            finally
-            {
-                Driver.ExecuteScript("return self.close();", popUp);
-            }
+            RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
+            RefreshCausesScopeToReload(popUp);
         }
 
         private static void RefreshCausesScopeToReload(DriverScope driverScope)

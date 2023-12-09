@@ -18,7 +18,7 @@ namespace Coypu.AcceptanceTests
                                 {
                                     Browser = Drivers.Browser.Chrome,
                                     Driver = typeof(PlaywrightDriver),
-                                    Headless = false
+                                    Headless = true
                                 };
             Browser = new BrowserSession(configuration);
         }

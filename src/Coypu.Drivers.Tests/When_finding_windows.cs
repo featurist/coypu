@@ -60,7 +60,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup();
-                Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window"));
+                RetryUntilTimeoutTimingStrategy.Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window"));
                 FindPopUpLink();
             }
         }
@@ -71,7 +71,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup2();
-                Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window 2"));
+                RetryUntilTimeoutTimingStrategy.Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window 2"));
 
                 FindPopUp2Link();
             }
@@ -84,7 +84,7 @@ namespace Coypu.Drivers.Tests
             {
                 OpenPopup();
                 OpenPopup2();
-                Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window"));
+                RetryUntilTimeoutTimingStrategy.Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window"));
                 FindPopUpLink();
             }
         }
@@ -99,7 +99,7 @@ namespace Coypu.Drivers.Tests
 
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
-                Retry(popUp);
+                RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
                 Id("popUpButtonId", popUp);
                 FindPopUpLink();
             }
@@ -129,24 +129,12 @@ namespace Coypu.Drivers.Tests
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
 
-                Retry(popUp);
+                RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
                 // Playwright errors before returning from ExecuteScript if the window is closed synchronously
                 Driver.ExecuteScript("window.setTimeout(() => self.close(), 1);", popUp);
                 Thread.Sleep(10);
                 Assert.Throws<MissingWindowException>(() => FindPopUp());
             }
-        }
-
-        private void Retry(Scope popUp)
-        {
-            Retry(() => popUp.Now());
-        }
-
-        private void Retry(Action popUpAction)
-        {
-            new RetryUntilTimeoutTimingStrategy().Synchronise(
-                new LambdaBrowserAction(popUpAction, DefaultOptions)
-            );
         }
     }
 }
