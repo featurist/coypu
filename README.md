@@ -109,7 +109,7 @@ Coypu v4.1.0 adds a driver for the Playwright framework. Playwright is a modern 
 
 The playwright driver will become the default driver for Coypu in the next major release.
 
-[A note on what Playwright means for Coypu](#a_note_on_playwright)
+[A note on what Playwright means for Coypu](#a-note-on-playwright)
 
 ```c#
 sessionConfiguration.Driver = typeof (Playwright);
