@@ -1,5 +1,10 @@
 # Coypu [![Nuget](https://img.shields.io/nuget/v/Coypu.svg)](https://www.nuget.org/packages/Coypu/) [![Nuget](https://img.shields.io/nuget/dt/Coypu.svg)](https://www.nuget.org/packages/Coypu/) ![](https://img.shields.io/badge/compatibility-.NET%20Framework%204.5%2B%20%7C%20.NET%20Standard%202.0-blue.svg)
 
+## "Theirs not to reason why, Theirs but to do and retry"
+&mdash; <cite>Alfred, Lord Selenium</cite>
+## "haha, coypu must have reduced teh amount of shit code by 90%"
+&mdash; <cite>Anonymous</cite>
+
 Coypu supports browser automation in .Net to help make tests readable, robust, fast to write and less tightly coupled to the UI. If your tests are littered with sleeps, retries, complex XPath expressions and IDs dug out of the source with browser developer tools then Coypu might help.
 
 Coypu is on Nuget:
@@ -13,23 +18,21 @@ NUnit matchers (e.g. `Assert.That(browserSession, Shows.Content("Hello world"));
 Discuss Coypu and get help on the [Google Group](http://groups.google.com/group/coypu)
 
 ## Coypu is
-* A robust wrapper for browser automation on .net platform for Selenium WebDriver that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS & JS
-* A more intuitive DSL for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
+* A robust wrapper for browser automation on .net platform for [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/) or [Microsoft Playwright](https://playwright.dev) that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS & JS
+* A more intuitive API for interacting with the browser in the way a human being would, inspired by the ruby framework Capybara - http://github.com/jnicklas/capybara
 
 ## Demo
 
-Check out a [demo of Coypu](http://skillsmatter.com/podcast/open-source-dot-net/london-dot-net-user-group-may) from a talk given at Skills Matter in May 2011.
+Check out a [demo of Coypu](http://skillsmatter.com/podcast/open-source-dot-net/london-dot-net-user-group-may) from a talk given at Skills Matter way back in May 2011.
 
-## Using Coypu
-
-#### Browser session
+## Browser session
 
 Open a browser session like so:
 
 ```c#
 var browser = new BrowserSession();
 ```
-	
+
 When you are done with the browser session:
 
 ```c#
@@ -39,13 +42,13 @@ browser.Dispose();
 or:
 
 ```c#
-using (var browser = new BrowserSession()) 
+using (var browser = new BrowserSession())
 {
 	...
 }
 ```
-	
-### Configuration
+
+## Configuration
 
 To configure Coypu pass an instance of `Coypu.SessionConfiguration` to the constructor of BrowserSession:
 
@@ -53,12 +56,12 @@ To configure Coypu pass an instance of `Coypu.SessionConfiguration` to the const
 var browserSession = new BrowserSession(new SessionConfiguration{...});
 ```
 
-#### Website under test
+## Website under test
 
 Configure the website you are testing as follows
 
 ```c#
-var sessionConfiguration = new SessionConfiguration 
+var sessionConfiguration = new SessionConfiguration
 {
   AppHost = "autotrader.co.uk",
   Port = 5555,
@@ -68,7 +71,7 @@ var sessionConfiguration = new SessionConfiguration
 
 If you don't specify any of these, Coypu will default to http, localhost and port 80.
 
-#### Driver
+## Driver
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `SessionConfiguration.Browser` setting to pick the correct browser.
 
@@ -78,7 +81,7 @@ Choose your driver/browser combination like so:
 sessionConfiguration.Driver = typeof (SeleniumWebDriver);
 sessionConfiguration.Browser = Drivers.Browser.Firefox;
 ```
- 
+
 These settings are the default configuration.
 
 If you want to configure these at runtime you could replace the following strings with strings read from your environment / configuration:
@@ -88,31 +91,75 @@ sessionConfiguration.Driver = Type.GetType("Coypu.Drivers.Selenium.SeleniumWebDr
 sessionConfiguration.Browser = Drivers.Browser.Parse("firefox");
 ```
 
-##### Selenium WebDriver
+## Headless mode
+
+```c#
+sessionConfiguration.Headless=true
+```
+
+**The Playwright driver in headless mode passes all the Coypu specs. Headless Playwright runs up to 5 times faster than headed Selenium.**
+
+Headless was never enabled on the Selenium driver as it had various shortcomings in the past, from Coypu v4.1.0 it is can be enabled using the `sessionConfiguration.Headless` setting. Selenium does have issues accessing cookies and IFrames in headless mode so you may need to run tests that rely on these features in headed mode when using the Selenium driver.
+
+Selenium only supports headless for Chrome, Edge and Firefox. IE, Safari and Opera are not supported.
+
+## Playwright
+
+Coypu v4.1.0 adds a driver for the Playwright framework. Playwright is a modern automation framework from Microsoft that is faster and more reliable than Selenium. Playwright supports Chrome, Edge, Firefox and Webkit (Safari).
+
+The playwright driver will become the default driver for Coypu in the next major release.
+
+[A note on what Playwright means for Coypu](#a-note-on-playwright)
+
+```c#
+sessionConfiguration.Driver = typeof (Playwright);
+```
+
+### Install browser binaries
+
+You may need to install the latest playwright browser binaries using the Playwright CLI:
+
+https://playwright.dev/dotnet/docs/browsers#install-browsers
+
+
+### Playwright supports:
+
+```c#
+Copyu.Browser.Chromium
+Copyu.Browser.Chrome
+Copyu.Browser.Edge
+Copyu.Browser.Firefox
+Copyu.Browser.Webkit
+```
+
+More on these options: https://playwright.dev/dotnet/docs/browsers
+
+## Selenium WebDriver
+
 `Coypu.Drivers.Selenium.SeleniumWebDriver` tracks the latest version of WebDriver and supports Chrome (fastest), Firefox, Edge and IE (slowest) as the browser. Any other Selenium implementation of RemoteWebDriver can be configured by subclassing `SeleniumWebDriver` and passing an instance of RemoteWebDriver to the base constructor.
 
 The Selenium Driver is included in the Coypu package.
 
-###### Chrome
+### Chrome
 You will need the chromedriver.exe on your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.ChromeDriver` to your project.
 
-###### Firefox
+### Firefox
 You will need GeckoDriver. We recommend adding the nuget package `Selenium.WebDriver.GeckoDriver.Win64` to your project.
 
-###### Edge
+### Edge
 You will need Microsoft's WebDriver. How you install this depends on your version of Windows 10. Please see [here](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/) for more information.
 
-###### Internet Explorer 
+### Internet Explorer
 
 You will need the new standalone InternetExplorerDriver.exe in your PATH or in the bin of your test project. We recommend adding the nuget package `Selenium.WebDriver.IEDriver` package to your project. Please see [Configuration Requirements](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver#required-configuration) for information on how to use it.
 
-### SpecFlow scenarios
+## SpecFlow scenarios
 
 If you are using SpecFlow for your acceptance tests then you will probably want to configure it to provide a single Browser Session scoped to each scenario. SpecFlow supports some basic dependency injection which you can use to achieve this as shown in [this gist](https://gist.github.com/2301407).
-  
-### Waits, retries and timeout
 
-Most of the methods in the Coypu DSL are automatically retried on any driver error until a configurable timeout is reached. It just catches exceptions and retries -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up. 
+## Waits, retries and timeout
+
+Most of the methods in the Coypu API are automatically retried on any driver error until a configurable timeout is reached. It just catches exceptions and retries -- mainly the `Coypu.Drivers.MissingHtmlException` that a driver should throw when it cannot find something, but also any internal driver errors that the driver might throw up.
 
 This is a rather blunt approach that goes well beyond WebDriver's ImplicitWait, for example, but the only truly robust strategy for heavily asynchronous websites, where elements are flying in and out of the DOM constantly, that I have found.
 
@@ -124,10 +171,10 @@ Configure timeout/retry like so:
 sessionConfiguration.Timeout = TimeSpan.FromSeconds(1);
 sessionConfiguration.RetryInterval = TimeSpan.FromSeconds(0.1);
 ```
-	
+
 These settings are the default configuration.
 
-All methods in the DSL take an optional final parameter of a `Coypu.Options`. By passing this in you can override any of these timing settings for just that call:
+All methods in the API take an optional final parameter of a `Coypu.Options`. By passing this in you can override any of these timing settings for just that call:
 
 So when you need an unusually long (or short) timeout for a particular interaction you can override the timeout just for this call by passing in a `Coypu.Options` like this:
 
@@ -139,38 +186,38 @@ Assert.That(browser, Shows.Content("File bigfile.mp4 (10.5mb) uploaded successfu
 
 The options you specify are merged with your SessionConfiguration, so you only need specify those options you wish to override.
 
-### Visible elements
+## Visible elements
 
-Coypu drivers filter out any elements that are not visible on the page -- this includes hidden inputs. 
+Coypu drivers filter out any elements that are not visible on the page -- this includes hidden inputs.
 
-Non-visible elements can get in the way of finding the elements that we are really looking for and cause often errors when trying to interact with them. 
+Non-visible elements can get in the way of finding the elements that we are really looking for and cause often errors when trying to interact with them.
 
 What we are really trying to do here is interact with the browser in the way that a human would. It's probably best to avoid hacking around with elements not accessible to the user where possible to avoid invalidating our tests in any case.
 
-#### However...
+### However...
 
 If you really need this for some intractable problem where you cannot control the browser without cheating like this, then there is `sessionConfiguration/options.ConsideringInvisibleElements = true` which overrides this restriction.
 
-### Can't find what you need?
+## Can't find what you need?
 
-If there's something you need that's not part of the DSL then please you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
+If there's something you need that's not part of the API then you may need to dive into the native driver which you can always do by casting the native driver to whatever underlying driver you know you are using:
 
 ```c#
 var selenium = ((OpenQA.Selenium.Remote.RemoteWebDriver) browserSession.Native);
 ```
-	
+
 But if you need to do this, please consider forking Coypu, adding what you need and sending a pull request. Thanks!
 
-### DSL
+# API
 
 Here are some examples to get you started using Coypu
-	
-#### Navigating
 
-```c#	
+## Navigating
+
+```c#
 browser.Visit("/used-cars");
 ```
-	
+
 If you need to step away and visit a site outside of the `SessionConfiguration.AppHost` then you can use a fully qualified Uri:
 
 ```c#
@@ -185,15 +232,15 @@ browser.GoBack();
 browser.GoForward();
 ```
 
-#### Getting the page title
+## Getting the page title
 ```c#
 browser.Title
 ```
-	
-#### Completing forms
+
+## Completing forms
 
 Form fields are found by label text, id, name (except radio buttons), placeholder or radio button value
-	
+
 ```c#
 // Drop downs
 browser.Select("toyota").From("make");
@@ -210,7 +257,7 @@ browser.Choose("Private");
 
 // Checkboxes
 browser.Check("Additional ads")
-browser.Uncheck("Additional ads")	
+browser.Uncheck("Additional ads")
 ```
 
 If you need to fall back to CSS or XPath you can do:
@@ -235,9 +282,9 @@ or
 browser.FindCss("ul.model li", text: new Regex("Citroen C\d"));
 ```
 
-#### Clicking
+## Clicking
 
-Buttons are found by value/text, id or name. 
+Buttons are found by value/text, id or name.
 
 ```c#
 browser.ClickButton("Search");
@@ -252,14 +299,14 @@ browser.ClickLink("Reset search");
 
 Click any other element by calling the Click method on the returned `ElementScope`:
 
-```c#	
+```c#
 browser.FindCss("span#i-should-be-a-link", text: "Log in").Click();
 ```
 
 In this example, due to the way Coypu defers execution of finders, the FindCss will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
 
 This introduces the idea of `Scope`. The browser.Find methods return a Scope on which you may perform actions, or make further scoped queries. There is more on scope below.
-	
+
 The last way to click is to pass an element you have already found directly to `Click()`:
 
 ```c#
@@ -270,7 +317,7 @@ foreach(var element in allToClick)
 }
 ```
 
-#### Finding single elements
+## Finding single elements
 
 Find methods return a `Coypu.ElementScope` that is scoped to the first matching element. The locator arguments are case sensitive.
 
@@ -298,12 +345,12 @@ You can read attributes of these elements like so:
     browser.FindLink("Home")["rel"]
 ```
 
-#### Finding multiple elements	
-	
+## Finding multiple elements
+
 FindAll methods return all matching elements immediately with no retry:
 
 ```c#
-	foreach(var link in browser.FindAllCss("a")) 
+	foreach(var link in browser.FindAllCss("a"))
 	{
 		var attributeValue = a["href"];
 		...
@@ -312,13 +359,13 @@ FindAll methods return all matching elements immediately with no retry:
 
 If you are expecting a particular state to be reached then you can describe this in a predicate and Coypu will retry until it matches.
 
-	foreach(var link in browser.FindAllCss("a", (links) => links.Count() == 5)) 
+	foreach(var link in browser.FindAllCss("a", (links) => links.Count() == 5))
 	{
 		var attributeValue = a["href"];
 		...
 	}
 
-#### Matching exactly or allowing substrings
+## Matching exactly or allowing substrings
 
 When finding elements by their text, the `TextPrecision` option allows you to specify whether to match exact text or allow a substring match. This can be set globally and also overridden on each and every call. `TextPrecision` has three options: `Exact`, `Substring` and `PreferExact`. The default is `PreferExact`.
 
@@ -328,7 +375,7 @@ When finding elements by their text, the `TextPrecision` option allows you to sp
 
 `TextPrecision.PreferExact` which will prefer an exact text match to a substring match. **This is the default for TextPrecision**
 
-##### Usage
+## Usage
 
 ```c#
 browserSession.FillIn("Password", new Options{TextPrecision = TextPrecision.Exact}).With("123456");
@@ -338,7 +385,7 @@ browserSession.FillIn("Password", Options.Exact).With("123456");
 
 This will be respected everywhere that Coypu matches visible text, including buttons, select options, placeholder text and so on, but not anywhere else, for example when considering ids or names of fields.
 
-#### Behaviour when multiple elements match a query
+## Behaviour when multiple elements match a query
 
 When using methods such as `ClickLink()`, and `FillIn()`, what happens when more than one element matches? With the `Match` option you have control over what happens by choosing one of the two `Match` strategies:
 
@@ -347,7 +394,7 @@ When using methods such as `ClickLink()`, and `FillIn()`, what happens when more
 `Match.First` just returns the first matching element.
 
 
-##### Usage
+## Usage
 
 ```c#
 browserSession.ClickButton("Close", new Options{Match = Match.First});
@@ -355,7 +402,7 @@ browserSession.ClickButton("Close", new Options{Match = Match.First});
 browserSession.ClickButton("Close", Options.First);
 ```
 
-#### Some more examples of using TextPrecision and Match
+## Some more examples of using TextPrecision and Match
 
 Say we had the HTML:
 
@@ -391,28 +438,28 @@ then as we vary the values of text and the options these would be the results:
 | "good things" | First  | Substring     | Clicks the link to 'x'                     |
 | "good things" | First  | PreferExact   | Clicks the link to 'x'                     |
 
-#### Hover
+## Hover
 
 Hover over an element
 
 	browser.FindCss("span#hoverOnMe").Hover();
 
-#### Fieldsets / Sections
+## Fieldsets / Sections
 
 To find this:
 
-	<fieldset>	
+	<fieldset>
 		<legend>Advanced search</legend>
 		...
 	</fieldset>
 
-use this:	
-	
+use this:
+
 	var element = browser.FindFieldset("Advanced search");
-	
+
 To find this:
 
-	<div>	
+	<div>
 		<h2>Search results</h2>
 		...
 	</div>
@@ -425,12 +472,12 @@ or this:
 	</section>
 
 use this:
-	
+
 	var element = browser.FindSection("Search results");
 
 **These work particularly well when used as scopes:**
 
-#### Scope
+## Scope
 
 When you want perform operations only within a particular part of the page, find the scope you want then use this as the scope for further finds and interactions as in the previous fieldset/section example.
 
@@ -454,7 +501,7 @@ The actual finding of the scope is deferred until the driver needs to interact w
 
 This means you have tests much more loosely coupled to the implementation of your website. Consider the search example above and the possible permutations of HTML and JS that would satisfy that test.
 
-#### Beware the XPath // trap
+## Beware the XPath // trap
 
 In XPath the expression // means something very specific, and it might not be what
 you think. Contrary to common belief, // means "anywhere in the document" not "anywhere
@@ -475,31 +522,31 @@ browser.FindXPath("//body").FindAllXPath(".//script");
 (from https://github.com/jnicklas/capybara#beware-the-xpath--trap)
 
 
-#### Scoping within frames / iframes
+## Scoping within frames / iframes
 
 To restrict the scope to a frame or iframe, locate the frame by its name,id, title or the text of an h1 element within the frame:
 
 ```c#
 var twitterFrame = browser.FindFrame("@coypu_news on Twitter");
 
-Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));	
+Assert.That(twitterFrame, Shows.Content("Coypu 0.8.0 released"));
 ```
 
-#### Scoping within windows
+## Scoping within windows
 
 To restrict the scope to a browser window (or tab), locate the window by its title or name:
 
 ```c#
 var surveyPopup = browser.FindWindow("Customer Survey");
 
-surveyPopup.Select("Not Satisfied").From("How did we handle your enquiry?");	
+surveyPopup.Select("Not Satisfied").From("How did we handle your enquiry?");
 surveyPopup.ClickButton("Submit");
 
 browser.ClickLink("Logout"); // Using the original window scope again - there is no need to switch back, just use the correct scope
 ```
 
 If no exact match is found Coypu will consider windows were the title contains the supplied value
-	
+
 Switching between frames and windows is a particular pain in WebDriver as you may well know. Check out this example of how Coypu handles windows from a Coypu acceptance test:
 
 ```c#
@@ -527,7 +574,7 @@ button.Click();
 
 **N.B.** If you drop down into the native Selenium driver and use SwitchTo() (highly unrecommended), bypassing Coypu's FindWindow(), Coypu will lose track of the current window, so make sure to switch back to the previous window before dropping back to Coypu.
 
-#### Window size
+## Window size
 
 Sometimes you need to maximise the window, or to set a particular width, perhaps for testing your responsive layout:
 
@@ -542,28 +589,37 @@ If you are dealing with multiple windows, just call these on the correct scope:
 browser.FindWindow("Pop Up Window").MaximiseWindow();
 ```
 
-#### Executing javascript in the browser
+## Executing javascript in the browser
 
 You can execute javascript like so:
 
 ```c#
 browser.ExecuteScript("document.getElementById('SomeContainer').innerHTML = '<h2>Hello</h2>';");
 ```
-	
-Anything is returned from the javascript will be returned from `browser.ExecuteScript`
+
+Anything returned from the javascript will be returned from `browser.ExecuteScript`
 
 ```c#
 var innerHtml = browser.ExecuteScript("return document.getElementById('SomeContainer').innerHTML;");
-```
-	
-#### Querying
+
+```Arguments can be passed and referenced via the arguments array:
+
+```c#
+browser.ExecuteScript("document.getElementById(arguments[0]).innerHTML = '<h2>Hello</h2>'");
+
+```Arguments can be `Coypu.Element` objects:
+
+```c#
+browser.ExecuteScript("arguments[0].innerHTML = '<h2>Hello</h2>'");
+
+## Querying
 
 Look for text anywhere in the page:
 
 ```c#
 bool hasContent = browser.HasContent("In France, the coypu is known as a ragondin");
 ```
-	
+
 Check for the presence of an element:
 
 ```c#
@@ -572,7 +628,7 @@ bool hasElement = browser.FindCss("ul.menu > li", text: "Home").Missing();
 
 bool hasElement = browser.FindXPath("//ul[@class = 'menu']/li").Exists();
 ```
-	
+
 The positive queries above will wait up to the configured timeout for a matching element to appear and return as soon as it does.
 
 The negative versions will wait for the element NOT to be present:
@@ -593,7 +649,7 @@ bool hasValue = browser.FindField("total").HasValue("147");
 bool hasNoValue = browser.FindField("total").HasNoValue("0");
 ```
 
-#### Matchers
+## Matchers
 
 There are NUnit matchers for some of the queries above to help with your assertions:
 
@@ -613,7 +669,7 @@ Assert.That(browser.FindField("total"), Shows.Value("147"));
 Assert.That(browser.FindField("total"), Shows.No.Value("0"));
 ```
 
-#### Inner/OuterHTML
+## Inner/OuterHTML
 
 If you just want to grab the inner or outer HTML of an element to do your own queries and assertions you can use:
 
@@ -622,25 +678,29 @@ var outerHTML = browser.FindCss("table#myData").OuterHTML;
 var innerHTML = browser.FindCss("table#myData").InnerHTML; // Will exclude the surrounding <table> ... </table>
 ```
 
-#### Dialogs
+## Dialogs
 
-Check for the presence of a modal dialog with expected text:
-
-```c#
-bool hasDialog = browser.HasDialog("Are you sure you want to cancel your account?");
-bool hasNoDialog = browser.HasDialog("Are you sure you want to cancel your account?");
-```
-	
-Waits are as for the other Has/HasNo methods.
-
-Interact with the current dialog like so:
+To interact with dialogs like alerts, confirms and prompts, pass an Action that will trigger the dialog to appear to `AcceptAlert`, `Accept/CancelConfirm` or `Accept/CancelPrompt`. Optionally supply the text that must match the dialog message or an exception will be raised.
 
 ```c#
-browser.AcceptDialog();
-browser.CancelDialog();
+browser.AcceptAlert(() => {
+  browser.ClickButton("Save");
+});
+
+browser.AcceptConfirm("Are you sure you want to cancel your account?", () => {
+  browser.ClickButton("Cancel my account");
+});
+
+browser.CancelConfirm("Are you sure you want to cancel your account?", () => {
+  browser.ClickButton("Cancel my account");
+});
+
+browser.AcceptPrompt("Please enter your age", "21", () => {
+  browser.ClickLink("Enter site");
+});
 ```
-	
-#### Finding states (nondeterministic testing)
+
+## Finding states (nondeterministic testing)
 
 Sometimes you just can't predict what state the browser will be in. Not ideal for a reliable test, but if it's unavoidable then you can use the `Session.FindState` like this:
 
@@ -648,7 +708,7 @@ Sometimes you just can't predict what state the browser will be in. Not ideal fo
 var signedIn = new State(() => browser.HasContent("Signed in in as:"));
 var signedOut = new State(() => browser.HasContent("Please sign in"));
 
-if (browser.FindState(signedIn,signedOut) == signedIn) 
+if (browser.FindState(signedIn,signedOut) == signedIn)
 {
   browser.ClickLink("Sign out");
 }
@@ -657,17 +717,17 @@ if (browser.FindState(signedIn,signedOut) == signedIn)
 It will return as soon as the first from your list of states is found, and throw if none of the states are found within the `SessionConfiguration.Timeout`
 
 Avoid this:
-  
+
 ```c#
-if (browser.HasContent("Signed in in as:")) 
+if (browser.HasContent("Signed in in as:"))
 {
   ...
 }
 ```
-  
+
 otherwise you will have to wait for the full `SessionConfiguration.Timeout` in the negitive case.
 
-### Screenshots
+## Screenshots
 
 If you can't get the quality of feedback from your tests you need to tell you exactly why they are failing you might need to take a screenshot:
 
@@ -716,7 +776,7 @@ public void CustomProfile()
         // etc.
     }
 
-    // Or if you need to 
+    // Or if you need to
 }
 ```
 
@@ -765,11 +825,11 @@ public class SauceLabsDriver : SeleniumWebDriver
 
 ## More tricks/tips
 
-So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation. 
+So, you are using Coypu but sometimes links or buttons still don't seem to be clicked when you expect them to. Well there are a couple more techniques that Coypu can help you with in this situation.
 
 If the driver reports it had found and clicked your element successfully but nothing happens then it may simply be that your app isn't wiring up events at the right time. But if you have exhausted this angle and cannot fix the problem in the site itself, then you could try a couple of things:
 
-#### Tell Coypu to keep clicking at regular intervals until you see the result you expect:
+## Tell Coypu to keep clicking at regular intervals until you see the result you expect:
 
 ```c#
 var until = () => browser.FindCss("#SearchResults").Exists();
@@ -780,14 +840,62 @@ browser.ClickButton("Search", until, waitBetweenRetries);
 
 This is far from ideal as you are coupling the click to the expected result rather than verifying what you expect in a separate step, but as a last resort we have found this useful.
 
-#### Tell Coypu to wait a short time between first finding links/buttons and clicking them:
+## Tell Coypu to wait a short time between first finding links/buttons and clicking them:
 
 ```c#
 sessionConfiguration.WaitBeforeClick = TimeSpan.FromMilliseconds(0.2);
 ```
-		
+
 WARNING: Setting this in your session configuration means adding time to *every* click in that session. You might be better off doing this just when you need it:
 
 ```c#
 browser.ClickButton("Search", new Options { WaitBeforeClick = TimeSpan.FromMilliseconds(0.2) } )
 ```
+## A note on Playwright
+
+The main reason for adding a Playwright driver to this library thats been making Selenium tests reliable since 2010 is to support those projects with existing Coypu test suites who want to move to Playwright without having to rewrite their tests. A good percentage of these are likely legacy apps but some may have a lot of life left in them if the tests can be kept alive!
+
+**If you're starting a new project then you should definitely consider using Playwright directly**, it implements a lot of the most useful stuff from Capybara/Coypu which is fantastic. However, if you like the Coypu API, here's a few reasons you might consider using Coypu over Playwrights own API even for a new project:
+
+### The Capybara/Copyu API is well established and has been pretty stable in the Rails world for a long time.
+
+The finders in Coypu remain more semantic and direct than Playwrights Locator pattern, and are designed to read like the way a human interacts with a web page without specifying `ByLabel`/`ByPlaceholder` etc e.g.:
+
+####] Playwright
+```
+await page.GetByLabel("Terms & Conditions").CheckAsync();
+await page.GetByLabel("User Name").FillAsync("John");
+```
+
+#### Coypu
+```
+window.Check("Terms & Conditions");
+window.FillIn("User Name").With("John");
+```
+
+You may prefer your tests to read like this, or you might prefer Playwrights more explicit API.
+
+### Waits and retries
+Playwright will auto wait for elements to become actionable in the page for you, but where your page elements change dynamically without a full page reload, like any Single Page App, then you will still need to write an `Expect` assertion for something that will indicate the UI has updated or your test may flake out.
+
+e.g. To Click through multiple pages loaded with async
+
+#### Playwright
+```
+await Page.GetByRole(AriaRole.Link, new() { Name = "Page 2" }).ClickAsync();
+// AJAX...
+await Expect(Page
+            .GetByRole(AriaRole.Heading, new() { Name = "Page 3" }))
+            .ToBeVisibleAsync();
+// Ready
+await Page.GetByRole(AriaRole.Link, new() { Name = "Page 3" }).ClickAsync();
+```
+
+#### Coypu
+```
+window.Click("Page 2");
+window.Click("Page 3");
+```
+
+### Keeping your options open
+As a wrapper that decouples finding elements, interacting with the browser and waits and retries from the actual browser automation you may feel prefer to write against the Coypu API to decouple your tests from your choice of automation framework. Coypu is a small library which can be easily extended to support new drivers, whereas Playwright is a much larger library that you would be more tightly coupled to.

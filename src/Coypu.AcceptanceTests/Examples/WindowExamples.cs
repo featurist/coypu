@@ -1,24 +1,29 @@
 ﻿using System.Threading;
+using Coypu.Drivers.Playwright;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests.Examples
 {
     public class WindowExamples : WaitAndRetryExamples
     {
-        private object GetOuterHeight()
+        private int GetOuterHeight()
         {
-            return Browser.ExecuteScript("return window.outerHeight;");
+            return int.Parse(Browser.ExecuteScript("return window.outerHeight;").ToString());
         }
 
-        private object GetOuterWidth()
+        private int GetOuterWidth()
         {
-            return Browser.ExecuteScript("return window.outerWidth;");
+            return int.Parse(Browser.ExecuteScript("return window.outerWidth;").ToString());
         }
 
         [Test]
         public void MaximiseWindow()
         {
-            var availWidth = Browser.ExecuteScript("return window.screen.availWidth;");
+            if (Browser.Driver is PlaywrightDriver)
+            {
+                Assert.Ignore("Playwright does not support window maximisation");
+            }
+            var availWidth = int.Parse(Browser.ExecuteScript("return window.screen.availWidth;").ToString());
             var initalWidth = GetOuterWidth();
             Assert.That(initalWidth, Is.LessThan(availWidth));
 
@@ -29,9 +34,9 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void RefreshingWindow()
         {
-            var tickBeforeRefresh = (long) Browser.ExecuteScript("return window.SpecData.CurrentTick;");
+            var tickBeforeRefresh = long.Parse(Browser.ExecuteScript("return window.SpecData.CurrentTick;").ToString());
             Browser.Refresh();
-            var tickAfterRefresh = (long) Browser.ExecuteScript("return window.SpecData.CurrentTick;");
+            var tickAfterRefresh = long.Parse(Browser.ExecuteScript("return window.SpecData.CurrentTick;").ToString());
             Assert.That(tickAfterRefresh - tickBeforeRefresh, Is.GreaterThan(0));
         }
 
@@ -55,8 +60,9 @@ namespace Coypu.AcceptanceTests.Examples
             Assert.That(mainWindow.FindButton("scoped button", Options.First)
                                   .Id,
                         Is.EqualTo("scope1ButtonId"));
-            mainWindow.ExecuteScript("setTimeout(function() {document.getElementById(\"openPopupLink\").click();}), 3000");
+            mainWindow.ExecuteScript("setTimeout(function() {document.getElementById(\"openPopupLink\").click();}, 300)");
             var popUp = mainWindow.FindWindow("Pop Up Window");
+
             Assert.That(popUp.FindButton("scoped button")
                              .Id,
                         Is.EqualTo("popUpButtonId"));

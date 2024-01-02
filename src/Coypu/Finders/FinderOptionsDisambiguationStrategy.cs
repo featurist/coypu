@@ -33,7 +33,7 @@ namespace Coypu.Finders
 
         private static Element[] Find(ElementFinder elementFinder, Options preferredOptions = null)
         {
-            return elementFinder.Find((Options.Merge(preferredOptions, elementFinder.Options))).ToArray();
+            return elementFinder.Find(Options.Merge(preferredOptions, elementFinder.Options)).ToArray();
         }
     }
 }

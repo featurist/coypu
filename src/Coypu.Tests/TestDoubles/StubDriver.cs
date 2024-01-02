@@ -11,14 +11,11 @@ namespace Coypu.Tests.TestDoubles
 {
     public class StubDriver : IDriver
     {
-        public StubDriver() { }
-
-        public StubDriver(Browser browser) { }
-
-        public StubDriver(IWebDriver driver)
-        {
-            Cookies = new Cookies(driver);
+        public StubDriver() {
+          Cookies = new StubCookies();
         }
+
+        public StubDriver(Browser browser, bool headless) : this() { }
 
         public void Dispose() { }
 
@@ -62,6 +59,8 @@ namespace Coypu.Tests.TestDoubles
         public void Uncheck(Element field) { }
 
         public void Choose(Element field) { }
+
+        public void SelectOption(Element select, Element option, string optionToSelect) { }
 
         public bool Disposed => false;
 
@@ -149,5 +148,57 @@ namespace Coypu.Tests.TestDoubles
         }
 
         public void SetBrowserCookies(Cookie cookie) { }
+
+    public void AcceptAlert(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void AcceptConfirm(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void CancelConfirm(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void AcceptPrompt(string text, string promptValue, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+
+    public void CancelPrompt(string text, DriverScope root, Action trigger)
+    {
+        trigger.Invoke();
+    }
+  }
+
+    // Implementation of Cookies interface that has no behaviour
+    public class StubCookies : Cookies
+    {
+        public void AddCookie(Cookie cookie,
+                              Options options = null) { }
+
+        public void DeleteAll() { }
+
+        public void DeleteCookie(Cookie cookie) { }
+
+        public void DeleteCookieNamed(string cookieName) { }
+
+        public IEnumerable<Cookie> GetAll()
+        {
+            return new List<Cookie>();
+        }
+
+        public Cookie GetCookieNamed(string cookieName)
+        {
+            return null;
+        }
+
+        public void WaitUntilCookieExists(Cookie cookie,
+                                          Options options) {
+        }
     }
 }

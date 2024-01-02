@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Coypu.Drivers.Selenium;
+using Coypu.Drivers.Playwright;
 using Coypu.Drivers.Tests;
 using Coypu.AcceptanceTests;
 using Coypu.AcceptanceTests.Sites;
@@ -9,9 +9,9 @@ using Coypu.Finders;
 using Coypu.Tests.TestBuilders;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
 using ElementFinder = Coypu.Finders.ElementFinder;
 using FrameFinder = Coypu.Finders.FrameFinder;
+using Coypu.Drivers.Selenium;
 
 [SetUpFixture]
 public class AssemblyTearDown
@@ -38,16 +38,15 @@ namespace Coypu.Drivers.Tests
     {
         private static IDriver _driver;
         private static DriverScope _root;
+        private static readonly bool Headless = false;
         private static readonly Browser Browser = Browser.Chrome;
         protected static readonly Options DefaultOptions = new Options();
-
-        private static readonly Type DriverType = typeof(SeleniumWebDriver);
-
+        private static readonly Type DriverType = typeof(PlaywrightDriver);
         protected static readonly SessionConfiguration DefaultSessionConfiguration = new SessionConfiguration
                                                                                      {
                                                                                          Browser = Browser,
                                                                                          Driver = DriverType,
-                                                                                         TextPrecision = TextPrecision.Exact
+                                                                                         TextPrecision = TextPrecision.Exact,
                                                                                      };
 
         protected static readonly DisambiguationStrategy DisambiguationStrategy = new ThrowsWhenMissingButNoDisambiguationStrategy();
@@ -92,7 +91,7 @@ namespace Coypu.Drivers.Tests
                 _driver.Dispose();
             }
 
-            _driver = (IDriver) Activator.CreateInstance(DriverType, Browser);
+            _driver = (IDriver) Activator.CreateInstance(DriverType, Browser, Headless);
 
             _root = null;
         }

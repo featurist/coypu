@@ -1,5 +1,7 @@
 ﻿using System;
+using Coypu.Drivers.Playwright;
 using Coypu.Drivers.Selenium;
+using OpenQA.Selenium.DevTools.V85.HeadlessExperimental;
 
 namespace Coypu
 {
@@ -10,7 +12,7 @@ namespace Coypu
     {
         const string DEFAULT_APP_HOST = "localhost";
         const int DEFAULT_PORT = 80;
-        
+
         private string appHost;
 
         /// <summary>
@@ -23,6 +25,7 @@ namespace Coypu
             SSL = false;
             Browser = Drivers.Browser.Firefox;
             Driver = typeof (SeleniumWebDriver);
+            Headless = true;
         }
 
         /// <summary>
@@ -32,7 +35,13 @@ namespace Coypu
         public Drivers.Browser Browser { get; set; }
 
         /// <summary>
-        /// <para>Specifies the driver you would like to use to control the browser</para> 
+        /// <para>Specifies whether the browser should run in headless mode</para>
+        /// <para>Default: true</para>
+        /// </summary>
+        public bool Headless { get; set; }
+
+        /// <summary>
+        /// <para>Specifies the driver you would like to use to control the browser</para>
         /// <para>Default: SeleniumWebDriver</para>
         /// </summary>
         public Type Driver { get; set; }

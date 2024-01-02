@@ -18,14 +18,18 @@ namespace Coypu.Drivers
                                             UppercaseTagNames = true
                                         };
 
-        public static Browser InternetExplorer = new Browser {Javascript = true};
-        public static Browser Chrome = new Browser {Javascript = true};
-        public static Browser Edge = new Browser {Javascript = true};
-        public static Browser Opera = new Browser {Javascript = true};
-        public static Browser Safari = new Browser {Javascript = true};
+        public static Browser InternetExplorer = new Browser {Javascript = true, Name = "InternetExplorer"};
+        public static Browser Chrome = new Browser {Javascript = true, Name = "Chrome"};
+        public static Browser Chromium = new Browser {Javascript = true, Name = "Chromium"};
+        public static Browser Edge = new Browser {Javascript = true, Name = "Edge"};
+        public static Browser Opera = new Browser {Javascript = true, Name = "Opera"};
+        public static Browser Safari = new Browser {Javascript = true, Name = "Safari"};
+        public static Browser Webkit = new Browser {Javascript = true, Name = "Webkit"};
         private Browser() { }
 
         public bool Javascript { get; private set; }
+
+        public string Name { get; private set; }
         public bool UppercaseTagNames { get; private set; }
 
         public static Browser Parse(string browserName)
@@ -38,9 +42,12 @@ namespace Coypu.Drivers
             return (Browser) fieldInfo.GetValue(null);
         }
 
+        public override string ToString() => Name;
+
         private static IEnumerable<FieldInfo> BrowserFields()
         {
             return typeof(Browser).GetFields(BindingFlags.Public | BindingFlags.Static);
         }
+
     }
 }

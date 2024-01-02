@@ -1,5 +1,4 @@
-﻿using Coypu.Finders;
-using Shouldly;
+﻿using Shouldly;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests

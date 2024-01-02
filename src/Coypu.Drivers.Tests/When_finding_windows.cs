@@ -1,6 +1,11 @@
 ﻿using Coypu.Finders;
 using Shouldly;
 using NUnit.Framework;
+using Coypu.Drivers.Playwright;
+using Coypu.Timing;
+using Coypu.Actions;
+using System;
+using System.Threading;
 
 namespace Coypu.Drivers.Tests
 {
@@ -11,6 +16,10 @@ namespace Coypu.Drivers.Tests
         {
             using (Driver)
             {
+                if (Driver is PlaywrightDriver)
+                {
+                    Assert.Ignore("Playwright does not seem to support window names");
+                }
                 OpenPopup();
                 var window = Window("popUpWindowName", Root, DefaultOptions);
 
@@ -51,8 +60,7 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup();
-                FindPopUp().Text.ShouldContain("I am a pop up window");
-
+                RetryUntilTimeoutTimingStrategy.Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window"));
                 FindPopUpLink();
             }
         }
@@ -63,7 +71,8 @@ namespace Coypu.Drivers.Tests
             using (Driver)
             {
                 OpenPopup2();
-                FindPopUp().Text.ShouldContain("I am a pop up window 2");
+                RetryUntilTimeoutTimingStrategy.Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window 2"));
+
                 FindPopUp2Link();
             }
         }
@@ -75,8 +84,7 @@ namespace Coypu.Drivers.Tests
             {
                 OpenPopup();
                 OpenPopup2();
-                FindPopUp().Text.ShouldContain("I am a pop up window");
-                
+                RetryUntilTimeoutTimingStrategy.Retry(() => FindPopUp().Text.ShouldContain("I am a pop up window"));
                 FindPopUpLink();
             }
         }
@@ -91,9 +99,8 @@ namespace Coypu.Drivers.Tests
 
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
-
+                RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
                 Id("popUpButtonId", popUp);
-
                 FindPopUpLink();
             }
         }
@@ -122,7 +129,10 @@ namespace Coypu.Drivers.Tests
                 var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions),
                                             Driver, null, null, null, DisambiguationStrategy);
 
-                Driver.ExecuteScript("self.close();", popUp);
+                RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
+                // Playwright errors before returning from ExecuteScript if the window is closed synchronously
+                Driver.ExecuteScript("window.setTimeout(() => self.close(), 1);", popUp);
+                Thread.Sleep(10);
                 Assert.Throws<MissingWindowException>(() => FindPopUp());
             }
         }

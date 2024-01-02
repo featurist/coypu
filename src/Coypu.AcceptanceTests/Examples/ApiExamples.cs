@@ -1,6 +1,7 @@
 ﻿using System;
 using Coypu.Drivers;
 using Coypu.Drivers.Selenium;
+using Microsoft.Playwright;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -15,7 +16,7 @@ namespace Coypu.AcceptanceTests.Examples
     {
         public class CustomFirefoxOptionsSeleniumWebDriver : SeleniumWebDriver
         {
-            public CustomFirefoxOptionsSeleniumWebDriver(Browser browser) : base(CustomOptions(), browser) { }
+            public CustomFirefoxOptionsSeleniumWebDriver(Browser browser, bool headless) : base(CustomOptions(), browser) { }
 
             private static IWebDriver CustomOptions()
             {
@@ -130,9 +131,9 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void Native_example()
         {
-            var button = (IWebElement) Browser.FindButton("clickMeTest")
+            var button = (IElementHandle) Browser.FindButton("clickMeTest")
                                               .Native;
-            button.Click();
+            button.ClickAsync().Sync();
             Assert.That(Browser.FindButton("clickMeTest")
                                .Value,
                         Is.EqualTo("Click me - clicked"));

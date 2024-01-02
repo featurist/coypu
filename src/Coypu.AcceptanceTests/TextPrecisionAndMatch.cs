@@ -1,4 +1,6 @@
 ﻿using System;
+using Coypu.Drivers.Playwright;
+using Microsoft.Playwright;
 using NUnit.Framework;
 
 namespace Coypu.AcceptanceTests
@@ -12,15 +14,11 @@ namespace Coypu.AcceptanceTests
         [OneTimeSetUp]
         public void SetUpFixture()
         {
-            if (!OperatingSystem.IsWindows())
-            {
-                Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
-            }
-            
             var configuration = new SessionConfiguration
             {
-                Timeout = TimeSpan.FromMilliseconds(2000),
-                Browser = Drivers.Browser.InternetExplorer
+                Timeout = TimeSpan.FromMilliseconds(0),
+                Browser = Drivers.Browser.Chrome,
+                Driver = typeof(PlaywrightDriver)
             };
             browser = new BrowserSession(configuration);
 
@@ -67,7 +65,7 @@ namespace Coypu.AcceptanceTests
             Assert.That(browser.FindField("Some for labeled radio option", Options.FirstExact).Id, Is.EqualTo("forLabeledRadioFieldExactMatchId"));
             Assert.Throws<MissingHtmlException>(() => browser.FindField("Some for labeled radio", Options.FirstExact).Now());
         }
-        
+
         [Test]
         public void Substring_finds_substring_text_matches()
         {
@@ -87,7 +85,7 @@ namespace Coypu.AcceptanceTests
         // seen occassionally.
         //
         // Could possibly recheck for an exact match after finding multiple substring matches rather than just picking the first
-        // but this would be a performance hit all over the place. 
+        // but this would be a performance hit all over the place.
         //
         // Probably best just to encourage switching to TextPrecision.Exact where you hit this situation.
         [Test]

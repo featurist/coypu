@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
+using Coypu.Actions;
 using Coypu.Finders;
+using Coypu.Timing;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -22,7 +24,7 @@ namespace Coypu.Drivers.Tests
         {
             Driver.Click(Link("Open pop up window"));
             var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver, "Pop Up Window", Root, DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-
+            RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
             Assert.That(Driver.Location(popUp)
                               .AbsoluteUri,
                         Does.EndWith("src/Coypu.Drivers.Tests/bin/Debug/net6.0/html/popup.htm"));

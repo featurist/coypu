@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
 using Cookie = System.Net.Cookie;
 
 #pragma warning disable 1591
@@ -28,11 +27,18 @@ namespace Coypu
 
         [Obsolete("Please use instead: _browserSession.Driver.Cookies.DeleteAll()")]
         void ClearBrowserCookies();
-
         void Click(Element element);
+        [Obsolete("Please use instead: AcceptAlert/AcceptConfirm/AcceptPrompt")]
         void AcceptModalDialog(Scope scope);
+        [Obsolete("Please use instead: CancelAlert/CancelConfirm/CancelPrompt")]
         void CancelModalDialog(Scope scope);
+        [Obsolete("Please use instead: [Accepts/Cancels][Alert/Confirm/Prompt]")]
         bool HasDialog(string withText, Scope scope);
+        void AcceptAlert(string text, DriverScope root, Action trigger);
+        void AcceptConfirm(string text, DriverScope root, Action trigger);
+        void CancelConfirm(string text, DriverScope root, Action trigger);
+        void AcceptPrompt(string text, string value, DriverScope root, Action trigger);
+        void CancelPrompt(string text, DriverScope root, Action trigger);
         void Choose(Element field);
         void Check(Element field);
         void Uncheck(Element field);
@@ -46,5 +52,6 @@ namespace Coypu
         void ResizeTo(Size size, Scope Scope);
         void SaveScreenshot(string fileName, Scope scope);
         void SendKeys(Element element, string keys);
-    }
+        void SelectOption(Element select, Element option, string optionToSelect);
+  }
 }

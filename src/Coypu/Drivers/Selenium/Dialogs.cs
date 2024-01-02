@@ -13,9 +13,11 @@ namespace Coypu.Drivers.Selenium
 
         public bool HasDialog(string withText)
         {
-            return HasAnyDialog() && _selenium.SwitchTo()
-                                              .Alert()
-                                              .Text == withText;
+            if (!HasAnyDialog() ) return false;
+
+            var alert = _selenium.SwitchTo().Alert();
+
+            return alert.Text == withText;
         }
 
         public bool HasAnyDialog()
@@ -32,13 +34,16 @@ namespace Coypu.Drivers.Selenium
             }
         }
 
-        public void AcceptModalDialog()
+        public void AcceptModalDialog(string prompt = null)
         {
             try
             {
-                _selenium.SwitchTo()
-                         .Alert()
-                         .Accept();
+                var alert = _selenium.SwitchTo()
+                         .Alert();
+                if (prompt != null) {
+                    alert.SendKeys(prompt);
+                }
+                alert.Accept();
             }
             catch (NoAlertPresentException ex)
             {

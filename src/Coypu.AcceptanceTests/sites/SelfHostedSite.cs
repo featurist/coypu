@@ -12,13 +12,13 @@ namespace Coypu.AcceptanceTests.Sites
     public class SelfHostedSite : IDisposable
     {
         private readonly WebApplication _app;
-        
+
         public SelfHostedSite()
         {
             var builder = WebApplication.CreateBuilder();
-            builder.WebHost.UseUrls($"https://{IPAddress.Loopback}:0");
+            builder.WebHost.UseUrls($"http://{IPAddress.Loopback}:0");
             _app = builder.Build();
-            
+
             _app.MapGet("/",
                 () =>
                     Results.Content(

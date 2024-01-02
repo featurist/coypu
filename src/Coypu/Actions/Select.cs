@@ -63,7 +63,7 @@ namespace Coypu.Actions
         private void SelectOption(ElementScope selectElementScope)
         {
             var option = _disambiguationStrategy.ResolveQuery(new OptionFinder(Driver, _optionToSelect, selectElementScope, _options));
-            Driver.Click(option);
+            Driver.SelectOption(selectElementScope, option, _optionToSelect);
         }
     }
 }

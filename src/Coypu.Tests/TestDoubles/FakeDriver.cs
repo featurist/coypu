@@ -14,6 +14,7 @@ namespace Coypu.Tests.TestDoubles
     {
         public readonly IList<Element> CheckedElements = new List<Element>();
         public readonly IList<Element> ChosenElements = new List<Element>();
+        public readonly List<SelectOptionParams> SelectedOptions = new List<SelectOptionParams>();
         public readonly IList<Element> ClickedElements = new List<Element>();
         public readonly IList<FindXPathParams> FindXPathRequests = new List<FindXPathParams>();
         public readonly IList<Scope> GoBackCalls = new List<Scope>();
@@ -41,14 +42,14 @@ namespace Coypu.Tests.TestDoubles
 
         public FakeDriver() { }
 
-        public FakeDriver(Browser browser)
+        public FakeDriver(Browser browser, bool headless)
         {
             Browser = browser;
         }
 
-        public FakeDriver(IWebDriver driver)
+        public FakeDriver(IWebDriver driver, bool headless)
         {
-            Cookies = new Cookies(driver);
+            Cookies = new FakeCookies();
         }
 
         public Browser Browser { get; }
@@ -211,6 +212,11 @@ namespace Coypu.Tests.TestDoubles
             ChosenElements.Add(field);
         }
 
+        public void SelectOption(Element select, Element option, string optionToSelect)
+        {
+            SelectedOptions.Add(new SelectOptionParams {Select = select, Option = option, OptionToSelect = optionToSelect});
+        }
+
         public IEnumerable<Element> FindWindows(string locator,
                                                 Scope scope,
                                                 Options options)
@@ -332,7 +338,32 @@ namespace Coypu.Tests.TestDoubles
             return a.ToString() == b.ToString() && a.Options == b.Options;
         }
 
-        public class SaveScreenshotParams
+    public void AcceptAlert(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void AcceptConfirm(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void CancelConfirm(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void AcceptPrompt(string text, string promptValue, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void CancelPrompt(string text, DriverScope root, Action trigger)
+    {
+      throw new NotImplementedException();
+    }
+
+    public class SaveScreenshotParams
         {
             public ImageFormat ImageFormat;
             public string SaveAs;
@@ -358,7 +389,14 @@ namespace Coypu.Tests.TestDoubles
             public T Request;
             public Scope Scope;
         }
+
+    public class SelectOptionParams
+    {
+      public Element Select;
+      public Element Option;
+      public string OptionToSelect;
     }
+  }
 
     public class SetFieldParams
     {
@@ -371,5 +409,45 @@ namespace Coypu.Tests.TestDoubles
         public Scope Scope { get; set; }
         public Regex TextPattern { get; set; }
         public string XPath { get; set; }
+    }
+
+    // Implementation of Cookies interface with in memory stores for cookies that behaves like a real browser might
+    public class FakeCookies : Cookies {
+        private readonly List<Cookie> _cookies = new List<Cookie>();
+
+        public void AddCookie(Cookie cookie, Options options = null)
+        {
+            _cookies.Add(cookie);
+        }
+
+        public void DeleteAll()
+        {
+            _cookies.Clear();
+        }
+
+        public void DeleteCookie(Cookie cookie)
+        {
+            _cookies.Remove(cookie);
+        }
+
+        public void DeleteCookieNamed(string cookieName)
+        {
+            _cookies.RemoveAll(c => c.Name == cookieName);
+        }
+
+        public IEnumerable<Cookie> GetAll()
+        {
+            return _cookies;
+        }
+
+        public Cookie GetCookieNamed(string cookieName)
+        {
+            return _cookies.FirstOrDefault(c => c.Name == cookieName);
+        }
+
+        public void WaitUntilCookieExists(Cookie cookie, Options options)
+        {
+            System.Threading.Thread.Sleep(1);
+        }
     }
 }

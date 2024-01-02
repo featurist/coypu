@@ -18,7 +18,7 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Sets_value_of_text_input_field_with_id()
         {
-            var textField = Field("containerLabeledTextInputFieldName");  
+            var textField = Field("containerLabeledTextInputFieldName");
             Driver.Set(textField, "should be much quicker since it's set by js");
 
             textField.Value.ShouldBe("should be much quicker since it's set by js");
@@ -83,12 +83,20 @@ namespace Coypu.Drivers.Tests
             var textField = Field("containerLabeledSelectFieldId");
             textField.Value.ShouldBe("select2value1");
 
-            Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
+            Driver.SelectOption(
+              GetSelectScope("containerLabeledSelectFieldId").Now(),
+              FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)),
+              "select two option two"
+            );
 
             var findAgain = Field("containerLabeledSelectFieldId");
             findAgain.Value.ShouldBe("select2value2");
 
-            Driver.Click(FindSingle(new OptionFinder(Driver, "select two option one", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
+            Driver.SelectOption(
+              GetSelectScope("containerLabeledSelectFieldId").Now(),
+              FindSingle(new OptionFinder(Driver, "select two option one", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)),
+              "select two option one"
+            );
 
             var andAgain = Field("containerLabeledSelectFieldId");
             andAgain.Value.ShouldBe("select2value1");
@@ -100,7 +108,11 @@ namespace Coypu.Drivers.Tests
             var textField = Field("containerLabeledSelectFieldId");
             textField.Name.ShouldBe("containerLabeledSelectFieldName");
 
-            Driver.Click(FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)));
+            Driver.SelectOption(
+              GetSelectScope("containerLabeledSelectFieldId").Now(),
+              FindSingle(new OptionFinder(Driver, "select two option two", GetSelectScope("containerLabeledSelectFieldId"), DefaultOptions)),
+              "select two option two"
+            );
 
             Field("containerLabeledSelectFieldId", Root).Name.ShouldBe("containerLabeledSelectFieldName - changed");
         }

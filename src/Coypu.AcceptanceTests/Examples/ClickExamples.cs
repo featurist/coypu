@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using NUnit.Framework;
+using OpenQA.Selenium.DevTools.V85.Network;
 
 namespace Coypu.AcceptanceTests.Examples
 {
@@ -48,19 +50,21 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void ClickLink()
         {
-            Browser.ClickLink("Trigger a confirm");
-            Browser.CancelModalDialog();
+            Browser.CancelConfirm(() => {
+                Browser.ClickLink("Trigger a confirm");
+            });
         }
 
         [Test]
         public void ClickLink_WaitBeforeClick()
         {
             var stopWatch = Stopwatch.StartNew();
-
-            Browser.ClickLink("Trigger a confirm", _optionsWaitBeforeClick);
-            var actualWait = stopWatch.ElapsedMilliseconds;
-            Console.WriteLine($"\t-> Actual wait before click {actualWait} milliseconds");
-            Browser.CancelModalDialog();
+            long actualWait = 0;
+            Browser.CancelConfirm(() => {
+              Browser.ClickLink("Trigger a confirm", _optionsWaitBeforeClick);
+              actualWait = stopWatch.ElapsedMilliseconds;
+              Console.WriteLine($"\t-> Actual wait before click {actualWait} milliseconds");
+            });
 
             Assert.That(actualWait > WaitBeforeClickInSec.TotalMilliseconds, "\tDidn't wait enough!");
         }
@@ -68,8 +72,9 @@ namespace Coypu.AcceptanceTests.Examples
         [Test]
         public void ClickLink_WithTitle()
         {
-            Browser.ClickLink("Link with title");
-            Browser.CancelModalDialog();
+            Browser.CancelConfirm(() => {
+              Browser.ClickLink("Link with title");
+            });
         }
 
         [Test]

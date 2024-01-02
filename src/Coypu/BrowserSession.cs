@@ -72,7 +72,7 @@ namespace Coypu
                                 RestrictedResourceDownloader restrictedResourceDownloader)
             : base(sessionConfiguration,
                    null,
-                   driverFactory.NewWebDriver(sessionConfiguration.Driver, sessionConfiguration.Browser),
+                   driverFactory.NewWebDriver(sessionConfiguration.Driver, sessionConfiguration.Browser, sessionConfiguration.Headless),
                    timingStrategy,
                    waiter,
                    urlBuilder,
@@ -145,7 +145,8 @@ namespace Coypu
         public void SaveWebResource(string resource,
                                     string saveAs)
         {
-            _restrictedResourceDownloader.SetCookies(_driver.GetBrowserCookies());
+            var cookies = _driver.GetBrowserCookies();
+            _restrictedResourceDownloader.SetCookies(cookies);
             _restrictedResourceDownloader.DownloadFile(UrlBuilder.GetFullyQualifiedUrl(resource, SessionConfiguration), saveAs);
         }
 
@@ -165,5 +166,10 @@ namespace Coypu
         {
             return new BrowserWindow(new WindowFinder(_driver, locator, this, Merge(options)), this);
         }
+
+        /// <summary>
+        ///     Manage cookies associated with the current browser session.
+        /// </summary>
+        public Cookies Cookies => _driver.Cookies;
     }
 }

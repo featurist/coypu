@@ -1,5 +1,6 @@
 ﻿using System;
 using Coypu.Finders;
+using Coypu.Timing;
 using NUnit.Framework;
 
 namespace Coypu.Drivers.Tests
@@ -17,24 +18,17 @@ namespace Coypu.Drivers.Tests
         {
             Driver.Click(Link("Open pop up window"));
             var popUp = new BrowserWindow(DefaultSessionConfiguration, new WindowFinder(Driver,"Pop Up Window",Root,DefaultOptions), Driver, null, null, null, DisambiguationStrategy);
-
-            try
-            {
-                RefreshCausesScopeToReload(popUp);
-            }
-            finally
-            {
-                Driver.ExecuteScript("return self.close();", popUp);
-            }
+            RetryUntilTimeoutTimingStrategy.Retry(() => popUp.Now());
+            RefreshCausesScopeToReload(popUp);
         }
 
         private static void RefreshCausesScopeToReload(DriverScope driverScope)
         {
-            var tickBeforeRefresh = (Int64) Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope);
+            var tickBeforeRefresh = long.Parse(Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope).ToString());
 
             Driver.Refresh(driverScope);
 
-            var tickAfterRefresh = (Int64) Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope);
+            var tickAfterRefresh = long.Parse(Driver.ExecuteScript("return window.SpecData.CurrentTick;", driverScope).ToString());
 
             Assert.That(tickAfterRefresh, Is.GreaterThan(tickBeforeRefresh));
         }

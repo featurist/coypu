@@ -5,9 +5,9 @@ using Coypu.Queries;
 namespace Coypu
 {
     /// <summary>
-    /// The scope of an element already found in the document, therefore not deferred. 
-    /// 
-    /// If this element becomes stale then using this scope will not try to refind the element but 
+    /// The scope of an element already found in the document, therefore not deferred.
+    ///
+    /// If this element becomes stale then using this scope will not try to refind the element but
     /// will raise a MissingHtmlException immediately.
     /// </summary>
     public class SnapshotElementScope : ElementScope
@@ -55,7 +55,8 @@ namespace Coypu
 
         public override bool Missing(Options options = null)
         {
-            return FindXPath(".", options).Missing();
+            var scope = FindXPath(".", options);
+            return scope.Missing();
         }
     }
 }

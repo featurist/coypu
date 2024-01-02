@@ -3,25 +3,25 @@
 <html>
 <head>
     <title>Coypu interaction tests page</title>
-    
+
 
 </head>
 <body>
   <form>
       <!--section> TODO:L
         <h1>JS links / buttons</h1>
-        
+
         <h2>These should be ignored as genuine ones exist later in the doc</h2>
         <div>first button</div>
         <span>first text input</span>
         <ul>
           <li>first link</li>
         </ul>
-        
+
         <h2>These are unique so should be found</h2>
         <div id="ImAButtonReally">I am a js button</div>
         <span id="ImALinkReally">I am a js link</span>
-        
+
       </section-->
       <fieldset>
         <legend>Buttons</legend>
@@ -31,62 +31,62 @@
           third button</button>
         <button id="anotherButtonId" name="anotherButtonName">another button</button>
         <button id="_ctrl1_otherButtonId" name="_ctrl1_otherButtonName">other button</button>
-        
+
         <button id="_ctrl1_partialButtonId" name="_ctrl1_partiatrigglButtonName">other button</button>
         <button id="partialButtonId" name="partialButtonName">partial button</button>
 
-        
+
           <input type="text" id="firstTextInputId" name="firstTextInputName" value="first text input" />
         <input type="hidden" id="firstHiddenInputId" name="firstHiddenInputName" value="first hidden input" />
-        
+
         <input type="button" id="firstInputButtonId" name="firstInputButtonName" value="first input button" />
         <input type="button" id="secondInputButtonId" name="secondInputButtonName" value="second input button" />
         <input type="button" id="thirdInputButtonId" name="thirdInputButtonName" value="third input button" />
-        
+
         <input type="submit" id="firstSubmitButtonId" name="firstSubmitButtonName" value="first submit button" />
         <input type="submit" id="secondSubmitButtonId" name="secondSubmitButtonName" value="second submit button" />
         <input type="submit" id="thirdSubmitButtonId" name="thirdSubmitButtonName" value="third submit button" />
-        
+
         <input type="image" src="img.jpg" id="firstImageButtonId" name="firstImageButtonName" value="first image button" />
         <input type="image" src="img2.jpg" id="secondImageButtonId" name="secondImageButtonName" value="second image button" />
 
         <img src="img2.jpg" id="roleImageButtonId" role="button" alt="I'm an image with the role of button" />
-          
-        <span id="roleSpanButtonId" role="button">I'm a span with the role of button</span>        
-        <span id="classButtonSpanButtonId" class="other button stuff">I'm a span with the class of button</span>        
-        <span id="classBtnSpanButtonId" class="other btn stuff">I'm a span with the class of btn</span>                
+
+        <span id="roleSpanButtonId" role="button">I'm a span with the role of button</span>
+        <span id="classButtonSpanButtonId" class="other button stuff">I'm a span with the class of button</span>
+        <span id="classBtnSpanButtonId" class="other btn stuff">I'm a span with the class of btn</span>
         <input type="button" id="clickMeTest" onclick="this.value += ' - clicked'; return false;" value="Click me" />
-        
+
         <button id="firstInvisibleInputId" name="firstInvisibleInputName" style="visibility:hidden">I am an invisible button</button>
         <span id="firstInvisibleSpanId" name="firstInvisibleSpanName" style="visibility:hidden">I am an invisible span</span>
         <input type="image" id="buttonWithBothQuotesId" value="I&apos;m an image button with &quot;both&quot; types of quote in my value" />
-      
+
         <button id="disabledButton" name="disabledButtonName" disabled>Disabled button</button>
       </fieldset>
       <fieldset>
           <legend>Fields</legend>
-        
+
           <label for="forLabeledTextInputFieldId">text input field linked by for</label>
           <input type="text" id="forLabeledTextInputFieldId" name="forLabeledTextInputFieldName" value="text input field one val" />
 
           <label for="forLabeledPasswordFieldId">password field linked by for</label>
           <input type="password" id="forLabeledPasswordFieldId" name="forLabeledPasswordFieldName" value="password field one val" />
-          i   
+          i
           <label for="forLabeledCheckboxFieldId">checkbox field linked by for</label>
           <input type="checkbox" id="forLabeledCheckboxFieldId" name="forLabeledCheckboxFieldName" value="checkbox field one val" />
-        
+
           <label for="forLabeledRadioFieldId">radio field linked by for</label>
           <input type="radio" id="forLabeledRadioFieldId" name="forLabeledRadioFieldName" value="radio field one val" />
-          
+
           <input type="checkbox" name="checkboxByValueOneFieldName" value="checkbox one val" />
           <input type="checkbox" name="checkboxByValueTwoFieldName" value="checkbox two val" />
-        
+
           <label for="forLabeledSelectFieldId">select field linked by for</label>
           <select id="forLabeledSelectFieldId" name="forLabeledSelectFieldName">
               <option value="value1">one</option>
               <option value="value2">two</option>
           </select>
-          
+
           <label>Ambiguous select options
               <select>
                   <option>choose</option>
@@ -95,27 +95,27 @@
               </select>
           </label>
           <span>normalize <b>space</b> test</span>
-        
+
           <label for="forLabeledTextareaFieldId">textarea field linked by for</label>
           <textarea cols="30" rows="5" id="forLabeledTextareaFieldId" name="forLabeledTextareaFieldName">textarea val one</textarea>
-        
+
           <label for="forLabeledFileFieldId">file field linked by for</label>
           <input type="file" id="forLabeledFileFieldId" name="forLabeledFileFieldName" />
-        
+
           <label>
               text input field in a label container
               <input type="text" id="containerLabeledTextInputFieldId" name="containerLabeledTextInputFieldName" value="text input field two val" />
           </label>
-          
+
           <label>
               email input field in a label container
               <input type="email" id="containerLabeledEmailInputFieldId" name="containerLabeledEmailInputFieldName" value="email input field two val" />
           </label>
-  
+
           <label>
               tel input field in a label container
               <input type="tel" id="containerLabeledTelInputFieldId" name="containerLabeledTelInputFieldName" value="0123456789"/>
-          </label> 
+          </label>
           <label>
               number input field in a label container
               <input type="number" id="containerLabeledNumberInputFieldId" name="containerLabeledNumberInputFieldName" value="42"/>
@@ -143,39 +143,39 @@
           <label>
               url input field in a label container
               <input type="url" id="containerLabeledUrlInputFieldId" name="containerLabeledUrlInputFieldName" value="http://www.example.com"/>
-          </label>   
+          </label>
 
           <label>
               Field with no id
               <input type="text" name="textFieldWithNoId" value="" />
           </label>
-          
+
           <label>
               Field with no type
               <input name="fieldWithNoType"/>
           </label>
-        
+
 
           <label>
               password field in a label container
               <input type="password" id="containerLabeledPasswordFieldId" name="containerLabeledPasswordFieldName" value="password field two val" />
           </label>
-        
+
           <label>
               radio field in a label container
               <input type="radio" id="containerLabeledRadioFieldId" name="containerLabeledRadioFieldName" value="radio field two val" />
           </label>
-        
+
           <label>
               checkbox field in a label container
               <input type="checkbox" id="containerLabeledCheckboxFieldId" name="containerLabeledCheckboxFieldName" value="checkbox field two val" />
           </label>
-        
+
           <label for="containerLabeledTextareaFieldId">
               textarea field in a label container
               <textarea cols="30" rows="5" id="containerLabeledTextareaFieldId" name="containerLabeledTextareaFieldName">textarea field two val</textarea>
           </label>
-        
+
           <label for="containerLabeledSelectFieldId">
               select field in a label container
               <select id="containerLabeledSelectFieldId" name="containerLabeledSelectFieldName" onchange="this.name += ' - changed'">
@@ -183,12 +183,12 @@
                   <option value="select2value2">select two option two</option>
               </select>
           </label>
-        
+
           <label for="containerLabeledFileFieldId">
               file field in a label container
               <input type="file" id="containerLabeledFileFieldId" name="containerLabeledFileFieldName" />
           </label>
-        
+
           <label for="_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldId">
               web forms style file field in a label container
               <input type="file" id="_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldId" name="_ctrl01_ctrl02_aspWebFormsContainerLabeledFileFieldName" />
@@ -203,10 +203,10 @@
               <option>default</option>
               <option>select me to test focussing</option>
           </select>
-        
+
           <input type="checkbox" id="uncheckedBox" value="unchecked" onclick="this.value += ' - clicked';" />
           <input type="checkbox" id="checkedBox" value="checked" onclick="this.value += ' - clicked';" checked="checked" />
-         
+
           <input type="radio" name="chooseRadio" id="chooseRadio1" value="Radio buttons - 1st value" />
           <input type="radio" name="chooseRadio" id="chooseRadio2" value="Radio buttons - 2nd value" onclick="this.value += ' - clicked';" />
           <input type="radio" name="chooseRadio" id="chooseRadio3" value="Radio buttons - 3rd value" />
@@ -233,16 +233,16 @@
 			</optgroup>
 		</select>
       </fieldset>
-      
+
       <fieldset>
           <legend>Ambiguous fields when finding by label text</legend>
 
           <label for="forLabeledRadioFieldPartialMatchId">Some for labeled radio option that might conflict with another one</label>
           <input name="forLabeledRadioFieldAmbiguousMatchName" type="radio" id="forLabeledRadioFieldPartialMatchId" value="forLabeledRadioFieldAmbiguousMatchName_2"/>
-          
+
           <label for="forLabeledRadioFieldExactMatchId">Some for labeled radio option</label>
           <input name="forLabeledRadioFieldAmbiguousMatchName" type="radio" id="forLabeledRadioFieldExactMatchId" value="forLabeledRadioFieldAmbiguousMatchName_1"/>
-          
+
           <label>
               Some container labeled radio option that might conflict with another one
               <input name="containerLabeledRadioFieldAmbiguousMatchName" type="radio" id="containerLabeledRadioFieldPartialMatchId" value="containerLabeledRadioFieldAmbiguousMatchName_4"/>
@@ -252,7 +252,7 @@
               Some container labeled radio option
               <input name="containerLabeledRadioFieldAmbiguousMatchName" type="radio" id="containerLabeledRadioFieldExactMatchId" value="containerLabeledRadioFieldAmbiguousMatchName_3"/>
           </label>
-          
+
           <input name="someFieldNameThatAppearsTwice" id="someFieldNameThatAppearsTwice_1"/>
           <input name="someFieldNameThatAppearsTwice" id="someFieldNameThatAppearsTwice_2"/>
 
@@ -300,21 +300,21 @@
             in
             source
         </span>
-        
+
         <div>
             <p>Some text displayed over</p>
             <p>two paragraphs</p>
-            
+
             Some text displayed over<br />
             multiple lines
         </div>
-        
+
         <p class="css-test">
             <span>This</span> is what we are looking for
             <img src="#" class="invisible" style="display:none" />
             <img src="#" class="invisible" style="visibility:hidden" />
         </p>
-        
+
         <ul id="cssTest" class="snapshot-scope">
             <li>one</li>
             <li>two</li>
@@ -326,16 +326,19 @@
   </section>
   <section>
       <h1>Dialogs</h1>
-      <a href="#alert" onclick="alert('You have triggered an alert and this is the text.');" id="alertTriggerLink">
+      <a href="#alert" onclick="alert('You have triggered an alert and this is the text.');this.innerHTML += ' - accepted';" id="alertTriggerLink">
         Trigger an alert
       </a>
-      
+
       <a href="#confirm" onclick="if(confirm('You have triggered a confirm and this is the text.')){this.innerHTML += ' - accepted';}else{this.innerHTML += ' - cancelled';}"  id="confirmTriggerLink">
           Trigger a confirm
       </a>
-      
+
       <a href="#confirm" title="Link with title" onclick="if(confirm('You have triggered a confirm and this is the text.')){this.innerHTML += ' - accepted';}else{this.innerHTML += ' - cancelled';}" id="confirmTriggerLink">
-        I have a title
+          I have a title
+      </a>
+      <a href="#prompt" onclick="this.innerHTML += ' - ' + (prompt('You have triggered a prompt and this is the text.') || 'cancelled');"  id="confirmTriggerLink">
+        Trigger a prompt
       </a>
   </section>
   <form id="attributeTestForm" method="post" action="http://somesite.com/action.htm" target="_parent">
@@ -347,42 +350,42 @@
   <div id="scope1">
     <fieldset id="fieldsetScope1">
       <legend>Scope 1</legend>
-      
+
         <label for="scope1TextInputFieldId">scoped text input field linked by for</label>
         <input type="text" id="scope1TextInputFieldId" name="scopedTextInputFieldName" value="scoped text input field one val" />
-          
+
         <label>
             scoped text input field in a label container
             <input type="text" id="scope1ContainerLabeledTextInputFieldId" name="scope1ContainerLabeledTextInputFieldName" value="scoped text input field two val" />
-        </label>      
-        
+        </label>
+
         <input id="scope1TextInputFieldWithPlaceholder" placeholder="scoped text input field with a placeholder" type="text" />
         <input type="radio" id="scope1RadioFieldId" name="scopedRadioFieldName" value="scoped radio field one val" />
 
       <input type="button" id="scope1InputButtonId" name="scopedInputButtonName" value="scoped input button" />
       <button id="scope1ButtonId" name="scopedButtonName">scoped button</button>
-      </fieldset>        
+      </fieldset>
   </div>
-  
+
   <div id="scope2">
       <fieldset id="fieldsetScope2">
           <legend>Scope 2</legend>
-          
+
           <label for="scope2TextInputFieldId">scoped text input field linked by for</label>
           <input type="text" id="scope2TextInputFieldId" name="scopedTextInputFieldName" value="scoped text input field one val" />
-          
+
           <label>
             scoped text input field in a label container
             <input type="text" id="scope2ContainerLabeledTextInputFieldId" name="scope2ContainerLabeledTextInputFieldName" value="scoped text input field two val" />
-        </label>        
-        
+        </label>
+
         <input id="scope2TextInputFieldWithPlaceholder" placeholder="scoped text input field with a placeholder" type="text" />
         <input type="radio" id="scope2RadioFieldId" name="scopedRadioFieldName" value="scoped radio field one val" />
 
       <input type="button" id="scope2InputButtonId" name="scopedInputButtonName" value="scoped input button" />
       <button id="scope2ButtonId" name="scopedButtonName">scoped button</button>
-        
-      </fieldset>        
+
+      </fieldset>
   </div>
   <section id="sectionOne">
     <h1>Section One h1</h1>
@@ -408,7 +411,7 @@
     <h3>Div Section Two h3</h3>
     <h6>Div Section Two h6</h6>
   </div>
-  
+
   <div id="divSectionOneWithLink">
     <h2><a href="#">Div Section One h2 with link</a></h2>
   </div>
@@ -418,7 +421,7 @@
       <a href="#">with link</a>
     </h2>
   </div>
-  
+
     <div id="iframes">
         <iframe src="iFrame1.htm" id="iframe1" title="iframe one title"></iframe>
         <iframe src="iFrame2.htm" id="iframe2" title="iframe two title"></iframe>

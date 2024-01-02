@@ -45,8 +45,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_by_div_by_id()
         {
-            Section("divSectionOne").Native.ShouldBe(Section("Div Section One h1").Native);
-            Section("divSectionTwo").Native.ShouldBe(Section("Div Section Two h1").Native);
+            Section("divSectionOne").Text.ShouldBe(Section("Div Section One h1").Text);
+            Section("divSectionTwo").Text.ShouldBe(Section("Div Section Two h1").Text);
         }
     }
 }

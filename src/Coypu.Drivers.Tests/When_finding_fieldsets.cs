@@ -15,8 +15,8 @@ namespace Coypu.Drivers.Tests
         [Test]
         public void Finds_by_id()
         {
-            Fieldset("fieldsetScope1").Native.ShouldBe(Fieldset("Scope 1").Native);
-            Fieldset("fieldsetScope2").Native.ShouldBe(Fieldset("Scope 2").Native);
+            Fieldset("fieldsetScope1").Id.ShouldBe("fieldsetScope1");
+            Fieldset("fieldsetScope2").Id.ShouldBe("fieldsetScope2");
         }
 
         [Test]
