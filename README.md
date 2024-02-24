@@ -78,7 +78,7 @@ Coypu drivers implement the `Coypu.Driver` interface and read the `SessionConfig
 Choose your driver/browser combination like so:
 
 ```c#
-sessionConfiguration.Driver = typeof (SeleniumWebDriver);
+sessionConfiguration.Driver = typeof (Coypu.Drivers.Selenium.SeleniumWebDriver);
 sessionConfiguration.Browser = Drivers.Browser.Firefox;
 ```
 
@@ -112,7 +112,7 @@ The playwright driver will become the default driver for Coypu in the next major
 [A note on what Playwright means for Coypu](#a-note-on-playwright)
 
 ```c#
-sessionConfiguration.Driver = typeof (Playwright);
+sessionConfiguration.Driver = typeof (Coypu.Drivers.Playwright.PlaywrightDriver);
 ```
 
 ### Install browser binaries
