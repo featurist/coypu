@@ -243,11 +243,17 @@ namespace Coypu.Drivers.Selenium
                                     Scope scope,
                                     params object[] args)
         {
+            return ExecuteScript<object>(javascript, scope, args);
+        }
+        public ReturnType ExecuteScript<ReturnType>(string javascript,
+                                    Scope scope,
+                                    params object[] args)
+        {
             if (NoJavascript)
                 throw new NotSupportedException("Javascript is not supported by " + _browser);
 
             _elementFinder.SeleniumScope(scope);
-            return JavaScriptExecutor.ExecuteScript(javascript, ConvertScriptArgs(args));
+            return (ReturnType) JavaScriptExecutor.ExecuteScript(javascript, ConvertScriptArgs(args));
         }
 
         public void Dispose()

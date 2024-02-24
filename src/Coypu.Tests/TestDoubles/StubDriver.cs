@@ -87,6 +87,13 @@ namespace Coypu.Tests.TestDoubles
             return null;
         }
 
+        public ReturnType ExecuteScript<ReturnType>(string javascript,
+                                    Scope scope,
+                                    params object[] args)
+        {
+            return default;
+        }
+
         public void Hover(Element element) { }
 
         public IEnumerable<Cookie> GetBrowserCookies()
