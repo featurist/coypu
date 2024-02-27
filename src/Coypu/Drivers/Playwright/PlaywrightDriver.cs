@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
-using OpenQA.Selenium.DevTools.V85.Network;
+using System.Text;
 
 #pragma warning disable 1591
 
@@ -200,6 +200,18 @@ namespace Coypu.Drivers.Playwright
         public void Visit(string url,
                           Scope scope)
         {
+            string userInfo = new Uri(url).UserInfo;
+            if (string.IsNullOrEmpty(userInfo))
+            {
+                _context.SetExtraHTTPHeadersAsync(new Dictionary<string, string> {
+                  { "Authorization", string.Empty }
+                }).Sync();
+            } else {
+                var base64EncodedAuthenticationString = Convert.ToBase64String(Encoding.ASCII.GetBytes(userInfo));
+                _context.SetExtraHTTPHeadersAsync(new Dictionary<string, string> {
+                  { "Authorization", "Basic " + base64EncodedAuthenticationString }
+                }).Sync();
+            }
             IResponse response = PlaywrightPage(scope).GotoAsync(url).Sync();
             if (response != null && response.Status != 200)
             {

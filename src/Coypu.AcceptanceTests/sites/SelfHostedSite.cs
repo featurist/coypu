@@ -38,6 +38,11 @@ namespace Coypu.AcceptanceTests.Sites
                         return Results.Text("bdd");
                     return Results.NoContent();
                 });
+            _app.MapGet("/headers",
+                 (HttpRequest req) =>
+                {
+                    return Results.Text(req.Headers.Select(h => $"{h.Key}: {h.Value}").Aggregate((a, b) => $"{a}\n{b}"));
+                });
 
             _app.StartAsync().Wait();
         }
