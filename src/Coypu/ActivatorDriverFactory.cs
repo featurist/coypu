@@ -7,11 +7,11 @@ namespace Coypu
     {
         public static int OpenDrivers { get; set; }
 
-        public IDriver NewWebDriver(Type driverType, Drivers.Browser browser, bool headless)
+        public IDriver NewWebDriver(Type driverType, Drivers.Browser browser, bool headless, string appHost)
         {
             try
             {
-                var driver = (IDriver)Activator.CreateInstance(driverType, browser, headless);
+                var driver = (IDriver)Activator.CreateInstance(driverType, browser, headless, appHost);
                 OpenDrivers++;
                 return driver;
             }

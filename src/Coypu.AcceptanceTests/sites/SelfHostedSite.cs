@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -39,9 +40,19 @@ namespace Coypu.AcceptanceTests.Sites
                     return Results.NoContent();
                 });
             _app.MapGet("/headers",
-                 (HttpRequest req) =>
+                 (HttpRequest req, HttpResponse res) =>
                 {
-                    return Results.Text(req.Headers.Select(h => $"{h.Key}: {h.Value}").Aggregate((a, b) => $"{a}\n{b}"));
+                    if (string.IsNullOrEmpty(req.Headers["Authorization"])) {
+                        res.Headers.Add("WWW-Authenticate", "Basic realm= \"Coypu Test\"");
+                        return Results.Unauthorized();
+                    };
+                    return Results.Content(
+                      "<HTML><BODY>" +
+                      req.Headers.Select(h => $"{h.Key}: {h.Value}").Aggregate((a, b) => $"{a}: {b}</br>") +
+                      "<img src=\"/235.gif\" />" +
+                      "<img src=\"https://github.com/featurist/coypu/pull/235.gif\" />" +
+                      "</BODY></HTML>",
+                          MediaTypeNames.Text.Html, Encoding.UTF8);
                 });
 
             _app.StartAsync().Wait();

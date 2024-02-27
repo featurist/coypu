@@ -35,22 +35,17 @@ namespace Coypu.AcceptanceTests
             {
               Timeout = TimeSpan.FromMilliseconds(1000),
               Port = site.BaseUri.Port,
-              AppHost = "http://username:passw0rd@localhost",
+              AppHost = "http://someUser:passw0rd@localhost",
               Driver = typeof(PlaywrightDriver), // Selenium can't do this
               Headless = false,
               Browser = Drivers.Browser.Chromium
             };
 
             browser = new BrowserSession(configuration);
+            browser.Visit("/");
+
             browser.Visit("/headers");
-            Assert.That(browser, Shows.Content("Authorization: " + GetBasicAuthHeader("username", "passw0rd")));
-
-            browser.Visit("http://un2:pw2@localhost:" + site.BaseUri.Port + "/headers");
-            Assert.That(browser, Shows.Content("Authorization: " + GetBasicAuthHeader("un2", "pw2")));
-
-            browser.Visit("http://localhost:" + site.BaseUri.Port + "/headers");
-            Assert.That(browser, Shows.Content("Authorization:"));
-            Assert.That(browser, Shows.No.Content("Authorization: Basic"));
+            Assert.That(browser, Shows.Content("Authorization: " + GetBasicAuthHeader("someUser", "passw0rd")));
         }
 
         private string GetBasicAuthHeader(string username, string password)
