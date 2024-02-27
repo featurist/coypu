@@ -28,6 +28,8 @@ namespace Coypu
         [Obsolete("Please use instead: _browserSession.Driver.Cookies.DeleteAll()")]
         void ClearBrowserCookies();
         void Click(Element element);
+        void DblClick(Element element);
+
         [Obsolete("Please use instead: AcceptAlert/AcceptConfirm/AcceptPrompt")]
         void AcceptModalDialog(Scope scope);
         [Obsolete("Please use instead: CancelAlert/CancelConfirm/CancelPrompt")]

@@ -23,6 +23,8 @@ namespace Coypu.Tests.TestDoubles
 
         public void Click(Element element) { }
 
+        public void DblClick(Element element) { }
+
         public void Visit(string url,
                           Scope scope) { }
 

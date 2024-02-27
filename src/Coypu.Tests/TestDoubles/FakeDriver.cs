@@ -16,6 +16,7 @@ namespace Coypu.Tests.TestDoubles
         public readonly IList<Element> ChosenElements = new List<Element>();
         public readonly List<SelectOptionParams> SelectedOptions = new List<SelectOptionParams>();
         public readonly IList<Element> ClickedElements = new List<Element>();
+        public readonly IList<Element> DblClickedElements = new List<Element>();
         public readonly IList<FindXPathParams> FindXPathRequests = new List<FindXPathParams>();
         public readonly IList<Scope> GoBackCalls = new List<Scope>();
         public readonly IList<Scope> GoForwardCalls = new List<Scope>();
@@ -62,6 +63,11 @@ namespace Coypu.Tests.TestDoubles
         public void Click(Element element)
         {
             ClickedElements.Add(element);
+        }
+
+        public void DblClick(Element element)
+        {
+            DblClickedElements.Add(element);
         }
 
         public void Hover(Element element)

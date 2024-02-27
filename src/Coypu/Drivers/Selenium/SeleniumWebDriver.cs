@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
+using Interactions = OpenQA.Selenium.Interactions;
 using Cookie = System.Net.Cookie;
 
 #pragma warning disable 1591
@@ -112,6 +113,12 @@ namespace Coypu.Drivers.Selenium
         {
             SeleniumElement(element)
                 .Click();
+        }
+
+        public void DblClick(Element element)
+        {
+          var act = new Interactions.Actions(_webDriver);
+          act.DoubleClick();
         }
 
         public void Hover(Element element)

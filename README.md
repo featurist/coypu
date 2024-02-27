@@ -303,7 +303,12 @@ Click any other element by calling the Click method on the returned `ElementScop
 browser.FindCss("span#i-should-be-a-link", text: "Log in").Click();
 ```
 
-In this example, due to the way Coypu defers execution of finders, the FindCss will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
+Or double click if you need to test this:
+```c#
+browser.FindButton("Open").DblClick();
+```:
+
+In these example, due to the way Coypu defers execution of finders, the Finder will also be retried, should the Click fail. For example if the DOM is shifting under the driver's feet, the link may have become stale after it is found but before the click is actioned while part of the page is reloaded.
 
 This introduces the idea of `Scope`. The browser.Find methods return a Scope on which you may perform actions, or make further scoped queries. There is more on scope below.
 

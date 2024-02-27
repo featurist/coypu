@@ -27,6 +27,20 @@ namespace Coypu.AcceptanceTests.Examples
         }
 
         [Test]
+        public void DblClick()
+        {
+            var element = Browser.FindButton("dblClickMeTest");
+            Assert.That(Browser.FindButton("dblClickMeTest")
+                               .Value,
+                        Is.EqualTo("Double Click me"));
+
+            element.DblClick();
+            Assert.That(Browser.FindButton("dblClickMeTest")
+                               .Value,
+                        Is.EqualTo("Double Click me - dblclicked"));
+        }
+
+        [Test]
         public void ClickButton()
         {
             Browser.ClickButton("clickMeTest");
