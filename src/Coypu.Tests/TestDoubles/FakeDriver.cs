@@ -113,7 +113,14 @@ namespace Coypu.Tests.TestDoubles
                                     Scope scope,
                                     params object[] args)
         {
-            return Find<string>(_stubbedExecuteScriptResults, javascript, scope);
+            return ExecuteScript<string>(javascript, scope, args);
+        }
+
+        public ReturnType ExecuteScript<ReturnType>(string javascript,
+                                    Scope scope,
+                                    params object[] args)
+        {
+            return Find<ReturnType>(_stubbedExecuteScriptResults, javascript, scope);
         }
 
         public IEnumerable<Element> FindFrames(string locator,

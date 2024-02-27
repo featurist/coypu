@@ -1,6 +1,8 @@
 ﻿using Coypu.Finders;
 using Shouldly;
 using NUnit.Framework;
+using System;
+using Coypu.Tests;
 
 namespace Coypu.Drivers.Tests
 {
@@ -30,6 +32,27 @@ namespace Coypu.Drivers.Tests
         public void Returns_the_result()
         {
             Driver.ExecuteScript("return document.getElementById('firstButtonId').innerHTML;", Root).ShouldBe("first button");
+            Driver.ExecuteScript("return 1234;", Root).ShouldBe(1234);
+        }
+
+         [Test]
+        public void Returns_the_result_typed()
+        {
+            string str = Driver.ExecuteScript<string>("return 'miles';", Root);
+            str.GetType().ShouldBe(typeof(string));
+
+            int integer = Driver.ExecuteScript<int>("return 1234;", Root);
+            integer.GetType().ShouldBe(typeof(int));
+
+            DateTime dateTime = Driver.ExecuteScript<DateTime>("return new Date();", Root);
+            dateTime.GetType().ShouldBe(typeof(DateTime));
+
+            try {
+              Driver.ExecuteScript<int>("return 'bob';", Root);
+              throw new TestException("Expected an exception");
+            } catch(Exception e) {
+              if (e is TestException) throw;
+            };
         }
     }
 }

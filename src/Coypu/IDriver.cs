@@ -22,6 +22,8 @@ namespace Coypu
         String Title(Scope scope);
         object ExecuteScript(string javascript, Scope scope, params object[] args);
 
+        ReturnType ExecuteScript<ReturnType>(string javascript, Scope scope, params object[] args);
+
         [Obsolete("Please use instead: _browserSession.Driver.Cookies.GetAll()")]
         IEnumerable<Cookie> GetBrowserCookies();
 

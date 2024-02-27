@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
+using OpenQA.Selenium.DevTools.V85.Network;
 
 #pragma warning disable 1591
 
@@ -350,11 +351,17 @@ namespace Coypu.Drivers.Playwright
                                     Scope scope,
                                     params object[] args)
         {
+            return ExecuteScript<object>(javascript, scope, args);
+        }
+
+        public ReturnType ExecuteScript<ReturnType>(string javascript,
+                                    Scope scope,
+                                    params object[] args)
+        {
             var func = $"(arguments) => {Regex.Replace(javascript, "^return ", string.Empty)}";
             return
               PlaywrightPage(scope)
-                .EvaluateAsync(func, ConvertScriptArgs(args)).Sync()
-                .ToString();
+                .EvaluateAsync<ReturnType>(func, ConvertScriptArgs(args)).Sync();
         }
 
         // TODO: extract duplication between Drivers
