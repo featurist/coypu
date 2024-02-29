@@ -122,6 +122,12 @@ namespace Coypu
             return this;
         }
 
+        public ElementScope DblClick(Options options = null)
+        {
+            Try(new DblClickAction(this, _driver, Merge(options), Waiter));
+            return this;
+        }
+
         /// <summary>
         ///     Treat this scope as an input field and fill in with the specified value
         /// </summary>

@@ -15,8 +15,8 @@ namespace Coypu.Drivers.Playwright
     {
         private readonly Browser _browser;
         private readonly bool _headless;
-    private readonly Dialogs _dialogs;
-    private readonly IPlaywright _playwright;
+        private readonly Dialogs _dialogs;
+        private readonly IPlaywright _playwright;
         private readonly IBrowser _playwrightBrowser;
         private readonly IBrowserContext _context;
 
@@ -215,6 +215,11 @@ namespace Coypu.Drivers.Playwright
         public void Click(Element element)
         {
             PlaywrightElement(element).ClickAsync().Sync();
+        }
+
+        public void DblClick(Element element)
+        {
+            PlaywrightElement(element).DblClickAsync().Sync();
         }
 
         public void Hover(Element element)
