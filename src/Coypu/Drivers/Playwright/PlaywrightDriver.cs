@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
-using OpenQA.Selenium.DevTools.V85.Network;
+using System.Collections.Immutable;
 
 #pragma warning disable 1591
 
@@ -18,31 +18,50 @@ namespace Coypu.Drivers.Playwright
         private readonly Dialogs _dialogs;
         private readonly IPlaywright _playwright;
         private readonly IBrowser _playwrightBrowser;
-        private readonly IBrowserContext _context;
+        private IBrowserContext _context;
 
-        public PlaywrightDriver(Browser browser, bool headless)
+        public PlaywrightDriver(SessionConfiguration sessionConfiguration)
         {
             _dialogs = new Dialogs();
             _playwright = Microsoft.Playwright.Playwright.CreateAsync().Sync();
-            _browser = browser;
-            _headless = headless;
-            var browserType = PlaywrightBrowserType(browser, _playwright); // TODO: map browser to playwright browser type
+            _browser = sessionConfiguration.Browser;
+            _headless = sessionConfiguration.Headless;
+            var browserType = PlaywrightBrowserType(_browser, _playwright); // TODO: map browser to playwright browser type
 
             _playwrightBrowser = browserType.LaunchAsync(
                 new BrowserTypeLaunchOptions
                 {
-                Headless = headless,
-                Channel = PlaywrightBrowserChannel(browser)
+                  Headless = _headless,
+                  Channel = PlaywrightBrowserChannel(_browser),
                 }
             ).Sync();
-            var page = _playwrightBrowser.NewPageAsync().Sync();
+            NewContext(sessionConfiguration);
+        }
+
+        private void NewContext(SessionConfiguration sessionConfiguration)
+        {
+            var options = new BrowserNewPageOptions();
+            if (!string.IsNullOrEmpty(sessionConfiguration.AppHost) && !string.IsNullOrEmpty(sessionConfiguration.UserInfo))
+            {
+              if (!string.IsNullOrEmpty(sessionConfiguration.UserInfo)) {
+                var credentials = sessionConfiguration.UserInfo.Split(':');
+                options.HttpCredentials = new HttpCredentials
+                {
+                  Username = credentials[0],
+                  Password = credentials[1],
+                  Origin = new FullyQualifiedUrlBuilder().GetFullyQualifiedUrl("", sessionConfiguration).TrimEnd('/')
+                };
+              }
+            }
+
+            var page = _playwrightBrowser.NewPageAsync(options).Sync();
             _context = page.Context;
 
             Cookies = new Cookies(_context);
             _context.SetDefaultTimeout(10000);
-    }
+        }
 
-    private string PlaywrightBrowserChannel(Browser browser)
+        private string PlaywrightBrowserChannel(Browser browser)
         {
             if (browser == Browser.Chrome)
                 return "chrome";
@@ -203,7 +222,7 @@ namespace Coypu.Drivers.Playwright
             IResponse response = PlaywrightPage(scope).GotoAsync(url).Sync();
             if (response != null && response.Status != 200)
             {
-              throw new Exception("Failed to load page");
+               throw new Exception("Failed to load page");
             }
         }
 

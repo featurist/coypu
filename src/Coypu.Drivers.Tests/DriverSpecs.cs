@@ -91,7 +91,7 @@ namespace Coypu.Drivers.Tests
                 _driver.Dispose();
             }
 
-            _driver = (IDriver) Activator.CreateInstance(DriverType, Browser, Headless);
+            _driver = (IDriver) Activator.CreateInstance(DriverType, new SessionConfiguration{Driver = DriverType, Browser = Browser, Headless = Headless});
 
             _root = null;
         }

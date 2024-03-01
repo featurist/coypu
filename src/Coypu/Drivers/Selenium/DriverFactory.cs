@@ -1,7 +1,6 @@
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools.V85.HeadlessExperimental;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -12,17 +11,18 @@ namespace Coypu.Drivers.Selenium
 {
     internal class DriverFactory
     {
-        public IWebDriver NewWebDriver(Browser browser, bool headless)
+        public IWebDriver NewWebDriver(SessionConfiguration sessionConfiguration)
         {
+            var browser = sessionConfiguration.Browser;
             var firefoxOptions = new FirefoxOptions();
             var chromeOptions = new ChromeOptions();
             EdgeOptions edgeOptions = new EdgeOptions();
-            if (headless) {
+            if (sessionConfiguration.Headless) {
               firefoxOptions.AddArgument("--headless");
               chromeOptions.AddArgument("--headless=new");
               edgeOptions.AddArgument("headless");
               edgeOptions.AddArgument("disable-gpu");
-              if (browser == Browser.Safari) {
+              if (sessionConfiguration.Browser == Browser.Safari) {
                 throw new NotSupportedException("Safari does not support headless mode");
               }
               if (browser == Browser.Safari) {

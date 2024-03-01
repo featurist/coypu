@@ -71,6 +71,14 @@ var sessionConfiguration = new SessionConfiguration
 
 If you don't specify any of these, Coypu will default to http, localhost and port 80.
 
+Basic authentication can be configured with the AppHost like so:
+```c#
+var sessionConfiguration = new SessionConfiguration
+{
+  AppHost = "username@password:autotrader.co.uk"
+};
+```
+
 ## Driver
 
 Coypu drivers implement the `Coypu.Driver` interface and read the `SessionConfiguration.Browser` setting to pick the correct browser.
