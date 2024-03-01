@@ -45,7 +45,7 @@ namespace Coypu.AcceptanceTests.Examples
             {
                 Assert.Inconclusive("This test requires Internet Explorer and will only run on Windows.");
             }
-            var driver = new SeleniumWebDriver(browser, false);
+            var driver = new SeleniumWebDriver(new SessionConfiguration{Browser = browser, Headless = false});
             using (var custom = new BrowserSession(driver))
             {
                 custom.Visit("https://saucelabs.com/test/guinea-pig");

@@ -108,7 +108,7 @@ namespace Coypu.Tests.When_interacting_with_the_browser
             this.driver = driver;
         }
 
-        public IDriver NewWebDriver(Type driverType, Drivers.Browser browser, bool Headless, string appHost)
+        public IDriver NewWebDriver(SessionConfiguration sessionConfiguration)
         {
             return driver;
         }

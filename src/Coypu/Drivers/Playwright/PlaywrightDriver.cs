@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
 using System.Collections.Immutable;
-using System.Threading.Tasks;
 
 #pragma warning disable 1591
 
@@ -21,36 +20,36 @@ namespace Coypu.Drivers.Playwright
         private readonly IBrowser _playwrightBrowser;
         private IBrowserContext _context;
 
-        public PlaywrightDriver(Browser browser, bool headless, string appHost)
+        public PlaywrightDriver(SessionConfiguration sessionConfiguration)
         {
             _dialogs = new Dialogs();
             _playwright = Microsoft.Playwright.Playwright.CreateAsync().Sync();
-            _browser = browser;
-            _headless = headless;
-            var browserType = PlaywrightBrowserType(browser, _playwright); // TODO: map browser to playwright browser type
+            _browser = sessionConfiguration.Browser;
+            _headless = sessionConfiguration.Headless;
+            var browserType = PlaywrightBrowserType(_browser, _playwright); // TODO: map browser to playwright browser type
 
             _playwrightBrowser = browserType.LaunchAsync(
                 new BrowserTypeLaunchOptions
                 {
-                  Headless = headless,
-                  Channel = PlaywrightBrowserChannel(browser),
+                  Headless = _headless,
+                  Channel = PlaywrightBrowserChannel(_browser),
                 }
             ).Sync();
-            NewContext(appHost);
+            NewContext(sessionConfiguration);
         }
 
-        private void NewContext(string appHost)
+        private void NewContext(SessionConfiguration sessionConfiguration)
         {
             var options = new BrowserNewPageOptions();
-            if (Uri.IsWellFormedUriString(appHost, UriKind.Absolute))
+            if (!string.IsNullOrEmpty(sessionConfiguration.AppHost) && !string.IsNullOrEmpty(sessionConfiguration.UserInfo))
             {
-              var userInfo = new Uri(appHost).UserInfo;
-              if (!string.IsNullOrEmpty(userInfo)) {
-                var credentials = userInfo.Split(':');
+              if (!string.IsNullOrEmpty(sessionConfiguration.UserInfo)) {
+                var credentials = sessionConfiguration.UserInfo.Split(':');
                 options.HttpCredentials = new HttpCredentials
                 {
                   Username = credentials[0],
-                  Password = credentials[1]
+                  Password = credentials[1],
+                  Origin = new FullyQualifiedUrlBuilder().GetFullyQualifiedUrl("", sessionConfiguration).TrimEnd('/')
                 };
               }
             }
