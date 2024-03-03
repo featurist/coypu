@@ -1,4 +1,9 @@
 # Coypu 4.1.0 - 09.12.2023
+* [#235](https://github.com/featurist/coypu/pull/235) Playwright auth header
+* [#234](https://github.com/featurist/coypu/pull/234) Add ElementScope.DblClick()
+* [#233](https://github.com/featurist/coypu/pull/233) Fix return type of ExecuteScript for Playwright; Add generic overload
+
+# Coypu 4.1.0 - 09.12.2023
 * [#231](https://github.com/featurist/coypu/pull/231) Playwright driver
 
 # Coypu 3.1.2 - 4.0.0
