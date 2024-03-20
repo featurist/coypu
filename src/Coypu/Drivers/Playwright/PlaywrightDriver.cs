@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Cookie = System.Net.Cookie;
 using Microsoft.Playwright;
-using System.Collections.Immutable;
 
 #pragma warning disable 1591
 
@@ -30,12 +29,29 @@ namespace Coypu.Drivers.Playwright
 
             _playwrightBrowser = browserType.LaunchAsync(
                 new BrowserTypeLaunchOptions
-                {
-                  Headless = _headless,
-                  Channel = PlaywrightBrowserChannel(_browser),
+                { 
+                    Proxy = MapProxy(sessionConfiguration.Proxy), 
+                    Headless = _headless, 
+                    Channel = PlaywrightBrowserChannel(_browser),
                 }
             ).Sync();
             NewContext(sessionConfiguration);
+        }
+
+        private Proxy MapProxy(DriverProxy proxy)
+        {
+            if (proxy is null)
+            {
+                return null;
+            }
+
+            return new Proxy
+            {
+                Username = proxy.Username,
+                Password = proxy.Password,
+                Server = proxy.Server,
+                Bypass = proxy.BypassAddresses == null ? null : string.Join(',', proxy.BypassAddresses)
+            };
         }
 
         private void NewContext(SessionConfiguration sessionConfiguration)
