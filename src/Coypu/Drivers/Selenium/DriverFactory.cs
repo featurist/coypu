@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -106,17 +107,19 @@ namespace Coypu.Drivers.Selenium
             {
                 SocksProxy = driverProxy.Type == DriverProxyType.Socks ? driverProxy.Server : null,
                 HttpProxy = driverProxy.Type == DriverProxyType.Http ? driverProxy.Server : null,
-                SslProxy = driverProxy.Ssl && driverProxy.Type == DriverProxyType.Http ? driverProxy.Server : null,
                 SocksUserName = driverProxy.Username,
                 SocksPassword = driverProxy.Password,
             };
 
-            if (driverProxy.Ssl)
+            if (driverProxy.Ssl && driverProxy.Type == DriverProxyType.Http)
             {
                 proxy.SslProxy = driverProxy.Server;
             }
             
-            proxy.AddBypassAddresses(driverProxy.BypassAddresses ?? Array.Empty<string>());
+            if(driverProxy.BypassAddresses?.Any() == true)
+            {
+                proxy.AddBypassAddresses(driverProxy.BypassAddresses);
+            }
 
             return proxy;
         }
