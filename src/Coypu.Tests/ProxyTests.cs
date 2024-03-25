@@ -66,8 +66,10 @@ public class ProxyTests
         
         using var browser = new BrowserSession(sessionConfiguration);
         
+        // Proxy turns this example.com into github.com
         browser.Visit("http://www.example.com");
 
+        // So we then assert we can find the GitHub Octo Icon
         var icon = browser.FindCss(".octicon-mark-github");
         
         Assert.That(icon.Exists(), Is.True);
