@@ -50,7 +50,7 @@ public class ProxyTests
 
     [TestCase(typeof(PlaywrightDriver))]
     [TestCase(typeof(SeleniumWebDriver))]
-    public void Driver(Type driverType)
+    public void Driver_Uses_Proxy(Type driverType)
     {
         new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
         var sessionConfiguration = new SessionConfiguration
