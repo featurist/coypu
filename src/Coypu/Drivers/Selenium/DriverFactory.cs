@@ -120,11 +120,11 @@ namespace Coypu.Drivers.Selenium
 
             if (driverProxy.Type == DriverProxyType.Http)
             {
-                proxy.HttpProxy = "localhost:5000";
+                proxy.HttpProxy = driverProxy.Server;
 
                 if (driverProxy.Ssl)
                 {
-                    proxy.SslProxy = "localhost:5001";
+                    proxy.SslProxy = driverProxy.Server;
                 }
             }
 
