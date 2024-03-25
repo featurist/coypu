@@ -26,7 +26,7 @@ namespace Coypu.Drivers.Playwright
             _browser = sessionConfiguration.Browser;
             _headless = sessionConfiguration.Headless;
             var browserType = PlaywrightBrowserType(_browser, _playwright); // TODO: map browser to playwright browser type
-
+            
             _playwrightBrowser = browserType.LaunchAsync(
                 new BrowserTypeLaunchOptions
                 { 
@@ -56,7 +56,11 @@ namespace Coypu.Drivers.Playwright
 
         private void NewContext(SessionConfiguration sessionConfiguration)
         {
-            var options = new BrowserNewPageOptions();
+            var options = new BrowserNewPageOptions
+            {
+                IgnoreHTTPSErrors = sessionConfiguration.AcceptInsecureCertificates
+            };
+            
             if (!string.IsNullOrEmpty(sessionConfiguration.AppHost) && !string.IsNullOrEmpty(sessionConfiguration.UserInfo))
             {
               if (!string.IsNullOrEmpty(sessionConfiguration.UserInfo)) {

@@ -18,16 +18,19 @@ namespace Coypu.Drivers.Selenium
             
             var firefoxOptions = new FirefoxOptions
             {
+                AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                 Proxy = MapProxy(sessionConfiguration.Proxy)
             };
             
             var chromeOptions = new ChromeOptions
             {
+                AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                 Proxy = MapProxy(sessionConfiguration.Proxy)
             };
             
             var edgeOptions = new EdgeOptions
             {
+                AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                 Proxy = MapProxy(sessionConfiguration.Proxy)
             };
             
@@ -73,6 +76,7 @@ namespace Coypu.Drivers.Selenium
             {
                 return new OperaDriver(new OperaOptions
                 {
+                    AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                     Proxy = MapProxy(sessionConfiguration.Proxy)
                 });
             }
@@ -81,6 +85,7 @@ namespace Coypu.Drivers.Selenium
             {
                 return new SafariDriver(new SafariOptions
                 {
+                    AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                     Proxy = MapProxy(sessionConfiguration.Proxy)
                 });
             }
@@ -88,6 +93,7 @@ namespace Coypu.Drivers.Selenium
             return browser == Browser.InternetExplorer
                 ? new InternetExplorerDriver(new InternetExplorerOptions
                 {
+                    AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                     IntroduceInstabilityByIgnoringProtectedModeSettings = true,
                     EnableNativeEvents = true,
                     IgnoreZoomLevel = true,
@@ -103,20 +109,26 @@ namespace Coypu.Drivers.Selenium
                 return null;
             }
 
-            var proxy = new Proxy
-            {
-                SocksProxy = driverProxy.Type == DriverProxyType.Socks ? driverProxy.Server : null,
-                HttpProxy = driverProxy.Type == DriverProxyType.Http ? driverProxy.Server : null,
-                SocksUserName = driverProxy.Username,
-                SocksPassword = driverProxy.Password,
-            };
+            var proxy = new Proxy();
 
-            if (driverProxy.Ssl && driverProxy.Type == DriverProxyType.Http)
+            if (driverProxy.Type == DriverProxyType.Socks)
             {
-                proxy.SslProxy = driverProxy.Server;
+                proxy.SocksProxy = driverProxy.Server;
+                proxy.SocksUserName = driverProxy.Username;
+                proxy.SocksPassword = driverProxy.Password;
             }
-            
-            if(driverProxy.BypassAddresses?.Any() == true)
+
+            if (driverProxy.Type == DriverProxyType.Http)
+            {
+                proxy.HttpProxy = "localhost:5000";
+
+                if (driverProxy.Ssl)
+                {
+                    proxy.SslProxy = "localhost:5001";
+                }
+            }
+
+            if (driverProxy.BypassAddresses?.Any() == true)
             {
                 proxy.AddBypassAddresses(driverProxy.BypassAddresses);
             }

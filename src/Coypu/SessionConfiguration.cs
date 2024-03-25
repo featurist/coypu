@@ -84,5 +84,10 @@ namespace Coypu
         /// <para>Default: null</para>
         /// </summary>
         public DriverProxy Proxy { get; set; }
+        
+        /// <summary>
+        /// Ignore Browser related certificate errors
+        /// </summary>
+        public bool AcceptInsecureCertificates { get; set; }
     }
 }
