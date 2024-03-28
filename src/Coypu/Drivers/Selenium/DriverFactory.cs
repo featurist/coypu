@@ -136,8 +136,8 @@ namespace Coypu.Drivers.Selenium
             return proxy;
         }
 
-        private IWebDriver BrowserNotSupported(Browser browser,
-            Exception inner)
+        private IWebDriver BrowserNotSupported(Browser browser, 
+                                               Exception inner)
         {
             throw new BrowserNotSupportedException(browser, GetType(), inner);
         }
