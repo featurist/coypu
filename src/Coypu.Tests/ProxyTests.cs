@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Mime;
+using System.Text;
 using System.Threading.Tasks;
 using Coypu.Drivers;
 using Coypu.Drivers.Playwright;
@@ -7,6 +9,7 @@ using Coypu.Drivers.Selenium;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
@@ -17,11 +20,11 @@ namespace Coypu.Tests;
 [FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
 public class ProxyTests
 {
-    private WebApplication _app;
-    private string _proxyServer;
+    private static WebApplication _app;
+    private static string _proxyServer;
 
-    [SetUp]
-    public void SetUp()
+    [OneTimeSetUp]
+    public static void SetUp()
     {
         var builder = WebApplication.CreateBuilder();
         builder.Configuration.AddJsonFile("proxysettings.json");
@@ -33,6 +36,16 @@ public class ProxyTests
         
         _app.UseRouting();
         _app.MapReverseProxy();
+
+        _app.MapGet("/acceptance-test", context =>
+            {
+                const string html = "<!DOCTYPE html><html><head></head><body><h1 id=\"title\">This page has been proxied successfully.</h1></body></html>";
+                
+                context.Response.ContentType = MediaTypeNames.Text.Html;
+                context.Response.ContentLength = Encoding.UTF8.GetByteCount(html);
+                return context.Response.WriteAsync(html);
+            }
+        );
         
         _app.RunAsync();
 
@@ -42,8 +55,8 @@ public class ProxyTests
             .First();
     }
 
-    [TearDown]
-    public async Task TearDown()
+    [OneTimeTearDown]
+    public static async Task TearDown()
     {
         await _app.DisposeAsync();
     }
@@ -61,17 +74,18 @@ public class ProxyTests
                 Server = _proxyServer,
             },
             Browser = Browser.Chrome,
-            Driver = driverType
+            Driver = driverType,
         };
         
         using var browser = new BrowserSession(sessionConfiguration);
         
-        // Proxy turns this example.com into github.com
-        browser.Visit("http://www.example.com");
+        // Proxy turns this example.com into localhost, which has an endpoint configured for this URL in the setup
+        browser.Visit("http://www.example.com/acceptance-test");
 
-        // So we then assert we can find the GitHub Octo Icon
-        var icon = browser.FindCss(".octicon-mark-github");
+        // So we then assert we can find the title in the HTML we've served
+        var title = browser.FindId("title");
         
-        Assert.That(icon.Exists(), Is.True);
+        Assert.That(title.Exists(), Is.True);
+        Assert.That(title.Text, Is.EqualTo("This page has been proxied successfully."));
     }
 }

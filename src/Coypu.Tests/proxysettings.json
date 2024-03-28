@@ -25,7 +25,7 @@
       "cluster1": {
         "Destinations": {
           "destination1": {
-            "Address": "https://github.com/"
+            "Address": "http://localhost:5000/"
           }
         }
       },
