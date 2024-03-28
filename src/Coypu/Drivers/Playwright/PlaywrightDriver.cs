@@ -26,12 +26,12 @@ namespace Coypu.Drivers.Playwright
             _browser = sessionConfiguration.Browser;
             _headless = sessionConfiguration.Headless;
             var browserType = PlaywrightBrowserType(_browser, _playwright); // TODO: map browser to playwright browser type
-            
+
             _playwrightBrowser = browserType.LaunchAsync(
                 new BrowserTypeLaunchOptions
-                { 
-                    Proxy = MapProxy(sessionConfiguration.Proxy), 
-                    Headless = _headless, 
+                {
+                    Proxy = MapProxy(sessionConfiguration.Proxy),
+                    Headless = _headless,
                     Channel = PlaywrightBrowserChannel(_browser),
                 }
             ).Sync();
@@ -60,18 +60,19 @@ namespace Coypu.Drivers.Playwright
             {
                 IgnoreHTTPSErrors = sessionConfiguration.AcceptInsecureCertificates
             };
-            
+
             if (!string.IsNullOrEmpty(sessionConfiguration.AppHost) && !string.IsNullOrEmpty(sessionConfiguration.UserInfo))
             {
-              if (!string.IsNullOrEmpty(sessionConfiguration.UserInfo)) {
-                var credentials = sessionConfiguration.UserInfo.Split(':');
-                options.HttpCredentials = new HttpCredentials
+                if (!string.IsNullOrEmpty(sessionConfiguration.UserInfo))
                 {
-                  Username = credentials[0],
-                  Password = credentials[1],
-                  Origin = new FullyQualifiedUrlBuilder().GetFullyQualifiedUrl("", sessionConfiguration).TrimEnd('/')
-                };
-              }
+                    var credentials = sessionConfiguration.UserInfo.Split(':');
+                    options.HttpCredentials = new HttpCredentials
+                    {
+                        Username = credentials[0],
+                        Password = credentials[1],
+                        Origin = new FullyQualifiedUrlBuilder().GetFullyQualifiedUrl("", sessionConfiguration).TrimEnd('/')
+                    };
+                }
             }
 
             var page = _playwrightBrowser.NewPageAsync(options).Sync();
@@ -113,12 +114,12 @@ namespace Coypu.Drivers.Playwright
 
         public Uri Location(Scope scope)
         {
-          return new Uri(PlaywrightPage(scope).Url);
+            return new Uri(PlaywrightPage(scope).Url);
         }
 
         public string Title(Scope scope)
         {
-          return PlaywrightPage(scope).TitleAsync().Sync();
+            return PlaywrightPage(scope).TitleAsync().Sync();
         }
 
         public Coypu.Cookies Cookies { get; set; }
@@ -126,36 +127,37 @@ namespace Coypu.Drivers.Playwright
 
         public Element Window => new PlaywrightWindow(_context.Pages.First());
 
-      public IEnumerable<Element> FindFrames(string locator,
-                                               Scope scope,
-                                               Options options)
-    {
-      IPage page = Page(scope);
-      return new FrameFinder(page).FindFrame(
-          locator,
-          page.QuerySelectorAllAsync("iframe,frame").Sync(),
-          options
-      );
-    }
-
-    private static IPage Page(Scope scope)
-    {
-      var nativeScope = scope.Now().Native;
-      var page = nativeScope as IPage ??
-                    ((IElementHandle)nativeScope).OwnerFrameAsync().Sync().Page;
-      return page;
-    }
-
-    public IEnumerable<Element> FindAllCss(string cssSelector,
-                                               Scope scope,
-                                               Options options,
-                                               Regex textPattern = null)
+        public IEnumerable<Element> FindFrames(string locator,
+                                                 Scope scope,
+                                                 Options options)
         {
-            try {
-              var results = Element(scope).QuerySelectorAllAsync($"css={cssSelector}").Sync()
-                              .Where(ValidateTextPattern(options, textPattern))
-                              .Where(e => IsDisplayed(e, options))
-                              .Select(BuildElement);
+            IPage page = Page(scope);
+            return new FrameFinder(page).FindFrame(
+                locator,
+                page.QuerySelectorAllAsync("iframe,frame").Sync(),
+                options
+            );
+        }
+
+        private static IPage Page(Scope scope)
+        {
+            var nativeScope = scope.Now().Native;
+            var page = nativeScope as IPage ??
+                          ((IElementHandle)nativeScope).OwnerFrameAsync().Sync().Page;
+            return page;
+        }
+
+        public IEnumerable<Element> FindAllCss(string cssSelector,
+                                                   Scope scope,
+                                                   Options options,
+                                                   Regex textPattern = null)
+        {
+            try
+            {
+                var results = Element(scope).QuerySelectorAllAsync($"css={cssSelector}").Sync()
+                                .Where(ValidateTextPattern(options, textPattern))
+                                .Where(e => IsDisplayed(e, options))
+                                .Select(BuildElement);
                 return results;
             }
             catch (AggregateException e)
@@ -166,18 +168,18 @@ namespace Coypu.Drivers.Playwright
 
         private Func<IElementHandle, bool> ValidateTextPattern(Options options, Regex textPattern)
         {
-          if (options == null) throw new ArgumentNullException(nameof(options));
-          Func<IElementHandle, bool> textMatches = e =>
-            {
-              if (textPattern == null) return true;
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            Func<IElementHandle, bool> textMatches = e =>
+              {
+                  if (textPattern == null) return true;
 
-              var text = e.InnerTextAsync().Sync();
-              return text != null && textPattern.IsMatch(text.Trim());
-            };
+                  var text = e.InnerTextAsync().Sync();
+                  return text != null && textPattern.IsMatch(text.Trim());
+              };
 
-          if (textPattern != null && options.ConsiderInvisibleElements)
-            throw new NotSupportedException("Cannot inspect the text of invisible elements.");
-          return textMatches;
+            if (textPattern != null && options.ConsiderInvisibleElements)
+                throw new NotSupportedException("Cannot inspect the text of invisible elements.");
+            return textMatches;
         }
 
         private bool IsDisplayed(IElementHandle e,
@@ -190,10 +192,11 @@ namespace Coypu.Drivers.Playwright
                                                  Scope scope,
                                                  Options options)
         {
-            try {
-              return Element(scope).QuerySelectorAllAsync($"xpath={xpath}").Sync()
-                        .Where(e => IsDisplayed(e, options))
-                        .Select(BuildElement);
+            try
+            {
+                return Element(scope).QuerySelectorAllAsync($"xpath={xpath}").Sync()
+                          .Where(e => IsDisplayed(e, options))
+                          .Select(BuildElement);
             }
             catch (AggregateException e)
             {
@@ -205,8 +208,8 @@ namespace Coypu.Drivers.Playwright
         {
             var tagName = element.EvaluateAsync("e => e.tagName").Sync()?.GetString();
 
-            Element coypuElement = new[] {"iframe", "frame"}.Contains(tagName.ToLower())
-                     ? (Element) new PlaywrightFrame(element) : new PlaywrightElement(element);
+            Element coypuElement = new[] { "iframe", "frame" }.Contains(tagName.ToLower())
+                     ? (Element)new PlaywrightFrame(element) : new PlaywrightElement(element);
 
             return coypuElement;
         }
@@ -242,7 +245,7 @@ namespace Coypu.Drivers.Playwright
             IResponse response = PlaywrightPage(scope).GotoAsync(url).Sync();
             if (response != null && response.Status != 200)
             {
-               throw new Exception("Failed to load page");
+                throw new Exception("Failed to load page");
             }
         }
 
@@ -282,13 +285,14 @@ namespace Coypu.Drivers.Playwright
 
         public void Refresh(Scope scope)
         {
-            ((IPage )scope.Now().Native).ReloadAsync().Sync();
+            ((IPage)scope.Now().Native).ReloadAsync().Sync();
         }
 
         public void ResizeTo(Size size,
                              Scope scope)
         {
-            if (_playwrightBrowser.BrowserType == _playwright.Chromium && !_headless) {
+            if (_playwrightBrowser.BrowserType == _playwright.Chromium && !_headless)
+            {
                 size = new Size(size.Width - 2, size.Height - 80);
             }
             PlaywrightPage(scope).SetViewportSizeAsync(size.Width, size.Height).Sync();
@@ -322,19 +326,20 @@ namespace Coypu.Drivers.Playwright
                                                 Scope scope,
                                                 Options options)
         {
-          try
-          {
-              return _context.Pages
-                  .Select(p => new PlaywrightWindow(p))
-                  .Where(window => {
-                    return
-                      options.TextPrecisionExact && (
-                        window.Title == titleOrName
-                      ) ||
-                      !options.TextPrecisionExact && (
-                        window.Title.Contains(titleOrName)
-                      );
-                  });
+            try
+            {
+                return _context.Pages
+                    .Select(p => new PlaywrightWindow(p))
+                    .Where(window =>
+                    {
+                        return
+                        options.TextPrecisionExact && (
+                          window.Title == titleOrName
+                        ) ||
+                        !options.TextPrecisionExact && (
+                          window.Title.Contains(titleOrName)
+                        );
+                    });
             }
             catch (PlaywrightException ex)
             {
@@ -420,26 +425,28 @@ namespace Coypu.Drivers.Playwright
 
         private IElementHandle PlaywrightElement(Element element)
         {
-            return (IElementHandle) element.Native;
+            return (IElementHandle)element.Native;
         }
 
         private IPage PlaywrightPage(Scope scope)
         {
-          return (IPage) scope.Now().Native;
+            return (IPage)scope.Now().Native;
         }
 
         private IElementHandle Element(Scope scope)
         {
             var scopeElement = scope.Now();
             var frame = scopeElement.Native as IFrame;
-            if (frame != null) {
+            if (frame != null)
+            {
                 return frame.QuerySelectorAsync("html").Sync();
             }
             var page = scopeElement.Native as IPage;
-            if (page != null) {
+            if (page != null)
+            {
                 return page.QuerySelectorAsync("html").Sync();
             }
-            return (IElementHandle) scopeElement.Native;
+            return (IElementHandle)scopeElement.Native;
         }
 
         public void Dispose()

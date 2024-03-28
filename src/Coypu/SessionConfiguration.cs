@@ -22,7 +22,7 @@ namespace Coypu
             Port = DEFAULT_PORT;
             SSL = false;
             Browser = Drivers.Browser.Firefox;
-            Driver = typeof (SeleniumWebDriver);
+            Driver = typeof(SeleniumWebDriver);
             Headless = true;
         }
 
@@ -78,13 +78,13 @@ namespace Coypu
         /// <para>Default: false</para>
         /// </summary>
         public bool SSL { get; set; }
-        
+
         /// <summary>
         /// <para>Specifies the proxy you would like to use</para>
         /// <para>Default: null</para>
         /// </summary>
         public DriverProxy Proxy { get; set; }
-        
+
         /// <summary>
         /// Ignore Browser related certificate errors
         /// </summary>

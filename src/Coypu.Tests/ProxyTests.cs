@@ -28,25 +28,25 @@ public class ProxyTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.Configuration.AddJsonFile("proxysettings.json");
-        
+
         builder.Services.AddReverseProxy()
             .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
-        
+
         _app = builder.Build();
-        
+
         _app.UseRouting();
         _app.MapReverseProxy();
 
         _app.MapGet("/acceptance-test", context =>
             {
                 const string html = "<!DOCTYPE html><html><head></head><body><h1 id=\"title\">This page has been proxied successfully.</h1></body></html>";
-                
+
                 context.Response.ContentType = MediaTypeNames.Text.Html;
                 context.Response.ContentLength = Encoding.UTF8.GetByteCount(html);
                 return context.Response.WriteAsync(html);
             }
         );
-        
+
         _app.RunAsync();
 
         _proxyServer = _app.Services.GetRequiredService<IServer>()
@@ -76,15 +76,15 @@ public class ProxyTests
             Browser = Browser.Chrome,
             Driver = driverType,
         };
-        
+
         using var browser = new BrowserSession(sessionConfiguration);
-        
+
         // Proxy turns this example.com into localhost, which has an endpoint configured for this URL in the setup
         browser.Visit("http://www.example.com/acceptance-test");
 
         // So we then assert we can find the title in the HTML we've served
         var title = browser.FindId("title");
-        
+
         Assert.That(title.Exists(), Is.True);
         Assert.That(title.Text, Is.EqualTo("This page has been proxied successfully."));
     }

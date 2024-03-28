@@ -15,32 +15,32 @@ namespace Coypu.Drivers.Selenium
         public IWebDriver NewWebDriver(SessionConfiguration sessionConfiguration)
         {
             var browser = sessionConfiguration.Browser;
-            
+
             var firefoxOptions = new FirefoxOptions
             {
                 AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                 Proxy = MapProxy(sessionConfiguration.Proxy)
             };
-            
+
             var chromeOptions = new ChromeOptions
             {
                 AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                 Proxy = MapProxy(sessionConfiguration.Proxy)
             };
-            
+
             var edgeOptions = new EdgeOptions
             {
                 AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
                 Proxy = MapProxy(sessionConfiguration.Proxy)
             };
-            
+
             if (sessionConfiguration.Headless)
             {
                 firefoxOptions.AddArgument("--headless");
                 chromeOptions.AddArgument("--headless=new");
                 edgeOptions.AddArgument("headless");
                 edgeOptions.AddArgument("disable-gpu");
-                
+
                 if (browser == Browser.Safari)
                 {
                     throw new NotSupportedException("Safari does not support headless mode");
