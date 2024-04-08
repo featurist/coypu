@@ -8,22 +8,20 @@
     <FileVersion>4.2.0.0</FileVersion>
     <PackageId>Coypu</PackageId>
     <Version>4.2.0</Version>
-    <Description>Intuitive, robust browser automation for the .NET platform.
+    <Description>A robust wrapper for browser automation on the .NET platform for Selenium WebDriver or Microsoft Playwright that eases automating ajax-heavy websites and reduces coupling to the HTML, CSS &amp; JS.
 This package includes the Coypu 4 framework assembly, which should be referenced by your tests.
 
 Supported platforms:
-- .NET 6+
-- .NET Standard 2.0+
-- .NET Core 2.0+</Description>
+- .NET 6+</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/featurist/coypu/</PackageProjectUrl>
-    <Copyright>Copyright © 2018 Adrian Longley and Contributors</Copyright>
+    <Copyright>Copyright © 2024 Adrian Longley and Contributors</Copyright>
     <PackageTags>browser, automation, selenium, testing, framework</PackageTags>
     <LangVersion>8.0</LangVersion>
     <Authors>Adrian Longley, Jakub Obstarczyk,Stacy Bowler</Authors>
     <RepositoryUrl>https://github.com/featurist/coypu</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-	<PackageReleaseNotes>update to net6.0, also update of selenium webdriver to v4.0.1</PackageReleaseNotes>
+	<PackageReleaseNotes>Allow using a proxy and basic auth. Multiple bug fixes.</PackageReleaseNotes>
     <Company>Coypu</Company>
     <NeutralLanguage>en</NeutralLanguage>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

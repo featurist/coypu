@@ -4,14 +4,14 @@
     <TargetFrameworks>net6.0</TargetFrameworks>
     <BuildPackage>true</BuildPackage>
     <AssemblyTitle>Coypu.NUnit</AssemblyTitle>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.1.0.0</FileVersion>
+    <AssemblyVersion>4.2.0.0</AssemblyVersion>
+    <FileVersion>4.2.0.0</FileVersion>
     <PackageId>Coypu.NUnit</PackageId>
-    <Version>3.1.0-rc</Version>
+    <Version>4.2.0</Version>
     <Description>NUnit matchers for Coypu.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/featurist/coypu/</PackageProjectUrl>
-    <Copyright>Copyright © 2018 Adrian Longley and Contributors</Copyright>
+    <Copyright>Copyright © 2024 Adrian Longley and Contributors</Copyright>
     <PackageTags>browser, automation, selenium, testing, nunit</PackageTags>
     <LangVersion>7.3</LangVersion>
     <Authors>Adrian Longley, Jakub Obstarczyk</Authors>
