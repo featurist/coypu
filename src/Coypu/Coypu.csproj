@@ -37,6 +37,6 @@ Supported platforms:
   <ItemGroup>
     <PackageReference Include="Microsoft.Playwright" Version="1.40.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Selenium.WebDriver" Version="[4.43.0,5)" />
+    <PackageReference Include="Selenium.WebDriver" Version="[4.47.0,5)" />
   </ItemGroup>
 </Project>
