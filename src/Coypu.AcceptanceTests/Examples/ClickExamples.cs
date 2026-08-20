@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium.DevTools.V85.Network;
 
 namespace Coypu.AcceptanceTests.Examples
 {

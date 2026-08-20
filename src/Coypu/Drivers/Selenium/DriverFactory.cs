@@ -5,7 +5,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.Safari;
 
 namespace Coypu.Drivers.Selenium
@@ -46,11 +45,6 @@ namespace Coypu.Drivers.Selenium
                     throw new NotSupportedException("Safari does not support headless mode");
                 }
 
-                if (browser == Browser.Opera)
-                {
-                    throw new NotSupportedException("Opera does not support headless mode");
-                }
-
                 if (browser == Browser.InternetExplorer)
                 {
                     throw new NotSupportedException("Internet Explorer does not support headless mode");
@@ -70,15 +64,6 @@ namespace Coypu.Drivers.Selenium
             if (browser == Browser.Edge)
             {
                 return new EdgeDriver(edgeOptions);
-            }
-
-            if (browser == Browser.Opera)
-            {
-                return new OperaDriver(new OperaOptions
-                {
-                    AcceptInsecureCertificates = sessionConfiguration.AcceptInsecureCertificates,
-                    Proxy = MapProxy(sessionConfiguration.Proxy)
-                });
             }
 
             if (browser == Browser.Safari)

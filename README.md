@@ -109,7 +109,7 @@ sessionConfiguration.Headless=true
 
 Headless was never enabled on the Selenium driver as it had various shortcomings in the past, from Coypu v4.1.0 it is can be enabled using the `sessionConfiguration.Headless` setting. Selenium does have issues accessing cookies and IFrames in headless mode so you may need to run tests that rely on these features in headed mode when using the Selenium driver.
 
-Selenium only supports headless for Chrome, Edge and Firefox. IE, Safari and Opera are not supported.
+Selenium only supports headless for Chrome, Edge and Firefox. IE and Safari are not supported. Opera is no longer supported by Selenium at all (its driver was removed in Selenium 4.2), so `Browser.Opera` now throws `BrowserNotSupportedException` on the Selenium driver.
 
 ## Playwright
 

@@ -159,10 +159,9 @@ namespace Coypu.Drivers.Selenium
                                    Scope scope)
         {
             _elementFinder.SeleniumScope(scope);
-            var format = ImageFormatParser.GetImageFormat(fileName);
 
             var screenshot = ((ITakesScreenshot) _webDriver).GetScreenshot();
-            screenshot.SaveAsFile(fileName, format);
+            screenshot.SaveAsFile(fileName);
         }
 
         public void GoBack(Scope scope)
