@@ -4,7 +4,6 @@ using System.Linq;
 using Coypu.Drivers;
 using Coypu.Tests.TestDoubles;
 using NUnit.Framework;
-using OpenQA.Selenium.DevTools.V85.Network;
 
 namespace Coypu.Tests.When_interacting_with_the_browser
 {
